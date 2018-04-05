@@ -80,5 +80,10 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 	<bean id="sadAdminAvggrunnlagService" class="no.systema.tvinn.sad.admin.service.SadAdminAvggrunnlagServiceImpl"/>
 	
 	
+	<!-- ============================  -->
+	<!-- TROR - Oppdragsregistrering   -->
+	<!-- ============================  -->
+	<bean id="trorMainOrderListService" class="no.systema.tror.service.TrorMainOrderListServiceImpl"/>
+	
 	
 </beans>

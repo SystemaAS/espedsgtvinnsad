@@ -14,6 +14,16 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<bean id="maintKodtvaService" class="no.systema.tvinn.sad.z.maintenance.main.service.MaintKodtvaServiceImpl"/>
 	
 	<!-- =================  -->
+	<!-- TVINN SAD		    -->
+	<!-- =================  -->
+	<bean id="maintSadSadlService" class="no.systema.tvinn.sad.z.maintenance.sad.service.MaintSadSadlServiceImpl"/>
+	<bean id="maintSadKodtsaService" class="no.systema.tvinn.sad.z.maintenance.sad.service.gyldigekoder.MaintSadKodtsaServiceImpl"/>
+	<bean id="maintSadKodtsdService" class="no.systema.tvinn.sad.z.maintenance.sad.service.gyldigekoder.MaintSadKodtsdServiceImpl"/>
+	<bean id="maintSadKodtsoService" class="no.systema.tvinn.sad.z.maintenance.sad.service.gyldigekoder.MaintSadKodtsoServiceImpl"/>
+	<bean id="brregEnhetsRegisteretService" class="no.systema.tvinn.sad.kundekontroll.brreg.service.BrregEnhetsRegisteretServiceImpl"/>
+	
+	
+	<!-- =================  -->
 	<!-- TVINN SAD FELLES   -->
 	<!-- =================  -->
 	<bean id="maintSadFellesKodtsiService" class="no.systema.tvinn.sad.z.maintenance.felles.service.MaintSadFellesKodtsiServiceImpl"/>

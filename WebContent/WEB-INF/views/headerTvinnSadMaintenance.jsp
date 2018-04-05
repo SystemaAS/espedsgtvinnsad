@@ -183,7 +183,7 @@
 			    			</font>
 			    				
 		    				<font color="#FF6600"; style="font-weight: bold;">&nbsp;&nbsp;|&nbsp;&nbsp;</font>
-			    			<a tabindex=-1 href="logoutTvinnSad.do">
+			    			<a tabindex=-1 href="logout.do">
 			    				<font class="headerMenuWhite"><img src="resources/images/home.gif" border="0">&nbsp;
 			    					<font style="color:#000000;" ><spring:message code="dashboard.menu.button"/>&nbsp;</font>
 			    				</font>
