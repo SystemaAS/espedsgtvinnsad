@@ -77,6 +77,7 @@
 				            </tr> 
 				            </c:forEach>
 				            </tbody>
+				            <%--
 				            <tfoot>
 							<tr>
 							   <th align="center" class="tableHeaderFieldFirst" >&nbsp;KUNDNR&nbsp;</th>
@@ -85,7 +86,8 @@
 			                    <th align="center" class="tableHeaderField" >&nbsp;ADR1&nbsp;</th>
 			                    <th align="center" class="tableHeaderField">&nbsp;SYLIKV&nbsp;</th>
 			                </tr>  
-			                </tfoot> 
+			                </tfoot>
+			                 --%> 
 			            </table>
 					</td>	
 					</tr>

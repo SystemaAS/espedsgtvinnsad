@@ -92,6 +92,7 @@
 				            </tr> 
 				            </c:forEach>
 				            </tbody>
+				            <%--
 				            <tfoot>
 							<tr>
 								<th class="tableHeaderField" >&nbsp;Endre&nbsp;</th>
@@ -102,7 +103,8 @@
 								<th class="tableHeaderField" >&nbsp;KS2PRE&nbsp;</th>
 								<th class="tableHeaderField">Slett</th>
 			                </tr>  
-			                </tfoot> 
+			                </tfoot>
+			                 --%> 
 			            </table>
 					</td>	
 					</tr>

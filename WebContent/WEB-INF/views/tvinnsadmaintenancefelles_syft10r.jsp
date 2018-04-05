@@ -89,6 +89,7 @@
 				            </tr> 
 				            </c:forEach>
 				            </tbody>
+				            <%--
 				            <tfoot>
 							<tr>
 							                                                                
@@ -102,7 +103,8 @@
 			                    <th align="center" class="tableHeaderFieldWhiteBg11">&nbsp;KSIXXX&nbsp;</th>
 			                    <th align="center" class="tableHeaderFieldWhiteBg11">Slett</th>
 			                </tr>  
-			                </tfoot> 
+			                </tfoot>
+			                 --%> 
 			            </table>
 					</td>	
 					</tr>

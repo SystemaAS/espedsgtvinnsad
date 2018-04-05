@@ -96,6 +96,7 @@
 				            </tr> 
 				            </c:forEach>
 				            </tbody>
+				            <%--
 				            <tfoot>
 							<tr>
 							    <th align="center" width="2%" class="tableHeaderFieldFirstWhiteBg11" >&nbsp;KLBSTA&nbsp;</th>
@@ -112,7 +113,8 @@
 			                    <th align="center" class="tableHeaderFieldWhiteBg11">&nbsp;KLBXXX&nbsp;</th>
 			                    <th align="center" class="tableHeaderFieldWhiteBg11">Slett</th>
 			                </tr>  
-			                </tfoot> 
+			                </tfoot>
+			                 --%> 
 			            </table>
 					</td>	
 					</tr>
