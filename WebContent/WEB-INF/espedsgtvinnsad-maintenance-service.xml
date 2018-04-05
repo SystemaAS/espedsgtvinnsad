@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:p="http://www.springframework.org/schema/p"
+xmlns:context="http://www.springframework.org/schema/context"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<!-- ============================  -->
+	<!-- MAINTENANCE WIDE per module   -->
+	<!-- ============================  -->
+	<bean id="maintKodtvaService" class="no.systema.tvinn.sad.z.maintenance.main.service.MaintKodtvaServiceImpl"/>
+	
+	<!-- =================  -->
+	<!-- TVINN SAD FELLES   -->
+	<!-- =================  -->
+	<bean id="maintSadFellesKodtsiService" class="no.systema.tvinn.sad.z.maintenance.felles.service.MaintSadFellesKodtsiServiceImpl"/>
+	<bean id="maintSadFellesKodtlbService" class="no.systema.tvinn.sad.z.maintenance.felles.service.MaintSadFellesKodtlbServiceImpl"/>
+	<bean id="maintSadFellesTariService" class="no.systema.tvinn.sad.z.maintenance.felles.service.MaintSadFellesTariServiceImpl"/>
+	<bean id="maintSadFellesSoktariService" class="no.systema.tvinn.sad.z.maintenance.felles.service.MaintSadFellesSoktariServiceImpl"/>
+	
+	
+	<!-- =================  -->
+	<!-- TVINN SAD EXPORT   -->
+	<!-- =================  -->
+	<bean id="maintSadExportTvineService" class="no.systema.tvinn.sad.z.maintenance.sadexport.service.MaintSadExportTvineServiceImpl"/>
+	<bean id="maintSadExportSadavgeService" class="no.systema.tvinn.sad.z.maintenance.sadexport.service.MaintSadExportSadavgeServiceImpl"/>
+	<bean id="maintSadExportSaehService" class="no.systema.tvinn.sad.z.maintenance.sadexport.service.MaintSadExportSaehServiceImpl"/>
+	<bean id="maintSadExportKodts6Service" class="no.systema.tvinn.sad.z.maintenance.sadexport.service.MaintSadExportKodts6ServiceImpl"/>
+	<bean id="maintSadExportSadsdService" class="no.systema.tvinn.sad.z.maintenance.sadexport.service.MaintSadExportSadsdServiceImpl"/>
+	<!-- START Gyldige koder -->
+	<bean id="maintSadExportKodts9Service" class="no.systema.tvinn.sad.z.maintenance.sadexport.service.gyldigekoder.MaintSadExportKodts9ServiceImpl"/>
+	<bean id="maintSadExportKodtscService" class="no.systema.tvinn.sad.z.maintenance.sadexport.service.gyldigekoder.MaintSadExportKodtscServiceImpl"/>
+	<bean id="maintSadExportKodtseService" class="no.systema.tvinn.sad.z.maintenance.sadexport.service.gyldigekoder.MaintSadExportKodtseServiceImpl"/>		
+	<!-- END Gyldige koder -->
+	
+	<!-- ===================  -->
+	<!-- TVINN SAD NCTS EXPORT-->
+	<!-- ===================  -->
+	<bean id="maintNctsExportTrughService" class="no.systema.tvinn.sad.z.maintenance.nctsexport.service.MaintNctsExportTrughServiceImpl"/>		
+	<bean id="maintNctsExportTrkodfService" class="no.systema.tvinn.sad.z.maintenance.nctsexport.service.MaintNctsExportTrkodfServiceImpl"/>		
+	
+	<!-- =================  -->
+	<!-- TVINN SAD IMPORT   -->
+	<!-- =================  -->
+	<bean id="maintSadImportKodtlikService" class="no.systema.tvinn.sad.z.maintenance.sadimport.service.MaintSadImportKodtlikServiceImpl"/>
+	<bean id="maintSadImportCundfLikvKodeService" class="no.systema.tvinn.sad.z.maintenance.sadimport.service.MaintSadImportCundfLikvKodeServiceImpl"/>
+	<bean id="maintSadImportSadsdService" class="no.systema.tvinn.sad.z.maintenance.sadimport.service.MaintSadImportSadsdServiceImpl"/>
+	<bean id="maintSadImportSadvareService" class="no.systema.tvinn.sad.z.maintenance.sadimport.service.MaintSadImportSadvareServiceImpl"/>
+	<bean id="maintSadImportSadhHeadfService" class="no.systema.tvinn.sad.z.maintenance.sadimport.service.MaintSadImportSadhHeadfServiceImpl"/>
+	<bean id="maintSadImportKodttsService" class="no.systema.tvinn.sad.z.maintenance.sadimport.service.MaintSadImportKodttsServiceImpl"/>
+	
+	<!-- Component stereotype   -->
+	<bean id="maintSadImportGyldigeKoderAjaxHandlerManager" class="no.systema.tvinn.sad.z.maintenance.sadimport.controller.ajax.manager.MaintSadImportGyldigeKoderAjaxHandlerManager"/>
+	
+	<!-- START Gyldige koder -->
+	<bean id="maintSadImportKodts1Service" class="no.systema.tvinn.sad.z.maintenance.sadimport.service.gyldigekoder.MaintSadImportKodts1ServiceImpl"/>
+	<bean id="maintSadImportKodts2Service" class="no.systema.tvinn.sad.z.maintenance.sadimport.service.gyldigekoder.MaintSadImportKodts2ServiceImpl"/>
+	<bean id="maintSadImportKodts3Service" class="no.systema.tvinn.sad.z.maintenance.sadimport.service.gyldigekoder.MaintSadImportKodts3ServiceImpl"/>
+	<bean id="maintSadImportKodts4Service" class="no.systema.tvinn.sad.z.maintenance.sadimport.service.gyldigekoder.MaintSadImportKodts4ServiceImpl"/>
+	<bean id="maintSadImportKodts5Service" class="no.systema.tvinn.sad.z.maintenance.sadimport.service.gyldigekoder.MaintSadImportKodts5ServiceImpl"/>
+	<bean id="maintSadImportKodts6Service" class="no.systema.tvinn.sad.z.maintenance.sadimport.service.gyldigekoder.MaintSadImportKodts6ServiceImpl"/>
+	<bean id="maintSadImportKodts7Service" class="no.systema.tvinn.sad.z.maintenance.sadimport.service.gyldigekoder.MaintSadImportKodts7ServiceImpl"/>
+	<bean id="maintSadImportKodts8Service" class="no.systema.tvinn.sad.z.maintenance.sadimport.service.gyldigekoder.MaintSadImportKodts8ServiceImpl"/>
+	<bean id="maintSadImportKodtsbService" class="no.systema.tvinn.sad.z.maintenance.sadimport.service.gyldigekoder.MaintSadImportKodtsbServiceImpl"/>
+	<!-- END Gyldige koder -->
+	
+	
+</beans>

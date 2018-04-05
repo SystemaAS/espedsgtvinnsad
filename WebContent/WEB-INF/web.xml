@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+ 
+  <display-name>Systema eSped Application</display-name>
+  <welcome-file-list>
+    <welcome-file>/WEB-INF/index.jsp</welcome-file>
+  </welcome-file-list>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
+  <!-- 
+  <listener>
+    <listener-class>no.systema.main.util.HttpSessionManager</listener-class>
+  </listener>
+   -->
+   
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/espedsgtvinnsad-servlet.xml, /WEB-INF/espedsgtvinnsad-service.xml, /WEB-INF/espedsgtvinnsad-maintenance-service.xml</param-value>
+  </context-param>
+  <servlet>
+    <servlet-name>espedsgtvinnsad</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>0</load-on-startup>    
+  </servlet>
+  
+  <!-- THIS IS to pre-compile some critical-JSPs in order to help first user <end-user> experience
+       It should be moved to an alternativ jasper/ant task invocation since this method is not a good design for a discrete number of jsp > 20 pages... -->
+       
+  <!-- TVINN START -->
+  <servlet>
+    <servlet-name>tvinnsadexport_edit.jsp</servlet-name>
+    <jsp-file>/WEB-INF/views/tvinnsadexport_edit.jsp</jsp-file>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>tvinnsadexport_edit_items.jsp</servlet-name>
+    <jsp-file>/WEB-INF/views/tvinnsadexport_edit_items.jsp</jsp-file>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>tvinnsadimport_edit.jsp</servlet-name>
+    <jsp-file>/WEB-INF/views/tvinnsadimport_edit.jsp</jsp-file>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>tvinnsadimport_edit_items.jsp</servlet-name>
+    <jsp-file>/WEB-INF/views/tvinnsadimport_edit_items.jsp</jsp-file>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <!-- TVINN END -->
+  
+  <servlet-mapping>
+    <servlet-name>espedsgtvinnsad</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <session-config>
+    <session-timeout>60</session-timeout>
+  </session-config>
+  
+  <filter>  
+    <filter-name>encodingFilter</filter-name>  
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>  
+    <init-param>  
+       <param-name>encoding</param-name>  
+       <param-value>UTF-8</param-value>  
+    </init-param>  
+    <init-param>  
+       <param-name>forceEncoding</param-name>  
+       <param-value>true</param-value>  
+    </init-param>  
+  </filter>  
+  <filter-mapping>  
+    <filter-name>encodingFilter</filter-name>  
+    <url-pattern>/*</url-pattern>  
+  </filter-mapping> 
+</web-app>

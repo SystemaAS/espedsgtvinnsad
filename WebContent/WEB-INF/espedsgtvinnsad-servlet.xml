@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:p="http://www.springframework.org/schema/p"
+xmlns:context="http://www.springframework.org/schema/context"
+xmlns:mvc="http://www.springframework.org/schema/mvc"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-4.0.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+	<context:component-scan base-package="no.systema.*"/>
+	 
+	<!-- This will allow Wiring with annotations. [It is not the default]  -->
+	<context:annotation-config/>
+	
+	<!--//////////////////////////////////
+        MVC resolver for static resources
+      ///////////////////////////////////
+   	-->
+ 	<!-- In order to reach all static resources like images, css, etc. you must use mvc:resources (which requires mvc:annotation-drive)
+ 		 Both REQUIRE hibernate jar files despite the fact no use of Hibernate is done in you application. 
+ 		 There are dependencies that demand this Validation Hibernate JAR is in you lib-path. Otherwise mvc:resources will cast an
+ 		 Exception at bootstrap (WAR)-->
+	<mvc:resources mapping="/resources/**" location="WEB-INF/resources/" order="1"/> 
+	<mvc:annotation-driven />
+	
+    <!-- This class provides an application-wide access to the Spring ApplicationContext --> 
+    <bean id="contextApplicationContextProvider" class="no.systema.main.context.TdsApplicationContextProvider"></bean>  
+    <!-- This class provides an application-wide access to the ServletContext --> 
+    <bean id="contextServletContextProvider" class="no.systema.main.context.TdsServletContextProvider"></bean>  
+	
+	
+	<!--/////////////////
+        View resolvers
+      /////////////////
+   	-->
+	<!-- view resolver Excel - PDF - old fashion
+ 	<bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+  		<property name="order"><value>1</value></property>
+  	</bean>
+  	 -->
+ 	<!-- view resolver Excel - PDF via XML Resolver -->
+ 	<bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.XmlViewResolver">
+  		<property name="order"><value>1</value></property>
+  		<property name="location" value="/WEB-INF/views.xml"/>
+  	</bean>
+  	<!-- JSP with JSTL -->
+  	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="2" />
+	</bean>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- max upload size in bytes -->
+        <property name="maxUploadSize" value="20971520" /> <!-- 20MB -->
+        <!-- max size of file in memory (in bytes) -->
+        <property name="maxInMemorySize" value="1048576" /> <!-- 1MB -->
+    </bean>
+	
+	<!-- application properties. This class extends: org.springframework.beans.factory.config.PropertyPlaceholderConfigurer -->
+	<bean id="placeholderConfigMM" class="no.systema.main.util.ApplicationPropertiesUtil">
+    	<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+    	<property name="locations">
+    		<list>
+        		<value>file:${catalina.home}/espedsgtvinnsad/application.properties</value>
+    		</list>
+    	</property>
+	</bean>
+	<!-- TEST template   
+	<bean id="appProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    	<property name="location" value="file:${catalina.home}/application.properties"/>
+	</bean>
+	-->
+	 
+	
+	<!-- ////////////////////////////////////////////////////
+        resource bundles and internationalization [i18n] and
+        localization [L10n] support
+       //////////////////////////////////////////////////////
+   	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"> 
+	  <property name="basename" value="/WEB-INF/messages"/> 
+	  <property name="cacheSeconds" value="3"/> 
+	</bean>
+	-->
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"> 
+	  <property name="basenames">
+	  		<list>
+				<value>/WEB-INF/messages</value>
+				<value>/WEB-INF/messagestvinnsad</value>
+				<value>/WEB-INF/messagesmainmaintenance</value>
+				
+			</list>
+	  </property>
+	</bean>
+
+	
+	<!-- We must have this mvc:tag to make it work. 
+		 This inteceptors and i18n has been implemented in SporringOppdrag to implement a required multi-language support
+		 The only thing to do is just to add message files in the target languages.
+		 All funneling is already in place. Ref. to dashboard.jsp (<a class="text14" href="sporringoppdraggate.do?lang=${user.usrLang}" >) 
+		 whereby the implementation can be seen in action. Just put the lang= parameter from that point forward you want to make used of the interceptor below. 
+		 Spring takes care of the rest.
+	-->
+	<mvc:interceptors> 
+		<bean id="localeChangeInterceptor"
+			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="lang" />
+		</bean>
+	</mvc:interceptors>
+
+	<mvc:annotation-driven>
+	     <mvc:message-converters>
+	            <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+	            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+	   </mvc:message-converters>
+	</mvc:annotation-driven>
+
+
+
+ 	
+ 	<bean id="localeResolver"
+ 		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<!-- class="org.springframework.web.servlet.i18n.SessionLocaleResolver">  -->
+		<property name="defaultLocale" value="no" />
+	</bean>
+	 
+	
+	 
+</beans>

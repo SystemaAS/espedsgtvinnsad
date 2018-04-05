@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:p="http://www.springframework.org/schema/p"
+xmlns:context="http://www.springframework.org/schema/context"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<!-- ================  -->
+ 	<!-- APPLICATION WIDE -->  
+	<!-- ================  -->
+	<bean id="urlCgiProxyService" class="no.systema.main.service.UrlCgiProxyServiceImpl"/>
+	<bean id="systemaWebLoginService" class="no.systema.main.service.login.SystemaWebLoginServiceImpl"/>
+	<bean id="currencyRateService" class="no.systema.main.service.general.CurrencyRateServiceImpl"/>
+	<bean id="notisblockService" class="no.systema.main.service.general.notisblock.NotisblockServiceImpl"/>
+	<bean id="ediFtpLogService" class="no.systema.main.service.general.EdiFtpLogServiceImpl"/>
+	<bean id="firmLoginService" class="no.systema.main.service.FirmLoginServiceImpl"/>
+	<bean id="uploadFileToArchiveService" class="no.systema.main.service.general.UploadFileToArchiveServiceImpl"/>
+	
+	
+	<!-- ===============  -->
+	<!-- TVINN-SAD WIDE   -->
+	<!-- ===============  -->
+	<!-- TVINN-SAD - Authorization -->
+    <bean id="tvinnSadAuthorizationService" class="no.systema.tvinn.sad.service.TvinnSadAuthorizationServiceImpl"/>
+    <bean id="tvinnSadCustomerService" class="no.systema.tvinn.sad.service.TvinnSadCustomerServiceImpl"/>
+    <bean id="tvinnSadTolltariffVarukodService" class="no.systema.tvinn.sad.service.TvinnSadTolltariffVarukodServiceImpl"/>
+    <bean id="tvinnSadTullkontorService" class="no.systema.tvinn.sad.service.TvinnSadTullkontorServiceImpl"/>
+    <!-- TVINN - Drop down bean --> 
+    <bean id="tvinnSadDropDownListPopulationService" class="no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService"/>
+    
+    <!-- ================= -->
+	<!-- TVINN-SAD EXPORT  -->
+	<!-- ================= -->
+	<bean id="sadExportTopicListService" class="no.systema.tvinn.sad.sadexport.service.SadExportTopicListServiceImpl"/>
+	<bean id="sadExportSpecificTopicService" class="no.systema.tvinn.sad.sadexport.service.SadExportSpecificTopicServiceImpl"/>
+	<bean id="sadExportSpecificTopicItemService" class="no.systema.tvinn.sad.sadexport.service.SadExportSpecificTopicItemServiceImpl"/>
+	<!-- SAD EXPORT Drop down bean --> 
+    <bean id="sadExportDropDownListPopulationService" class="no.systema.tvinn.sad.sadexport.service.html.dropdown.SadExportDropDownListPopulationService"/>
+	<!-- SAD EXPORT - General Codes ChildWindow Service -->
+    <bean id="sadExportGeneralCodesChildWindowService" class="no.systema.tvinn.sad.sadexport.service.SadExportGeneralCodesChildWindowServiceImpl"/>
+    
+	<!-- ================= -->
+	<!-- TVINN-SAD IMPORT  -->
+	<!-- ================= -->
+	<bean id="sadImportTopicListService" class="no.systema.tvinn.sad.sadimport.service.SadImportTopicListServiceImpl"/>
+	<bean id="sadImportSpecificTopicService" class="no.systema.tvinn.sad.sadimport.service.SadImportSpecificTopicServiceImpl"/>
+	<bean id="sadImportSpecificTopicItemService" class="no.systema.tvinn.sad.sadimport.service.SadImportSpecificTopicItemServiceImpl"/>
+	<!-- SAD IMPORT Drop down bean --> 
+    <bean id="sadImportDropDownListPopulationService" class="no.systema.tvinn.sad.sadimport.service.html.dropdown.SadImportDropDownListPopulationService"/>
+	<!-- SAD IMPORT - General Codes ChildWindow Service -->
+    <bean id="sadImportGeneralCodesChildWindowService" class="no.systema.tvinn.sad.sadimport.service.SadImportGeneralCodesChildWindowServiceImpl"/>
+    
+	<!-- =====================  -->
+	<!-- TVINN-SAD NCTS EXPORT  -->
+	<!-- =====================  -->
+	<bean id="sadNctsExportTopicListService" class="no.systema.tvinn.sad.nctsexport.service.SadNctsExportTopicListServiceImpl"/>
+	<bean id="sadNctsExportSkatSpecificTopicService" class="no.systema.tvinn.sad.nctsexport.service.SadNctsExportSpecificTopicServiceImpl"/>
+	<bean id="sadNctsExportSkatSpecificTopicItemService" class="no.systema.tvinn.sad.nctsexport.service.SadNctsExportSpecificTopicItemServiceImpl"/>
+	<!-- SKAT-NCTS EXPORT Drop down bean --> 
+    <bean id="sadNctsExportSkatdropDownListPopulationService" class="no.systema.tvinn.sad.nctsexport.service.html.dropdown.SadNctsExportDropDownListPopulationService"/>
+	
+	<!-- =====================  -->
+	<!-- TVINN-SAD NCTS IMPORT  -->
+	<!-- =====================  -->
+	<bean id="sadNctsImportTopicListService" class="no.systema.tvinn.sad.nctsimport.service.SadNctsImportTopicListServiceImpl"/>
+	<bean id="sadNctsImportSpecificTopicService" class="no.systema.tvinn.sad.nctsimport.service.SadNctsImportSpecificTopicServiceImpl"/>
+	<bean id="sadNctsImportSpecificTopicItemService" class="no.systema.tvinn.sad.nctsimport.service.SadNctsImportSpecificTopicItemServiceImpl"/>
+	<bean id="sadNctsImportSpecificTopicUnloadingService" class="no.systema.tvinn.sad.nctsimport.service.SadNctsImportSpecificTopicUnloadingServiceImpl"/>
+	<bean id="sadNctsImportSpecificTopicUnloadingItemService" class="no.systema.tvinn.sad.nctsimport.service.SadNctsImportSpecificTopicUnloadingItemServiceImpl"/>
+	<!-- TVINN-SAD NCTS IMPORT Drop down bean --> 
+    <bean id="sadNctsImportDropDownListPopulationService" class="no.systema.tvinn.sad.nctsimport.service.html.dropdown.SadNctsImportDropDownListPopulationService"/>
+	
+	<!-- =================  -->
+	<!-- TVINN-SAD ADMIN    -->
+	<!-- =================  -->
+	<bean id="sadAdminTransportService" class="no.systema.tvinn.sad.admin.service.SadAdminTransportServiceImpl"/>
+	<bean id="sadAdminAvggrunnlagService" class="no.systema.tvinn.sad.admin.service.SadAdminAvggrunnlagServiceImpl"/>
+	
+	
+	
+</beans>
