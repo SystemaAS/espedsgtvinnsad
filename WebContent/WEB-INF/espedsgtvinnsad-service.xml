@@ -57,10 +57,10 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 	<!-- TVINN-SAD NCTS EXPORT  -->
 	<!-- =====================  -->
 	<bean id="sadNctsExportTopicListService" class="no.systema.tvinn.sad.nctsexport.service.SadNctsExportTopicListServiceImpl"/>
-	<bean id="sadNctsExportSkatSpecificTopicService" class="no.systema.tvinn.sad.nctsexport.service.SadNctsExportSpecificTopicServiceImpl"/>
-	<bean id="sadNctsExportSkatSpecificTopicItemService" class="no.systema.tvinn.sad.nctsexport.service.SadNctsExportSpecificTopicItemServiceImpl"/>
-	<!-- SKAT-NCTS EXPORT Drop down bean --> 
-    <bean id="sadNctsExportSkatdropDownListPopulationService" class="no.systema.tvinn.sad.nctsexport.service.html.dropdown.SadNctsExportDropDownListPopulationService"/>
+	<bean id="sadNctsExportSpecificTopicService" class="no.systema.tvinn.sad.nctsexport.service.SadNctsExportSpecificTopicServiceImpl"/>
+	<bean id="sadNctsExportSpecificTopicItemService" class="no.systema.tvinn.sad.nctsexport.service.SadNctsExportSpecificTopicItemServiceImpl"/>
+	<!-- NCTS EXPORT Drop down bean --> 
+    <bean id="sadNctsExportdropDownListPopulationService" class="no.systema.tvinn.sad.nctsexport.service.html.dropdown.SadNctsExportDropDownListPopulationService"/>
 	
 	<!-- =====================  -->
 	<!-- TVINN-SAD NCTS IMPORT  -->
