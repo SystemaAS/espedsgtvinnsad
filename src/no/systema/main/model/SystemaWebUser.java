@@ -1,5 +1,7 @@
 package no.systema.main.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
 
 import no.systema.main.model.jsonjackson.JsonSystemaUserExtensionsArchiveRecord;
@@ -148,9 +150,13 @@ public class SystemaWebUser {
 	private String httpProtocol = AppConstants.HTTP_PROTOCOL;
 	public String getHttpProtocol() { return this.httpProtocol;}
 	
-	private String versionEspedsg = AppConstants.VERSION_ESPSEDSG;
-	public String getVersionEspedsg() { return this.versionEspedsg;}
-	
+	private String versionEspedsg = null;//AppConstants.VERSION_ESPSEDSG;
+	public String getVersionEspedsg() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd-HHmmss");
+		Calendar cal = Calendar.getInstance();
+		this.versionEspedsg = dateFormat.format(cal.getTime()); 
+		return this.versionEspedsg;
+	}
 	private String versionSpring = AppConstants.VERSION_SPRING;
 	public String getVersionSpring() { return this.versionSpring;}
 	
