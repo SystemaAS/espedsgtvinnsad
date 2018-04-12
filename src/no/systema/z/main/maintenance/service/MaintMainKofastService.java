@@ -3,7 +3,7 @@
  */
 package no.systema.z.main.maintenance.service;
 
-import no.systema.z.main.maintenance.model.JsonMaintMainChildWindowKofastContainer;
+import no.systema.z.main.maintenance.model.jsonjackson.dbtable.JsonMaintMainChildWindowKofastContainer;
 
 /**
  * 

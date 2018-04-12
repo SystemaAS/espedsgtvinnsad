@@ -4,7 +4,7 @@
 package no.systema.tvinn.sad.z.maintenance.nctsexport.service;
 
 import no.systema.tvinn.sad.z.maintenance.nctsexport.model.jsonjackson.dbtable.JsonMaintNctsTrughContainer;
-import no.systema.z.main.maintenance.model.JsonMaintMainCundfContainer;
+import no.systema.z.main.maintenance.model.jsonjackson.dbtable.JsonMaintMainCundfContainer;
 
 /**
  * 

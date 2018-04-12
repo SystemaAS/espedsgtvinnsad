@@ -27,10 +27,10 @@ import no.systema.tvinn.sad.z.maintenance.sadexport.model.jsonjackson.dbtable.Js
 import no.systema.tvinn.sad.z.maintenance.sadexport.model.jsonjackson.dbtable.JsonMaintSadExportKodts6Record;
 import no.systema.tvinn.sad.z.maintenance.sadexport.service.MaintSadExportKodts6Service;
 import no.systema.tvinn.sad.z.maintenance.sadexport.url.store.TvinnSadMaintenanceExportUrlDataStore;
-import no.systema.z.main.maintenance.model.JsonMaintMainChildWindowKofastContainer;
-import no.systema.z.main.maintenance.model.JsonMaintMainChildWindowKofastRecord;
-import no.systema.z.main.maintenance.model.JsonMaintMainKodtaContainer;
-import no.systema.z.main.maintenance.model.JsonMaintMainKodtaRecord;
+import no.systema.z.main.maintenance.model.jsonjackson.dbtable.JsonMaintMainChildWindowKofastContainer;
+import no.systema.z.main.maintenance.model.jsonjackson.dbtable.JsonMaintMainChildWindowKofastRecord;
+import no.systema.z.main.maintenance.model.jsonjackson.dbtable.JsonMaintMainKodtaContainer;
+import no.systema.z.main.maintenance.model.jsonjackson.dbtable.JsonMaintMainKodtaRecord;
 import no.systema.z.main.maintenance.service.MaintMainKodtaService;
 import no.systema.z.main.maintenance.service.MaintMainKofastService;
 import no.systema.z.main.maintenance.url.store.MaintenanceMainUrlDataStore;

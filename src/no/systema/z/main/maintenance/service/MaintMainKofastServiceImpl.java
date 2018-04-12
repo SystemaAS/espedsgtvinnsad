@@ -3,8 +3,8 @@
  */
 package no.systema.z.main.maintenance.service;
 
-import no.systema.z.main.maintenance.mapper.MaintMainGenericMapper;
-import no.systema.z.main.maintenance.model.JsonMaintMainChildWindowKofastContainer;
+import no.systema.z.main.maintenance.mapper.jsonjackson.dbtable.MaintMainGenericMapper;
+import no.systema.z.main.maintenance.model.jsonjackson.dbtable.JsonMaintMainChildWindowKofastContainer;
 
 /**
  * 

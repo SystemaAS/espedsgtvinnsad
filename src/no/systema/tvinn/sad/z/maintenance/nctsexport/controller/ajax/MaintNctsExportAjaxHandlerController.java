@@ -27,8 +27,8 @@ import no.systema.tvinn.sad.z.maintenance.nctsexport.model.jsonjackson.dbtable.J
 import no.systema.tvinn.sad.z.maintenance.nctsexport.service.MaintNctsExportTrkodfService;
 import no.systema.tvinn.sad.z.maintenance.nctsexport.service.MaintNctsExportTrughService;
 import no.systema.tvinn.sad.z.maintenance.nctsexport.url.store.TvinnNctsMaintenanceExportUrlDataStore;
-import no.systema.z.main.maintenance.model.JsonMaintMainCundfContainer;
-import no.systema.z.main.maintenance.model.JsonMaintMainCundfRecord;
+import no.systema.z.main.maintenance.model.jsonjackson.dbtable.JsonMaintMainCundfContainer;
+import no.systema.z.main.maintenance.model.jsonjackson.dbtable.JsonMaintMainCundfRecord;
 
 
 /**
