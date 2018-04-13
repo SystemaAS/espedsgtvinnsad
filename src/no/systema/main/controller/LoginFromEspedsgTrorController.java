@@ -209,7 +209,7 @@ public class LoginFromEspedsgTrorController {
 			    	//Note: To allow for a correct Company Tomcat from a Holding Company Web Portal.
 			    	//TOTEN AS triggered this requirement
 			    	//------------------------------------------------------------------------------------------------------
-			    	/*
+			    	
 			    	if(appUser.getTomcatPort()!=null && !"".equals(appUser.getTomcatPort())){
 				    	String urlRedirectTomcatToSubsidiaryCompany = this.getTomcatServerRedirectionUrl(appUser, request);
 				    	RedirectView rw = new RedirectView();
@@ -217,62 +217,10 @@ public class LoginFromEspedsgTrorController {
 				    	rw.setUrl(urlRedirectTomcatToSubsidiaryCompany);
 				    	successView = new ModelAndView(rw);
 			    	}
-			    	*/
+			    	
 			    	return successView;
 		    }
 		}
-	}
-	/**
-	 * 
-	 * @param appUser
-	 * @param request
-	 * @return
-	 */
-	private ModelAndView getSuccessView (SystemaWebUser appUser, HttpServletRequest request){
-		
-		//get all other params
-		String sadExport = request.getParameter("sade");
-		String avd = request.getParameter("avd");
-		String opd = request.getParameter("opd");
-		String signatur = request.getParameter("sysg");
-		String password = request.getParameter("dp");//map the password (encrypted) since we must send it as parameter= dp instead of texted: password
-		//map the Tvinn authorization attributes as well
-		appUser.setPassword(password);
-		appUser.setAuthorizedTvinnSadUserAS400("Y");
-		appUser.setTvinnSadSign(signatur);
-		//debug
-		logger.info("USER:" + appUser.getUser());
-		//logger.info("PASS:" + appUser.getPassword());
-		logger.info("EXPORT:" + sadExport);
-		
-		//================================================================
-		//Start building the final redirection to
-		//(1) Export or Import
- 		//(2) Existing or a New One (having a Transportuppdrag as origin)
-		//================================================================
-		String successViewStr = "";
-		if(strMgr.isNotNull(sadExport) && "Y".equals(sadExport)){
-			//SAD EXPORT
-			if(this.sadExportExists(appUser, avd, opd)){
-				logger.info("SAD Export EXISTS !");
-				successViewStr = "redirect:tvinnsadexport_edit.do?action=doFetch" + "&avd=" + avd + "&opd=" + opd + "&sysg=" + signatur;
-			}else{
-				successViewStr = "redirect:tvinnsadexport_doFetchTopicFromTransportUppdrag.do?actionGS=doUpdate" + "&selectedAvd=" + avd + "&selectedOpd=" + opd ;
-			}
-			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_EXPORT);
-		}else{
-			//SAD IMPORT
-			if(this.sadImportExists(appUser, avd, opd)){
-				logger.info("SAD Import EXISTS !");
-				successViewStr = "redirect:tvinnsadimport_edit.do?action=doFetch" + "&avd=" + avd + "&opd=" + opd + "&sysg=" + signatur;
-			}else{
-				successViewStr = "redirect:tvinnsadimport_doFetchTopicFromTransportUppdrag.do?actionGS=doUpdate" + "&selectedAvd=" + avd + "&selectedOpd=" + opd ;
-			}
-			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_IMPORT);
-		}
-		
-		ModelAndView successView = new ModelAndView(successViewStr);
-		return successView;
 	}
 	
 	/**
@@ -370,6 +318,59 @@ public class LoginFromEspedsgTrorController {
 		    	return successView;
 			   
 			}
+	}
+	
+	/**
+	 * 
+	 * @param appUser
+	 * @param request
+	 * @return
+	 */
+	private ModelAndView getSuccessView (SystemaWebUser appUser, HttpServletRequest request){
+		
+		//get all other params
+		String sadExport = request.getParameter("sade");
+		String avd = request.getParameter("avd");
+		String opd = request.getParameter("opd");
+		String signatur = request.getParameter("sysg");
+		String password = request.getParameter("dp");//map the password (encrypted) since we must send it as parameter= dp instead of texted: password
+		//map the Tvinn authorization attributes as well
+		appUser.setPassword(password);
+		appUser.setAuthorizedTvinnSadUserAS400("Y");
+		appUser.setTvinnSadSign(signatur);
+		//debug
+		logger.info("USER:" + appUser.getUser());
+		//logger.info("PASS:" + appUser.getPassword());
+		logger.info("EXPORT:" + sadExport);
+		
+		//================================================================
+		//Start building the final redirection to
+		//(1) Export or Import
+ 		//(2) Existing or a New One (having a Transportuppdrag as origin)
+		//================================================================
+		String successViewStr = "";
+		if(strMgr.isNotNull(sadExport) && "Y".equals(sadExport)){
+			//SAD EXPORT
+			if(this.sadExportExists(appUser, avd, opd)){
+				logger.info("SAD Export EXISTS !");
+				successViewStr = "redirect:tvinnsadexport_edit.do?action=doFetch" + "&avd=" + avd + "&opd=" + opd + "&sysg=" + signatur;
+			}else{
+				successViewStr = "redirect:tvinnsadexport_doFetchTopicFromTransportUppdrag.do?actionGS=doUpdate" + "&selectedAvd=" + avd + "&selectedOpd=" + opd ;
+			}
+			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_EXPORT);
+		}else{
+			//SAD IMPORT
+			if(this.sadImportExists(appUser, avd, opd)){
+				logger.info("SAD Import EXISTS !");
+				successViewStr = "redirect:tvinnsadimport_edit.do?action=doFetch" + "&avd=" + avd + "&opd=" + opd + "&sysg=" + signatur;
+			}else{
+				successViewStr = "redirect:tvinnsadimport_doFetchTopicFromTransportUppdrag.do?actionGS=doUpdate" + "&selectedAvd=" + avd + "&selectedOpd=" + opd ;
+			}
+			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_IMPORT);
+		}
+		
+		ModelAndView successView = new ModelAndView(successViewStr);
+		return successView;
 	}
 	
 	/**
@@ -504,7 +505,6 @@ public class LoginFromEspedsgTrorController {
 		//We must user GET until we get Spring 4 (in order to send params on POST)
 		try{
 			StringBuffer params = new StringBuffer();
-			
 			params.append("/logonWRedTrorList_toSad.do?user=" + appUser.getUser());
 			params.append("&sade=" + request.getParameter("sade"));
 			params.append("&avd=" + request.getParameter("avd"));

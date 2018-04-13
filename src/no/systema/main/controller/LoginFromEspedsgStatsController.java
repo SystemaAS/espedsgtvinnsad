@@ -212,7 +212,6 @@ public class LoginFromEspedsgStatsController {
 			    	//Note: To allow for a correct Company Tomcat from a Holding Company Web Portal.
 			    	//TOTEN AS triggered this requirement
 			    	//------------------------------------------------------------------------------------------------------
-			    	/* TODO later if applicable
 			    	if(appUser.getTomcatPort()!=null && !"".equals(appUser.getTomcatPort())){
 				    	String urlRedirectTomcatToSubsidiaryCompany = this.getTomcatServerRedirectionUrl(appUser, request);
 				    	RedirectView rw = new RedirectView();
@@ -220,7 +219,7 @@ public class LoginFromEspedsgStatsController {
 				    	rw.setUrl(urlRedirectTomcatToSubsidiaryCompany);
 				    	successView = new ModelAndView(rw);
 			    	}
-			    	*/
+			    	
 			    	return successView;
 		    }
 		}
@@ -509,7 +508,6 @@ public class LoginFromEspedsgStatsController {
 		//We must user GET until we get Spring 4 (in order to send params on POST)
 		try{
 			StringBuffer params = new StringBuffer();
-			
 			params.append("/logonWRedAnalyseReports_toSad.do?user=" + appUser.getUser());
 			params.append("&sade=" + request.getParameter("sade"));
 			params.append("&avd=" + request.getParameter("avd"));
