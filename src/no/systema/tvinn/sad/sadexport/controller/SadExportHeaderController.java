@@ -750,7 +750,7 @@ public class SadExportHeaderController {
 	 * @return
 	 * 
 	 */
-	@RequestMapping(value="tvinnsadexport_doFetchTopicFromTransportUppdrag.do", method={RequestMethod.POST} )
+	@RequestMapping(value="tvinnsadexport_doFetchTopicFromTransportUppdrag.do", method={RequestMethod.POST, RequestMethod.GET} )
 	public ModelAndView doFetchTopicFromTransportUppdrag( HttpSession session, HttpServletRequest request){
 		JsonSadExportTopicCopiedFromTransportUppdragContainer jsonContainer = null;
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);

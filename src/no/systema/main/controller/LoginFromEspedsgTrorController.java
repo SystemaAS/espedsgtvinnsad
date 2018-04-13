@@ -35,12 +35,13 @@ import org.springframework.validation.BindingResult;
 
 //import no.systema.tds.service.MainHdTopicService;
 import no.systema.main.validator.UserValidator;
-import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicListContainer;
-import no.systema.tvinn.sad.sadexport.service.SadExportTopicListService;
-import no.systema.tvinn.sad.sadexport.url.store.SadExportUrlDataStore;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportTopicListContainer;
 import no.systema.tvinn.sad.sadimport.service.SadImportTopicListService;
 import no.systema.tvinn.sad.sadimport.url.store.SadImportUrlDataStore;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicListContainer;
+import no.systema.tvinn.sad.sadexport.service.SadExportTopicListService;
+import no.systema.tvinn.sad.sadexport.url.store.SadExportUrlDataStore;
+
 //application imports
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.model.jsonjackson.JsonSystemaUserContainer;
@@ -63,7 +64,7 @@ import no.systema.jservices.common.util.AesEncryptionDecryptionManager;
 
 
 /**
- * Login for the external module: espedsgstats
+ * Login for the external module: espedsgtror
  * 
  * To accomplish direct link into whatever tvinnsad - view (JSP). 
  * A separate logon MUST take place.
@@ -77,8 +78,8 @@ import no.systema.jservices.common.util.AesEncryptionDecryptionManager;
 
 @Controller
 @Scope("session")
-public class LoginFromEspedsgStatsController {
-	private static final Logger logger = Logger.getLogger(LoginFromEspedsgStatsController.class.getName());
+public class LoginFromEspedsgTrorController {
+	private static final Logger logger = Logger.getLogger(LoginFromEspedsgTrorController.class.getName());
 	private final String COMPANY_CODE_REQUIRED_FLAG_VALUE = "1";
 	private AesEncryptionDecryptionManager aesManager = new AesEncryptionDecryptionManager();
 	private StringManager strMgr = new StringManager();
@@ -103,21 +104,17 @@ public class LoginFromEspedsgStatsController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="logonAnalyseReports_toSad.do", method= { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value="logonTrorList_toSad.do", method= { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView logon(@ModelAttribute (AppConstants.SYSTEMA_WEB_USER_KEY) SystemaWebUser appUser, BindingResult bindingResult, HttpSession session, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttr){
 		logger.info("Inside logon");
 		ModelAndView successView = this.getSuccessView(appUser, request);
 		
 		Map model = new HashMap();
-		
 		if(appUser==null){
 			return this.loginView;
-		
 		}else{
 			
-			//TEST from {catalina.home}..application.properties => logger.info(ApplicationPropertiesUtil.getProperty("http.as400.root.cgi"));
 			UserValidator validator = new UserValidator();
-			//logger.info("Host via HttpServletRequest.getHeader('Host'): " + request.getHeader("Host"));
 			
 		    validator.validate(appUser, bindingResult);
 		    if(bindingResult.hasErrors()){
@@ -212,7 +209,7 @@ public class LoginFromEspedsgStatsController {
 			    	//Note: To allow for a correct Company Tomcat from a Holding Company Web Portal.
 			    	//TOTEN AS triggered this requirement
 			    	//------------------------------------------------------------------------------------------------------
-			    	/* TODO later if applicable
+			    	/*
 			    	if(appUser.getTomcatPort()!=null && !"".equals(appUser.getTomcatPort())){
 				    	String urlRedirectTomcatToSubsidiaryCompany = this.getTomcatServerRedirectionUrl(appUser, request);
 				    	RedirectView rw = new RedirectView();
@@ -224,6 +221,58 @@ public class LoginFromEspedsgStatsController {
 			    	return successView;
 		    }
 		}
+	}
+	/**
+	 * 
+	 * @param appUser
+	 * @param request
+	 * @return
+	 */
+	private ModelAndView getSuccessView (SystemaWebUser appUser, HttpServletRequest request){
+		
+		//get all other params
+		String sadExport = request.getParameter("sade");
+		String avd = request.getParameter("avd");
+		String opd = request.getParameter("opd");
+		String signatur = request.getParameter("sysg");
+		String password = request.getParameter("dp");//map the password (encrypted) since we must send it as parameter= dp instead of texted: password
+		//map the Tvinn authorization attributes as well
+		appUser.setPassword(password);
+		appUser.setAuthorizedTvinnSadUserAS400("Y");
+		appUser.setTvinnSadSign(signatur);
+		//debug
+		logger.info("USER:" + appUser.getUser());
+		//logger.info("PASS:" + appUser.getPassword());
+		logger.info("EXPORT:" + sadExport);
+		
+		//================================================================
+		//Start building the final redirection to
+		//(1) Export or Import
+ 		//(2) Existing or a New One (having a Transportuppdrag as origin)
+		//================================================================
+		String successViewStr = "";
+		if(strMgr.isNotNull(sadExport) && "Y".equals(sadExport)){
+			//SAD EXPORT
+			if(this.sadExportExists(appUser, avd, opd)){
+				logger.info("SAD Export EXISTS !");
+				successViewStr = "redirect:tvinnsadexport_edit.do?action=doFetch" + "&avd=" + avd + "&opd=" + opd + "&sysg=" + signatur;
+			}else{
+				successViewStr = "redirect:tvinnsadexport_doFetchTopicFromTransportUppdrag.do?actionGS=doUpdate" + "&selectedAvd=" + avd + "&selectedOpd=" + opd ;
+			}
+			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_EXPORT);
+		}else{
+			//SAD IMPORT
+			if(this.sadImportExists(appUser, avd, opd)){
+				logger.info("SAD Import EXISTS !");
+				successViewStr = "redirect:tvinnsadimport_edit.do?action=doFetch" + "&avd=" + avd + "&opd=" + opd + "&sysg=" + signatur;
+			}else{
+				successViewStr = "redirect:tvinnsadimport_doFetchTopicFromTransportUppdrag.do?actionGS=doUpdate" + "&selectedAvd=" + avd + "&selectedOpd=" + opd ;
+			}
+			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_IMPORT);
+		}
+		
+		ModelAndView successView = new ModelAndView(successViewStr);
+		return successView;
 	}
 	
 	/**
@@ -238,7 +287,7 @@ public class LoginFromEspedsgStatsController {
 	 * @return
 	 */
 	
-	@RequestMapping(value="logonWRedAnalyseReports_toSad.do", method= { RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value="logonWRedTrorList_toSad.do", method= { RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView logonRedirected(RedirectAttributes redirectAttrs, Model modelX, @ModelAttribute (AppConstants.SYSTEMA_WEB_USER_KEY) SystemaWebUser appUser, HttpSession session, HttpServletRequest request, HttpServletResponse response){
 		logger.info("Inside logon");
 		ModelAndView successView = this.getSuccessView(appUser, request);
@@ -326,60 +375,7 @@ public class LoginFromEspedsgStatsController {
 	/**
 	 * 
 	 * @param appUser
-	 * @param request
-	 * @return
-	 */
-	private ModelAndView getSuccessView (SystemaWebUser appUser, HttpServletRequest request){
-		
-		//get all other params
-		String sadExport = request.getParameter("sade");
-		String avd = request.getParameter("avd");
-		String opd = request.getParameter("opd");
-		String signatur = request.getParameter("sysg");
-		String password = request.getParameter("dp");//map the password (encrypted) since we must send it as parameter= dp instead of texted: password
-		//map the Tvinn authorization attributes as well
-		appUser.setPassword(password);
-		appUser.setAuthorizedTvinnSadUserAS400("Y");
-		appUser.setTvinnSadSign(signatur);
-		//debug
-		logger.info("USER:" + appUser.getUser());
-		//logger.info("PASS:" + appUser.getPassword());
-		logger.info("EXPORT:" + sadExport);
-		
-		//================================================================
-		//Start building the final redirection to
-		//(1) Export or Import
- 		//(2) Existing or a New One (having a Transportuppdrag as origin)
-		//================================================================
-		String successViewStr = "";
-		if(strMgr.isNotNull(sadExport) && "Y".equals(sadExport)){
-			//SAD EXPORT
-			if(this.sadExportExists(appUser, avd, opd)){
-				successViewStr = "redirect:tvinnsadexport_edit.do?action=doFetch" + "&avd=" + avd + "&opd=" + opd + "&sysg=" + signatur;
-			}else{
-				successViewStr = "redirect:tvinnsadexport_doFetchTopicFromTransportUppdrag.do?actionGS=doUpdate" + "&selectedAvd=" + avd + "&selectedOpd=" + opd ;
-			}
-			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_EXPORT);
-		}else{
-			//SAD IMPORT
-			if(this.sadImportExists(appUser, avd, opd)){
-				logger.info("SAD Import EXISTS !");
-				successViewStr = "redirect:tvinnsadimport_edit.do?action=doFetch" + "&avd=" + avd + "&opd=" + opd + "&sysg=" + signatur;
-			}else{
-				successViewStr = "redirect:tvinnsadimport_doFetchTopicFromTransportUppdrag.do?actionGS=doUpdate" + "&selectedAvd=" + avd + "&selectedOpd=" + opd ;
-			}
-			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_IMPORT);
-		}
-		
-		ModelAndView successView = new ModelAndView(successViewStr);
-		return successView;
-	}
-	
-	/**
-	 * 
-	 * @param appUser
 	 * @param avd
-	 * @param opd
 	 * @return
 	 */
 	private boolean sadImportExists(SystemaWebUser appUser, String avd, String opd ){
@@ -505,12 +501,11 @@ public class LoginFromEspedsgStatsController {
 			}
 		}
 		
-		
 		//We must user GET until we get Spring 4 (in order to send params on POST)
 		try{
 			StringBuffer params = new StringBuffer();
 			
-			params.append("/logonWRedAnalyseReports_toSad.do?user=" + appUser.getUser());
+			params.append("/logonWRedTrorList_toSad.do?user=" + appUser.getUser());
 			params.append("&sade=" + request.getParameter("sade"));
 			params.append("&avd=" + request.getParameter("avd"));
 			params.append("&opd=" + request.getParameter("opd"));
@@ -523,8 +518,6 @@ public class LoginFromEspedsgStatsController {
 			//logger.info("XXXXX:" + request.getContextPath());
 		}
 		return retval;
-		
-		
 	}
 	/**
 	 * This method must be used as long as we use AS400 login service
@@ -724,6 +717,7 @@ public class LoginFromEspedsgStatsController {
 	public void setFirmLoginService (FirmLoginService value){ this.firmLoginService = value; }
 	public FirmLoginService getFirmLoginService(){ return this.firmLoginService; }
 	
+	
 	@Qualifier ("sadImportTopicListService")
 	private SadImportTopicListService sadImportTopicListService;
 	@Autowired
@@ -737,6 +731,7 @@ public class LoginFromEspedsgStatsController {
 	@Required
 	public void setSadExportTopicListService (SadExportTopicListService value){ this.sadExportTopicListService = value; }
 	public SadExportTopicListService getSadExportTopicListService(){ return this.sadExportTopicListService; }
+	
 	
 		
 }
