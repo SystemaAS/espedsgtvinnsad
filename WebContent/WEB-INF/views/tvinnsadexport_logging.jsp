@@ -24,7 +24,7 @@
 					<a id="alinkHeader" style="display:block;" href="tvinnsadexport_edit.do?action=doFetch&avd=${model.avd}&opd=${model.opd}
 							&sysg=${model.sign}&tuid=${model.tullId}&syst=${model.status}&sydt=${model.datum}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
 						<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.export.created.mastertopic.tab"/></font>
-						<font class="text12MediumBlue">[${model.opd}]</font>
+						<font class="text14MediumBlue">[${model.opd}]</font>
 						<c:if test="${model.status == 'M' || empty model.status || model.status == '1'}">
 							<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 						</c:if>
@@ -101,24 +101,27 @@
 			<tr>
 				<td>
 				<table width="100%" cellspacing="0" border="0" cellpadding="0">
+					<thead>
 					<tr class="tableHeaderField" height="20" valign="left">
-					    <td class="tableHeaderFieldFirst">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.topicNr"/>&nbsp;</td>
-						<td class="tableHeaderField">&nbsp;Interch.nr&nbsp;</td>
-						<td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.messageNr"/>&nbsp;</td>
-					    <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.sender"/>&nbsp;</td>
-	                    <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.receiver"/>&nbsp;</td> 
-	                    <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.t"/>&nbsp;</td> 
-	                    <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.messageId"/>&nbsp;</td>
-	                    <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.function"/>&nbsp;</td>
-	                    <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.date"/>&nbsp;</td>
-	                    <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.sequence"/>&nbsp;</td> 
-	                    <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.ver"/>&nbsp;</td> 
-	                    <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.eksp"/>&nbsp;</td>
-	                    <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.s"/>&nbsp;</td>
-	                    <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.sent"/>&nbsp;</td>
-	                    <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.sentReceive"/>&nbsp;</td>
-	                    <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.text"/>&nbsp;</td>
-	               </tr>     
+					    <th class="tableHeaderFieldFirst">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.topicNr"/>&nbsp;</th>
+						<th class="tableHeaderField">&nbsp;Interch.nr&nbsp;</th>
+						<th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.messageNr"/>&nbsp;</th>
+					    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.sender"/>&nbsp;</th>
+	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.receiver"/>&nbsp;</th> 
+	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.t"/>&nbsp;</th> 
+	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.messageId"/>&nbsp;</th>
+	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.function"/>&nbsp;</th>
+	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.date"/>&nbsp;</th>
+	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.sequence"/>&nbsp;</th> 
+	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.ver"/>&nbsp;</th> 
+	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.eksp"/>&nbsp;</th>
+	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.s"/>&nbsp;</th>
+	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.sent"/>&nbsp;</th>
+	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.sentReceive"/>&nbsp;</th>
+	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.logging.list.label.text"/>&nbsp;</th>
+	               </tr> 
+	               </thead>
+	               <tbody>    
 		           	<c:forEach items="${list}" var="record" varStatus="counter">    
 		               <c:choose>           
 		                   <c:when test="${record.msr == 'R'}">
@@ -163,6 +166,7 @@
 		               </td>
 		            </tr> 
 		            </c:forEach>
+		            </tbody>
 	            </table>
 			</td>	
 			</tr>

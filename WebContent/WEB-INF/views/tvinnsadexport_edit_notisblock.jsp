@@ -50,7 +50,7 @@
 						<a id="alinkHeader" style="display:block;" href="tvinnsadexport_edit.do?action=doFetch&avd=${model.avd}&opd=${model.opd}
 								&sysg=${model.sign}&tuid=${refnr}&syst=${model.status}&sydt=${model.datum}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
 							<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.export.created.mastertopic.tab"/></font>
-							<font class="text12MediumBlue">[${model.opd}]</font>
+							<font class="text14MediumBlue">[${model.opd}]</font>
 							<c:if test="${model.status == 'M' || empty model.status}">
 								<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 							</c:if>
@@ -147,7 +147,7 @@
 	 				<%-- MASTER Topic header --%>
 	 				<table width="80%" align="left" class="formFrameHeaderTransparent" border="0" cellspacing="0" cellpadding="0">
 				 		<tr height="15">
-				 			<td class="text12MediumBlue">
+				 			<td class="text14MediumBlue">
 				 				&nbsp;Avd&nbsp;<b>${model.avd}</b>
 				 				&nbsp;Tolldeknr.&nbsp;<b>${model.opd}</b>
 			 				</td>
@@ -180,7 +180,7 @@
 										</td>
 									</tr>
 									<tr>
-										<td class="text12Bold">&nbsp;Antall notater&nbsp;&nbsp;<font class="text12MediumBlue"><b>${model.recordItemContainerFinansOpplysningerTopic.totalNumberOfItemLines}</b></font>
+										<td class="text12Bold">&nbsp;Antall notater&nbsp;&nbsp;<font class="text14MediumBlue"><b>${model.recordItemContainerFinansOpplysningerTopic.totalNumberOfItemLines}</b></font>
 						            		</td>
 									</tr>
 									<tr height="2"><td></td></tr>
@@ -190,14 +190,14 @@
 						</tr> 
 						
 						<tr>
-							<td class="ownScrollableSubWindow" style="width:830px; height:10em;">
+							<td class="ownScrollableSubWindow" style="width:80%; height:10em;">
 								<table width="100%" cellspacing="0" border="0" cellpadding="0">
 									<tr class="tableHeaderField" height="20" valign="left">
-									    <td class="tableHeaderFieldFirst">&nbsp;Linje&nbsp;</td>   
-					                    <td class="tableHeaderField" nowrap>&nbsp;Dato&nbsp;</td>
-					                    <td class="tableHeaderField" nowrap>&nbsp;Part&nbsp;</td>
-					                    <td class="tableHeaderField" nowrap>&nbsp;Fritekst&nbsp;</td>
-					                    	<td align="center" class="tableHeaderField" nowrap>Slett</td>
+									    <th class="tableHeaderFieldFirst">&nbsp;Linje&nbsp;</th>   
+					                    <th class="tableHeaderField" nowrap>&nbsp;Dato&nbsp;</th>
+					                    <th class="tableHeaderField" nowrap>&nbsp;Part&nbsp;</th>
+					                    <th class="tableHeaderField" nowrap>&nbsp;Fritekst&nbsp;</th>
+					                    	<th align="center" class="tableHeaderField" nowrap>Slett</th>
 					               </tr> 
 					               <form name="formItemList" id="formItemList" method="POST" >
 					               		<input type="hidden" name="frtavd" id="frtavd" value="${model.avd}">
@@ -284,7 +284,7 @@
 				 	<%-- Topic ITEM CREATE --%>
 	 				<table width="80%" align="left" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
 				 		<tr height="15">
-				 			<td class="text12White" align="left" >
+				 			<td class="text14White" align="left" >
 				 				<b>&nbsp;&nbsp;N<label onClick="showPop('debugPrintlnAjaxItemFetchAdmin');" >o</label>tat&nbsp;</b>
 		 									<span style="position:absolute; left:150px; top:200px; width:800px; height:400px;" id="debugPrintlnAjaxItemFetchAdmin" class="popupWithInputText"  >
 								           		<div class="text11" align="left">
@@ -298,7 +298,7 @@
 								        		</span>
 				 				<img onClick="showPop('updateInfo');" src="resources/images/update.gif" border="0" alt="edit">
 				 				<span style="position:absolute; left:150px; top:200px; width:800px; height:400px;" id="updateInfo" class="popupWithInputText"  >
-		           		   			<div class="text12" align="left" style="display:block;width:700px;word-break:break-all;">
+		           		   			<div class="text14" align="left" style="display:block;width:700px;word-break:break-all;">
 		           		   				${activeUrlRPGUpdate_TvinnSad}<br/><br/>
 		           		   				<button name="updateInformationButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('updateInfo');">Close</button> 
 		           		   			</div>
@@ -314,9 +314,9 @@
 					 		<td>
 						 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							 		<tr>
-							            <td class="text12" align="left"><span title="frtdt">&nbsp;Dato</span></td>
-							            <td class="text12" align="left"><span title="frtkod">&nbsp;Part</span></td>
-							            <td class="text12" align="left"><span title="frttxt">&nbsp;Tekst</span></td>
+							            <td class="text14" align="left"><span title="frtdt">&nbsp;Dato</span></td>
+							            <td class="text14" align="left"><span title="frtkod">&nbsp;Part</span></td>
+							            <td class="text14" align="left"><span title="frttxt">&nbsp;Tekst</span></td>
 							        </tr>
 							        <tr>
 						        		<td align="left" valign="top">
@@ -325,20 +325,18 @@
 										<td align="left" valign="top">
 						        			<input type="text" class="inputText" name="frtkod" id="frtkod" size="2" maxlength="1" value="${model.record.frtkod}">
 										</td>
-										<td class="text12" align="left">
+										<td class="text14" align="left">
 						            		<textarea rows="1" cols="79" class="inputText" name="frttxt" id="frttxt" maxlength="79">${model.record.frttxt}</textarea>
 							            </td>
 							        </tr>
 							        <tr height="10"><td class="text" align="left"></td></tr>
 						        </table>
 					        </td>
-				        </tr>
-					    <tr height="10"><td colspan="2" ></td></tr>
-					    <tr>	
-						    <td align="left" colspan="5">
+					        <td align="left" colspan="5">
 								<input class="inputFormSubmit" type="submit" name="submit" onclick="javascript: form.action='editNotisblock.do';" value="Lagre notat">
-							</td>							        	
+							</td>
 				        </tr>
+					    <tr height="2"><td colspan="2" ></td></tr>
         	        </table>
         	        </form>
 		        </td>

@@ -517,7 +517,7 @@
 			 				    	</c:choose>	
 							</td>
 				        </tr>
-					    <tr height="5"><td colspan="2" ></td></tr>
+					    <tr height="2"><td colspan="2" ></td></tr>
 					    <tr>	
 						    							        	
 				        </tr>
