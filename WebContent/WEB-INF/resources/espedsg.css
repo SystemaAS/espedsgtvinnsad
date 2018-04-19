@@ -1496,7 +1496,16 @@
 	font-family: Verdana, Arial, Helvetica, sans-serif; 
 	font-size: 12px; 
 	color: #7cbf4c; 
-    background-color: #3D3D3D;
+    background-color: #9DB68C;
+    
+}
+.text14BoldWhiteForItemLinenr{  
+    font-weight:bold ; 
+    border: 0px solid #4E78A0;
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 14px; 
+	color: #FFFFFF; 
+    background-color: #9DB68C;
     
 }
 .text12BoldLightGreenForItemLinenrBlueBg{  
@@ -1523,7 +1532,16 @@
 	font-family: Verdana, Arial, Helvetica, sans-serif; 
 	font-size: 12px; 
 	color: #FF0000; 
-    background-color: #3D3D3D;
+    background-color: #9DB68C;
+    
+}
+.text14BoldRedForItemLinenr{  
+    font-weight:bold ; 
+    border: 0px solid #4E78A0;
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 14px; 
+	color: #FF0000; 
+    background-color: #9DB68C;
     
 }
 .text12BoldRedForItemLinenrBlueBg{  
@@ -1597,6 +1615,11 @@
     font-family: Helvetica Neue, verdana, Arial, sans-serif; font-size: 14px; color: #4E78A0; 
 }
 
+.text14Gray{  
+    font-family: Helvetica Neue, verdana, Arial, sans-serif; 
+    font-size: 14px; 
+    color:#555555;
+}
 
 .text14Red{  
     font-family: Helvetica Neue, verdana, Arial, sans-serif; font-size: 14px; color:#FF0000;  

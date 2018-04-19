@@ -57,7 +57,7 @@
 						<font class="tabLink">
 							&nbsp;<spring:message code="systema.tvinn.sad.export.created.mastertopic.tab"/>
 						</font>
-						<font class="text12MediumBlue">[${model.record.setdn}]</font>
+						<font class="text14MediumBlue">[${model.record.setdn}]</font>
 						<c:if test="${ model.record.sest == 'M' || empty  model.record.sest}">
 							<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 						</c:if>
@@ -201,12 +201,12 @@
 	    		<input type="hidden" name="avd" id="avd" value='${model.record.seavd}'>
 			<input type="hidden" name="sesg" id="sesg" value='${model.record.sesg}'>
 			<tr >
-				<td align="left" class="text12MediumBlue" >
+				<td align="left" class="text14MediumBlue" >
 					&nbsp;&nbsp;&nbsp;&nbsp;<span title="seavd">Avdeling:</span>&nbsp;<b>${model.record.seavd}</b>&nbsp;&nbsp;<span title="setdn">Tolldeknr:&nbsp;</span><b>${model.record.setdn}</b>
 					&nbsp;&nbsp;<span title="sesg">Sign:</span>&nbsp;<b>${model.record.sesg}</b>
 					&nbsp;&nbsp;
 					<img onMouseOver="showPop('status_info');" onMouseOut="hidePop('status_info');" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-					Stat<a tabindex=-1 id="updateStatusLink" name="updateStatusLink" runat="server" href="#"><font class="text12MediumBlue">u</font></a>s:
+					Stat<a tabindex=-1 id="updateStatusLink" name="updateStatusLink" runat="server" href="#"><font class="text14MediumBlue">u</font></a>s:
 					<b>
 						<c:choose>
 							<c:when test="${empty model.record.sest}">
@@ -245,9 +245,9 @@
 					</div>											
 				</td>
 				<td align="right" valign="top" >
-					<input tabindex=-1 type="checkbox" name="semi" id="semi" value="I" <c:if test="${model.record.semi == 'I'}"> checked </c:if> ><font class="text12MediumBlue"><b>Foreløpig</b></font>&nbsp;&nbsp;&nbsp;
+					<input tabindex=-1 type="checkbox" name="semi" id="semi" value="I" <c:if test="${model.record.semi == 'I'}"> checked </c:if> ><font class="text14MediumBlue"><b>Foreløpig</b></font>&nbsp;&nbsp;&nbsp;
 					<c:if test="${'2' != isTestAvd}">
-						<input tabindex=-1 type="checkbox" name="se0035" id="se0035" value="2" <c:if test="${model.record.se0035 == '2'}"> checked </c:if> ><font class="text12MediumBlue"><b>TEST flag</b></font>&nbsp;&nbsp;&nbsp;						
+						<input tabindex=-1 type="checkbox" name="se0035" id="se0035" value="2" <c:if test="${model.record.se0035 == '2'}"> checked </c:if> ><font class="text14MediumBlue"><b>TEST flag</b></font>&nbsp;&nbsp;&nbsp;						
 					</c:if>
 					<a tabindex=-1 href="tvinnsadexport_edit_printTopic.do?avd=${model.record.seavd}&opd=${model.record.setdn}">
 					 	<img title="Print" style="vertical-align: bottom;cursor:pointer;" src="resources/images/printer.png" width="30px" height="30px" border="0" alt="Print">
@@ -260,7 +260,7 @@
 				</td>
 			</tr>
 			<tr >
-				<td align="left" class="text12MediumBlue" >
+				<td align="left" class="text14MediumBlue" >
 					&nbsp;&nbsp;&nbsp;<b>54.</b>&nbsp;<span title="sedst">Tarifferingsted:</span>&nbsp;<b>${model.record.sedst}</b>
 					&nbsp;&nbsp;<span title="setarf">Tariffør:</span>&nbsp;<b>${model.record.setarf}</b>
 					
@@ -280,16 +280,16 @@
 		<%-- CREATE MODE --%> 
 		<c:otherwise>
 			<tr >
-				<td align="left" class="text12MediumBlue">
+				<td align="left" class="text14MediumBlue">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span title="seavd">Avdeling:&nbsp;
-           			<select name="avd" id="avd" TABINDEX=1>
+           			<select class="selectMediumBlueE2" name="avd" id="avd" TABINDEX=1>
 	            		<option value="">-velg-</option>
 	 				  	<c:forEach var="record" items="${model.avdList}" >
                              <option value="${record.avd}"<c:if test="${model.record.seavd == record.avd}"> selected </c:if> >${record.avd}<c:if test="${record.tst == '2'}">&nbsp;(test)</c:if></option>
 						</c:forEach> 
 					</select>
 					&nbsp;<span title="sesg">Sign:</span>&nbsp;
-           			<select name="sesg" id="sesg" TABINDEX=2>
+           			<select class="selectMediumBlueE2" name="sesg" id="sesg" TABINDEX=2>
 	            		<option value="">-velg-</option>
 	 				  	<c:forEach var="record" items="${model.signList}" >
                            	 	<c:choose>
@@ -322,7 +322,7 @@
 	            <td >
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 				 		<tr>
-				 			<td class="text12">
+				 			<td class="text14">
 				 				<img onMouseOver="showPop('1_1_info');" onMouseOut="hidePop('1_1_info');"style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 			 					<b>1</b><font class="text16RedBold" >*</font><span title="sedty">Dekl.type&nbsp;</span>
 			 					<div class="text11" style="position: relative;" align="left">
@@ -348,7 +348,7 @@
 								  <option value="EX"<c:if test="${model.record.sedty == 'EX'}"> selected </c:if> >EX</option>
 								</select>
 			 				</td>
-			 				<td class="text12">&nbsp;
+			 				<td class="text14">&nbsp;
 				 				<img onMouseOver="showPop('ekspedtype_info');" onMouseOut="hidePop('ekspedtype_info');"style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 				 				<font class="text16RedBold" >*</font><span title="sedp">Eksped.type&nbsp;</span>
 				 				<div class="text11" style="position: relative;" align="left">
@@ -372,7 +372,7 @@
 				 			
 		 				</tr>
 		 				<tr>
-		 					<td class="text12">
+		 					<td class="text14">
 		 						<img onMouseOver="showPop('tollMva_info');" onMouseOut="hidePop('tollMva_info');"style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 				 				<span title="seski" id="v_seski" class="validation">&nbsp;Avgifter S/K/I&nbsp;</span>
 				 				<div class="text11" style="position: relative;" align="left">
@@ -392,14 +392,14 @@
 								</div>
 				 			</td>
 				 			<td>
-				 				<select name="seski" id="seski" >
+				 				<select class="selectMediumBlueE2" name="seski" id="seski" >
 				 					<option value="">-velg-</option>
 								  <option value="S"<c:if test="${ model.record.seski == 'S'}"> selected </c:if> >S</option>
 								  <option value="K"<c:if test="${ model.record.seski == 'K'}"> selected </c:if> >K</option>
 								  <option value="I"<c:if test="${ model.record.seski == 'I'}"> selected </c:if> >I</option>
 								</select>
 			 				</td>
-			 				<td class="text12">&nbsp;
+			 				<td class="text14">&nbsp;
 			 					<img onMouseOver="showPop('ens_flag_info');" onMouseOut="hidePop('ens_flag_info');"style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 				 				<span title="sekddk">Dagsopp./Kontant&nbsp;</span>
 				 				<div class="text11" style="position: relative;" align="left">
@@ -414,7 +414,7 @@
 								</div>
 			 				</td>
 			 				<td>
-				 				<select name="sekddk" id="sekddk" >
+				 				<select class="selectMediumBlueE2" name="sekddk" id="sekddk" >
 				 				  <option selected value="">-velg-</option>
 								  <option value="D"<c:if test="${model.record.sekddk == 'D'}"> selected </c:if> >D</option>
 								  <option value="K"<c:if test="${model.record.sekddk == 'K'}"> selected </c:if> >K</option>
@@ -424,17 +424,17 @@
 		 				
 		 				<tr height="10"><td></td></tr>
 		 				<tr>
-		 					<td align="left" class="text12">&nbsp;
+		 					<td align="left" class="text14">&nbsp;
 		 						<span title="h_xref">Ext.ref.nr.&nbsp;</span>
 				 			</td>
-				 			<td class="text12" align="left" colspan="2">
+				 			<td class="text14" align="left" colspan="2">
 				 				<input type="text" class="inputText" name="h_xref" id="h_xref" size="15" maxlength="35" value="${model.record.h_xref}">
 			 				</td>
 			 					
-				 			<td class="text12">&nbsp;
+				 			<td class="text14">&nbsp;
 		 						<span title="setll" id="v_setll" >Løpenr.&nbsp;</span>
 			 				</td>
-			 				<td class="text12" align="left">
+			 				<td class="text14" align="left">
 		            			<input readonly type="text" class="inputTextReadOnly" name="setll" id="setll" size="12" maxlength="10" value="${model.record.setll}">
 	            			</td>
 				 		</tr>
@@ -494,7 +494,7 @@
 	 				<%-- SENDER --%>
 	 				<table width="90%" align="left" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
 				 		<tr height="15">
-				 			<td class="text12White">
+				 			<td class="text14White">
 								&nbsp;<img onMouseOver="showPop('2_info');" onMouseOut="hidePop('2_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 					 			<b>&nbsp;2.</b>Avsender / Eksportør&nbsp;<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 				 				<div class="text11" style="position: relative;" align="left">
@@ -537,7 +537,7 @@
 							        	<input type="hidden" name="orig_seadk2" id="orig_seadk2" value='${model.record.seadk2}'>
 							        	<input type="hidden" name="orig_seadk3" id="orig_seadk3" value='${model.record.seadk3}'>
 							        	
-							            <td class="text12" align="left" >&nbsp;&nbsp;
+							            <td class="text14" align="left" >&nbsp;&nbsp;
 							            <span title="seknk">Kundenummer</span>
 											<img title="Spørring på fritekster for kunder" id="senderFreeTextImg" onMouseOver="showPop('senderFtxtinfo');" onMouseOut="hidePop('senderFtxtinfo');" onClick="showPop('senderInfoFreeTextDialog');" style="vertical-align:top;" width="18px" height="18px" src="resources/images/largeTextContent.png" border="0" alt="info">
 								 			<span style="position:absolute; left:300px; top:300px; width:400px; height:500px;" id="senderInfoFreeTextDialog" class="popupWithInputText"  >
@@ -558,7 +558,7 @@
 											</span>
 											</div>							            
 							            </td>
-							            <td class="text12" align="left" >&nbsp;&nbsp;
+							            <td class="text14" align="left" >&nbsp;&nbsp;
 							            <span title="senak" id="v_senak" class="validation">Navn&nbsp;</span>
 							            	<a tabindex="-1" id="senakIdLink">
 												<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
@@ -566,15 +566,15 @@
 							            </td>
 							        </tr>
 							        <tr>
-							            <td class="text12" align="left"><input type="text" class="inputTextMediumBlue" name="seknk" id="seknk" size="9" maxlength="8" value="${model.record.seknk}"></td>
-							            <td class="text12" align="left"><input type="text" class="inputTextMediumBlue" name="senak" id="senak" size="31" maxlength="30" value="${model.record.senak}"></td>
+							            <td class="text14" align="left"><input type="text" class="inputTextMediumBlue" name="seknk" id="seknk" size="9" maxlength="8" value="${model.record.seknk}"></td>
+							            <td class="text14" align="left"><input type="text" class="inputTextMediumBlue" name="senak" id="senak" size="31" maxlength="30" value="${model.record.senak}"></td>
 							        </tr>
 							        <tr height="10"><td></td></tr>
 									<tr>
-							            <td class="text12" align="left" >&nbsp;<font class="text16RedBold" >*</font>
+							            <td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font>
 							            		<span title="serg" id="v_serg" class="validation">Regnr</span>
 							            </td>
-							            <td class="text12" >
+							            <td class="text14" >
 					 					<img onMouseOver="showPop('48_info');" onMouseOut="hidePop('48_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 						 				&nbsp;<b>48.&nbsp;</b><span title="segkd/sekta/sektb">Kontonr.Tollkredit&nbsp;</span>
 						 				<span style="position:absolute; left:800px; top:500px; width:250px; height:200px;" id="48_info" class="popupWithInputText"  >
@@ -599,7 +599,7 @@
 							         
 							        <tr height="4"><td>&nbsp;</td></tr>
 							        <tr>
-							            <td class="text12" align="left" >&nbsp;&nbsp;
+							            <td class="text14" align="left" >&nbsp;&nbsp;
 							            <span title="seadk1" id="v_seadk1" class="validation">Adresse-1</span></td>
 							            <td>&nbsp;</td>
 							        </tr>
@@ -608,7 +608,7 @@
     							            
 							        </tr>
 							        <tr>
-							            <td class="text12" align="left" >&nbsp;&nbsp;
+							            <td class="text14" align="left" >&nbsp;&nbsp;
 							            <span title="seadk2" id="v_seadk2" class="validation">Adresse-2</span></td>
     							            <td>&nbsp;</td>
 							        </tr>
@@ -617,7 +617,7 @@
    							            
 							        </tr>
 							        <tr>
-							            <td class="text12" align="left" >&nbsp;&nbsp;
+							            <td class="text14" align="left" >&nbsp;&nbsp;
 							            <span title="seadk3" id="v_seadk3" class="validation">Adresse-3</span></td>
    							            <td>&nbsp;</td>							            
 							        </tr>
@@ -642,7 +642,7 @@
 	            <td >		
 	 				<table width="90%" align="left" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
 				 		<tr height="15">
-				 			<td class="text12White">
+				 			<td class="text14White">
 				 				&nbsp;<img onMouseOver="showPop('8_info');" onMouseOut="hidePop('8_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 				 				<b>&nbsp;8.</b><font class="text16RedBold" >*</font>Mottaker&nbsp;<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 				 				<div class="text11" style="position: relative;" align="left">
@@ -685,7 +685,7 @@
 							        	<input type="hidden" name="orig_seads2" id="orig_seads2" value='${model.record.seads2}'>
 							        	<input type="hidden" name="orig_seads3" id="orig_seads3" value='${model.record.seads3}'>
 							        	
-							            <td class="text12" align="left" >&nbsp;&nbsp;
+							            <td class="text14" align="left" >&nbsp;&nbsp;
 							            <span title="sekns">Kundenummer</span>
 							            		<img id="receiverFreeTextImg" onMouseOver="showPop('receiverFtxtinfo');" onMouseOut="hidePop('receiverFtxtinfo');" onClick="showPop('receiverInfoFreeTextDialog');" style="vertical-align:top;" width="18px" height="18px" src="resources/images/largeTextContent.png" border="0" alt="info" title="Spørring på fritekster for kunder" >
 								 			<span style="position:absolute; left:300px; top:450px; width:400px; height:500px;" id="receiverInfoFreeTextDialog" class="popupWithInputText"  >
@@ -706,7 +706,7 @@
 											</span>
 											</div>
 							            </td>
-							            <td class="text12" align="left" ><font class="text16RedBold" >*</font>
+							            <td class="text14" align="left" ><font class="text16RedBold" >*</font>
 							            <span title="senas" id="v_senas" class="validation">Navn&nbsp;</span>
 							            	<a tabindex="-1" id="senasIdLink">
 												<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
@@ -714,14 +714,14 @@
 							            </td>
 							        </tr>
 							        <tr>
-							            <td class="text12" align="left"><input type="text" class="inputTextMediumBlue" name="sekns" id="sekns" size="9" maxlength="8" value="${model.record.sekns}"></td>
-							            <td class="text12" align="left"><input type="text" class="inputTextMediumBlueMandatoryField" name="senas" id="senas" size="31" maxlength="30" value="${model.record.senas}"></td>
+							            <td class="text14" align="left"><input type="text" class="inputTextMediumBlue" name="sekns" id="sekns" size="9" maxlength="8" value="${model.record.sekns}"></td>
+							            <td class="text14" align="left"><input type="text" class="inputTextMediumBlueMandatoryField" name="senas" id="senas" size="31" maxlength="30" value="${model.record.senas}"></td>
 							            
 							        </tr>
 							        
 							        <tr height="4"><td>&nbsp;</td></tr>
 							        <tr>
-							            <td class="text12" align="left" >&nbsp;&nbsp;
+							            <td class="text14" align="left" >&nbsp;&nbsp;
 							            <span title="seads1" id="v_seads1" class="validation">Adresse-1</span></td>
 							            <td>&nbsp;</td>
 							        </tr>
@@ -730,7 +730,7 @@
     							            
 							        </tr>
 							        <tr>
-							            <td class="text12" align="left" >&nbsp;&nbsp;
+							            <td class="text14" align="left" >&nbsp;&nbsp;
 							            <span title="seads2" id="v_seads2" class="validation">Adresse-2</span></td>
     							            <td>&nbsp;</td>
 							        </tr>
@@ -739,7 +739,7 @@
    							            
 							        </tr>
 							        <tr>
-							            <td class="text12" align="left" >&nbsp;&nbsp;
+							            <td class="text14" align="left" >&nbsp;&nbsp;
 							            <span title="seads3" id="v_seads3" class="validation">Adresse-3</span></td>
    							            <td>&nbsp;</td>							            
 							        </tr>
@@ -763,7 +763,7 @@
 	 				<%-- DEKLARANT --%>
 	 				<table width="90%" align="left" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
 				 		<tr height="18px">
-				 			<td class="text12White">
+				 			<td class="text14White">
 				 				&nbsp;<img onMouseOver="showPop('14_b_info');" onMouseOut="hidePop('14_b_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 		 						<b>&nbsp;14.</b><font class="text16RedBold" >*</font>Deklarant&nbsp;<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 				 				<div class="text11" style="position: relative;" align="left">
@@ -793,9 +793,9 @@
 						 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							 		<tr height="5"><td></td></tr>
 							        <tr>
-							            <td class="text12" align="left" >&nbsp;&nbsp;<font class="text16RedBold" >*</font>
+							            <td class="text14" align="left" >&nbsp;&nbsp;<font class="text16RedBold" >*</font>
 							            <span title="senad">Navn</span></td>
-							            <td class="text12" align="left" >&nbsp;&nbsp;<font class="text16RedBold" >*</font>
+							            <td class="text14" align="left" >&nbsp;&nbsp;<font class="text16RedBold" >*</font>
 							            <span title="setlf">Telefon</span></td>
 							        </tr>
 							        <tr>
@@ -816,7 +816,7 @@
 					<%-- Special section --%>
 					<table width="90%" align="left" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
 				 		<tr height="15">
-				 			<td class="text12White">
+				 			<td class="text14White">
 				 				&nbsp;<img onMouseOver="showPop('28_info');" onMouseOut="hidePop('28_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 		 						<b>&nbsp;28.</b>&nbsp;<font class="text16RedBold" >*</font>Finans<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 		 						<div class="text11" style="position: relative;" align="left">
@@ -840,22 +840,22 @@
 					 		<td>
 						 		<table align="left" border="0" cellspacing="0" cellpadding="0">
 							 		<tr height="15">
-							            <td class="text12Bold" align="left" >&nbsp;</td> 
+							            <td class="text14Bold" align="left" >&nbsp;</td> 
 							        </tr>
 							        <tr>
-							            <td class="text12" align="left" >&nbsp;<font class="text16RedBold" >*</font>
+							            <td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font>
 							            <span title="sefif">Fakt.nr.&nbsp;</span>
 							            <input type="text" class="inputTextMediumBlueMandatoryField" name="sefif" id="sefif" size="18" maxlength="17" value='${ model.record.sefif}'></td>
-							            <td class="text12">&nbsp;&nbsp;&nbsp;&nbsp;<font class="text16RedBold" >*</font>
+							            <td class="text14">&nbsp;&nbsp;&nbsp;&nbsp;<font class="text16RedBold" >*</font>
 							            		<span title="sefid">Fakt.dato</span>
 			 								<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="sefid" id="sefid" size="9" maxlength="6" value="${model.record.sefid}">
 			 							</td>
 							        </tr>
 							        <tr height="15">
-							            <td class="text12Bold" align="left" >&nbsp;</td> 
+							            <td class="text14Bold" align="left" >&nbsp;</td> 
 							        </tr>
 							        <tr>
-							            <td colspan="2" class="text12" align="left" >&nbsp;
+							            <td colspan="2" class="text14" align="left" >&nbsp;
 							            <span title="finansOpplysningarTotSum/finansOpplysningarTotValidCurrency"></span>Fakturasum. fra Finans.oppl.&nbsp;</span>
 							            <input type="text" class="inputTextReadOnly"  name="finansOpplysningarTotSum" id="finansOpplysningarTotSum" size="15" value='${ model.record.finansOpplysningarTotSum}'>
 							            &nbsp;&nbsp;
@@ -865,7 +865,7 @@
 							            </td>
 							        </tr>
 							        <tr height="5">
-							            <td class="text12Bold" align="left" >&nbsp;</td> 
+							            <td class="text14Bold" align="left" >&nbsp;</td> 
 							        </tr>
 								</table>
 							</td>
@@ -881,14 +881,14 @@
 	            <td >
 	                <table width="90%" align="left" border="0" cellspacing="0" cellpadding="0">
 				 		<tr>
-				 			<td class="text12">
+				 			<td class="text14">
 				 				<b>&nbsp;22.</b>&nbsp;<font class="text16RedBold" >*</font>
 				 				<span title="sebel1" id="v_sebel1" class="validation">Fakturasum&nbsp;</span>
 				 			</td>
 				 			<td align="left" >
 				 				<input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="sebel1" id="sebel1" size="20" maxlength="13" value="${model.record.sebel1}">
 				 			</td>
-				 			<td class="text12" align="left">
+				 			<td class="text14" align="left">
 				 				&nbsp;<font class="text16RedBold" >*</font>
 				 				<span title="seval1" id="v_seval1" class="validation">Valuta</span>
 				 				<%-- Note: onChange event in jQuery for this currency list --%>
@@ -903,7 +903,7 @@
 								</a>
 								
 				 			<%-- this field is only used via Ajax since there is no database field. It is used to disclosed a factor when changing the currency --%>
-				 			<td class="text12Grey" align="left" ><input readonly type="text" class="inputTextReadOnly" name="factor" id="factor" size="6" value=""></td>
+				 			<td class="text14Grey" align="left" ><input readonly type="text" class="inputTextReadOnly" name="factor" id="factor" size="6" value=""></td>
 			 			</tr>		 				
 		 				<tr height="5"><td></td></tr>
 		 				<tr height="1"><td colspan="4" style="border-bottom:1px solid;border-color:#DDDDDD;" class="text">&nbsp;</td> </tr>
@@ -922,7 +922,7 @@
 					<td valign="top">
 			 			<table border="0" cellspacing="0" cellpadding="0">
 					 		<tr>
-					            <td class="text12" align="left" >
+					            <td class="text14" align="left" >
 					            <img onMouseOver="showPop('15_info');" onMouseOut="hidePop('15_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 			 					<b>15.</b><span title="selka">&nbsp;Avs/utf.land</span>&nbsp;
 			 					<div class="text11" style="position: relative;" align="left">
@@ -936,7 +936,7 @@
 					            </td>
 					            
 					            <td >
-				            		<select name="selka" id="selka">
+				            		<select class="selectMediumBlueE2" name="selka" id="selka">
 				 						<option value="">-velg-</option>
 					 				  	<c:forEach var="country" items="${model.countryCodeList}" >
 					 				  		<option value="${country.zkod}"<c:if test="${model.record.selka == country.zkod}"> selected </c:if> >${country.zkod}</option>
@@ -969,7 +969,7 @@
 								</td>
 							</tr>
 							<tr>
-					            <td class="text12" align="left" >
+					            <td class="text14" align="left" >
 					            <img onMouseOver="showPop('17_info');" onMouseOut="hidePop('17_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 			 					<b>17.</b><font class="text16RedBold" >*</font><span title="selkb">&nbsp;Best.land</span>&nbsp;
 			 					<div class="text11" style="position: relative;" align="left">
@@ -1023,7 +1023,7 @@
 							<tr height="8"><td class="text"></td> </tr>
 							
 							<tr>
-					            <td class="text12" align="left" >
+					            <td class="text14" align="left" >
 					            <img onMouseOver="showPop('19_info');" onMouseOut="hidePop('19_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 					            <b>19.</b><font class="text16RedBold" >*</font><span title="sekdc" id="v_sekdc" class="validation">Container&nbsp;</span>
 					            <div class="text11" style="position: relative;" align="left">
@@ -1043,7 +1043,7 @@
 								</span>	
 								</div>	
 								</td>
-					            <td class="text12" >
+					            <td class="text14" >
 			           				<select class="inputTextMediumBlueMandatoryField" name="sekdc" id="sekdc">
 				 						<option value="0" <c:if test="${model.record.sekdc == '0'}"> selected </c:if> >0</option>
 				 						<option value="1" <c:if test="${model.record.sekdc == '1'}"> selected </c:if> >1</option>								 				  	  
@@ -1052,7 +1052,7 @@
 							</tr>
 							<tr height="10"><td class="text"></td> </tr>
 							<tr>
-					            <td class="text12" align="left" >
+					            <td class="text14" align="left" >
 					            <img onMouseOver="showPop('21_1_info');" onMouseOut="hidePop('21_1_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 			 					<b>21.1</b><span title="setrid" id="v_setrid" class="validation">Transp.ID</span>
 			 					<div class="text11" style="position: relative;" align="left">
@@ -1076,7 +1076,7 @@
 			 		<td>
 						<table border="0" cellspacing="1" cellpadding="0">	
 					 		<tr>
-					            <td class="text12" align="left">
+					            <td class="text14" align="left">
 					            <img onMouseOver="showPop('21_2_info');" onMouseOut="hidePop('21_2_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 					            <b>21.2</b><font class="text16RedBold" >*</font><span title="selkt">Aktive transp. nasjonalitet ved grense&nbsp;</span>
 					            <div class="text11" style="position: relative;" align="left">
@@ -1128,7 +1128,7 @@
 			 		<td>
 			 			<table border="0" cellspacing="1" cellpadding="0">
 			 				<tr>
-					            <td class="text12" align="left" >
+					            <td class="text14" align="left" >
 					            <img onMouseOver="showPop('25_info');" onMouseOut="hidePop('25_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 					            <b>25.</b><font class="text16RedBold" >*</font><span title="setrm" id="v_setrm" class="validation">Transportmåte&nbsp;</span>
 					            <div class="text11" style="position: relative;" align="left">
@@ -1145,7 +1145,7 @@
 								</span>
 								</div>
 								</td>		
-					            <td class="text12" >
+					            <td class="text14" >
 			           				<select class="inputTextMediumBlueMandatoryField" name="setrm" id="setrm">
 				 						<option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.transportmaterCodeList}" >
@@ -1156,7 +1156,7 @@
 							</tr>
 							<tr height="5"><td class="text"></td></tr>
 							<tr>
-					            <td class="text12" align="left" >
+					            <td class="text14" align="left" >
 					            <img onMouseOver="showPop('49_info');" onMouseOut="hidePop('49_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">	
 					            &nbsp;<b>49.&nbsp;<span title="segn">Godsnr</span>
 					            <div class="text11" style="position: relative;" align="left" >
@@ -1182,7 +1182,7 @@
 					            </td>
 					        </tr>
 					        <tr>
-					            <td class="text12" align="left" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span title="sepos">Posisjon</span></td>
+					            <td class="text14" align="left" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span title="sepos">Posisjon</span></td>
 					            <td >
 					            		<input type="text" class="inputTextMediumBlue" name="sepos" id="sepos" size="15" maxlength="9" value="${model.record.sepos}">
 					            </td>
@@ -1191,10 +1191,10 @@
 					        
 							<tr height="5"><td class="text"></td></tr>
 							<tr>
-					            <td class="text12" align="left" >
+					            <td class="text14" align="left" >
 					            <img onMouseOver="showPop('29_info');" onMouseOut="hidePop('29_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 					            <b>29.</b><font class="text16RedBold" >*</font>
-					            <span title="sekdh/sekdft" id="v_sekdh" class="validation"><font class="text12">Utpass.sted&nbsp;</font></span>
+					            <span title="sekdh/sekdft" id="v_sekdh" class="validation"><font class="text14">Utpass.sted&nbsp;</font></span>
 					            <div class="text11" style="position: relative;" align="left">
 					            <span style="position:absolute;top:2px; width:250px;" id="29_info" class="popupWithInputText text11"  >
 					           			<b>29. Utpasseringsted</b>
@@ -1204,7 +1204,7 @@
 								</span>
 								</div>
 								</td>		
-					            <td class="text12" >
+					            <td class="text14" >
 			           				<select class="inputTextMediumBlueMandatoryField" name="sekdh" id="sekdh">
 				 						<option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.havnCodeList}" >
@@ -1251,7 +1251,7 @@
 					<td valign="top">
 			 			<table border="0" cellspacing="0" cellpadding="0">
 					 		<tr>
-				            <td class="text12" align="left" >
+				            <td class="text14" align="left" >
 				            <img onMouseOver="showPop('20_1_info');" onMouseOut="hidePop('20_1_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 		 					<b>20.1</b><font class="text16RedBold" >*</font><span title="selv">&nbsp;Leveringksvilkår kode</span>
 				            <div class="text11" style="position: relative;" align="left">
@@ -1279,7 +1279,7 @@
 							</tr>
 			 			
 			 				<tr>
-					            <td class="text12" align="left" >
+					            <td class="text14" align="left" >
 					            <img onMouseOver="showPop('20_2_info');" onMouseOut="hidePop('20_2_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 			 					<b>20.2</b><font class="text16RedBold" >*</font><span title="selvt">&nbsp;Leveringksvilkår sted</span>&nbsp;
 					            <div class="text11" style="position: relative;" align="left">
@@ -1308,7 +1308,7 @@
 			 				<tr height="1"><td colspan="2" style="border-bottom:1px solid;border-color:#DDDDDD;" class="text">&nbsp;</td> </tr>
 			 				<tr height="5"><td class="text">&nbsp;</td> </tr>
 			 				<tr>
-				            	<td class="text12" align="left" >
+				            	<td class="text14" align="left" >
 					            <img onMouseOver="showPop('30_1_info');" onMouseOut="hidePop('30_1_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">	
 					            <b>30.1&nbsp;</b><span title="sekdls">Lagringssted kode</span>
   					            <div class="text11" style="position: relative;" align="left">
@@ -1326,7 +1326,7 @@
 								</div>
 					            </td>
 					            <td >
-						            <select name="sekdls" id="sekdls">
+						            <select class="selectMediumBlueE2" name="sekdls" id="sekdls">
 						            	<option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.lagringsstedCodeList}" >
 					 				  		<option value="${record.zkod}"<c:if test="${model.record.sekdls == record.zkod}"> selected </c:if> >${record.zkod}</option>
@@ -1335,7 +1335,7 @@
 					            </td>
         					</tr>
         					<tr>
-			            		<td class="text12" align="left" >
+			            		<td class="text14" align="left" >
 			            		<img onMouseOver="showPop('30_2_info');" onMouseOut="hidePop('30_2_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">	
 					            <b>30.2&nbsp;</b><span title="sels">Lagringssted tekst</span>
 					            <div class="text11" style="position: relative;" align="left">
@@ -1354,7 +1354,7 @@
         					<tr height="1"><td colspan="2" style="border-bottom:1px solid;border-color:#DDDDDD;" class="text">&nbsp;</td> </tr>
 				            <tr height="20"><td class="text">&nbsp;</td> </tr>
 			 				<tr>
-			 					<td class="text12" colspan="2" >
+			 					<td class="text14" colspan="2" >
 			 					<img onMouseOver="showPop('12_info');" onMouseOut="hidePop('12_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 				 				<b>12.&nbsp;Verdiopplysninger&nbsp;</b>
 				 				<div class="text11" style="position: relative;" align="left">
@@ -1373,7 +1373,7 @@
 							</tr> 
 							
 							<tr>
-								<td class="text12" align="left" >
+								<td class="text14" align="left" >
 								<img onMouseOver="showPop('andraKostPM_info');" onMouseOut="hidePop('andraKostPM_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 				 				<span title="siftg2">+/-&nbsp;(P/M)</span>
 				 				<div class="text11" style="position: relative;" align="left">
@@ -1388,13 +1388,13 @@
 								</span>
 								</div>
 				 				</td>
-			 					<td class="text12">
+			 					<td class="text14">
 			 						<input type="text" class="inputTextMediumBlue" name="seftg2" id="seftg2" size="1" maxlength="1" value="${model.record.seftg2}">
 			 					</td>
 							</tr>
 							
 							<tr>
-								<td class="text12" >
+								<td class="text14" >
 								<img onMouseOver="showPop('andraKost_info');" onMouseOut="hidePop('andraKost_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 				 				<span title="sebel2/seval2">Beløp andre kost.</span>
 				 				<div class="text11" style="position: relative;" align="left">
@@ -1427,9 +1427,9 @@
 								</div>
 								</td>
 			 					
-			 					<td class="text12">
+			 					<td class="text14">
 			 						<input onKeyPress="return amountKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="sebel2" id="sebel2" size="12" maxlength="11" value="${model.record.sebel2}">
-			 						<select name="seval2" id="seval2">
+			 						<select class="selectMediumBlueE2" name="seval2" id="seval2">
 				 						<option value="">-velg-</option>
 					 				  	<c:forEach var="currency" items="${model.currencyCodeList}" >
 					 				  		<option value="${currency.zkod}"<c:if test="${model.record.seval2 == currency.zkod}"> selected </c:if> >${currency.zkod}</option>
@@ -1466,7 +1466,7 @@
 				            
 					        <tr height="10"><td></td> </tr>
 	        					<tr>
-					            <td class="text12" align="left" >
+					            <td class="text14" align="left" >
 					            <img onMouseOver="showPop('brut_info');" onMouseOut="hidePop('brut_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">	
 					            <font class="text16RedBold" >*</font><span title="sevkb">Brutto vekt</span>
 					            <div class="text11" style="position: relative;" align="left">
@@ -1483,7 +1483,7 @@
 					            </td>
 					        </tr>
 				            <tr>
-					            <td class="text12" align="left" >
+					            <td class="text14" align="left" >
 					            <img onMouseOver="showPop('6_info');" onMouseOut="hidePop('6_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">	
 					            <b>6.</b><font class="text16RedBold" >*</font><span title="sentk">Antall Kolli</span>
 					            <div class="text11" style="position: relative;" align="left">
@@ -1501,7 +1501,7 @@
 					        <tr height="10"><td class="text">&nbsp;</td> </tr>
 					        
 					        <tr>
-		 						<td class="text12" colspan="2" >
+		 						<td class="text14" colspan="2" >
 			 					<img onMouseOver="showPop('31_info');" onMouseOut="hidePop('31_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 				 				&nbsp;<b>31.&nbsp;</b><span title="seft1/seft2">Beskrivelse</span>&nbsp;</b>
 				 				<div class="text11" style="position: relative;" align="left">
@@ -1527,18 +1527,18 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="2" class="text12">
+								<td colspan="2" class="text14">
 			 						<input type="text" class="inputTextMediumBlue" name="seft1" id="seft1" size="55" maxlength="45" value="${model.record.seft1}">
 			 					</td>
 							</tr>	
 							<tr>
-								<td colspan="2" class="text12">
+								<td colspan="2" class="text14">
 			 						<input type="text" class="inputTextMediumBlue" name="seft2" id="seft2" size="55" maxlength="45" value="${model.record.seft2}">
 			 					</td>
 							</tr>
 							<tr height="10"><td class="text"></td></tr>	 
 							<tr>
-			 					<td class="text12" colspan="2" >
+			 					<td class="text14" colspan="2" >
 			 					<img onMouseOver="showPop('44_info');" onMouseOut="hidePop('44_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 				 				&nbsp;<b>44.&nbsp;</b><span title="seft3">Fritekst/Tillegsopplysning</span>&nbsp;</b>
 				 				<div class="text11" style="position: relative;" align="left">
@@ -1559,13 +1559,13 @@
 								</td>
 							</tr> 
 							<tr>
-								<td colspan="2" class="text12">
+								<td colspan="2" class="text14">
 			 						<input type="text" class="inputTextMediumBlue" name="seft3" id="seft3" size="55" maxlength="45" value="${model.record.seft3}">
 			 					</td>
 							</tr>	
 							<tr height="25"><td>&nbsp;</td></tr>
 							<tr>
-					            <td class="text12" align="left" >
+					            <td class="text14" align="left" >
 					            <img onMouseOver="showPop('slaSammen_info');" onMouseOut="hidePop('slaSammen_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 					            <span title="sefvk">Slå sammen:</span>
 					            	<div class="text11" style="position: relative;" align="left">
@@ -1579,7 +1579,7 @@
 									</div>
 				            	</td>
 					            <td >
-				            		<select name="sesam" id="sesam" >
+				            		<select class="selectMediumBlueE2" name="sesam" id="sesam" >
 				 				  		<option value="">-velg-</option>
 								  		<option value="J"<c:if test="${model.record.sesam == 'J'}"> selected </c:if> >Ja</option>
 								  		<option value="N"<c:if test="${model.record.sesam == 'N'}"> selected </c:if> >Nej</option>
@@ -1587,7 +1587,7 @@
 					            </td>
 					        </tr>
 							<tr>
-					            <td class="text12" align="left" >
+					            <td class="text14" align="left" >
 					            <img onMouseOver="showPop('forholdBN_info');" onMouseOut="hidePop('forholdBN_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 					            <span title="sefvk">Forhold B/N-vekt:</span>
 					            	<div class="text11" style="position: relative;" align="left">
@@ -1608,7 +1608,7 @@
 					        <c:if test="${ model.record.sest == 'E' || model.record.sest == 'K' || model.record.sest == 'Å' || empty  model.record.sest }"> 
 						   		<c:if test="${ empty model.record.setll }">
 							        <tr>
-							        	<td valign="top" class="text12" colspan="2">
+							        	<td valign="top" class="text14" colspan="2">
 							        		<img onMouseOver="showPop('changeStatusUser_info');" onMouseOut="hidePop('changeStatusUser_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 					            			Endre Status&nbsp;
 							        		<img style="vertical-align: bottom;cursor: pointer;" id="updateStatusByUserImg" width="20px" height="20px" src="resources/images/changeStatus.png" border="0" alt="change status">
@@ -1634,9 +1634,9 @@
 					        
 					        
 							<tr height="20"><td>&nbsp;</td>&nbsp;</tr>
-							<tr><td class="text12" colspan="2"><b>Varelinje totaler&nbsp;</b></td></tr>
+							<tr><td class="text14" colspan="2"><b>Varelinje totaler&nbsp;</b></td></tr>
 							<tr>
-				        		<td class="text12Gray" align="left" >Kolli&nbsp;</td>
+				        		<td class="text14Gray" align="left" >Kolli&nbsp;</td>
 					        	<td >
 				            		<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="sumOfAntalKolliInItemLines" id="sumOfAntalKolliInItemLines" size="10" maxlength="7" value="${ model.record.sumOfAntalKolliInItemLinesStr}">
 				            		<c:if test="${not empty ( model.record.sumOfAntalKolliInItemLinesStr &&  model.record.sentk)}">
@@ -1657,7 +1657,7 @@
 					            </td>
 					        </tr>
 					        <tr>
-				        		<td class="text12Gray" align="left" >Varelinjer &nbsp;</td>
+				        		<td class="text14Gray" align="left" >Varelinjer &nbsp;</td>
 					        	<td >
 				            		<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="sumOfAntalItemLines" id="sumOfAntalItemLines" size="10" value="${ model.record.sumOfAntalItemLinesStr}">
 				            		<c:if test="${not empty ( model.record.sumOfAntalItemLinesStr)}">
@@ -1673,7 +1673,7 @@
 					            </td>
 					        </tr>
 					        <tr>
-					        		<td class="text12Gray" align="left" >Beløp&nbsp;</td>
+					        		<td class="text14Gray" align="left" >Beløp&nbsp;</td>
 						        	<td >
 					            		<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="sumTotalAmountItemLines" id="sumTotalAmountItemLines" size="10" value="${ model.record.sumTotalAmountItemLinesStr}">
 						            	<c:if test="${model.record.sumTotalAmountItemLines != model.record.sebel1Dbl}">
@@ -1687,7 +1687,7 @@
 					            </td>
 					        </tr>
 					        <tr>
-					        		<td class="text12Gray" align="left" >Bruttovekt&nbsp;</td>
+					        		<td class="text14Gray" align="left" >Bruttovekt&nbsp;</td>
 						        	<td >
 					            		<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="sumTotalBruttoViktItemLines" id="sumTotalBruttoViktItemLines" size="10" value="${ model.record.sumTotalBruttoViktItemLinesStr}">
 						            	<c:if test="${model.record.sumTotalBruttoViktItemLines != model.record.sevkbDbl}">
@@ -1760,12 +1760,12 @@
 			<form action="tvinnsadexport_updateStatus.do" name="updateStatusForm" id="updateStatusForm" method="post">
 			 	<input type="hidden" name="currentAvd" id="currentAvd" value="${model.record.seavd}">
 			 	<input type="hidden" name="currentOpd" id="currentOpd" value="${model.record.setdn}">
-				<p class="text12" >Change status as needed.</p>
+				<p class="text14" >Change status as needed.</p>
 				<table>
 					<tr>
-						<td class="text12" align="left" >&nbsp;Status</td>
-						<td class="text12MediumBlue">
-							<select name="selectedStatus" id="selectedStatus">
+						<td class="text14" align="left" >&nbsp;Status</td>
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="selectedStatus" id="selectedStatus">
 			            		<option value=" ">-velg-</option>
 		            		  	<option value="A">A</option>
 							  	<option value="C">C</option>
@@ -1817,8 +1817,8 @@
 				<table>
 					<tr height="5"><td ></td></tr>
 					<tr>
-						<td class="text12MediumBlue">
-							<select name="selectedOmb" id="selectedOmb">
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="selectedOmb" id="selectedOmb">
 								<option value="">Vis omberegning</option>
 			            		<option value="NYO">Ny omb. basert på original fortolling</option>
 			 				  	<option value="NYS">Ny omb. basert på siste ombereg.</option>
@@ -1842,9 +1842,9 @@
 			 	<input type="hidden" name="currentOpd" id="currentOpd" value="${model.record.setdn}">
 				<table>
 					<tr>
-						<td class="text12" align="left" >&nbsp;Type</td>
-						<td class="text12MediumBlue">
-							<select name="selectedType" id="selectedType">
+						<td class="text14" align="left" >&nbsp;Type</td>
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="selectedType" id="selectedType">
 			            		<option value="">-velg-</option>
 			            		<c:forEach var="record" items="${model.typeArchiveCodeList}" >
 			 				  		<option value="${record.artype}">${record.artype}&nbsp;${record.artxt}</option>
@@ -1878,7 +1878,7 @@
 						
 							<table id="containerdatatableTable" cellspacing="2" align="left">
 								<tr>
-									<td colspan="3" class="text12Bold">&nbsp;
+									<td colspan="3" class="text14Bold">&nbsp;
 										<img style="vertical-align:bottom;" src="resources/images/upload.png" border="0" width="20" height="20" alt="upload">
 										&nbsp;File Upload&nbsp;							
 									</td>
@@ -1897,7 +1897,7 @@
 									<tr>
 										<td class="text11">&nbsp;Arkiv typen:</td>
 										<td class="text11">&nbsp;
-											<select tabindex=-1 name="wstype" id="wstype">
+											<select class="selectMediumBlueE2" tabindex=-1 name="wstype" id="wstype">
 												<c:forEach var="record" items="${user.arkivKodOpdList}" >
 						                       	 	<option value="${record.arkKod}">${record.arkKod}-${record.arkTxt}</option>
 												</c:forEach> 

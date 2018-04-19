@@ -46,7 +46,7 @@
 		
  		<table width="100%" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
  	        <tr height="3"><td></td></tr>
- 	        <form name="tvinnsadExportSearchForm" id="searchForm" action="tvinnsadexport?action=doFind" method="post" >
+ 	        <form name="tvinnsadExportSearchForm" id="searchForm" onClick="setBlockUI(this);" action="tvinnsadexport?action=doFind" method="post" >
  	        <tr>	
                 <td class="text14" align="left" title="avd">&nbsp;&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.avd"/></td>
                 <td class="text14" align="left" title="sg">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.signatur"/></td>
@@ -212,12 +212,12 @@
 		               <td class="tableCellFirst" widtd="5%">&nbsp;${topic.avd}</td>
 		               <td class="tableCell" >&nbsp;${topic.sg}</td>
 		               <td nowrap class="tableCell" align="center">
-	               	   		<a id="alinkCurrentdeaderId_${counter.count}" onClick="setBlockUI(tdis);" href="tvinnsadexport_edit.do?action=doFetch&avd=${topic.avd}&opd=${topic.opd}&sysg=${topic.sg}&setll=${topic.setll}&syst=${topic.status}&sydt=${topic.datum}&o2_sest=${topic.o2_sest}&o2_sedt=${topic.o2_sedt}&o2_semf=${topic.o2_semf}">
+	               	   		<a id="alinkCurrentdeaderId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadexport_edit.do?action=doFetch&avd=${topic.avd}&opd=${topic.opd}&sysg=${topic.sg}&setll=${topic.setll}&syst=${topic.status}&sydt=${topic.datum}&o2_sest=${topic.o2_sest}&o2_sedt=${topic.o2_sedt}&o2_semf=${topic.o2_semf}">
 	               				<img title="Oppdatera tolldekl." valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
             					</a>
                		   </td>
                		   <td class="tableCell" >&nbsp;
-               		   		<a id="alinkCurrentdeaderOpdId_${counter.count}" onClick="setBlockUI(tdis);" href="tvinnsadexport_edit.do?action=doFetch&avd=${topic.avd}&opd=${topic.opd}&sysg=${topic.sg}&setll=${topic.setll}&syst=${topic.status}&sydt=${topic.datum}&o2_sest=${topic.o2_sest}&o2_sedt=${topic.o2_sedt}&o2_semf=${topic.o2_semf}">
+               		   		<a id="alinkCurrentdeaderOpdId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadexport_edit.do?action=doFetch&avd=${topic.avd}&opd=${topic.opd}&sysg=${topic.sg}&setll=${topic.setll}&syst=${topic.status}&sydt=${topic.datum}&o2_sest=${topic.o2_sest}&o2_sedt=${topic.o2_sedt}&o2_semf=${topic.o2_semf}">
 	               				&nbsp;${topic.opd}
 		               		</a>
 		               </td>
