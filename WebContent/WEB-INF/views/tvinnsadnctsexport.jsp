@@ -47,12 +47,12 @@
  	        <tr height="3"><td></td></tr>
  	        <form name="tvinnSadNctsExportSearchForm" id="searchForm" action="tvinnsadnctsexport?action=doFind" method="post" >
  	        <tr>	
-                <td class="text12" align="left" >&nbsp;&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.avd"/></td>
-                <td class="text12" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.signatur"/></td>
-                <td class="text12" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.arende"/></td>
-                <td class="text12" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.lrnNr"/></td>
-                <td class="text12" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.mrnNr"/></td>
-                <td class="text12" align="left" >
+                <td class="text14" align="left" >&nbsp;&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.avd"/></td>
+                <td class="text14" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.signatur"/></td>
+                <td class="text14" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.arende"/></td>
+                <td class="text14" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.lrnNr"/></td>
+                <td class="text14" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.mrnNr"/></td>
+                <td class="text14" align="left" >
 				<img onMouseOver="showPop('datum_info');" onMouseOut="hidePop('datum_info');"style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
                 <spring:message code="systema.tvinn.sad.ncts.export.list.search.label.fdatum"/>
                 <div class="text11" style="position: relative;" align="left">
@@ -64,8 +64,8 @@
 	           		</span>	
 				</div>
                 </td>
-                <td class="text12" align="left" ><span title="datumt"><spring:message code="systema.tvinn.sad.ncts.export.list.search.label.tdatum"/></span></td>
-                <td class="text12" align="left" >
+                <td class="text14" align="left" ><span title="datumt"><spring:message code="systema.tvinn.sad.ncts.export.list.search.label.tdatum"/></span></td>
+                <td class="text14" align="left" >
 				<img onMouseOver="showPop('status_info');" onMouseOut="hidePop('status_info');"style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
                 <spring:message code="systema.tvinn.sad.ncts.export.list.search.label.status"/>
                 	<div class="text11" style="position: relative;" align="left">
@@ -95,13 +95,13 @@
 					</span>	
 					</div>
 				</td>                
-                <td class="text12" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.mottagare"/></td>
-                <td class="text12" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.bruttovikt"/></td>
+                <td class="text14" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.mottagare"/></td>
+                <td class="text14" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.bruttovikt"/></td>
                 <td>&nbsp;</td>
 			</tr>
  	        <tr>
 				<td align="left" >&nbsp;
-           			<select name="avd" id="avd">
+           			<select class="selectMediumBlueE2" name="avd" id="avd">
 	            		<option value="">-velg-</option>
 	 				  	<c:forEach var="record" items="${model.avdList}" >
                             <option value="${record.avd}"<c:if test="${searchFilterSadExportNcts.avd == record.avd}"> selected </c:if> >${record.avd}<c:if test="${record.tst == '1'}">&nbsp;(test)</c:if></option>                       	 	
@@ -109,7 +109,7 @@
 					</select>
 				</td>
 				<td align="left" >
-           			<select name="sign" id="sign">
+           			<select class="selectMediumBlueE2" name="sign" id="sign">
 	            		<option value="">-velg-</option>
 	 				  	<c:forEach var="record" items="${model.signList}" >
                              	 	<option value="${record.sign}"<c:if test="${searchFilterSadExportNcts.sign == record.sign}"> selected </c:if> >${record.sign}</option>
@@ -166,31 +166,28 @@
 			<tr>
 				<td>
 				<table width="100%" cellspacing="0" border="0" cellpadding="0">
-					<tr class="tableHeaderField" height="20" valign="left">
-	                    <td class="tableHeaderFieldFirst" align="left" >&nbsp;&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.avd"/></td>
-                		<td class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.signatur"/></td>
-                		<td class="tableHeaderField" align="center" >&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.update"/></td>
-                		<td class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.arende"/></td>
-                		<td class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.lrnNr"/></td>
-                		<td class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.mrnNr"/></td>
-                		<td class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.datum"/></td>
-                		<td class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.status"/></td>
-                		<td class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.mottagare"/></td>
-                		<td class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.bruttovikt"/></td>
+					<thead>
+					<tr class="tableHeaderField" height="20" >
+	                    <th class="tableHeaderFieldFirst" align="left" >&nbsp;&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.avd"/></th>
+                		<th class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.signatur"/></th>
+                		<th class="tableHeaderField" align="center" >&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.update"/></th>
+                		<th class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.arende"/></th>
+                		<th class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.lrnNr"/></th>
+                		<th class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.mrnNr"/></th>
+                		<th class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.datum"/></th>
+                		<th class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.status"/></th>
+                		<th class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.mottagare"/></th>
+                		<th class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.bruttovikt"/></th>
                 		<%--
                 		<td class="tableHeaderField">&nbsp;Kopiera Ärende&nbsp;</td>
 	                     --%>
 	                     
-                	</tr>     
+                	</tr>   
+                	</thead>
+                	<tbody>  
 		           	<c:forEach items="${list}" var="topic" varStatus="counter">    
-		               <c:choose>           
-		                   <c:when test="${counter.count%2==0}">
-		                       <tr class="tableRow" height="20" >
-		                   </c:when>
-		                   <c:otherwise>   
-		                       <tr class="tableOddRow" height="20" >
-		                   </c:otherwise>
-		               </c:choose>
+		               <tr class="tableRow" height="20" >
+		                   
 		               <td class="tableCellFirst" width="5%">&nbsp;${topic.avd}</td>
 		               <td class="tableCell" >&nbsp;${topic.sign}</td>
 		               <td class="tableCell" align="center" >
@@ -212,57 +209,9 @@
 		               <td class="tableCell" >&nbsp;<b>${topic.status}</b></td>
 		               <td class="tableCell" >&nbsp;${topic.motNavn}</td>
 		               <td class="tableCell" >&nbsp;${topic.bruttoVikt}</td>
-    		           <%--
-    		           <td class="tableCell" width="10%">&nbsp;
-		               		
-		               		<a class="copyLink" id="copyLink${counter.count}" runat="server" href="#">
-								<img src="resources/images/copy.png" border="0" alt="copy">
-								&nbsp;Kopiere
-							</a>
-							 
-							<div style="display: none;" class="clazz_dialog" id="dialog${counter.count}" title="Dialog">
-								<form  action="tvinnsadnctsexport_copyTopic.do" name="copyForm${counter.count}" id="copyForm${counter.count}" method="post">
-								 	<input type="hidden" name="action${counter.count}" id="action${counter.count}" value='doFetch'/>
-									<input type="hidden" name="originalAvd${counter.count}" id="originalAvd${counter.count}" value='${topic.avd}'/>
-				 					<input type="hidden" name="originalOpd${counter.count}" id="originalOpd${counter.count}" value='${topic.opd}'/>
-					 					
-									<p class="text12" >Du skal velga nye&nbsp;<code>Afdeling</code>&nbsp;og nye&nbsp;
-										<code>Signatur</code> or at kunne kopiere en angivelse
-									</p>
-									<p class="text12" >Et nyt angivelsesnummer vil blive oprettet automatisk.
-									</p>
-									
-									<table>
-										<tr>
-											<td class="text12" align="left" >&nbsp;Afdeling</td>
-	                							<td class="text12" align="left" >&nbsp;Signatur</td>
-	                						</tr>
-	 									<tr>
-											<td class="text12MediumBlue">
-												<select class="newAvd" name="newAvd${counter.count}" id="newAvd${counter.count}">
-								            		<option value="">-velg-</option>
-								 				  	<c:forEach var="record" items="${model.avdList}" >
-							                             	 	<option value="${record.avd}">${record.avd}</option>
-													</c:forEach> 
-												</select>
-											</td>
-											<td class="text12MediumBlue">
-												<select class="newSign" name="newSign${counter.count}" id="newSign${counter.count}">
-								            		<option value="">-velg-</option>
-								 				  	<c:forEach var="record" items="${model.signList}" >
-							                             	 	<option value="${record.sign}">${record.sign}</option>
-													</c:forEach> 
-												</select>
-											</td>
-										</tr>
-									</table>
-								</form>
-							</div>
-							
-		               </td>
-		                --%>
-		               
+    		           
 		            </tr> 
+		            </tbody>
 		            </c:forEach>
 	            </table>
 			</td>	

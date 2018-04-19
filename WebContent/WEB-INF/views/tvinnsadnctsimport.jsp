@@ -46,11 +46,11 @@
  	        <tr height="3"><td></td></tr>
  	        <form name="nctsImportSearchForm" id="searchForm" action="tvinnsadnctsimport?action=doFind" method="post" >
  	        <tr>	
-                <td class="text12" align="left" title="avd" >&nbsp;&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.avd"/></td>
-                <td class="text12" align="left" title="sign" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.signatur"/></td>
-                <td class="text12" align="left" title="opd" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.arende"/></td>
-                <td class="text12" align="left" title="mrnNr" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.mrnNr"/></td>
-                <td class="text12" align="left" >
+                <td class="text14" align="left" title="avd" >&nbsp;&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.avd"/></td>
+                <td class="text14" align="left" title="sign" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.signatur"/></td>
+                <td class="text14" align="left" title="opd" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.arende"/></td>
+                <td class="text14" align="left" title="mrnNr" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.mrnNr"/></td>
+                <td class="text14" align="left" >
 				<img onMouseOver="showPop('datum_info');" onMouseOut="hidePop('datum_info');"style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
                 <span title="datum"><spring:message code="systema.tvinn.sad.ncts.import.list.search.label.fdatum"/></span>
                	<div class="text11" style="position: relative;" align="left">
@@ -62,8 +62,8 @@
 				</span>	
 				</div>
                 </td>
-                <td class="text12" align="left" ><span title="datumt"><spring:message code="systema.tvinn.sad.ncts.import.list.search.label.tdatum"/></span></td>
-                <td class="text12" align="left" >
+                <td class="text14" align="left" ><span title="datumt"><spring:message code="systema.tvinn.sad.ncts.import.list.search.label.tdatum"/></span></td>
+                <td class="text14" align="left" >
 				<img onMouseOver="showPop('status_info');" onMouseOut="hidePop('status_info');"style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
                 <span title="status"><spring:message code="systema.tvinn.sad.ncts.import.list.search.label.status"/></span>
                 <div class="text11" style="position: relative;" align="left">
@@ -94,10 +94,10 @@
 				</span>	 
 				</div>               
                 </td>
-                <td class="text12" align="left" title="forenklad" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.type"/></td>
-                <td class="text12" align="left" title="ansNavn" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.ansvarig"/></td>
-                <td class="text12" align="left" title="godsNr" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.godsnr"/></td>
-                <td class="text12" align="left" title="datumFr" ><img onMouseOver="showPop('datumFr_info');" onMouseOut="hidePop('datumFr_info');"style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+                <td class="text14" align="left" title="forenklad" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.type"/></td>
+                <td class="text14" align="left" title="ansNavn" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.ansvarig"/></td>
+                <td class="text14" align="left" title="godsNr" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.godsnr"/></td>
+                <td class="text14" align="left" title="datumFr" ><img onMouseOver="showPop('datumFr_info');" onMouseOut="hidePop('datumFr_info');"style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
                 	<span title="datumFr"><spring:message code="systema.tvinn.sad.ncts.import.list.search.label.frigivningsDatum"/></span>
                 	<div class="text11" style="position: relative;" align="left">
 					<span style="position:absolute;top:2px; width:200px;" id="datumFr_info" class="popupWithInputText text11"  >
@@ -109,7 +109,7 @@
 			</tr>
  	        <tr>
 				<td align="left" >&nbsp;
-           			<select name="avd" id="avd">
+           			<select class="selectMediumBlueE2" name="avd" id="avd">
 	            		<option value="">-velg-</option>
 	 				  	<c:forEach var="record" items="${model.avdList}" >
                         	 	<option value="${record.avd}"<c:if test="${searchFilterSadImportNcts.avd == record.avd}"> selected </c:if> >${record.avd}<c:if test="${record.tst == '1'}">&nbsp;(test)</c:if></option>                       	 	
@@ -117,7 +117,7 @@
 					</select>
 				</td>
 				<td align="left" >
-           			<select name="sign" id="sign">
+           			<select class="selectMediumBlueE2" name="sign" id="sign">
 	            		<option value="">-velg-</option>
 	 				  	<c:forEach var="record" items="${model.signList}" >
                              	 	<option value="${record.sign}"<c:if test="${searchFilterSadImportNcts.sign == record.sign}"> selected </c:if> >${record.sign}</option>
@@ -130,7 +130,7 @@
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="datumt" id="datumt" size="6" maxlength="6" value="${searchFilterSadImportNcts.datumt}">&nbsp;</td>
 				<td align="left" ><input type="text" class="inputText" name="status" id="status" size="2" maxlength="1" value="${searchFilterSadImportNcts.status}">&nbsp;</td>
 				<td align="left" >
-					<select name="forenklad" id="forenklad">
+					<select class="selectMediumBlueE2" name="forenklad" id="forenklad">
 		            		<option value="">-velg-</option>
 		            		<option value="J" <c:if test="${searchFilterSadImportNcts.forenklad == 'J'}"> selected </c:if> >Forenklet</option>
 		            		<option value="N" <c:if test="${searchFilterSadImportNcts.forenklad == 'N'}"> selected </c:if> >Normal</option>
@@ -180,7 +180,8 @@
 			<tr>
 				<td>
 				<table width="100%" cellspacing="0" border="0" cellpadding="0">
-					<tr class="tableHeaderField" height="20" valign="left">
+					<thead>
+					<tr class="tableHeaderField" height="20" >
                     <td class="tableHeaderFieldFirst" align="left" >&nbsp;&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.avd"/></td>
                 		<td class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.signatur"/></td>
                 		<td class="tableHeaderField" align="center" >&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.update"/></td>
@@ -195,16 +196,12 @@
                 		<%--
                 		<td class="tableHeaderField">&nbsp;Kopiera Ärende&nbsp;</td>
 	                 --%>    
-                	</tr> 
+                	</tr>
+                	</thead>
+                	<tbody> 
 		           	<c:forEach items="${list}" var="record" varStatus="counter">    
-		               <c:choose>           
-		                   <c:when test="${counter.count%2==0}">
-		                       <tr class="tableRow" height="20" >
-		                   </c:when>
-		                   <c:otherwise>   
-		                       <tr class="tableOddRow" height="20" >
-		                   </c:otherwise>
-		               </c:choose>
+		              <tr class="tableRow" height="20" >
+		          
 		               <td class="tableCellFirst" width="5%">&nbsp;${record.avd}</td>
 		               <td class="tableCell" >&nbsp;${record.sign}</td>
 		               <td class="tableCell" align="center" >
@@ -269,6 +266,8 @@
 		               <td class="tableCell" >&nbsp;${record.datumFr}</td>
 		            </tr> 
 		            </c:forEach>
+		            </tbody>
+		            
 	            </table>
 			</td>	
 			</tr>

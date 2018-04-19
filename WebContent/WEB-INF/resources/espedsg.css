@@ -1,14 +1,4 @@
-/*-------------------------------------
-START override in jQuery UI elements
-------------------------------------- */
-/*.ui-button,  .ui-button-text .ui-button{  
-font-size: 10px !important; 
-}
-.ui-datepicker { font-size:9pt; }
-*/
-/*------------------------------
-END override jQuery elements
-/*------------------------------*/
+@import url("espedsg2.css");
 
 .ownScrollableSubWindow{    
   width: 1050px;
@@ -85,7 +75,7 @@ END override jQuery elements
 }
 
 .popupFloatingWithRoundCorners3D {
-	position:absolute; left:15; top:5; width:150;
+	position:absolute; left:10; top:5; width:110;
 	-webkit-border-top-right-radius: 5px;
 	-webkit-border-top-left-radius: 5px;
 	-moz-border-top-right-radius: 5px;
@@ -106,7 +96,7 @@ END override jQuery elements
   	color:black;
    	z-index:2;  
 	font-family: verdana, Arial, Helvetica, sans-serif; 
-    font-size: 11px;  
+    font-size: 12px;  
     
 }
 
@@ -220,9 +210,21 @@ END override jQuery elements
 	border-top-right-radius: 5px;
 	border-top-left-radius: 5px;
 	padding: 2px 4px;
-	background-color:#FFFFFF;
 	outline: 0;
+	
 	-webkit-appearance: none;
+	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+
+	/*background-color:#FCFFF0;*/
+	background-color:#FFFFFF;
+	border-style: outset; 
+    border-width: 0px 1px 1px 0px; 
+    border-color:#778899;
+    
+}
 	
 }
 .dashboardFrameMain{
@@ -246,6 +248,8 @@ END override jQuery elements
 	
 }
 
+
+
 .dashboardFrameHeader { 
 	border: 0px solid #ccc;
 	-webkit-border-top-right-radius: 5px;
@@ -263,7 +267,7 @@ END override jQuery elements
 }
 
 .dashboardFrame{
-	border: 1px solid #4169E1;
+	/*border: 1px solid #4169E1;*/
 	/*border: 0px solid #ccc;*/
 	-webkit-border-bottom-right-radius: 5px;
 	-webkit-border-bottom-left-radius: 5px;
@@ -272,12 +276,26 @@ END override jQuery elements
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
 	padding: 2px 4px;
-	background-color:#FCFFF0;
 	outline: 0;
 	-webkit-appearance: none;
+	/*
+	background-color:#FAFAFA;
 	border-style: solid; 
-    border-width: 0px 1px 1px 0px; 
-    border-color:#EEEEEE
+    border-width: 0px 2px 2px 0px; 
+    border-color:#778899
+    */
+}
+.aDashboardLink{
+  display:inline;
+  height:100%;
+  width:100%;
+}
+.aDashboardLinkInForm{
+  border: 0; 
+  padding: 0; 
+  display: inline; 
+  background: none; 
+  cursor: pointer;
 }
 .grayTitanBg { 
 	background-color:#3D3D3D;
@@ -290,7 +308,7 @@ END override jQuery elements
 .headerTdsBannerAreaBg{
 	background-color:#FCFFF0;
 	border-style: outset; 
-    border-width: 0px 1px 1px 0px; 
+    border-width: 0px 1px 0px 0px; 
     border-color:##778899
 }
 
@@ -299,7 +317,7 @@ END override jQuery elements
 	-webkit-border-radius: 1em 4em 1em 4em;
 	-moz-border-radius: 1em 4em 1em 4em;
 	border-radius: 1em 4em 1em 4em;
-	font-size: 12px;
+	font-size: 14px;
 	padding: 2px 4px;
 	background-color:#4169E1;
 	color:#FFFFFF;	
@@ -311,7 +329,7 @@ END override jQuery elements
 	-webkit-border-radius: 1em 4em 1em 4em;
 	-moz-border-radius: 1em 4em 1em 4em;
 	border-radius: 1em 4em 1em 4em;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: bold;
 	padding: 2px 4px;
 	background-color:#000080;
@@ -325,7 +343,7 @@ END override jQuery elements
 	-webkit-border-radius: 1em 4em 1em 4em;
 	-moz-border-radius: 1em 4em 1em 4em;
 	border-radius: 1em 4em 1em 4em;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: bold;
 	padding: 2px 4px;
 	background-color:#0000CD;
@@ -338,7 +356,7 @@ END override jQuery elements
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border: 0px solid #ccc;
-	font-size: 11px;
+	font-size: 14px;
 	padding: 2px 4px;
 	background-color:#FF6600;
 	color:#FFFFFF;
@@ -351,7 +369,7 @@ END override jQuery elements
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border: 0px solid #ccc;
-	font-size: 11px;
+	font-size: 14px;
 	padding: 2px 4px;
 	background-color:#8FBC8F;
 	color:#575757;
@@ -362,7 +380,7 @@ END override jQuery elements
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border: 0px solid #ccc;
-	font-size: 11px;
+	font-size: 14px;
 	padding: 2px 4px;
 	background-color:#8FBC8F;
 	color:#575757;
@@ -373,7 +391,7 @@ END override jQuery elements
 	-webkit-border-radius: 1em 4em 1em 4em;
 	-moz-border-radius: 1em 4em 1em 4em;
 	border-radius: 1em 4em 1em 4em;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: normal;
 	padding: 2px 4px;
 	background-color:#8FBC8F;
@@ -386,7 +404,7 @@ END override jQuery elements
 	-webkit-border-radius: 1em 4em 1em 4em;
 	-moz-border-radius: 1em 4em 1em 4em;
 	border-radius: 1em 4em 1em 4em;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: bold;
 	padding: 2px 4px;
 	background-color:#3F9E4D;
@@ -399,7 +417,7 @@ END override jQuery elements
 	-webkit-border-radius: 1em 4em 1em 4em;
 	-moz-border-radius: 1em 4em 1em 4em;
 	border-radius: 1em 4em 1em 4em;
-	font-size: 12px;
+	font-size: 14px;
 	padding: 2px 4px;
 	background-color:#4E78A0;
 	color:#DDDDDD;	
@@ -410,7 +428,7 @@ END override jQuery elements
 	-webkit-border-radius: 1em 4em 1em 4em;
 	-moz-border-radius: 1em 4em 1em 4em;
 	border-radius: 1em 4em 1em 4em;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: bold;
 	padding: 2px 4px;
 	background-color:#104E8B;
@@ -427,9 +445,8 @@ END override jQuery elements
 	background-color:#CCCCCC;
 	outline: 0;
 	-webkit-appearance: none;
-	
-	
 }
+
 
 .inputFormLogin{
 	border: 1px solid #DDDDDD;
@@ -484,7 +501,11 @@ END override jQuery elements
 }
 
 .inputFormSubmitStd{
-	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	padding: 4px 7px;
+	font-size: 14px;
 	cursor:pointer;
  }
 .inputFormSubmit{
@@ -492,7 +513,7 @@ END override jQuery elements
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	font-size: 12px;
+	font-size: 14px;
 	background-color---Blue:#4169E1;
 	background-color:#3F9E4D;
 	color:#FFFFFF;
@@ -535,7 +556,7 @@ END override jQuery elements
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	font-size: 12px;
+	font-size: 14px;
 	background-color:#CCCCCC;
 	color:#000000;
 	padding: 4px 7px;
@@ -571,7 +592,7 @@ END override jQuery elements
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: bold;
 	background-color:#CCCCCC;
 	color:#000000;
@@ -584,7 +605,7 @@ END override jQuery elements
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: bold;
 	background-color:#CCCCCC;
 	color:red;
@@ -598,7 +619,7 @@ END override jQuery elements
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	font-size: 12px;
+	font-size: 14px;
 	background-color:#CCCCCC;
 	color:#000000;
 	padding: 4px 7px;
@@ -686,7 +707,7 @@ END override jQuery elements
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	font-size: 12px;
+	font-size: 14px;
 	padding: 4px 7px;
 	outline: 0;
 }
@@ -699,12 +720,21 @@ END override jQuery elements
 	padding: 4px 7px;
 	outline: 0;
 }
+.inputText14{
+	border: 1px solid #DDDDDD;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 14px;
+	padding: 4px 7px;
+	outline: 0;
+}
 .inputTextNoBorder{
 	border: 0px solid #FFFFFF;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	font-size: 12px;
+	font-size: 14px;
 	padding: 4px 7px;
 	outline: 0;
 }
@@ -713,7 +743,7 @@ END override jQuery elements
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	font-size: 12px;
+	font-size: 14px;
 	text-align: right;
 	padding: 4px 7px;
 	outline: 0;
@@ -724,7 +754,7 @@ END override jQuery elements
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: bold;
 	text-align: right;
 	padding: 4px 7px;
@@ -736,7 +766,7 @@ END override jQuery elements
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	font-size: 12px;
+	font-size: 14px;
 	font-style: italic;
 	background-color:#DDDDDD;
 	padding: 4px 7px
@@ -832,7 +862,7 @@ END override jQuery elements
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	font-size: 12px;
+	font-size: 14px;
 	padding: 4px 7px;
 	outline: 0;
 	color: #000080;
@@ -841,7 +871,7 @@ END override jQuery elements
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	font-size: 12px;
+	font-size: 14px;
 	padding: 4px 7px;
 	outline: 0;
 	color: #000080;
@@ -855,7 +885,7 @@ END override jQuery elements
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	font-size: 12px;
+	font-size: 14px;
 	padding: 4px 7px;
 	outline: 0;
 	color: #000080;
@@ -870,7 +900,7 @@ END override jQuery elements
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	font-size: 12px;
+	font-size: 14px;
 	padding: 4px 7px;
 	outline: 0;
 	color: #000080;
@@ -881,11 +911,39 @@ END override jQuery elements
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	font-size: 12px;
+	font-size: 14px;
 	padding: 4px 7px;
 	outline: 0;
 	color: #000080;
 	text-transform:uppercase;
+}
+
+.inputTextMediumBlueMandatoryFieldUPPERCASE{
+	border: 1px solid #DDDDDD;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 14px;
+	padding: 4px 7px;
+	outline: 0;
+	color: #000080;
+	background-color:#FFFFFF;
+	border-style: solid; 
+    border-width: 1px 2px 2px 1px; 
+    border-color: #F79F81;
+    text-transform:uppercase;
+}
+
+.inputTextMediumBlue14Bold{
+	border: 1px solid #DDDDDD;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 4px 7px;
+	outline: 0;
+	color: #000080;
 }
 
 .inputTextMediumBlue11{
@@ -1082,7 +1140,7 @@ END override jQuery elements
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
 	padding: 2px 4px;
-	background-color:#CCCCCC;
+	background-color:#F2F5F0;
 	outline: 0;
 	-webkit-appearance: none;
 }
@@ -1168,7 +1226,7 @@ END override jQuery elements
 	font-family: Verdana, Arial, Helvetica, sans-serif; 
 	font-size: 12px; 
 	color:#000000; 
-    background-color: #3D3D3D
+    background-color: #9DB68C
     
 }
 .formFrameHeaderBlueWithBorder { 
@@ -1263,7 +1321,7 @@ END override jQuery elements
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	font-size: 12px;
+	font-size: 14px;
 	background-color:#CCCCCC;
 	color:#000000;
 	padding: 1px 2px;
@@ -1290,7 +1348,7 @@ END override jQuery elements
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: normal;
 	background-color:#104E8B;
 	color:#FFFFFF;
@@ -1405,6 +1463,9 @@ END override jQuery elements
 }
 
 .text12{  
+    font-family: Helvetica Neue, verdana, Arial, sans-serif; font-size: 12px; color:#000000;
+}
+.text12User{  
     font-family: Helvetica Neue, verdana, Arial, sans-serif; font-size: 12px; color:#000000;
 }
 .text12UPPERCASE{  
@@ -1615,6 +1676,12 @@ END override jQuery elements
 .text16MediumBlue{  
     font-family: Helvetica Neue, verdana, Arial, sans-serif; font-size: 16px; color: #000080; font-weight:normal;
 }
+.text16NavyBlue{  
+    font-family: Helvetica Neue, verdana, Arial, sans-serif; font-size: 16px; color: #003152; 
+}
+.text16NavyBlueBold{  
+    font-family: Helvetica Neue, verdana, Arial, sans-serif; font-size: 16px; color: #003152; font-weight:bold ; 
+}
 .text18{  
     font-family: Helvetica Neue, verdana, Arial, sans-serif; font-size: 18px; 
 }
@@ -1674,6 +1741,7 @@ END override jQuery elements
     border-width: 1px 1px 1px 0px; 
     border-color:#4E78A0
 }
+
 .tableHeaderFieldFirst10 { 
 	font-family: Verdana, Arial, Helvetica, sans-serif; 
 	font-size: 10px; 
@@ -1703,16 +1771,16 @@ END override jQuery elements
 }
 .tableHeaderField {  
 	font-family: Verdana, Arial, Helvetica, sans-serif; 
-	font-size: 12px; 
+	font-size: 14px; 
 	color:#000000; 
-    background-color: #DCDCDC ;
+    background-color: #F2F5EF ;
     border-style: solid; 
     border-width: 1px 1px 1px 0px; 
-    border-color:#4E78A0
+    border-color:#D5E0CE
 }
 .tableHeaderFieldOmberegning {  
 	font-family: Verdana, Arial, Helvetica, sans-serif; 
-	font-size: 12px; 
+	font-size: 14px; 
 	color:#FFFFFF; 
     background-color: #4E78A0;
     border-style: solid; 
@@ -1721,7 +1789,7 @@ END override jQuery elements
 }
 .tableHeaderFieldEbookingPrint {  
 	font-family: Verdana, Arial, Helvetica, sans-serif; 
-	font-size: 11px; 
+	font-size: 14px; 
 	color:#FFFFFF; 
     background-color: #4E78A0;
     border-style: solid; 
@@ -1730,16 +1798,16 @@ END override jQuery elements
 }
 .tableHeaderFieldFirst { 
 	font-family: Verdana, Arial, Helvetica, sans-serif; 
-	font-size: 12px; 
+	font-size: 14px; 
 	color:#000000; 
-    background-color: #DCDCDC ;
+    background-color: #F2F5EF ;
     border-style: solid; 
     border-width: 1px 1px 1px 1px; 
-    border-color:#4E78A0
+    border-color:#D5E0CE
 }
 .tableProformaAngivelseRow {  
         font-family: Verdana, Arial, Helvetica, sans-serif; 
-        font-size: 10px; 
+        font-size: 12px; 
         color: #9F6000;
     	background-color: #FEEFB3;
 }
@@ -1755,17 +1823,26 @@ END override jQuery elements
 }
 .tableCell{  
     font-family: verdana, Arial, Helvetica, sans-serif; 
-    font-size: 10px;
+    font-size: 14px;
     color: black; 
     border-style: solid; 
     border-width: 0px 1px 1px 0px; 
-    border-color:#4E78A0
+    border-color:#D5E0CE
      
 }
 .tableCellGray{  
     font-family: verdana, Arial, Helvetica, sans-serif; 
-    font-size: 11px;
+    font-size: 14px;
     color: black; 
+    border-style: solid; 
+    border-width: 0px 1px 1px 0px; 
+    border-color:#DDDDDD
+     
+}
+.tableCellRedFont{  
+    font-family: verdana, Arial, Helvetica, sans-serif; 
+    font-size: 14px;
+    color: red; 
     border-style: solid; 
     border-width: 0px 1px 1px 0px; 
     border-color:#DDDDDD
@@ -1782,7 +1859,7 @@ END override jQuery elements
 }
 .tableCellDangerousGoods{  
     font-family: verdana, Arial, Helvetica, sans-serif; 
-    font-size: 10px;
+    font-size: 12px;
     color: black; 
     background-color:#EEEED1; /*#FCFFF0 tentative */
     border-style: solid; 
@@ -1798,7 +1875,7 @@ END override jQuery elements
     background-color: lightyellow;
     border-style: solid; 
     border-width: 0px 1px 1px 0px; 
-    border-color:#4E78A0  
+    border-color:#D5E0CE  
 }
 .tableCellEbookingPrint{  
     font-family: verdana, Arial, Helvetica, sans-serif; 
@@ -1808,7 +1885,7 @@ END override jQuery elements
     background-color: lightyellow;
     border-style: solid; 
     border-width: 0px 1px 1px 0px; 
-    border-color:#4E78A0  
+    border-color:#D5E0CE  
 }
 
 .tableCellOnlyBottomBorder{  
@@ -1817,7 +1894,7 @@ END override jQuery elements
     color: black; 
     border-style: solid; 
     border-width: 0px 0px 1px 0px; 
-    border-color:#4E78A0
+    border-color:#D5E0CE
      
 }
 .tableCell11{  
@@ -1826,7 +1903,7 @@ END override jQuery elements
     color: black; 
     border-style: solid; 
     border-width: 0px 1px 1px 0px; 
-    border-color:#4E78A0
+    border-color:#D5E0CE
      
 }
 .tableCell12{  
@@ -1835,7 +1912,7 @@ END override jQuery elements
     color: black; 
     border-style: solid; 
     border-width: 0px 1px 1px 0px; 
-    border-color:#4E78A0
+    border-color:#D5E0CE
      
 }
 .tableCell14{  
@@ -1844,16 +1921,16 @@ END override jQuery elements
     color: black; 
     border-style: solid; 
     border-width: 0px 1px 1px 0px; 
-    border-color:#4E78A0
+    border-color:#D5E0CE
      
 }
 .tableCellFirst{  
     font-family: verdana, Arial, Helvetica, sans-serif; 
-    font-size: 10px; 
+    font-size: 14px; 
     color: black;
     border-style: solid; 
     border-width: 0px 1px 1px 1px; 
-    border-color:#4E78A0 
+    border-color:#D5E0CE 
 }
 .tableCellFirst11{  
     font-family: verdana, Arial, Helvetica, sans-serif; 
@@ -1861,7 +1938,7 @@ END override jQuery elements
     color: black;
     border-style: solid; 
     border-width: 0px 1px 1px 1px; 
-    border-color:#4E78A0 
+    border-color:#D5E0CE 
 }
 .tableCellFirst12{  
     font-family: verdana, Arial, Helvetica, sans-serif; 
@@ -1869,7 +1946,7 @@ END override jQuery elements
     color: black;
     border-style: solid; 
     border-width: 0px 1px 1px 1px; 
-    border-color:#4E78A0 
+    border-color:#D5E0CE 
 }
 .tableCellFirst14{  
     font-family: verdana, Arial, Helvetica, sans-serif; 
@@ -1877,7 +1954,7 @@ END override jQuery elements
     color: black;
     border-style: solid; 
     border-width: 0px 1px 1px 1px; 
-    border-color:#4E78A0 
+    border-color:#D5E0CE 
 }
 
 .tabThinBorderSlateGray {  
@@ -1897,7 +1974,7 @@ END override jQuery elements
 
 .tabThinBorderGray {  
     font-family: verdana, Arial, Helvetica, sans-serif; 
-    font-size: 11px;  
+    font-size: 12px;  
     color: #4E78A0; 
     background-color:#CCCCCC;
     border-style: solid; 
@@ -1907,42 +1984,42 @@ END override jQuery elements
 
 .tabThinBorderWhite {  
     font-family: verdana, Arial, Helvetica, sans-serif; 
-    font-size: 11px;  
+    font-size: 12px;  
     color: #4E78A0; 
     background-color:#FFFFFF;
     border-style: solid; 
     border-width: 0px 1px 1px 1px; 
-    border-color: #4E78A0;
+    border-color: #D5E0CE;
 }
 
 .tabThinBorderWhiteWithTopBorder {  
     font-family: verdana, Arial, Helvetica, sans-serif; 
-    font-size: 11px;  
+    font-size: 12px;  
     color: #4E78A0; 
     background-color:#FFFFFF;
     border-style: solid; 
     border-width: 1px 1px 1px 1px; 
-    border-color: #4E78A0;
+    border-color: #D5E0CE;
 }
 
 .tabThinBorderWhiteWithSideBorders {  
     font-family: verdana, Arial, Helvetica, sans-serif; 
-    font-size: 11px;  
+    font-size: 12px;  
     color: #4E78A0; 
     background-color:#FFFFFF;
     border-style: solid; 
     border-width: 0px 1px 0px 1px; 
-    border-color: #4E78A0;
+    border-color: #D5E0CE;
 }
 
 .tabNoBorderSeparatorWhite {  
     font-family: verdana, Arial, Helvetica, sans-serif; 
-    font-size: 11px;  
+    font-size: 12px;  
     color: #4E78A0; 
     background-color:#FFFFFF;
     border-style: solid; 
     border-width: 0px 0px 0px 0px; 
-    border-color: #4E78A0;
+    border-color: #D5E0CE;
 }
 .tab {
 	border: 1px solid #ccc;
@@ -1950,12 +2027,12 @@ END override jQuery elements
 	-webkit-border-radius: 2px;
 	border-radius: 5px 5px 0px 0px;
     font-family: verdana, Arial, Helvetica, sans-serif; 
-    font-size: 11px;
+    font-size: 12px;
     color: #4E78A0; 
     background-color:#FFFFFF;
     border-style: solid; 
     border-width: 1px 1px 0px 1px; 
-    border-color: #4E78A0;
+    border-color: #D5E0CE;
     margin: 2px;
     padding: 2px
 }
@@ -1965,12 +2042,12 @@ END override jQuery elements
 	-webkit-border-radius: 2px;
 	border-radius: 5px 5px 0px 0px;
 	font-family: verdana, Arial, Helvetica, sans-serif; 
-    font-size: 11px; 
+    font-size: 12px; 
     color: #4E78A0; 
     background-color:#DDDDDD;
     border-style: solid; 
     border-width: 1px 1px 1px 1px; 
-    border-color: #4E78A0;
+    border-color: #D5E0CE;
     margin: 2px;
     padding: 2px      
 }
@@ -1981,12 +2058,12 @@ END override jQuery elements
 	-webkit-border-radius: 2px;
 	border-radius: 10px 10px 0px 0px;
 	font-family: verdana, Arial, Helvetica, sans-serif; 
-    font-size: 11px; 
+    font-size: 12px; 
     color: #4E78A0; 
     background-color:#FFFFFF;
     border-style: solid; 
     border-width: 1px 1px 0px 1px; 
-    border-color: #4E78A0; 
+    border-color: #D5E0CE; 
     margin: 2px;
     padding: 2px     
 }
@@ -1996,12 +2073,12 @@ END override jQuery elements
 	-webkit-border-radius: 2px;
 	border-radius: 10px 10px 0px 0px;
 	font-family: verdana, Arial, Helvetica, sans-serif; 
-    font-size: 11px; 
+    font-size: 12px; 
     color: #4E78A0; 
     background-color: #FFFFCC;
     border-style: solid; 
     border-width: 1px 1px 1px 1px; 
-    border-color: #4E78A0; 
+    border-color: #D5E0CE; 
     margin: 2px;
     padding: 2px   
 }
@@ -2013,7 +2090,7 @@ END override jQuery elements
     background-color:#FFFFFF;
     border-style: solid; 
     border-width: 0px 0px 1px 0px; 
-    border-color: #4E78A0;
+    border-color: #D5E0CE;
     margin: 2px;
     padding: 2px
 }
@@ -2023,38 +2100,38 @@ END override jQuery elements
     background-color:#FFFFFF;
     border-style: solid; 
     border-width: 0px 0px 1px 0px; 
-    border-color: #4E78A0;
+    border-color: #D5E0CE;
     margin: 1px;
     padding: 1px      
 }
 
 .tabLink{ 
     font-family: verdana, Arial, Helvetica, sans-serif; 
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     color:#000000; 
 }
 .tabLinkMinor{ 
     font-family: verdana, Arial, Helvetica, sans-serif; 
-    font-size: 11px;
+    font-size: 12px;
     font-weight: bold;
     color:#000000; 
 }
 
 .tabLinkSign{ 
     font-family: verdana, Arial, Helvetica, sans-serif; 
-    font-size: 12px;
+    font-size: 14px;
     color:#000000; 
 }
 
 .tabDisabledLink{ 
     font-family: verdana, Arial, Helvetica, sans-serif; 
-    font-size: 12px;
+    font-size: 14px;
     color:#555555;    
 }
 .tabDisabledLinkMinor{ 
     font-family: verdana, Arial, Helvetica, sans-serif; 
-    font-size: 11px;
+    font-size: 12px;
     color:#555555;    
 }
 .tdFixSize500px {    
@@ -2173,7 +2250,7 @@ END override jQuery elements
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
 	font-family: verdana, Arial, Helvetica, sans-serif; 
-    font-size: 11px;  
+    font-size: 12px;  
     color: #4E78A0; 
     background-color:lightyellow;
     border-style: solid; 
@@ -2489,12 +2566,9 @@ a { cursor: pointer }
     text-align: center;
 }
 
-
-
 .border {
     border: 1px solid #ddd;
 }
-
 
 a.menu:link {text-decoration: none ; font-weight: normal; border: 0px }
 a.menu:visited {text-decoration: none ; color:#FFFFFF; font-weight: normal; border: 0px }
