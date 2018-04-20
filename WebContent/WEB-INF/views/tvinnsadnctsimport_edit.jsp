@@ -32,7 +32,7 @@
 						<font class="tabLink">
 							&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.created.mastertopic.tab"/>
 						</font>
-						<font class="text12MediumBlue">[${model.record.titdn}]</font>
+						<font class="text14MediumBlue">[${model.record.titdn}]</font>
 						<c:if test="${model.record.tist == 'F' || model.record.tist == 'M' || empty model.record.tist}">
 							<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 						</c:if>
@@ -162,26 +162,26 @@
 			<input type="hidden" name="sign" id="sign" value='${model.record.tisg}'>
 			
 			<tr >
-				<td colspan="3" align="left" class="text12MediumBlue">
+				<td colspan="3" align="left" class="text14MediumBlue">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Avd:&nbsp;${model.record.tiavd}&nbsp;&nbsp;<span title="titdn">Tolldekl.:</span>&nbsp;<b>${model.record.titdn}</b>
 				</td>
 				<c:if test="${'1' != isTestAvd}">		
 					<td align="right" >
 						<%--This checkbox appears only in real production. Otherwise use the Testavdelning --%>
-						<input type="checkbox" name="dknh_0035" id="dknh_0035" value="1" <c:if test="${Xmodel.record.dknh_0035 == '1'}"> checked </c:if>  ><font class="text12MediumBlue"><b>TEST flagg</b></font>&nbsp;&nbsp;&nbsp;
+						<input type="checkbox" name="dknh_0035" id="dknh_0035" value="1" <c:if test="${Xmodel.record.dknh_0035 == '1'}"> checked </c:if>  ><font class="text14MediumBlue"><b>TEST flagg</b></font>&nbsp;&nbsp;&nbsp;
 					</td>
 				</c:if>
 			</tr>
 			<tr height="2"><td></td></tr>
 			<tr >
-				<td align="left" class="text12MediumBlue">
+				<td align="left" class="text14MediumBlue">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span title="tign">Godsnr:</span>&nbsp;<b>${model.record.tign}</b>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span title="titrnr">MRN-nr:</span>&nbsp;<b>${model.record.titrnr}</b>
 				</td>
 			</tr>
 			<tr height="5"><td></td></tr>
 			<tr >
-				<td align="left" class="text12MediumBlue">
+				<td align="left" class="text14MediumBlue">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span title="tisg">Sign:</span>&nbsp;<b>${model.record.tisg}</b>,&nbsp;&nbsp;<span title="tidt">Dato:</span>&nbsp;<b>${model.record.tidt}</b>,
 					&nbsp;
 					<img onMouseOver="showPop('status_info');" onMouseOut="hidePop('status_info');"style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
@@ -189,7 +189,7 @@
 					&nbsp;&nbsp;
 					<font class="text16RedBold" >*</font><span title="tienkl">Type prosedyre</span>&nbsp;
 					<%-- Must be model attribute in order to validate towards the filter (thsg) --%>
-           			<select class="text11" name="tienkl" id="tienkl">
+           			<select class="selectMediumBlueE2"  name="tienkl" id="tienkl">
 	            			<option value="J"<c:if test="${model.record.tienkl == 'J'}"> selected </c:if> >Forenklet</option>
 					  	<option value="N"<c:if test="${model.record.tienkl == 'N'}"> selected </c:if> >Normal</option>
 					</select>
@@ -245,11 +245,11 @@
 			<input type="hidden" name="tidt" id="tidt" value='${model.record.tidt}'>
 			
 			<tr >
-				<td align="left" class="text12MediumBlue">
+				<td align="left" class="text14MediumBlue">
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;<font class="text16RedBold" >*</font><span title="avd(tiavd)">Avd:</span>&nbsp;
 					<%-- Must be model attribute in order to validate towards the filter (thavd) --%>
-           			<select name="avd" id="avd">
+           			<select class="selectMediumBlueE2" name="avd" id="avd">
 	            		<option value="">-velg-</option>
 	 				  	<c:forEach var="record" items="${model.avdList}" >
                        	 	<option value="${record.avd}"<c:if test="${model.record.tiavd == record.avd}"> selected </c:if> >${record.avd}<c:if test="${record.tst == '1'}">&nbsp;(test)</c:if></option>
@@ -258,7 +258,7 @@
 					&nbsp;
 					<font class="text16RedBold" >*</font><span title="sign(tisg)">Sign:</span>&nbsp;
 					<%-- Must be model attribute in order to validate towards the filter (thsg) --%>
-           			<select name="sign" id="sign">
+           			<select class="selectMediumBlueE2" name="sign" id="sign">
 	            		<option value="">-velg-</option>
 	 				  	<c:forEach var="record" items="${model.signList}" >
 	 				  		<c:choose>
@@ -273,7 +273,7 @@
 					</select>
 					<font class="text16RedBold" >*</font><span title="tienkl">Type procedure</span>&nbsp;
 					<%-- Must be model attribute in order to validate towards the filter (thsg) --%>
-           			<select name="tienkl" id="tienkl">
+           			<select class="selectMediumBlueE2" name="tienkl" id="tienkl">
 	            			<option value="J"<c:if test="${model.record.tienkl == 'J'}"> selected </c:if> >Forenklet</option>
 					  	<option value="N"<c:if test="${model.record.tienkl == 'N'}"> selected </c:if> >Normal</option>
 					</select>
@@ -335,13 +335,13 @@
 			</c:if>
 
 		<tr>
-			<td width="50%"class="text12" valign="top">
+			<td width="50%"class="text14" valign="top">
 				<table width="90%" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
 						<table width="100%" class="formFrameHeader" border="0" cellspacing="1" cellpadding="0">
 					 		<tr height="15">
-					 			<td class="text12White">&nbsp;&nbsp;Næringsliv - Ansvarlig&nbsp;</td>
+					 			<td class="text14White">&nbsp;&nbsp;Næringsliv - Ansvarlig&nbsp;</td>
 			 				</tr>
 			            </table>
 			            </td>
@@ -350,12 +350,12 @@
 					 	<td>
 						<table width="100%" class="formFrame" border="0" cellspacing="2" cellpadding="1">
 					 		<tr >
-					 			<td class="text12">&nbsp;<span title="tikn">Kundenr</span></td>
-					 			<td class="text12">&nbsp;</td>
+					 			<td class="text14">&nbsp;<span title="tikn">Kundenr</span></td>
+					 			<td class="text14">&nbsp;</td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text12"><input type="text" class="inputTextMediumBlue" name="tikn" id="tikn" size="8" maxlength="8" value="${model.record.tikn}"></td>
-					 			<td class="text12">&nbsp;</td>
+					 			<td class="text14"><input type="text" class="inputTextMediumBlue" name="tikn" id="tikn" size="8" maxlength="8" value="${model.record.tikn}"></td>
+					 			<td class="text14">&nbsp;</td>
 			 				</tr>
 			 				<tr >
 								<%-- ================================================================================== --%>
@@ -372,25 +372,25 @@
 						        	<input type="hidden" name="orig_tilk" id="orig_tilk" value='${model.record.tilk}'>
 						        	<input type="hidden" name="orig_tisk" id="orig_tisk" value='${model.record.tisk}'>
 			 				
-					 			<td class="text12">&nbsp;<font class="text16RedBold" >*</font><span title="titin">TIN</span></td>
-					 			<td class="text12">&nbsp;<font class="text16RedBold" >*</font><span title="tina">Navn</span>
+					 			<td class="text14">&nbsp;<font class="text16RedBold" >*</font><span title="titin">TIN</span></td>
+					 			<td class="text14">&nbsp;<font class="text16RedBold" >*</font><span title="tina">Navn</span>
 						            <a tabindex="-1" id="tinaIdLink">
 										<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
 									</a>
 					 			</td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text12"><input type="text" class="inputTextMediumBlueMandatoryField" name="titin" id="titin" size="17" maxlength="17" value="${model.record.titin}"></td>
-					 			<td class="text12"><input type="text" class="inputTextMediumBlueMandatoryField" name="tina" id="tina" size="30" maxlength="30" value="${model.record.tina}"></td>
+					 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="titin" id="titin" size="17" maxlength="17" value="${model.record.titin}"></td>
+					 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="tina" id="tina" size="30" maxlength="30" value="${model.record.tina}"></td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text12">&nbsp;<span title="tiad1">Adresse</span></td>
-					 			<td class="text12">&nbsp;<span title="tisk">Språkkode</span></td>
+					 			<td class="text14">&nbsp;<span title="tiad1">Adresse</span></td>
+					 			<td class="text14">&nbsp;<span title="tisk">Språkkode</span></td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text12"><input type="text" class="inputTextMediumBlue" name="tiad1" id="tiad1" size="30" maxlength="30" value="${model.record.tiad1}"></td>
-					 			<td class="text12">
-					 				<select name="tisk" id="tisk">
+					 			<td class="text14"><input type="text" class="inputTextMediumBlue" name="tiad1" id="tiad1" size="30" maxlength="30" value="${model.record.tiad1}"></td>
+					 			<td class="text14">
+					 				<select class="selectMediumBlueE2" name="tisk" id="tisk">
 						            		<option value="">-velg-</option>
 						 				  	<c:forEach var="code" items="${model.ncts012_Sprak_CodeList}" >
 					                             <option value="${code.tkkode}"<c:if test="${model.record.tisk == code.tkkode}"> selected </c:if> >${code.tkkode}</option>
@@ -402,22 +402,22 @@
 					 			</td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text12">&nbsp;<span title="tips">Postadresse</span></td>
-					 			<td class="text12">&nbsp;<span title="tipn">Postnr</span></td>
+					 			<td class="text14">&nbsp;<span title="tips">Postadresse</span></td>
+					 			<td class="text14">&nbsp;<span title="tipn">Postnr</span></td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text12"><input type="text" class="inputTextMediumBlue" name="tips" id="tips" size="24" maxlength="24" value="${model.record.tips}"></td>
-					 			<td class="text12"><input type="text" class="inputTextMediumBlue" name="tipn" id="tipn" size="9" maxlength="9" value="${model.record.tipn}"></td>
+					 			<td class="text14"><input type="text" class="inputTextMediumBlue" name="tips" id="tips" size="24" maxlength="24" value="${model.record.tips}"></td>
+					 			<td class="text14"><input type="text" class="inputTextMediumBlue" name="tipn" id="tipn" size="9" maxlength="9" value="${model.record.tipn}"></td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text12">&nbsp;<span title="tilk">Landkode</span>
+					 			<td class="text14">&nbsp;<span title="tilk">Landkode</span>
 					 			
 					 			</td>
-					 			<td class="text12">&nbsp</td>
+					 			<td class="text14">&nbsp</td>
 			 				</tr>
 			 				<tr >
 					 			<td>
-					 				<select name="tilk" id="tilk">
+					 				<select class="selectMediumBlueE2" name="tilk" id="tilk">
 						            		<option value="">-velg-</option>
 					 				  	<c:forEach var="country" items="${model.countryCodeList}" >
 	                                	 		<option value="${country.zkod}"<c:if test="${model.record.tilk == country.zkod}"> selected </c:if> >${country.zkod}</option>
@@ -427,7 +427,7 @@
 										<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 									</a>
 				 				</td>
-					 			<td class="text12">
+					 			<td class="text14">
 					 				&nbsp;
 					 			</td>
 			 				</tr>
@@ -438,19 +438,19 @@
 	            </table>
             </td>
             
-            	<td width="50%" class="text12" valign="top">
+            	<td width="50%" class="text14" valign="top">
 				<table width="100%" align="center" border="0" cellspacing="1" cellpadding="0">
 					<tr>
 						<td valign="top">
 						<table border="0" cellspacing="1" cellpadding="0">
 						<tr>
 				            <td >&nbsp;</td>
-				            <td class="text12" ><font class="text16RedBold" >*</font><span title="tign">Godsnr</span></td>
+				            <td class="text14" ><font class="text16RedBold" >*</font><span title="tign">Godsnr</span></td>
 				            <td colspan="3" ><input type="text" class="inputTextMediumBlueMandatoryField" name="tign" id="tign" size="36" maxlength="35" value="${model.record.tign}"></td>
 			            </tr>
 						<tr>
 				            <td >&nbsp;</td>
-				            <td class="text12" ><font class="text16RedBold" >*</font><span title="tignsk">Språkkode</span>&nbsp;</td>
+				            <td class="text14" ><font class="text16RedBold" >*</font><span title="tignsk">Språkkode</span>&nbsp;</td>
 				            <td >
 					            <select class="inputTextMediumBlueMandatoryField" name="tignsk" id="tignsk">
 					            		<option value="">-velg-</option>
@@ -466,12 +466,12 @@
 			            </tr>
 			            <tr>
 				            <td >&nbsp;</td>
-				            <td class="text12" ><font class="text16RedBold" >*</font><span title="titrnr">MRN-nr</span></td>
+				            <td class="text14" ><font class="text16RedBold" >*</font><span title="titrnr">MRN-nr</span></td>
 				            <td colspan="3" ><input type="text" class="inputTextMediumBlueMandatoryField" name="titrnr" id="titrnr" size="36" maxlength="18" value="${model.record.titrnr}"></td>
 			            </tr>
 			            <tr>
 				            <td >&nbsp;</td>
-				            <td class="text12" ><font class="text16RedBold" >*</font><span title="tialk">Avs.land</span>&nbsp;</td>
+				            <td class="text14" ><font class="text16RedBold" >*</font><span title="tialk">Avs.land</span>&nbsp;</td>
 				            <td >
 					            <select class="inputTextMediumBlueMandatoryField" name="tialk" id="tialk">
 					            		<option value="">-velg-</option>
@@ -488,15 +488,15 @@
 			            <tr height="2"><td>&nbsp;</td></tr>
 			            <tr>
 				            <td >&nbsp;</td>
-				            <td class="text12" ><font class="text16RedBold" >*</font><span title="titsb">Freml.tollsted</span></td>
+				            <td class="text14" ><font class="text16RedBold" >*</font><span title="titsb">Freml.tollsted</span></td>
 				            <td ><input type="text" class="inputTextMediumBlueMandatoryField" name="titsb" id="titsb" size="9" maxlength="8" value="${model.record.titsb}">
 				            	<a tabindex="-1" id="titsbIdLink">
 									<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 								</a>
 					        </td>
-				            <td class="text12" ><span title="tiskb">Språkkode</span>&nbsp;</td>
+				            <td class="text14" ><span title="tiskb">Språkkode</span>&nbsp;</td>
 				            <td >
-					            <select name="tiskb" id="tiskb">
+					            <select class="selectMediumBlueE2" name="tiskb" id="tiskb">
 					            		<option value="">-velg-</option>
 					 				  	<c:forEach var="code" items="${model.ncts012_Sprak_CodeList}" >
 				                             <option value="${code.tkkode}"<c:if test="${model.record.tiskb == code.tkkode}"> selected </c:if> >${code.tkkode}</option>
@@ -510,18 +510,18 @@
 			            </tr>
 			            <tr>
 				            <td >&nbsp;</td>
-				            <td class="text12" ><span title="tidtf">Frigivelsesdato</span></td>
+				            <td class="text14" ><span title="tidtf">Frigivelsesdato</span></td>
 				            <td ><input readonly type="text" class="inputTextReadOnly" name="tidtf" id="tidtf" size="8" maxlength="8" value="${model.record.tidtf}"></td>
 			            </tr>
 			            
 			            <tr height="10"><td>&nbsp;</td></tr>
 			            <tr>
 				            <td >&nbsp;</td>
-				            <td class="text12" ><span title="tialsk">Avt.lag.sted (kode)</span></td>
+				            <td class="text14" ><span title="tialsk">Avt.lag.sted (kode)</span></td>
 				            <td ><input type="text" class="inputText" name="tialsk" id="tialsk" size="17" maxlength="17" value="${model.record.tialsk}"></td>
-				            <td class="text12" ><span title="tialss">Språkkode</span>&nbsp;</td>
+				            <td class="text14" ><span title="tialss">Språkkode</span>&nbsp;</td>
 				            <td >
-					            <select name="tialss" id="tialss">
+					            <select class="selectMediumBlueE2" name="tialss" id="tialss">
 					            		<option value="">-velg-</option>
 					 				  	<c:forEach var="code" items="${model.ncts012_Sprak_CodeList}" >
 				                             <option value="${code.tkkode}"<c:if test="${model.record.tialss == code.tkkode}"> selected </c:if> >${code.tkkode}</option>
@@ -535,7 +535,7 @@
 			            </tr>
 			            <tr>
 				            <td >&nbsp;</td>
-				            <td class="text12" ><span title="tials">Avt.lag.sted</span></td>
+				            <td class="text14" ><span title="tials">Avt.lag.sted</span></td>
 				            <td ><input type="text" class="inputText" name="tials" id="tials" size="20" maxlength="35" value="${model.record.tials}"></td>
 			            </tr>
 			            
@@ -544,12 +544,12 @@
 			            <tr height="2"><td>&nbsp;</td></tr>
 			            <tr>
 				            <td >&nbsp;</td>
-				            <td class="text12" ><span title="tiglsk">Godk.lag.sted (kode)</span></td>
+				            <td class="text14" ><span title="tiglsk">Godk.lag.sted (kode)</span></td>
 				            <td ><input type="text" class="inputText" name="tiglsk" id="tiglsk" size="17" maxlength="17" value="${model.record.tiglsk}"></td>
 				            
 				            
 				                
-				        	<td valign="top" class="text12" colspan="2">
+				        	<td valign="top" class="text14" colspan="2">
 				        		<img onMouseOver="showPop('changeStatusUser_info');" onMouseOut="hidePop('changeStatusUser_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 		            			Endre Status&nbsp;
 				        		<img style="vertical-align: bottom;cursor: pointer;" id="updateStatusByUserImg" width="20px" height="20px" src="resources/images/changeStatus.png" border="0" alt="change status">
@@ -570,7 +570,7 @@
 			            </tr>
 			            <tr>
 				            <td >&nbsp;</td>
-				            <td class="text12" ><span title="tiacts">Contr.sted (kode)</span></td>
+				            <td class="text14" ><span title="tiacts">Contr.sted (kode)</span></td>
 				            <td ><input type="text" class="inputText" name="tiacts" id="tiacts" size="17" maxlength="17" value="${model.record.tiacts}"></td>
 			            </tr>
 			            
@@ -625,12 +625,12 @@
 			 	<input type="hidden" name="currentOpd" id="currentOpd" value="${model.record.titdn}">
 			 	<input type="hidden" name="currentSign" id="currentSign" value="${model.record.tisg}">
 			 		
-				<p class="text12" >Change status as needed.</p>
+				<p class="text14" >Change status as needed.</p>
 				<table>
 					<tr>
-						<td class="text12" align="left" >&nbsp;Status</td>
-						<td class="text12MediumBlue">
-							<select name="selectedStatus" id="selectedStatus">
+						<td class="text14" align="left" >&nbsp;Status</td>
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="selectedStatus" id="selectedStatus">
 		            			<option value="">-velg-</option>
 		 				  		<option value="E">E</option>
 						  		<option value="Q">Q</option>

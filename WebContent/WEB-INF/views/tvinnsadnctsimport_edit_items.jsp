@@ -30,7 +30,7 @@
 				<a tabindex=-1 style="display:block;" href="tvinnsadnctsimport_edit.do?action=doFetch&avd=${model.avd}&opd=${model.opd}
 						&sysg=${model.sign}&syst=${model.status}&sydt=${model.datum}">
 					<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.created.mastertopic.tab"/></font>
-					<font class="text12MediumBlue">[${model.opd}]</font>
+					<font class="text14MediumBlue">[${model.opd}]</font>
 					<c:if test="${ model.status == 'F' || model.status == 'M' || empty model.status}">
 						<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 					</c:if>
@@ -107,7 +107,7 @@
 	 				<%-- MASTER Topic header --%>
 	 				<table width="100%" align="center" class="formFrameHeaderTransparent" border="0" cellspacing="0" cellpadding="0">
 				 		<tr height="15">
-				 			<td class="text11MediumBlue">
+				 			<td class="text12MediumBlue">
 				 				&nbsp;Avd&nbsp;<b>${recordTopicTvinnSad.tiavd}</b>
 				 				&nbsp;Oppdrag&nbsp;<b>${recordTopicTvinnSad.titdn}</b>
 				 				&nbsp;Sign&nbsp;<b>${recordTopicTvinnSad.tisg}</b>
@@ -158,40 +158,40 @@
 						 		<table width="80%" border="0" cellspacing="1" cellpadding="0">
 							 		<tr>
 							            <td width="30%" class="text11Bold" align="left" >Ansvarlig&nbsp;</td>
-							            <td class="text11" align="left" ></td>
+							            <td class="text14" align="left" ></td>
 							        </tr>
 							        <tr>
-							            <td width="30%" class="text11" align="left" >Kundenr&nbsp;</td>
-							            <td class="text11MediumBlue" align="left" >${recordTopicTvinnSad.tikn}</td>
+							            <td width="30%" class="text14" align="left" >Kundenr&nbsp;</td>
+							            <td class="text12MediumBlue" align="left" >${recordTopicTvinnSad.tikn}</td>
 							        </tr>
 							        
 							        <tr>
-							            <td width="30%" class="text11" align="left">TIN-nr&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left"><b>${recordTopicTvinnSad.titin}</b></td>
+							            <td width="30%" class="text14" align="left">TIN-nr&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left"><b>${recordTopicTvinnSad.titin}</b></td>
 							        </tr>
 									<tr>
-							            <td width="30%" class="text11" align="left">Navn&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left"><b>${recordTopicTvinnSad.tina}</b></td>
+							            <td width="30%" class="text14" align="left">Navn&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left"><b>${recordTopicTvinnSad.tina}</b></td>
 							        </tr>
 								</table>
 					        </td>
 							<td width="50%">
 						 		<table width="80%" border="0" cellspacing="1" cellpadding="0">
 							 		<tr>
-							            <td class="text11" align="left" >&nbsp;</td>
+							            <td class="text14" align="left" >&nbsp;</td>
 							        </tr>
 							        <tr>
-							            <td width="30%" class="text11" align="left">Adresse&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.tiad1}</td>
+							            <td width="30%" class="text14" align="left">Adresse&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.tiad1}</td>
 							        </tr>
 									<tr>
-							            <td width="30%" class="text11" align="left">Postadresse&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.tipn}&nbsp;${recordTopicTvinnSad.tips}</td>
+							            <td width="30%" class="text14" align="left">Postadresse&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.tipn}&nbsp;${recordTopicTvinnSad.tips}</td>
 							        </tr>
 							        <tr>
-							            <td width="30%" class="text11" align="left">Landkode
+							            <td width="30%" class="text14" align="left">Landkode
 							            </td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.tilk}</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.tilk}</td>
 							        </tr>
 							        
 			        	        </table>
@@ -284,7 +284,7 @@
 							           				<table >
 													<%-- OK BUTTON --%>
 							           				<tr align="left" >
-														<td class="text11"><button name="allItemsButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('allItems');">&nbsp;<spring:message code="systema.tvinn.sad.ok"/></button> 
+														<td class="text14"><button name="allItemsButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('allItems');">&nbsp;<spring:message code="systema.tvinn.sad.ok"/></button> 
 														</td>
 													</tr>
 													</table>
@@ -405,7 +405,7 @@
 				 	<%-- Topic ITEM CREATE --%>
 	 				<table width="100%" align="center" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
 				 		<tr height="15">
-				 			<td class="text12White">
+				 			<td class="text14White">
 				 				<b>&nbsp;&nbsp;Beskrivelse (Hendelse)&nbsp;</b>
 				 				<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 				 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -420,21 +420,21 @@
 					 		<td colspan="3">
 						 		<table class="tableBorderWithRoundCornersGray" width="80%" border="0" cellspacing="0" cellpadding="0">
 							 		<tr>
-							 			<td class="text12" align="left">
+							 			<td class="text14" align="left">
 							            		&nbsp;&nbsp;&nbsp;<font class="text16RedBold" >*</font><span title="tvst" >Sted</span>
 							            </td>
-							            <td class="text12" align="left" valign="bottom">
+							            <td class="text14" align="left" valign="bottom">
 										<font class="text16RedBold" >*</font><span title="tvstlk" >Landkode</span>
 						 					
 										</td>
-										<td class="text12" align="left" valign="bottom">
+										<td class="text14" align="left" valign="bottom">
 											&nbsp;<span title="tvstsk" >Språkkode</span>
 											
 										</td>
-										<td class="text12" align="left" valign="bottom"><span title="tvctl" >Kontrol</span>
+										<td class="text14" align="left" valign="bottom"><span title="tvctl" >Kontrol</span>
 											<img onMouseOver="showPop('kontroll_info');" onMouseOut="hidePop('kontroll_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-							                <div class="text11" style="position: relative;" align="left">
-											<span style="position:absolute;top:2px; width:250px;" id="kontroll_info" class="popupWithInputText text11"  >
+							                <div class="text14" style="position: relative;" align="left">
+											<span style="position:absolute;top:2px; width:250px;" id="kontroll_info" class="popupWithInputText text14"  >
 								           			<b>Nej</b>&nbsp;(0) = Hendelse er ikke registreret i.
 								           			<br/>
            											<b>Ja</b>&nbsp;(1) = Hendelse er allerede registreret i NCTS [fra en transiteringssted].
@@ -444,7 +444,7 @@
 										</td>
 							        </tr>
 							        <tr>
-						        		<td class="text12" align="left" >
+						        		<td class="text14" align="left" >
 						        			&nbsp;&nbsp;<input type="text" class="inputTextMediumBlueMandatoryField" name="tvst" id="tvst" size="35" maxlength="35" value="${model.record.tvst}">
 		 			            		</td>
 		 			            		<td>
@@ -486,12 +486,12 @@
 					 		<td valign="top">
 						 		<table width="95%" border="0" cellspacing="0" cellpadding="0">
 							 		<tr>
-							 			<td class="text12" align="left" valign="top" >
+							 			<td class="text14" align="left" valign="top" >
 							 				&nbsp;&nbsp;<font class="text16RedBold" >*</font><span title="tvinf1-4" ><b>Hendelser</b></span>
 							 			</td>
 							 		</tr>
 							 		<tr>	
-							 			<td class="text12" align="left">
+							 			<td class="text14" align="left">
 								            &nbsp;<textarea class="inputTextMediumBlueMandatoryField" name="tvinf" id="tvinf" cols="50" rows="7" maxlength="279">${model.record.tvinf}</textarea>
 							            </td>
 						            </tr>
@@ -500,27 +500,27 @@
 					        <td valign="top">
 						 		<table width="100%" align="left" border="0" cellspacing="0" cellpadding="0">
 						 			<tr>
-							 			<td class="text12" align="left" valign="top" >
+							 			<td class="text14" align="left" valign="top" >
 							 				&nbsp;
 							 			</td>
 							 		</tr>
 							 		<tr>
-							 			<td class="text12" align="left" valign="bottom">
+							 			<td class="text14" align="left" valign="bottom">
 							 				&nbsp;<span title="tvgdt" >Godkj.dato</span>
 							 			</td>
-							 			<td class="text12" align="left" valign="bottom">
+							 			<td class="text14" align="left" valign="bottom">
 							 				&nbsp;<span title="tvgm" >Myndighet</span>
 							 			</td>
-							 			<td class="text12" align="left" valign="bottom">
+							 			<td class="text14" align="left" valign="bottom">
 											&nbsp;<span title="tvgmsk" >Språkkode</span>
 											
 										</td>
 									</tr>
 									<tr>	
-							 			<td class="text12" align="left">
+							 			<td class="text14" align="left">
 								            <input type="text" class="inputText" name="tvgdt" id="tvgdt" size="9" maxlength="8" value="${model.record.tvgdt}">
 							            </td>
-							            <td class="text12" align="left">
+							            <td class="text14" align="left">
 								            <input type="text" class="inputText" name="tvgm" id="tvgm" size="35" maxlength="35" value="${model.record.tvgm}">
 							            </td>
 							            <td >
@@ -536,14 +536,14 @@
 										</td>
 						            </tr>
 						            <tr>
-							            <td class="text12" align="left" valign="bottom">
+							            <td class="text14" align="left" valign="bottom">
 											&nbsp;<span title="tvgmlk" >Godkj.landkode</span>
 							 					
 										</td>
-										<td class="text12" align="left" valign="bottom">
+										<td class="text14" align="left" valign="bottom">
 							 				&nbsp;<span title="tvgmst" >Godkj.sted</span>
 							 			</td>
-							 			<td class="text12" align="left" valign="bottom">
+							 			<td class="text14" align="left" valign="bottom">
 											&nbsp;<span title="tvgmss" >Språkkode</span>
 											
 										</td>
@@ -560,7 +560,7 @@
 												<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 											</a>
 						 				</td>
-										<td class="text12" align="left">
+										<td class="text14" align="left">
 								            <input type="text" class="inputText" name="tvgmst" id="tvgmst" size="35" maxlength="35" value="${model.record.tvgmst}">
 							            </td>
 							            <td >
@@ -579,27 +579,27 @@
 					        </td>
 				        </tr>
 				        <tr height="10"><td></td></tr>
-				        <tr><td class="text12"><b>&nbsp;&nbsp;Forsegling</b></td></tr>
+				        <tr><td class="text14"><b>&nbsp;&nbsp;Forsegling</b></td></tr>
 				        <tr>
 				        		<td >
 					        		<table width="80%" align="left" border="0" cellspacing="0" cellpadding="0">
 					        			<tr>
-							 			<td class="text12" align="left" valign="bottom">
+							 			<td class="text14" align="left" valign="bottom">
 							 				&nbsp;&nbsp;<span title="tvdant" >Antal</span>
 							 			</td>
-							 			<td class="text12" align="left" valign="bottom">
+							 			<td class="text14" align="left" valign="bottom">
 							 				&nbsp;&nbsp;<span title="tvdfkd" >Kode</span>
 							 			</td>
-							 			<td class="text12" align="left" valign="bottom">
+							 			<td class="text14" align="left" valign="bottom">
 											&nbsp;<span title="tvdfsk" >Språkkode</span>
 											
 										</td>
 									</tr>
 						        		<tr>
-										<td class="text12" align="left">
+										<td class="text14" align="left">
 								            &nbsp;<input type="text" class="inputText" name="tvdant" id="tvdant" size="3" maxlength="3" value="${model.record.tvdant}">
 							            </td>
-										<td class="text12" align="left">
+										<td class="text14" align="left">
 								            <input type="text" class="inputText" name="tvdfkd" id="tvdfkd" size="20" maxlength="20" value="${model.record.tvdfkd}">
 							            </td>
 							            <td >
@@ -643,7 +643,7 @@
 					        <td colspan="3">
 							<table width="99%" align="center" class="formFrameHeaderBlueWithBorder" border="0" cellspacing="0" cellpadding="0">
 						 		<tr height="15">
-						 			<td class="text12White">
+						 			<td class="text14White">
 						 				&nbsp;&nbsp;<b>Omlasting</b>&nbsp;<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 					 				</td>
 				 				</tr>
@@ -657,20 +657,20 @@
 							 		<td valign="top" width="50%">
 								 		<table width="85%" border="0" cellspacing="1" cellpadding="0">
 							 			<tr>
-								 			<td class="text12" align="left" valign="bottom">
+								 			<td class="text14" align="left" valign="bottom">
 								 				&nbsp;&nbsp;<span title="tvtaid" >Transport</span>
 								 			</td>
-								 			<td class="text12" align="left" valign="bottom">
+								 			<td class="text14" align="left" valign="bottom">
 								 				&nbsp;<span title="tvtalk" >Landkode</span>
 								 				
 								 			</td>
-								 			<td class="text12" align="left" valign="bottom">
+								 			<td class="text14" align="left" valign="bottom">
 												&nbsp;<span title="tvtask" >Språkkode</span>
 												
 											</td>
 										</tr>
 										<tr>	
-								 			<td class="text12" align="left">
+								 			<td class="text14" align="left">
 									            &nbsp;<input type="text" class="inputText" name="tvtaid" id="tvtaid" size="25" maxlength="27" value="${model.record.tvtaid}">
 								            </td>
 											<td>
@@ -701,22 +701,22 @@
 						 			<td valign="top" width="50%">
 							 			<table width="100%" border="0" cellspacing="1" cellpadding="0"> 
 							 			<tr>
-								 			<td class="text12" align="left" valign="bottom">
+								 			<td class="text14" align="left" valign="bottom">
 								 				&nbsp;<span title="tvgodt" >Godkj.dato</span>
 								 			</td>
-								 			<td class="text12" align="left" valign="bottom">
+								 			<td class="text14" align="left" valign="bottom">
 								 				&nbsp;<span title="tvom" >Myndighet</span>
 								 			</td>
-								 			<td class="text12" align="left" valign="bottom">
+								 			<td class="text14" align="left" valign="bottom">
 												&nbsp;<span title="tvomsk" >Språkkode</span>
 												
 											</td>
 										</tr>
 										<tr>	
-								 			<td class="text12" align="left">
+								 			<td class="text14" align="left">
 									            <input type="text" class="inputText" name="tvgodt" id="tvgodt" size="9" maxlength="8" value="${model.record.tvgodt}">
 								            </td>
-								            <td class="text12" align="left">
+								            <td class="text14" align="left">
 									            <input type="text" class="inputText" name="tvom" id="tvom" size="35" maxlength="35" value="${model.record.tvom}">
 								            </td>
 								            <td >
@@ -732,14 +732,14 @@
 											</td>
 							            </tr>
 							            <tr>
-								            <td class="text12" align="left" valign="bottom">
+								            <td class="text14" align="left" valign="bottom">
 												&nbsp;<span title="tvomlk" >Godkj.landkode</span>
 							 															
 											</td>
-											<td class="text12" align="left" valign="bottom">
+											<td class="text14" align="left" valign="bottom">
 								 				&nbsp;<span title="tvomst" >Godkj.sted</span>
 								 			</td>
-								 			<td class="text12" align="left" valign="bottom">
+								 			<td class="text14" align="left" valign="bottom">
 												&nbsp;<span title="tvomss" >Språkkode</span>
 												
 											</td>
@@ -756,7 +756,7 @@
 													<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 												</a>
 							 				</td>
-											<td class="text12" align="left">
+											<td class="text14" align="left">
 									            <input type="text" class="inputText" name="tvomst" id="tvomst" size="35" maxlength="35" value="${model.record.tvomst}">
 								            </td>
 								            <td >
@@ -773,38 +773,38 @@
 										</tr>
 										<tr height="10"><td>&nbsp;</td></tr>
 										<tr>
-											<td class="text12" align="right">
+											<td class="text14" align="right">
 								 				<span title="tvcnr">Container&nbsp;&nbsp;</span>
 							 				</td>
-											<td colspan="4" class="text12" align="left">
+											<td colspan="4" class="text14" align="left">
 									            <input type="text" class="inputText" name="tvcnr" id="tvcnr" size="20" maxlength="17" value="${model.record.tvcnr}">
 								            		&nbsp;<button name="containerNrButton" class="buttonGray" type="button" onClick="showPop('containerNrInfo');" >Mer...</button> 
 							           		<span style="position:absolute; left:480px; top:650px; width:680px; height:120px;" id="containerNrInfo" class="popupWithInputText"  >
 								           		<div class="text10" align="left">
 								           			<table>
 									           			<tr>
-										           			<td class="text11" colspan="5">
+										           			<td class="text14" colspan="5">
 										           				<b><span title="tvcnr/tvcnr2/tvcnr3.../tvcnr5">Container nr</span></b>
 										           			</td>
 										        			</tr>
 									           			<tr>
-										           			<td class="text11">
+										           			<td class="text14">
 																&nbsp;2.<input type="text" class="inputText" name="tvcnr2" id="tvcnr2" size="17" maxlength="17" value="${model.record.tvcnr2}">
 															</td>
-															<td class="text11">
+															<td class="text14">
 																&nbsp;3.<input type="text" class="inputText" name="tvcnr3" id="tvcnr3" size="17" maxlength="17" value="${model.record.tvcnr3}">
 															</td>
-															<td class="text11">
+															<td class="text14">
 										           				&nbsp;4.<input type="text" class="inputText" name="tvcnr4" id="tvcnr4" size="17" maxlength="17" value="${model.record.tvcnr4}">
 										           			</td>
-										           			<td class="text11">
+										           			<td class="text14">
 										           				&nbsp;5.<input type="text" class="inputText" name="tvcnr5" id="tvcnr5" size="17" maxlength="17" value="${model.record.tvcnr5}">
 										           			</td>
 														</tr>
 													</table>
 													<table width="100%" align="left" border="0">
 														<tr align="left" >
-															<td class="text12" ><button name="containerNrButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('containerNrInfo');">&nbsp;<spring:message code="systema.tvinn.sad.ok"/></button> 
+															<td class="text14" ><button name="containerNrButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('containerNrInfo');">&nbsp;<spring:message code="systema.tvinn.sad.ok"/></button> 
 															</td>
 														</tr>
 													</table>

@@ -31,20 +31,20 @@
 						<table>
 						<form name="tvinnsadNctsExportOppdragForm" id="tvinnsadNctsExportOppdragForm" action="tvinnsadnctsexport_edit_items_childwindow_oppdragslist.do?action=doFind" method="post">
 						<tr>
-							<td class="text11">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.avd"/></td>
-							<td class="text11">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.arende"/></td>
-							<td class="text11">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.extrefnr"/></td>
-							<td class="text11">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.datum"/>.</td>
-							<td class="text11">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.avsandare"/></td>
-							<td class="text11">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.mottagare"/></td>
+							<td class="text14">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.avd"/></td>
+							<td class="text14">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.arende"/></td>
+							<td class="text14">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.extrefnr"/></td>
+							<td class="text14">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.datum"/>.</td>
+							<td class="text14">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.avsandare"/></td>
+							<td class="text14">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.mottagare"/></td>
 						 </tr>
 						 <tr>	
-							<td class="text11">&nbsp;<input type="text" class="inputText" name="avd" id="avd" size="5" maxlength="4" value="${searchFilter.avd}"></td>
-							<td class="text11">&nbsp;<input type="text" class="inputText" name="opd" id="opd" size="8" maxlength="7" value="${searchFilter.opd}"></td>
-							<td class="text11">&nbsp;<input type="text" class="inputText" name="xref" id="xref" size="10" maxlength="10" value="${searchFilter.xref}"></td>
-							<td class="text11">&nbsp;<input type="text" class="inputText" name="datum" id="datum" size="10" maxlength="8" value="${searchFilter.datum}"></td>
-							<td class="text11">&nbsp;<input type="text" class="inputText" name="avsNavn" id="avsNavn" size="15" maxlength="25" value="${searchFilter.avsNavn}"></td>
-							<td class="text11">&nbsp;<input type="text" class="inputText" name="motNavn" id="motNavn" size="15" maxlength="25" value="${searchFilter.motNavn}"></td>
+							<td class="text14">&nbsp;<input type="text" class="inputText" name="avd" id="avd" size="5" maxlength="4" value="${searchFilter.avd}"></td>
+							<td class="text14">&nbsp;<input type="text" class="inputText" name="opd" id="opd" size="8" maxlength="7" value="${searchFilter.opd}"></td>
+							<td class="text14">&nbsp;<input type="text" class="inputText" name="xref" id="xref" size="10" maxlength="10" value="${searchFilter.xref}"></td>
+							<td class="text14">&nbsp;<input type="text" class="inputText" name="datum" id="datum" size="10" maxlength="8" value="${searchFilter.datum}"></td>
+							<td class="text14">&nbsp;<input type="text" class="inputText" name="avsNavn" id="avsNavn" size="15" maxlength="25" value="${searchFilter.avsNavn}"></td>
+							<td class="text14">&nbsp;<input type="text" class="inputText" name="motNavn" id="motNavn" size="15" maxlength="25" value="${searchFilter.motNavn}"></td>
 							
 							<td align="right">&nbsp;<input class="inputFormSubmit" type="submit" name="submit" value='<spring:message code="search.label"/>'>
 		           		</tr>
@@ -55,20 +55,20 @@
 					 								           		
 	           		<tr height="20"><td></td></tr>
 					
-					<tr class="text11" >
+					<tr class="text14" >
 					<td class="ownScrollableSubWindowDynamicWidthHeight" width="100%" style="height:30em;">
 					<%-- this is the datatables grid (content)--%>
 					<table id="oppdragsList" class="display compact cell-border" width="100%" >
 						<thead>
-						<tr style="background-color:#EEEEEE">
-							<th class="text11" title="avd">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.avd"/>&nbsp;</th>
-		                    <th class="text11" title="sign">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.signatur"/>&nbsp;</th>
-		                    <th class="text11" title="opd">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.arende"/>&nbsp;</th>
-		                    <th class="text11" title="refnr">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.extrefnr"/>&nbsp;</th>
-		                    <th class="text11" title="datum">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.datum"/>&nbsp;</th>
-		                    <th class="text11" title="status">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.status"/>&nbsp;</th>
-		                    <th class="text11" title="avsNavn">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.avsandare"/>&nbsp;</th>
-		                    <th class="text11" title="motNavn">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.mottagare"/>&nbsp;</th>
+						<tr class="tableHeaderField" >
+							<th class="text14" title="avd">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.avd"/>&nbsp;</th>
+		                    <th class="text14" title="sign">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.signatur"/>&nbsp;</th>
+		                    <th class="text14" title="opd">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.arende"/>&nbsp;</th>
+		                    <th class="text14" title="refnr">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.extrefnr"/>&nbsp;</th>
+		                    <th class="text14" title="datum">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.datum"/>&nbsp;</th>
+		                    <th class="text14" title="status">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.status"/>&nbsp;</th>
+		                    <th class="text14" title="avsNavn">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.avsandare"/>&nbsp;</th>
+		                    <th class="text14" title="motNavn">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.mottagare"/>&nbsp;</th>
 		                </tr> 
 		                </thead>
 		                
@@ -76,22 +76,22 @@
 		                <c:forEach var="record" items="${model.oppdragsList}" varStatus="counter">    
 			               <c:choose>           
 			                   <c:when test="${counter.count%2==0}">
-			                       <tr class="text11">
+			                       <tr class="text14">
 			                   </c:when>
 			                   <c:otherwise>   
-			                       <tr class="text11">
+			                       <tr class="text14">
 			                   </c:otherwise>
 			               </c:choose>
-			               <td class="text11">&nbsp;${record.avd}</td>
-			               <td class="text11">&nbsp;${record.sign}</td>
-			               <td nowrap style="cursor:pointer;" class="text11MediumBlue" id="avd${record.avd}@opd${record.opd}" >
+			               <td class="text14">&nbsp;${record.avd}</td>
+			               <td class="text14">&nbsp;${record.sign}</td>
+			               <td nowrap style="cursor:pointer;" class="text14MediumBlue" id="avd${record.avd}@opd${record.opd}" >
 			               		<img title="select" valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;${record.opd}
 			               	</td>
-		               	   <td class="text11">&nbsp;${record.h_xref}</td>
-		               	   <td class="text11">&nbsp;${record.datum}</td>
-		               	   <td class="text11">&nbsp;${record.status}</td>
-		               	   <td class="text11">&nbsp;${record.avsNavn}</td>
-		               	   <td class="text11">&nbsp;${record.motNavn}</td>
+		               	   <td class="text14">&nbsp;${record.h_xref}</td>
+		               	   <td class="text14">&nbsp;${record.datum}</td>
+		               	   <td class="text14">&nbsp;${record.status}</td>
+		               	   <td class="text14">&nbsp;${record.avsNavn}</td>
+		               	   <td class="text14">&nbsp;${record.motNavn}</td>
 			            </tr> 
 			            </c:forEach>
 			            </tbody>

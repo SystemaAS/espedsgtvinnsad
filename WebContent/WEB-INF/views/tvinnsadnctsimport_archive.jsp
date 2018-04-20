@@ -24,7 +24,7 @@
 					<a tabindex=-1 style="display:block;" href="tvinnsadnctsimport_edit.do?action=doFetch&avd=${model.avd}&opd=${model.opd}
 							&sysg=${model.sign}&syst=${model.status}&sydt=${model.datum}">
 						<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.created.mastertopic.tab"/></font>
-						<font class="text12MediumBlue">[${model.opd}]</font>
+						<font class="text14MediumBlue">[${model.opd}]</font>
 						<c:if test="${ model.status == 'F' || model.status == 'M' || empty model.status}">
 							<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 						</c:if>
@@ -102,18 +102,21 @@
 			<tr>
 				<td>
 				<table width="100%" cellspacing="0" border="0" cellpadding="0">
+					<thead>
 					<tr class="tableHeaderField" height="20" valign="left">
 					
-	                    <td class="tableHeaderFieldFirst">&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.archive.list.label.topicNr"/>&nbsp;</td>
-	                    <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.archive.list.label.docType"/>&nbsp;</td> 
-	                    <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.archive.list.label.subject"/>&nbsp;</td> 
-	                    <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.archive.list.label.date"/>&nbsp;</td>
-	                    <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.archive.list.label.time"/>&nbsp;</td>
-	                    <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.archive.list.label.additionalInfo"/>&nbsp;</td>
-	                    <%-- <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.archive.list.label.url"/>&nbsp;</td> --%>
-	                    <td class="tableHeaderField">&nbsp;Dokument</td> 
+	                    <th class="tableHeaderFieldFirst">&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.archive.list.label.topicNr"/>&nbsp;</th>
+	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.archive.list.label.docType"/>&nbsp;</th> 
+	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.archive.list.label.subject"/>&nbsp;</th> 
+	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.archive.list.label.date"/>&nbsp;</th>
+	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.archive.list.label.time"/>&nbsp;</th>
+	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.archive.list.label.additionalInfo"/>&nbsp;</th>
+	                    <%-- <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.archive.list.label.url"/>&nbsp;</th> --%>
+	                    <th class="tableHeaderField">&nbsp;Dokument</th> 
 	                    
-	               </tr>     
+	               </tr>   
+	               </thead>
+	               <tbody>  
 		           	<c:forEach items="${list}" var="record" varStatus="counter">    
 		               <c:choose>           
 		                   <c:when test="${counter.count%2==0}">
@@ -138,7 +141,7 @@
 		               </td>
 		            </tr> 
 		            </c:forEach>
-		            
+		            </tbody>
 	            </table>
 			</td>	
 			</tr>

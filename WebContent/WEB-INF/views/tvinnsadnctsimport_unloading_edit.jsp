@@ -36,7 +36,7 @@
 				<a tabindex=-1 style="display:block;" href="tvinnsadnctsimport_edit.do?action=doFetch&avd=${recordTopicTvinnSad.tiavd}&opd=${recordTopicTvinnSad.titdn}
 						&sysg=${recordTopicTvinnSad.tisg}&syst=${recordTopicTvinnSad.tist}&sydt=${recordTopicTvinnSad.tidt}">
 					<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.created.mastertopic.tab"/></font>
-					<font class="text12MediumBlue">[${recordTopicTvinnSad.titdn}]</font>
+					<font class="text14MediumBlue">[${recordTopicTvinnSad.titdn}]</font>
 					<c:if test="${ recordTopicTvinnSad.tist == 'F' || recordTopicTvinnSad.tist == 'M' || empty recordTopicTvinnSad.tist}">
 						<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 					</c:if>
@@ -127,12 +127,12 @@
     		<input type="hidden" name="avd" id="avd" value='${recordTopicTvinnSad.tiavd}'>
 		<input type="hidden" name="sign" id="sign" value='${recordTopicTvinnSad.tisg}'>
 		<tr >
-			<td colspan="3" align="left" class="text12MediumBlue">
+			<td colspan="3" align="left" class="text14MediumBlue">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Avd:&nbsp;<b>${recordTopicTvinnSad.tiavd}</b>&nbsp;&nbsp;<span title="titdn">Tolldekl.:</span>&nbsp;<b>${recordTopicTvinnSad.titdn}</b>
 			</td>
 		</tr>
 		<tr >
-			<td colspan="3" align="left" class="text12MediumBlue">
+			<td colspan="3" align="left" class="text14MediumBlue">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span title="titrnr">MRN-nr:</span>&nbsp;<b>${recordTopicTvinnSad.titrnr}</b>&nbsp;&nbsp;Gods-nr:&nbsp;<b>${recordTopicTvinnSad.tign}</b>
 			</td>
 		</tr>
@@ -207,13 +207,13 @@
 		</tr>
 		</c:if>
 		<tr>
-			<td width="50%"class="text12" valign="top">
+			<td width="50%"class="text14" valign="top">
 				<table width="90%" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
 						<table width="100%" class="formFrameHeader" border="0" cellspacing="1" cellpadding="0">
 					 		<tr height="15">
-					 			<td class="text12White">
+					 			<td class="text14White">
 					 				&nbsp;Næringsliv - Ansvarlig&nbsp;
 				 				</td>
 			 				</tr>
@@ -224,44 +224,44 @@
 					 	<td>
 						<table width="100%" class="formFrame" border="0" cellspacing="2" cellpadding="1">
 					 		<tr >
-					 			<td class="text12">&nbsp;<span title="tikn">Kundenr</span></td>
-					 			<td class="text12">&nbsp;</td>
+					 			<td class="text14">&nbsp;<span title="tikn">Kundenr</span></td>
+					 			<td class="text14">&nbsp;</td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text12"><input readonly type="text" class="inputTextMediumBlue" name="tikn" id="tikn" size="8" maxlength="8" value="${recordTopicTvinnSad.tikn}"></td>
-					 			<td class="text12">&nbsp;</td>
+					 			<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="tikn" id="tikn" size="8" maxlength="8" value="${recordTopicTvinnSad.tikn}"></td>
+					 			<td class="text14">&nbsp;</td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text12">&nbsp;<span title="titin">TIN</span></td>
-					 			<td class="text12">&nbsp;<span title="tina">Navn</span></td>
+					 			<td class="text14">&nbsp;<span title="titin">TIN</span></td>
+					 			<td class="text14">&nbsp;<span title="tina">Navn</span></td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text12"><input readonly type="text" class="inputTextMediumBlue" name="titin" id="titin" size="17" maxlength="17" value="${recordTopicTvinnSad.titin}"></td>
-					 			<td class="text12"><input readonly type="text" class="inputTextMediumBlue" name="tina" id="tina" size="30" maxlength="30" value="${recordTopicTvinnSad.tina}"></td>
+					 			<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="titin" id="titin" size="17" maxlength="17" value="${recordTopicTvinnSad.titin}"></td>
+					 			<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="tina" id="tina" size="30" maxlength="30" value="${recordTopicTvinnSad.tina}"></td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text12">&nbsp;<span title="tiad1">Adresse</span></td>
-					 			<td class="text12">&nbsp;<span title="tisk">Språkkode</span></td>
+					 			<td class="text14">&nbsp;<span title="tiad1">Adresse</span></td>
+					 			<td class="text14">&nbsp;<span title="tisk">Språkkode</span></td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text12"><input readonly type="text" class="inputTextMediumBlue" name="tiad1" id="tiad1" size="30" maxlength="30" value="${recordTopicTvinnSad.tiad1}"></td>
+					 			<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="tiad1" id="tiad1" size="30" maxlength="30" value="${recordTopicTvinnSad.tiad1}"></td>
 					 			<td ><input readonly type="text" class="inputTextMediumBlue" name="tisk" id="tisk" size="2" maxlength="2" value="${recordTopicTvinnSad.tisk}"></td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text12">&nbsp;<span title="tips">Postadresse</span></td>
-					 			<td class="text12">&nbsp;<span title="tipn">Postnr</span></td>
+					 			<td class="text14">&nbsp;<span title="tips">Postadresse</span></td>
+					 			<td class="text14">&nbsp;<span title="tipn">Postnr</span></td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text12"><input readonly type="text" class="inputTextMediumBlue" name="tips" id="tips" size="24" maxlength="24" value="${recordTopicTvinnSad.tips}"></td>
-					 			<td class="text12"><input readonly type="text" class="inputTextMediumBlue" name="tipn" id="tipn" size="9" maxlength="9" value="${recordTopicTvinnSad.tipn}"></td>
+					 			<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="tips" id="tips" size="24" maxlength="24" value="${recordTopicTvinnSad.tips}"></td>
+					 			<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="tipn" id="tipn" size="9" maxlength="9" value="${recordTopicTvinnSad.tipn}"></td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text12">&nbsp;<span title="tilk">Landkode</span></td>
-					 			<td class="text12">&nbsp</td>
+					 			<td class="text14">&nbsp;<span title="tilk">Landkode</span></td>
+					 			<td class="text14">&nbsp</td>
 			 				</tr>
 			 				<tr >
 			 					<td ><input readonly type="text" class="inputTextMediumBlue" name="tilk" id="tilk" size="2" maxlength="2" value="${recordTopicTvinnSad.tilk}"></td>
-					 			<td class="text12">
+					 			<td class="text14">
 					 				&nbsp;
 					 			</td>
 			 				</tr>
@@ -272,83 +272,83 @@
 	            </table>
             </td>
             
-            	<td width="50%" class="text12" valign="top">
+            	<td width="50%" class="text14" valign="top">
 				<table width="100%" align="center" border="0" cellspacing="1" cellpadding="0">
 					<tr>
 						<td valign="top">
 						<table border="0" cellspacing="1" cellpadding="0">
 						<tr>
 				            <td >&nbsp;</td>
-				            <td class="text12" ><span title="tign">Godsnr</span></td>
+				            <td class="text14" ><span title="tign">Godsnr</span></td>
 				            <td colspan="3" ><input readonly type="text" class="inputText" name="tign" id="tign" size="36" maxlength="35" value="${recordTopicTvinnSad.tign}"></td>
 			            </tr>
 			            <tr>
 				            <td >&nbsp;</td>
-				            <td class="text12" ><span title="tignsk">Språkkode</span>&nbsp;</td>
+				            <td class="text14" ><span title="tignsk">Språkkode</span>&nbsp;</td>
 				            <td ><input readonly type="text" class="inputText" name="tignsk" id="tignsk" size="2" maxlength="2" value="${recordTopicTvinnSad.tignsk}"></td>
 			            </tr>
 			            <tr>
 				            <td >&nbsp;</td>
-				            <td class="text12" ><span title="titrnr">MRN-nr</span></td>
+				            <td class="text14" ><span title="titrnr">MRN-nr</span></td>
 				            <td colspan="3"><input readonly type="text" class="inputText" name="titrnr" id="titrnr" size="36" maxlength="35" value="${recordTopicTvinnSad.titrnr}"></td>
 			            </tr>
 			            <tr>
 				            <td >&nbsp;</td>
-				            <td class="text12" ><span title="tialk">Avs.land</span>&nbsp;</td>
+				            <td class="text14" ><span title="tialk">Avs.land</span>&nbsp;</td>
 				            <td ><input readonly type="text" class="inputText" name="tialk" id="tialk" size="2" maxlength="2" value="${recordTopicTvinnSad.tialk}"></td>
 				            <td >&nbsp;</td>
 			            </tr>
 			            <tr height="2"><td>&nbsp;</td></tr>
 			            <tr>
 				            <td >&nbsp;</td>
-				            <td class="text12" ><span title="titsb">Freml.tollsted</span></td>
+				            <td class="text14" ><span title="titsb">Freml.tollsted</span></td>
 				            <td ><input readonly type="text" class="inputTextReadOnly" name="titsb" id="titsb" size="10" maxlength="8" value="${recordTopicTvinnSad.titsb}"></td>
-				            <td class="text12" ><span title="tiskb">Språkkode&nbsp;</span></td>
+				            <td class="text14" ><span title="tiskb">Språkkode&nbsp;</span></td>
 				            <td ><input readonly type="text" class="inputTextReadOnly" name="tiskb" id="tiskb" size="2" maxlength="2" value="${recordTopicTvinnSad.tiskb}"></td>
 				            
 			            </tr>
 			            <tr>
 				            <td >&nbsp;</td>
-				            <td class="text12" ><span title="tidtf">Frigivelsesdato</span></td>
+				            <td class="text14" ><span title="tidtf">Frigivelsesdato</span></td>
 				            <td ><input readonly type="text" class="inputTextReadOnly" name="tidtf" id="tidtf" size="10" maxlength="8" value="${recordTopicTvinnSad.tidtf}"></td>
 			            </tr>
 			            
 			            <tr height="5"><td></td></tr>
 			            <tr>
 				            <td >&nbsp;</td>
-				            <td class="text12" ><span title="tinaa">Hovedans.</span></td>
+				            <td class="text14" ><span title="tinaa">Hovedans.</span></td>
 				            <td ><input readonly type="text" class="inputTextReadOnly" name="tinaa" id="tinaa" size="20" maxlength="35" value="${model.record.tinaa}"></td>
 			            </tr>
 			            <tr>
 				            <td >&nbsp;</td>
-				            <td class="text12" ><span title="tinas">Avsender</span>&nbsp;</td>
+				            <td class="text14" ><span title="tinas">Avsender</span>&nbsp;</td>
 				            <td ><input readonly type="text" class="inputTextReadOnly" name="tinas" id="tinas" size="20" maxlength="35" value="${model.record.tinas}"></td>
-				            <td class="text12" ><span title="tinak">Mottaker</span>&nbsp;</td>
+				            <td class="text14" ><span title="tinak">Mottaker</span>&nbsp;</td>
 				            <td ><input readonly type="text" class="inputTextReadOnly" name="tinak" id="tinak" size="20" maxlength="35" value="${model.record.tinak}"></td>
 			            </tr>
 			            
 			            <tr height="10"><td>&nbsp;</td></tr>
 			            <tr>
 				            <td >&nbsp;</td>
-				            <td class="text12" ><span title="tialsk">Avt.lag.sted (kode)</span></td>
+				            <td class="text14" ><span title="tialsk">Avt.lag.sted (kode)</span></td>
 				            <td ><input readonly type="text" class="inputTextReadOnly" name="tialsk" id="tialsk" size="20" maxlength="17" value="${recordTopicTvinnSad.tialsk}"></td>
-				            <td class="text12" ><span title="tialss">Språkkode</span>&nbsp;</td>
+				            <td class="text14" ><span title="tialss">Språkkode</span>&nbsp;</td>
 				            <td ><input readonly type="text" class="inputTextReadOnly" name="tialss" id="tialss" size="2" maxlength="2" value="${recordTopicTvinnSad.tialss}"></td>
 			            </tr>
 			            <tr>
 				            <td >&nbsp;</td>
-				            <td class="text12" ><span title="tials">Avt.lag.sted</span></td>
+				            <td class="text14" ><span title="tials">Avt.lag.sted</span></td>
 				            <td ><input readonly type="text" class="inputTextReadOnly" name="tials" id="tials" size="20" maxlength="35" value="${recordTopicTvinnSad.tials}"></td>
 			            </tr>
 			            <tr height="2"><td>&nbsp;</td></tr>
 			            <tr>
 				            <td >&nbsp;</td>
-				            <td class="text12" ><span title="tiglsk">Godkj.lag.sted (kode)</span></td>
+				            <td class="text14" ><span title="tiglsk">Godkj.lag.sted (kode)</span></td>
 				            <td ><input readonly type="text" class="inputTextReadOnly" name="tiglsk" id="tiglsk" size="20" maxlength="17" value="${recordTopicTvinnSad.tiglsk}"></td>
 			            </tr>
 			            <tr>
 				            <td >&nbsp;</td>
-				            <td class="text12" ><span title="tiacts">Contr.sted (kode)</span></td>
+				            <td class="text14" ><span title="tiacts">Contr.sted (kode)</span></td>
 				            <td ><input readonly type="text" class="inputTextReadOnly" name="tiacts" id="tiacts" size="20" maxlength="17" value="${recordTopicTvinnSad.tiacts}"></td>
 			            </tr>
 			            
@@ -391,7 +391,7 @@
 		 	<td colspan="2">
 			<table width="100%" class="formFrameHeader" border="0" cellspacing="1" cellpadding="0">
 		 		<tr height="15">
-		 			<td class="text12White">
+		 			<td class="text14White">
 		 				&nbsp;Lossemerknader&nbsp;<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 	 				</td>
  				</tr>
@@ -402,26 +402,26 @@
 		 	<td width="50%">
 				<table width="100%" class="formFrame" border="0" cellspacing="1" cellpadding="0">
 			 		<tr height="15">
-			 			<td class="text12">
+			 			<td class="text14">
 			 				&nbsp;<span title="tivpos">Samlet antal varelinjer [NCTS]</span>
 		 				</td>
-			 			<td class="text12">
+			 			<td class="text14">
 			 				&nbsp;<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="tivpos" id="tivpos" size="5" maxlength="5" value="${model.record.tivpos}">
 		 				</td>
 	 				</tr>
 			 		<tr height="15">
-			 			<td class="text12">
+			 			<td class="text14">
 			 				&nbsp;<span title="tintk">Samlet kollital [NCTS]</span>
 		 				</td>
-			 			<td class="text12">
+			 			<td class="text14">
 			 				&nbsp;<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="tintk" id="tintk" size="5" maxlength="4" value="${model.record.tintk}">
 		 				</td>
 	 				</tr>
 			 		<tr height="15">
-			 			<td class="text12">
+			 			<td class="text14">
 			 				&nbsp;<span title="tivkb">Samlet bruttovekt [NCTS]</span>
 		 				</td>
-			 			<td class="text12">
+			 			<td class="text14">
 			 				&nbsp;<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="tivkb" id="tivkb" size="11" maxlength="11" value="${model.record.tivkb}">
 		 				</td>
 	 				</tr>
@@ -431,26 +431,26 @@
 		 	<td width="50%">
 				<table width="100%" class="formFrame" border="0" cellspacing="1" cellpadding="0">
 			 		<tr height="15">
-			 			<td class="text12">
+			 			<td class="text14">
 			 				&nbsp;<span title="nivpos">Samlet antal varelinjer [CTL]</span>
 		 				</td>
-			 			<td class="text12">
+			 			<td class="text14">
 			 				&nbsp;<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="nivpos" id="nivpos" size="5" maxlength="5" value="${model.record.nivpos}">
 		 				</td>
 	 				</tr>
 			 		<tr height="15">
-			 			<td class="text12">
+			 			<td class="text14">
 			 				&nbsp;<span title="nintk">Samlet kollital [CTL]</span>
 		 				</td>
-			 			<td class="text12">
+			 			<td class="text14">
 			 				&nbsp;<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="nintk" id="nintk" size="5" maxlength="4" value="${model.record.nintk}">
 		 				</td>
 	 				</tr>
 			 		<tr height="15">
-			 			<td class="text12">
+			 			<td class="text14">
 			 				&nbsp;<span title="nivkb">Samlet bruttovekt [CTL]</span>
 		 				</td>
-			 			<td class="text12">
+			 			<td class="text14">
 			 				&nbsp;<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="nivkb" id="nivkb" size="11" maxlength="11" value="${model.record.nivkb}">
 		 				</td>
 	 				</tr>
@@ -465,13 +465,13 @@
 			<table class="formFrame" width="100%" align="left" border="0" cellspacing="1" cellpadding="0">
  				<tr height="5"><td></td></tr>
 				<tr>
-				<td width="50%" class="text12" valign="bottom">
+				<td width="50%" class="text14" valign="bottom">
 					<table width="100%" align="left" border="0" cellspacing="1" cellpadding="0">
 					 	<tr >
 						 	<td>
 							<table width="100%" border="0" cellspacing="1" cellpadding="0">
 				 				<tr>		
-									<td class="text12">&nbsp;
+									<td class="text14">&nbsp;
 									<img onMouseOver="showPop('konform_info');" onMouseOut="hidePop('konform_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 									<font class="text12Red" >*</font><span title="nikonf">Konform</span>
 						 				<div class="text11" style="position: relative;" align="left">
@@ -484,13 +484,13 @@
 										</span>
 										</div>
 									</td>			 			
-						 			<td class="text12">
+						 			<td class="text14">
 										<select class="inputTextMediumBlueMandatoryField" name="nikonf" id="nikonf">
 						            			<option value="0"<c:if test="${model.record.nikonf == '0' || empty model.record.nikonf}}"> selected </c:if> >0</option>
 					 					  	<option value="1"<c:if test="${model.record.nikonf == '1'}"> selected </c:if> >1</option>
 										</select>
 									</td>
-									<td class="text12">&nbsp;
+									<td class="text14">&nbsp;
 									<img onMouseOver="showPop('afsluttet_info');" onMouseOut="hidePop('afsluttet_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 									<font class="text12Red" >*</font><span title="nifulf">Fullført</span>
 										<div class="text11" style="position: relative;" align="left">
@@ -503,14 +503,14 @@
 										</span>
 										</div>
 									</td>
-						 			<td class="text12">
+						 			<td class="text14">
 										<select class="inputTextMediumBlueMandatoryField" name="nifulf" id="nifulf">
 					            			<option value=""<c:if test="${model.record.nifulf == '0' || empty model.record.nifulf}"> selected </c:if> >Nej</option>
 					            			<option value="1"<c:if test="${model.record.nifulf == '1'}"> selected </c:if> >Ja</option>
 										</select>
 						 			</td>
-						 			<td class="text12">&nbsp;<font class="text12Red" >*</font><span title="nidtl">Losse dato</span></td>
-						 			<td class="text12">
+						 			<td class="text14">&nbsp;<font class="text12Red" >*</font><span title="nidtl">Losse dato</span></td>
+						 			<td class="text14">
 						 				<input type="text" class="inputTextMediumBlueMandatoryField" name="nidtl" id="nidtl" size="9" maxlength="6" value="${model.record.nidtl}">
 					 				</td>
 						 		</tr>
@@ -522,7 +522,7 @@
 						 	<td>
 						 	<table class="tableBorderWithRoundCornersGray" width="100%" border="0" cellspacing="1" cellpadding="0">		
 				 				<tr >
-						 			<td colspan="2" class="text12">&nbsp;<b>CTL resultat(OT/DI)</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						 			<td colspan="2" class="text14">&nbsp;<b>CTL resultat(OT/DI)</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<span title="nictsk">Språkkode</span>&nbsp;
 							            <select name="nictsk" id="nictsk">
 							            		<option value="">-velg-</option>
@@ -536,7 +536,7 @@
 					            		</td>					 			
 						 		</tr>
 						 		<tr>	
-						 			<td class="text12" >&nbsp;&nbsp;
+						 			<td class="text14" >&nbsp;&nbsp;
 						 			<img onMouseOver="showPop('control_OT_code_info');" onMouseOut="hidePop('control_OT_code_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 						 			<span title="nictb">OT:</span>&nbsp;
 						 				<div class="text11" style="position: relative;" align="left">
@@ -552,12 +552,12 @@
 										</span>
 										</div>						 			
 						 			</td>
-						 			<td class="text12">
+						 			<td class="text14">
 										<input type="text" class="inputTextMediumBlue" name="nictb" id="nictb" size="40" maxlength="70" value="${model.record.nictb}">
 									</td>
 								</tr>
 								<tr>	
-						 			<td class="text12" >&nbsp;&nbsp;
+						 			<td class="text14" >&nbsp;&nbsp;
 						 			<img onMouseOver="showPop('control_DI_code_info');" onMouseOut="hidePop('control_DI_code_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 						 			<span title="nictb2">DI:</span>
 						 				<div class="text11" style="position: relative;" align="left">
@@ -573,12 +573,12 @@
 										</span>	
 										</div>					 			
 						 			</td>
-						 			<td class="text12">
+						 			<td class="text14">
 										<input type="text" class="inputTextMediumBlue" name="nictb2" id="nictb2" size="40" maxlength="70" value="${model.record.nictb2}">
 									</td>
 								</tr>
 								<tr>	
-						 			<td class="text12" >&nbsp;&nbsp;
+						 			<td class="text14" >&nbsp;&nbsp;
 						 			<img onMouseOver="showPop('pointer_info');" onMouseOut="hidePop('pointer_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 						 			<span title="nictp">Peker:</span>
 						 				<div class="text11" style="position: relative;" align="left">
@@ -591,12 +591,12 @@
 										</span>	
 										</div>					 			
 						 			</td>
-						 			<td class="text12">
+						 			<td class="text14">
 										<input type="text" class="inputTextMediumBlue" name="nictp" id="nictp" size="30" maxlength="35" value="${model.record.nictp}">
 									</td>
 								</tr>
 								<tr>	
-						 			<td class="text12" >&nbsp;&nbsp;
+						 			<td class="text14" >&nbsp;&nbsp;
 						 			<img onMouseOver="showPop('correctedValue_info');" onMouseOut="hidePop('correctedValue_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 						 			<span title="nictnv">Korrigeret verdi:</span>
 						 				<div class="text11" style="position: relative;" align="left">
@@ -609,14 +609,14 @@
 										</span>	
 										</div>					 			
 						 			</td>
-						 			<td class="text12">
+						 			<td class="text14">
 										<input type="text" class="inputTextMediumBlue" name="nictnv" id="nictnv" size="20" maxlength="15" value="${model.record.nictnv}">
 									</td>
 								</tr>
 								<%-- finns på grön skärm men används inte längre. Vi gömmer dessa här tills vidare besked
 								<tr>	
-									<td class="text12" >&nbsp;&nbsp;&nbsp;<span title="nictp">Pekare:</span>&nbsp;</td>
-						 			<td class="text12">
+									<td class="text14" >&nbsp;&nbsp;&nbsp;<span title="nictp">Pekare:</span>&nbsp;</td>
+						 			<td class="text14">
 										<input type="text" class="inputTextMediumBlue" name="nictp" id="nictp" size="6" maxlength="5" value="${model.record.nictp}">
 										&nbsp;<span title="nictnv">Nytt värde:</span>&nbsp;
 										<input type="text" class="inputTextMediumBlue" name="nictnv" id="nictnv" size="16" maxlength="15" value="${model.record.nictnv}">
@@ -632,11 +632,11 @@
 						 	<td>
 						 	<table class="tableBorderWithRoundCornersGray" width="100%" border="0" cellspacing="1" cellpadding="0">		
 				 				<tr >
-						 			<td colspan="2" class="text12">&nbsp;<span title""><b>Forsegling</b></span></td>					 			
+						 			<td colspan="2" class="text14">&nbsp;<span title""><b>Forsegling</b></span></td>					 			
 						 		</tr>
 						 		<tr>	
-						 			<td class="text12" >&nbsp;&nbsp;&nbsp;<span title="nidfst">Status:</span>&nbsp;</td>
-						 			<td class="text12">
+						 			<td class="text14" >&nbsp;&nbsp;&nbsp;<span title="nidfst">Status:</span>&nbsp;</td>
+						 			<td class="text14">
 					           			<select class="text11" name="nidfst" id="nidfst">
 					           				<option value="">-velg-</option>
 					           				<option value="0"<c:if test="${model.record.nidfst == '0'}"> selected </c:if> >Ikke Ok</option>
@@ -646,22 +646,22 @@
 									</td>
 								</tr>
 								<tr>	
-						 			<td class="text12" >&nbsp;&nbsp;&nbsp;<span title="nidant">Antall:</span>&nbsp;</td>
-						 			<td class="text12">
+						 			<td class="text14" >&nbsp;&nbsp;&nbsp;<span title="nidant">Antall:</span>&nbsp;</td>
+						 			<td class="text14">
 										<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="nidant" id="nidant" size="4" maxlength="4" value="${model.record.nidant}">
 									</td>
 								</tr>
 								<tr>	
-									<td class="text12" >&nbsp;&nbsp;&nbsp;<span title="nidfkd">Id:</span>&nbsp;</td>
-						 			<td class="text12">
+									<td class="text14" >&nbsp;&nbsp;&nbsp;<span title="nidfkd">Id:</span>&nbsp;</td>
+						 			<td class="text14">
 										<input type="text" class="inputTextMediumBlue" name="nidfkd" id="nidfkd" size="20" maxlength="20" value="${model.record.nidfkd}">
 									</td>
 						 		</tr>
 						 		<tr>
-						 			<td class="text12" >
+						 			<td class="text14" >
 						 				<span title="nidfsk">&nbsp;&nbsp;&nbsp;Språkkode</span>&nbsp;
 						 			</td>
-						 			<td 	class="text12" >
+						 			<td 	class="text14" >
 							            <select name="nidfsk" id="nidfsk">
 							            		<option value="">-velg-</option>
 							 				  	<c:forEach var="code" items="${model.ncts012_Sprak_CodeList}" >
@@ -681,7 +681,7 @@
 			            
 		            </table>
 	            	</td>
-				<td width="50%" class="text12" valign="Top">
+				<td width="50%" class="text14" valign="Top">
 					<table width="100%" align="left" border="0" cellspacing="1" cellpadding="0">
 						 <tr height="35"><td>&nbsp;</td></tr>
 						 <tr>
@@ -689,7 +689,7 @@
 						 	<table class="tableBorderWithRoundCornersGray" width="85%" border="0" cellspacing="1" cellpadding="0">
 								
 								<tr>	
-						 			<td class="text12">&nbsp;&nbsp;&nbsp;&nbsp;<b><span title="nimn1/nimn2">Merknader</span></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						 			<td class="text14">&nbsp;&nbsp;&nbsp;&nbsp;<b><span title="nimn1/nimn2">Merknader</span></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						 			<span title="nimnsk">Språkkode</span>&nbsp;
 							            <select name="nimnsk" id="nimnsk">
 							            		<option value="">-velg-</option>
@@ -703,12 +703,12 @@
 					            		</td>		
 								</tr>
 								<tr>	
-						 			<td class="text12"><span title="nimn1">&nbsp;&nbsp;</span>
+						 			<td class="text14"><span title="nimn1">&nbsp;&nbsp;</span>
 										<input type="text" class="inputTextMediumBlue" name="nimn1" id="nimn1" size="70" maxlength="70" value="${model.record.nimn1}">
 									</td>
 								</tr>
 								<tr>	
-						 			<td class="text12"><span title="nimn2">&nbsp;&nbsp;</span>
+						 			<td class="text14"><span title="nimn2">&nbsp;&nbsp;</span>
 										<input type="text" class="inputTextMediumBlue" name="nimn2" id="nimn2" size="70" maxlength="70" value="${model.record.nimn2}">
 									</td>
 						 		</tr>

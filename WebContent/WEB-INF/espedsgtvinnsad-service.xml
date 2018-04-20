@@ -85,5 +85,9 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 	<!-- ============================  -->
 	<bean id="trorMainOrderListService" class="no.systema.tror.service.TrorMainOrderListServiceImpl"/>
 	
+	<!-- ================  -->
+	<!-- SKAT-NCTS EXPORT  -->
+	<!-- ================  -->
+	<bean id="skatNctsExportSkatSpecificTopicService" class="no.systema.skat.nctsexport.service.SkatNctsExportSpecificTopicServiceImpl"/>
 	
 </beans>

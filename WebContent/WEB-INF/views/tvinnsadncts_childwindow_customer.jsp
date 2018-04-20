@@ -28,13 +28,13 @@
 						<form name="tvinnsadCustomerForm" id="tvinnsadCustomerForm" action="tvinnsadncts_childwindow_customer.do?action=doFind" method="post">
 						<input type="hidden" name="ctype" id="ctype" value="${model.ctype}">
 						<tr>
-							<td class="text11">&nbsp;Kundenr.</td>
-							<td class="text11">&nbsp;<input type="text" class="inputText" name="knr" id="knr" size="10" maxlength="10" value="${model.knr}"></td>
-							<td class="text11">&nbsp;</td>
-							<td class="text11">&nbsp;Navn</td>
-							<td class="text11">&nbsp;<input type="text" class="inputText" name="sonavn" id="sonavn" size="30" maxlength="50" value="${model.sonavn}"></td>
+							<td class="text14">&nbsp;Kundenr.</td>
+							<td class="text14">&nbsp;<input type="text" class="inputText" name="knr" id="knr" size="10" maxlength="10" value="${model.knr}"></td>
+							<td class="text14">&nbsp;</td>
+							<td class="text14">&nbsp;Navn</td>
+							<td class="text14">&nbsp;<input type="text" class="inputText" name="sonavn" id="sonavn" size="30" maxlength="50" value="${model.sonavn}"></td>
 							
-							<td class="text11">&nbsp;</td>
+							<td class="text14">&nbsp;</td>
 	           				<td align="right">&nbsp;<input class="inputFormSubmit" type="submit" name="submit" value='<spring:message code="search.label"/>'></td>
 		           		</tr>
 		           		</form>
@@ -50,14 +50,14 @@
 					<%-- this is the datatables grid (content)--%>
 					<table id="customerList" class="display compact cell-border" width="100%" >
 						<thead>
-						<tr style="background-color:#EEEEEE">
-							<th class="text11" >&nbsp;Kundenr.&nbsp;</th>
-		                    <th class="text11" >&nbsp;Navn&nbsp;</th>
-		                    <th class="text11" >&nbsp;TIN&nbsp;</th>
-		                    <th class="text11" >&nbsp;Adresse&nbsp;</th>
-		                    <th class="text11" >&nbsp;Postadresse&nbsp;</th>
-		                    <th class="text11" >&nbsp;Postnr&nbsp;</th>
-		                    <th class="text11" >&nbsp;Land&nbsp;</th>
+						<tr class="tableHeaderField" height="20" >
+							<th class="text14" >&nbsp;Kundenr.&nbsp;</th>
+		                    <th class="text14" >&nbsp;Navn&nbsp;</th>
+		                    <th class="text14" >&nbsp;TIN&nbsp;</th>
+		                    <th class="text14" >&nbsp;Adresse&nbsp;</th>
+		                    <th class="text14" >&nbsp;Postadresse&nbsp;</th>
+		                    <th class="text14" >&nbsp;Postnr&nbsp;</th>
+		                    <th class="text14" >&nbsp;Land&nbsp;</th>
 		                </tr> 
 		                </thead>
 		                
@@ -65,21 +65,21 @@
 		                <c:forEach var="record" items="${model.customerList}" varStatus="counter">    
 			               <c:choose>           
 			                   <c:when test="${counter.count%2==0}">
-			                       <tr class="text11">
+			                       <tr class="text14">
 			                   </c:when>
 			                   <c:otherwise>   
-			                       <tr class="text11">
+			                       <tr class="text14">
 			                   </c:otherwise>
 			               </c:choose>
-			               <td style="cursor:pointer;" class="text11MediumBlue" id="knr${record.kundnr}@knavn${record.knavn}@kadr1${record.adr1}@kadr3${record.adr3}@kpostnr${record.postnr}@kland${record.syland}@keori${record.eori}@ctype${model.ctype}@ksyrg${record.syrg}" >
+			               <td style="cursor:pointer;" class="text14MediumBlue" id="knr${record.kundnr}@knavn${record.knavn}@kadr1${record.adr1}@kadr3${record.adr3}@kpostnr${record.postnr}@kland${record.syland}@keori${record.eori}@ctype${model.ctype}@ksyrg${record.syrg}" >
 			               		<img title="select" valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;${record.kundnr}
 			               	</td>
-		               	   <td class="text11">&nbsp;${record.knavn}</td>
-		               	   <td class="text11">&nbsp;${record.syrg}</td>
-		               	   <td class="text11">&nbsp;${record.adr1}</td>
-		               	   <td class="text11">&nbsp;${record.adr3}</td>
-		               	   <td class="text11">&nbsp;${record.postnr}</td>
-		               	   <td class="text11">&nbsp;${record.syland}</td>
+		               	   <td class="text14">&nbsp;${record.knavn}</td>
+		               	   <td class="text14">&nbsp;${record.syrg}</td>
+		               	   <td class="text14">&nbsp;${record.adr1}</td>
+		               	   <td class="text14">&nbsp;${record.adr3}</td>
+		               	   <td class="text14">&nbsp;${record.postnr}</td>
+		               	   <td class="text14">&nbsp;${record.syland}</td>
 			            </tr> 
 			            </c:forEach>
 			            </tbody>
