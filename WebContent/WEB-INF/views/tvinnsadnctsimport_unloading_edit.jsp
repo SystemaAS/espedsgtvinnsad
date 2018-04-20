@@ -138,7 +138,7 @@
 		</tr>
 		<tr height="3"><td>&nbsp;</td></tr>
 		<tr >
-			<td align="left" class="text11MediumBlue">
+			<td align="left" class="text14MediumBlue">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span title="tisg">Sign:</span>&nbsp;<b>${recordTopicTvinnSad.tisg}</b>,&nbsp;&nbsp;<span title="tidt">Dato:</span>&nbsp;<b>${recordTopicTvinnSad.tidt}</b>
 				&nbsp;
 				<img onMouseOver="showPop('status_info');" onMouseOut="hidePop('status_info');"style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
@@ -524,7 +524,7 @@
 				 				<tr >
 						 			<td colspan="2" class="text14">&nbsp;<b>CTL resultat(OT/DI)</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<span title="nictsk">Språkkode</span>&nbsp;
-							            <select name="nictsk" id="nictsk">
+							            <select class="selectMediumBlueE2" name="nictsk" id="nictsk">
 							            		<option value="">-velg-</option>
 							 				  	<c:forEach var="code" items="${model.ncts012_Sprak_CodeList}" >
 						                             <option value="${code.tkkode}"<c:if test="${model.record.nictsk == code.tkkode}"> selected </c:if> >${code.tkkode}</option>
@@ -637,7 +637,7 @@
 						 		<tr>	
 						 			<td class="text14" >&nbsp;&nbsp;&nbsp;<span title="nidfst">Status:</span>&nbsp;</td>
 						 			<td class="text14">
-					           			<select class="text11" name="nidfst" id="nidfst">
+					           			<select class="selectMediumBlueE2" name="nidfst" id="nidfst">
 					           				<option value="">-velg-</option>
 					           				<option value="0"<c:if test="${model.record.nidfst == '0'}"> selected </c:if> >Ikke Ok</option>
 					           				<option value="1"<c:if test="${model.record.nidfst == '1'}"> selected </c:if> >Ok</option>
@@ -662,7 +662,7 @@
 						 				<span title="nidfsk">&nbsp;&nbsp;&nbsp;Språkkode</span>&nbsp;
 						 			</td>
 						 			<td 	class="text14" >
-							            <select name="nidfsk" id="nidfsk">
+							            <select class="selectMediumBlueE2" name="nidfsk" id="nidfsk">
 							            		<option value="">-velg-</option>
 							 				  	<c:forEach var="code" items="${model.ncts012_Sprak_CodeList}" >
 						                             <option value="${code.tkkode}"<c:if test="${model.record.nidfsk == code.tkkode}"> selected </c:if> >${code.tkkode}</option>
@@ -691,7 +691,7 @@
 								<tr>	
 						 			<td class="text14">&nbsp;&nbsp;&nbsp;&nbsp;<b><span title="nimn1/nimn2">Merknader</span></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						 			<span title="nimnsk">Språkkode</span>&nbsp;
-							            <select name="nimnsk" id="nimnsk">
+							            <select class="selectMediumBlueE2" name="nimnsk" id="nimnsk">
 							            		<option value="">-velg-</option>
 							 				  	<c:forEach var="code" items="${model.ncts012_Sprak_CodeList}" >
 						                             <option value="${code.tkkode}"<c:if test="${model.record.nimnsk == code.tkkode}"> selected </c:if> >${code.tkkode}</option>

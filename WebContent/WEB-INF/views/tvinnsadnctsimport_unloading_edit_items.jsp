@@ -107,7 +107,7 @@
 	 				<%-- MASTER Topic header --%>
 	 				<table width="100%" align="center" class="formFrameHeaderTransparent" border="0" cellspacing="0" cellpadding="0">
 				 		<tr height="15">
-				 			<td class="text11MediumBlue">
+				 			<td class="text14MediumBlue">
 				 				&nbsp;Avd&nbsp;<b>${recordTopicTvinnSad.tiavd}</b>
 				 				&nbsp;Tolldekl.&nbsp;<b>${recordTopicTvinnSad.titdn}</b>
 				 				&nbsp;Sign&nbsp;<b>${recordTopicTvinnSad.tisg}</b>
@@ -158,41 +158,41 @@
 					 		<td width="50%">
 						 		<table width="80%" border="0" cellspacing="1" cellpadding="0">
 							 		<tr>
-							            <td width="30%" class="text11Bold" align="left" >Ansvarlig&nbsp;</td>
-							            <td class="text11" align="left" ></td>
+							            <td width="30%" class="text12Bold" align="left" >Ansvarlig&nbsp;</td>
+							            <td class="text12" align="left" ></td>
 							        </tr>
 									<tr>
-							            <td width="30%" class="text11" align="left" >Kundenr&nbsp;</td>
-							            <td class="text11MediumBlue" align="left" >${recordTopicTvinnSad.tikn}</td>
+							            <td width="30%" class="text12" align="left" >Kundenr&nbsp;</td>
+							            <td class="text12MediumBlue" align="left" >${recordTopicTvinnSad.tikn}</td>
 							        </tr>
 							        							        
 							        <tr>
-							            <td width="30%" class="text11" align="left">TIN-nr&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left"><b>${recordTopicTvinnSad.titin}</b></td>
+							            <td width="30%" class="text12" align="left">TIN-nr&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left"><b>${recordTopicTvinnSad.titin}</b></td>
 							        </tr>
 									<tr>
-							            <td width="30%" class="text11" align="left">Navn&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left"><b>${recordTopicTvinnSad.tina}</b></td>
+							            <td width="30%" class="text12" align="left">Navn&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left"><b>${recordTopicTvinnSad.tina}</b></td>
 							        </tr>
 								</table>
 					        </td>
 							<td width="50%">
 						 		<table width="80%" border="0" cellspacing="1" cellpadding="0">
 							 		<tr>
-							            <td class="text11" align="left" >&nbsp;</td>
+							            <td class="text12" align="left" >&nbsp;</td>
 							        </tr>
 							        <tr>
-							            <td width="30%" class="text11" align="left">Adresse&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.tiad1}</td>
+							            <td width="30%" class="text12" align="left">Adresse&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.tiad1}</td>
 							        </tr>
 									<tr>
-							            <td width="30%" class="text11" align="left">Postadresse&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.tipn}&nbsp;${recordTopicTvinnSad.tips}</td>
+							            <td width="30%" class="text12" align="left">Postadresse&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.tipn}&nbsp;${recordTopicTvinnSad.tips}</td>
 							        </tr>
 							        <tr>
-							            <td width="30%" class="text11" align="left">Landkode
+							            <td width="30%" class="text12" align="left">Landkode
 							            </td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.tilk}</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.tilk}</td>
 							        </tr>
 							        
 			        	        </table>
@@ -224,7 +224,7 @@
 								<input tabindex=-1 class="inputFormSubmitStd" type="submit" name="submit" value='Lage ny'>
 								<button name="allItemsButton" class="inputFormSubmitStd" type="button" onClick="showPop('allItems');" >Vis alle</button> 
 							        <span style="background-color:#EEEEEE; position:absolute; left:50px; top:200px; width:1100px; height:1000px;" id="allItems" class="popupWithInputTextThickBorder"  >
-						           		<div class="ownScrollableSubWindow" style="width:1080px; height:900px; margin:10px;">
+						           		<div class="ownScrollableSubWindow" style="width:100%; height:900px; margin:10px;">
 						           			<nav>
 						           			<table width="95%" border="0" align="left" cellspacing="2">
 						           			<tr>
@@ -287,7 +287,7 @@
 						           				<table >
 												<%-- OK BUTTON --%>
 						           				<tr align="left" >
-													<td class="text11"><button name="allItemsButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('allItems');">&nbsp;Ok</button> 
+													<td class="text12"><button name="allItemsButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('allItems');">&nbsp;Ok</button> 
 													</td>
 												</tr>
 												</table>
@@ -302,27 +302,28 @@
 							</form>
 						</tr> 
 						<tr>
-							<td class="ownScrollableSubWindow" style="width:1050px; height:10em;">
+							<td class="ownScrollableSubWindow" style="width:100%; height:10em;">
 								<table width="100%" cellspacing="0" border="0" cellpadding="0">
+									<thead>
 									<tr class="tableHeaderField" height="20" valign="left">
-									    <td class="tableHeaderFieldFirst">&nbsp;Linjenr.&nbsp;</td>
-									    	<td align="center" class="tableHeaderField" nowrap>Slett</td>   
-					                    <td class="tableHeaderField">&nbsp;Varenr.&nbsp;</td> 
-					                    <td class="tableHeaderField">&nbsp;Varebeskrivelse&nbsp;</td>  
-					                    <td class="tableHeaderField">&nbsp;Bruttovekt&nbsp;</td>
-					                    <td class="tableHeaderField">&nbsp;Nettovekt&nbsp;</td>
-					                    <td class="tableHeaderField">&nbsp;Dok.type&nbsp;</td>
-					                    <td class="tableHeaderField">&nbsp;Dok.ref&nbsp;</td>
-					                    <td class="tableHeaderField">&nbsp;Kollislag</td>
-					                    <td class="tableHeaderField">&nbsp;Kolliantal</td>
+									    <th class="tableHeaderFieldFirst">&nbsp;Linjenr.&nbsp;</th>
+									    	<th align="center" class="tableHeaderField" nowrap>Slett</th>   
+					                    <th class="tableHeaderField">&nbsp;Varenr.&nbsp;</th> 
+					                    <th class="tableHeaderField">&nbsp;Varebeskrivelse&nbsp;</th>  
+					                    <th class="tableHeaderField">&nbsp;Bruttovekt&nbsp;</th>
+					                    <th class="tableHeaderField">&nbsp;Nettovekt&nbsp;</th>
+					                    <th class="tableHeaderField">&nbsp;Dok.type&nbsp;</th>
+					                    <th class="tableHeaderField">&nbsp;Dok.ref&nbsp;</th>
+					                    <th class="tableHeaderField">&nbsp;Kollislag</th>
+					                    <th class="tableHeaderField">&nbsp;Kolliantal</th>
 					                    
 					               </tr> 
-					               
+					               </thead>
 					               <form name="formItemList" id="formItemList" method="POST" >
 					               		<input type="hidden" name="opdItemList" id="opdItemList" value='${model.opd}'>
 				 						<input type="hidden" name="avdItemList" id="avdItemList" value='${model.avd}'> 
 				 						<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
-				 						 
+				 					   <tbody>	 
 							           <c:forEach items="${model.list}" var="record" varStatus="counter">    
 							               <c:choose>           
 							                   <c:when test="${counter.count%2==0}">
@@ -358,6 +359,7 @@
 								        <c:set var="numberOfItemLinesInTopic" value="${record.tvli}" scope="request" />
 								         
 							            </c:forEach>
+							            </tbody>
 						            </form>	
 					            </table>
 							</td>	
@@ -526,7 +528,7 @@
 											</a>
 			 			            		</td>
 			 			            		<td >
-											<select name="nvvtsk" id="nvvtsk">
+											<select class="selectMediumBlueE2" name="nvvtsk" id="nvvtsk">
 							            			<option value="">-velg-</option>
 						 					  	<c:forEach var="code" items="${model.ncts012_Sprak_CodeList}" >
 			                                	 	<option value="${code.tkkode}"<c:if test="${model.record.nvvtsk == code.tkkode}"> selected </c:if> >${code.tkkode}</option>
@@ -576,7 +578,7 @@
 							        
 										<%-- Doc.Type --%>
 										<td class="text14" align="left">
-											<select name="nvdty" id="nvdty">
+											<select class="selectMediumBlueE2" name="nvdty" id="nvdty">
 							            		<option value="">-velg-</option>
 							 				  	<c:forEach var="code" items="${model.ncts013_DocType_CodeList}" >
 			                                	 	<option value="${code.tkkode}"<c:if test="${model.record.nvdty == code.tkkode}"> selected </c:if> >${code.tkkode}</option>
@@ -590,7 +592,7 @@
 							        			<input type="text" class="inputText" name="nvdref" id="nvdref" size="35" maxlength="35" value="${model.record.nvdref}">
 			 			            		</td>
 			 			            		<td >
-											<select name="nvdsk" id="nvdsk">
+											<select class="selectMediumBlueE2" name="nvdsk" id="nvdsk">
 							            			<option value="">-velg-</option>
 						 					  	<c:forEach var="code" items="${model.ncts012_Sprak_CodeList}" >
 			                                	 	<option value="${code.tkkode}"<c:if test="${model.record.nvdsk == code.tkkode}"> selected </c:if> >${code.tkkode}</option>
@@ -605,7 +607,7 @@
 			 			            		</td>
 			 			            		
 										<td >
-											<select name="nvdosk" id="nvdosk">
+											<select class="selectMediumBlueE2" name="nvdosk" id="nvdosk">
 							            			<option value="">-velg-</option>
 						 					  	<c:forEach var="code" items="${model.ncts012_Sprak_CodeList}" >
 			                                	 	<option value="${code.tkkode}"<c:if test="${model.record.nvdosk == code.tkkode}"> selected </c:if> >${code.tkkode}</option>
@@ -643,7 +645,7 @@
 						        			<input type="text" class="inputTextMediumBlueMandatoryField" name="nvmn" id="nvmn" size="35" maxlength="42" value="${model.record.nvmn}">
 		 			            		</td>
 						        		<td >
-											<select name="nvmnsk" id="nvmnsk">
+											<select class="selectMediumBlueE2" name="nvmnsk" id="nvmnsk">
 						            			<option value="">-velg-</option>
 						 					  	<c:forEach var="code" items="${model.ncts012_Sprak_CodeList}" >
 	                        	        	 	<option value="${code.tkkode}"<c:if test="${model.record.nvmnsk == code.tkkode}"> selected </c:if> >${code.tkkode}</option>
@@ -658,7 +660,7 @@
 		 			            		</td>
 		 			            		
 		 			            		<td class="text14" align="left" >
-						        			<select class="inputTextMediumBlueMandatoryField" name="nveh" id="nveh">
+						        			<select class="selectMediumBlueE2" class="inputTextMediumBlueMandatoryField" name="nveh" id="nveh">
 						            		<option value="">-velg-</option>
 						 				  	<c:forEach var="code" items="${model.ncts017_Kolli_CodeList}" >
 		                                	 	<option value="${code.tkkode}"<c:if test="${model.record.nveh == code.tkkode}"> selected </c:if> >${code.tkkode}</option>
@@ -698,7 +700,7 @@
 							        </tr>
 							        <tr>
 							        		<td class="text14" align="left">
-							        			<select name="nvfv" id="nvfv">
+							        			<select class="selectMediumBlueE2" name="nvfv" id="nvfv">
 								        			<option value="">-velg-</option>
 								 				<option value="1"<c:if test="${model.record.nvfv == '1'}"> selected </c:if> >1</option>
 											</select>

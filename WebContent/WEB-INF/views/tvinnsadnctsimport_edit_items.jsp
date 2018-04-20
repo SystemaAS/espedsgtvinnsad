@@ -107,7 +107,7 @@
 	 				<%-- MASTER Topic header --%>
 	 				<table width="100%" align="center" class="formFrameHeaderTransparent" border="0" cellspacing="0" cellpadding="0">
 				 		<tr height="15">
-				 			<td class="text12MediumBlue">
+				 			<td class="text14MediumBlue">
 				 				&nbsp;Avd&nbsp;<b>${recordTopicTvinnSad.tiavd}</b>
 				 				&nbsp;Oppdrag&nbsp;<b>${recordTopicTvinnSad.titdn}</b>
 				 				&nbsp;Sign&nbsp;<b>${recordTopicTvinnSad.tisg}</b>
@@ -120,7 +120,7 @@
 				 				&nbsp;&nbsp;&nbsp;MRN-nr:&nbsp;<b>${recordTopicTvinnSad.titrnr}</b>
 				 				&nbsp;&nbsp;&nbsp;Gods-nr:&nbsp;<b>${recordTopicTvinnSad.tign}</b>
 				 				
-							<div class="text11" style="position: relative;" align="left">
+							<div class="text12" style="position: relative;" align="left">
 							<span style="position:absolute;top:2px; width:250px;" id="status_info" class="popupWithInputText text11"  >
 				           		Kun status <b>M</b>, <b>(Fejl)</b> eller <b>' '</b> kan redigeres.
 			           			<ul>
@@ -157,21 +157,21 @@
 					 		<td width="50%">
 						 		<table width="80%" border="0" cellspacing="1" cellpadding="0">
 							 		<tr>
-							            <td width="30%" class="text11Bold" align="left" >Ansvarlig&nbsp;</td>
+							            <td width="30%" class="text12Bold" align="left" >Ansvarlig&nbsp;</td>
 							            <td class="text14" align="left" ></td>
 							        </tr>
 							        <tr>
 							            <td width="30%" class="text14" align="left" >Kundenr&nbsp;</td>
-							            <td class="text12MediumBlue" align="left" >${recordTopicTvinnSad.tikn}</td>
+							            <td class="text14MediumBlue" align="left" >${recordTopicTvinnSad.tikn}</td>
 							        </tr>
 							        
 							        <tr>
 							            <td width="30%" class="text14" align="left">TIN-nr&nbsp;</td>
-							           	<td class="text12MediumBlue" align="left"><b>${recordTopicTvinnSad.titin}</b></td>
+							           	<td class="text14MediumBlue" align="left"><b>${recordTopicTvinnSad.titin}</b></td>
 							        </tr>
 									<tr>
 							            <td width="30%" class="text14" align="left">Navn&nbsp;</td>
-							           	<td class="text12MediumBlue" align="left"><b>${recordTopicTvinnSad.tina}</b></td>
+							           	<td class="text14MediumBlue" align="left"><b>${recordTopicTvinnSad.tina}</b></td>
 							        </tr>
 								</table>
 					        </td>
@@ -182,16 +182,16 @@
 							        </tr>
 							        <tr>
 							            <td width="30%" class="text14" align="left">Adresse&nbsp;</td>
-							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.tiad1}</td>
+							           	<td class="text14MediumBlue" align="left">${recordTopicTvinnSad.tiad1}</td>
 							        </tr>
 									<tr>
 							            <td width="30%" class="text14" align="left">Postadresse&nbsp;</td>
-							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.tipn}&nbsp;${recordTopicTvinnSad.tips}</td>
+							           	<td class="text14MediumBlue" align="left">${recordTopicTvinnSad.tipn}&nbsp;${recordTopicTvinnSad.tips}</td>
 							        </tr>
 							        <tr>
 							            <td width="30%" class="text14" align="left">Landkode
 							            </td>
-							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.tilk}</td>
+							           	<td class="text14MediumBlue" align="left">${recordTopicTvinnSad.tilk}</td>
 							        </tr>
 							        
 			        	        </table>
@@ -227,7 +227,7 @@
 								</c:if>
 								<button name="allItemsButton" class="inputFormSubmitStd" type="button" onClick="showPop('allItems');" >Vis alle</button> 
 								        <span style="background-color:#EEEEEE; position:absolute; left:50px; top:200px; width:1200px; height:1000px;" id="allItems" class="popupWithInputTextThickBorder"  >
-							           		<div class="ownScrollableSubWindow" style="width:1080px; height:900px; margin:10px;">
+							           		<div class="ownScrollableSubWindow" style="width:100%; height:900px; margin:10px;">
 							           			<nav>
 							           			<table width="95%" border="0" align="left" cellspacing="2">
 							           			<tr>
@@ -299,23 +299,24 @@
 							</form>
 						</tr> 
 						<tr>
-							<td class="ownScrollableSubWindow" style="width:1050px; height:10em;">
+							<td class="ownScrollableSubWindow" style="width:100%; height:10em;">
 								<table width="100%" cellspacing="0" border="0" cellpadding="0">
+									<thead>
 									<tr class="tableHeaderField" height="20" valign="left">
-									    <td class="tableHeaderFieldFirst">&nbsp;Linjenr.&nbsp;</td>
+									    <th class="tableHeaderFieldFirst">&nbsp;Linjenr.&nbsp;</th>
 									    <c:if test="${model.status == 'F' || model.status == 'M' || empty model.status}">
-					                    		<td align="center" class="tableHeaderField" nowrap>Slett</td>
+					                    		<th align="center" class="tableHeaderField" nowrap>Slett</th>
 					                    </c:if> 
-									    <td class="tableHeaderField">&nbsp;Sted&nbsp;</td> 
-									    <td class="tableHeaderField">&nbsp;Hendelse&nbsp;</td>   
-					                    <td class="tableHeaderField">&nbsp;Omlasting&nbsp;</td>
+									    <th class="tableHeaderField">&nbsp;Sted&nbsp;</th> 
+									    <th class="tableHeaderField">&nbsp;Hendelse&nbsp;</th>   
+					                    <th class="tableHeaderField">&nbsp;Omlasting&nbsp;</th>
 					               </tr> 
-					               
+					               </thead>
 					               <form name="formItemList" id="formItemList" method="POST" >
 					               		<input type="hidden" name="opdItemList" id="opdItemList" value="${model.opd}">
 				 						<input type="hidden" name="avdItemList" id="avdItemList" value="${model.avd}"> 
 				 						<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
-				 						 
+				 					   <tbody>	 
 							           <c:forEach items="${model.list}" var="record" varStatus="counter">    
 							               <c:choose>           
 							                   <c:when test="${counter.count%2==0}">
@@ -351,6 +352,7 @@
 									       <c:set var="numberOfItemLinesInTopic" value="${record.tvli}" scope="request" />
 								         
 							            </c:forEach>
+							            </tbody>
 						            </form>	
 					            </table>
 							</td>	
@@ -459,7 +461,7 @@
 											</a>
 						 				</td>
 										<td >
-											<select name="tvstsk" id="tvstsk">
+											<select class="selectMediumBlueE2" name="tvstsk" id="tvstsk">
 							            			<option value="">-velg-</option>
 						 					  	<c:forEach var="code" items="${model.ncts012_Sprak_CodeList}" >
 			                                	 	<option value="${code.tkkode}"<c:if test="${model.record.tvstsk == code.tkkode}"> selected </c:if> >${code.tkkode}</option>
@@ -470,7 +472,7 @@
 											</a>
 										</td>
 										<td >
-											<select name="tvctl" id="tvctl">
+											<select class="selectMediumBlueE2" name="tvctl" id="tvctl">
 							            			<option value="">-velg-</option>
 						 					  	<option value="1"<c:if test="${model.record.tvctl == '1'}"> selected </c:if> >Ja</option>
 											  	<option value="0"<c:if test="${model.record.tvctl == '0'}"> selected </c:if> >Nej</option>
@@ -524,7 +526,7 @@
 								            <input type="text" class="inputText" name="tvgm" id="tvgm" size="35" maxlength="35" value="${model.record.tvgm}">
 							            </td>
 							            <td >
-											<select name="tvgmsk" id="tvgmsk">
+											<select class="selectMediumBlueE2" name="tvgmsk" id="tvgmsk">
 							            			<option value="">-velg-</option>
 						 					  	<c:forEach var="code" items="${model.ncts012_Sprak_CodeList}" >
 			                                	 	<option value="${code.tkkode}"<c:if test="${model.record.tvgmsk == code.tkkode}"> selected </c:if> >${code.tkkode}</option>
@@ -550,7 +552,7 @@
 									</tr>
 									<tr>
 										<td>
-							 				<select name="tvgmlk" id="tvgmlk">
+							 				<select class="selectMediumBlueE2" name="tvgmlk" id="tvgmlk">
 								            		<option value="">-velg-</option>
 							 				  	<c:forEach var="country" items="${model.countryCodeList}" >
 			                                	 		<option value="${country.zkod}"<c:if test="${model.record.tvgmlk == country.zkod}"> selected </c:if> >${country.zkod}</option>
@@ -564,7 +566,7 @@
 								            <input type="text" class="inputText" name="tvgmst" id="tvgmst" size="35" maxlength="35" value="${model.record.tvgmst}">
 							            </td>
 							            <td >
-											<select name="tvgmss" id="tvgmss">
+											<select class="selectMediumBlueE2" name="tvgmss" id="tvgmss">
 							            			<option value="">-velg-</option>
 						 					  	<c:forEach var="code" items="${model.ncts012_Sprak_CodeList}" >
 			                                	 	<option value="${code.tkkode}"<c:if test="${model.record.tvgmss == code.tkkode}"> selected </c:if> >${code.tkkode}</option>
@@ -603,7 +605,7 @@
 								            <input type="text" class="inputText" name="tvdfkd" id="tvdfkd" size="20" maxlength="20" value="${model.record.tvdfkd}">
 							            </td>
 							            <td >
-											<select name="tvdfsk" id="tvdfsk">
+											<select class="selectMediumBlueE2" name="tvdfsk" id="tvdfsk">
 							            			<option value="">-velg-</option>
 						 					  	<c:forEach var="code" items="${model.ncts012_Sprak_CodeList}" >
 			                                	 	<option value="${code.tkkode}"<c:if test="${model.record.tvdfsk == code.tkkode}"> selected </c:if> >${code.tkkode}</option>
@@ -674,7 +676,7 @@
 									            &nbsp;<input type="text" class="inputText" name="tvtaid" id="tvtaid" size="25" maxlength="27" value="${model.record.tvtaid}">
 								            </td>
 											<td>
-								 				<select name="tvtalk" id="tvtalk">
+								 				<select class="selectMediumBlueE2" name="tvtalk" id="tvtalk">
 									            		<option value="">-velg-</option>
 								 				  	<c:forEach var="country" items="${model.countryCodeList}" >
 				                                	 	<option value="${country.zkod}"<c:if test="${model.record.tvtalk == country.zkod}"> selected </c:if> >${country.zkod}</option>
@@ -685,7 +687,7 @@
 												</a>
 							 				</td>
 								            <td >
-												<select name="tvtask" id="tvtask">
+												<select class="selectMediumBlueE2" name="tvtask" id="tvtask">
 								            			<option value="">-velg-</option>
 							 					  	<c:forEach var="code" items="${model.ncts012_Sprak_CodeList}" >
 				                                	 	<option value="${code.tkkode}"<c:if test="${model.record.tvtask == code.tkkode}"> selected </c:if> >${code.tkkode}</option>
@@ -720,7 +722,7 @@
 									            <input type="text" class="inputText" name="tvom" id="tvom" size="35" maxlength="35" value="${model.record.tvom}">
 								            </td>
 								            <td >
-												<select name="tvomsk" id="tvomsk">
+												<select class="selectMediumBlueE2" name="tvomsk" id="tvomsk">
 								            			<option value="">-velg-</option>
 							 					  	<c:forEach var="code" items="${model.ncts012_Sprak_CodeList}" >
 				                                	 	<option value="${code.tkkode}"<c:if test="${model.record.tvomsk == code.tkkode}"> selected </c:if> >${code.tkkode}</option>
@@ -746,7 +748,7 @@
 										</tr>
 										<tr>
 											<td>
-								 				<select name="tvomlk" id="tvomlk">
+								 				<select class="selectMediumBlueE2" name="tvomlk" id="tvomlk">
 									            		<option value="">-velg-</option>
 								 				  	<c:forEach var="country" items="${model.countryCodeList}" >
 				                                	 	<option value="${country.zkod}"<c:if test="${model.record.tvomlk == country.zkod}"> selected </c:if> >${country.zkod}</option>
@@ -760,7 +762,7 @@
 									            <input type="text" class="inputText" name="tvomst" id="tvomst" size="35" maxlength="35" value="${model.record.tvomst}">
 								            </td>
 								            <td >
-												<select name="tvomss" id="tvomss">
+												<select class="selectMediumBlueE2" name="tvomss" id="tvomss">
 								            			<option value="">-velg-</option>
 							 					  	<c:forEach var="code" items="${model.ncts012_Sprak_CodeList}" >
 				                                	 	<option value="${code.tkkode}"<c:if test="${model.record.tvomss == code.tkkode}"> selected </c:if> >${code.tkkode}</option>

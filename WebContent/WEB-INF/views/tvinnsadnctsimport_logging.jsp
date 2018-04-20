@@ -128,7 +128,7 @@
 		                   </c:otherwise>
 		               </c:choose>
 		               <td class="tableCellFirst" <c:if test="${record.msr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;${record.mtdn}&nbsp;&nbsp;
-		               	<font class="text10" <c:if test="${record.msr == 'R'}">style="color:#9F6000;"</c:if> >[${model.sign}]&nbsp;-&nbsp;${model.mrnNr}</font>
+		               	<font class="text12" <c:if test="${record.msr == 'R'}">style="color:#9F6000;"</c:if> >[${model.sign}]&nbsp;-&nbsp;${model.mrnNr}</font>
 		               </td>
 		               <td class="tableCell" <c:if test="${record.msr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;
 		               		<a <c:if test="${record.msr == 'R'}">style="color:#9F6000;"</c:if> href="ediftplog.do?sssn=${record.msn}&ftplev=EDISS" target="_new" onClick="window.open(this.href,'targetWindow','top=200px,left=600px,height=800px,width=700px,scrollbars=no,status=no,location=no'); return false;">
@@ -146,7 +146,7 @@
 		               <td class="tableCell" <c:if test="${record.msr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;
 		               <c:choose>
 		               		<c:when test="${record.m1225 == '058' || record.m1225 == '008'}" >
-		               			<font class="text11Red">${record.m1225}</font>
+		               			<font class="text12Red">${record.m1225}</font>
 		               		</c:when>
 		               		<c:otherwise>
 		               			<font <c:if test="${record.msr == 'R' }">style="color:#9F6000;"</c:if> >${record.m1225}</font>
