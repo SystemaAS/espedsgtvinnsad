@@ -29,7 +29,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="30%" valign="bottom" class="tab" align="center">
-						<font class="tabLink">Leveringsbeting.</font>&nbsp;<font class="text12">SAD012 / KODTLB </font>&nbsp;
+						<font class="tabLink">Leveringsbeting.</font>&nbsp;<font class="text14">SAD012 / KODTLB </font>&nbsp;
 						<a id="alinkRecordId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadmaintenancefelles_sad012r.do?id=${model.dbTable}">
 							<img style="vertical-align: middle;"  src="resources/images/bulletGreen.png" border="0" width="8px" height="8px" alt="db table">
 						</a>
@@ -74,20 +74,20 @@
 				            <c:forEach var="record" items="${model.list}" varStatus="counter">   
 				               <tr class="tableRow" height="20" >
 				              
-				               <td align="center" width="2%" class="tableCellFirst" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text12">&nbsp;${record.klbsta}&nbsp;</font></td>
+				               <td align="center" width="2%" class="tableCellFirst" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text14">&nbsp;${record.klbsta}&nbsp;</font></td>
 				               <td id="recordUpdate_${record.klbkod}" onClick="getRecord(this);" align="center" width="2%" class="tableCell" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<img src="resources/images/update.gif" border="0" alt="edit">
 				               </td>
-				               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.klbuni}&nbsp;</font></td>
-				               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.klbkod}&nbsp;</font></td>
-		                       <td align="left"   class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.klbkt}&nbsp;</font></td>
-				               <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.klbnav}&nbsp;</font></td>
-		                       <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.klbfok}&nbsp;</font></td>
-		                       <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.klbprm}&nbsp;</font></td>
-		                       <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.klbfrk}&nbsp;</font></td>
-		                       <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.klbxxx_andrek}&nbsp;</font></td>
-		                       <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.klbxxx_avs}&nbsp;</font></td>
-		                       <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.klbxxx_mot}&nbsp;</font></td>
+				               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.klbuni}&nbsp;</font></td>
+				               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.klbkod}&nbsp;</font></td>
+		                       <td align="left"   class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.klbkt}&nbsp;</font></td>
+				               <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.klbnav}&nbsp;</font></td>
+		                       <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.klbfok}&nbsp;</font></td>
+		                       <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.klbprm}&nbsp;</font></td>
+		                       <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.klbfrk}&nbsp;</font></td>
+		                       <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.klbxxx_andrek}&nbsp;</font></td>
+		                       <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.klbxxx_avs}&nbsp;</font></td>
+		                       <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.klbxxx_mot}&nbsp;</font></td>
 		                       <td align="center" width="2%" class="tableCell" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadmaintenancefelles_sad012r_edit.do?action=doDelete&id=${model.dbTable}&klbkod=${record.klbkod}">
 					               		<img valign="bottom" src="resources/images/delete.gif" border="0" width="15px" height="15px" alt="remove">
@@ -132,7 +132,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 	            	<tr >
 					<td >					
-			            <ul class="isa_error text12" >
+			            <ul class="isa_error text14" >
 			            <c:forEach var="error" items="${errors.allErrors}">
 			                <li >
 			                	<spring:message code="${error.code}" text="${error.defaultMessage}"/>&nbsp;&nbsp;
@@ -154,7 +154,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 				 		<tr>
 				 			<td >
-				 				<ul class="isa_error text12" >
+				 				<ul class="isa_error text14" >
                                     <li>[ERROR on Update] - Server return code: ${model.errorMessage}</li>                                    
                                 </ul>
 				 			</td>
@@ -179,15 +179,15 @@
 					<table width="80%" cellspacing="1" border="0" align="left">
 					
 			    	    <tr>
-							<td class="text12" title="KLBKOD">&nbsp;<font class="text14RedBold" >*</font>Lev.kode</td>
-							<td class="text12" title="KLBKT">&nbsp;<font class="text14RedBold" >*</font>K.tekst</td>
-							<td class="text12" title="KLBNAV">&nbsp;Beskrivelse</td>
-							<td class="text12" title="KLBFOK">&nbsp;<font class="text14RedBold" >*</font>Fors.kode</td>
-							<td class="text12" title="KLBPRM">&nbsp;Promille</td>
-							<td class="text12" title="KLBFRK">&nbsp;<font class="text14RedBold" >*</font>Fr.kode</td>
-							<td class="text12" title="KLBXXX">&nbsp;And.K.</td>
-							<td class="text12" title="KLBXXX">&nbsp;Avs</td>
-							<td class="text12" title="KLBXXX">&nbsp;Mot</td>
+							<td class="text14" title="KLBKOD">&nbsp;<font class="text14RedBold" >*</font>Lev.kode</td>
+							<td class="text14" title="KLBKT">&nbsp;<font class="text14RedBold" >*</font>K.tekst</td>
+							<td class="text14" title="KLBNAV">&nbsp;Beskrivelse</td>
+							<td class="text14" title="KLBFOK">&nbsp;<font class="text14RedBold" >*</font>Fors.kode</td>
+							<td class="text14" title="KLBPRM">&nbsp;Promille</td>
+							<td class="text14" title="KLBFRK">&nbsp;<font class="text14RedBold" >*</font>Fr.kode</td>
+							<td class="text14" title="KLBXXX">&nbsp;And.K.</td>
+							<td class="text14" title="KLBXXX">&nbsp;Avs</td>
+							<td class="text14" title="KLBXXX">&nbsp;Mot</td>
 						</tr>
 						<tr>
 						<td ><input type="text" class="inputTextMediumBlueUPPERCASEMandatoryField" name="klbkod" id="klbkod" size="4" maxlength="3" value='${model.record.klbkod}'></td>

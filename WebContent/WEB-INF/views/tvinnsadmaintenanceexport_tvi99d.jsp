@@ -13,12 +13,12 @@
 	</style>
 
 
-<table width="100%" class="text11" cellspacing="0" border="0" cellpadding="0">
+<table width="100%" class="text14" cellspacing="0" border="0" cellpadding="0">
 	<tr height="15"><td>&nbsp;</td></tr>
 	<tr>
 		<td>
 		<%-- tab container component --%>
-		<table width="100%" class="text11" cellspacing="0" border="0" cellpadding="0">
+		<table width="100%" class="text14" cellspacing="0" border="0" cellpadding="0">
 			<tr height="2"><td></td></tr>
 				<tr height="25"> 
 					<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
@@ -29,7 +29,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="30%" valign="bottom" class="tab" align="center">
-						<font class="tabLink">Funksjonfeil</font>&nbsp;<font class="text12">TVI99D / TVINE</font>&nbsp;
+						<font class="tabLink">Funksjonfeil</font>&nbsp;<font class="text14">TVI99D / TVINE</font>&nbsp;
 						<a id="alinkRecordId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadmaintenanceexport_tvi99d.do?id=${model.dbTable}">
 							<img style="vertical-align: middle;"  src="resources/images/bulletGreen.png" border="0" width="8px" height="8px" alt="db table">
 						</a>
@@ -51,7 +51,7 @@
 				<td width="100%">
 				<table id="containerdatatableTable" width="98%" cellspacing="1" border="0" align="left">
 			    	    <tr>
-						<td class="text11">
+						<td class="text14">
 						<table id="mainList" class="display compact cell-border" >
 							<thead>
 							<tr>
@@ -67,8 +67,8 @@
 				               <td id="recordUpdate_${record.e9705}" onClick="getRecord(this);" align="center" width="2%" class="tableCellFirst" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<img src="resources/images/update.gif" border="0" alt="edit">
 				               </td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text12">&nbsp;${record.e9705}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.e4440}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text14">&nbsp;${record.e9705}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.e4440}&nbsp;</font></td>
 				               
 				               <td align="center" width="2%" class="tableCell" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadmaintenanceexport_tvi99d_edit.do?action=doDelete&id=${model.dbTable}&e9705=${record.e9705}">
@@ -105,7 +105,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 	            	<tr >
 					<td >					
-			            <ul class="isa_error text12" >
+			            <ul class="isa_error text14" >
 			            <c:forEach var="error" items="${errors.allErrors}">
 			                <li >
 			                	<spring:message code="${error.code}" text="${error.defaultMessage}"/>&nbsp;&nbsp;
@@ -127,7 +127,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 				 		<tr>
 				 			<td >
-				 				<ul class="isa_error text12" >
+				 				<ul class="isa_error text14" >
                                     <li>[ERROR on Update] - Server return code: ${model.errorMessage}</li>                                    
                                 </ul>
 				 			</td>
@@ -152,8 +152,8 @@
 					
 					<table width="60%" cellspacing="1" border="0" align="left">
 			    	    <tr>
-							<td class="text12" title="VARENR">&nbsp;<font class="text14RedBold" >*</font>Kode</td>
-							<td class="text12" title="VAREBE">&nbsp;Tollvesenets tekst</td>
+							<td class="text14" title="VARENR">&nbsp;<font class="text14RedBold" >*</font>Kode</td>
+							<td class="text14" title="VAREBE">&nbsp;Tollvesenets tekst</td>
 						</tr>
 						<tr>
 						<td ><input type="text" class="inputTextMediumBlueMandatoryField" name="e9705" id="e9705" size="20" maxlength="3" value='${model.record.e9705}'></td>

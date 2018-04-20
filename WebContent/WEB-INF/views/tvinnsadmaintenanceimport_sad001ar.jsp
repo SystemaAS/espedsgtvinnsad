@@ -29,7 +29,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="30%" valign="bottom" class="tab" align="center">
-						<font class="tabLink">Kunders vareregister</font>&nbsp;<font class="text12">SAD001A / SADVARE</font>&nbsp;
+						<font class="tabLink">Kunders vareregister</font>&nbsp;<font class="text14">SAD001A / SADVARE</font>&nbsp;
 						<a id="alinkRecordId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadmaintenanceimport_sad001ar.do?id=${model.dbTable}">
 							<img style="vertical-align: middle;"  src="resources/images/bulletGreen.png" border="0" width="8px" height="8px" alt="db table">
 						</a>
@@ -47,7 +47,7 @@
 	 	    
 	 	    <tr >
 	 	    	<td width="5%">&nbsp;</td>
-				<td width="100%" class="text12">
+				<td width="100%" class="text14">
 					<form action="tvinnsadmaintenanceimport_sad001ar.do?id=${model.dbTable}" name="formRecord" id="formRecord" method="POST" >
 					Kundenr&nbsp;
 					<input type="text" class="inputTextMediumBlue" name="searchKundnr" id="searchKundnr" size="9" maxlength="8" value='${model.kundnr}'>
@@ -91,16 +91,16 @@
 				               <td id="recordUpdate_${record.varenr}_${record.levenr}" onClick="getRecord(this);" align="center" width="2%" class="tableCellFirst" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<img src="resources/images/update.gif" border="0" alt="edit">
 				               </td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text12">&nbsp;${record.varenr}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.varebe}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.w2vf}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.w2lk}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.w2vnti}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.w2tn}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.w2pre}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.w2pva}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.w2as}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.w2mfr}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text14">&nbsp;${record.varenr}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.varebe}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.w2vf}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.w2lk}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.w2vnti}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.w2tn}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.w2pre}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.w2pva}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.w2as}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.w2mfr}&nbsp;</font></td>
 				               
 				               <td align="center" width="2%" class="tableCell" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadmaintenanceimport_sad001ar_edit.do?action=doDelete&id=${model.dbTable}&varenr=${record.varenr}&levenr=${record.levenr}">
@@ -145,7 +145,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 	            	<tr >
 					<td >					
-			            <ul class="isa_error text12" >
+			            <ul class="isa_error text14" >
 			            <c:forEach var="error" items="${errors.allErrors}">
 			                <li >
 			                	<spring:message code="${error.code}" text="${error.defaultMessage}"/>&nbsp;&nbsp;
@@ -167,7 +167,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 				 		<tr>
 				 			<td >
-				 				<ul class="isa_error text12" >
+				 				<ul class="isa_error text14" >
                                     <li>[ERROR on Update] - Server return code: ${model.errorMessage}</li>                                    
                                 </ul>
 				 			</td>
@@ -193,8 +193,8 @@
 					
 					<table width="60%" cellspacing="1" border="0" align="left">
 			    	    <tr>
-							<td class="text12" title="VARENR">&nbsp;<font class="text14RedBold" >*</font>Varenr.</td>
-							<td class="text12" title="VAREBE">&nbsp;Beskrivelse</td>
+							<td class="text14" title="VARENR">&nbsp;<font class="text14RedBold" >*</font>Varenr.</td>
+							<td class="text14" title="VAREBE">&nbsp;Beskrivelse</td>
 						</tr>
 						<tr>
 						<td ><input type="text" class="inputTextMediumBlueMandatoryField" name="varenr" id="varenr" size="20" maxlength="28" value='${model.record.varenr}'></td>

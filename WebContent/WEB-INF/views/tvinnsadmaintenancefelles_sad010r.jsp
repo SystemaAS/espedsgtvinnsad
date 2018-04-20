@@ -29,7 +29,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="30%" valign="bottom" class="tab" align="center">
-						<font class="tabLink">Tolltariff</font>&nbsp;<font class="text12">SAD010 / TARI</font>&nbsp;
+						<font class="tabLink">Tolltariff</font>&nbsp;<font class="text14">SAD010 / TARI</font>&nbsp;
 						<a id="alinkRecordId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadmaintenancefelles_sad010r.do?id=${model.dbTable}">
 							<img style="vertical-align: middle;"  src="resources/images/bulletGreen.png" border="0" width="8px" height="8px" alt="db table">
 						</a>
@@ -47,7 +47,7 @@
 	 	    
 	 	    <tr >
 	 	    	<td width="5%">&nbsp;</td>
-				<td width="100%" class="text12">
+				<td width="100%" class="text14">
 					<form action="tvinnsadmaintenancefelles_sad010r.do?id=${model.dbTable}" name="formRecord" id="formRecord" method="POST" >
 					Tariffnr&nbsp;
 					<input type="text" class="inputTextMediumBlue" name="searchTatanr" id="searchTatanr" size="9" maxlength="8" value='${model.tatanr}'>
@@ -92,19 +92,19 @@
 				               <td id="recordUpdate_${record.tatanr}_${record.taalfa}" onClick="getRecord(this);" align="center" width="2%" class="tableCellFirst" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<img src="resources/images/update.gif" border="0" alt="edit">
 				               </td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text12">&nbsp;${record.tatanr}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.taordb}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.taordk}&nbsp;</font></td>
-		                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.taeftb}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.taeftk}&nbsp;</font></td>
-		                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.taefb}&nbsp;</font></td>
-		                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.taefk}&nbsp;</font></td>
-		                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.tastk}&nbsp;</font></td>
-		                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.taalfa}&nbsp;</font></td>
-		                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.tatxt}&nbsp;</font></td>
-		                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.taenhe}&nbsp;</font></td>
-		                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.tadatoNO}&nbsp;</font></td>
-		                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.tadtsNO}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text14">&nbsp;${record.tatanr}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.taordb}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.taordk}&nbsp;</font></td>
+		                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.taeftb}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.taeftk}&nbsp;</font></td>
+		                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.taefb}&nbsp;</font></td>
+		                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.taefk}&nbsp;</font></td>
+		                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.tastk}&nbsp;</font></td>
+		                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.taalfa}&nbsp;</font></td>
+		                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.tatxt}&nbsp;</font></td>
+		                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.taenhe}&nbsp;</font></td>
+		                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.tadatoNO}&nbsp;</font></td>
+		                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.tadtsNO}&nbsp;</font></td>
 		                       <td align="center" width="2%" class="tableCell" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadmaintenancefelles_sad010r_edit.do?action=doDelete&id=${model.dbTable}&tatanr=${record.tatanr}&taalfa=${record.taalfa}">
 					               		<img valign="bottom" src="resources/images/delete.gif" border="0" width="15px" height="15px" alt="remove">
@@ -152,7 +152,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 	            	<tr >
 					<td >					
-			            <ul class="isa_error text12" >
+			            <ul class="isa_error text14" >
 			            <c:forEach var="error" items="${errors.allErrors}">
 			                <li >
 			                	<spring:message code="${error.code}" text="${error.defaultMessage}"/>&nbsp;&nbsp;
@@ -174,7 +174,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 				 		<tr>
 				 			<td >
-				 				<ul class="isa_error text12" >
+				 				<ul class="isa_error text14" >
                                     <li>[ERROR on Update] - Server return code: ${model.errorMessage}</li>                                    
                                 </ul>
 				 			</td>
@@ -200,16 +200,16 @@
 					
 					<table width="98%" cellspacing="1" border="0" align="left">
 			    	    <tr>
-							<td class="text12" title="TATANR">&nbsp;<font class="text14RedBold" >*</font>Tariffnr.</td>
-							<td class="text12" title="TAALFA">&nbsp;<font class="text14RedBold" >*</font>Søkebgrep</td>
-							<td class="text12" title="TADATO">&nbsp;<font class="text14RedBold" >*</font>F.o.m dato</td>
-							<td class="text12" title="TADTR">&nbsp;Opd.dato</td>
-							<td class="text12" title="TADATO">&nbsp;T.o.m dato</td>
-							<td class="text12" title="TASTK">&nbsp;Stk</td>
-							<td class="text12" title="TATXT">&nbsp;Text</td>
-							<td class="text12" title="TAENHE">&nbsp;Enhet</td>
-							<td class="text12" title="TAREST">&nbsp;Regul.(NHLE)</td>
-							<td class="text12" title="TAKAPA">&nbsp;Øvrige kap.</td>
+							<td class="text14" title="TATANR">&nbsp;<font class="text14RedBold" >*</font>Tariffnr.</td>
+							<td class="text14" title="TAALFA">&nbsp;<font class="text14RedBold" >*</font>Søkebgrep</td>
+							<td class="text14" title="TADATO">&nbsp;<font class="text14RedBold" >*</font>F.o.m dato</td>
+							<td class="text14" title="TADTR">&nbsp;Opd.dato</td>
+							<td class="text14" title="TADATO">&nbsp;T.o.m dato</td>
+							<td class="text14" title="TASTK">&nbsp;Stk</td>
+							<td class="text14" title="TATXT">&nbsp;Text</td>
+							<td class="text14" title="TAENHE">&nbsp;Enhet</td>
+							<td class="text14" title="TAREST">&nbsp;Regul.(NHLE)</td>
+							<td class="text14" title="TAKAPA">&nbsp;Øvrige kap.</td>
 						</tr>
 						<tr>
 						<td ><input type="text" class="inputTextMediumBlueMandatoryField" name="tatanr" id="tatanr" size="9" maxlength="8" value='${model.record.tatanr}'></td>
@@ -218,7 +218,7 @@
 						<td ><input readOnly type="text" class="inputTextReadOnly" name="tadtrNO" id="tadtrNO" size="8" maxlength="8" value='${model.record.tadtrNO}'></td>
 						<td ><input type="text" class="inputTextMediumBlue" name="tadtsNO" id="tadtsNO" size="8" maxlength="8" value='${model.record.tadtsNO}'></td>
 						<td >
-							<select name="tastk" id="tastk">
+							<select class="inputTextMediumBlue" name="tastk" id="tastk">
         		    			<option value="">-velg-</option>
 							  	<option value="J"<c:if test="${ model.record.tastk == 'J'}"> selected </c:if> >Ja</option>
 							</select>
@@ -243,19 +243,19 @@
 						------------------------ 
 						--%>
 						<tr>
-							<td class="text12" title="TAORDB">&nbsp;Ordinær</td>
-							<td class="text12" title="TAORDK">&nbsp;PVA</td>
-							<td class="text12" title="TAEFTB">&nbsp;EFTA</td>
-							<td class="text12" title="TAEFTK">&nbsp;PVA</td>
-							<td class="text12" title="TAEFB">&nbsp;EF</td>
-							<td class="text12" title="TAEFK">&nbsp;PVA</td>
+							<td class="text14" title="TAORDB">&nbsp;Ordinær</td>
+							<td class="text14" title="TAORDK">&nbsp;PVA</td>
+							<td class="text14" title="TAEFTB">&nbsp;EFTA</td>
+							<td class="text14" title="TAEFTK">&nbsp;PVA</td>
+							<td class="text14" title="TAEFB">&nbsp;EF</td>
+							<td class="text14" title="TAEFK">&nbsp;PVA</td>
 							
 						</tr>
 
 						<tr>
 						<td ><input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlue" name="taordb" id="taordb" size="10" maxlength="10" value='${model.record.taordb}'></td>
 						<td >
-							<select name="taordk" id="taordk">
+							<select class="inputTextMediumBlue" name="taordk" id="taordk">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.taordk == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.taordk == 'F'}"> selected </c:if> >F</option>
@@ -266,7 +266,7 @@
 						</td>
 						<td ><input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlue" name="taeftb" id="taeftb" size="10" maxlength="10" value='${model.record.taeftb}'></td>
 						<td >
-							<select name="taeftk" id="taeftk">
+							<select class="inputTextMediumBlue" name="taeftk" id="taeftk">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.taeftk == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.taeftk == 'F'}"> selected </c:if> >F</option>
@@ -277,7 +277,7 @@
 						</td>
 						<td ><input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlue" name="taefb" id="taefb" size="10" maxlength="10" value='${model.record.taefb}'></td>
 						<td >
-							<select name="taefk" id="taefk">
+							<select class="inputTextMediumBlue" name="taefk" id="taefk">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.taefk == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.taefk == 'F'}"> selected </c:if> >F</option>
@@ -295,24 +295,24 @@
 						--%>
 						<tr height="10"><td></td></tr>
 						<tr >
-							<td class="text12" title="TAEOSB">&nbsp;EØS</td>
-							<td class="text12" title="TAEOSK">&nbsp;PVA</td>
-							<td class="text12" title="TATSJB">&nbsp;Swaziland</td>
-							<td class="text12" title="TATSJK">&nbsp;PVA</td>
-							<td class="text12" title="TATYRB">&nbsp;Tyrkia</td>
-							<td class="text12" title="TATYRK">&nbsp;PVA</td>
-							<td class="text12" title="TAISRB">&nbsp;Israel</td>
-							<td class="text12" title="TAISRK">&nbsp;PVA</td>
-							<td class="text12" title="TAELLB">&nbsp;Singapore</td>
-							<td class="text12" title="TAELLK">&nbsp;PVA</td>
-							<td class="text12" title="TABULB">&nbsp;Chile</td>
-							<td class="text12" title="TABULK">&nbsp;PVA</td>
+							<td class="text14" title="TAEOSB">&nbsp;EØS</td>
+							<td class="text14" title="TAEOSK">&nbsp;PVA</td>
+							<td class="text14" title="TATSJB">&nbsp;Swaziland</td>
+							<td class="text14" title="TATSJK">&nbsp;PVA</td>
+							<td class="text14" title="TATYRB">&nbsp;Tyrkia</td>
+							<td class="text14" title="TATYRK">&nbsp;PVA</td>
+							<td class="text14" title="TAISRB">&nbsp;Israel</td>
+							<td class="text14" title="TAISRK">&nbsp;PVA</td>
+							<td class="text14" title="TAELLB">&nbsp;Singapore</td>
+							<td class="text14" title="TAELLK">&nbsp;PVA</td>
+							<td class="text14" title="TABULB">&nbsp;Chile</td>
+							<td class="text14" title="TABULK">&nbsp;PVA</td>
 							
 						</tr>
 						<tr >
 							<td ><input type="text" class="inputTextMediumBlue" name="taeosb" id="taeosb" size="10" maxlength="10" value='${model.record.taeosb}'></td>
 							<td>
-								<select name="taeosk" id="taeosk">
+								<select class="inputTextMediumBlue" name="taeosk" id="taeosk">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.taeosk == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.taeosk == 'F'}"> selected </c:if> >F</option>
@@ -323,7 +323,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="tatsjb" id="tatsjb" size="10" maxlength="10" value='${model.record.tatsjb}'></td>
 							<td>
-								<select name="tatsjk" id="tatsjk">
+								<select class="inputTextMediumBlue" name="tatsjk" id="tatsjk">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tatsjk == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tatsjk == 'F'}"> selected </c:if> >F</option>
@@ -334,7 +334,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="tatyrb" id="tatyrb" size="10" maxlength="10" value='${model.record.tatyrb}'></td>
 							<td>
-								<select name="tatyrk" id="tatyrk">
+								<select class="inputTextMediumBlue" name="tatyrk" id="tatyrk">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tatyrk == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tatyrk == 'F'}"> selected </c:if> >F</option>
@@ -345,7 +345,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="taisrb" id="taisrb" size="10" maxlength="10" value='${model.record.taisrb}'></td>
 							<td>
-								<select name="taisrk" id="taisrk">
+								<select class="inputTextMediumBlue" name="taisrk" id="taisrk">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.taisrk == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.taisrk == 'F'}"> selected </c:if> >F</option>
@@ -356,7 +356,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="taellb" id="taellb" size="10" maxlength="10" value='${model.record.taellb}'></td>
 							<td>
-								<select name="taellk" id="taellk">
+								<select class="inputTextMediumBlue" name="taellk" id="taellk">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.taellk == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.taellk == 'F'}"> selected </c:if> >F</option>
@@ -367,7 +367,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="tabulb" id="tabulb" size="10" maxlength="10" value='${model.record.tabulb}'></td>
 							<td>
-								<select name="tabulk" id="tabulk">
+								<select class="inputTextMediumBlue" name="tabulk" id="tabulk">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tabulk == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tabulk == 'F'}"> selected </c:if> >F</option>
@@ -384,23 +384,23 @@
 						------------------------ 
 						--%>
 						<tr>
-							<td class="text12" title="TAPOLB">&nbsp;Makedonia</td>
-							<td class="text12" title="TAPOLK">&nbsp;PVA</td>
-							<td class="text12" title="TAROMB">&nbsp;Sør-Korea</td>
-							<td class="text12" title="TAROMK">&nbsp;PVA</td>
-							<td class="text12" title="TAN05B">&nbsp;Serbia</td>
-							<td class="text12" title="TAN05K">&nbsp;PVA</td>
-							<td class="text12" title="TAN06B">&nbsp;Albania</td>
-							<td class="text12" title="TAN06K">&nbsp;PVA</td>
-							<td class="text12" title="TAN07B">&nbsp;Ukraina</td>
-							<td class="text12" title="TAN07K">&nbsp;PVA</td>
-							<td class="text12" title="TAUNGB">&nbsp;Jordan</td>
-							<td class="text12" title="TAUNGK">&nbsp;PVA</td>
+							<td class="text14" title="TAPOLB">&nbsp;Makedonia</td>
+							<td class="text14" title="TAPOLK">&nbsp;PVA</td>
+							<td class="text14" title="TAROMB">&nbsp;Sør-Korea</td>
+							<td class="text14" title="TAROMK">&nbsp;PVA</td>
+							<td class="text14" title="TAN05B">&nbsp;Serbia</td>
+							<td class="text14" title="TAN05K">&nbsp;PVA</td>
+							<td class="text14" title="TAN06B">&nbsp;Albania</td>
+							<td class="text14" title="TAN06K">&nbsp;PVA</td>
+							<td class="text14" title="TAN07B">&nbsp;Ukraina</td>
+							<td class="text14" title="TAN07K">&nbsp;PVA</td>
+							<td class="text14" title="TAUNGB">&nbsp;Jordan</td>
+							<td class="text14" title="TAUNGK">&nbsp;PVA</td>
 						</tr>
 						<tr>
 							<td ><input type="text" class="inputTextMediumBlue" name="tapolb" id="tapolb" size="10" maxlength="10" value='${model.record.tapolb}'></td>
 							<td>
-								<select name="tapolk" id="tapolk">
+								<select class="inputTextMediumBlue" name="tapolk" id="tapolk">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tapolk == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tapolk == 'F'}"> selected </c:if> >F</option>
@@ -411,7 +411,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="taromb" id="taromb" size="10" maxlength="10" value='${model.record.taromb}'></td>
 							<td>
-								<select name="taromk" id="taromk">
+								<select class="inputTextMediumBlue" name="taromk" id="taromk">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.taromk == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.taromk == 'F'}"> selected </c:if> >F</option>
@@ -422,7 +422,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="tan05b" id="tan05b" size="10" maxlength="10" value='${model.record.tan05b}'></td>
 							<td>
-								<select name="tan05k" id="tan05k">
+								<select class="inputTextMediumBlue" name="tan05k" id="tan05k">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tan05k == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tan05k == 'F'}"> selected </c:if> >F</option>
@@ -433,7 +433,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="tan06b" id="tan06b" size="10" maxlength="10" value='${model.record.tan06b}'></td>
 							<td>
-								<select name="tan06k" id="tan06k">
+								<select class="inputTextMediumBlue" name="tan06k" id="tan06k">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tan06k == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tan06k == 'F'}"> selected </c:if> >F</option>
@@ -444,7 +444,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="tan07b" id="tan07b" size="10" maxlength="10" value='${model.record.tan07b}'></td>
 							<td>
-								<select name="tan07k" id="tan07k">
+								<select class="inputTextMediumBlue" name="tan07k" id="tan07k">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tan07k == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tan07k == 'F'}"> selected </c:if> >F</option>
@@ -455,7 +455,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="taungb" id="taungb" size="10" maxlength="10" value='${model.record.taungb}'></td>
 							<td>
-								<select name="taungk" id="taungk">
+								<select class="inputTextMediumBlue" name="taungk" id="taungk">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.taungk == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.taungk == 'F'}"> selected </c:if> >F</option>
@@ -472,23 +472,23 @@
 						------------------------ 
 						--%>
 						<tr>
-							<td class="text12" title="TASLOB">&nbsp;Tunisia</td>
-							<td class="text12" title="TASLOK">&nbsp;PVA</td>
-							<td class="text12" title="TAMULB">&nbsp;Min.uland</td>
-							<td class="text12" title="TAMULK">&nbsp;PVA</td>
-							<td class="text12" title="TAOULB">&nbsp;Ord.uland</td>
-							<td class="text12" title="TAOULK">&nbsp;PVA</td>
-							<td class="text12" title="TAGRLB">&nbsp;Grønnland</td>
-							<td class="text12" title="TAGRLK">&nbsp;PVA</td>
-							<td class="text12" title="TAFERB">&nbsp;Færøyen</td>
-							<td class="text12" title="TAFERK">&nbsp;PVA</td>
-							<td class="text12" title="TAISTB">&nbsp;IndiaSrTh</td>
-							<td class="text12" title="TAISTK">&nbsp;PVA</td>
+							<td class="text14" title="TASLOB">&nbsp;Tunisia</td>
+							<td class="text14" title="TASLOK">&nbsp;PVA</td>
+							<td class="text14" title="TAMULB">&nbsp;Min.uland</td>
+							<td class="text14" title="TAMULK">&nbsp;PVA</td>
+							<td class="text14" title="TAOULB">&nbsp;Ord.uland</td>
+							<td class="text14" title="TAOULK">&nbsp;PVA</td>
+							<td class="text14" title="TAGRLB">&nbsp;Grønnland</td>
+							<td class="text14" title="TAGRLK">&nbsp;PVA</td>
+							<td class="text14" title="TAFERB">&nbsp;Færøyen</td>
+							<td class="text14" title="TAFERK">&nbsp;PVA</td>
+							<td class="text14" title="TAISTB">&nbsp;IndiaSrTh</td>
+							<td class="text14" title="TAISTK">&nbsp;PVA</td>
 						</tr>
 						<tr>
 							<td ><input type="text" class="inputTextMediumBlue" name="taslob" id="taslob" size="10" maxlength="10" value='${model.record.taslob}'></td>
 							<td>
-								<select name="taslok" id="taslok">
+								<select class="inputTextMediumBlue" name="taslok" id="taslok">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.taslok == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.taslok == 'F'}"> selected </c:if> >F</option>
@@ -499,7 +499,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="tamulb" id="tamulb" size="10" maxlength="10" value='${model.record.tamulb}'></td>
 							<td>
-								<select name="tamulk" id="tamulk">
+								<select class="inputTextMediumBlue" name="tamulk" id="tamulk">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tamulk == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tamulk == 'F'}"> selected </c:if> >F</option>
@@ -510,7 +510,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="taoulb" id="taoulb" size="10" maxlength="10" value='${model.record.taoulb}'></td>
 							<td>
-								<select name="taoulk" id="taoulk">
+								<select class="inputTextMediumBlue" name="taoulk" id="taoulk">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.taoulk == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.taoulk == 'F'}"> selected </c:if> >F</option>
@@ -521,7 +521,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="tagrlb" id="tagrlb" size="10" maxlength="10" value='${model.record.tagrlb}'></td>
 							<td>
-								<select name="tagrlk" id="tagrlk">
+								<select class="inputTextMediumBlue" name="tagrlk" id="tagrlk">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tagrlk == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tagrlk == 'F'}"> selected </c:if> >F</option>
@@ -532,7 +532,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="taferb" id="taferb" size="10" maxlength="10" value='${model.record.taferb}'></td>
 							<td>
-								<select name="taferk" id="taferk">
+								<select class="inputTextMediumBlue" name="taferk" id="taferk">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.taferk == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.taferk == 'F'}"> selected </c:if> >F</option>
@@ -543,7 +543,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="taistb" id="taistb" size="10" maxlength="10" value='${model.record.taistb}'></td>
 							<td>
-								<select name="taistk" id="taistk">
+								<select class="inputTextMediumBlue" name="taistk" id="taistk">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.taistk == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.taistk == 'F'}"> selected </c:if> >F</option>
@@ -560,23 +560,23 @@
 						------------------------ 
 						--%>
 						<tr>
-							<td class="text12" title="TAMARB">&nbsp;Marokka</td>
-							<td class="text12" title="TAMARK">&nbsp;PVA</td>
-							<td class="text12" title="TAN08B">&nbsp;Peru</td>
-							<td class="text12" title="TAN08K">&nbsp;PVA</td>
-							<td class="text12" title="TAN09B">&nbsp;Montenegro</td>
-							<td class="text12" title="TAN09K">&nbsp;PVA</td>
-							<td class="text12" title="TAN10B">&nbsp;Hong Kong</td>
-							<td class="text12" title="TAN10K">&nbsp;PVA</td>
-							<td class="text12" title="TAMEXB">&nbsp;México</td>
-							<td class="text12" title="TAMEXK">&nbsp;PVA</td>
-							<td class="text12" title="TAVGAB">&nbsp;VB Gaza</td>
-							<td class="text12" title="TAVGAK">&nbsp;PVA</td>
+							<td class="text14" title="TAMARB">&nbsp;Marokka</td>
+							<td class="text14" title="TAMARK">&nbsp;PVA</td>
+							<td class="text14" title="TAN08B">&nbsp;Peru</td>
+							<td class="text14" title="TAN08K">&nbsp;PVA</td>
+							<td class="text14" title="TAN09B">&nbsp;Montenegro</td>
+							<td class="text14" title="TAN09K">&nbsp;PVA</td>
+							<td class="text14" title="TAN10B">&nbsp;Hong Kong</td>
+							<td class="text14" title="TAN10K">&nbsp;PVA</td>
+							<td class="text14" title="TAMEXB">&nbsp;México</td>
+							<td class="text14" title="TAMEXK">&nbsp;PVA</td>
+							<td class="text14" title="TAVGAB">&nbsp;VB Gaza</td>
+							<td class="text14" title="TAVGAK">&nbsp;PVA</td>
 						</tr>
 						<tr>
 							<td ><input type="text" class="inputTextMediumBlue" name="tamarb" id="tamarb" size="10" maxlength="10" value='${model.record.tamarb}'></td>
 							<td>
-								<select name="tamark" id="tamark">
+								<select class="inputTextMediumBlue" name="tamark" id="tamark">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tamark == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tamark == 'F'}"> selected </c:if> >F</option>
@@ -587,7 +587,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="tan08b" id="tan08b" size="10" maxlength="10" value='${model.record.tan08b}'></td>
 							<td>
-								<select name="tan08k" id="tan08k">
+								<select class="inputTextMediumBlue" name="tan08k" id="tan08k">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tan08k == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tan08k == 'F'}"> selected </c:if> >F</option>
@@ -598,7 +598,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="tan09b" id="tan09b" size="10" maxlength="10" value='${model.record.tan09b}'></td>
 							<td>
-								<select name="tan09k" id="tan09k">
+								<select class="inputTextMediumBlue" name="tan09k" id="tan09k">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tan09k == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tan09k == 'F'}"> selected </c:if> >F</option>
@@ -609,7 +609,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="tan10b" id="tan10b" size="10" maxlength="10" value='${model.record.tan10b}'></td>
 							<td>
-								<select name="tan10k" id="tan10k">
+								<select class="inputTextMediumBlue" name="tan10k" id="tan10k">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tan10k == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tan10k == 'F'}"> selected </c:if> >F</option>
@@ -620,7 +620,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="tamexb" id="tamexb" size="10" maxlength="10" value='${model.record.tamexb}'></td>
 							<td>
-								<select name="tamexk" id="tamexk">
+								<select class="inputTextMediumBlue" name="tamexk" id="tamexk">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tamexk == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tamexk == 'F'}"> selected </c:if> >F</option>
@@ -631,7 +631,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="tavgab" id="tavgab" size="10" maxlength="10" value='${model.record.tavgab}'></td>
 							<td>
-								<select name="tavgak" id="tavgak">
+								<select class="inputTextMediumBlue" name="tavgak" id="tavgak">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tavgak == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tavgak == 'F'}"> selected </c:if> >F</option>
@@ -648,23 +648,23 @@
 						------------------------ 
 						--%>
 						<tr>
-							<td class="text12" title="TAN01B">&nbsp;Libanon</td>
-							<td class="text12" title="TAN01K">&nbsp;PVA</td>
-							<td class="text12" title="TAN02B">&nbsp;SACU</td>
-							<td class="text12" title="TAN02K">&nbsp;PVA</td>
-							<td class="text12" title="TAN03B">&nbsp;Egypt</td>
-							<td class="text12" title="TAN03K">&nbsp;PVA</td>
-							<td class="text12" title="TAN04B">&nbsp;Canada</td>
-							<td class="text12" title="TAN04K">&nbsp;PVA</td>
-							<td class="text12" title="TAN11B">&nbsp;BW,NA,SZ</td>
-							<td class="text12" title="TAN11K">&nbsp;PVA</td>
-							<td class="text12" title="TAN12B">&nbsp;Lavere MIL</td>
-							<td class="text12" title="TAN12K">&nbsp;PVA</td>
+							<td class="text14" title="TAN01B">&nbsp;Libanon</td>
+							<td class="text14" title="TAN01K">&nbsp;PVA</td>
+							<td class="text14" title="TAN02B">&nbsp;SACU</td>
+							<td class="text14" title="TAN02K">&nbsp;PVA</td>
+							<td class="text14" title="TAN03B">&nbsp;Egypt</td>
+							<td class="text14" title="TAN03K">&nbsp;PVA</td>
+							<td class="text14" title="TAN04B">&nbsp;Canada</td>
+							<td class="text14" title="TAN04K">&nbsp;PVA</td>
+							<td class="text14" title="TAN11B">&nbsp;BW,NA,SZ</td>
+							<td class="text14" title="TAN11K">&nbsp;PVA</td>
+							<td class="text14" title="TAN12B">&nbsp;Lavere MIL</td>
+							<td class="text14" title="TAN12K">&nbsp;PVA</td>
 						</tr>
 						<tr>
 							<td ><input type="text" class="inputTextMediumBlue" name="tan01b" id="tan01b" size="10" maxlength="10" value='${model.record.tan01b}'></td>
 							<td>
-								<select name="tan01k" id="tan01k">
+								<select class="inputTextMediumBlue" name="tan01k" id="tan01k">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tan01k == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tan01k == 'F'}"> selected </c:if> >F</option>
@@ -675,7 +675,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="tan02b" id="tan02b" size="10" maxlength="10" value='${model.record.tan02b}'></td>
 							<td>
-								<select name="tan02k" id="tan02k">
+								<select class="inputTextMediumBlue" name="tan02k" id="tan02k">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tan02k == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tan02k == 'F'}"> selected </c:if> >F</option>
@@ -686,7 +686,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="tan03b" id="tan03b" size="10" maxlength="10" value='${model.record.tan03b}'></td>
 							<td>
-								<select name="tan03k" id="tan03k">
+								<select class="inputTextMediumBlue" name="tan03k" id="tan03k">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tan03k == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tan03k == 'F'}"> selected </c:if> >F</option>
@@ -697,7 +697,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="tan04b" id="tan04b" size="10" maxlength="10" value='${model.record.tan04b}'></td>
 							<td>
-								<select name="tan04k" id="tan04k">
+								<select class="inputTextMediumBlue" name="tan04k" id="tan04k">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tan04k == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tan04k == 'F'}"> selected </c:if> >F</option>
@@ -708,7 +708,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="tan11b" id="tan11b" size="10" maxlength="10" value='${model.record.tan11b}'></td>
 							<td>
-								<select name="tan11k" id="tan11k">
+								<select class="inputTextMediumBlue" name="tan11k" id="tan11k">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tan11k == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tan11k == 'F'}"> selected </c:if> >F</option>
@@ -719,7 +719,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="tan12b" id="tan12b" size="10" maxlength="10" value='${model.record.tan12b}'></td>
 							<td>
-								<select name="tan12k" id="tan12k">
+								<select class="inputTextMediumBlue" name="tan12k" id="tan12k">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tan12k == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tan12k == 'F'}"> selected </c:if> >F</option>
@@ -736,17 +736,17 @@
 						------------------------ 
 						--%>
 						<tr>
-							<td class="text12" title="TAN13B">&nbsp;Reserver</td>
-							<td class="text12" title="TAN13K">&nbsp;PVA</td>
-							<td class="text12" title="TAN14B">&nbsp;Reserver</td>
-							<td class="text12" title="TAN14K">&nbsp;PVA</td>
-							<td class="text12" title="TAN15B">&nbsp;Reserver</td>
-							<td class="text12" title="TAN15K">&nbsp;PVA</td>
+							<td class="text14" title="TAN13B">&nbsp;Reserver</td>
+							<td class="text14" title="TAN13K">&nbsp;PVA</td>
+							<td class="text14" title="TAN14B">&nbsp;Reserver</td>
+							<td class="text14" title="TAN14K">&nbsp;PVA</td>
+							<td class="text14" title="TAN15B">&nbsp;Reserver</td>
+							<td class="text14" title="TAN15K">&nbsp;PVA</td>
 						</tr>
 						<tr>
 							<td ><input type="text" class="inputTextMediumBlue" name="tan13b" id="tan13b" size="10" maxlength="10" value='${model.record.tan13b}'></td>
 							<td>
-								<select name="tan13k" id="tan13k">
+								<select class="inputTextMediumBlue" name="tan13k" id="tan13k">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tan13k == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tan13k == 'F'}"> selected </c:if> >F</option>
@@ -757,7 +757,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="tan14b" id="tan14b" size="10" maxlength="10" value='${model.record.tan14b}'></td>
 							<td>
-								<select name="tan14k" id="tan14k">
+								<select class="inputTextMediumBlue" name="tan14k" id="tan14k">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tan14k == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tan14k == 'F'}"> selected </c:if> >F</option>
@@ -768,7 +768,7 @@
 							</td>
 							<td ><input type="text" class="inputTextMediumBlue" name="tan15b" id="tan15b" size="10" maxlength="10" value='${model.record.tan15b}'></td>
 							<td>
-								<select name="tan15k" id="tan15k">
+								<select class="inputTextMediumBlue" name="tan15k" id="tan15k">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.tan15k == 'A'}"> selected </c:if> >A</option>
 							  	<option value="F"<c:if test="${ model.record.tan15k == 'F'}"> selected </c:if> >F</option>

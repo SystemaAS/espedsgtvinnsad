@@ -29,7 +29,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="30%" valign="bottom" class="tab" align="center">
-						<font class="tabLink">Løpenummer</font>&nbsp;<font class="text12">SAD024 / SAEH-HEADF</font>&nbsp;
+						<font class="tabLink">Løpenummer</font>&nbsp;<font class="text14">SAD024 / SAEH-HEADF</font>&nbsp;
 						<a id="alinkRecordId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadmaintenanceexport_sad024.do?id=${model.dbTable}">
 							<img style="vertical-align: middle;"  src="resources/images/bulletGreen.png" border="0" width="8px" height="8px" alt="db table">
 						</a>
@@ -47,7 +47,7 @@
 	 	    
 	 	    <tr >
 	 	    	<td width="5%">&nbsp;</td>
-				<td width="100%" class="text12">
+				<td width="100%" class="text14">
 					<form action="tvinnsadmaintenanceexport_sad024.do?id=${model.dbTable}" name="formRecord" id="formRecord" method="POST" >
 						<font class="text14RedBold" >*</font>Avd&nbsp;
 						<input type="text" class="inputTextMediumBlue" name="searchAvd" id="searchAvd" size="6" maxlength="6" value='${model.avd}'>
@@ -85,12 +85,12 @@
 				               <td id="recordUpdate_${record.seavd}_${record.setdn}" onClick="getRecord(this);" align="center" width="2%" class="tableCellFirst" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<img src="resources/images/update.gif" border="0" alt="edit">
 				               </td>
-				               <td width="5%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text12">&nbsp;${record.seavd}&nbsp;</font></td>
-				               <td width="10%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text12">&nbsp;${record.setdn}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.senas}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.setll}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.setle}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.sedtg}&nbsp;</font></td>
+				               <td width="5%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text14">&nbsp;${record.seavd}&nbsp;</font></td>
+				               <td width="10%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text14">&nbsp;${record.setdn}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.senas}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.setll}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.setle}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.sedtg}&nbsp;</font></td>
 				            </tr> 
 				            </c:forEach>
 				            </tbody>
@@ -125,7 +125,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 	            	<tr >
 					<td >					
-			            <ul class="isa_error text12" >
+			            <ul class="isa_error text14" >
 			            <c:forEach var="error" items="${errors.allErrors}">
 			                <li >
 			                	<spring:message code="${error.code}" text="${error.defaultMessage}"/>&nbsp;&nbsp;
@@ -147,7 +147,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 				 		<tr>
 				 			<td >
-				 				<ul class="isa_error text12" >
+				 				<ul class="isa_error text14" >
                                     <li>[ERROR on Update] - Server return code: ${model.errorMessage}</li>                                    
                                 </ul>
 				 			</td>
@@ -169,11 +169,11 @@
 					
 					<table width="60%" cellspacing="1" border="0" align="left">
 			    	    <tr>
-							<td class="text12" title="SETDN">&nbsp;<font class="text14RedBold" >*</font>Tolldekl.nr.</td>
-							<td class="text12" title="SENAS">&nbsp;Mottak.navn</td>
-							<td class="text12" title="SETLL">&nbsp;Løpenr.</td>
-							<td class="text12" title="SETLE">&nbsp;Eksp.nr</td>
-							<td class="text12" title="SEDTG">&nbsp;Dato</td>
+							<td class="text14" title="SETDN">&nbsp;<font class="text14RedBold" >*</font>Tolldekl.nr.</td>
+							<td class="text14" title="SENAS">&nbsp;Mottak.navn</td>
+							<td class="text14" title="SETLL">&nbsp;Løpenr.</td>
+							<td class="text14" title="SETLE">&nbsp;Eksp.nr</td>
+							<td class="text14" title="SEDTG">&nbsp;Dato</td>
 						</tr>
 						<tr>
 						<td ><input readonly type="text" class="inputTextReadOnly" name="setdn" id="setdn" size="8" maxlength="7" value='${model.record.setdn}'></td>

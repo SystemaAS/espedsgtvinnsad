@@ -29,7 +29,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="30%" valign="bottom" class="tab" align="center">
-						<font class="tabLink">Gyldige likvidit.koder</font>&nbsp;<font class="text12">SYFT19 / KODTLIK</font>&nbsp;
+						<font class="tabLink">Gyldige likvidit.koder</font>&nbsp;<font class="text14">SYFT19 / KODTLIK</font>&nbsp;
 						<a id="alinkRecordId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadmaintenanceimport_syft19r.do?id=${model.dbTable}">
 							<img style="vertical-align: middle;"  src="resources/images/bulletGreen.png" border="0" width="8px" height="8px" alt="db table">
 						</a>
@@ -69,15 +69,15 @@
 				            <c:forEach var="record" items="${model.list}" varStatus="counter">   
 				               <tr class="tableRow" height="20" >
 				              
-				               <td align="center" width="2%" class="tableCellFirst" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text12">&nbsp;${record.klista}&nbsp;</font></td>
+				               <td align="center" width="2%" class="tableCellFirst" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text14">&nbsp;${record.klista}&nbsp;</font></td>
 				               <td id="recordUpdate_${record.klikod}" onClick="getRecord(this);" align="center" width="2%" class="tableCell" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<img src="resources/images/update.gif" border="0" alt="edit">
 				               </td>
-				               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.kliuni}&nbsp;</font></td>
-				               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.klikod}&nbsp;</font></td>
-		                       <td align="left"  class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.klinav}&nbsp;</font></td>
-				               <td align="center"width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.klisto}&nbsp;</font></td>
-		                       <td align="center"class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.klixxx}&nbsp;</font></td>
+				               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.kliuni}&nbsp;</font></td>
+				               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.klikod}&nbsp;</font></td>
+		                       <td align="left"  class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.klinav}&nbsp;</font></td>
+				               <td align="center"width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.klisto}&nbsp;</font></td>
+		                       <td align="center"class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.klixxx}&nbsp;</font></td>
 		                       <td align="center" width="2%" class="tableCell" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadmaintenanceimport_syft19r_edit.do?action=doDelete&id=${model.dbTable}&klikod=${record.klikod}">
 					               		<img valign="bottom" src="resources/images/delete.gif" border="0" width="15px" height="15px" alt="remove">
@@ -117,7 +117,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 	            	<tr >
 					<td >					
-			            <ul class="isa_error text12" >
+			            <ul class="isa_error text14" >
 			            <c:forEach var="error" items="${errors.allErrors}">
 			                <li >
 			                	<spring:message code="${error.code}" text="${error.defaultMessage}"/>&nbsp;&nbsp;
@@ -139,7 +139,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 				 		<tr>
 				 			<td >
-				 				<ul class="isa_error text12" >
+				 				<ul class="isa_error text14" >
                                     <li>[ERROR on Update] - Server return code: ${model.errorMessage}</li>                                    
                                 </ul>
 				 			</td>
@@ -163,9 +163,9 @@
 					<input type="hidden" name="action" id=action value="doUpdate">
 					<table width="40%" cellspacing="1" border="0" align="left">
 			    	    <tr>
-						<td class="text12" title="KLIKOD">&nbsp;<font class="text14RedBold" >*</font>Likvid.kode</td>
-						<td class="text12" title="KLINAV">&nbsp;<font class="text14RedBold" >*</font>Beskrivelse</td>
-						<td class="text12" title="KLISTO">&nbsp;<font class="text14RedBold" >*</font>Stopp?</td>
+						<td class="text14" title="KLIKOD">&nbsp;<font class="text14RedBold" >*</font>Likvid.kode</td>
+						<td class="text14" title="KLINAV">&nbsp;<font class="text14RedBold" >*</font>Beskrivelse</td>
+						<td class="text14" title="KLISTO">&nbsp;<font class="text14RedBold" >*</font>Stopp?</td>
 						</tr>
 						<tr>
 						<td ><input type="text" class="inputTextMediumBlueUPPERCASEMandatoryField" name="klikod" id="klikod" size="2" maxlength="1" value='${model.record.klikod}'></td>

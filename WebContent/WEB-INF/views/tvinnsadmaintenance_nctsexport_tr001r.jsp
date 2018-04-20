@@ -29,7 +29,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="20%" valign="bottom" class="tab" align="center">
-						<font class="tabLink">Koderegister</font>&nbsp;<font class="text12">TR001R</font>&nbsp;
+						<font class="tabLink">Koderegister</font>&nbsp;<font class="text14">TR001R</font>&nbsp;
 						<a id="alinkRecordId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadmaintenance_nctsexport_tr001r.do?id=${model.dbTable}">
 							<img style="vertical-align: middle;"  src="resources/images/bulletGreen.png" border="0" width="8px" height="8px" alt="db table">
 						</a>
@@ -46,7 +46,7 @@
 	 	    <tr height="30"><td>&nbsp;</td></tr>
 	 	    <tr>
 	 	    	<td width="5%">&nbsp;</td>
-				<td width="100%" class="text12">
+				<td width="100%" class="text14">
 					<form action="tvinnsadmaintenance_nctsexport_tr001r.do?id=${model.dbTable}" name="formRecordSearch" id="formRecordSearch" method="POST" >
 							<font class="text14RedBold" >*</font><span title="searchTkunik">Kodetype</span>
 							<select required oninvalid="this.setCustomValidity('Obligatoriskt')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="searchTkunik" id="searchTkunik" >
@@ -70,7 +70,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 	            	<tr >
 					<td >					
-			            <ul class="isa_error text12" > 
+			            <ul class="isa_error text14" > 
 			            <c:forEach var="error" items="${errors.allErrors}">
 			                <li >
 			                	<spring:message code="${error.code}" text="${error.defaultMessage}"/>&nbsp;&nbsp;
@@ -107,9 +107,9 @@
 				               <td id="recordUpdate_${searchFilterNctsExportKoderegister.searchTkunik}_${record.tkkode}" onClick="getRecord(this);" align="center" width="2%" class="tableCellFirst" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<img src="resources/images/update.gif" border="0" alt="edit">
 				               </td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text12">&nbsp;${record.tkkode}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;"><font class="text12">&nbsp;${record.tktxtn}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;"><font class="text12">&nbsp;${record.tktxte}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text14">&nbsp;${record.tkkode}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;"><font class="text14">&nbsp;${record.tktxtn}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;"><font class="text14">&nbsp;${record.tktxte}&nbsp;</font></td>
 							   <td align="center" width="2%" class="tableCell" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadmaintenance_nctsexport_tr001r_edit.do?action=doDelete&id=${model.dbTable}&tkunik=${model.searchTkunik}&tkkode=${record.tkkode}">
 					               		<img valign="bottom" src="resources/images/delete.gif" border="0" width="15px" height="15px" alt="remove">
@@ -147,7 +147,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 	            	<tr >
 					<td >					
-			            <ul class="isa_error text12" > 
+			            <ul class="isa_error text14" > 
 			            <c:forEach var="error" items="${errors.allErrors}">
 			                <li >
 			                	<spring:message code="${error.code}" text="${error.defaultMessage}"/>&nbsp;&nbsp;
@@ -169,7 +169,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 				 		<tr>
 				 			<td >
-				 				<ul class="isa_error text12" >
+				 				<ul class="isa_error text14" >
                                     <li>${model.errorMessage}</li>                                    
                                 </ul>
 				 			</td>
@@ -196,13 +196,13 @@
 					<input type="hidden" name="action" id=action value="doUpdate">
 						<table width="60%" cellspacing="1" border="0" align="left">
 				    	    <tr>
-								<td class="text12" title="Kode">&nbsp;<font class="text14RedBold" >*</font>Kode</td>
-								<td class="text12" title="Beskrivelse(norsk)">&nbsp;<font class="text14RedBold" >*</font>Beskrivelse(norsk)</td>
-								<td class="text12" title="Beskrivelse(engelsk)">&nbsp;<font class="text14RedBold" >*</font>Beskrivelse(engelsk)</td>
+								<td class="text14" title="Kode">&nbsp;<font class="text14RedBold" >*</font>Kode</td>
+								<td class="text14" title="Beskrivelse(norsk)">&nbsp;<font class="text14RedBold" >*</font>Beskrivelse(norsk)</td>
+								<td class="text14" title="Beskrivelse(engelsk)">&nbsp;<font class="text14RedBold" >*</font>Beskrivelse(engelsk)</td>
 								<c:if test="${searchFilterNctsExportKoderegister.searchTkunik == '106'}">
-									<td class="text12" title="Avgang">&nbsp;Avgang</td>
-									<td class="text12" title="Ankomst">&nbsp;Ankomst</td>
-									<td class="text12" title="Transit">&nbsp;Transit</td>
+									<td class="text14" title="Avgang">&nbsp;Avgang</td>
+									<td class="text14" title="Ankomst">&nbsp;Ankomst</td>
+									<td class="text14" title="Transit">&nbsp;Transit</td>
 								</c:if>
 							</tr>
 							<tr>

@@ -29,7 +29,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="30%" valign="bottom" class="tab" align="center">
-						<font class="tabLink">Gyldige tariffører</font>&nbsp;<font class="text12">SYFT10 / KODTSI</font>&nbsp;
+						<font class="tabLink">Gyldige tariffører</font>&nbsp;<font class="text14">SYFT10 / KODTSI</font>&nbsp;
 						<a id="alinkRecordId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadmaintenancefelles_syft10r.do?id=${model.dbTable}">
 							<img style="vertical-align: middle;"  src="resources/images/bulletGreen.png" border="0" width="8px" height="8px" alt="db table">
 						</a>
@@ -71,16 +71,16 @@
 				            <c:forEach var="record" items="${model.list}" varStatus="counter">   
 				               <tr class="tableRow" height="20" >
 				              
-				               <td align="center" width="2%" class="tableCellFirst" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text12">&nbsp;${record.ksista}&nbsp;</font></td>
+				               <td align="center" width="2%" class="tableCellFirst" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text14">&nbsp;${record.ksista}&nbsp;</font></td>
 				               <td id="recordUpdate_${record.ksisig}" onClick="getRecord(this);" align="center" width="2%" class="tableCell" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<img src="resources/images/update.gif" border="0" alt="edit">
 				               </td>
-				               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.ksiuni}&nbsp;</font></td>
-				               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.ksisig}&nbsp;</font></td>
-		                       <td align="left"   class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.ksinav}&nbsp;</font></td>
-				               <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.ksovl}&nbsp;</font></td>
-		                       <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.ksuser}&nbsp;</font></td>
-		                       <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.ksixxx}&nbsp;</font></td>
+				               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.ksiuni}&nbsp;</font></td>
+				               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.ksisig}&nbsp;</font></td>
+		                       <td align="left"   class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.ksinav}&nbsp;</font></td>
+				               <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.ksovl}&nbsp;</font></td>
+		                       <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.ksuser}&nbsp;</font></td>
+		                       <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.ksixxx}&nbsp;</font></td>
 		                       <td align="center" width="2%" class="tableCell" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadmaintenancefelles_syft10r_edit.do?action=doDelete&id=${model.dbTable}&ksisig=${record.ksisig}">
 					               		<img valign="bottom" src="resources/images/delete.gif" border="0" width="15px" height="15px" alt="remove">
@@ -122,7 +122,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 	            	<tr >
 					<td >					
-			            <ul class="isa_error text12" >
+			            <ul class="isa_error text14" >
 			            <c:forEach var="error" items="${errors.allErrors}">
 			                <li >
 			                	<spring:message code="${error.code}" text="${error.defaultMessage}"/>&nbsp;&nbsp;
@@ -144,7 +144,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 				 		<tr>
 				 			<td >
-				 				<ul class="isa_error text12" >
+				 				<ul class="isa_error text14" >
                                     <li>[ERROR on Update] - Server return code: ${model.errorMessage}</li>                                    
                                 </ul>
 				 			</td>
@@ -169,11 +169,11 @@
 					<table width="40%" cellspacing="1" border="0" align="left">
 					
 			    	    <tr>
-							<td class="text12" title="KSISIG">&nbsp;<font class="text14RedBold" >*</font>Sig.</td>
-							<td class="text12" title="KSINAV">&nbsp;<font class="text14RedBold" >*</font>Navn</td>
-							<td class="text12" title="KSOVL">&nbsp;Overlay</td>
-							<td class="text12" title="KSUSER">&nbsp;Brukerid</td>
-							<td class="text12" title="KSUSER">&nbsp;Epost for TVINN-melding</td>
+							<td class="text14" title="KSISIG">&nbsp;<font class="text14RedBold" >*</font>Sig.</td>
+							<td class="text14" title="KSINAV">&nbsp;<font class="text14RedBold" >*</font>Navn</td>
+							<td class="text14" title="KSOVL">&nbsp;Overlay</td>
+							<td class="text14" title="KSUSER">&nbsp;Brukerid</td>
+							<td class="text14" title="KSUSER">&nbsp;Epost for TVINN-melding</td>
 						</tr>
 						<tr>
 						<td ><input type="text" class="inputTextMediumBlueUPPERCASEMandatoryField" name="ksisig" id="ksisig" size="4" maxlength="3" value='${model.record.ksisig}'></td>

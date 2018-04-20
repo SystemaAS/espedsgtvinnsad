@@ -29,7 +29,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="30%" valign="bottom" class="tab" align="center">
-						<font class="tabLink">Fiskeavgifter</font>&nbsp;<font class="text12">SAD015 / SADAVGE</font>&nbsp;
+						<font class="tabLink">Fiskeavgifter</font>&nbsp;<font class="text14">SAD015 / SADAVGE</font>&nbsp;
 						<a id="alinkRecordId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadmaintenanceexport_sad015.do?id=${model.dbTable}">
 							<img style="vertical-align: middle;"  src="resources/images/bulletGreen.png" border="0" width="8px" height="8px" alt="db table">
 						</a>
@@ -47,7 +47,7 @@
 	 	    
 	 	    <tr >
 	 	    	<td width="5%">&nbsp;</td>
-				<td width="100%" class="text12">
+				<td width="100%" class="text14">
 					<form action="tvinnsadmaintenanceexport_sad015.do?id=${model.dbTable}" name="formRecord" id="formRecord" method="POST" >
 					Tariffnr&nbsp;
 					<input type="text" class="inputTextMediumBlue" name="searchAgtanr" id="searchAgtanr" size="9" maxlength="8" value='${model.agtanr}'>					
@@ -89,22 +89,22 @@
 			               				<img src="resources/images/update.gif" border="0" alt="edit">
 					               </td>
 					               				               				               
-					               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text12">&nbsp;${record.agtanr}&nbsp;</font></td>
-					               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.taalfa}&nbsp;</font></td>
-					               <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.agakd}&nbsp;</font></td>
-			                       <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.agskv}&nbsp;</font></td>
-					               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.agdtfNO}&nbsp;</font></td>
-			                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.agdttNO}&nbsp;</font></td>
-			                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.agkd}&nbsp;</font></td>
-			                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.agpp}&nbsp;</font></td>				                       
-			                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.agsats}&nbsp;</font></td>
+					               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text14">&nbsp;${record.agtanr}&nbsp;</font></td>
+					               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.taalfa}&nbsp;</font></td>
+					               <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.agakd}&nbsp;</font></td>
+			                       <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.agskv}&nbsp;</font></td>
+					               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.agdtfNO}&nbsp;</font></td>
+			                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.agdttNO}&nbsp;</font></td>
+			                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.agkd}&nbsp;</font></td>
+			                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.agpp}&nbsp;</font></td>				                       
+			                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.agsats}&nbsp;</font></td>
 			                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >
 			                       		<c:choose> 
 				    					<c:when test="${record.agaktk=='A'}">
-			                       			<font class="text12">&nbsp;&nbsp;&nbsp;AKTIV&nbsp;</font>
+			                       			<font class="text14">&nbsp;&nbsp;&nbsp;AKTIV&nbsp;</font>
 			                       		</c:when>
 			                       		<c:otherwise>
-			                       			<font class="text12">&nbsp;&nbsp;&nbsp;INAKTIV&nbsp;</font>
+			                       			<font class="text14">&nbsp;&nbsp;&nbsp;INAKTIV&nbsp;</font>
 			                       		</c:otherwise>
 			                       		</c:choose>
 			                       </td>
@@ -147,7 +147,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 	            	<tr >
 					<td >					
-			            <ul class="isa_error text12" >
+			            <ul class="isa_error text14" >
 			            <c:forEach var="error" items="${errors.allErrors}">
 			                <li >
 			                	<spring:message code="${error.code}" text="${error.defaultMessage}"/>&nbsp;&nbsp;
@@ -169,7 +169,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 				 		<tr>
 				 			<td >
-				 				<ul class="isa_error text12" >
+				 				<ul class="isa_error text14" >
                                     <li>[ERROR on Update] - Server return code: ${model.errorMessage}</li>                                    
                                 </ul>
 				 			</td>
@@ -196,16 +196,16 @@
 					
 					<table width="98%" cellspacing="1" border="0" align="left">
 			    	    <tr>
-							<td class="text12" title="AGTANR">&nbsp;<font class="text14RedBold" >*</font>Tariffnr.</td>
-							<td class="text12" title="TAALFA">&nbsp;Beskrivelse</td>
-							<td class="text12" title="AGAKD">&nbsp;Avg.</td>
-							<td class="text12" title="AGSVK">&nbsp;<font class="text14RedBold" >*</font>Sekv.</td>
-							<td class="text12" title="AGDTF">&nbsp;<font class="text14RedBold" >*</font>F.o.m dato</td>
-							<td class="text12" title="AGDTT">&nbsp;<font class="text14RedBold" >*</font>T.o.m dato</td>
-							<td class="text12" title="AGKD">&nbsp;EU</td>
-							<td class="text12" title="AGPP">&nbsp;%/P</td>
-							<td class="text12" title="AGSATS">&nbsp;<font class="text14RedBold" >*</font>Sats</td>
-							<td class="text12" title="AGAKTK">&nbsp;Status</td>
+							<td class="text14" title="AGTANR">&nbsp;<font class="text14RedBold" >*</font>Tariffnr.</td>
+							<td class="text14" title="TAALFA">&nbsp;Beskrivelse</td>
+							<td class="text14" title="AGAKD">&nbsp;Avg.</td>
+							<td class="text14" title="AGSVK">&nbsp;<font class="text14RedBold" >*</font>Sekv.</td>
+							<td class="text14" title="AGDTF">&nbsp;<font class="text14RedBold" >*</font>F.o.m dato</td>
+							<td class="text14" title="AGDTT">&nbsp;<font class="text14RedBold" >*</font>T.o.m dato</td>
+							<td class="text14" title="AGKD">&nbsp;EU</td>
+							<td class="text14" title="AGPP">&nbsp;%/P</td>
+							<td class="text14" title="AGSATS">&nbsp;<font class="text14RedBold" >*</font>Sats</td>
+							<td class="text14" title="AGAKTK">&nbsp;Status</td>
 						</tr>
 						<tr>
 						<td ><input type="text" class="inputTextMediumBlueMandatoryField" name="agtanr" id="agtanr" size="9" maxlength="8" value='${model.record.agtanr}'></td>
@@ -218,7 +218,7 @@
 						<td ><input type="text" class="inputTextMediumBlueMandatoryField" name="agpp" id="agpp" size="2" maxlength="1" value='${model.record.agpp}'></td>						
 						<td ><input type="text" class="inputTextMediumBlueMandatoryField" name="agsats" id="agsats" size="6" maxlength="5" value='${model.record.agsats}'></td>
 						<td >
-							<select name="agaktk" id="agaktk">
+							<select class="inputTextMediumBlue" name="agaktk" id="agaktk">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.agaktk == 'A'}"> selected </c:if> >AKTIV</option>
 							  	<option value="I"<c:if test="${ model.record.agaktk == 'I'}"> selected </c:if> >INAKTIV</option>

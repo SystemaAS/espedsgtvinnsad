@@ -29,7 +29,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="30%" valign="bottom" class="tab" align="center">
-						<font class="tabLink">Gml. Kunders vareregister</font>&nbsp;<font class="text12">SAD004 / SADL</font>&nbsp;
+						<font class="tabLink">Gml. Kunders vareregister</font>&nbsp;<font class="text14">SAD004 / SADL</font>&nbsp;
 						<a id="alinkRecordId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadmaintenanceimport_sad004r.do?id=${model.dbTable}">
 							<img style="vertical-align: middle;"  src="resources/images/bulletGreen.png" border="0" width="8px" height="8px" alt="db table">
 						</a>
@@ -47,7 +47,7 @@
 	 	    
 	 	    <tr >
 	 	    	<td width="5%">&nbsp;</td>
-				<td width="100%" class="text12">
+				<td width="100%" class="text14">
 					<form action="tvinnsadmaintenanceimport_sad004r.do?id=${model.dbTable}" name="formRecord" id="formRecord" method="POST" >
 					Kundenr&nbsp;
 					<input type="text" class="inputTextMediumBlue" name="searchKundnr" id="searchKundnr" size="9" maxlength="8" value='${model.kundnr}'>
@@ -93,18 +93,18 @@
 				               <td id="recordUpdate_${record.slalfa}@${record.slknr}" onClick="getRecord(this);" align="center" width="2%" class="tableCellFirst" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<img src="resources/images/update.gif" border="0" alt="edit">
 				               </td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text12">&nbsp;${record.slalfa}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.sltxt}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.r31}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.sloppl}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.sltanr}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.sltn}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.pref}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.slvekt}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.slpva}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.slsats}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.mf}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.slkdae}&nbsp;${record.slkdse}</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text14">&nbsp;${record.slalfa}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.sltxt}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.r31}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.sloppl}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.sltanr}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.sltn}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.pref}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.slvekt}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.slpva}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.slsats}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.mf}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.slkdae}&nbsp;${record.slkdse}</font></td>
 				               
 				               <td align="center" width="2%" class="tableCell" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadmaintenanceimport_sad004r_edit.do?action=doDelete&id=${model.dbTable}&slalfa=${record.slalfa}&slknr=${record.slknr}">
@@ -151,7 +151,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 	            	<tr >
 					<td >					
-			            <ul class="isa_error text12" >
+			            <ul class="isa_error text14" >
 			            <c:forEach var="error" items="${errors.allErrors}">
 			                <li >
 			                	<spring:message code="${error.code}" text="${error.defaultMessage}"/>&nbsp;&nbsp;
@@ -173,7 +173,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 				 		<tr>
 				 			<td >
-				 				<ul class="isa_error text12" >
+				 				<ul class="isa_error text14" >
                                     <li>[ERROR on Update] - Server return code: ${model.errorMessage}</li>                                    
                                 </ul>
 				 			</td>
@@ -199,18 +199,18 @@
 					
 					<table width="99%" cellspacing="1" border="0" align="left">
 			    	    <tr>
-							<td class="text12" title="SLALFA">&nbsp;<font class="text14RedBold" >*</font>Varenr.</td>
-							<td class="text12" title="SLTXT">&nbsp;Beskrivelse</td>
-							<td class="text12" title="SLTXT(21)">&nbsp;R31</td>
-							<td class="text12" title="SLOPPL">&nbsp;<font class="text14RedBold" >*</font>L/F</td>
-							<td class="text12" title="SLTANR">&nbsp;<font class="text14RedBold" >*</font>Tariffnr.</td>
-							<td class="text12" title="SLTN">&nbsp;Tn</td>
-							<td class="text12" title="SLTXT(22)">&nbsp;Pref.</td>
-							<td class="text12" title="SLVEKT">&nbsp;Vekt</td>
-							<td class="text12" title="SLPVA">&nbsp;PVA</td>
-							<td class="text12" title="SLSATS">&nbsp;Tollsats</td>
-							<td class="text12" title="SLTXT(23)">&nbsp;MF</td>
-							<td class="text12" title="SLKDAÆ/SLKDSÆ">&nbsp;Avgift(kode/sekv)</td>
+							<td class="text14" title="SLALFA">&nbsp;<font class="text14RedBold" >*</font>Varenr.</td>
+							<td class="text14" title="SLTXT">&nbsp;Beskrivelse</td>
+							<td class="text14" title="SLTXT(21)">&nbsp;R31</td>
+							<td class="text14" title="SLOPPL">&nbsp;<font class="text14RedBold" >*</font>L/F</td>
+							<td class="text14" title="SLTANR">&nbsp;<font class="text14RedBold" >*</font>Tariffnr.</td>
+							<td class="text14" title="SLTN">&nbsp;Tn</td>
+							<td class="text14" title="SLTXT(22)">&nbsp;Pref.</td>
+							<td class="text14" title="SLVEKT">&nbsp;Vekt</td>
+							<td class="text14" title="SLPVA">&nbsp;PVA</td>
+							<td class="text14" title="SLSATS">&nbsp;Tollsats</td>
+							<td class="text14" title="SLTXT(23)">&nbsp;MF</td>
+							<td class="text14" title="SLKDAÆ/SLKDSÆ">&nbsp;Avgift(kode/sekv)</td>
 							
 						</tr>
 						<tr>
@@ -254,8 +254,8 @@
 						</tr>
 						
 						<tr>
-							<td class="text12" title="SLTO">&nbsp;Till.Opplysn.</td>
-							<td class="text12" title="SLCREF">&nbsp;Ref.</td>
+							<td class="text14" title="SLTO">&nbsp;Till.Opplysn.</td>
+							<td class="text14" title="SLCREF">&nbsp;Ref.</td>
 						</tr>
 						<tr>
 							<td ><input type="text" class="inputTextMediumBlue" name="slto" id="slto" size="30" maxlength="45" value='${model.record.slto}'></td>

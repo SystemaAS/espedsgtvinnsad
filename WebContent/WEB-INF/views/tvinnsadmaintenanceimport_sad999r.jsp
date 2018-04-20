@@ -29,7 +29,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="30%" valign="bottom" class="tab" align="center">
-						<font class="tabLink">Særavgifter</font>&nbsp;<font class="text12">SAD999 / SADSD</font>&nbsp;
+						<font class="tabLink">Særavgifter</font>&nbsp;<font class="text14">SAD999 / SADSD</font>&nbsp;
 						<a id="alinkRecordId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadmaintenanceimport_sad999r.do?id=${model.dbTable}">
 							<img style="vertical-align: middle;"  src="resources/images/bulletGreen.png" border="0" width="8px" height="8px" alt="db table">
 						</a>
@@ -47,7 +47,7 @@
 	 	    
 	 	    <tr >
 	 	    	<td width="5%">&nbsp;</td>
-				<td width="100%" class="text12">
+				<td width="100%" class="text14">
 					<form action="tvinnsadmaintenanceimport_sad999r.do?id=${model.dbTable}" name="formRecord" id="formRecord" method="POST" >
 					Tariffnr&nbsp;
 					<input type="text" class="inputTextMediumBlue" name="searchSdtnrf" id="searchSdtnrf" size="9" maxlength="8" value='${model.sdtnrf}'>
@@ -92,20 +92,20 @@
 				               <td id="recordUpdate_${record.sdtnrf}_${record.taalfa}_${record.sddtf}_${record.sddtt}" onClick="getRecord(this);" align="center" width="2%" class="tableCellFirst" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<img src="resources/images/update.gif" border="0" alt="edit">
 				               </td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text12">&nbsp;${record.sdtnrf}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.taalfa}&nbsp;</font></td>
-				               <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.sdkdae}&nbsp;</font></td>
-		                       <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.sdkdse}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.sddtfNO}&nbsp;</font></td>
-		                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.sddttNO}&nbsp;</font></td>
-		                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.sdblse}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text14">&nbsp;${record.sdtnrf}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.taalfa}&nbsp;</font></td>
+				               <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.sdkdae}&nbsp;</font></td>
+		                       <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.sdkdse}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.sddtfNO}&nbsp;</font></td>
+		                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.sddttNO}&nbsp;</font></td>
+		                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.sdblse}&nbsp;</font></td>
 		                       <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >
 		                       		<c:choose> 
 			    					<c:when test="${record.sdaktk=='A'}">
-		                       			<font class="text12">&nbsp;&nbsp;&nbsp;AKTIV&nbsp;</font>
+		                       			<font class="text14">&nbsp;&nbsp;&nbsp;AKTIV&nbsp;</font>
 		                       		</c:when>
 		                       		<c:otherwise>
-		                       			<font class="text12">&nbsp;&nbsp;&nbsp;INAKTIV&nbsp;</font>
+		                       			<font class="text14">&nbsp;&nbsp;&nbsp;INAKTIV&nbsp;</font>
 		                       		</c:otherwise>
 		                       		</c:choose>
 		                       </td>
@@ -145,7 +145,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 	            	<tr >
 					<td >					
-			            <ul class="isa_error text12" >
+			            <ul class="isa_error text14" >
 			            <c:forEach var="error" items="${errors.allErrors}">
 			                <li >
 			                	<spring:message code="${error.code}" text="${error.defaultMessage}"/>&nbsp;&nbsp;
@@ -167,7 +167,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 				 		<tr>
 				 			<td >
-				 				<ul class="isa_error text12" >
+				 				<ul class="isa_error text14" >
                                     <li>[ERROR on Update] - Server return code: ${model.errorMessage}</li>                                    
                                 </ul>
 				 			</td>
@@ -196,14 +196,14 @@
 					
 					<table width="98%" cellspacing="1" border="0" align="left">
 			    	    <tr>
-							<td class="text12" title="SDTNRF">&nbsp;<font class="text14RedBold" >*</font>Tariffnr.</td>
-							<td class="text12" title="TAALFA">&nbsp;Beskrivelse</td>
-							<td class="text12" title="SDKDAE">&nbsp;<font class="text14RedBold" >*</font>Avg.</td>
-							<td class="text12" title="SDKDSE">&nbsp;Sekv.</td>
-							<td class="text12" title="SDDTF">&nbsp;<font class="text14RedBold" >*</font>F.o.m dato</td>
-							<td class="text12" title="SDDTT">&nbsp;<font class="text14RedBold" >*</font>T.o.m dato</td>
-							<td class="text12" title="SDBLSE">&nbsp;<font class="text14RedBold" >*</font>Sats</td>
-							<td class="text12" title="SDAKTK">&nbsp;Status</td>
+							<td class="text14" title="SDTNRF">&nbsp;<font class="text14RedBold" >*</font>Tariffnr.</td>
+							<td class="text14" title="TAALFA">&nbsp;Beskrivelse</td>
+							<td class="text14" title="SDKDAE">&nbsp;<font class="text14RedBold" >*</font>Avg.</td>
+							<td class="text14" title="SDKDSE">&nbsp;Sekv.</td>
+							<td class="text14" title="SDDTF">&nbsp;<font class="text14RedBold" >*</font>F.o.m dato</td>
+							<td class="text14" title="SDDTT">&nbsp;<font class="text14RedBold" >*</font>T.o.m dato</td>
+							<td class="text14" title="SDBLSE">&nbsp;<font class="text14RedBold" >*</font>Sats</td>
+							<td class="text14" title="SDAKTK">&nbsp;Status</td>
 						</tr>
 						<tr>
 						<td ><input type="text" class="inputTextMediumBlueMandatoryField" name="sdtnrf" id="sdtnrf" size="9" maxlength="8" value='${model.record.sdtnrf}'></td>
@@ -219,7 +219,7 @@
 						<td ><input type="text" class="inputTextMediumBlueMandatoryField" name="sddttNO" id="sddttNO" size="9" maxlength="8" value='${model.record.sddttNO}'></td>
 						<td ><input type="text" class="inputTextMediumBlueMandatoryField" name="sdblse" id="sdblse" size="11" maxlength="10" value='${model.record.sdblse}'></td>
 						<td >
-							<select name="sdaktk" id="sdaktk">
+							<select class="inputTextMediumBlue" name="sdaktk" id="sdaktk">
         		    			<option value="">-velg-</option>
 							  	<option value="A"<c:if test="${ model.record.sdaktk == 'A'}"> selected </c:if> >AKTIV</option>
 							  	<option value="I"<c:if test="${ model.record.sdaktk == 'I'}"> selected </c:if> >INAKTIV</option>

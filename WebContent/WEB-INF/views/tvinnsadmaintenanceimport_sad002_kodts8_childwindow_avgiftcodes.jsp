@@ -26,13 +26,13 @@
 					<td>
 						<table>
 						<tr>
-							<td class="text11">&nbsp;Kod</td>
-							<td class="text11">&nbsp;<input type="text" class="inputText" name="kode" id="kode" size="10" maxlength="10" value="${Xmodel.container.kode}"></td>
+							<td class="text14">&nbsp;Kod</td>
+							<td class="text14">&nbsp;<input type="text" class="inputText" name="kode" id="kode" size="10" maxlength="10" value="${Xmodel.container.kode}"></td>
 							
-							<td class="text11">&nbsp;Beskrivning</td>
-							<td class="text11">&nbsp;<input type="text" class="inputText" name="tekst" id="tekst" size="10" maxlength="20" value="${Xmodel.container.tekst}"></td>
+							<td class="text14">&nbsp;Beskrivning</td>
+							<td class="text14">&nbsp;<input type="text" class="inputText" name="tekst" id="tekst" size="10" maxlength="20" value="${Xmodel.container.tekst}"></td>
 						
-							<td class="text11">&nbsp;</td>
+							<td class="text14">&nbsp;</td>
 	           				<td align="right">&nbsp;<input class="inputFormSubmit" type="submit" name="submit" value='<spring:message code="search.label"/>'>
 		           		</tr>
 		           		
@@ -43,32 +43,32 @@
 													           		
 	           		<tr height="10"><td></td></tr>
 					
-					<tr class="text12" >
+					<tr class="text14" >
 					<td class="ownScrollableSubWindowDynamicWidthHeight" width="100%" style="height:30em;">
 					<%-- this is the datatables grid (content)--%>
 					<table id="generalCodeList" class="display compact cell-border" width="100%" >
 						<thead>
 						<tr style="background-color:#EEEEEE">
-							<th class="text11" title="ks8avg">&nbsp;Kode&nbsp;</th>
-		                    <th class="text11" title="ks8skv">&nbsp;Sekvens&nbsp;</th>
-		                    <th class="text11" title="ks8ftx">&nbsp;Fritekst&nbsp;</th>
-		                    <th class="text11" title="ks8sat">&nbsp;Sats&nbsp;</th>
-		                    <th class="text11" title="ks8sty">&nbsp;Type&nbsp;</th>
+							<th class="text14" title="ks8avg">&nbsp;Kode&nbsp;</th>
+		                    <th class="text14" title="ks8skv">&nbsp;Sekvens&nbsp;</th>
+		                    <th class="text14" title="ks8ftx">&nbsp;Fritekst&nbsp;</th>
+		                    <th class="text14" title="ks8sat">&nbsp;Sats&nbsp;</th>
+		                    <th class="text14" title="ks8sty">&nbsp;Type&nbsp;</th>
 		                </tr> 
 		                </thead>
 		                
 		                <tbody>
 		                <c:forEach var="record" items="${model.generalCodeList}" varStatus="counter">    
-	                       	<tr class="text11">
-				               <td style="cursor:pointer;" class="text11MediumBlue" 
+	                       	<tr class="text14">
+				               <td style="cursor:pointer;" class="text14MediumBlue" 
 				               		id="kod${record.ks8avg}@skv${record.ks8skv}@ctype${model.callerType}" >
 				               		&nbsp;<img title="select" valign="bottom" src="resources/images/bebullet.gif" border="0" alt="edit">
 				               		&nbsp;&nbsp;${record.ks8avg}
 				               </td>
-			               	   	<td class="text11">&nbsp;${record.ks8skv}</td>
-		               	   		<td class="text11">&nbsp;${record.ks8ftx}</td>
-		               	   		<td class="text11">&nbsp;${record.ks8sat}</td>
-		               	   		<td class="text11">&nbsp;${record.ks8sty}</td>
+			               	   	<td class="text14">&nbsp;${record.ks8skv}</td>
+		               	   		<td class="text14">&nbsp;${record.ks8ftx}</td>
+		               	   		<td class="text14">&nbsp;${record.ks8sat}</td>
+		               	   		<td class="text14">&nbsp;${record.ks8sty}</td>
 			            	</tr> 
 			            </c:forEach>
 			            </tbody>

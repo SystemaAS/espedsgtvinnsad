@@ -36,7 +36,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="30%" valign="bottom" class="tab" align="center">
-						<font class="tabLink">Avgiftskoder</font>&nbsp;<font class="text12">SAD002 / KODTTS8</font>&nbsp;
+						<font class="tabLink">Avgiftskoder</font>&nbsp;<font class="text14">SAD002 / KODTTS8</font>&nbsp;
 						<a id="alinkRecordId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadmaintenanceimport_sad002_kodts8r.do?id=${model.dbTable}">
 							<img style="vertical-align: middle;"  src="resources/images/bulletGreen.png" border="0" width="8px" height="8px" alt="db table">
 						</a>
@@ -79,14 +79,14 @@
 				               <td id="recordUpdate_${record.ks8avg}_${record.ks8skv}" onClick="getRecord(this);" align="center" width="2%" class="tableCell" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<img src="resources/images/update.gif" border="0" alt="edit">
 				               </td>
-				               <td width="2%" class="tableCellFirst" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text12">&nbsp;${record.ks8avg}&nbsp;</font></td>
+				               <td width="2%" class="tableCellFirst" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text14">&nbsp;${record.ks8avg}&nbsp;</font></td>
 				               
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.ks8skv}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.ks8ftx}&nbsp;</font></td>
-		                       <td width="2%" align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.ore}&nbsp;</font></td>
-		                       <td width="2%" align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.mil}&nbsp;</font></td>
-		                       <td width="2%" align="right" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.ks8sat}&nbsp;</font></td>
-				               <td width="2%" align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.ks8sty}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.ks8skv}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.ks8ftx}&nbsp;</font></td>
+		                       <td width="2%" align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.ore}&nbsp;</font></td>
+		                       <td width="2%" align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.mil}&nbsp;</font></td>
+		                       <td width="2%" align="right" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.ks8sat}&nbsp;</font></td>
+				               <td width="2%" align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.ks8sty}&nbsp;</font></td>
 		                       <td align="center" class="tableCell" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadmaintenanceimport_sad002_kodts8r_edit.do?action=doDelete&id=${model.dbTable}&ks8avg=${record.ks8avg}&ks8skv=${record.ks8skv}">
 					               		<img valign="bottom" src="resources/images/delete.gif" border="0" width="15px" height="15px" alt="remove">
@@ -127,7 +127,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 	            	<tr >
 					<td >					
-			            <ul class="isa_error text12" >
+			            <ul class="isa_error text14" >
 			            <c:forEach var="error" items="${errors.allErrors}">
 			                <li >
 			                	<spring:message code="${error.code}" text="${error.defaultMessage}"/>&nbsp;&nbsp;
@@ -149,7 +149,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 				 		<tr>
 				 			<td >
-				 				<ul class="isa_error text12" >
+				 				<ul class="isa_error text14" >
                                     <li>[ERROR on Update] - Server return code: ${model.errorMessage}</li>                                    
                                 </ul>
 				 			</td>
@@ -175,13 +175,13 @@
 					<input type="hidden" name="action" id=action value="doUpdate">
 					<table width="80%" cellspacing="1" border="0" align="left">
 			    	    <tr>
-						<td class="text12" title="KS8AVG">&nbsp;<font class="text14RedBold" >*</font>Avg.kode</td>
-						<td class="text12" title="KS8SKV">&nbsp;Sekv.</td>
-						<td class="text12" title="KS8FTX">&nbsp;<font class="text14RedBold" >*</font>Fritekst</td>
-						<td class="text12" title="ORE">&nbsp;Øre</td>
-						<td class="text12" title="MIL">&nbsp;M</td>
-						<td class="text12" title="KS8SAT">&nbsp;Sats</td>
-						<td class="text12" title="KS8STY">&nbsp;Type</td>
+						<td class="text14" title="KS8AVG">&nbsp;<font class="text14RedBold" >*</font>Avg.kode</td>
+						<td class="text14" title="KS8SKV">&nbsp;Sekv.</td>
+						<td class="text14" title="KS8FTX">&nbsp;<font class="text14RedBold" >*</font>Fritekst</td>
+						<td class="text14" title="ORE">&nbsp;Øre</td>
+						<td class="text14" title="MIL">&nbsp;M</td>
+						<td class="text14" title="KS8SAT">&nbsp;Sats</td>
+						<td class="text14" title="KS8STY">&nbsp;Type</td>
 						</tr>
 						<tr>
 						<td ><input type="text" class="inputTextMediumBlueMandatoryField" name="ks8avg" id="ks8avg" size="3" maxlength="2" value='${model.record.ks8avg}'></td>

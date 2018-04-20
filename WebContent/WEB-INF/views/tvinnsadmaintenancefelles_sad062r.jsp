@@ -29,7 +29,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="30%" valign="bottom" class="tab" align="center">
-						<font class="tabLink">Søkeveier til tariff</font>&nbsp;<font class="text12">SAD062 / SOKTARI</font>&nbsp;
+						<font class="tabLink">Søkeveier til tariff</font>&nbsp;<font class="text14">SAD062 / SOKTARI</font>&nbsp;
 						<a id="alinkRecordId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadmaintenancefelles_sad062r.do?id=${model.dbTable}">
 							<img style="vertical-align: middle;"  src="resources/images/bulletGreen.png" border="0" width="8px" height="8px" alt="db table">
 						</a>
@@ -47,7 +47,7 @@
 	 	    
 	 	    <tr >
 	 	    	<td width="5%">&nbsp;</td>
-				<td width="100%" class="text12">
+				<td width="100%" class="text14">
 					<form action="tvinnsadmaintenancefelles_sad062r.do?id=${model.dbTable}" name="formRecord" id="formRecord" method="POST" >
 					Tariffnr&nbsp;
 					<input type="text" class="inputTextMediumBlue" name="searchTariff" id="searchTariff" size="9" maxlength="8" value='${model.tariff}'>
@@ -84,8 +84,8 @@
 				               <td id="recordUpdate_${record.tariff}_${record.beskr1}" onClick="getRecord(this);" align="center" width="2%" class="tableCellFirst" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<img src="resources/images/update.gif" border="0" alt="edit">
 				               </td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text12">&nbsp;${record.tariff}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.beskr1}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text14">&nbsp;${record.tariff}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.beskr1}&nbsp;</font></td>
 				               <td align="center" width="2%" class="tableCell" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadmaintenancefelles_sad062r_edit.do?action=doDelete&id=${model.dbTable}&tariff=${record.tariff}&beskr1=${record.beskr1}">
 					               		<img valign="bottom" src="resources/images/delete.gif" border="0" width="15px" height="15px" alt="remove">
@@ -121,7 +121,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 	            	<tr >
 					<td >					
-			            <ul class="isa_error text12" >
+			            <ul class="isa_error text14" >
 			            <c:forEach var="error" items="${errors.allErrors}">
 			                <li >
 			                	<spring:message code="${error.code}" text="${error.defaultMessage}"/>&nbsp;&nbsp;
@@ -143,7 +143,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 				 		<tr>
 				 			<td >
-				 				<ul class="isa_error text12" >
+				 				<ul class="isa_error text14" >
                                     <li>[ERROR on Update] - Server return code: ${model.errorMessage}</li>                                    
                                 </ul>
 				 			</td>
@@ -169,8 +169,8 @@
 					
 					<table width="60%" cellspacing="1" border="0" align="left">
 			    	    <tr>
-							<td class="text12" title="TARIFF">&nbsp;<font class="text14RedBold" >*</font>Tariffnr.</td>
-							<td class="text12" title="BESKR1">&nbsp;<font class="text14RedBold" >*</font>Beskrivelse</td>
+							<td class="text14" title="TARIFF">&nbsp;<font class="text14RedBold" >*</font>Tariffnr.</td>
+							<td class="text14" title="BESKR1">&nbsp;<font class="text14RedBold" >*</font>Beskrivelse</td>
 						</tr>
 						<tr>
 						<td ><input type="text" class="inputTextMediumBlueMandatoryField" name="tariff" id="tariff" size="9" maxlength="8" value='${model.record.tariff}'></td>

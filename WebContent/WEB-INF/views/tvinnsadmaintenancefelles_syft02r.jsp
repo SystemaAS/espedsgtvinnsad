@@ -29,7 +29,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="30%" valign="bottom" class="tab" align="center">
-						<font class="tabLink">Tollkurser</font>&nbsp;<font class="text12">SYFT02 / KODTVA</font>&nbsp;
+						<font class="tabLink">Tollkurser</font>&nbsp;<font class="text14">SYFT02 / KODTVA</font>&nbsp;
 						<a id="alinkRecordId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadmaintenancefelles_syft02r.do?id=${model.dbTable}">
 							<img style="vertical-align: middle;"  src="resources/images/bulletGreen.png" border="0" width="8px" height="8px" alt="db table">
 						</a>
@@ -47,7 +47,7 @@
 	 	    
 	 	    <tr >
 	 	    	<td width="5%">&nbsp;</td>
-				<td width="100%" class="text12">
+				<td width="100%" class="text14">
 					<form action="tvinnsadmaintenancefelles_syft02r.do?id=${model.dbTable}" name="formRecordSearch" id="formRecordSearch" method="POST" >
 					Kode&nbsp;
 					<input type="text" class="inputTextMediumBlue" name="searchKode" id="searchKode" size="5" maxlength="3" value='${model.searchKode}'>
@@ -87,12 +87,12 @@
 				               <td id="recordUpdate_${record.kvakod}_${record.kvadtNO}" onClick="getRecord(this);" align="center" width="2%" class="tableCellFirst" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<img src="resources/images/update.gif" border="0" alt="edit">
 				               </td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text12">&nbsp;${record.kvakod}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.kvaxxx}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.kvakrs}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.kvaomr}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.kvadtNO}&nbsp;</font></td>
-				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text12">&nbsp;${record.kvagv}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text14">&nbsp;${record.kvakod}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.kvaxxx}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.kvakrs}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.kvaomr}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.kvadtNO}&nbsp;</font></td>
+				               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.kvagv}&nbsp;</font></td>
 				               
 				               <td align="center" width="2%" class="tableCell" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadmaintenancefelles_syft02r_edit.do?action=doDelete&id=${model.dbTable}&kvakod=${record.kvakod}&kvadt=${record.kvadtNO}">
@@ -133,7 +133,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 	            	<tr >
 					<td >					
-			            <ul class="isa_error text12" >
+			            <ul class="isa_error text14" >
 			            <c:forEach var="error" items="${errors.allErrors}">
 			                <li >
 			                	<spring:message code="${error.code}" text="${error.defaultMessage}"/>&nbsp;&nbsp;
@@ -155,7 +155,7 @@
 	            	<table align="left" border="0" cellspacing="0" cellpadding="0">
 				 		<tr>
 				 			<td >
-				 				<ul class="isa_error text12" >
+				 				<ul class="isa_error text14" >
                                     <li>[ERROR on Update] - Server return code: ${model.errorMessage}</li>                                    
                                 </ul>
 				 			</td>
@@ -180,12 +180,12 @@
 					
 					<table width="80%" cellspacing="1" border="0" align="left">
 			    	    <tr>
-							<td class="text12" title="KVAKOD">&nbsp;<font class="text14RedBold" >*</font>Kode</td>
-							<td class="text12" title="KVAXXX">&nbsp;Beskrivelse</td>
-							<td class="text12" title="KVAKRS">&nbsp;<font class="text14RedBold" >*</font>Kurs</td>
-							<td class="text12" title="KVAOMR">&nbsp;<font class="text14RedBold" >*</font>Omr.faktor</td>
-							<td class="text12" title="KVADT">&nbsp;<font class="text14RedBold" >*</font>F.o.m.dato</td>
-							<td class="text12" title="KVAGV">&nbsp;Grenseverdi</td>
+							<td class="text14" title="KVAKOD">&nbsp;<font class="text14RedBold" >*</font>Kode</td>
+							<td class="text14" title="KVAXXX">&nbsp;Beskrivelse</td>
+							<td class="text14" title="KVAKRS">&nbsp;<font class="text14RedBold" >*</font>Kurs</td>
+							<td class="text14" title="KVAOMR">&nbsp;<font class="text14RedBold" >*</font>Omr.faktor</td>
+							<td class="text14" title="KVADT">&nbsp;<font class="text14RedBold" >*</font>F.o.m.dato</td>
+							<td class="text14" title="KVAGV">&nbsp;Grenseverdi</td>
 						</tr>
 						<tr>
 						<td ><input type="text" required oninvalid="this.setCustomValidity('Obligatoriskt')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="kvakod" id="kvakod" size="4" maxlength="3" value='${model.record.kvakod}'></td>
