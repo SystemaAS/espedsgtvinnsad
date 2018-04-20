@@ -27,12 +27,12 @@
 						<table>
 						<form name="tvinnsadExportKundensvareRegForm" id="tvinnsadExportKundensvareRegForm" action="tvinnsadexport_edit_items_childwindow_kundensvarereg.do?action=doInit" method="post">
 						<tr>
-							<td class="text11">&nbsp;Varenr.</td>
-							<td class="text11">&nbsp;<input type="text" class="inputText" name="vkod" id="vkod" size="10" maxlength="10" value="${model.vkod}"></td>
-							<td class="text11">&nbsp;</td>
-	           				<td class="text11">&nbsp;Kundenr.(Avsender)</td>
-							<td class="text11">&nbsp;<input type="text" class="inputText" name="senId" id="senId" size="10" maxlength="20" value="${model.senId}"></td>
-							<td class="text11">&nbsp;</td>
+							<td class="text14">&nbsp;Varenr.</td>
+							<td class="text14">&nbsp;<input type="text" class="inputText" name="vkod" id="vkod" size="10" maxlength="10" value="${model.vkod}"></td>
+							<td class="text14">&nbsp;</td>
+	           				<td class="text14">&nbsp;Kundenr.(Avsender)</td>
+							<td class="text14">&nbsp;<input type="text" class="inputText" name="senId" id="senId" size="10" maxlength="20" value="${model.senId}"></td>
+							<td class="text14">&nbsp;</td>
 	           				<td align="right">&nbsp;<input class="inputFormSubmit" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.search"/>'></td>
            				</tr>
 		           		</form>
@@ -47,31 +47,31 @@
 					<%-- this is the datatables grid (content)--%>
 					<table id="kundensVareRegList" class="display compact cell-border" width="100%" >
 						<thead>
-						<tr style="background-color:#EEEEEE">
-							<th class="text11" title="adunnr">&nbsp;Varenr&nbsp;</th>
-		                    <th class="text11" title="adunnr">&nbsp;Varekod/Tariffnr&nbsp;</th>
-		                    <th class="text11" title="adembg">&nbsp;Beskrivelse&nbsp;</th>
-		                    <th class="text11" title="adembg">&nbsp;Fylke/Land&nbsp;</th>
-		                    <th class="text11" title="adunnr">&nbsp;Bruttovekt&nbsp;</th>
+						<tr class="tableHeaderField" height="20" >
+							<th class="text14" title="adunnr">&nbsp;Varenr&nbsp;</th>
+		                    <th class="text14" title="adunnr">&nbsp;Varekod/Tariffnr&nbsp;</th>
+		                    <th class="text14" title="adembg">&nbsp;Beskrivelse&nbsp;</th>
+		                    <th class="text14" title="adembg">&nbsp;Fylke/Land&nbsp;</th>
+		                    <th class="text14" title="adunnr">&nbsp;Bruttovekt&nbsp;</th>
 		                </tr> 
 		                </thead>
 		                <tbody>
 		                <c:forEach var="record" items="${model.kundensVareRegList}" varStatus="counter">    
 			               <c:choose>           
 			                   <c:when test="${counter.count%2==0}">
-			                       <tr class="text11">
+			                       <tr class="text14">
 			                   </c:when>
 			                   <c:otherwise>   
-			                       <tr class="text11">
+			                       <tr class="text14">
 			                   </c:otherwise>
 			               </c:choose>
-			               <td nowrap style="cursor:pointer;" class="text11MediumBlue" id="varenr${record.slalfa}@varebe${record.sltxt}@tariffnr${record.sltanr}@vekt${record.slvekt}@fylk${record.sloppl}" >
+			               <td nowrap style="cursor:pointer;" class="text14MediumBlue" id="varenr${record.slalfa}@varebe${record.sltxt}@tariffnr${record.sltanr}@vekt${record.slvekt}@fylk${record.sloppl}" >
                			   		<img title="select" valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;${record.slalfa}
 			               </td>
-		               	   <td class="text11">&nbsp;${record.sltanr}</td>
-		               	   <td class="text11">&nbsp;${record.sltxt}</td>
-		               	   <td class="text11">&nbsp;${record.sloppl}</td>
-		               	   <td class="text11">&nbsp;${record.slvekt}</td>
+		               	   <td class="text14">&nbsp;${record.sltanr}</td>
+		               	   <td class="text14">&nbsp;${record.sltxt}</td>
+		               	   <td class="text14">&nbsp;${record.sloppl}</td>
+		               	   <td class="text14">&nbsp;${record.slvekt}</td>
 		               	   
 			            </tr> 
 			            </c:forEach>

@@ -854,7 +854,7 @@
 										<td class="text14" align="left"><span title="svlk">Lk.Oppr.</span></td>							
 							        </tr>
 							        <tr>
-							        	<td align="center" >&nbsp;<button title="Kundens vareregister" name="kundensVaruregisterControlButton" id="kundensVaruregisterControlButton" class="buttonGrayWithGreenFrame" type="button" >Søk i kund.varereg.</button></td>
+							        	<td >&nbsp;<button title="Kundens vareregister" name="kundensVaruregisterControlButton" id="kundensVaruregisterControlButton" class="buttonGrayWithGreenFrame" type="button" >Søk i kund.varereg.</button></td>
 						        		<td align="left" nowrap>
 							            	<c:choose>
 											<c:when test="${recordTopicTvinnSad.sedp=='02' || recordTopicTvinnSad.sedp=='04' || recordTopicTvinnSad.sedp=='18' 

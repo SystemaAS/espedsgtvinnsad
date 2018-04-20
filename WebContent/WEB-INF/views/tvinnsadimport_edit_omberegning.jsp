@@ -32,7 +32,7 @@
  <tr>
  <td>	
 	<%-- tab container component --%>
-	<table width="100%"  class="text12" cellspacing="0" border="0" cellpadding="0">
+	<table width="100%"  class="text14" cellspacing="0" border="0" cellpadding="0">
 		<tr height="2"><td></td></tr>
 		<tr height="25"> 
 			<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
@@ -157,16 +157,16 @@
 		<%-- sub-tabs --%>
 		<tr>
 			<td colspan="2">
-				<table width="100%" class="text12" cellspacing="0" border="0" cellpadding="0">
+				<table width="100%" class="text14" cellspacing="0" border="0" cellpadding="0">
 				<tr>
 				<td width="2px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 				<td width="8%" valign="bottom" class="tabSub" align="center" nowrap>
-						<font class="text12"><b>Hode</b></font>
+						<font class="text14"><b>Hode</b></font>
 				</td>
 				<td width="8%" valign="bottom" class="tabDisabledSub" align="center" nowrap>
 					<a id="alinkOmberegningItemLinesSubTab" style="display:block;" href="tvinnsadimport_edit_omberegning_items.do?action=doFetch&avd=${ model.record.siavd}&sign=${ model.record.sisg}
 											&opd=${ model.record.sitdn}&status=${ model.record.sist}&fabl=${model.record.sibel3}&o2_sist=${ model.record.o2_sist}&o2_sidt=${ model.record.o2_sidt}&o2_simf=${ model.record.o2_simf}">
-					<font class="text12Gray">Varelinjer</font>
+					<font class="text14Gray">Varelinjer</font>
 					</a>
 				</td>
 				<td width="85%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
@@ -204,8 +204,8 @@
 						</c:choose>
 					</b>
 					&nbsp;<span title="sidt">Opprettelsesdato:</span>&nbsp;<b>${model.record.sidt}</b>
-					<div class="text12" style="position: relative;" align="left">
-					<span style="position:absolute; top:2px; width:250px;" id="status_info" class="popupWithInputText text12"  >
+					<div class="text14" style="position: relative;" align="left">
+					<span style="position:absolute; top:2px; width:250px;" id="status_info" class="popupWithInputText text14"  >
 						<br/>
 		           		 	Bare status <b>M</b> (Fejl) eller <b>' '</b> kan redigeres.
 		           		 	<ul>
@@ -262,14 +262,14 @@
 			<tr >
 				<td align="left" class="text14MediumBlue">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span title="siavd"><font class="text16RedBold" >*</font>Avdeling:&nbsp;
-           			<select name="avd" id="avd">
+           			<select class="selectMediumBlueE2" name="avd" id="avd">
 	            		<option value="">-velg-</option>
 	 				  	<c:forEach var="record" items="${Xmodel.avdList}" >
                              <option value="${record.avd}"<c:if test="${model.record.siavd == record.avd}"> selected </c:if> >${record.avd}<c:if test="${record.tst == '2'}">&nbsp;(test)</c:if></option>
 						</c:forEach> 
 					</select>
 					&nbsp;<span title="sisg"><font class="text16RedBold" >*</font>Sign:</span>&nbsp;
-           			<select name="sisg" id="sisg">
+           			<select class="selectMediumBlueE2" name="sisg" id="sisg">
 	            		<option value="">-velg-</option>
 	 				  	<c:forEach var="record" items="${Xmodel.signList}" >
                            	 	<c:choose>
@@ -306,8 +306,8 @@
 				 			<td class="text14" align="left">
 				 				<img onMouseOver="showPop('1_1_info');" onMouseOut="hidePop('1_1_info');"style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 			 					<b>1.1</b><font class="text16RedBold" >*</font><span title="sidty">Dekl.type&nbsp;</span>
-			 					<div class="text12" style="position: relative;" align="left">
-			 					<span style="position:absolute; top:2px; width:250px;" id="1_1_info" class="popupWithInputText text12"  >
+			 					<div class="text14" style="position: relative;" align="left">
+			 					<span style="position:absolute; top:2px; width:250px;" id="1_1_info" class="popupWithInputText text14"  >
 					           			<b>1.1 Dekl.type</b>
 					           			<ul>
 					           				<li><b>EU</b> innførsel fra et EØS,EFTA eller EU-land</li>
@@ -330,8 +330,8 @@
 			 				</td>
 			 				<td class="text14">
 			 				<img onMouseOver="showPop('prosedyr_info');" onMouseOut="hidePop('prosedyr_info');"style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-			 				<div class="text12" style="position: relative;display:inline;" align="left">
-			 				<span style="position:absolute; top:2px; width:250px;" id="prosedyr_info" class="popupWithInputText text12">
+			 				<div class="text14" style="position: relative;display:inline;" align="left">
+			 				<span style="position:absolute; top:2px; width:250px;" id="prosedyr_info" class="popupWithInputText text14">
 				           		<ul>
 				           			<c:forEach var="record" items="${model.ekspedisjonstyperImportCodeList}" >
 				           			<li><b>${record.zkod}</b>&nbsp;${record.ztxt}</li>
@@ -356,8 +356,8 @@
 				 			<td class="text14">
 				 				<img onMouseOver="showPop('om_sitype_info');" onMouseOut="hidePop('om_sitype_info');"style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 			 					<font class="text16RedBold" >*</font><span title="om_sitype">Typetilfelle&nbsp;</span>
-			 					<div class="text12" style="position: relative;" align="left">
-			 					<span style="position:absolute;top:2px; width:250px;" id="om_sitype_info" class="popupWithInputText text12"  >
+			 					<div class="text14" style="position: relative;" align="left">
+			 					<span style="position:absolute;top:2px; width:250px;" id="om_sitype_info" class="popupWithInputText text14"  >
 				           			<b>Typetilfelle</b>
 				           			<ul>
 				           				<c:forEach var="record" items="${model.typetilfelleOmbCodeList}" >
@@ -390,8 +390,8 @@
 		 						</td>
 		 						<td class="text14" align="center">
 					 				<span title="siski" id="v_siski" class="validation">Toll/Mva</span>
-					 				<div class="text12" style="position: relative;" align="left">
-					 				<span style="position:absolute; top:2px; width:250px;" id="tollMva_info" class="popupWithInputText text12" >
+					 				<div class="text14" style="position: relative;" align="left">
+					 				<span style="position:absolute; top:2px; width:250px;" id="tollMva_info" class="popupWithInputText text14" >
 					           			<b>Toll/Mva</b>
 					           			<br/><br/>
 					           			Dersom systemet ikke finner tollkreditt på det tastede kundenummeret, så må man angi hvem som skal betale TOLL/MVA.
@@ -410,7 +410,7 @@
 				 				</table>
 				 			</td>
 				 			<td>
-				 				<select name="siski" id="siski" >
+				 				<select class="selectMediumBlueE2" name="siski" id="siski" >
 				 					<option value="">-velg-</option>
 								  <option value="S"<c:if test="${ model.record.siski == 'S'}"> selected </c:if> >S</option>
 								  <option value="K"<c:if test="${ model.record.siski == 'K'}"> selected </c:if> >K</option>
@@ -420,8 +420,8 @@
 			 				<td class="text14">
 			 					<img onMouseOver="showPop('ens_flag_info');" onMouseOut="hidePop('ens_flag_info'); "style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 			 					<span title="sikddk">&nbsp;Dagsopp./Kontant</span>
-				 				<div class="text12" style="position: relative;" align="left">
-				 				<span style="position:absolute; top:2px; width:250px;" id="ens_flag_info" class="popupWithInputText text12"  >
+				 				<div class="text14" style="position: relative;" align="left">
+				 				<span style="position:absolute; top:2px; width:250px;" id="ens_flag_info" class="popupWithInputText text14"  >
 						           		<b>Dagsoppgjør/Kontant</b>
 						           		<p>
 						           		Kodevalg for hvilke tekst man ønsker på deklarasj. dersom S/K/I er brukt.
@@ -434,7 +434,7 @@
 								</div>
 			 				</td>
 			 				<td>
-				 				<select name="sikddk" id="sikddk" >
+				 				<select class="selectMediumBlueE2" name="sikddk" id="sikddk" >
 				 				  <option selected value="">-velg-</option>
 								  <option value="D"<c:if test="${model.record.sikddk == 'D'}"> selected </c:if> >D</option>
 								  <option value="K"<c:if test="${model.record.sikddk == 'K'}"> selected </c:if> >K</option>
@@ -531,8 +531,8 @@
 				 			<td class="text14White">
 								&nbsp;<img onMouseOver="showPop('2_info');" onMouseOut="hidePop('2_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 					 			<b>&nbsp;2.</b>&nbsp;Avsender / Eksportør&nbsp;<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
-				 				<div class="text12" style="position: relative;" align="left">
-				 				<span style="position:absolute; top:2px; width:250px;" id="2_info" class="popupWithInputText text12"  >
+				 				<div class="text14" style="position: relative;" align="left">
+				 				<span style="position:absolute; top:2px; width:250px;" id="2_info" class="popupWithInputText text14"  >
 					           		<b>Avsender / Eksportør</b>
 					           		<p>
 					           		Oppgi selgerens navn og adresse. 
@@ -574,14 +574,14 @@
 							            <td class="text14" align="left" >&nbsp;&nbsp;
 								            <span title="sikns">Kundenummer</span>
 								            <img title="Spørring på fritekster for kunder" id="senderFreeTextImg" onMouseOver="showPop('senderFtxtinfo');" onMouseOut="hidePop('senderFtxtinfo');" onClick="showPop('senderInfoFreeTextDialog');" style="vertical-align:top;" width="18px" height="18px" src="resources/images/largeTextContent.png" border="0" alt="info">
-								 			<div class="text12" style="position: relative;" align="left">
+								 			<div class="text14" style="position: relative;" align="left">
 											<span style="position:absolute; top:2px; width:250px;" id="senderFtxtinfo" class="popupWithInputText"  >
-								           		<font class="text12" >Spørring på fritekster for kunder</font>
+								           		<font class="text14" >Spørring på fritekster for kunder</font>
 											</span>
 											</div>
 											
 								 			<span style="position:absolute; left:300px; top:300px; width:400px; height:500px;" id="senderInfoFreeTextDialog" class="popupWithInputText"  >
-								           		<div class="text12" align="left">
+								           		<div class="text14" align="left">
 								           		Spørring på fritekster for kunder
 								           		<p>
 								           			<textarea rows="20" cols="40" class="inputText" name="senderInfoTextArea" id="senderInfoTextArea" maxlength="1000"></textarea>
@@ -654,8 +654,8 @@
 				 			<td class="text14White">
 				 				&nbsp;<img onMouseOver="showPop('8_info');" onMouseOut="hidePop('8_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 				 				<b>&nbsp;8.</b><font class="text16RedBold" >*</font>&nbsp;Mottaker&nbsp;<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
-				 				<div class="text12" style="position: relative;" align="left">
-				 				<span style="position:absolute; top:2px; width:250px;" id="8_info" class="popupWithInputText text12"  >
+				 				<div class="text14" style="position: relative;" align="left">
+				 				<span style="position:absolute; top:2px; width:250px;" id="8_info" class="popupWithInputText text14"  >
 						           		<b>Mottaker</b>
 						           		<p>
 						           		Oppgi mottakers/vareeiers navn og adresse.
@@ -698,14 +698,14 @@
 							            <td class="text14" align="left" >&nbsp;&nbsp;
 							            <span title="siknk">Kundenummer</span>
 							            		<img id="receiverFreeTextImg" onMouseOver="showPop('receiverFtxtinfo');" onMouseOut="hidePop('receiverFtxtinfo');" onClick="showPop('receiverInfoFreeTextDialog');" style="vertical-align:top;" width="18px" height="18px" src="resources/images/largeTextContent.png" border="0" alt="info" title="Spørring på fritekster for kunder" >
-								 			<div class="text12" style="position: relative;" align="left">
+								 			<div class="text14" style="position: relative;" align="left">
 											<span style="position:absolute; top:2px; width:250px;" id="receiverFtxtinfo" class="popupWithInputText"  >
-								           		<font class="text12" >Spørring på fritekster for kunder</font>
+								           		<font class="text14" >Spørring på fritekster for kunder</font>
 											</span>
 											</div>
 											
 											<span style="position:absolute; left:300px; top:450px; width:400px; height:500px;" id="receiverInfoFreeTextDialog" class="popupWithInputText"  >
-								           		<div class="text12" align="left">
+								           		<div class="text14" align="left">
 								           		Spørring på fritekster for kunder
 								           		<p>
 								           			<textarea rows="20" cols="40" class="inputText" name="receiverInfoTextArea" id="receiverInfoTextArea" maxlength="1000"></textarea>
@@ -738,8 +738,8 @@
 							            <td class="text14" >
 						 					<img onMouseOver="showPop('48_info');" onMouseOut="hidePop('48_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 							 				&nbsp;<b>48.&nbsp;</b><span title="siktc/sikta/siktb">Kontonr.Tollkredit&nbsp;</span>
-							 				<div class="text12" style="position: relative;" align="left">
-							 				<span style="position:absolute; top:2px; width:250px;" id="48_info" class="popupWithInputText text12"  >
+							 				<div class="text14" style="position: relative;" align="left">
+							 				<span style="position:absolute; top:2px; width:250px;" id="48_info" class="popupWithInputText text14"  >
 							           			<b>48. Kontonr.Tollkredit</b>&nbsp;
 												<p>
 							           			Hentes fra kunderegister. Dersom det er en kunde som tidligere har vært uten kred, så kan man taste inn krednr.
@@ -804,8 +804,8 @@
 				 			<td class="text14White">
 				 				&nbsp;<img onMouseOver="showPop('14_b_info');" onMouseOut="hidePop('14_b_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 		 						<b>&nbsp;14.</b><font class="text16RedBold" >*</font>&nbsp;Deklarant&nbsp;<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
-				 				<div class="text12" style="position: relative;" align="left">
-				 				<span style="position:absolute; top:2px; width:250px;" id="14_b_info" class="popupWithInputText text12"  >
+				 				<div class="text14" style="position: relative;" align="left">
+				 				<span style="position:absolute; top:2px; width:250px;" id="14_b_info" class="popupWithInputText text14"  >
 					           		<b>14.Deklarant</b> 
 				           			<p>
 				           				Hentes automatisk fra standardverdiene for AVDELINGEN
@@ -856,8 +856,8 @@
 				 			<td class="text14White">
 				 				&nbsp;<img onMouseOver="showPop('28_info');" onMouseOut="hidePop('28_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 		 						<b>&nbsp;28.<font class="text16RedBold" >*</font></b>&nbsp;Finans<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
-		 						<div class="text12" style="position: relative;" align="left">
-		 						<span style="position:absolute; top:2px; width:250px;" id="28_info" class="popupWithInputText text12"  >
+		 						<div class="text14" style="position: relative;" align="left">
+		 						<span style="position:absolute; top:2px; width:250px;" id="28_info" class="popupWithInputText text14"  >
 				           			<b>28.&nbsp;Finans</b><br/><br/>
 									Oppgi fakturanummer og dato. Fakturaer med fortløpende nummer kan oppgis med første og siste nummer. Feks. 270-275. 
 									Hvis fakturaen ikke er nummerert,oppgis bare dato
@@ -969,8 +969,8 @@
 				 				  <option value="3" <c:if test="${model.record.sitst == '3'}"> selected </c:if> >3</option>	
 				 				  <option value="9" <c:if test="${model.record.sitst == '9'}"> selected </c:if> >9</option>	
 				 				</select>
-				 				<div class="text12" style="position: relative;" align="left">
-				 				<span style="position:absolute; top:2px; width:250px;" id="24_info" class="popupWithInputText text12"  >
+				 				<div class="text14" style="position: relative;" align="left">
+				 				<span style="position:absolute; top:2px; width:250px;" id="24_info" class="popupWithInputText text14"  >
 					           		<b>24.&nbsp;Transaksjonstype</b><br/><br/>
 									Oppgi med kode:
 									<ul>
@@ -1009,8 +1009,8 @@
 				 			<td class="text14White">
 				 				&nbsp;<img onMouseOver="showPop('edi_info');" onMouseOut="hidePop('edi_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 		 						&nbsp;<font class="text16RedBold" >*</font>Meldings funksjon Omberegning<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
-		 						<div class="text12" style="position: relative;" align="left">
-		 						<span style="position:absolute;top:2px; width:250px;" id="edi_info" class="popupWithInputText text12" >
+		 						<div class="text14" style="position: relative;" align="left">
+		 						<span style="position:absolute;top:2px; width:250px;" id="edi_info" class="popupWithInputText text14" >
 				           			<b>Meldings funksjon Omberegning</b><br/><br/>
 									Send till TVINN (EDI) ...
 								</span>
@@ -1083,8 +1083,8 @@
 					            <td class="text14" align="left" >
 					            <img onMouseOver="showPop('15_info');" onMouseOut="hidePop('15_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 			 					<b>15.</b><font class="text16RedBold" >*</font>&nbsp;<span title="silka">Avs/utf.land</span>&nbsp;
-					            <div class="text12" style="position: relative;" align="left">
-			 					<span style="position:absolute; top:2px; width:250px;" id="15_info" class="popupWithInputText text12"  >
+					            <div class="text14" style="position: relative;" align="left">
+			 					<span style="position:absolute; top:2px; width:250px;" id="15_info" class="popupWithInputText text14"  >
 					           			<b>15. Avs/utf.land</b>
 					           			<br/><br/>
 					           			Med avsenderland forstås det land hvorfra varen er sendt til Norge uten mellomliggende handelstransaksjon (omlasting undderveis endrer ikke forholdet)
@@ -1109,16 +1109,16 @@
 									<img onClick="showPop('avsenderlandInfo');" tabindex=-1 style="cursor:pointer;" src="resources/images/find.png" border="0" alt="search" >
 									<span style="position:absolute; left:920px; top:150px; width:350px; height:150px;" id="avsenderlandInfo" class="popupWithInputText"  >
 						           		<div class="text10" align="left">
-					           				<select class="text12" id="avsenderland" name="avsenderland" size="5" onDblClick="hidePop('avsenderlandInfo');">
+					           				<select class="text14" id="avsenderland" name="avsenderland" size="5" onDblClick="hidePop('avsenderlandInfo');">
 						           				<c:forEach var="country" items="${model.countryCodeList}" >
 						 				  			<option value="${country.zkod}">${country.zkod}&nbsp;${country.ztxt}</option>
 												</c:forEach>
 						           			</select>
 						           			
 											<table width="100%" align="left" border="0">
-												<tr height="10">&nbsp;<td class="text12">&nbsp;</td></tr>
+												<tr height="10">&nbsp;<td class="text14">&nbsp;</td></tr>
 												<tr align="left" >
-													<td class="text12">&nbsp;<button name="avsenderlandButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('avsenderlandInfo');">&nbsp;<spring:message code="systema.tvinn.sad.import.ok"/></button> 
+													<td class="text14">&nbsp;<button name="avsenderlandButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('avsenderlandInfo');">&nbsp;<spring:message code="systema.tvinn.sad.import.ok"/></button> 
 													</td>
 												</tr>
 											</table>
@@ -1134,8 +1134,8 @@
 					            <img onMouseOver="showPop('19_info');" onMouseOut="hidePop('19_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 					            <b>19.</b><span title="sikdc" id="v_sikdc" class="validation">Container&nbsp;</span>
 					            
-					            <div class="text12" style="position: relative;" align="left">
-					            <span style="position:absolute; top:2px; width:250px;" id="19_info" class="popupWithInputText text12">
+					            <div class="text14" style="position: relative;" align="left">
+					            <span style="position:absolute; top:2px; width:250px;" id="19_info" class="popupWithInputText text14">
 					           			<b>19. Container</b>
 					           			<br/><br/>
 					           			Oppgi,med fastsatte koder, om varene blir transportert i containere ved innpassering til Norge.
@@ -1156,7 +1156,7 @@
 								</td>
 									
 					            <td class="text14" >
-			           				<select name="sikdc" id="sikdc">
+			           				<select class="selectMediumBlueE2" name="sikdc" id="sikdc">
 				 						<option value="0" <c:if test="${model.record.sikdc == '0'}"> selected </c:if> >0</option>
 				 						<option value="1" <c:if test="${model.record.sikdc == '1'}"> selected </c:if> >1</option>								 				  	  
 									</select>
@@ -1167,8 +1167,8 @@
 					            <td class="text14" align="left" >
 					            <img onMouseOver="showPop('21_1_info');" onMouseOut="hidePop('21_1_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 			 					<b>21.1</b><span title="sitrid" id="v_sitrid" class="validation">Transp.ID</span>
-			 					<div class="text12" style="position: relative;" align="left">
-			 					<span style="position:absolute; top:2px; width:250px;" id="21_1_info" class="popupWithInputText text12"  >
+			 					<div class="text14" style="position: relative;" align="left">
+			 					<span style="position:absolute; top:2px; width:250px;" id="21_1_info" class="popupWithInputText text14"  >
 					           			<b>21.1 Det aktive Transportmidlets identitet</b>
 					           			<p>
 					           			Oppgi det aktive transportmidlets identitet ved innpassering til Norge. 
@@ -1197,8 +1197,8 @@
 					            <img onMouseOver="showPop('21_2_info');" onMouseOut="hidePop('21_2_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 					            <b>21.2</b>
 					            <span title="silkt">Aktive transp. nasjonalitet&nbsp;</span>
-					          	<div class="text12" style="position: relative;" align="left">
-					            <span style="position:absolute; top:2px; width:250px;" id="21_2_info" class="popupWithInputText text12"  >
+					          	<div class="text14" style="position: relative;" align="left">
+					            <span style="position:absolute; top:2px; width:250px;" id="21_2_info" class="popupWithInputText text14"  >
 					           			<b>21.2 Aktive transp. nasjonalitet ved grense</b>
 					           			<p>
 					           			Oppgi det aktive transportmidlets nasjonalitet ved innpassering til Norge. 
@@ -1212,7 +1212,7 @@
 								</td>
 									
 								<td>
-					            		<select name="silkt" id="silkt">
+					            		<select class="selectMediumBlueE2" name="silkt" id="silkt">
 				 						<option value="">-velg-</option>
 					 				  	<c:forEach var="country" items="${model.countryCodeList}" >
 					 				  		<option value="${country.zkod}"<c:if test="${model.record.silkt == country.zkod}"> selected </c:if> >${country.zkod}</option>
@@ -1225,16 +1225,16 @@
 									<img onClick="showPop('nasjonalitetSearchInfo');" tabindex=-1 style="cursor:pointer;" src="resources/images/find.png" border="0" alt="search" >
 									<span style="position:absolute; left:920px; top:150px; width:350px; height:150px;" id="nasjonalitetSearchInfo" class="popupWithInputText"  >
 						           		<div class="text10" align="left">
-					           				<select class="text12" id="nasjonalitetSearch" name="nasjonalitetSearch" size="5" onDblClick="hidePop('nasjonalitetSearchInfo');">
+					           				<select class="text14" id="nasjonalitetSearch" name="nasjonalitetSearch" size="5" onDblClick="hidePop('nasjonalitetSearchInfo');">
 						           				<c:forEach var="country" items="${model.countryCodeList}" >
 						 				  			<option value="${country.zkod}">${country.zkod}&nbsp;${country.ztxt}</option>
 												</c:forEach>
 						           			</select>
 						           			
 											<table width="100%" align="left" border="0">
-												<tr height="10">&nbsp;<td class="text12">&nbsp;</td></tr>
+												<tr height="10">&nbsp;<td class="text14">&nbsp;</td></tr>
 												<tr align="left" >
-													<td class="text12">&nbsp;<button name="nasjonalitetSearchButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('nasjonalitetSearchInfo');">&nbsp;<spring:message code="systema.tvinn.sad.import.ok"/></button> 
+													<td class="text14">&nbsp;<button name="nasjonalitetSearchButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('nasjonalitetSearchInfo');">&nbsp;<spring:message code="systema.tvinn.sad.import.ok"/></button> 
 													</td>
 												</tr>
 											</table>
@@ -1255,8 +1255,8 @@
 					            <img onMouseOver="showPop('25_info');" onMouseOut="hidePop('25_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 					            <b>25.</b>
 					            <span title="sitrm" id="v_sitrm" class="validation">Transportmåte ved grensen</span>
-					            <div class="text12" style="position: relative;" align="left">
-					            <span style="position:absolute; top:2px; width:250px;" id="25_info" class="popupWithInputText text12"  >
+					            <div class="text14" style="position: relative;" align="left">
+					            <span style="position:absolute; top:2px; width:250px;" id="25_info" class="popupWithInputText text14"  >
 					           			<b>25. Transportmåte ved grensen</b>
 					           			<p>
 					           			Oppgi med kode transportmåten ved innpassering til Norge.
@@ -1272,7 +1272,7 @@
 								
 								</td>	
 					            <td class="text14" >
-			           				<select name="sitrm" id="sitrm">
+			           				<select class="selectMediumBlueE2" name="sitrm" id="sitrm">
 				 						<option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.transportmaterCodeList}" >
 					 				  		<option value="${record.zkod}"<c:if test="${model.record.sitrm == record.zkod}"> selected </c:if> >${record.zkod}</option>
@@ -1290,8 +1290,8 @@
 		            <img onMouseOver="showPop('49_info');" onMouseOut="hidePop('49_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">	
 		            <b>49.&nbsp;</b><span title="sign"><font class="text16RedBold" >*</font>Godsnr</span>
 		            &nbsp;<input type="text" class="inputTextMediumBlueMandatoryField"  name="sign" id="sign" size="20" maxlength="15" value="${model.record.sign}">
-		            <div class="text12" style="position: relative;" align="left">
-		            <span style="position:absolute; top:2px; width:250px;" id="49_info" class="popupWithInputText text12"  >
+		            <div class="text14" style="position: relative;" align="left">
+		            <span style="position:absolute; top:2px; width:250px;" id="49_info" class="popupWithInputText text14"  >
 		           			<b>49. Godsnr</b><br/>
 		           			Godsnr og posisjonsnr/konnossementnr overføres fra oppdraget.
 							<br/><br/>
@@ -1339,8 +1339,8 @@
 				            <td class="text14" align="left" >
 				            <img onMouseOver="showPop('20_1_info');" onMouseOut="hidePop('20_1_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 		 					<b>20.1</b><span title="silv"><font class="text16RedBold" >*</font>Leveringksvilkår kode</span>
-				            <div class="text12" style="position: relative;" align="left">
-				            <span style="position:absolute; top:2px; width:250px;" id="20_1_info" class="popupWithInputText text12"  >
+				            <div class="text14" style="position: relative;" align="left">
+				            <span style="position:absolute; top:2px; width:250px;" id="20_1_info" class="popupWithInputText text14"  >
 				           			<b>Leveringksvilkår kode</b>
 				           			<p>
 				           			Kode for leveringsvilkår:
@@ -1368,8 +1368,8 @@
 					            <img onMouseOver="showPop('20_2_info');" onMouseOut="hidePop('20_2_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 			 					<b>20.2</b>
 			 					<span title="silvt"><font class="text16RedBold" >*</font>Leveringksvilkår sted</span>&nbsp;
-					            <div class="text12" style="position: relative;" align="left">
-					            <span style="position:absolute; top:2px; width:250px;" id="20_2_info" class="popupWithInputText text12"  >
+					            <div class="text14" style="position: relative;" align="left">
+					            <span style="position:absolute; top:2px; width:250px;" id="20_2_info" class="popupWithInputText text14"  >
 					           			<b>Leveringksvilkår sted</b>
 					           			<p>
 					           			Stedet leveringsvilkåret gjelder til/fra. 
@@ -1398,14 +1398,14 @@
 					            <img onMouseOver="showPop('30_1_info');" onMouseOut="hidePop('30_1_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">	
 					            <b>30.1&nbsp;</b><span title="sikdls">Lagringssted kode</span></td>
 					            <td >
-						            <select name="sikdls" id="sikdls">
+						            <select class="selectMediumBlueE2" name="sikdls" id="sikdls">
 					 				  	<c:forEach var="record" items="${model.lagringsstedCodeList}" >
 					 				  		<option value="${record.zkod}"<c:if test="${model.record.sikdls == record.zkod}"> selected </c:if> >${record.zkod}</option>
 										</c:forEach>
 									</select>
 					            
-					            <div class="text12" style="position: relative;" align="left">
-					            <span style="position:absolute; top:2px; width:250px;" id="30_1_info" class="popupWithInputText text12"  >
+					            <div class="text14" style="position: relative;" align="left">
+					            <span style="position:absolute; top:2px; width:250px;" id="30_1_info" class="popupWithInputText text14"  >
 				           			<b>30. Lagringssted kode</b>
 				           			<br/><br/>
 				           			Varenes lagringssted oppgis med kode. Rubrikken skal fylles ut med gyldig kode for lagringssted.
@@ -1424,8 +1424,8 @@
 				            		<td class="text14" align="left" >
 				            		<img onMouseOver="showPop('30_2_info');" onMouseOut="hidePop('30_2_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">	
 					            <b>30.2&nbsp;</b><span title="sils">Lagringssted tekst</span>
-					            <div class="text12" style="position: relative;" align="left">
-					            <span style="position:absolute; top:2px; width:250px;" id="30_2_info" class="popupWithInputText text12"  >
+					            <div class="text14" style="position: relative;" align="left">
+					            <span style="position:absolute; top:2px; width:250px;" id="30_2_info" class="popupWithInputText text14"  >
 					           			<b>30. Lagringssted tekst</b>
 					           			<br/><br/>
 					           			Selve tekstfeltet oppdateres automatisk når man taster / plukker en gyldig kode.
@@ -1442,8 +1442,8 @@
 			 					<td class="text14" colspan="2" >
 			 					<img onMouseOver="showPop('12_info');" onMouseOut="hidePop('12_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 				 				<b>12.&nbsp;Verdiopplysninger&nbsp;</b>
-				 				<div class="text12" style="position: relative;" align="left">
-				 				<span style="position:absolute; top:2px; width:250px;" id="12_info" class="popupWithInputText text12"  >
+				 				<div class="text14" style="position: relative;" align="left">
+				 				<span style="position:absolute; top:2px; width:250px;" id="12_info" class="popupWithInputText text14"  >
 					           			<b>12. Verdiopplysninger</b>&nbsp;
 					           			<br/><br/>
 					           			Oppgi fraktomkostningene (til norsk grense) for hele ekspedisjonen når disse ikke inngår i fakturaprisen.
@@ -1461,8 +1461,8 @@
 								<td class="text14" align="left" >
 								<img onMouseOver="showPop('andraKostPM_info');" onMouseOut="hidePop('andraKostPM_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 				 				<span title="siftg2">+/-&nbsp;(P/M)</span>
-				 				<div class="text12" style="position: relative;" align="left">
-				 				<span style="position:absolute; top:2px; width:250px;" id="andraKostPM_info" class="popupWithInputText text12"  >
+				 				<div class="text14" style="position: relative;" align="left">
+				 				<span style="position:absolute; top:2px; width:250px;" id="andraKostPM_info" class="popupWithInputText text14"  >
 					           			<b>Andre kostnader +/- (P/M)</b>&nbsp;
 					           			<p>
 											HVIS MAN IKKE ØNSKER AT RUBR. 22 SKAL PÅVIRKES KAN MAN BENYTTE KODENE
@@ -1481,7 +1481,7 @@
 								<td class="text14" ><span title="sibel1/sival1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Beløp tollb.frakt</span></td>
 			 					<td class="text14">
 			 						<input onKeyPress="return amountKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="sibel1" id="sibel1" size="12" maxlength="11" value="${model.record.sibel1}">
-			 						<select name="sival1" id="sival1">
+			 						<select class="selectMediumBlueE2" name="sival1" id="sival1">
 				 						<option value="">-velg-</option>
 					 				  	<c:forEach var="currency" items="${model.currencyCodeList}" >
 					 				  		<option value="${currency.zkod}"<c:if test="${model.record.sival1 == currency.zkod}"> selected </c:if> >${currency.zkod}</option>
@@ -1494,16 +1494,16 @@
 									<img onClick="showPop('sival1SearchInfo');" tabindex=-1 style="cursor:pointer;" src="resources/images/find.png" border="0" alt="search" >
 									<span style="position:absolute; left:920px; top:400px; width:350px; height:150px;" id="sival1SearchInfo" class="popupWithInputText"  >
 						           		<div class="text10" align="left">
-					           				<select class="text12" id="sival1Search" name="sival1Search" size="5" onDblClick="hidePop('sival1SearchInfo');">
+					           				<select class="text14" id="sival1Search" name="sival1Search" size="5" onDblClick="hidePop('sival1SearchInfo');">
 						           				<c:forEach var="currency" items="${model.currencyCodeList}" >
 						 				  			<option value="${currency.zkod}">${currency.zkod}&nbsp;${currency.ztxt}</option>
 												</c:forEach>
 						           			</select>
 						           			
 											<table width="100%" align="left" border="0">
-												<tr height="10">&nbsp;<td class="text12">&nbsp;</td></tr>
+												<tr height="10">&nbsp;<td class="text14">&nbsp;</td></tr>
 												<tr align="left" >
-													<td class="text12">&nbsp;<button name="sibel1SearchButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('sival1SearchInfo');">&nbsp;<spring:message code="systema.tvinn.sad.import.ok"/></button> 
+													<td class="text14">&nbsp;<button name="sibel1SearchButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('sival1SearchInfo');">&nbsp;<spring:message code="systema.tvinn.sad.import.ok"/></button> 
 													</td>
 												</tr>
 											</table>
@@ -1517,8 +1517,8 @@
 								<img onMouseOver="showPop('andraKost_info');" onMouseOut="hidePop('andraKost_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 				 				<span title="sibel2/sival2">Beløp andre kost.</span>
 				 				
-								<div class="text12" style="position: relative;" align="left">
-								<span style="position:absolute; top:2px; width:250px;" id="andraKost_info" class="popupWithInputText text12">
+								<div class="text14" style="position: relative;" align="left">
+								<span style="position:absolute; top:2px; width:250px;" id="andraKost_info" class="popupWithInputText text14">
 					           			<b>Beløp andre kostnader +/- (P/M)</b>&nbsp;
 					           			<br/><br/>
 										Oppgi summen av eventuelle tillegg og/eller fradrag. Dersom det er mer å trekke fra enn å legge til fakturabeløpet, blir det et negativt beløp her.
@@ -1549,7 +1549,7 @@
 			 					
 			 					<td class="text14">
 			 						<input onKeyPress="return amountKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="sibel2" id="sibel2" size="12" maxlength="11" value="${model.record.sibel2}">
-			 						<select name="sival2" id="sival2">
+			 						<select class="selectMediumBlueE2" name="sival2" id="sival2">
 				 						<option value="">-velg-</option>
 					 				  	<c:forEach var="currency" items="${model.currencyCodeList}" >
 					 				  		<option value="${currency.zkod}"<c:if test="${model.record.sival2 == currency.zkod}"> selected </c:if> >${currency.zkod}</option>
@@ -1562,16 +1562,16 @@
 									<img onClick="showPop('sival2SearchInfo');" tabindex=-1 style="cursor:pointer;" src="resources/images/find.png" border="0" alt="search" >
 									<span style="position:absolute; left:920px; top:400px; width:350px; height:150px;" id="sival2SearchInfo" class="popupWithInputText"  >
 						           		<div class="text10" align="left">
-					           				<select class="text12" id="sival2Search" name="sival2Search" size="5" onDblClick="hidePop('sival2SearchInfo');">
+					           				<select class="text14" id="sival2Search" name="sival2Search" size="5" onDblClick="hidePop('sival2SearchInfo');">
 						           				<c:forEach var="currency" items="${model.currencyCodeList}" >
 						 				  			<option value="${currency.zkod}">${currency.zkod}&nbsp;${currency.ztxt}</option>
 												</c:forEach>
 						           			</select>
 						           			
 											<table width="100%" align="left" border="0">
-												<tr height="10">&nbsp;<td class="text12">&nbsp;</td></tr>
+												<tr height="10">&nbsp;<td class="text14">&nbsp;</td></tr>
 												<tr align="left" >
-													<td class="text12">&nbsp;<button name="sibel2SearchButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('sival2SearchInfo');">&nbsp;<spring:message code="systema.tvinn.sad.import.ok"/></button> 
+													<td class="text14">&nbsp;<button name="sibel2SearchButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('sival2SearchInfo');">&nbsp;<spring:message code="systema.tvinn.sad.import.ok"/></button> 
 													</td>
 												</tr>
 											</table>
@@ -1593,8 +1593,8 @@
 					            <td class="text14" align="left" >
 					            <img onMouseOver="showPop('brut_info');" onMouseOut="hidePop('brut_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">	
 					            <span title="sivkb"><font class="text16RedBold" >*</font>Bruttovekt</span>
-					            <div class="text12" style="position: relative;" align="left">
-					            <span style="position:absolute; top:2px; width:250px;" id="brut_info" class="popupWithInputText text12"  >
+					            <div class="text14" style="position: relative;" align="left">
+					            <span style="position:absolute; top:2px; width:250px;" id="brut_info" class="popupWithInputText text14"  >
 					           			<b>Bruttovekt</b>
 								</span>	
 								</div>
@@ -1607,8 +1607,8 @@
 					            <td class="text14" align="left" >
 					            <img onMouseOver="showPop('6_info');" onMouseOut="hidePop('6_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">	
 					            <b>&nbsp;6.&nbsp;</b><span title="sintk"><font class="text16RedBold" >*</font>Antall Kolli</span>
-					            <div class="text12" style="position: relative;" align="left">
-					            <span style="position:absolute; top:2px; width:250px;" id="6_info" class="popupWithInputText text12"  >
+					            <div class="text14" style="position: relative;" align="left">
+					            <span style="position:absolute; top:2px; width:250px;" id="6_info" class="popupWithInputText text14"  >
 					           			<b>6. Antall Kolli</b>
 					           			<br/><br/>
 					           			Opplysningene overføres fra oppdragsregistreringen. 
@@ -1628,8 +1628,8 @@
 			 					<td class="text14" colspan="2" >
 			 					<img onMouseOver="showPop('31_info');" onMouseOut="hidePop('31_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 				 				&nbsp;<b>31.<c:if test="${empty model.record.om_sift11}"></b><font class="text16RedBold" >*</font></c:if>&nbsp;<span title="om_sift01...">Årsak</span>&nbsp;</b>
-				 				<div class="text12" style="position: relative;" align="left">
-				 				<span style="position:absolute; top:2px; width:250px;" id="31_info" class="popupWithInputText text12"  >
+				 				<div class="text14" style="position: relative;" align="left">
+				 				<span style="position:absolute; top:2px; width:250px;" id="31_info" class="popupWithInputText text14"  >
 					           			<b>31. Årsak</b>&nbsp;
 					           			<br/><br/>
 					           			Todo
@@ -1676,8 +1676,8 @@
 			 					<td class="text14" colspan="2" >
 			 					<img onMouseOver="showPop('mftvinn_info');" onMouseOut="hidePop('mftvinn_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 				 				&nbsp;<span title="blank">Melding fra TVINN</span>&nbsp;</b>
-				 				<div class="text12" style="position: relative;" align="left">
-				 				<span style="position:absolute; top:2px; width:250px;" id="mftvinn_info" class="popupWithInputText text12"  >
+				 				<div class="text14" style="position: relative;" align="left">
+				 				<span style="position:absolute; top:2px; width:250px;" id="mftvinn_info" class="popupWithInputText text14"  >
 					           			<b>Melding fra TVINN</b>&nbsp;
 					           			<br/><br/>
 					           			Todo
@@ -1720,8 +1720,8 @@
 					            <td class="text14" align="left" >
     			 					<img onMouseOver="showPop('vf_info');" onMouseOut="hidePop('vf_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 					            <span title="insivf">Default VF:</span>
-					            	<div class="text12" style="position: relative;" align="left">
-					            	<span style="position:absolute; top:2px; width:250px;" id="vf_info" class="popupWithInputText text12"  >
+					            	<div class="text14" style="position: relative;" align="left">
+					            	<span style="position:absolute; top:2px; width:250px;" id="vf_info" class="popupWithInputText text14"  >
 					           			<b>Default VF</b>
 					           			<br/>
 					           			<p>
@@ -1738,8 +1738,8 @@
 					            <td class="text14" align="left" >
 					            <img onMouseOver="showPop('forholdBN_info');" onMouseOut="hidePop('forholdBN_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 					            <span title="insibvnv">Forhold B/N-vekt:</span>
-					            	<div class="text12" style="position: relative;" align="left">
-					            	<span style="position:absolute; top:2px; width:250px;" id="forholdBN_info" class="popupWithInputText text12"  >
+					            	<div class="text14" style="position: relative;" align="left">
+					            	<span style="position:absolute; top:2px; width:250px;" id="forholdBN_info" class="popupWithInputText text14"  >
 					           			<b>Forhold B/N-vekt</b>
 					           			<br/>
 					           			<p>
@@ -1761,8 +1761,8 @@
 							        		<img onMouseOver="showPop('changeStatusUser_info');" onMouseOut="hidePop('changeStatusUser_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 					            			Endre Status&nbsp;
 							        		<img style="vertical-align: bottom;cursor: pointer;" id="updateStatusByUserImg" width="20px" height="20px" src="resources/images/changeStatus.png" border="0" alt="change status">
-							        		<div class="text12" style="position: relative;" align="left">
-							            	<span style="position:absolute; top:2px;" id="changeStatusUser_info" class="popupWithInputText text12"  >
+							        		<div class="text14" style="position: relative;" align="left">
+							            	<span style="position:absolute; top:2px;" id="changeStatusUser_info" class="popupWithInputText text14"  >
 							           			<b>Endre Status</b>
 							           			<br/>
 							           			<p>
@@ -1790,9 +1790,9 @@
 				            		<c:if test="${not empty ( Xmodel.record.sumOfAntalKolliInItemLinesStr &&  Xmodel.record.sintk)}">
 					            		<c:if test="${ Xmodel.record.sintk !=  Xmodel.record.sumOfAntalKolliInItemLinesStr}">
 							            <img onMouseOver="showPop('itemsSumKolli_info');" onMouseOut="hidePop('itemsSumKolli_info');" width="18px" height="20px" src="resources/images/redFlag.png" border="0" alt="kolliantall warning">	
-							            <div class="text12" style="position: relative;" align="left">
+							            <div class="text14" style="position: relative;" align="left">
 							            <span style="position:absolute; top:2px; width:250px;" id="itemsSumKolli_info" class="popupWithInputText"  >
-							           		<font class="text12">
+							           		<font class="text14">
 							           			<p>	
 							           			Summen av antall pakker på produktnivå ikke er lik det angitte antall pakker i posten. Vi anbefaler at du leser hva som kunne være galt ved å sjekke varelinjene.
 							           			Hvis nummeret til venstre er = <b>-1</b> betyr, at det er mere enn 0-varelinjer, og summen av varelinjer kolli antall er = 0.
@@ -1811,9 +1811,9 @@
 				            		<c:if test="${not empty ( Xmodel.record.sumOfAntalItemLinesStr)}">
 					            		<c:if test="${ Xmodel.record.sumOfAntalItemLines <= 0 }">
 							            <img onMouseOver="showPop('itemsSum_info');" onMouseOut="hidePop('itemsSum_info');" width="18px" height="20px" src="resources/images/redFlag.png" border="0" alt="varelinjerantall warning">	
-							            <div class="text12" style="position: relative;" align="left">
+							            <div class="text14" style="position: relative;" align="left">
 							            <span style="position:absolute; top:2px; width:250px;" id="itemsSum_info" class="popupWithInputText"  >
-						           			<font class="text12" >Summen av ​​antallet varelinjer må vare > 0</font>
+						           			<font class="text14" >Summen av ​​antallet varelinjer må vare > 0</font>
 										</span>
 										</div>	
 					            		</c:if>
@@ -1826,9 +1826,9 @@
 				            		<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="sumTotalAmountItemLines" id="sumTotalAmountItemLines" size="10" value="${ Xmodel.record.sumTotalAmountItemLinesStr}">
 					            	<c:if test="${Xmodel.record.sumTotalAmountItemLines != Xmodel.record.sibel3Dbl}">
 					            		<img onMouseOver="showPop('itemsAmountSum_info');" onMouseOut="hidePop('itemsAmountSum_info');" width="18px" height="20px" src="resources/images/redFlag.png" border="0" alt="vare-sum warning">	
-						            <div class="text12" style="position: relative;" align="left">
+						            <div class="text14" style="position: relative;" align="left">
 						            <span style="position:absolute; left:10px; top:0px;" id="itemsAmountSum_info" class="popupWithInputText"  >
-					           			<font class="text12" >Summen av Tollverdi(Σ) <b>matcher ikke</b> 22 Fakturasum</font>
+					           			<font class="text14" >Summen av Tollverdi(Σ) <b>matcher ikke</b> 22 Fakturasum</font>
 									</span>	
 									</div>
 				            		</c:if>
@@ -1840,9 +1840,9 @@
 				            		<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="sumTotalBruttoViktItemLines" id="sumTotalBruttoViktItemLines" size="10" value="${ Xmodel.record.sumTotalBruttoViktItemLinesStr}">
 					            	<c:if test="${Xmodel.record.sumTotalBruttoViktItemLines != Xmodel.record.sivkbDbl}">
 					            		<img onMouseOver="showPop('itemsBruttoVektSum_info');" onMouseOut="hidePop('itemsBruttoVektSum_info');" width="18px" height="20px" src="resources/images/redFlag.png" border="0" alt="bruttovekt warning">	
-						            <div class="text12" style="position: relative;" align="left">
+						            <div class="text14" style="position: relative;" align="left">
 						            <span style="position:absolute; left:10px; top:0px;" id="itemsBruttoVektSum_info" class="popupWithInputText"  >
-					           			<font class="text12" >Summen av Bruttovekt(Σ) <b>matcher ikke</b> Bruttovekt (hodenivå)</font>
+					           			<font class="text14" >Summen av Bruttovekt(Σ) <b>matcher ikke</b> Bruttovekt (hodenivå)</font>
 									</span>	
 									</div>
 				            		</c:if>
@@ -1902,7 +1902,7 @@
 					<tr>
 						<td class="text14" align="left" >&nbsp;Status</td>
 						<td class="text14MediumBlue">
-							<select name="selectedStatus" id="selectedStatus">
+							<select class="selectMediumBlueE2" name="selectedStatus" id="selectedStatus">
 			            		  	<option value=" ">-velg-</option>
 		            		  		<option value="A">A</option>
 							  	<option value="C">C</option>

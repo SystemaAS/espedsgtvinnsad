@@ -34,14 +34,14 @@
 						<td colspan="3">
 							<table id="tblInvoices" class="display compact cell-border" width="100%">
 								<thead>
-								<tr style="background-color:#DDDDDD">
-									<th align="center" width="2%" class="text12">&nbsp;Velg&nbsp;</th>
-								    <th align="center" width="20%" class="text12">&nbsp;Fakturanr.&nbsp;</th>   
-				                    <th align="center" class="text12">&nbsp;Dato&nbsp;</th> 
-				                    <th align="right" class="text12">&nbsp;Beløp&nbsp;</th> 
-				                    <th align="right" class="text12">&nbsp;Valuta&nbsp;</th> 
-				                    <th align="right" class="text12">&nbsp;Kurs&nbsp;</th> 
-				                    <th align="center" class="text12">Slett</th>
+								<tr class="tableHeaderField" height="20" >
+									<th align="center" width="2%" class="text14">&nbsp;Velg&nbsp;</th>
+								    <th align="center" width="20%" class="text14">&nbsp;Fakturanr.&nbsp;</th>   
+				                    <th align="center" class="text14">&nbsp;Dato&nbsp;</th> 
+				                    <th align="right" class="text14">&nbsp;Beløp&nbsp;</th> 
+				                    <th align="right" class="text14">&nbsp;Valuta&nbsp;</th> 
+				                    <th align="right" class="text14">&nbsp;Kurs&nbsp;</th> 
+				                    <th align="center" class="text14">Slett</th>
 			                    </tr>
 			                    </thead>
 			                    <tbody>
@@ -54,15 +54,15 @@
 					                       <tr class="tableOddRow" height="20" >
 					                   </c:otherwise>
 					               </c:choose>
-					               <td align="center" class="text11" width="2%" >
+					               <td align="center" class="text14" width="2%" >
 					               		<input class="clazzInvoiceAware" type="checkbox" value="J" id="id${record.sfreff}__unik${record.sfunik}" name="id${record.sfreff}__unik${record.sfunik}" >
 					               </td>
-					               <td align="center" width="20%" class="text11">&nbsp;<span title="reff/unik:${record.sfreff}/${record.sfunik}">${record.sftxt}</span></td>
-					               <td align="center" class="text11" >&nbsp;${record.sfdt}</td>
-					               <td align="right" class="text11" >&nbsp;${record.sfbl28}</td>
-					               <td align="right" class="text11" >&nbsp;${record.sfvk28}</td>
-					               <td align="right" class="text11" >&nbsp;${record.sfkr28}</td>
-					               <td width="4%" class="text11" align="center" nowrap>
+					               <td align="center" width="20%" class="text14">&nbsp;<span title="reff/unik:${record.sfreff}/${record.sfunik}">${record.sftxt}</span></td>
+					               <td align="center" class="text14" >&nbsp;${record.sfdt}</td>
+					               <td align="right" class="text14" >&nbsp;${record.sfbl28}</td>
+					               <td align="right" class="text14" >&nbsp;${record.sfvk28}</td>
+					               <td align="right" class="text14" >&nbsp;${record.sfkr28}</td>
+					               <td width="4%" class="text14" align="center" nowrap>
 					               		<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadimport_edit_childwindow_external_invoices_delete.do?action=doDelete&sfavd=${model.avd}&sfopdn=${model.opd}&sfreff=${record.sfreff}&sfunik=${record.sfunik}">
 						               		<img valign="bottom" src="resources/images/delete.gif" border="0" alt="remove">
 						               	</a>

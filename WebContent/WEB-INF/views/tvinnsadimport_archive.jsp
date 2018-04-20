@@ -24,7 +24,7 @@
 					<a id="alinkHeader" tabindex=-1 style="display:block;" href="tvinnsadimport_edit.do?action=doFetch&avd=${model.avd}&opd=${model.opd}
 							&sysg=${model.sign}&tuid=${model.tullId}&syst=${model.status}&sydt=${model.datum}&o2_sist=${ model.o2_sist}&o2_sidt=${ model.o2_sidt}&o2_simf=${ model.o2_simf}">
 						<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.import.created.mastertopic.tab"/></font>
-						<font class="text12MediumBlue">[${model.opd}]</font>
+						<font class="text14MediumBlue">[${model.opd}]</font>
 						<c:if test="${model.status == 'M' || empty model.status}">
 							<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 						</c:if>
@@ -106,18 +106,21 @@
 			<tr>
 				<td>
 				<table width="100%" cellspacing="0" border="0" cellpadding="0">
+					<thead>
 					<tr class="tableHeaderField" height="20" valign="left">
 					
-	                    <td class="tableHeaderFieldFirst">&nbsp;<spring:message code="systema.tvinn.sad.import.archive.list.label.topicNr"/>&nbsp;</td>
-	                    <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.import.archive.list.label.docType"/>&nbsp;</td> 
-	                    <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.import.archive.list.label.subject"/>&nbsp;</td> 
-	                    <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.import.archive.list.label.date"/>&nbsp;</td>
-	                    <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.import.archive.list.label.time"/>&nbsp;</td>
-	                    <td class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.import.archive.list.label.additionalInfo"/>&nbsp;</td>
-	                    <td class="tableHeaderField">&nbsp;Dokument</td> 
+	                    <th class="tableHeaderFieldFirst">&nbsp;<spring:message code="systema.tvinn.sad.import.archive.list.label.topicNr"/>&nbsp;</th>
+	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.import.archive.list.label.docType"/>&nbsp;</th> 
+	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.import.archive.list.label.subject"/>&nbsp;</th> 
+	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.import.archive.list.label.date"/>&nbsp;</th>
+	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.import.archive.list.label.time"/>&nbsp;</th>
+	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.import.archive.list.label.additionalInfo"/>&nbsp;</th>
+	                    <th class="tableHeaderField">&nbsp;Dokument</th> 
 	                    
 	               </tr> 
-	               <c:if test="${not empty list}">    
+	               <thead>
+	               <c:if test="${not empty list}"> 
+	               <tbody>   
 		           	<c:forEach items="${list}" var="record" varStatus="counter">    
 		               <c:choose>           
 		                   <c:when test="${counter.count%2==0}">
@@ -142,6 +145,7 @@
 		               </td>
 		            </tr> 
 		            </c:forEach>
+		            </tbody>
 		            </c:if>
 	            </table>
 			</td>	

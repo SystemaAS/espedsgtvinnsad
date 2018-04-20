@@ -54,7 +54,7 @@
 						&sysg=${model.sign}&tuid=${refnr}&syst=${model.status}&sydt=${model.datum}&o2_sist=${ model.o2_sist}&o2_sidt=${ model.o2_sidt}&o2_simf=${ model.o2_simf}">
 					
 					<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.import.created.mastertopic.tab"/></font>
-					<font class="text12MediumBlue">[${model.opd}]</font>
+					<font class="text14MediumBlue">[${model.opd}]</font>
 					<c:if test="${model.status == 'M' || empty model.status}">
 						<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 					</c:if>
@@ -136,7 +136,7 @@
 	 				<%-- MASTER Topic header --%>
 	 				<table width="100%" align="center" class="formFrameHeaderTransparent" border="0" cellspacing="0" cellpadding="0">
 				 		<tr height="15">
-				 			<td class="text12MediumBlue">
+				 			<td class="text14MediumBlue">
 				 				&nbsp;Avd&nbsp;<b>${model.avd}</b>
 				 				&nbsp;Tolldeknr.&nbsp;<b>${model.opd}</b>
 				 				&nbsp;Sign&nbsp;<b>${model.sign}</b>
@@ -181,62 +181,62 @@
 					 		<td width="50%">
 						 		<table width="80%" border="0" cellspacing="1" cellpadding="0">
 							 		<tr>
-							            <td width="30%" class="text11Bold" align="left" >Eksportør</td>
-							            <td class="text11" align="left" >&nbsp;&nbsp;</td>
+							            <td width="30%" class="text12Bold" align="left" >Eksportør</td>
+							            <td class="text12" align="left" >&nbsp;&nbsp;</td>
 							        </tr>
 							        <tr>
-							            <td width="30%" class="text11" align="left">Navn&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.sinas}</td>
+							            <td width="30%" class="text12" align="left">Navn&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.sinas}</td>
 							        </tr>
 									<tr>
-							            <td width="30%" class="text11" align="left">Adresse-1&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.siads1}</td>
+							            <td width="30%" class="text12" align="left">Adresse-1&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.siads1}</td>
 							        </tr>
 							        <tr>
-							            <td width="30%" class="text11" align="left">Adresse-2&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.siads2}</td>
+							            <td width="30%" class="text12" align="left">Adresse-2&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.siads2}</td>
 							        </tr>
 							        
 									<tr>
-							            <td width="30%" class="text11" align="left">Adresse-3&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.siads3}</td>
+							            <td width="30%" class="text12" align="left">Adresse-3&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.siads3}</td>
 							        </tr>
 							        <tr>
-							        		<td width="30%" class="text11" align="left">&nbsp;</td>
+							        		<td width="30%" class="text12" align="left">&nbsp;</td>
 							        </tr>						        
 			        	        </table>
 					        </td>
 					        <td width="50%">
 						 		<table width="80%" border="0" cellspacing="1" cellpadding="0">
 							 		<tr>
-							            <td width="30%" class="text11Bold" align="left" >Mottaker</td>
-							            <td class="text11" align="left" >&nbsp;&nbsp;</td>
+							            <td width="30%" class="text12Bold" align="left" >Mottaker</td>
+							            <td class="text12" align="left" >&nbsp;&nbsp;</td>
 							        </tr>
 							        <tr>
-							            <td width="30%" class="text11" align="left">Regnr.&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.sirg}</td>
+							            <td width="30%" class="text12" align="left">Regnr.&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.sirg}</td>
 							        </tr>
 							        <tr>
-							            <td width="30%" class="text11" align="left">Navn&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.sinak}</td>
+							            <td width="30%" class="text12" align="left">Navn&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.sinak}</td>
 							        </tr>
 									<tr>
-							            <td width="30%" class="text11" align="left">Adresse-1&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.siadk1}</td>
+							            <td width="30%" class="text12" align="left">Adresse-1&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.siadk1}</td>
 							        </tr>
 							        <tr>
-							            <td width="30%" class="text11" align="left">Adresse-2&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.siadk2}</td>
+							            <td width="30%" class="text12" align="left">Adresse-2&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.siadk2}</td>
 							        </tr>
 							        
 									<tr>
-							            <td width="30%" class="text11" align="left">Adresse-3&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.siadk3}</td>
+							            <td width="30%" class="text12" align="left">Adresse-3&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.siadk3}</td>
 							        </tr>
 							        <%--
 									<tr>
-							            <td width="30%" class="text11" align="left">Handläggare&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${XX.svih_moha}</td>
+							            <td width="30%" class="text12" align="left">Handläggare&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${XX.svih_moha}</td>
 							        </tr>
 							         --%>
 							        
@@ -272,7 +272,7 @@
 								<table width="100%" cellspacing="0" border="0" cellpadding="0">
 									<tr>
 										
-										<td class="text12Bold">
+										<td class="text14Bold">
 											<c:if test="${model.status == 'M' || empty model.status}">
 												<input tabindex=-1 class="inputFormSubmitStd" type="submit" name="submit" onclick="javascript: form.action='tvinnsadimport_edit_items.do';" value="<spring:message code="systema.tvinn.sad.import.item.line.init.createnew.submit"/>">
 											</c:if>
@@ -284,26 +284,26 @@
 										           			<td colspan="3" class="text14"><b>Varelinjer</b></td>
 										           		</tr>
 											           	<tr>	
-															<td class="text12">
+															<td class="text14">
 															<table id="tblItemLinesAll" class="display compact cell-border" >
 																<thead>
-																<tr style="background-color:#DDDDDD">
-																    <th class="text12">&nbsp;Linjenr.&nbsp;</th>   
-												                    <th class="text12" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svlk.opprLand"/>&nbsp;</th>
-												                    <th class="text12" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svvnt.vareNr"/>&nbsp;</th>
-												                    <th class="text12" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svtn.tn"/>&nbsp;</th>
-												                    <th class="text12" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svpre.preference"/>&nbsp;</th>
-												                    <th class="text12" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svbelt.varansPris"/>&nbsp;</th>
-												                    <th class="text12">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svvktn.nettov"/>&nbsp;</th>
-												                    <th class="text12">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svntm.mengde"/>&nbsp;</th>
-												                    <th class="text12">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svpva.enhetPVA"/></th>
-												                    <th class="text12">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svas.tollsats"/></th>
-												                    <th class="text12">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svmfr.mva"/>&nbsp;</th>
-												                    <th class="text12">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svkdaae.avgift"/>&nbsp;</th>
-												                    <th class="text12">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.wd1.vareDescription"/>&nbsp;</th>
-												                    <th align="center" class="text12">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.sverr.error"/>&nbsp;</th>
+																<tr class="tableHeaderField" >
+																    <th class="text14">&nbsp;Linjenr.&nbsp;</th>   
+												                    <th class="text14" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svlk.opprLand"/>&nbsp;</th>
+												                    <th class="text14" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svvnt.vareNr"/>&nbsp;</th>
+												                    <th class="text14" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svtn.tn"/>&nbsp;</th>
+												                    <th class="text14" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svpre.preference"/>&nbsp;</th>
+												                    <th class="text14" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svbelt.varansPris"/>&nbsp;</th>
+												                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svvktn.nettov"/>&nbsp;</th>
+												                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svntm.mengde"/>&nbsp;</th>
+												                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svpva.enhetPVA"/></th>
+												                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svas.tollsats"/></th>
+												                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svmfr.mva"/>&nbsp;</th>
+												                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svkdaae.avgift"/>&nbsp;</th>
+												                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.wd1.vareDescription"/>&nbsp;</th>
+												                    <th align="center" class="text14">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.sverr.error"/>&nbsp;</th>
 												                    <c:if test="${model.status == 'M' || empty model.status}">
-												                    	<th align="center" class="text12" nowrap>Slett</th>
+												                    	<th align="center" class="text14" nowrap>Slett</th>
 												                    </c:if>
 												                    
 											               		</tr> 
@@ -363,7 +363,7 @@
 													<%-- OK BUTTON --%>
 							           				<tr align="left" >
 														<td class="text11"><button name="allItemsButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('allItems');">&nbsp;Ok</button></td>
-														<td class="text12">&nbsp;&nbsp;&nbsp;
+														<td class="text14">&nbsp;&nbsp;&nbsp;
 											 	        		<a href="tvinnsadImportItemListExcelView.do" target="_new">
 										                 		<img valign="bottom" id="itemListExcel" src="resources/images/excel.png" border="0" alt="excel">&nbsp;Excel
 											 	        		</a>
@@ -394,7 +394,7 @@
 						            		</td>
 									</tr>
 									<tr>
-										<td class="text12Bold">&nbsp;Antall varelinjer&nbsp;&nbsp;<font class="text12MediumBlue"><b>${totalNumberOfItemLines}</b></font>
+										<td class="text14Bold">&nbsp;Antall varelinjer&nbsp;&nbsp;<font class="text14MediumBlue"><b>${totalNumberOfItemLines}</b></font>
 						            		</td>
 										<td align="right" class="text11">Bruttovekt:&nbsp;
 											<input tabindex=-1 align="right" type="text" readonly class="inputText11BlueBoldReadOnly" size="12" maxlength=11" value='${recordTopicTvinnSad.sivkb}'>
@@ -439,24 +439,24 @@
 							
 								<table id="tblItemLines" class="display compact cell-border">
 									<thead>
-									<tr style="background-color:#DDDDDD">
-									    <th class="text12">&nbsp;Lin.&nbsp;</th> 
-									    <th class="text12">&nbsp;Redig.&nbsp;</th> 
-									    <th class="text12" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svlk.opprLand"/>&nbsp;</th>
-					                    <th class="text12" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svvnt.vareNr"/>&nbsp;</th>
-					                    <th class="text12" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svtn.tn"/>&nbsp;</th>
-					                    <th class="text12" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svpre.preference"/>&nbsp;</th>
-					                    <th class="text12" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svbelt.varansPris"/>&nbsp;</th>
-					                    <th class="text12">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svvktn.nettov"/>&nbsp;</th>
-					                    <th class="text12">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svntm.mengde"/>&nbsp;</th>
-					                    <th class="text12">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svpva.enhetPVA"/></th>
-					                    <th class="text12">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svas.tollsats"/></th>
-					                    <th class="text12">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svmfr.mva"/>&nbsp;</th>
-					                    <th class="text12">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svkdaae.avgift"/>&nbsp;</th>
-					                    <th class="text12">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.wd1.vareDescription"/>&nbsp;</th>
-					                    <th align="center" class="text12">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.sverr.error"/>&nbsp;</th>
+									<tr class="tableHeaderField" height="20" >
+									    <th class="text14">&nbsp;Lin.&nbsp;</th> 
+									    <th class="text14">&nbsp;Redig.&nbsp;</th> 
+									    <th class="text14" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svlk.opprLand"/>&nbsp;</th>
+					                    <th class="text14" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svvnt.vareNr"/>&nbsp;</th>
+					                    <th class="text14" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svtn.tn"/>&nbsp;</th>
+					                    <th class="text14" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svpre.preference"/>&nbsp;</th>
+					                    <th class="text14" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svbelt.varansPris"/>&nbsp;</th>
+					                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svvktn.nettov"/>&nbsp;</th>
+					                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svntm.mengde"/>&nbsp;</th>
+					                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svpva.enhetPVA"/></th>
+					                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svas.tollsats"/></th>
+					                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svmfr.mva"/>&nbsp;</th>
+					                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svkdaae.avgift"/>&nbsp;</th>
+					                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.wd1.vareDescription"/>&nbsp;</th>
+					                    <th align="center" class="text14">&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.sverr.error"/>&nbsp;</th>
 					                    <c:if test="${model.status == 'M' || empty model.status}">
-					                    		<th align="center" class="text12" nowrap>Slett</th>
+					                    		<th align="center" class="text14" nowrap>Slett</th>
 					                    </c:if> 
 					               </tr> 
 					               </thead>
@@ -470,8 +470,8 @@
 							                       <tr id="parentItemListTableRowNr_${counter.count}" class="tableOddRow" >
 							                   </c:otherwise>
 							               </c:choose>
-							               <td width="4%" class="text11" align="center">${record.svln}</td>
-							               <td width="4%" class="text11" align="center">&nbsp;
+							               <td width="4%" class="text14" align="center">${record.svln}</td>
+							               <td width="4%" class="text14" align="center">&nbsp;
 							               		<%-- Always svli to AS400. svln is only for presentation purposes --%>
 							               		<a tabindex=-1 title="${counter.count}" id="recordUpdate_${record.svli}" href="#" onClick="getItemData(this);">
 							               			<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;
@@ -479,27 +479,27 @@
 							               </td>
 							               
 							               
-							               <td class="text11" >&nbsp;${record.svlk}</td>
-							               <td class="text11" >&nbsp;${record.svvnt}&nbsp;&nbsp;
-							               	  <img id="recordUpdate_${record.svli}" onClick="updateKundensVarReg(this);" src="resources/images/addOrder.png" width="12px" height="12px" border="0" title="Tilføy Kundens varereg.">
+							               <td class="text14" >&nbsp;${record.svlk}</td>
+							               <td class="text14" >&nbsp;${record.svvnt}&nbsp;&nbsp;
+							               	  <img style="cursor:pointer;" id="recordUpdate_${record.svli}" onClick="updateKundensVarReg(this);" src="resources/images/addOrder.png" width="12px" height="12px" border="0" title="Tilføy Kundens varereg.">
 							               </td>
-							               <td class="text11" >&nbsp;${record.svtn}</td>
-							               <td class="text11" >&nbsp;${record.svpre}</td>
-							               <td class="text11" >&nbsp;${record.svbelt}</td>
-							               <td class="text11" >&nbsp;${record.svvktn}</td>
-							               <td class="text11" >&nbsp;${record.svntm}</td>
-							               <td class="text11" >&nbsp;${record.svpva}</td>
-							               <td class="text11" >&nbsp;${record.svas}</td>
-							               <td class="text11" >&nbsp;${record.svmfr}</td>
-							               <td class="text11">&nbsp;${record.wg1}</td>
-							               <td class="text11">&nbsp;${record.wd1}</td>
-							               <td align="center" class="text11">&nbsp;
+							               <td class="text14" >&nbsp;${record.svtn}</td>
+							               <td class="text14" >&nbsp;${record.svpre}</td>
+							               <td class="text14" >&nbsp;${record.svbelt}</td>
+							               <td class="text14" >&nbsp;${record.svvktn}</td>
+							               <td class="text14" >&nbsp;${record.svntm}</td>
+							               <td class="text14" >&nbsp;${record.svpva}</td>
+							               <td class="text14" >&nbsp;${record.svas}</td>
+							               <td class="text14" >&nbsp;${record.svmfr}</td>
+							               <td class="text14">&nbsp;${record.wg1}</td>
+							               <td class="text14">&nbsp;${record.wd1}</td>
+							               <td align="center" class="text14">&nbsp;
 							               		<c:if test="${not empty record.sverr}">
 							               			<img valign="bottom" src="resources/images/redFlag.png" width="18px" height="18px" border="0" alt="remove">
 							               		</c:if>
 							               </td>
 							               <c:if test="${model.status == 'M' || empty model.status}">	
-								               <td class="text11" align="center" nowrap>
+								               <td class="text14" align="center" nowrap>
 								               	<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadimport_edit_items.do?action=doDelete&sign=${model.sign}&avd=${record.svavd}&opd=${record.svtdn}&lin=${record.svli}&fabl=${recordTopicTvinnSad.sibel3}">
 								               		<img valign="bottom" src="resources/images/delete.gif" border="0" alt="remove">
 								               	</a>	
@@ -568,7 +568,7 @@
 				 	<%-- Topic ITEM CREATE --%>
 	 				<table width="100%" align="center" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
 				 		<tr height="15">
-				 			<td class="text12White" align="left" >
+				 			<td class="text14White" align="left" >
 				 				&nbsp;&nbsp;V<label onClick="showPop('debugPrintlnAjaxItemFetchAdmin');" >a</label>relinje&nbsp;
 		 									<span style="position:absolute; left:150px; top:200px; width:800px; height:400px;" id="debugPrintlnAjaxItemFetchAdmin" class="popupWithInputText"  >
 								           		<div class="text11" align="left">
@@ -582,7 +582,7 @@
 								        		</span>
 				 				<img onClick="showPop('updateInfo');" src="resources/images/update.gif" border="0" alt="edit">
 				 				<span style="position:absolute; left:150px; top:200px; width:800px; height:400px;" id="updateInfo" class="popupWithInputText"  >
-		           		   			<div class="text12" align="left" style="display:block;width:700px;word-break:break-all;">
+		           		   			<div class="text14" align="left" style="display:block;width:700px;word-break:break-all;">
 		           		   				${activeUrlRPGUpdate_TvinnSad}<br/><br/>
 		           		   				<button name="updateInformationButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('updateInfo');">Close</button> 
 		           		   			</div>
@@ -605,13 +605,13 @@
 									</c:otherwise>
 								</c:choose>
 			 				</td>
-			 				<td class="text12White" align="right">Forhold B/N-vekt:&nbsp;
+			 				<td class="text14White" align="right">Forhold B/N-vekt:&nbsp;
 			 					<c:choose>
 					 				<c:when test="${not empty recordTopicTvinnSad.insibvnv}">
-						 				<input style="text-align:center;" tabindex=-1 class="text12BoldLightGreenForItemLinenr" readonly type="text" name="grossNetFactor" id="grossNetFactor" size="5" value="${recordTopicTvinnSad.insibvnv}">
+						 				<input style="text-align:center;" tabindex=-1 class="text14BoldWhiteForItemLinenr" readonly type="text" name="grossNetFactor" id="grossNetFactor" size="5" value="${recordTopicTvinnSad.insibvnv}">
 						 			</c:when>
 						 			<c:otherwise>
-										<input style="text-align:center;" tabindex=-1 class="text12BoldLightGreenForItemLinenr" readonly type="text" name="grossNetFactor" id="grossNetFactor" size="5" value="0,90">														 			
+										<input style="text-align:center;" tabindex=-1 class="text14BoldWhiteForItemLinenr" readonly type="text" name="grossNetFactor" id="grossNetFactor" size="5" value="0,90">														 			
 						 			</c:otherwise>
 					 			</c:choose>	
 						 	</td>
@@ -624,7 +624,7 @@
 						 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							 		<tr>
 							 			<td>&nbsp;</td>
-							 			<td class="text12" align="left">&nbsp;
+							 			<td class="text14" align="left">&nbsp;
 							 			<img onMouseOver="showPop('svvf_info');" onMouseOut="hidePop('svvf_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 				 						<b>43.</b>&nbsp;<font class="text16RedBold" >*</font><span title="svvf">VF</span>
 										<div class="text11" style="position: relative;" align="left">
@@ -645,7 +645,7 @@
 										</div>
 										</td>
 							            
-							            <td class="text12" align="left">
+							            <td class="text14" align="left">
 							 			<img onMouseOver="showPop('svlk_info');" onMouseOut="hidePop('svlk_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 				 						<font class="text16RedBold" >*</font>
 							            <span title="svlk">Oppr.land</span>
@@ -660,7 +660,7 @@
 										</div>
 										</td>
 							            
-							 			<td class="text12" align="left">
+							 			<td class="text14" align="left">
 							            <img onMouseOver="showPop('varenr_info');" onMouseOut="hidePop('varenr_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 							            <font class="text16RedBold" >*</font><span title="svvnt">Varenr.</span>
 							            <div class="text11" style="position: relative;" align="left">
@@ -685,7 +685,7 @@
 									           				<tr>
 																<td class="text11" style="vertical-align:bottom;">&nbsp;Varenr.</td>
 																<td class="text11">&nbsp;<input type="text" class="inputText" name="search_svvnt" id="search_svvnt" size="10" maxlength="10" value="">
-																	<a tabindex="-1" class="text12" target="_blank" href="${model.tolltariffenURL.value}" onclick="${model.tolltariffenURL.windowOpenDimensions}" >
+																	<a tabindex="-1" class="text14" target="_blank" href="${model.tolltariffenURL.value}" onclick="${model.tolltariffenURL.windowOpenDimensions}" >
 					            											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tolltariffen 
 					            											&nbsp;<img width="25px" height="35px" style="cursor:pointer;" src="resources/images/logoTollNorway.jpg" border="0" alt="search">
 					            										</a>
@@ -733,7 +733,7 @@
 										 --%>
 							            </td>
 							            
-							            <td class="text12" align="left">
+							            <td class="text14" align="left">
 							            <img onMouseOver="showPop('svtn_info');" onMouseOut="hidePop('svtn_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 							            <span title="svtn">TN</span>
 				 					
@@ -764,7 +764,7 @@
 										</div>
 							            </td>
 							            
-							            <td class="text12" align="left">
+							            <td class="text14" align="left">
 							            <img onMouseOver="showPop('svpre_info');" onMouseOut="hidePop('svpre_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info" >
 				 						<b>36.</b><span title="svpre">Preferense</span>
 				 						<div class="text11" style="position: relative;" align="left">
@@ -796,7 +796,7 @@
 										</span>
 				 						</div>
 				 						</td>
-							            <td class="text12" align="left">
+							            <td class="text14" align="left">
 							            <img onMouseOver="showPop('svbelt_info');" onMouseOut="hidePop('svbelt_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 							            	<span title="svbelt">Tollverdi</span>
 							            	<div class="text11" style="position: relative;" align="left">
@@ -807,8 +807,121 @@
 											</span>
 											</div>
 					            		</td>
-						            		
-							            
+						            	<td class="text14" align="left">
+							            <img onMouseOver="showPop('svvktb_info');" onMouseOut="hidePop('svvktb_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+							            <font class="text16RedBold" >*</font>
+				 						<span title="svvktb">Bruttovekt(kg)</span>
+				 						<div class="text11" style="position: relative;" align="left">
+							            <span style="position:absolute;top:2px; width:250px;" id="svvktb_info" class="popupWithInputText text11"  >
+												<b>Brutto/Nettovekt (kg)</b>
+							           			<br/><br/>
+												Dersom man ikke taster noe i feltene så beregner systemet vektene selv (ved å dele vekt på verdi) ved bruk av tasten F11.
+												Om systemet skal beregne vektene automatisk så må man gjøre dette konsekvent på ALLE varelinjene. 
+												<br/><br/>
+												Dersom man taster brutto eller nettovekt så finner systemet automatisk den andre vekten. 
+												(10% opp/ned eller angitt på hovedsiden)
+										</span>
+										</div>
+										</td>
+										
+						            	<td class="text14" align="left">
+										<img onMouseOver="showPop('nettovekt_info');" onMouseOut="hidePop('nettovekt_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+				 						<font class="text16RedBold" >*</font>
+				 						<span title="svvktn">&nbsp;Nettovekt(kg)</span>
+				 						<div class="text11" style="position: relative;" align="left">
+										<span style="position:absolute;top:2px; width:250px;" id="nettovekt_info" class="popupWithInputText text11"  >
+												<b>Brutto/Nettovekt (kg)</b>
+							           			<br/><br/>
+												Dersom man ikke taster noe i feltene så beregner systemet vektene selv (ved å dele vekt på verdi) ved bruk av tasten F11.
+												Om systemet skal beregne vektene automatisk så må man gjøre dette konsekvent på ALLE varelinjene. 
+												<br/><br/>
+												Dersom man taster brutto eller nettovekt så finner systemet automatisk den andre vekten. 
+												(10% opp/ned eller angitt på hovedsiden)
+										</span>
+										</div>
+										</td>
+										<td class="text14" >
+										<img onMouseOver="showPop('mengde_info');" onMouseOut="hidePop('mengde_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+										
+				 						<span title="svntm">Mengde</span>
+				 						<div class="text11" style="position: relative;" align="left">
+				 						<span style="position:absolute;top:2px; width:250px;" id="mengde_info" class="popupWithInputText text11"  >
+							           		<b>Mengde</b>
+						           			<br/><br/>
+						           			Her tastes mengde i annen enhet dersom tolltariffen krever det.
+						           			Systemet sjekker automatisk i tariffen og du får beskjed om å registrere antall eller annen enhet dersom du glemmer det.<br/>
+											Følgende koder gjelder ved fortolling via Tvinn:
+											<ul>
+												<li><b>STK</b> = NMB Antall</li>
+												<li><b>PAR</b> = NPP Par</li>
+												<li><b>LIT</b> = LTR Liter</li>
+												<li><b>M3</b> = MTO Kubikkmeter</li>
+												<li><b>M2</b> = MTK Kvadratmeter</li>
+												<li><b>GRA</b> = GRM Gram</li>
+											</ul>						           			
+											Disse kodene skal ligge definert i Tolltariffen og bruker behøver normalt ikke forholde seg til dette kodesettet.
+											<p> 
+											Skulle derimot felt for antall 'STK' i Tolltariffen ikke være utfyllt med kode J og Tollvesenet / Tvinn skulle kreve antall oppgitt må man gjøre følgende:
+											Felt STK fylles ut med kode J og felt ENHET fylles ut med en av kodene som er vist over.
+											<p>
+											Systemet vil konvertere etter overstående tabell. Hvis andre enhetskoder benyttes vil systemet sende det som er blitt tastet med de muligheter for feilmelding fra Tvinn som dette medfører
+										</span>
+										</div>
+										</td>
+							            <td class="text14" >
+										<img onMouseOver="showPop('svpva_info');" onMouseOut="hidePop('svpva_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+				 						<font class="text16RedBold" >*</font>	
+										<span title="svpva">PVA</span>
+										<div class="text11" style="position: relative;" align="left">
+										<span style="position:absolute;top:2px; width:250px;" id="svpva_info" class="popupWithInputText text11"  >
+						           			<b>PVA</b>
+											<ul>
+												<li><b>P</b> =PROSENTTOLL</li>
+												<li><b>V</b> =pr kg.</li>
+												<li><b>W</b> =pr 100 kg</li>
+												<li><b>A</b> =pr. liter</li>
+												<li><b>F</b> =FRI</li>
+											</ul>
+											Fylles normalt ut automatisk.
+											Systemet legger selv ut satsene. Skal det være <b>fritt</b> iht. kode i TN rubr. så må man taste en <b>F</b> her.
+										</span>
+										</div>
+										</td>
+										<td class="text14" align="left">
+								            <img onMouseOver="showPop('tollsats_info');" onMouseOut="hidePop('tollsats_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+								            <span title="svas">Tollsats&nbsp;</span>
+								            <div class="text11" style="position: relative;" align="left">
+								            <span style="position:absolute;top:2px; width:250px;" id="tollsats_info" class="popupWithInputText text11"  >
+							           			<br/>
+							           			<b>Tollsats</b>
+												<br/><br/>
+							           			Systemet finner selv tollsatsen. Dersom satsen skal reduseres iht. kode i TN rubrikken så må ønsket sats tastes her.
+											</span>
+											</div>
+										</td>
+										<td class="text14" align="left">
+								            <img onMouseOver="showPop('svmfr_info');" onMouseOut="hidePop('svmfr_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+					 						<font class="text16RedBold" >*</font>
+								            <span title="svmfr">Momsfri&nbsp;</span>
+								            <div class="text11" style="position: relative;" align="left">
+								            <span style="position:absolute;top:2px; width:250px;" id="svmfr_info" class="popupWithInputText text11"  >
+							           			<b>Momsfri/sats</b>
+												<br/><br/>
+							           			<ul>
+							           				<li><b>F</b> = Momsfri</li>
+													<li><b>1</b> = MVA høy sats</li>
+													<li><b>2</b> = MVA lav sats</li>
+												</ul>
+												<p>
+												Hvis tariffnummeret har mulighet for lav MVA, må du velge lav eller høy sats. 
+												</p>
+												<p>
+												Om det ikke skal svares importMVA av varelinjen så tastes det en F her. 
+												(Når ekspedisjonstype er 7 (prosedyre 70-79) legges automatisk F inn).
+												</p>
+											</span>
+											</div>
+										</td>
 							        </tr>
 							        <tr>
 						        		<td>&nbsp;<button title="Kundens vareregister" name="kundensVaruregisterControlButton" id="kundensVaruregisterControlButton" class="buttonGrayWithGreenFrame" type="button" >Søk i kund.varereg.</button></td>
@@ -877,14 +990,14 @@
 											</span>	
 											--%>																 			
 										</td>
-							        		<td class="text12" align="left">
+							        		<td class="text14" align="left">
 							            		<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField"  name="svvnt" id="svvnt" size="12" maxlength="8" value="${model.record.svvnt}">
 							            		<a tabindex="-1" id="svvntIdLink">
 												<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 												</a>
 							            </td>
 										<td align="left" nowrap>
-											<select name="svtn" id="svtn">
+											<select class="selectMediumBlueE2" name="svtn" id="svtn">
 						 						<option value="">-velg-</option>
 												<option value="E"<c:if test="${ model.record.svtn == 'E'}"> selected </c:if> >E</option>
 												<option value="F"<c:if test="${ model.record.svtn == 'F'}"> selected </c:if> >F</option>
@@ -893,8 +1006,8 @@
 												<option value="R"<c:if test="${ model.record.svtn == 'R'}"> selected </c:if> >R</option>		  
 											</select>
 										</td>
-						 				<td class="text12" align="left" nowrap>
-											<select name="svpre" id="svpre">
+						 				<td class="text14" align="left" nowrap>
+											<select class="selectMediumBlueE2" name="svpre" id="svpre">
 						        		    			<option value="">-velg-</option>
 			  								  	<option value="N"<c:if test="${ model.record.svpre == 'N'}"> selected </c:if> >N</option>		
 											  	<option value="J"<c:if test="${ model.record.svpre == 'J'}"> selected </c:if> >J</option>
@@ -905,7 +1018,7 @@
 											  	<option value="P"<c:if test="${ model.record.svpre == 'P'}"> selected </c:if> >P</option>
 											</select>
 										</td>
-						 				<td nowrap class="text12" align="left">
+						 				<td nowrap class="text14" align="left">
 						            		<c:choose>
 												<%-- only when it is a new line  --%>
 					           					<c:when test="${empty model.record.svbelt}">
@@ -923,133 +1036,8 @@
 					 				  			</c:otherwise>
 											</c:choose>
 						            	</td>
-						 				
-							        </tr>
-							        <tr height="10"><td class="text" align="left" colspan="12"><hr></td></tr>
-							        
-						            <tr>
-						            	<td class="text12" align="left">
-							            <img onMouseOver="showPop('svvktb_info');" onMouseOut="hidePop('svvktb_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-							            <font class="text16RedBold" >*</font>
-				 						<span title="svvktb">Bruttovekt(kg)</span>
-				 						<div class="text11" style="position: relative;" align="left">
-							            <span style="position:absolute;top:2px; width:250px;" id="svvktb_info" class="popupWithInputText text11"  >
-												<b>Brutto/Nettovekt (kg)</b>
-							           			<br/><br/>
-												Dersom man ikke taster noe i feltene så beregner systemet vektene selv (ved å dele vekt på verdi) ved bruk av tasten F11.
-												Om systemet skal beregne vektene automatisk så må man gjøre dette konsekvent på ALLE varelinjene. 
-												<br/><br/>
-												Dersom man taster brutto eller nettovekt så finner systemet automatisk den andre vekten. 
-												(10% opp/ned eller angitt på hovedsiden)
-										</span>
-										</div>
-										</td>
-										
-						            	<td class="text12" align="left">
-										<img onMouseOver="showPop('nettovekt_info');" onMouseOut="hidePop('nettovekt_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-				 						<font class="text16RedBold" >*</font>
-				 						<span title="svvktn">&nbsp;Nettovekt(kg)</span>
-				 						<div class="text11" style="position: relative;" align="left">
-										<span style="position:absolute;top:2px; width:250px;" id="nettovekt_info" class="popupWithInputText text11"  >
-												<b>Brutto/Nettovekt (kg)</b>
-							           			<br/><br/>
-												Dersom man ikke taster noe i feltene så beregner systemet vektene selv (ved å dele vekt på verdi) ved bruk av tasten F11.
-												Om systemet skal beregne vektene automatisk så må man gjøre dette konsekvent på ALLE varelinjene. 
-												<br/><br/>
-												Dersom man taster brutto eller nettovekt så finner systemet automatisk den andre vekten. 
-												(10% opp/ned eller angitt på hovedsiden)
-										</span>
-										</div>
-										</td>
-										
-										<td class="text12" >
-										<img onMouseOver="showPop('mengde_info');" onMouseOut="hidePop('mengde_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-										
-				 						<span title="svntm">Mengde</span>
-				 						<div class="text11" style="position: relative;" align="left">
-				 						<span style="position:absolute;top:2px; width:250px;" id="mengde_info" class="popupWithInputText text11"  >
-							           		<b>Mengde</b>
-						           			<br/><br/>
-						           			Her tastes mengde i annen enhet dersom tolltariffen krever det.
-						           			Systemet sjekker automatisk i tariffen og du får beskjed om å registrere antall eller annen enhet dersom du glemmer det.<br/>
-											Følgende koder gjelder ved fortolling via Tvinn:
-											<ul>
-												<li><b>STK</b> = NMB Antall</li>
-												<li><b>PAR</b> = NPP Par</li>
-												<li><b>LIT</b> = LTR Liter</li>
-												<li><b>M3</b> = MTO Kubikkmeter</li>
-												<li><b>M2</b> = MTK Kvadratmeter</li>
-												<li><b>GRA</b> = GRM Gram</li>
-											</ul>						           			
-											Disse kodene skal ligge definert i Tolltariffen og bruker behøver normalt ikke forholde seg til dette kodesettet.
-											<p> 
-											Skulle derimot felt for antall 'STK' i Tolltariffen ikke være utfyllt med kode J og Tollvesenet / Tvinn skulle kreve antall oppgitt må man gjøre følgende:
-											Felt STK fylles ut med kode J og felt ENHET fylles ut med en av kodene som er vist over.
-											<p>
-											Systemet vil konvertere etter overstående tabell. Hvis andre enhetskoder benyttes vil systemet sende det som er blitt tastet med de muligheter for feilmelding fra Tvinn som dette medfører
-										</span>
-										</div>
-										</td>
-							            
-										<td class="text12" >
-										<img onMouseOver="showPop('svpva_info');" onMouseOut="hidePop('svpva_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-				 						<font class="text16RedBold" >*</font>	
-										<span title="svpva">PVA</span>
-										<div class="text11" style="position: relative;" align="left">
-										<span style="position:absolute;top:2px; width:250px;" id="svpva_info" class="popupWithInputText text11"  >
-						           			<b>PVA</b>
-											<ul>
-												<li><b>P</b> =PROSENTTOLL</li>
-												<li><b>V</b> =pr kg.</li>
-												<li><b>W</b> =pr 100 kg</li>
-												<li><b>A</b> =pr. liter</li>
-												<li><b>F</b> =FRI</li>
-											</ul>
-											Fylles normalt ut automatisk.
-											Systemet legger selv ut satsene. Skal det være <b>fritt</b> iht. kode i TN rubr. så må man taste en <b>F</b> her.
-										</span>
-										</div>
-										</td>
-							            
-										<td class="text12" align="left">
-								            <img onMouseOver="showPop('tollsats_info');" onMouseOut="hidePop('tollsats_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-								            <span title="svas">Tollsats&nbsp;</span>
-								            <div class="text11" style="position: relative;" align="left">
-								            <span style="position:absolute;top:2px; width:250px;" id="tollsats_info" class="popupWithInputText text11"  >
-							           			<br/>
-							           			<b>Tollsats</b>
-												<br/><br/>
-							           			Systemet finner selv tollsatsen. Dersom satsen skal reduseres iht. kode i TN rubrikken så må ønsket sats tastes her.
-											</span>
-											</div>
-										</td>
-										<td class="text12" align="left">
-								            <img onMouseOver="showPop('svmfr_info');" onMouseOut="hidePop('svmfr_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-					 						<font class="text16RedBold" >*</font>
-								            <span title="svmfr">Momsfri&nbsp;</span>
-								            <div class="text11" style="position: relative;" align="left">
-								            <span style="position:absolute;top:2px; width:250px;" id="svmfr_info" class="popupWithInputText text11"  >
-							           			<b>Momsfri/sats</b>
-												<br/><br/>
-							           			<ul>
-							           				<li><b>F</b> = Momsfri</li>
-													<li><b>1</b> = MVA høy sats</li>
-													<li><b>2</b> = MVA lav sats</li>
-												</ul>
-												<p>
-												Hvis tariffnummeret har mulighet for lav MVA, må du velge lav eller høy sats. 
-												</p>
-												<p>
-												Om det ikke skal svares importMVA av varelinjen så tastes det en F her. 
-												(Når ekspedisjonstype er 7 (prosedyre 70-79) legges automatisk F inn).
-												</p>
-											</span>
-											</div>
-										</td>
-							        </tr>
-									<tr>
-										<td  class="text12" align="left"><input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="svvktb" id="svvktb" size="13" maxlength="12" value="${model.record.svvktb}"></td>
-										<td class="text12" align="left"><input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField"  name="svvktn" id="svvktn" size="13" maxlength="12" value="${model.record.svvktn}"></td>
+						 				<td  class="text14" align="left"><input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="svvktb" id="svvktb" size="13" maxlength="12" value="${model.record.svvktb}"></td>
+										<td class="text14" align="left"><input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField"  name="svvktn" id="svvktn" size="13" maxlength="12" value="${model.record.svvktn}"></td>
 										<td class="text11" valign="bottom">
 											&nbsp;<input onKeyPress="return numberKey(event)" type="text" class="inputText" name="svntm" id="svntm" size="10" maxlength="9" value="${model.record.svntm}">
 										</td>
@@ -1063,9 +1051,8 @@
 											  	<option value="F"<c:if test="${ model.record.svpva == 'F'}"> selected </c:if> >F</option>
 											</select>
 										</td> 
-				            				
-										<td class="text12" align="left" ><input type="text" class="inputText" name="svas" id="svas" size="8" maxlength="7" value="${model.record.svas}"></td>
-										<td class="text12" align="left" >
+										<td class="text14" align="left" ><input type="text" class="inputText" name="svas" id="svas" size="8" maxlength="7" value="${model.record.svas}"></td>
+										<td class="text14" align="left" >
 											<select class="inputTextMediumBlueMandatoryField" name="svmfr" id="svmfr">
 				        		    			<option value="">-velg-</option>
 			  								  	<option value="F"<c:if test="${ model.record.svmfr == 'F'}"> selected </c:if> >F</option>		
@@ -1073,34 +1060,28 @@
 											  	<option value="2"<c:if test="${ model.record.svmfr == '2'}"> selected </c:if> >2</option>
 											</select>
 										</td>
-										<td align="left" >
-												<c:choose>	
-													<c:when test="${model.status == 'M' || empty model.status || model.status == '10' || model.status == '20'}">
-														<input class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadimport_edit_items.do';" value='<spring:message code="systema.tvinn.sad.import.item.createnew.submit"/>'>
-														&nbsp;&nbsp;
-														
-														<%-- SEND button: is causing some issues in the Stat.värde calculation
-															 We shall have the send button ONLY at one place (so far) and that is at the header level
-									 				    	<c:if test="${not empty totalNumberOfItemLines && '0' != totalNumberOfItemLines}">
-									 				    		<input tabindex=-1 class="inputFormSubmit" type="submit" name="send" id="send" onclick="javascript: form.action='skatimport_send.do';" value='<spring:message code="systema.skat.import.createnew.send"/>'/>
-									 				    	</c:if>
-									 				  	 --%>
-													</c:when>
-													<c:otherwise>
-							 				    		<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
-							 				    	</c:otherwise>	
-						 				    	</c:choose>	
+										<td align="right" colspan="18" >
+											<c:choose>	
+												<c:when test="${model.status == 'M' || empty model.status || model.status == '10' || model.status == '20'}">
+													<input class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadimport_edit_items.do';" value='<spring:message code="systema.tvinn.sad.import.item.createnew.submit"/>'>
+													&nbsp;
+												</c:when>
+												<c:otherwise>
+						 				    		<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
+						 				    		&nbsp;
+						 				    	</c:otherwise>	
+					 				    	</c:choose>	
 										</td>		
 										
- 							        </tr>
-									<tr height="10"><td class="text" align="left" colspan="12"><hr></td></tr>
-									<tr height="8"><td class="text" align="left"></td></tr>
+							        </tr>
+							        
+									<tr height="25"><td class="text" align="left"></td></tr>
 									
 							        <tr >
 							        <td colspan="4" align="center" style="vertical-align:top;">
 							        		<table class="tableBorderWithRoundCornersGray" style="width: 95%; margin-left:auto;margin-right:auto;">
 											<tr >
-									        <td class="text12Bold" >
+									        <td class="text14Bold" >
 									        		&nbsp;<img onMouseOver="showPop('varebeskrivelse_info');" onMouseOut="hidePop('varebeskrivelse_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 									        		Varebeskrivelse
 									        		<div class="text11" style="position: relative;" align="left">
@@ -1124,10 +1105,10 @@
 									        </tr>
 											<tr height="5"><td></td></tr>
 											<tr>
-												<td class="text12" align="left" >&nbsp;<span title="wd1-wd5(svvt)">Varetext</span></td>
-												<td class="text12" align="left" >&nbsp;<span title="wa1-wa7(svft)">Merke og nr</span></td>
-												<td class="text12" align="left" >&nbsp;<span title="wb1-wb7(svnt)">Antall kolli</span></td>
-		               							<td class="text12" align="left" >&nbsp;<span title="wc1-wc7(sveh)">Enhet</span>
+												<td class="text14" align="left" >&nbsp;<span title="wd1-wd5(svvt)">Varetext</span></td>
+												<td class="text14" align="left" >&nbsp;<span title="wa1-wa7(svft)">Merke og nr</span></td>
+												<td class="text14" align="left" >&nbsp;<span title="wb1-wb7(svnt)">Antall kolli</span></td>
+		               							<td class="text14" align="left" >&nbsp;<span title="wc1-wc7(sveh)">Enhet</span>
 			               							<a tabindex="-1" id="svehWc1Wc7IdLink">
 													<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 													</a>
@@ -1136,17 +1117,17 @@
 		               						</tr>
 		               						
 											<tr>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input type="text" class="inputText" name="wd1" id="wd1" size="20" maxlength="30" value="${model.record.wd1}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input type="text" class="inputText" name="wa1" id="wa1" size="20" maxlength="28" value="${model.record.wa1}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return numberKey(event)" type="text" class="inputText" name="wb1" id="wb1" size="6" maxlength="6" value="${model.record.wb1}">
 												</td>
-												<td class="text12MediumBlue">
-													<select name="wc1" id="wc1">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="wc1" id="wc1">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.enhetsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wc1 == code.zkod}"> selected </c:if> >${code.zkod}</option>
@@ -1155,17 +1136,17 @@
 												</td>
 											</tr>
 											<tr>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input type="text" class="inputText" name="wd2" id="wd2" size="20" maxlength="30" value="${model.record.wd2}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input type="text" class="inputText" name="wa2" id="wa2" size="20" maxlength="28" value="${model.record.wa2}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return numberKey(event)" type="text" class="inputText" name="wb2" id="wb2" size="6" maxlength="6" value="${model.record.wb2}">
 												</td>
-												<td class="text12MediumBlue">
-													<select name="wc2" id="wc2">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="wc2" id="wc2">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.enhetsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wc2 == code.zkod}"> selected </c:if> >${code.zkod}</option>
@@ -1174,17 +1155,17 @@
 												</td>
 											</tr>
 											<tr>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input type="text" class="inputText" name="wd3" id="wd3" size="20" maxlength="30" value="${model.record.wd3}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input type="text" class="inputText" name="wa3" id="wa3" size="20" maxlength="28" value="${model.record.wa3}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return numberKey(event)" type="text" class="inputText" name="wb3" id="wb3" size="6" maxlength="6" value="${model.record.wb3}">
 												</td>
-												<td class="text12MediumBlue">
-													<select name="wc3" id="wc3">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="wc3" id="wc3">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.enhetsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wc3 == code.zkod}"> selected </c:if> >${code.zkod}</option>
@@ -1193,17 +1174,17 @@
 												</td>
 											</tr>
 											<tr>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input type="text" class="inputText" name="wd4" id="wd4" size="20" maxlength="30" value="${model.record.wd4}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input type="text" class="inputText" name="wa4" id="wa4" size="20" maxlength="28" value="${model.record.wa4}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return numberKey(event)" type="text" class="inputText" name="wb4" id="wb4" size="6" maxlength="6" value="${model.record.wb4}">
 												</td>
-												<td class="text12MediumBlue">
-													<select name="wc4" id="wc4">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="wc4" id="wc4">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.enhetsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wc4 == code.zkod}"> selected </c:if> >${code.zkod}</option>
@@ -1212,17 +1193,17 @@
 												</td>
 											</tr>
 											<tr>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input type="text" class="inputText" name="wd5" id="wd5" size="20" maxlength="30" value="${model.record.wd5}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input type="text" class="inputText" name="wa5" id="wa5" size="20" maxlength="28" value="${model.record.wa5}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return numberKey(event)" type="text" class="inputText" name="wb5" id="wb5" size="6" maxlength="6" value="${model.record.wb5}">
 												</td>
-												<td class="text12MediumBlue">
-													<select name="wc5" id="wc5">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="wc5" id="wc5">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.enhetsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wc5 == code.zkod}"> selected </c:if> >${code.zkod}</option>
@@ -1231,17 +1212,17 @@
 												</td>
 											</tr>
 											<tr>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													&nbsp;
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input type="text" class="inputText" name="wa6" id="wa6" size="20" maxlength="28" value="${model.record.wa6}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return numberKey(event)" type="text" class="inputText" name="wb6" id="wb6" size="6" maxlength="6" value="${model.record.wb6}">
 												</td>
-												<td class="text12MediumBlue">
-													<select name="wc6" id="wc6">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="wc6" id="wc6">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.enhetsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wc6 == code.zkod}"> selected </c:if> >${code.zkod}</option>
@@ -1250,17 +1231,17 @@
 												</td>
 											</tr>
 											<tr>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													&nbsp;
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input type="text" class="inputText" name="wa7" id="wa7" size="20" maxlength="28" value="${model.record.wa7}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return numberKey(event)" type="text" class="inputText" name="wb7" id="wb7" size="6" maxlength="6" value="${model.record.wb7}">
 												</td>
-												<td class="text12MediumBlue">
-													<select name="wc7" id="wc7">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="wc7" id="wc7">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.enhetsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wc7 == code.zkod}"> selected </c:if> >${code.zkod}</option>
@@ -1269,16 +1250,16 @@
 												</td>
 											</tr>
 											<tr>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													&nbsp;
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													&nbsp;
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													&nbsp;
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													&nbsp;
 												</td>
 											</tr>
@@ -1289,7 +1270,7 @@
 										<td colspan="4" style="vertical-align:top;">
 										<table class="tableBorderWithRoundCornersGray" style="width: 95%; margin-left:auto;margin-right:auto;">
 									        <tr >
-										        <td class="text12Bold">
+										        <td class="text14Bold">
 											        <%-- Model fields needed for the AJAX calculation av Bilagda handlingar  --%>
 											        <input type="hidden" name="model_avd" id="model_avd" value="${model.avd}">
 											        <input type="hidden" name="model_opd" id="model_opd" value="${model.opd}">
@@ -1376,10 +1357,10 @@
 										           			<table>
 										           				<tr height="4"><td ></td></tr>
 										           				<tr class="tableHeaderField" height="20" >
-																	<td class="text12" class="tableHeaderFieldFirst">&nbsp;Kode</td>
-																	<td class="text12" class="tableHeaderField">&nbsp;Beskr.</td>
-																	<td class="text12" class="tableHeaderField">Sekvens</td>
-																	<td align="right" class="text12" class="tableHeaderField">Sats&nbsp;</td>
+																	<td class="text14" class="tableHeaderFieldFirst">&nbsp;Kode</td>
+																	<td class="text14" class="tableHeaderField">&nbsp;Beskr.</td>
+																	<td class="text14" class="tableHeaderField">Sekvens</td>
+																	<td align="right" class="text14" class="tableHeaderField">Sats&nbsp;</td>
 																</tr>
 																<tr class="tableRow">	
 																	<td class="tableCellFirst"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_kode0" id="search_kode0" size="3" value=""></td>
@@ -1557,7 +1538,7 @@
 											<tr height="5"><td></td></tr>
 											 
 											<tr>
-												<td class="text12" align="left" >&nbsp;<span title="wg1-wg8(svkdaae)">Kode</span>
+												<td class="text14" align="left" >&nbsp;<span title="wg1-wg8(svkdaae)">Kode</span>
 													<a tabindex="-1" id="svkdaaeWg1Wg8IdLink">
 													<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 													</a>
@@ -1582,7 +1563,7 @@
 													 --%>
 													 
 												</td>
-												<td class="text12" align="left" >&nbsp;<span title="wh1-wh8(svkdsae)">Sekvens</span>
+												<td class="text14" align="left" >&nbsp;<span title="wh1-wh8(svkdsae)">Sekvens</span>
 													<a tabindex="-1" id="svkdsaeWh1Wh8IdLink">
 													<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 													</a>
@@ -1606,242 +1587,242 @@
 													</span>	
 													 --%>
 												</td>
-		               							<td class="text12" align="left" >&nbsp;<span title="wk1-wk8(svblsae)">Sats</span></td>
-		               							<td class="text12" align="left" >&nbsp;<span title="wj1-wj8(svblgae)">Grunnlag</span></td>
-		               							<td class="text12" align="left" >&nbsp;<span title="wi1-wi8(svblae)">Beløp (NOK)</span></td>
+		               							<td class="text14" align="left" >&nbsp;<span title="wk1-wk8(svblsae)">Sats</span></td>
+		               							<td class="text14" align="left" >&nbsp;<span title="wj1-wj8(svblgae)">Grunnlag</span></td>
+		               							<td class="text14" align="left" >&nbsp;<span title="wi1-wi8(svblae)">Beløp (NOK)</span></td>
 		               						</tr>
 											<tr>
-												<td class="text12MediumBlue">
-													<select name="wg1" id="wg1">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="wg1" id="wg1">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wg1 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
 													</select>
 												</td>
-												<td class="text12MediumBlue">
-													<select name="wh1" id="wh1">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="wh1" id="wh1">
 										            		<option value="">-Velg-</option>
 										            		<c:forEach var="code" items="${model.avgiftsCodeListB}" >
 					                                	 		<option value="${code.zskv}"<c:if test="${model.record.wh1 == code.zskv}"> selected </c:if> >${code.zskv}</option>
 														</c:forEach> 
 													</select>
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wk1" id="wk1" size="10" maxlength="9" value="${model.record.wk1}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wj1" id="wj1" size="10" maxlength="11" value="${model.record.wj1}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wi1" id="wi1" size="10" maxlength="9" value="${model.record.wi1}">
 												</td>
 											</tr>
 											<tr>
-												<td class="text12MediumBlue">
-													<select name="wg2" id="wg2">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="wg2" id="wg2">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wg2 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
 													</select>
 												</td>
-												<td class="text12MediumBlue">
-													<select name="wh2" id="wh2">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="wh2" id="wh2">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeListB}" >
 					                                	 		<option value="${code.zskv}"<c:if test="${model.record.wh2 == code.zskv}"> selected </c:if> >${code.zskv}</option>
 														</c:forEach> 
 													</select>
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wk2" id="wk2" size="10" maxlength="9" value="${model.record.wk2}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wj2" id="wj2" size="10" maxlength="11" value="${model.record.wj2}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wi2" id="wi2" size="10" maxlength="9" value="${model.record.wi2}">
 												</td>
 											</tr>
 											<tr>
-												<td class="text12MediumBlue">
-													<select name="wg3" id="wg3">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="wg3" id="wg3">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wg3 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
 													</select>
 												</td>
-												<td class="text12MediumBlue">
-													<select name="wh3" id="wh3">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="wh3" id="wh3">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeListB}" >
 					                                	 		<option value="${code.zskv}"<c:if test="${model.record.wh3 == code.zskv}"> selected </c:if> >${code.zskv}</option>
 														</c:forEach> 
 													</select>
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wk3" id="wk3" size="10" maxlength="9" value="${model.record.wk3}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wj3" id="wj3" size="10" maxlength="11" value="${model.record.wj3}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wi3" id="wi3" size="10" maxlength="9" value="${model.record.wi3}">
 												</td>
 											</tr>
 											<tr>
-												<td class="text12MediumBlue">
-													<select name="wg4" id="wg4">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="wg4" id="wg4">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wg4 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
 													</select>
 												</td>
-												<td class="text12MediumBlue">
-													<select name="wh4" id="wh4">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="wh4" id="wh4">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeListB}" >
 					                                	 		<option value="${code.zskv}"<c:if test="${model.record.wh4 == code.zskv}"> selected </c:if> >${code.zskv}</option>
 														</c:forEach> 
 													</select>
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wk4" id="wk4" size="10" maxlength="9" value="${model.record.wk4}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wj4" id="wj4" size="10" maxlength="11" value="${model.record.wj4}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wi4" id="wi4" size="10" maxlength="9" value="${model.record.wi4}">
 												</td>
 											</tr>
 											<tr>
-												<td class="text12MediumBlue">
-													<select name="wg5" id="wg5">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="wg5" id="wg5">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wg5 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
 													</select>
 												</td>
-												<td class="text12MediumBlue">
-													<select name="wh5" id="wh5">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="wh5" id="wh5">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeListB}" >
 					                                	 		<option value="${code.zskv}"<c:if test="${model.record.wh5 == code.zskv}"> selected </c:if> >${code.zskv}</option>
 														</c:forEach> 
 													</select>
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wk5" id="wk5" size="10" maxlength="9" value="${model.record.wk5}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wj5" id="wj5" size="10" maxlength="11" value="${model.record.wj5}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wi5" id="wi5" size="10" maxlength="9" value="${model.record.wi5}">
 												</td>
 											</tr>
 											<tr>
-												<td class="text12MediumBlue">
-													<select name="wg6" id="wg6">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="wg6" id="wg6">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wg6 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
 													</select>
 												</td>
-												<td class="text12MediumBlue">
-													<select name="wh6" id="wh6">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="wh6" id="wh6">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeListB}" >
 					                                	 		<option value="${code.zskv}"<c:if test="${model.record.wh6 == code.zskv}"> selected </c:if> >${code.zskv}</option>
 														</c:forEach> 
 													</select>
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wk6" id="wk6" size="10" maxlength="9" value="${model.record.wk6}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wj6" id="wj6" size="10" maxlength="11" value="${model.record.wj6}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wi6" id="wi6" size="10" maxlength="9" value="${model.record.wi6}">
 												</td>
 											</tr>
 											<tr>
-												<td class="text12MediumBlue">
-													<select name="wg7" id="wg7">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="wg7" id="wg7">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wg7 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
 													</select>
 												</td>
-												<td class="text12MediumBlue">
-													<select name="wh7" id="wh7">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="wh7" id="wh7">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeListB}" >
 					                                	 		<option value="${code.zskv}"<c:if test="${model.record.wh7 == code.zskv}"> selected </c:if> >${code.zskv}</option>
 														</c:forEach> 
 													</select>
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wk7" id="wk7" size="10" maxlength="9" value="${model.record.wk7}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wj7" id="wj7" size="10" maxlength="11" value="${model.record.wj7}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wi7" id="wi7" size="10" maxlength="9" value="${model.record.wi7}">
 												</td>
 											</tr>
 											<tr>
-												<td class="text12MediumBlue">
-													<select name="wg8" id="wg8">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="wg8" id="wg8">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wg8 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
 													</select>
 												</td>
-												<td class="text12MediumBlue">
-													<select name="wh8" id="wh8">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="wh8" id="wh8">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeListB}" >
 					                                	 		<option value="${code.zskv}"<c:if test="${model.record.wh8 == code.zskv}"> selected </c:if> >${code.zskv}</option>
 														</c:forEach> 
 													</select>
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wk8" id="wk8" size="10" maxlength="9" value="${model.record.wk8}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wj8" id="wj8" size="10" maxlength="11" value="${model.record.wj8}">
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="wi8" id="wi8" size="10" maxlength="9" value="${model.record.wi8}">
 												</td>
 											</tr>
 											
 											<tr>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													&nbsp;
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													&nbsp;
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													&nbsp;
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													&nbsp;
 												</td>
 												<%--
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input style="display: none;" class="inputFormSubmitStd" type="button" id="calcAvgifterAjax" value='Räkna om'>
 													<input class="inputFormSubmitStd" type="button" id="calcAvgifterDeleteAll" value='Radera värden'>
 													 
@@ -1859,7 +1840,7 @@
 										<td colspan="4" style="vertical-align: top;">
 										<table class="tableBorderWithRoundCornersGray" style="width: 95%; margin-left:auto;margin-right:auto;">
 									        <tr >
-										        <td class="text12Bold">
+										        <td class="text14Bold">
 										        		&nbsp;<img onMouseOver="showPop('toa_info');" onMouseOut="hidePop('toa_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 										        		<b>44.a</b>&nbsp;Tilleggsopplysn<label onClick="showPop('debugPrintlnAjaxAdmin');" >i</label>nger
 													<span style="position:absolute; left:200px; top:500px; width:600px; height:180px;" id="debugPrintlnAjaxAdmin" class="popupWithInputText"  >
@@ -1909,8 +1890,8 @@
 											<tr height="5"><td></td></tr>
 											
 											<tr>
-												<td class="text12" align="left" >&nbsp;<span title="wf1-wf5(svtoa)">Tilleggsoppl.</span></td>
-			               							<td class="text12" align="left" >&nbsp;<span title="we1-we5(svcref)">Ref.</span>
+												<td class="text14" align="left" >&nbsp;<span title="wf1-wf5(svtoa)">Tilleggsoppl.</span></td>
+			               							<td class="text14" align="left" >&nbsp;<span title="we1-we5(svcref)">Ref.</span>
 			               								<a tabindex="-1" id="svcrefWe1We5IdLink">
 														<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 														</a>
@@ -1936,11 +1917,11 @@
 			               							</td>
 			               						</tr>
 												<tr>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input type="text" class="inputText" name="wf1" id="wf1" size="46" maxlength="45" value="${model.record.wf1}">
 												</td>
-												<td class="text12MediumBlue">
-													<select name="we1" id="we1">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="we1" id="we1">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.docSertImportCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.we1 == code.zkod}"> selected </c:if> >${code.zkod}</option>
@@ -1949,11 +1930,11 @@
 												</td>
 											</tr>
 												<tr>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input type="text" class="inputText" name="wf2" id="wf2" size="46" maxlength="45" value="${model.record.wf2}">
 												</td>
-												<td class="text12MediumBlue">
-													<select name="we2" id="we2">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="we2" id="we2">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.docSertImportCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.we2 == code.zkod}"> selected </c:if> >${code.zkod}</option>
@@ -1962,11 +1943,11 @@
 												</td>
 											</tr>
 												<tr>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input type="text" class="inputText" name="wf3" id="wf3" size="46" maxlength="45" value="${model.record.wf3}">
 												</td>
-												<td class="text12MediumBlue">
-													<select name="we3" id="we3">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="we3" id="we3">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.docSertImportCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.we3 == code.zkod}"> selected </c:if> >${code.zkod}</option>
@@ -1975,11 +1956,11 @@
 												</td>
 											</tr>
 												<tr>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input type="text" class="inputText" name="wf4" id="wf4" size="46" maxlength="45" value="${model.record.wf4}">
 												</td>
-												<td class="text12MediumBlue">
-													<select name="we4" id="we4">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="we4" id="we4">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.docSertImportCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.we4 == code.zkod}"> selected </c:if> >${code.zkod}</option>
@@ -1988,11 +1969,11 @@
 												</td>
 											</tr>
 											<tr>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input type="text" class="inputText" name="wf5" id="wf5" size="46" maxlength="45" value="${model.record.wf5}">
 												</td>
-												<td class="text12MediumBlue">
-													<select name="we5" id="we5">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="we5" id="we5">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.docSertImportCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.we5 == code.zkod}"> selected </c:if> >${code.zkod}</option>
@@ -2001,10 +1982,10 @@
 												</td>
 											</tr>
 												<tr>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													&nbsp;
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													&nbsp;
 												</td>
 											</tr>
@@ -2015,7 +1996,7 @@
 							    			<td colspan="4" style="vertical-align: top;">
 										<table class="tableBorderWithRoundCornersGray" style="width: 95%; margin-left:auto;margin-right:auto;">
 									        <tr >
-										        <td class="text12Bold">
+										        <td class="text14Bold">
 										        		&nbsp;<img onMouseOver="showPop('tob_info');" onMouseOut="hidePop('tob_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 										        		<b>44.b</b>&nbsp;Tilleggsopplysninger
 										        <div class="text11" style="position: relative;" align="left">
@@ -2057,8 +2038,8 @@
 									        </tr>
 											<tr height="5"><td></td></tr>
 											<tr>
-												<td class="text12" align="left" >&nbsp;<span title="wf6-wf10(svtoa)">Tilleggsoppl.</span></td>
-			               							<td class="text12" align="left" >&nbsp;<span title="we6-we10(svcref)">Ref.</span>
+												<td class="text14" align="left" >&nbsp;<span title="wf6-wf10(svtoa)">Tilleggsoppl.</span></td>
+			               							<td class="text14" align="left" >&nbsp;<span title="we6-we10(svcref)">Ref.</span>
 			               								<a tabindex="-1" id="svcrefWe6We10IdLink">
 														<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 														</a>
@@ -2068,11 +2049,11 @@
 			               							</td>
 			               						</tr>
 												<tr>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input type="text" class="inputText" name="wf6" id="wf6" size="46" maxlength="45" value="${model.record.wf6}">
 												</td>
-												<td class="text12MediumBlue">
-													<select name="we6" id="we6">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="we6" id="we6">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.docSertImportCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.we6 == code.zkod}"> selected </c:if> >${code.zkod}</option>
@@ -2081,11 +2062,11 @@
 												</td>
 											</tr>
 												<tr>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input type="text" class="inputText" name="wf7" id="wf7" size="46" maxlength="45" value="${model.record.wf7}">
 												</td>
-												<td class="text12MediumBlue">
-													<select name="we7" id="we7">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="we7" id="we7">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.docSertImportCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.we7 == code.zkod}"> selected </c:if> >${code.zkod}</option>
@@ -2094,11 +2075,11 @@
 												</td>
 											</tr>
 												<tr>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input type="text" class="inputText" name="wf8" id="wf8" size="46" maxlength="45" value="${model.record.wf8}">
 												</td>
-												<td class="text12MediumBlue">
-													<select name="we8" id="we8">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="we8" id="we8">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.docSertImportCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.we8 == code.zkod}"> selected </c:if> >${code.zkod}</option>
@@ -2107,11 +2088,11 @@
 												</td>
 											</tr>
 												<tr>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input type="text" class="inputText" name="wf9" id="wf9" size="46" maxlength="45" value="${model.record.wf9}">
 												</td>
-												<td class="text12MediumBlue">
-													<select name="we9" id="we9">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="we9" id="we9">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.docSertImportCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.we9 == code.zkod}"> selected </c:if> >${code.zkod}</option>
@@ -2120,11 +2101,11 @@
 												</td>
 											</tr>
 											<tr>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													<input type="text" class="inputText" name="wf10" id="wf10" size="46" maxlength="45" value="${model.record.wf10}">
 												</td>
-												<td class="text12MediumBlue">
-													<select name="we10" id="we10">
+												<td class="text14MediumBlue">
+													<select class="selectMediumBlueE2" name="we10" id="we10">
 										            		<option value="">-Velg-</option>
 									 				  	<c:forEach var="code" items="${model.docSertImportCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.we10 == code.zkod}"> selected </c:if> >${code.zkod}</option>
@@ -2133,10 +2114,10 @@
 												</td>
 											</tr>
 												<tr>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													&nbsp;
 												</td>
-												<td class="text12MediumBlue">
+												<td class="text14MediumBlue">
 													&nbsp;
 												</td>
 											</tr>
@@ -2178,7 +2159,7 @@
 				 	
 					<table>
 						<tr>
-							<td colspan="6">Beskrivning:&nbsp;<label class="text12Bold" id="svvt" name="svvt"></label></td>
+							<td colspan="6">Beskrivning:&nbsp;<label class="text14Bold" id="svvt" name="svvt"></label></td>
 						</tr>
 						<tr height="5"><td></td></tr>
 						
@@ -2190,11 +2171,11 @@
           					<td class="tableHeaderField" align="left" >&nbsp;Kundenr.</td>
           				</tr>
 						<tr>
-							<td class="tableCell11"><input readonly class="inputTextReadOnly" type="text"  id="w2vf" name="w2vf" size="10px" value=""></input></td>
-							<td class="tableCellFirst11"><input class="inputTextReadOnly" type="text" id="w2lk" name="w2lk" size="10px" value=""></input></td>
-							<td class="tableCell11"><input readonly class="inputTextReadOnly" type="text"  id="w2vnti" name="w2vnti" size="10px" value=""></input></td>
-							<td class="tableCell11"><input  class="inputTextMediumBlue" type="text"  id="varenr" name="varenr" size="10px" value=""></input></td>
-							<td class="tableCell11"><input  class="inputTextMediumBlue" type="text"  id="levenr" name="levenr" size="10px" value=""></input></td>
+							<td class="tableCell"><input readonly class="inputTextReadOnly" type="text"  id="w2vf" name="w2vf" size="10px" value=""></input></td>
+							<td class="tableCellFirst"><input class="inputTextReadOnly" type="text" id="w2lk" name="w2lk" size="10px" value=""></input></td>
+							<td class="tableCell"><input readonly class="inputTextReadOnly" type="text"  id="w2vnti" name="w2vnti" size="10px" value=""></input></td>
+							<td class="tableCell"><input  class="inputTextMediumBlue" type="text"  id="varenr" name="varenr" size="10px" value=""></input></td>
+							<td class="tableCell"><input  class="inputTextMediumBlue" type="text"  id="levenr" name="levenr" size="10px" value=""></input></td>
 						</tr>
 						
 					</table>

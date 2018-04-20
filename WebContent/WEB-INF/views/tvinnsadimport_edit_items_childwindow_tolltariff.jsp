@@ -27,13 +27,13 @@
 						<table>
 						<form name="tvinnsadImportTolltariffForm" id="tvinnsadImportTolltariffForm" action="tvinnsadimport_edit_items_childwindow_tolltariff.do?action=doInit" method="post">
 						<tr>
-							<td class="text11">&nbsp;Varenr.</td>
-							<td class="text11">&nbsp;<input type="text" class="inputText" name="vkod" id="vkod" size="10" maxlength="10" value="${model.vkod}"></td>
+							<td class="text14">&nbsp;Varenr.</td>
+							<td class="text14">&nbsp;<input type="text" class="inputText" name="vkod" id="vkod" size="10" maxlength="10" value="${model.vkod}"></td>
 							
-							<td class="text11">&nbsp;Vareslag</td>
-							<td class="text11">&nbsp;<input type="text" class="inputText" name="tekst" id="tekst" size="30" maxlength="50" value="${model.tekst}"></td>
+							<td class="text14">&nbsp;Vareslag</td>
+							<td class="text14">&nbsp;<input type="text" class="inputText" name="tekst" id="tekst" size="30" maxlength="50" value="${model.tekst}"></td>
 							
-							<td class="text11">&nbsp;</td>
+							<td class="text14">&nbsp;</td>
 	           				<td align="right">&nbsp;<input class="inputFormSubmit" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.search"/>'></td>
 		           		</tr>
 		           		</form>
@@ -49,10 +49,10 @@
 					<%-- this is the datatables grid (content)--%>
 					<table id="tolltariffList" class="display compact cell-border" width="100%" >
 						<thead>
-						<tr style="background-color:#EEEEEE">
-							<th class="text11" title="adunnr">&nbsp;Varenr.&nbsp;</th>
-		                    <th class="text11" title="adembg">&nbsp;Vareslag&nbsp;</th>
-		                    <th class="text11" title="adembg">&nbsp;Beskrivelse&nbsp;</th>
+						<tr class="tableHeaderField" height="20" >
+							<th class="text14" title="adunnr">&nbsp;Varenr.&nbsp;</th>
+		                    <th class="text14" title="adembg">&nbsp;Vareslag&nbsp;</th>
+		                    <th class="text14" title="adembg">&nbsp;Beskrivelse&nbsp;</th>
 		                    
 		                </tr> 
 		                </thead>
@@ -61,17 +61,17 @@
 		                <c:forEach var="record" items="${model.tolltariffList}" varStatus="counter">    
 			               <c:choose>           
 			                   <c:when test="${counter.count%2==0}">
-			                       <tr class="text11">
+			                       <tr class="text14">
 			                   </c:when>
 			                   <c:otherwise>   
-			                       <tr class="text11">
+			                       <tr class="text14">
 			                   </c:otherwise>
 			               </c:choose>
-			               <td nowrap style="cursor:pointer;" class="text11MediumBlue" id="vkod${record.tatanr}@text${record.taalfa}" >
+			               <td nowrap style="cursor:pointer;" class="text14MediumBlue" id="vkod${record.tatanr}@text${record.taalfa}" >
 			               		<img title="select" valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;${record.tatanr}
 			               	</td>
-		               	   <td class="text11">&nbsp;${record.taalfa}</td>
-		               	   <td class="text11">&nbsp;${record.beskr1}</td>
+		               	   <td class="text14">&nbsp;${record.taalfa}</td>
+		               	   <td class="text14">&nbsp;${record.beskr1}</td>
 		               	   
 			            </tr> 
 			            </c:forEach>
