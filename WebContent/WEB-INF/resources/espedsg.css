@@ -2476,12 +2476,18 @@
 
 input[type=text]:focus, textarea:focus{
 	background-color: lightyellow;
-	border: 2px solid #4169E1;
+	/*border: 2px solid #4169E1;*/
+	box-shadow: 0 0 5px rgba(66, 148, 255, 1);
+	border: 2px solid rgba(66, 148, 255, 1);
+	
 	
 }
 input[type=password]:focus, textarea:focus{
 	background-color: lightyellow;
-	border: 2px solid #4169E1;
+	/*border: 2px solid #4169E1;*/
+	box-shadow: 0 0 5px rgba(66, 148, 255, 1);
+	border: 2px solid rgba(66, 148, 255, 1);
+	
 	
 }
 input[type=button]:focus{
