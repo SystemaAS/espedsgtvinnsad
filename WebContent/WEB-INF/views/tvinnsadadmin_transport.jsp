@@ -47,18 +47,18 @@
  	        <tr height="10"><td></td></tr>
  	        <form name="sadAdminTransportSearchForm" id="sadAdminTransportSearchForm" action="tvinnsadadmin_transport?action=doFind" method="post" >
  	        <tr>	
- 	        		<td class="text12" align="left" >&nbsp;&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.avd"/></td>
-                <td class="text12" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.sign"/></td>
-                <td class="text12" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.transportuppdrag"/></td>
-                <td class="text12" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.sender"/></td>
-                <td class="text12" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.receiver"/></td>
-                <td class="text12" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.datum"/></td>
+ 	        		<td class="text14" align="left" >&nbsp;&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.avd"/></td>
+                <td class="text14" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.sign"/></td>
+                <td class="text14" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.transportuppdrag"/></td>
+                <td class="text14" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.sender"/></td>
+                <td class="text14" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.receiver"/></td>
+                <td class="text14" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.datum"/></td>
                 <td>&nbsp;</td>
 			</tr>
  	        <tr>
  	        		
 				<td align="left" >&nbsp;
-           			<select name="avd" id="avd">
+           			<select class="selectMediumBlueE2" name="avd" id="avd">
 	            		<option value="">-velg-</option>
 	 				  	<c:forEach var="record" items="${model.avdList}" >
                              	 	<option value="${record.avd}"<c:if test="${searchFilter.avd == record.avd}"> selected </c:if> >${record.avd}</option>
@@ -66,7 +66,7 @@
 					</select>
 				</td>
 				<td align="left" >
-           			<select name="sign" id="sign">
+           			<select class="selectMediumBlueE2" name="sign" id="sign">
 	            		<option value="">-velg-</option>
 	 				  	<c:forEach var="record" items="${model.signList}" >
                              	 	<option value="${record.sign}"
@@ -120,15 +120,18 @@
 			<tr>
 				<td>
 				<table width="100%" cellspacing="0" border="0" cellpadding="0">
+					<thead>
 					<tr class="tableHeaderField" height="20" valign="left">
-	                    <td width="2%" class="tableHeaderFieldFirst" align="left" >&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.avd"/></td>
-               			<td width="2%" class="tableHeaderField" align="left" >&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.sign"/></td>
-               			<td width="2%" class="tableHeaderField" align="left" >Endre</td>
-                        <td class="tableHeaderField" align="left" >&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.transportuppdrag"/></td>
-		                <td class="tableHeaderField" align="left" >&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.sender"/></td>
-		                <td class="tableHeaderField" align="left" >&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.receiver"/></td>
-		                <td class="tableHeaderField" align="left" >&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.datum"/></td>
-	                </tr>     
+	                    <th width="2%" class="tableHeaderFieldFirst" align="left" >&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.avd"/></th>
+               			<th width="2%" class="tableHeaderField" align="left" >&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.sign"/></th>
+               			<th width="2%" class="tableHeaderField" align="left" >Endre</th>
+                        <th class="tableHeaderField" align="left" >&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.transportuppdrag"/></th>
+		                <th class="tableHeaderField" align="left" >&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.sender"/></th>
+		                <th class="tableHeaderField" align="left" >&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.receiver"/></th>
+		                <th class="tableHeaderField" align="left" >&nbsp;<spring:message code="systema.tvinn.sad.admin.transport.list.search.label.datum"/></th>
+	                </tr> 
+	                </thead>
+	                <tbody>    
 		            <c:forEach items="${list}" var="topic" varStatus="counter">    
 		               <c:choose>           
 		                   <c:when test="${counter.count%2==0}">
@@ -153,6 +156,7 @@
 		               <td class="tableCell" >&nbsp;${topic.datum}</td>
 		            </tr> 
 		            </c:forEach>
+		            </tbody>
 	            </table>
 			</td>	
 			</tr>

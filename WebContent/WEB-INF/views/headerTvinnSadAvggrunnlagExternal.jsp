@@ -37,12 +37,12 @@
 	<%--<script type="text/javascript" src="http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/jqueryui/dataTables.jqueryui.js"></script> --%>
 	
 	
-    <table class="noBg" width="1100" border="0" cellspacing="0" cellpadding="0">
+    <table class="noBg" width="100%" border="0" cellspacing="0" cellpadding="0">
 		<%--Banner --%>
 	 	<tr>
 	 		 <%-- class="grayTitanBg" --%>
     		<td height="60" class="headerTdsBannerAreaBg" width="100%" align="left" colspan="3"> 
-    			 <table width="1100" border="0" cellspacing="0" cellpadding="0">
+    			 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     			 	<tr>
 			        	<td>&nbsp;</td>
 			        	<td>&nbsp;</td>
@@ -53,20 +53,20 @@
 					 		<c:when test="${not empty user.logo}">
 				 				<c:choose>
 					 				<c:when test="${fn:contains(user.logo, '/')}">
-					 					<td class="text12" width="10%" align="center" valign="middle" >
+					 					<td class="text14" width="10%" align="center" valign="middle" >
 											<img src="${user.logo}" border="0" width="30px" height="20px">
 										</td>
 									</c:when>
 									<c:otherwise>
 										<c:choose>
 											<c:when test="${fn:contains(user.logo, 'systema')}">
-											<td class="text12white" width="10%" align=left valign="bottom" >&nbsp;
+											<td class="text14white" width="10%" align=left valign="bottom" >&nbsp;
 												<img src="resources/images/${user.logo}" border="0" width=80px height=50px>
 											</td>
 											</c:when>
 											<c:otherwise>
 												<c:if test="${fn:contains(user.logo, 'logo')}">
-													<td class="text12white" width="10%" align=left valign="bottom" >&nbsp;
+													<td class="text14white" width="10%" align=left valign="bottom" >&nbsp;
 														<img src="resources/images/${user.logo}" border="0" >
 													</td>
 												</c:if>
@@ -76,17 +76,17 @@
 								</c:choose>
    			 				</c:when> 
    			 				<c:otherwise>
-						 		<td class="text12white" width="10%" align=left valign="bottom" >&nbsp;</td>
-						 		<%-- <td class="text12white" width="10%" align=right valign="bottom" >&nbsp;</td>--%>
+						 		<td class="text14white" width="10%" align=left valign="bottom" >&nbsp;</td>
+						 		<%-- <td class="text14white" width="10%" align=right valign="bottom" >&nbsp;</td>--%>
 					 		</c:otherwise>
 				 		</c:choose>
-				 		<td class="text22Bold" width="80%" align="middle" valign="middle" style="color:#778899;" >
+				 		<td class="text32Bold" width="100%" align="center" valign="middle" style="color:#778899;" >
 				 			eSped<font style="color:#003300;">sg</font> - TVINN Avgiftsgrunnlag
 				 			
 				 		</td>
 				 		 
-			    		<td class="text12" width="10%" align="center" valign="middle" ><img src="resources/images/systema_logo.png" border="0" width=80px height=50px ></td>
-			      		<%-- <td class="text12white" width="10%" align=right valign="bottom" >&nbsp;</td>--%>
+			    		<td class="text14" width="10%" align="center" valign="middle" ><img src="resources/images/systema_logo.png" border="0" width=80px height=50px ></td>
+			      		<%-- <td class="text14white" width="10%" align=right valign="bottom" >&nbsp;</td>--%>
 			        </tr>
 			        <tr>
 			        	<td>&nbsp;</td>
@@ -99,10 +99,10 @@
 		</tr>
 		
 		<tr >
-			<td height="23" class="tabThinBorderLightSlateGray" width="100%" align="left" colspan="3"> 
-    			 <table width="1100" border="0" cellspacing="0" cellpadding="0">
+			<td height="23" class="tabThinBorderLightGreenLogoutE2" width="100%" align="left" colspan="3"> 
+    			 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 				 	<tr >
-			    		<td class="text11" width="70%" align="left" >&nbsp;&nbsp;
+			    		<td class="text14" width="70%" align="left" >&nbsp;&nbsp;
 			    			<%-- -------------------------------- --%>
 			    			<%-- TVINN Avgiftsgrunnlag external   --%>
 			    			<%-- -------------------------------- --%>
@@ -121,7 +121,7 @@
 			    			</a>
 			    			
 	      				</td>		      				
-	      				<td class="text11" width="50%" align="right" valign="middle">
+	      				<td class="text14" width="50%" align="right" valign="middle">
 	      					<c:if test="${user.usrLang =='NO' || empty user.usrLang }">
 	                   			<img src="resources/images/countryFlags/Flag_NO.gif" height="12" border="0" alt="country">
    							</c:if>
@@ -132,24 +132,26 @@
 		      				
 		      				<font class="headerMenuGreen">
 			    				<img src="resources/images/appUser.gif" border="0" onClick="showPop('specialInformationAdmin');" > 
-						        <span style="position:absolute; left:100px; top:150px; width:1000px; height:400px;" id="specialInformationAdmin" class="popupWithInputText"  >
-						           		<div class="text11" align="left">
+						        <div class="text11" style="position: relative;display: inline;" align="left">
+									<span style="position:absolute; top:3px; width:150;" id="specialInformationAdmin" class="popupWithInputText"  >
+						           		<div class="text14" align="left">
 						           			${activeUrlRPG_TODO}
 						           			<br/><br/>
 						           			<button name="specialInformationButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('specialInformationAdmin');">Close</button> 
 						           		</div>
-						        </span>   		
-			    				<font class="text11User"  >${user.user}&nbsp;</font>${user.usrLang}</font>
+						        	</span>
+						        </div>	   		
+			    				<font class="text14User"  >${user.user}&nbsp;</font>${user.usrLang}</font>
 			    				<font color="#FFFFFF"; style="font-weight: bold;">&nbsp;|&nbsp;&nbsp;</font>
 				    			<a tabindex=-1 href="logout.do">
 				    				<font class="headerMenuGreen"><img src="resources/images/home.gif" border="0">&nbsp;
-				    					<font class="text11User"  ><spring:message code="dashboard.menu.button"/>&nbsp;</font>
+				    					<font class="text14User"  ><spring:message code="dashboard.menu.button"/>&nbsp;</font>
 				    				</font>
 				    			</a>
 				    			<font color="#FFFFFF"; style="font-weight: bold;">&nbsp;&nbsp;|&nbsp;</font>
-				    			<font class="text12LightGreen" style="cursor:pointer;" onClick="showPop('versionInfo');">${user.versionSpring}&nbsp;</font>
-		    				    	<div class="text11" style="position: relative;" align="left">
-									<span style="position:absolute; left:5px; top:30px; width:250px" id="versionInfo" class="popupWithInputText"  >	
+				    			<font class="text14LightGreen" style="cursor:pointer;" onClick="showPop('versionInfo');">${user.versionSpring}&nbsp;</font>
+		    				    	<div class="text11" style="position: relative;display: inline;" align="left">
+									<span style="position:absolute; top:3px; width:150;" id="versionInfo" class="popupWithInputText"  >
 					           	
 					           			&nbsp;<b>${user.versionEspedsg}</b>
 					           			<br/><br/>
@@ -157,7 +159,7 @@
 					           			<br/><br/><br/>
 					           			<button name="versionInformationButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('versionInfo');">Close</button> 
 					           		</span>
-								</div>  
+									</div>  
 						        
 				    		</td>
 	      				

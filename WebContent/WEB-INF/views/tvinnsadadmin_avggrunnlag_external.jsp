@@ -87,8 +87,8 @@
 					 			<tr height="8"><td >&nbsp;</td></tr>
  	        					<tr>
  	        						<td>&nbsp;</td>
-					 	        	<td class="text12" align="left" >&nbsp;Fra dato</td>
-					                <td class="text12" align="left" >&nbsp;Til dato</td>
+					 	        	<td class="text14" align="left" >&nbsp;Fra dato</td>
+					                <td class="text14" align="left" >&nbsp;Til dato</td>
 					            </tr>
 					            <tr>
 					            	<td>&nbsp;</td>
@@ -100,7 +100,7 @@
 								<tr height="5"><td >&nbsp;</td></tr>
 					            <tr> 
 					            	<td>&nbsp;</td>   
-					                <td class="text12" align="left" >&nbsp;Kunde
+					                <td class="text14" align="left" >&nbsp;Kunde
 					                	<c:if test="${user.intern == 'J'}">
 					                		<a tabindex="-1" id="avggCustomerIdLink">
 												<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
@@ -151,7 +151,7 @@
 					<table style="width:85%" align="center" cellspacing="0" border="0" cellpadding="0">
 						<tr height="10"><td >&nbsp;</td></tr>
 						<tr>
-						<td class="text12">
+						<td class="text14">
 			 				<img style="vertical-align: bottom" src="resources/images/excel.png" width="18" height="18" border="0" alt="show docs">
 			 				&nbsp;<b>Resultat</b>
 			 			</td>
