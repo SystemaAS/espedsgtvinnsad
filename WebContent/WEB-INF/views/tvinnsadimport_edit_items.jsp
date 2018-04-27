@@ -924,7 +924,7 @@
 										</td>
 							        </tr>
 							        <tr>
-						        		<td>&nbsp;<button title="Kundens vareregister" name="kundensVaruregisterControlButton" id="kundensVaruregisterControlButton" class="buttonGrayWithGreenFrame" type="button" >Søk i kund.varereg.</button></td>
+						        		<td>&nbsp;<button tabindex=-1 title="Kundens vareregister" name="kundensVaruregisterControlButton" id="kundensVaruregisterControlButton" class="buttonGrayWithGreenFrame" type="button" >Søk i kund.varereg.</button></td>
 							        		<td align="left" nowrap>
 							        			<c:choose>
 							        			<c:when test="${ not empty model.record.svvf}">

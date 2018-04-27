@@ -771,50 +771,7 @@
 			});
 	  	});
   	});
-  	//Grid aspects on behavior usually required when updating more than 10-rows. 
-	//All this helps to high-light the next-row to update...after a newly row update has taken place.
-	jq(document).ready(function(){
-		var indx = 1;
-		try{
-			indx = parseInt(jq('#lastSelectedItemLineNumber').val());
-			indx++;
-		}catch(err){ 
-			//alert("err:" + err.message)
-		}
-		var row = document.getElementById("tblItemLines").rows;
-		//do the rest ONLY if lineNr is empty (since there could be validadtion errors and in this case the code should not execute further)
-		var lineNr = jq('#lineNr').val();
-		if (indx > 1 && ""==lineNr){
-			//alert(indx);
-			row[indx].scrollIntoView(false);
-			var id = "#"+row[indx].id;
-			//jq(id).css("background-color","#F0F0F0");
-			jq(id).css("background-color","#A3D098");
-			row[indx].focus();
-			
-		}else{
-			//focus on
-			//jq('#svvf').focus(); //causing unexpected behavior on html rewrite after  a big item lines set is loaded
-			jq('#startItemLineNr').focus();
-		}
-		
-		//Initialize Dialog for KundensVareregister here
-  		jq(function() { 
-  		  jq("#dialogKundensVareregister").dialog({
-  			  autoOpen: false,
-  			  maxWidth:600,
-  	          maxHeight: 250,
-  	          width: 600,
-  	          height: 250,
-  			  modal: true
-  		  });
-  		});
-  		
-  		
-  		
-	});
   	
-	
 	//set item line into kundensvarereg.
   	function updateKundensVarReg(record) {
   		var htmlValue = record.id;
@@ -925,6 +882,7 @@
     	//init table (no ajax, no columns since the payload is already there by means of HTML produced on the back-end)
 	      jq('#tblItemLinesAll').dataTable( {
 	    	  "dom": '<"top">t<"bottom"flip><"clear">',
+	    	  "tabIndex": -1,
 	    	  "scrollY":    "800px",
 	    	  "scrollCollapse":  true,
 	  		  "order": [[ 13, "desc" ]],
@@ -933,6 +891,7 @@
 	      //init table (no ajax, no columns since the payload is already there by means of HTML produced on the back-end)
 	      jq('#tblItemLines').dataTable( {
 	    	  "dom": '<"top">t<"bottom"flip><"clear">',
+	    	  "tabIndex": -1,
 	    	  "scrollY":    "180px",
 	  		  "scrollCollapse":  true,
 	  		  "order": [[ 14, "desc" ], [ 1, 'asc' ]],
@@ -947,5 +906,48 @@
 	      jq('input.tblItemLinesAll_filter').on( 'keyup click', function () {
 	      		filterGlobal();
 	      });
+	      
+		    //Grid aspects on behavior usually required when updating more than 10-rows. 
+		  	//All this helps to high-light the next-row to update...after a newly row update has taken place.
+	      	
+	      	/* TO be re-used. Let's turn it OFF until further customer case
+	  	  	var indx = 1;
+			try{
+				indx = parseInt(jq('#lastSelectedItemLineNumber').val());
+				indx++;
+			}catch(err){ 
+				//alert("err:" + err.message)
+			}
+			var row = document.getElementById("tblItemLines").rows;
+			//do the rest ONLY if lineNr is empty (since there could be validadtion errors and in this case the code should not execute further)
+			var lineNr = jq('#lineNr').val();
+			if (indx > 1 && ""==lineNr){
+				//alert(indx);
+				row[indx].scrollIntoView(false);
+				var id = "#"+row[indx].id;
+				//jq(id).css("background-color","#F0F0F0");
+				jq(id).css("background-color","#A3D098");
+				row[indx].focus();
+				
+			}else{
+				//focus on
+				//jq('#svvf').focus(); //causing unexpected behavior on html rewrite after  a big item lines set is loaded
+				jq('#startItemLineNr').focus();
+			}
+			*/
+	      
+			//Initialize Dialog for KundensVareregister here
+	  		jq(function() { 
+	  		  jq("#dialogKundensVareregister").dialog({
+	  			  autoOpen: false,
+	  			  maxWidth:600,
+	  	          maxHeight: 250,
+	  	          width: 600,
+	  	          height: 250,
+	  			  modal: true
+	  		  });
+	  		});
+	  		
+	  		jq('#svvf').focus();
     });
 	
