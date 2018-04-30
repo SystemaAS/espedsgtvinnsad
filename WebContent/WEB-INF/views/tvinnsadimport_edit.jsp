@@ -176,6 +176,10 @@
 			<%-- general (from user profile) --%>
 			<input type="hidden" name="action" id="action" value='doUpdate'>
 			<input type="hidden" name="applicationUser" id="applicationUser" value='${user.user}'>
+			<input type="hidden" name="userEncrypted" id="userEncrypted" value='${user.encryptedPassword}'>
+       		<input type="hidden" name="servletHost" id="servletHost" value='${user.servletHost}'>
+      		<input type="hidden" name="tomcatPort" id="tomcatPort" value='${user.tomcatPort}'>
+		
 			<input type="hidden" name="opd" id="opd" value='${model.record.sitdn}'>
 			<%-- topic specific (syop and refnr) --%>
 			<input type="hidden" name="siavd" id="siavd" value='${model.record.siavd}'>
@@ -272,6 +276,7 @@
 				<td align="left" class="text14MediumBlue" >
 					&nbsp;&nbsp;&nbsp;&nbsp;<span title="sidst">Tarifferingsted:</span>&nbsp;<b>${model.record.sidst}</b>
 					&nbsp;&nbsp;<span title="sitarf">Tariffør:</span>&nbsp;<b>${model.record.sitarf}</b>
+					&nbsp;&nbsp;<input class="buttonGrayWithGreenFrame" type="button" name="buttonToTror" id="buttonToTror" value='Til Oppdragsreg.'/>
 					
 				</td>
 			</tr>

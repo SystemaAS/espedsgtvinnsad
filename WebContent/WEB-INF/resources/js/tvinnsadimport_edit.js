@@ -37,6 +37,14 @@
   			
   		}
 	  });
+  	  
+  	  jq("#buttonToTror").click(function() {
+		  jq.blockUI({ css: { fontSize: '22px' }, message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+		  var url = jq('#servletHost').val() + ":" + jq('#tomcatPort').val() + "/espedsgtror/logonTvinnSad_toTror.do?user=" + jq('#applicationUser').val(); 
+		  var params = "&heavd="+ jq('#avd').val() + '&heopd=' + jq('#opd').val() + "&hesg=" + jq('#sisg').val() + "&dp=" + encodeURIComponent(jq('#userEncrypted').val()); 
+		  
+		  window.location = url + params;
+	  });
     });
     
     //General functions
