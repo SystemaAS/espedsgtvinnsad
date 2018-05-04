@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import no.systema.main.model.SystemaWebUser;
 import no.systema.main.service.UrlCgiProxyService;
 import no.systema.main.service.UrlCgiProxyServiceImpl;
 import no.systema.main.util.JsonDebugger;
@@ -32,9 +33,15 @@ import no.systema.tvinn.sad.nctsimport.model.jsonjackson.topic.unloading.items.J
 import no.systema.tvinn.sad.nctsimport.model.jsonjackson.topic.unloading.items.JsonSadNctsImportSpecificTopicUnloadingItemContainer;
 
 import no.systema.tvinn.sad.model.jsonjackson.customer.JsonTvinnSadCustomerRecord;
-import no.systema.tvinn.sad.nctsimport.service.SadNctsImportSpecificTopicItemService;
+import no.systema.tvinn.sad.model.jsonjackson.JsonTvinnSadGodsnrContainer;
+import no.systema.tvinn.sad.model.jsonjackson.JsonTvinnSadGodsnrRecord;
+import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelningContainer;
+import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelningRecord;
 import no.systema.tvinn.sad.nctsimport.service.SadNctsImportSpecificTopicUnloadingItemService;
+import no.systema.tvinn.sad.service.TvinnSadGodsnrService;
 import no.systema.tvinn.sad.service.TvinnSadTolltariffVarukodService;
+import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
+
 /**
  * This Ajax handler is the class handling ajax request in Sad-NctsImport. 
  * It will usually be called from within a jQuery function or other javascript alike... 
@@ -208,6 +215,8 @@ public class SadNctsImportAjaxHandlerController {
 	    		if(container!=null){
 	    			for(JsonSadNctsImportSpecificTopicRecord  record : container.getOneorder()){
 	    				logger.info("Registreringsdatum: " + record.getTidt() );
+	    				//update Godsnr with a better seed... (A12 being the leading case of this godsnr implementation
+	    				record.setTign(this.getGodsnrSeed(record.getTign(), applicationUser, record.getTiavd()));
 	    				result.add(record);
 	    			}
 	    		}
@@ -215,6 +224,39 @@ public class SadNctsImportAjaxHandlerController {
 			return result;
 		  
 	  }
+	 
+	 /**
+	  * 
+	  * @param originalGodsnrSeed
+	  * @param appUser
+	  * @param avd
+	  * @return
+	  */
+	 private String getGodsnrSeed(String originalGodsnrSeed, String applicationUser, String avd){
+		//fill in html lists here
+		String retval = originalGodsnrSeed; 
+		try{
+			String BASE_URL = TvinnSadUrlDataStore.TVINN_SAD_FETCH_GODSNR_URL;
+			StringBuffer urlRequestParamsKeys = new StringBuffer();
+			urlRequestParamsKeys.append("user=" + applicationUser);
+			urlRequestParamsKeys.append("&avd=" + avd);
+			//Now build the URL and send to the back end via the drop down service
+			String utfPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
+			logger.info("AVD BASE_URL:" + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+			logger.info("AVD BASE_PARAMS:" + urlRequestParamsKeys.toString());
+			
+			JsonTvinnSadGodsnrContainer container = this.tvinnSadGodsnrService.getContainer(utfPayload);
+			for(JsonTvinnSadGodsnrRecord record: container.getCrtgodsnr()){
+				retval = record.getTign();
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return retval;
+			
+	}	
 	 
 	 /**
 	   * 
@@ -346,5 +388,12 @@ public class SadNctsImportAjaxHandlerController {
 	  public void setTvinnSadTaricVarukodService(TvinnSadTolltariffVarukodService value){this.tvinnSadTaricVarukodService = value;}
 	  public TvinnSadTolltariffVarukodService getTvinnSadTaricVarukodService(){ return this.tvinnSadTaricVarukodService; }
 	  
+	  
+	  @Qualifier ("tvinnSadGodsnrService")
+	  private TvinnSadGodsnrService tvinnSadGodsnrService;
+	  @Autowired
+	  public void setTvinnSadGodsnrService (TvinnSadGodsnrService value){ this.tvinnSadGodsnrService = value; }
+	  public TvinnSadGodsnrService getTvinnSadGodsnrService(){return this.tvinnSadGodsnrService;}
+		
 		
 }

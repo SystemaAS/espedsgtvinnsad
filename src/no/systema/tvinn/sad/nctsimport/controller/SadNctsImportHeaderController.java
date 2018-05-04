@@ -39,6 +39,8 @@ import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelning
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureContainer;
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureRecord;
 import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService;
+import no.systema.tvinn.sad.service.TvinnSadGodsnrService;
+
 //Specific NCTS-import
 import no.systema.tvinn.sad.nctsimport.util.manager.CodeDropDownMgr;
 import no.systema.tvinn.sad.nctsimport.service.SadNctsImportSpecificTopicService;
@@ -823,6 +825,32 @@ public class SadNctsImportHeaderController {
 			e.printStackTrace();
 		}
 	}	
+	
+	private void getGodsnrSeed(Map model, SystemaWebUser appUser, String avd){
+		//fill in html lists here
+		try{
+			String BASE_URL = TvinnSadUrlDataStore.TVINN_SAD_FETCH_GODSNR_URL;
+			StringBuffer urlRequestParamsKeys = new StringBuffer();
+			urlRequestParamsKeys.append("user=" + appUser.getUser());
+			urlRequestParamsKeys.append("&avd=" + avd);
+			//Now build the URL and send to the back end via the drop down service
+			String url = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
+			logger.info("AVD BASE_URL:" + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+			logger.info("AVD BASE_PARAMS:" + urlRequestParamsKeys.toString());
+			
+			JsonTvinnSadAvdelningContainer container = this.tvinnSadDropDownListPopulationService.getAvdelningContainer(url);
+			List<JsonTvinnSadAvdelningRecord> list = new ArrayList();
+			for(JsonTvinnSadAvdelningRecord record: container.getAvdelningar()){
+				list.add(record);
+			}
+			model.put(TvinnSadConstants.RESOURCE_MODEL_KEY_AVD_LIST, list);
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}	
 	/**
 	 * 
 	 * @param appUser
@@ -851,12 +879,20 @@ public class SadNctsImportHeaderController {
 	public void setSadNctsImportSpecificTopicService (SadNctsImportSpecificTopicService value){ this.sadNctsImportSpecificTopicService = value; }
 	public SadNctsImportSpecificTopicService getSadNctsImportSpecificTopicService(){ return this.sadNctsImportSpecificTopicService; }
 
-	
 	@Qualifier ("tvinnSadDropDownListPopulationService")
 	private TvinnSadDropDownListPopulationService tvinnSadDropDownListPopulationService;
 	@Autowired
 	public void setTvinnSadDropDownListPopulationService (TvinnSadDropDownListPopulationService value){ this.tvinnSadDropDownListPopulationService = value; }
 	public TvinnSadDropDownListPopulationService getTvinnSadDropDownListPopulationService(){return this.tvinnSadDropDownListPopulationService;}
+	
+	
+	@Qualifier ("tvinnSadGodsnrService")
+	private TvinnSadGodsnrService tvinnSadGodsnrService;
+	@Autowired
+	public void setTvinnSadGodsnrService (TvinnSadGodsnrService value){ this.tvinnSadGodsnrService = value; }
+	public TvinnSadGodsnrService getTvinnSadGodsnrService(){return this.tvinnSadGodsnrService;}
+	
+	
 	
 }
 

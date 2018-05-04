@@ -28,6 +28,7 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd">
     <bean id="tvinnSadCustomerService" class="no.systema.tvinn.sad.service.TvinnSadCustomerServiceImpl"/>
     <bean id="tvinnSadTolltariffVarukodService" class="no.systema.tvinn.sad.service.TvinnSadTolltariffVarukodServiceImpl"/>
     <bean id="tvinnSadTullkontorService" class="no.systema.tvinn.sad.service.TvinnSadTullkontorServiceImpl"/>
+    <bean id="tvinnSadGodsnrService" class="no.systema.tvinn.sad.service.TvinnSadGodsnrServiceImpl"/>
     <!-- TVINN - Drop down bean --> 
     <bean id="tvinnSadDropDownListPopulationService" class="no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService"/>
     

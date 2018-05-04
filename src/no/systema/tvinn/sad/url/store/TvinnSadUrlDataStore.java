@@ -32,25 +32,29 @@ public final class TvinnSadUrlDataStore {
 	//http://gw.systema.no/sycgip/TNOG004R.pgm?user=OSCAR&sonavn=NO&avg=J
 	
 	// GENERAL CODES - TVINN SAD 
-	static public String TVINN_SAD_CODES_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOG005R.pgm"; 
 	//http://gw.systema.no/sycgip/TNOG005R.pgm?user=OSCAR&typ=2
-	static public String TVINN_SAD_CODES2_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TARC001R.pgm"; 
+	static public String TVINN_SAD_CODES_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOG005R.pgm"; 
 	//http://gw.systema.no/sycgip/TARC001R.pgm?user=OSCAR&type=Z..
+	static public String TVINN_SAD_CODES2_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TARC001R.pgm"; 
 	
 	
 	//FETCH VARUKODER-TOLLTARIFF (ITEM LINES)
-	static public String TVINN_SAD_FETCH_TOLLTARIFF_VARUKODER_ITEMS_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOG006R.pgm";
 	//http://gw.systema.no/sycgip/TNOG006R.pgm?user=OSCAR&ie=I&kod=8514 (alt. ie=E)
-	static public String TVINN_SAD_FETCH_TOLLTARIFF_VARUKODER_ITEMS_FROM_DESC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOG023R.pgm";
+	static public String TVINN_SAD_FETCH_TOLLTARIFF_VARUKODER_ITEMS_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOG006R.pgm";
 	//http://gw.systema.no/sycgip/TNOG023R.pgm?user=OSCAR&ie=I&sok=Beskrivelse (alt. ie=E)
+	static public String TVINN_SAD_FETCH_TOLLTARIFF_VARUKODER_ITEMS_FROM_DESC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOG023R.pgm";
 	
 	//CURRENCY RATES
 	static public String TVINN_SAD_FETCH_CURRENCY_RATE_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOG007R.pgm"; //?user=OSCAR&kod=SEK...		
 	
 	//GENERAL CODES - TVINN NCTS 
-	static public String TVINN_SAD_NCTS_CODES_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCG005R.pgm";
 	//http://gw.systema.no/sycgip/TTCG005R.pgm?user=OSCAR&typ=012 
-		
+	static public String TVINN_SAD_NCTS_CODES_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCG005R.pgm";
+	
+	//GODSNR LIST
+	//http://gw.systema.no/sycgip/TTCI003R2.pgm?user=OSCAR&ugn=20180101
+	static public String TVINN_SAD_NCTS_GODSNR_LIST_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCI003R2.pgm";
+	
 	
 	//----------------------------------
 	//FETCH AVDELNING AND SIGNATURE
@@ -58,21 +62,25 @@ public final class TvinnSadUrlDataStore {
     //ie=E	SAD export
     //ie=I	SAD import
     //ie=A	Transportuppdrag
-	static public String TVINN_SAD_FETCH_AVDELNINGAR_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOG008R.pgm"; //?user=OSCAR&ie=E
 	//http://gw.systema.no/sycgip/TNOG008R.pgm?user=OSCAR&ie=I
+	static public String TVINN_SAD_FETCH_AVDELNINGAR_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOG008R.pgm"; //?user=OSCAR&ie=E
 	
 	//ie=F	SAD import/export
 	static public String TVINN_SAD_FETCH_SIGNATURE_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOG009R.pgm"; //?user=OSCAR&ie=F
 	
-	//--------------------------------------
-	//FETCH AVDELNING AND SIGNATURE (NCTS)
-	//--------------------------------------
+	//---------------------------------------------
+	//FETCH AVDELNING AND SIGNATURE (NCTS), Godsnr
+	//---------------------------------------------
 	//ie=X	NCTS export
     //ie=N	NCTS import
     static public String TVINN_SAD_FETCH_AVDELNINGAR_NCTS_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTNG008R.pgm"; 
 	//http://gw.systema.no/sycgip/TTNG008R.pgm?user=OSCAR&ie=N
 	static public String TVINN_SAD_FETCH_SIGNATURE_NCTS_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTNG009R.pgm"; 
 	//http://gw.systema.no/sycgip/TTNG009R.pgm?user=OSCAR&ie=N	
+	
+	//http://gw.systema.no/sycgip/TTCI003R.pgm?user=CB&avd=1
+	static public String TVINN_SAD_FETCH_GODSNR_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCI003R.pgm";
+	
 	
 	//-------------------------
 	// Authorization on SAD
@@ -83,8 +91,8 @@ public final class TvinnSadUrlDataStore {
 	//Validation routines (general)
 	//-----------------------------
 	//lk = landkod (Opp.land), kod=Varukod 
-	static public String TVINN_SAD_CHECK_EXTRA_MANGDENHET = AppConstants.HTTP_ROOT_CGI + "/sycgip/TSVG016R.pgm"; 
 	//http://gw.systema.no/sycgip/TSVG016R.pgm?user=OSCAR&ie=I&kod=9404300000&lk=CA 
+	static public String TVINN_SAD_CHECK_EXTRA_MANGDENHET = AppConstants.HTTP_ROOT_CGI + "/sycgip/TSVG016R.pgm"; 
 	
 	//-------------------------------
 	//Name for a given SIGN (general)

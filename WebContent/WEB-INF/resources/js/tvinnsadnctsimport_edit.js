@@ -21,6 +21,25 @@
 				jq('#tiskIdLink').click();
 			}
 	    });
+	    //godsnr
+	    jq('#tignIdLink').click(function() {
+	    	jq('#tignIdLink').attr('target','_blank');
+	    	if(jq('#sign').val()!=''){
+	    		jq("#file").removeClass( "isa_error" );
+	    		jq("#lblSignNull").text("");
+	    		window.open('tvinnsadnctsimport_edit_childwindow_godsnrlist.do?action=doFind&sign=' + jq('#sign').val() + '&gogn=' + jq('#tign').val() + '&ctype=tign', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+	    	}else{
+	    		jq("#lblSignNull").addClass( "isa_error" );
+	    		jq("#lblSignNull").text("Avd og Signatur må velges");
+	    		
+		  		//jq("#file").removeClass( "isa_success" );
+	    	}
+	    });
+	    jq('#tignIdLink').keypress(function(e){ //extra feature for the end user
+			if(e.which == 13) {
+				jq('#tignIdLink').click();
+			}
+	    });
 	    //språk - tignsk
 	    jq('#tignskIdLink').click(function() {
 	    	jq('#tignskIdLink').attr('target','_blank');

@@ -446,7 +446,12 @@
 						<tr>
 				            <td >&nbsp;</td>
 				            <td class="text14" ><font class="text16RedBold" >*</font><span title="tign">Godsnr</span></td>
-				            <td colspan="3" ><input type="text" class="inputTextMediumBlueMandatoryField" name="tign" id="tign" size="36" maxlength="35" value="${model.record.tign}"></td>
+				            <td colspan="3" ><input type="text" class="inputTextMediumBlueMandatoryField" name="tign" id="tign" size="36" maxlength="35" value="${model.record.tign}">
+				            	<a tabindex="-1" id="tignIdLink">
+									<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
+								</a>
+								&nbsp;<lable id="lblSignNull"></lable>
+				            </td>
 			            </tr>
 						<tr>
 				            <td >&nbsp;</td>

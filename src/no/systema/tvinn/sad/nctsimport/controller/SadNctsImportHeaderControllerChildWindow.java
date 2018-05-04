@@ -45,9 +45,13 @@ import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeContainer;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
 import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorContainer;
 import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorRecord;
+import no.systema.tvinn.sad.model.jsonjackson.JsonTvinnSadGodsnrListContainer;
+import no.systema.tvinn.sad.model.jsonjackson.JsonTvinnSadGodsnrListRecord;
 
 import no.systema.tvinn.sad.sadimport.service.SadImportGeneralCodesChildWindowService;
 import no.systema.tvinn.sad.service.TvinnSadTullkontorService;
+import no.systema.tvinn.sad.service.TvinnSadGodsnrService;
+
 
 import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
 import no.systema.tvinn.sad.util.TvinnSadConstants;
@@ -116,6 +120,41 @@ public class SadNctsImportHeaderControllerChildWindow {
 			List list = this.getCodeList(appUser, typeCode);
 			model.put("generalCodeList", list);
 			model.put("callerType", callerType);
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsadnctsimport_edit_childwindow_godsnrlist.do", params="action=doFind",  method={ RequestMethod.GET, RequestMethod.POST } )
+	public ModelAndView doGetGodsnrList(@ModelAttribute ("record") JsonTvinnSadGodsnrListRecord recordToValidate, HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doGetGodsnrList");
+		Map model = new HashMap();
+		String sign = request.getParameter("sign");
+		String callerType = request.getParameter("ctype");
+			
+		ModelAndView successView = new ModelAndView("tvinnsadnctsimport_edit_childwindow_godsnrlist");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			  
+			List list = this.getGodsnrList(recordToValidate, sign);
+			model.put("godsnrList", list);
+			model.put("sign", sign);
+			model.put("callerType", callerType);
+			model.put("record", recordToValidate);
+			
 			
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 			
@@ -222,6 +261,43 @@ public class SadNctsImportHeaderControllerChildWindow {
 		}
 		return list;
 	}
+	
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param appUser
+	 * @return
+	 */
+	private List<JsonTvinnSadGodsnrListRecord> getGodsnrList(JsonTvinnSadGodsnrListRecord recordToValidate, String sign){
+		List<JsonTvinnSadGodsnrListRecord> list = new ArrayList<JsonTvinnSadGodsnrListRecord>();
+		
+		logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+		String BASE_URL = TvinnSadUrlDataStore.TVINN_SAD_NCTS_GODSNR_LIST_URL;
+		
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + sign);
+		urlRequestParams.append("&ugn=" + recordToValidate.getGogn());
+		
+		logger.info(BASE_URL);
+		logger.info(urlRequestParams);
+		
+		UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
+		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+		JsonTvinnSadGodsnrListContainer container = null;
+		try{
+			if(jsonPayload!=null){
+				container = this.tvinnSadGodsnrService.getContainerGodsnrList(jsonPayload);
+				if(container!=null){
+					for(JsonTvinnSadGodsnrListRecord  record : container.getGodsliste()){
+						list.add(record);
+					}
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return list;
+	}
 	/**
 	 * 
 	 * @param appUser
@@ -310,6 +386,13 @@ public class SadNctsImportHeaderControllerChildWindow {
 	public void setTvinnSadTullkontorService (TvinnSadTullkontorService value){ this.tvinnSadTullkontorService = value; }
 	public TvinnSadTullkontorService getTvinnSadTullkontorService(){ return this.tvinnSadTullkontorService; }
 	
+	@Qualifier ("tvinnSadGodsnrService")
+	private TvinnSadGodsnrService tvinnSadGodsnrService;
+	@Autowired
+	public void setTvinnSadGodsnrService (TvinnSadGodsnrService value){ this.tvinnSadGodsnrService = value; }
+	public TvinnSadGodsnrService getTvinnSadGodsnrService(){return this.tvinnSadGodsnrService;}
+		
+		
 	
 }
 
