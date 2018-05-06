@@ -67,7 +67,21 @@
 			                       <tr class="text14">
 			                   </c:otherwise>
 			               </c:choose>
-			               <td nowrap style="cursor:pointer;" class="text14MediumBlue" id="varenr${record.varenr}@varebe${record.varebe}@w2vnti${record.w2vnti}@w2belt${record.w2belt}@w2vktb${record.w2vktb}@w2vktn${record.w2vktn}" >
+			               <td nowrap style="cursor:pointer;" class="text14MediumBlue" id="varenr${record.varenr}@varebe${record.varebe}@w2vnti${record.w2vnti}@w2belt${record.w2belt}@w2vktb${record.w2vktb}@w2vktn${record.w2vktn}
+			               			@w2top1${record.w2top1}@w2cre1${record.w2cre1}@w2top2${record.w2top2}@w2cre2${record.w2cre2}@w2top3${record.w2top3}@w2cre3${record.w2cre3}
+			               			@w2top4${record.w2top4}@w2cre4${record.w2cre4}@w2top5${record.w2top5}@w2cre5${record.w2cre5}@w2top6${record.w2top6}@w2cre6${record.w2cre6}
+			               			@w2top7${record.w2top7}@w2cre7${record.w2cre7}@w2top8${record.w2top8}@w2cre8${record.w2cre8}@w2top9${record.w2top9}@w2cre9${record.w2cre9}
+			               			@w2top10${record.w2top10}@w2cre10${record.w2cre10}
+			               			@w2akd1${record.w2akd1}@w2asv1${record.w2asv1}@w2asa1${record.w2asa1}@w2agr1${record.w2agr1}@w2abl1${record.w2abl1}
+			               			@w2akd2${record.w2akd2}@w2asv2${record.w2asv2}@w2asa2${record.w2asa2}@w2agr2${record.w2agr2}@w2abl2${record.w2abl2}
+			               			@w2akd3${record.w2akd3}@w2asv3${record.w2asv3}@w2asa3${record.w2asa3}@w2agr3${record.w2agr3}@w2abl3${record.w2abl3}
+			               			@w2akd4${record.w2akd4}@w2asv4${record.w2asv4}@w2asa4${record.w2asa4}@w2agr4${record.w2agr4}@w2abl4${record.w2abl4}
+			               			@w2akd5${record.w2akd5}@w2asv5${record.w2asv5}@w2asa5${record.w2asa5}@w2agr5${record.w2agr5}@w2abl5${record.w2abl5}
+			               			@w2akd6${record.w2akd6}@w2asv6${record.w2asv6}@w2asa6${record.w2asa6}@w2agr6${record.w2agr6}@w2abl6${record.w2abl6}
+			               			@w2akd7${record.w2akd7}@w2asv7${record.w2asv7}@w2asa7${record.w2asa7}@w2agr7${record.w2agr7}@w2abl7${record.w2abl7}
+			               			@w2akd8${record.w2akd8}@w2asv8${record.w2asv8}@w2asa8${record.w2asa8}@w2agr8${record.w2agr8}@w2abl8${record.w2abl8}
+			               			" >
+			               			
                			   		<img title="select" valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;${record.varenr}
 			               </td>
 		               	   <td class="text14">&nbsp;${record.w2vnti}</td>

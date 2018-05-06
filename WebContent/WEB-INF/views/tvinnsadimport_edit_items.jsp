@@ -441,7 +441,7 @@
 									<thead>
 									<tr class="tableHeaderField" height="20" >
 									    <th class="text14">&nbsp;Lin.&nbsp;</th> 
-									    <th class="text14">&nbsp;Redig.&nbsp;</th> 
+									    <th class="text14">&nbsp;Endre&nbsp;</th> 
 									    <th class="text14" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svlk.opprLand"/>&nbsp;</th>
 					                    <th class="text14" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svvnt.vareNr"/>&nbsp;</th>
 					                    <th class="text14" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.import.item.list.label.svtn.tn"/>&nbsp;</th>
