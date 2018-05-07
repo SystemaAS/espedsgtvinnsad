@@ -868,61 +868,11 @@
 										</span>
 										</div>
 										</td>
-							            <td class="text14" >
-										<img onMouseOver="showPop('svpva_info');" onMouseOut="hidePop('svpva_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-				 						<font class="text16RedBold" >*</font>	
-										<span title="svpva">PVA</span>
-										<div class="text11" style="position: relative;" align="left">
-										<span style="position:absolute;top:2px; width:250px;" id="svpva_info" class="popupWithInputText text11"  >
-						           			<b>PVA</b>
-											<ul>
-												<li><b>P</b> =PROSENTTOLL</li>
-												<li><b>V</b> =pr kg.</li>
-												<li><b>W</b> =pr 100 kg</li>
-												<li><b>A</b> =pr. liter</li>
-												<li><b>F</b> =FRI</li>
-											</ul>
-											Fylles normalt ut automatisk.
-											Systemet legger selv ut satsene. Skal det være <b>fritt</b> iht. kode i TN rubr. så må man taste en <b>F</b> her.
-										</span>
-										</div>
-										</td>
-										<td class="text14" align="left">
-								            <img onMouseOver="showPop('tollsats_info');" onMouseOut="hidePop('tollsats_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-								            <span title="svas">Tollsats&nbsp;</span>
-								            <div class="text11" style="position: relative;" align="left">
-								            <span style="position:absolute;top:2px; width:250px;" id="tollsats_info" class="popupWithInputText text11"  >
-							           			<br/>
-							           			<b>Tollsats</b>
-												<br/><br/>
-							           			Systemet finner selv tollsatsen. Dersom satsen skal reduseres iht. kode i TN rubrikken så må ønsket sats tastes her.
-											</span>
-											</div>
-										</td>
-										<td class="text14" align="left">
-								            <img onMouseOver="showPop('svmfr_info');" onMouseOut="hidePop('svmfr_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-					 						<font class="text16RedBold" >*</font>
-								            <span title="svmfr">Momsfri&nbsp;</span>
-								            <div class="text11" style="position: relative;" align="left">
-								            <span style="position:absolute;top:2px; width:250px;" id="svmfr_info" class="popupWithInputText text11"  >
-							           			<b>Momsfri/sats</b>
-												<br/><br/>
-							           			<ul>
-							           				<li><b>F</b> = Momsfri</li>
-													<li><b>1</b> = MVA høy sats</li>
-													<li><b>2</b> = MVA lav sats</li>
-												</ul>
-												<p>
-												Hvis tariffnummeret har mulighet for lav MVA, må du velge lav eller høy sats. 
-												</p>
-												<p>
-												Om det ikke skal svares importMVA av varelinjen så tastes det en F her. 
-												(Når ekspedisjonstype er 7 (prosedyre 70-79) legges automatisk F inn).
-												</p>
-											</span>
-											</div>
-										</td>
+
 							        </tr>
+							        
+							        
+							        
 							        <tr>
 						        		<td>&nbsp;<button tabindex=-1 title="Kundens vareregister" name="kundensVaruregisterControlButton" id="kundensVaruregisterControlButton" class="buttonGrayWithGreenFrame" type="button" >Søk i kund.varereg.</button></td>
 							        		<td align="left" nowrap>
@@ -1041,7 +991,71 @@
 										<td class="text11" valign="bottom">
 											&nbsp;<input onKeyPress="return numberKey(event)" type="text" class="inputText" name="svntm" id="svntm" size="10" maxlength="9" value="${model.record.svntm}">
 										</td>
-										<td align="left" nowrap>
+										
+										
+										
+							        </tr>
+							        <tr height="5"><td class="text" align="left"></td></tr>
+									
+							        <tr>
+							        	<td class="text14" >
+										<img onMouseOver="showPop('svpva_info');" onMouseOut="hidePop('svpva_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+				 						<font class="text16RedBold" >*</font>	
+										<span title="svpva">PVA</span>
+										<div class="text11" style="position: relative;" align="left">
+										<span style="position:absolute;top:2px; width:250px;" id="svpva_info" class="popupWithInputText text11"  >
+						           			<b>PVA</b>
+											<ul>
+												<li><b>P</b> =PROSENTTOLL</li>
+												<li><b>V</b> =pr kg.</li>
+												<li><b>W</b> =pr 100 kg</li>
+												<li><b>A</b> =pr. liter</li>
+												<li><b>F</b> =FRI</li>
+											</ul>
+											Fylles normalt ut automatisk.
+											Systemet legger selv ut satsene. Skal det være <b>fritt</b> iht. kode i TN rubr. så må man taste en <b>F</b> her.
+										</span>
+										</div>
+										</td>
+										<td class="text14" align="left">
+								            <img onMouseOver="showPop('tollsats_info');" onMouseOut="hidePop('tollsats_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+								            <span title="svas">Tollsats&nbsp;</span>
+								            <div class="text11" style="position: relative;" align="left">
+								            <span style="position:absolute;top:2px; width:250px;" id="tollsats_info" class="popupWithInputText text11"  >
+							           			<br/>
+							           			<b>Tollsats</b>
+												<br/><br/>
+							           			Systemet finner selv tollsatsen. Dersom satsen skal reduseres iht. kode i TN rubrikken så må ønsket sats tastes her.
+											</span>
+											</div>
+										</td>
+										<td class="text14" align="left">
+								            <img onMouseOver="showPop('svmfr_info');" onMouseOut="hidePop('svmfr_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+					 						<font class="text16RedBold" >*</font>
+								            <span title="svmfr">Momsfri&nbsp;</span>
+								            <div class="text11" style="position: relative;" align="left">
+								            <span style="position:absolute;top:2px; width:250px;" id="svmfr_info" class="popupWithInputText text11"  >
+							           			<b>Momsfri/sats</b>
+												<br/><br/>
+							           			<ul>
+							           				<li><b>F</b> = Momsfri</li>
+													<li><b>1</b> = MVA høy sats</li>
+													<li><b>2</b> = MVA lav sats</li>
+												</ul>
+												<p>
+												Hvis tariffnummeret har mulighet for lav MVA, må du velge lav eller høy sats. 
+												</p>
+												<p>
+												Om det ikke skal svares importMVA av varelinjen så tastes det en F her. 
+												(Når ekspedisjonstype er 7 (prosedyre 70-79) legges automatisk F inn).
+												</p>
+											</span>
+											</div>
+										</td>
+							        </tr>
+							        
+							        <tr>
+							        	<td align="left" nowrap>
 					            				<select class="inputTextMediumBlueMandatoryField" name="svpva" id="svpva">
 				        		    			<option value="">-velg-</option>
 			  								  	<option value="P"<c:if test="${ model.record.svpva == 'P'}"> selected </c:if> >P</option>		
@@ -1060,7 +1074,7 @@
 											  	<option value="2"<c:if test="${ model.record.svmfr == '2'}"> selected </c:if> >2</option>
 											</select>
 										</td>
-										<td align="right" colspan="18" >
+										<td align="left" >
 											<c:choose>	
 												<c:when test="${model.status == 'M' || empty model.status || model.status == '10' || model.status == '20'}">
 													<input class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadimport_edit_items.do';" value='<spring:message code="systema.tvinn.sad.import.item.createnew.submit"/>'>
@@ -1072,7 +1086,6 @@
 						 				    	</c:otherwise>	
 					 				    	</c:choose>	
 										</td>		
-										
 							        </tr>
 							        
 									<tr height="25"><td class="text" align="left"></td></tr>

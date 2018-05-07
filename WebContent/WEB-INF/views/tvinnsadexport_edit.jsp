@@ -579,7 +579,7 @@
 						 				&nbsp;<b>48.&nbsp;</b><span title="segkd/sekta/sektb">Kontonr.Tollkredit&nbsp;</span>
 						 				<span style="position:absolute; left:800px; top:500px; width:250px; height:200px;" id="48_info" class="popupWithInputText"  >
 							           		<div class="text11" align="left">
-							           			<b>48. Kontonr.Tollkredit</b>&nbsp;
+							           			<b>48. Kontonr.Tollkreditt</b>&nbsp;
 							           			<p>
 							           			Eksportørens kontonr. for tollkreditt. Hentes fra kunderegister, kundenr. for avsender. 
 							           			Dersom det er en kunde som tidligere har vært uten kred vil kontonr. da bli lagret i kunderegisteret.
@@ -1253,7 +1253,7 @@
 					 		<tr>
 				            <td class="text14" align="left" >
 				            <img onMouseOver="showPop('20_1_info');" onMouseOut="hidePop('20_1_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-		 					<b>20.1</b><font class="text16RedBold" >*</font><span title="selv">&nbsp;Leveringksvilkår kode</span>
+		 					<b>20.1</b><font class="text16RedBold" >*</font><span title="selv">&nbsp;Leveringsvilkår kode</span>
 				            <div class="text11" style="position: relative;" align="left">
 				            <span style="position:absolute;top:2px; width:250px;" id="20_1_info" class="popupWithInputText text11"  >
 				           			<b>Leveringksvilkår kode</b>
@@ -1281,7 +1281,7 @@
 			 				<tr>
 					            <td class="text14" align="left" >
 					            <img onMouseOver="showPop('20_2_info');" onMouseOut="hidePop('20_2_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-			 					<b>20.2</b><font class="text16RedBold" >*</font><span title="selvt">&nbsp;Leveringksvilkår sted</span>&nbsp;
+			 					<b>20.2</b><font class="text16RedBold" >*</font><span title="selvt">&nbsp;Leveringsvilkår sted</span>&nbsp;
 					            <div class="text11" style="position: relative;" align="left">
 					            <span style="position:absolute;top:2px; width:250px;" id="20_2_info" class="popupWithInputText text11"  >
 					           			<b>Leveringksvilkår sted</b>
@@ -1567,7 +1567,7 @@
 							<tr>
 					            <td class="text14" align="left" >
 					            <img onMouseOver="showPop('slaSammen_info');" onMouseOut="hidePop('slaSammen_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-					            <span title="sefvk">Slå sammen:</span>
+					            <span title="sefvk">Slå sammen varelinjer:</span>
 					            	<div class="text11" style="position: relative;" align="left">
 					            	<span style="position:absolute;top:2px; width:250px;" id="slaSammen_info" class="popupWithInputText text11"  >
 					           			<b>Slå sammen</b>

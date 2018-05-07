@@ -295,6 +295,63 @@ public class JsonSadImportTolltariffKundensRegisterVarukodRecord {
 	public void setW2vt03(String value){ this.w2vt03 = value;}
 	public String getW2vt03(){ return this.w2vt03; }
 	
+	private String w2ft04 = null;
+	public void setW2ft04(String value){ this.w2ft04 = value;}
+	public String getW2ft04(){ return this.w2ft04; }
+	
+	private String w2nt04 = null;
+	public void setW2nt04(String value){ this.w2nt04 = value;}
+	public String getW2nt04(){ return this.w2nt04; }
+	
+	private String w2eh04 = null;
+	public void setW2eh04(String value){ this.w2eh04 = value;}
+	public String getW2eh04(){ return this.w2eh04; }
+	
+	private String w2vt04 = null;
+	public void setW2vt04(String value){ this.w2vt04 = value;}
+	public String getW2vt04(){ return this.w2vt04; }
+	
+	private String w2ft05 = null;
+	public void setW2ft05(String value){ this.w2ft05 = value;}
+	public String getW2ft05(){ return this.w2ft05; }
+	
+	private String w2nt05 = null;
+	public void setW2nt05(String value){ this.w2nt05 = value;}
+	public String getW2nt05(){ return this.w2nt05; }
+	
+	private String w2eh05 = null;
+	public void setW2eh05(String value){ this.w2eh05 = value;}
+	public String getW2eh05(){ return this.w2eh05; }
+	
+	private String w2vt05 = null;
+	public void setW2vt05(String value){ this.w2vt05 = value;}
+	public String getW2vt05(){ return this.w2vt05; }
+	
+	private String w2ft06 = null;
+	public void setW2ft06(String value){ this.w2ft06 = value;}
+	public String getW2ft06(){ return this.w2ft06; }
+	
+	private String w2nt06 = null;
+	public void setW2nt06(String value){ this.w2nt06 = value;}
+	public String getW2nt06(){ return this.w2nt06; }
+	
+	private String w2eh06 = null;
+	public void setW2eh06(String value){ this.w2eh06 = value;}
+	public String getW2eh06(){ return this.w2eh06; }
+	
+	private String w2ft07 = null;
+	public void setW2ft07(String value){ this.w2ft07 = value;}
+	public String getW2ft07(){ return this.w2ft07; }
+	
+	private String w2nt07 = null;
+	public void setW2nt07(String value){ this.w2nt07 = value;}
+	public String getW2nt07(){ return this.w2nt07; }
+	
+	private String w2eh07 = null;
+	public void setW2eh07(String value){ this.w2eh07 = value;}
+	public String getW2eh07(){ return this.w2eh07; }
+	
+	
 	//START TilleggsOpplysningar
 	private String w2top1 = null;
 	public void setW2top1(String value){ this.w2top1 = value;}
@@ -333,7 +390,7 @@ public class JsonSadImportTolltariffKundensRegisterVarukodRecord {
 	public String getW2top5(){ return this.w2top5; }
 	
 	private String w2cre5 = null;
-	public void setW2cre5(String value){ this.w2cre3 = value;}
+	public void setW2cre5(String value){ this.w2cre5 = value;}
 	public String getW2cre5(){ return this.w2cre5; }
 	
 	private String w2top6 = null;
