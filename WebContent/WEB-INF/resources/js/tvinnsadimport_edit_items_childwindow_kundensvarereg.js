@@ -5,8 +5,7 @@
   	//--------
 	jq(function() {
 		jq('#kundensVareRegList').on('click', 'td', function(){
-			 console.log("HI");
-			 alert("inside");
+			 
 			  var id = this.id;
 			  var record = id.split('@');
 			  var varenr = record[0].replace("varenr", "");
