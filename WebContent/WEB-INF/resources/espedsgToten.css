@@ -697,6 +697,15 @@ END override jQuery elements
 	padding: 4px 7px;
 	outline: 0;
 }
+.inputText16{
+	border: 1px solid #DDDDDD;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 16px;
+	padding: 4px 7px;
+	outline: 0;
+}
 .inputTextNoBorder{
 	border: 0px solid #FFFFFF;
 	-moz-border-radius: 5px;
@@ -1631,6 +1640,9 @@ END override jQuery elements
 }
 .text22OrangeBold{  
     font-family: Helvetica Neue, verdana, Arial, sans-serif; font-size: 22px; color:#FF6600;font-weight:bold ;
+}
+.text28Bold{  
+    font-family: Helvetica Neue, verdana, Arial, sans-serif; font-size: 28px; color:#000000; font-weight:bold;
 }
 .text32Bold{  
     font-family: Helvetica Neue, verdana, Arial, sans-serif; font-size: 32px; color:#000000; font-weight:bold; 
