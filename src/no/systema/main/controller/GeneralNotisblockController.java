@@ -100,6 +100,7 @@ public class GeneralNotisblockController {
 		String avd = request.getParameter("avd");
 		String opd = request.getParameter("opd");
 		String sign = request.getParameter("sign");
+		String status = request.getParameter("status");
 		String omberegningFlag = null;
 		String omberegningDate = null;
 		String omberegningType = null;
@@ -107,6 +108,7 @@ public class GeneralNotisblockController {
 		model.put("avd", avd);
 		model.put("opd", opd);
 		model.put("sign", sign);
+		model.put("status", status);
 		model.put("orig", caller);
 		//Fallback view in case no other view is provided
 		ModelAndView successView = new ModelAndView("dashboard");

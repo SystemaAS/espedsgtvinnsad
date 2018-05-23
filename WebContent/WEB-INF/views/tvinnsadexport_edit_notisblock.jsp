@@ -333,7 +333,14 @@
 						        </table>
 					        </td>
 					        <td align="left" colspan="5">
-								<input class="inputFormSubmit" type="submit" name="submit" onclick="javascript: form.action='editNotisblock.do';" value="Lagre notat">
+								<c:choose>
+				 				    <c:when test="${ model.status == 'M' || empty  model.status }">
+				 				    	<input class="inputFormSubmit" type="submit" name="submit" onclick="javascript: form.action='editNotisblock.do';" value="Lagre notat">
+				 				    </c:when>
+				 				    <c:otherwise>
+			 				    		<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
+				 				    </c:otherwise>	
+			 				    </c:choose>
 							</td>
 				        </tr>
 					    <tr height="2"><td colspan="2" ></td></tr>

@@ -70,7 +70,7 @@
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
 				<a style="display:block;" href="editNotisblock.do?action=doFetch&subsys=sade&orig=topic&avd=${ model.record.seavd}&sign=${ model.record.sesg}
-											&opd=${fn:replace(model.record.setdn,'-','')}&o2_sest=${ model.record.o2_sest}&o2_sedt=${ model.record.o2_sedt}&o2_semf=${ model.record.o2_semf}">
+											&opd=${fn:replace(model.record.setdn,'-','')}&status=${ model.record.sest}&o2_sest=${ model.record.o2_sest}&o2_sedt=${ model.record.o2_sedt}&o2_semf=${ model.record.o2_semf}">
 					<font class="tabDisabledLink">
 						&nbsp;<spring:message code="systema.tvinn.sad.export.notisblock.createnew.tab"/>
 					</font>

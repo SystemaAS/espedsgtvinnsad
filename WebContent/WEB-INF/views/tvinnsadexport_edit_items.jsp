@@ -62,7 +62,7 @@
 			
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
-				<a id="alinkInvoices" style="display:block;" href="tvinnsadexport_edit_finansopplysninger.do?action=doFetch&avd=${model.avd}&sign=${model.sign}&opd=${model.opd}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
+				<a id="alinkInvoices" style="display:block;" href="tvinnsadexport_edit_finansopplysninger.do?action=doFetch&avd=${model.avd}&sign=${model.sign}&opd=${model.opd}&status=${ model.status}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
 					<font class="tabDisabledLink">
 						&nbsp;<spring:message code="systema.tvinn.sad.export.finansopplys.createnew.tab"/>
 					</font>
@@ -70,7 +70,7 @@
 			</td>
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
-				<a id="alinkNotis" style="display:block;" href="editNotisblock.do?action=doFetch&subsys=sade&orig=topic&avd=${model.avd}&sign=${ model.sign}&opd=${ model.opd}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
+				<a id="alinkNotis" style="display:block;" href="editNotisblock.do?action=doFetch&subsys=sade&orig=topic&avd=${model.avd}&sign=${ model.sign}&opd=${ model.opd}&status=${ model.status}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
 					<font class="tabDisabledLink">
 						&nbsp;<spring:message code="systema.tvinn.sad.export.notisblock.createnew.tab"/>
 					</font>

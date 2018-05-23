@@ -43,7 +43,7 @@
 				<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 				<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
 					<a style="display:block;" href="editNotisblock.do?action=doFetch&subsys=sadi&orig=topic&avd=${ model.avd}&sign=${ model.sign}
-												&opd=${ model.opd}&o2_sist=${ model.o2_sist}&o2_sidt=${ model.o2_sidt}&o2_simf=${ model.o2_simf}">
+												&opd=${ model.opd}&status=${ model.status}&o2_sist=${ model.o2_sist}&o2_sidt=${ model.o2_sidt}&o2_simf=${ model.o2_simf}">
 						<font class="tabDisabledLink">
 							&nbsp;<spring:message code="systema.tvinn.sad.import.notisblock.createnew.tab"/>
 						</font>
