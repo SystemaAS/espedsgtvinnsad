@@ -1379,7 +1379,7 @@
 																	<td class="tableCellFirst"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_kode0" id="search_kode0" size="3" value=""></td>
 																	<td class="tableCell"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_txt0" id="search_txt0" size="60" value=""></td>
 																	<td class="tableCell">
-																		<select class="text11 clazzAvgCalcSekvens" id="search_sekvensList_0" name="search_sekvensList_0">
+																		<select class="text14 clazzAvgCalcSekvens" id="search_sekvensList_0" name="search_sekvensList_0">
 						 													<option value="">-velg-</option>
 						 							 					</select>
 					 							 					</td>
@@ -1391,7 +1391,7 @@
 																	<td class="tableCellFirst"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_kode1" id="search_kode1" size="3" value=""></td>
 																	<td class="tableCell"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_txt1" id="search_txt1" size="60" value=""></td>
 																	<td class="tableCell">
-																		<select class="text11 clazzAvgCalcSekvens" id="search_sekvensList_1" name="search_sekvensList_1">
+																		<select class="text14 clazzAvgCalcSekvens" id="search_sekvensList_1" name="search_sekvensList_1">
 						 													<option value="">-velg-</option>
 						 							 					</select>
 					 							 					</td>
@@ -1403,7 +1403,7 @@
 																	<td class="tableCellFirst"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_kode2" id="search_kode2" size="3" value=""></td>
 																	<td class="tableCell"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_txt2" id="search_txt2" size="60" value=""></td>
 																	<td class="tableCell">
-																		<select class="text11 clazzAvgCalcSekvens" id="search_sekvensList_2" name="search_sekvensList_2">
+																		<select class="text14 clazzAvgCalcSekvens" id="search_sekvensList_2" name="search_sekvensList_2">
 						 													<option value="">-velg-</option>
 						 							 					</select>
 					 							 					</td>
@@ -1415,7 +1415,7 @@
 																	<td class="tableCellFirst"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_kode3" id="search_kode3" size="3" value=""></td>
 																	<td class="tableCell"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_txt3" id="search_txt3" size="60" value=""></td>
 																	<td class="tableCell">
-																		<select class="text11 clazzAvgCalcSekvens" id="search_sekvensList_3" name="search_sekvensList_3">
+																		<select class="text14 clazzAvgCalcSekvens" id="search_sekvensList_3" name="search_sekvensList_3">
 						 													<option value="">-velg-</option>
 						 							 					</select>
 					 							 					</td>
@@ -1427,7 +1427,7 @@
 																	<td class="tableCellFirst"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_kode4" id="search_kode4" size="3" value=""></td>
 																	<td class="tableCell"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_txt4" id="search_txt4" size="52" value=""></td>
 																	<td class="tableCell">
-																		<select class="text11 clazzAvgCalcSekvens" id="search_sekvensList_4" name="search_sekvensList_4">
+																		<select class="text14 clazzAvgCalcSekvens" id="search_sekvensList_4" name="search_sekvensList_4">
 						 													<option value="">-velg-</option>
 						 							 					</select>
 					 							 					</td>
@@ -1439,7 +1439,7 @@
 																	<td class="tableCellFirst"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_kode5" id="search_kode5" size="3" value=""></td>
 																	<td class="tableCell"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_txt5" id="search_txt5" size="52" value=""></td>
 																	<td class="tableCell">
-																		<select class="text11 clazzAvgCalcSekvens" id="search_sekvensList_5" name="search_sekvensList_5">
+																		<select class="text14 clazzAvgCalcSekvens" id="search_sekvensList_5" name="search_sekvensList_5">
 						 													<option value="">-velg-</option>
 						 							 					</select>
 					 							 					</td>
@@ -1451,7 +1451,7 @@
 																	<td class="tableCellFirst"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_kode6" id="search_kode6" size="3" value=""></td>
 																	<td class="tableCell"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_txt6" id="search_txt6" size="60" value=""></td>
 																	<td class="tableCell">
-																		<select class="text11 clazzAvgCalcSekvens" id="search_sekvensList_6" name="search_sekvensList_6">
+																		<select class="text14 clazzAvgCalcSekvens" id="search_sekvensList_6" name="search_sekvensList_6">
 						 													<option value="">-velg-</option>
 						 							 					</select>
 					 							 					</td>
@@ -1463,7 +1463,7 @@
 																	<td class="tableCellFirst"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_kode7" id="search_kode7" size="3" value=""></td>
 																	<td class="tableCell"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_txt7" id="search_txt7" size="60" value=""></td>
 																	<td class="tableCell">
-																		<select class="text11 clazzAvgCalcSekvens" id="search_sekvensList_7" name="search_sekvensList_7">
+																		<select class="text14 clazzAvgCalcSekvens" id="search_sekvensList_7" name="search_sekvensList_7">
 						 													<option value="">-velg-</option>
 						 							 					</select>
 					 							 					</td>
@@ -1475,7 +1475,7 @@
 																	<td class="tableCellFirst"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_kode8" id="search_kode8" size="3" value=""></td>
 																	<td class="tableCell"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_txt8" id="search_txt8" size="60" value=""></td>
 																	<td class="tableCell">
-																		<select class="text11 clazzAvgCalcSekvens" id="search_sekvensList_8" name="search_sekvensList_8">
+																		<select class="text14 clazzAvgCalcSekvens" id="search_sekvensList_8" name="search_sekvensList_8">
 						 													<option value="">-velg-</option>
 						 							 					</select>
 					 							 					</td>
@@ -1487,7 +1487,7 @@
 																	<td class="tableCellFirst"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_kode9" id="search_kode9" size="3" value=""></td>
 																	<td class="tableCell"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_txt9" id="search_txt9" size="60" value=""></td>
 																	<td class="tableCell">
-																		<select class="text11 clazzAvgCalcSekvens" id="search_sekvensList_9" name="search_sekvensList_9">
+																		<select class="text14 clazzAvgCalcSekvens" id="search_sekvensList_9" name="search_sekvensList_9">
 						 													<option value="">-velg-</option>
 						 							 					</select>
 					 							 					</td>
@@ -1499,7 +1499,7 @@
 																	<td class="tableCellFirst"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_kode10" id="search_kode10" size="3" value=""></td>
 																	<td class="tableCell"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_txt10" id="search_txt9" size="60" value=""></td>
 																	<td class="tableCell">
-																		<select class="text11 clazzAvgCalcSekvens" id="search_sekvensList_10" name="search_sekvensList_10">
+																		<select class="text14 clazzAvgCalcSekvens" id="search_sekvensList_10" name="search_sekvensList_10">
 						 													<option value="">-velg-</option>
 						 							 					</select>
 					 							 					</td>
@@ -1511,7 +1511,7 @@
 																	<td class="tableCellFirst"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_kode11" id="search_kode11" size="3" value=""></td>
 																	<td class="tableCell"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_txt11" id="search_txt11" size="60" value=""></td>
 																	<td class="tableCell">
-																		<select class="text11 clazzAvgCalcSekvens" id="search_sekvensList_11" name="search_sekvensList_11">
+																		<select class="text14 clazzAvgCalcSekvens" id="search_sekvensList_11" name="search_sekvensList_11">
 						 													<option value="">-velg-</option>
 						 							 					</select>
 					 							 					</td>
@@ -1523,7 +1523,7 @@
 																	<td class="tableCellFirst"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_kode12" id="search_kode12" size="3" value=""></td>
 																	<td class="tableCell"><input tabindex=-1 type="text" readonly class="inputTextNoBorder" name="search_txt12" id="search_txt12" size="60" value=""></td>
 																	<td class="tableCell">
-																		<select class="text11 clazzAvgCalcSekvens" id="search_sekvensList_12" name="search_sekvensList_12">
+																		<select class="text14 clazzAvgCalcSekvens" id="search_sekvensList_12" name="search_sekvensList_12">
 						 													<option value="">-velg-</option>
 						 							 					</select>
 					 							 					</td>
