@@ -1141,7 +1141,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="wc1" id="wc1">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.enhetsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wc1 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -1160,7 +1160,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="wc2" id="wc2">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.enhetsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wc2 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -1179,7 +1179,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="wc3" id="wc3">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.enhetsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wc3 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -1198,7 +1198,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="wc4" id="wc4">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.enhetsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wc4 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -1217,7 +1217,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="wc5" id="wc5">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.enhetsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wc5 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -1236,7 +1236,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="wc6" id="wc6">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.enhetsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wc6 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -1255,7 +1255,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="wc7" id="wc7">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.enhetsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wc7 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -1607,7 +1607,7 @@
 											<tr>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="wg1" id="wg1">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wg1 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -1615,7 +1615,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="wh1" id="wh1">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 										            		<c:forEach var="code" items="${model.avgiftsCodeListB}" >
 					                                	 		<option value="${code.zskv}"<c:if test="${model.record.wh1 == code.zskv}"> selected </c:if> >${code.zskv}</option>
 														</c:forEach> 
@@ -1634,7 +1634,7 @@
 											<tr>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="wg2" id="wg2">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wg2 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -1642,7 +1642,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="wh2" id="wh2">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeListB}" >
 					                                	 		<option value="${code.zskv}"<c:if test="${model.record.wh2 == code.zskv}"> selected </c:if> >${code.zskv}</option>
 														</c:forEach> 
@@ -1661,7 +1661,7 @@
 											<tr>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="wg3" id="wg3">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wg3 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -1669,7 +1669,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="wh3" id="wh3">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeListB}" >
 					                                	 		<option value="${code.zskv}"<c:if test="${model.record.wh3 == code.zskv}"> selected </c:if> >${code.zskv}</option>
 														</c:forEach> 
@@ -1688,7 +1688,7 @@
 											<tr>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="wg4" id="wg4">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wg4 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -1696,7 +1696,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="wh4" id="wh4">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeListB}" >
 					                                	 		<option value="${code.zskv}"<c:if test="${model.record.wh4 == code.zskv}"> selected </c:if> >${code.zskv}</option>
 														</c:forEach> 
@@ -1715,7 +1715,7 @@
 											<tr>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="wg5" id="wg5">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wg5 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -1723,7 +1723,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="wh5" id="wh5">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeListB}" >
 					                                	 		<option value="${code.zskv}"<c:if test="${model.record.wh5 == code.zskv}"> selected </c:if> >${code.zskv}</option>
 														</c:forEach> 
@@ -1742,7 +1742,7 @@
 											<tr>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="wg6" id="wg6">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wg6 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -1750,7 +1750,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="wh6" id="wh6">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeListB}" >
 					                                	 		<option value="${code.zskv}"<c:if test="${model.record.wh6 == code.zskv}"> selected </c:if> >${code.zskv}</option>
 														</c:forEach> 
@@ -1769,7 +1769,7 @@
 											<tr>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="wg7" id="wg7">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wg7 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -1777,7 +1777,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="wh7" id="wh7">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeListB}" >
 					                                	 		<option value="${code.zskv}"<c:if test="${model.record.wh7 == code.zskv}"> selected </c:if> >${code.zskv}</option>
 														</c:forEach> 
@@ -1796,7 +1796,7 @@
 											<tr>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="wg8" id="wg8">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.wg8 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -1804,7 +1804,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="wh8" id="wh8">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.avgiftsCodeListB}" >
 					                                	 		<option value="${code.zskv}"<c:if test="${model.record.wh8 == code.zskv}"> selected </c:if> >${code.zskv}</option>
 														</c:forEach> 
@@ -1935,7 +1935,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="we1" id="we1">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.docSertImportCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.we1 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -1948,7 +1948,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="we2" id="we2">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.docSertImportCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.we2 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -1961,7 +1961,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="we3" id="we3">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.docSertImportCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.we3 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -1974,7 +1974,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="we4" id="we4">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.docSertImportCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.we4 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -1987,7 +1987,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="we5" id="we5">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.docSertImportCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.we5 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -2067,7 +2067,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="we6" id="we6">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.docSertImportCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.we6 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -2080,7 +2080,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="we7" id="we7">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.docSertImportCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.we7 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -2093,7 +2093,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="we8" id="we8">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.docSertImportCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.we8 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -2106,7 +2106,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="we9" id="we9">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.docSertImportCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.we9 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 
@@ -2119,7 +2119,7 @@
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="we10" id="we10">
-										            		<option value="">-Velg-</option>
+										            		<option value="">-velg-</option>
 									 				  	<c:forEach var="code" items="${model.docSertImportCodeList}" >
 					                                	 		<option value="${code.zkod}"<c:if test="${model.record.we10 == code.zkod}"> selected </c:if> >${code.zkod}</option>
 														</c:forEach> 

@@ -316,7 +316,7 @@
     						</tr>
 						<tr>
 							<td class="text14MediumBlue">
-								<select name="selectedAvd" id="selectedAvd">
+								<select class="selectMediumBlueE2" name="selectedAvd" id="selectedAvd">
 				            		<option value="">-velg-</option>
 				 				  	<c:forEach var="record" items="${model.avdList}" >
 	                             	 	<option value="${record.avd}"<c:if test="${searchFilterSadExport.avd == record.avd}"> selected </c:if> >${record.avd}<c:if test="${record.tst== '2'}">&nbsp;(test)</c:if></option>

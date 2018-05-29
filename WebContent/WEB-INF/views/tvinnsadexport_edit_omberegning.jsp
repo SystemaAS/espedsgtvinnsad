@@ -262,14 +262,14 @@
 			<tr >
 				<td align="left" class="text14MediumBlue">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span title="seavd">Avdeling:&nbsp;
-           			<select name="avd" id="avd" TABINDEX=1>
+           			<select  class="selectMediumBlueE2" name="avd" id="avd" TABINDEX=1>
 	            		<option value="">-velg-</option>
 	 				  	<c:forEach var="record" items="${model.avdList}" >
                              <option value="${record.avd}"<c:if test="${model.record.seavd == record.avd}"> selected </c:if> >${record.avd}<c:if test="${record.tst == '2'}">&nbsp;(test)</c:if></option>
 						</c:forEach> 
 					</select>
 					&nbsp;<span title="sesg">Sign:</span>&nbsp;
-           			<select name="sesg" id="sesg" TABINDEX=2>
+           			<select  class="selectMediumBlueE2" name="sesg" id="sesg" TABINDEX=2>
 	            		<option value="">-velg-</option>
 	 				  	<c:forEach var="record" items="${model.signList}" >
                            	 	<c:choose>
@@ -400,7 +400,7 @@
 								</div>
 				 			</td>
 				 			<td>
-				 				<select name="seski" id="seski" >
+				 				<select class="selectMediumBlueE2" name="seski" id="seski" >
 				 					<option value="">-velg-</option>
 								  <option value="S"<c:if test="${ model.record.seski == 'S'}"> selected </c:if> >S</option>
 								  <option value="K"<c:if test="${ model.record.seski == 'K'}"> selected </c:if> >K</option>
@@ -422,7 +422,7 @@
 								</div>
 			 				</td>
 			 				<td>
-				 				<select name="sekddk" id="sekddk" >
+				 				<select class="selectMediumBlueE2" name="sekddk" id="sekddk" >
 				 				  <option selected value="">-velg-</option>
 								  <option value="D"<c:if test="${model.record.sekddk == 'D'}"> selected </c:if> >D</option>
 								  <option value="K"<c:if test="${model.record.sekddk == 'K'}"> selected </c:if> >K</option>
@@ -1019,7 +1019,7 @@
 					            </td>
 					            
 					            <td >
-				            		<select name="selka" id="selka">
+				            		<select  class="selectMediumBlueE2" name="selka" id="selka">
 				 						<option value="">-velg-</option>
 					 				  	<c:forEach var="country" items="${model.countryCodeList}" >
 					 				  		<option value="${country.zkod}"<c:if test="${model.record.selka == country.zkod}"> selected </c:if> >${country.zkod}</option>
@@ -1409,7 +1409,7 @@
 								</div>
 					            </td>
 					            <td >
-						            <select name="sekdls" id="sekdls">
+						            <select  class="selectMediumBlueE2" name="sekdls" id="sekdls">
 						            	<option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.lagringsstedCodeList}" >
 					 				  		<option value="${record.zkod}"<c:if test="${model.record.sekdls == record.zkod}"> selected </c:if> >${record.zkod}</option>
@@ -1512,7 +1512,7 @@
 			 					
 			 					<td class="text14">
 			 						<input onKeyPress="return amountKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="sebel2" id="sebel2" size="12" maxlength="11" value="${model.record.sebel2}">
-			 						<select name="seval2" id="seval2">
+			 						<select  class="selectMediumBlueE2" name="seval2" id="seval2">
 				 						<option value="">-velg-</option>
 					 				  	<c:forEach var="currency" items="${model.currencyCodeList}" >
 					 				  		<option value="${currency.zkod}"<c:if test="${model.record.seval2 == currency.zkod}"> selected </c:if> >${currency.zkod}</option>
@@ -1834,7 +1834,7 @@
 					<tr>
 						<td class="text14" align="left" >&nbsp;Status</td>
 						<td class="text14MediumBlue">
-							<select name="selectedStatus" id="selectedStatus">
+							<select  class="selectMediumBlueE2" name="selectedStatus" id="selectedStatus">
 			            		<option value=" ">-velg-</option>
 		            		  	<option value="A">A</option>
 							  	<option value="C">C</option>
