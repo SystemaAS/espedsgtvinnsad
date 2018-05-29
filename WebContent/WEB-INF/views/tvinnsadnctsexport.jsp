@@ -189,8 +189,8 @@
 		               <tr class="tableRow" height="20" >
 		                   
 		               <td class="tableCellFirst" width="5%">&nbsp;${topic.avd}</td>
-		               <td class="tableCell" >&nbsp;${topic.sign}</td>
-		               <td class="tableCell" align="center" >
+		               <td class="tableCell" width="5%">&nbsp;${topic.sign}</td>
+		               <td class="tableCell" width="5%" align="center" >
               	   	   		<c:if test="${empty topic.status || topic.status=='M' ||  topic.status=='G' ||  topic.status=='F'}">
               	   	   			<%-- only M, null or G (garantifel) are editable in NCTS --%>
               	   	   			<a id="alinkHeader" href="tvinnsadnctsexport_edit.do?action=doFetch&avd=${topic.avd}&opd=${topic.opd}&sysg=${topic.sign}&tuid=${topic.lrnNr}&syst=${topic.status}&sydt=${topic.datum}">

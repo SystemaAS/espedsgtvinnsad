@@ -203,8 +203,8 @@
 		              <tr class="tableRow" height="20" >
 		          
 		               <td class="tableCellFirst" width="5%">&nbsp;${record.avd}</td>
-		               <td class="tableCell" >&nbsp;${record.sign}</td>
-		               <td class="tableCell" align="center" >
+		               <td class="tableCell" width="5%">&nbsp;${record.sign}</td>
+		               <td class="tableCell" width="5%" align="center" >
 		               		<c:choose>
 		               		<c:when test="${empty record.status || record.status == 'M' || record.status == 'F'}">
 	              	   	   		<span title="Angivelse er opdaterbar"></span>
