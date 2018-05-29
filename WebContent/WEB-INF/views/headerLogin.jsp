@@ -7,10 +7,10 @@
 		<c:choose>
 			<%-- set up BEFORE login --%>
 			<c:when test="${not empty model.user.cssEspedsg}">
-				<link href="resources/${model.user.cssEspedsg}?ver=${user.versionEspedsg}" rel="stylesheet" type="text/css"/>
+				<link href="/espedsg2/resources/${model.user.cssEspedsg}?ver=${user.versionEspedsg}" rel="stylesheet" type="text/css"/>
 			</c:when>
 			<c:otherwise>
-				<link href="resources/espedsg.css?ver=${user.versionEspedsg}" rel="stylesheet" type="text/css"/>
+				<link href="/espedsg2/resources/espedsg.css?ver=${user.versionEspedsg}" rel="stylesheet" type="text/css"/>
 			</c:otherwise>
 		</c:choose>
 		<c:choose>
