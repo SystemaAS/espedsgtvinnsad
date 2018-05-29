@@ -834,6 +834,55 @@ END override jQuery elements
 	padding: 2px 5px
 }
 
+.inputText12BlueBoldReadOnly{
+	border: 1px solid #CCCCCC;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 12px;
+	font-style: italic;
+	font-weight: bold;
+	color:#000080;
+	background-color:#DDDDDD;
+	padding: 2px 5px
+}
+
+.inputText14BlueBoldReadOnly{
+	border: 1px solid #CCCCCC;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 14px;
+	font-style: italic;
+	font-weight: bold;
+	color:#000080;
+	background-color:#DDDDDD;
+	padding: 2px 5px
+}
+
+.inputText12RedBoldReadOnly{
+	border: 1px solid #CCCCCC;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 12px;
+	font-style: italic;
+	font-weight: bold;
+	color:red;
+	padding: 2px 5px
+}
+.inputText14RedBoldReadOnly{
+	border: 1px solid #CCCCCC;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 14px;
+	font-style: italic;
+	font-weight: bold;
+	color:red;
+	padding: 2px 5px
+}
+
 .inputTextMediumBlue{
 	border: 1px solid #DDDDDD;
 	-moz-border-radius: 5px;
@@ -1439,6 +1488,16 @@ END override jQuery elements
     background-color: #3D3D3D;
     
 }
+.text14BoldLightGreenForItemLinenr{  
+    font-weight:bold ; 
+    border: 0px solid #4E78A0;
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 12px; 
+	color: #7cbf4c; 
+    background-color: #3D3D3D;
+    
+}
+
 .text12BoldLightGreenForItemLinenrBlueBg{  
     font-weight:bold ; 
     border: 0px solid #4E78A0;

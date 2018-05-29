@@ -184,24 +184,24 @@
 							        </tr>
 							        <tr>
 							            <td width="30%" class="text12" align="left">Regnr.&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.serg}</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.serg}</td>
 							        </tr>
 							        <tr>
 							            <td width="30%" class="text12" align="left">Navn&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.senak}</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.senak}</td>
 							        </tr>
 									<tr>
 							            <td width="30%" class="text12" align="left">Adresse-1&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.seadk1}</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.seadk1}</td>
 							        </tr>
 							        <tr>
 							            <td width="30%" class="text12" align="left">Adresse-2&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.seadk2}</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.seadk2}</td>
 							        </tr>
 							        
 									<tr>
 							            <td width="30%" class="text12" align="left">Adresse-3&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.seadk3}</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.seadk3}</td>
 							        </tr>
 							        <tr>
 							        		<td width="30%" class="text12" align="left">&nbsp;</td>
@@ -217,24 +217,24 @@
 							        
 							        <tr>
 							            <td width="30%" class="text12" align="left">Navn&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.senas}</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.senas}</td>
 							        </tr>
 									<tr>
 							            <td width="30%" class="text12" align="left">Adresse-1&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.seads1}</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.seads1}</td>
 							        </tr>
 							        <tr>
 							            <td width="30%" class="text12" align="left">Adresse-2&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.seads2}</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.seads2}</td>
 							        </tr>
 									<tr>
 							            <td width="30%" class="text12" align="left">Adresse-3&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.seads3}</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.seads3}</td>
 							        </tr>
 							        <%--
 									<tr>
 							            <td width="30%" class="text12" align="left">Handläggare&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${XX.svih_moha}</td>
+							           	<td class="text12MediumBlue" align="left">${XX.svih_moha}</td>
 							        </tr>
 							         --%>
 			        	        </table>
@@ -275,15 +275,15 @@
 										</td>
 									</tr>
 									<tr>
-										<td class="text12Bold">&nbsp;Antall varelinjer&nbsp;&nbsp;<font class="text12MediumBlue"><b>${model.recordItemContainerFinansOpplysningerTopic.totalNumberOfItemLines}</b></font>
+										<td class="text14Bold">&nbsp;Antall varelinjer&nbsp;&nbsp;<font class="text14MediumBlue"><b>${model.recordItemContainerFinansOpplysningerTopic.totalNumberOfItemLines}</b></font>
 						            		</td>
 						            	<td width="40%">&nbsp;</td>	
-										<td align="right" class="text12">Fsum:&nbsp;
-											<input tabindex=-1 align="right" type="text" readonly class="inputText11BlueBoldReadOnly" size="12" maxlength=20" value="${recordTopicTvinnSad.sebel1}">
+										<td align="right" class="text14">Fsum:&nbsp;
+											<input tabindex=-1 align="right" type="text" readonly class="inputText14BlueBoldReadOnly" size="12" maxlength=20" value="${recordTopicTvinnSad.sebel1}">
 											<font class="inputText11BlueBoldReadOnly">${recordTopicTvinnSad.seval1}</font>
 										</td>
-										<td align="right" class="text12">Vsum&nbsp;(&Sigma;):&nbsp;
-											<input tabindex=-1 align="right" type="text" readonly class="inputText11BlueBoldReadOnly" size="12" maxlength=20" value="${model.recordItemContainerFinansOpplysningerTopic.calculatedItemLinesTotalAmount}">
+										<td align="right" class="text14">Vsum&nbsp;(&Sigma;):&nbsp;
+											<input tabindex=-1 align="right" type="text" readonly class="inputText14BlueBoldReadOnly" size="12" maxlength=20" value="${model.recordItemContainerFinansOpplysningerTopic.calculatedItemLinesTotalAmount}">
 											<font class="inputText11BlueBoldReadOnly">${model.recordItemContainerFinansOpplysningerTopic.calculatedValidCurrency}</font>											
 										</td>
 										

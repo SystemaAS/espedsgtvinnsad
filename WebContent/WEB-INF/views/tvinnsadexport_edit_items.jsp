@@ -174,30 +174,30 @@
 					 		<td width="50%">
 						 		<table width="80%" border="0" cellspacing="1" cellpadding="0">
 							 		<tr>
-							            <td width="30%" class="text11Bold" align="left" >Eksportør</td>
-							            <td class="text11" align="left" >&nbsp;&nbsp;</td>
+							            <td width="30%" class="text12Bold" align="left" >Eksportør</td>
+							            <td class="text12" align="left" >&nbsp;&nbsp;</td>
 							        </tr>
 							        <tr>
-							        		<td width="30%" class="text11" align="left">Reg.nr&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.serg}</td>
+							        		<td width="30%" class="text12" align="left">Reg.nr&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.serg}</td>
 							           	
 							        </tr>
 							        <tr>
-							            <td width="30%" class="text11" align="left">Navn&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.senak}</td>
+							            <td width="30%" class="text12" align="left">Navn&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.senak}</td>
 							        </tr>
 									<tr>
-							            <td width="30%" class="text11" align="left">Adresse-1&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.seadk1}</td>
+							            <td width="30%" class="text12" align="left">Adresse-1&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.seadk1}</td>
 							        </tr>
 							        <tr>
-							            <td width="30%" class="text11" align="left">Adresse-2&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.seadk2}</td>
+							            <td width="30%" class="text12" align="left">Adresse-2&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.seadk2}</td>
 							        </tr>
 							        
 									<tr>
-							            <td width="30%" class="text11" align="left">Adresse-3&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.seadk3}</td>
+							            <td width="30%" class="text12" align="left">Adresse-3&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.seadk3}</td>
 							        </tr>						        
 							        
 			        	        </table>
@@ -205,34 +205,34 @@
 					        <td width="50%">
 						 		<table width="80%" border="0" cellspacing="1" cellpadding="0">
 							 		<tr>
-							            <td width="30%" class="text11Bold" align="left" >Mottaker</td>
-							            <td class="text11" align="left" >&nbsp;&nbsp;</td>
+							            <td width="30%" class="text12Bold" align="left" >Mottaker</td>
+							            <td class="text12" align="left" >&nbsp;&nbsp;</td>
 							        </tr>
 							        <tr>
-							            <td width="30%" class="text11" align="left">&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left"></td>
+							            <td width="30%" class="text12" align="left">&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left"></td>
 							        </tr>
 							        <tr>
-							            <td width="30%" class="text11" align="left">Navn&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.senas}</td>
+							            <td width="30%" class="text12" align="left">Navn&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.senas}</td>
 							        </tr>
 									<tr>
-							            <td width="30%" class="text11" align="left">Adresse-1&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.seads1}</td>
+							            <td width="30%" class="text12" align="left">Adresse-1&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.seads1}</td>
 							        </tr>
 							        <tr>
-							            <td width="30%" class="text11" align="left">Adresse-2&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.seads2}</td>
+							            <td width="30%" class="text12" align="left">Adresse-2&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.seads2}</td>
 							        </tr>
 							        
 									<tr>
-							            <td width="30%" class="text11" align="left">Adresse-3&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${recordTopicTvinnSad.seads3}</td>
+							            <td width="30%" class="text12" align="left">Adresse-3&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${recordTopicTvinnSad.seads3}</td>
 							        </tr>
 							        <%--
 									<tr>
-							            <td width="30%" class="text11" align="left">Handläggare&nbsp;</td>
-							           	<td class="text11MediumBlue" align="left">${XX.svih_moha}</td>
+							            <td width="30%" class="text12" align="left">Handläggare&nbsp;</td>
+							           	<td class="text12MediumBlue" align="left">${XX.svih_moha}</td>
 							        </tr>
 							         --%>
 							        
@@ -309,22 +309,22 @@
 														                       <tr class="tableOddRow" height="20" >
 														                   </c:otherwise>
 														               </c:choose>
-														               <td class="text11" align="center">&nbsp;${record.svli}</td>
-														               <td class="text11" align="center">&nbsp;${record.svfyl}</td>
-														               <td class="text11" >&nbsp;${record.svvnt}</td>
-														               <td class="text11" >&nbsp;${record.svvktn}</td>
-														               <td class="text11" >&nbsp;${record.svntm}</td>
-														               <td class="text11" >&nbsp;${record.svbelt}</td>
-														               <td class="text11" >&nbsp;${record.svavt}</td>
-														               <td class="text11" >&nbsp;${record.svavtp}</td>
-														               <td class="text11" >&nbsp;${record.wd1}</td>
-														               <td align="center" class="text11">&nbsp;
+														               <td class="text14" align="center">&nbsp;${record.svli}</td>
+														               <td class="text14" align="center">&nbsp;${record.svfyl}</td>
+														               <td class="text14" >&nbsp;${record.svvnt}</td>
+														               <td class="text14" >&nbsp;${record.svvktn}</td>
+														               <td class="text14" >&nbsp;${record.svntm}</td>
+														               <td class="text14" >&nbsp;${record.svbelt}</td>
+														               <td class="text14" >&nbsp;${record.svavt}</td>
+														               <td class="text14" >&nbsp;${record.svavtp}</td>
+														               <td class="text14" >&nbsp;${record.wd1}</td>
+														               <td align="center" class="text14">&nbsp;
 														               		<c:if test="${not empty record.sverr}">
 														               			<img src="resources/images/redFlag.png" width="18px" height="18px" border="0" alt="remove">
 														               		</c:if>
 														               </td>
 														               <c:if test="${model.status == 'M' || empty model.status}">	
-															               <td class="text11" align="center" nowrap>
+															               <td class="text14" align="center" nowrap>
 															               	<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadexport_edit_items.do?action=doDelete&sign=${model.sign}&avd=${record.svavd}&opd=${record.svtdn}&lin=${record.svli}&fabl=${recordTopicTvinnSad.sebel1}">
 															               		<img src="resources/images/delete.gif" border="0" alt="remove">
 															               	</a>	
@@ -346,7 +346,7 @@
 								           				<table >
 														<%-- OK BUTTON --%>
 								           				<tr align="left" >
-															<td class="text11"><button name="allItemsButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('allItems');">&nbsp;Ok</button> 
+															<td class="text14"><button name="allItemsButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('allItems');">&nbsp;Ok</button> 
 															</td>
 															<td class="text14">&nbsp;&nbsp;&nbsp;
 												 	        		<a href="tvinnsadExportItemListExcelView.do" target="_new">
@@ -368,7 +368,7 @@
 										<td colspan="4">
 											<table class="tableBorderWithRoundCornersGray" >
 												<tr>
-													<td class="text11" nowrap>
+													<td class="text12" nowrap>
 														<input tabindex=-1 class="inputFormSubmitGrayFont12" type="submit" name="submitStartItem" onclick="javascript: form.action='tvinnsadexport_edit_items.do';" value="Hent">
 														fra linjenr:
 														<input tabindex=-1 align="left" type="text" class="inputText" size="4" maxlength="5" name="startItemLineNr" id="startItemLineNr" value='${model.recordItemContainerTopic.startItemLineNr}'>
@@ -384,24 +384,24 @@
 						            		
 										</td>
 										<td width="10%" class="text14">&nbsp;</td>
-										<td align="right" class="text12"><span title="headerRecord.sevkb">Bruttovekt:&nbsp;</span>
-											<input tabindex=-1 align="right" type="text" readonly class="inputText12BlueBoldReadOnly" size="12" maxlength=11" value='${recordTopicTvinnSad.sevkb}'>
+										<td align="right" class="text14"><span title="headerRecord.sevkb">Bruttovekt:&nbsp;</span>
+											<input tabindex=-1 align="right" type="text" readonly class="inputText14BlueBoldReadOnly" size="12" maxlength=11" value='${recordTopicTvinnSad.sevkb}'>
 										</td>
-										<td align="right" class="text12"><span title="headerRecord.sebel1">Fsum:&nbsp;</span>
-											<input tabindex=-1 align="right" type="text" readonly class="inputText12BlueBoldReadOnly" size="12" maxlength=20" value='${recordTopicTvinnSad.sebel1}'>
+										<td align="right" class="text14"><span title="headerRecord.sebel1">Fsum:&nbsp;</span>
+											<input tabindex=-1 align="right" type="text" readonly class="inputText14BlueBoldReadOnly" size="12" maxlength=20" value='${recordTopicTvinnSad.sebel1}'>
 											&nbsp;<font style="color:#000080; font-style: italic;"><b>${recordTopicTvinnSad.seval1}</b></font>
 										</td>
-										<td align="right" class="text12"><span title="headerRecord.calculatedItemLinesTotalAmount">Vsum&nbsp;(&Sigma;):&nbsp;</span>
-											<input tabindex=-1 align="right" type="text" readonly class="inputText12BlueBoldReadOnly" size="12" maxlength=20" value='${model.recordItemContainerTopic.calculatedItemLinesTotalAmount}'>
+										<td align="right" class="text14"><span title="headerRecord.calculatedItemLinesTotalAmount">Vsum&nbsp;(&Sigma;):&nbsp;</span>
+											<input tabindex=-1 align="right" type="text" readonly class="inputText14BlueBoldReadOnly" size="12" maxlength=20" value='${model.recordItemContainerTopic.calculatedItemLinesTotalAmount}'>
 										</td>
-										<td align="right" class="text12"><span title="headerRecord.diffItemLinesTotalAmountWithInvoiceTotalAmount">Diff:&nbsp;</span>
+										<td align="right" class="text14"><span title="headerRecord.diffItemLinesTotalAmountWithInvoiceTotalAmount">Diff:&nbsp;</span>
 											<input tabindex=-1 align="right" type="text" readonly
 												<c:choose>
 												<c:when test="${fn:contains(model.recordItemContainerTopic.diffItemLinesTotalAmountWithInvoiceTotalAmount,'-')}">
-													class="inputText11RedBoldReadOnly" 
+													class="inputText14RedBoldReadOnly" 
 												</c:when>
 												<c:otherwise>
-													class="inputText11BlueBoldReadOnly"
+													class="inputText14BlueBoldReadOnly"
 												</c:otherwise>
 												</c:choose>
 												size="12" maxlength=20" value='${model.recordItemContainerTopic.diffItemLinesTotalAmountWithInvoiceTotalAmount}'>
@@ -423,7 +423,7 @@
 				 					
 								<table id="containerdatatableTable" cellspacing="2" align="left" width="100%" >
 								<tr>
-								<td class="text11">
+								<td class="text14">
 							
 								<table id="tblItemLines" class="display compact cell-border" >
 									<thead>
@@ -454,29 +454,29 @@
 							                       <tr id="parentItemListTableRowNr_${counter.count}" class="tableOddRow" height="20" >
 							                   </c:otherwise>
 							               </c:choose>
-							               <td width="4%" class="text11" align="center">${record.svli}</td>
-							               <td width="4%" class="text11" align="center">&nbsp;
+							               <td width="4%" class="text14" align="center">${record.svli}</td>
+							               <td width="4%" class="text14" align="center">&nbsp;
 							               		<a tabindex=-1 title="${counter.count}" id="recordUpdate_${record.svli}" href="#" onClick="getItemData(this);">
 							               			<img src="resources/images/update.gif" border="0" alt="edit">&nbsp;
 							               		</a>
 							               </td>
-							               <td class="text11" >&nbsp;${record.svfyl}</td>
-							               <td class="text11" >&nbsp;${record.svvnt}&nbsp;&nbsp;
+							               <td class="text14" >&nbsp;${record.svfyl}</td>
+							               <td class="text14" >&nbsp;${record.svvnt}&nbsp;&nbsp;
 							               	  <img id="recordUpdate_${record.svli}" onClick="updateKundensVarReg(this);" src="resources/images/addOrder.png" width="12px" height="12px" border="0" title="Tilføy Kundens varereg.">
 							               </td>
-							               <td class="text11" >&nbsp;${record.svvktn}</td>
-							               <td class="text11" >&nbsp;${record.svntm}</td>
-							               <td class="text11" >&nbsp;${record.svbelt}</td>
-							               <td class="text11" >&nbsp;${record.svavt}</td>
-							               <td class="text11" >&nbsp;${record.svavtp}</td>
-							               <td class="text11">&nbsp;${record.wd1}</td>
-							               <td align="center" class="text11">&nbsp;
+							               <td class="text14" >&nbsp;${record.svvktn}</td>
+							               <td class="text14" >&nbsp;${record.svntm}</td>
+							               <td class="text14" >&nbsp;${record.svbelt}</td>
+							               <td class="text14" >&nbsp;${record.svavt}</td>
+							               <td class="text14" >&nbsp;${record.svavtp}</td>
+							               <td class="text14">&nbsp;${record.wd1}</td>
+							               <td align="center" class="text14">&nbsp;
 							               		<c:if test="${not empty record.sverr}">
 							               			<img valign="bottom" src="resources/images/redFlag.png" width="18px" height="18px" border="0" alt="remove">
 							               		</c:if>
 							               </td>
 							               <c:if test="${model.status == 'M' || empty model.status}">	
-								               <td class="text11" align="center" nowrap>
+								               <td class="text14" align="center" nowrap>
 								               	<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadexport_edit_items.do?action=doDelete&avd=${record.svavd}&opd=${record.svtdn}&lin=${record.svli}&fabl=${recordTopicTvinnSad.sebel1}">
 								               		<img src="resources/images/delete.gif" border="0" alt="remove">
 								               	</a>	

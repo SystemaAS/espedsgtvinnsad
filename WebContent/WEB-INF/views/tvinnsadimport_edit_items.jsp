@@ -319,27 +319,27 @@
 														                   </c:otherwise>
 														               </c:choose>
 														               <%-- <td class="tableCellFirst" align="center">&nbsp;${record.svln} --%>
-														               <td class="text11" align="center">&nbsp;${record.svln}
+														               <td class="text14" align="center">&nbsp;${record.svln}
 														               
-														               <td class="text11" >&nbsp;${record.svlk}</td>
-														               <td class="text11" >&nbsp;${record.svvnt}</td>
-														               <td class="text11" >&nbsp;${record.svtn}</td>
-														               <td class="text11" >&nbsp;${record.svpre}</td>
-														               <td class="text11" >&nbsp;${record.svbelt}</td>
-														               <td class="text11" >&nbsp;${record.svvktn}</td>
-														               <td class="text11" >&nbsp;${record.svntm}</td>
-														               <td class="text11" >&nbsp;${record.svpva}</td>
-														               <td class="text11" >&nbsp;${record.svas}</td>
-														               <td class="text11" >&nbsp;${record.svmfr}</td>
-														               <td class="text11">&nbsp;${record.wg1}</td>
-														               <td class="text11">&nbsp;${record.wd1}</td>
-														               <td align="center" class="text11">&nbsp;
+														               <td class="text14" >&nbsp;${record.svlk}</td>
+														               <td class="text14" >&nbsp;${record.svvnt}</td>
+														               <td class="text14" >&nbsp;${record.svtn}</td>
+														               <td class="text14" >&nbsp;${record.svpre}</td>
+														               <td class="text14" >&nbsp;${record.svbelt}</td>
+														               <td class="text14" >&nbsp;${record.svvktn}</td>
+														               <td class="text14" >&nbsp;${record.svntm}</td>
+														               <td class="text14" >&nbsp;${record.svpva}</td>
+														               <td class="text14" >&nbsp;${record.svas}</td>
+														               <td class="text14" >&nbsp;${record.svmfr}</td>
+														               <td class="text14">&nbsp;${record.wg1}</td>
+														               <td class="text14">&nbsp;${record.wd1}</td>
+														               <td align="center" class="text14">&nbsp;
 														               		<c:if test="${not empty record.sverr}">
 														               			<img valign="bottom" src="resources/images/redFlag.png" width="18px" height="18px" border="0" alt="remove">
 														               		</c:if>
 														               </td>
 														               <c:if test="${model.status == 'M' || empty model.status}">	
-															               <td class="text11" align="center" nowrap>
+															               <td class="text14" align="center" nowrap>
 															               	<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadimport_edit_items.do?action=doDelete&sign=${model.sign}&avd=${record.svavd}&opd=${record.svtdn}&lin=${record.svli}&fabl=${recordTopicTvinnSad.sibel3}">
 															               		<img valign="bottom" src="resources/images/delete.gif" border="0" alt="remove">
 															               	</a>	
@@ -362,7 +362,7 @@
 										   			<table >
 													<%-- OK BUTTON --%>
 							           				<tr align="left" >
-														<td class="text11"><button name="allItemsButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('allItems');">&nbsp;Ok</button></td>
+														<td class="text14"><button name="allItemsButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('allItems');">&nbsp;Ok</button></td>
 														<td class="text14">&nbsp;&nbsp;&nbsp;
 											 	        		<a href="tvinnsadImportItemListExcelView.do" target="_new">
 										                 		<img valign="bottom" id="itemListExcel" src="resources/images/excel.png" border="0" alt="excel">&nbsp;Excel
@@ -396,24 +396,24 @@
 									<tr>
 										<td class="text14Bold">&nbsp;Antall varelinjer&nbsp;&nbsp;<font class="text14MediumBlue"><b>${totalNumberOfItemLines}</b></font>
 						            		</td>
-										<td align="right" class="text11">Bruttovekt:&nbsp;
-											<input tabindex=-1 align="right" type="text" readonly class="inputText11BlueBoldReadOnly" size="12" maxlength=11" value='${recordTopicTvinnSad.sivkb}'>
+										<td align="right" class="text14">Bruttovekt:&nbsp;
+											<input tabindex=-1 align="right" type="text" readonly class="inputText14BlueBoldReadOnly" size="12" maxlength=11" value='${recordTopicTvinnSad.sivkb}'>
 										</td>
-										<td align="right" class="text11">Fsum:&nbsp;
-											<input tabindex=-1 align="right" type="text" readonly class="inputText11BlueBoldReadOnly" size="12" maxlength=20" value='${recordTopicTvinnSad.sibel3}'>
-											&nbsp;<font class="inputText11BlueBoldReadOnly"><b>${recordTopicTvinnSad.sival3}</b></font>
+										<td align="right" class="text14">Fsum:&nbsp;
+											<input tabindex=-1 align="right" type="text" readonly class="inputText14BlueBoldReadOnly" size="12" maxlength=20" value='${recordTopicTvinnSad.sibel3}'>
+											&nbsp;<font class="inputText14BlueBoldReadOnly"><b>${recordTopicTvinnSad.sival3}</b></font>
 										</td>
-										<td align="right" class="text11">Vsum&nbsp;(&Sigma;):&nbsp;
-											<input tabindex=-1 align="right" type="text" readonly class="inputText11BlueBoldReadOnly" size="12" maxlength=20" value='${model.recordItemContainerTopic.calculatedItemLinesTotalAmount}'>
+										<td align="right" class="text14">Vsum&nbsp;(&Sigma;):&nbsp;
+											<input tabindex=-1 align="right" type="text" readonly class="inputText14BlueBoldReadOnly" size="12" maxlength=20" value='${model.recordItemContainerTopic.calculatedItemLinesTotalAmount}'>
 										</td>
-										<td align="right" class="text11">Diff:&nbsp;
+										<td align="right" class="text14">Diff:&nbsp;
 											<input tabindex=-1 align="right" type="text" readonly
 												<c:choose>
 												<c:when test="${fn:contains(model.recordItemContainerTopic.diffItemLinesTotalAmountWithInvoiceTotalAmount,'-')}">
-													class="inputText11RedBoldReadOnly" 
+													class="inputText14RedBoldReadOnly" 
 												</c:when>
 												<c:otherwise>
-													class="inputText11BlueBoldReadOnly"
+													class="inputText14BlueBoldReadOnly"
 												</c:otherwise>
 												</c:choose>
 												size="12" maxlength=20" value='${model.recordItemContainerTopic.diffItemLinesTotalAmountWithInvoiceTotalAmount}'>
@@ -590,10 +590,10 @@
 				 				&nbsp;&nbsp;&nbsp;
 				 				<c:choose>
 					 				<c:when test="${not empty model.record.svln}">
-						 				<input title="from model" tabindex=-1 style="text-align:center;" class="text12BoldLightGreenForItemLinenr" readonly type="text" name="lineSvln" id="lineSvln" size="4" value="${model.record.svln}">
+						 				<input title="from model" tabindex=-1 style="text-align:center;" class="text14BoldLightGreenForItemLinenr" readonly type="text" name="lineSvln" id="lineSvln" size="4" value="${model.record.svln}">
 									</c:when>
 									<c:otherwise>
-				 						<input title="from session" tabindex=-1 style="text-align:center;" class="text12BoldLightGreenForItemLinenr" readonly type="text" name="lineSvln" id="lineSvln" size="4" value="${svln_SESSION}">
+				 						<input title="from session" tabindex=-1 style="text-align:center;" class="text14BoldLightGreenForItemLinenr" readonly type="text" name="lineSvln" id="lineSvln" size="4" value="${svln_SESSION}">
 									</c:otherwise>
 								</c:choose>
 				 				<c:choose>

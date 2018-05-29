@@ -834,6 +834,31 @@
 	background-color:#DDDDDD;
 	padding: 2px 5px
 }
+.inputText12BlueBoldReadOnly{
+	border: 1px solid #CCCCCC;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 12px;
+	font-style: italic;
+	font-weight: bold;
+	color:#000080;
+	background-color:#DDDDDD;
+	padding: 2px 5px
+}
+
+.inputText14BlueBoldReadOnly{
+	border: 1px solid #CCCCCC;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 14px;
+	font-style: italic;
+	font-weight: bold;
+	color:#000080;
+	background-color:#DDDDDD;
+	padding: 2px 5px
+}
 
 .inputText11RedReadOnly{
 	border: 1px solid #CCCCCC;
@@ -851,6 +876,29 @@
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 	font-size: 11px;
+	font-style: italic;
+	font-weight: bold;
+	color:red;
+	padding: 2px 5px
+}
+
+.inputText12RedBoldReadOnly{
+	border: 1px solid #CCCCCC;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 12px;
+	font-style: italic;
+	font-weight: bold;
+	color:red;
+	padding: 2px 5px
+}
+.inputText14RedBoldReadOnly{
+	border: 1px solid #CCCCCC;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 14px;
 	font-style: italic;
 	font-weight: bold;
 	color:red;
@@ -1495,7 +1543,16 @@
     border: 0px solid #4E78A0;
 	font-family: Verdana, Arial, Helvetica, sans-serif; 
 	font-size: 12px; 
-	color: #7cbf4c; 
+	color: #000000; 
+    background-color: #9DB68C;
+    
+}
+.text14BoldLightGreenForItemLinenr{  
+    font-weight:bold ; 
+    border: 0px solid #4E78A0;
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 14px; 
+	color: #000000; 
     background-color: #9DB68C;
     
 }
