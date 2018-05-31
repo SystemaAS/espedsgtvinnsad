@@ -1,3 +1,11 @@
+	var jq = jQuery.noConflict();
+  	var BLOCKUI_OVERLAY_MESSAGE_DEFAULT = "Please wait...";
+  	
+	function setBlockUI(){
+    	  jq.blockUI({ css: { fontSize: '22px' }, message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+     }	
+
+
 	var langMap = {
 			   'EN' : 'English',
 			   'DK' : 'Danish',
@@ -64,4 +72,6 @@
     function refreshCustomValidity(element){
   	  element.setCustomValidity('');
     }
+    
+    
   

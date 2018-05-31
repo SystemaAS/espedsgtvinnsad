@@ -1494,6 +1494,9 @@ public class SadImportHeaderController {
 			record.setO2_sist(omberegningFlag);
 			record.setO2_sidt(omberegningDate);
 			record.setO2_simf(omberegningType);
+			logger.info("A:" + record.getO2_sist());
+			logger.info("B:" + record.getO2_sidt());
+			logger.info("C:" + record.getO2_simf());
 			
 			model.put(TvinnSadConstants.DOMAIN_RECORD, record);
 			//put the header topic in session for the coming item lines

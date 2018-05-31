@@ -1,32 +1,31 @@
 	//this variable is a global jQuery var instead of using "$" all the time. Very handy
 	var jq = jQuery.noConflict();
-	var BLOCKUI_OVERLAY_MESSAGE_DEFAULT = "Please wait...";
-    
+	
   	//Overlay on tab (to mark visually a delay...)
     jq(function() {
       jq('#alinkTopicList').click(function() { 
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+    	  setBlockUI();
 	  });	
   	  jq('#alinkHeader').click(function() { 
-  		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		  setBlockUI();
   	  });
   	  jq('#alinkOmberegning').click(function() { 
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		setBlockUI();
 	  });
   	  jq('#alinkInvoices').click(function() { 
-  		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		setBlockUI();
   	  });
   	  jq('#alinkItemLines').click(function() { 
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		setBlockUI();
 	  });
   	  jq('#alinkLogging').click(function() { 
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		setBlockUI();
 	  });
   	  jq('#alinkArchive').click(function() { 
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		setBlockUI();
 	  });
   	  jq('#alinkOmberegningSubTab').click(function() { 
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		setBlockUI();
 	  });
     });
 	
@@ -35,15 +34,15 @@
   	//General functions
   	jq(function() {
   		jq( "#submit" ).click(function( event ) {
-  		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT });
+  			setBlockUI();
   	  	});
   		
   		jq('#itemListControlButton').click(function() {
-			jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT });
+  			setBlockUI();
 			window.location = 'tvinnsadimport_edit_items_autocontrol.do?svavd='+ jq('#avd').val() + '&svtdn=' + jq('#opd').val();
 		});
   		jq('#itemListAngreOmbButton').click(function() {
-			jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT });
+  			setBlockUI();
 			window.location = 'tvinnsadimport_edit_omberegning_items.do?action=doReverse&user=' + jq('#applicationUser').val() + '&avd='+ jq('#avd').val() + '&opd=' + jq('#opd').val() + '&o2_sist=' + jq('#o2_sist').val() + '&o2_sidt=' + jq('#o2_sidt').val()+ '&o2_simf=' + jq('#o2_simf').val();
 		});
   		

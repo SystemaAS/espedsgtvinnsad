@@ -3,27 +3,26 @@
 	//===========================================
 	//this variable is a global jQuery var instead of using "$" all the time. Very handy
   	var jq = jQuery.noConflict();
-  	var BLOCKUI_OVERLAY_MESSAGE_DEFAULT = "Please wait...";
-    
+  	
   	//Overlay on tab (to mark visually a delay...)
     jq(function() {
       jq('#alinkTopicList').click(function() { 
-  		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+    	  setBlockUI();
   	  });
       jq('#alinkOmberegning').click(function() { 
-  		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+    	  setBlockUI();
   	  });      
   	  jq('#alinkInvoices').click(function() { 
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		setBlockUI();
 	  });
   	  jq('#alinkItemLines').click(function() { 
-  		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		setBlockUI();
   	  });
   	  jq('#alinkLogging').click(function() { 
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		setBlockUI();
 	  });
   	  jq('#alinkArchive').click(function() { 
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		setBlockUI();
 	  });
   	  jq('#getFinansOpplSumButton').click(function() { 
   		if(jq('#finansOpplysningarTotSum').val()!='' && jq('#finansOpplysningarTotValidCurrency').val()!='' ){  
@@ -42,7 +41,7 @@
   //General functions
   	jq(function() {
   		jq( "#submit" ).click(function( event ) {
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT });
+  			setBlockUI();
 	  	});
   		
   		//=====================================
@@ -994,7 +993,7 @@
 	  function uploadFile(){
 			//grab all form data  
 			  var form = new FormData(document.getElementById('uploadFileForm'));
-			  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+			  setBlockUI();
 			  
 			  jq.ajax({
 			  	  type: 'POST',

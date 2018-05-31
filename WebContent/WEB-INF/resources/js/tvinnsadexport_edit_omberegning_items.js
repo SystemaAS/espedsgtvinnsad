@@ -1,44 +1,43 @@
 	//this variable is a global jQuery var instead of using "$" all the time. Very handy
   	var jq = jQuery.noConflict();
-  	var BLOCKUI_OVERLAY_MESSAGE_DEFAULT = "Please wait...";
-    
+  	
   	//Overlay on tab (to mark visually a delay...)
     jq(function() {
 	  jq('#alinkTopicList').click(function() { 
-  		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+		  setBlockUI();
   	  });	
   	  jq('#alinkHeader').click(function() { 
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		setBlockUI();
 	  });
       jq('#alinkOmberegning').click(function() { 
-  		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+    	  setBlockUI();
   	  });
   	  jq('#alinkInvoices').click(function() { 
-  		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		setBlockUI();
   	  });
   	  jq('#alinkLogging').click(function() { 
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		setBlockUI();
 	  });
   	  jq('#alinkArchive').click(function() { 
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		setBlockUI();
 	  });
   	  jq('#alinkOmberegningSubTab').click(function() { 
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		setBlockUI();
 	  });
     });
   	
   	//Auto control - autoförtullning
   	jq(function() { 
   		jq( "#submit" ).click(function( event ) {
-  			jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT });
+  			setBlockUI();
 	  	});
   		
   		jq('#itemListControlButton').click(function() {
-			jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT });
+  			setBlockUI();
 			window.location = 'tvinnsadexport_edit_items_autocontrol.do?svavd='+ jq('#avd').val() + '&svtdn=' + jq('#opd').val();
 		});
   		jq('#itemListAngreOmbButton').click(function() {
-			jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT });
+  			setBlockUI();
 			window.location = 'tvinnsadexport_edit_omberegning_items.do?action=doReverse&user=' + jq('#applicationUser').val() + '&avd='+ jq('#avd').val() + '&opd=' + jq('#opd').val() + '&o2_sest=' + jq('#o2_sest').val() + '&o2_sedt=' + jq('#o2_sedt').val()+ '&o2_semf=' + jq('#o2_semf').val();
 		});
   		
@@ -648,7 +647,7 @@
 						 id: "dialogSaveTU",	
 						 text: "Spara",
 						 click: function(){
-			            			jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+							 		setBlockUI();
 			 		 		 		jq('#updateKundensVareregisterForm').submit();
 						 		}
 					 	 },

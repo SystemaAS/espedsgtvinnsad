@@ -1,26 +1,25 @@
 	//this variable is a global jQuery var instead of using "$" all the time. Very handy
 	var jq = jQuery.noConflict();
-	var BLOCKUI_OVERLAY_MESSAGE_DEFAULT = "Please wait...";
-    
+	
   	//Overlay on tab (to mark visually a delay...)
     jq(function() {
       jq('#alinkTopicList').click(function() { 
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+    	  setBlockUI();
 	  });	
   	  jq('#alinkHeader').click(function() { 
-  		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		setBlockUI();
   	  });
   	  jq('#alinkOmberegning').click(function() { 
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		setBlockUI();
 	  });
   	  jq('#alinkInvoices').click(function() { 
-  		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		setBlockUI();
   	  });
   	  jq('#alinkLogging').click(function() { 
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		setBlockUI();
 	  });
   	  jq('#alinkArchive').click(function() { 
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		setBlockUI();
 	  });
     });
 	
@@ -29,11 +28,11 @@
   	//General functions
   	jq(function() {
   		jq( "#submit" ).click(function( event ) {
-  		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT });
+  			setBlockUI();
   	  	});
   		
   		jq('#itemListControlButton').click(function() {
-			jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT });
+  			setBlockUI();
 			window.location = 'tvinnsadimport_edit_items_autocontrol.do?svavd='+ jq('#avd').val() + '&svtdn=' + jq('#opd').val();
 		});
   		
@@ -823,7 +822,7 @@
 						 id: "dialogSaveTU",	
 						 text: "Spara",
 						 click: function(){
-			            			jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+							 		setBlockUI();
 			 		 		 		jq('#updateKundensVareregisterForm').submit();
 						 		}
 					 	 },

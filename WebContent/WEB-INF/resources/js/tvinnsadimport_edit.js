@@ -5,25 +5,30 @@
   	var jq = jQuery.noConflict();
   	var BLOCKUI_OVERLAY_MESSAGE_DEFAULT = "Please wait...";
   	
+  	function setBlockUI(element){
+  	  jq.blockUI({ css: { fontSize: '22px' }, message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+    }
+    
+    
   	//Overlay on tab (to mark visually a delay...)
     jq(function() {
       jq('#alinkTopicList').click(function() { 
-  		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+    	  setBlockUI();
   	  });
       jq('#alinkOmberegning').click(function() { 
-  		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+    	  setBlockUI();
   	  });
   	  jq('#alinkInvoices').click(function() { 
-  		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		  setBlockUI();
   	  });
   	  jq('#alinkItemLines').click(function() { 
-  		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		  setBlockUI();
   	  });
   	  jq('#alinkLogging').click(function() { 
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		  setBlockUI();
 	  });
   	  jq('#alinkArchive').click(function() { 
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		  setBlockUI();
 	  });
   	
   	  jq('#getFinansOpplSumButton').click(function() { 
@@ -40,7 +45,7 @@
 	  });
   	  
   	  jq("#buttonToTror").click(function() {
-		  jq.blockUI({ css: { fontSize: '22px' }, message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  		  setBlockUI();
 		  var url = jq('#servletHost').val() + ":" + jq('#tomcatPort').val() + "/espedsgtror/logonTvinnSad_toTror.do?user=" + jq('#applicationUser').val(); 
 		  var params = "&heavd="+ jq('#avd').val() + '&heopd=' + jq('#opd').val() + "&hesg=" + jq('#sisg').val() + "&dp=" + encodeURIComponent(jq('#userEncrypted').val()); 
 		  
@@ -51,7 +56,7 @@
     //General functions
   	jq(function() {
   		jq( "#submit" ).click(function( event ) {
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT });
+  			setBlockUI();
 	  	});
   		//=====================================
 	  	//START Child window for general codes

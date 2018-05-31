@@ -3,6 +3,10 @@
   var counterIndex = 0;
   var BLOCKUI_OVERLAY_MESSAGE_DEFAULT = "Please wait...";
   
+  function setBlockUI(element){
+	  jq.blockUI({ css: { fontSize: '22px' }, message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+  }
+  
   jq(function() {
 	  jq("#opd").focus();
   });
@@ -19,26 +23,23 @@
 		  //defaultDate: "-6m"	  
 	  });
 	  jq( "#submit" ).click(function( event ) {
-  		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT });
+  		  setBlockUI();
   	  });
 	  //General Header Menus
 	  jq('#alinkTopicListMenuImp').click(function() { 
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+		  setBlockUI();
 	  });
 	  jq('#alinkTopicListMenuExp').click(function() { 
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+		  setBlockUI();
 	  });
 	  jq('#alinkTopicListMenuNctsExp').click(function() { 
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+		  setBlockUI();
 	  });
 	  jq('#alinkTopicListMenuNctsImp').click(function() { 
-		  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+		  setBlockUI();
 	  });
   });
-  
-  function setBlockUI(element){
-	  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
-  }
+ 
   
   
   //-----------------------------------
