@@ -279,8 +279,8 @@
 		<%-- LEFT SIDE CELL --%>
 		<%-- --------------- --%>
 		<tr>
-		<td width="55%">
-		<table border="0" cellspacing="1" cellpadding="0">
+		<td width="53%">
+		<table width="90%" border="0" cellspacing="1" cellpadding="0">
 			<tr>
 	            <td width="5">&nbsp;</td>
 	            <td >
@@ -1041,7 +1041,7 @@
 		<%-- --------------- --%>
 		<%-- RIGHT SIDE CELL --%>
 		<%-- --------------- --%>
-		<td width="45%" align="center" valign="top">
+		<td width="50%" align="center" valign="top">
 			<table border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td width="2">&nbsp;</td>

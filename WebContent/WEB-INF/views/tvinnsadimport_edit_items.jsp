@@ -374,7 +374,7 @@
 													</div>
 								   				</span>
 											<c:if test="${model.status == 'M' || empty model.status}">		
-												&nbsp;<button title="Kontrollera varelinjer" name="itemListControlButton" id="itemListControlButton" class="buttonGrayWithGreenFrame11" type="button" >Varelinje kontroll</button>
+												&nbsp;<button title="Kontrollera varelinjer" name="itemListControlButton" id="itemListControlButton" class="buttonGrayWithGreenFrame" type="button" >Varelinje kontroll</button>
 											</c:if>
 										</td>
 									</tr>
@@ -598,20 +598,20 @@
 								</c:choose>
 				 				<c:choose>
 					 				<c:when test="${not empty model.record.svli}">								
-										<input title="from model" tabindex=-1 style="text-align:center;" class="text12BoldRedForItemLinenr" readonly type="text" name="lineSvli" id="lineSvli" size="4" value="${model.record.svli}">
+										<input title="from model" tabindex=-1 style="text-align:center;" class="text14BoldRedForItemLinenr" readonly type="text" name="lineSvli" id="lineSvli" size="4" value="${model.record.svli}">
 									</c:when>
 									<c:otherwise>
-				 						<input title="from session" tabindex=-1 style="text-align:center;" class="text12BoldRedForItemLinenr" readonly type="text" name="lineSvli" id="lineSvli" size="4" value="${svli_SESSION}">
+				 						<input title="from session" tabindex=-1 style="text-align:center;" class="text14BoldRedForItemLinenr" readonly type="text" name="lineSvli" id="lineSvli" size="4" value="${svli_SESSION}">
 									</c:otherwise>
 								</c:choose>
 			 				</td>
 			 				<td class="text14White" align="right">Forhold B/N-vekt:&nbsp;
 			 					<c:choose>
 					 				<c:when test="${not empty recordTopicTvinnSad.insibvnv}">
-						 				<input style="text-align:center;" tabindex=-1 class="text14BoldWhiteForItemLinenr" readonly type="text" name="grossNetFactor" id="grossNetFactor" size="5" value="${recordTopicTvinnSad.insibvnv}">
+						 				<input style="text-align:center;" tabindex=-1 class="text14BoldLightGreenForItemLinenr" readonly type="text" name="grossNetFactor" id="grossNetFactor" size="5" value="${recordTopicTvinnSad.insibvnv}">
 						 			</c:when>
 						 			<c:otherwise>
-										<input style="text-align:center;" tabindex=-1 class="text14BoldWhiteForItemLinenr" readonly type="text" name="grossNetFactor" id="grossNetFactor" size="5" value="0,90">														 			
+										<input style="text-align:center;" tabindex=-1 class="text14BoldLightGreenForItemLinenr" readonly type="text" name="grossNetFactor" id="grossNetFactor" size="5" value="0,90">														 			
 						 			</c:otherwise>
 					 			</c:choose>	
 						 	</td>

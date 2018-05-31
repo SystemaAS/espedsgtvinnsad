@@ -305,7 +305,7 @@
 							<td class="ownScrollableSubWindow" style="width:100%; height:10em;">
 								<table width="100%" cellspacing="0" border="0" cellpadding="0">
 									<thead>
-									<tr class="tableHeaderField" height="20" valign="left">
+									<tr class="tableHeaderField"  valign="left">
 									    <th class="tableHeaderFieldFirst">&nbsp;Linjenr.&nbsp;</th>
 									    	<th align="center" class="tableHeaderField" nowrap>Slett</th>   
 					                    <th class="tableHeaderField">&nbsp;Varenr.&nbsp;</th> 
@@ -406,13 +406,13 @@
 				 	<%-- Topic ITEM CREATE --%>
 	 				<table width="100%" align="center" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
 				 		<tr height="15">
-				 			<td class="text12White">
+				 			<td class="text14White">
 				 				<b>&nbsp;&nbsp;Varelinje&nbsp;-&nbsp;Kontrolresultat&nbsp;&nbsp;</b>
 				 				<img src="resources/images/update.gif" border="0" alt="edit">
 				 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				 				<input tabindex=-1 align="center" class="text12BoldLightGreenForItemLinenr" readonly type="text" name="lineNr" id="lineNr" size="3" value="">
+				 				<input tabindex=-1 align="center" class="text14BoldLightGreenForItemLinenr" readonly type="text" name="lineNr" id="lineNr" size="3" value="">
 			 				</td>
-			 				<td class="text12White" align="right">
+			 				<td class="text14White" align="right">
 				 				Konform&nbsp;&nbsp;<font class="text16RedBold">${ recordTopicTvinnSadUnloading.nikonf }</font>&nbsp;&nbsp;&nbsp;
 				 			</td>
 		 				</tr>

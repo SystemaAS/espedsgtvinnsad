@@ -291,7 +291,7 @@
 							   				</span>	
 							   		
 							   		<c:if test="${model.status == 'G' ||  model.status=='F' || model.status == 'M' || empty model.status}">
-							   			&nbsp;<button title="Import av varuposter" name="itemLinesImportButton" id="itemLinesImportButton" class="buttonGrayWithGreenFrame11" type="button" >Importere varelinjer</button>	
+							   			&nbsp;<button title="Import av varuposter" name="itemLinesImportButton" id="itemLinesImportButton" class="buttonGrayWithGreenFrame" type="button" >Importere varelinjer</button>	
 							   		</c:if>	
 							   				
 									</td>
@@ -315,7 +315,7 @@
 							
 									<table id="tblItemLines" class="display compact cell-border">
 									<thead>
-										<tr style="background-color:#DDDDDD">
+										<tr class="tableHeaderField" >
 									    <th class="text14">&nbsp;Linjenr.&nbsp;</th> 
 									    <th class="text14">&nbsp;Oppd.&nbsp;</th>
 									    <th class="text14">&nbsp;Varenr.&nbsp;</th>   
@@ -445,7 +445,7 @@
 					           		</div>
 						        </span>
 				 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				 				<input tabindex=-1 align="center" class="text12BoldLightGreenForItemLinenr" readonly type="text" name="lineNr" id="lineNr" size="3" value=''>
+				 				<input tabindex=-1 align="center" class="text14BoldLightGreenForItemLinenr" readonly type="text" name="lineNr" id="lineNr" size="3" value=''>
 			 				</td>
 		 				</tr>
 	 				</table>

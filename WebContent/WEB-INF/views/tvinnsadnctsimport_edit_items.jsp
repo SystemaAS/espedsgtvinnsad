@@ -411,7 +411,7 @@
 				 				<b>&nbsp;&nbsp;Beskrivelse (Hendelse)&nbsp;</b>
 				 				<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 				 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				 				<input tabindex=-1 align="center" class="text12BoldLightGreenForItemLinenr" readonly type="text" name="lineNr" id="lineNr" size="3" value="">
+				 				<input tabindex=-1 align="center" class="text14BoldLightGreenForItemLinenr" readonly type="text" name="lineNr" id="lineNr" size="3" value="">
 								
 			 				</td>
 		 				</tr>

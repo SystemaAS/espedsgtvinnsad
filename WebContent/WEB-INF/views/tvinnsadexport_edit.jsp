@@ -315,8 +315,8 @@
 		<%-- LEFT SIDE CELL --%>
 		<%-- --------------- --%>
 		<tr>
-		<td width="50%" valign="top">
-		<table width="96%" border="0" cellspacing="0" cellpadding="0">
+		<td width="53%" valign="top">
+		<table width="90%" border="0" cellspacing="0" cellpadding="0">
 			<tr>
 	            <td width="5">&nbsp;</td>
 	            <td >
