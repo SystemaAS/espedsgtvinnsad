@@ -949,9 +949,9 @@
 		  jq("#dialogOmberegningPaOmberegning").dialog({
 			  autoOpen: false,
 			  maxWidth:350,
-	          maxHeight: 250,
+	          maxHeight: 300,
 	          width: 350,
-	          height: 250,
+	          height: 300,
 			  modal: true
 		  });
 	  });
