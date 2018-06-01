@@ -276,8 +276,11 @@
 				<td align="left" class="text14MediumBlue" >
 					&nbsp;&nbsp;&nbsp;&nbsp;<span title="sidst">Tarifferingsted:</span>&nbsp;<b>${model.record.sidst}</b>
 					&nbsp;&nbsp;<span title="sitarf">Tariffør:</span>&nbsp;<b>${model.record.sitarf}</b>
-					&nbsp;&nbsp;<input class="buttonGrayWithGreenFrame" type="button" name="buttonToTror" id="buttonToTror" value='Til Oppdragsreg.'/>
-					
+					<c:forEach items="${user.menuList}" var="record" varStatus="counter"> 
+				 		<c:if test="${ fn:contains(record.prog, 'TOMCAT-TROR') }">
+							&nbsp;&nbsp;<input class="buttonGrayWithGreenFrame" type="button" name="buttonToTror" id="buttonToTror" value='Til Oppdragsreg.'/>
+						</c:if>
+					</c:forEach>
 				</td>
 			</tr>
 			

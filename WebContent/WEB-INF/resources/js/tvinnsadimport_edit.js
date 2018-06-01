@@ -265,11 +265,14 @@
   	//FETCH CUSTOMER from SENDER  html area
   	//---------------------------------------------------------
 	function searchSenderOwnWindow() {
+		var customerName = jq.trim(jq('#search_sinas').val());
+		var customerNumber = jq.trim(jq('#search_sikns').val());
+		
 		jq(function() {
 			jq.getJSON('searchCustomer_TvinnSad.do', {
 				applicationUser : jq('#applicationUser').val(),
-				customerName : jq('#search_sinas').val(),
-				customerNumber : jq('#search_sikns').val(),
+				customerName : customerName,
+				customerNumber : customerNumber,
 				ajax : 'true'
 			}, function(data) {
 				//alert("Hello");
@@ -362,9 +365,10 @@
 	//--------------------------------------------------------------------------------------
 	jq(function() { 
 	    jq('#sikns').blur(function() {
-	    		var customerNr = jq('#sikns').val();
-	    		var name = jq('#sinas').val();
-			var address = jq('#siads1').val();
+	    		var customerNr = jq.trim(jq('#sikns').val());
+	    		var name = jq.trim(jq('#sinas').val());
+	    		var address = jq.trim(jq('#siads1').val());
+	    		
 	    		if(customerNr!="" && (name=='' && address=='')){
 		    		jq.getJSON('searchCustomer_TvinnSad.do', {
 					applicationUser : jq('#applicationUser').val(),
@@ -448,6 +452,9 @@
   	//---------------------------------------------------------
 	function searchReceiverOwnWindow() {
 		jq(function() {
+			var customerName = jq.trim(jq('#search_sinak').val());
+			var customerNumber = jq.trim(jq('#search_siknk').val());
+			
 			jq.getJSON('searchCustomer_TvinnSad.do', {
 				applicationUser : jq('#applicationUser').val(),
 				customerName : jq('#search_sinak').val(),
@@ -559,9 +566,9 @@
 	//--------------------------------------------------------------------------------------
 	jq(function() { 
 	    jq('#siknk').blur(function() {
-	    		var customerNr = jq('#siknk').val();
-	    		var name = jq('#sinak').val();
-			var regNr = jq('#sirg').val();
+	    		var customerNr = jq.trim(jq('#siknk').val());
+	    		var name = jq.trim(jq('#sinak').val());
+	    		var regNr = jq.trim(jq('#sirg').val());
 				
 	    		if(customerNr!='' && (name=='' && regNr=='') ){
 		    		jq.getJSON('searchCustomer_TvinnSad.do', {

@@ -85,7 +85,11 @@ public class SadImportItemsAutoControlMgr {
 	public void checkValidPreferences(){
 		//Tilleggsoppl. mandatory if Preferense is ON
 		if(this.record.getSvpre()!=null && !"".equals(this.record.getSvpre())){
+			logger.info("SVPRE:" + this.record.getSvpre());
 			if(!"N".equals(this.record.getSvpre()) && !"J".equals(this.record.getSvpre())){
+				logger.info("WF1:" + this.record.getWf1());
+				logger.info("WE1:" + this.record.getWe1());
+				
 				if("".equals(this.record.getWf1()) || "".equals(this.record.getWe1())){
 					this.validRecord = false;
 				}

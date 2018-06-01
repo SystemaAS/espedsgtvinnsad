@@ -593,14 +593,14 @@ public class SadImportItemsController {
 	    						}else{
 	    							//Set error
 	    							logger.info(ERROR_FRAME_STD_OUTPUT);
-		    						logger.info("ERROR level (3) - Mengde Must Exist" + idDebug);
+		    						logger.info("ERROR level (3) - Mengde Must Exist:" + idDebug);
 		    						logger.info(ERROR_FRAME_STD_OUTPUT);
 		    						autoControlMgr.updateItemWithAutoControlError(appUser.getUser(), AUTO_CONTROL_ERROR_FLAG_VALUE);
 	    						}
 	    					}else{
 	    						//Set error
 	    						logger.info(ERROR_FRAME_STD_OUTPUT);
-	    						logger.info("ERROR level (2) - Preferenser" + idDebug);
+	    						logger.info("ERROR level (2) - Preferenser:" + idDebug);
 	    						logger.info(ERROR_FRAME_STD_OUTPUT);
 	    						autoControlMgr.updateItemWithAutoControlError(appUser.getUser(), AUTO_CONTROL_ERROR_FLAG_VALUE);
 	    					}
@@ -608,7 +608,7 @@ public class SadImportItemsController {
 						}else{
 							//Set error
 							logger.info(ERROR_FRAME_STD_OUTPUT);
-							logger.info("ERROR level (1) - Weights" + idDebug);
+							logger.info("ERROR level (1) - Weights:" + idDebug);
 							logger.info(ERROR_FRAME_STD_OUTPUT);
 							autoControlMgr.updateItemWithAutoControlError(appUser.getUser(), AUTO_CONTROL_ERROR_FLAG_VALUE);
 						}

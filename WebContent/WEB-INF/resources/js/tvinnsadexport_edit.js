@@ -311,10 +311,13 @@
   	//---------------------------------------------------------
 	function searchSenderOwnWindow() {
 		jq(function() {
+			var customerName = jq.trim(jq('#search_senak').val());
+			var customerNumber = jq.trim(jq('#search_seknk').val());
+			
 			jq.getJSON('searchCustomer_TvinnSad.do', {
 				applicationUser : jq('#applicationUser').val(),
-				customerName : jq('#search_senak').val(),
-				customerNumber : jq('#search_seknk').val(),
+				customerName : customerName,
+				customerNumber : customerNumber,
 				ajax : 'true'
 			}, function(data) {
 				//alert("Hello");
@@ -423,9 +426,9 @@
 	//--------------------------------------------------------------------------------------
 	jq(function() { 
 	    jq('#seknk').blur(function() {
-	    		var customerNr = jq('#seknk').val();
-	    		var name = jq('#senak').val();
-	    		var regNr = jq('#serg').val();
+	    		var customerNr = jq.trim(jq('#seknk').val());
+	    		var name = jq.trim(jq('#senak').val());
+	    		var regNr = jq.trim(jq('#serg').val());
 			
 	    		if(customerNr!='' && (name=='' && regNr=='') ){
 	    			jq.getJSON('searchCustomer_TvinnSad.do', {
@@ -481,7 +484,7 @@
 					}
 				});
 	    			//free text
-		    		setFreeTextSender(jq('#seknk').val());
+		    		setFreeTextSender(jq.trim(jq('#seknk').val()));
 	    		}
 		});
 	});
@@ -490,7 +493,7 @@
 	//-----------------------------------
 	jq(function() { 
 	    jq('#senderFreeTextImg').click(function() {
-	    		setFreeTextSender(jq('#seknk').val());
+	    		setFreeTextSender(jq.trim(jq('#seknk').val()));
 		});
 	});
 	//-------------------
@@ -501,7 +504,7 @@
 			if(seknk!=null && seknk!=""){
 		    		jq.getJSON('getCustomerInfoFreeText_TvinnSad.do', {
 					applicationUser : jq('#applicationUser').val(),
-					customerNumber : jq('#seknk').val(),
+					customerNumber : seknk,
 					delsystem : "L",
 					ajax : 'true'
 				}, function(data) {
@@ -522,10 +525,13 @@
   	//---------------------------------------------------------
 	function searchReceiverOwnWindow() {
 		jq(function() {
+			var customerName = jq.trim(jq('#search_senas').val());
+			var customerNumber = jq.trim(jq('#search_sekns').val());
+			
 			jq.getJSON('searchCustomer_TvinnSad.do', {
 				applicationUser : jq('#applicationUser').val(),
-				customerName : jq('#search_senas').val(),
-				customerNumber : jq('#search_sekns').val(),
+				customerName : customerName,
+				customerNumber : customerNumber,
 				ajax : 'true'
 			}, function(data) {
 				var html = '<option selected value="">-Select-</option>';
@@ -611,13 +617,13 @@
 	//--------------------------------------------------------------------------------------
 	jq(function() { 
 	    jq('#sekns').blur(function() {
-	    		var sekns = jq('#sekns').val();
-	    		var senas = jq('#senas').val();
+	    		var sekns = jq.trim(jq('#sekns').val());
+	    		var senas = jq.trim(jq('#senas').val());
 	    		if(	(sekns!=null && sekns!="") && (senas=='')){
 		    		jq.getJSON('searchCustomer_TvinnSad.do', {
 					applicationUser : jq('#applicationUser').val(),
 					customerName : "",
-					customerNumber : jq('#sekns').val(),
+					customerNumber : sekns,
 					ajax : 'true'
 				}, function(data) {
 					//alert("Hello");
@@ -655,7 +661,7 @@
 					}
 				});
 		    		//free text
-		    		setFreeTextReceiver(jq('#sekns').val());
+		    		setFreeTextReceiver(jq.trim(jq('#sekns').val()));
 	    		}
 		});
 	});
