@@ -257,7 +257,7 @@
 	        			<tr height="10"><td></td></tr> 
 						<tr >
 							<td>
-							<form name="createNewItemLine" id="createNewItemLine" method="post" action="tvinnsadimport_edit_items.do">
+							<form name="createNewItemLine" id="createNewItemLine" method="post" >
 								<input type="hidden" name="action" id="action" value='doFetch'>
 								<input type="hidden" name="renew" id="renew" value='1'>
 				 				<input type="hidden" name="avd" id="avd" value='${model.avd}'>
@@ -274,7 +274,7 @@
 										
 										<td class="text14Bold">
 											<c:if test="${model.status == 'M' || empty model.status}">
-												<input tabindex=-1 class="inputFormSubmitStd" type="submit" name="submit" onclick="javascript: form.action='tvinnsadimport_edit_items.do';" value="<spring:message code="systema.tvinn.sad.import.item.line.init.createnew.submit"/>">
+												<input tabindex=-1 class="inputFormSubmitStd" type="submit" name="submitCreateNew" id="submitCreateNew" onclick="javascript: form.action='tvinnsadimport_edit_items.do';" value="<spring:message code="systema.tvinn.sad.import.item.line.init.createnew.submit"/>">
 											</c:if>
 											<button name="allItemsButton" class="inputFormSubmitStd" type="button" onClick="showPop('allItems');" >Vis alle</button> 
 										        <span style="background-color:#EEEEEE; position:absolute; left:50px; top:200px; width:1200px; height:1000px;" id="allItems" class="popupWithInputTextThickBorder"  >
@@ -1081,7 +1081,7 @@
 													&nbsp;
 												</c:when>
 												<c:otherwise>
-						 				    		<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
+						 				    		<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" id="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
 						 				    		&nbsp;
 						 				    	</c:otherwise>	
 					 				    	</c:choose>	

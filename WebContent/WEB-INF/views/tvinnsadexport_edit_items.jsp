@@ -270,7 +270,7 @@
 									<tr>
 										<td class="text14Bold">
 											<c:if test="${model.status == 'M' || empty model.status}">
-												<input tabindex=-1 class="inputFormSubmitStd" type="submit" name="submit" onclick="javascript: form.action='tvinnsadexport_edit_items.do';" value="<spring:message code="systema.tvinn.sad.export.item.line.init.createnew.submit"/>">
+												<input tabindex=-1 class="inputFormSubmitStd" type="submit" name="submitCreateNew" id="submitCreateNew" onclick="javascript: form.action='tvinnsadexport_edit_items.do';" value="<spring:message code="systema.tvinn.sad.export.item.line.init.createnew.submit"/>">
 											</c:if>
 											<button name="allItemsButton" class="inputFormSubmitStd" type="button" onClick="showPop('allItems');" >Vis alle</button> 
 										        <span style="background-color:#EEEEEE; position:absolute; left:50px; top:200px; width:1200px; height:1000px;" id="allItems" class="popupWithInputTextThickBorder"  >

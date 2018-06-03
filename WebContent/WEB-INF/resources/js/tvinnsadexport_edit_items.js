@@ -29,6 +29,11 @@
   		jq( "#submit" ).click(function( event ) {
   			setBlockUI();
 	  	});
+  		jq('#submit').keypress(function(e){ //extra feature for the end user
+			if(e.which == 13) {
+				jq('#submit').click();
+			}
+	    });
   		
   		jq('#itemListControlButton').click(function() {
   			setBlockUI();
@@ -562,7 +567,7 @@
 	    	  "dom": '<"top">t<"bottom"flip><"clear">',
 	    	  "scrollY":    "180px",
 	  		  "scrollCollapse":  true,
-	  		  "order": [[ 10, "desc" ], [ 2, 'asc' ]],
+	  		  "order": [[ 10, "desc" ], [ 0, 'asc' ]],
 	  		  "lengthMenu": [ 75, 100, 300, 400, 900]
 	  	  });
 	      
