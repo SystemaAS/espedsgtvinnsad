@@ -329,19 +329,19 @@
 							                       <tr class="tableOddRow" height="20" >
 							                   </c:otherwise>
 							               </c:choose>
-							               <td width="2%" class="text12" align="right">${record.sftxt}</td>
-							               <td width="2%" class="text12" align="center">
+							               <td width="2%" class="text14" align="right">${record.sftxt}</td>
+							               <td width="2%" class="text14" align="center">
 							               		<a tabindex=-1 id="recordUpdate__${record.sftxt}__${record.sfdt}" href="#" onClick="getFinansOpplysningerItemData(this);">
 							               			<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 							               		</a>
 							               </td>
-							               <td align="center" class="text12" >&nbsp;${record.sfdt}</td>
-							               <td align="right" class="text12" >&nbsp;${record.sfbl28}</td>
-							               <td align="right" class="text12" >&nbsp;${record.sfvk28}</td>
-							               <td align="right" class="text12" >&nbsp;${record.sfkr28}</td>
-							               <td align="right" class="text12" >&nbsp;${record.sfom28}</td>
+							               <td align="center" class="text14" >&nbsp;${record.sfdt}</td>
+							               <td align="right" class="text14" >&nbsp;${record.sfbl28}</td>
+							               <td align="right" class="text14" >&nbsp;${record.sfvk28}</td>
+							               <td align="right" class="text14" >&nbsp;${record.sfkr28}</td>
+							               <td align="right" class="text14" >&nbsp;${record.sfom28}</td>
 										   <c:if test="${model.status == 'M' || empty model.status}">	
-								               <td class="text12" align="center" nowrap>
+								               <td class="text14" align="center" nowrap>
 								               	<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadexport_edit_finansopplysninger.do?action=doDelete&sign=${model.sign}&avd=${model.avd}&opd=${model.opd}&status=${model.status}&fak=${record.sftxt}">
 								               		<img valign="bottom" src="resources/images/delete.gif" border="0" alt="remove">
 								               	</a>	&nbsp;
