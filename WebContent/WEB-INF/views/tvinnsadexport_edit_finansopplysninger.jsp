@@ -49,7 +49,7 @@
 						&sysg=${model.sign}&tuid=${refnr}&syst=${model.status}&sydt=${model.datum}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
 					
 					<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.export.created.mastertopic.tab"/></font>
-					<font class="text12MediumBlue">[${model.opd}]</font>
+					<font class="text14MediumBlue">[${model.opd}]</font>
 					<c:if test="${model.status == 'M' || empty model.status}">
 						<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 					</c:if>
@@ -308,6 +308,7 @@
 									<thead>
 									<tr class="tableHeaderField" height="20" >
 									    <th class="text14">&nbsp;Finans.opplysn.&nbsp;</th> 
+									    <th align="center" class="text14">&nbsp;Endre&nbsp;</th>
 									    <th align="center" class="text14" nowrap>&nbsp;Dato&nbsp;</th>
 					                    <th align="right" class="text14" nowrap>&nbsp;Beløp&nbsp;</th>
 					                    <th align="right" class="text14" nowrap>&nbsp;Valuta&nbsp;</th>
@@ -328,10 +329,11 @@
 							                       <tr class="tableOddRow" height="20" >
 							                   </c:otherwise>
 							               </c:choose>
-							               <td width="2%" class="text12" align="right">
-							               		<a tabindex=-1 id="recordUpdate__${record.sftxt}__${record.sfdt}" href="#" onClick="getFinansOpplysningerItemData(this);">${record.sftxt}
-							               			<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;
-							               		</a>&nbsp;&nbsp;
+							               <td width="2%" class="text12" align="right">${record.sftxt}</td>
+							               <td width="2%" class="text12" align="center">
+							               		<a tabindex=-1 id="recordUpdate__${record.sftxt}__${record.sfdt}" href="#" onClick="getFinansOpplysningerItemData(this);">
+							               			<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
+							               		</a>
 							               </td>
 							               <td align="center" class="text12" >&nbsp;${record.sfdt}</td>
 							               <td align="right" class="text12" >&nbsp;${record.sfbl28}</td>

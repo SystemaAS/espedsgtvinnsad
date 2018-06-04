@@ -327,6 +327,7 @@
 									<thead>
 									<tr class="tableHeaderField" height="20" >
 									    <th class="text14">&nbsp;Finans.opplysn.&nbsp;</th> 
+									    <th align="center" class="text14">&nbsp;Endre&nbsp;</th>
 									    <th align="center" class="text14" nowrap>&nbsp;Dato&nbsp;</th>
 					                    <th align="right" class="text14" nowrap>&nbsp;Beløp&nbsp;</th>
 					                    <th align="right" class="text14" nowrap>&nbsp;Valuta&nbsp;</th>
@@ -347,9 +348,10 @@
 							                       <tr class="tableOddRow" height="20" >
 							                   </c:otherwise>
 							               </c:choose>
-							               <td width="2%" class="text14" align="right">
-							               		<a tabindex=-1 id="recordUpdate__${record.sftxt}__${record.sfdt}" href="#" onClick="getFinansOpplysningerItemData(this);">${record.sftxt}
-							               			<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;
+							               <td width="2%" class="text14" align="right">${record.sftxt}</td>
+							               <td width="2%" class="text14" align="center">
+							               		<a tabindex=-1 id="recordUpdate__${record.sftxt}__${record.sfdt}" href="#" onClick="getFinansOpplysningerItemData(this);">
+							               			<img src="resources/images/update.gif" border="0" alt="edit">&nbsp;
 							               		</a>&nbsp;&nbsp;
 							               </td>
 							               <td align="center" class="text14" >&nbsp;${record.sfdt}</td>

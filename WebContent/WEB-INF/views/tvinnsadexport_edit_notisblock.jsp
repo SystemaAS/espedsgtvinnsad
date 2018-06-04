@@ -193,11 +193,12 @@
 							<td class="ownScrollableSubWindow" style="width:80%; height:10em;">
 								<table width="100%" cellspacing="0" border="0" cellpadding="0">
 									<tr class="tableHeaderField" height="20" valign="left">
-									    <th class="tableHeaderFieldFirst">&nbsp;Linje&nbsp;</th>   
-					                    <th class="tableHeaderField" nowrap>&nbsp;Dato&nbsp;</th>
-					                    <th class="tableHeaderField" nowrap>&nbsp;Part&nbsp;</th>
-					                    <th class="tableHeaderField" nowrap>&nbsp;Fritekst&nbsp;</th>
-					                    	<th align="center" class="tableHeaderField" nowrap>Slett</th>
+									    <th align="center" class="tableHeaderFieldFirst">&nbsp;Linje&nbsp;</th>  
+									    <th align="center" class="tableHeaderField">&nbsp;Endre&nbsp;</th>
+					                    <th align="center" class="tableHeaderField" nowrap>&nbsp;Dato&nbsp;</th>
+					                    <th align="center" class="tableHeaderField" nowrap>&nbsp;Part&nbsp;</th>
+					                    <th align="left" class="tableHeaderField" nowrap>&nbsp;Fritekst&nbsp;</th>
+				                    	<th align="center" class="tableHeaderField" nowrap>Slett</th>
 					               </tr> 
 					               <form name="formItemList" id="formItemList" method="POST" >
 					               		<input type="hidden" name="frtavd" id="frtavd" value="${model.avd}">
@@ -212,18 +213,19 @@
 							                       <tr class="tableOddRow" height="20" >
 							                   </c:otherwise>
 							               </c:choose>
-							               <td width="2%" class="tableCellFirst" align="right">
-							               		<a tabindex=-1 id="recordUpdate_${record.frtli}_${record.frtdt}" href="#" onClick="getNotisblockItemData(this);">${record.frtli}
-							               			<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;
-							               		</a>&nbsp;&nbsp;
+							               <td width="2%" class="tableCellFirst" align="center">${record.frtli}</td>
+							               <td width="2%" class="tableCell" align="center">
+							               		<a tabindex=-1 id="recordUpdate_${record.frtli}_${record.frtdt}" href="#" onClick="getNotisblockItemData(this);">
+							               			<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
+							               		</a>
 							               </td>
-							               <td class="tableCell" >&nbsp;${record.frtdt}</td>
-							               <td class="tableCell" >&nbsp;${record.frtkod}</td>
-							               <td class="tableCell" >&nbsp;${record.frttxt}</td>
+							               <td align="center" class="tableCell" >&nbsp;${record.frtdt}</td>
+							               <td align="center" class="tableCell" >&nbsp;${record.frtkod}</td>
+							               <td align="left" class="tableCell" >&nbsp;${record.frttxt}</td>
 									       <td class="tableCell" align="center" nowrap>
-							               	<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="editNotisblock.do?action=doDelete&subsys=sade&orig=${model.orig}&sign=${model.sign}&frtli=${record.frtli}&frtdt=${record.frtdt}&opd=${record.frtopd}&avd=${record.frtavd}">
-							               		<img valign="bottom" src="resources/images/delete.gif" border="0" alt="remove">
-							               	</a>	&nbsp;
+								               	<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="editNotisblock.do?action=doDelete&subsys=sade&orig=${model.orig}&sign=${model.sign}&frtli=${record.frtli}&frtdt=${record.frtdt}&opd=${record.frtopd}&avd=${record.frtavd}">
+								               		<img src="resources/images/delete.gif" border="0" alt="remove">
+								               	</a>	&nbsp;
 							               </td>
 							            </tr>
 								        <%-- this param is used ONLY in this JSP 
