@@ -874,4 +874,54 @@
 	  }
 
 
-	
+	//-------------------------------------------------
+	  //START Model dialog SEND: "Send with parameters"
+	  //-----------------------------------------------
+	  //Initialize <div> here
+	  jq(function() { 
+		  jq("#dialogSendWithParameters").dialog({
+			  autoOpen: false,
+			  maxWidth:500,
+	          maxHeight: 400,
+	          width: 360,
+	          height: 360,
+			  modal: true
+		  });
+	  });
+	  //----------------------------
+	  //Present dialog box onClick 
+	  //----------------------------
+	  jq(function() {
+		  jq("#sendButton").click(function() {
+			  presentSendWithParametersDialog();
+		  });
+		  
+	  });
+	  function presentSendWithParametersDialog(){
+		//setters (add more if needed)
+		  jq('#dialogSendWithParameters').dialog( "option", "title", "Send tolldeklaration" );
+		  //deal with buttons for this modal window
+		  jq('#dialogSendWithParameters').dialog({
+			 buttons: [ 
+	            {
+				 id: "dialogSaveTU",	
+				 text: "Ok",
+				 click: function(){
+					 		jq('#sendWithParamtersForm').submit();
+				 		}
+			 	 },
+	 	 		{
+			 	 id: "dialogCancelTU",
+			 	 text: "Cancel", 
+				 click: function(){
+					 		//back to initial state of form elements on modal dialog
+					 		//jq("#dialogSaveSU").button("option", "disabled", true);
+					 		jq( this ).dialog( "close" ); 
+				 		} 
+	 	 		 } ] 
+		  });
+		  //init values
+		  //jq("#dialogSaveSU").button("option", "disabled", true);
+		  //open now
+		  jq('#dialogSendWithParameters').dialog('open');
+	  }

@@ -893,7 +893,7 @@
 		  jq('#dialogUpdateStatus').dialog('open');
 	  }
 	  
-	//-------------------------------------------------
+	  //-------------------------------------------------
 	  //START Model dialog SEND: "Send with parameters"
 	  //-----------------------------------------------
 	  //Initialize <div> here

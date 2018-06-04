@@ -1398,7 +1398,6 @@ public class SadImportHeaderController {
 		StringBuffer urlRequestParamsKeys = new StringBuffer();
 		String opd = request.getParameter("opd");
 		String avd = request.getParameter("avd");
-		String sign = request.getParameter("sign");
 		//
 		String m1N07 = request.getParameter("m1N07");
 		String m3039e = request.getParameter("m3039e");

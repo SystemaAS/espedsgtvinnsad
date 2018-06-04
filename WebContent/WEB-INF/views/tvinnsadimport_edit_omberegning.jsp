@@ -998,12 +998,12 @@
 					</td>
 			</tr>
 			
-			<%-- Communcation EDI parameters --%>
+			<%-- Communcation EDI parameters --> OBSOLETE: has been moved to poput send modal window... sendParametersForm
 			<tr height="20"><td></td></tr>
 			<tr>
 				<td width="5">&nbsp;</td>
 	            <td >
-					<%-- Special section --%>
+					<%-- Special section 
 					<table width="90%" align="left" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
 				 		<tr height="15">
 				 			<td class="text14White">
@@ -1023,7 +1023,7 @@
 			<tr>
 	 			<td width="5">&nbsp;</td>
 	            <td >
-	 				<%-- create record --%>
+	 				<%-- create record 
 				 	<table width="90%" align="left" class="formFrameTitaniumGrayRoundBottom" border="0" cellspacing="0" cellpadding="0">
 				 		<tr>
 					 		<td>
@@ -1067,7 +1067,9 @@
 					</table>
 				</td>
 		  	</tr>
-			
+			 --%>
+			 
+			 
            	</table>
 		</td>
 		<%-- --------------- --%>
@@ -1871,7 +1873,7 @@
 			 				    	<input tabindex=-1 class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadimport_edit_omberegning.do';" value='<spring:message code="systema.tvinn.sad.import.createnew.submit"/>'/>
 			 				    	&nbsp;&nbsp;
 			 				    	<c:if test="${not empty  model.record.sitdn && model.record.validUpdate}">
-			 				    		<input tabindex=-2 class="inputFormSubmit" type="submit" name="send" id="send" onclick="javascript: form.action='tvinnsadimport_edit_omberegning_send.do';" value='<spring:message code="systema.tvinn.sad.import.createnew.send"/>'/>
+			 				    		<input tabindex=-2 class="inputFormSubmit" type="button" name="sendButton" id="sendButton" onclick="javascript: form.action='tvinnsadimport_edit_omberegning_send.do';" value='<spring:message code="systema.tvinn.sad.import.createnew.send"/>'/>
 			 				    	</c:if>
 				 				    
                 				</td>
@@ -1927,6 +1929,79 @@
 			</form>
 		</div>
 	</td>
-</tr> 
+</tr>
+
+<%-- -------------------------- --%>	
+	 <%-- Send button's extra info   --%>	
+	 <%-- -------------------------- --%>	
+	 <tr>
+		<td>
+			<div id="dialogSendWithParameters" title="Dialog">
+			<form action="tvinnsadimport_edit_omberegning_send.do" name="sendWithParamtersForm" id="sendWithParamtersForm" method="post">
+			 	<input type="hidden" name="avd" id="avd" value="${model.record.siavd}">
+			 	<input type="hidden" name="opd" id="opd" value="${model.record.sitdn}">
+			 	<input type="hidden" name="sign" id="sign" value="${model.record.sign}">
+				<table>
+					<tr>
+						<td class="text14" align="left" title="m1N07">Meldings funksjon</td>
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="m1N07" id="m1N07">
+			            		<option value="">-velg-</option>
+			            		<option value="DEB" <c:if test="${Xmodel.record.sendParametersRecord.m1N07 == 'DEB'}"> selected </c:if> >DEB</option>
+			            		<option value="DRE" <c:if test="${Xmodel.record.sendParametersRecord.m1N07 == 'DRE'}"> selected </c:if> >DRE</option>
+			            		<option value="DSO" <c:if test="${Xmodel.record.sendParametersRecord.m1N07 == 'DSO'}"> selected </c:if> >DSO</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="text14" align="left" title="m3039e">Til ekspedisjonsenhet</td>
+						<td class="text14MediumBlue">
+							<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue"  name="m3039e" id="m3039e" size="8" maxlength="6" value="${Xmodel.record.sendParametersRecord.m3039e}">
+						</td>
+					</tr>
+					<tr>
+						<td class="text14" align="left" title="m2005b">Ønsket behandlingsdato</td>
+						<td class="text14MediumBlue">
+							<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue"  name="m2005b" id="m2005b" size="8" maxlength="6" value="${Xmodel.record.sendParametersRecord.m2005b}">
+						</td>
+					</tr>
+					<tr>
+						<td class="text14" align="left" title="m5004d">Depositum beløp</td>
+						<td class="text14MediumBlue">
+							<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue"  name="m5004d" id="m5004d" size="12" maxlength="10" value="${Xmodel.record.sendParametersRecord.m5004d}">
+						</td>
+					</tr>
+					<tr>
+						<td class="text14" align="left" title="mven">Ventegrupe</td>
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="mven" id="mven">
+			            		<option value="" <c:if test="${empty Xmodel.record.sendParametersRecord.mven}"> selected </c:if> >Nej</option>
+			            		<option value="1" <c:if test="${Xmodel.record.sendParametersRecord.mven == '1'}"> selected </c:if> >Ja</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="text14" align="left" title="m0035">Testekode</td>
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="m0035" id="m0035">
+			            		<option value="1" <c:if test="${Xmodel.record.sendParametersRecord.m0035 == '1'}"> selected </c:if> >Test</option>
+			            		<option value="" <c:if test="${empty Xmodel.record.sendParametersRecord.m0035}"> selected </c:if> >Prod</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="text14" align="left" title="m9n01">Eksped.prioritet</td>
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="m9n01" id="m9n01">
+			            		<option value="1" <c:if test="${empty Xmodel.record.sendParametersRecord.m9n01 || model.record.sendParametersRecord.m9n01 == '1'}"> selected </c:if> >Express</option>
+			            		<option value="2" <c:if test="${not empty Xmodel.record.sendParametersRecord.m9n01 && model.record.sendParametersRecord.m9n01 != '1'}"> selected </c:if> >Annen</option>
+							</select>
+						</td>
+					</tr>
+				</table>
+			</form>
+			</div>
+		</td>
+	</tr>  
  
 	
