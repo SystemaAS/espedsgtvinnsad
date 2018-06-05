@@ -16,6 +16,9 @@ import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.validator.JsonSadI
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.validator.JsonSadImportTopicIncotermsAttributesRecord;
 import no.systema.tvinn.sad.sadimport.service.SadImportSpecificTopicService;
 import no.systema.tvinn.sad.sadimport.url.store.SadImportUrlDataStore;
+import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
+import no.systema.main.util.StringManager;
+import no.systema.main.validator.DateValidator;
 
 
 /**
@@ -26,7 +29,9 @@ import no.systema.tvinn.sad.sadimport.url.store.SadImportUrlDataStore;
  */
 public class SadImportHeaderValidator implements Validator {
 	private static final Logger logger = Logger.getLogger(SadImportHeaderController.class.getName());
-	
+	private StringManager strMgr = new StringManager();
+	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
+	private DateValidator dateValidator = new DateValidator();
 	private UrlCgiProxyService urlCgiProxyService = null;
 	private SadImportSpecificTopicService sadImportSpecificTopicService = null;
 	private SystemaWebUser appUser = null;
@@ -124,6 +129,12 @@ public class SadImportHeaderValidator implements Validator {
 				//------
 				//dates 
 				//------
+				if(strMgr.isNotNull(record.getSifid())){
+					if(!dateValidator.validateDate(record.getSifid(), DateValidator.DATE_MASK_NO)){
+						errors.rejectValue("sifid", "systema.tvinn.sad.import.header.error.rule.invalidFaktDate"); 	
+					}
+				}
+				
 				/*
 				if( (record.getDkih_dtm1()!=null && !"".equals(record.getDkih_dtm1()) ) && (record.getDkih_dtm2()!=null && !"".equals(record.getDkih_dtm2()) ) ){ 
 					errors.rejectValue("dkih_dtm1", "systema.skat.import.header.error.rule.onlyOneDate"); 
