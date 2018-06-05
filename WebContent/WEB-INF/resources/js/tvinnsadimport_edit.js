@@ -972,7 +972,7 @@
 				 buttons: [ 
 		            {
 					 id: "dialogSaveOMB",	
-					 text: "Gå vidare",
+					 text: "Gå videre",
 					 click: function(){
 						 		jq('#copyOmberegningPaOmberegningForm').submit();
 					 		}

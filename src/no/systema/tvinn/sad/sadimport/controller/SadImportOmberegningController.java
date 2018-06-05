@@ -32,6 +32,7 @@ import no.systema.main.util.DateTimeManager;
 import no.systema.main.util.JsonDebugger;
 import no.systema.main.util.NumberFormatterLocaleAware;
 import no.systema.main.model.SystemaWebUser;
+import no.systema.main.util.StringManager;
 import no.systema.tvinn.sad.sadexport.url.store.SadExportUrlDataStore;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportSpecificTopicFaktTotalContainer;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportSpecificTopicFaktTotalRecord;
@@ -87,12 +88,15 @@ public class SadImportOmberegningController {
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	private ApplicationContext context;
 	
+	private StringManager strMgr = new StringManager();
+	
 	private String ACTIVE_INNSTIKK_CODE = "I";
 	//Omberegning
 	private String OMBEREGNING_TYPE_OMB_ORIGINAL_BACKEND = "OMB";
 	private String OMBEREGNING_TYPE_NYO_ORIGINAL_BACKEND = "NYO";
 	private String OMBEREGNING_TYPE_NYS_LATTER_BACKEND = "NYS";
 	private String OMBEREGNING_TYPE_NYA_ANGRA_BACKEND = "NYA";
+	private String OMBEREGNING_READYONLY = "readonly";
 	
 	
 	@InitBinder
@@ -148,11 +152,11 @@ public class SadImportOmberegningController {
 		logger.info("Avd:" + avd);
 		logger.info("Sign:" + sign);
 		logger.info("OmberegFlag:" + omberegningFlag);
+		logger.info("selectedOmb:" + selectedOmb);
 		
 		logger.info("Fakturabelop (sibel3):" + recordToValidate.getSibel3());
-		
-		
 		Map model = new HashMap();
+		
 		
 		if(appUser==null){
 			return this.loginView;
@@ -171,27 +175,23 @@ public class SadImportOmberegningController {
 				//FETCH RECORD
 				//-------------
 				if(TvinnSadConstants.ACTION_FETCH.equals(action)){
+					
 					//Omberegning adjust prior to fetch
 					String opdOmb = opd;
-					
 					//(A) BRANCH for omberegning ALREADY exists
-					if(omberegningDate!=null && !"".equals(omberegningDate)){
+					if(strMgr.isNotNull(omberegningDate)){
 						//at this point we do know that there IS ALREADY a previous omberegning
-						if(omberegningType!=null && !"".equals(omberegningType)){
+						if(strMgr.isNotNull(omberegningType)){
 							//At this point we do know the user wants to clone or simply fetch upon a dialog interaction
-							if(selectedOmb != null && !"".equals(selectedOmb)){
-								if(!opdOmb.contains("-")){
-									opdOmb = opdOmb + "-";
-								}
+							if(!opdOmb.contains("-")){
+								opdOmb = opdOmb + "-";
+							}
+							//only if applicable
+							if(strMgr.isNotNull(selectedOmb) && !selectedOmb.equals(this.OMBEREGNING_READYONLY)){
 								logger.info("Clone omberegning... upon user interaction");
 								this.cloneOpdToOmberegning(appUser.getUser(), avd, opdOmb, sign, selectedOmb);
-								
-							}else{
-								//Add a minus sign (to indicate omberegning on service back-end will be fetch)
-								if(!opdOmb.contains("-")){
-									opdOmb = opdOmb + "-"; 
-								}
 							}
+						
 						}else{
 							//Add a minus sign (to indicate omberegning on service back-end will be fetched)
 							logger.info("Show omberegning BRANCH (A)...");
@@ -245,7 +245,9 @@ public class SadImportOmberegningController {
 						this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
 						this.setCodeDropDownMgr(appUser, model);	
 			    		this.setDomainObjectsInView(session, model, jsonSadImportSpecificTopicContainer, totalItemLinesObject, omberegningFlag, omberegningDate, omberegningType);	
-				    	
+				    	//extra
+			    		model.put("selectedOmb", selectedOmb);
+			    		
 			    		successView.addObject(TvinnSadConstants.DOMAIN_MODEL, model);
 						//put the doUpdate action since we are preparing the record for an update (when saving)
 						successView.addObject(TvinnSadConstants.EDIT_ACTION_ON_TOPIC, TvinnSadConstants.ACTION_UPDATE);

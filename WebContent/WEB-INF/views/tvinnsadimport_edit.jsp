@@ -1673,6 +1673,28 @@
 					            		<input type="text" class="inputTextMediumBlue" name="insivf" id="insivf" size="2" maxlength="1" value="${model.record.insivf}">
 					            </td>
 					        </tr>
+					        <tr>
+					            <td class="text14" align="left" >
+					            <img onMouseOver="showPop('slaSammen_info');" onMouseOut="hidePop('slaSammen_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+					            <span title="sefvk">Slå sammen varelinjer:</span>
+					            	<div class="text11" style="position: relative;" align="left">
+					            	<span style="position:absolute;top:2px; width:250px;" id="slaSammen_info" class="popupWithInputText text11"  >
+					           			<b>Slå sammen</b>
+					           			<br/>
+					           			<p>
+				           				TODO
+					           			</p>
+									</span>
+									</div>
+				            	</td>
+					            <td >
+				            		<select class="selectMediumBlueE2" name="sitrt" id="sitrt" >
+				 				  		<option value="">-velg-</option>
+								  		<option value="1"<c:if test="${model.record.sitrt == '1'}"> selected </c:if> >Ja</option>
+								  		<option value=""<c:if test="${model.record.sitrt == ''}"> selected </c:if> >Nej</option>
+									</select>
+					            </td>
+					        </tr>
 							<tr>
 					            <td class="text14" align="left" >
 					            <img onMouseOver="showPop('forholdBN_info');" onMouseOut="hidePop('forholdBN_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
@@ -1901,7 +1923,7 @@
 				
 				<p class="text14" >Denne fortollingen er <b>allerede omberegnet</b>
 				<br><br>
-				Vad vill du velge?
+				Hva vil du velge?
 				</p>
 									
 				<table>
@@ -1909,7 +1931,7 @@
 					<tr>
 						<td class="text14MediumBlue">
 							<select class="selectMediumBlueE2" name="selectedOmb" id="selectedOmb">
-			            		<option value="">Vis omberegning</option>
+			            		<option value="readonly">Vis omberegning</option>
 			 				  	<option value="NYO">Ny omb. basert på original fortolling</option>
 			 				  	<option value="NYS">Ny omb. basert på siste ombereg.</option>
 							</select>

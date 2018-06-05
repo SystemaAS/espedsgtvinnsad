@@ -165,7 +165,7 @@
 				</td>
 				<td width="8%" valign="bottom" class="tabDisabledSub" align="center" nowrap>
 					<a id="alinkOmberegningItemLinesSubTab" style="display:block;" href="tvinnsadimport_edit_omberegning_items.do?action=doFetch&avd=${ model.record.siavd}&sign=${ model.record.sisg}
-											&opd=${ model.record.sitdn}&status=${ model.record.sist}&fabl=${model.record.sibel3}&o2_sist=${ model.record.o2_sist}&o2_sidt=${ model.record.o2_sidt}&o2_simf=${ model.record.o2_simf}">
+											&opd=${ model.record.sitdn}&status=${ model.record.sist}&fabl=${model.record.sibel3}&o2_sist=${ model.record.o2_sist}&o2_sidt=${ model.record.o2_sidt}&o2_simf=${ model.record.o2_simf}&selectedOmb=${ model.selectedOmb}">
 					<font class="text14Gray">Varelinjer</font>
 					</a>
 				</td>
@@ -1869,13 +1869,18 @@
 				            <tr >	
 			            		<td class="text">&nbsp;</td> 
 			 				    <td class="text9BlueGreen" valign="bottom" align="right" >
-
-			 				    	<input tabindex=-1 class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadimport_edit_omberegning.do';" value='<spring:message code="systema.tvinn.sad.import.createnew.submit"/>'/>
-			 				    	&nbsp;&nbsp;
-			 				    	<c:if test="${not empty  model.record.sitdn && model.record.validUpdate}">
-			 				    		<input tabindex=-2 class="inputFormSubmit" type="button" name="sendButton" id="sendButton" onclick="javascript: form.action='tvinnsadimport_edit_omberegning_send.do';" value='<spring:message code="systema.tvinn.sad.import.createnew.send"/>'/>
-			 				    	</c:if>
-				 				    
+									<c:choose>
+										<c:when test="${model.selectedOmb != 'readonly'}">
+											<input tabindex=-1 class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadimport_edit_omberegning.do';" value='<spring:message code="systema.tvinn.sad.import.createnew.submit"/>'/>
+					 				    	&nbsp;&nbsp;
+					 				    	<c:if test="${not empty  model.record.sitdn && model.record.validUpdate}">
+					 				    		<input tabindex=-2 class="inputFormSubmit" type="button" name="sendButton" id="sendButton" onclick="javascript: form.action='tvinnsadimport_edit_omberegning_send.do';" value='<spring:message code="systema.tvinn.sad.import.createnew.send"/>'/>
+					 				    	</c:if>
+					 				    </c:when>
+					 				    <c:otherwise>
+					 				    	<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
+					 				    </c:otherwise>
+				 				    </c:choose>
                 				</td>
 					        </tr>
 						</table>

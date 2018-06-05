@@ -87,7 +87,7 @@ public class MaintSadImportSad002rController {
 		MaintenanceGyldigekoderListObject object = new  MaintenanceGyldigekoderListObject();
 		
 		object.setId("1");
-		object.setSubject("Ekspeditionstyper");
+		object.setSubject("Ekspedisjonstyper");
 		object.setText("SAD002 / KODTS1");
 		object.setDbTable("KODTS1");
 		object.setStatus("G");

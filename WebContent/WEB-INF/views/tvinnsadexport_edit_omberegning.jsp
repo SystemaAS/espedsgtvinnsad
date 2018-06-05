@@ -157,16 +157,16 @@
 		<%-- sub-tabs --%>
 		<tr>
 			<td colspan="2">
-				<table width="100%" class="text11" cellspacing="0" border="0" cellpadding="0">
+				<table width="100%" class="text14" cellspacing="0" border="0" cellpadding="0">
 				<tr>
 				<td width="2px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 				<td width="8%" valign="bottom" class="tabSub" align="center" nowrap>
-						<font class="text12"><b>Hode</b></font>
+						<font class="text14"><b>Hode</b></font>
 				</td>
 				<td width="8%" valign="bottom" class="tabDisabledSub" align="center" nowrap>
 					<a id="alinkOmberegningItemLinesSubTab" style="display:block;" href="tvinnsadexport_edit_omberegning_items.do?action=doFetch&avd=${ model.record.seavd}&sign=${ model.record.sesg}
-											&opd=${ model.record.setdn}&status=${ model.record.sest}&fabl=${model.record.sebel1}&o2_sest=${ model.record.o2_sest}&o2_sedt=${ model.record.o2_sedt}&o2_semf=${ model.record.o2_semf}">
-					<font class="text12Gray">Varelinjer</font>
+											&opd=${ model.record.setdn}&status=${ model.record.sest}&fabl=${model.record.sebel1}&o2_sest=${ model.record.o2_sest}&o2_sedt=${ model.record.o2_sedt}&o2_semf=${ model.record.o2_semf}&selectedOmb=${ model.selectedOmb}">
+					<font class="text14Gray">Varelinjer</font>
 					</a>
 				</td>
 				<td width="85%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
@@ -1797,13 +1797,18 @@
 				            <tr >	
 			            		<td class="text">&nbsp;</td> 
 			 				    <td class="text9BlueGreen" valign="bottom" align="right" >
-
-			 				    	<input tabindex=-1 class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadexport_edit_omberegning.do';" value='<spring:message code="systema.tvinn.sad.export.createnew.submit"/>'/>
-			 				    	&nbsp;&nbsp;
-			 				    	<c:if test="${not empty  model.record.setdn && model.record.validUpdate}">
-			 				    		<input tabindex=-2 class="inputFormSubmit" type="submit" name="send" id="send" onclick="javascript: form.action='tvinnsadexport_edit_omberegning_send.do';" value='<spring:message code="systema.tvinn.sad.export.createnew.send"/>'/>
-			 				    	</c:if>
-
+									<c:choose>	
+										<c:when test="${model.selectedOmb != 'readonly'}">
+				 				    	<input tabindex=-1 class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadexport_edit_omberegning.do';" value='<spring:message code="systema.tvinn.sad.export.createnew.submit"/>'/>
+				 				    	&nbsp;&nbsp;
+				 				    	<c:if test="${not empty  model.record.setdn && model.record.validUpdate}">
+				 				    		<input tabindex=-2 class="inputFormSubmit" type="submit" name="send" id="send" onclick="javascript: form.action='tvinnsadexport_edit_omberegning_send.do';" value='<spring:message code="systema.tvinn.sad.export.createnew.send"/>'/>
+				 				    	</c:if>
+				 				    	</c:when>
+										<c:otherwise>
+					 				    	<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
+					 				    </c:otherwise>
+					 				</c:choose>    
                 				</td>
 					        </tr>
 				            

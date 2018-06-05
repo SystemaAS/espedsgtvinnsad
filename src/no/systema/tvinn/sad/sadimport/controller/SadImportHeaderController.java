@@ -176,7 +176,6 @@ public class SadImportHeaderController {
 		
 		Map model = new HashMap();
 		
-		
 		if(appUser==null){
 			return this.loginView;
 		}else{

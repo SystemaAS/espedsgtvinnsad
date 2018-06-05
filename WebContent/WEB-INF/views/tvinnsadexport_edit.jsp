@@ -1811,7 +1811,7 @@
 				
 				<p class="text14" >Denne fortollingen er <b>allerede omberegnet</b>
 				<br><br>
-				Vad vill du velge?
+				Hva vil du velge?
 				</p>
 									
 				<table>
@@ -1819,7 +1819,7 @@
 					<tr>
 						<td class="text14MediumBlue">
 							<select class="selectMediumBlueE2" name="selectedOmb" id="selectedOmb">
-								<option value="">Vis omberegning</option>
+								<option value="readonly">Vis omberegning</option>
 			            		<option value="NYO">Ny omb. basert på original fortolling</option>
 			 				  	<option value="NYS">Ny omb. basert på siste ombereg.</option>
 							</select>

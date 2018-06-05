@@ -32,7 +32,7 @@ import no.systema.main.context.TdsServletContext;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.JsonDebugger;
-
+import no.systema.main.util.StringManager;
 import no.systema.tvinn.sad.sadimport.service.SadImportSpecificTopicItemService;
 import no.systema.tvinn.sad.sadimport.mapper.url.request.UrlRequestParameterMapper;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportSpecificTopicItemAvgifterBeforeCalculationRecord;
@@ -81,6 +81,8 @@ public class SadImportOmberegningItemsController {
 	private final String NOT_FOUND = "NOT FOUND";
 	private final String MATCH = "MATCH";
 	
+	private String OMBEREGNING_READYONLY = "readonly";
+	private StringManager strMgr = new StringManager();
 	
 	@InitBinder
     protected void initBinder(WebDataBinder binder) {
@@ -141,7 +143,9 @@ public class SadImportOmberegningItemsController {
 			//Omberegning
 			String omberegningFlag = request.getParameter("o2_sist"); //omberegning indicator
 			String omberegningDate = request.getParameter("o2_sidt"); //omberegning indicator
-			String omberegningType = request.getParameter("o2_simf"); //omberegning indicator (DFU,DTK,DEB, etc)
+			String omberegningType = request.getParameter("o2_simf"); //omberegning indicator ( DEB,DRE,DSO )
+			String selectedOmb = request.getParameter("selectedOmb"); //omberegning indicator from User Input dialog
+			
 			//new line
 			String renew = request.getParameter("renew");
 			if(renew!=null && !"".equals(renew)){
@@ -179,6 +183,7 @@ public class SadImportOmberegningItemsController {
 			model.put("o2_sist", omberegningFlag);
 			model.put("o2_sidt", omberegningDate);
 			model.put("o2_simf", omberegningType);
+			model.put("selectedOmb", selectedOmb );
 			
 			
 			if(TvinnSadConstants.ACTION_UPDATE.equals(action)){

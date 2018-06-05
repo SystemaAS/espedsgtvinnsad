@@ -120,17 +120,17 @@
 		<%-- sub-tabs --%>
 		<tr>
 			<td colspan="2">
-				<table width="100%"  class="text11" cellspacing="0" border="0" cellpadding="0">
+				<table width="100%"  class="text14" cellspacing="0" border="0" cellpadding="0">
 				<tr>
 				<td width="2px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 				<td width="8%" valign="bottom" class="tabDisabledSub" align="center" nowrap>
 					<a id="alinkOmberegningSubTab" style="display:block;" href="tvinnsadexport_edit_omberegning.do?action=doFetch&avd=${model.avd}&sign=${model.sign}
-											&opd=${model.opd}&status=${model.status}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
-						<font class="text12Gray">Hode</font>
+											&opd=${model.opd}&status=${model.status}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}&selectedOmb=${ model.selectedOmb}">
+						<font class="text14Gray">Hode</font>
 					</a>	
 				</td>
 				<td width="8%" valign="bottom" class="tabSub" align="center" nowrap>
-					<font class="text12"><b>Varelinjer</b></font>
+					<font class="text14"><b>Varelinjer</b></font>
 				</td>
 				<td width="85%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 				</tr>
@@ -289,6 +289,7 @@
 								<table width="100%" cellspacing="0" border="0" cellpadding="0">
 									<tr>
 										<td class="text14Bold">
+											<c:if test="${model.selectedOmb != 'readonly'}">
 											<input tabindex=-1 class="inputFormSubmitStd" type="submit" name="submit" onclick="javascript: form.action='tvinnsadexport_edit_omberegning_items.do';" value="<spring:message code="systema.tvinn.sad.export.item.line.init.createnew.submit"/>">
 											
 											<button name="allItemsButton" class="inputFormSubmitStd" type="button" onClick="showPop('allItems');" >Vis alle</button> 
@@ -384,8 +385,8 @@
 												&nbsp;<button title="Kontrollera varelinjer" name="itemListControlButton" id="itemListControlButton" class="buttonGrayWithGreenFrame11" type="button" >Varelinje kontroll</button>
 											</c:if>
 											 --%> 
-											 &nbsp;<button title="Angre Omberegning" name="itemListAngreOmbButton" id="itemListAngreOmbButton" class="buttonGrayWithGreenFrame11" type="button" >&nbsp;Angre Omberegning&nbsp;</button>
-											          		
+											 &nbsp;<button title="Angre Omberegning" name="itemListAngreOmbButton" id="itemListAngreOmbButton" class="buttonGrayWithGreenFrame" type="button" >&nbsp;Angre Omberegning&nbsp;</button>
+											 </c:if>         		
 										</td>
 										
 									</tr>
@@ -509,11 +510,13 @@
 							               </td>
 							               <td width="2%" align="center" class="text11Red"><b>${record.svnyl}</b></td>
 							               <td class="text14" align="center" nowrap>
-							                	<c:if test="${record.svnyl != 'S'}">
-							               			<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadexport_edit_omberegning_items.do?action=doDelete&avd=${record.svavd}&opd=${record.svtdn}&lin=${record.svli}&fabl=${recordTopicTvinnSad.sebel1}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
-							               				<img src="resources/images/delete.gif" border="0" alt="remove">
-							               			</a>
-							               		</c:if>	
+							               		<c:if test="${model.selectedOmb != 'readonly'}">
+								                	<c:if test="${record.svnyl != 'S'}">
+								               			<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadexport_edit_omberegning_items.do?action=doDelete&avd=${record.svavd}&opd=${record.svtdn}&lin=${record.svli}&fabl=${recordTopicTvinnSad.sebel1}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
+								               				<img src="resources/images/delete.gif" border="0" alt="remove">
+								               			</a>
+								               		</c:if>	
+							               		</c:if>
 							               </td>
 							              
 							            </tr>
@@ -926,8 +929,15 @@
 											</a>
 										</td>																			
 								    	<td align="left" colspan="2">
-								    			<input class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadexport_edit_omberegning_items.do';" value='<spring:message code="systema.tvinn.sad.export.item.createnew.submit"/>'>
-												&nbsp;&nbsp;
+								    		<c:choose>	
+												<c:when test="${model.selectedOmb != 'readonly'}">
+								    				<input class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadexport_edit_omberegning_items.do';" value='<spring:message code="systema.tvinn.sad.export.item.createnew.submit"/>'>
+													&nbsp;&nbsp;
+												</c:when>
+												<c:otherwise>
+						 				    		<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
+						 				    	</c:otherwise>	
+					 				    	</c:choose>
 										</td>
 							        </tr>									
 								</table>

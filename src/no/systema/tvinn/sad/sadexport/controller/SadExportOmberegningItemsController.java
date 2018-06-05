@@ -139,7 +139,9 @@ public class SadExportOmberegningItemsController {
 			//Omberegning
 			String omberegningFlag = request.getParameter("o2_sest"); //omberegning indicator
 			String omberegningDate = request.getParameter("o2_sedt"); //omberegning indicator
-			String omberegningType = request.getParameter("o2_semf"); //omberegning indicator (DFU,DTK,DEB, etc)
+			String omberegningType = request.getParameter("o2_semf"); //omberegning indicator (DEB,DRE,DSO)
+			String selectedOmb = request.getParameter("selectedOmb"); //omberegning indicator from User Input dialog
+			
 			//new line
 			String renew = request.getParameter("renew");
 			if(renew!=null && !"".equals(renew)){
@@ -177,6 +179,7 @@ public class SadExportOmberegningItemsController {
 			model.put("o2_sest", omberegningFlag);
 			model.put("o2_sedt", omberegningDate);
 			model.put("o2_semf", omberegningType);
+			model.put("selectedOmb", selectedOmb );
 			
 			
 			if(TvinnSadConstants.ACTION_UPDATE.equals(action)){
