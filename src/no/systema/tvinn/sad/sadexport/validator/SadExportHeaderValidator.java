@@ -21,7 +21,6 @@ import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
  */
 public class SadExportHeaderValidator implements Validator {
 	private StringManager strMgr = new StringManager();
-	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
 	private DateValidator dateValidator = new DateValidator();
 	
 	/**

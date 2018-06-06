@@ -38,7 +38,15 @@
   			
   		}
 	  });
+  	  
+  	  
+  	  jq( "#submit" ).click(function( event ) {
+  		  setBlockUI();
+  	  });
+	    
+  	  
     });
+    
     
     
     /*

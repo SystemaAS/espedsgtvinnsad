@@ -401,7 +401,7 @@
 				 	<input type="hidden" name="status" id="status" value="${model.status}"/>
 				 	<input type="hidden" name="datum" id="datum" value="${model.datum}"/>
 				 	<input type="hidden" name="fabl" id="fabl" value="${recordTopicTvinnSad.sebel1}"/>
-				 	<input type="hidden" name="lineId" id="lineId" value="">
+				 	<input type="hidden" name="lineId" id="lineId" value="${model.lineId}">
 				 	<%-- <input type="hidden" name="numberOfItemLinesInTopic" id="numberOfItemLinesInTopic" value="${numberOfItemLinesInTopic}" /> --%>
 				 	
 				 	<%-- Topic ITEM CREATE --%>

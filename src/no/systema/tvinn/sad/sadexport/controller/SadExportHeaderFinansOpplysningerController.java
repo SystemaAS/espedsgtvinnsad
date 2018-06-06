@@ -341,6 +341,8 @@ public class SadExportHeaderFinansOpplysningerController {
 			//this next step is necessary for the default values on "create new" record
     		if(bindingErrorsExist){
     			this.setDefaultDomainItemRecordInView(model, jsonSadExportTopicFinansOpplysningerContainer, recordToValidate);
+    			model.put("lineId", lineId);
+    			model.put("action", action);
     		}else{
     			this.setDefaultDomainItemRecordInView(model, jsonSadExportTopicFinansOpplysningerContainer, null);
     		}

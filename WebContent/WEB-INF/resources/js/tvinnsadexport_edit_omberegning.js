@@ -44,8 +44,9 @@
   //General functions
   	jq(function() {
   		jq( "#submit" ).click(function( event ) {
-  			setBlockUI();
-	  	});
+  		  setBlockUI();
+  		});
+    	
   		
   		//=====================================
 	  	//START Child window for general codes

@@ -8,6 +8,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 
 import no.systema.main.util.DateTimeManager;
+import no.systema.main.util.StringManager;
+import no.systema.main.validator.DateValidator;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicRecord;
 
 /**
@@ -17,6 +19,8 @@ import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpeci
  *
  */
 public class SadExportOmberegningHeaderValidator implements Validator {
+	private StringManager strMgr = new StringManager();
+	private DateValidator dateValidator = new DateValidator();
 	
 	/**
 	 * 
@@ -94,6 +98,15 @@ public class SadExportOmberegningHeaderValidator implements Validator {
 						//Valid
 					}else{
 						errors.rejectValue("seski", "systema.tvinn.sad.export.header.error.rule.seski.tollMvaValueDiscreteMandatoryValues"); 
+					}
+				}
+				
+				//------
+				//dates 
+				//------
+				if(strMgr.isNotNull(record.getSefid())){
+					if(!dateValidator.validateDate(record.getSefid(), DateValidator.DATE_MASK_NO)){
+						errors.rejectValue("sefid", "systema.tvinn.sad.export.header.error.rule.invalidFaktDate"); 	
 					}
 				}
 			

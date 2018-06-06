@@ -6,6 +6,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 
 import no.systema.main.util.DateTimeManager;
+import no.systema.main.validator.DateValidator;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportTopicFinansOpplysningerRecord;
 
 /**
@@ -15,6 +16,7 @@ import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportTopic
  */
 public class SadImportHeaderFinansOpplysningerValidator implements Validator {
 	private static final Logger logger = Logger.getLogger(SadImportHeaderFinansOpplysningerValidator.class.getName());
+	private DateValidator dateValidator = new DateValidator();
 	
 	/**
 	 * 
@@ -64,12 +66,21 @@ public class SadImportHeaderFinansOpplysningerValidator implements Validator {
 	private boolean isValidDate(JsonSadImportTopicFinansOpplysningerRecord record){
 		boolean retval = true;
 		DateTimeManager dateMgr = new DateTimeManager();
+		
 		if(record.getSfdt().length()!=6){
 			retval = false;
 		}else{
-			String isoDate = dateMgr.getDateFormatted_ISO(record.getSfdt(), "ddMMyy");
-			logger.info("ISO-date:"+ isoDate);
-			retval = dateMgr.isValidCurrentAndBackwardDate(isoDate, "yyyMMdd");
+			
+			if(dateValidator.validateDate(record.getSfdt(), DateValidator.DATE_MASK_NO)){
+				String isoDate = dateMgr.getDateFormatted_ISO(record.getSfdt(), "ddMMyy");
+				logger.info("ISO-date:"+ isoDate);
+				retval = dateMgr.isValidCurrentAndBackwardDate(isoDate, "yyyMMdd");
+				
+			}else{
+				retval = false;
+		}
+			
+			
 			
 		}
 		

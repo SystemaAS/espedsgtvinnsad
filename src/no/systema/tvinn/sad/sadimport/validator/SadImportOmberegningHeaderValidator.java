@@ -10,6 +10,8 @@ import org.springframework.validation.ValidationUtils;
 
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.service.UrlCgiProxyService;
+import no.systema.main.util.StringManager;
+import no.systema.main.validator.DateValidator;
 import no.systema.tvinn.sad.sadimport.controller.SadImportHeaderController;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportSpecificTopicRecord;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.validator.JsonSadImportTopicIncotermsAttributesContainer;
@@ -26,6 +28,8 @@ import no.systema.tvinn.sad.sadimport.url.store.SadImportUrlDataStore;
  */
 public class SadImportOmberegningHeaderValidator implements Validator {
 	private static final Logger logger = Logger.getLogger(SadImportHeaderController.class.getName());
+	private DateValidator dateValidator = new DateValidator();
+	private StringManager strMgr = new StringManager();
 	
 	private UrlCgiProxyService urlCgiProxyService = null;
 	private SadImportSpecificTopicService sadImportSpecificTopicService = null;
@@ -121,6 +125,14 @@ public class SadImportOmberegningHeaderValidator implements Validator {
 					errors.rejectValue("sibel1", "systema.tvinn.sad.import.header.error.rule.invalidFrakt"); 
 				}
 				
+				//------
+				//dates 
+				//------
+				if(strMgr.isNotNull(record.getSifid())){
+					if(!dateValidator.validateDate(record.getSifid(), DateValidator.DATE_MASK_NO)){
+						errors.rejectValue("sifid", "systema.tvinn.sad.import.header.error.rule.invalidFaktDate"); 	
+					}
+				}
 				//------
 				//dates 
 				//------

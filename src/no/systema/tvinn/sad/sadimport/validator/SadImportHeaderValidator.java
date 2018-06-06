@@ -30,7 +30,6 @@ import no.systema.main.validator.DateValidator;
 public class SadImportHeaderValidator implements Validator {
 	private static final Logger logger = Logger.getLogger(SadImportHeaderController.class.getName());
 	private StringManager strMgr = new StringManager();
-	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
 	private DateValidator dateValidator = new DateValidator();
 	private UrlCgiProxyService urlCgiProxyService = null;
 	private SadImportSpecificTopicService sadImportSpecificTopicService = null;
