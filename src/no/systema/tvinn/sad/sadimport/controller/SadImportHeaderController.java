@@ -1624,8 +1624,13 @@ public class SadImportHeaderController {
 		String dateSidtISO =null;
 		
 		if(jsonSadImportSpecificTopicRecord.getSifid()!=null){
-			dateSifidISO = this.dateFormatter.convertToDate_ISO(jsonSadImportSpecificTopicRecord.getSifid());
-			jsonSadImportSpecificTopicRecord.setSifid(dateSifidISO);
+			if(!"999999".equals(jsonSadImportSpecificTopicRecord.getSifid())){
+				dateSifidISO = this.dateFormatter.convertToDate_ISO(jsonSadImportSpecificTopicRecord.getSifid());
+				jsonSadImportSpecificTopicRecord.setSifid(dateSifidISO);
+			}else{
+				jsonSadImportSpecificTopicRecord.setSifid("99999999");
+			}
+			
 		}
 		if(jsonSadImportSpecificTopicRecord.getSidtg()!=null){
 			dateSidtgISO = this.dateFormatter.convertToDate_ISO(jsonSadImportSpecificTopicRecord.getSidtg());
@@ -1658,8 +1663,12 @@ public class SadImportHeaderController {
 		
 		if(jsonSadImportSpecificTopicRecord!=null){
 			if(jsonSadImportSpecificTopicRecord.getSifid()!=null){
-				dateSifiNO = this.dateFormatter.convertToDate_NO(jsonSadImportSpecificTopicRecord.getSifid());
-				jsonSadImportSpecificTopicRecord.setSifid(dateSifiNO);
+				if("999999".equals(jsonSadImportSpecificTopicRecord.getSifid()) || "99999999".equals(jsonSadImportSpecificTopicRecord.getSifid())){
+					jsonSadImportSpecificTopicRecord.setSifid("999999");
+				}else{
+					dateSifiNO = this.dateFormatter.convertToDate_NO(jsonSadImportSpecificTopicRecord.getSifid());
+					jsonSadImportSpecificTopicRecord.setSifid(dateSifiNO);
+				}
 			}
 			
 			if(jsonSadImportSpecificTopicRecord.getSidtg()!=null){
