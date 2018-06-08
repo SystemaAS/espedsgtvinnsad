@@ -45,6 +45,8 @@ import no.systema.tvinn.sad.sadimport.url.store.SadImportUrlDataStore;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportSpecificTopicContainer;
 
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportSpecificTopicRecord;
+import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportSpecificTopicSendParametersContainer;
+import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportSpecificTopicSendParametersRecord;
 import no.systema.tvinn.sad.sadimport.service.SadImportSpecificTopicService;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportTopicCopiedFromTransportUppdragContainer;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportTopicCopiedContainer;
@@ -363,6 +365,8 @@ public class SadImportOmberegningController {
 					    	}else{
 					    		//Update successfully done!
 					    		logger.info("[INFO] Record successfully updated, OK ");
+					    		//get SEND-parameters
+					    		this.fetchSendParameters(appUser, jsonSadImportSpecificTopicRecord);
 					    		//put domain objects
 					    		this.setDomainObjectsInView(session, model, jsonSadImportSpecificTopicRecord, totalItemLinesObject, omberegningFlag, omberegningDate, omberegningType );
 					    		if(totalItemLinesObject.getSumOfAntalItemLines()>0 || this.ACTIVE_INNSTIKK_CODE.equals(jsonSadImportSpecificTopicRecord.getSimi())){
@@ -413,6 +417,40 @@ public class SadImportOmberegningController {
 	    	return successView;
 		}
 	}
+	/**
+	 * 
+	 * @param appUser
+	 * @param headerRecord
+	 */
+	public void fetchSendParameters(SystemaWebUser appUser, JsonSadImportSpecificTopicRecord headerRecord){
+		//---------------------------
+		//get BASE URL = RPG-PROGRAM
+        //---------------------------
+		String BASE_URL = SadImportUrlDataStore.SAD_IMPORT_BASE_FETCH_SPECIFIC_TOPIC_SEND_PARAMS_URL;
+		//-------------------
+		//add URL-parameter 
+		//-------------------
+		StringBuffer urlRequestParamsKeys = new StringBuffer();
+		urlRequestParamsKeys.append("user=" + appUser.getUser());
+		urlRequestParamsKeys.append("&avd=" + headerRecord.getSiavd() + "&opd=" + headerRecord.getSitdn());
+		
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+    	logger.info("URL PARAMS: " + urlRequestParamsKeys.toString());
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
+		
+    	if(jsonPayload!=null){
+    		JsonSadImportSpecificTopicSendParametersContainer container = this.sadImportSpecificTopicService.getSadImportSpecificTopicSendParametersContainer(jsonPayload);
+    		if(container!=null){
+    			for (JsonSadImportSpecificTopicSendParametersRecord record : container.getGetcmn()){
+    				//logger.info("M3039e:" + record.getM3039e());
+    				headerRecord.setSendParametersRecord(record);
+    			}
+    		}
+    	}
+	
+}
 
 	/**
 	 * 
@@ -1060,7 +1098,6 @@ public class SadImportOmberegningController {
 		record.setO2_sist(omberegningFlag);
 		record.setO2_sidt(omberegningDate);
 		record.setO2_simf(omberegningType);
-		
 				
 		model.put(TvinnSadConstants.DOMAIN_RECORD, record);
 		//put the header topic in session for the coming item lines

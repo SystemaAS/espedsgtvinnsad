@@ -128,6 +128,12 @@ public class SadImportHeaderValidator implements Validator {
 				//------
 				//dates 
 				//------
+				if(strMgr.isNotNull(record.getSidtg())){
+					if(!dateValidator.validateDate(record.getSidtg(), DateValidator.DATE_MASK_NO)){
+						errors.rejectValue("sidtg", "systema.tvinn.sad.import.header.error.rule.invalidDeklGodkantDate"); 	
+					}
+				}
+				
 				if(strMgr.isNotNull(record.getSifid()) && !"999999".equals(record.getSifid())){
 					if(!dateValidator.validateDate(record.getSifid(), DateValidator.DATE_MASK_NO)){
 						errors.rejectValue("sifid", "systema.tvinn.sad.import.header.error.rule.invalidFaktDate"); 	

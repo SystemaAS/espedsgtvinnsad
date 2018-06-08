@@ -379,10 +379,10 @@
 			 				<b>1.2</b><font class="text16RedBold" >*</font><span title="sidp">&nbsp;Eksped.type</span>
 			 				</td>
 				 			<td>
-				 				<select class="inputTextMediumBlueMandatoryField" name="sidp" id="sidp" >
+				 				<select class="inputTextMediumBlueMandatoryField" name="sidp" id="sidp" size="1" >
 				 				  <option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.ekspedisjonstyperImportCodeList}" >
-					 				  		<option value="${record.zkod}"<c:if test="${model.record.sidp == record.zkod}"> selected </c:if> >${record.zkod}</option>
+					 				  		<option value="${record.zkod}" title="${record.ztxt}"  <c:if test="${model.record.sidp == record.zkod}"> selected </c:if> >${record.zkod}</option>
 										</c:forEach>  
 								</select>
 				 			</td>
@@ -456,10 +456,10 @@
 				 				<input type="text" class="inputText" name="h_xref" id="h_xref" size="15" maxlength="35" value="${model.record.h_xref}">
 			 				</td>
 				 			<td class="text14" >&nbsp;
-		 						<span title="sidtg" id="v_sidtg" class="validation">Dekl. godj.dato&nbsp;</span>
+		 						<span title="sidtg" id="v_sidtg" class="validation">Dekl. godkj.dato&nbsp;</span>
 				 			</td>
 			 				<td class="text14" align="left">
-			 					<input readonly type="text" class="inputTextReadOnly" name="sidtg" id="sidtg" size="12" maxlength="8" value="${model.record.sidtg}">
+			 					<input type="text" class="inputTextMediumBlue" name="sidtg" id="sidtg" size="12" maxlength="6" value="${model.record.sidtg}">
 		            			</td>
 				 		</tr>
 				 		<tr>	
@@ -467,13 +467,13 @@
 		 						<span title="sitll" id="v_sitll" >Løpenr.&nbsp;</span>
 			 				</td>
 			 				<td class="text14" align="left">
-			            			<input readonly type="text" class="inputTextReadOnly" name="sitll" id="sitll" size="12" maxlength="10" value="${model.record.sitll}">
+			            			<input type="text" class="inputTextMediumBlue" name="sitll" id="sitll" size="12" maxlength="10" value="${model.record.sitll}">
 		            			</td>
 		            			<td class="text14">&nbsp;
 		 						<span title="sitle" id="v_sitle" >Ekspsted&nbsp;</span>
 			 				</td>
 			 				<td class="text14" align="left">
-			            			<input readonly type="text" class="inputTextReadOnly" name="sitle" id="sitle" size="12" maxlength="6" value="${model.record.sitle}">
+			            			<input type="text" class="inputTextMediumBlue" name="sitle" id="sitle" size="12" maxlength="6" value="${model.record.sitle}">
 		            			</td>
 		            			
 		 				</tr>	
@@ -851,8 +851,8 @@
 							            <span title="sitlf"><font class="text16RedBold" >*</font>Telefon</span></td>
 							        </tr>
 							        <tr>
-							            <td align="left"><input readonly type="text" class="inputTextReadOnly" name="sinad" id="sinad" size="35" maxlength="30" value="${model.record.sinad}"></td>
-							            <td align="left"><input readonly type="text" class="inputTextReadOnly" name="sitlf" id="sitlf" size="15" maxlength="12" value="${model.record.sitlf}"></td>
+							            <td align="left"><input  type="text" class="inputTextMediumBlue" name="sinad" id="sinad" size="35" maxlength="30" value="${model.record.sinad}"></td>
+							            <td align="left"><input  type="text" class="inputTextMediumBlue" name="sitlf" id="sitlf" size="15" maxlength="12" value="${model.record.sitlf}"></td>
 							            
 							        </tr>
 							        
@@ -1714,7 +1714,8 @@
 					            </td>
 					        </tr>
 					       <tr height="2"><td></td></tr> 
-					       <c:if test="${ model.record.sist == 'E' || model.record.sist == 'K' || model.record.sist == 'Å' || empty  model.record.sist }"> 
+					       
+					       <%-- <c:if test="${ model.record.sist == 'E' || model.record.sist == 'K' || model.record.sist == 'Å' || empty  model.record.sist }">  --%> 
 						   		<c:if test="${ empty model.record.sitll }"> 
 							        <tr>
 							        	<td valign="top" class="text14" colspan="2">
@@ -1738,7 +1739,7 @@
 							        	</td>
 							        </tr>
 						        </c:if>
-					        </c:if>
+					        <%-- </c:if>  --%>
 					        
 					        
 							<tr height="20"><td>&nbsp;</td></tr>

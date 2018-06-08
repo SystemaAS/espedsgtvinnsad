@@ -1644,32 +1644,32 @@
 									<%-- When Tullverket has answered, the legend should be protected and not updateable --%>
 									<c:choose>
 										<c:when test="${empty model.record.om_sift11}">
-											<input type="text" class="inputTextMediumBlueMandatoryField" name="om_sift01" id="om_sift01" size="66" maxlength="65" value="${model.record.om_sift01}">
+											<input type="text" class="inputTextMediumBlueMandatoryField" name="om_sift01" id="om_sift01" size="71" maxlength="70" value="${model.record.om_sift01}">
 				 						</c:when>
 				 						<c:otherwise>
-				 							<input readonly type="text" class="inputTextReadOnly" size="66" maxlength="65" value="${model.record.om_sift01}">
+				 							<input readonly type="text" class="inputTextReadOnly" size="71" maxlength="70" value="${model.record.om_sift01}">
 				 						</c:otherwise>
 			 						</c:choose>
 			 					</td>
 							</tr>	
 							<tr>
 								<td colspan="2" class="text14">
-			 						<input type="text" class="inputTextMediumBlue" name="om_sift02" id="om_sift02" size="66" maxlength="65" value="${model.record.om_sift02}">
+			 						<input type="text" class="inputTextMediumBlue" name="om_sift02" id="om_sift02" size="71" maxlength="70" value="${model.record.om_sift02}">
 			 					</td>
 							</tr>
 							<tr>
 								<td colspan="2" class="text14">
-			 						<input type="text" class="inputTextMediumBlue" name="om_sift03" id="om_sift03" size="66" maxlength="65" value="${model.record.om_sift03}">
+			 						<input type="text" class="inputTextMediumBlue" name="om_sift03" id="om_sift03" size="71" maxlength="70" value="${model.record.om_sift03}">
 			 					</td>
 							</tr>
 							<tr>
 								<td colspan="2" class="text14">
-			 						<input type="text" class="inputTextMediumBlue" name="om_sift04" id="om_sift04" size="66" maxlength="65" value="${model.record.om_sift04}">
+			 						<input type="text" class="inputTextMediumBlue" name="om_sift04" id="om_sift04" size="71" maxlength="70" value="${model.record.om_sift04}">
 			 					</td>
 							</tr>
 							<tr>
 								<td colspan="2" class="text14">
-			 						<input type="text" class="inputTextMediumBlue" name="om_sift05" id="om_sift05" size="66" maxlength="65" value="${model.record.om_sift05}">
+			 						<input type="text" class="inputTextMediumBlue" name="om_sift05" id="om_sift05" size="71" maxlength="70" value="${model.record.om_sift05}">
 			 					</td>
 							</tr>
 							<tr height="10"><td class="text">&nbsp;</td> </tr>
@@ -1961,27 +1961,27 @@
 					<tr>
 						<td class="text14" align="left" title="m3039e">Til ekspedisjonsenhet</td>
 						<td class="text14MediumBlue">
-							<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue"  name="m3039e" id="m3039e" size="8" maxlength="6" value="${Xmodel.record.sendParametersRecord.m3039e}">
+							<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue"  name="m3039e" id="m3039e" size="8" maxlength="6" value="${model.record.sendParametersRecord.m3039e}">
 						</td>
 					</tr>
 					<tr>
 						<td class="text14" align="left" title="m2005b">Ønsket behandlingsdato</td>
 						<td class="text14MediumBlue">
-							<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue"  name="m2005b" id="m2005b" size="8" maxlength="6" value="${Xmodel.record.sendParametersRecord.m2005b}">
+							<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue"  name="m2005b" id="m2005b" size="8" maxlength="6" value="${model.record.sendParametersRecord.m2005b}">
 						</td>
 					</tr>
 					<tr>
 						<td class="text14" align="left" title="m5004d">Depositum beløp</td>
 						<td class="text14MediumBlue">
-							<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue"  name="m5004d" id="m5004d" size="12" maxlength="10" value="${Xmodel.record.sendParametersRecord.m5004d}">
+							<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue"  name="m5004d" id="m5004d" size="12" maxlength="10" value="${model.record.sendParametersRecord.m5004d}">
 						</td>
 					</tr>
 					<tr>
 						<td class="text14" align="left" title="mven">Ventegrupe</td>
 						<td class="text14MediumBlue">
 							<select class="selectMediumBlueE2" name="mven" id="mven">
-			            		<option value="" <c:if test="${empty Xmodel.record.sendParametersRecord.mven}"> selected </c:if> >Nej</option>
-			            		<option value="1" <c:if test="${Xmodel.record.sendParametersRecord.mven == '1'}"> selected </c:if> >Ja</option>
+			            		<option value="" <c:if test="${empty model.record.sendParametersRecord.mven}"> selected </c:if> >Nej</option>
+			            		<option value="1" <c:if test="${model.record.sendParametersRecord.mven == '1'}"> selected </c:if> >Ja</option>
 							</select>
 						</td>
 					</tr>
@@ -1989,8 +1989,8 @@
 						<td class="text14" align="left" title="m0035">Testekode</td>
 						<td class="text14MediumBlue">
 							<select class="selectMediumBlueE2" name="m0035" id="m0035">
-			            		<option value="1" <c:if test="${Xmodel.record.sendParametersRecord.m0035 == '1'}"> selected </c:if> >Test</option>
-			            		<option value="" <c:if test="${empty Xmodel.record.sendParametersRecord.m0035}"> selected </c:if> >Prod</option>
+			            		<option value="1" <c:if test="${model.record.sendParametersRecord.m0035 == '1'}"> selected </c:if> >Test</option>
+			            		<option value="" <c:if test="${empty model.record.sendParametersRecord.m0035}"> selected </c:if> >Prod</option>
 							</select>
 						</td>
 					</tr>
@@ -1998,8 +1998,8 @@
 						<td class="text14" align="left" title="m9n01">Eksped.prioritet</td>
 						<td class="text14MediumBlue">
 							<select class="selectMediumBlueE2" name="m9n01" id="m9n01">
-			            		<option value="1" <c:if test="${empty Xmodel.record.sendParametersRecord.m9n01 || model.record.sendParametersRecord.m9n01 == '1'}"> selected </c:if> >Express</option>
-			            		<option value="2" <c:if test="${not empty Xmodel.record.sendParametersRecord.m9n01 && model.record.sendParametersRecord.m9n01 != '1'}"> selected </c:if> >Annen</option>
+			            		<option value="1" <c:if test="${empty model.record.sendParametersRecord.m9n01 || model.record.sendParametersRecord.m9n01 == '1'}"> selected </c:if> >Express</option>
+			            		<option value="2" <c:if test="${not empty model.record.sendParametersRecord.m9n01 && model.record.sendParametersRecord.m9n01 != '1'}"> selected </c:if> >Annen</option>
 							</select>
 						</td>
 					</tr>

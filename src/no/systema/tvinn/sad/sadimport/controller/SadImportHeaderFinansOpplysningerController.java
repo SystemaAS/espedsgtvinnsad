@@ -34,7 +34,7 @@ import no.systema.main.context.TdsServletContext;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.JsonDebugger;
-
+import no.systema.main.util.StringManager;
 
 import no.systema.tvinn.sad.sadimport.service.SadImportSpecificTopicService;
 
@@ -83,7 +83,7 @@ public class SadImportHeaderFinansOpplysningerController {
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private SadImportCalculator sadImportCalculator = new SadImportCalculator();
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
-		
+	private StringManager strMgr = new StringManager();	
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	private final String NOT_FOUND = "NOT FOUND";
 	private final String MATCH = "MATCH";
@@ -258,7 +258,8 @@ public class SadImportHeaderFinansOpplysningerController {
 				    	}else{
 				    		//Update succefully done!
 				    		logger.info("[INFO] Valid STEP[2] Update -- Record successfully updated, OK ");
-				    		//put domain objects (it is not necessary since the fetch below (onFetch) will clean this up anyway)
+				    		//clear record id in order to apply default logic to the next new line
+				    		recordToValidate.setSftxt(null);
 				    	}
 					}else{
 						rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on CREATE, at tuid, syop generation : " + rpgReturnResponseHandler.getErrorMessage());
@@ -326,30 +327,20 @@ public class SadImportHeaderFinansOpplysningerController {
 	    		jsonSadImportTopicFinansOpplysningerContainer.setCalculatedValidCurrency(sumFaktTotalRecord.getTot_vk28());
 	    		jsonSadImportTopicFinansOpplysningerContainer.setCalculatedItemLinesTotalAmount(sumFaktTotalRecord.getTot_bl28());
 	    		
-	    		/*OBSOLETE SECTION. Has been repalced by service AS400 above: this.getInvoiceTotalFromInvoices...
-	    		//Set the common currency code for all invoices (if more than one)
-	    		jsonSadImportTopicFinansOpplysningerContainer.setCalculatedValidCurrency(this.sadImportCalculator.getFinalCurrency(jsonSadImportTopicFinansOpplysningerContainer));
 	    		
-	    		Double calculatedItemLinesTotalAmount = this.sadImportCalculator.getItemLinesTotalAmount(jsonSadImportTopicFinansOpplysningerContainer);
-	    		Double diffItemLinesTotalAmountWithInvoiceTotalAmount = this.sadImportCalculator.getDiffBetweenCalculatedTotalAmountAndTotalAmount(invoiceTotalAmount, calculatedItemLinesTotalAmount);
-	    		logger.info("CalculatedItemLinesTotalAmount:" + calculatedItemLinesTotalAmount);
-	    		logger.info("diffItemLinesTotalAmountWithInvoiceTotalAmount:" + diffItemLinesTotalAmountWithInvoiceTotalAmount);
-	    		jsonSadImportTopicFinansOpplysningerContainer.setCalculatedItemLinesTotalAmount(calculatedItemLinesTotalAmount);
-	    		jsonSadImportTopicFinansOpplysningerContainer.setDiffItemLinesTotalAmountWithInvoiceTotalAmount(diffItemLinesTotalAmountWithInvoiceTotalAmount);
-				 */   
 	    	}
 	    	//drop downs populated from back-end
 	    	this.setCodeDropDownMgr(appUser, model, headerRecord);
 	    		
     		//drop downs populated from a txt file
-    		this.setDomainObjectsForListInView(model, jsonSadImportTopicFinansOpplysningerContainer);
+    		this.setDomainObjectsForListInView(model, jsonSadImportTopicFinansOpplysningerContainer, recordToValidate);
 			//this next step is necessary for the default values on "create new" record
     		if(bindingErrorsExist){
-    			this.setDefaultDomainItemRecordInView(model, jsonSadImportTopicFinansOpplysningerContainer, recordToValidate);
+    			this.setDefaultDomainItemRecordInView(model, jsonSadImportTopicFinansOpplysningerContainer, recordToValidate, bindingErrorsExist);
     			model.put("lineId", lineId);
     			model.put("action", action);
     		}else{
-    			this.setDefaultDomainItemRecordInView(model, jsonSadImportTopicFinansOpplysningerContainer, null);
+    			this.setDefaultDomainItemRecordInView(model, jsonSadImportTopicFinansOpplysningerContainer, recordToValidate, bindingErrorsExist);
     		}
 	    	successView.addObject("model",model);
 			//successView.addObject(Constants.EDIT_ACTION_ON_TOPIC, Constants.ACTION_FETCH);
@@ -379,12 +370,20 @@ public class SadImportHeaderFinansOpplysningerController {
 	 * @param container
 	 * 
 	 */
-	private void setDomainObjectsForListInView(Map model, JsonSadImportTopicFinansOpplysningerContainer container){
+	private void setDomainObjectsForListInView(Map model, JsonSadImportTopicFinansOpplysningerContainer container, JsonSadImportTopicFinansOpplysningerRecord recordToValidate){
 		List list = new ArrayList();
 		if(container!=null){
+			int counter = 1;
 			for (JsonSadImportTopicFinansOpplysningerRecord record : container.getInvoicList()){
 				this.adjustDatesOnFetch(record);
 				list.add(record);
+				//fill in default values with first item line values since it is mostly the norm for the rest of lines (to help end-user)
+				if(counter==1){
+					recordToValidate.setSfdt(record.getSfdt());
+					recordToValidate.setSfvk28(record.getSfvk28());
+					recordToValidate.setSfkr28(record.getSfkr28());
+				}
+				counter++;
 			}
 		}
 		model.put(TvinnSadConstants.DOMAIN_LIST, list);
@@ -409,10 +408,10 @@ public class SadImportHeaderFinansOpplysningerController {
 	 * @param recordToValidate
 	 * 
 	 */
-	private void setDefaultDomainItemRecordInView(Map model, JsonSadImportTopicFinansOpplysningerContainer container, JsonSadImportTopicFinansOpplysningerRecord recordToValidate){
+	private void setDefaultDomainItemRecordInView(Map model, JsonSadImportTopicFinansOpplysningerContainer container, JsonSadImportTopicFinansOpplysningerRecord recordToValidate, boolean bindingErrorsExist){
 		List list = new ArrayList();
 		JsonSadImportTopicFinansOpplysningerRecord defaultRecord = new JsonSadImportTopicFinansOpplysningerRecord();
-		
+		logger.info(recordToValidate.getSfvk28());
 		if(container!=null){
 			/*	
 			int lineNr = 0;
@@ -424,11 +423,18 @@ public class SadImportHeaderFinansOpplysningerController {
 			}
 			*/
 			//meaning that there were validation errors
-			if(recordToValidate!=null){
+			if(bindingErrorsExist){
 				defaultRecord = recordToValidate;//in order to retain the original values before the validation errors
 				model.put(TvinnSadConstants.DOMAIN_RECORD, defaultRecord);
 				
 			}else{
+				//this means that there is at least one-item line with values to user as default values
+				if(strMgr.isNull(recordToValidate.getSftxt()) && strMgr.isNotNull(recordToValidate.getSfdt())){
+					defaultRecord.setSfdt(recordToValidate.getSfdt());
+					defaultRecord.setSfvk28(recordToValidate.getSfvk28());
+					defaultRecord.setSfkr28(recordToValidate.getSfkr28());
+				}
+				//
 				model.put(TvinnSadConstants.DOMAIN_RECORD, defaultRecord);				
 			}
 		}

@@ -9,6 +9,9 @@
   	  jq.blockUI({ css: { fontSize: '22px' }, message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
     }
     
+  	jq( function() {
+  	    jq( document ).tooltip();
+  	 });
     
   	//Overlay on tab (to mark visually a delay...)
     jq(function() {
@@ -151,10 +154,15 @@
 	  });
     });
   	jq(function() {
+  	  jq("#sidtg").datepicker({ 
+  		  dateFormat: 'ddmmy'  
+  	  });
+  	});
+  	jq(function() {
   	  jq("#m2005b").datepicker({ 
   		  dateFormat: 'ddmmy'  
   	  });
-      });
+  	});
   	
   	//onChange avd list
 	jq(function() { 

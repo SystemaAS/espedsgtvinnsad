@@ -180,12 +180,16 @@
     	  "dom": '<"top">t<"bottom"f><"clear">',
   		  "scrollY":    "150px",
   		  "scrollCollapse":  true,
+  		  "tabIndex": -1,
   		  "lengthMenu": [ 25, 50]
   	  });
       //event on input field for search
       jq('input.tblInvoices_filter').on( 'keyup click', function () {
       		filterGlobal();
       });
+      
+      jq('#sftxt').focus();
+      
   	
     });
 
