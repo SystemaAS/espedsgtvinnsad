@@ -5,14 +5,14 @@
     	  jq.blockUI({ css: { fontSize: '22px' }, message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
      }	
 
-	/*tooltip for jquery in order to fix all "title" in dropdowns ... */
-  	jq( function() {
+	/*tooltip for jquery in order to fix all "title" in dropdowns ...
+	jq( function() {
   	    jq( document ).tooltip({
   	      track: true
   	    });
   	 
   	 });
-    
+    */
 
 	var langMap = {
 			   'EN' : 'English',
