@@ -26,6 +26,7 @@
 	.ui-timepicker-rtl dl { text-align: right; padding: 0 5px 0 0; }
 	.ui-timepicker-rtl dl dt{ float: right; clear: right; }
 	.ui-timepicker-rtl dl dd { margin: 0 40% 10px 10px; }
+	
 	</style>
 	
 <table width="100%" cellspacing="0" border="0" cellpadding="0">

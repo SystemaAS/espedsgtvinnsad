@@ -9,10 +9,6 @@
   	  jq.blockUI({ css: { fontSize: '22px' }, message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
     }
     
-  	jq( function() {
-  	    jq( document ).tooltip();
-  	 });
-    
   	//Overlay on tab (to mark visually a delay...)
     jq(function() {
       jq('#alinkTopicList').click(function() { 
