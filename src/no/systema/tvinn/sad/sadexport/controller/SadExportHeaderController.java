@@ -887,13 +887,30 @@ public class SadExportHeaderController {
 		
 		RpgReturnResponseHandler rpgReturnResponseHandler = new RpgReturnResponseHandler();
 		
-		//---------------------------------
-		//Crucial request parameters (Keys
-		//---------------------------------
-		String opd = request.getParameter("currentOpd");
-		String avd = request.getParameter("currentAvd");
-		String newStatus = request.getParameter("selectedStatus");
+		//-------------------------
+		//Request parameters
+		//-------------------------
+		String opd = null; //request.getParameter("currentOpd");
+		String avd = null; //request.getParameter("currentAvd");
+		String newStatus = null; //request.getParameter("selectedStatus");
 		
+		Enumeration requestParameters = request.getParameterNames();
+	    while (requestParameters.hasMoreElements()) {
+	        String element = (String) requestParameters.nextElement();
+	        String value = request.getParameter(element);
+	        if (element != null && value != null) {
+        		logger.info("####################################################");
+    			logger.info("param Name : " + element + " value: " + value);
+    			if(element.startsWith("currentAvd")){
+    				avd = value;
+    			}else if(element.startsWith("currentOpd")){
+    				opd = value;
+    			}else if(element.startsWith("selectedStatus")){
+    				newStatus = value;
+    			}
+    		}
+    	}
+			    
 		Map model = new HashMap();
 		
 		if(appUser==null){
@@ -913,26 +930,26 @@ public class SadExportHeaderController {
 			String urlRequestParams = urlRequestParamsKeys;
 			
 			logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-		    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
-		    	logger.info("URL PARAMS: " + urlRequestParams);
-		    	//----------------------------------------------------------------------------
-		    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
-		    	//----------------------------------------------------------------------------
-		    	String rpgReturnPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+	    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+	    	logger.info("URL PARAMS: " + urlRequestParams);
+	    	//----------------------------------------------------------------------------
+	    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
+	    	//----------------------------------------------------------------------------
+	    	String rpgReturnPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
 			//Debug --> 
-		    	logger.info("Checking errMsg in rpgReturnPayload" + rpgReturnPayload);
-		    	//we must evaluate a return RPG code in order to know if the Update was OK or not
-		    	rpgReturnResponseHandler.evaluateRpgResponseOnTopicUpdate(rpgReturnPayload);
-		    	if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){
-		    		rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on UPDATE: " + rpgReturnResponseHandler.getErrorMessage());
-		    		//TODO ERROR HANDLING HERE... stay in the same page ?
-		    	}else{
-		    		//Update succefully done!
-		    		logger.info("[INFO] Status successfully updated [changed status], OK ");
-		    		//put domain objects
-		    		//this.setDomainObjectsInView(session, model, jsonTdsImportSpecificTopicRecord);
-		    		//TODO SUCCESS should stay at the same side or not? Right now we go to the list of topics
-		    	}
+	    	logger.info("Checking errMsg in rpgReturnPayload" + rpgReturnPayload);
+	    	//we must evaluate a return RPG code in order to know if the Update was OK or not
+	    	rpgReturnResponseHandler.evaluateRpgResponseOnTopicUpdate(rpgReturnPayload);
+	    	if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){
+	    		rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on UPDATE: " + rpgReturnResponseHandler.getErrorMessage());
+	    		//TODO ERROR HANDLING HERE... stay in the same page ?
+	    	}else{
+	    		//Update succefully done!
+	    		logger.info("[INFO] Status successfully updated [changed status], OK ");
+	    		//put domain objects
+	    		//this.setDomainObjectsInView(session, model, jsonTdsImportSpecificTopicRecord);
+	    		//TODO SUCCESS should stay at the same side or not? Right now we go to the list of topics
+	    	}
 		}
 		return successView;
 	}

@@ -173,68 +173,76 @@
 	        <tr height="1"><td></td></tr> 
 			<tr>
 				<td>
-				<table width="100%" cellspacing="0" border="0" cellpadding="0">
+				<table id="containerdatatableTable" width="100%" cellspacing="2" align="left" >
+				<tr>
+				<td class="text11">
+							
+				
+				<table id="mainList" class="display compact cell-border" >
 					<thead>
 					<tr class="tableHeaderField" height="20" >
-	                    <th class="tableHeaderFieldFirst">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.avd"/>&nbsp;</th>   
-	                    <th class="tableHeaderField" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.signatur"/>&nbsp;</th>
+	                    <th class="tableHeaderFieldFirst"><spring:message code="systema.tvinn.sad.export.list.search.label.avd"/></th>   
+	                    <th class="tableHeaderField" nowrap><spring:message code="systema.tvinn.sad.export.list.search.label.signatur"/></th>
 	                    <th class="tableHeaderField" nowrap><spring:message code="systema.tvinn.sad.export.list.search.label.update"/></th>
-	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.arende"/>&nbsp;</th>
-	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.extrefnr"/>&nbsp;</th>
-	                    <th class="tableHeaderField" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.datum"/>&nbsp;</th>
-	                    <th class="tableHeaderField" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.lopenr"/>&nbsp;</th>
-	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.status"/>&nbsp;</th>
-	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.avsandare"/>&nbsp;</th>
-	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.mottagare"/>&nbsp;</th>
-	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.godsnr"/>&nbsp;</th>
-	                    <th class="tableHeaderField" align="center">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.innstikk"/>&nbsp;</th>
-	                    <th class="tableHeaderField" align="center">&nbsp;EP&nbsp;</th>
+	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.export.list.search.label.arende"/></th>
+	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.export.list.search.label.extrefnr"/></th>
+	                    <th class="tableHeaderField" nowrap><spring:message code="systema.tvinn.sad.export.list.search.label.datum"/></th>
+	                    <th class="tableHeaderField" nowrap><spring:message code="systema.tvinn.sad.export.list.search.label.lopenr"/></th>
+	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.export.list.search.label.status"/></th>
+	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.export.list.search.label.avsandare"/></th>
+	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.export.list.search.label.mottagare"/></th>
+	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.export.list.search.label.godsnr"/></th>
+	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.export.list.search.label.innstikk"/></th>
+	                    <th class="tableHeaderField">EP</th>
 	                     <%-- START Omberegning --%>
-	                    <th class="tableHeaderFieldOmberegning" align="center">&nbsp;Omber&nbsp;</th>
-	                    <th class="tableHeaderFieldOmberegning" align="center">&nbsp;St&nbsp;</th>
-	                    <th class="tableHeaderFieldOmberegning" align="center">&nbsp;Dato&nbsp;</th>
-	                    <th class="tableHeaderFieldOmberegning" align="center">&nbsp;Løpenr&nbsp;</th>
+	                    <th class="tableHeaderFieldOmberegning">Omber&nbsp;</th>
+	                    <th class="tableHeaderFieldOmberegning">St&nbsp;</th>
+	                    <th class="tableHeaderFieldOmberegning">Dato&nbsp;</th>
+	                    <th class="tableHeaderFieldOmberegning">Løpenr&nbsp;</th>
 	                    <%-- END Omberegning --%>
-	                    <th class="tableHeaderField" align="center">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.notisblock"/>&nbsp;</th>	                    
+	                    <th class="tableHeaderField" >&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.notisblock"/>&nbsp;</th>	                    
 	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.kopieraArende"/></th>
+	                    <th class="tableHeaderField" nowrap>Slett</th>
+	                    
 	                </tr>  
 	                </thead>
 	                <tbody>   
 		            <c:forEach items="${list}" var="topic" varStatus="counter">    
-		               <c:choose>           
-		                   <c:when test="${counter.count%2==0}">
-		                       <tr class="tableRow" height="20" >
-		                   </c:when>
-		                   <c:otherwise>   
-		                       <tr class="tableOddRow" height="20" >
-		                   </c:otherwise>
-		               </c:choose>
-		               <td class="tableCellFirst" widtd="5%">&nbsp;${topic.avd}</td>
-		               <td class="tableCell" >&nbsp;${topic.sg}</td>
+		               <tr class="tableRow" height="20" >
+		               
+		               <td class="tableCellFirst" align="center"width="5%">${topic.avd}</td>
+		               <td class="tableCell" align="center">${topic.sg}</td>
 		               <td nowrap class="tableCell" align="center">
 	               	   		<a id="alinkCurrentdeaderId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadexport_edit.do?action=doFetch&avd=${topic.avd}&opd=${topic.opd}&sysg=${topic.sg}&setll=${topic.setll}&syst=${topic.status}&sydt=${topic.datum}&o2_sest=${topic.o2_sest}&o2_sedt=${topic.o2_sedt}&o2_semf=${topic.o2_semf}">
-	               				<img title="Oppdatera tolldekl." valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
-            					</a>
+	               				<c:choose>
+		               				<c:when test="${ topic.status == 'M' || empty  topic.status }">
+		               					<img title="Uppdatera ärende" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">
+		               				</c:when>
+		               				<c:otherwise>
+		               					<img title="Read" style="vertical-align:bottom;" src="resources/images/eye.png" height="18px" width="18px" border="0" alt="read">
+		               				</c:otherwise>
+	               				</c:choose>
+           					</a>
                		   </td>
-               		   <td class="tableCell" >&nbsp;
+               		   <td class="tableCell" align="center" width="5%" >
                		   		<a id="alinkCurrentdeaderOpdId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadexport_edit.do?action=doFetch&avd=${topic.avd}&opd=${topic.opd}&sysg=${topic.sg}&setll=${topic.setll}&syst=${topic.status}&sydt=${topic.datum}&o2_sest=${topic.o2_sest}&o2_sedt=${topic.o2_sedt}&o2_semf=${topic.o2_semf}">
-	               				&nbsp;${topic.opd}
+	               				${topic.opd}
 		               		</a>
 		               </td>
-		               <td class="tableCell" >&nbsp;${topic.h_xref}&nbsp;</td>
-		               <td class="tableCell" >&nbsp;${topic.datum}&nbsp;</td>
-		               <td class="tableCell" >&nbsp;${topic.setll}&nbsp;</td>
-		               <td class="tableCell" >&nbsp;<b>${topic.status}&nbsp;</b></td>
-		               <td class="tableCell" >&nbsp;${topic.avsNavn}&nbsp;</td>
-		               <td class="tableCell" >&nbsp;${topic.motNavn}&nbsp;</td>
-		               <td class="tableCell" >&nbsp;${topic.sign}&nbsp;</td>
-		               <td class="tableCell" align="center"><b>${topic.semi}&nbsp;</b></td>
-		               <td class="tableCell" >&nbsp;todo&nbsp;</td>
-		               <td class="tableCellOmberegning" >&nbsp;${topic.o2_semf}&nbsp;</td>
-		               <td class="tableCellOmberegning" >&nbsp;${topic.o2_sest}&nbsp;</td>
-		               <td class="tableCellOmberegning" >&nbsp;${topic.o2_sedt}&nbsp;</td>
-		               <td class="tableCellOmberegning" >&nbsp;${topic.o2_setll}&nbsp;</td>
-		               <td class="tableCell" align="left">&nbsp;
+		               <td class="tableCell" align="left" >${topic.h_xref}</td>
+		               <td class="tableCell" align="center" width="5%" >${topic.datum}</td>
+		               <td class="tableCell" align="center">${topic.setll}&nbsp;</td>
+		               <td class="tableCell" align="center" width="5%" ><b>${topic.status}&nbsp;</b></td>
+		               <td class="tableCell" align="left" >${topic.avsNavn}&nbsp;</td>
+		               <td class="tableCell" align="left" >${topic.motNavn}&nbsp;</td>
+		               <td class="tableCell" align="center" width="5%" >${topic.sign}&nbsp;</td>
+		               <td class="tableCell" align="center" width="5%" ><b>${topic.semi}&nbsp;</b></td>
+		               <td class="tableCell" align="center">todo&nbsp;</td>
+		               <td class="tableCellOmberegning" align="center">${topic.o2_semf}&nbsp;</td>
+		               <td class="tableCellOmberegning" align="center">${topic.o2_sest}</td>
+		               <td class="tableCellOmberegning" align="center">${topic.o2_sedt}</td>
+		               <td class="tableCellOmberegning" align="center">${topic.o2_setll}</td>
+		               <td class="tableCell" align="center">
 	               		 <a href="editNotisblock.do?action=doFetch&subsys=sade&avd=${topic.avd}&opd=${topic.opd}&sign=${topic.sg}">
 							<img title="Notisblokk til oppdrag" src="resources/images/largeTextContent.png" width="16px" height="16px" border="0" alt="notisblock">
 							<font class="text14MediumBlue" style="font-style: italic;">${topic.opd}</font>
@@ -285,10 +293,30 @@
 								</form>
 							</div>
 		               </td>
-		            </tr> 
+		               
+		               <td align="center" class="tableCell" >&nbsp;
+							<a class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
+								<img src="resources/images/delete.gif" border="0" alt="remove">
+							</a>
+							
+							<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
+								<form action="tvinnsadexport_updateStatus.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
+								 	<input type="hidden" name="currentAvd${counter.count}" id="currentAvd${counter.count}" value="${topic.avd}">
+								 	<input type="hidden" name="currentOpd${counter.count}" id="currentOpd${counter.count}" value="${topic.opd}">
+								 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="D">
+									<p class="text14" >Er du sikker på at du vil slette denne??</p>
+									
+								</form>
+							</div>
+		               </td>		               
+		            </tr>
 		            </c:forEach>
 		            </tbody>
 	            </table>
+	            </td>
+	            </tr>
+	            </table>
+	           
 			</td>	
 			</tr>
 		</table>
@@ -297,7 +325,7 @@
 		
     </c:if> 
     
-    		<tr>
+    	<tr>
 		<td>
 			<div id="dialogCopyFromTransportUppdrag" title="Dialog">
 				<form  action="tvinnsadexport_doFetchTopicFromTransportUppdrag.do" name="copyFromTransportUppdragForm" id="copyFromTransportUppdragForm" method="post">
@@ -335,8 +363,7 @@
 			</div>
 		</td>
 		</tr>
-		
-    
+	    
 </table>	
 		
 <!-- ======================= footer ===========================-->

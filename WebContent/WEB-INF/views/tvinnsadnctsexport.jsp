@@ -165,19 +165,24 @@
 	        <tr height="1"><td></td></tr> 
 			<tr>
 				<td>
-				<table width="100%" cellspacing="0" border="0" cellpadding="0">
+				<table id="containerdatatableTable" width="100%" cellspacing="2" align="left" >
+				<tr>
+				<td class="text11">
+							
+				
+				<table id="mainList" class="display compact cell-border" >
 					<thead>
 					<tr class="tableHeaderField" height="20" >
-	                    <th class="tableHeaderFieldFirst" align="left" >&nbsp;&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.avd"/></th>
-                		<th class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.signatur"/></th>
-                		<th class="tableHeaderField" align="center" >&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.update"/></th>
-                		<th class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.arende"/></th>
-                		<th class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.lrnNr"/></th>
-                		<th class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.mrnNr"/></th>
-                		<th class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.datum"/></th>
-                		<th class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.status"/></th>
-                		<th class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.mottagare"/></th>
-                		<th class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.bruttovikt"/></th>
+	                    <th class="tableHeaderFieldFirst" ><spring:message code="systema.tvinn.sad.ncts.export.list.search.label.avd"/></th>
+                		<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.ncts.export.list.search.label.signatur"/></th>
+                		<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.export.list.search.label.update"/></th>
+                		<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.ncts.export.list.search.label.arende"/></th>
+                		<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.ncts.export.list.search.label.lrnNr"/></th>
+                		<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.ncts.export.list.search.label.mrnNr"/></th>
+                		<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.ncts.export.list.search.label.datum"/></th>
+                		<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.ncts.export.list.search.label.status"/></th>
+                		<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.ncts.export.list.search.label.mottagare"/></th>
+                		<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.ncts.export.list.search.label.bruttovikt"/></th>
                 		<%--
                 		<td class="tableHeaderField">&nbsp;Kopiera Ärende&nbsp;</td>
 	                     --%>
@@ -188,32 +193,42 @@
 		           	<c:forEach items="${list}" var="topic" varStatus="counter">    
 		               <tr class="tableRow" height="20" >
 		                   
-		               <td class="tableCellFirst" width="5%">&nbsp;${topic.avd}</td>
-		               <td class="tableCell" width="5%">&nbsp;${topic.sign}</td>
+		               <td class="tableCellFirst" align="center" width="5%">${topic.avd}</td>
+		               <td class="tableCell" align="center" width="5%">${topic.sign}</td>
 		               <td class="tableCell" width="5%" align="center" >
-              	   	   		<c:if test="${empty topic.status || topic.status=='M' ||  topic.status=='G' ||  topic.status=='F'}">
-              	   	   			<%-- only M, null or G (garantifel) are editable in NCTS --%>
-              	   	   			<a id="alinkHeader" href="tvinnsadnctsexport_edit.do?action=doFetch&avd=${topic.avd}&opd=${topic.opd}&sysg=${topic.sign}&tuid=${topic.lrnNr}&syst=${topic.status}&sydt=${topic.datum}">
-	               					<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
-	               				</a>	
-	               			</c:if>
+		               		<c:choose>
+	               				<c:when test="${empty topic.status || topic.status=='M' ||  topic.status=='G' ||  topic.status=='F'}">
+	               					<a id="alinkHeader" href="tvinnsadnctsexport_edit.do?action=doFetch&avd=${topic.avd}&opd=${topic.opd}&sysg=${topic.sign}&tuid=${topic.lrnNr}&syst=${topic.status}&sydt=${topic.datum}">
+	               						<img title="Uppdatera ärende" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">
+	               					</a>
+	               				</c:when>
+	               				<c:otherwise>
+	               					<a id="alinkHeader" href="tvinnsadnctsexport_edit.do?action=doFetch&avd=${topic.avd}&opd=${topic.opd}&sysg=${topic.sign}&tuid=${topic.lrnNr}&syst=${topic.status}&sydt=${topic.datum}">
+	               						<img title="Read" style="vertical-align:bottom;" src="resources/images/eye.png" height="18px" width="18px" border="0" alt="read">
+	               					</a>
+	               				</c:otherwise>
+               				</c:choose>
 	               	   </td>
-               		   <td class="tableCell" width="10%" >&nbsp;
+               		   <td class="tableCell" align="center" width="5%" >
 	               	   		<a id="alinkHeader" href="tvinnsadnctsexport_edit.do?action=doFetch&avd=${topic.avd}&opd=${topic.opd}&sysg=${topic.sign}&tuid=${topic.lrnNr}&syst=${topic.status}&sydt=${topic.datum}">
-	               	   			&nbsp;&nbsp;${topic.opd}
+	               	   			${topic.opd}
 	               			</a>
                		   </td>
-		               <td class="tableCell" >&nbsp;${topic.lrnNr}</td>
-		               <td class="tableCell" >&nbsp;${topic.mrnNr}</td>
-		               <td class="tableCell" >&nbsp;${topic.datum}</td>
-		               <td class="tableCell" >&nbsp;<b>${topic.status}</b></td>
-		               <td class="tableCell" >&nbsp;${topic.motNavn}</td>
-		               <td class="tableCell" >&nbsp;${topic.bruttoVikt}</td>
+		               <td class="tableCell" align="left" width="5%" >${topic.lrnNr}</td>
+		               <td class="tableCell" align="left" width="5%" >${topic.mrnNr}</td>
+		               <td class="tableCell" align="center" width="5%" >${topic.datum}</td>
+		               <td class="tableCell" align="center" width="5%" ><b>${topic.status}</b></td>
+		               <td class="tableCell" align="left" >${topic.motnavn}</td>
+		               <td class="tableCell" align="right" width="5%" >${topic.bruttoVikt}</td>
     		           
 		            </tr> 
 		            </tbody>
 		            </c:forEach>
 	            </table>
+	            </td>
+	            </tr>
+	            </table>
+	            
 			</td>	
 			</tr>
 		</table>

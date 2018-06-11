@@ -179,20 +179,25 @@
 	        <tr height="1"><td></td></tr> 
 			<tr>
 				<td>
-				<table width="100%" cellspacing="0" border="0" cellpadding="0">
+				<table id="containerdatatableTable" width="100%" cellspacing="2" align="left" >
+				<tr>
+				<td class="text11">
+							
+				
+				<table id="mainList" class="display compact cell-border" >
 					<thead>
 					<tr class="tableHeaderField" height="20" >
-                    <td class="tableHeaderFieldFirst" align="left" >&nbsp;&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.avd"/></td>
-                		<td class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.signatur"/></td>
-                		<td class="tableHeaderField" align="center" >&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.update"/></td>
-                		<td class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.arende"/></td>
-                		<td class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.mrnNr"/></td>
-                		<td class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.datum"/></td>
-                		<td class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.status"/></td>
-                		<td class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.type"/></td>
-                		<td class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.ansvarig"/></td>
-                		<td class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.godsnr"/></td>
-                		<td class="tableHeaderField" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.list.search.label.frigivningsDatum"/></td>
+                    	<th class="tableHeaderFieldFirst" ><spring:message code="systema.tvinn.sad.ncts.import.list.search.label.avd"/></th>
+                		<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.ncts.import.list.search.label.signatur"/></th>
+                		<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.ncts.import.list.search.label.update"/></th>
+                		<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.ncts.import.list.search.label.arende"/></th>
+                		<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.ncts.import.list.search.label.mrnNr"/></th>
+                		<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.ncts.import.list.search.label.datum"/></th>
+                		<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.ncts.import.list.search.label.status"/></th>
+                		<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.ncts.import.list.search.label.type"/></th>
+                		<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.ncts.import.list.search.label.ansvarig"/></th>
+                		<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.ncts.import.list.search.label.godsnr"/></th>
+                		<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.ncts.import.list.search.label.frigivningsDatum"/></th>
                 		<%--
                 		<td class="tableHeaderField">&nbsp;Kopiera Ärende&nbsp;</td>
 	                 --%>    
@@ -202,14 +207,14 @@
 		           	<c:forEach items="${list}" var="record" varStatus="counter">    
 		              <tr class="tableRow" height="20" >
 		          
-		               <td class="tableCellFirst" width="5%">&nbsp;${record.avd}</td>
-		               <td class="tableCell" width="5%">&nbsp;${record.sign}</td>
-		               <td class="tableCell" width="5%" align="center" >
+		               <td class="tableCellFirst" align="center" width="5%">${record.avd}</td>
+		               <td class="tableCell" align="center" width="5%">${record.sign}</td>
+		               <td class="tableCell" align="center" width="5%" >
 		               		<c:choose>
 		               		<c:when test="${empty record.status || record.status == 'M' || record.status == 'F'}">
 	              	   	   		<span title="Angivelse er opdaterbar"></span>
-	            	   	   			<a href="tvinnsadnctsimport_edit.do?action=doFetch&avd=${record.avd}&opd=${record.opd}&status=${record.status}">
-	               					<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
+            	   	   			<a href="tvinnsadnctsimport_edit.do?action=doFetch&avd=${record.avd}&opd=${record.opd}&status=${record.status}">
+	               					<img src="resources/images/update.gif" border="0" alt="edit">
 	               				</a>
                				</c:when>
                				<c:otherwise>
@@ -217,7 +222,7 @@
 	               					<c:when test="${record.status == 'U' || record.status == 'H'}">
 		              	   	   			<span title="Losning er opdaterbar">
 		              	   	   			<a href="tvinnsadnctsimport_unloading_edit.do?action=doFetch&origo=list&avd=${record.avd}&sign=${record.sign}&opd=${record.opd}&status=${record.status}&datum=${record.datum}">
-											<img valign="bottom" src="resources/images/unloading.png" width="16" hight="16" border="0" alt="lossning - editable">					
+											<img src="resources/images/unloading.png" width="16" hight="16" border="0" alt="lossning - editable">					
 										</a>
 		              	   	   			</span>
 		               				</c:when>
@@ -228,12 +233,12 @@
                				</c:otherwise>
 	               			</c:choose>
 	               	   </td>
-               		   <td class="tableCell" width="10%" >&nbsp;
+               		   <td class="tableCell" align="center" width="5%" >
                		   		<c:choose>
 		               		<c:when test="${empty record.status || record.status == 'M' ||  record.status == 'F'}">
 	              	   	   		<span title="Angivelse er opdaterbar"></span>
 	            	   	   			<a href="tvinnsadnctsimport_edit.do?action=doFetch&avd=${record.avd}&opd=${record.opd}&status=${record.status}">
-	               					&nbsp;&nbsp;${record.opd}
+	               					${record.opd}
 	               				</a>
                				</c:when>
                				<c:otherwise>
@@ -241,34 +246,38 @@
 	               					<c:when test="${record.status == 'U' || record.status == 'H'}">
 		              	   	   			<span title="Lossning är uppdaterbar">
 		              	   	   			<a href="tvinnsadnctsimport_unloading_edit.do?action=doFetch&origo=list&avd=${record.avd}&sign=${record.sign}&opd=${record.opd}&status=${record.status}&datum=${record.datum}">
-											&nbsp;&nbsp;${record.opd}
+											${record.opd}
 										</a>
 		              	   	   			</span>
 		               				</c:when>
 		               				<c:otherwise>
 										<a href="tvinnsadnctsimport_edit.do?action=doFetch&avd=${record.avd}&opd=${record.opd}&status=${record.status}">
-											&nbsp;&nbsp;${record.opd}
+											${record.opd}
 										</a>		               				
 		               				</c:otherwise>
 	               				</c:choose>									
                				</c:otherwise>
 	               			</c:choose>
                		   </td>
-		               <td class="tableCell" >&nbsp;${record.mrnNr}</td>
-		               <td class="tableCell" >&nbsp;${record.datum}</td>
-		               <td class="tableCell" >&nbsp;<b>${record.status}</b></td>
-		               <td class="tableCell" >&nbsp;
+		               <td class="tableCell" align="left" >${record.mrnNr}</td>
+		               <td class="tableCell" align="center" width="5%" >${record.datum}</td>
+		               <td class="tableCell" align="center" width="5%" ><b>${record.status}</b></td>
+		               <td class="tableCell" align="center" width="5%" >
                				<c:if test="${record.forenklad == 'J'}">Forenklet</c:if>
 		               		<c:if test="${record.forenklad == 'N'}">Normal</c:if>
 		               </td>
-		               <td class="tableCell" >&nbsp;${record.ansNavn}</td>
-		               <td class="tableCell" >&nbsp;${record.godsNr}</td>
-		               <td class="tableCell" >&nbsp;${record.datumFr}</td>
+		               <td class="tableCell" align="left" >${record.ansNavn}</td>
+		               <td class="tableCell" align="left" >${record.godsNr}</td>
+		               <td class="tableCell" align="center" width="5%" >${record.datumFr}</td>
 		            </tr> 
 		            </c:forEach>
 		            </tbody>
 		            
 	            </table>
+	            </td>
+	            </tr>
+	            </table>
+	            
 			</td>	
 			</tr>
 		</table>

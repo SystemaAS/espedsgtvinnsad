@@ -897,12 +897,30 @@ public class SadImportHeaderController {
 		
 		RpgReturnResponseHandler rpgReturnResponseHandler = new RpgReturnResponseHandler();
 		
-		//---------------------------------
-		//Crucial request parameters (Keys
-		//---------------------------------
-		String opd = request.getParameter("currentOpd");
-		String avd = request.getParameter("currentAvd");
-		String newStatus = request.getParameter("selectedStatus");
+		//-------------------------
+		//Request parameters
+		//-------------------------
+		String opd = null; //request.getParameter("currentOpd");
+		String avd = null; //request.getParameter("currentAvd");
+		String newStatus = null; //request.getParameter("selectedStatus");
+		
+		Enumeration requestParameters = request.getParameterNames();
+	    while (requestParameters.hasMoreElements()) {
+	        String element = (String) requestParameters.nextElement();
+	        String value = request.getParameter(element);
+	        if (element != null && value != null) {
+        		logger.info("####################################################");
+    			logger.info("param Name : " + element + " value: " + value);
+    			if(element.startsWith("currentAvd")){
+    				avd = value;
+    			}else if(element.startsWith("currentOpd")){
+    				opd = value;
+    			}else if(element.startsWith("selectedStatus")){
+    				newStatus = value;
+    			}
+    		}
+    	}
+	    
 		
 		Map model = new HashMap();
 		

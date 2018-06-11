@@ -341,7 +341,7 @@
 														               <c:if test="${model.status == 'M' || empty model.status}">	
 															               <td class="text14" align="center" nowrap>
 															               	<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadimport_edit_items.do?action=doDelete&sign=${model.sign}&avd=${record.svavd}&opd=${record.svtdn}&lin=${record.svli}&fabl=${recordTopicTvinnSad.sibel3}">
-															               		<img valign="bottom" src="resources/images/delete.gif" border="0" alt="remove">
+															               		<img src="resources/images/delete.gif" border="0" alt="remove">
 															               	</a>	
 															               </td>
 														               </c:if>

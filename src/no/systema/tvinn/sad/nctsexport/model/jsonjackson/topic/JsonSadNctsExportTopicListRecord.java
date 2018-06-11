@@ -74,9 +74,9 @@ public class JsonSadNctsExportTopicListRecord extends JsonAbstractGrandFatherRec
 	public void setEksternref(String value) {  this.eksternref = value; }
 	public String getEksternref() { return this.eksternref;}
 	
-	private String motNavn = null;
-	public void setMotNavn(String value) {  this.motNavn = value; }
-	public String getMotNavn() { return this.motNavn;}
+	private String motnavn = null;
+	public void setMotnavn(String value) {  this.motnavn = value; }
+	public String getMotnavn() { return this.motnavn;}
 	
 	private String avsNavn = null;
 	public void setAvsNavn(String value) {  this.avsNavn = value; }
