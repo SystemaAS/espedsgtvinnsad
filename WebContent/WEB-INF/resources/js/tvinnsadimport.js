@@ -52,8 +52,8 @@
 			autoOpen: false,
 			maxWidth:500,
 			maxHeight: 400,
-			width: 350,
-			height: 220,
+			width: 500,
+			height: 280,
 			modal: true
 		});
 	  });
@@ -125,19 +125,8 @@
 	
   
   //----------------------------------------------------------------
-  //START Model dialog: "Delete tolldekl" (implicit "Update status"
+  //START Model dialog: "Delete tolldekl" (implicit "Update status")
   //----------------------------------------------------------------
-  //Initialize <div> here
-  jq(function() { 
-	  jq("#dialogUpdateStatus").dialog({
-		  autoOpen: false,
-		  maxWidth:500,
-          maxHeight: 400,
-          width: 350,
-          height: 220,
-		  modal: true
-	  });
-  });
   
   //Present dialog box onClick (href in parent JSP)
   jq(function() {

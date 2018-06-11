@@ -28,11 +28,16 @@ import org.springframework.web.bind.WebDataBinder;
 
 //application imports
 import no.systema.main.service.UrlCgiProxyService;
+import no.systema.main.service.general.notisblock.NotisblockService;
+import no.systema.main.url.store.MainUrlDataStore;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.DateTimeManager;
 import no.systema.main.util.JsonDebugger;
 import no.systema.main.util.NumberFormatterLocaleAware;
+import no.systema.main.util.StringManager;
 import no.systema.main.model.SystemaWebUser;
+import no.systema.main.model.jsonjackson.general.notisblock.JsonNotisblockContainer;
+import no.systema.main.model.jsonjackson.general.notisblock.JsonNotisblockRecord;
 import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelningContainer;
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelningRecord;
@@ -82,7 +87,7 @@ public class SadExportHeaderController {
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
 	private NumberFormatterLocaleAware numberFormatter = new NumberFormatterLocaleAware();	
-	
+	private StringManager strMgr = new StringManager();
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	private ApplicationContext context;
 	private String ACTIVE_INNSTIKK_CODE = "I";
@@ -878,6 +883,90 @@ public class SadExportHeaderController {
 	 * @return
 	 * 
 	 */
+	@RequestMapping(value="tvinnsadexport_updateStatus_deleteWithNotis.do")
+	public ModelAndView doUpdateStatusDeleteWithNotis(HttpSession session, HttpServletRequest request){
+		
+		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
+		appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_EXPORT);
+		ModelAndView successView = new ModelAndView("redirect:tvinnsadexport.do?action=doFind&sg=" + appUser.getTvinnSadSign());
+		
+		RpgReturnResponseHandler rpgReturnResponseHandler = new RpgReturnResponseHandler();
+		
+		//-------------------------
+		//Request parameters
+		//-------------------------
+		String opd = null; 
+		String avd = null;
+		String newStatus = null; 
+		String notisText = null; 
+		String today = new DateTimeManager().getCurrentDate_ISO();
+		String notisPart = "A"; //?
+		
+		Enumeration requestParameters = request.getParameterNames();
+	    while (requestParameters.hasMoreElements()) {
+	        String element = (String) requestParameters.nextElement();
+	        String value = request.getParameter(element);
+	        if (element != null && value != null) {
+        		logger.info("####################################################");
+    			logger.info("param Name : " + element + " value: " + value);
+    			if(element.startsWith("currentAvd")){
+    				avd = value;
+    			}else if(element.startsWith("currentOpd")){
+    				opd = value;
+    			}else if(element.startsWith("selectedStatus")){
+    				newStatus = value;
+    			}else if(element.startsWith("currentText")){
+    				notisText = value;
+    			}
+    		}
+    	}
+			    
+			    
+		Map model = new HashMap();
+		
+		if(appUser==null){
+			return this.loginView;
+		}else{
+			
+			//---------------------------
+			//get BASE URL = RPG-PROGRAM
+            //---------------------------
+			String BASE_URL = SadExportUrlDataStore.SAD_EXPORT_BASE_UPDATE_STATUS_URL;
+			
+			//-------------------
+			//add URL-parameter 
+			//-------------------
+			String urlRequestParamsKeys = this.getRequestUrlKeyParametersForUpdateStatus(avd, opd, newStatus, appUser);
+			//there are only key parameters in doSend. No other topic (record) specific parameters from GUI or such
+			String urlRequestParams = urlRequestParamsKeys;
+			
+			logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+	    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+	    	logger.info("URL PARAMS: " + urlRequestParams);
+	    	//----------------------------------------------------------------------------
+	    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
+	    	//----------------------------------------------------------------------------
+	    	String rpgReturnPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+			//Debug --> 
+	    	logger.info("Checking errMsg in rpgReturnPayload" + rpgReturnPayload);
+	    	//we must evaluate a return RPG code in order to know if the Update was OK or not
+	    	rpgReturnResponseHandler.evaluateRpgResponseOnTopicUpdate(rpgReturnPayload);
+	    	if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){
+	    		rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on UPDATE: " + rpgReturnResponseHandler.getErrorMessage());
+	    		//TODO ERROR HANDLING HERE... stay in the same page ?
+	    	}else{
+	    		//Update succefully done!
+	    		logger.info("[INFO] Status successfully updated [changed status], OK ");
+	    		//now create a notisblock text for this (if applicable)
+	    		String itemLineNumber = this.getNotisBlockNextItemLineNumber(appUser.getUser(), avd, opd) ;
+	    		if(strMgr.isNotNull(notisText)){
+	    			this.executeUpdateNotisBlock(appUser.getUser(), avd, opd, today, itemLineNumber, notisPart, notisText);
+	    		}
+	    	}
+		}
+		return successView;
+	}
+	
 	@RequestMapping(value="tvinnsadexport_updateStatus.do")
 	public ModelAndView doUpdateStatus(HttpSession session, HttpServletRequest request){
 		
@@ -954,6 +1043,95 @@ public class SadExportHeaderController {
 		return successView;
 	}
 	
+	
+	/**
+	 * 
+	 * @param user
+	 * @param avd
+	 * @param opd
+	 * @return
+	 */
+	private String getNotisBlockNextItemLineNumber(String user, String avd, String opd){
+		String retval = "0";
+		
+		String BASE_URL_FETCH = MainUrlDataStore.SYSTEMA_NOTIS_BLOCK_FETCH_LIST_URL;
+		StringBuffer urlRequestParamsKeysBuffer = new StringBuffer();
+		urlRequestParamsKeysBuffer.append("user=" + user);
+		urlRequestParamsKeysBuffer.append("&avd=" + avd);
+		urlRequestParamsKeysBuffer.append("&opd=" + opd);
+		
+		String urlRequestParamsKeys = urlRequestParamsKeysBuffer.toString();
+		
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+		logger.info("FETCH av item list... ");
+    	logger.info("URL: " + BASE_URL_FETCH);
+    	logger.info("URL PARAMS: " + urlRequestParamsKeys);
+    	//--------------------------------------
+    	//EXECUTE the FETCH (RPG program) here
+    	//--------------------------------------
+    	String jsonPayloadFetch = this.urlCgiProxyService.getJsonContent(BASE_URL_FETCH, urlRequestParamsKeys);
+    	logger.info(jsonPayloadFetch);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	JsonNotisblockContainer jsonNotisblockContainer = this.notisblockService.getNotisblockListContainer(jsonPayloadFetch);
+    	if(jsonNotisblockContainer!=null){
+    		Collection<JsonNotisblockRecord> list = new ArrayList<JsonNotisblockRecord>();
+    		int lineNr = 0;
+    		for(JsonNotisblockRecord notisRecord : jsonNotisblockContainer.getFreetextlist()){
+    			//DEBUG 
+    			logger.info("Notisblock free text:" + notisRecord.getFrtli());
+    			lineNr = Integer.parseInt(notisRecord.getFrtli());
+    			
+    		}
+    		lineNr++;
+    		retval = String.valueOf(lineNr);
+    	}
+    	return retval;
+	}
+	
+	/**
+	 * 
+	 * @param user
+	 * @param avd
+	 * @param opd
+	 * @param notisDate
+	 * @param lineNr
+	 * @param notisPart
+	 * @param notisText
+	 */
+	private void executeUpdateNotisBlock(String user, String avd, String opd, String notisDate, String lineNr, String notisPart, String notisText){
+		
+		//---------------------------
+		//get BASE URL = RPG-PROGRAM
+        //---------------------------
+		String BASE_URL_UPDATE = MainUrlDataStore.SYSTEMA_NOTIS_BLOCK_UPDATE_ITEMLINE_URL;
+		StringBuffer urlRequestParamsKeysBuffer = new StringBuffer();
+		urlRequestParamsKeysBuffer.append("user=" + user);
+		urlRequestParamsKeysBuffer.append("&frtavd=" + avd);
+		urlRequestParamsKeysBuffer.append("&frtopd=" + opd);
+		urlRequestParamsKeysBuffer.append("&frtdt=" + notisDate);
+		urlRequestParamsKeysBuffer.append("&frtli=" + lineNr);
+		urlRequestParamsKeysBuffer.append("&mode=" + "A");
+		urlRequestParamsKeysBuffer.append("&frttxt=" + notisText);
+		urlRequestParamsKeysBuffer.append("&frtkod=" + notisPart);		 
+		
+		String urlRequestParamsKeys = urlRequestParamsKeysBuffer.toString();
+		logger.info("URL: " + BASE_URL_UPDATE);
+		logger.info("PARAMS: " + urlRequestParamsKeys);
+		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL_UPDATE, urlRequestParamsKeys);
+		logger.info(jsonPayload);
+		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+		 
+		JsonNotisblockContainer jsonNotisblockContainer = this.notisblockService.getNotisblockListContainer(jsonPayload);
+		logger.info("JsonNotisblockContainer:" + jsonNotisblockContainer);
+		if(jsonNotisblockContainer!=null){
+			//logger.info("A:" + jsonNotisblockContainer.getErrMsg());
+			if( !"".equals(jsonNotisblockContainer.getErrMsg()) ){
+				//Debug
+				logger.info("[ERROR]:" + jsonNotisblockContainer.getErrMsg());
+			}
+		}
+	}
 	
 	/**
 	 * Sum of all item lines kolliantal
@@ -1648,6 +1826,12 @@ public class SadExportHeaderController {
 	@Required
 	public void setSadExportSpecificTopicService (SadExportSpecificTopicService value){ this.sadExportSpecificTopicService = value; }
 	public SadExportSpecificTopicService getSadExportSpecificTopicService(){ return this.sadExportSpecificTopicService; }
+	
+	@Qualifier ("notisblockService")
+	private NotisblockService notisblockService;
+	@Autowired
+	public void setNotisblockService (NotisblockService value){ this.notisblockService=value; }
+	public NotisblockService getNotisblockService(){return this.notisblockService;}
 	
 	
 }

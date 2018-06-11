@@ -1605,8 +1605,7 @@
 					            </td>
 					        </tr>
 					        <tr height="2"><td></td></tr>
-					        <c:if test="${ model.record.sest == 'E' || model.record.sest == 'K' || model.record.sest == 'Å' || empty  model.record.sest }"> 
-						   		<c:if test="${ empty model.record.setll }">
+					       
 							        <tr>
 							        	<td valign="top" class="text14" colspan="2">
 							        		<img onMouseOver="showPop('changeStatusUser_info');" onMouseOut="hidePop('changeStatusUser_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
@@ -1628,8 +1627,7 @@
 											</div>	
 							        	</td>
 							        </tr>
-						       </c:if>
-					        </c:if>
+						       
 					        
 					        
 					        

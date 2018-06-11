@@ -306,18 +306,24 @@
 							</div>
 		               </td>
 		               
-		               <td align="center" class="tableCell" >&nbsp;
+		               <td align="center" class="tableCell" >
+		               <c:if test="${ topic.status == 'M' || empty  topic.status }">
 							<a class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
 								<img src="resources/images/delete.gif" border="0" alt="remove">
 							</a>
 							<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
-								<form action="tvinnsadimport_updateStatus.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
+								<form action="tvinnsadimport_updateStatus_deleteWithNotis.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
 								 	<input type="hidden" name="currentAvd${counter.count}" id="currentAvd${counter.count}" value="${topic.avd}">
 								 	<input type="hidden" name="currentOpd${counter.count}" id="currentOpd${counter.count}" value="${topic.opd}">
 								 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="D">
-									<p class="text14" >Er du sikker på at du vil slette denne??</p>
+									<p class="text14" >Er du sikker på at du vil slette denne?</p>
+									<br/>
+									<p class="text14"> Tekst </p>
+									<input type="text" class="inputText" name="currentText${counter.count}" id="currentText${counter.count}" size="45" maxlength="70" value=''>&nbsp;</td>
+									
 								</form>
 							</div>
+						</c:if>	
 		               </td>
 		               
 		            </tr> 

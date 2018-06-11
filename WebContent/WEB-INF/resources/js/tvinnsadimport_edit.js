@@ -29,6 +29,17 @@
   	  jq('#alinkArchive').click(function() { 
   		  setBlockUI();
 	  });
+  	  
+	  	jq('#sifif').focus(function() {
+	    	if(jq('#sifif').val()!=''){
+	    		refreshCustomValidity(jq('#sifif')[0]);
+	  		}
+	  	});
+	  	jq('#sifid').on('input',function(e){
+	  		if(jq('#sifid').val()!=''){
+	    		refreshCustomValidity(jq('#sifid')[0]);
+	  		}
+	  	});
   	
   	  jq('#getFinansOpplSumButton').click(function() { 
   		if(jq('#finansOpplysningarTotSum').val()!='' && jq('#finansOpplysningarTotValidCurrency').val()!='' ){    
@@ -54,7 +65,7 @@
     
     //General functions
   	jq(function() {
-  		jq( "#submit" ).click(function( event ) {
+  		jq("#sadImportSaveNewTopicForm").submit(function() {
   			setBlockUI();
 	  	});
   		//=====================================

@@ -899,11 +899,11 @@
 							            <td class="text14Bold" align="left" >&nbsp;</td> 
 							        </tr>
 							        <tr>
-							            <td class="text14" align="left" >&nbsp;
-							            <font class="text16RedBold" >*</font><span title="sifif">Fakt.nr.&nbsp;</span>
-							            <input type="text" class="inputTextMediumBlueMandatoryField"  name="sifif" id="sifif" size="18" maxlength="17" value='${ model.record.sifif}'></td>
+							            <td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font><span title="sifif">Fakt.nr.&nbsp;</span>
+							            <input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField"  name="sifif" id="sifif" size="18" maxlength="17" value='${ model.record.sifif}'></td>
 							            <td class="text14">&nbsp;&nbsp;&nbsp;&nbsp;<font class="text16RedBold" >*</font><span title="sifid">Fakt.dato</span>
-			 								<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField"  name="sifid" id="sifid" size="9" maxlength="6" value="${model.record.sifid}">
+							            	<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField"  name="sifid" id="sifid" size="9" maxlength="6" value="${model.record.sifid}">
+								            	
 			 							</td>
 							        </tr>
 							        <tr height="5">
@@ -911,7 +911,7 @@
 							        </tr>
 							        <tr>
 							            <td colspan="2" class="text14" align="left" >&nbsp;
-							            <span title="finansOpplysningarTotSum/finansOpplysningarTotValidCurrency"></span>Fakturasum. fra Finans.oppl.&nbsp;</span>
+							            <span title="finansOpplysningarTotSum/finansOpplysningarTotValidCurrency">Fakturasum. fra Finans.oppl.&nbsp;</span>
 							            <input readonly type="text" class="inputTextReadOnly"  name="finansOpplysningarTotSum" id="finansOpplysningarTotSum" size="15" value='${ model.record.finansOpplysningarTotSum}'>
 							            &nbsp;&nbsp;
 							            <input readonly type="text" class="inputTextReadOnly"  name="finansOpplysningarTotValidCurrency" id="finansOpplysningarTotValidCurrency" size="5" value='${ model.record.finansOpplysningarTotValidCurrency}'>
@@ -1717,7 +1717,7 @@
 					       <tr height="2"><td></td></tr> 
 					       
 					       <%-- <c:if test="${ model.record.sist == 'E' || model.record.sist == 'K' || model.record.sist == 'Å' || empty  model.record.sist }">  --%> 
-						   		<c:if test="${ empty model.record.sitll }"> 
+						   <%-- 		<c:if test="${ empty model.record.sitll }"> --%>
 							        <tr>
 							        	<td valign="top" class="text14" colspan="2">
 							        		<img onMouseOver="showPop('changeStatusUser_info');" onMouseOut="hidePop('changeStatusUser_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
@@ -1739,9 +1739,8 @@
 											</div>	
 							        	</td>
 							        </tr>
-						        </c:if>
 					        <%-- </c:if>  --%>
-					        
+					         <%-- </c:if>  --%>
 					        
 							<tr height="20"><td>&nbsp;</td></tr>
 							<tr><td class="text14" colspan="2"><b>Varelinje totaler&nbsp;</b></td></tr>
