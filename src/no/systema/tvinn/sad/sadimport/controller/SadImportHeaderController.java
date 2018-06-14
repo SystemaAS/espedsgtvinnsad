@@ -46,6 +46,7 @@ import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
 
 import no.systema.tvinn.sad.sadimport.model.topic.SadImportSpecificTopicTotalItemLinesObject;
 import no.systema.tvinn.sad.sadimport.url.store.SadImportUrlDataStore;
+import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportSpecificTopicAvdDataContainer;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportSpecificTopicContainer;
 
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportSpecificTopicRecord;
@@ -138,9 +139,10 @@ public class SadImportHeaderController {
     		
     		//domain
     		JsonSadImportSpecificTopicRecord jsonSadImportSpecificTopicRecord = this.createNewTopicHeaderKeySeeds(session, request, appUser, avd, sign);
-			//override default since we must enter in UDATE-status. Long gone is now the CREATE NEW.
-    		if(jsonSadImportSpecificTopicRecord!=null){
-	    		StringBuffer redirectViewStr = new StringBuffer();
+    		//jsonSadImportSpecificTopicRecord = this.setDefaultValuesOnGui(appUser.getUser(), jsonSadImportSpecificTopicRecord);
+    		//at this point we have a new record on db with only avd/sign. All 
+    		if(jsonSadImportSpecificTopicRecord!=null && strMgr.isNotNull(jsonSadImportSpecificTopicRecord.getSitdn()) ){
+    			StringBuffer redirectViewStr = new StringBuffer();
 	    		redirectViewStr.append("redirect:tvinnsadimport_edit.do?action=doFetch&avd=" + jsonSadImportSpecificTopicRecord.getSiavd());
 	    		redirectViewStr.append("&opd=" + jsonSadImportSpecificTopicRecord.getSitdn());
 	    		redirectViewStr.append("&sysg=" + jsonSadImportSpecificTopicRecord.getSisg());
@@ -148,11 +150,42 @@ public class SadImportHeaderController {
 	    		successView = new ModelAndView(redirectViewStr.toString());
     		}
     		
-    		//successView.addObject("model", model);
-    		//successView.addObject(TvinnSadConstants.EDIT_ACTION_ON_TOPIC, TvinnSadConstants.ACTION_CREATE);
+    		successView.addObject("model", model);
+    		successView.addObject(TvinnSadConstants.EDIT_ACTION_ON_TOPIC, TvinnSadConstants.ACTION_UPDATE);
     		
 		}
 		return successView;
+	}
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param jsonSadImportSpecificTopicRecord
+	 */
+	private JsonSadImportSpecificTopicRecord setDefaultValuesOnGui(String applicationUser, JsonSadImportSpecificTopicRecord jsonSadImportSpecificTopicRecord){
+		 
+		 JsonSadImportSpecificTopicRecord targetRecord = null;
+		 String BASE_URL = SadImportUrlDataStore.SAD_IMPORT_BASE_FETCH_AVDDATA_DEFAULT_DATA_URL;
+		 String urlRequestParamsKeys = "user=" + applicationUser + "&avd=" + jsonSadImportSpecificTopicRecord.getSiavd();
+		 logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+		 logger.info("PARAMS: " + urlRequestParamsKeys);
+		 //logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		 String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+		 //logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+		 logger.info(jsonPayload);
+		 if(jsonPayload!=null){
+			 JsonSadImportSpecificTopicAvdDataContainer container = this.sadImportSpecificTopicService.getSadImportSpecificTopicAvdDataContainer(jsonPayload);
+			 if(container!=null){
+				 for(JsonSadImportSpecificTopicRecord  record : container.getGetdepinf()){
+					 targetRecord = record;
+					 targetRecord.setSiavd(jsonSadImportSpecificTopicRecord.getSiavd());
+					 targetRecord.setSitdn(jsonSadImportSpecificTopicRecord.getSitdn());
+					 targetRecord.setSisg(jsonSadImportSpecificTopicRecord.getSisg());
+				
+				 }
+			 }
+		 }
+		 return targetRecord;
+	 
 	}
 	
 	/**
@@ -238,7 +271,17 @@ public class SadImportHeaderController {
 			    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 			    	if(jsonPayload!=null){
 			    		JsonSadImportSpecificTopicContainer jsonSadImportSpecificTopicContainer = this.sadImportSpecificTopicService.getSadImportSpecificTopicContainer(jsonPayload);
-			    		
+			    		for(JsonSadImportSpecificTopicRecord rr : jsonSadImportSpecificTopicContainer.getOneorder()){
+			    			if(rr!=null && (strMgr.isNotNull(rr.getSidty()) && strMgr.isNotNull(rr.getSifid()) )){
+			    				//Nothing
+			    			}else{
+			    				//populate with default values since this record was created with only CREATE-NEW SEEDS
+			    				rr = this.setDefaultValuesOnGui(appUser.getUser(), rr);
+			    				Collection<JsonSadImportSpecificTopicRecord> list = new ArrayList<JsonSadImportSpecificTopicRecord>();
+			    				list.add(rr);
+			    				jsonSadImportSpecificTopicContainer.setOneorder(list);
+			    			}
+			    		}
 			    		//populate gui elements
 			    		//add gui lists here
 						this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
@@ -864,27 +907,27 @@ public class SadImportHeaderController {
 				session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, BASE_URL  + "==>params: " + urlRequestParamsKeys.toString()); 
 				
 				logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-			    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
-			    	logger.info("URL PARAMS: " + urlRequestParamsKeys);
-			    	//--------------------------------------
-			    	//EXECUTE the FETCH (RPG program) here
-			    	//--------------------------------------
-			    	jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
-				//Debug --> 
-			    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
-			    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-			    	if(jsonPayload!=null){
-			    		JsonSadImportSpecificTopicContainer jsonSadImportSpecificTopicContainer = this.sadImportSpecificTopicService.getSadImportSpecificTopicContainer(jsonPayload);
-		    			//populate gui
-					this.setCodeDropDownMgr(appUser, model);	
-			    		this.setDomainObjectsInView(session, model, jsonSadImportSpecificTopicContainer);
-			    		successView.addObject(TvinnSadConstants.DOMAIN_MODEL, model);
-					//put the doUpdate action since we are preparing the record for an update (when saving)
-					successView.addObject(TvinnSadConstants.EDIT_ACTION_ON_TOPIC, TvinnSadConstants.ACTION_UPDATE);
-			    		
-			    	}else{
-					logger.fatal("[ERROR fatal] NO CONTENT on jsonPayload from URL... ??? <Null>");
-					return loginView;
+		    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+		    	logger.info("URL PARAMS: " + urlRequestParamsKeys);
+		    	//--------------------------------------
+		    	//EXECUTE the FETCH (RPG program) here
+		    	//--------------------------------------
+		    	jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+		    	//Debug --> 
+		    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+		    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+		    	if(jsonPayload!=null){
+		    		JsonSadImportSpecificTopicContainer jsonSadImportSpecificTopicContainer = this.sadImportSpecificTopicService.getSadImportSpecificTopicContainer(jsonPayload);
+	    			//populate gui
+		    		this.setCodeDropDownMgr(appUser, model);	
+		    		this.setDomainObjectsInView(session, model, jsonSadImportSpecificTopicContainer);
+		    		successView.addObject(TvinnSadConstants.DOMAIN_MODEL, model);
+		    		//put the doUpdate action since we are preparing the record for an update (when saving)
+		    		successView.addObject(TvinnSadConstants.EDIT_ACTION_ON_TOPIC, TvinnSadConstants.ACTION_UPDATE);
+		    		
+		    	}else{
+		    		logger.fatal("[ERROR fatal] NO CONTENT on jsonPayload from URL... ??? <Null>");
+		    		return loginView;
 				}
 			}else if(strMgr.isNotNull(avd)){
 				logger.warn("[INFO] Redirecting to: tvinnsadimport_edit.do?action=doPrepareCreate... to CREATE-NEW ");

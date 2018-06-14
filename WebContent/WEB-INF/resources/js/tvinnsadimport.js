@@ -285,7 +285,7 @@
   	  "scrollY":        	"700px",
   	  "scrollCollapse":  true,
 	  "tabIndex": -1,
-	  "order": [[ 5, "desc" ]], //date
+	  "order": [[ 5, "desc" ], [ 3, "desc" ]], //date, tolldekl.nr.
 	  "lengthMenu": [ 25, 50, 100, 200]
     });
     //event on input field for search

@@ -30,12 +30,122 @@
   		  setBlockUI();
 	  });
   	  
+  	  	
+  	jq('#sidty').focus(function() {
+    	if(jq('#sidty').val()!=''){
+    		refreshCustomValidity(jq('#sidty')[0]);
+  		}
+  	});
+  	jq('#sidp').focus(function() {
+    	if(jq('#sidp').val()!=''){
+    		refreshCustomValidity(jq('#sidp')[0]);
+  		}
+  	});
+  	jq('#sinas').focus(function() {
+    	if(jq('#sinas').val()!=''){
+    		refreshCustomValidity(jq('#sinas')[0]);
+  		}
+  	});
+  	jq('#siads1').focus(function() {
+    	if(jq('#siads1').val()!=''){
+    		refreshCustomValidity(jq('#siads1')[0]);
+  		}
+  	});
+
+  	jq('#sinak').focus(function() {
+    	if(jq('#sinak').val()!=''){
+    		refreshCustomValidity(jq('#sinak')[0]);
+  		}
+  	});
+  	jq('#sirg').focus(function() {
+    	if(jq('#sirg').val()!=''){
+    		refreshCustomValidity(jq('#sirg')[0]);
+  		}
+  	});
+  	jq('#simva').focus(function() {
+    	if(jq('#simva').val()!=''){
+    		refreshCustomValidity(jq('#simva')[0]);
+  		}
+  	});
+  	jq('#sibel3').focus(function() {
+    	if(jq('#sibel3').val()!=''){
+    		refreshCustomValidity(jq('#sibel3')[0]);
+  		}
+  	});
+  	jq('#sival3').focus(function() {
+    	if(jq('#sival3').val()!=''){
+    		refreshCustomValidity(jq('#sival3')[0]);
+  		}
+  	});
+  	
+  	jq('#sivku').focus(function() {
+    	if(jq('#sivku').val()!=''){
+    		refreshCustomValidity(jq('#sivku')[0]);
+  		}
+  	});
+  	jq('#sitst').focus(function() {
+    	if(jq('#sitst').val()!=''){
+    		refreshCustomValidity(jq('#sitst')[0]);
+  		}
+  	});
+  	
+  	jq('#silka').focus(function() {
+    	if(jq('#silka').val()!=''){
+    		refreshCustomValidity(jq('#silka')[0]);
+  		}
+  	});
+  	jq('#silkt').focus(function() {
+    	if(jq('#silkt').val()!=''){
+    		refreshCustomValidity(jq('#silkt')[0]);
+  		}
+  	});
+  	jq('#sign').focus(function() {
+    	if(jq('#sign').val()!=''){
+    		refreshCustomValidity(jq('#sign')[0]);
+  		}
+  	});
+  	jq('#silv').focus(function() {
+    	if(jq('#silv').val()!=''){
+    		refreshCustomValidity(jq('#silv')[0]);
+  		}
+  	});
+  	jq('#silvt').focus(function() {
+    	if(jq('#silvt').val()!=''){
+    		refreshCustomValidity(jq('#silvt')[0]);
+  		}
+  	});
+  	jq('#sivkb').focus(function() {
+    	if(jq('#sivkb').val()!=''){
+    		refreshCustomValidity(jq('#sivkb')[0]);
+  		}
+  	});
+  	jq('#sintk').focus(function() {
+    	if(jq('#sintk').val()!=''){
+    		refreshCustomValidity(jq('#sintk')[0]);
+  		}
+  	});
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	  	
+  	  	
+  	  	
 	  	jq('#sifif').focus(function() {
 	    	if(jq('#sifif').val()!=''){
 	    		refreshCustomValidity(jq('#sifif')[0]);
 	  		}
 	  	});
+	  	/*
 	  	jq('#sifid').on('input',function(e){
+	  		if(jq('#sifid').val()!=''){
+	    		refreshCustomValidity(jq('#sifid')[0]);
+	  		}
+	  	});*/
+	  	jq('#sifid').focus(function() {
 	  		if(jq('#sifid').val()!=''){
 	    		refreshCustomValidity(jq('#sifid')[0]);
 	  		}
@@ -157,7 +267,13 @@
   	
   	jq(function() {
 	  jq("#sifid").datepicker({ 
-		  dateFormat: 'ddmmy'  
+		  dateFormat: 'ddmmy',
+		  onSelect: function (){	// The "this" keyword refers to the input (in this case: #someinput)
+		      this.focus();
+		  },
+		  onClose: function (){	// The "this" keyword refers to the input (in this case: #someinput)
+		      this.focus();
+		  }
 	  });
     });
   	jq(function() {
@@ -1205,4 +1321,7 @@
 	  //END Model dialog: "File upload"
 	  //-------------------------------------------
 	
-	
+	  jq(document).ready(function() {
+		  //Not working with dropdowns
+		  //jq( document ).tooltip();
+	  });

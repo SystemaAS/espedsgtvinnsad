@@ -708,34 +708,38 @@
 	    	  if(grossNetFactorHeader!=""){
 	    		  grossNetFactor = grossNetFactorHeader.replace("," , ".");
 	    	  }
-		  //init field(s)
+	    	  //init field(s)
 	    	  var grossWeight = jq('#svvktb').val();
-	    	  grossWeight = grossWeight.replace(",",".");
 	    	  var netWeight = jq('#svvktn').val();
-		  if(""==netWeight || "0"==netWeight){
-			  var netWeightRaw = grossWeight * grossNetFactor;
-			  netWeightRaw = netWeightRaw.toFixed(3);
-			  netWeightRaw = netWeightRaw.replace(".",",");
-			  jq('#svvktn').val(netWeightRaw);
-		  }
+	    	  grossWeight = grossWeight.replace(",",".");
+	    	  grossWeight = Number(grossWeight);
+	    	  
+	    	  if(grossWeight > 0 && (""==netWeight || "0"==netWeight)){
+	    		  var netWeightRaw = grossWeight * grossNetFactor;
+	    		  netWeightRaw = netWeightRaw.toFixed(3);
+	    		  netWeightRaw = netWeightRaw.replace(".",",");
+	    		  jq('#svvktn').val(netWeightRaw);
+	    	  }
 		});
   		//Net to Gross
   		jq('#svvktn').blur(function() {
+  			  /*
 	    	  var grossNetFactor = 0.9;
 	    	  var grossNetFactorHeader = jq('#grossNetFactor').val();
 	    	  if(grossNetFactorHeader!=""){
 	    		  grossNetFactor = grossNetFactorHeader.replace("," , ".");
 	    	  }
-		  //init field(s)
+	    	  //init field(s)
 	    	  var netWeight = jq('#svvktn').val();
 	    	  netWeight = netWeight.replace(",",".");
 	    	  var grossWeight = jq('#svvktb').val();
-		  if(""==grossWeight || "0"==grossWeight){
-			  var grossWeightRaw = netWeight / grossNetFactor;
-			  grossWeightRaw = grossWeightRaw.toFixed(3);
-			  grossWeightRaw = grossWeightRaw.replace(".",",");
-			  jq('#svvktb').val(grossWeightRaw);
-		  }
+	    	  if(""==grossWeight || "0"==grossWeight){
+	    		  var grossWeightRaw = netWeight / grossNetFactor;
+	    		  grossWeightRaw = grossWeightRaw.toFixed(3);
+	    		  grossWeightRaw = grossWeightRaw.replace(".",",");
+	    		  jq('#svvktb').val(grossWeightRaw);
+	    	  }
+	    	  */
 		});
 
 	});

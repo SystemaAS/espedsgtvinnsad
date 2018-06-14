@@ -34,8 +34,7 @@ import no.systema.main.context.TdsServletContext;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.JsonDebugger;
-
-
+import no.systema.main.util.StringManager;
 import no.systema.tvinn.sad.sadexport.service.SadExportSpecificTopicService;
 
 import no.systema.tvinn.sad.sadexport.mapper.url.request.UrlRequestParameterMapper;
@@ -79,7 +78,7 @@ public class SadExportHeaderFinansOpplysningerController {
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private SadExportCalculator sadExportCalculator = new SadExportCalculator();
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
-		
+	private StringManager strMgr = new StringManager();	
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	private final String NOT_FOUND = "NOT FOUND";
 	private final String MATCH = "MATCH";
@@ -201,7 +200,7 @@ public class SadExportHeaderFinansOpplysningerController {
 						//		  This step is ONLY applicable for new item lines 
 						//-------------------------------------------------------------------------------------------
 						jsonSadExportTopicFinansOpplysningerRecord  = this.createNewItemKeySeeds(recordToValidate, session, request, appUser);
-						if(jsonSadExportTopicFinansOpplysningerRecord!=null){
+						if(jsonSadExportTopicFinansOpplysningerRecord!=null  && strMgr.isNull(jsonSadExportTopicFinansOpplysningerRecord.getErrMsg()) ){
 							String newLineId = jsonSadExportTopicFinansOpplysningerRecord.getSftxt();
 							//take the rest from GUI.
 							jsonSadExportTopicFinansOpplysningerRecord = new JsonSadExportTopicFinansOpplysningerRecord();
@@ -256,8 +255,17 @@ public class SadExportHeaderFinansOpplysningerController {
 				    		//put domain objects (it is not necessary since the fetch below (onFetch) will clean this up anyway)
 				    	}
 					}else{
-						rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on CREATE, at tuid, syop generation : " + rpgReturnResponseHandler.getErrorMessage());
+						StringBuffer errorMessage = new StringBuffer();
+						//errorMessage.append("[ERROR] FATAL on CREATE: ");
+						if(rpgReturnResponseHandler!=null && strMgr.isNotNull(rpgReturnResponseHandler.getErrorMessage())){
+							errorMessage.append(rpgReturnResponseHandler.getErrorMessage());
+						}
+						if(jsonSadExportTopicFinansOpplysningerRecord!=null && strMgr.isNotNull(jsonSadExportTopicFinansOpplysningerRecord.getErrMsg())){
+							errorMessage.append(jsonSadExportTopicFinansOpplysningerRecord.getErrMsg());
+						}
+						rpgReturnResponseHandler.setErrorMessage(errorMessage.toString());
 						this.setFatalError(model, rpgReturnResponseHandler, jsonSadExportTopicFinansOpplysningerRecord);
+						
 					}
 			    }
 				
@@ -320,18 +328,7 @@ public class SadExportHeaderFinansOpplysningerController {
 	    		JsonSadExportSpecificTopicFaktTotalRecord sumFaktTotalRecord = this.getInvoiceTotalFromInvoices(avd, opd, appUser);
 	    		jsonSadExportTopicFinansOpplysningerContainer.setCalculatedValidCurrency(sumFaktTotalRecord.getTot_vk28());
 	    		jsonSadExportTopicFinansOpplysningerContainer.setCalculatedItemLinesTotalAmount(sumFaktTotalRecord.getTot_bl28());
-	    		
-	    		/*OBSOLETE SECTION. Has been repalced by service AS400 above: this.getInvoiceTotalFromInvoices...
-	    		//Set the common currency code for all invoices (if more than one)
-	    		jsonSadExportTopicFinansOpplysningerContainer.setCalculatedValidCurrency(this.sadExportCalculator.getFinalCurrency(jsonSadExportTopicFinansOpplysningerContainer));
-	    		
-	    		Double calculatedItemLinesTotalAmount = this.sadExportCalculator.getItemLinesTotalAmount(jsonSadExportTopicFinansOpplysningerContainer);
-	    		Double diffItemLinesTotalAmountWithInvoiceTotalAmount = this.sadExportCalculator.getDiffBetweenCalculatedTotalAmountAndTotalAmount(invoiceTotalAmount, calculatedItemLinesTotalAmount);
-	    		logger.info("CalculatedItemLinesTotalAmount:" + calculatedItemLinesTotalAmount);
-	    		logger.info("diffItemLinesTotalAmountWithInvoiceTotalAmount:" + diffItemLinesTotalAmountWithInvoiceTotalAmount);
-	    		jsonSadExportTopicFinansOpplysningerContainer.setCalculatedItemLinesTotalAmount(calculatedItemLinesTotalAmount);
-	    		jsonSadExportTopicFinansOpplysningerContainer.setDiffItemLinesTotalAmountWithInvoiceTotalAmount(diffItemLinesTotalAmountWithInvoiceTotalAmount);
-				*/    
+
 	    	}
 	    	//drop downs populated from back-end
 	    	this.setCodeDropDownMgr(appUser, model, headerRecord);
@@ -339,13 +336,11 @@ public class SadExportHeaderFinansOpplysningerController {
     		//drop downs populated from a txt file
     		this.setDomainObjectsForListInView(model, jsonSadExportTopicFinansOpplysningerContainer);
 			//this next step is necessary for the default values on "create new" record
-    		if(bindingErrorsExist){
-    			this.setDefaultDomainItemRecordInView(model, jsonSadExportTopicFinansOpplysningerContainer, recordToValidate);
+    		if(bindingErrorsExist || !isValidCreatedRecordTransactionOnRPG){
     			model.put("lineId", lineId);
     			model.put("action", action);
-    		}else{
-    			this.setDefaultDomainItemRecordInView(model, jsonSadExportTopicFinansOpplysningerContainer, null);
     		}
+    		this.setDefaultDomainItemRecordInView(model, jsonSadExportTopicFinansOpplysningerContainer, recordToValidate, bindingErrorsExist, isValidCreatedRecordTransactionOnRPG );
 	    	successView.addObject("model",model);
 			//successView.addObject(Constants.EDIT_ACTION_ON_TOPIC, Constants.ACTION_FETCH);
 	    	return successView;
@@ -404,10 +399,10 @@ public class SadExportHeaderFinansOpplysningerController {
 	 * @param recordToValidate
 	 * 
 	 */
-	private void setDefaultDomainItemRecordInView(Map model, JsonSadExportTopicFinansOpplysningerContainer container, JsonSadExportTopicFinansOpplysningerRecord recordToValidate){
+	private void setDefaultDomainItemRecordInView(Map model, JsonSadExportTopicFinansOpplysningerContainer container, JsonSadExportTopicFinansOpplysningerRecord recordToValidate, boolean bindingErrorsExist, boolean isValidCreatedRecordTransactionOnRPG){
 		List list = new ArrayList();
 		JsonSadExportTopicFinansOpplysningerRecord defaultRecord = new JsonSadExportTopicFinansOpplysningerRecord();
-		
+		logger.info(recordToValidate.getSfvk28());
 		if(container!=null){
 			/*	
 			int lineNr = 0;
@@ -418,12 +413,18 @@ public class SadExportHeaderFinansOpplysningerController {
 				}
 			}
 			*/
-			//meaning that there were validation errors
-			if(recordToValidate!=null){
+			if(bindingErrorsExist || !isValidCreatedRecordTransactionOnRPG){
 				defaultRecord = recordToValidate;//in order to retain the original values before the validation errors
 				model.put(TvinnSadConstants.DOMAIN_RECORD, defaultRecord);
 				
 			}else{
+				//this means that there is at least one-item line with values to user as default values
+				if(strMgr.isNull(recordToValidate.getSftxt()) && strMgr.isNotNull(recordToValidate.getSfdt())){
+					defaultRecord.setSfdt(recordToValidate.getSfdt());
+					defaultRecord.setSfvk28(recordToValidate.getSfvk28());
+					defaultRecord.setSfkr28(recordToValidate.getSfkr28());
+				}
+				//
 				model.put(TvinnSadConstants.DOMAIN_RECORD, defaultRecord);				
 			}
 		}
@@ -509,7 +510,7 @@ public class SadExportHeaderFinansOpplysningerController {
 		//we must complete the GUI-json with the value from a line nr seed here
 		if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage()) ){
 			logger.info("[ERROR] No mandatory seeds (syli, opd) were generated correctly)! look at std output log. [errMsg]" + rpgReturnResponseHandler.getErrorMessage());
-			jsonSadExportTopicFinansOpplysningerRecord = null;
+			jsonSadExportTopicFinansOpplysningerRecord.setErrMsg(rpgReturnResponseHandler.getErrorMessage());
 		}
         
 		return jsonSadExportTopicFinansOpplysningerRecord;

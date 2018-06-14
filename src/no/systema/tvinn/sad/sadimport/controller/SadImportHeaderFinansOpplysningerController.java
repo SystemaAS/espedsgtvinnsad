@@ -612,9 +612,11 @@ public class SadImportHeaderFinansOpplysningerController {
 	 * @param record
 	 */
 	private void adjustDatesOnFetch(JsonSadImportTopicFinansOpplysningerRecord record){
-		String dateSfdtNO = this.dateFormatter.convertToDate_NO(record.getSfdt());
-		//fields
-		record.setSfdt(dateSfdtNO);
+		if(record!=null){
+			String dateSfdtNO = this.dateFormatter.convertToDate_NO(record.getSfdt());
+			//fields
+			record.setSfdt(dateSfdtNO);
+		}
 	}
 	/**
 	 * 

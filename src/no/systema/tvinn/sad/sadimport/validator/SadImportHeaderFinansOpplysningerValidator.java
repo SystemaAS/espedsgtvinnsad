@@ -70,20 +70,10 @@ public class SadImportHeaderFinansOpplysningerValidator implements Validator {
 		if(record.getSfdt().length()!=6){
 			retval = false;
 		}else{
-			
-			if(dateValidator.validateDate(record.getSfdt(), DateValidator.DATE_MASK_NO)){
-				String isoDate = dateMgr.getDateFormatted_ISO(record.getSfdt(), "ddMMyy");
-				logger.info("ISO-date:"+ isoDate);
-				retval = dateMgr.isValidCurrentAndBackwardDate(isoDate, "yyyMMdd");
-				
-			}else{
+			if(!dateValidator.validateDate(record.getSfdt(), DateValidator.DATE_MASK_NO)){
 				retval = false;
+			}
 		}
-			
-			
-			
-		}
-		
 		return retval;
 	}
 	

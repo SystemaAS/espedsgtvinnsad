@@ -206,7 +206,7 @@ public class SadImportOmberegningFinansOpplysningerController {
 						//		  This step is ONLY applicable for new item lines 
 						//-------------------------------------------------------------------------------------------
 						jsonSadImportTopicFinansOpplysningerRecord  = this.createNewItemKeySeeds(recordToValidate, session, request, appUser);
-						if(jsonSadImportTopicFinansOpplysningerRecord!=null){
+						if(jsonSadImportTopicFinansOpplysningerRecord!=null && strMgr.isNull(jsonSadImportTopicFinansOpplysningerRecord.getErrMsg())){
 							String newLineId = jsonSadImportTopicFinansOpplysningerRecord.getSftxt();
 							//take the rest from GUI.
 							jsonSadImportTopicFinansOpplysningerRecord = new JsonSadImportTopicFinansOpplysningerRecord();
@@ -354,8 +354,6 @@ public class SadImportOmberegningFinansOpplysningerController {
 	    	return successView;
 			}
 	}
-	
-	
 	
 	/**
 	 * Set aspects  objects
@@ -527,7 +525,7 @@ public class SadImportOmberegningFinansOpplysningerController {
 		//we must complete the GUI-json with the value from a line nr seed here
 		if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage()) ){
 			logger.info("[ERROR] No mandatory seeds (syli, opd) were generated correctly)! look at std output log. [errMsg]" + rpgReturnResponseHandler.getErrorMessage());
-			jsonSadImportTopicFinansOpplysningerRecord = null;
+			jsonSadImportTopicFinansOpplysningerRecord.setErrMsg(rpgReturnResponseHandler.getErrorMessage());
 		}
         
 		return jsonSadImportTopicFinansOpplysningerRecord;
@@ -613,9 +611,11 @@ public class SadImportOmberegningFinansOpplysningerController {
 	 * @param record
 	 */
 	private void adjustDatesOnFetch(JsonSadImportTopicFinansOpplysningerRecord record){
-		String dateSfdtNO = this.dateFormatter.convertToDate_NO(record.getSfdt());
-		//fields
-		record.setSfdt(dateSfdtNO);
+		if(record!=null){
+			String dateSfdtNO = this.dateFormatter.convertToDate_NO(record.getSfdt());
+			//fields
+			record.setSfdt(dateSfdtNO);
+		}
 	}
 	/**
 	 * 
