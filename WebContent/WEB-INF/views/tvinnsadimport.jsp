@@ -346,23 +346,30 @@
 				<form  action="tvinnsadimport_doFetchTopicFromTransportUppdrag.do" name="copyFromTransportUppdragForm" id="copyFromTransportUppdragForm" method="post">
 				 	<input type="hidden" name="actionGS" id="actionGS" value='doUpdate'/>
 
-					<p class="text14" ><b>Ved å taste</b> avdeling og oppdragsnummer lages det en ny deklarasjon med utgangspunkt i data fra SYSPED Transportoppdrag.</p>
+					<p class="text14" ><b>Ved å taste</b> oppdragnummer eller Ext.ref.nr. lages det en ny deklarasjon med utgangspunkt i data fra SYSPED Transportoppdrag.</p>
 					<p class="text14">eller</p>
-					<p class="text14" ><b>Ved å IKKE taste</b> avdeling og oppdragnummer lages det en ny deklarasjon med utgangspunkt i avdelingens standardopplysninger.</p>
+					<p class="text14" ><b>Ved å IKKE taste</b> oppdragnummer eller Ext.ref.nr. lages det en ny deklarasjon med utgangspunkt i avdelingens standardopplysninger.</p>
 					<p class="text14">Klikk deretter Fortsett.</p>
 										
 					<table>
 						<tr>
-							<td class="text14" align="left" >&nbsp;Avdeling</td>
+							<td class="text14" align="left" ><font class="text16RedBold" >*</font>&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.avd"/></td>
+   							<td class="text14" align="left" ><font class="text16RedBold" >*</font>&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.signatur"/></td>
    							<td class="text14" align="left" >&nbsp;Oppdragsnr.</td>
-   							<td class="text14" align="left" >&nbsp;Ext.ref.nr.</td>
+   							<td class="text14" align="left" >&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.extrefnr"/></td>
    						</tr>
-						<tr>
-							<td class="text14MediumBlue">
-								<select name="selectedAvd" id="selectedAvd">
-				            		<option value="">-velg-</option>
-				 				  	<c:forEach var="record" items="${model.avdList}" >
+   						<tr>
+   							<td align="left" class="text14" >
+								<select class="inputTextMediumBlueMandatoryField" name="selectedAvd" id="selectedAvd">
+				            		<c:forEach var="record" items="${model.avdList}" >
 	                             	 	<option value="${record.avd}"<c:if test="${searchFilterSadImport.avd == record.avd}"> selected </c:if> >${record.avd}<c:if test="${record.tst== '2'}">&nbsp;(test)</c:if></option>
+									</c:forEach> 
+								</select>
+							</td>
+							<td align="left" class="text14" >
+			           			<select class="inputTextMediumBlueMandatoryField" name="selectedSign" id="selectedSign">
+				            		<c:forEach var="record" items="${model.signList}" >
+			                             	 	<option value="${record.sign}"<c:if test="${searchFilterSadImport.sg == record.sign}"> selected </c:if> >${record.sign}</option>
 									</c:forEach> 
 								</select>
 							</td>
@@ -373,6 +380,7 @@
 								<input type="text" class="inputText" id="selectedExtRefNr" name="selectedExtRefNr" size="25" maxlength="35" value=''>&nbsp;
 							</td>
 						</tr>
+   						
 					</table>
 				</form>
 			</div>

@@ -3,6 +3,11 @@
  */
 package no.systema.tvinn.sad.util;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+import no.systema.tvinn.sad.util.manager.TvinnSadGeneralDatabaseManager;
+
 /**
  * All type of system constants for TVINN-SAD in general
  * 
@@ -111,7 +116,12 @@ public final class TvinnSadConstants {
 	//aspects in view (sucha as errors, logs, other
 	public static final String ASPECT_ERROR_MESSAGE = "errorMessage";
 	public static final String ASPECT_ERROR_META_INFO = "errorInfo";
-	
 
-	   
+	public static final List<String>LIST_EU_COUNTRIES = Arrays.asList("AD" ,"AT" ,"BE", "BG", "CH", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", 
+														"FL", "FR", "GB", "GR", "HR", "HU" ,"IE", "IS", "IT", "LI", "LT", "LU", "LV",
+														"MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "SJ", "SK", "RS", "XK");
+	//get list of EU-countries (more dynamic implementation ...)
+	public List<String> getListEUCountries(String applicationUser){   
+		return new TvinnSadGeneralDatabaseManager().fetchListEU_Countries(applicationUser);
+	}
 }

@@ -140,6 +140,14 @@
 				<td width="8%" valign="bottom" class="tabSub" align="center" nowrap>
 					<font class="text14"><b>Varelinjer</b></font>
 				</td>
+				<td width="8%" valign="bottom" class="tabDisabledSub" align="center" nowrap>
+					<a id="alinkInvoices" style="display:block;" href="tvinnsadimport_edit_omberegning_finansopplysninger.do?action=doFetch&avd=${ model.avd}&sign=${ model.sign}
+									&opd=${ model.opd}&status=${ model.status}&fabl=${recordTopicTvinnSad.sibel3}&o2_sist=${ model.o2_sist}&o2_sidt=${ model.o2_sidt}&o2_simf=${ model.o2_simf}&selectedOmb=${ model.selectedOmb}">
+						<font class="text14Gray">
+							&nbsp;<spring:message code="systema.tvinn.sad.import.finansopplys.createnew.tab"/>
+						</font>
+					</a>
+				</td>
 				<td width="85%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 				</tr>
 				</table>

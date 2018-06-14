@@ -10,7 +10,7 @@
 	<SCRIPT type="text/javascript" src="resources/js/jquery.calculator.js"></SCRIPT>
 	<SCRIPT type="text/javascript" src="resources/js/jquery-ui-timepicker-addon.js"></SCRIPT>
 	<SCRIPT type="text/javascript" src="resources/js/tvinnsadglobal_edit.js?ver=${user.versionEspedsg}"></SCRIPT>			
-	<SCRIPT type="text/javascript" src="resources/js/tvinnsadimport_edit_finansopplysninger.js?ver=${user.versionEspedsg}"></SCRIPT>
+	<SCRIPT type="text/javascript" src="resources/js/tvinnsadimport_edit_omberegning_finansopplysninger.js?ver=${user.versionEspedsg}"></SCRIPT>
 	
 	<style type = "text/css">
 	.ui-datepicker { font-size:9pt;}
@@ -30,12 +30,8 @@
 	</style>
 	
 	<%-- tab container component --%>
-	<table width="100%"  class="text11" cellspacing="0" border="0" cellpadding="0">
-		<tr height="2">
-			<td>
-				<input type="hidden" name="modelStatus" id="modelStatus" value='${model.status}'>
-			</td>
-		</tr>
+	<table width="100%"  class="text14" cellspacing="0" border="0" cellpadding="0">
+		<tr height="2"><td></td></tr>
 		<tr height="25"> 
 			<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
 				<a id="alinkTopicList" style="display:block;" href="tvinnsadimport.do?action=doFind&sg=${model.sign}">
@@ -45,11 +41,11 @@
 			</td>
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
-				<a id="alinkHeader" style="display:block;" href="tvinnsadimport_edit.do?action=doFetch&avd=${model.avd}&opd=${model.opd}
-						&sysg=${model.sign}&tuid=${refnr}&syst=${model.status}&sydt=${model.datum}&o2_sist=${ model.o2_sist}&o2_sidt=${ model.o2_sidt}&o2_simf=${ model.o2_simf}">
+				<a id="alinkHeader" style="display:block;" href="tvinnsadimport_edit.do?action=doFetch&avd=${model.avd}&opd=${fn:replace(model.opd,'-','')}
+						&sysg=${model.sign}&tuid=${refnr}&syst=${model.status}&sydt=${model.datum}&o2_sist=${model.o2_sist}&o2_sidt=${ model.o2_sidt}&o2_simf=${ model.o2_simf}">
 					
 					<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.import.created.mastertopic.tab"/></font>
-					<font class="text14MediumBlue">[${model.opd}]</font>
+					<font class="text14MediumBlue">[${fn:replace(model.opd,'-','')}]</font>
 					<c:if test="${model.status == 'M' || empty model.status}">
 						<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 					</c:if>
@@ -57,36 +53,38 @@
 			</td>
 			
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-			<td width="12%" valign="bottom" class="tab" align="center" nowrap>
-				<font class="tabLink">&nbsp;<spring:message code="systema.tvinn.sad.import.finansopplys.createnew.tab"/></font>
-				<img valign="bottom" src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
+			<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
+				<a id="alinkInvoices" style="display:block;" href="tvinnsadimport_edit_finansopplysninger.do?action=doFetch&avd=${ model.avd}&sign=${ model.sign}
+											&opd=${fn:replace(model.opd,'-','')}&status=${ model.status}&fabl=${recordTopicTvinnSad.sibel3}&o2_sist=${ model.o2_sist}&o2_sidt=${ model.o2_sidt}&o2_simf=${ model.o2_simf}">
+					<font class="tabDisabledLink">
+						&nbsp;<spring:message code="systema.tvinn.sad.import.finansopplys.createnew.tab"/>
+					</font>
+				</a>
 			</td>
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
-				<a id="alinkNotis" style="display:block;" href="editNotisblock.do?action=doFetch&subsys=sadi&orig=topic&avd=${ model.avd}&sign=${ model.sign}
-											&opd=${ model.opd}&status=${ model.status}&o2_sist=${ model.o2_sist}&o2_sidt=${ model.o2_sidt}&o2_simf=${ model.o2_simf}">
+				<a style="display:block;" href="editNotisblock.do?action=doFetch&subsys=sadi&orig=topic&avd=${ model.avd}&sign=${ model.sign}
+											&opd=${fn:replace(model.opd,'-','')}&status=${ model.status}&o2_sist=${ model.o2_sist}&o2_sidt=${ model.o2_sidt}&o2_simf=${ model.o2_simf}">
 					<font class="tabDisabledLink">
 						&nbsp;<spring:message code="systema.tvinn.sad.import.notisblock.createnew.tab"/>
 					</font>
 				</a>
 			</td>
+			
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
 				<a id="alinkItemLines" style="display:block;" href="tvinnsadimport_edit_items.do?action=doFetch&avd=${model.avd}&sign=${model.sign}
-											&opd=${model.opd}&tullId=${model.tullId}
-											&status=${model.status}&datum=${model.datum}&fabl=${recordTopicSkatXX.dkih_222}&o2_sist=${ model.o2_sist}&o2_sidt=${ model.o2_sidt}&o2_simf=${ model.o2_simf}">
-					<font class="tabDisabledLink">
-						&nbsp;<spring:message code="systema.tvinn.sad.import.item.createnew.tab"/>
-					</font>
-					<c:if test="${model.status == 'M' || empty model.status || model.status == '1'}">
-						<img valign="bottom" src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
-					</c:if>
-					
+												&opd=${fn:replace(model.opd,'-','')}&tullId=${model.tullId}
+												&status=${model.status}&datum=${model.datum}&fabl=${recordTopicTvinnSad.sibel3}&o2_sist=${ model.o2_sist}&o2_sidt=${ model.o2_sidt}&o2_simf=${ model.o2_simf}">
+				<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.import.item.createnew.tab"/></font>
+				<c:if test="${model.status == 'M' || empty model.status || model.status == '10' || model.status == '20'}">
+					<img valign="bottom" src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
+				</c:if>
 				</a>
 			</td>
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
-				<a id="alinkLogging" style="display:block;" href="tvinnsadimport_logging.do?avd=${model.avd}&sign=${model.sign}&opd=${model.opd}
+				<a id="alinkLogging" style="display:block;" href="tvinnsadimport_logging.do?avd=${model.avd}&sign=${model.sign}&opd=${fn:replace(model.opd,'-','')}
 													&status=${model.status}&datum=${model.datum}&o2_sist=${ model.o2_sist}&o2_sidt=${ model.o2_sidt}&o2_simf=${ model.o2_simf}">
 					<font class="tabDisabledLink">
 						&nbsp;<spring:message code="systema.tvinn.sad.import.logging.tab"/>
@@ -96,7 +94,7 @@
 			</td>
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
-				<a id="alinkArchive" style="display:block;" href="tvinnsadimport_archive.do?avd=${model.avd}&sign=${model.sign}&opd=${model.opd}
+				<a id="alinkArchive" style="display:block;" href="tvinnsadimport_archive.do?avd=${model.avd}&sign=${model.sign}&opd=${fn:replace(model.opd,'-','')}
 													&status=${model.status}&datum=${model.datum}&o2_sist=${ model.o2_sist}&o2_sidt=${ model.o2_sidt}&o2_simf=${ model.o2_simf}">
 					<font class="tabDisabledLink">
 						&nbsp;<spring:message code="systema.tvinn.sad.import.archive.tab"/>
@@ -104,26 +102,50 @@
 					<img style="vertical-align: bottom" src="resources/images/archive.png" width="16" hight="16" border="0" alt="show archive">
 				</a>
 			</td>
-			<%-- This tab should be hidden here ?
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-			<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
-				<a id="alinkOmberegning" style="display:block;" href="tvinnsadimport_edit_omberegning.do?action=doFetch&avd=${model.avd}&sign=${model.sign}
-											&opd=${ model.opd}&status=${model.status}&o2_sist=${ model.o2_sist}&o2_sidt=${ model.o2_sidt}&o2_simf=${ model.o2_simf}">
-					<font class="tabDisabledLink">
-						&nbsp;<spring:message code="systema.tvinn.sad.import.omberegning.mastertopic.tab"/>
-					</font>
-				</a>
+			<td width="12%" valign="bottom" class="tab" align="center" nowrap>
+				<font class="tabLink">
+					&nbsp;<spring:message code="systema.tvinn.sad.import.omberegning.mastertopic.tab"/>
+				</font>
 			</td>
-			 --%>
-			<td width="20%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
+			<td width="4%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 		</tr>
 	</table>
+		
 	<%-- -------------------------------- --%>	
  	<%-- tab area container MASTER TOPIC  --%>
 	<%-- -------------------------------- --%>
  	<table width="100%" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
-		<tr height="15"><td colspan="2">&nbsp;</td></tr>	
-		
+		<tr height="6">
+			<td colspan="2">&nbsp;</td>
+		</tr>	
+		<%-- sub-tabs --%>
+		<tr>
+			<td colspan="2">
+				<table width="100%"  class="text14" cellspacing="0" border="0" cellpadding="0">
+				<tr>
+				<td width="2px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
+				<td width="8%" valign="bottom" class="tabDisabledSub" align="center" nowrap>
+					<a id="alinkOmberegningSubTab" style="display:block;" href="tvinnsadimport_edit_omberegning.do?action=doFetch&avd=${model.avd}&sign=${model.sign}
+								&opd=${ model.opd}&status=${model.status}&o2_sist=${ model.o2_sist}&o2_sidt=${ model.o2_sidt}&o2_simf=${ model.o2_simf}&selectedOmb=${ model.selectedOmb}">
+						<font class="text14Gray">Hode</font>
+					</a>	
+				</td>
+				<td width="8%" valign="bottom" class="tabDisabledSub" align="center" nowrap>
+					<a id="alinkOmberegningItemLinesSubTab" style="display:block;" href="tvinnsadimport_edit_omberegning_items.do?action=doFetch&avd=${ model.avd}&sign=${ model.sign}
+								&opd=${ model.opd}&status=${ model.status}&fabl=${recordTopicTvinnSad.sibel3}&o2_sist=${ model.o2_sist}&o2_sidt=${ model.o2_sidt}&o2_simf=${ model.o2_simf}&selectedOmb=${ model.selectedOmb}">
+					<font class="text14Gray">Varelinjer</font>
+					</a>
+				</td>
+				<td width="8%" valign="bottom" class="tabSub" align="center" nowrap>
+					<font class="text14"><b>Finans.oppl.</b></font>
+				</td>
+				<td width="85%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		<tr height="10"><td colspan="2">&nbsp;</td></tr>	
 		<tr>
 		<td >
 		<table border="0" width="95%" align="center">
@@ -260,7 +282,7 @@
 	        			<tr height="10"><td></td></tr> 
 						<tr >
 							<td>
-								<form name="createNewItemLine" id="createNewItemLine" method="post" action="tvinnsadimport_edit_finansopplysninger.do">
+								<form name="createNewItemLine" id="createNewItemLine" method="post" action="tvinnsadimport_edit_omberegning_finansopplysninger.do">
 								<input type="hidden" name="action" id="action" value='doFetch'>
 				 				<input type="hidden" name="avd" id="avd" value='${model.avd}'>
 				 				<input type="hidden" name="sign" id="sign" value='${model.sign}'>
@@ -275,7 +297,7 @@
 									<tr>
 										<td class="text14Bold">
 											<c:if test="${model.status == 'M' || empty model.status}">
-												<input tabindex=-1 class="inputFormSubmitStd" type="submit" name="submit" onclick="javascript: form.action='tvinnsadimport_edit_finansopplysninger.do';" value="<spring:message code="systema.tvinn.sad.import.item.line.init.createnew.submit"/>">
+												<input tabindex=-1 class="inputFormSubmitStd" type="submit" name="submit" onclick="javascript: form.action='tvinnsadimport_edit_omberegning_finansopplysninger.do';" value="<spring:message code="systema.tvinn.sad.import.item.line.init.createnew.submit"/>">
 												&nbsp;<button title="Import av eksterna fakturaer" name="importInvoicesButton" id="importInvoicesButton" class="buttonGrayWithGreenFrame" type="button" >Importer eksterne fakturaer</button>
 											</c:if>
 										</td>
@@ -325,7 +347,7 @@
 							
 								<table id="tblInvoices" class="display compact cell-border" >
 									<thead>
-									<tr class="tableHeaderField" height="20" >
+									<tr style="background-color:#DDDDDD">
 									    <th class="text14">&nbsp;Finans.opplysn.&nbsp;</th> 
 									    <th align="center" class="text14">&nbsp;Endre&nbsp;</th>
 									    <th align="right" class="text14" nowrap>&nbsp;Beløp&nbsp;</th>
@@ -340,14 +362,8 @@
 					               </thead> 
 					               <tbody>
 				 					  <c:forEach items="${model.list}" var="record" varStatus="counter">    
-							               <c:choose>           
-							                   <c:when test="${counter.count%2==0}">
-							                       <tr class="tableRow" height="20" >
-							                   </c:when>
-							                   <c:otherwise> 
-							                       <tr class="tableOddRow" height="20" >
-							                   </c:otherwise>
-							               </c:choose>
+							              <tr class="tableRow" height="20" >
+							                  
 							               <td width="2%" class="text14" align="right">${record.sftxt}</td>
 							               <td width="2%" class="text14" align="center">
 							               		<a tabindex=-1 id="recordUpdate__${record.sftxt}__${record.sfdt}" href="#" onClick="getFinansOpplysningerItemData(this);">
@@ -361,7 +377,7 @@
 							               <td align="right" class="text14" >&nbsp;${record.sfom28}</td>
 							               <c:if test="${model.status == 'M' || empty model.status}">	
 								               <td class="text14" align="center" nowrap>
-								               	<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadimport_edit_finansopplysninger.do?action=doDelete&sign=${model.sign}&avd=${model.avd}&opd=${model.opd}&status=${model.status}&fak=${record.sftxt}">
+								               	<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadimport_edit_omberegning_finansopplysninger.do?action=doDelete&sign=${model.sign}&avd=${model.avd}&opd=${model.opd}&status=${model.status}&fak=${record.sftxt}">
 								               		<img valign="bottom" src="resources/images/delete.gif" border="0" alt="remove">
 								               	</a>	&nbsp;
 								               </td>
@@ -442,7 +458,7 @@
 				 	<%-- <input type="hidden" name="numberOfItemLinesInTopic" id="numberOfItemLinesInTopic" value="${numberOfItemLinesInTopic}" /> --%>
 				 	
 				 	<%-- Topic ITEM CREATE --%>
-	 				<table width="80%" align="left" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
+	 				<table width="80%" align="left" class="formFrameHeaderBlueWithBorder" border="0" cellspacing="0" cellpadding="0">
 				 		<tr height="15">
 				 			<td class="text14White" align="left" >
 				 				<b>&nbsp;&nbsp;V<label onClick="showPop('debugPrintlnAjaxItemFetchAdmin');" >a</label>relinje&nbsp;</b>
@@ -469,7 +485,7 @@
 			 				</td>
 		 				</tr>
 	 				</table>
-					<table width="80%" align="left" class="formFrame" border="0" cellspacing="0" cellpadding="0">
+					<table width="80%" align="left" class="formFrameTitaniumGrayRoundBottom" border="0" cellspacing="0" cellpadding="0">
 				 		<tr height="15"><td class="text" align="left"></td></tr>
 				 		<tr>
 					 		<td>
@@ -552,7 +568,7 @@
 						    <td align="left" colspan="5">
 									<c:choose>	
 										<c:when test="${model.status == 'M' || empty model.status || model.status == '1'}">
-											<input class="inputFormSubmit" type="submit" name="submit" onclick="javascript: form.action='tvinnsadimport_edit_finansopplysninger.do';" value='<spring:message code="systema.tvinn.sad.import.item.createnew.submit"/>'>
+											<input class="inputFormSubmit" type="submit" name="submit" onclick="javascript: form.action='tvinnsadimport_edit_omberegning_finansopplysninger.do';" value='<spring:message code="systema.tvinn.sad.import.item.createnew.submit"/>'>
 											&nbsp;&nbsp;
 										</c:when>
 										<c:otherwise>

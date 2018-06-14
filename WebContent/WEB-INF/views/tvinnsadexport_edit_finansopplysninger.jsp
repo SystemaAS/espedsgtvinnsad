@@ -387,6 +387,25 @@
 				</td>
 			</tr>
 			</spring:hasBindErrors>
+			
+			<%-- Other errors (none validation errors) --%>
+			<c:if test="${not empty model.errorMessage}">
+			<tr>
+				<td >
+	            	<table width="100%" align="left" border="0" cellspacing="0" cellpadding="0">
+				 		<tr>
+				 			<td class="textError">
+				 				<ul>
+                                    <li>
+                                    	${model.errorMessage}  
+                                    </li>                                    
+                                </ul>
+				 			</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			</c:if>
 			<%-- ------------------------------------------------- --%>
            	<%-- DETAIL Section - Create Item line PRIMARY SECTION --%>
            	<%-- ------------------------------------------------- --%>

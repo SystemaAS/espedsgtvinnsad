@@ -83,6 +83,11 @@ public class JsonSadImportTopicFinansOpplysningerRecord extends JsonAbstractGran
 	public void setSfxxx(String value) {  this.sfxxx = value; }
 	public String getSfxxx() { return this.sfxxx;}
 	
+	
+	private String errMsg = "";
+	public void setErrMsg(String value) {  this.errMsg = value; }
+	public String getErrMsg() {return this.errMsg;}
+	
 	/**
 	 * 
 	 * @return

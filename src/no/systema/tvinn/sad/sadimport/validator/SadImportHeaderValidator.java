@@ -16,7 +16,7 @@ import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.validator.JsonSadI
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.validator.JsonSadImportTopicIncotermsAttributesRecord;
 import no.systema.tvinn.sad.sadimport.service.SadImportSpecificTopicService;
 import no.systema.tvinn.sad.sadimport.url.store.SadImportUrlDataStore;
-import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
+import no.systema.tvinn.sad.util.TvinnSadConstants;
 import no.systema.main.util.StringManager;
 import no.systema.main.validator.DateValidator;
 
@@ -139,6 +139,12 @@ public class SadImportHeaderValidator implements Validator {
 						errors.rejectValue("sifid", "systema.tvinn.sad.import.header.error.rule.invalidFaktDate"); 	
 					}
 				}
+				//Avs.Land vs Dekl.typ (EU vs IM)
+				if(strMgr.isNotNull(record.getSilka())){
+					if(!isValidCountryForDeklaration(record)){
+						errors.rejectValue("silka", "systema.tvinn.sad.import.header.error.rule.invalidCountryDeklType"); 	
+					}
+				}
 				
 				/*
 				if( (record.getDkih_dtm1()!=null && !"".equals(record.getDkih_dtm1()) ) && (record.getDkih_dtm2()!=null && !"".equals(record.getDkih_dtm2()) ) ){ 
@@ -204,7 +210,37 @@ public class SadImportHeaderValidator implements Validator {
 		
 		return retval;
 	}
-	
+	/**
+	 * 
+	 * @param record
+	 * @return
+	 */
+	private boolean isValidCountryForDeklaration(JsonSadImportSpecificTopicRecord record){
+		boolean retval = false;
+		
+		boolean matchEU_Country = false;
+		
+		for(String country:TvinnSadConstants.LIST_EU_COUNTRIES){
+			if(country.equals(record.getSilka())){
+				matchEU_Country = true;
+				break;
+			}
+		}
+		//
+		if(matchEU_Country){
+			if("EU".equals(record.getSidty())){
+				logger.info("MATCH EU");
+				retval = true;
+			}
+		}else{
+			if("IM".equals(record.getSidty())){
+				logger.info("MATCH IM");
+				retval = true;
+			}
+		}
+		
+		return retval;
+	}
 	
 	/**
 	 * 

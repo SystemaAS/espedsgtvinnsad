@@ -163,11 +163,6 @@
 	  });
   });
   
-  
-  
-  
-  
-  
   //----------------------------------------------------------------------------------
   //START Model dialog "Kopiera Ärende from template (norsk export/transport order)
   //--------------------------------------------------------------------------------
@@ -175,10 +170,10 @@
   jq(function() { 
 	  jq("#dialogCopyFromTransportUppdrag").dialog({
 		  autoOpen: false,
-		  maxWidth:500,
-          maxHeight: 400,
-          width: 500,
-          height: 400,
+		  maxWidth:700,
+          maxHeight: 500,
+          width: 650,
+          height: 450,
 		  modal: true
 	  });
   });
@@ -186,7 +181,7 @@
   jq(function() {
 	  jq("#copyFromTransportUppdragLink").click(function() {
 		  //setters (add more if needed)
-		  jq('#dialogCopyFromTransportUppdrag').dialog( "option", "title", "Last ned oppdrag fra SYSPED" );
+		  jq('#dialogCopyFromTransportUppdrag').dialog( "option", "title", "Lage Ny Tolldeklarasjon" );
 		  
 		  //deal with buttons for this modal window
 		  jq('#dialogCopyFromTransportUppdrag').dialog({
@@ -203,8 +198,9 @@
 			 	 text: "Avbryt", 
 				 click: function(){
 					 		//back to initial state of form elements on modal dialog
-					 		jq("#dialogSaveSU").button("option", "disabled", true);
+					 		jq("#dialogSaveSU").button("option", "disabled", false);
 					 		jq("#selectedAvd").val("");
+					 		jq("#selectedSign").val("");
 					 		jq("#selectedOpd").val("");
 					 		jq("#selectedExtRefNr").val("");
 					 		jq( this ).dialog( "close" ); 

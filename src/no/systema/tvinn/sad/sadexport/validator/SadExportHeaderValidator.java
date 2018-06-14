@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 import org.springframework.validation.Validator;
+import org.apache.log4j.Logger;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 
@@ -11,6 +12,9 @@ import no.systema.main.util.DateTimeManager;
 import no.systema.main.util.StringManager;
 import no.systema.main.validator.DateValidator;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicRecord;
+import no.systema.tvinn.sad.sadimport.controller.SadImportHeaderController;
+import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportSpecificTopicRecord;
+import no.systema.tvinn.sad.util.TvinnSadConstants;
 import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
 
 /**
@@ -20,6 +24,7 @@ import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
  *
  */
 public class SadExportHeaderValidator implements Validator {
+	private static final Logger logger = Logger.getLogger(SadExportHeaderValidator.class.getName());
 	private StringManager strMgr = new StringManager();
 	private DateValidator dateValidator = new DateValidator();
 	
@@ -109,10 +114,13 @@ public class SadExportHeaderValidator implements Validator {
 						errors.rejectValue("sefid", "systema.tvinn.sad.export.header.error.rule.invalidFaktDate"); 	
 					}
 				}
+				//Avs.Land vs Dekl.typ (EU vs EX)
+				if(strMgr.isNotNull(record.getSelka())){
+					if(!isValidCountryForDeklaration(record)){
+						errors.rejectValue("selka", "systema.tvinn.sad.export.header.error.rule.invalidCountryDeklType"); 	
+					}
+				}
 			}
-			
-			
-			
 		}
 	}
 	
@@ -169,6 +177,37 @@ public class SadExportHeaderValidator implements Validator {
 			}
 			
 		}
+		return retval;
+	}
+	/**
+	 * 
+	 * @param record
+	 * @return
+	 */
+	private boolean isValidCountryForDeklaration(JsonSadExportSpecificTopicRecord record){
+		boolean retval = false;
+		
+		boolean matchEU_Country = false;
+		
+		for(String country:TvinnSadConstants.LIST_EU_COUNTRIES){
+			if(country.equals(record.getSelka())){
+				matchEU_Country = true;
+				break;
+			}
+		}
+		//
+		if(matchEU_Country){
+			if("EU".equals(record.getSedty())){
+				logger.info("MATCH EU");
+				retval = true;
+			}
+		}else{
+			if("EX".equals(record.getSedty())){
+				logger.info("MATCH EX");
+				retval = true;
+			}
+		}
+		
 		return retval;
 	}
 

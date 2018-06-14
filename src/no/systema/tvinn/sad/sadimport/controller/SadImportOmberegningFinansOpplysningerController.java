@@ -66,19 +66,19 @@ import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadTolltariffVaruko
 
 
 /**
- * SAD Import create items gateway
+ * SAD Import FinansOpp. Omberegning create items gateway
  * 
  * @author oscardelatorre
- * @date Sep 24, 2014
+ * @date Jun 12, 2018
  * 
  */
 
 @Controller
 //@SessionAttributes(AppConstants.SYSTEMA_WEB_USER_KEY)
 @Scope("session")
-public class SadImportHeaderFinansOpplysningerController {
+public class SadImportOmberegningFinansOpplysningerController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = Logger.getLogger(SadImportHeaderFinansOpplysningerController.class.getName());
+	private static final Logger logger = Logger.getLogger(SadImportOmberegningFinansOpplysningerController.class.getName());
 	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private SadImportCalculator sadImportCalculator = new SadImportCalculator();
@@ -108,12 +108,12 @@ public class SadImportHeaderFinansOpplysningerController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="tvinnsadimport_edit_finansopplysninger.do")
-	public ModelAndView sadImportEditFinansOpplysninger(@ModelAttribute ("record") JsonSadImportTopicFinansOpplysningerRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+	@RequestMapping(value="tvinnsadimport_edit_omberegning_finansopplysninger.do")
+	public ModelAndView sadImportEditOmberegningFinansOpplysninger(@ModelAttribute ("record") JsonSadImportTopicFinansOpplysningerRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		boolean bindingErrorsExist = false;
-		logger.info("Inside: sadImportEditFinansOpplysninger");
+		logger.info("Inside: sadImportEditOmberegningFinansOpplysninger");
 		
-		ModelAndView successView = new ModelAndView("tvinnsadimport_edit_finansopplysninger");
+		ModelAndView successView = new ModelAndView("tvinnsadimport_edit_omberegning_finansopplysninger");
 		RpgReturnResponseHandler rpgReturnResponseHandler = new RpgReturnResponseHandler();
 		JsonSadImportTopicFinansOpplysningerRecord jsonSadImportTopicFinansOpplysningerRecord = null;
 		
@@ -206,7 +206,7 @@ public class SadImportHeaderFinansOpplysningerController {
 						//		  This step is ONLY applicable for new item lines 
 						//-------------------------------------------------------------------------------------------
 						jsonSadImportTopicFinansOpplysningerRecord  = this.createNewItemKeySeeds(recordToValidate, session, request, appUser);
-						if(jsonSadImportTopicFinansOpplysningerRecord!=null && strMgr.isNull(jsonSadImportTopicFinansOpplysningerRecord.getErrMsg()) ){
+						if(jsonSadImportTopicFinansOpplysningerRecord!=null){
 							String newLineId = jsonSadImportTopicFinansOpplysningerRecord.getSftxt();
 							//take the rest from GUI.
 							jsonSadImportTopicFinansOpplysningerRecord = new JsonSadImportTopicFinansOpplysningerRecord();
@@ -347,7 +347,8 @@ public class SadImportHeaderFinansOpplysningerController {
     			model.put("lineId", lineId);
     			model.put("action", action);
     		}
-    		this.setDefaultDomainItemRecordInView(model, jsonSadImportTopicFinansOpplysningerContainer, recordToValidate, bindingErrorsExist, isValidCreatedRecordTransactionOnRPG );
+    		this.setDefaultDomainItemRecordInView(model, jsonSadImportTopicFinansOpplysningerContainer, recordToValidate, bindingErrorsExist, isValidCreatedRecordTransactionOnRPG);
+			
 	    	successView.addObject("model",model);
 			//successView.addObject(Constants.EDIT_ACTION_ON_TOPIC, Constants.ACTION_FETCH);
 	    	return successView;
@@ -526,7 +527,7 @@ public class SadImportHeaderFinansOpplysningerController {
 		//we must complete the GUI-json with the value from a line nr seed here
 		if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage()) ){
 			logger.info("[ERROR] No mandatory seeds (syli, opd) were generated correctly)! look at std output log. [errMsg]" + rpgReturnResponseHandler.getErrorMessage());
-			jsonSadImportTopicFinansOpplysningerRecord.setErrMsg(rpgReturnResponseHandler.getErrorMessage());
+			jsonSadImportTopicFinansOpplysningerRecord = null;
 		}
         
 		return jsonSadImportTopicFinansOpplysningerRecord;

@@ -121,8 +121,8 @@ public class SadImportHeaderController {
 	public ModelAndView doPrepareCreate(HttpSession session, HttpServletRequest request){
 		Map model = new HashMap();
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
-		//String messageFromContext = this.context.getMessage("user.label",new Object[0], request.getLocale());
 		ModelAndView successView = new ModelAndView("tvinnsadimport_edit");
+		
 		logger.info("Method: doPrepareCreate");
 		//check user (should be in session already)
 		if(appUser==null){
@@ -132,9 +132,25 @@ public class SadImportHeaderController {
 			this.setCodeDropDownMgr(appUser, model);
 			this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
     		this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
+    		//Mandatory fields from caller
+    		String avd = request.getParameter("avd");
+    		String sign = request.getParameter("sign");
+    		
     		//domain
-    		successView.addObject("model", model);
-    		successView.addObject(TvinnSadConstants.EDIT_ACTION_ON_TOPIC, TvinnSadConstants.ACTION_CREATE);
+    		JsonSadImportSpecificTopicRecord jsonSadImportSpecificTopicRecord = this.createNewTopicHeaderKeySeeds(session, request, appUser, avd, sign);
+			//override default since we must enter in UDATE-status. Long gone is now the CREATE NEW.
+    		if(jsonSadImportSpecificTopicRecord!=null){
+	    		StringBuffer redirectViewStr = new StringBuffer();
+	    		redirectViewStr.append("redirect:tvinnsadimport_edit.do?action=doFetch&avd=" + jsonSadImportSpecificTopicRecord.getSiavd());
+	    		redirectViewStr.append("&opd=" + jsonSadImportSpecificTopicRecord.getSitdn());
+	    		redirectViewStr.append("&sysg=" + jsonSadImportSpecificTopicRecord.getSisg());
+	    		//TODO ßredirectBfr.append("&sitll=121212&syst=&sydt=310518&o2_sist=&o2_sidt=20180612&o2_simf=2");
+	    		successView = new ModelAndView(redirectViewStr.toString());
+    		}
+    		
+    		//successView.addObject("model", model);
+    		//successView.addObject(TvinnSadConstants.EDIT_ACTION_ON_TOPIC, TvinnSadConstants.ACTION_CREATE);
+    		
 		}
 		return successView;
 	}
@@ -774,21 +790,18 @@ public class SadImportHeaderController {
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
 
 		ModelAndView successView = new ModelAndView("tvinnsadimport_edit");
-		//fallback view (usually on errors)
-		ModelAndView fallbackView = new ModelAndView("tvinnsadimport_edit");
-		fallbackView.addObject("action", "doPrepareCreate");
-		//this view is when the end user choose not to copy at all. He/She will start from scratch (empty form (header))
-		ModelAndView cleanNewView = new ModelAndView("redirect:tvinnsadimport_edit.do?action=doPrepareCreate");
 				
 		String method = "doFetchTopicFromTransportUppdrag";
 		logger.info("Method: " + method);
 		Map model = new HashMap();
 		
-		//We must get all parameters from the enumeration since all have sequence counter number
+		//Get parameters
 		String action=request.getParameter("actionGS");;
 		String avd=request.getParameter("selectedAvd");
 		String opd=request.getParameter("selectedOpd");
 		String extRefNr=request.getParameter("selectedExtRefNr"); //Domino ref in Dachser Norway AS
+		//fallback in case no transport uppdrag is applicable
+		ModelAndView fallbackView = new ModelAndView("redirect:tvinnsadimport_edit.do?action=doPrepareCreate&avd=1&sign=OT" );
 		
 		//check user (should be in session already)
 		if(appUser==null){
@@ -873,10 +886,11 @@ public class SadImportHeaderController {
 					logger.fatal("[ERROR fatal] NO CONTENT on jsonPayload from URL... ??? <Null>");
 					return loginView;
 				}
-			}else{
-				logger.warn("[INFO] Tolldekl.nr. is NULL. Redirecting to: tvinnsadimport_edit.do?action=doPrepareCreate... ");
+			}else if(strMgr.isNotNull(avd)){
+				logger.warn("[INFO] Redirecting to: tvinnsadimport_edit.do?action=doPrepareCreate... to CREATE-NEW ");
 				//return new ModelAndView("redirect:tdsimport_edit.do?action=doPrepareCreate");
-				return cleanNewView;
+				//this view is when the end user choose not to copy at all. He/She will start from scratch (empty form (header))
+				return fallbackView;
 			}
 			
 			return successView;
@@ -1368,7 +1382,10 @@ public class SadImportHeaderController {
 		
 		//we must complete the GUI-json sypo and tuid with the value from a seedTuid here
 		if(rpgReturnResponseHandler.getSitdn()!=null && !"".equals(rpgReturnResponseHandler.getSitdn())){
+			record.setSiavd(avd);
+			record.setSisg(sign);
 			record.setSitdn(rpgReturnResponseHandler.getSitdn().trim());
+			
 		}else{
 			logger.info("[ERROR] No mandatory seeds (sitdn) were generated correctly)! look at std output log. [errMsg]" + rpgReturnResponseHandler.getErrorMessage());
 			record = null;
