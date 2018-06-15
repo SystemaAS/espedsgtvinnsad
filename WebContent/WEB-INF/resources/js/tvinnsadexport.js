@@ -289,7 +289,9 @@
   }
 
   jq(document).ready(function() {
-	  jq.fn.dataTable.moment( 'DDMMYY' );  
+	 //very important for sorting 
+	 jq.fn.dataTable.moment( 'DDMMYY' );
+	 
     //init table (no ajax, no columns since the payload is already there by means of HTML produced on the back-end)
     jq('#mainList').dataTable( {
   	  //"dom": '<"top"f>t<"bottom"><"clear">',
@@ -297,7 +299,7 @@
   	  "scrollY":        	"700px",
   	  "scrollCollapse":  true,
 	  "tabIndex": -1,
-	  "order": [[ 5, "desc" ]], //date
+	  "order": [[ 5, "desc" ], [ 3, "desc" ]], //date, tolldekl.nr.
 	  "lengthMenu": [ 25, 50, 100, 200]
     });
     //event on input field for search

@@ -266,7 +266,7 @@
   //---------------------------------------------------
   
   
-//-------------------
+  //-------------------
   //Datatables jquery
   //-------------------
   //private function
@@ -277,7 +277,9 @@
   }
 
   jq(document).ready(function() {
-	jq.fn.dataTable.moment( 'DDMMYY' );  
+	//very important for sorting
+	jq.fn.dataTable.moment( 'DDMMYY' ); 
+	
     //init table (no ajax, no columns since the payload is already there by means of HTML produced on the back-end)
     jq('#mainList').dataTable( {
   	  //"dom": '<"top"f>t<"bottom"><"clear">',

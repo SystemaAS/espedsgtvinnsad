@@ -252,7 +252,8 @@ public class SadExportHeaderFinansOpplysningerController {
 				    	}else{
 				    		//Update succefully done!
 				    		logger.info("[INFO] Valid STEP[2] Update -- Record successfully updated, OK ");
-				    		//put domain objects (it is not necessary since the fetch below (onFetch) will clean this up anyway)
+				    		//clear record id in order to apply default logic to the next new line
+				    		recordToValidate.setSftxt(null);
 				    	}
 					}else{
 						StringBuffer errorMessage = new StringBuffer();
@@ -334,7 +335,7 @@ public class SadExportHeaderFinansOpplysningerController {
 	    	this.setCodeDropDownMgr(appUser, model, headerRecord);
 	    		
     		//drop downs populated from a txt file
-    		this.setDomainObjectsForListInView(model, jsonSadExportTopicFinansOpplysningerContainer);
+    		this.setDomainObjectsForListInView(model, jsonSadExportTopicFinansOpplysningerContainer, recordToValidate);
 			//this next step is necessary for the default values on "create new" record
     		if(bindingErrorsExist || !isValidCreatedRecordTransactionOnRPG){
     			model.put("lineId", lineId);
@@ -369,12 +370,18 @@ public class SadExportHeaderFinansOpplysningerController {
 	 * @param container
 	 * 
 	 */
-	private void setDomainObjectsForListInView(Map model, JsonSadExportTopicFinansOpplysningerContainer container){
+	private void setDomainObjectsForListInView(Map model, JsonSadExportTopicFinansOpplysningerContainer container, JsonSadExportTopicFinansOpplysningerRecord recordToValidate){
 		List list = new ArrayList();
 		if(container!=null){
+			//int counter = 1;
 			for (JsonSadExportTopicFinansOpplysningerRecord record : container.getInvoicList()){
 				this.adjustDatesOnFetch(record);
 				list.add(record);
+				//fill in default values with last item line values since it is mostly the norm for the rest of lines (to help end-user)
+				recordToValidate.setSfdt(record.getSfdt());
+				recordToValidate.setSfvk28(record.getSfvk28());
+				recordToValidate.setSfkr28(record.getSfkr28());
+				
 			}
 		}
 		model.put(TvinnSadConstants.DOMAIN_LIST, list);
@@ -419,10 +426,14 @@ public class SadExportHeaderFinansOpplysningerController {
 				
 			}else{
 				//this means that there is at least one-item line with values to user as default values
+				logger.info("A:" + recordToValidate.getSfdt());
+				logger.info("AA:" + recordToValidate.getSfvk28());
+				logger.info("AAA:" + recordToValidate.getSfkr28());
 				if(strMgr.isNull(recordToValidate.getSftxt()) && strMgr.isNotNull(recordToValidate.getSfdt())){
 					defaultRecord.setSfdt(recordToValidate.getSfdt());
 					defaultRecord.setSfvk28(recordToValidate.getSfvk28());
 					defaultRecord.setSfkr28(recordToValidate.getSfkr28());
+					logger.info(defaultRecord.getSfdt());
 				}
 				//
 				model.put(TvinnSadConstants.DOMAIN_RECORD, defaultRecord);				

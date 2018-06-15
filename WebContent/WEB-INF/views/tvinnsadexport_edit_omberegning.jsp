@@ -161,12 +161,18 @@
 				<tr>
 				<td width="2px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 				<td width="8%" valign="bottom" class="tabSub" align="center" nowrap>
-						<font class="text14"><b>Hode</b></font>
+					<font class="text14"><b>Hode</b></font>
 				</td>
 				<td width="8%" valign="bottom" class="tabDisabledSub" align="center" nowrap>
 					<a id="alinkOmberegningItemLinesSubTab" style="display:block;" href="tvinnsadexport_edit_omberegning_items.do?action=doFetch&avd=${ model.record.seavd}&sign=${ model.record.sesg}
-											&opd=${ model.record.setdn}&status=${ model.record.sest}&fabl=${model.record.sebel1}&o2_sest=${ model.record.o2_sest}&o2_sedt=${ model.record.o2_sedt}&o2_semf=${ model.record.o2_semf}&selectedOmb=${ model.selectedOmb}">
-					<font class="text14Gray">Varelinjer</font>
+						&opd=${ model.record.setdn}&status=${ model.record.sest}&fabl=${model.record.sebel1}&o2_sest=${ model.record.o2_sest}&o2_sedt=${ model.record.o2_sedt}&o2_semf=${ model.record.o2_semf}&selectedOmb=${ model.selectedOmb}">
+						<font class="text14Gray">Varelinjer</font>
+					</a>
+				</td>
+				<td width="8%" valign="bottom" class="tabDisabledSub" align="center" nowrap>
+					<a id="alinkOmberegningItemLinesSubTab" style="display:block;" href="tvinnsadexport_edit_omberegning_finansopplysninger.do?action=doFetch&avd=${ model.record.seavd}&sign=${ model.record.sesg}
+						&opd=${ model.record.setdn}&status=${ model.record.sest}&fabl=${model.record.sebel1}&o2_sest=${ model.record.o2_sest}&o2_sedt=${ model.record.o2_sedt}&o2_semf=${ model.record.o2_semf}&selectedOmb=${ model.selectedOmb}">
+						<font class="text14Gray">Finans.oppl.</font>
 					</a>
 				</td>
 				<td width="85%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>

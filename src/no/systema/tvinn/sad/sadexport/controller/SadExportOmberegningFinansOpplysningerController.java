@@ -1,4 +1,4 @@
-package no.systema.tvinn.sad.sadimport.controller;
+package no.systema.tvinn.sad.sadexport.controller;
 
 import java.util.*;
 
@@ -35,53 +35,48 @@ import no.systema.main.model.SystemaWebUser;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.JsonDebugger;
 import no.systema.main.util.StringManager;
+import no.systema.tvinn.sad.sadexport.service.SadExportSpecificTopicService;
 
-import no.systema.tvinn.sad.sadimport.service.SadImportSpecificTopicService;
+import no.systema.tvinn.sad.sadexport.mapper.url.request.UrlRequestParameterMapper;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicRecord;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicFinansOpplysningerContainer;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicFinansOpplysningerRecord;
 
-import no.systema.tvinn.sad.sadimport.mapper.url.request.UrlRequestParameterMapper;
-import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportSpecificTopicItemContainer;
-import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportSpecificTopicItemRecord;
-import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportSpecificTopicFaktTotalContainer;
-import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportSpecificTopicFaktTotalRecord;
-import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportSpecificTopicRecord;
-import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportTopicFinansOpplysningerContainer;
-import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportTopicFinansOpplysningerRecord;
-
-import no.systema.tvinn.sad.sadimport.url.store.SadImportUrlDataStore;
+import no.systema.tvinn.sad.sadexport.url.store.SadExportUrlDataStore;
 import no.systema.tvinn.sad.util.TvinnSadConstants;
 import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
-import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
 
 import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService;
-import no.systema.tvinn.sad.sadimport.service.html.dropdown.SadImportDropDownListPopulationService;
-import no.systema.tvinn.sad.sadimport.util.RpgReturnResponseHandler;
-import no.systema.tvinn.sad.sadimport.util.SadImportCalculator;
-import no.systema.tvinn.sad.sadimport.util.manager.CodeDropDownMgr;
+import no.systema.tvinn.sad.sadexport.service.html.dropdown.SadExportDropDownListPopulationService;
+import no.systema.tvinn.sad.sadexport.util.RpgReturnResponseHandler;
+import no.systema.tvinn.sad.sadexport.util.SadExportCalculator;
+import no.systema.tvinn.sad.sadexport.util.manager.CodeDropDownMgr;
 
-import no.systema.tvinn.sad.sadimport.validator.SadImportHeaderFinansOpplysningerValidator;
+import no.systema.tvinn.sad.sadexport.validator.SadExportHeaderFinansOpplysningerValidator;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicFaktTotalContainer;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicFaktTotalRecord;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicFaktTotalRecord;
 
 import no.systema.tvinn.sad.service.TvinnSadTolltariffVarukodService;
-import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadTolltariffVarukodContainer;
-import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadTolltariffVarukodRecord;
 
 
 /**
- * SAD Import FinansOpp. Omberegning create items gateway
+ * SAD Export create items gateway
  * 
  * @author oscardelatorre
- * @date Jun 12, 2018
+ * @date Jun 15, 2018
  * 
  */
 
 @Controller
 //@SessionAttributes(AppConstants.SYSTEMA_WEB_USER_KEY)
 @Scope("session")
-public class SadImportOmberegningFinansOpplysningerController {
+public class SadExportOmberegningFinansOpplysningerController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = Logger.getLogger(SadImportOmberegningFinansOpplysningerController.class.getName());
+	private static final Logger logger = Logger.getLogger(SadExportOmberegningFinansOpplysningerController.class.getName());
 	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
-	private SadImportCalculator sadImportCalculator = new SadImportCalculator();
+	private SadExportCalculator sadExportCalculator = new SadExportCalculator();
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
 	private StringManager strMgr = new StringManager();	
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
@@ -108,14 +103,14 @@ public class SadImportOmberegningFinansOpplysningerController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="tvinnsadimport_edit_omberegning_finansopplysninger.do")
-	public ModelAndView sadImportEditOmberegningFinansOpplysninger(@ModelAttribute ("record") JsonSadImportTopicFinansOpplysningerRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+	@RequestMapping(value="tvinnsadexport_edit_omberegning_finansopplysninger.do")
+	public ModelAndView sadImportEditOmberegningFinansOpplysninger(@ModelAttribute ("record") JsonSadExportTopicFinansOpplysningerRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		boolean bindingErrorsExist = false;
 		logger.info("Inside: sadImportEditOmberegningFinansOpplysninger");
 		
-		ModelAndView successView = new ModelAndView("tvinnsadimport_edit_omberegning_finansopplysninger");
+		ModelAndView successView = new ModelAndView("tvinnsadexport_edit_omberegning_finansopplysninger");
 		RpgReturnResponseHandler rpgReturnResponseHandler = new RpgReturnResponseHandler();
-		JsonSadImportTopicFinansOpplysningerRecord jsonSadImportTopicFinansOpplysningerRecord = null;
+		JsonSadExportTopicFinansOpplysningerRecord jsonSadExportTopicFinansOpplysningerRecord = null;
 		
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
 		
@@ -139,13 +134,14 @@ public class SadImportOmberegningFinansOpplysningerController {
 			String sign = request.getParameter("sign");
 			String status = request.getParameter("status");
 			String datum = request.getParameter("datum");
-			String omberegningFlag = request.getParameter("o2_sist");
-			String omberegningDate = request.getParameter("o2_sidt");
-			String omberegningType = request.getParameter("o2_simf");
+			String omberegningFlag = request.getParameter("o2_sest");
+			String omberegningDate = request.getParameter("o2_sedt");
+			String omberegningType = request.getParameter("o2_semf");
 			
 			//this fragment gets some header fields needed for the validator
-			JsonSadImportSpecificTopicRecord headerRecord = (JsonSadImportSpecificTopicRecord)session.getAttribute(TvinnSadConstants.DOMAIN_RECORD_TOPIC_TVINN_SAD);
-			String invoiceTotalAmount = headerRecord.getSibel3();
+			JsonSadExportSpecificTopicRecord headerRecord = (JsonSadExportSpecificTopicRecord)session.getAttribute(TvinnSadConstants.DOMAIN_RECORD_TOPIC_TVINN_SAD);
+			String invoiceTotalAmount = headerRecord.getSebel1();
+			
 			
 			//this key is only used with a real Update. When empty it will be a signal for a CREATE NEW (Add)
 			String lineId = request.getParameter("lineId");
@@ -158,9 +154,9 @@ public class SadImportOmberegningFinansOpplysningerController {
 			model.put("sign", sign);
 			model.put("status", status);
 			model.put("datum", datum);
-			model.put("o2_sist", omberegningFlag);
-			model.put("o2_sidt", omberegningDate);
-			model.put("o2_simf", omberegningType);
+			model.put("o2_sest", omberegningFlag);
+			model.put("o2_sedt", omberegningDate);
+			model.put("o2_semf", omberegningType);
 			
 			
 			if(TvinnSadConstants.ACTION_UPDATE.equals(action)){
@@ -168,7 +164,7 @@ public class SadImportOmberegningFinansOpplysningerController {
 				//recordToValidate.setHeader_dkih_aart(headerRecord.getDkih_aart());
 				//recordToValidate.setExtraMangdEnhet(this.getMandatoryMangdEnhetDirective(appUser.getUser(), recordToValidate));
 				
-				SadImportHeaderFinansOpplysningerValidator validator = new SadImportHeaderFinansOpplysningerValidator();
+				SadExportHeaderFinansOpplysningerValidator validator = new SadExportHeaderFinansOpplysningerValidator();
 				logger.info("Host via HttpServletRequest.getHeader('Host'): " + request.getHeader("Host"));
 			    validator.validate(recordToValidate, bindingResult);
 			    //check for ERRORS
@@ -186,10 +182,10 @@ public class SadImportOmberegningFinansOpplysningerController {
 						//-------
 						//UPDATE
 						//-------
-						logger.info("UPDATE(only) ITEM (existent item) on process...");
+						logger.info("UPDATE(only) FINANS ITEM (existent item) on process...");
 						//take the rest from GUI.
-						jsonSadImportTopicFinansOpplysningerRecord = new JsonSadImportTopicFinansOpplysningerRecord();
-						ServletRequestDataBinder binder = new ServletRequestDataBinder(jsonSadImportTopicFinansOpplysningerRecord);
+						jsonSadExportTopicFinansOpplysningerRecord = new JsonSadExportTopicFinansOpplysningerRecord();
+						ServletRequestDataBinder binder = new ServletRequestDataBinder(jsonSadExportTopicFinansOpplysningerRecord);
 			            //binder.registerCustomEditor(...); // if needed
 			            binder.bind(request);
 			            
@@ -197,18 +193,18 @@ public class SadImportOmberegningFinansOpplysningerController {
 						//-------
 						//CREATE
 						//-------
-						logger.info("CREATE and UPDATE on ITEM (new fresh item) on process...");
+						logger.info("CREATE and UPDATE on FINANS ITEM (new fresh item) on process...");
 						//This means that the update will be done AFTER a creation of an empty record. All this in the same transaction. 2 STEPS involved: (1)create and (2)update
 						//-----------------------------------------------------------------------------------------
 						//STEP[1] Generate new Item line key seeds (avd,opd,sftxt) by creating an empty new record. 
 						//		  This step is ONLY applicable for new item lines 
 						//-------------------------------------------------------------------------------------------
-						jsonSadImportTopicFinansOpplysningerRecord  = this.createNewItemKeySeeds(recordToValidate, session, request, appUser);
-						if(jsonSadImportTopicFinansOpplysningerRecord!=null && strMgr.isNull(jsonSadImportTopicFinansOpplysningerRecord.getErrMsg())){
-							String newLineId = jsonSadImportTopicFinansOpplysningerRecord.getSftxt();
+						jsonSadExportTopicFinansOpplysningerRecord  = this.createNewItemKeySeeds(recordToValidate, session, request, appUser);
+						if(jsonSadExportTopicFinansOpplysningerRecord!=null  && strMgr.isNull(jsonSadExportTopicFinansOpplysningerRecord.getErrMsg()) ){
+							String newLineId = jsonSadExportTopicFinansOpplysningerRecord.getSftxt();
 							//take the rest from GUI.
-							jsonSadImportTopicFinansOpplysningerRecord = new JsonSadImportTopicFinansOpplysningerRecord();
-							ServletRequestDataBinder binder = new ServletRequestDataBinder(jsonSadImportTopicFinansOpplysningerRecord);
+							jsonSadExportTopicFinansOpplysningerRecord = new JsonSadExportTopicFinansOpplysningerRecord();
+							ServletRequestDataBinder binder = new ServletRequestDataBinder(jsonSadExportTopicFinansOpplysningerRecord);
 				            //binder.registerCustomEditor(...); // if needed
 				            binder.bind(request);
 				            logger.info("[INFO] populate the sftx:" + newLineId);
@@ -222,16 +218,16 @@ public class SadImportOmberegningFinansOpplysningerController {
 					if(isValidCreatedRecordTransactionOnRPG){
 						logger.info("[INFO] Valid STEP[1] Add Record(if applicable) successfully created, OK ");
 						//adjust after bind (both UPDATE or CREATE)
-						this.adjustFieldsAfterBind(request, jsonSadImportTopicFinansOpplysningerRecord);
+						this.adjustFieldsAfterBind(request, jsonSadExportTopicFinansOpplysningerRecord);
 						
 						//---------------------------
 						//get BASE URL = RPG-PROGRAM
 			            //---------------------------
-						String BASE_URL_UPDATE = SadImportUrlDataStore.SAD_IMPORT_BASE_UPDATE_SPECIFIC_TOPIC_FINANS_OPPLYS_DATA_URL;
-						logger.info("[INFO] UPDATE to be done with invoiceId [sftxt]: " + jsonSadImportTopicFinansOpplysningerRecord.getSftxt());
+						String BASE_URL_UPDATE = SadExportUrlDataStore.SAD_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_FINANS_OPPLYS_DATA_URL;
+						logger.info("[INFO] UPDATE to be done with invoiceId [sftxt]: " + jsonSadExportTopicFinansOpplysningerRecord.getSftxt());
 						
-						urlRequestParamsKeys = this.getRequestUrlKeyParametersUpdate(jsonSadImportTopicFinansOpplysningerRecord.getSftxt(), avd, opd, appUser, TvinnSadConstants.MODE_UPDATE);
-						String urlRequestParamsTopicItem = this.urlRequestParameterMapper.getUrlParameterValidString((jsonSadImportTopicFinansOpplysningerRecord));
+						urlRequestParamsKeys = this.getRequestUrlKeyParametersUpdate(jsonSadExportTopicFinansOpplysningerRecord.getSftxt(), avd, opd, appUser, TvinnSadConstants.MODE_UPDATE);
+						String urlRequestParamsTopicItem = this.urlRequestParameterMapper.getUrlParameterValidString((jsonSadExportTopicFinansOpplysningerRecord));
 						//put the final valid param. string
 						String urlRequestParams = urlRequestParamsKeys + urlRequestParamsTopicItem;
 						//for debug purposes in GUI
@@ -251,7 +247,7 @@ public class SadImportOmberegningFinansOpplysningerController {
 				    	rpgReturnResponseHandler.evaluateRpgResponseOnTopicItemCreateOrUpdate(rpgReturnPayload);
 				    	if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){
 				    		rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on UPDATE: " + rpgReturnResponseHandler.getErrorMessage());
-				    		this.setFatalError(model, rpgReturnResponseHandler, jsonSadImportTopicFinansOpplysningerRecord);
+				    		this.setFatalError(model, rpgReturnResponseHandler, jsonSadExportTopicFinansOpplysningerRecord);
 				    		
 				    	}else{
 				    		//Update succefully done!
@@ -265,11 +261,11 @@ public class SadImportOmberegningFinansOpplysningerController {
 						if(rpgReturnResponseHandler!=null && strMgr.isNotNull(rpgReturnResponseHandler.getErrorMessage())){
 							errorMessage.append(rpgReturnResponseHandler.getErrorMessage());
 						}
-						if(jsonSadImportTopicFinansOpplysningerRecord!=null && strMgr.isNotNull(jsonSadImportTopicFinansOpplysningerRecord.getErrMsg())){
-							errorMessage.append(jsonSadImportTopicFinansOpplysningerRecord.getErrMsg());
+						if(jsonSadExportTopicFinansOpplysningerRecord!=null && strMgr.isNotNull(jsonSadExportTopicFinansOpplysningerRecord.getErrMsg())){
+							errorMessage.append(jsonSadExportTopicFinansOpplysningerRecord.getErrMsg());
 						}
 						rpgReturnResponseHandler.setErrorMessage(errorMessage.toString());
-						this.setFatalError(model, rpgReturnResponseHandler, jsonSadImportTopicFinansOpplysningerRecord);
+						this.setFatalError(model, rpgReturnResponseHandler, jsonSadExportTopicFinansOpplysningerRecord);
 					}
 			    }
 				
@@ -280,7 +276,7 @@ public class SadImportOmberegningFinansOpplysningerController {
 				//---------------------------
 				//get BASE URL = RPG-PROGRAM
 	            //---------------------------
-				String BASE_URL_DELETE = SadImportUrlDataStore.SAD_IMPORT_BASE_UPDATE_SPECIFIC_TOPIC_FINANS_OPPLYS_DATA_URL;
+				String BASE_URL_DELETE = SadExportUrlDataStore.SAD_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_FINANS_OPPLYS_DATA_URL;
 				String urlRequestParams = this.getRequestUrlKeyParametersUpdate(lineNrToDelete, avd, opd, appUser,TvinnSadConstants.MODE_DELETE );
 				
 				logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
@@ -297,7 +293,7 @@ public class SadImportOmberegningFinansOpplysningerController {
 		    	rpgReturnResponseHandler.evaluateRpgResponseOnTopicItemCreateOrUpdate(rpgReturnPayload);
 		    	if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){
 		    		rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on UPDATE: " + rpgReturnResponseHandler.getErrorMessage());
-		    		this.setFatalError(model, rpgReturnResponseHandler, jsonSadImportTopicFinansOpplysningerRecord);
+		    		this.setFatalError(model, rpgReturnResponseHandler, jsonSadExportTopicFinansOpplysningerRecord);
 		    	}else{
 		    		//Delete succefully done!
 		    		logger.info("[INFO] Valid Delete -- Record successfully deleted, OK ");
@@ -308,7 +304,7 @@ public class SadImportOmberegningFinansOpplysningerController {
 			//---------------------------
 			//get BASE URL = RPG-PROGRAM
             //---------------------------
-			String BASE_URL_FETCH = SadImportUrlDataStore.SAD_IMPORT_BASE_FETCH_SPECIFIC_TOPIC_FINANS_OPPLYS_LIST_DATA_URL;
+			String BASE_URL_FETCH = SadExportUrlDataStore.SAD_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_FINANS_OPPLYS_LIST_DATA_URL;
 			urlRequestParamsKeys = this.getRequestUrlKeyParameters(request, avd, opd, appUser);
 			
 			logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
@@ -324,34 +320,34 @@ public class SadImportOmberegningFinansOpplysningerController {
 					" " + "(fetched list):" + jsonPayloadFetch); 
 			
 			//Debug --> 
-			logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayloadFetch));
+	    	logger.info(jsonPayloadFetch);
 	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-	    	JsonSadImportTopicFinansOpplysningerContainer jsonSadImportTopicFinansOpplysningerContainer = this.sadImportSpecificTopicService.getSadImportTopicFinansOpplysningerContainer(jsonPayloadFetch);
-	    	if(jsonSadImportTopicFinansOpplysningerContainer!=null){
+	    	JsonSadExportTopicFinansOpplysningerContainer jsonSadExportTopicFinansOpplysningerContainer = this.sadExportSpecificTopicService.getSadExportTopicFinansOpplysningerContainer(jsonPayloadFetch);
+	    	if(jsonSadExportTopicFinansOpplysningerContainer!=null){
 	    		
-	    		JsonSadImportSpecificTopicFaktTotalRecord sumFaktTotalRecord = this.getInvoiceTotalFromInvoices(avd, opd, appUser);
-	    		jsonSadImportTopicFinansOpplysningerContainer.setCalculatedValidCurrency(sumFaktTotalRecord.getTot_vk28());
-	    		jsonSadImportTopicFinansOpplysningerContainer.setCalculatedItemLinesTotalAmount(sumFaktTotalRecord.getTot_bl28());
-	    		
-	    		
+	    		JsonSadExportSpecificTopicFaktTotalRecord sumFaktTotalRecord = this.getInvoiceTotalFromInvoices(avd, opd, appUser);
+	    		jsonSadExportTopicFinansOpplysningerContainer.setCalculatedValidCurrency(sumFaktTotalRecord.getTot_vk28());
+	    		jsonSadExportTopicFinansOpplysningerContainer.setCalculatedItemLinesTotalAmount(sumFaktTotalRecord.getTot_bl28());
+
 	    	}
 	    	//drop downs populated from back-end
 	    	this.setCodeDropDownMgr(appUser, model, headerRecord);
 	    		
     		//drop downs populated from a txt file
-    		this.setDomainObjectsForListInView(model, jsonSadImportTopicFinansOpplysningerContainer, recordToValidate);
+    		this.setDomainObjectsForListInView(model, jsonSadExportTopicFinansOpplysningerContainer, recordToValidate);
 			//this next step is necessary for the default values on "create new" record
     		if(bindingErrorsExist || !isValidCreatedRecordTransactionOnRPG){
     			model.put("lineId", lineId);
     			model.put("action", action);
     		}
-    		this.setDefaultDomainItemRecordInView(model, jsonSadImportTopicFinansOpplysningerContainer, recordToValidate, bindingErrorsExist, isValidCreatedRecordTransactionOnRPG);
-			
+    		this.setDefaultDomainItemRecordInView(model, jsonSadExportTopicFinansOpplysningerContainer, recordToValidate, bindingErrorsExist, isValidCreatedRecordTransactionOnRPG );
 	    	successView.addObject("model",model);
 			//successView.addObject(Constants.EDIT_ACTION_ON_TOPIC, Constants.ACTION_FETCH);
 	    	return successView;
 			}
 	}
+	
+	
 	
 	/**
 	 * Set aspects  objects
@@ -373,20 +369,17 @@ public class SadImportOmberegningFinansOpplysningerController {
 	 * @param container
 	 * 
 	 */
-	private void setDomainObjectsForListInView(Map model, JsonSadImportTopicFinansOpplysningerContainer container, JsonSadImportTopicFinansOpplysningerRecord recordToValidate){
+	private void setDomainObjectsForListInView(Map model, JsonSadExportTopicFinansOpplysningerContainer container, JsonSadExportTopicFinansOpplysningerRecord recordToValidate){
 		List list = new ArrayList();
 		if(container!=null){
-			int counter = 1;
-			for (JsonSadImportTopicFinansOpplysningerRecord record : container.getInvoicList()){
+			for (JsonSadExportTopicFinansOpplysningerRecord record : container.getInvoicList()){
 				this.adjustDatesOnFetch(record);
 				list.add(record);
-				//fill in default values with first item line values since it is mostly the norm for the rest of lines (to help end-user)
-				if(counter==1){
-					recordToValidate.setSfdt(record.getSfdt());
-					recordToValidate.setSfvk28(record.getSfvk28());
-					recordToValidate.setSfkr28(record.getSfkr28());
-				}
-				counter++;
+				//fill in default values with last item line values since it is mostly the norm for the rest of lines (to help end-user)
+				recordToValidate.setSfdt(record.getSfdt());
+				recordToValidate.setSfvk28(record.getSfvk28());
+				recordToValidate.setSfkr28(record.getSfkr28());
+				
 			}
 		}
 		model.put(TvinnSadConstants.DOMAIN_LIST, list);
@@ -397,7 +390,7 @@ public class SadImportOmberegningFinansOpplysningerController {
 	 * @param model
 	 * @param record
 	 */
-	private void setDomainObjectsInView(Map model, JsonSadImportTopicFinansOpplysningerRecord record){
+	private void setDomainObjectsInView(Map model, JsonSadExportTopicFinansOpplysningerRecord record){
 		this.adjustDatesOnFetch(record);
 		model.put(TvinnSadConstants.DOMAIN_RECORD, record);
 	}
@@ -411,9 +404,9 @@ public class SadImportOmberegningFinansOpplysningerController {
 	 * @param recordToValidate
 	 * 
 	 */
-	private void setDefaultDomainItemRecordInView(Map model, JsonSadImportTopicFinansOpplysningerContainer container, JsonSadImportTopicFinansOpplysningerRecord recordToValidate, boolean bindingErrorsExist, boolean isValidCreatedRecordTransactionOnRPG){
+	private void setDefaultDomainItemRecordInView(Map model, JsonSadExportTopicFinansOpplysningerContainer container, JsonSadExportTopicFinansOpplysningerRecord recordToValidate, boolean bindingErrorsExist, boolean isValidCreatedRecordTransactionOnRPG){
 		List list = new ArrayList();
-		JsonSadImportTopicFinansOpplysningerRecord defaultRecord = new JsonSadImportTopicFinansOpplysningerRecord();
+		JsonSadExportTopicFinansOpplysningerRecord defaultRecord = new JsonSadExportTopicFinansOpplysningerRecord();
 		logger.info(recordToValidate.getSfvk28());
 		if(container!=null){
 			/*	
@@ -425,7 +418,6 @@ public class SadImportOmberegningFinansOpplysningerController {
 				}
 			}
 			*/
-			//meaning that there were validation errors
 			if(bindingErrorsExist || !isValidCreatedRecordTransactionOnRPG){
 				defaultRecord = recordToValidate;//in order to retain the original values before the validation errors
 				model.put(TvinnSadConstants.DOMAIN_RECORD, defaultRecord);
@@ -436,6 +428,7 @@ public class SadImportOmberegningFinansOpplysningerController {
 					defaultRecord.setSfdt(recordToValidate.getSfdt());
 					defaultRecord.setSfvk28(recordToValidate.getSfvk28());
 					defaultRecord.setSfkr28(recordToValidate.getSfkr28());
+					logger.info("AAA:" + defaultRecord.getSfvk28());
 				}
 				//
 				model.put(TvinnSadConstants.DOMAIN_RECORD, defaultRecord);				
@@ -451,7 +444,7 @@ public class SadImportOmberegningFinansOpplysningerController {
 	 * @param rpgReturnResponseHandler
 	 * @param record
 	 */
-	private void setFatalError(Map model, RpgReturnResponseHandler rpgReturnResponseHandler, JsonSadImportTopicFinansOpplysningerRecord record){
+	private void setFatalError(Map model, RpgReturnResponseHandler rpgReturnResponseHandler, JsonSadExportTopicFinansOpplysningerRecord record){
 		logger.info(rpgReturnResponseHandler.getErrorMessage());
 		this.setAspectsInView(model, rpgReturnResponseHandler);
 		//No refresh on jsonRecord is done for the GUI (form fields). Must be implemented right here, if required. !!
@@ -466,7 +459,7 @@ public class SadImportOmberegningFinansOpplysningerController {
 	 * @param appUser
 	 * @return
 	 */
-	private JsonSadImportTopicFinansOpplysningerRecord createNewItemKeySeeds(JsonSadImportTopicFinansOpplysningerRecord record, HttpSession session, HttpServletRequest request, SystemaWebUser appUser){
+	private JsonSadExportTopicFinansOpplysningerRecord createNewItemKeySeeds(JsonSadExportTopicFinansOpplysningerRecord record, HttpSession session, HttpServletRequest request, SystemaWebUser appUser){
 		RpgReturnResponseHandler rpgReturnResponseHandler = new RpgReturnResponseHandler();
 		//request variables
 		/*String numberOfItemLinesInTopicStr = request.getParameter("numberOfItemLinesInTopic");
@@ -476,14 +469,14 @@ public class SadImportOmberegningFinansOpplysningerController {
 		*/	
 		String opd = request.getParameter("opd");
 		String avd = request.getParameter("avd");
-		JsonSadImportTopicFinansOpplysningerRecord jsonSadImportTopicFinansOpplysningerRecord = new JsonSadImportTopicFinansOpplysningerRecord();
-		jsonSadImportTopicFinansOpplysningerRecord.setSfopdn(opd);
-		jsonSadImportTopicFinansOpplysningerRecord.setSfavd(avd);
-		jsonSadImportTopicFinansOpplysningerRecord.setSftxt(record.getSftxt());
+		JsonSadExportTopicFinansOpplysningerRecord jsonSadExportTopicFinansOpplysningerRecord = new JsonSadExportTopicFinansOpplysningerRecord();
+		jsonSadExportTopicFinansOpplysningerRecord.setSfopdn(opd);
+		jsonSadExportTopicFinansOpplysningerRecord.setSfavd(avd);
+		jsonSadExportTopicFinansOpplysningerRecord.setSftxt(record.getSftxt());
 		//---------------------------
 		//get BASE URL = RPG-PROGRAM
         //---------------------------
-		String BASE_URL = SadImportUrlDataStore.SAD_IMPORT_BASE_UPDATE_SPECIFIC_TOPIC_FINANS_OPPLYS_DATA_URL;
+		String BASE_URL = SadExportUrlDataStore.SAD_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_FINANS_OPPLYS_DATA_URL;
 		
 		//-------------------------------------------------------------------------------------------
 		// STEP[PREPARE CREATION] --> generate new opd and tuid (if applicable) in order to be able to Add (Create)
@@ -492,8 +485,8 @@ public class SadImportOmberegningFinansOpplysningerController {
 		//logger.info("STEP[1] numberOfItemLinesInTopicStr: " + numberOfItemLinesInTopicStr);
 		StringBuffer urlRequestParamsForSeed = new StringBuffer();
 		urlRequestParamsForSeed.append("user=" + appUser.getUser());
-		urlRequestParamsForSeed.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "avd=" + jsonSadImportTopicFinansOpplysningerRecord.getSfavd());
-		urlRequestParamsForSeed.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "opd=" + jsonSadImportTopicFinansOpplysningerRecord.getSfopdn());
+		urlRequestParamsForSeed.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "avd=" + jsonSadExportTopicFinansOpplysningerRecord.getSfavd());
+		urlRequestParamsForSeed.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "opd=" + jsonSadExportTopicFinansOpplysningerRecord.getSfopdn());
 		/*
 		Integer numberOfItemLinesInTopic = -99;
 		try{
@@ -505,7 +498,7 @@ public class SadImportOmberegningFinansOpplysningerController {
 			//nothing
 		}
 		*/
-		urlRequestParamsForSeed.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "fak=" + jsonSadImportTopicFinansOpplysningerRecord.getSftxt());
+		urlRequestParamsForSeed.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "fak=" + jsonSadExportTopicFinansOpplysningerRecord.getSftxt());
 		urlRequestParamsForSeed.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "mode=" + TvinnSadConstants.MODE_ADD);
 		logger.info("URL for SEED: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
 		logger.info("PARAMS for SEED: " + urlRequestParamsForSeed.toString());
@@ -523,48 +516,10 @@ public class SadImportOmberegningFinansOpplysningerController {
 		//we must complete the GUI-json with the value from a line nr seed here
 		if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage()) ){
 			logger.info("[ERROR] No mandatory seeds (syli, opd) were generated correctly)! look at std output log. [errMsg]" + rpgReturnResponseHandler.getErrorMessage());
-			jsonSadImportTopicFinansOpplysningerRecord.setErrMsg(rpgReturnResponseHandler.getErrorMessage());
+			jsonSadExportTopicFinansOpplysningerRecord.setErrMsg(rpgReturnResponseHandler.getErrorMessage());
 		}
         
-		return jsonSadImportTopicFinansOpplysningerRecord;
-	}
-	
-	/**
-	 * 
-	 * @param avd
-	 * @param opd
-	 * @param appUser
-	 * @return
-	 */
-	private JsonSadImportSpecificTopicFaktTotalRecord getInvoiceTotalFromInvoices(String avd, String opd, SystemaWebUser appUser){
-		//--------------------------
-		//get BASE URL = RPG-PROGRAM
-        //---------------------------
-		JsonSadImportSpecificTopicFaktTotalRecord returnRecord = null;
-		
-		String BASE_URL_FETCH = SadImportUrlDataStore.SAD_IMPORT_BASE_FETCH_SPECIFIC_TOPIC_FAKT_TOTAL_URL;
-		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&avd=" + avd + "&opd=" + opd;
-		
-		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-		logger.info("FETCH av item list... ");
-    	logger.info("URL: " + BASE_URL_FETCH);
-    	logger.info("URL PARAMS: " + urlRequestParamsKeys);
-    	//--------------------------------------
-    	//EXECUTE the FETCH (RPG program) here
-    	//--------------------------------------
-		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL_FETCH, urlRequestParamsKeys);
-		//Debug --> 
-		logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
-		
-    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-    	JsonSadImportSpecificTopicFaktTotalContainer container = this.sadImportSpecificTopicService.getSadImportSpecificTopicFaktTotalContainer(jsonPayload);
-    	if(container!=null){
-	    	for(JsonSadImportSpecificTopicFaktTotalRecord record : container.getInvTot()){
-				 returnRecord = record;
-	    	}
-    	}
-		
-		return returnRecord;
+		return jsonSadExportTopicFinansOpplysningerRecord;
 	}
 	/**
 	 * 
@@ -608,19 +563,17 @@ public class SadImportOmberegningFinansOpplysningerController {
 	 * We must adjust some fields that require it (presentation requirements)
 	 * @param record
 	 */
-	private void adjustDatesOnFetch(JsonSadImportTopicFinansOpplysningerRecord record){
-		if(record!=null){
-			String dateSfdtNO = this.dateFormatter.convertToDate_NO(record.getSfdt());
-			//fields
-			record.setSfdt(dateSfdtNO);
-		}
+	private void adjustDatesOnFetch(JsonSadExportTopicFinansOpplysningerRecord record){
+		String dateSfdtNO = this.dateFormatter.convertToDate_NO(record.getSfdt());
+		//fields
+		record.setSfdt(dateSfdtNO);
 	}
 	/**
 	 * 
 	 * @param request
 	 * @param record
 	 */
-	private void adjustFieldsAfterBind(HttpServletRequest request, JsonSadImportTopicFinansOpplysningerRecord record){
+	private void adjustFieldsAfterBind(HttpServletRequest request, JsonSadExportTopicFinansOpplysningerRecord record){
 		String dateSfdtISO = this.dateFormatter.convertToDate_ISO(record.getSfdt());
 		String factor = request.getParameter("factor");
 		//fields
@@ -635,7 +588,7 @@ public class SadImportOmberegningFinansOpplysningerController {
 	 * @param headerRecord
 	 * 
 	 */
-	private void setCodeDropDownMgr(SystemaWebUser appUser, Map model, JsonSadImportSpecificTopicRecord headerRecord){
+	private void setCodeDropDownMgr(SystemaWebUser appUser, Map model, JsonSadExportSpecificTopicRecord headerRecord){
 	    	//values for map 
 		Map map = new HashMap();
 		/*
@@ -647,6 +600,42 @@ public class SadImportOmberegningFinansOpplysningerController {
 				 model,appUser,CodeDropDownMgr.CODE_V_CURRENCY, null, null);
 	}
 	
+	/**
+	 * 
+	 * @param avd
+	 * @param opd
+	 * @param appUser
+	 * @return
+	 */
+	private JsonSadExportSpecificTopicFaktTotalRecord getInvoiceTotalFromInvoices(String avd, String opd, SystemaWebUser appUser){
+		//--------------------------
+		//get BASE URL = RPG-PROGRAM
+        //---------------------------
+		JsonSadExportSpecificTopicFaktTotalRecord returnRecord = null;
+		
+		String BASE_URL_FETCH = SadExportUrlDataStore.SAD_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_FAKT_TOTAL_URL;
+		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&avd=" + avd + "&opd=" + opd;
+		
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+		logger.info("FETCH av item list... ");
+    	logger.info("URL: " + BASE_URL_FETCH);
+    	logger.info("URL PARAMS: " + urlRequestParamsKeys);
+    	//--------------------------------------
+    	//EXECUTE the FETCH (RPG program) here
+    	//--------------------------------------
+		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL_FETCH, urlRequestParamsKeys);
+		//Debug --> 
+    	logger.info(jsonPayload);
+		
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	JsonSadExportSpecificTopicFaktTotalContainer container = this.sadExportSpecificTopicService.getSadExportSpecificTopicFaktTotalContainer(jsonPayload);
+    	if(container!=null){
+	    	for(JsonSadExportSpecificTopicFaktTotalRecord record : container.getInvTot()){
+				 returnRecord = record;
+	    	}
+    	}
+		return returnRecord;
+	}
 	
 	//SERVICES
 	@Qualifier ("urlCgiProxyService")
@@ -666,11 +655,11 @@ public class SadImportOmberegningFinansOpplysningerController {
 	
 	
 	
-	@Qualifier ("sadImportDropDownListPopulationService")
-	private SadImportDropDownListPopulationService sadImportDropDownListPopulationService;
+	@Qualifier ("sadExportDropDownListPopulationService")
+	private SadExportDropDownListPopulationService sadExportDropDownListPopulationService;
 	@Autowired
-	public void setSadImportDropDownListPopulationService (SadImportDropDownListPopulationService value){ this.sadImportDropDownListPopulationService=value; }
-	public SadImportDropDownListPopulationService getSadImportDropDownListPopulationService(){return this.sadImportDropDownListPopulationService;}
+	public void setSadExportDropDownListPopulationService (SadExportDropDownListPopulationService value){ this.sadExportDropDownListPopulationService=value; }
+	public SadExportDropDownListPopulationService getSadImportDropDownListPopulationService(){return this.sadExportDropDownListPopulationService;}
 	
 	@Qualifier ("tvinnSadDropDownListPopulationService")
 	private TvinnSadDropDownListPopulationService tvinnSadDropDownListPopulationService;
@@ -678,12 +667,12 @@ public class SadImportOmberegningFinansOpplysningerController {
 	public void setTvinnSadDropDownListPopulationService (TvinnSadDropDownListPopulationService value){ this.tvinnSadDropDownListPopulationService=value; }
 	public TvinnSadDropDownListPopulationService getTvinnSadDropDownListPopulationService(){return this.tvinnSadDropDownListPopulationService;}
 	
-	@Qualifier ("sadImportSpecificTopicService")
-	private SadImportSpecificTopicService sadImportSpecificTopicService;
+	@Qualifier ("sadExportSpecificTopicService")
+	private SadExportSpecificTopicService sadExportSpecificTopicService;
 	@Autowired
 	@Required
-	public void setSadImportSpecificTopicService (SadImportSpecificTopicService value){ this.sadImportSpecificTopicService = value; }
-	public SadImportSpecificTopicService getSadImportSpecificTopicService(){ return this.sadImportSpecificTopicService; }
+	public void setSadExportSpecificTopicService (SadExportSpecificTopicService value){ this.sadExportSpecificTopicService = value; }
+	public SadExportSpecificTopicService getSadExportSpecificTopicService(){ return this.sadExportSpecificTopicService; }
 	
 	
 	 

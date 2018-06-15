@@ -309,8 +309,8 @@
 									<tr class="tableHeaderField" height="20" >
 									    <th class="text14">&nbsp;Finans.opplysn.&nbsp;</th> 
 									    <th align="center" class="text14">&nbsp;Endre&nbsp;</th>
-									    <th align="center" class="text14" nowrap>&nbsp;Dato&nbsp;</th>
-					                    <th align="right" class="text14" nowrap>&nbsp;Beløp&nbsp;</th>
+									    <th align="right" class="text14" nowrap>&nbsp;Beløp&nbsp;</th>
+					                    <th align="center" class="text14" nowrap>&nbsp;Dato&nbsp;</th>
 					                    <th align="right" class="text14" nowrap>&nbsp;Valuta&nbsp;</th>
 					                    <th align="right" class="text14" nowrap>&nbsp;Kurs&nbsp;</th>
 					                    <th align="right" class="text14" nowrap>&nbsp;Faktor&nbsp;</th>
@@ -335,8 +335,8 @@
 							               			<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 							               		</a>
 							               </td>
-							               <td align="center" class="text14" >&nbsp;${record.sfdt}</td>
 							               <td align="right" class="text14" >&nbsp;${record.sfbl28}</td>
+							               <td align="center" class="text14" >&nbsp;${record.sfdt}</td>
 							               <td align="right" class="text14" >&nbsp;${record.sfvk28}</td>
 							               <td align="right" class="text14" >&nbsp;${record.sfkr28}</td>
 							               <td align="right" class="text14" >&nbsp;${record.sfom28}</td>
@@ -471,8 +471,8 @@
 										</div>										
 										</td>
 										
-							            <td class="text14" align="left"><span title="sfdt">&nbsp;Dato</span></td>
 							            <td class="text14" align="left"><span title="sfbl28">&nbsp;Beløp</span></td>
+							            <td class="text14" align="left"><span title="sfdt">&nbsp;Dato</span></td>
 							            <td class="text14" align="left"><span title="sfvk28">&nbsp;Valuta</span></td>
 					            		<td class="text14" align="left"><span title="sfkr28">&nbsp;Kurs</span></td>
 					            		<td class="text14" align="left"><span title="factor">Faktor&nbsp;</span></td>
@@ -481,14 +481,14 @@
 						        		<td align="left">
 						        			<input type="text" class="inputTextMediumBlueMandatoryField" name="sftxt" id="sftxt" size="20" maxlength="17" value="${model.record.sftxt}">
 										</td>
-										<td align="left">
-						        			<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="sfdt" id="sfdt" size="6" maxlength="6" value="${model.record.sfdt}">
-										</td>
 										<td class="text14" align="left">
 						            		<input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="sfbl28" id="sfbl28" size="13" maxlength="12" value="${model.record.sfbl28}">
 							            </td>
+										<td align="left">
+						        			<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="sfdt" id="sfdt" size="6" maxlength="6" value="${model.record.sfdt}">
+										</td>
 										<td align="left" nowrap>
-								            	<select class="inputTextMediumBlueMandatoryField" name="sfvk28" id="sfvk28">
+							            	<select class="inputTextMediumBlueMandatoryField" name="sfvk28" id="sfvk28">
 						 						<option value="">-velg-</option>
 							 				  	<c:forEach var="currency" items="${model.currencyCodeList}" >
 							 				  		<option value="${currency.zkod}"<c:if test="${model.record.sfvk28 == currency.zkod}"> selected </c:if> >${currency.zkod}</option>
