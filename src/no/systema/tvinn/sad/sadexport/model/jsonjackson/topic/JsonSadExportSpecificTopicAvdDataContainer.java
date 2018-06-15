@@ -23,9 +23,9 @@ public class JsonSadExportSpecificTopicAvdDataContainer {
 	public void setErrMsg(String value) {  this.errMsg = value; }
 	public String getErrMsg() {return this.errMsg;}
 	
-	private Collection<JsonSadExportSpecificTopicAvdDataRecord> getGetdepinf = null;
-	public void setGetdepinf(Collection<JsonSadExportSpecificTopicAvdDataRecord> value) {  this.getGetdepinf = value; }
-	public Collection<JsonSadExportSpecificTopicAvdDataRecord> getGetdepinf() {return this.getGetdepinf;}
+	private Collection<JsonSadExportSpecificTopicRecord> getGetdepinf = null;
+	public void setGetdepinf(Collection<JsonSadExportSpecificTopicRecord> value) {  this.getGetdepinf = value; }
+	public Collection<JsonSadExportSpecificTopicRecord> getGetdepinf() {return this.getGetdepinf;}
 	
 	
 }

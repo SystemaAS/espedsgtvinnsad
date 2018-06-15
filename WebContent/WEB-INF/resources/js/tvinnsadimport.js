@@ -199,8 +199,6 @@
 				 click: function(){
 					 		//back to initial state of form elements on modal dialog
 					 		jq("#dialogSaveSU").button("option", "disabled", false);
-					 		jq("#selectedAvd").val("");
-					 		jq("#selectedSign").val("");
 					 		jq("#selectedOpd").val("");
 					 		jq("#selectedExtRefNr").val("");
 					 		jq( this ).dialog( "close" ); 

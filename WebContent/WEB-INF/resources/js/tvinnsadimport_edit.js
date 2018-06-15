@@ -124,15 +124,6 @@
     		refreshCustomValidity(jq('#sintk')[0]);
   		}
   	});
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	  	
-  	  	
   	  	
 	  	jq('#sifif').focus(function() {
 	    	if(jq('#sifif').val()!=''){

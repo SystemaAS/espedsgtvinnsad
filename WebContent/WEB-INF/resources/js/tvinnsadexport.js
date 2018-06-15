@@ -184,7 +184,7 @@
   jq(function() {
 	  jq("#copyFromTransportUppdragLink").click(function() {
 		  //setters (add more if needed)
-		  jq('#dialogCopyFromTransportUppdrag').dialog( "option", "title", "Last ned oppdrag fra SYSPED" );
+		  jq('#dialogCopyFromTransportUppdrag').dialog( "option", "title", "Lage Ny Tolldeklarasjon" );
 		  
 		  //deal with buttons for this modal window
 		  jq('#dialogCopyFromTransportUppdrag').dialog({
@@ -201,8 +201,7 @@
 			 	 text: "Avbryt", 
 				 click: function(){
 					 		//back to initial state of form elements on modal dialog
-					 		jq("#dialogSaveSU").button("option", "disabled", true);
-					 		jq("#selectedAvd").val("");
+					 		jq("#dialogSaveSU").button("option", "disabled", false);
 					 		jq("#selectedOpd").val("");
 					 		jq("#selectedExtRefNr").val("");
 							jq( this ).dialog( "close" ); 

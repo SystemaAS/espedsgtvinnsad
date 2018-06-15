@@ -342,7 +342,7 @@
 			 					
 				 			</td>
 				 			<td>
-				 				<select class="inputTextMediumBlueMandatoryField" name="sedty" id="sedty" >
+				 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="sedty" id="sedty" >
 				 				  <option value="">-velg-</option>
 								  <option value="EU"<c:if test="${model.record.sedty == 'EU'}"> selected </c:if> >EU</option>
 								  <option value="EX"<c:if test="${model.record.sedty == 'EX'}"> selected </c:if> >EX</option>
@@ -362,7 +362,7 @@
 				 				</div>
 			 				</td>
 				 			<td>
-				 				<select class="inputTextMediumBlueMandatoryField" name="sedp" id="sedp" >
+				 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="sedp" id="sedp" >
 				 				  <option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.ekspedisjonstyperExportCodeList}" >
 					 				  		<option value="${record.zkod}"<c:if test="${model.record.sedp == record.zkod}"> selected </c:if> >${record.zkod}</option>
@@ -589,7 +589,7 @@
 										</td>
 							        </tr>
 							        <tr>
-							            <td align="left"><input type="text" class="inputTextMediumBlueMandatoryField" name="serg" id="serg" size="20" maxlength="11" value="${model.record.serg}"></td>
+							            <td align="left"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="serg" id="serg" size="20" maxlength="11" value="${model.record.serg}"></td>
 							            	<td align="left">
 											<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="segkd" id="segkd" size="1" maxlength="1" value="${model.record.segkd}">
 											<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="sekta" id="sekta" size="5" maxlength="5" value="${model.record.sekta}">
@@ -715,7 +715,7 @@
 							        </tr>
 							        <tr>
 							            <td class="text14" align="left"><input type="text" class="inputTextMediumBlue" name="sekns" id="sekns" size="9" maxlength="8" value="${model.record.sekns}"></td>
-							            <td class="text14" align="left"><input type="text" class="inputTextMediumBlueMandatoryField" name="senas" id="senas" size="31" maxlength="30" value="${model.record.senas}"></td>
+							            <td class="text14" align="left"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="senas" id="senas" size="31" maxlength="30" value="${model.record.senas}"></td>
 							            
 							        </tr>
 							        
@@ -845,10 +845,10 @@
 							        <tr>
 							            <td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font>
 							            <span title="sefif">Fakt.nr.&nbsp;</span>
-							            <input type="text" class="inputTextMediumBlueMandatoryField" name="sefif" id="sefif" size="18" maxlength="17" value='${ model.record.sefif}'></td>
+							            <input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="sefif" id="sefif" size="18" maxlength="17" value='${ model.record.sefif}'></td>
 							            <td class="text14">&nbsp;&nbsp;&nbsp;&nbsp;<font class="text16RedBold" >*</font>
 							            		<span title="sefid">Fakt.dato</span>
-			 								<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="sefid" id="sefid" size="9" maxlength="6" value="${model.record.sefid}">
+			 								<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="sefid" id="sefid" size="9" maxlength="6" value="${model.record.sefid}">
 			 							</td>
 							        </tr>
 							        <tr height="15">
@@ -886,13 +886,13 @@
 				 				<span title="sebel1" id="v_sebel1" class="validation">Fakturasum&nbsp;</span>
 				 			</td>
 				 			<td align="left" >
-				 				<input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="sebel1" id="sebel1" size="20" maxlength="13" value="${model.record.sebel1}">
+				 				<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="sebel1" id="sebel1" size="20" maxlength="13" value="${model.record.sebel1}">
 				 			</td>
 				 			<td class="text14" align="left">
 				 				&nbsp;<font class="text16RedBold" >*</font>
 				 				<span title="seval1" id="v_seval1" class="validation">Valuta</span>
 				 				<%-- Note: onChange event in jQuery for this currency list --%>
-				 				<select class="inputTextMediumBlueMandatoryField" name="seval1" id="seval1" >
+				 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="seval1" id="seval1" >
 				 				  <option value="">-velg-</option>	
 				 				  <c:forEach var="currency" items="${model.currencyCodeList}" >
 			 				  		<option value="${currency.zkod}"<c:if test="${ model.record.seval1 == currency.zkod}"> selected </c:if> >${currency.zkod}</option>
@@ -988,7 +988,7 @@
 								</div>	
 					            </td>
 					            <td >
-					            	<select class="inputTextMediumBlueMandatoryField" name="selkb" id="selkb">
+					            	<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="selkb" id="selkb">
 				 						<option value="">-velg-</option>
 					 				  	<c:forEach var="country" items="${model.countryCodeList}" >
 					 				  		<option value="${country.zkod}"<c:if test="${model.record.selkb == country.zkod}"> selected </c:if> >${country.zkod}</option>
@@ -1088,7 +1088,7 @@
 								</div>
 								</td>
 								<td>
-					            		<select class="inputTextMediumBlueMandatoryField" name="selkt" id="selkt">
+					            		<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="selkt" id="selkt">
 				 						<option value="">-velg-</option>
 					 				  	<c:forEach var="country" items="${model.countryCodeList}" >
 					 				  		<option value="${country.zkod}"<c:if test="${model.record.selkt == country.zkod}"> selected </c:if> >${country.zkod}</option>
@@ -1146,7 +1146,7 @@
 								</div>
 								</td>		
 					            <td class="text14" >
-			           				<select class="inputTextMediumBlueMandatoryField" name="setrm" id="setrm">
+			           				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="setrm" id="setrm">
 				 						<option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.transportmaterCodeList}" >
 					 				  		<option value="${record.zkod}"<c:if test="${model.record.setrm == record.zkod}"> selected </c:if> >${record.zkod}</option>
@@ -1178,7 +1178,7 @@
 								</div>
 								</td>
 					            <td>
-					            		<input type="text" class="inputTextMediumBlue" name="segn" id="segn" size="20" maxlength="15" value="${model.record.segn}">
+					            	<input type="text" class="inputTextMediumBlue" name="segn" id="segn" size="20" maxlength="15" value="${model.record.segn}">
 					            </td>
 					        </tr>
 					        <tr>
@@ -1205,7 +1205,7 @@
 								</div>
 								</td>		
 					            <td class="text14" >
-			           				<select class="inputTextMediumBlueMandatoryField" name="sekdh" id="sekdh">
+			           				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="sekdh" id="sekdh">
 				 						<option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.havnCodeList}" >
 					 				  		<c:choose>
@@ -1269,7 +1269,7 @@
 							</div>
 							</td>
 				            <td >&nbsp;
-					            	<select class="inputTextMediumBlueMandatoryField" name="selv" id="selv">
+					            	<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="selv" id="selv">
 			 						<option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.incotermsCodeList}" >
 					 				  		<option value="${record.zkod}"<c:if test="${model.record.selv == record.zkod}"> selected </c:if> >${record.zkod}</option>
@@ -1293,7 +1293,7 @@
 								</div>
 								</td>
 					            <td >
-				            		&nbsp;<input type="text" class="inputTextMediumBlueMandatoryField" name="selvt" id="selvt" size="20" maxlength="17" value="${model.record.selvt}">
+				            		&nbsp;<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="selvt" id="selvt" size="20" maxlength="17" value="${model.record.selvt}">
 								</td>
 							</tr>
 							<tr height="5"><td></td></tr>
@@ -1479,7 +1479,7 @@
 								</div>
 								</td>	
 					            <td >
-					            		<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlueMandatoryField" name="sevkb" id="sevkb" size="10" maxlength="9" value="${model.record.sevkb}">
+					            	<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlueMandatoryField" name="sevkb" id="sevkb" size="10" maxlength="9" value="${model.record.sevkb}">
 					            </td>
 					        </tr>
 				            <tr>
@@ -1495,7 +1495,7 @@
 								</div>
 								</td>	
 					            <td >
-				            		<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlueMandatoryField" name="sentk" id="sentk" size="8" maxlength="7" value="${model.record.sentk}">
+				            		<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlueMandatoryField" name="sentk" id="sentk" size="8" maxlength="7" value="${model.record.sentk}">
 					            </td>
 					        </tr>
 					        <tr height="10"><td class="text">&nbsp;</td> </tr>

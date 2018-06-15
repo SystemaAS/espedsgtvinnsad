@@ -336,26 +336,34 @@
 				<form  action="tvinnsadexport_doFetchTopicFromTransportUppdrag.do" name="copyFromTransportUppdragForm" id="copyFromTransportUppdragForm" method="post">
 				 	<input type="hidden" name="actionGS" id="actionGS" value='doUpdate'/>
 				 	
-					<p class="text14" ><b>Ved å taste</b> avdeling og oppdragsnummer lages det en ny deklarasjon med utgangspunkt i data fra SYSPED Transportoppdrag.</p>
+					<p class="text14" ><b>Ved å taste</b> oppdragnummer eller Ext.ref.nr. lages det en ny deklarasjon med utgangspunkt i data fra SYSPED Transportoppdrag.</p>
 					<p class="text14">eller</p>
-					<p class="text14" ><b>Ved å IKKE taste</b> avdeling og oppdragnummer lages det en ny deklarasjon med utgangspunkt i avdelingens standardopplysninger.</p>
+					<p class="text14" ><b>Ved å IKKE taste</b> oppdragnummer eller Ext.ref.nr. lages det en ny deklarasjon med utgangspunkt i avdelingens standardopplysninger.</p>
 					<p class="text14">Klikk deretter Fortsett.</p>
 						
 					<table>
 						<tr>
-							<td class="text14" align="left" >&nbsp;Avdeling</td>
-    							<td class="text14" align="left" >&nbsp;Oppdragsnr.</td>
-    							<td class="text14" align="left" >&nbsp;Ext.ref.nr.</td>
-    						</tr>
+							<td class="text14" align="left" ><font class="text16RedBold" >*</font>&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.avd"/></td>
+   							<td class="text14" align="left" ><font class="text16RedBold" >*</font>&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.signatur"/></td>
+   							<td class="text14" align="left" >&nbsp;Oppdragsnr.</td>
+   							<td class="text14" align="left" >&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.extrefnr"/></td>
+   						</tr>
 						<tr>
-							<td class="text14MediumBlue">
-								<select class="selectMediumBlueE2" name="selectedAvd" id="selectedAvd">
-				            		<option value="">-velg-</option>
-				 				  	<c:forEach var="record" items="${model.avdList}" >
+							<td align="left" class="text14" >
+								<select class="inputTextMediumBlueMandatoryField" name="selectedAvd" id="selectedAvd">
+				            		<c:forEach var="record" items="${model.avdList}" >
 	                             	 	<option value="${record.avd}"<c:if test="${searchFilterSadExport.avd == record.avd}"> selected </c:if> >${record.avd}<c:if test="${record.tst== '2'}">&nbsp;(test)</c:if></option>
 									</c:forEach> 
 								</select>
 							</td>
+							<td align="left" class="text14" >
+			           			<select class="inputTextMediumBlueMandatoryField" name="selectedSign" id="selectedSign">
+				            		<c:forEach var="record" items="${model.signList}" >
+			                             	 	<option value="${record.sign}"<c:if test="${searchFilterSadExport.sg == record.sign}"> selected </c:if> >${record.sign}</option>
+									</c:forEach> 
+								</select>
+							</td>
+							
 							<td class="text14MediumBlue">
 								<input type="text" class="inputText" id="selectedOpd" name="selectedOpd" size="10" maxlength="35" value=''>&nbsp;
 							</td>

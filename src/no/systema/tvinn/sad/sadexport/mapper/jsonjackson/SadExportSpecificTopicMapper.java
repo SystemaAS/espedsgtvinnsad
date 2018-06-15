@@ -61,8 +61,8 @@ public class SadExportSpecificTopicMapper extends ObjectMapperAbstractGrandFathe
 		//logger.info(mapper.writeValueAsString(topicListContainer));
 		logger.info("[JSON-String payload status=OK]  " + container.getUser());
 		//DEBUG
-		Collection<JsonSadExportSpecificTopicAvdDataRecord> fields = container.getGetdepinf();
-		for(JsonSadExportSpecificTopicAvdDataRecord record : fields){
+		Collection<JsonSadExportSpecificTopicRecord> fields = container.getGetdepinf();
+		for(JsonSadExportSpecificTopicRecord record : fields){
 			//debug here when applicable
 		}
 		return container;

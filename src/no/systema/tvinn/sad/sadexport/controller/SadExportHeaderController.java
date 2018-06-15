@@ -61,8 +61,8 @@ import no.systema.tvinn.sad.sadexport.validator.SadExportHeaderValidator;
 import no.systema.tvinn.sad.sadexport.service.SadExportSpecificTopicItemService;
 import no.systema.tvinn.sad.sadexport.util.RpgReturnResponseHandler;
 import no.systema.tvinn.sad.sadexport.util.manager.CodeDropDownMgr;
-import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicFaktTotalRecord;
-import no.systema.tvinn.sad.sadimport.url.store.SadImportUrlDataStore;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicAvdDataContainer;
+
 
 import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService;
 import no.systema.tvinn.sad.util.TvinnSadConstants;
@@ -126,7 +126,22 @@ public class SadExportHeaderController {
 			this.setCodeDropDownMgr(appUser, model);	
 	    		this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
 	    		this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
+	    		//Mandatory fields from caller
+	    		String avd = request.getParameter("avd");
+	    		String sign = request.getParameter("sign");
+	    		
 	    		//domain
+	    		JsonSadExportSpecificTopicRecord jsonSadExportSpecificTopicRecord = this.createNewTopicHeaderKeySeeds(session, request, appUser, avd, sign);
+	    		//at this point we have a new record on db with only avd/sign. All 
+	    		if(jsonSadExportSpecificTopicRecord!=null && strMgr.isNotNull(jsonSadExportSpecificTopicRecord.getSetdn()) ){
+	    			StringBuffer redirectViewStr = new StringBuffer();
+		    		redirectViewStr.append("redirect:tvinnsadexport_edit.do?action=doFetch&avd=" + jsonSadExportSpecificTopicRecord.getSeavd());
+		    		redirectViewStr.append("&opd=" + jsonSadExportSpecificTopicRecord.getSetdn());
+		    		redirectViewStr.append("&sysg=" + jsonSadExportSpecificTopicRecord.getSesg());
+		    		//TODO redirectBfr.append("&sitll=121212&syst=&sydt=310518&o2_sist=&o2_sidt=20180612&o2_simf=2");
+		    		successView = new ModelAndView(redirectViewStr.toString());
+	    		}
+	    		
 	    		//logger.info("#######" + request.getAttribute("errorMessageOnCopyFromTransportOppdrag"));
 	    		successView.addObject("model", model);
 	    		successView.addObject(TvinnSadConstants.EDIT_ACTION_ON_TOPIC, TvinnSadConstants.ACTION_CREATE);
@@ -218,6 +233,12 @@ public class SadExportHeaderController {
 			    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 			    	if(jsonPayload!=null){
 			    		JsonSadExportSpecificTopicContainer jsonSadExportSpecificTopicContainer = this.sadExportSpecificTopicService.getSadExportSpecificTopicContainer(jsonPayload);
+			    		for (JsonSadExportSpecificTopicRecord rr: jsonSadExportSpecificTopicContainer.getOneorder()){
+			    			rr = this.setDefaultValuesOnGui(appUser.getUser(), rr);
+			    			Collection<JsonSadExportSpecificTopicRecord> list = new ArrayList<JsonSadExportSpecificTopicRecord>();
+			    			list.add(rr);
+			    			jsonSadExportSpecificTopicContainer.setOneorder(list);
+			    		}
 			    		//populate gui elements
 			    		this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
 			    		this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
@@ -279,8 +300,7 @@ public class SadExportHeaderController {
 					    	}
 
 				    }else{
-				    		JsonSadExportSpecificTopicRecord jsonSadExportSpecificTopicRecord = null;
-						String tuidRefNr = null;
+				    	JsonSadExportSpecificTopicRecord jsonSadExportSpecificTopicRecord = null;
 						
 						if(opd!=null && !"".equals(opd)){
 							logger.info("PURE UPDATE transaction..."); 
@@ -378,6 +398,8 @@ public class SadExportHeaderController {
 					    	}else{
 					    		//Update successfully done!
 					    		logger.info("[INFO] Record successfully updated, OK ");
+					    		//get SEND-parameters
+					    		//NOT like IMPORT COVI ? this.fetchSendParameters(appUser, jsonSadExportSpecificTopicRecord);
 					    		//put domain objects
 					    		this.setDomainObjectsInView(session, model, jsonSadExportSpecificTopicRecord, totalItemLinesObject);
 					    		if(totalItemLinesObject.getSumOfAntalItemLines()>0 || this.ACTIVE_INNSTIKK_CODE.equals(jsonSadExportSpecificTopicRecord.getSemi())){
@@ -425,6 +447,38 @@ public class SadExportHeaderController {
 			}
 	    	return successView;
 		}
+	}
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param jsonSadExportSpecificTopicRecord
+	 * @return
+	 */
+	private JsonSadExportSpecificTopicRecord setDefaultValuesOnGui(String applicationUser, JsonSadExportSpecificTopicRecord jsonSadExportSpecificTopicRecord){
+		 
+		JsonSadExportSpecificTopicRecord targetRecord = null;
+		 String BASE_URL = SadExportUrlDataStore.SAD_EXPORT_BASE_FETCH_AVDDATA_DEFAULT_DATA_URL;
+		 String urlRequestParamsKeys = "user=" + applicationUser + "&avd=" + jsonSadExportSpecificTopicRecord.getSeavd();
+		 logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+		 logger.info("PARAMS: " + urlRequestParamsKeys);
+		 //logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		 String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+		 //logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+		 logger.info(jsonPayload);
+		 if(jsonPayload!=null){
+			 JsonSadExportSpecificTopicAvdDataContainer container = this.sadExportSpecificTopicService.getSadExportSpecificTopicAvdDataContainer(jsonPayload);
+			 if(container!=null){
+				 for(JsonSadExportSpecificTopicRecord  record : container.getGetdepinf()){
+					 targetRecord = record;
+					 targetRecord.setSeavd(jsonSadExportSpecificTopicRecord.getSeavd());
+					 targetRecord.setSetdn(jsonSadExportSpecificTopicRecord.getSetdn());
+					 targetRecord.setSesg(jsonSadExportSpecificTopicRecord.getSesg());
+				
+				 }
+			 }
+		 }
+		 return targetRecord;
+	 
 	}
 
 	/**
@@ -761,11 +815,6 @@ public class SadExportHeaderController {
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
 
 		ModelAndView successView = new ModelAndView("tvinnsadexport_edit");
-		//fallback view (usually on errors)
-		ModelAndView fallbackView = new ModelAndView("tvinnsadexport_edit");
-		fallbackView.addObject("action", "doPrepareCreate");
-		//this view is when the end user choose not to copy at all. He/She will start from scratch (empty form (header))
-		ModelAndView cleanNewView = new ModelAndView("redirect:tvinnsadexport_edit.do?action=doPrepareCreate");
 		
 		String method = "doFetchTopicFromTransportUppdrag";
 		logger.info("Method: " + method);
@@ -774,9 +823,12 @@ public class SadExportHeaderController {
 		//We must get all parameters from the enumeration since all have sequence counter number
 		String action=request.getParameter("actionGS");;
 		String avd=request.getParameter("selectedAvd");
+		String sign=request.getParameter("selectedSign");
 		String opd=request.getParameter("selectedOpd");
 		String extRefNr=request.getParameter("selectedExtRefNr"); //Domino ref in Dachser Norway AS
-
+		//fallback in case no transport uppdrag is applicable
+		ModelAndView fallbackView = new ModelAndView("redirect:tvinnsadexport_edit.do?action=doPrepareCreate&avd=" + avd + "&sign=" + sign );
+				
 		logger.info("Method: " + action + avd + opd);
 		//check user (should be in session already)
 		if(appUser==null){
@@ -825,8 +877,8 @@ public class SadExportHeaderController {
 				}
 			    
 				
-			    	//At this point we do now have a cloned record with its own data. The only thing left is to present it in edit mode
-			    	//--------------------
+		    	//At this point we do now have a cloned record with its own data. The only thing left is to present it in edit mode
+		    	//--------------------
 				//STEP 2: FETCH record
 				//--------------------
 				logger.info("starting FETCH record transaction...");
@@ -840,32 +892,32 @@ public class SadExportHeaderController {
 				session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, BASE_URL  + "==>params: " + urlRequestParamsKeys.toString()); 
 				
 				logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-			    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
-			    	logger.info("URL PARAMS: " + urlRequestParamsKeys);
-			    	//--------------------------------------
-			    	//EXECUTE the FETCH (RPG program) here
-			    	//--------------------------------------
-			    	jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+		    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+		    	logger.info("URL PARAMS: " + urlRequestParamsKeys);
+		    	//--------------------------------------
+		    	//EXECUTE the FETCH (RPG program) here
+		    	//--------------------------------------
+		    	jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
 				//Debug --> 
 			    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
 			    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 			    	if(jsonPayload!=null){
 			    		JsonSadExportSpecificTopicContainer jsonSadExportSpecificTopicContainer = this.sadExportSpecificTopicService.getSadExportSpecificTopicContainer(jsonPayload);
 		    			//populate gui
-					this.setCodeDropDownMgr(appUser, model);	
+			    		this.setCodeDropDownMgr(appUser, model);	
 			    		this.setDomainObjectsInView(session, model, jsonSadExportSpecificTopicContainer);
 			    		successView.addObject(TvinnSadConstants.DOMAIN_MODEL, model);
-					//put the doUpdate action since we are preparing the record for an update (when saving)
-					successView.addObject(TvinnSadConstants.EDIT_ACTION_ON_TOPIC, TvinnSadConstants.ACTION_UPDATE);
+			    		//put the doUpdate action since we are preparing the record for an update (when saving)
+			    		successView.addObject(TvinnSadConstants.EDIT_ACTION_ON_TOPIC, TvinnSadConstants.ACTION_UPDATE);
 			    		
 			    	}else{
 					logger.fatal("[ERROR fatal] NO CONTENT on jsonPayload from URL... ??? <Null>");
 					return loginView;
 				}
-			}else{
-				logger.warn("[INFO] Tolldekl is NULL. Redirecting to: tvinnsadexport_edit.do?action=doPrepareCreate... ");
-				//return new ModelAndView("redirect:tdsimport_edit.do?action=doPrepareCreate");
-				return cleanNewView;
+			}else if(strMgr.isNotNull(avd)){
+					logger.warn("[INFO] Redirecting to: tvinnsadexport_edit.do?action=doPrepareCreate... to CREATE-NEW ");
+					//this view is when the end user choose not to copy at all. He/She will start from scratch (empty form (header))
+					return fallbackView;
 			}
 			
 			return successView;
@@ -1317,15 +1369,48 @@ public class SadExportHeaderController {
 		logger.info("### setdn from RPG PROGRAM: " + rpgReturnResponseHandler.getSetdn());
 		
 		//we must complete the GUI-json sypo and tuid with the value from a seedTuid here
-		if(rpgReturnResponseHandler.getSetdn()!=null){
+		if(rpgReturnResponseHandler.getSetdn()!=null && !"".equals(rpgReturnResponseHandler.getSetdn())){
+			record.setSeavd(avd);
+			record.setSesg(sign);
 			record.setSetdn(rpgReturnResponseHandler.getSetdn().trim());
+			
 		}else{
-			logger.info("[ERROR] No mandatory seeds (setdn) were generated correctly)! look at std output log. [errMsg]" + rpgReturnResponseHandler.getErrorMessage());
+			logger.info("[ERROR] No mandatory seeds (sitdn) were generated correctly)! look at std output log. [errMsg]" + rpgReturnResponseHandler.getErrorMessage());
 			record = null;
 		}
-        
 		return record;
 	}
+	
+	/*
+	public void fetchSendParameters(SystemaWebUser appUser, JsonSadExportSpecificTopicRecord headerRecord){
+		//---------------------------
+		//get BASE URL = RPG-PROGRAM
+        //---------------------------
+		String BASE_URL = SadExportUrlDataStore.SAD_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_SEND_PARAMS_URL;
+		//-------------------
+		//add URL-parameter 
+		//-------------------
+		StringBuffer urlRequestParamsKeys = new StringBuffer();
+		urlRequestParamsKeys.append("user=" + appUser.getUser());
+		urlRequestParamsKeys.append("&avd=" + headerRecord.getSeavd() + "&opd=" + headerRecord.getSetdn());
+		
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+    	logger.info("URL PARAMS: " + urlRequestParamsKeys.toString());
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
+		
+    	if(jsonPayload!=null){
+    		JsonSadExportSpecificTopicSendParametersContainer container = this.sadExportSpecificTopicService.getSadImportSpecificTopicSendParametersContainer(jsonPayload);
+    		if(container!=null){
+    			for (JsonSadExportSpecificTopicSendParametersRecord record : container.getGetcmn()){
+    				headerRecord.setSendParametersRecord(record);
+    			}
+    		}
+    	}
+	
+	}
+	*/
 	
 	/**
 	 * log Errors in Aspects and Domain objects in order to render on GUI

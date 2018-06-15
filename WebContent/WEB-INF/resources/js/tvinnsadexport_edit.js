@@ -24,6 +24,94 @@
   	  jq('#alinkArchive').click(function() { 
   		setBlockUI();
 	  });
+  	  
+  	  
+  	  
+  	jq('#sedty').focus(function() {
+    	if(jq('#sedty').val()!=''){
+    		refreshCustomValidity(jq('#sedty')[0]);
+  		}
+  	});
+  	jq('#sedp').focus(function() {
+    	if(jq('#sedp').val()!=''){
+    		refreshCustomValidity(jq('#sedp')[0]);
+  		}
+  	});
+  	jq('#senas').focus(function() {
+    	if(jq('#senas').val()!=''){
+    		refreshCustomValidity(jq('#senas')[0]);
+  		}
+  	});
+  	
+  	jq('#serg').focus(function() {
+    	if(jq('#serg').val()!=''){
+    		refreshCustomValidity(jq('#serg')[0]);
+  		}
+  	});
+  	jq('#sefif').focus(function() {
+    	if(jq('#sefif').val()!=''){
+    		refreshCustomValidity(jq('#sefif')[0]);
+  		}
+  	});
+  	jq('#sefid').focus(function() {
+    	if(jq('#sefid').val()!=''){
+    		refreshCustomValidity(jq('#sefid')[0]);
+  		}
+  	});
+  	jq('#sebel1').focus(function() {
+    	if(jq('#sebel1').val()!=''){
+    		refreshCustomValidity(jq('#sebel1')[0]);
+  		}
+  	});
+  	
+  	jq('#seval1').focus(function() {
+    	if(jq('#seval1').val()!=''){
+    		refreshCustomValidity(jq('#seval1')[0]);
+  		}
+  	});
+  	jq('#selkb').focus(function() {
+    	if(jq('#selkb').val()!=''){
+    		refreshCustomValidity(jq('#selkb')[0]);
+  		}
+  	});
+  	jq('#selkt').focus(function() {
+    	if(jq('#selkt').val()!=''){
+    		refreshCustomValidity(jq('#selkt')[0]);
+  		}
+  	});
+  	jq('#setrm').focus(function() {
+    	if(jq('#setrm').val()!=''){
+    		refreshCustomValidity(jq('#setrm')[0]);
+  		}
+  	});
+  	jq('#sekdh').focus(function() {
+    	if(jq('#sekdh').val()!=''){
+    		refreshCustomValidity(jq('#sekdh')[0]);
+  		}
+  	});
+  	jq('#selv').focus(function() {
+    	if(jq('#selv').val()!=''){
+    		refreshCustomValidity(jq('#selv')[0]);
+  		}
+  	});
+  	jq('#selvt').focus(function() {
+    	if(jq('#selvt').val()!=''){
+    		refreshCustomValidity(jq('#selvt')[0]);
+  		}
+  	});
+  	jq('#sevkb').focus(function() {
+    	if(jq('#sevkb').val()!=''){
+    		refreshCustomValidity(jq('#sevkb')[0]);
+  		}
+  	});
+  	jq('#sentk').focus(function() {
+    	if(jq('#sentk').val()!=''){
+    		refreshCustomValidity(jq('#sentk')[0]);
+  		}
+  	});
+  	
+  	  
+  	  
   	  jq('#getFinansOpplSumButton').click(function() { 
   		if(jq('#finansOpplysningarTotSum').val()!='' && jq('#finansOpplysningarTotValidCurrency').val()!='' ){  
 	  		jq('#sebel1').val(jq('#finansOpplysningarTotSum').val());

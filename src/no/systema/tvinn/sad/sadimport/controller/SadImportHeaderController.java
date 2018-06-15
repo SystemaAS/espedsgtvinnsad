@@ -139,14 +139,13 @@ public class SadImportHeaderController {
     		
     		//domain
     		JsonSadImportSpecificTopicRecord jsonSadImportSpecificTopicRecord = this.createNewTopicHeaderKeySeeds(session, request, appUser, avd, sign);
-    		//jsonSadImportSpecificTopicRecord = this.setDefaultValuesOnGui(appUser.getUser(), jsonSadImportSpecificTopicRecord);
     		//at this point we have a new record on db with only avd/sign. All 
     		if(jsonSadImportSpecificTopicRecord!=null && strMgr.isNotNull(jsonSadImportSpecificTopicRecord.getSitdn()) ){
     			StringBuffer redirectViewStr = new StringBuffer();
 	    		redirectViewStr.append("redirect:tvinnsadimport_edit.do?action=doFetch&avd=" + jsonSadImportSpecificTopicRecord.getSiavd());
 	    		redirectViewStr.append("&opd=" + jsonSadImportSpecificTopicRecord.getSitdn());
 	    		redirectViewStr.append("&sysg=" + jsonSadImportSpecificTopicRecord.getSisg());
-	    		//TODO ßredirectBfr.append("&sitll=121212&syst=&sydt=310518&o2_sist=&o2_sidt=20180612&o2_simf=2");
+	    		//TODO redirectBfr.append("&sitll=121212&syst=&sydt=310518&o2_sist=&o2_sidt=20180612&o2_simf=2");
 	    		successView = new ModelAndView(redirectViewStr.toString());
     		}
     		
@@ -373,7 +372,6 @@ public class SadImportHeaderController {
 							jsonSadImportSpecificTopicRecord = this.createNewTopicHeaderKeySeeds(session, request, appUser, avd, sign);
 							if(jsonSadImportSpecificTopicRecord!=null){
 								opd = jsonSadImportSpecificTopicRecord.getSitdn();
-								//
 								jsonSadImportSpecificTopicRecord.setSiavd(avd);
 								jsonSadImportSpecificTopicRecord.setSisg(sign);
 								
@@ -841,10 +839,11 @@ public class SadImportHeaderController {
 		//Get parameters
 		String action=request.getParameter("actionGS");;
 		String avd=request.getParameter("selectedAvd");
+		String sign=request.getParameter("selectedSign");
 		String opd=request.getParameter("selectedOpd");
 		String extRefNr=request.getParameter("selectedExtRefNr"); //Domino ref in Dachser Norway AS
 		//fallback in case no transport uppdrag is applicable
-		ModelAndView fallbackView = new ModelAndView("redirect:tvinnsadimport_edit.do?action=doPrepareCreate&avd=1&sign=OT" );
+		ModelAndView fallbackView = new ModelAndView("redirect:tvinnsadimport_edit.do?action=doPrepareCreate&avd=" + avd + "&sign=" + sign );
 		
 		//check user (should be in session already)
 		if(appUser==null){
@@ -1749,9 +1748,6 @@ public class SadImportHeaderController {
 			record.setO2_sist(omberegningFlag);
 			record.setO2_sidt(omberegningDate);
 			record.setO2_simf(omberegningType);
-			logger.info("A:" + record.getO2_sist());
-			logger.info("B:" + record.getO2_sidt());
-			logger.info("C:" + record.getO2_simf());
 			
 			model.put(TvinnSadConstants.DOMAIN_RECORD, record);
 			//put the header topic in session for the coming item lines

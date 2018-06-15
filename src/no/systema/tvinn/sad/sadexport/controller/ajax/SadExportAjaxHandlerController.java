@@ -102,7 +102,7 @@ public class SadExportAjaxHandlerController {
 		 if(jsonPayload!=null){
 				 JsonSadExportSpecificTopicAvdDataContainer container = this.sadExportSpecificTopicService.getSadExportSpecificTopicAvdDataContainer(jsonPayload);
 				 if(container!=null){
-					 for(JsonSadExportSpecificTopicAvdDataRecord  record : container.getGetdepinf()){
+					 for(JsonSadExportSpecificTopicRecord  record : container.getGetdepinf()){
 						 logger.info("#### senad (Deklarantnavn):" + record.getSenad());
 						 result.add(record);
 					 }
