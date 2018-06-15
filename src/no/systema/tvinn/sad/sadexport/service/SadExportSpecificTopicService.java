@@ -9,6 +9,7 @@ import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopic
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.archive.JsonSadExportSpecificTopicArchiveContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.logging.JsonSadExportSpecificTopicLoggingContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.logging.JsonSadExportSpecificTopicLoggingLargeTextContainer;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicSendParametersContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicCopiedFromTransportUppdragContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicAvdDataContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicFinansOpplysningerContainer;
@@ -39,5 +40,7 @@ public interface SadExportSpecificTopicService {
 	public JsonSadExportTopicFinansOpplysningerExternalContainer getSadExportTopicFinansOpplysningerContainerContainerExternal (String utfPayload);
 	public JsonSadExportTopicFinansOpplysningerExternalContainer getSadExportTopicFinansOpplysningerContainerOneInvoiceExternal (String utfPayload);
 	public JsonSadExportTopicFinansOpplysningerExternalForUpdateContainer getSadExportTopicFinansOpplysningerContainerOneInvoiceExternalForUpdate (String utfPayload);
+	
+	public JsonSadExportSpecificTopicSendParametersContainer getSadExportSpecificTopicSendParametersContainer (String utfPayload);
 	
 }

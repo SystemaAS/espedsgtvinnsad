@@ -19,14 +19,13 @@ import no.systema.tvinn.sad.sadexport.mapper.jsonjackson.SadExportSpecificTopicA
 import no.systema.tvinn.sad.sadexport.mapper.jsonjackson.SadExportSpecificTopicLoggingMapper;
 import no.systema.tvinn.sad.sadexport.mapper.jsonjackson.SadExportSpecificTopicLoggingLargeTextMapper;
 import no.systema.tvinn.sad.sadexport.mapper.jsonjackson.SadExportTopicCopiedFromTransportUppdragMapper;
-import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicAvdDataContainer;
 import no.systema.tvinn.sad.sadexport.mapper.jsonjackson.SadExportTopicFinansOpplysningerMapper;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicFinansOpplysningerContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicFinansOpplysningerExternalContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicFinansOpplysningerExternalForUpdateContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicFinansOpplysningerExternalRecord;
-import no.systema.tvinn.sad.sadexport.mapper.jsonjackson.SadExportSpecificTopicMapper;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicFaktTotalContainer;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicSendParametersContainer;
 
 
 /**
@@ -263,6 +262,21 @@ public class SadExportSpecificTopicServiceImpl implements SadExportSpecificTopic
 		
 	}
 	
+	/**
+	 * 
+	 */
+	public JsonSadExportSpecificTopicSendParametersContainer getSadExportSpecificTopicSendParametersContainer (String utfPayload){
+		JsonSadExportSpecificTopicSendParametersContainer container = null;
+			try{
+				SadExportSpecificTopicMapper mapper = new SadExportSpecificTopicMapper();
+				container = mapper.getSendParametersContainer(utfPayload);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			return container;
+
+	}
 	
 }
 

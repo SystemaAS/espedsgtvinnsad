@@ -1358,7 +1358,7 @@
 					            	<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="silv" id="silv">
 			 						<option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.incotermsCodeList}" >
-					 				  		<option value="${record.zkod}" title="${record.ztxt}" <c:if test="${model.record.silv == record.zkod}"> selected </c:if> >${record.zkod}</option>
+					 				  		<option value="${record.zkod}" title="${record.ztxt}"<c:if test="${model.record.silv == record.zkod}"> selected </c:if> >${record.zkod}</option>
 										</c:forEach>  
 								</select>
 							</td>

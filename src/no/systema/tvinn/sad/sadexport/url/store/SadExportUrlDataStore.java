@@ -43,6 +43,10 @@ public final class SadExportUrlDataStore {
 	//------------------------------		
 	static public String SAD_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOE002R.pgm";
 	
+	//[3.01]Fetch the Send parameters
+	//http://gw.systema.no/sycgip/tnoe004r.pgm?user=CB&avd=1&opd=0091333
+	static public String SAD_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_SEND_PARAMS_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOE004R.pgm";
+		
 	
 	//--------------------------------------------------
 	//[3.1] Fetch LIST Topic-financial extra information

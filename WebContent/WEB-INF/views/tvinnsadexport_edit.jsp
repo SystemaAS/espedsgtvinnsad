@@ -365,7 +365,7 @@
 				 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="sedp" id="sedp" >
 				 				  <option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.ekspedisjonstyperExportCodeList}" >
-					 				  		<option value="${record.zkod}"<c:if test="${model.record.sedp == record.zkod}"> selected </c:if> >${record.zkod}</option>
+					 				  		<option value="${record.zkod}" title="${record.ztxt}" <c:if test="${model.record.sedp == record.zkod}"> selected </c:if> >${record.zkod}</option>
 										</c:forEach>  
 								</select>
 				 			</td>
@@ -428,14 +428,14 @@
 		 						<span title="h_xref">Ext.ref.nr.&nbsp;</span>
 				 			</td>
 				 			<td class="text14" align="left" colspan="2">
-				 				<input type="text" class="inputText" name="h_xref" id="h_xref" size="15" maxlength="35" value="${model.record.h_xref}">
+				 				<input type="text" class="inputTextMediumBlue" name="h_xref" id="h_xref" size="15" maxlength="35" value="${model.record.h_xref}">
 			 				</td>
 			 					
 				 			<td class="text14">&nbsp;
 		 						<span title="setll" id="v_setll" >Løpenr.&nbsp;</span>
 			 				</td>
 			 				<td class="text14" align="left">
-		            			<input readonly type="text" class="inputTextReadOnly" name="setll" id="setll" size="12" maxlength="10" value="${model.record.setll}">
+		            			<input type="text" class="inputTextMediumBlue" name="setll" id="setll" size="12" maxlength="10" value="${model.record.setll}">
 	            			</td>
 				 		</tr>
 	 				</table>
@@ -842,28 +842,68 @@
 							 		<tr height="15">
 							            <td class="text14Bold" align="left" >&nbsp;</td> 
 							        </tr>
-							        <tr>
-							            <td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font>
-							            <span title="sefif">Fakt.nr.&nbsp;</span>
-							            <input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="sefif" id="sefif" size="18" maxlength="17" value='${ model.record.sefif}'></td>
-							            <td class="text14">&nbsp;&nbsp;&nbsp;&nbsp;<font class="text16RedBold" >*</font>
-							            		<span title="sefid">Fakt.dato</span>
-			 								<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="sefid" id="sefid" size="9" maxlength="6" value="${model.record.sefid}">
-			 							</td>
-							        </tr>
-							        <tr height="15">
-							            <td class="text14Bold" align="left" >&nbsp;</td> 
-							        </tr>
-							        <tr>
-							            <td colspan="2" class="text14" align="left" >&nbsp;
-							            <span title="finansOpplysningarTotSum/finansOpplysningarTotValidCurrency"></span>Fakturasum. fra Finans.oppl.&nbsp;</span>
-							            <input type="text" class="inputTextReadOnly"  name="finansOpplysningarTotSum" id="finansOpplysningarTotSum" size="15" value='${ model.record.finansOpplysningarTotSum}'>
-							            &nbsp;&nbsp;
-							            <input type="text" class="inputTextReadOnly"  name="finansOpplysningarTotValidCurrency" id="finansOpplysningarTotValidCurrency" size="5" value='${ model.record.finansOpplysningarTotValidCurrency}'>
-							            &nbsp;<button title="Hente summen fra Finans.oppl." name="getFinansOpplSumButton" id="getFinansOpplSumButton" class="buttonGrayWithGreenFrame" type="button" >Hente summen</button>
-							            <input type="hidden" name="finansOpplysningarTotKurs" id="finansOpplysningarTotKurs" value='${ model.record.finansOpplysningarTotKurs}'>
-							            </td>
-							        </tr>
+							        <c:choose>
+			                			<c:when test="${ empty model.record.finansOpplysningarTotSum}">
+									        <tr>
+									        	<c:choose>
+			                					<c:when test="${ model.record.sefid != '999999'}">
+										            <td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font><span title="sefif">Fakt.nr.&nbsp;</span>
+										            <input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="sefif" id="sefif" size="18" maxlength="17" value='${ model.record.sefif}'></td>
+										            <td class="text14">&nbsp;&nbsp;&nbsp;&nbsp;<font class="text16RedBold" >*</font>
+										            		<span title="sefid">Fakt.dato</span>
+						 								<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="sefid" id="sefid" size="9" maxlength="6" value="${model.record.sefid}">
+						 							</td>
+					 							</c:when>
+					 							<c:otherwise>
+					 								<td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font><span title="sefif">Fakt.nr.&nbsp;</span>
+										            <input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="sefif" id="sefif" size="18" maxlength="17" value=''></td>
+										            <td class="text14">&nbsp;&nbsp;&nbsp;&nbsp;<font class="text16RedBold" >*</font>
+										            		<span title="sefid">Fakt.dato</span>
+						 								<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="sefid" id="sefid" size="9" maxlength="6" value="">
+						 							</td>
+					 							</c:otherwise>
+					 							</c:choose>
+					 							
+									        </tr>
+									        <tr height="15">
+									            <td class="text14Bold" align="left" >&nbsp;</td> 
+									        </tr>
+									        <tr>
+									            <td colspan="2" class="text14" align="left" >&nbsp;
+									            <span title="finansOpplysningarTotSum/finansOpplysningarTotValidCurrency"></span>Fakturasum. fra Finans.oppl.&nbsp;</span>
+									            <input readonly type="text" class="inputTextReadOnly"  name="finansOpplysningarTotSum" id="finansOpplysningarTotSum" size="15" value='${ model.record.finansOpplysningarTotSum}'>
+									            &nbsp;&nbsp;
+									            <input readonly type="text" class="inputTextReadOnly"  name="finansOpplysningarTotValidCurrency" id="finansOpplysningarTotValidCurrency" size="5" value='${ model.record.finansOpplysningarTotValidCurrency}'>
+									            &nbsp;<button title="Hente summen fra Finans.oppl." name="getFinansOpplSumButton" id="getFinansOpplSumButton" class="buttonGrayWithGreenFrame" type="button" >Hente summen</button>
+									            <input type="hidden" name="finansOpplysningarTotKurs" id="finansOpplysningarTotKurs" value='${ model.record.finansOpplysningarTotKurs}'>
+									            </td>
+									        </tr>
+								        </c:when>
+								        <c:otherwise>
+								        	<tr>
+								        		<td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font><span title="sefif">Fakt.nr.&nbsp;</span>
+									            	<input readonly type="text" class="inputTextReadOnly" name="sefif" id="sefif" size="18" maxlength="17" value="F15  ER  BENYTTET"></td>
+									            <td class="text14">&nbsp;&nbsp;&nbsp;&nbsp;<font class="text16RedBold" >*</font><span title="sefid">Fakt.dato</span>
+					 								<input readonly onKeyPress="return numberKey(event)" type="text" class="inputTextReadOnly" name="sefid" id="sefid" size="9" maxlength="6" value="999999">
+					 							</td>
+								        	</tr>
+								        	<tr height="15">
+									            <td class="text14Bold" align="left" >&nbsp;</td> 
+									        </tr>
+									        <tr>
+									            <td colspan="2" class="text14" align="left" >&nbsp;
+									            <span title="finansOpplysningarTotSum/finansOpplysningarTotValidCurrency"></span>Fakturasum. fra Finans.oppl.&nbsp;</span>
+									            <input type="text" class="inputTextReadOnly"  name="finansOpplysningarTotSum" id="finansOpplysningarTotSum" size="15" value='${ model.record.finansOpplysningarTotSum}'>
+									            &nbsp;&nbsp;
+									            <input type="text" class="inputTextReadOnly"  name="finansOpplysningarTotValidCurrency" id="finansOpplysningarTotValidCurrency" size="5" value='${ model.record.finansOpplysningarTotValidCurrency}'>
+									            &nbsp;<button title="Hente summen fra Finans.oppl." name="getFinansOpplSumButton" id="getFinansOpplSumButton" class="buttonGrayWithGreenFrame" type="button" >Hente summen</button>
+									            <input type="hidden" name="finansOpplysningarTotKurs" id="finansOpplysningarTotKurs" value='${ model.record.finansOpplysningarTotKurs}'>
+									            </td>
+									        </tr>
+								        	
+								        </c:otherwise>
+							        </c:choose>
+							        
 							        <tr height="5">
 							            <td class="text14Bold" align="left" >&nbsp;</td> 
 							        </tr>
@@ -1149,7 +1189,7 @@
 			           				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="setrm" id="setrm">
 				 						<option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.transportmaterCodeList}" >
-					 				  		<option value="${record.zkod}"<c:if test="${model.record.setrm == record.zkod}"> selected </c:if> >${record.zkod}</option>
+					 				  		<option value="${record.zkod}" title="${record.ztxt}"<c:if test="${model.record.setrm == record.zkod}"> selected </c:if> >${record.zkod}</option>
 										</c:forEach>  
 									</select>
 			           			</td>
@@ -1272,7 +1312,7 @@
 					            	<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="selv" id="selv">
 			 						<option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.incotermsCodeList}" >
-					 				  		<option value="${record.zkod}"<c:if test="${model.record.selv == record.zkod}"> selected </c:if> >${record.zkod}</option>
+					 				  		<option value="${record.zkod}" title="${record.ztxt}"<c:if test="${model.record.selv == record.zkod}"> selected </c:if> >${record.zkod}</option>
 										</c:forEach>  
 								</select>
 							</td>
@@ -1724,8 +1764,8 @@
 				 				    <c:when test="${ model.record.sest == 'M' || empty  model.record.sest }">
 					 				    	<input tabindex=-1 class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadexport_edit.do';" value='<spring:message code="systema.tvinn.sad.export.createnew.submit"/>'/>
 					 				    	&nbsp;&nbsp;
-					 				    	<c:if test="${not empty  model.record.setdn && model.record.validUpdate}">
-					 				    		<input tabindex=-2 class="inputFormSubmit" type="submit" name="send" id="send" onclick="javascript: form.action='tvinnsadexport_send.do';" value='<spring:message code="systema.tvinn.sad.export.createnew.send"/>'/>
+					 				    	<c:if test="${not empty model.record.setdn && model.record.validUpdate}">
+					 				    		<input tabindex=-2 class="inputFormSubmit" type="button" name="sendButton" id="sendButton" onclick="javascript: form.action='tvinnsadexport_send.do';" value='<spring:message code="systema.tvinn.sad.export.createnew.send"/>'/>
 					 				    	</c:if>
 				 				    </c:when>
 				 				    <c:otherwise>
@@ -1923,5 +1963,79 @@
 	</tr>
 
 	
+	<%-- -------------------------- --%>	
+	 <%-- Send button's extra info   --%>	
+	 <%-- -------------------------- --%>	
+	 <tr>
+		<td>
+			<div id="dialogSendWithParameters" title="Dialog">
+			<form action="tvinnsadexport_send.do" name="sendWithParamtersForm" id="sendWithParamtersForm" method="post">
+			 	<input type="hidden" name="avd" id="avd" value="${model.record.seavd}">
+			 	<input type="hidden" name="opd" id="opd" value="${model.record.setdn}">
+			 	<input type="hidden" name="sign" id="sign" value="${model.record.segn}">
+				<table>
+					<tr>
+						<td class="text14" align="left" title="m1N07">Meldings funksjon</td>
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="m1N07" id="m1N07">
+			            		<option value="">-velg-</option>
+			            		<option value="DFU" <c:if test="${model.record.sendParametersRecord.m1N07 == 'DFU'}"> selected </c:if> >DFU</option>
+			            		<option value="DMA" <c:if test="${model.record.sendParametersRecord.m1N07 == 'DMA'}"> selected </c:if> >DMA</option>
+			            		<option value="DFO" <c:if test="${model.record.sendParametersRecord.m1N07 == 'DFO'}"> selected </c:if> >DFO</option>
+			            		<option value="DEN" <c:if test="${model.record.sendParametersRecord.m1N07 == 'DEN'}"> selected </c:if> >DEN</option>
+			            		<option value="DKO" <c:if test="${model.record.sendParametersRecord.m1N07 == 'DKO'}"> selected </c:if> >DKO</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="text14" align="left" title="m3039e">Til ekspedisjonsenhet</td>
+						<td class="text14MediumBlue">
+							<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue"  name="m3039e" id="m3039e" size="8" maxlength="6" value="${model.record.sendParametersRecord.m3039e}">
+						</td>
+					</tr>
+					<tr>
+						<td class="text14" align="left" title="m2005b">Ønsket behandlingsdato</td>
+						<td class="text14MediumBlue">
+							<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue"  name="m2005b" id="m2005b" size="8" maxlength="6" value="${model.record.sendParametersRecord.m2005b}">
+						</td>
+					</tr>
+					<tr>
+						<td class="text14" align="left" title="m5004d">Depositum beløp</td>
+						<td class="text14MediumBlue">
+							<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue"  name="m5004d" id="m5004d" size="12" maxlength="10" value="${model.record.sendParametersRecord.m5004d}">
+						</td>
+					</tr>
+					<tr>
+						<td class="text14" align="left" title="mven">Ventegrupe</td>
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="mven" id="mven">
+			            		<option value="" <c:if test="${empty model.record.sendParametersRecord.mven}"> selected </c:if> >Nej</option>
+			            		<option value="1" <c:if test="${model.record.sendParametersRecord.mven == '1'}"> selected </c:if> >Ja</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="text14" align="left" title="m0035">Testekode</td>
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="m0035" id="m0035">
+			            		<option value="1" <c:if test="${model.record.sendParametersRecord.m0035 == '1'}"> selected </c:if> >Test</option>
+			            		<option value="" <c:if test="${empty model.record.sendParametersRecord.m0035}"> selected </c:if> >Prod</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="text14" align="left" title="m9n01">Eksped.prioritet</td>
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="m9n01" id="m9n01">
+			            		<option value="1" <c:if test="${empty model.record.sendParametersRecord.m9n01 || model.record.sendParametersRecord.m9n01 == '1'}"> selected </c:if> >Express</option>
+			            		<option value="2" <c:if test="${not empty model.record.sendParametersRecord.m9n01 && model.record.sendParametersRecord.m9n01 != '1'}"> selected </c:if> >Annen</option>
+							</select>
+						</td>
+					</tr>
+				</table>
+			</form>
+			</div>
+		</td>
+	</tr> 
 
 	

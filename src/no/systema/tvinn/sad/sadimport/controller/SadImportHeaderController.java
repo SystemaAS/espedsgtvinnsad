@@ -161,7 +161,7 @@ public class SadImportHeaderController {
 	 * @param jsonSadImportSpecificTopicRecord
 	 */
 	private JsonSadImportSpecificTopicRecord setDefaultValuesOnGui(String applicationUser, JsonSadImportSpecificTopicRecord jsonSadImportSpecificTopicRecord){
-		 
+		logger.info("FETCHING DEFAULT values for Tolldekl. " + jsonSadImportSpecificTopicRecord.getSitdn());
 		 JsonSadImportSpecificTopicRecord targetRecord = null;
 		 String BASE_URL = SadImportUrlDataStore.SAD_IMPORT_BASE_FETCH_AVDDATA_DEFAULT_DATA_URL;
 		 String urlRequestParamsKeys = "user=" + applicationUser + "&avd=" + jsonSadImportSpecificTopicRecord.getSiavd();
@@ -272,7 +272,7 @@ public class SadImportHeaderController {
 			    		JsonSadImportSpecificTopicContainer jsonSadImportSpecificTopicContainer = this.sadImportSpecificTopicService.getSadImportSpecificTopicContainer(jsonPayload);
 			    		for(JsonSadImportSpecificTopicRecord rr : jsonSadImportSpecificTopicContainer.getOneorder()){
 			    			if(rr!=null && (strMgr.isNotNull(rr.getSidty()) && strMgr.isNotNull(rr.getSifid()) )){
-			    				//Nothing
+			    				//Tolldekl. has been saved at least once
 			    			}else{
 			    				//populate with default values since this record was created with only CREATE-NEW SEEDS
 			    				rr = this.setDefaultValuesOnGui(appUser.getUser(), rr);

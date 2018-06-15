@@ -48,6 +48,8 @@ import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpeci
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicFaktTotalContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicFaktTotalRecord;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicRecord;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicSendParametersContainer;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicSendParametersRecord;
 import no.systema.tvinn.sad.sadexport.service.SadExportSpecificTopicService;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicCopiedFromTransportUppdragContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicCopiedContainer;
@@ -234,10 +236,14 @@ public class SadExportHeaderController {
 			    	if(jsonPayload!=null){
 			    		JsonSadExportSpecificTopicContainer jsonSadExportSpecificTopicContainer = this.sadExportSpecificTopicService.getSadExportSpecificTopicContainer(jsonPayload);
 			    		for (JsonSadExportSpecificTopicRecord rr: jsonSadExportSpecificTopicContainer.getOneorder()){
-			    			rr = this.setDefaultValuesOnGui(appUser.getUser(), rr);
-			    			Collection<JsonSadExportSpecificTopicRecord> list = new ArrayList<JsonSadExportSpecificTopicRecord>();
-			    			list.add(rr);
-			    			jsonSadExportSpecificTopicContainer.setOneorder(list);
+			    			if(rr!=null && (strMgr.isNotNull(rr.getSedty()) && strMgr.isNotNull(rr.getSefid()) )){
+			    				//Tolldekl. has been saved at least once
+			    			}else{
+			    				rr = this.setDefaultValuesOnGui(appUser.getUser(), rr);
+			    				Collection<JsonSadExportSpecificTopicRecord> list = new ArrayList<JsonSadExportSpecificTopicRecord>();
+			    				list.add(rr);
+			    				jsonSadExportSpecificTopicContainer.setOneorder(list);
+			    			}
 			    		}
 			    		//populate gui elements
 			    		this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
@@ -399,7 +405,7 @@ public class SadExportHeaderController {
 					    		//Update successfully done!
 					    		logger.info("[INFO] Record successfully updated, OK ");
 					    		//get SEND-parameters
-					    		//NOT like IMPORT COVI ? this.fetchSendParameters(appUser, jsonSadExportSpecificTopicRecord);
+					    		this.fetchSendParameters(appUser, jsonSadExportSpecificTopicRecord);
 					    		//put domain objects
 					    		this.setDomainObjectsInView(session, model, jsonSadExportSpecificTopicRecord, totalItemLinesObject);
 					    		if(totalItemLinesObject.getSumOfAntalItemLines()>0 || this.ACTIVE_INNSTIKK_CODE.equals(jsonSadExportSpecificTopicRecord.getSemi())){
@@ -455,8 +461,8 @@ public class SadExportHeaderController {
 	 * @return
 	 */
 	private JsonSadExportSpecificTopicRecord setDefaultValuesOnGui(String applicationUser, JsonSadExportSpecificTopicRecord jsonSadExportSpecificTopicRecord){
-		 
-		JsonSadExportSpecificTopicRecord targetRecord = null;
+		 logger.info("FETCHING DEFAULT values for Tolldekl. " + jsonSadExportSpecificTopicRecord.getSetdn());
+		 JsonSadExportSpecificTopicRecord targetRecord = null;
 		 String BASE_URL = SadExportUrlDataStore.SAD_EXPORT_BASE_FETCH_AVDDATA_DEFAULT_DATA_URL;
 		 String urlRequestParamsKeys = "user=" + applicationUser + "&avd=" + jsonSadExportSpecificTopicRecord.getSeavd();
 		 logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
@@ -1381,7 +1387,12 @@ public class SadExportHeaderController {
 		return record;
 	}
 	
-	/*
+	/**
+	 * 
+	 * @param appUser
+	 * @param headerRecord
+	 */
+	
 	public void fetchSendParameters(SystemaWebUser appUser, JsonSadExportSpecificTopicRecord headerRecord){
 		//---------------------------
 		//get BASE URL = RPG-PROGRAM
@@ -1401,7 +1412,7 @@ public class SadExportHeaderController {
     	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
 		
     	if(jsonPayload!=null){
-    		JsonSadExportSpecificTopicSendParametersContainer container = this.sadExportSpecificTopicService.getSadImportSpecificTopicSendParametersContainer(jsonPayload);
+    		JsonSadExportSpecificTopicSendParametersContainer container = this.sadExportSpecificTopicService.getSadExportSpecificTopicSendParametersContainer(jsonPayload);
     		if(container!=null){
     			for (JsonSadExportSpecificTopicSendParametersRecord record : container.getGetcmn()){
     				headerRecord.setSendParametersRecord(record);
@@ -1410,7 +1421,7 @@ public class SadExportHeaderController {
     	}
 	
 	}
-	*/
+	
 	
 	/**
 	 * log Errors in Aspects and Domain objects in order to render on GUI

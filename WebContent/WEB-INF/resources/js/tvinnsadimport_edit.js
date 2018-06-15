@@ -1315,4 +1315,5 @@
 	  jq(document).ready(function() {
 		  //Not working with dropdowns
 		  //jq( document ).tooltip();
+		  jq('#sidty').focus();
 	  });

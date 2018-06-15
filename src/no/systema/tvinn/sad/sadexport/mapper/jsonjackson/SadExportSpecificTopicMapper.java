@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 //application library
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicRecord;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicSendParametersContainer;
 import no.systema.main.mapper.jsonjackson.general.ObjectMapperAbstractGrandFather;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicAvdDataContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicAvdDataRecord;
@@ -78,6 +79,21 @@ public class SadExportSpecificTopicMapper extends ObjectMapperAbstractGrandFathe
 		
 		//At this point we now have an UTF-8 payload
 		JsonSadExportSpecificTopicFaktTotalContainer container = super.getObjectMapper().readValue(utfPayload.getBytes(), JsonSadExportSpecificTopicFaktTotalContainer.class); 
+		//logger.info(mapper.writeValueAsString(topicListContainer));
+		logger.info("[JSON-String payload status=OK]  " + container.getUser());
+		
+		return container;
+	}
+	/**
+	 * 
+	 * @param utfPayload
+	 * @return
+	 * @throws Exception
+	 */
+	public JsonSadExportSpecificTopicSendParametersContainer getSendParametersContainer(String utfPayload) throws Exception{
+		
+		//At this point we now have an UTF-8 payload
+		JsonSadExportSpecificTopicSendParametersContainer container = super.getObjectMapper().readValue(utfPayload.getBytes(), JsonSadExportSpecificTopicSendParametersContainer.class); 
 		//logger.info(mapper.writeValueAsString(topicListContainer));
 		logger.info("[JSON-String payload status=OK]  " + container.getUser());
 		

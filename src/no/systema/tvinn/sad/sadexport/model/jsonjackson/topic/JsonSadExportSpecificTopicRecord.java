@@ -4,6 +4,8 @@
 package no.systema.tvinn.sad.sadexport.model.jsonjackson.topic;
 
 import no.systema.main.model.jsonjackson.general.JsonAbstractGrandFatherRecord;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicSendParametersRecord;
+
 import java.util.*;
 import java.lang.reflect.Field;
 /**
@@ -85,7 +87,11 @@ public class JsonSadExportSpecificTopicRecord extends JsonAbstractGrandFatherRec
 	public void setFinansOpplysningarTotKurs(String value) {  this.finansOpplysningarTotKurs = value; }
 	public String getFinansOpplysningarTotKurs() { return this.finansOpplysningarTotKurs; }
 	
-	
+	//Send function extra parameters
+	private JsonSadExportSpecificTopicSendParametersRecord sendParametersRecord = null;
+	public void setSendParametersRecord(JsonSadExportSpecificTopicSendParametersRecord value) {  this.sendParametersRecord = value; }
+	public JsonSadExportSpecificTopicSendParametersRecord getSendParametersRecord() {return this.sendParametersRecord;}
+
 	//in order to validate before a "send topic"
 	private boolean validUpdate = false;
 	public void setValidUpdate(boolean value) {  this.validUpdate = value; }
