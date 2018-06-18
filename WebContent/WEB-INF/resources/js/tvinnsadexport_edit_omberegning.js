@@ -43,9 +43,9 @@
     
   //General functions
   	jq(function() {
-  		jq( "#submit" ).click(function( event ) {
-  		  setBlockUI();
-  		});
+  		jq("#sadImportSaveNewTopicForm").submit(function() {
+  			setBlockUI();
+	  	});
     	
   		
   		//=====================================

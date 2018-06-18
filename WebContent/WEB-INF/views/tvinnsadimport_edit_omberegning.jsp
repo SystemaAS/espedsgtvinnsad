@@ -330,7 +330,7 @@
 								</div>	
 				 			</td>
 				 			<td>
-				 				<select class="inputTextMediumBlueMandatoryField" name="sidty" id="sidty" >
+				 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="sidty" id="sidty" >
 				 				  <option value="">-velg-</option>
 								  <option value="EU"<c:if test="${model.record.sidty == 'EU'}"> selected </c:if> >EU</option>
 								  <option value="IM"<c:if test="${model.record.sidty == 'IM'}"> selected </c:if> >IM</option>
@@ -350,10 +350,10 @@
 			 				<b>1.2</b><font class="text16RedBold" >*</font><span title="sidp">&nbsp;Eksped.type</span>
 			 				</td>
 				 			<td>
-				 				<select class="inputTextMediumBlueMandatoryField" name="sidp" id="sidp" >
+				 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="sidp" id="sidp" >
 				 				  <option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.ekspedisjonstyperImportCodeList}" >
-					 				  		<option value="${record.zkod}"<c:if test="${model.record.sidp == record.zkod}"> selected </c:if> >${record.zkod}</option>
+					 				  		<option value="${record.zkod}" title="${record.ztxt}" <c:if test="${model.record.sidp == record.zkod}"> selected </c:if> >${record.zkod}</option>
 										</c:forEach>  
 								</select>
 				 			</td>
@@ -377,10 +377,10 @@
 			 					
 				 			</td>
 				 			<td>
-				 				<select class="inputTextMediumBlueMandatoryField" name="om_sitype" id="om_sitype" >
+				 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="om_sitype" id="om_sitype" >
 				 				  <option value="">-velg-</option>	
 				 				  <c:forEach var="record" items="${model.typetilfelleOmbCodeList}" >
-			 				  		<option value="${record.zkod}"<c:if test="${ model.record.om_sitype == record.zkod}"> selected </c:if> >${record.zkod}</option>
+			 				  		<option value="${record.zkod}" title="${record.ztxt}" <c:if test="${ model.record.om_sitype == record.zkod}"> selected </c:if> >${record.zkod}</option>
 								  </c:forEach> 
 								</select>
 			 				</td>
@@ -612,7 +612,7 @@
 							        </tr>
 							        <tr>
 							            <td class="text14" align="left"><input type="text" class="inputTextMediumBlue" name="sikns" id="sikns" size="9" maxlength="8" value="${model.record.sikns}"></td>
-							            <td class="text14" align="left"><input type="text" class="inputTextMediumBlueMandatoryField"  name="sinas" id="sinas" size="31" maxlength="30" value="${model.record.sinas}"></td>
+							            <td class="text14" align="left"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField"  name="sinas" id="sinas" size="31" maxlength="30" value="${model.record.sinas}"></td>
 							        </tr>
 							        <tr height="4"><td>&nbsp;</td></tr>
 							        <tr>
@@ -621,7 +621,7 @@
 							            <td>&nbsp;</td>
 							        </tr>
 							        <tr>
-							            <td colspan="2" align="left"><input type="text" class="inputTextMediumBlueMandatoryField"  name="siads1" id="siads1" size="40" maxlength="30" value="${model.record.siads1}"></td>
+							            <td colspan="2" align="left"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField"  name="siads1" id="siads1" size="40" maxlength="30" value="${model.record.siads1}"></td>
     							            
 							        </tr>
 							        <tr>
@@ -735,7 +735,7 @@
 							        </tr>
 							        <tr>
 							            <td class="text14" align="left"><input type="text" class="inputTextMediumBlue" name="siknk" id="siknk" size="9" maxlength="8" value="${model.record.siknk}"></td>
-							            <td class="text14" align="left"><input type="text" class="inputTextMediumBlueMandatoryField"  name="sinak" id="sinak" size="31" maxlength="30" value="${model.record.sinak}"></td>
+							            <td class="text14" align="left"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField"  name="sinak" id="sinak" size="31" maxlength="30" value="${model.record.sinak}"></td>
 							        </tr>
 							        <tr height="10"><td></td></tr>
 							        
@@ -757,7 +757,7 @@
 										</td>
 							        </tr>
 							        <tr>
-							            <td align="left"><input type="text" class="inputTextMediumBlueMandatoryField"  name="sirg" id="sirg" size="20" maxlength="11" value="${model.record.sirg}"></td>
+							            <td align="left"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField"  name="sirg" id="sirg" size="20" maxlength="11" value="${model.record.sirg}"></td>
 							            <td align="left">
 							            		<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="siktc" id="siktc" size="1" maxlength="1" value="${model.record.siktc}">
 											<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="sikta" id="sikta" size="5" maxlength="5" value="${model.record.sikta}">
@@ -891,9 +891,9 @@
 							        <tr>
 							            <td class="text14" align="left" >&nbsp;
 							            <font class="text16RedBold" >*</font><span title="sifif">Fakt.nr.&nbsp;</span>
-							            <input type="text" class="inputTextMediumBlueMandatoryField"  name="sifif" id="sifif" size="18" maxlength="17" value='${ model.record.sifif}'></td>
+							            <input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField"  name="sifif" id="sifif" size="18" maxlength="17" value='${ model.record.sifif}'></td>
 							            <td class="text14">&nbsp;&nbsp;&nbsp;&nbsp;<font class="text16RedBold" >*</font><span title="sifid">Fakt.dato</span>
-			 								<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField"  name="sifid" id="sifid" size="9" maxlength="6" value="${model.record.sifid}">
+			 								<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField"  name="sifid" id="sifid" size="9" maxlength="6" value="${model.record.sifid}">
 			 							</td>
 							        </tr>
 							        <%--
@@ -933,7 +933,7 @@
 				 				<span title="sibel3" id="v_sibel3" class="validation">Fakturasum&nbsp;</span>
 				 			</td>
 				 			<td align="left" >
-				 				<input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField"  name="sibel3" id="sibel3" size="20" maxlength="13" value="${model.record.sibel3}">				 				
+				 				<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField"  name="sibel3" id="sibel3" size="20" maxlength="13" value="${model.record.sibel3}">				 				
 				 				<%--
 				 				<c:choose>
 					 				<c:when test="${Xmodel.record.finansOpplysningarExist==true}">
@@ -949,7 +949,7 @@
 				 				&nbsp;
 				 				<span title="sival3" id="v_sival3" class="validation"><font class="text16RedBold" >*</font>Valuta</span>
 				 				<%-- Note: onChange event in jQuery for this currency list --%>
-				 				<select class="inputTextMediumBlueMandatoryField" name="sival3" id="sival3" >
+				 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="sival3" id="sival3" >
 				 				  <option value="">-velg-</option>	
 				 				  <c:forEach var="currency" items="${model.currencyCodeList}" >
 			 				  		<option value="${currency.zkod}"<c:if test="${ model.record.sival3 == currency.zkod}"> selected </c:if> >${currency.zkod}</option>
@@ -965,17 +965,17 @@
 			 				<td class="text14">
 			 					<b>&nbsp;23.</b><font class="text16RedBold" >*</font><span title="sivku">Kurs&nbsp;</span>
 				 			</td>
-				 			<td class="text14" align="left" ><input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField"  name="sivku" id="sivku" size="10" maxlength="7" value="${model.record.sivku}"></td>
+				 			<td class="text14" align="left" ><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField"  name="sivku" id="sivku" size="10" maxlength="7" value="${model.record.sivku}"></td>
 				 			
 				 			<td class="text14" align="left" >&nbsp;
 				 				<img onMouseOver="showPop('24_info');" onMouseOut="hidePop('24_info');"style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 				 				<b>24.</b><font class="text16RedBold" >*</font><span title="sitst">Tr.type</span>
-				 				<select class="inputTextMediumBlueMandatoryField" name="sitst" id="sitst" >
+				 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="sitst" id="sitst" >
 				 				  <option value="">-velg-</option>	
-				 				  <option value="1" <c:if test="${model.record.sitst == '1'}"> selected </c:if> >1</option>	
-				 				  <option value="2" <c:if test="${model.record.sitst == '2'}"> selected </c:if> >2</option>	
-				 				  <option value="3" <c:if test="${model.record.sitst == '3'}"> selected </c:if> >3</option>	
-				 				  <option value="9" <c:if test="${model.record.sitst == '9'}"> selected </c:if> >9</option>	
+				 				  <option value="1" title="Kjøp i fast regning" <c:if test="${model.record.sitst == '1'}"> selected </c:if> >1</option>	
+				 				  <option value="2" title="Konsignasjon/Kommisjon" <c:if test="${model.record.sitst == '2'}"> selected </c:if> >2</option>	
+				 				  <option value="3" title="Leie (herunder leasing)Lån" <c:if test="${model.record.sitst == '3'}"> selected </c:if> >3</option>	
+				 				  <option value="9" title="Annet" <c:if test="${model.record.sitst == '9'}"> selected </c:if> >9</option>	
 				 				</select>
 				 				<div class="text14" style="position: relative;" align="left">
 				 				<span style="position:absolute; top:2px; width:250px;" id="24_info" class="popupWithInputText text14"  >
@@ -1106,7 +1106,7 @@
 									
 					             </td>
 					            <td >
-				            		<select class="inputTextMediumBlueMandatoryField" name="silka" id="silka">
+				            		<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="silka" id="silka">
 				 						<option value="">-velg-</option>
 					 				  	<c:forEach var="country" items="${model.countryCodeList}" >
 					 				  		<option value="${country.zkod}"<c:if test="${model.record.silka == country.zkod}"> selected </c:if> >${country.zkod}</option>
@@ -1299,7 +1299,7 @@
 		            <td class="text14" align="left" >
 		            <img onMouseOver="showPop('49_info');" onMouseOut="hidePop('49_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">	
 		            <b>49.&nbsp;</b><span title="sign"><font class="text16RedBold" >*</font>Godsnr</span>
-		            &nbsp;<input type="text" class="inputTextMediumBlueMandatoryField"  name="sign" id="sign" size="20" maxlength="15" value="${model.record.sign}">
+		            &nbsp;<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField"  name="sign" id="sign" size="20" maxlength="15" value="${model.record.sign}">
 		            <div class="text14" style="position: relative;" align="left">
 		            <span style="position:absolute; top:2px; width:250px;" id="49_info" class="popupWithInputText text14"  >
 		           			<b>49. Godsnr</b><br/>
@@ -1364,10 +1364,10 @@
 							</div>	
 							</td>	
 				            <td >&nbsp;
-					            	<select class="inputTextMediumBlueMandatoryField" name="silv" id="silv">
+					            	<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="silv" id="silv">
 			 						<option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.incotermsCodeList}" >
-					 				  		<option value="${record.zkod}"<c:if test="${model.record.silv == record.zkod}"> selected </c:if> >${record.zkod}</option>
+					 				  		<option value="${record.zkod}" title="${record.ztxt}" <c:if test="${model.record.silv == record.zkod}"> selected </c:if> >${record.zkod}</option>
 										</c:forEach>  
 								</select>
 							</td>
@@ -1388,7 +1388,7 @@
 								</div>
 								</td>
 					            <td >
-					            		&nbsp;<input type="text" class="inputTextMediumBlueMandatoryField"  name="silvt" id="silvt" size="20" maxlength="17" value="${model.record.silvt}">
+					            		&nbsp;<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField"  name="silvt" id="silvt" size="20" maxlength="17" value="${model.record.silvt}">
 								</td>
 							</tr>
 							<tr height="5"><td></td></tr>
@@ -1410,7 +1410,7 @@
 					            <td >
 						            <select class="selectMediumBlueE2" name="sikdls" id="sikdls">
 					 				  	<c:forEach var="record" items="${model.lagringsstedCodeList}" >
-					 				  		<option value="${record.zkod}"<c:if test="${model.record.sikdls == record.zkod}"> selected </c:if> >${record.zkod}</option>
+					 				  		<option value="${record.zkod}" title="${record.ztxt}" <c:if test="${model.record.sikdls == record.zkod}"> selected </c:if> >${record.zkod}</option>
 										</c:forEach>
 									</select>
 					            
@@ -1610,7 +1610,7 @@
 								</div>
 								</td>
 					            <td >
-					            		<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlueMandatoryField"  name="sivkb" id="sivkb" size="10" maxlength="9" value="${model.record.sivkb}">
+					            		<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlueMandatoryField"  name="sivkb" id="sivkb" size="10" maxlength="9" value="${model.record.sivkb}">
 					            </td>
 					        </tr>
 				            <tr>
@@ -1629,7 +1629,7 @@
 								</div>
 								</td>
 					            <td >
-					            	<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlueMandatoryField"  name="sintk" id="sintk" size="8" maxlength="7" value="${model.record.sintk}">
+					            	<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlueMandatoryField"  name="sintk" id="sintk" size="8" maxlength="7" value="${model.record.sintk}">
 					            </td>
 					        </tr>
    					        <tr height="10"><td class="text">&nbsp;</td> </tr>
@@ -1652,7 +1652,7 @@
 									<%-- When Tullverket has answered, the legend should be protected and not updateable --%>
 									<c:choose>
 										<c:when test="${empty model.record.om_sift11}">
-											<input type="text" class="inputTextMediumBlueMandatoryField" name="om_sift01" id="om_sift01" size="71" maxlength="70" value="${model.record.om_sift01}">
+											<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="om_sift01" id="om_sift01" size="71" maxlength="70" value="${model.record.om_sift01}">
 				 						</c:when>
 				 						<c:otherwise>
 				 							<input readonly type="text" class="inputTextReadOnly" size="71" maxlength="70" value="${model.record.om_sift01}">

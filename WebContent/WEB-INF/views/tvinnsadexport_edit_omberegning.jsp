@@ -351,7 +351,7 @@
 				 				<select class="inputTextMediumBlueMandatoryField" name="sedp" id="sedp" >
 				 				  <option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.ekspedisjonstyperExportCodeList}" >
-					 				  		<option value="${record.zkod}"<c:if test="${model.record.sedp == record.zkod}"> selected </c:if> >${record.zkod}</option>
+					 				  		<option value="${record.zkod}" title="${record.ztxt}" <c:if test="${model.record.sedp == record.zkod}"> selected </c:if> >${record.zkod}</option>
 										</c:forEach>  
 								</select>
 				 			</td>
@@ -378,7 +378,7 @@
 				 				<select class="inputTextMediumBlueMandatoryField" name="om_setype" id="om_setype" >
 				 				  <option value="">-velg-</option>	
 				 				  <c:forEach var="record" items="${model.typetilfelleOmbCodeList}" >
-			 				  		<option value="${record.zkod}"<c:if test="${ model.record.om_setype == record.zkod}"> selected </c:if> >${record.zkod}</option>
+			 				  		<option value="${record.zkod}" title="${record.ztxt}" <c:if test="${ model.record.om_setype == record.zkod}"> selected </c:if> >${record.zkod}</option>
 								  </c:forEach> 
 								</select>
 			 				</td>
@@ -1238,7 +1238,7 @@
 			           				<select class="inputTextMediumBlueMandatoryField" name="setrm" id="setrm">
 				 						<option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.transportmaterCodeList}" >
-					 				  		<option value="${record.zkod}"<c:if test="${model.record.setrm == record.zkod}"> selected </c:if> >${record.zkod}</option>
+					 				  		<option value="${record.zkod}" title="${record.ztxt}" <c:if test="${model.record.setrm == record.zkod}"> selected </c:if> >${record.zkod}</option>
 										</c:forEach>  
 									</select>
 			           			</td>
@@ -1361,7 +1361,7 @@
 					            	<select class="inputTextMediumBlueMandatoryField" name="selv" id="selv">
 			 						<option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.incotermsCodeList}" >
-					 				  		<option value="${record.zkod}"<c:if test="${model.record.selv == record.zkod}"> selected </c:if> >${record.zkod}</option>
+					 				  		<option value="${record.zkod}" title="${record.ztxt}" <c:if test="${model.record.selv == record.zkod}"> selected </c:if> >${record.zkod}</option>
 										</c:forEach>  
 								</select>
 							</td>
@@ -1418,7 +1418,7 @@
 						            <select  class="selectMediumBlueE2" name="sekdls" id="sekdls">
 						            	<option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.lagringsstedCodeList}" >
-					 				  		<option value="${record.zkod}"<c:if test="${model.record.sekdls == record.zkod}"> selected </c:if> >${record.zkod}</option>
+					 				  		<option value="${record.zkod}" title="${record.ztxt}" <c:if test="${model.record.sekdls == record.zkod}"> selected </c:if> >${record.zkod}</option>
 										</c:forEach>
 									</select>
 					            </td>
