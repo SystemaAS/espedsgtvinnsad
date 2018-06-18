@@ -26,6 +26,14 @@ public class JsonSadExportSpecificTopicSendParametersRecord extends JsonAbstract
 	public void setM3039e(String value) {  this.m3039e = value; }
 	public String getM3039e() {return this.m3039e;}
 	
+	private String m3039eo1 = null;
+	public void setM3039eo1(String value) {  this.m3039eo1 = value; }
+	public String getM3039eo1() {return this.m3039eo1;}
+	
+	private String m3039eo2 = null;
+	public void setM3039eo2(String value) {  this.m3039eo2 = value; }
+	public String getM3039eo2() {return this.m3039eo2;}
+	
 	private String m2005b = null;
 	public void setM2005b(String value) {  this.m2005b = value; }
 	public String getM2005b() {return this.m2005b;}

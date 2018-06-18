@@ -1960,16 +1960,19 @@
 						<td class="text14MediumBlue">
 							<select class="selectMediumBlueE2" name="m1N07" id="m1N07">
 			            		<option value="">-velg-</option>
-			            		<option value="DEB" <c:if test="${Xmodel.record.sendParametersRecord.m1N07 == 'DEB'}"> selected </c:if> >DEB</option>
-			            		<option value="DRE" <c:if test="${Xmodel.record.sendParametersRecord.m1N07 == 'DRE'}"> selected </c:if> >DRE</option>
-			            		<option value="DSO" <c:if test="${Xmodel.record.sendParametersRecord.m1N07 == 'DSO'}"> selected </c:if> >DSO</option>
+			            		<option value="DEB" <c:if test="${model.record.sendParametersRecord.m1N07 == 'DEB'}"> selected </c:if> >DEB</option>
+			            		<option value="DRE" <c:if test="${model.record.sendParametersRecord.m1N07 == 'DRE'}"> selected </c:if> >DRE</option>
+			            		<option value="DSO" <c:if test="${model.record.sendParametersRecord.m1N07 == 'DSO'}"> selected </c:if> >DSO</option>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<td class="text14" align="left" title="m3039e">Til ekspedisjonsenhet</td>
 						<td class="text14MediumBlue">
-							<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue"  name="m3039e" id="m3039e" size="8" maxlength="6" value="${model.record.sendParametersRecord.m3039e}">
+							<select class="selectMediumBlueE2" name="m3039e" id="m3039e">
+			            		<option value="${model.record.sendParametersRecord.m3039eo1}" >${model.record.sendParametersRecord.m3039eo1}</option>
+			            		<option value="${model.record.sendParametersRecord.m3039eo2}" >${model.record.sendParametersRecord.m3039eo2}</option>
+							</select>
 						</td>
 					</tr>
 					<tr>
