@@ -39,6 +39,11 @@
     		refreshCustomValidity(jq('#sedp')[0]);
   		}
   	});
+  	jq('#om_setype').focus(function() {
+    	if(jq('#om_setype').val()!=''){
+    		refreshCustomValidity(jq('#om_setype')[0]);
+  		}
+  	});
   	jq('#senas').focus(function() {
     	if(jq('#senas').val()!=''){
     		refreshCustomValidity(jq('#senas')[0]);
@@ -139,7 +144,7 @@
     
   //General functions
   	jq(function() {
-  		jq("#sadImportSaveNewTopicForm").submit(function() {
+  		jq("#sadExportSaveNewTopicForm").submit(function() {
   			setBlockUI();
 	  	});
     	

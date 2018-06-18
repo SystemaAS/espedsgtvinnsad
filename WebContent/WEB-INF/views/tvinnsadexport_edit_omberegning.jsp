@@ -375,7 +375,7 @@
 			 					
 				 			</td>
 				 			<td>
-				 				<select class="inputTextMediumBlueMandatoryField" name="om_setype" id="om_setype" >
+				 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="om_setype" id="om_setype" >
 				 				  <option value="">-velg-</option>	
 				 				  <c:forEach var="record" items="${model.typetilfelleOmbCodeList}" >
 			 				  		<option value="${record.zkod}" title="${record.ztxt}" <c:if test="${ model.record.om_setype == record.zkod}"> selected </c:if> >${record.zkod}</option>
