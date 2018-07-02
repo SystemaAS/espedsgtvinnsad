@@ -888,29 +888,65 @@
 							 		<tr height="15">
 							            <td class="text14Bold" align="left" >&nbsp;</td> 
 							        </tr>
-							        <tr>
-							            <td class="text14" align="left" >&nbsp;
-							            <font class="text16RedBold" >*</font><span title="sifif">Fakt.nr.&nbsp;</span>
-							            <input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField"  name="sifif" id="sifif" size="18" maxlength="17" value='${ model.record.sifif}'></td>
-							            <td class="text14">&nbsp;&nbsp;&nbsp;&nbsp;<font class="text16RedBold" >*</font><span title="sifid">Fakt.dato</span>
-			 								<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField"  name="sifid" id="sifid" size="9" maxlength="6" value="${model.record.sifid}">
-			 							</td>
-							        </tr>
-							        <%--
-							        <tr height="5">
-							            <td class="text14Bold" align="left" >&nbsp;</td> 
-							        </tr>
-							        <tr>
-							            <td colspan="2" class="text14" align="left" >&nbsp;
-							            <span title="finansOpplysningarTotSum/finansOpplysningarTotValidCurrency"></span>Fakturasum. fra Finans.oppl.&nbsp;</span>
-							            <input readonly type="text" class="inputTextReadOnly"  name="finansOpplysningarTotSum" id="finansOpplysningarTotSum" size="15" value='${ Xmodel.record.finansOpplysningarTotSum}'>
-							            &nbsp;&nbsp;
-							            <input readonly type="text" class="inputTextReadOnly"  name="finansOpplysningarTotValidCurrency" id="finansOpplysningarTotValidCurrency" size="5" value='${ Xmodel.record.finansOpplysningarTotValidCurrency}'>
-							            &nbsp;<button title="Hente summen fra Finans.oppl." name="getFinansOpplSumButton" id="getFinansOpplSumButton" class="buttonGrayWithGreenFrame" type="button" >Hente summen</button>
-							            <input type="hidden" name="finansOpplysningarTotKurs" id="finansOpplysningarTotKurs" value='${ Xmodel.record.finansOpplysningarTotKurs}'>
-							            </td>
-							        </tr>
-							         --%>
+							        <c:choose>
+		                			<c:when test="${ empty model.record.finansOpplysningarTotSum}">
+		                				<tr>
+		                					<c:choose>
+			                					<c:when test="${ model.record.sifid != '999999'}">
+										            <td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font><span title="sifif">Fakt.nr.&nbsp;</span>
+										            <input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField"  name="sifif" id="sifif" size="18" maxlength="17" value='${ model.record.sifif}'></td>
+										            <td class="text14">&nbsp;&nbsp;&nbsp;&nbsp;<font class="text16RedBold" >*</font><span title="sifid">Fakt.dato</span>
+										            	<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField"  name="sifid" id="sifid" size="9" maxlength="6" value="${model.record.sifid}">
+											            	
+						 							</td>
+					 							</c:when>
+					 							<c:otherwise>
+													<td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font><span title="sifif">Fakt.nr.&nbsp;</span>
+										            <input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField"  name="sifif" id="sifif" size="18" maxlength="17" value=''></td>
+										            <td class="text14">&nbsp;&nbsp;&nbsp;&nbsp;<font class="text16RedBold" >*</font><span title="sifid">Fakt.dato</span>
+										            	<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField"  name="sifid" id="sifid" size="9" maxlength="6" value="">
+											            	
+						 							</td>
+					 							</c:otherwise>
+				 							</c:choose>
+								        </tr>
+								        <tr height="5">
+								            <td class="text14Bold" align="left" >&nbsp;</td> 
+								        </tr>
+								        <tr>
+								            <td colspan="2" class="text14" align="left" >&nbsp;
+								            <span title="finansOpplysningarTotSum/finansOpplysningarTotValidCurrency">Fakturasum. fra Finans.oppl.&nbsp;</span>
+								            <input readonly type="text" class="inputTextReadOnly"  name="finansOpplysningarTotSum" id="finansOpplysningarTotSum" size="15" value='${ model.record.finansOpplysningarTotSum}'>
+								            &nbsp;&nbsp;
+								            <input readonly type="text" class="inputTextReadOnly"  name="finansOpplysningarTotValidCurrency" id="finansOpplysningarTotValidCurrency" size="5" value='${ model.record.finansOpplysningarTotValidCurrency}'>
+								            <%-- &nbsp;<button title="Hente summen fra Finans.oppl." name="getFinansOpplSumButton" id="getFinansOpplSumButton" class="buttonGrayWithGreenFrame" type="button" >Hente summen</button> --%>
+								            <input type="hidden" name="finansOpplysningarTotKurs" id="finansOpplysningarTotKurs" value='${ model.record.finansOpplysningarTotKurs}'>
+								            </td>
+								        </tr>
+							        </c:when>
+							        <c:otherwise>
+							        	<tr>
+								            <td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font><span title="sifif">Fakt.nr.&nbsp;</span>
+								            <input readonly type="text" class="inputTextReadOnly"  name="sifif" id="sifif" size="18" maxlength="17" value='F15  ER  BENYTTET'></td>
+								            <td class="text14">&nbsp;&nbsp;&nbsp;&nbsp;<font class="text16RedBold" >*</font><span title="sifid">Fakt.dato</span>
+								            	<input readonly type="text" class="inputTextReadOnly"  name="sifid" id="sifid" size="9" maxlength="6" value="999999">
+				 							</td>
+								        </tr>
+								        <tr height="5">
+								            <td class="text14Bold" align="left" >&nbsp;</td> 
+								        </tr>
+								        <tr>
+								            <td colspan="2" class="text14" align="left" >&nbsp;
+								            <span title="finansOpplysningarTotSum/finansOpplysningarTotValidCurrency">Fakturasum. fra Finans.oppl.&nbsp;</span>
+								            <input readonly type="text" class="inputTextReadOnly"  name="finansOpplysningarTotSum" id="finansOpplysningarTotSum" size="15" value='${ model.record.finansOpplysningarTotSum}'>
+								            &nbsp;&nbsp;
+								            <input readonly type="text" class="inputTextReadOnly"  name="finansOpplysningarTotValidCurrency" id="finansOpplysningarTotValidCurrency" size="5" value='${ model.record.finansOpplysningarTotValidCurrency}'>
+								            &nbsp;<button title="Hente summen fra Finans.oppl." name="getFinansOpplSumButton" id="getFinansOpplSumButton" class="buttonGrayWithGreenFrame" type="button" >Hente summen</button>
+								            <input type="hidden" name="finansOpplysningarTotKurs" id="finansOpplysningarTotKurs" value='${ model.record.finansOpplysningarTotKurs}'>
+								            </td>
+								        </tr>
+							        </c:otherwise>
+							        </c:choose>
 							        <tr height="5">
 							            <td class="text14Bold" align="left" >&nbsp;</td> 
 							        </tr>

@@ -77,16 +77,18 @@ public class SadImportCalculator {
 					if(rawValue==null || "".equals(rawValue)){
 						rawValue = "0.00";
 					}else{
-						NumberFormat nf = NumberFormat.getInstance(Locale.GERMAN);
-					    try {
-					        Number parsed = nf.parse(rawValue);
-					        BigDecimal bd = new BigDecimal(parsed.toString());
-					        //logger.info(bd.toString());
-					        retval += bd.doubleValue();
-					        
-					    } catch (Exception e) {
-					        e.printStackTrace();
-					    }
+						if(!"S".equals(record.getSvpreae()) ){
+							NumberFormat nf = NumberFormat.getInstance(Locale.GERMAN);
+						    try {
+						        Number parsed = nf.parse(rawValue);
+						        BigDecimal bd = new BigDecimal(parsed.toString());
+						        //logger.info(bd.toString());
+						        retval += bd.doubleValue();
+						        
+						    } catch (Exception e) {
+						        e.printStackTrace();
+						    }
+						}
 					}
 					//logger.info("################### FINAL CONVERSION SAD-IMPORT FABL(sum of items (svbelt) calculated: " + retval);
 					

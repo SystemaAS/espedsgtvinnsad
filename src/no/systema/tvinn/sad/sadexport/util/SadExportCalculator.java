@@ -41,6 +41,7 @@ public class SadExportCalculator {
 					}else{
 						NumberFormat nf = NumberFormat.getInstance(Locale.GERMAN);
 					    try {
+					    	
 					        Number parsed = nf.parse(rawValue);
 					        BigDecimal bd = new BigDecimal(parsed.toString());
 					        //check if there is a valid currency = NOK (meaning implicitly that there is several currencies)
@@ -78,16 +79,18 @@ public class SadExportCalculator {
 					if(rawValue==null || "".equals(rawValue)){
 						rawValue = "0.00";
 					}else{
-						NumberFormat nf = NumberFormat.getInstance(Locale.GERMAN);
-					    try {
-					        Number parsed = nf.parse(rawValue);
-					        BigDecimal bd = new BigDecimal(parsed.toString());
-					        //logger.info(bd.toString());
-					        retval += bd.doubleValue();
-					        
-					    } catch (Exception e) {
-					        e.printStackTrace();
-					    }
+						if(!"S".equals(record.getSvnyl()) ){
+							NumberFormat nf = NumberFormat.getInstance(Locale.GERMAN);
+						    try {
+						        Number parsed = nf.parse(rawValue);
+						        BigDecimal bd = new BigDecimal(parsed.toString());
+						        //logger.info(bd.toString());
+						        retval += bd.doubleValue();
+						        
+						    } catch (Exception e) {
+						        e.printStackTrace();
+						    }
+						}
 					}
 					//logger.info("################### FINAL CONVERSION SAD-EXPORT FABL(sum of items (svbelt) calculated: " + retval);
 					
