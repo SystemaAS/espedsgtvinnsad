@@ -130,7 +130,7 @@
 								<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 								<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
 									<a id="alinkOmberegning" style="display:block;" href="tvinnsadimport_edit_omberegning.do?action=doFetch&avd=${ model.record.siavd}&sign=${ model.record.sisg}
-																&opd=${ model.record.sitdn}&status=${ model.record.sist}&fabl=${ model.record.sibel3}&o2_sist=${ model.record.o2_sist}&o2_sidt=${ model.record.o2_sidt}&o2_simf=${ model.record.o2_simf}">
+																&opd=${model.record.sitdn}-&status=${ model.record.sist}&fabl=${ model.record.sibel3}&o2_sist=${ model.record.o2_sist}&o2_sidt=${ model.record.o2_sidt}&o2_simf=${ model.record.o2_simf}">
 										<font class="tabDisabledLink">
 											&nbsp;<spring:message code="systema.tvinn.sad.import.omberegning.mastertopic.tab"/>
 										</font>

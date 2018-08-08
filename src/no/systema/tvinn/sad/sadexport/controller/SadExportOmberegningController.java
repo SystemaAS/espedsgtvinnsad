@@ -164,7 +164,7 @@ public class SadExportOmberegningController {
 				totalItemLinesObject.setFinansOpplysningarTotValidCurrency(sumFaktTotalRecord.getTot_vk28());
 				totalItemLinesObject.setFinansOpplysningarTotSum(sumFaktTotalRecord.getTot_bl28());
 				totalItemLinesObject.setFinansOpplysningarTotKurs(sumFaktTotalRecord.getTot_kr28());
-				
+				logger.info("A-#########:" + totalItemLinesObject.getFinansOpplysningarTotSum());
 				//-------------
 				//FETCH RECORD
 				//-------------
@@ -267,6 +267,11 @@ public class SadExportOmberegningController {
 						recordToValidate.setSumOfAntalItemLines(totalItemLinesObject.getSumOfAntalItemLines());
 						recordToValidate.setSumTotalAmountItemLines(totalItemLinesObject.getSumTotalAmountItemLines());
 						recordToValidate.setSumTotalBruttoViktItemLines(totalItemLinesObject.getSumTotalBruttoViktItemLines());
+						//get invoice totals from invoice list
+						sumFaktTotalRecord = this.getInvoiceTotalFromInvoices(avd, opd, appUser);
+						totalItemLinesObject.setFinansOpplysningarTotValidCurrency(sumFaktTotalRecord.getTot_vk28());
+						totalItemLinesObject.setFinansOpplysningarTotSum(sumFaktTotalRecord.getTot_bl28());
+						totalItemLinesObject.setFinansOpplysningarTotKurs(sumFaktTotalRecord.getTot_kr28());
 						
 					}else{
 						recordToValidate.setSeavd(avd);
@@ -917,6 +922,20 @@ public class SadExportOmberegningController {
 		record.setSumOfAntalItemLines(totalItemLinesObject.getSumOfAntalItemLines());
 		record.setSumTotalAmountItemLines(totalItemLinesObject.getSumTotalAmountItemLines());
 		record.setSumTotalBruttoViktItemLines(totalItemLinesObject.getSumTotalBruttoViktItemLines());
+		record.setFinansOpplysningarTotValidCurrency(totalItemLinesObject.getFinansOpplysningarTotValidCurrency());
+		record.setFinansOpplysningarTotSum(totalItemLinesObject.getFinansOpplysningarTotSum());
+		record.setFinansOpplysningarTotKurs(totalItemLinesObject.getFinansOpplysningarTotKurs());
+		//Fakt.fields
+		if(strMgr.isNotNull(totalItemLinesObject.getFinansOpplysningarTotValidCurrency())){
+			record.setFinansOpplysningarTotValidCurrency(totalItemLinesObject.getFinansOpplysningarTotValidCurrency());
+		}
+		logger.info("#########:" + totalItemLinesObject.getFinansOpplysningarTotSum());
+		if(strMgr.isNotNull(totalItemLinesObject.getFinansOpplysningarTotSum())){
+			record.setFinansOpplysningarTotSum(totalItemLinesObject.getFinansOpplysningarTotSum());
+		}
+		if(strMgr.isNotNull(totalItemLinesObject.getFinansOpplysningarTotKurs())){
+			record.setFinansOpplysningarTotKurs(totalItemLinesObject.getFinansOpplysningarTotKurs());
+		}
 		//Adjust dates
 		this.adjustDatesOnFetch(record);
 		//Omberegning flag
@@ -1032,7 +1051,9 @@ public class SadExportOmberegningController {
 		String dateSedtNO = null;
 		
 		if(record!=null){
-			if(record.getSefid()!=null){
+			if("999999".equals(record.getSefid()) || "99999999".equals(record.getSefid())){
+				record.setSefid("999999");
+			}else{
 				dateSefiNO = this.dateFormatter.convertToDate_NO(record.getSefid());
 				record.setSefid(dateSefiNO);
 			}
@@ -1072,8 +1093,12 @@ public class SadExportOmberegningController {
 		String dateSedtISO = null;
 		
 		if(record.getSefid()!=null){
-			dateSefidISO = this.dateFormatter.convertToDate_ISO(record.getSefid());
-			record.setSefid(dateSefidISO);
+			if(!"999999".equals(record.getSefid())){
+				dateSefidISO = this.dateFormatter.convertToDate_ISO(record.getSefid());
+				record.setSefid(dateSefidISO);
+			}else{
+				record.setSefid("99999999");
+			}
 		}
 		if(record.getSedtg()!=null){
 			dateSedtgISO = this.dateFormatter.convertToDate_ISO(record.getSedtg());

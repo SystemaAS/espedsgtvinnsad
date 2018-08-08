@@ -104,7 +104,8 @@ public class SadExportOmberegningHeaderValidator implements Validator {
 				//------
 				//dates 
 				//------
-				if(strMgr.isNotNull(record.getSefid())){
+				
+				if(strMgr.isNotNull(record.getSefid())  && !"999999".equals(record.getSefid())){
 					if(!dateValidator.validateDate(record.getSefid(), DateValidator.DATE_MASK_NO)){
 						errors.rejectValue("sefid", "systema.tvinn.sad.export.header.error.rule.invalidFaktDate"); 	
 					}

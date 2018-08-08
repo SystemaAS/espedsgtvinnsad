@@ -34,7 +34,7 @@
   			jq('#sivku').val(jq('#finansOpplysningarTotKurs').val());
   			//for backwards compatibility meaning: ref till fakturalista
   			jq('#sifif').val("F15  ER  BENYTTET");
-  			
+  			jq('#sifid').val("999999");
   			
   		}
 	  });

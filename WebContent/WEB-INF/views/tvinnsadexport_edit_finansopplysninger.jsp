@@ -268,10 +268,9 @@
 								<table width="80%" cellspacing="0" border="0" cellpadding="0">
 									<tr>
 										<td class="text12Bold">
-											<c:if test="${model.status == 'M' || empty model.status}">
-												<input tabindex=-1 class="inputFormSubmitStd" type="submit" name="submit" onclick="javascript: form.action='tvinnsadexport_edit_finansopplysninger.do';" value="<spring:message code="systema.tvinn.sad.import.item.line.init.createnew.submit"/>">
+											<input tabindex=-1 class="inputFormSubmitStd" type="submit" name="submit" onclick="javascript: form.action='tvinnsadexport_edit_finansopplysninger.do';" value="<spring:message code="systema.tvinn.sad.import.item.line.init.createnew.submit"/>">
 												&nbsp;<button title="Import av eksterna fakturaer" name="importInvoicesButton" id="importInvoicesButton" class="buttonGrayWithGreenFrame" type="button" >Importera eksterna fakturaer</button>
-											</c:if>
+											
 										</td>
 									</tr>
 									<tr>
@@ -527,15 +526,8 @@
 						        </table>
 					        </td>
 					        <td align="left" >
-									<c:choose>	
-										<c:when test="${model.status == 'M' || empty model.status || model.status == '1'}">
-											<input class="inputFormSubmit" type="submit" name="submit" onclick="javascript: form.action='tvinnsadexport_edit_finansopplysninger.do';" value='<spring:message code="systema.tvinn.sad.import.item.createnew.submit"/>'>
-											&nbsp;&nbsp;
-										</c:when>
-										<c:otherwise>
-				 				    		<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
-				 				    	</c:otherwise>	
-			 				    	</c:choose>	
+								<input class="inputFormSubmit" type="submit" name="submit" onclick="javascript: form.action='tvinnsadexport_edit_finansopplysninger.do';" value='<spring:message code="systema.tvinn.sad.import.item.createnew.submit"/>'>
+								&nbsp;&nbsp;
 							</td>
 				        </tr>
 					    <tr height="2"><td colspan="2" ></td></tr>

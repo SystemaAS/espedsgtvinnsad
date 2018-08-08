@@ -298,10 +298,8 @@
 								<table width="80%" cellspacing="0" border="0" cellpadding="0">
 									<tr>
 										<td class="text12Bold">
-											<c:if test="${model.status == 'M' || empty model.status}">
 												<input tabindex=-1 class="inputFormSubmitStd" type="submit" name="submit" onclick="javascript: form.action='tvinnsadexport_edit_omberegning_finansopplysninger.do';" value="<spring:message code="systema.tvinn.sad.export.item.line.init.createnew.submit"/>">
 												&nbsp;<button title="Import av eksterna fakturaer" name="importInvoicesButton" id="importInvoicesButton" class="buttonGrayWithGreenFrame" type="button" >Importera eksterna fakturaer</button>
-											</c:if>
 										</td>
 									</tr>
 									<tr>
@@ -344,9 +342,7 @@
 					                    <th align="right" class="text14" nowrap>&nbsp;Valuta&nbsp;</th>
 					                    <th align="right" class="text14" nowrap>&nbsp;Kurs&nbsp;</th>
 					                    <th align="right" class="text14" nowrap>&nbsp;Faktor&nbsp;</th>
-					                    <c:if test="${model.status == 'M' || empty model.status}">
-					                    	<th align="center" class="text14" nowrap>Slett</th>
-					                    </c:if> 
+					                    <th align="center" class="text14" nowrap>Slett</th>
 					               </tr> 
 								   </thead>
 								   <body>						               
@@ -370,13 +366,11 @@
 							               <td align="right" class="text14" >&nbsp;${record.sfvk28}</td>
 							               <td align="right" class="text14" >&nbsp;${record.sfkr28}</td>
 							               <td align="right" class="text14" >&nbsp;${record.sfom28}</td>
-										   <c:if test="${model.status == 'M' || empty model.status}">	
-								               <td class="text14" align="center" nowrap>
+										   <td class="text14" align="center" nowrap>
 								               	<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadexport_edit_omberegning_finansopplysninger.do?action=doDelete&sign=${model.sign}&avd=${model.avd}&opd=${model.opd}&status=${model.status}&fak=${record.sftxt}">
 								               		<img valign="bottom" src="resources/images/delete.gif" border="0" alt="remove">
 								               	</a>	&nbsp;
-								               </td>
-							               </c:if>
+							               </td>
 							            </tr>
 								        <%-- this param is used ONLY in this JSP 
 								        <c:set var="totalNumberOfItemLines" value="${counter.count}" scope="request" />
@@ -556,16 +550,9 @@
 							        <tr height="10"><td class="text" align="left"></td></tr>
 						        </table>
 					        </td>
-					        <td align="left" >
-									<c:choose>	
-										<c:when test="${model.status == 'M' || empty model.status || model.status == '1'}">
-											<input class="inputFormSubmit" type="submit" name="submit" onclick="javascript: form.action='tvinnsadexport_edit_omberegning_finansopplysninger.do';" value='<spring:message code="systema.tvinn.sad.export.item.createnew.submit"/>'>
-											&nbsp;&nbsp;
-										</c:when>
-										<c:otherwise>
-				 				    		<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
-				 				    	</c:otherwise>	
-			 				    	</c:choose>	
+					        <td align="left" >				
+								<input class="inputFormSubmit" type="submit" name="submit" onclick="javascript: form.action='tvinnsadexport_edit_omberegning_finansopplysninger.do';" value='<spring:message code="systema.tvinn.sad.export.item.createnew.submit"/>'>
+								&nbsp;&nbsp;
 							</td>
 				        </tr>
 					    <tr height="2"><td colspan="2" ></td></tr>

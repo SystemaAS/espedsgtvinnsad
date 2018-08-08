@@ -137,7 +137,7 @@
 	  		
 	  		//for backwards compatibility meaning: ref till fakturalista
   			jq('#sefif').val("F15  ER  BENYTTET");
-  			
+  			jq('#sefid').val("999999");
   		}
 	  });
     });

@@ -242,7 +242,7 @@ public class SadImportHeaderController {
 				totalItemLinesObject.setFinansOpplysningarTotValidCurrency(sumFaktTotalRecord.getTot_vk28());
 				totalItemLinesObject.setFinansOpplysningarTotSum(sumFaktTotalRecord.getTot_bl28());
 				totalItemLinesObject.setFinansOpplysningarTotKurs(sumFaktTotalRecord.getTot_kr28());
-				
+				logger.info("A-#########:" + totalItemLinesObject.getFinansOpplysningarTotSum());
 				//-------------
 				//FETCH RECORD
 				//-------------
@@ -316,6 +316,11 @@ public class SadImportHeaderController {
 						recordToValidate.setSumOfAntalItemLines(totalItemLinesObject.getSumOfAntalItemLines());
 						recordToValidate.setSumTotalAmountItemLines(totalItemLinesObject.getSumTotalAmountItemLines());
 						recordToValidate.setSumTotalBruttoViktItemLines(totalItemLinesObject.getSumTotalBruttoViktItemLines());
+						//get invoice totals from invoice list
+						sumFaktTotalRecord = this.getInvoiceTotalFromInvoices(avd, opd, appUser);
+						totalItemLinesObject.setFinansOpplysningarTotValidCurrency(sumFaktTotalRecord.getTot_vk28());
+						totalItemLinesObject.setFinansOpplysningarTotSum(sumFaktTotalRecord.getTot_bl28());
+						totalItemLinesObject.setFinansOpplysningarTotKurs(sumFaktTotalRecord.getTot_kr28());
 						
 					}else{
 						recordToValidate.setSiavd(avd);
@@ -1772,6 +1777,7 @@ public class SadImportHeaderController {
 		if(strMgr.isNotNull(totalItemLinesObject.getFinansOpplysningarTotValidCurrency())){
 			record.setFinansOpplysningarTotValidCurrency(totalItemLinesObject.getFinansOpplysningarTotValidCurrency());
 		}
+		logger.info("#########:" + totalItemLinesObject.getFinansOpplysningarTotSum());
 		if(strMgr.isNotNull(totalItemLinesObject.getFinansOpplysningarTotSum())){
 			record.setFinansOpplysningarTotSum(totalItemLinesObject.getFinansOpplysningarTotSum());
 		}
