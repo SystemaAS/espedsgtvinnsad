@@ -272,14 +272,14 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span title="siavd"><font class="text16RedBold" >*</font>Avdeling:&nbsp;
            			<select class="selectMediumBlueE2" name="avd" id="avd">
 	            		<option value="">-velg-</option>
-	 				  	<c:forEach var="record" items="${Xmodel.avdList}" >
+	 				  	<c:forEach var="record" items="${model.avdList}" >
                              <option value="${record.avd}"<c:if test="${model.record.siavd == record.avd}"> selected </c:if> >${record.avd}<c:if test="${record.tst == '2'}">&nbsp;(test)</c:if></option>
 						</c:forEach> 
 					</select>
 					&nbsp;<span title="sisg"><font class="text16RedBold" >*</font>Sign:</span>&nbsp;
            			<select class="selectMediumBlueE2" name="sisg" id="sisg">
 	            		<option value="">-velg-</option>
-	 				  	<c:forEach var="record" items="${Xmodel.signList}" >
+	 				  	<c:forEach var="record" items="${model.signList}" >
                            	 	<c:choose>
 								<c:when test="${empty model.record.sisg}">
 									<option value="${record.sign}"<c:if test="${user.tvinnSadSign == record.sign}"> selected </c:if> >${record.sign}</option>
@@ -1798,34 +1798,27 @@
 					            		<input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlue" name="insibvnv" id="insibvnv" size="5" maxlength="5" value="${model.record.insibvnv}">
 					            </td>
 					        </tr>
-					        <%--
-					       	<tr height="2"><td></td></tr> 
-					       	<c:if test="${ Xmodel.record.sist == 'E' || Xmodel.record.sist == 'K' || Xmodel.record.sist == 'Å' || empty  Xmodel.record.sist }"> 
-						   		<c:if test="${ empty Xmodel.record.sitll }"> 
-							        <tr>
-							        	<td valign="top" class="text14" colspan="2">
-							        		<img onMouseOver="showPop('changeStatusUser_info');" onMouseOut="hidePop('changeStatusUser_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-					            			Endre Status&nbsp;
-							        		<img style="vertical-align: bottom;cursor: pointer;" id="updateStatusByUserImg" width="20px" height="20px" src="resources/images/changeStatus.png" border="0" alt="change status">
-							        		<div class="text14" style="position: relative;" align="left">
-							            	<span style="position:absolute; top:2px;" id="changeStatusUser_info" class="popupWithInputText text14"  >
-							           			<b>Endre Status</b>
-							           			<br/>
-							           			<p>
-							           				Statusen kan bare endres når:
-							           				<ol>
-							           				<li>Status = E, K, Å eller blank</li>
-							           				<li>Løpenr er blank</li>
-							           				
-						           					</ol>	
-							           			</p>
-											</span>
-											</div>	
-							        	</td>
-							        </tr>
-						        </c:if>
-					         </c:if>
-					         --%>
+					        <tr>
+					        	<td valign="top" class="text14" colspan="2">
+					        		<img onMouseOver="showPop('changeStatusUser_info');" onMouseOut="hidePop('changeStatusUser_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+			            			Endre Status&nbsp;
+					        		<img style="vertical-align: bottom;cursor: pointer;" id="updateStatusByUserImg" width="20px" height="20px" src="resources/images/changeStatus.png" border="0" alt="change status">
+					        		<div class="text11" style="position: relative;" align="left">
+					            	<span style="position:absolute; top:2px;" id="changeStatusUser_info" class="popupWithInputText text11"  >
+					           			<b>Endre Status</b>
+					           			<br/>
+					           			<p>
+					           				Statusen kan bare endres når:
+					           				<ol>
+					           				<li>Status = E, K, Å eller blank</li>
+					           				<li>Løpenr er blank</li>
+					           				
+				           					</ol>	
+					           			</p>
+									</span>
+									</div>	
+					        	</td>
+					        </tr>
 					        
 					        <tr height="20"><td>&nbsp;</td></tr>
 							<tr><td class="text14" colspan="2"><b>Varelinje totaler&nbsp;</b></td></tr>
@@ -1946,8 +1939,8 @@
 		<%-- change status admin dialog --%>	
 		<div id="dialogUpdateStatus" title="Dialog">
 			<form action="tvinnsadimport_updateStatus.do" name="updateStatusForm" id="updateStatusForm" method="post">
-			 	<input type="hidden" name="currentAvd" id="currentAvd" value="${Xmodel.record.siavd}">
-			 	<input type="hidden" name="currentOpd" id="currentOpd" value="${Xmodel.record.sitdn}">
+			 	<input type="hidden" name="currentAvd" id="currentAvd" value="${model.record.siavd}">
+			 	<input type="hidden" name="currentOpd" id="currentOpd" value="${model.record.sitdn}">
 				<p class="text14" >Change status as needed.</p>
 				<table>
 					<tr>
