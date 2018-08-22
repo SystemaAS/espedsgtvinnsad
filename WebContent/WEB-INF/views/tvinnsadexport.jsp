@@ -101,6 +101,7 @@
                 <td class="text14" align="left" title="motNavn">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.mottagare"/></td>
                 <td class="text14" align="left" title="sign">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.godsnr"/></td>
                 <td class="text14" align="left" title="semi">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.innstikk"/></td>
+                <td class="text14" align="left" title="faknr">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.faknr"/></td>
                 
                 <td>&nbsp;</td>
 			</tr>
@@ -133,6 +134,7 @@
 				<td align="left" ><input type="text" class="inputText" name="motNavn" id="motNavn" size="9" maxlength="50" value='${searchFilterSadExport.motNavn}'>&nbsp;</td>
 				<td align="left" ><input type="text" class="inputText" name="godsnr" id="godsnr" size="10" maxlength="50" value='${searchFilterSadExport.godsnr}'>&nbsp;</td>
 				<td align="left" ><input type="text" class="inputText" name="innstikk" id="innstikk" size="1" maxlength="1" value='${searchFilterSadExport.innstikk}'>&nbsp;</td>
+				<td align="left" ><input type="text" class="inputText" name="faknr" id="faknr" size="10" maxlength="17" value='${searchFilterSadExport.faknr}'>&nbsp;</td>
 				<td valign="top" align="left" >
                    &nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='<spring:message code="systema.tvinn.sad.search"/>'>
               

@@ -89,6 +89,10 @@ public class SearchFilterSadExportTopicList {
 	public void setInnstikk(String value) {  this.innstikk = value; }
 	public String getInnstikk() { return this.innstikk;}
 	
+	private String faknr = null;
+	public void setFaknr(String value) {  this.faknr = value; }
+	public String getFaknr() { return this.faknr;}
+	
 	
 	
 	/**

@@ -341,6 +341,9 @@ public class SadExportController {
 		if(searchFilter.getInnstikk()!=null && !"".equals(searchFilter.getInnstikk())){
 			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "innstikk=" + searchFilter.getInnstikk());
 		}
+		if(searchFilter.getFaknr()!=null && !"".equals(searchFilter.getFaknr())){
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "faknr=" + searchFilter.getFaknr());
+		}
 		
 		return urlRequestParamsKeys.toString();
 	}
