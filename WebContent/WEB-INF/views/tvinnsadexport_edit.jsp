@@ -1251,11 +1251,11 @@
 					 				  		<c:choose>
 					 				  			<c:when test="${fn:contains(model.record.sekdh,'@')}">
 					 				  				<%-- Usually when a validation error occur --%>
-					 				  				<option value="${record.zkod}@${record.ztxt}"<c:if test='${fn:substringBefore(model.record.sekdh, "@") == record.zkod && fn:substringAfter(model.record.sekdh, "@") == record.ztxt}'> selected </c:if> >${record.ztxt}&nbsp;${record.zkod}</option>
+					 				  				<option value="${record.zkod}@${record.ztxt}"<c:if test='${fn:substringBefore(model.record.sekdh, "@") == record.zkod && fn:substringAfter(model.record.sekdh, "@") == record.ztxt}'> selected </c:if> >${record.zkod}&nbsp;${record.ztxt}</option>
 					 				  			</c:when>
 					 				  			<c:otherwise>
 					 				  				<%-- Usually when a normal doFetch occur --%>
-					 				  				<option value="${record.zkod}@${record.ztxt}"<c:if test='${model.record.sekdh == record.zkod && (model.record.sekdft == record.ztxt)}'> selected </c:if> >${record.ztxt}&nbsp;${record.zkod}</option>
+					 				  				<option value="${record.zkod}@${record.ztxt}"<c:if test='${model.record.sekdh == record.zkod && (model.record.sekdft == record.ztxt)}'> selected </c:if> >${record.zkod}&nbsp;${record.ztxt}</option>
 					 				  			</c:otherwise>
 					 				  		</c:choose>
 										</c:forEach>  
