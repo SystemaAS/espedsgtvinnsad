@@ -22,7 +22,7 @@
 	}
 	//for setting user lang to datatables
 	function getLanguage(lang) {
-	    return '/espedsg/resources/localization/'+langMap[lang]+'.json';
+	    return '/espedsg2/resources/localization/'+langMap[lang]+'.json';
 	}
 	
 	//for mouse-over for css popup
