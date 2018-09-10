@@ -7,9 +7,11 @@
 	<%-- specific jQuery functions for this JSP (must reside under the resource map since this has been
 		specified in servlet.xml as static <mvc:resources mapping="/resources/**" location="WEB-INF/resources/" order="1"/> --%>
 	<SCRIPT type="text/javascript" src="resources/js/tvinnsadglobal_edit.js?ver=${user.versionEspedsg}"></SCRIPT>	
-	<SCRIPT type="text/javascript" src="resources/js/tvinnsadexport.js?ver=${user.versionEspedsg}"></SCRIPT>	
+	<SCRIPT type="text/javascript" src="resources/js/tvinnsadexport.js?ver=${user.versionEspedsg}"></SCRIPT>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">	
 	
 	<style type = "text/css">
+	.ui-dialog{font-size:10pt;}
 	.ui-datepicker { font-size:9pt;}
 	</style>
 
@@ -308,7 +310,6 @@
 									 	<input type="hidden" name="currentOpd${counter.count}" id="currentOpd${counter.count}" value="${topic.opd}">
 									 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="D">
 										<p class="text14" >Er du sikker på at du vil slette denne?</p>
-										<br/>
 										<p class="text14"> Tekst </p>
 										<input type="text" class="inputText" name="currentText${counter.count}" id="currentText${counter.count}" size="45" maxlength="70" value=''>&nbsp;</td>
 										
