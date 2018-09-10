@@ -1,21 +1,17 @@
 package no.systema.tvinn.sad.sadexport.validator;
 
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
-import org.springframework.validation.Validator;
 import org.apache.log4j.Logger;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
+import org.springframework.validation.Validator;
 
-import no.systema.main.util.DateTimeManager;
 import no.systema.main.util.StringManager;
 import no.systema.main.validator.DateValidator;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicRecord;
-import no.systema.tvinn.sad.sadimport.controller.SadImportHeaderController;
-import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportSpecificTopicRecord;
 import no.systema.tvinn.sad.util.TvinnSadConstants;
-import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
 
 /**
  * 
@@ -92,19 +88,20 @@ public class SadExportHeaderValidator implements Validator {
 					errors.rejectValue("selka", "systema.tvinn.sad.export.header.error.rule.avsLandNotNorwayAndBestLandNorway"); 
 				}
 				//if tullkredit = not exists
-				if("".equals(record.getSekta()) || "".equals(record.getSektb()) ){
+				if("".equals(record.getSekta())){
 					if("".equals(record.getSeski())){
 						errors.rejectValue("seski", "systema.tvinn.sad.export.header.error.rule.seski.tollMvaValueMandatory"); 
 					}
 				}
-				//if tullkredit = exists
-				if(!"".equals(record.getSekta()) && !"".equals(record.getSektb()) ){
-					if("S".equals(record.getSeski()) || "I".equals(record.getSeski()) ){
-						//Valid
-					}else{
-						errors.rejectValue("seski", "systema.tvinn.sad.export.header.error.rule.seski.tollMvaValueDiscreteMandatoryValues"); 
-					}
-				}
+//				2018-09-04 Remarked due to not needed, according to CB. 
+//				//if tullkredit = exists
+//				if(!"".equals(record.getSekta()) && !"".equals(record.getSektb()) ){
+//					if("S".equals(record.getSeski()) || "I".equals(record.getSeski()) ){
+//						//Valid
+//					}else{
+//						errors.rejectValue("seski", "systema.tvinn.sad.export.header.error.rule.seski.tollMvaValueDiscreteMandatoryValues"); 
+//					}
+//				}
 				
 				//------
 				//dates 
