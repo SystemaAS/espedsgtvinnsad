@@ -250,7 +250,7 @@
 	    </c:when>
 	    
 	    <c:otherwise>
-	    	    		<tr>
+    		<tr>
 				<td height="23" class="tabThinBorderLightGreenLogoutE2" width="100%" align="left" colspan="3"> 
 	    			 <table width="100%" border="0" cellspacing="1" cellpadding="1">
 					 	<tr >
