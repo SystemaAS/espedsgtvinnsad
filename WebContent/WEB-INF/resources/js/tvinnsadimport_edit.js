@@ -1022,10 +1022,10 @@
 	  jq(function() { 
 		  jq("#dialogSendWithParameters").dialog({
 			  autoOpen: false,
-			  maxWidth:500,
-	          maxHeight: 400,
-	          width: 360,
-	          height: 360,
+			  maxWidth:600,
+	          maxHeight: 500,
+	          width: 450,
+	          height: 400,
 			  modal: true
 		  });
 	  });
@@ -1035,6 +1035,10 @@
 	  jq(function() {
 		  jq("#sendButton").click(function() {
 			  presentSendWithParametersDialog();
+		  });
+		  
+		  jq('#m3039e').blur(function() {
+			  jq('#idVedlegg').css('display','block');
 		  });
 		  
 	  });
@@ -1065,6 +1069,8 @@
 		  //jq("#dialogSaveSU").button("option", "disabled", true);
 		  //open now
 		  jq('#dialogSendWithParameters').dialog('open');
+		  
+		 
 	  }
 	  
 	  

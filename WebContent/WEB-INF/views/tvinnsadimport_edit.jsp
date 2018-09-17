@@ -2094,6 +2094,7 @@
 							</select>
 						</td>
 					</tr>
+					
 					<tr>
 						<td class="text14" align="left" title="m3039e">Til ekspedisjonsenhet</td>
 						<td class="text14MediumBlue">
@@ -2139,7 +2140,29 @@
 							</select>
 						</td>
 					</tr>
+					<tr height="2"><td></td></tr>
 				</table>
+				<div class="text14" style="display:none;" id="idVedlegg" >&nbsp;<font style="color:yellow;">Vedlegg</font>
+					<table >
+						<thead>
+						<tr class="tableHeaderField12" >
+							<th class="tableHeaderField11">Velg</th>
+							<th class="tableHeaderField11">Tema</th>
+							<th class="tableHeaderField11">Dokument</th>
+						</tr>
+						</thead>
+						<tbody>
+						<c:forEach items="${model.archiveList}" var="record" varStatus="counter">    
+		                   <tr class="tableOddRow">
+		               		<td class="tableCellFirst11"><input type="checkbox" name="archiveId_${counter.count}" id="archiveId_${counter.count}" value="${record.url}" ></td>
+							<td class="tableCell11">${record.subject}</td>
+							<td class="tableCell11">${record.documentName}</td>
+							</tr>
+						</c:forEach>
+						</tbody>
+					</table>
+				</div>
+				
 			</form>
 			</div>
 		</td>

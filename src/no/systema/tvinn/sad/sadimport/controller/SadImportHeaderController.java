@@ -54,6 +54,7 @@ import no.systema.tvinn.sad.sadimport.service.SadImportSpecificTopicService;
 import no.systema.tvinn.sad.sadimport.service.SadImportTopicListService;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportTopicCopiedFromTransportUppdragContainer;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportTopicListContainer;
+import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.archive.JsonSadImportSpecificTopicArchiveContainer;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportTopicCopiedContainer;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportSpecificTopicSendParametersContainer;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportSpecificTopicSendParametersRecord;
@@ -285,6 +286,7 @@ public class SadImportHeaderController {
 			    		//add gui lists here
 						this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
 						this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
+						this.populateArchiveList(appUser, avd, opd, model);
 						this.setCodeDropDownMgr(appUser, model);	
 			    		this.setDomainObjectsInView(session, model, jsonSadImportSpecificTopicContainer, totalItemLinesObject, omberegningFlag, omberegningDate, omberegningType);	
 				    		
@@ -468,6 +470,7 @@ public class SadImportHeaderController {
 					//add gui lists here
 					this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
 					this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
+					this.populateArchiveList(appUser, avd, opd, model);
 					this.setCodeDropDownMgr(appUser, model);	
 
 	    			successView.addObject("model" , model);
@@ -552,32 +555,47 @@ public class SadImportHeaderController {
 			//add URL-parameter 
 			//-------------------
 			String urlRequestParamsKeys = this.getRequestUrlKeyParameters(action, appUser, request);
-			//there are only key parameters in doSend. No other topic (record) specific parameters from GUI or such
-			String urlRequestParams = urlRequestParamsKeys;
-			//for debugging purposes
-			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, BASE_URL); 
-			
+			//archive params (url to vedlegg)
+			StringBuffer archiveVedleggUrlRequestParams = new StringBuffer();
+			Enumeration<String> records = request.getParameterNames();
+			int urlCounter = 1;
+			while (records.hasMoreElements()) {
+		        String paramName = (String) records.nextElement();
+		        if(paramName!=null && paramName.contains("archiveId")){
+	        		String url = request.getParameter(paramName);
+	    	        //logger.info("ParamName:" + paramName);
+	        		//logger.info("url" + url);
+	        		archiveVedleggUrlRequestParams.append("&url" + urlCounter + "=" + url);
+	        		urlCounter++;
+		        }
+			}
+			//logger.info("Archive urls:" + archiveVedleggUrlRequestParams.toString());
+			//complete paramList
+			String urlRequestParams = urlRequestParamsKeys + archiveVedleggUrlRequestParams.toString();
 			logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-		    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
-		    	logger.info("URL PARAMS: " + urlRequestParams);
-		    	//----------------------------------------------------------------------------
-		    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
-		    	//----------------------------------------------------------------------------
-		    	String rpgReturnPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+	    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+	    	logger.info("URL PARAMS: " + urlRequestParams);
+	    	
+	    	/* TO REACTIVATE
+	    	//----------------------------------------------------------------------------
+	    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
+	    	//----------------------------------------------------------------------------
+	    	String rpgReturnPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
 			//Debug --> 
-		    	logger.info("Checking errMsg in rpgReturnPayload" + rpgReturnPayload);
-		    	//we must evaluate a return RPG code in order to know if the Update was OK or not
-		    	rpgReturnResponseHandler.evaluateRpgResponseOnTopicUpdate(rpgReturnPayload);
-		    	if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){
-		    		rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on UPDATE: " + rpgReturnResponseHandler.getErrorMessage());
-		    		//TODO ERROR HANDLING HERE... stay in the same page ?
-		    	}else{
-		    		//Update succefully done!
-		    		logger.info("[INFO] Record successfully sent [changed status], OK ");
-		    		//put domain objects
-		    		//this.setDomainObjectsInView(session, model, jsonTdsImportSpecificTopicRecord);
-		    		//TODO SUCCESS should stay at the same side or not? Right now we go to the list of topics
-		    	}
+	    	logger.info("Checking errMsg in rpgReturnPayload" + rpgReturnPayload);
+	    	//we must evaluate a return RPG code in order to know if the Update was OK or not
+	    	rpgReturnResponseHandler.evaluateRpgResponseOnTopicUpdate(rpgReturnPayload);
+	    	if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){
+	    		rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on UPDATE: " + rpgReturnResponseHandler.getErrorMessage());
+	    		//TODO ERROR HANDLING HERE... stay in the same page ?
+	    	}else{
+	    		//Update succefully done!
+	    		logger.info("[INFO] Record successfully sent [changed status], OK ");
+	    		//put domain objects
+	    		//this.setDomainObjectsInView(session, model, jsonTdsImportSpecificTopicRecord);
+	    		//TODO SUCCESS should stay at the same side or not? Right now we go to the list of topics
+	    	}
+	    	*/
 		}
 		return successView;
 	}
@@ -1973,6 +1991,42 @@ public class SadImportHeaderController {
 			//drop down to print skilleark (must be Z type)
 			this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString2(urlCgiProxyService, tvinnSadDropDownListPopulationService, model, appUser, "Z");
 			
+	}
+	
+	/**
+	 * 
+	 * @param appUser
+	 * @param avd
+	 * @param opd
+	 * @param model
+	 */
+	private void populateArchiveList(SystemaWebUser appUser, String avd, String opd, Map model){
+		logger.info("Inside: populateArchiveList");
+		Collection list = new ArrayList();
+		//---------------------------
+		//get BASE URL = RPG-PROGRAM
+        //---------------------------
+		String BASE_URL = SadImportUrlDataStore.SAD_IMPORT_BASE_ARCHIVE_FOR_SPECIFIC_TOPIC_URL;
+		//url params
+		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&avd=" + avd + "&opd=" + opd;
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+    	logger.info("URL PARAMS: " + urlRequestParamsKeys);
+    	//--------------------------------------
+    	//EXECUTE the FETCH (RPG program) here
+    	//--------------------------------------
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+		//Debug --> 
+    	logger.info(" --> jsonPayload:" + jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	
+		if(jsonPayload!=null){
+    		JsonSadImportSpecificTopicArchiveContainer container = this.sadImportSpecificTopicService.getSadImportSpecificTopicArchiveContainer(jsonPayload);
+			if(container!=null){
+				list =  container.getArchiveElements();
+			}
+		}
+		model.put("archiveList", list);
 	}
 	
 	
