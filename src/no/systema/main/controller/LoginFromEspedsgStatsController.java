@@ -134,9 +134,10 @@ public class LoginFromEspedsgStatsController {
 		    }else{
 		    	//Decrypt password to be able to work with it. 
 		    	//All sub-modules will be passed an encrypted password (from the dashboard). ALWAYS!
+		    	
+		    	logger.info("DECRYPT...:" + appUser.getPassword());
 		    	appUser.setEncryptedPassword(appUser.getPassword());
 		    	appUser.setPassword(this.aesManager.decrypt(appUser.getPassword()));
-		    	//logger.info("DECRYPT...:" + appUser.getPassword());
 		    	
 		    	//get the company code for the comming user
 		    	//this routine was triggered by Totens upgrade (Jan-2017 V12). Ref. JOVOs requirement
