@@ -179,9 +179,23 @@
 			    				>&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.label"/>&nbsp;</font>
 			    			</a>
 			    			&nbsp;<font color="#FFFFFF" style="font-weight: bold;">|</font>
-			    			<%--
-			    			<font class="headerMenuLightGreen">&nbsp;<spring:message code="systema.ncts.import.label"/>&nbsp;</font>
-			    			--%>
+			    			<%-- --------------------- --%>
+			    			<%-- TVINN-SAD MANIFEST    --%>
+			    			<%-- --------------------- --%>
+			    			<a id="alinkTopicListMenuManifest" tabindex=-1 href="tvinnsadmanifest.do?action=doFind&sign=${user.tvinnSadSign}">
+			    				&nbsp;<font
+			    				<c:choose>           
+		                   			<c:when test="${user.activeMenu=='TVINN_SAD_MANIFEST'}">
+		                       			class="headerMenuMediumGreen"
+		                   			</c:when>
+		                   			<c:otherwise>   
+		                       			class="headerMenuLightGreen"
+		                   			</c:otherwise>
+		               			</c:choose>
+			    				>&nbsp;<spring:message code="systema.tvinn.sad.manifest.label"/>&nbsp;</font>
+			    			</a>
+			    			&nbsp;<font color="#FFFFFF" style="font-weight: bold;">|</font>
+			    			
 			    			
 			    			<%-- -------------- --%>
 			    			<%-- ADMIN  MENU    --%>
