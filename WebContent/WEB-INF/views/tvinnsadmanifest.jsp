@@ -27,7 +27,7 @@
 			</td>
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
-				<a style="display:block;" href="tvinnsadmanifest_edit.do?user=${user.user}">
+				<a id="alinkHeader"style="display:block;" href="tvinnsadmanifest_edit.do?user=${user.user}">
 					<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.createnew"/></font>
 					<img valign="bottom" src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
 				</a>
@@ -43,7 +43,7 @@
 	<%-- search filter component --%>
 		
  		<table width="100%" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
- 	        <form name="searchForm" id="searchForm" action="tvinnsadmanifest?action=doFind" method="post" >
+ 	        <form name="searchForm" id="searchForm" action="tvinnsadmanifest.do?action=doFind" method="post" >
  	        <tr height="3"><td></td></tr>
  	        <tr>	
                 <td class="text14" align="left" title="avd" >&nbsp;&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.manifest.list.search.label.avd"/></td>

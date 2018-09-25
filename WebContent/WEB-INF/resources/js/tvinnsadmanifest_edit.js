@@ -4,7 +4,7 @@
   
   //Overlay on tab (to mark visually a delay...)
   jq(function() {
-    jq('#alinkHeaderNew').click(function() { 
+	jq('#alinkManifestList').click(function() { 
     	setBlockUI();
     });
     jq('#alinkHeader').click(function() { 

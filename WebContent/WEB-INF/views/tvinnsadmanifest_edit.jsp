@@ -21,7 +21,7 @@
 			<c:choose> 
 			    <c:when test="${editActionOnTopic=='doUpdate' or editActionOnTopic=='doFetch'}">
 					<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<a tabindex=-1 style="display:block;" href="tvinnsadmanifest.do?action=doFind&avd=${model.record.tiavd}&sign=${model.record.tisg}&opd=${model.record.titdn}">
+						<a id="alinkManifestList" tabindex=-1 style="display:block;" href="tvinnsadmanifest.do?action=doFind&avd=${model.record.tiavd}&sign=${model.record.tisg}&opd=${model.record.titdn}">
 							<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.manifest.list.tab"/></font>
 							<img src="resources/images/list.gif" border="0" alt="general list">
 						</a>
@@ -52,7 +52,7 @@
 				</c:when>
 				<c:otherwise>
 					<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<a tabindex=-1 style="display:block;" href="tvinnsadmanifest.do?action=doFind&sign=${user.tvinnSadSign}">
+						<a id="alinkManifestList" tabindex=-1 style="display:block;" href="tvinnsadmanifest.do?action=doFind&sign=${user.tvinnSadSign}">
 							<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.manifest.list.tab"/></font>
 							<img src="resources/images/list.gif" border="0" alt="general list">
 						</a>
@@ -127,44 +127,35 @@
 				</td>
 			</tr>
 			</c:if>
-
-		<tr>
-			<td style="width:33%" class="text14" valign="top">
+ 		<tr>
+			<td style="width:30%" class="text14" valign="top">
 				<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
 						<table style="width:100%" class="formFrameHeader" border="0" cellspacing="1" cellpadding="0">
 					 		<tr height="15">
 					 			<td class="text14White">&nbsp;&nbsp;Transport&nbsp;</td>
+					 			<td class="text14" align="right">Transportør - Systema&nbsp;</td>
 			 				</tr>
 			            </table>
 			            </td>
 		            </tr>
 		            <tr >
 					 	<td>
-						<table style="width:100%" class="formFrame" border="0" cellspacing="1" cellpadding="1">
-					 		<tr >
-					 			<td class="text14">&nbsp;<span title="tikn">Transportør</span></td>
-					 			<td class="text14">Systema</td>
-			 				</tr>
-			 				<tr height="10"><td colspan="2">&nbsp;</td></tr>
+						<table style="width:100%" class="formFrame" border="0" cellspacing="1" cellpadding="0">
 			 				<tr >
 								<td class="text14">&nbsp;<span title="titin">Transportmåte</span><font class="text16RedBold" >*</font></td>
-								<td class="text14">&nbsp;</td>
 			 				</tr>
 			 				<tr >
 					 			<td class="text14">
 					 				<select class="inputTextMediumBlueMandatoryField" name="svlk" id="svlk" style="width:100px;">
 				 						<option value="">Velg</option>
 		 		 				  		<option value="30">30 Bil</option>
-		 		 				  		
 									</select>
-					 				
 					 			</td>
 			 				</tr>
 			 				<tr >
 								<td class="text14">&nbsp;<span title="titin">ID-type kjøretøyeier</span><font class="text16RedBold" >*</font></td>
-								<td class="text14">&nbsp;</td>
 			 				</tr>
 			 				<tr >
 					 			<td class="text14">
@@ -173,16 +164,14 @@
 		 		 				  		<option value="O">Org.nr</option>
 		 		 				  		<option value="E">EORI</option>
 									</select>
-					 				
-					 			</td>
-					 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="titin" id="titin" size="20" maxlength="25" value="${Xmodel.record.titin}"></td>
+									&nbsp;&nbsp;<input type="text" class="inputTextMediumBlueMandatoryField" name="titin" id="titin" size="20" maxlength="25" value="${Xmodel.record.titin}">
+								</td>
 			 				</tr>
 			 				<tr >
 								<td class="text14">&nbsp;<span title="titin">Kjøretøyeier</span><font class="text16RedBold" >*</font></td>
-								<td class="text14">&nbsp;</td>
 			 				</tr>
 			 				<tr >
-					 			<td colspan="2" class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="titin" id="titin" size="45" maxlength="35" value="${Xmodel.record.titin}"></td>
+					 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="titin" id="titin" size="45" maxlength="35" value="${Xmodel.record.titin}"></td>
 			 				</tr>
 			            </table>
 			            </td>
@@ -191,8 +180,8 @@
 	            </table>
             </td>
             
-           	<td style="width:33%" class="text14" valign="top">
-				<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">
+           	<td style="width:30%;" class="text14" valign="top">
+				<table style="width:90%;" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
 						<table style="width:100%" class="formFrameHeader" border="0" cellspacing="1" cellpadding="0">
@@ -204,7 +193,7 @@
 		            </tr>
 		            <tr >
 					 	<td>
-						<table style="width:100%" class="formFrame" border="0" cellspacing="1" cellpadding="1">
+						<table style="width:100%;" class="formFrame" border="0" cellspacing="1" cellpadding="0">
 					 		<tr >
 					 			<td class="text14">&nbsp;<span title="tikn">Kjøretøytype</span></td>
 					 			<td class="text14">&nbsp;</td>
@@ -218,11 +207,9 @@
 		 		 				  		<option value="3">Kjøretøy uten henger</option>
 									</select>
 					 			</td>
-					 			<td class="text14">&nbsp;</td>
 			 				</tr>
 			 				<tr >
 								<td class="text14">&nbsp;<span title="titin">Kjøretøy nasjonalitet</span><font class="text16RedBold" >*</font></td>
-								<td class="text14">&nbsp;</td>
 			 				</tr>
 			 				<tr >
 					 			<td class="text14">
@@ -235,7 +222,6 @@
 			 				</tr>
 			 				<tr >
 								<td class="text14">&nbsp;<span title="titin">Kjøretøy kjennemerke</span><font class="text16RedBold" >*</font></td>
-								<td class="text14">&nbsp;</td>
 			 				</tr>
 			 				<tr >
 					 			<td colspan="2" class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="titin" id="titin" size="15" maxlength="20" value="${Xmodel.record.titin}"></td>
@@ -247,7 +233,7 @@
             </td>
             
             
-            <td style="width:33%" class="text14" valign="top">
+            <td style="width:30%" class="text14" valign="top">
 				<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
@@ -260,21 +246,37 @@
 		            </tr>
 		            <tr >
 					 	<td>
-						<table width="100%" class="formFrame" border="0" cellspacing="1" cellpadding="1">
+						<table style="width:100%" class="formFrame" border="0" cellspacing="1" cellpadding="0">
 					 		<tr >
-					 			<td class="text14">&nbsp;<span title="tikn">Transportør</span></td>
-					 			<td class="text14">&nbsp;</td>
+					 			<td class="text14">&nbsp;<span title="tikn">Fornavn</span><font class="text16RedBold" >*</font></td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text14"><input type="text" class="inputTextMediumBlue" name="tikn" id="tikn" size="8" maxlength="8" value="${Xmodel.record.tikn}"></td>
-					 			<td class="text14">&nbsp;</td>
+					 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="tikn" id="tikn" size="35" maxlength="35" value="${Xmodel.record.tikn}"></td>
 			 				</tr>
 			 				<tr >
-								<td class="text14">&nbsp;<span title="titin">Transportmåte</span><font class="text16RedBold" >*</font></td>
-								<td class="text14">&nbsp;</td>
+								<td class="text14">&nbsp;<span title="titin">Etternavn</span><font class="text16RedBold" >*</font></td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="titin" id="titin" size="5" maxlength="5" value="${Xmodel.record.titin}"></td>
+					 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="titin" id="titin" size="35" maxlength="35" value="${Xmodel.record.titin}"></td>
+			 				</tr>
+			 				<tr >
+								<td class="text14">&nbsp;<span title="titin">Statsborger i</span><font class="text16RedBold" >*</font></td>
+			 				</tr>
+			 				<tr >
+					 			<td class="text14">
+					 				<select class="inputTextMediumBlueMandatoryField" name="svlk" id="svlk" style="width:100px;">
+				 						<option value="">Velg</option>
+		 		 				  		<option value="SE">Sverige</option>
+		 		 				  		<option value="NO">Norge</option>
+									</select>
+					 			</td>
+			 				</tr>
+			 				<tr height="15"><td colspan="2">&nbsp;</td></tr>
+			 				<tr >
+								<td class="text14">&nbsp;<span title="titin">Kort beskrivelse</span></td>
+			 				</tr>
+			 				<tr >
+					 			<td class="text14"><input type="text" class="inputTextMediumBlue" name="titin" id="titin" size="50" maxlength="50" value="${Xmodel.record.titin}"></td>
 			 				</tr>
 			            </table>
 			            </td>
@@ -282,16 +284,30 @@
 	            </table>
             </td>			 
 		</tr>
-	
+		<tr height="10"><td></td></tr>
+		<tr>
+			<td colspan="3" class="text14" valign="top">
+				<table style="width:96%" border="0" cellspacing="1" cellpadding="0">
+					<tr>
+						<td align="right" >
+							<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
 		<tr height="20"><td colspan="2">&nbsp;</td></tr>
-	</table> 
-	</td>
- </tr>
- </table>
- </form>
- </td>
- </tr>
-
+	
+</table>
+</td>
+</tr>
+		
+</table> 
+</form>
+</td>
+</tr>
+</table>
+ 
  	
  
 	
