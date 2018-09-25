@@ -127,18 +127,18 @@
                 	</tr>
                 	</thead>
                 	<tbody> 
-		           	<c:forEach items="${Xlist}" var="record" varStatus="counter">    
+		           	<c:forEach items="${model.list}" var="record" varStatus="counter">    
 		              <tr class="tableRow" height="20" >
 		          
-		               <td class="tableCellFirst" align="center" width="5%">${record.avd}</td>
-		               <td class="tableCell" align="center" width="5%">${record.sign}</td>
+		               <td class="tableCellFirst" align="center" width="5%">${record.id}</td>
+		               <td class="tableCell" align="center" width="5%">${Xrecord.sign}</td>
 		               <td class="tableCell" align="center" width="5%" >
-		               		<a href="tvinnsadmanifest_edit.do?action=doFetch&avd=${record.avd}&opd=${record.opd}">
+		               		<a href="tvinnsadmanifest_edit.do?action=doFetch&avd=${record.id}&opd=${Xrecord.opd}">
                					<img src="resources/images/update.gif" border="0" alt="edit">
                				</a>
 	               	   </td>
-               		   <td class="tableCell" align="left" >${record.opd}</td>
-		               <td class="tableCell" align="center">${record.datum}</td>
+               		   <td class="tableCell" align="left" >${Xrecord.opd}</td>
+		               <td class="tableCell" align="center">${Xrecord.datum}</td>
 		              
 		            </tr> 
 		            </c:forEach>

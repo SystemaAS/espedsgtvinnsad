@@ -51,6 +51,10 @@ import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelning
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelningRecord;
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureContainer;
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureRecord;
+import no.systema.tvinn.sad.manifest.model.jsonjackson.JsonTvinnSadManifestContainer;
+import no.systema.tvinn.sad.manifest.model.jsonjackson.JsonTvinnSadManifestRecord;
+import no.systema.tvinn.sad.service.TvinnSadManifestService;
+
 
 
 
@@ -119,6 +123,16 @@ public class SadManifestController {
             		searchFilter = sessionFilter;
             	}
             }
+            //FAKE
+            JsonTvinnSadManifestContainer fakeContainer = new JsonTvinnSadManifestContainer();
+            JsonTvinnSadManifestRecord fakeRecord = new JsonTvinnSadManifestRecord();
+            fakeRecord.setId("111");
+            Collection list = new ArrayList(); 
+            list.add(fakeRecord);
+            fakeContainer.setList(list);
+            model.put("list", list);
+            successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+            //END FAKE
             /*
             //get BASE URL
     		final String BASE_URL = SadNctsImportUrlDataStore.NCTS_IMPORT_BASE_TOPICLIST_URL;
@@ -356,7 +370,13 @@ public class SadManifestController {
 	public SadNctsImportTopicListService getSadNctsImportTopicListService(){ return this.sadNctsImportTopicListService; }
 	
 	
+	@Qualifier ("tvinnSadManifestService")
+	private TvinnSadManifestService tvinnSadManifestService;
+	@Autowired
+	@Required
+	public void setTvinnSadManifestService (TvinnSadManifestService value){ this.tvinnSadManifestService = value; }
+	public TvinnSadManifestService getTvinnSadManifestService(){ return this.tvinnSadManifestService; }
 	
-	
+
 }
 
