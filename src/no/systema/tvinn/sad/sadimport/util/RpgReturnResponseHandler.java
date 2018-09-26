@@ -39,6 +39,18 @@ public class RpgReturnResponseHandler {
 	public void setSitdn(String value){ this.sitdn=value;  }
 	public String getSitdn(){ return this.sitdn;  }
 	
+	private String s3039ex1 = null;
+	public void setS3039ex1(String value){ this.s3039ex1=value;  }
+	public String getS3039ex1(){ return this.s3039ex1;  }
+	
+	private String s3039ex2 = null;
+	public void setS3039ex2(String value){ this.s3039ex2=value;  }
+	public String getS3039ex2(){ return this.s3039ex2;  }
+	
+	private String s3039ex3 = null;
+	public void setS3039ex3(String value){ this.s3039ex3=value;  }
+	public String getS3039ex3(){ return this.s3039ex3;  }
+	
 	
 	//Item lines key records (line nr, opd, etc)
 	private String lin = null;
@@ -82,6 +94,12 @@ public class RpgReturnResponseHandler {
 						this.user = keyValuePair[0] + ":" + keyValuePair[1] + ",";
 					}else if(keyValuePair[0].trim().equalsIgnoreCase("sitdn")){
 						this.sitdn = keyValuePair[0] + ":" + keyValuePair[1]+ ",";
+					}else if(keyValuePair[0].trim().equalsIgnoreCase("s3039ex1")){
+						this.s3039ex1 = keyValuePair[1];
+					}else if(keyValuePair[0].trim().equalsIgnoreCase("s3039ex2")){
+						this.s3039ex2 = keyValuePair[1];
+					}else if(keyValuePair[0].trim().equalsIgnoreCase("s3039ex3")){
+						this.s3039ex3 = keyValuePair[1];
 					}
 				}
 			}

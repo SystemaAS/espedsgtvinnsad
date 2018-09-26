@@ -2080,6 +2080,10 @@
 			 	<input type="hidden" name="avd" id="avd" value="${model.record.siavd}">
 			 	<input type="hidden" name="opd" id="opd" value="${model.record.sitdn}">
 			 	<input type="hidden" name="sign" id="sign" value="${model.record.sign}">
+			 	<input type="hidden" name="s3039ex1" id="s3039ex1" value="${model.record.s3039ex1}">
+			 	<input type="hidden" name="s3039ex2" id="s3039ex2" value="${model.record.s3039ex2}">
+			 	<input type="hidden" name="s3039ex3" id="s3039ex3" value="${model.record.s3039ex3}">
+			 	
 				<table>
 					<tr>
 						<td class="text14" align="left" title="m1N07">Meldings funksjon</td>
@@ -2102,17 +2106,18 @@
 						</td>
 					</tr>
 					<tr>
-						<td class="text14" align="left" title="m2005b">Ønsket behandlingsdato</td>
-						<td class="text14MediumBlue">
-							<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue"  name="m2005b" id="m2005b" size="8" maxlength="6" value="${model.record.sendParametersRecord.m2005b}">
-						</td>
-					</tr>
-					<tr>
 						<td class="text14" align="left" title="m5004d">Depositum beløp</td>
 						<td class="text14MediumBlue">
 							<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue"  name="m5004d" id="m5004d" size="12" maxlength="10" value="${model.record.sendParametersRecord.m5004d}">
 						</td>
 					</tr>
+					<tr>
+						<td class="text14" align="left" title="m2005b">Ønsket behandlingsdato</td>
+						<td class="text14MediumBlue">
+							<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue"  name="m2005b" id="m2005b" size="8" maxlength="6" value="${model.record.sendParametersRecord.m2005b}">
+						</td>
+					</tr>
+					
 					<tr>
 						<td class="text14" align="left" title="mven">Ventegrupe</td>
 						<td class="text14MediumBlue">
@@ -2142,7 +2147,7 @@
 					</tr>
 					<tr height="2"><td></td></tr>
 				</table>
-				<div class="text14" style="display:none;" id="idVedlegg" >&nbsp;<font style="color:yellow;">Vedlegg</font>
+				<div class="text14" style="display:none;" id="idVedlegg" >&nbsp;<font style="color:lemonchiffon;">Vedlegg</font>
 					<table >
 						<thead>
 						<tr class="tableHeaderField12" >

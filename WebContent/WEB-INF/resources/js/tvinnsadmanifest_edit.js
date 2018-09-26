@@ -10,6 +10,9 @@
     jq('#alinkHeader').click(function() { 
     	setBlockUI();
     });
+    jq('#alinkItems').click(function() { 
+    	setBlockUI();
+    });
     jq( "#submit" ).click(function( event ) {
     	setBlockUI();
 	});

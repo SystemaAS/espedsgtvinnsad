@@ -451,6 +451,10 @@ public class SadImportHeaderController {
 					    	}else{
 					    		//Update successfully done!
 					    		logger.info("[INFO] Record successfully updated, OK ");
+					    		//complete the expeditionsenhet (if applicable)
+					    		jsonSadImportSpecificTopicRecord.setS3039ex1(rpgReturnResponseHandler.getS3039ex1().trim());
+					    		jsonSadImportSpecificTopicRecord.setS3039ex2(rpgReturnResponseHandler.getS3039ex2().trim());
+					    		jsonSadImportSpecificTopicRecord.setS3039ex3(rpgReturnResponseHandler.getS3039ex3().trim());
 					    		//get SEND-parameters
 					    		this.fetchSendParameters(appUser, jsonSadImportSpecificTopicRecord);
 					    		//put domain objects

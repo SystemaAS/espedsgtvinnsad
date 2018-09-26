@@ -13,23 +13,23 @@
 	.ui-datepicker { font-size:9pt;}
 	</style>
 	
-<table width="100%"  class="text11" cellspacing="0" border="0" cellpadding="0">
+<table style="width:100%;"  class="text11" cellspacing="0" border="0" cellpadding="0">
 <tr>
 	<td>
 	<%-- tab container component --%>
-	<table width="100%"  class="text11" cellspacing="0" border="0" cellpadding="0">
+	<table style="width:100%;" class="text11" cellspacing="0" border="0" cellpadding="0">
 		<tr height="2"><td></td></tr>
 		<tr height="25"> 
 			<td width="20%" valign="bottom" class="tab" align="center" nowrap>
 				<font class="tabLink">&nbsp;<spring:message code="systema.tvinn.sad.manifest.list.tab"/></font>
-				<img valign="bottom" src="resources/images/list.gif" border="0" alt="general list">
+				<img src="resources/images/list.gif" border="0" alt="general list">
 				&nbsp;&nbsp;${listSize}
 			</td>
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
-				<a id="alinkHeader"style="display:block;" href="tvinnsadmanifest_edit.do?user=${user.user}">
+				<a id="alinkHeader" style="display:block;" href="tvinnsadmanifest_edit.do?user=${user.user}">
 					<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.createnew"/></font>
-					<img valign="bottom" src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
+					<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
 				</a>
 			</td>
 			<td width="60%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
@@ -42,7 +42,7 @@
 	<td>
 	<%-- search filter component --%>
 		
- 		<table width="100%" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
+ 		<table style="width:100%;" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
  	        <form name="searchForm" id="searchForm" action="tvinnsadmanifest.do?action=doFind" method="post" >
  	        <tr height="3"><td></td></tr>
  	        <tr>	
@@ -88,7 +88,7 @@
 	<spring:hasBindErrors name="record"> <%-- name must equal the command object name in the Controller --%>
 	<tr>
 		<td>
-           	<table width="100%" align="left" border="0" cellspacing="0" cellpadding="0">
+           	<table style="width:100%;" align="left" border="0" cellspacing="0" cellpadding="0">
            	<tr>
 			<td class="textError">					
 	            <ul>
@@ -107,7 +107,7 @@
 	<%-- list component --%>
 	<tr>
 		<td>		
-		<table width="100%" cellspacing="0" border="0" cellpadding="0">
+		<table style="width:100%;" cellspacing="0" border="0" cellpadding="0">
 	    	<%-- separator --%>
 	        <tr height="1"><td></td></tr> 
 			<tr>
@@ -119,9 +119,9 @@
 				<table id="mainList" class="display compact cell-border" >
 					<thead>
 					<tr class="tableHeaderField" height="20" >
-                    	<th width="5%" class="tableHeaderFieldFirst" ><spring:message code="systema.tvinn.sad.manifest.list.search.label.avd"/></th>
+                    	<th width="5%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.update"/></th>
+                		<th width="5%" class="tableHeaderFieldFirst" ><spring:message code="systema.tvinn.sad.manifest.list.search.label.avd"/></th>
                 		<th width="5%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.manifest.list.search.label.signatur"/></th>
-                		<th width="5%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.update"/></th>
                 		<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.manifest.list.search.label.arende"/></th>
                 		<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.manifest.list.search.label.datum"/></th>    
                 	</tr>
@@ -130,13 +130,14 @@
 		           	<c:forEach items="${model.list}" var="record" varStatus="counter">    
 		              <tr class="tableRow" height="20" >
 		          
-		               <td class="tableCellFirst" align="center" width="5%">${record.id}</td>
-		               <td class="tableCell" align="center" width="5%">${Xrecord.sign}</td>
-		               <td class="tableCell" align="center" width="5%" >
-		               		<a href="tvinnsadmanifest_edit.do?action=doFetch&avd=${record.id}&opd=${Xrecord.opd}">
+		          	   <td class="tableCellFirst" align="center" width="5%" >
+		               		<a style="display: block;" href="tvinnsadmanifest_edit.do?action=doFetch&avd=${Xrecord.avd}&opd=${Xrecord.opd}&id=${record.id}" onClick="setBlockUI();">
                					<img src="resources/images/update.gif" border="0" alt="edit">
                				</a>
 	               	   </td>
+		               <td class="tableCell" align="center" width="5%">${record.id}</td>
+		               <td class="tableCell" align="center" width="5%">${Xrecord.sign}</td>
+		               
                		   <td class="tableCell" align="left" >${Xrecord.opd}</td>
 		               <td class="tableCell" align="center">${Xrecord.datum}</td>
 		              

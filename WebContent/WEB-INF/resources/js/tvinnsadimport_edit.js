@@ -1023,9 +1023,9 @@
 		  jq("#dialogSendWithParameters").dialog({
 			  autoOpen: false,
 			  maxWidth:600,
-	          maxHeight: 500,
+	          maxHeight: 1000,
 	          width: 450,
-	          height: 400,
+	          height: 500,
 			  modal: true
 		  });
 	  });
@@ -1036,9 +1036,17 @@
 		  jq("#sendButton").click(function() {
 			  presentSendWithParametersDialog();
 		  });
-		  
+		  //check if vedlegg(s) are mandatory
 		  jq('#m3039e').blur(function() {
-			  jq('#idVedlegg').css('display','block');
+			  if(jq('#m3039e').val() != ''){
+				  var value = jq('#m3039e').val();
+				  if( (value == jq('#s3039ex1').val()) || (value == jq('#s3039ex2').val()) || (value == jq('#s3039ex3').val())){
+					  jq('#idVedlegg').css('display','block');
+				  }else{
+					  jq('#idVedlegg').css('display','none');
+				  }
+			  }
+			  
 		  });
 		  
 	  });

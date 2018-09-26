@@ -4,7 +4,7 @@
   
   //Overlay on tab (to mark visually a delay...)
   jq(function() {
-    jq('#alinkManifestList').click(function() { 
+	jq('#alinkManifestList').click(function() { 
     	setBlockUI();
     });
     jq('#alinkHeader').click(function() { 
@@ -34,10 +34,6 @@
     });
   });
   
-  
-  
-  
-  
 //-------------------
   //Datatables jquery
   //-------------------
@@ -53,8 +49,8 @@
     //init table (no ajax, no columns since the payload is already there by means of HTML produced on the back-end)
     jq('#mainList').dataTable( {
   	  //"dom": '<"top"f>t<"bottom"><"clear">',
-  	  "dom": '<"top"f>rt<"bottom"lip><"clear">',
-  	  "scrollY":        	"700px",
+  	  "dom": '<"top"f>t<"bottom"><"clear">',
+  	  "scrollY": "300px",
   	  "scrollCollapse":  true,
 	  "tabIndex": -1,
 	  //"order": [[ 5, "desc" ]], //date
@@ -67,12 +63,7 @@
     jq('input.mainList_filter').on( 'keyup click', function () {
     		filterGlobal();
     });
-   
-	
   });
-  
-  
-  
-  
+ 
   
  

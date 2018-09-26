@@ -10,18 +10,18 @@
 	<SCRIPT type="text/javascript" src="resources/js/tvinnsadglobal_edit.js?ver=${user.versionEspedsg}"></SCRIPT>	
 	<SCRIPT type="text/javascript" src="resources/js/tvinnsadmanifest_edit.js?ver=${user.versionEspedsg}"></SCRIPT>
 	
-<table width="100%" cellspacing="0" border="0" cellpadding="0">
+<table style="width:100%;" cellspacing="0" border="0" cellpadding="0">
 
  <tr>
  <td>	
 	<%-- tab container component --%>
-	<table width="100%"  class="text11" cellspacing="0" border="0" cellpadding="0">
+	<table style="width:100%;"  class="text11" cellspacing="0" border="0" cellpadding="0">
 		<tr height="2"><td></td></tr>
 		<tr height="25"> 
 			<c:choose> 
-			    <c:when test="${editActionOnTopic=='doUpdate' or editActionOnTopic=='doFetch'}">
+			    <c:when test="${not empty record.id}">
 					<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<a id="alinkManifestList" tabindex=-1 style="display:block;" href="tvinnsadmanifest.do?action=doFind&avd=${model.record.tiavd}&sign=${model.record.tisg}&opd=${model.record.titdn}">
+						<a tabindex=-1 id="alinkManifestList" style="display:block;" href="tvinnsadmanifest.do?action=doFind&avd=${Xmodel.record.tiavd}&sign=${Xmodel.record.tisg}&opd=${Xmodel.record.titdn}">
 							<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.manifest.list.tab"/></font>
 							<img src="resources/images/list.gif" border="0" alt="general list">
 						</a>
@@ -32,14 +32,14 @@
 						<font class="tabLink">
 							&nbsp;<spring:message code="systema.tvinn.sad.manifest.created.header.tab"/>
 						</font>
-						<font class="text14MediumBlue">[${Xmodel.record.titdn}]</font>
+						<font class="text14MediumBlue">[${record.id}]</font>
 						<img src="resources/images/update.gif" border="0" alt="edit">
 						
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<a tabindex=-1 style="display:block;" href="tvinnsadmanifest_edit_items.do?action=doFetch&avd=${Xmodel.record.tiavd}&sign=${Xmodel.record.tisg}
-													&opd=${Xmodel.record.titdn}">
+						<a tabindex=-1 id="alinkItems" style="display:block;" href="tvinnsadmanifest_edit_items.do?action=doFetch&avd=${Xmodel.record.tiavd}&sign=${Xmodel.record.tisg}
+													&opd=${Xmodel.record.titdn}&id=${record.id}">
 							<font class="tabDisabledLink">
 								&nbsp;<spring:message code="systema.tvinn.sad.manifest.createnew.last.tab"/>
 							</font>
@@ -77,7 +77,7 @@
  	<%-- tab area container PRIMARY  --%>
 	<%-- --------------------------- --%>
 	<form name="manifestForm" id="manifestForm" method="post">
-	<table width="100%" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
+	<table style="width:100%;" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
  		<tr height="10"><td colspan="10">&nbsp;</td></tr>
  		
 		<%-- --------------- --%>
@@ -85,7 +85,7 @@
 		<%-- --------------- --%>
 		<tr>
 		<td >
-		<table align="center" width="100%" border="0" cellspacing="1" cellpadding="0">
+		<table align="center" style="width:100%;"  border="0" cellspacing="1" cellpadding="0">
 			
 			<%-- Validation errors --%>
 			<spring:hasBindErrors name="record"> <%-- name must equal the command object name in the Controller --%>

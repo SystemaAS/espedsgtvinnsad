@@ -45,7 +45,7 @@ import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
 import no.systema.tvinn.sad.manifest.model.jsonjackson.JsonTvinnSadManifestRecord;
 
 /**
- * Sad Manifest Header Controller
+ * Sad Manifest Header Items Controller
  * 
  * @author oscardelatorre
  * @date Sep 2018
@@ -53,9 +53,9 @@ import no.systema.tvinn.sad.manifest.model.jsonjackson.JsonTvinnSadManifestRecor
  */
 
 @Controller
-public class SadManifestHeaderController {
+public class SadManifestHeaderItemsController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(3000);
-	private static Logger logger = Logger.getLogger(SadManifestHeaderController.class.getName());
+	private static Logger logger = Logger.getLogger(SadManifestHeaderItemsController.class.getName());
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	private LoginValidator loginValidator = new LoginValidator();
 	private StringManager strMgr = new StringManager();
@@ -80,10 +80,10 @@ public class SadManifestHeaderController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="tvinnsadmanifest_edit.do", method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doManifestEdit(ModelMap model, @ModelAttribute ("record") JsonTvinnSadManifestRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
-		ModelAndView successView = new ModelAndView("tvinnsadmanifest_edit");
-		logger.info("Inside: doManifestEdit");
+	@RequestMapping(value="tvinnsadmanifest_edit_items.do", method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doManifestEditItems(ModelMap model, @ModelAttribute ("record") JsonTvinnSadManifestRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		ModelAndView successView = new ModelAndView("tvinnsadmanifest_edit_items");
+		logger.info("Inside: doManifestEditItems");
 		
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		
@@ -186,10 +186,10 @@ public class SadManifestHeaderController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="tvinnsadmanifest_edit_delete.do", method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doGodsnoDelete(ModelMap model, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
-		ModelAndView successView = new ModelAndView("redirect:tvinnsadmanifest.do");
-		logger.info("Inside: doGodsnoDelete");
+	@RequestMapping(value="tvinnsadmanifest_edit_items_delete.do", method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doItemDelete(ModelMap model, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		ModelAndView successView = new ModelAndView("redirect:tvinnsadmanifest_edit_items.do");
+		logger.info("Inside: doItemDelete");
 		
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		

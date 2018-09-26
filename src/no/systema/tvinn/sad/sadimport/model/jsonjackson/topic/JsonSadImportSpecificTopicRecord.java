@@ -558,6 +558,18 @@ public class JsonSadImportSpecificTopicRecord extends JsonAbstractGrandFatherRec
 	public void setH_xref(String value) {  this.h_xref = value; }
 	public String getH_xref() { return this.h_xref;}
 	
+	private String s3039ex1 = null;
+	public void setS3039ex1(String value) {  this.s3039ex1 = value; }
+	public String getS3039ex1() { return this.s3039ex1;}
+	
+	private String s3039ex2 = null;
+	public void setS3039ex2(String value) {  this.s3039ex2 = value; }
+	public String getS3039ex2() { return this.s3039ex2;}
+	
+	private String s3039ex3 = null;
+	public void setS3039ex3(String value) {  this.s3039ex3 = value; }
+	public String getS3039ex3() { return this.s3039ex3;}
+	
 	//OMBEREGNING variables
 	private String om_sitype = null; 
 	public void setOm_sitype(String value) {  this.om_sitype = value; }
