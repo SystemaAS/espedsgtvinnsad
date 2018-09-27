@@ -1922,7 +1922,7 @@
 											<tr height="5"><td></td></tr>
 											
 											<tr>
-												<td class="text14" align="left" >&nbsp;<span title="wf1-wf5(svtoa)">Tilleggsoppl.</span></td>
+												<td class="text14" align="left" >&nbsp;<span title="wf1-wf5(svtop)">Tilleggsoppl.</span></td>
 			               							<td class="text14" align="left" >&nbsp;<span title="we1-we5(svcref)">Ref.</span>
 			               								<a tabindex="-1" id="svcrefWe1We5IdLink">
 														<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
@@ -1950,7 +1950,7 @@
 			               						</tr>
 												<tr>
 												<td class="text14MediumBlue">
-													<input type="text" class="inputText" name="wf1" id="wf1" size="46" maxlength="45" value="${model.record.wf1}">
+													<input type="text" class="inputText" name="wf1" id="wf1" size="20" maxlength="17" value="${model.record.wf1}">
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="we1" id="we1">
@@ -1963,7 +1963,7 @@
 											</tr>
 												<tr>
 												<td class="text14MediumBlue">
-													<input type="text" class="inputText" name="wf2" id="wf2" size="46" maxlength="45" value="${model.record.wf2}">
+													<input type="text" class="inputText" name="wf2" id="wf2" size="20" maxlength="17" value="${model.record.wf2}">
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="we2" id="we2">
@@ -1976,7 +1976,7 @@
 											</tr>
 												<tr>
 												<td class="text14MediumBlue">
-													<input type="text" class="inputText" name="wf3" id="wf3" size="46" maxlength="45" value="${model.record.wf3}">
+													<input type="text" class="inputText" name="wf3" id="wf3" size="20" maxlength="17" value="${model.record.wf3}">
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="we3" id="we3">
@@ -1989,7 +1989,7 @@
 											</tr>
 												<tr>
 												<td class="text14MediumBlue">
-													<input type="text" class="inputText" name="wf4" id="wf4" size="46" maxlength="45" value="${model.record.wf4}">
+													<input type="text" class="inputText" name="wf4" id="wf4" size="20" maxlength="17" value="${model.record.wf4}">
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="we4" id="we4">
@@ -2002,7 +2002,7 @@
 											</tr>
 											<tr>
 												<td class="text14MediumBlue">
-													<input type="text" class="inputText" name="wf5" id="wf5" size="46" maxlength="45" value="${model.record.wf5}">
+													<input type="text" class="inputText" name="wf5" id="wf5" size="20" maxlength="17" value="${model.record.wf5}">
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="we5" id="we5">
@@ -2070,7 +2070,7 @@
 									        </tr>
 											<tr height="5"><td></td></tr>
 											<tr>
-												<td class="text14" align="left" >&nbsp;<span title="wf6-wf10(svtoa)">Tilleggsoppl.</span></td>
+												<td class="text14" align="left" >&nbsp;<span title="wf6-wf10(svtop)">Tilleggsoppl.</span></td>
 			               							<td class="text14" align="left" >&nbsp;<span title="we6-we10(svcref)">Ref.</span>
 			               								<a tabindex="-1" id="svcrefWe6We10IdLink">
 														<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
@@ -2082,7 +2082,7 @@
 			               						</tr>
 												<tr>
 												<td class="text14MediumBlue">
-													<input type="text" class="inputText" name="wf6" id="wf6" size="46" maxlength="45" value="${model.record.wf6}">
+													<input type="text" class="inputText" name="wf6" id="wf6" size="20" maxlength="17" value="${model.record.wf6}">
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="we6" id="we6">
@@ -2095,7 +2095,7 @@
 											</tr>
 												<tr>
 												<td class="text14MediumBlue">
-													<input type="text" class="inputText" name="wf7" id="wf7" size="46" maxlength="45" value="${model.record.wf7}">
+													<input type="text" class="inputText" name="wf7" id="wf7" size="20" maxlength="17" value="${model.record.wf7}">
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="we7" id="we7">
@@ -2108,7 +2108,7 @@
 											</tr>
 												<tr>
 												<td class="text14MediumBlue">
-													<input type="text" class="inputText" name="wf8" id="wf8" size="46" maxlength="45" value="${model.record.wf8}">
+													<input type="text" class="inputText" name="wf8" id="wf8" size="20" maxlength="17" value="${model.record.wf8}">
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="we8" id="we8">
@@ -2121,7 +2121,7 @@
 											</tr>
 												<tr>
 												<td class="text14MediumBlue">
-													<input type="text" class="inputText" name="wf9" id="wf9" size="46" maxlength="45" value="${model.record.wf9}">
+													<input type="text" class="inputText" name="wf9" id="wf9" size="20" maxlength="17" value="${model.record.wf9}">
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="we9" id="we9">
@@ -2134,7 +2134,7 @@
 											</tr>
 											<tr>
 												<td class="text14MediumBlue">
-													<input type="text" class="inputText" name="wf10" id="wf10" size="46" maxlength="45" value="${model.record.wf10}">
+													<input type="text" class="inputText" name="wf10" id="wf10" size="20" maxlength="17" value="${model.record.wf10}">
 												</td>
 												<td class="text14MediumBlue">
 													<select class="selectMediumBlueE2" name="we10" id="we10">
