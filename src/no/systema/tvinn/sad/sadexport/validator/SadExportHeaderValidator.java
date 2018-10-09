@@ -85,7 +85,7 @@ public class SadExportHeaderValidator implements Validator {
 					errors.rejectValue("selka", "systema.tvinn.sad.export.header.error.rule.avsLandNotNorwayAndBestLandNorway"); 
 				}
 				if(!this.isValidProcedureTypeForBestLand(record)){
-					errors.rejectValue("selka", "systema.tvinn.sad.export.header.error.rule.avsLandNotNorwayAndBestLandNorway"); 
+					errors.rejectValue("selkb", "systema.tvinn.sad.export.header.error.rule.avsLandNotNorwayAndBestLandNorway"); 
 				}
 				//if tullkredit = not exists
 				if("".equals(record.getSekta())){
@@ -114,8 +114,14 @@ public class SadExportHeaderValidator implements Validator {
 				
 				//Avs.Land vs Dekl.typ (EU vs EX)
 				if(strMgr.isNotNull(record.getSelka())){
-					if(!isValidCountryForDeklaration(record)){
+					//if(!isValidCountryForDeklaration(record)){
+					if(!"NO".equals(record.getSelka())){
 						errors.rejectValue("selka", "systema.tvinn.sad.export.header.error.rule.invalidCountryDeklType"); 	
+					}
+				}
+				if(strMgr.isNotNull(record.getSelkb())){
+					if(!isValidCountryForDeklaration(record)){
+						errors.rejectValue("selkb", "systema.tvinn.sad.export.header.error.rule.selkb.invalidCountryDeklType"); 	
 					}
 				}
 			}
@@ -188,7 +194,7 @@ public class SadExportHeaderValidator implements Validator {
 		boolean matchEU_Country = false;
 		
 		for(String country:TvinnSadConstants.LIST_EU_COUNTRIES){
-			if(country.equals(record.getSelka())){
+			if(country.equals(record.getSelkb())){
 				matchEU_Country = true;
 				break;
 			}
