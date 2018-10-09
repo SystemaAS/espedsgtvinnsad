@@ -14,6 +14,7 @@
 			  //addressing a parent field from this child window
 			  if(callerType == 'sival3'){
 				  opener.jq('#sival3').val(kod);
+				  opener.jq('#sival3').change();
 				  opener.jq('#sival3').focus();
 				  
 			  }else if(callerType == 'silka'){

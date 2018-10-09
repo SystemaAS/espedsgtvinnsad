@@ -922,15 +922,13 @@
 	                <table width="90%" align="left" border="0" cellspacing="0" cellpadding="0">
 				 		<tr>
 				 			<td class="text14">
-				 				<b>&nbsp;22.</b>&nbsp;<font class="text16RedBold" >*</font>
-				 				<span title="sebel1" id="v_sebel1" class="validation">Fakturasum&nbsp;</span>
+				 				<b>&nbsp;22.</b>&nbsp;<font class="text16RedBold" >*</font><span title="sebel1" id="v_sebel1" class="validation">Fakturasum&nbsp;</span>
 				 			</td>
 				 			<td align="left" >
 				 				<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="sebel1" id="sebel1" size="20" maxlength="13" value="${model.record.sebel1}">
 				 			</td>
 				 			<td class="text14" align="left">
-				 				&nbsp;<font class="text16RedBold" >*</font>
-				 				<span title="seval1" id="v_seval1" class="validation">Valuta</span>
+				 				&nbsp;<font class="text16RedBold" >*</font><span title="seval1" id="v_seval1" class="validation">Valuta</span>
 				 				<%-- Note: onChange event in jQuery for this currency list --%>
 				 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="seval1" id="seval1" >
 				 				  <option value="">-velg-</option>	
@@ -944,7 +942,36 @@
 								
 				 			<%-- this field is only used via Ajax since there is no database field. It is used to disclosed a factor when changing the currency --%>
 				 			<td class="text14Grey" align="left" ><input readonly type="text" class="inputTextReadOnly" name="factor" id="factor" size="6" value=""></td>
-			 			</tr>		 				
+			 			</tr>
+			 			<tr>
+			 				<td class="text14">
+			 					<b>&nbsp;23.</b><font class="text16RedBold" >*</font><span title="sivku">Kurs&nbsp;</span>
+				 			</td>
+				 			<td class="text14" align="left" ><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField"  name="sevku" id="sevku" size="10" maxlength="7" value="${model.record.sevku}"></td>
+				 			
+				 			<td class="text14" align="left" >&nbsp;
+				 				<img onMouseOver="showPop('24_info');" onMouseOut="hidePop('24_info');"style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+				 				<b>24.</b><font class="text16RedBold" >*</font><span title="setst">Tr.type</span>
+				 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="setst" id="setst" >
+					 			   <option value="1" <c:if test="${model.record.setst == '1'}"> selected </c:if> >1</option>	
+				 				   <option value="2" <c:if test="${model.record.setst == '2'}"> selected </c:if> >2</option>	
+				 				   <option value="3" <c:if test="${model.record.setst == '3'}"> selected </c:if> >3</option>	
+				 				   <option value="9" <c:if test="${model.record.setst == '9'}"> selected </c:if> >9</option>	
+				 				</select>
+				 				<div class="text11" style="position: relative;" align="left">
+				 				<span style="position:absolute; top:2px; width:250px;" id="24_info" class="popupWithInputText text11"  >
+					           		<b>24.&nbsp;Transaksjonstype</b><br/><br/>
+									Oppgi med kode:
+									<ul>
+										<li><b>1</b>&nbsp;Kjøp i fast regning</li>
+										<li><b>2</b>&nbsp;Konsignasjon/Kommisjon</li>
+										<li><b>3</b>&nbsp;Leie (herunder leasing)Lån</li>
+										<li><b>9</b>&nbsp;Annet</li>
+									</ul>
+								</span>
+								</div>
+							</td>
+		 				</tr>		 				
 		 				<tr height="5"><td></td></tr>
 		 				<tr height="1"><td colspan="4" style="border-bottom:1px solid;border-color:#DDDDDD;" class="text">&nbsp;</td> </tr>
 					</table>

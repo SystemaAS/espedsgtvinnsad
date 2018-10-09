@@ -14,6 +14,7 @@
 			  //addressing a parent field from this child window
 			  if(callerType == 'seval1'){
 				  opener.jq('#seval1').val(kod);
+				  opener.jq('#seval1').change();
 				  opener.jq('#seval1').focus();
 				  
 			  }else if(callerType == 'selka'){

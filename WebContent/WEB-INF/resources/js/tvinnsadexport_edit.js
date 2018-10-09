@@ -69,6 +69,16 @@
     		refreshCustomValidity(jq('#seval1')[0]);
   		}
   	});
+  	jq('#sevku').focus(function() {
+    	if(jq('#sevku').val()!=''){
+    		refreshCustomValidity(jq('#sevku')[0]);
+  		}
+  	});
+  	jq('#setst').focus(function() {
+    	if(jq('#setst').val()!=''){
+    		refreshCustomValidity(jq('#setst')[0]);
+  		}
+  	});
   	jq('#selkb').focus(function() {
     	if(jq('#selkb').val()!=''){
     		refreshCustomValidity(jq('#selkb')[0]);
@@ -210,6 +220,52 @@
 	    });
   		
   	});
+  	
+  	
+  //============================
+	//START - Currency AJAX fetch
+	//============================
+	jq(function() { 
+	    jq('#seval1').change(function() {
+	    		//In Norway we must use the current day (today) as currency date, 
+	    		//therefore we send = null. The AjaxController will take care of the rest
+	    		var currencyDate = null; 
+	    		getCurrencyData(currencyDate);
+	    });
+	});
+	jq(function() { 
+	    jq('#sevku').blur(function() {
+	    		var currencyRate = jq('#sevku').val();
+	    		if(currencyRate==null || currencyRate==""){
+	    			//In Norway we must use the current day (today) as currency date, 
+	    			//therefore we send = null. The AjaxController will take care of the rest
+	    			var currencyDate = null; 
+	    			getCurrencyData(currencyDate);
+	    		}
+	    });
+	});
+	//private function
+	function getCurrencyData(currencyDate) {
+		jq.ajax({
+			type: 'GET',
+			url: 'getCurrencyRate_SadImport.do', //we use the SadImport functionality since it is global for both modules
+			data: { 	applicationUser : jq('#applicationUser').val(),
+					currencyCode : jq('#seval1').val(),
+					isoDate : currencyDate} ,
+			dataType: 'json',
+			success: function(data) {
+				var len = data.length;
+				for ( var i = 0; i < len; i++) {
+					jq('#sevku').val(data[i].kvakrs);
+					jq('#factor').val(data[i].kvaomr);
+				}
+			}
+		});
+	}
+	//============================
+	//END - Currency AJAX fetch
+	//============================
+  	
   	
   	//-----------------------------------------------------------------------------
   	//jQuery CALCULATOR (related to jquery.calculator.js and jquery.calculator.css
