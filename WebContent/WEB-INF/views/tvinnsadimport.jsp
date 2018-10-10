@@ -98,6 +98,7 @@
 		           				<li><b>M</b>&nbsp;Tollteknisk fejl</li>
 		           				<li><b>P</b>&nbsp;Deklarasjonen er skrevet ut. Hvis den er sendt på TVINN vil denne koden bety at tollkvittering er mottatt fra Tollvesenet og skrevet ut.</li>
 		           				<li><b>Q</b>&nbsp;Deklarasjonen ligger i utgående postkasse for TVINN. men er ikke sendt.</li>
+		           				<li><b>S</b>&nbsp;SLETTET</li>
 		           				<li><b>T</b>&nbsp;Informasjonsmelding om at deklarasjonen er lagt til manuell ekspedering hos Tollvesenet.</li>
 		           				<li><b>U</b>&nbsp;Utleveringsattest er mottatt fra Tollvesenet.</li>
 		           				<li><b>V</b>&nbsp;Melding om varekontroll er mottatt fra Tollvesenet.</li>
@@ -317,7 +318,7 @@
 								<form action="tvinnsadimport_updateStatus_deleteWithNotis.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
 								 	<input type="hidden" name="currentAvd${counter.count}" id="currentAvd${counter.count}" value="${topic.avd}">
 								 	<input type="hidden" name="currentOpd${counter.count}" id="currentOpd${counter.count}" value="${topic.opd}">
-								 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="D">
+								 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="S">
 									<p class="text14" >Er du sikker på at du vil slette denne?</p>
 									<p class="text14"> Tekst </p>
 									<input type="text" class="inputText" name="currentText${counter.count}" id="currentText${counter.count}" size="45" maxlength="70" value=''>&nbsp;</td>

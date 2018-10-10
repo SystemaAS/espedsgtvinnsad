@@ -38,12 +38,12 @@
 	
 	<body>
 
-    <table class="noBg" width="100%" border="0" cellspacing="0" cellpadding="0">
+    <table class="noBg" style="width:100%;" border="0" cellspacing="0" cellpadding="0">
 		<%--Banner --%>
 	 	<tr>
 	 		 <%-- class="grayTitanBg" --%>
     		<td height="60" class="headerTdsBannerAreaBg" width="100%" align="left" colspan="3"> 
-    			 <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    			 <table style="width:100%;" border="0" cellspacing="0" cellpadding="0">
     			 	<tr>
 			        	<td>&nbsp;</td>
 			        	<td>&nbsp;</td>
@@ -102,7 +102,7 @@
 		<c:when test="${user.authorizedTvinnSadUserAS400 == 'Y'}">
 		<tr >
 			<td height="23" class="tabThinBorderLightGreenLogoutE2" width="100%" align="left" colspan="3"> 
-    			 <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    			 <table style="width:100%;" border="0" cellspacing="0" cellpadding="0">
 				 	<tr >
 			    		<td class="text14" width="70%" align="left" >&nbsp;&nbsp;
 			    			<%-- --------------------- --%>
@@ -226,7 +226,7 @@
 	      				</td>		      				
 	      				<td class="text14" width="50%" align="right" valign="middle">
 	      					
-						    <img valign="bottom" src="resources/images/countryFlags/Flag_NO.gif" height="12" border="0" alt="country">
+						    <img src="resources/images/countryFlags/Flag_NO.gif" height="12" border="0" alt="country">
 		      				&nbsp;
 		      				<font class="headerMenuGreen">
 			    				<img src="resources/images/appUser.gif" border="0" onClick="showPop('specialInformationAdmin');" > 
@@ -266,11 +266,11 @@
 	    <c:otherwise>
     		<tr>
 				<td height="23" class="tabThinBorderLightGreenLogoutE2" width="100%" align="left" colspan="3"> 
-	    			 <table width="100%" border="0" cellspacing="1" cellpadding="1">
+	    			 <table style="width:100%;" border="0" cellspacing="1" cellpadding="1">
 					 	<tr >
 				    		<td class="text14" width="50%" align="left" >&nbsp;&nbsp;</td>
 	      				<td class="text14" width="50%" align="right">
-	      					<img valign="bottom" src="resources/images/countryFlags/Flag_NO.gif" height="12" border="0" alt="country">
+	      					<img src="resources/images/countryFlags/Flag_NO.gif" height="12" border="0" alt="country">
 		      				&nbsp;
 	      					<font class="headerMenuGreen">
 				    				<img src="resources/images/appUser.gif" border="0" > 
@@ -299,7 +299,7 @@
 		    </tr>
 			<tr class="text" height="20"><td></td></tr>
 		    <tr>
-				<td width="100%" align="left" >
+				<td style="width:100%;" align="left" >
 					<form action="tvinnsadgate.do" name="loginTvinnSadForm" id="loginTvinnSadForm" method="POST" > 
     			 		<table width="250" border="0" cellspacing="1" cellpadding="0">
     			 		<tr >

@@ -234,6 +234,7 @@
 		           				<li><b>M</b>&nbsp;Tollteknisk fejl</li>
 		           				<li><b>P</b>&nbsp;Deklarasjonen er skrevet ut. Hvis den er sendt på TVINN vil denne koden bety at tollkvittering er mottatt fra Tollvesenet og skrevet ut.</li>
 		           				<li><b>Q</b>&nbsp;Deklarasjonen ligger i utgående postkasse for TVINN. men er ikke sendt.</li>
+		           				<li><b>S</b>&nbsp;SLETTET</li>
 		           				<li><b>T</b>&nbsp;Informasjonsmelding om at deklarasjonen er lagt til manuell ekspedering hos Tollvesenet.</li>
 		           				<li><b>U</b>&nbsp;Utleveringsattest er mottatt fra Tollvesenet.</li>
 		           				<li><b>V</b>&nbsp;Melding om varekontroll er mottatt fra Tollvesenet.</li>
@@ -953,20 +954,16 @@
 				 				<img onMouseOver="showPop('24_info');" onMouseOut="hidePop('24_info');"style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 				 				<b>24.</b><font class="text16RedBold" >*</font><span title="setst">Tr.type</span>
 				 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="setst" id="setst" >
-					 			   <option value="1" <c:if test="${model.record.setst == '1'}"> selected </c:if> >1</option>	
-				 				   <option value="2" <c:if test="${model.record.setst == '2'}"> selected </c:if> >2</option>	
-				 				   <option value="3" <c:if test="${model.record.setst == '3'}"> selected </c:if> >3</option>	
-				 				   <option value="9" <c:if test="${model.record.setst == '9'}"> selected </c:if> >9</option>	
+					 			   <option value="0" <c:if test="${model.record.setst == '0'}"> selected </c:if> >0</option>	
+				 				   <option value="5" <c:if test="${model.record.setst == '5'}"> selected </c:if> >5</option>	
 				 				</select>
 				 				<div class="text11" style="position: relative;" align="left">
 				 				<span style="position:absolute; top:2px; width:250px;" id="24_info" class="popupWithInputText text11"  >
 					           		<b>24.&nbsp;Transaksjonstype</b><br/><br/>
 									Oppgi med kode:
 									<ul>
-										<li><b>1</b>&nbsp;Kjøp i fast regning</li>
-										<li><b>2</b>&nbsp;Konsignasjon/Kommisjon</li>
-										<li><b>3</b>&nbsp;Leie (herunder leasing)Lån</li>
-										<li><b>9</b>&nbsp;Annet</li>
+										<li><b>0</b>&nbsp;Varen skal ikke betales</li>
+										<li><b>5</b>&nbsp;Varen skal betales, eller det vil bli utstedt kreditnota for varen</li>
 									</ul>
 								</span>
 								</div>
