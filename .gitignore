@@ -1,3 +1,4 @@
-/build/
-/.project
+/bin/
 /.classpath
+/.project
+/.gitignore

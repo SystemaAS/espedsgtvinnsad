@@ -29,7 +29,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="20%" valign="bottom" class="tab" align="center">
-						<font class="tabLink">&nbsp;GYLDIGE KODER</font>&nbsp;
+						<font class="tabLink">&nbsp;GYLDIGE KODER</font>
 						<a id="alinkRecordId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadmaintenanceexport_sad002r.do?id=${model.dbTable}">
 							<img style="vertical-align: middle;"  src="resources/images/list.gif" border="0" alt="general list">
 						</a>
@@ -55,7 +55,6 @@
 						<table id="mainList" class="display compact cell-border" >
 							<thead>
 							<tr>							                                                                
-								<th width="2%" class="tableHeaderFieldFirst" align="center" >&nbsp;Id&nbsp;</th>
 								<th width="2%" class="tableHeaderField" align="center" >&nbsp;Endre</th>
 			                    <th width="80%" class="tableHeaderField" align="left" >&nbsp;Beskrivelse&nbsp;</th>
 			                    <%--
@@ -68,7 +67,6 @@
 				            <c:forEach var="record" items="${model.list}" varStatus="counter">   
 				               <tr class="tableRow" height="20" >
 				              
-				               <td width="2%" class="tableCellFirst" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;" align="center" ><font class="text14">&nbsp;${record.id}&nbsp;</font></td>
 				               <td width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" align="center">
 				               	<c:choose>
 				               		<c:when test="${record.status == 'G'}">

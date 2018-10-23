@@ -75,11 +75,7 @@ public class MaintSadExportSad015Controller {
 		if(appUser==null){
 			return this.loginView;
 		}else{
-			//get table
-	    	List<JsonMaintSadExportSadavgeRecord> list = new ArrayList();
-	    	if( (agtanr!=null && !"".equals(agtanr)) ){
-	    		list = this.fetchList(appUser.getUser(), agtanr);
-	    	} 
+	    	List<JsonMaintSadExportSadavgeRecord> list = fetchList(appUser.getUser(), agtanr);
 	    		    	
 	    	//set domain objets
 	    	model.put("dbTable", dbTable);
@@ -198,11 +194,7 @@ public class MaintSadExportSad015Controller {
 		urlRequestParams.append("user="+ applicationUser);
 		if (agtanr != null && !"".equals(agtanr)) {
 			urlRequestParams.append("&agtanr=" + agtanr);
-		} else {
-			// no further search. Just return an empty list
-			return new ArrayList();
-		}
-	
+		}	
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
     	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
     	logger.info("URL PARAMS: " + urlRequestParams);
