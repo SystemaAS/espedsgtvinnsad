@@ -71,13 +71,16 @@
   }
   
   jq(document).ready(function() {
-      //init table (no ajax, no columns since the payload is already there by means of HTML produced on the back-end)
-      jq('#mainList').dataTable( {
+	  var lang = jq('#language').val();
+	  jq('#mainList').dataTable( {
     	  "dom": '<"top">t<"bottom"flip><"clear">',
     	  "scrollY": "250px",
     	  "scrollCollapse":  false,
     	  "columnDefs": [{ "type": "num", "targets": 0 }],
-    	  "lengthMenu": [ 75, 100]
+    	  "lengthMenu": [ 75, 100],
+  		  "language": {
+  			  "url": getLanguage(lang)
+           }   	  
   	  });
       
       //event on input field for search

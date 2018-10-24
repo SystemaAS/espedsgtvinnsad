@@ -29,7 +29,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="30%" valign="bottom" class="tab" align="center">
-						<font class="tabLink">Gyldige likvidit.koder</font>&nbsp;<font class="text14">SYFT19 / KODTLIK</font>&nbsp;
+						<font class="tabLink">Gyldige likvidit.koder</font>
 						<a id="alinkRecordId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadmaintenanceimport_syft19r.do?id=${model.dbTable}">
 							<img style="vertical-align: middle;"  src="resources/images/bulletGreen.png" border="0" width="8px" height="8px" alt="db table">
 						</a>
@@ -55,13 +55,10 @@
 						<table id="mainList" class="display compact cell-border" >
 							<thead>
 							<tr>
-								<th align="center" width="2%" class="tableHeaderFieldFirst" >&nbsp;KLISTA&nbsp;</th>
 								<th align="center" width="2%" class="tableHeaderField" >&nbsp;Endre&nbsp;</th>
-								<th align="center" width="2%" class="tableHeaderField" >&nbsp;KLIUNI</th>
 			                    <th align="center" width="2%" class="tableHeaderField" >&nbsp;Likvid.kode&nbsp;</th>
 			                    <th align="left" class="tableHeaderField" >&nbsp;Beskrivelse&nbsp;</th>
 								<th align="center" width="2%" class="tableHeaderField">&nbsp;Stopp?&nbsp;</th>
-			                    <th align="center" class="tableHeaderField" >&nbsp;KLIXXX&nbsp;</th>
 			                    <th align="center" class="tableHeaderField">Slett</th>
 			                </tr>  
 			                </thead> 
@@ -69,15 +66,12 @@
 				            <c:forEach var="record" items="${model.list}" varStatus="counter">   
 				               <tr class="tableRow" height="20" >
 				              
-				               <td align="center" width="2%" class="tableCellFirst" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text14">&nbsp;${record.klista}&nbsp;</font></td>
 				               <td id="recordUpdate_${record.klikod}" onClick="getRecord(this);" align="center" width="2%" class="tableCell" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<img src="resources/images/update.gif" border="0" alt="edit">
 				               </td>
-				               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.kliuni}&nbsp;</font></td>
 				               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.klikod}&nbsp;</font></td>
 		                       <td align="left"  class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.klinav}&nbsp;</font></td>
 				               <td align="center"width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.klisto}&nbsp;</font></td>
-		                       <td align="center"class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.klixxx}&nbsp;</font></td>
 		                       <td align="center" width="2%" class="tableCell" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadmaintenanceimport_syft19r_edit.do?action=doDelete&id=${model.dbTable}&klikod=${record.klikod}">
 					               		<img valign="bottom" src="resources/images/delete.gif" border="0" width="15px" height="15px" alt="remove">

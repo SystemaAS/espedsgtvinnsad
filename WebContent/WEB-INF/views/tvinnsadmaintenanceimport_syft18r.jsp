@@ -29,7 +29,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="30%" valign="bottom" class="tab" align="center">
-						<font class="tabLink">Kunders likvidit.koder</font>&nbsp;<font class="text14">SYFT18 / CUNDF</font>&nbsp;
+						<font class="tabLink">Kunders likvidit.koder</font>
 						<a id="alinkRecordId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadmaintenanceimport_syft18r.do?id=${model.dbTable}">
 							<img style="vertical-align: middle;"  src="resources/images/bulletGreen.png" border="0" width="8px" height="8px" alt="db table">
 						</a>

@@ -29,7 +29,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="30%" valign="bottom" class="tab" align="center">
-						<font class="tabLink">Kunders vareregister</font>&nbsp;<font class="text14">SAD001A / SADVARE</font>&nbsp;
+						<font class="tabLink">Kunders vareregister</font>
 						<a id="alinkRecordId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadmaintenanceimport_sad001ar.do?id=${model.dbTable}">
 							<img style="vertical-align: middle;"  src="resources/images/bulletGreen.png" border="0" width="8px" height="8px" alt="db table">
 						</a>
