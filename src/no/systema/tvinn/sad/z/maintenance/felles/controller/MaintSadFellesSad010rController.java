@@ -75,6 +75,7 @@ public class MaintSadFellesSad010rController {
 		String dbTable = request.getParameter("id");
 		String tatanr = request.getParameter("searchTatanr");
 		String taalfa = request.getParameter("searchTaalfa");
+		String tatxt = request.getParameter("searchTatxt");
 		
 		Map model = new HashMap();
 		if(appUser==null){
@@ -82,13 +83,15 @@ public class MaintSadFellesSad010rController {
 		}else{
 			//get table
 	    	List<JsonMaintSadFellesTariRecord> list = new ArrayList();
-	    	if( (tatanr!=null && !"".equals(tatanr)) || (taalfa!=null && !"".equals(taalfa))){
-	    		list = this.fetchList(appUser.getUser(), tatanr, taalfa);
+	    	if( (tatanr!=null && !"".equals(tatanr)) || (taalfa!=null && !"".equals(taalfa)) ||  (tatxt!=null && !"".equals(tatxt))){
+	    		list = fetchList(appUser.getUser(), tatanr, taalfa, tatxt);
 	    	}
 	    	//set domain objets
 	    	model.put("dbTable", dbTable);
 	    	model.put("tatanr", tatanr);
 	    	model.put("taalfa", taalfa);
+	    	model.put("tatxt", tatxt);
+
 	    	model.put(TvinnSadMaintenanceConstants.DOMAIN_LIST, list);
 	    	successView.addObject(TvinnSadMaintenanceConstants.DOMAIN_MODEL , model);
 			
@@ -172,7 +175,7 @@ public class MaintSadFellesSad010rController {
 			//------------
 			//FETCH table
 			//------------
-	    	List<JsonMaintSadFellesTariRecord> list = this.fetchList(appUser.getUser(), recordToValidate.getTatanr(), recordToValidate.getTaalfa());
+	    	List<JsonMaintSadFellesTariRecord> list = this.fetchList(appUser.getUser(), recordToValidate.getTatanr(), recordToValidate.getTaalfa(), recordToValidate.getTatxt());
 	    	//set domain objets
 	    	model.put("dbTable", dbTable);
 			model.put(TvinnSadMaintenanceConstants.DOMAIN_LIST, list);
@@ -437,9 +440,10 @@ public class MaintSadFellesSad010rController {
 	 * 
 	 * @param applicationUser
 	 * @param tatanr
+	 * @param xX 
 	 * @return
 	 */
-	private List<JsonMaintSadFellesTariRecord> fetchList(String applicationUser, String tatanr, String taalfa){
+	private List<JsonMaintSadFellesTariRecord> fetchList(String applicationUser, String tatanr, String taalfa, String tatxt){
 		
 		String BASE_URL = TvinnSadMaintenanceFellesUrlDataStore.TVINN_SAD_MAINTENANCE_FELLES_BASE_SAD010R_GET_LIST_URL;
 		StringBuffer urlRequestParams = new StringBuffer();
@@ -449,7 +453,10 @@ public class MaintSadFellesSad010rController {
 			urlRequestParams.append("&tatanr=" + tatanr);
 		}else if (taalfa!=null && !"".equals(taalfa)){
 			urlRequestParams.append("&taalfa=" + taalfa);
-		}else{
+		}else if (tatxt!=null && !"".equals(tatxt)){
+			urlRequestParams.append("&tatxt=" + tatxt);
+		}
+		else{
 			//no further search. Just return an empty list
 			return new ArrayList();
 		}

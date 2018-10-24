@@ -29,7 +29,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="30%" valign="bottom" class="tab" align="center">
-						<font class="tabLink">Leveringsbeting.</font>&nbsp;<font class="text14">SAD012 / KODTLB </font>&nbsp;
+						<font class="tabLink">Leveringsbetingelser</font>
 						<a id="alinkRecordId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadmaintenancefelles_sad012r.do?id=${model.dbTable}">
 							<img style="vertical-align: middle;"  src="resources/images/bulletGreen.png" border="0" width="8px" height="8px" alt="db table">
 						</a>
@@ -55,9 +55,7 @@
 						<table id="mainList" class="display compact cell-border" >
 							<thead>
 							<tr>
-								<th align="center" width="2%" class="tableHeaderFieldFirst" >&nbsp;KLBSTA&nbsp;</th>
 								<th align="center" width="2%" class="tableHeaderField" >&nbsp;Endre&nbsp;</th>
-								<th align="center" width="2%" class="tableHeaderField" >&nbsp;KLBUNI</th>
 			                    <th align="center" width="2%" class="tableHeaderField" >&nbsp;Lev.kode&nbsp;</th>
 			                    <th align="left" class="tableHeaderField" >&nbsp;K.tekst&nbsp;</th>
 								<th align="center" class="tableHeaderField" >&nbsp;Beskrivelse&nbsp;</th>
@@ -74,11 +72,9 @@
 				            <c:forEach var="record" items="${model.list}" varStatus="counter">   
 				               <tr class="tableRow" height="20" >
 				              
-				               <td align="center" width="2%" class="tableCellFirst" style="border-style: solid;border-width: 0px 1px 1px 1px;border-color:#FAEBD7;"><font class="text14">&nbsp;${record.klbsta}&nbsp;</font></td>
 				               <td id="recordUpdate_${record.klbkod}" onClick="getRecord(this);" align="center" width="2%" class="tableCell" style="cursor:pointer; border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;">
 		               				<img src="resources/images/update.gif" border="0" alt="edit">
 				               </td>
-				               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.klbuni}&nbsp;</font></td>
 				               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.klbkod}&nbsp;</font></td>
 		                       <td align="left"   class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.klbkt}&nbsp;</font></td>
 				               <td align="center" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" ><font class="text14">&nbsp;${record.klbnav}&nbsp;</font></td>

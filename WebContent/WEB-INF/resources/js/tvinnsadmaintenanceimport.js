@@ -19,7 +19,7 @@
           "paging":   false,
           "ordering": false,
           "info":     false,
-          "searching":     false,
+          "searching":     false
   	  });
       
       //event on input field for search
