@@ -233,6 +233,7 @@
 											                    <th class="text14">&nbsp;Kolliant.(&Sigma;)</th>
 											                    <th class="text14">&nbsp;Stk.(&Sigma;)</th>
 											                    <th class="text14">&nbsp;Varebeskrivelse&nbsp;</th>
+											                    <th class="text14">&nbsp;Dok.ref.&nbsp;</th>
 											                    <c:if test="${model.status == 'G' ||  model.status=='F' || model.status == 'M' || empty model.status}">
 										                    		<th align="center" class="text14" nowrap>Slett</td>
 											                    </c:if> 
@@ -250,16 +251,17 @@
 													               </c:choose>
 			               							               <td width="2%" class="text14" align="center">&nbsp;${record.tvli}</td>
 													               <td class="text14" >&nbsp;${record.tvvnt}</td>
-													               <td class="text14" >&nbsp;${record.tvdk}</td>
-													               <td class="text14" >&nbsp;${record.tvalk}</td>
-													               <td class="text14" >&nbsp;${record.tvblk}</td>
-													               <td class="text14" >&nbsp;${record.tvdty}</td>
-													               <td class="text14" align="right" >&nbsp;${record.tvvktb}&nbsp;</td>
-													               <td class="text14" align="right" >&nbsp;${record.tvvktn}&nbsp;</td>
+													               <td width="2%" class="text14" >&nbsp;${record.tvdk}</td>
+													               <td width="2%" class="text14" >&nbsp;${record.tvalk}</td>
+													               <td width="2%" class="text14" >&nbsp;${record.tvblk}</td>
+													               <td width="2%" class="text14" >&nbsp;${record.tvdty}</td>
+													               <td width="2%" class="text14" align="right" >&nbsp;${record.tvvktb}&nbsp;</td>
+													               <td width="2%" class="text14" align="right" >&nbsp;${record.tvvktn}&nbsp;</td>
 													               
-													               <td class="text14" >&nbsp;${record.sum_of_tvnt}</td>
-													               <td class="text14" >&nbsp;${record.sum_of_tvnteh}</td>
-													               <td width="40%" class="text14" width="100" >&nbsp;${record.tvvt}</td>
+													               <td width="2%" class="text14" >&nbsp;${record.sum_of_tvnt}</td>
+													               <td width="2%" class="text14" >&nbsp;${record.sum_of_tvnteh}</td>
+													               <td class="text14" width="100" >&nbsp;${record.tvvt}</td>
+													               <td width="2%" class="text14" >&nbsp;${record.tvdref}</td>
 													               <c:if test="${model.status == 'G' ||  model.status=='F' || model.status == 'M' || empty model.status}">	
 														               <td class="text14" align="center" nowrap>&nbsp;
 														               	<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadnctsexport_edit_items.do?action=doDelete&sign=${model.sign}&avd=${record.tvavd}&opd=${record.tvtdn}&lin=${record.tvli}">
@@ -328,6 +330,7 @@
 					                    <th class="text14">&nbsp;Kolliant.(&Sigma;)</th>
 					                    <th class="text14">&nbsp;Stk.(&Sigma;)</th>
 					                    <th class="text14">&nbsp;Varebeskrivelse&nbsp;</th>
+					                    <th class="text14">&nbsp;Dok.ref.&nbsp;</th>
 					                    <c:if test="${model.status == 'G' ||  model.status=='F' || model.status == 'M' || empty model.status}">
 					                    	<th align="center" class="text14" nowrap>Slett</th>
 					                    </c:if> 
@@ -352,15 +355,16 @@
 							               		</a>
 							               </td>
 							               <td class="text14" >&nbsp;${record.tvvnt}</td>
-							               <td class="text14" >&nbsp;${record.tvdk}</td>
-							               <td class="text14" >&nbsp;${record.tvalk}</td>
-							               <td class="text14" >&nbsp;${record.tvblk}</td>
-							               <td class="text14" >&nbsp;${record.tvdty}</td>
-							               <td class="text14" align="right" >&nbsp;${record.tvvktb}&nbsp;</td>
-							               <td class="text14" align="right" >&nbsp;${record.tvvktn}&nbsp;</td>
-							               <td class="text14" >&nbsp;${record.sum_of_tvnt}</td>
-							               <td class="text14" >&nbsp;${record.sum_of_tvnteh}</td>
+							               <td width="2%" class="text14" >&nbsp;${record.tvdk}</td>
+							               <td width="2%" class="text14" >&nbsp;${record.tvalk}</td>
+							               <td width="2%" class="text14" >&nbsp;${record.tvblk}</td>
+							               <td width="2%" class="text14" >&nbsp;${record.tvdty}</td>
+							               <td width="2%" class="text14" align="right" >&nbsp;${record.tvvktb}&nbsp;</td>
+							               <td width="2%" class="text14" align="right" >&nbsp;${record.tvvktn}&nbsp;</td>
+							               <td width="2%" class="text14" align="right" >&nbsp;${record.sum_of_tvnt}</td>
+							               <td width="2%" class="text14" align="right" >&nbsp;${record.sum_of_tvnteh}</td>
 							               <td class="text14" ><div style="width:120px" >&nbsp;${record.tvvt}</div></td>
+							               <td width="2%" class="text14" >&nbsp;${record.tvdref}</td>
 							               <c:if test="${model.status == 'G' ||  model.status=='F' || model.status == 'M' || empty model.status}">	
 								               <td class="text14" align="center" nowrap>&nbsp;
 								               	<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadnctsexport_edit_items.do?action=doDelete&sign=${model.sign}&avd=${record.tvavd}&opd=${record.tvtdn}&lin=${record.tvli}">
