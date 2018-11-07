@@ -78,6 +78,10 @@ public class SearchFilterSadNctsExportTopicList {
 	public void setMotNavn(String value) {  this.motNavn = value; }
 	public String getMotNavn() { return this.motNavn;}
 	
+	private String docRef = null;
+	public void setDocRef(String value) {  this.docRef = value; }
+	public String getDocRef() { return this.docRef;}
+	
 	/**
 	 * Gets the populated values by reflection
 	 * @param searchFilter

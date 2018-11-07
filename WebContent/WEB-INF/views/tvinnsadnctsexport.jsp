@@ -97,6 +97,7 @@
 				</td>                
                 <td class="text14" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.mottagare"/></td>
                 <td class="text14" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.bruttovikt"/></td>
+                <td class="text14" align="left" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.list.search.label.docRef"/></td>
                 <td>&nbsp;</td>
 			</tr>
  	        <tr>
@@ -124,6 +125,7 @@
 				<td align="left" ><input type="text" class="inputText" name="status" id="status" size="1" maxlength="1" value='${searchFilterSadExportNcts.status}'>&nbsp;</td>
 				<td align="left" ><input type="text" class="inputText" name="motNavn" id="motNavn" size="10" maxlength="50" value='${searchFilterSadExportNcts.motNavn}'>&nbsp;</td>
 				<td align="left" ><input type="text" class="inputText" name="bruttoVikt" id="bruttoVikt" size="10" maxlength="50" value='${searchFilterSadExportNcts.bruttoVikt}'>&nbsp;</td>
+				<td align="left" ><input type="text" class="inputText" name="docRef" id="docRef" size="10" maxlength="50" value='${searchFilterSadExportNcts.docRef}'>&nbsp;</td>
 				
 				<td valign="top" align="left" >
                    &nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='<spring:message code="systema.tvinn.sad.search"/>'>

@@ -33,6 +33,7 @@ import no.systema.main.service.UrlCgiProxyService;
 import no.systema.main.validator.LoginValidator;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.JsonDebugger;
+import no.systema.main.util.StringManager;
 import no.systema.main.model.SystemaWebUser;
 
 import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
@@ -76,7 +77,7 @@ public class SadNctsExportController {
 	private LoginValidator loginValidator = new LoginValidator();
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
-	
+	private StringManager strMgr = new StringManager();
 	
 	@PostConstruct
 	public void initIt() throws Exception {
@@ -148,7 +149,11 @@ public class SadNctsExportController {
 	            	}
 	            }
 	            //get BASE URL
-	    		final String BASE_URL = SadNctsExportUrlDataStore.NCTS_EXPORT_BASE_TOPICLIST_URL;
+	    		String BASE_URL = SadNctsExportUrlDataStore.NCTS_EXPORT_BASE_TOPICLIST_URL;
+	    		//only when docRef exists
+	    		if(searchFilter!=null && strMgr.isNotNull(searchFilter.getDocRef())){
+	    			BASE_URL = SadNctsExportUrlDataStore.NCTS_EXPORT_BASE_TOPICLIST_DOCREF_URL;
+	    		}
 	    		//add URL-parameters
 				String urlRequestParams = this.getRequestUrlKeyParameters(searchFilter, appUser);
 				logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
@@ -298,6 +303,9 @@ public class SadNctsExportController {
 		
 		if(searchFilter.getBruttoVikt()!=null && !"".equals(searchFilter.getBruttoVikt())){
 			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "bvikt=" + searchFilter.getBruttoVikt());
+		}
+		if(searchFilter.getDocRef()!=null && !"".equals(searchFilter.getDocRef())){
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "tvdref=" + searchFilter.getDocRef());
 		}
 		
 		if(searchFilter.getMotNavn()!=null && !"".equals(searchFilter.getMotNavn())){

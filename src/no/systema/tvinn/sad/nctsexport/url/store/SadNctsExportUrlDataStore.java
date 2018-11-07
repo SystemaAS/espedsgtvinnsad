@@ -16,9 +16,11 @@ public final class SadNctsExportUrlDataStore {
 	//----------------------------
 	//[1] FETCH ARENDE LIST
 	//----------------------------
-	static public String NCTS_EXPORT_BASE_TOPICLIST_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE000R.pgm"; 
 	//http://gw.systema.no/sycgip/ttce000r.pgm?user=YBC&datum=20140101;
-	
+	static public String NCTS_EXPORT_BASE_TOPICLIST_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE000R.pgm"; 
+	//http://gw.systema.no/sycgip/ttce000r.pgm?user=YBC&tvdref=xxxx
+	static public String NCTS_EXPORT_BASE_TOPICLIST_DOCREF_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE000R2.pgm"; 
+		
 	//---------------------------------------------------------------
 	//[2] FETCH A SPECIFIC ARENDE or Default values for a NEW ARENDE
 	//---------------------------------------------------------------
