@@ -54,7 +54,7 @@
 				 				<c:choose>
 					 				<c:when test="${fn:contains(user.logo, '/')}">
 					 					<td class="text14" width="10%" align="center" valign="middle" >
-											<img src="${user.logo}" border="0" width="30px" height="20px">
+											<img src="${user.logo}" border="0" >
 										</td>
 									</c:when>
 									<c:otherwise>
