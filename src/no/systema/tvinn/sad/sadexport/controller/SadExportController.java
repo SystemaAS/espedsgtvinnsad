@@ -338,6 +338,9 @@ public class SadExportController {
 		if(searchFilter.getAart()!=null && !"".equals(searchFilter.getAart())){
 			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "aart=" + searchFilter.getAart());
 		}
+		if(searchFilter.getGodsnr()!=null && !"".equals(searchFilter.getGodsnr())){
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "godsnr=" + searchFilter.getGodsnr());
+		}
 		if(searchFilter.getInnstikk()!=null && !"".equals(searchFilter.getInnstikk())){
 			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "innstikk=" + searchFilter.getInnstikk());
 		}

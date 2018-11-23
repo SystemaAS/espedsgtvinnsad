@@ -49,9 +49,9 @@ public class JsonSadExportTopicListRecord extends JsonAbstractGrandFatherRecord 
 	public String getAart() { return this.aart;}
 	
 	//Godsnr = sign
-	private String sign = null;
-	public void setSign(String value) {  this.sign = value; }
-	public String getSign() { return this.sign;}
+	private String segn = null;
+	public void setSegn(String value) {  this.segn = value; }
+	public String getSegn() { return this.segn;}
 	
 	private String sg = null;
 	public void setSg(String value) {  this.sg = value; }
