@@ -137,7 +137,8 @@
     //init table (no ajax, no columns since the payload is already there by means of HTML produced on the back-end)
     jq('#mainList').dataTable( {
   	  //"dom": '<"top"f>t<"bottom"><"clear">',
-  	  "dom": '<"top"f>rt<"bottom"lip><"clear">',
+      "searchHighlight": true,
+      "dom": '<"top"f>rt<"bottom"lip><"clear">',
   	  "scrollY":        	"700px",
   	  "scrollCollapse":  true,
 	  "tabIndex": -1,
