@@ -278,11 +278,11 @@
 						            		</td>
 						            	<td width="40%">&nbsp;</td>	
 										<td align="right" class="text14">Fsum:&nbsp;
-											<input tabindex=-1 align="right" type="text" readonly class="inputText14BlueBoldReadOnly" size="12" maxlength=20" value="${recordTopicTvinnSad.sebel1}">
+											<input tabindex=-1 align="right" type="text" readonly class="inputText14BlueBoldReadOnly" size="12" maxlength=20" value="${model.recordItemContainerFinansOpplysningerTopic.calculatedItemLinesTotalAmount}">
 											<font class="inputText11BlueBoldReadOnly">${model.recordItemContainerFinansOpplysningerTopic.calculatedValidCurrency}</font>
 										</td>
 										<td align="right" class="text14">Vsum&nbsp;(&Sigma;):&nbsp;
-											<input tabindex=-1 align="right" type="text" readonly class="inputText14BlueBoldReadOnly" size="12" maxlength=20" value="${model.recordItemContainerFinansOpplysningerTopic.calculatedItemLinesTotalAmount}">
+											<input tabindex=-1 align="right" type="text" readonly class="inputText14BlueBoldReadOnly" size="12" maxlength=20" value="${recordTopicTvinnSad.sebel1}">											
 											<font class="inputText11BlueBoldReadOnly">${recordTopicTvinnSad.seval1}</font>
 																						
 										</td>
