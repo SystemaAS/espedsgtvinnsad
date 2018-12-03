@@ -307,11 +307,12 @@
 						            		</td>
 										<td align="right" class="text12">Fsum:&nbsp;
 											<input tabindex=-1 align="right" type="text" readonly class="inputText14BlueBoldReadOnly" size="12" maxlength=20" value="${recordTopicTvinnSad.sibel3}">
-											<font class="inputText14BlueBoldReadOnly">${recordTopicTvinnSad.sival3}</font>
+											<font class="inputText14BlueBoldReadOnly">${model.recordItemContainerFinansOpplysningerTopic.calculatedValidCurrency}</font>
 										</td>
 										<td align="right" class="text14">Vsum&nbsp;(&Sigma;):&nbsp;
 											<input tabindex=-1 align="right" type="text" readonly class="inputText14BlueBoldReadOnly" size="12" maxlength=20" value="${model.recordItemContainerFinansOpplysningerTopic.calculatedItemLinesTotalAmount}">
-											<font class="inputText14BlueBoldReadOnly">${model.recordItemContainerFinansOpplysningerTopic.calculatedValidCurrency}</font>											
+											<font class="inputText14BlueBoldReadOnly">${recordTopicTvinnSad.sival3}</font>
+																						
 										</td>
 										<%--
 										<td align="right" class="text11">Diff:&nbsp;
