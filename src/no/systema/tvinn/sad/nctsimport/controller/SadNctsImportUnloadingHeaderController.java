@@ -296,7 +296,7 @@ public class SadNctsImportUnloadingHeaderController {
 		ModelAndView successView = new ModelAndView("redirect:tvinnsadnctsimport.do?action=doFind&sign=" + appUser.getTvinnSadSign());
 		
 		RpgReturnResponseHandler rpgReturnResponseHandler = new RpgReturnResponseHandler();
-		appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_SKAT_NCTS_IMPORT);
+		appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_NCTS_IMPORT);
 		
 		//---------------------------------
 		//Crucial request parameters (Keys
