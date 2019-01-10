@@ -1036,6 +1036,9 @@
 		  jq("#sendButton").click(function() {
 			  presentSendWithParametersDialog();
 		  });
+		  jq("#sendButton2").click(function() {
+			  presentSendWithParametersDialog();
+		  });
 		  //check if vedlegg(s) are mandatory
 		  jq('#m3039e').blur(function() {
 			  if(jq('#m3039e').val() != ''){

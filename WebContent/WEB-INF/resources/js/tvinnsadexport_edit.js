@@ -978,6 +978,9 @@
 		  jq("#sendButton").click(function() {
 			  presentSendWithParametersDialog();
 		  });
+		  jq("#sendButton2").click(function() {
+			  presentSendWithParametersDialog();
+		  });
 		  
 	  });
 	  function presentSendWithParametersDialog(){

@@ -1041,8 +1041,69 @@
 		<%-- --------------- --%>
 		<%-- RIGHT SIDE CELL --%>
 		<%-- --------------- --%>
-		<td width="50%" align="center" valign="top">
+		<td width="50%" align="left" valign="top">
 			<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+					<td width="2">&nbsp;</td>
+			 		<td>
+			 			<table width="80%" align="left" border="0" cellspacing="0" cellpadding="0">
+			 				<tr height="5">
+			 					<td class="text">&nbsp;</td> 
+			 				</tr>
+			 				<tr >
+				            	<td class="text">&nbsp;</td> 
+			 				</tr>
+
+				            <tr >	
+			            		<td class="text">&nbsp;</td> 
+			 				    <td class="text9BlueGreen" valign="bottom" align="left" >
+			 				    	<%-- only some status are allowed --%>
+				 				    <c:choose>
+					 				    <c:when test="${ model.record.thst == 'G' ||  model.status=='F' || model.record.thst == 'M' || empty model.record.thst}">
+						 				    	<input tabindex=-1 class="inputFormSubmit" type="submit" name="submit" onclick="javascript: form.action='tvinnsadnctsexport_edit.do';" value='<spring:message code="systema.tvinn.sad.ncts.export.createnew.submit"/>'/>
+						 				    	&nbsp;&nbsp;
+						 				    	<c:if test="${not empty model.record.thtdn}">
+						 				    		<input tabindex=-2 class="inputFormSubmit" type="submit" name="send" onclick="javascript: form.action='tvinnsadnctsexport_send.do';" value='<spring:message code="systema.tvinn.sad.ncts.export.createnew.send"/>'/>
+						 				    	</c:if>
+					 				    </c:when>
+					 				    <c:otherwise>
+					 				    		<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
+					 				    </c:otherwise>	
+				 				    </c:choose>
+	                				</td>
+					        </tr>
+					        <tr height="10"><td colspan="2">&nbsp;</td></tr>
+					        
+					        <c:if test="${model.record.warrantyAlarm}">
+					        <tr>
+						        <td colspan="2" >&nbsp;&nbsp;
+						            	<table style="border-color:red;border-width: 2px 2px 2px 2px;" class="tableBorderWithRoundCorners" align="left" border="0" cellspacing="2" cellpadding="1">
+								    		<tr>
+									    		<td class="text14" colspan="2">
+									            <img width="18px" height="20px" src="resources/images/redFlag.png" border="0" alt="emergency">	
+										    		<b>Brugte garantibeløp</b>&nbsp;<font class="text14RedBold">overskrider</font>&nbsp;<b>alarmgrensen på</b>&nbsp; 
+										    		<b>${model.record.tgprm}&nbsp;%</b>
+										    		<ul class="text14">
+										    			<li>
+										    				Totalt garantibeløp er: <font class="text14GreenBold">${model.record.tggbl}</font>
+										    			</li>
+										    			<li>
+										    				Totalt brugte garantibeløp (herunder dette angivelse) er: <font class="text14RedBold">${model.record.tggblb}</font>
+										    			</li>
+										    		</ul>
+								    			</td>	
+								    		</tr>
+								    		 	   
+						        		</table>
+						        </td>
+					        </tr>
+					        </c:if>
+					        
+						</table>
+					</td>
+				</tr>
+				
+			
 				<tr>
 					<td width="2">&nbsp;</td>
 					<td valign="top">
@@ -1600,32 +1661,30 @@
 			 			<table width="80%" align="left" border="0" cellspacing="0" cellpadding="0">
 			 				<tr height="5">
 			 					<td class="text">&nbsp;</td> 
-			 					<td class="text">&nbsp;</td> 
 			 				</tr>
 			 				<tr >
 				            	<td class="text">&nbsp;</td> 
-		 						<td class="text">&nbsp;</td> 
 			 				</tr>
 
 				            <tr >	
 			            		<td class="text">&nbsp;</td> 
-			 				    <td class="text9BlueGreen" valign="bottom" align="right" >
+			 				    <td class="text9BlueGreen" valign="bottom" align="left" >
 			 				    	<%-- only some status are allowed --%>
 				 				    <c:choose>
 					 				    <c:when test="${ model.record.thst == 'G' ||  model.status=='F' || model.record.thst == 'M' || empty model.record.thst}">
-						 				    	<input tabindex=-1 class="inputFormSubmit" type="submit" name="submit" onclick="javascript: form.action='tvinnsadnctsexport_edit.do';" value='<spring:message code="systema.tvinn.sad.ncts.export.createnew.submit"/>'/>
+						 				    	<input tabindex=-1 class="inputFormSubmit" type="submit" name="submit2" onclick="javascript: form.action='tvinnsadnctsexport_edit.do';" value='<spring:message code="systema.tvinn.sad.ncts.export.createnew.submit"/>'/>
 						 				    	&nbsp;&nbsp;
 						 				    	<c:if test="${not empty model.record.thtdn}">
-						 				    		<input tabindex=-2 class="inputFormSubmit" type="submit" name="send" onclick="javascript: form.action='tvinnsadnctsexport_send.do';" value='<spring:message code="systema.tvinn.sad.ncts.export.createnew.send"/>'/>
+						 				    		<input tabindex=-2 class="inputFormSubmit" type="submit" name="send2" onclick="javascript: form.action='tvinnsadnctsexport_send.do';" value='<spring:message code="systema.tvinn.sad.ncts.export.createnew.send"/>'/>
 						 				    	</c:if>
 					 				    </c:when>
 					 				    <c:otherwise>
-					 				    		<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
+					 				    		<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit2" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
 					 				    </c:otherwise>	
 				 				    </c:choose>
 	                				</td>
 					        </tr>
-					        <tr height="25"><td colspan="2">&nbsp;</td></tr>
+					        <tr height="10"><td colspan="2">&nbsp;</td></tr>
 					        
 					        <c:if test="${model.record.warrantyAlarm}">
 					        <tr>

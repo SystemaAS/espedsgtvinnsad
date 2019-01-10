@@ -979,12 +979,34 @@
 		<%-- --------------- --%>
 		<%-- RIGHT SIDE CELL --%>
 		<%-- --------------- --%>
-		<td width="50%" align="center" valign="top">
+		<td width="50%" align="left" valign="top">
 			<table border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td width="2">&nbsp;</td>
 					<td valign="top">
 			 			<table border="0" cellspacing="0" cellpadding="0">
+			 			
+			 				<tr >	
+			            		<td class="text9BlueGreen" valign="bottom" align="left" >
+	
+			 				    <%-- only status = M or emtpy status is allowed --%>
+			 				    <c:choose>
+				 				    <c:when test="${ model.record.sest == 'M' || empty  model.record.sest }">
+					 				    	<input tabindex=-1 class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadexport_edit.do';" value='<spring:message code="systema.tvinn.sad.export.createnew.submit"/>'/>
+					 				    	&nbsp;&nbsp;
+					 				    	<c:if test="${not empty model.record.setdn && model.record.validUpdate}">
+					 				    		<input tabindex=-2 class="inputFormSubmit" type="button" name="sendButton" id="sendButton" onclick="javascript: form.action='tvinnsadexport_send.do';" value='<spring:message code="systema.tvinn.sad.export.createnew.send"/>'/>
+					 				    	</c:if>
+				 				    </c:when>
+				 				    <c:otherwise>
+				 				    		<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
+				 				    </c:otherwise>	
+			 				    </c:choose>
+		 				    
+                				</td>
+					        </tr>
+			 				<tr height="10"><td></td></tr>
+			 			
 					 		<tr>
 					            <td class="text14" align="left" >
 					            <img onMouseOver="showPop('15_info');" onMouseOut="hidePop('15_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
@@ -1765,7 +1787,7 @@
 						</table>
 					</td>
 				</tr>
-				<tr height="20"><td class="text"></td></tr>
+				<tr height="10"><td class="text"></td></tr>
 				        
 				<tr>
 					<td width="2">&nbsp;</td>
@@ -1773,27 +1795,24 @@
 			 			<table width="80%" align="left" border="0" cellspacing="0" cellpadding="0">
 			 				<tr height="5">
 			 					<td class="text">&nbsp;</td> 
-			 					<td class="text">&nbsp;</td> 
 			 				</tr>
 			 				<tr >
 				            	<td class="text">&nbsp;</td> 
-		 						<td class="text">&nbsp;</td> 
 			 				</tr>
 				            <tr >	
-			            		<td class="text">&nbsp;</td> 
-			 				    <td class="text9BlueGreen" valign="bottom" align="right" >
+			            		<td class="text9BlueGreen" valign="bottom" align="left" >
 	
 			 				    <%-- only status = M or emtpy status is allowed --%>
 			 				    <c:choose>
 				 				    <c:when test="${ model.record.sest == 'M' || empty  model.record.sest }">
-					 				    	<input tabindex=-1 class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadexport_edit.do';" value='<spring:message code="systema.tvinn.sad.export.createnew.submit"/>'/>
+					 				    	<input tabindex=-1 class="inputFormSubmit" type="submit" name="submit2" id="submit2" onclick="javascript: form.action='tvinnsadexport_edit.do';" value='<spring:message code="systema.tvinn.sad.export.createnew.submit"/>'/>
 					 				    	&nbsp;&nbsp;
 					 				    	<c:if test="${not empty model.record.setdn && model.record.validUpdate}">
-					 				    		<input tabindex=-2 class="inputFormSubmit" type="button" name="sendButton" id="sendButton" onclick="javascript: form.action='tvinnsadexport_send.do';" value='<spring:message code="systema.tvinn.sad.export.createnew.send"/>'/>
+					 				    		<input tabindex=-2 class="inputFormSubmit" type="button" name="sendButton2" id="sendButton2" onclick="javascript: form.action='tvinnsadexport_send.do';" value='<spring:message code="systema.tvinn.sad.export.createnew.send"/>'/>
 					 				    	</c:if>
 				 				    </c:when>
 				 				    <c:otherwise>
-				 				    		<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
+				 				    		<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit2" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
 				 				    </c:otherwise>	
 			 				    </c:choose>
 		 				    
