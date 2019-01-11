@@ -107,6 +107,10 @@ public class JsonSadExportTopicListRecord extends JsonAbstractGrandFatherRecord 
 	public void setO2_setll(String value) {  this.o2_setll = value; }
 	public String getO2_setll() { return this.o2_setll;}
 	
+	private String epjn = null;
+	public void setEpjnl(String value) {  this.epjn = value; }
+	public String getEpjn() { return this.epjn;}
+	
 	
 	/**
 	 * 

@@ -104,7 +104,8 @@
                 <td class="text14" align="left" title="motNavn">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.mottagare"/></td>
                 <td class="text14" align="left" title="segn">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.godsnr"/></td>
                 <td class="text14" align="left" title="semi">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.innstikk"/></td>
-                <td class="text14" align="left" title="faknr">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.faknr"/></td>
+                <td class="text14" align="left" title="inv">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.faknr"/></td>
+                <td class="text14" align="left" title="r31">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.r31"/></td>
                 
                 <td>&nbsp;</td>
 			</tr>
@@ -137,7 +138,8 @@
 				<td align="left" ><input type="text" class="inputText" name="motNavn" id="motNavn" size="9" maxlength="50" value='${searchFilterSadExport.motNavn}'>&nbsp;</td>
 				<td align="left" ><input type="text" class="inputText" name="godsnr" id="godsnr" size="15" maxlength="50" value='${searchFilterSadExport.godsnr}'>&nbsp;</td>
 				<td align="left" ><input type="text" class="inputText" name="innstikk" id="innstikk" size="1" maxlength="1" value='${searchFilterSadExport.innstikk}'>&nbsp;</td>
-				<td align="left" ><input type="text" class="inputText" name="faknr" id="faknr" size="10" maxlength="17" value='${searchFilterSadExport.faknr}'>&nbsp;</td>
+				<td align="left" ><input type="text" class="inputText" name="inv" id="inv" size="10" maxlength="17" value='${searchFilterSadExport.inv}'>&nbsp;</td>
+				<td align="left" ><input type="text" class="inputText" name="r31" id="r31" size="10" maxlength="30" value='${searchFilterSadExport.r31}'>&nbsp;</td>
 				<td valign="top" align="left" >
                    &nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='<spring:message code="systema.tvinn.sad.search"/>'>
               
@@ -198,7 +200,7 @@
 	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.export.list.search.label.mottagare"/></th>
 	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.export.list.search.label.godsnr"/></th>
 	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.export.list.search.label.innstikk"/></th>
-	                    <th class="tableHeaderField">EP</th>
+	                    <th class="tableHeaderField">epost</th>
 	                     <%-- START Omberegning --%>
 	                    <th class="tableHeaderFieldOmberegning">Omber&nbsp;</th>
 	                    <th class="tableHeaderFieldOmberegning">St&nbsp;</th>
@@ -242,7 +244,7 @@
 		               <td class="tableCell" align="left" >${topic.motNavn}&nbsp;</td>
 		               <td class="tableCell" align="center" width="5%" >${topic.segn}&nbsp;</td>
 		               <td class="tableCell" align="center" width="5%" ><b>${topic.semi}&nbsp;</b></td>
-		               <td class="tableCell" align="center">todo&nbsp;</td>
+		               <td class="tableCell" align="center">${topic.epjn}&nbsp;</td>
 		               <td class="tableCellOmberegning" align="center">${topic.o2_semf}&nbsp;</td>
 		               <td class="tableCellOmberegning" align="center">${topic.o2_sest}</td>
 		               <td class="tableCellOmberegning" align="center">${topic.o2_sedt}</td>

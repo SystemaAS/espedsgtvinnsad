@@ -101,6 +101,10 @@ public class JsonSadImportTopicListRecord extends JsonAbstractGrandFatherRecord 
 	public void setO2_sitll(String value) {  this.o2_sitll = value; }
 	public String getO2_sitll() { return this.o2_sitll;}
 	
+	private String epjn = null;
+	public void setEpjnl(String value) {  this.epjn = value; }
+	public String getEpjn() { return this.epjn;}
+	
 	
 	
 	private Collection<JsonNotisblockRecord> notisblockList;

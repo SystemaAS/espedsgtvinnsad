@@ -31,9 +31,11 @@ import no.systema.main.service.UrlCgiProxyService;
 import no.systema.main.validator.LoginValidator;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.JsonDebugger;
+import no.systema.main.util.StringManager;
 import no.systema.main.model.SystemaWebUser;
 
 import no.systema.tvinn.sad.sadexport.filter.SearchFilterSadExportTopicList;
+import no.systema.tvinn.sad.sadexport.url.store.SadExportUrlDataStore;
 import no.systema.tvinn.sad.sadimport.url.store.SadImportUrlDataStore;
 import no.systema.tvinn.sad.sadimport.util.manager.CodeDropDownMgr;
 import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
@@ -72,7 +74,7 @@ public class SadImportController {
 	private LoginValidator loginValidator = new LoginValidator();
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
-	
+	private StringManager strMgr = new StringManager();
 	
 	@PostConstruct
 	public void initIt() throws Exception {
@@ -184,7 +186,14 @@ public class SadImportController {
 	            }
 	            
 	            //get BASE URL
-	    		final String BASE_URL = SadImportUrlDataStore.SAD_IMPORT_BASE_TOPICLIST_URL;
+	            String BASE_URL = SadImportUrlDataStore.SAD_IMPORT_BASE_TOPICLIST_URL;
+	    		//only when Inv exists
+	    		if(searchFilter!=null && strMgr.isNotNull(searchFilter.getInv())){
+	    			BASE_URL = SadImportUrlDataStore.SAD_IMPORT_BASE_TOPICLIST_INVOICEREF_URL;
+	    		//only when r31 exists	
+	    		}else if(searchFilter!=null && strMgr.isNotNull(searchFilter.getR31())){
+	    			BASE_URL = SadImportUrlDataStore.SAD_IMPORT_BASE_TOPICLIST_R31REF_URL;
+	    		}
 	    		//add URL-parameters
 	    		String urlRequestParams = this.getRequestUrlKeyParameters(searchFilter, appUser);
 	    		session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, BASE_URL + "?" + urlRequestParams.toString()); 
@@ -345,6 +354,8 @@ public class SadImportController {
 		//String action = request.getParameter("action");
 		
 		urlRequestParamsKeys.append("user=" + appUser.getUser());
+		urlRequestParamsKeys.append("&usrspcname=" + appUser.getUser());
+		
 		if(searchFilter.getAvd()!=null && !"".equals(searchFilter.getAvd())){
 			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "avd=" + searchFilter.getAvd());
 		}
@@ -380,6 +391,12 @@ public class SadImportController {
 		}
 		if(searchFilter.getInnstikk()!=null && !"".equals(searchFilter.getInnstikk())){
 			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "innstikk=" + searchFilter.getInnstikk());
+		}
+		if(searchFilter.getInv()!=null && !"".equals(searchFilter.getInv())){
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "inv=" + searchFilter.getInv());
+		}
+		if(searchFilter.getR31()!=null && !"".equals(searchFilter.getR31())){
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "r31=" + searchFilter.getR31());
 		}
 		
 		return urlRequestParamsKeys.toString();

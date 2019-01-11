@@ -77,6 +77,14 @@ public class SearchFilterSadImportTopicList {
 	public void setXref(String value) {  this.xref = value; }
 	public String getXref() { return this.xref;}
 	
+	private String inv = null;
+	public void setInv(String value) {  this.inv = value; }
+	public String getInv() { return this.inv;}
+	
+	private String r31 = null;
+	public void setR31(String value) {  this.r31 = value; }
+	public String getR31() { return this.r31;}
+	
 	
 	/**
 	 * Gets the populated values by reflection

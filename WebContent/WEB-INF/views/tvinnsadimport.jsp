@@ -113,6 +113,8 @@
                 <td class="text14" align="left" title="motNavn">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.mottagare"/></td>
                 <td class="text14" align="left" title="sign">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.godsnr"/></td>
                 <td class="text14" align="left" title="simi">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.innstikk"/></td>
+                <td class="text14" align="left" title="inv">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.faknr"/></td>
+                <td class="text14" align="left" title="r31">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.r31"/></td>
                 
                 <td>&nbsp;</td>
 			</tr>
@@ -145,6 +147,8 @@
 				<td align="left" ><input type="text" class="inputText" name="motNavn" id="motNavn" size="9" maxlength="35" value='${searchFilterSadImport.motNavn}'>&nbsp;</td>
 				<td align="left" ><input type="text" class="inputText" name="godsnr" id="godsnr" size="10" maxlength="15" value='${searchFilterSadImport.godsnr}'>&nbsp;</td>
 				<td align="left" ><input type="text" class="inputText" name="innstikk" id="innstikk" size="1" maxlength="1" value='${searchFilterSadImport.innstikk}'>&nbsp;</td>
+				<td align="left" ><input type="text" class="inputText" name="inv" id="inv" size="10" maxlength="17" value='${searchFilterSadImport.inv}'>&nbsp;</td>
+				<td align="left" ><input type="text" class="inputText" name="r31" id="r31" size="10" maxlength="30" value='${searchFilterSadImport.r31}'>&nbsp;</td>
 				<td valign="top" align="left" >
                    &nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='<spring:message code="systema.tvinn.sad.search"/>'>
                 </td>
@@ -207,7 +211,7 @@
 	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.import.list.search.label.vikt"/></th>
 	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.import.list.search.label.godsnr"/></th>
 	                    <th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.import.list.search.label.innstikk"/></th>
-	                    <th class="tableHeaderField" >EP</th>
+	                    <th class="tableHeaderField" >epost</th>
 	                    <%-- START Omberegning --%>
 	                    <th class="tableHeaderFieldOmberegning" >Omber</th>
 	                    <th class="tableHeaderFieldOmberegning" >St</th>
@@ -254,7 +258,7 @@
 		               <td class="tableCell" align="right" >${topic.sivkb}</td>
 		               <td class="tableCell" align="center" >${topic.sign}</td>
 		               <td class="tableCell" align="center"><b>${topic.simi}</b></td>
-		               <td class="tableCell" align="center" >todo</td>
+		               <td class="tableCell" align="center" >${topic.epjn}</td>
 		               <td class="tableCellOmberegning" align="center" >${topic.o2_simf}</td>
 		               <td class="tableCellOmberegning" align="center" >${topic.o2_sist}</td>
 		               <td class="tableCellOmberegning" align="center" >${topic.o2_sidt}</td>

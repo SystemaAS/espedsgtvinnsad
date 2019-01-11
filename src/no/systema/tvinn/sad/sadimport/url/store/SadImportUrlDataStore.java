@@ -16,9 +16,13 @@ public final class SadImportUrlDataStore {
 	//----------------------------
 	//[1] FETCH ARENDE LIST
 	//----------------------------
-	static public String SAD_IMPORT_BASE_TOPICLIST_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOI000R.pgm";
 	//http://gw.systema.no/sycgip/TNOI000R.pgm?user=OSCAR&avd=1
-	
+	static public String SAD_IMPORT_BASE_TOPICLIST_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOI000R.pgm";
+	//http://gw.systema.no/sycgip/TNOI000R2.pgm?user=OSCAR&usrspcname=OSCAR&inv=12
+	static public String SAD_IMPORT_BASE_TOPICLIST_INVOICEREF_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOI000R2.pgm";
+	//http://gw.systema.no/sycgip/TNOI000R3.pgm?user=OSCAR&usrspcname=OSCAR&r31=12
+	static public String SAD_IMPORT_BASE_TOPICLIST_R31REF_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOI000R3.pgm";
+		
 	//----------------------------
 	//[2] FETCH A SPECIFIC ARENDE
 	//----------------------------

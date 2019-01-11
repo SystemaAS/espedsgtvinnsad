@@ -93,6 +93,13 @@ public class SearchFilterSadExportTopicList {
 	public void setFaknr(String value) {  this.faknr = value; }
 	public String getFaknr() { return this.faknr;}
 	
+	private String inv = null;
+	public void setInv(String value) {  this.inv = value; }
+	public String getInv() { return this.inv;}
+	
+	private String r31 = null;
+	public void setR31(String value) {  this.r31 = value; }
+	public String getR31() { return this.r31;}
 	
 	
 	/**
