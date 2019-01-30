@@ -481,9 +481,12 @@ public class SadExportHeaderController {
 			 if(container!=null){
 				 for(JsonSadExportSpecificTopicRecord  record : container.getGetdepinf()){
 					 targetRecord = record;
+					 //these values should not be changed upon default-values
 					 targetRecord.setSeavd(jsonSadExportSpecificTopicRecord.getSeavd());
 					 targetRecord.setSetdn(jsonSadExportSpecificTopicRecord.getSetdn());
 					 targetRecord.setSesg(jsonSadExportSpecificTopicRecord.getSesg());
+					 targetRecord.setSedt(jsonSadExportSpecificTopicRecord.getSedt());
+					 
 				
 				 }
 			 }
