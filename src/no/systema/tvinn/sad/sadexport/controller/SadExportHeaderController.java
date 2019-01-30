@@ -486,8 +486,6 @@ public class SadExportHeaderController {
 					 targetRecord.setSetdn(jsonSadExportSpecificTopicRecord.getSetdn());
 					 targetRecord.setSesg(jsonSadExportSpecificTopicRecord.getSesg());
 					 targetRecord.setSedt(jsonSadExportSpecificTopicRecord.getSedt());
-					 
-				
 				 }
 			 }
 		 }
