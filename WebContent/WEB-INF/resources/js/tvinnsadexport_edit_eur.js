@@ -30,4 +30,13 @@
         */
     });
 	
-	
+    
+    jq(document).ready(function() {
+      jq('#tblItems').dataTable( {
+          "dom": '<"top">t<"bottom"><"clear">',
+          "tabIndex": -1,
+  		  "scrollY":    "100px",
+  		  "scrollCollapse":  true
+  	  });
+      
+    });

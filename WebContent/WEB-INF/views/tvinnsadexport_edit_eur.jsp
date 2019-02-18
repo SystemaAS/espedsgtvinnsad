@@ -299,12 +299,12 @@
 	           		
 	           			<table border="0" align="left" cellspacing="2" style="width:80%;background-color:#EEEEEE;" id="eurArea" class="areaWithThickBorder" >
 	           			<tr>
-		           			<td colspan="3" class="text14"><b>Varesertifikat EUR.1</b></td>
+		           			<td colspan="3" class="text14"><b>&nbsp;Varesertifikat EUR.1</b></td>
 		           		</tr>
 		           		<%-- FIRST SECTION --%>
 		           		<tr>
-	           				<td>
-	           				<table class="formFrameTitaniumWhite" >
+	           				<td >
+	           				<table style="width:70%" class="formFrameTitaniumWhite" >
 	           				
 							<tr>
 			           			<td colspan="5" class="text12">
@@ -314,13 +314,26 @@
 							<tr>
 								<td>
 									<table>
+									
 									<tr>
-				           			<td class="text12">
-										&nbsp;<input type="text" class="inputText" name="todo" id="todo" size="20" maxlength="35" value="${Xmodel.record.dkih_t05a}">
-									</td>
-									<td class="text12">
-										&nbsp;<input type="text" class="inputText" name="todo" id="todo" size="20" maxlength="35" value="${Xmodel.record.dkih_t05a}">
-									</td>
+										<td class="text12">&nbsp;Navn</td>
+										<td class="text12">&nbsp;Adresse-1</td>
+										<td class="text12">&nbsp;Adresse-2</td>
+										<td class="text12">&nbsp;Adresse-3</td>
+									</tr>
+									<tr>
+					           			<td class="text12">
+											<input type="text" class="inputText" name="todo" id="todo" size="25" maxlength="30" value="${Xmodel.record.dkih_t05a}">
+										</td>
+										<td class="text12">
+											<input type="text" class="inputText" name="todo" id="todo" size="25" maxlength="30" value="${Xmodel.record.dkih_t05a}">
+										</td>
+										<td class="text12">
+											<input type="text" class="inputText" name="todo" id="todo" size="25" maxlength="30" value="${Xmodel.record.dkih_t05a}">
+										</td>
+										<td class="text12">
+											<input type="text" class="inputText" name="todo" id="todo" size="25" maxlength="30" value="${Xmodel.record.dkih_t05a}">
+										</td>
 									</tr>
 									</table>
 								</td>	
@@ -330,7 +343,7 @@
 						</tr>
 						<tr>
 	           				<td>
-	           				<table class="formFrameTitaniumWhite" >
+	           				<table style="width:70%" class="formFrameTitaniumWhite" >
 	           				
 							<tr>
 			           			<td colspan="5" class="text12">
@@ -340,13 +353,26 @@
 							<tr>
 								<td>
 									<table>
+									
 									<tr>
-				           			<td class="text12">
-										&nbsp;<input type="text" class="inputText" name="todo" id="todo" size="20" maxlength="35" value="${Xmodel.record.dkih_t05a}">
-									</td>
-									<td class="text12">
-										&nbsp;<input type="text" class="inputText" name="todo" id="todo" size="20" maxlength="35" value="${Xmodel.record.dkih_t05a}">
-									</td>
+										<td class="text12">&nbsp;Navn</td>
+										<td class="text12">&nbsp;Adresse-1</td>
+										<td class="text12">&nbsp;Adresse-2</td>
+										<td class="text12">&nbsp;Adresse-3</td>
+									</tr>
+									<tr>
+					           			<td class="text12">
+											<input type="text" class="inputText" name="todo" id="todo" size="25" maxlength="30" value="${Xmodel.record.dkih_t05a}">
+										</td>
+										<td class="text12">
+											<input type="text" class="inputText" name="todo" id="todo" size="25" maxlength="30" value="${Xmodel.record.dkih_t05a}">
+										</td>
+										<td class="text12">
+											<input type="text" class="inputText" name="todo" id="todo" size="25" maxlength="30" value="${Xmodel.record.dkih_t05a}">
+										</td>
+										<td class="text12">
+											<input type="text" class="inputText" name="todo" id="todo" size="25" maxlength="30" value="${Xmodel.record.dkih_t05a}">
+										</td>
 									</tr>
 									</table>
 								</td>	
@@ -357,7 +383,7 @@
 						
 						<tr>
 	           				<td>
-	           				<table class="formFrameTitaniumWhite" >
+	           				<table style="width:70%" class="formFrameTitaniumWhite" >
 	           				
 							<tr>
 			           			<td class="text12">
@@ -366,13 +392,133 @@
 								<td class="text12">
 									&nbsp;<input type="text" class="inputText" name="todo" id="todo" size="5" maxlength="2" value="${Xmodel.record.dkih_t05a}">
 								</td>
-							</tr>
-							<tr>
+								<td width="15px" class="text12">&nbsp;</td>
 			           			<td class="text12">
 									&nbsp;&nbsp;<span title="todo"><b>5.&nbsp;</b>Bestemmelsesland, gruppe av land eller territorier</span>
 								</td>
 								<td class="text12">
 									&nbsp;<input type="text" class="inputText" name="todo" id="todo" size="5" maxlength="2" value="${Xmodel.record.dkih_t05a}">
+								</td>
+							</tr>	
+							
+							</table>
+							</td>
+						</tr>
+						
+						<tr>
+	           				<td>
+	           				<table style="width:70%" class="formFrameTitaniumWhite" >
+	           				
+							<tr>
+			           			<td class="text12">
+									&nbsp;&nbsp;<span title="todo"><b>6.&nbsp;</b>Opplysninger om transporten (utfylling ikke påkrevet)</span>
+								</td>
+								<td class="text12">
+									&nbsp;<input type="text" class="inputText" name="todo" id="todo" size="10" maxlength="10" value="${Xmodel.record.dkih_t05a}">
+								</td>
+								<td class="text12">
+									&nbsp;<input type="text" class="inputText" name="todo" id="todo" size="10" maxlength="10" value="${Xmodel.record.dkih_t05a}">
+								</td>
+								<td class="text12">
+									&nbsp;<input type="text" class="inputText" name="todo" id="todo" size="10" maxlength="10" value="${Xmodel.record.dkih_t05a}">
+								</td>
+								<td width="15px" class="text12">&nbsp;</td>
+			           			<td class="text12">
+									&nbsp;<span title="todo"><b>7.&nbsp;</b>Merknader</span>
+								</td>
+								<td class="text12">
+									&nbsp;<input tabindex=-1 readonly type="text" class="inputTextReadOnly" name="todo" id="todo" size="15" value="N/A">
+								</td>
+							</tr>	
+							
+							</table>
+							</td>
+						</tr>
+						
+						<tr>
+		           			<td height="10px" class="text12">&nbsp;</td>
+		           		</tr>
+		           		
+						<tr>
+	           				<td>
+	           				<table style="width:70%" class="formFrameTitaniumWhite" >
+	           				
+							<tr>
+			           			<td colspan="5" class="text12">
+									&nbsp;<span title="todo"><b>8.&nbsp;</b>Løpenr.,kollienes merke, nr., antall og art; vareslag.&nbsp;&nbsp;&nbsp;<b>9.&nbsp;</b>Bruttovekt(kg) eller annet mål (l,m3,etc)&nbsp;&nbsp;&nbsp;<b>10.&nbsp;</b>Fakturaer&nbsp;(utfylling ikke påkrevet)</span>
+								</td>
+							</tr>
+							<tr>	
+								<td class="text12">
+									<table id="tblItems" class="display compact cell-border" width="100%">
+										<thead>
+										<tr class="tableHeaderField">
+											<th class="text12">&nbsp;Løpenr.&nbsp;</th>
+											<th class="text12">&nbsp;Koll.merke.&nbsp;</th>
+											<th class="text12">&nbsp;Antall&nbsp;</th>
+											<th class="text12">&nbsp;Art&nbsp;</th>
+											<th class="text12">&nbsp;Vareslag&nbsp;</th>
+											<th class="text12">&nbsp;Bruttovekt&nbsp;</th> 
+											<th class="text12">&nbsp;Fakt.nr&nbsp;</th> 
+												
+										</tr>
+										</thead>
+										<tbody>
+											<td class="text12"></td>
+											<td class="text12"></td>
+											<td class="text12"></td>
+											<td class="text12"></td>
+											<td class="text12"></td>
+											<td class="text12"></td>
+											<td class="text12"></td>
+										</tbody>
+										
+									</table>
+								</td>
+							</tr>
+							
+							
+							</table>
+							</td>
+						</tr>
+						
+						<tr>
+	           				<td>
+	           				<table style="width:70%" class="formFrameTitaniumWhite" >
+	           				
+							<tr>
+			           			<td class="text12">
+									&nbsp;<span title="todo"><b>11.&nbsp;</b>TOLLVESENETS PÅTEGNING</span>
+								</td>
+							</tr>
+							<tr>	
+								<td class="text12">
+									&nbsp;<input tabindex=-1 readonly type="text" class="inputTextReadOnly" name="todo" id="todo" size="10" value="N/A">
+								</td>
+							</tr>
+							<tr>	
+								<td style="height:10px" class="text12"></td>
+							</tr>
+							<tr>
+			           			<td class="text12">
+									&nbsp;<span title="todo"><b>12.&nbsp;</b>EKSPORTØRENS ERKLÆRING</span>
+								</td>
+							</tr>
+							<tr>
+			           			<td class="text12">
+									&nbsp;<span title="todo">Undertegnede erklærer att de ovenfor nevnte varer oppfyller de vilkpr som kreves ror utstedelse av dette varesertifikat.
+								</td>
+							</tr>
+							<tr>	
+								<td class="text12">
+								<table>
+									<tr>
+									<td>
+									&nbsp;Sted:&nbsp;<input type="text" class="inputText" name="todo" id="todo" size="10" maxlength="10" value="${Xmodel.record.dkih_t05a}">
+									&nbsp;Dato:&nbsp;<input type="text" class="inputText" name="todo" id="todo" size="9" maxlength="8" value="${Xmodel.record.dkih_t05a}">
+									</td>
+									</tr>
+								</table>	
 								</td>
 							</tr>	
 							
