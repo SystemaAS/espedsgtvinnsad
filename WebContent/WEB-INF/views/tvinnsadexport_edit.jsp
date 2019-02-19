@@ -110,21 +110,9 @@
 							<img style="vertical-align: bottom" src="resources/images/archive.png" width="16" hight="16" border="0" alt="show archive">
 						</a>
 					</td>
-					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td width="10%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<a id="alinkEur" style="display:block;" href="tvinnsadexport_edit_eur.do?avd=${model.record.seavd}&sign=${model.record.sesg}
-							&opd=${model.record.setdn}&status=${model.record.sest}&datum=${model.record.sedt}&o2_sest=${ model.record.o2_sest}&o2_sedt=${ model.record.o2_sedt}&o2_semf=${ model.record.o2_semf}">
-							<font class="tabDisabledLink">
-								&nbsp;<spring:message code="systema.tvinn.sad.export.eur.tab"/>
-							</font>
-							
-						</a>
-					</td>
 					
-					<%-- We must check if this tolddkl. qualifies for omberegning 
-					<c:if test="${ ( not empty model.record.setll && 
-								   ( (empty model.record.sest || model.record.sest == 'P' || model.record.sest == 'U'))  || ( empty model.record.o2_sest  || model.record.o2_sest == 'M' || model.record.o2_sest == 'Z' || model.record.o2_sest == 'Q' || model.record.o2_sest == 'P')  )}">
-					--%>
+					
+					<%-- We must check if this tolddkl. qualifies for omberegning --%> 
 					<c:if test="${ not empty model.record.setll }">
 						<c:if test="${ (empty model.record.sest || model.record.sest == 'P' || model.record.sest == 'U')  || ( empty model.record.o2_sest  || model.record.o2_sest == 'M' || model.record.o2_sest == 'Z' || model.record.o2_sest == 'Q' || model.record.o2_sest == 'P')  }">
 						<%-- ------------------------------------------------------------------------------------------ --%>
@@ -153,7 +141,16 @@
 						</c:choose>
 						</c:if>	
 					</c:if>
-					
+					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
+					<td width="10%" valign="bottom" class="tabDisabled" align="center" nowrap>
+						<a id="alinkEur" style="display:block;" href="tvinnsadexport_edit_eur.do?avd=${model.record.seavd}&sign=${model.record.sesg}
+							&opd=${model.record.setdn}&status=${model.record.sest}&datum=${model.record.sedt}&o2_sest=${ model.record.o2_sest}&o2_sedt=${ model.record.o2_sedt}&o2_semf=${ model.record.o2_semf}">
+							<font class="tabDisabledLink">
+								&nbsp;<spring:message code="systema.tvinn.sad.export.eur.tab"/>
+							</font>
+							
+						</a>
+					</td>
 					<td width="25%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 				</c:when>
 				<c:otherwise>

@@ -58,7 +58,7 @@
 					</td>
 					
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
+					<td width="10%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a id="alinkInvoices" style="display:block;" href="tvinnsadexport_edit_finansopplysninger.do?action=doFetch&avd=${model.avd}&sign=${model.sign}
 													&opd=${model.opd}&status=${model.status}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
 							<font class="tabDisabledLink">
@@ -67,12 +67,12 @@
 						</a>
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td width="12%" valign="bottom" class="tab" align="center" nowrap>
+					<td width="10%" valign="bottom" class="tab" align="center" nowrap>
 						<font class="tabLink">&nbsp;<spring:message code="systema.tvinn.sad.export.notisblock.createnew.tab"/></font>
 						<img valign="bottom" src="resources/images/add.png" width="12" hight="12" border="0" alt="notisblock">
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
+					<td width="10%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a id="alinkItemLines" style="display:block;" href="tvinnsadexport_edit_items.do?action=doFetch&avd=${model.avd}&sign=${ model.sign}
 													&opd=${model.opd}&status=${ model.status}&fabl=&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
 							<font class="tabDisabledLink">
@@ -82,7 +82,7 @@
 						</a>
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
+					<td width="10%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a id="alinkLogging" style="display:block;" href="tvinnsadexport_logging.do?avd=${ model.avd}&sign=${ model.sign}
 													&opd=${model.opd}&status=${model.status}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
 							<font class="tabDisabledLink">
@@ -92,7 +92,7 @@
 						</a>
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
+					<td width="10%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a id="alinkArchive" style="display:block;" href="tvinnsadexport_archive.do?avd=${model.avd}&sign=${model.sign}
 													&opd=${model.opd}&status=${model.status}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
 							<font class="tabDisabledLink">
@@ -101,17 +101,16 @@
 							<img style="vertical-align: bottom" src="resources/images/archive.png" width="16" hight="16" border="0" alt="show archive">
 						</a>
 					</td>
-					<%-- This tab should be hidden here ?
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<a id="alinkOmberegning" style="display:block;" href="tvinnsadexport_edit_omberegning.do?action=doFetch&avd=${model.avd}&sysg=${model.sign}
-													&opd=${ model.opd}&syst=${model.status}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
+					<td width="10%" valign="bottom" class="tabDisabled" align="center" nowrap>
+						<a id="alinkEur" style="display:block;" href="tvinnsadexport_edit_eur.do?avd=${model.avd}&sign=${model.sign}
+							&opd=${model.opd}&status=${model.status}&datum=${model.datum}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
 							<font class="tabDisabledLink">
-								&nbsp;<spring:message code="systema.tvinn.sad.export.omberegning.mastertopic.tab"/>
+								&nbsp;<spring:message code="systema.tvinn.sad.export.eur.tab"/>
 							</font>
+							
 						</a>
 					</td>
-					--%>
 					<td width="20%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 				</c:when>
 				<c:otherwise>

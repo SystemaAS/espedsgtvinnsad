@@ -172,7 +172,8 @@
 		 				</tr>
 	 				</table>
 					<%-- MASTER Topic information [it is passed through a session object: XX] --%>
-				 	<table height="40" width="80%" align="left" class="formFrameTitaniumWhite" border="0" cellspacing="0" cellpadding="0">
+					<div style="width:70%">
+				 	<table height="35" width="100%" align="left" class="formFrameTitaniumWhite" border="0" cellspacing="0" cellpadding="0">
 				 		<tr height="2"><td class="text" align="left" colspan="2"></td></tr>
 				 		<tr>
 					 		<td width="50%">
@@ -234,7 +235,8 @@
 			        	        </table>
 					        </td>
 				        </tr>
-				</table>          
+				</table>
+				</div>          
             	</td>
            	</tr> 
            	
@@ -295,16 +297,16 @@
 				 	<input type="hidden" name="datum" id="datum" value="${model.datum}"/>
 				 	<input type="hidden" name="fabl" id="fabl" value="${recordTopicTvinnSad.sebel1}"/>
 				 	<input type="hidden" name="lineId" id="lineId" value="${model.lineId}">
-				 	<%--<span style="background-color:#EEEEEE;" id="eurArea" class="areaWithInputTextThickBorder"  >  --%>
-	           		
-	           			<table border="0" align="left" cellspacing="2" style="width:80%;background-color:#EEEEEE;" id="eurArea" class="areaWithThickBorder" >
+				 	
+				 	<div style="width:70%">
+	           			<table style="width:100%;background-color:#EEEEEE;" id="eurArea" class="areaWithThickBorder" >
 	           			<tr>
 		           			<td colspan="3" class="text14"><b>&nbsp;Varesertifikat EUR.1</b></td>
 		           		</tr>
 		           		<%-- FIRST SECTION --%>
 		           		<tr>
 	           				<td >
-	           				<table style="width:70%" class="formFrameTitaniumWhite" >
+	           				<table style="width:100%" class="formFrameTitaniumWhite" >
 	           				
 							<tr>
 			           			<td colspan="5" class="text12">
@@ -343,7 +345,7 @@
 						</tr>
 						<tr>
 	           				<td>
-	           				<table style="width:70%" class="formFrameTitaniumWhite" >
+	           				<table style="width:100%" class="formFrameTitaniumWhite" >
 	           				
 							<tr>
 			           			<td colspan="5" class="text12">
@@ -383,7 +385,7 @@
 						
 						<tr>
 	           				<td>
-	           				<table style="width:70%" class="formFrameTitaniumWhite" >
+	           				<table style="width:100%" class="formFrameTitaniumWhite" >
 	           				
 							<tr>
 			           			<td class="text12">
@@ -407,7 +409,7 @@
 						
 						<tr>
 	           				<td>
-	           				<table style="width:70%" class="formFrameTitaniumWhite" >
+	           				<table style="width:100%" class="formFrameTitaniumWhite" >
 	           				
 							<tr>
 			           			<td class="text12">
@@ -441,7 +443,7 @@
 		           		
 						<tr>
 	           				<td>
-	           				<table style="width:70%" class="formFrameTitaniumWhite" >
+	           				<table style="width:100%" class="formFrameTitaniumWhite" >
 	           				
 							<tr>
 			           			<td colspan="5" class="text12">
@@ -453,24 +455,27 @@
 									<table id="tblItems" class="display compact cell-border" width="100%">
 										<thead>
 										<tr class="tableHeaderField">
-											<th class="text12">&nbsp;Løpenr.&nbsp;</th>
-											<th class="text12">&nbsp;Koll.merke.&nbsp;</th>
-											<th class="text12">&nbsp;Antall&nbsp;</th>
-											<th class="text12">&nbsp;Art&nbsp;</th>
-											<th class="text12">&nbsp;Vareslag&nbsp;</th>
-											<th class="text12">&nbsp;Bruttovekt&nbsp;</th> 
-											<th class="text12">&nbsp;Fakt.nr&nbsp;</th> 
-												
+											<th class="text12">Løpenr.</th>
+											<th class="text12">Koll.merke.</th>
+											<th class="text12">Antall</th>
+											<th class="text12">Art</th>
+											<th class="text12">Vareslag</th>
+											<th class="text12">Bruttovekt</th> 
+											<th class="text12">Fakt.nr</th> 
+											<th class="text12">Slett</th> 
+											 	
 										</tr>
 										</thead>
 										<tbody>
-											<td class="text12"></td>
-											<td class="text12"></td>
-											<td class="text12"></td>
-											<td class="text12"></td>
-											<td class="text12"></td>
-											<td class="text12"></td>
-											<td class="text12"></td>
+											<tr class="tableRow" >
+												<td class="tableCellFirst"></td>
+												<td class="tableCell"></td>
+												<td class="tableCell"></td>
+												<td class="tableCell"></td>
+												<td class="tableCell"></td>
+												<td class="tableCell"></td>
+												<td class="tableCell"></td>
+											</tr>
 										</tbody>
 										
 									</table>
@@ -484,7 +489,7 @@
 						
 						<tr>
 	           				<td>
-	           				<table style="width:70%" class="formFrameTitaniumWhite" >
+	           				<table style="width:100%" class="formFrameTitaniumWhite" >
 	           				
 							<tr>
 			           			<td class="text12">
@@ -527,7 +532,7 @@
 						</tr>
 						
 				 		</table>
-			 			
+			 		</div>	
 				 </form>
 				 </td>
 		    </tr>

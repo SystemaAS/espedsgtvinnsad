@@ -20,6 +20,9 @@
 	  });
   	  jq('#alinkArchive').click(function() { 
   		setBlockUI();
+      });
+      jq('#alinkEur').click(function() { 
+  		setBlockUI();
 	  });
     });
   	
