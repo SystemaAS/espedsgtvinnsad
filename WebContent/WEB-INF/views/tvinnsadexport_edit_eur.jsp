@@ -287,7 +287,7 @@
 	 			
 	 			<td  >
 	 			
-	 				<form name="sadImportEurForm" id="sadImportEurForm" method="post">
+	 				<form name="sadExportEurForm" id="sadExportEurForm" method="post">
 				 	<%--Required key parameters from the Topic parent --%>
 				 	<input type="hidden" name="action" id="action" value='doUpdate'/>
 				 	<input type="hidden" name="opd" id="opd" value="${model.opd}"/>
@@ -301,7 +301,22 @@
 				 	<div style="width:70%">
 	           			<table style="width:100%;background-color:#EEEEEE;" id="eurArea" class="areaWithThickBorder" >
 	           			<tr>
-		           			<td colspan="3" class="text14"><b>&nbsp;Varesertifikat EUR.1</b></td>
+	           				<td>
+		           				<table >
+		           				<tr>
+			           			<td class="text14"><b>&nbsp;Varesertifikat EUR.1</b></td>
+			           			<td width="15px" class="text14">&nbsp;</td>
+			           			<td class="text14">
+			           				<input tabindex=-1 class="inputFormSubmit" type="submit" name="submit" id="submit" value="Lagre" onclick="javascript: form.action='tvinnsadexport_edit_eur.do';" />
+			           			</td>
+			           			<td class="text14">
+			           				<a tabindex=-1 href="TODOtvinnsadexport_edit_printTopic.do?avd=${model.avd}&opd=${model.opd}">
+										<img title="Print" style="vertical-align: bottom;cursor:pointer;" src="resources/images/printer.png" width="20px" height="20px" border="0" alt="Print">
+									</a>
+			           			</td>
+			           			</tr>
+		           			</table>
+		           			</td>
 		           		</tr>
 		           		<%-- FIRST SECTION --%>
 		           		<tr>
@@ -310,7 +325,7 @@
 	           				
 							<tr>
 			           			<td colspan="5" class="text12">
-									&nbsp;&nbsp;<span title="todo"><b>1.&nbsp;</b>Eksportør (Navn, full adresse, land)</span>
+									&nbsp;&nbsp;<span title="-"><b>1.<font class="text14RedBold" >*</font></b>Eksportør (Navn, full adresse, land)</span>
 								</td>
 							</tr>
 							<tr>
@@ -318,23 +333,23 @@
 									<table>
 									
 									<tr>
-										<td class="text12">&nbsp;Navn</td>
-										<td class="text12">&nbsp;Adresse-1</td>
-										<td class="text12">&nbsp;Adresse-2</td>
-										<td class="text12">&nbsp;Adresse-3</td>
+										<td class="text12">&nbsp;<font class="text14RedBold" >*</font><span title="eur01a">Navn</span></td>
+										<td class="text12">&nbsp;<font class="text14RedBold" >*</font><span title="eur01b">Adresse-1</span></td>
+										<td class="text12">&nbsp;<font class="text14RedBold" >*</font><span title="eur01c">Adresse-2</span></td>
+										<td class="text12">&nbsp;<font class="text14RedBold" >*</font><span title="eur01d">Adresse-3</span></td>
 									</tr>
 									<tr>
 					           			<td class="text12">
-											<input type="text" class="inputText" name="todo" id="todo" size="25" maxlength="30" value="${Xmodel.record.dkih_t05a}">
+											<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" type="text" name="eur01a" id="eur01a" size="25" maxlength="30" value="${model.record.eur01a}">
 										</td>
 										<td class="text12">
-											<input type="text" class="inputText" name="todo" id="todo" size="25" maxlength="30" value="${Xmodel.record.dkih_t05a}">
+											<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" type="text" name="eur01b" id="eur01b" size="25" maxlength="30" value="${model.record.eur01b}">
 										</td>
 										<td class="text12">
-											<input type="text" class="inputText" name="todo" id="todo" size="25" maxlength="30" value="${Xmodel.record.dkih_t05a}">
+											<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField"type="text" name="eur01c" id="eur01c" size="25" maxlength="30" value="${model.record.eur01c}">
 										</td>
 										<td class="text12">
-											<input type="text" class="inputText" name="todo" id="todo" size="25" maxlength="30" value="${Xmodel.record.dkih_t05a}">
+											<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField"type="text" name="eur01d" id="eur01d" size="25" maxlength="30" value="${model.record.eur01d}">
 										</td>
 									</tr>
 									</table>
@@ -349,7 +364,7 @@
 	           				
 							<tr>
 			           			<td colspan="5" class="text12">
-									&nbsp;&nbsp;<span title="todo"><b>3.&nbsp;</b>Mottaker (Navn, fullstendig adresse, land) (utfylling ikke påkrevet)</span>
+									&nbsp;&nbsp;<span title="-"><b>3.&nbsp;</b>Mottaker (Navn, fullstendig adresse, land) (utfylling ikke påkrevet)</span>
 								</td>
 							</tr>
 							<tr>
@@ -357,23 +372,23 @@
 									<table>
 									
 									<tr>
-										<td class="text12">&nbsp;Navn</td>
-										<td class="text12">&nbsp;Adresse-1</td>
-										<td class="text12">&nbsp;Adresse-2</td>
-										<td class="text12">&nbsp;Adresse-3</td>
+										<td class="text12">&nbsp;<span title="eur03a">Navn</span></td>
+										<td class="text12">&nbsp;<span title="eur03b">Adresse-1</span></td>
+										<td class="text12">&nbsp;<span title="eur03c">Adresse-2</span></td>
+										<td class="text12">&nbsp;<span title="eur03d">Adresse-3</span></td>
 									</tr>
 									<tr>
 					           			<td class="text12">
-											<input type="text" class="inputText" name="todo" id="todo" size="25" maxlength="30" value="${Xmodel.record.dkih_t05a}">
+											<input type="text" class="inputText" name="eur03a" id="eur03a" size="25" maxlength="30" value="${model.record.eur03a}">
 										</td>
 										<td class="text12">
-											<input type="text" class="inputText" name="todo" id="todo" size="25" maxlength="30" value="${Xmodel.record.dkih_t05a}">
+											<input type="text" class="inputText" name="eur03b" id="eur03b" size="25" maxlength="30" value="${model.record.eur03b}">
 										</td>
 										<td class="text12">
-											<input type="text" class="inputText" name="todo" id="todo" size="25" maxlength="30" value="${Xmodel.record.dkih_t05a}">
+											<input type="text" class="inputText" name="eur03c" id="eur03c" size="25" maxlength="30" value="${model.record.eur03c}">
 										</td>
 										<td class="text12">
-											<input type="text" class="inputText" name="todo" id="todo" size="25" maxlength="30" value="${Xmodel.record.dkih_t05a}">
+											<input type="text" class="inputText" name="eur03d" id="eur03d" size="25" maxlength="30" value="${model.record.eur03d}">
 										</td>
 									</tr>
 									</table>
@@ -389,17 +404,17 @@
 	           				
 							<tr>
 			           			<td class="text12">
-									&nbsp;&nbsp;<span title="todo"><b>4.&nbsp;</b>Land, gruppe av land eller territorium hvor varene anses å ha sin opprinnelse</span>
+									&nbsp;&nbsp;<span title="eur04"><b>4.<font class="text14RedBold" >*</font></b>Land, gruppe av land eller territorium hvor varene anses å ha sin opprinnelse</span>
 								</td>
 								<td class="text12">
-									&nbsp;<input type="text" class="inputText" name="todo" id="todo" size="5" maxlength="2" value="${Xmodel.record.dkih_t05a}">
+									&nbsp;<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" type="text" name="eur04" id="eur04" size="3" maxlength="2" value="${model.record.eur04}">
 								</td>
 								<td width="15px" class="text12">&nbsp;</td>
 			           			<td class="text12">
-									&nbsp;&nbsp;<span title="todo"><b>5.&nbsp;</b>Bestemmelsesland, gruppe av land eller territorier</span>
+									&nbsp;&nbsp;<span title="eur05"><b>5.<font class="text14RedBold" >*</font></b>Bestemmelsesland, gruppe av land eller territorier</span>
 								</td>
 								<td class="text12">
-									&nbsp;<input type="text" class="inputText" name="todo" id="todo" size="5" maxlength="2" value="${Xmodel.record.dkih_t05a}">
+									&nbsp;<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" type="text" name="eur05" id="eur05" size="3" maxlength="2" value="${model.record.eur05}">
 								</td>
 							</tr>	
 							
@@ -410,33 +425,68 @@
 						<tr>
 	           				<td>
 	           				<table style="width:100%" class="formFrameTitaniumWhite" >
-	           				
+	           				<tr>
+	           					<td class="text12">&nbsp;</td>
+	           					
+			           			<td class="text12">
+									&nbsp;<span title="eur06a">Transp.måte</span>
+								</td>
+			           			<td class="text12">
+									&nbsp;<span title="eur06b">Transp.id</span>
+								</td>
+			           			<td class="text12">
+									&nbsp;<span title="eur06c">Landkode Transp.id</span>
+								</td>
+							</tr>	
 							<tr>
 			           			<td class="text12">
-									&nbsp;&nbsp;<span title="todo"><b>6.&nbsp;</b>Opplysninger om transporten (utfylling ikke påkrevet)</span>
+									&nbsp;&nbsp;<span title="-"><b>6.&nbsp;</b>Opplysninger om transporten (utfylling ikke påkrevet)</span>
 								</td>
 								<td class="text12">
-									&nbsp;<input type="text" class="inputText" name="todo" id="todo" size="10" maxlength="10" value="${Xmodel.record.dkih_t05a}">
+									&nbsp;<input type="text" class="inputText" name="eur06a" id="eur06a" size="3" maxlength="2" value="${Xmodel.record.eur06a}">
 								</td>
 								<td class="text12">
-									&nbsp;<input type="text" class="inputText" name="todo" id="todo" size="10" maxlength="10" value="${Xmodel.record.dkih_t05a}">
+									&nbsp;<input type="text" class="inputText" name="eur06b" id="eur06b" size="20" maxlength="17" value="${Xmodel.record.eur06b}">
 								</td>
 								<td class="text12">
-									&nbsp;<input type="text" class="inputText" name="todo" id="todo" size="10" maxlength="10" value="${Xmodel.record.dkih_t05a}">
-								</td>
-								<td width="15px" class="text12">&nbsp;</td>
-			           			<td class="text12">
-									&nbsp;<span title="todo"><b>7.&nbsp;</b>Merknader</span>
-								</td>
-								<td class="text12">
-									&nbsp;<input tabindex=-1 readonly type="text" class="inputTextReadOnly" name="todo" id="todo" size="15" value="N/A">
+									&nbsp;<input type="text" class="inputText" name="eur06c" id="eur06c" size="3" maxlength="2" value="${Xmodel.record.eur06c}">
 								</td>
 							</tr>	
 							
 							</table>
 							</td>
 						</tr>
-						
+						<tr>
+	           				<td>
+	           				<table style="width:100%" class="formFrameTitaniumWhite" >
+	           				
+							<tr>
+			           			<td class="text12">
+									&nbsp;<span title="-"><b>7.&nbsp;</b>Merknader</span>
+								</td>
+							</tr>
+							<tr>	
+								<td class="text12">
+									&nbsp;1.<input type="text" class="inputText" name="eur07a" id="eur07a" size="20" maxlength="30" value="${Xmodel.record.eur07a}">
+								</td>
+								<td class="text12">
+									&nbsp;2.<input type="text" class="inputText" name="eur07b" id="eur07b" size="20" maxlength="30" value="${Xmodel.record.eur07b}">
+								</td>
+								<td class="text12">
+									&nbsp;3.<input type="text" class="inputText" name="eur07c" id="eur07c" size="20" maxlength="30" value="${Xmodel.record.eur07c}">
+								</td>
+								<td class="text12">
+									&nbsp;4.<input type="text" class="inputText" name="eur07d" id="eur07d" size="20" maxlength="30" value="${Xmodel.record.eur07d}">
+								</td>
+								<td class="text12">
+									&nbsp;5.<input type="text" class="inputText" name="eur07e" id="eur07e" size="20" maxlength="30" value="${Xmodel.record.eur07e}">
+								</td>
+							</tr>	
+							
+							</table>
+							</td>
+						</tr>
+
 						<tr>
 		           			<td height="10px" class="text12">&nbsp;</td>
 		           		</tr>
@@ -452,29 +502,122 @@
 							</tr>
 							<tr>	
 								<td class="text12">
-									<table id="tblItems" class="display compact cell-border" width="100%">
+									<table id="tblItems" style="width:100%" >
 										<thead>
-										<tr class="tableHeaderField">
-											<th class="text12">Løpenr.</th>
-											<th class="text12">Koll.merke.</th>
-											<th class="text12">Antall</th>
-											<th class="text12">Art</th>
-											<th class="text12">Vareslag</th>
-											<th class="text12">Bruttovekt</th> 
-											<th class="text12">Fakt.nr</th> 
-											<th class="text12">Slett</th> 
-											 	
+										<tr >
+											<th align="left" class="tableHeaderFieldFirst12">Koll.merke.</th>
+											<th align="right" class="tableHeaderField12">Antall</th>
+											<th align="center" class="tableHeaderField12">Art</th>
+											<th align="center" class="tableHeaderField12">Vareslag</th>
+											<th align="right" class="tableHeaderField12">Bruttovekt</th> 
+											<th align="center" class="tableHeaderField12">Fakt.nr</th>  	
 										</tr>
 										</thead>
 										<tbody>
 											<tr class="tableRow" >
-												<td class="tableCellFirst"></td>
-												<td class="tableCell"></td>
-												<td class="tableCell"></td>
-												<td class="tableCell"></td>
-												<td class="tableCell"></td>
-												<td class="tableCell"></td>
-												<td class="tableCell"></td>
+												<td class="tableCellFirst">
+													<input type="text" class="inputTextMediumBlue12" name="eur81a" id="eur81a" size="15" maxlength="28" value="${Xmodel.record.eur81a}">
+												</td>
+												<td class="tableCell"  align="right">
+													<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue12" style="text-align:right;" name="eur82a" id="eur82a" size="7" maxlength="6" value="${Xmodel.record.eur82a}">
+												</td>
+												<td class="tableCell" align="center">
+													<input type="text" class="inputTextMediumBlue12" name="eur83a" id="eur83a" size="5" maxlength="4" value="${Xmodel.record.eur83a}">
+												</td>
+												<td class="tableCell" align="center">
+													<input type="text" class="inputTextMediumBlue12" name="eur84a" id="eur84a" size="15" maxlength="30" value="${Xmodel.record.eur84a}">
+												</td>
+												<td class="tableCell" align="right">
+													<input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlue12" style="text-align:right;" name="eur09a" id="eur09a" size="15" maxlength="15" value="${Xmodel.record.eur09a}">
+												</td>
+												<td class="tableCell" align="center">
+													<input type="text" class="inputTextMediumBlue12" name="eur10a" id="eur10a" size="15" maxlength="17" value="${Xmodel.record.eur10a}">
+												</td>
+												
+											</tr>
+											<tr class="tableRow" >
+												<td class="tableCellFirst">
+													<input type="text" class="inputTextMediumBlue12" name="eur81b" id="eur81b" size="15" maxlength="28" value="${Xmodel.record.eur81b}">
+												</td>
+												<td class="tableCell"  align="right">
+													<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue12" style="text-align:right;" name="eur82b" id="eur82b" size="7" maxlength="6" value="${Xmodel.record.eur82b}">
+												</td>
+												<td class="tableCell" align="center">
+													<input type="text" class="inputTextMediumBlue12" name="eur83b" id="eur83b" size="5" maxlength="4" value="${Xmodel.record.eur83b}">
+												</td>
+												<td class="tableCell" align="center">
+													<input type="text" class="inputTextMediumBlue12" name="eur84b" id="eur84b" size="15" maxlength="30" value="${Xmodel.record.eur84b}">
+												</td>
+												<td class="tableCell" align="right">
+													<input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlue12" style="text-align:right;" name="eur09b" id="eur09b" size="15" maxlength="15" value="${Xmodel.record.eur09b}">
+												</td>
+												<td class="tableCell" align="center">
+													<input type="text" class="inputTextMediumBlue12" name="eur10b" id="eur10b" size="15" maxlength="17" value="${Xmodel.record.eur10b}">
+												</td>
+												
+											</tr>
+											<tr class="tableRow" >
+												<td class="tableCellFirst">
+													<input type="text" class="inputTextMediumBlue12" name="eur81c" id="eur81c" size="15" maxlength="28" value="${Xmodel.record.eur81c}">
+												</td>
+												<td class="tableCell"  align="right">
+													<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue12" style="text-align:right;" name="eur82c" id="eur82c" size="7" maxlength="6" value="${Xmodel.record.eur82c}">
+												</td>
+												<td class="tableCell" align="center">
+													<input type="text" class="inputTextMediumBlue12" name="eur83c" id="eur83c" size="5" maxlength="4" value="${Xmodel.record.eur83c}">
+												</td>
+												<td class="tableCell" align="center">
+													<input type="text" class="inputTextMediumBlue12" name="eur84c" id="eur84c" size="15" maxlength="30" value="${Xmodel.record.eur84c}">
+												</td>
+												<td class="tableCell" align="right">
+													<input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlue12" style="text-align:right;" name="eur09c" id="eur09c" size="15" maxlength="15" value="${Xmodel.record.eur09c}">
+												</td>
+												<td class="tableCell" align="center">
+													<input type="text" class="inputTextMediumBlue12" name="eur10c" id="eur10c" size="15" maxlength="17" value="${Xmodel.record.eur10c}">
+												</td>
+												
+											</tr>
+											<tr class="tableRow" >
+												<td class="tableCellFirst">
+													<input type="text" class="inputTextMediumBlue12" name="eur81d" id="eur81d" size="15" maxlength="28" value="${Xmodel.record.eur81d}">
+												</td>
+												<td class="tableCell"  align="right">
+													<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue12" style="text-align:right;" name="eur82d" id="eur82d" size="7" maxlength="6" value="${Xmodel.record.eur82d}">
+												</td>
+												<td class="tableCell" align="center">
+													<input type="text" class="inputTextMediumBlue12" name="eur83d" id="eur83d" size="5" maxlength="4" value="${Xmodel.record.eur83d}">
+												</td>
+												<td class="tableCell" align="center">
+													<input type="text" class="inputTextMediumBlue12" name="eur84d" id="eur84d" size="15" maxlength="30" value="${Xmodel.record.eur84d}">
+												</td>
+												<td class="tableCell" align="right">
+													<input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlue12" style="text-align:right;" name="eur09d" id="eur09d" size="15" maxlength="15" value="${Xmodel.record.eur09d}">
+												</td>
+												<td class="tableCell" align="center">
+													<input type="text" class="inputTextMediumBlue12" name="eur10d" id="eur10d" size="15" maxlength="17" value="${Xmodel.record.eur10d}">
+												</td>
+												
+											</tr>
+											<tr class="tableRow" >
+												<td class="tableCellFirst">
+													<input type="text" class="inputTextMediumBlue12" name="eur81e" id="eur81e" size="15" maxlength="28" value="${Xmodel.record.eur81e}">
+												</td>
+												<td class="tableCell"  align="right">
+													<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue12" style="text-align:right;" name="eur82e" id="eur82e" size="7" maxlength="6" value="${Xmodel.record.eur82e}">
+												</td>
+												<td class="tableCell" align="center">
+													<input type="text" class="inputTextMediumBlue12" name="eur83e" id="eur83e" size="5" maxlength="4" value="${Xmodel.record.eur83e}">
+												</td>
+												<td class="tableCell" align="center">
+													<input type="text" class="inputTextMediumBlue12" name="eur84e" id="eur84e" size="15" maxlength="30" value="${Xmodel.record.eur84e}">
+												</td>
+												<td class="tableCell" align="right">
+													<input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlue12" style="text-align:right;" name="eur09e" id="eur09e" size="15" maxlength="15" value="${Xmodel.record.eur09e}">
+												</td>
+												<td class="tableCell" align="center">
+													<input type="text" class="inputTextMediumBlue12" name="eur10e" id="eur10e" size="15" maxlength="17" value="${Xmodel.record.eur10e}">
+												</td>
+												
 											</tr>
 										</tbody>
 										
@@ -506,7 +649,7 @@
 							</tr>
 							<tr>
 			           			<td class="text12">
-									&nbsp;<span title="todo"><b>12.&nbsp;</b>EKSPORTØRENS ERKLÆRING</span>
+									&nbsp;<span title="todo"><b>12.<font class="text14RedBold" >*</font></b>EKSPORTØRENS ERKLÆRING</span>
 								</td>
 							</tr>
 							<tr>
@@ -519,8 +662,9 @@
 								<table>
 									<tr>
 									<td>
-									&nbsp;Sted:&nbsp;<input type="text" class="inputText" name="todo" id="todo" size="10" maxlength="10" value="${Xmodel.record.dkih_t05a}">
-									&nbsp;Dato:&nbsp;<input type="text" class="inputText" name="todo" id="todo" size="9" maxlength="8" value="${Xmodel.record.dkih_t05a}">
+									&nbsp;<font class="text14RedBold" >*</font><span title="eur12a">Sted:&nbsp;</span><input type="text" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="eur12a" id="eur12a" size="16" maxlength="15" value="${Xmodel.record.eur12a}">
+									&nbsp;<font class="text14RedBold" >*</font><span title="eur12b">Dato:&nbsp;</span><input type="text" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="eur12b" id="eur12b" size="9" maxlength="8" value="${Xmodel.record.eur12b}">
+									&nbsp;<font class="text14RedBold" >*</font><span title="eur12c">Navn deklarant:&nbsp;</span><input type="text" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="eur12c" id="eur12c" size="25" maxlength="30" value="${Xmodel.record.eur12c}">
 									</td>
 									</tr>
 								</table>	

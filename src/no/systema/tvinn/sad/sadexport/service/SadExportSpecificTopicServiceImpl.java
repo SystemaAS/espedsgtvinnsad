@@ -11,6 +11,7 @@ import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.archive.JsonSadExp
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.logging.JsonSadExportSpecificTopicLoggingContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.logging.JsonSadExportSpecificTopicLoggingLargeTextContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicCopiedFromTransportUppdragContainer;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicEurContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicAvdDataContainer;
 
 import no.systema.tvinn.sad.sadexport.mapper.jsonjackson.SadExportTopicCopiedMapper;
@@ -20,6 +21,7 @@ import no.systema.tvinn.sad.sadexport.mapper.jsonjackson.SadExportSpecificTopicL
 import no.systema.tvinn.sad.sadexport.mapper.jsonjackson.SadExportSpecificTopicLoggingLargeTextMapper;
 import no.systema.tvinn.sad.sadexport.mapper.jsonjackson.SadExportTopicCopiedFromTransportUppdragMapper;
 import no.systema.tvinn.sad.sadexport.mapper.jsonjackson.SadExportTopicFinansOpplysningerMapper;
+import no.systema.tvinn.sad.sadexport.mapper.jsonjackson.SadExportTopicEurMapper;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicFinansOpplysningerContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicFinansOpplysningerExternalContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicFinansOpplysningerExternalForUpdateContainer;
@@ -276,6 +278,20 @@ public class SadExportSpecificTopicServiceImpl implements SadExportSpecificTopic
 			
 			return container;
 
+	}
+	/**
+	 * EUR1.0
+	 */
+	public JsonSadExportTopicEurContainer getSadExportSpecificTopicEur (String utfPayload){
+		JsonSadExportTopicEurContainer container = null;
+		try{
+			SadExportTopicEurMapper mapper = new SadExportTopicEurMapper();
+			container = mapper.getContainer(utfPayload);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return container;
 	}
 	
 }

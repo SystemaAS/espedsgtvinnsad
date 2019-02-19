@@ -39,8 +39,8 @@ import no.systema.tvinn.sad.sadexport.service.SadExportSpecificTopicService;
 
 import no.systema.tvinn.sad.sadexport.mapper.url.request.UrlRequestParameterMapper;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicRecord;
-import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicFinansOpplysningerContainer;
-import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicFinansOpplysningerRecord;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicEurContainer;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicEurRecord;
 
 import no.systema.tvinn.sad.sadexport.url.store.SadExportUrlDataStore;
 import no.systema.tvinn.sad.util.TvinnSadConstants;
@@ -52,12 +52,8 @@ import no.systema.tvinn.sad.sadexport.util.RpgReturnResponseHandler;
 import no.systema.tvinn.sad.sadexport.util.SadExportCalculator;
 import no.systema.tvinn.sad.sadexport.util.manager.CodeDropDownMgr;
 
-import no.systema.tvinn.sad.sadexport.validator.SadExportHeaderFinansOpplysningerValidator;
-import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicFaktTotalContainer;
-import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicFaktTotalRecord;
-import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicFaktTotalRecord;
+import no.systema.tvinn.sad.sadexport.validator.SadExportEurValidator;
 
-import no.systema.tvinn.sad.service.TvinnSadTolltariffVarukodService;
 
 
 /**
@@ -102,13 +98,13 @@ public class SadExportHeaderEurController {
 	 * @return
 	 */
 	@RequestMapping(value="tvinnsadexport_edit_eur.do")
-	public ModelAndView sadExportEditEur(@ModelAttribute ("record") JsonSadExportTopicFinansOpplysningerRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+	public ModelAndView sadExportEditEur(@ModelAttribute ("record") JsonSadExportTopicEurRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		boolean bindingErrorsExist = false;
 		logger.info("Inside: sadExportEditEur");
 		
 		ModelAndView successView = new ModelAndView("tvinnsadexport_edit_eur");
 		RpgReturnResponseHandler rpgReturnResponseHandler = new RpgReturnResponseHandler();
-		JsonSadExportTopicFinansOpplysningerRecord jsonSadExportTopicFinansOpplysningerRecord = null;
+		JsonSadExportTopicEurRecord jsonSadExportTopicEurRecord = new JsonSadExportTopicEurRecord();
 		
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
 		
@@ -125,7 +121,7 @@ public class SadExportHeaderEurController {
 			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE);
 			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_UPDATE_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE);
 			
-			boolean isValidCreatedRecordTransactionOnRPG = true;
+			boolean isValidRecordTransactionOnRPG = true;
 			//Keys and header information
 			String opd = request.getParameter("opd");
 			String avd = request.getParameter("avd");
@@ -138,15 +134,7 @@ public class SadExportHeaderEurController {
 			
 			//this fragment gets some header fields needed for the validator
 			JsonSadExportSpecificTopicRecord headerRecord = (JsonSadExportSpecificTopicRecord)session.getAttribute(TvinnSadConstants.DOMAIN_RECORD_TOPIC_TVINN_SAD);
-			String invoiceTotalAmount = headerRecord.getSebel1();
 			
-			
-			//this key is only used with a real Update. When empty it will be a signal for a CREATE NEW (Add)
-			String lineId = request.getParameter("lineId");
-			logger.info("[INFO lineId] " + lineId);
-			if(lineId!=null && !"".equals(lineId)){
-				//nothing
-			}
 			model.put("avd", avd);
 			model.put("opd", opd);
 			model.put("sign", sign);
@@ -158,63 +146,38 @@ public class SadExportHeaderEurController {
 			
 			
 			if(TvinnSadConstants.ACTION_UPDATE.equals(action)){
+				
+				
 				//put some header records in aux.attributes (in order to send to validator)... Add more if applicable
 				//recordToValidate.setHeader_dkih_aart(headerRecord.getDkih_aart());
 				//recordToValidate.setExtraMangdEnhet(this.getMandatoryMangdEnhetDirective(appUser.getUser(), recordToValidate));
 				
-				SadExportHeaderFinansOpplysningerValidator validator = new SadExportHeaderFinansOpplysningerValidator();
+				SadExportEurValidator validator = new SadExportEurValidator();
 				logger.info("Host via HttpServletRequest.getHeader('Host'): " + request.getHeader("Host"));
 			    validator.validate(recordToValidate, bindingResult);
 			    //check for ERRORS
 				if(bindingResult.hasErrors()){
 				    	logger.info("[ERROR Validation] Record does not validate)");
-				    	logger.info("[INFO lineId] " + lineId);
 				    	bindingErrorsExist = true;
-				    	//model.put("record", recordToValidate);
-				    	if(lineId!=null && !"".equals(lineId)){
-				    		recordToValidate.setSfopdn(opd);
-				    		recordToValidate.setSfavd(avd);
-				    	}
+				    	isValidRecordTransactionOnRPG = false;
 			    }else{
-		    		if(lineId!=null && !"".equals(lineId)){
-						//-------
-						//UPDATE
-						//-------
-						logger.info("UPDATE(only) FINANS ITEM (existent item) on process...");
-						//take the rest from GUI.
-						/*TODO - COVI jsonSadExportTopicFinansOpplysningerRecord = new JsonSadExportTopicFinansOpplysningerRecord();
-						ServletRequestDataBinder binder = new ServletRequestDataBinder(jsonSadExportTopicFinansOpplysningerRecord);
-			            //binder.registerCustomEditor(...); // if needed
-			            binder.bind(request);
-			            */
-					}else{
-						//-------
-						//CREATE
-						//-------
-						logger.info("CREATE and UPDATE on FINANS ITEM (new fresh item) on process...");
-						//This means that the update will be done AFTER a creation of an empty record. All this in the same transaction. 2 STEPS involved: (1)create and (2)update
-						//-----------------------------------------------------------------------------------------
-						//STEP[1] Generate new Item line key seeds (avd,opd,sftxt) by creating an empty new record. 
-						//		  This step is ONLY applicable for new item lines 
-						//-------------------------------------------------------------------------------------------
-						/* TODO COVI -- jsonSadExportTopicFinansOpplysningerRecord  = this.createNewItemKeySeeds(recordToValidate, session, request, appUser);
-						if(jsonSadExportTopicFinansOpplysningerRecord!=null  && strMgr.isNull(jsonSadExportTopicFinansOpplysningerRecord.getErrMsg()) ){
-							String newLineId = jsonSadExportTopicFinansOpplysningerRecord.getSftxt();
-							//take the rest from GUI.
-							jsonSadExportTopicFinansOpplysningerRecord = new JsonSadExportTopicFinansOpplysningerRecord();
-							ServletRequestDataBinder binder = new ServletRequestDataBinder(jsonSadExportTopicFinansOpplysningerRecord);
-				            //binder.registerCustomEditor(...); // if needed
-				            binder.bind(request);
-				            logger.info("[INFO] populate the sftx:" + newLineId);
-						}else{
-							isValidCreatedRecordTransactionOnRPG = false;
-						}
-						*/
-					}
+		    		
+					//-------
+					//UPDATE
+					//-------
+					logger.info("UPDATE(only) FINANS ITEM (existent item) on process...");
+					//take the rest from GUI.
+					/*TODO - COVI jsonSadExportTopicFinansOpplysningerRecord = new JsonSadExportTopicFinansOpplysningerRecord();
+					ServletRequestDataBinder binder = new ServletRequestDataBinder(jsonSadExportTopicFinansOpplysningerRecord);
+		            //binder.registerCustomEditor(...); // if needed
+		            binder.bind(request);
+		            */
+		
+					
 					//--------------------------------------------------
 					//At this point we are ready to do an update
 					//--------------------------------------------------
-					if(isValidCreatedRecordTransactionOnRPG){
+					if(isValidRecordTransactionOnRPG){
 						/*
 						logger.info("[INFO] Valid STEP[1] Add Record(if applicable) successfully created, OK ");
 						//adjust after bind (both UPDATE or CREATE)
@@ -303,12 +266,13 @@ public class SadExportHeaderEurController {
 		    	}
 				*/
 			}
+			
 			//FETCH the ITEM LIST of existent ITEMs for this TOPIC
 			//---------------------------
 			//get BASE URL = RPG-PROGRAM
             //---------------------------
-			/*
-			String BASE_URL_FETCH = SadExportUrlDataStore.SAD_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_FINANS_OPPLYS_LIST_DATA_URL;
+			
+			String BASE_URL_FETCH = SadExportUrlDataStore.SAD_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_EUR_URL;
 			urlRequestParamsKeys = this.getRequestUrlKeyParameters(request, avd, opd, appUser);
 			
 			logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
@@ -322,21 +286,23 @@ public class SadExportHeaderEurController {
 			//for debug purposes in GUI
 			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, BASE_URL_FETCH + "==>params: " + urlRequestParamsKeys.toString() + 
 					" " + "(fetched list):" + jsonPayloadFetch); 
-			
 			//Debug --> 
 	    	logger.info(jsonPayloadFetch);
 	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-	    	JsonSadExportTopicFinansOpplysningerContainer jsonSadExportTopicFinansOpplysningerContainer = this.sadExportSpecificTopicService.getSadExportTopicFinansOpplysningerContainer(jsonPayloadFetch);
-	    	if(jsonSadExportTopicFinansOpplysningerContainer!=null){
-	    		
-	    		JsonSadExportSpecificTopicFaktTotalRecord sumFaktTotalRecord = this.getInvoiceTotalFromInvoices(avd, opd, appUser);
-	    		jsonSadExportTopicFinansOpplysningerContainer.setCalculatedValidCurrency(sumFaktTotalRecord.getTot_vk28());
-	    		jsonSadExportTopicFinansOpplysningerContainer.setCalculatedItemLinesTotalAmount(sumFaktTotalRecord.getTot_bl28());
-
+	    	JsonSadExportTopicEurContainer jsonSadExportTopicEurContainer = this.sadExportSpecificTopicService.getSadExportSpecificTopicEur(jsonPayloadFetch);
+	    	if(jsonSadExportTopicEurContainer!=null){
+	    		if(jsonSadExportTopicEurContainer.getGeteur1()!=null){
+	    			for(JsonSadExportTopicEurRecord record_ : jsonSadExportTopicEurContainer.getGeteur1()){
+	    				jsonSadExportTopicEurRecord = record_;
+	    				logger.info("Record EXISTS...");
+	    			}
+	    		}
 	    	}
-	    	*/
+	    	
 	    	//drop downs populated from back-end
 	    	this.setCodeDropDownMgr(appUser, model, headerRecord);
+	    	//
+	    	this.setDomainObjectsInView(model, jsonSadExportTopicEurRecord);
 	    	
 	    	/*
     		//drop downs populated from a txt file
@@ -347,6 +313,7 @@ public class SadExportHeaderEurController {
     		}
     		this.setDefaultDomainItemRecordInView(model, jsonSadExportTopicFinansOpplysningerContainer, recordToValidate, bindingErrorsExist, isValidCreatedRecordTransactionOnRPG );
 	    	*/
+	    	
 	    	successView.addObject("model",model);
 			//successView.addObject(Constants.EDIT_ACTION_ON_TOPIC, Constants.ACTION_FETCH);
 	    	return successView;
@@ -369,81 +336,15 @@ public class SadExportHeaderEurController {
 		model.put(TvinnSadConstants.ASPECT_ERROR_META_INFO, errorMetaInformation);
 		
 	}
-	/**
-	 * Sets domain objects
-	 * @param model
-	 * @param container
-	 * 
-	 */
-	private void setDomainObjectsForListInView(Map model, JsonSadExportTopicFinansOpplysningerContainer container, JsonSadExportTopicFinansOpplysningerRecord recordToValidate){
-		List list = new ArrayList();
-		if(container!=null){
-			//int counter = 1;
-			for (JsonSadExportTopicFinansOpplysningerRecord record : container.getInvoicList()){
-				this.adjustDatesOnFetch(record);
-				list.add(record);
-				//fill in default values with last item line values since it is mostly the norm for the rest of lines (to help end-user)
-				recordToValidate.setSfdt(record.getSfdt());
-				recordToValidate.setSfvk28(record.getSfvk28());
-				recordToValidate.setSfkr28(record.getSfkr28());
-				
-			}
-		}
-		model.put(TvinnSadConstants.DOMAIN_LIST, list);
-		model.put(TvinnSadConstants.DOMAIN_RECORD_ITEM_CONTAINER_FINANS_OPPLYSNINGER_TOPIC, container);
-	}
+	
 	/**
 	 * Sets domain objects
 	 * @param model
 	 * @param record
 	 */
-	private void setDomainObjectsInView(Map model, JsonSadExportTopicFinansOpplysningerRecord record){
+	private void setDomainObjectsInView(Map model, JsonSadExportTopicEurRecord record){
 		this.adjustDatesOnFetch(record);
 		model.put(TvinnSadConstants.DOMAIN_RECORD, record);
-	}
-	
-	/**
-	 * The method populates a default record (including original records before a validation error)
-	 * The requirement here is to propose some predefined default values to the end-user.
-	 *  
-	 * @param model
-	 * @param container
-	 * @param recordToValidate
-	 * 
-	 */
-	private void setDefaultDomainItemRecordInView(Map model, JsonSadExportTopicFinansOpplysningerContainer container, JsonSadExportTopicFinansOpplysningerRecord recordToValidate, boolean bindingErrorsExist, boolean isValidCreatedRecordTransactionOnRPG){
-		List list = new ArrayList();
-		JsonSadExportTopicFinansOpplysningerRecord defaultRecord = new JsonSadExportTopicFinansOpplysningerRecord();
-		logger.info(recordToValidate.getSfvk28());
-		if(container!=null){
-			/*	
-			int lineNr = 0;
-			for (JsonSadImportTopicFinansOpplysningerRecord record : container.getOrderList()){
-				lineNr++;
-				if(lineNr==1){
-					break;
-				}
-			}
-			*/
-			if(bindingErrorsExist || !isValidCreatedRecordTransactionOnRPG){
-				defaultRecord = recordToValidate;//in order to retain the original values before the validation errors
-				model.put(TvinnSadConstants.DOMAIN_RECORD, defaultRecord);
-				
-			}else{
-				//this means that there is at least one-item line with values to user as default values
-				logger.info("A:" + recordToValidate.getSfdt());
-				logger.info("AA:" + recordToValidate.getSfvk28());
-				logger.info("AAA:" + recordToValidate.getSfkr28());
-				if(strMgr.isNull(recordToValidate.getSftxt()) && strMgr.isNotNull(recordToValidate.getSfdt())){
-					defaultRecord.setSfdt(recordToValidate.getSfdt());
-					defaultRecord.setSfvk28(recordToValidate.getSfvk28());
-					defaultRecord.setSfkr28(recordToValidate.getSfkr28());
-					logger.info(defaultRecord.getSfdt());
-				}
-				//
-				model.put(TvinnSadConstants.DOMAIN_RECORD, defaultRecord);				
-			}
-		}
 	}
 	
 	
@@ -454,83 +355,14 @@ public class SadExportHeaderEurController {
 	 * @param rpgReturnResponseHandler
 	 * @param record
 	 */
-	private void setFatalError(Map model, RpgReturnResponseHandler rpgReturnResponseHandler, JsonSadExportTopicFinansOpplysningerRecord record){
+	private void setFatalError(Map model, RpgReturnResponseHandler rpgReturnResponseHandler, JsonSadExportTopicEurRecord record){
 		logger.info(rpgReturnResponseHandler.getErrorMessage());
 		this.setAspectsInView(model, rpgReturnResponseHandler);
 		//No refresh on jsonRecord is done for the GUI (form fields). Must be implemented right here, if required. !!
         this.setDomainObjectsInView(model, record);
 	}
 	
-	/**
-	 * 
-	 * Creates the record (Add) for a later update in the same transaction
-	 * @param session
-	 * @param request
-	 * @param appUser
-	 * @return
-	 */
-	private JsonSadExportTopicFinansOpplysningerRecord createNewItemKeySeeds(JsonSadExportTopicFinansOpplysningerRecord record, HttpSession session, HttpServletRequest request, SystemaWebUser appUser){
-		RpgReturnResponseHandler rpgReturnResponseHandler = new RpgReturnResponseHandler();
-		//request variables
-		/*String numberOfItemLinesInTopicStr = request.getParameter("numberOfItemLinesInTopic");
-		if(numberOfItemLinesInTopicStr==null || "".equals(numberOfItemLinesInTopicStr)){
-			numberOfItemLinesInTopicStr = "0";
-		}
-		*/	
-		String opd = request.getParameter("opd");
-		String avd = request.getParameter("avd");
-		JsonSadExportTopicFinansOpplysningerRecord jsonSadExportTopicFinansOpplysningerRecord = new JsonSadExportTopicFinansOpplysningerRecord();
-		jsonSadExportTopicFinansOpplysningerRecord.setSfopdn(opd);
-		jsonSadExportTopicFinansOpplysningerRecord.setSfavd(avd);
-		jsonSadExportTopicFinansOpplysningerRecord.setSftxt(record.getSftxt());
-		//---------------------------
-		//get BASE URL = RPG-PROGRAM
-        //---------------------------
-		String BASE_URL = SadExportUrlDataStore.SAD_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_FINANS_OPPLYS_DATA_URL;
-		
-		//-------------------------------------------------------------------------------------------
-		// STEP[PREPARE CREATION] --> generate new opd and tuid (if applicable) in order to be able to Add (Create)
-		//-------------------------------------------------------------------------------------------
-		logger.info("STEP[1] GET SEEDS and CREATE RECORD...");
-		//logger.info("STEP[1] numberOfItemLinesInTopicStr: " + numberOfItemLinesInTopicStr);
-		StringBuffer urlRequestParamsForSeed = new StringBuffer();
-		urlRequestParamsForSeed.append("user=" + appUser.getUser());
-		urlRequestParamsForSeed.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "avd=" + jsonSadExportTopicFinansOpplysningerRecord.getSfavd());
-		urlRequestParamsForSeed.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "opd=" + jsonSadExportTopicFinansOpplysningerRecord.getSfopdn());
-		/*
-		Integer numberOfItemLinesInTopic = -99;
-		try{
-			numberOfItemLinesInTopic = Integer.valueOf(numberOfItemLinesInTopicStr);
-			//add one
-			numberOfItemLinesInTopic++;
-			logger.info("New item line nr: " + numberOfItemLinesInTopic);
-		}catch(Exception e){
-			//nothing
-		}
-		*/
-		urlRequestParamsForSeed.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "fak=" + jsonSadExportTopicFinansOpplysningerRecord.getSftxt());
-		urlRequestParamsForSeed.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "mode=" + TvinnSadConstants.MODE_ADD);
-		logger.info("URL for SEED: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
-		logger.info("PARAMS for SEED: " + urlRequestParamsForSeed.toString());
-		//for debug purposes in GUI
-		session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, BASE_URL + " ==>params: " + urlRequestParamsForSeed.toString() );
-				
-		//Get the counter from RPG (new opd Id)
-		String rpgSeedNumberPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsForSeed.toString());
-		
-		// Map the JSON response to the new seeds (syop,syli)
-		// We are not using std JSON conversion since the RPGs strings are not the same. Should be the same as
-		// the header fields. The RPG output should be changed in order to comply to the field specification...
-		rpgReturnResponseHandler.evaluateRpgResponseOnTopicItemCreateOrUpdate(rpgSeedNumberPayload);
-		
-		//we must complete the GUI-json with the value from a line nr seed here
-		if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage()) ){
-			logger.info("[ERROR] No mandatory seeds (syli, opd) were generated correctly)! look at std output log. [errMsg]" + rpgReturnResponseHandler.getErrorMessage());
-			jsonSadExportTopicFinansOpplysningerRecord.setErrMsg(rpgReturnResponseHandler.getErrorMessage());
-		}
-        
-		return jsonSadExportTopicFinansOpplysningerRecord;
-	}
+	
 	/**
 	 * 
 	 * @param request
@@ -573,22 +405,22 @@ public class SadExportHeaderEurController {
 	 * We must adjust some fields that require it (presentation requirements)
 	 * @param record
 	 */
-	private void adjustDatesOnFetch(JsonSadExportTopicFinansOpplysningerRecord record){
-		String dateSfdtNO = this.dateFormatter.convertToDate_NO(record.getSfdt());
+	private void adjustDatesOnFetch(JsonSadExportTopicEurRecord record){
+		String dateNO = this.dateFormatter.convertToDate_NO(record.getEur12b());
 		//fields
-		record.setSfdt(dateSfdtNO);
+		record.setEur12b(dateNO);
 	}
 	/**
 	 * 
 	 * @param request
 	 * @param record
 	 */
-	private void adjustFieldsAfterBind(HttpServletRequest request, JsonSadExportTopicFinansOpplysningerRecord record){
-		String dateSfdtISO = this.dateFormatter.convertToDate_ISO(record.getSfdt());
+	private void adjustFieldsAfterBind(HttpServletRequest request, JsonSadExportTopicEurRecord record){
+		String dateISO = this.dateFormatter.convertToDate_ISO(record.getEur12b());
 		String factor = request.getParameter("factor");
 		//fields
-		record.setSfdt(dateSfdtISO);
-		record.setSfom28(factor);
+		record.setEur12b(dateISO);
+		
 	}
 	
 	/**
@@ -610,42 +442,7 @@ public class SadExportHeaderEurController {
 				 model,appUser,CodeDropDownMgr.CODE_V_CURRENCY, null, null);
 	}
 	
-	/**
-	 * 
-	 * @param avd
-	 * @param opd
-	 * @param appUser
-	 * @return
-	 */
-	private JsonSadExportSpecificTopicFaktTotalRecord getInvoiceTotalFromInvoices(String avd, String opd, SystemaWebUser appUser){
-		//--------------------------
-		//get BASE URL = RPG-PROGRAM
-        //---------------------------
-		JsonSadExportSpecificTopicFaktTotalRecord returnRecord = null;
-		
-		String BASE_URL_FETCH = SadExportUrlDataStore.SAD_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_FAKT_TOTAL_URL;
-		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&avd=" + avd + "&opd=" + opd;
-		
-		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-		logger.info("FETCH av item list... ");
-    	logger.info("URL: " + BASE_URL_FETCH);
-    	logger.info("URL PARAMS: " + urlRequestParamsKeys);
-    	//--------------------------------------
-    	//EXECUTE the FETCH (RPG program) here
-    	//--------------------------------------
-		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL_FETCH, urlRequestParamsKeys);
-		//Debug --> 
-    	logger.info(jsonPayload);
-		
-    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-    	JsonSadExportSpecificTopicFaktTotalContainer container = this.sadExportSpecificTopicService.getSadExportSpecificTopicFaktTotalContainer(jsonPayload);
-    	if(container!=null){
-	    	for(JsonSadExportSpecificTopicFaktTotalRecord record : container.getInvTot()){
-				 returnRecord = record;
-	    	}
-    	}
-		return returnRecord;
-	}
+	
 	
 	//SERVICES
 	@Qualifier ("urlCgiProxyService")
@@ -654,15 +451,6 @@ public class SadExportHeaderEurController {
 	@Required
 	public void setUrlCgiProxyService (UrlCgiProxyService value){ this.urlCgiProxyService = value; }
 	public UrlCgiProxyService getUrlCgiProxyService(){ return this.urlCgiProxyService; }
-	
-	
-	@Qualifier 
-	private TvinnSadTolltariffVarukodService tvinnSadTaricVarukodService;
-	@Autowired
-	@Required	
-	public void setTvinnSadTaricVarukodService(TvinnSadTolltariffVarukodService value){this.tvinnSadTaricVarukodService = value;}
-	public TvinnSadTolltariffVarukodService getTvinnSadTaricVarukodService(){ return this.tvinnSadTaricVarukodService; }
-	
 	
 	
 	@Qualifier ("sadExportDropDownListPopulationService")
