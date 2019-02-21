@@ -38,11 +38,12 @@ public final class SadExportUrlDataStore {
 	//http://gw.systema.no/sycgip/tnoe033r.pgm?user=OSCAR&avd=1&opd=155272
 	static public String SAD_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_FAKT_TOTAL_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOE033R.pgm";
 	
-	
 	// EUR- http://10.13.3.22/SYCGIP/TNOE091R.pgm?user=CB&avd=1&opd=900121
 	static public String SAD_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_EUR_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOE091R.pgm";
 	// EUR- UPDATE http://10.13.3.22/SYCGIP/TNOE093R.pgm?user=CB&avd=1&opd=900114&eur01a=Tarzan&eur01B=Jane...........och så vidare
 	static public String SAD_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_EUR_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOE093R.pgm";
+	// EUR PDF http://10.13.3.22/SYCGIP/TNOE094R.pgm?user=CB&avd=1&opd=900128
+	static public String SAD_EXPORT_BASE_RENDER_SPECIFIC_TOPIC_EUR_PDF_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOE094R.pgm";
 	
 	//------------------------------
 	//[3] EDIT A SPECIFIC ARENDE

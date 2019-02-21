@@ -106,6 +106,8 @@ public class JsonSadExportTopicEurRecord extends JsonAbstractGrandFatherRecord {
 	private String eur12a;
 	private String eur12b;
 	private String eur12c;
+	//print PDF only record
+	private String bane;
 	
 	
 	private String errMsg = "";

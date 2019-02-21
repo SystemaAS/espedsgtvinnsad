@@ -36,5 +36,8 @@ public class JsonSadExportTopicEurContainer {
 	public void setGeteur1(Collection<JsonSadExportTopicEurRecord> value){ this.geteur1 = value; }
 	public Collection<JsonSadExportTopicEurRecord> getGeteur1(){ return geteur1; }
 	
+	private Collection<JsonSadExportTopicEurRecord> prteur1;
+	public void setPrteur1(Collection<JsonSadExportTopicEurRecord> value){ this.prteur1 = value; }
+	public Collection<JsonSadExportTopicEurRecord> getPrteur1(){ return prteur1; }
 	
 }

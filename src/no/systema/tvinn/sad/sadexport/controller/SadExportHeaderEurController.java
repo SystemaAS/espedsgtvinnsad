@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,7 @@ import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
@@ -35,6 +37,7 @@ import no.systema.main.model.SystemaWebUser;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.JsonDebugger;
 import no.systema.main.util.StringManager;
+import no.systema.main.util.io.PayloadContentFlusher;
 import no.systema.tvinn.sad.sadexport.service.SadExportSpecificTopicService;
 
 import no.systema.tvinn.sad.sadexport.mapper.url.request.UrlRequestParameterMapper;
@@ -76,6 +79,7 @@ public class SadExportHeaderEurController {
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
 	private StringManager strMgr = new StringManager();	
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
+	private PayloadContentFlusher payloadContentFlusher = new PayloadContentFlusher();
 	
 	
 	@InitBinder
@@ -170,7 +174,7 @@ public class SadExportHeaderEurController {
 					//get BASE URL = RPG-PROGRAM
 		            //---------------------------
 					String BASE_URL = SadExportUrlDataStore.SAD_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_EUR_URL;
-					urlRequestParamsKeys = "user="+ appUser.getUser() + "&avd=" + avd + "&opd=" + opd;
+					urlRequestParamsKeys = this.getRequestUrlKeyParameters(request, avd, opd, appUser);
 					//build the url parameters (from GUI-form) to send on a GET/POST method AFTER the keyParameters
 					String urlRequestParamsTopic = this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate));
 					//put the final valid param. string
@@ -193,7 +197,7 @@ public class SadExportHeaderEurController {
 			    		this.setFatalError(model, rpgReturnResponseHandler, recordToValidate);
 			    		isValidRecordTransactionOnRPG = false;
 			    	}else{
-			    		//Delete succefully done!
+			    		//Update successfully done!
 			    		logger.info("[INFO] Valid update: Record successfully updated, OK ");
 			    	}
 					
@@ -201,35 +205,7 @@ public class SadExportHeaderEurController {
 				
 			}else if(TvinnSadConstants.ACTION_DELETE.equals(action)){
 				logger.info("[INFO] Delete record start process... ");
-				/*
-				String lineNrToDelete = request.getParameter("fak");
-				
-				//---------------------------
-				//get BASE URL = RPG-PROGRAM
-	            //---------------------------
-				String BASE_URL_DELETE = SadExportUrlDataStore.SAD_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_FINANS_OPPLYS_DATA_URL;
-				String urlRequestParams = this.getRequestUrlKeyParametersUpdate(lineNrToDelete, avd, opd, appUser,TvinnSadConstants.MODE_DELETE );
-				
-				logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-		    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL_DELETE));
-		    	logger.info("URL PARAMS: " + urlRequestParams);
-		    	//----------------------------------------------------------------------------
-		    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
-		    	//----------------------------------------------------------------------------
-		    	String rpgReturnPayload = this.urlCgiProxyService.getJsonContent(BASE_URL_DELETE, urlRequestParams);
-			    	
-				//Debug --> 
-		    	logger.info("Checking errMsg in rpgReturnPayload" + rpgReturnPayload);
-		    	//we must evaluate a return RPG code in order to know if the Update was OK or not
-		    	rpgReturnResponseHandler.evaluateRpgResponseOnTopicItemCreateOrUpdate(rpgReturnPayload);
-		    	if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){
-		    		rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on UPDATE: " + rpgReturnResponseHandler.getErrorMessage());
-		    		this.setFatalError(model, rpgReturnResponseHandler, jsonSadExportTopicFinansOpplysningerRecord);
-		    	}else{
-		    		//Delete succefully done!
-		    		logger.info("[INFO] Valid Delete -- Record successfully deleted, OK ");
-		    	}
-				*/
+				//N/A ?
 			}
 			
 			//FETCH the EUR for this TOPIC
@@ -241,7 +217,7 @@ public class SadExportHeaderEurController {
 				urlRequestParamsKeys = this.getRequestUrlKeyParameters(request, avd, opd, appUser);
 				
 				logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-				logger.info("FETCH av item list... ");
+				logger.info("FETCH of eur record... ");
 		    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL_FETCH));
 		    	logger.info("URL PARAMS: " + urlRequestParamsKeys);
 		    	//--------------------------------------
@@ -259,7 +235,7 @@ public class SadExportHeaderEurController {
 		    		if(jsonSadExportTopicEurContainer.getGeteur1()!=null){
 		    			for(JsonSadExportTopicEurRecord record_ : jsonSadExportTopicEurContainer.getGeteur1()){
 		    				jsonSadExportTopicEurRecord = record_;
-		    				logger.info("Record EXISTS...");
+		    				logger.info("Eur record EXISTS...");
 		    			}
 		    		}
 		    	}
@@ -277,7 +253,100 @@ public class SadExportHeaderEurController {
 	}
 	
 	
-	
+	/**
+	 * 
+	 * @param session
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsadexport_renderPdf_eur.do", method={ RequestMethod.GET })
+	public ModelAndView doSadExportRenderPdfEur(HttpSession session, HttpServletRequest request, HttpServletResponse response){
+		logger.info("Inside doSadExportRenderPdfEur...");
+		
+		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
+		
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			//get file path and use it
+			String filePath = this.getPdfEurPath(request, appUser);
+
+			if(filePath!=null && !"".equals(filePath)){
+                String absoluteFilePath = filePath;
+                //must know the file type in order to put the correct content type on the Servlet response.
+                String fileType = this.payloadContentFlusher.getFileType(filePath);
+                
+                if(AppConstants.DOCUMENTTYPE_PDF.equals(fileType)){
+                		response.setContentType(AppConstants.HTML_CONTENTTYPE_PDF);
+                }else if(AppConstants.DOCUMENTTYPE_TIFF.equals(fileType) || AppConstants.DOCUMENTTYPE_TIF.equals(fileType)){
+            			response.setContentType(AppConstants.HTML_CONTENTTYPE_TIFF);
+                }else if(AppConstants.DOCUMENTTYPE_JPEG.equals(fileType) || AppConstants.DOCUMENTTYPE_JPG.equals(fileType)){
+                		response.setContentType(AppConstants.HTML_CONTENTTYPE_JPEG);
+                }else if(AppConstants.DOCUMENTTYPE_TXT.equals(fileType)){
+            			response.setContentType(AppConstants.HTML_CONTENTTYPE_TEXTHTML);
+                }else if(AppConstants.DOCUMENTTYPE_DOC.equals(fileType)){
+            			response.setContentType(AppConstants.HTML_CONTENTTYPE_WORD);
+                }else if(AppConstants.DOCUMENTTYPE_XLS.equals(fileType)){
+            			response.setContentType(AppConstants.HTML_CONTENTTYPE_EXCEL);
+                }
+                //--> with browser dialogbox: response.setHeader ("Content-disposition", "attachment; filename=\"edifactPayload.txt\"");
+                response.setHeader ("Content-disposition", "filename=\"eurPdfDocument." + fileType + "\"");
+                
+                logger.info("Start flushing file payload...");
+                //send the file output to the ServletOutputStream
+                try{
+                		this.payloadContentFlusher.flushServletOutput(response, absoluteFilePath);
+                		//payloadContentFlusher.flushServletOutput(response, "plain text test...".getBytes());
+                	
+                }catch (Exception e){
+                		e.printStackTrace();
+                }
+                
+            }
+			//this to present the output in an independent window
+            return(null);
+			
+		}
+			
+	}	
+	/**
+	 * 
+	 * @param request
+	 * @param appUser
+	 * @return
+	 */
+	private String getPdfEurPath(HttpServletRequest request, SystemaWebUser appUser){
+		String avd = request.getParameter("avd");
+		String opd = request.getParameter("opd");
+		String filePath = "";
+		
+		String BASE_URL = SadExportUrlDataStore.SAD_EXPORT_BASE_RENDER_SPECIFIC_TOPIC_EUR_PDF_URL;
+		String urlRequestParamsKeys = this.getRequestUrlKeyParameters(request, avd, opd, appUser);
+		
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+		logger.info("FETCH of pdf path... ");
+    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+    	logger.info("URL PARAMS: " + urlRequestParamsKeys);
+    	//--------------------------------------
+    	//EXECUTE the FETCH (RPG program) here
+    	//--------------------------------------
+		String jsonPayloadFetch = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+		//Debug --> 
+    	logger.info(jsonPayloadFetch);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	JsonSadExportTopicEurContainer jsonSadExportTopicEurContainer = this.sadExportSpecificTopicService.getSadExportSpecificTopicEur(jsonPayloadFetch);
+    	if(jsonSadExportTopicEurContainer!=null){
+    		if(jsonSadExportTopicEurContainer.getPrteur1()!=null){
+    			for(JsonSadExportTopicEurRecord _record : jsonSadExportTopicEurContainer.getPrteur1()){
+    				filePath = _record.getBane();
+    				logger.info("File path (PDF-eur) EXISTS...");
+    			}
+    		}
+    	}
+    	return filePath;
+	}
 	/**
 	 * Set aspects  objects
 	 * @param model
@@ -335,27 +404,7 @@ public class SadExportHeaderEurController {
 		
 		return urlRequestParamsKeys.toString();
 	}
-	/**
-	 * 
-	 * Parameters for a creation of a "next" item line
-	 * 
-	 * @param lineId
-	 * @param avd
-	 * @param opd
-	 * @param appUser
-	 * @return
-	 */
-	private String getRequestUrlKeyParametersUpdate(String invoiceId, String avd, String opd, SystemaWebUser appUser, String mode){
-		StringBuffer urlRequestParamsKeys = new StringBuffer();
-		
-		urlRequestParamsKeys.append("user=" + appUser.getUser());
-		urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "avd=" + avd);
-		urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "opd=" + opd);
-		urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "fak=" + invoiceId);
-		urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "mode=" + mode);
-		
-		return urlRequestParamsKeys.toString();
-	}
+	
 	
 	/**
 	 * We must adjust some fields that require it (presentation requirements)
