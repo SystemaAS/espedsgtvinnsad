@@ -41,10 +41,7 @@ public class JsonSadExportTopicEurRecord extends JsonAbstractGrandFatherRecord {
 	private String eur07b;
 	private String eur07c;
 	private String eur07d;
-	
-	private String eur12a;
-	private String eur12b;
-	private String eur12c;
+	private String eur07e;
 	
 	private String eur081a;
 	private String eur081b;
@@ -96,18 +93,19 @@ public class JsonSadExportTopicEurRecord extends JsonAbstractGrandFatherRecord {
 	private String eur09h;
 	private String eur09i;
 	//
-	private String eur010a;
-	private String eur010b;
-	private String eur010c;
-	private String eur010d;
-	private String eur010e;
-	private String eur010f;
-	private String eur010g;
-	private String eur010h;
-	private String eur010i;
+	private String eur10a;
+	private String eur10b;
+	private String eur10c;
+	private String eur10d;
+	private String eur10e;
+	private String eur10f;
+	private String eur10g;
+	private String eur10h;
+	private String eur10i;
 	
-	
-	
+	private String eur12a;
+	private String eur12b;
+	private String eur12c;
 	
 	
 	private String errMsg = "";

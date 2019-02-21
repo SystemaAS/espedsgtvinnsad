@@ -147,11 +147,6 @@ public class SadExportHeaderEurController {
 			
 			if(TvinnSadConstants.ACTION_UPDATE.equals(action)){
 				
-				
-				//put some header records in aux.attributes (in order to send to validator)... Add more if applicable
-				//recordToValidate.setHeader_dkih_aart(headerRecord.getDkih_aart());
-				//recordToValidate.setExtraMangdEnhet(this.getMandatoryMangdEnhetDirective(appUser.getUser(), recordToValidate));
-				
 				SadExportEurValidator validator = new SadExportEurValidator();
 				logger.info("Host via HttpServletRequest.getHeader('Host'): " + request.getHeader("Host"));
 			    validator.validate(recordToValidate, bindingResult);
@@ -162,76 +157,46 @@ public class SadExportHeaderEurController {
 				    	isValidRecordTransactionOnRPG = false;
 			    }else{
 		    		
-					//-------
+					//----------------------------------------------------------------------------
 					//UPDATE
-					//-------
-					logger.info("UPDATE(only) FINANS ITEM (existent item) on process...");
-					//take the rest from GUI.
-					/*TODO - COVI jsonSadExportTopicFinansOpplysningerRecord = new JsonSadExportTopicFinansOpplysningerRecord();
-					ServletRequestDataBinder binder = new ServletRequestDataBinder(jsonSadExportTopicFinansOpplysningerRecord);
-		            //binder.registerCustomEditor(...); // if needed
-		            binder.bind(request);
-		            */
-		
+			    	//Note: CREATE NEW does not exist. since the service is taking care of that
+			    	//      from the very begining
+					//---------------------------------------------------------------------------
+					logger.info("UPDATE(only) EUR (existent eur record) on process...");
+					//adjust some fields
+					this.adjustFieldsAfterBind(request, recordToValidate);
 					
-					//--------------------------------------------------
-					//At this point we are ready to do an update
-					//--------------------------------------------------
-					if(isValidRecordTransactionOnRPG){
-						/*
-						logger.info("[INFO] Valid STEP[1] Add Record(if applicable) successfully created, OK ");
-						//adjust after bind (both UPDATE or CREATE)
-						this.adjustFieldsAfterBind(request, jsonSadExportTopicFinansOpplysningerRecord);
-						
-						//---------------------------
-						//get BASE URL = RPG-PROGRAM
-			            //---------------------------
-						String BASE_URL_UPDATE = SadExportUrlDataStore.SAD_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_FINANS_OPPLYS_DATA_URL;
-						logger.info("[INFO] UPDATE to be done with invoiceId [sftxt]: " + jsonSadExportTopicFinansOpplysningerRecord.getSftxt());
-						
-						urlRequestParamsKeys = this.getRequestUrlKeyParametersUpdate(jsonSadExportTopicFinansOpplysningerRecord.getSftxt(), avd, opd, appUser, TvinnSadConstants.MODE_UPDATE);
-						String urlRequestParamsTopicItem = this.urlRequestParameterMapper.getUrlParameterValidString((jsonSadExportTopicFinansOpplysningerRecord));
-						//put the final valid param. string
-						String urlRequestParams = urlRequestParamsKeys + urlRequestParamsTopicItem;
-						//for debug purposes in GUI
-						session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_UPDATE_TVINN_SAD, BASE_URL_UPDATE + "==>params: " + urlRequestParams.toString()); 
-						
-						logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-				    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL_UPDATE));
-				    	logger.info("URL PARAMS: " + urlRequestParams);
-				    	//----------------------------------------------------------------------------
-				    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
-				    	//----------------------------------------------------------------------------
-						String rpgReturnPayload = this.urlCgiProxyService.getJsonContent(BASE_URL_UPDATE, urlRequestParams);
-					    	
-						//Debug --> 
-				    	logger.info("Checking errMsg in rpgReturnPayload" + rpgReturnPayload);
-				    	//we must evaluate a return RPG code in order to know if the Update was OK or not
-				    	rpgReturnResponseHandler.evaluateRpgResponseOnTopicItemCreateOrUpdate(rpgReturnPayload);
-				    	if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){
-				    		rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on UPDATE: " + rpgReturnResponseHandler.getErrorMessage());
-				    		this.setFatalError(model, rpgReturnResponseHandler, jsonSadExportTopicFinansOpplysningerRecord);
-				    		
-				    	}else{
-				    		//Update succefully done!
-				    		logger.info("[INFO] Valid STEP[2] Update -- Record successfully updated, OK ");
-				    		//clear record id in order to apply default logic to the next new line
-				    		recordToValidate.setSftxt(null);
-				    	}*/
-					}else{
-						/*
-						StringBuffer errorMessage = new StringBuffer();
-						//errorMessage.append("[ERROR] FATAL on CREATE: ");
-						if(rpgReturnResponseHandler!=null && strMgr.isNotNull(rpgReturnResponseHandler.getErrorMessage())){
-							errorMessage.append(rpgReturnResponseHandler.getErrorMessage());
-						}
-						if(jsonSadExportTopicFinansOpplysningerRecord!=null && strMgr.isNotNull(jsonSadExportTopicFinansOpplysningerRecord.getErrMsg())){
-							errorMessage.append(jsonSadExportTopicFinansOpplysningerRecord.getErrMsg());
-						}
-						rpgReturnResponseHandler.setErrorMessage(errorMessage.toString());
-						this.setFatalError(model, rpgReturnResponseHandler, jsonSadExportTopicFinansOpplysningerRecord);
-						*/
-					}
+					//---------------------------
+					//get BASE URL = RPG-PROGRAM
+		            //---------------------------
+					String BASE_URL = SadExportUrlDataStore.SAD_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_EUR_URL;
+					urlRequestParamsKeys = "user="+ appUser.getUser() + "&avd=" + avd + "&opd=" + opd;
+					//build the url parameters (from GUI-form) to send on a GET/POST method AFTER the keyParameters
+					String urlRequestParamsTopic = this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate));
+					//put the final valid param. string
+					String urlRequestParams = urlRequestParamsKeys + urlRequestParamsTopic;
+					
+					logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+			    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+			    	logger.info("URL PARAMS: " + urlRequestParams);
+			    	//----------------------------------------------------------------------------
+			    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
+			    	//----------------------------------------------------------------------------
+			    	String rpgReturnPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+				    	
+					//Debug --> 
+			    	logger.info("Checking errMsg in rpgReturnPayload" + rpgReturnPayload);
+			    	//we must evaluate a return RPG code in order to know if the Update was OK or not
+			    	rpgReturnResponseHandler.evaluateRpgResponseOnTopicItemCreateOrUpdate(rpgReturnPayload);
+			    	if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){
+			    		rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on UPDATE: " + rpgReturnResponseHandler.getErrorMessage());
+			    		this.setFatalError(model, rpgReturnResponseHandler, recordToValidate);
+			    		isValidRecordTransactionOnRPG = false;
+			    	}else{
+			    		//Delete succefully done!
+			    		logger.info("[INFO] Valid update: Record successfully updated, OK ");
+			    	}
+					
 			    }
 				
 			}else if(TvinnSadConstants.ACTION_DELETE.equals(action)){
@@ -267,56 +232,47 @@ public class SadExportHeaderEurController {
 				*/
 			}
 			
-			//FETCH the ITEM LIST of existent ITEMs for this TOPIC
+			//FETCH the EUR for this TOPIC
 			//---------------------------
 			//get BASE URL = RPG-PROGRAM
             //---------------------------
-			
-			String BASE_URL_FETCH = SadExportUrlDataStore.SAD_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_EUR_URL;
-			urlRequestParamsKeys = this.getRequestUrlKeyParameters(request, avd, opd, appUser);
-			
-			logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-			logger.info("FETCH av item list... ");
-	    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL_FETCH));
-	    	logger.info("URL PARAMS: " + urlRequestParamsKeys);
-	    	//--------------------------------------
-	    	//EXECUTE the FETCH (RPG program) here
-	    	//--------------------------------------
-			String jsonPayloadFetch = this.urlCgiProxyService.getJsonContent(BASE_URL_FETCH, urlRequestParamsKeys);
-			//for debug purposes in GUI
-			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, BASE_URL_FETCH + "==>params: " + urlRequestParamsKeys.toString() + 
-					" " + "(fetched list):" + jsonPayloadFetch); 
-			//Debug --> 
-	    	logger.info(jsonPayloadFetch);
-	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-	    	JsonSadExportTopicEurContainer jsonSadExportTopicEurContainer = this.sadExportSpecificTopicService.getSadExportSpecificTopicEur(jsonPayloadFetch);
-	    	if(jsonSadExportTopicEurContainer!=null){
-	    		if(jsonSadExportTopicEurContainer.getGeteur1()!=null){
-	    			for(JsonSadExportTopicEurRecord record_ : jsonSadExportTopicEurContainer.getGeteur1()){
-	    				jsonSadExportTopicEurRecord = record_;
-	    				logger.info("Record EXISTS...");
-	    			}
-	    		}
-	    	}
+			if(isValidRecordTransactionOnRPG){
+				String BASE_URL_FETCH = SadExportUrlDataStore.SAD_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_EUR_URL;
+				urlRequestParamsKeys = this.getRequestUrlKeyParameters(request, avd, opd, appUser);
+				
+				logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+				logger.info("FETCH av item list... ");
+		    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL_FETCH));
+		    	logger.info("URL PARAMS: " + urlRequestParamsKeys);
+		    	//--------------------------------------
+		    	//EXECUTE the FETCH (RPG program) here
+		    	//--------------------------------------
+				String jsonPayloadFetch = this.urlCgiProxyService.getJsonContent(BASE_URL_FETCH, urlRequestParamsKeys);
+				//for debug purposes in GUI
+				session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, BASE_URL_FETCH + "==>params: " + urlRequestParamsKeys.toString() + 
+						" " + "(fetched list):" + jsonPayloadFetch); 
+				//Debug --> 
+		    	logger.info(jsonPayloadFetch);
+		    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+		    	JsonSadExportTopicEurContainer jsonSadExportTopicEurContainer = this.sadExportSpecificTopicService.getSadExportSpecificTopicEur(jsonPayloadFetch);
+		    	if(jsonSadExportTopicEurContainer!=null){
+		    		if(jsonSadExportTopicEurContainer.getGeteur1()!=null){
+		    			for(JsonSadExportTopicEurRecord record_ : jsonSadExportTopicEurContainer.getGeteur1()){
+		    				jsonSadExportTopicEurRecord = record_;
+		    				logger.info("Record EXISTS...");
+		    			}
+		    		}
+		    	}
+	    		this.setDomainObjectsInView(model, jsonSadExportTopicEurRecord);
+			}else{
+				this.setDomainObjectsInView(model, recordToValidate);
+			}
 	    	
 	    	//drop downs populated from back-end
 	    	this.setCodeDropDownMgr(appUser, model, headerRecord);
-	    	//
-	    	this.setDomainObjectsInView(model, jsonSadExportTopicEurRecord);
-	    	
-	    	/*
-    		//drop downs populated from a txt file
-    		this.setDomainObjectsForListInView(model, jsonSadExportTopicFinansOpplysningerContainer, recordToValidate);
-			//this next step is necessary for the default values on "create new" record
-    		if(bindingErrorsExist || !isValidCreatedRecordTransactionOnRPG){
-    			model.put("action", action);
-    		}
-    		this.setDefaultDomainItemRecordInView(model, jsonSadExportTopicFinansOpplysningerContainer, recordToValidate, bindingErrorsExist, isValidCreatedRecordTransactionOnRPG );
-	    	*/
 	    	
 	    	successView.addObject("model",model);
-			//successView.addObject(Constants.EDIT_ACTION_ON_TOPIC, Constants.ACTION_FETCH);
-	    	return successView;
+			return successView;
 			}
 	}
 	
@@ -417,7 +373,6 @@ public class SadExportHeaderEurController {
 	 */
 	private void adjustFieldsAfterBind(HttpServletRequest request, JsonSadExportTopicEurRecord record){
 		String dateISO = this.dateFormatter.convertToDate_ISO(record.getEur12b());
-		String factor = request.getParameter("factor");
 		//fields
 		record.setEur12b(dateISO);
 		

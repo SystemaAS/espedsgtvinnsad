@@ -33,15 +33,8 @@ public class SadExportEurValidator implements Validator {
 	 */
 	public void validate(Object obj, Errors errors) { 
 		
-		/*
+		
 		JsonSadExportTopicEurRecord record = (JsonSadExportTopicEurRecord)obj;
-		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sftxt", "systema.tvinn.sad.export.header.error.null.finans.infoiceNr.sftxt");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sfdt", "systema.tvinn.sad.export.header.error.null.finans.dato.sfdt"); 
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sfbl28", "systema.tvinn.sad.export.header.error.null.finans.belop.sfbl28"); 
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sfvk28", "systema.tvinn.sad.export.header.error.null.finans.valuta.sfvk28"); 
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sfkr28", "systema.tvinn.sad.export.header.error.null.finans.valutaKurs.sfkr28"); 
-		
 		
 		//Logical (RULES) controls if we passed the NOT NULL errors
 		if(!errors.hasFieldErrors()){
@@ -49,14 +42,14 @@ public class SadExportEurValidator implements Validator {
 				//----------------
 				//Date validation
 				//----------------
-				if(record.getSfdt()!=null && !"".equals(record.getSfdt())){
+				if(record.getEur12b()!=null && !"".equals(record.getEur12b())){
 					if(!isValidDate(record)){
-						errors.rejectValue("sfdt", "systema.tvinn.sad.export.header.error.rule.finans.dato.sfdt.invalidDate");
+						errors.rejectValue("eur12b", "systema.tvinn.sad.export.header.error.rule.finans.dato.sfdt.invalidDate");
 					}
 				}
 			}
 		}
-		*/
+
 		
 	}
 	/**
@@ -67,7 +60,6 @@ public class SadExportEurValidator implements Validator {
 	 */
 	private boolean isValidDate(JsonSadExportTopicEurRecord record){
 		boolean retval = true;
-		DateTimeManager dateMgr = new DateTimeManager();
 		
 		if(record.getEur12b().length()!=6){
 			retval = false;
@@ -75,7 +67,6 @@ public class SadExportEurValidator implements Validator {
 		}else{
 			if(!dateValidator.validateDate(record.getEur12b(), DateValidator.DATE_MASK_NO)){
 				retval = false;
-				//retval = dateMgr.isValidCurrentAndBackwardDate(isoDate, "yyyMMdd");
 			}
 			
 		}

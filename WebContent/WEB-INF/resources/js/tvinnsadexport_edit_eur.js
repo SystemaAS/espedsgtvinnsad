@@ -24,6 +24,9 @@
     });
   	
 	jq(function() {
+        jq( "#submit" ).click(function( event ) {
+  			setBlockUI();
+	  	});
 		/*jq("#sfdt").datepicker({ 
 			dateFormat: 'ddmmy'  
         });
