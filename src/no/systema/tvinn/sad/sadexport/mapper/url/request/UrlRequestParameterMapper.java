@@ -22,7 +22,7 @@ import no.systema.tvinn.sad.util.TvinnSadConstants;
  * @author oscardelatorre
  * @param Maj 2, 2014
  */
-public class UrlRequestParameterMapper<T> {
+public class UrlRequestParameterMapper {
 	private static final Logger logger = Logger.getLogger(UrlRequestParameterMapper.class.getName());
 	
 	/**
@@ -220,16 +220,16 @@ public class UrlRequestParameterMapper<T> {
 	
 	
 	/**
-	 * 
+	 * Generic method for all type of classes
 	 * @param object
 	 * @return
 	 */
-	
-	public String getUrlParameterValidString(JsonSadExportTopicEurRecord object){
+	public String getUrlParameterValidString(Object object){
 		StringBuffer sb = new StringBuffer();
+		Class clazz = object.getClass();
 		
 		try{
-			for(Field field: object.getFields()){
+			for(Field field: clazz.getDeclaredFields()){
 				try{
 					field.setAccessible(true);//we must do this in order to access private fields
 					String value = (String)field.get(object); 
@@ -265,7 +265,5 @@ public class UrlRequestParameterMapper<T> {
 		}
 		return sb.toString();
 	}
-   
-	
 	
 }
