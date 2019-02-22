@@ -195,7 +195,7 @@
 			           			<td width="15px" class="text14">&nbsp;</td>
 			           			
 			           			<td class="text14">
-			           				<a tabindex=-1 href="tvinnsadexport_renderPdf_eur.do?avd=${model.avd}&opd=${model.opd}">
+			           				<a tabindex=-1 target="_blank" href="tvinnsadexport_renderPdf_eur.do?avd=${model.avd}&opd=${model.opd}" >
 										<img title="Print" style="vertical-align: bottom;cursor:pointer;" src="resources/images/pdf2.png" width="20px" height="20px" border="0" alt="Print">
 									</a>
 			           			</td>

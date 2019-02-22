@@ -272,7 +272,6 @@ public class SadExportHeaderEurController {
 		}else{
 			//get file path and use it
 			String filePath = this.getPdfEurPath(request, appUser);
-
 			if(filePath!=null && !"".equals(filePath)){
                 String absoluteFilePath = filePath;
                 //must know the file type in order to put the correct content type on the Servlet response.
@@ -341,7 +340,8 @@ public class SadExportHeaderEurController {
     		if(jsonSadExportTopicEurContainer.getPrteur1()!=null){
     			for(JsonSadExportTopicEurRecord _record : jsonSadExportTopicEurContainer.getPrteur1()){
     				filePath = _record.getBane();
-    				logger.info("File path (PDF-eur) EXISTS...");
+    				logger.info("File path (PDF-eur):" + filePath);
+    				
     			}
     		}
     	}

@@ -24,13 +24,11 @@
     });
   	
 	jq(function() {
-        jq( "#submit" ).click(function( event ) {
+       
+          jq( "#sadExportEurForm" ).submit(function( event ) {
   			setBlockUI();
-	  	});
-		/*jq("#sfdt").datepicker({ 
-			dateFormat: 'ddmmy'  
-        });
-        */
+	  	  });
+		
 
         jq('#eur01a').focus(function() {
     	if(jq('#eur01a').val()!=''){
