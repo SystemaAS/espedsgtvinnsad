@@ -382,7 +382,7 @@
 	           				
 							<tr>
 			           			<td colspan="5" class="text12">
-									&nbsp;<span title="todo"><b>8.&nbsp;</b>Løpenr.,kollienes merke, nr., antall og art; vareslag.&nbsp;&nbsp;&nbsp;<b>9.&nbsp;</b>Bruttovekt(kg) eller annet mål (l,m3,etc)&nbsp;&nbsp;&nbsp;<b>10.&nbsp;</b>Fakturaer&nbsp;(utfylling ikke påkrevet)</span>
+									&nbsp;<span title=""><b>8.&nbsp;</b>Løpenr.,kollienes merke, nr., antall og art; vareslag.&nbsp;&nbsp;&nbsp;<b>9.&nbsp;</b>Bruttovekt(kg) eller annet mål (l,m3,etc)&nbsp;&nbsp;&nbsp;<b>10.&nbsp;</b>Fakturaer&nbsp;(utfylling ikke påkrevet)</span>
 								</td>
 							</tr>
 							<tr>	
