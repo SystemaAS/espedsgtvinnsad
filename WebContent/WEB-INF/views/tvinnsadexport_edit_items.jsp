@@ -856,17 +856,19 @@
 												<c:forEach var="code" items="${model.fylkesCodeList}" >
 													<c:choose>
 							           					<c:when test="${not empty model.recordItemContainerTopic.w2fyl && empty model.record.svfyl}">
-								 				  			<option value="${code.zkod}" <c:if test="${model.recordItemContainerTopic.w2fyl == code.zkod}"> selected </c:if> >${code.zkod}&nbsp;${fn:substring(code.ztxt, 0, 4)}</option>
+								 				  			<option title="${code.ztxt}" value="${code.ztxt}" <c:if test="${model.recordItemContainerTopic.w2fyl == code.zkod}"> selected </c:if> >${code.zkod}&nbsp;${fn:substring(code.ztxt, 0, 6)}</option>
 							 				  			</c:when>
 							 				  			<c:otherwise>
-							 				  				<option value="${code.zkod}"<c:if test="${model.record.svfyl == code.zkod}"> selected </c:if> >${code.zkod}&nbsp;${fn:substring(code.ztxt, 0, 4)}</option>
+							 				  				<option title="${code.ztxt}" value="${code.ztxt}"<c:if test="${model.record.svfyl == code.zkod}"> selected </c:if> >${code.zkod}&nbsp;${fn:substring(code.ztxt, 0, 6)}</option>
 							 				  			</c:otherwise>
 													</c:choose>
 												</c:forEach> 
 												</select>
+												<%--
 												<a tabindex="-1" id="svfyl2IdLink">
 													<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
-												</a>	
+												</a>
+												 --%>	
 											</c:otherwise>
 											</c:choose>
 											

@@ -208,7 +208,6 @@
 		<%-- UPDATE MODE --%> 
 	    <c:when test="${editActionOnTopic=='doUpdate' or editActionOnTopic=='doFetch'}">
 	    	<input type="hidden" name="avd" id="avd" value='${model.record.siavd}'>
-			<input type="hidden" name="sisg" id="sisg" value='${model.record.sisg}'>
 			<input type="hidden" name="sibel4" id="sibel4" value='${model.record.sibel4}'>
 			<input type="hidden" name="sibelr" id="sibelr" value='${model.record.sibelr}'>
 			<input type="hidden" name="sibels" id="sibels" value='${model.record.sibels}'>
@@ -216,7 +215,20 @@
 			<tr >
 				<td align="left" class="text14MediumBlue" >
 					&nbsp;&nbsp;&nbsp;&nbsp;<span title="siavd">Avdeling:</span>&nbsp;<b>${model.record.siavd}</b>&nbsp;&nbsp;<span title="sitdn">Tolldeknr:&nbsp;</span><b>${model.record.sitdn}</b>
-					&nbsp;&nbsp;<span title="sisg">Sign:</span>&nbsp;<b>${model.record.sisg}</b>
+					&nbsp;&nbsp;<span title="sisg">Sign:</span>
+					<select class="selectMediumBlueE2" name="sisg" id="sisg">
+	            		<option value="">-velg-</option>
+	 				  	<c:forEach var="record" items="${model.signList}" >
+                           	 	<c:choose>
+								<c:when test="${empty model.record.sisg}">
+									<option value="${record.sign}"<c:if test="${user.tvinnSadSign == record.sign}"> selected </c:if> >${record.sign}</option>
+								</c:when>
+								<c:otherwise>
+									<option value="${record.sign}"<c:if test="${model.record.sisg == record.sign}"> selected </c:if> >${record.sign}</option>
+								</c:otherwise>
+								</c:choose>
+						</c:forEach> 
+					</select>
 					&nbsp;&nbsp;
 					<img onMouseOver="showPop('status_info');" onMouseOut="hidePop('status_info');" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 					Stat<a tabindex=-1 id="updateStatusLink" name="updateStatusLink" runat="server" href="#"><font class="text14MediumBlue">u</font></a>s:

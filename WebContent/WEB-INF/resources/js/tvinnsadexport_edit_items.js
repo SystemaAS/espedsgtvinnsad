@@ -551,8 +551,8 @@
 			
 		}else{
 			//focus on
-			//jq('#svfyl').focus(); //causing unexpected behavior on html rewrite after  a big item lines set is loaded
-			jq('#startItemLineNr').focus();
+			jq('#svfyl').focus(); //causing unexpected behavior on html rewrite after a big item lines set is loaded
+			//jq('#startItemLineNr').focus();
 		}
 	});
 	

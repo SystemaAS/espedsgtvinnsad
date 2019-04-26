@@ -236,9 +236,11 @@ public class SadExportHeaderController {
 			    	if(jsonPayload!=null){
 			    		JsonSadExportSpecificTopicContainer jsonSadExportSpecificTopicContainer = this.sadExportSpecificTopicService.getSadExportSpecificTopicContainer(jsonPayload);
 			    		for (JsonSadExportSpecificTopicRecord rr: jsonSadExportSpecificTopicContainer.getOneorder()){
-			    			if(rr!=null && (strMgr.isNotNull(rr.getSedty()) && strMgr.isNotNull(rr.getSefid()) )){
-			    				//Tolldekl. has been saved at least once
+			    			//Dekl.type (sedty), Avs.navn (senak)
+			    			if(rr!=null && (strMgr.isNotNull(rr.getSedty()) && strMgr.isNotNull(rr.getSenak()) )){
+			    				//Tolldekl. has been saved at least once OR has been imported from external systems (e.g. CargoWise- DHL)
 			    			}else{
+			    				logger.info("Fetching default values starting ...");
 			    				rr = this.setDefaultValuesOnGui(appUser.getUser(), rr);
 			    				Collection<JsonSadExportSpecificTopicRecord> list = new ArrayList<JsonSadExportSpecificTopicRecord>();
 			    				list.add(rr);

@@ -173,10 +173,10 @@
   jq(function() { 
 	  jq("#dialogCopyFromTransportUppdrag").dialog({
 		  autoOpen: false,
-		  maxWidth:500,
-          maxHeight: 400,
-          width: 500,
-          height: 400,
+		  maxWidth:700,
+          maxHeight: 500,
+          width: 650,
+          height: 450,
 		  modal: true
 	  });
   });

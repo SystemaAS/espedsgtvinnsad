@@ -272,9 +272,11 @@ public class SadImportHeaderController {
 			    	if(jsonPayload!=null){
 			    		JsonSadImportSpecificTopicContainer jsonSadImportSpecificTopicContainer = this.sadImportSpecificTopicService.getSadImportSpecificTopicContainer(jsonPayload);
 			    		for(JsonSadImportSpecificTopicRecord rr : jsonSadImportSpecificTopicContainer.getOneorder()){
-			    			if(rr!=null && (strMgr.isNotNull(rr.getSidty()) && strMgr.isNotNull(rr.getSifid()) )){
-			    				//Tolldekl. has been saved at least once
+			    			//Dekl.type (sidty), Avs.navn (sinas)
+			    			if(rr!=null && (strMgr.isNotNull(rr.getSidty()) && strMgr.isNotNull(rr.getSinas()) )){
+			    				//Tolldekl. has been saved at least once OR has been imported from external systems (e.g. CargoWise- DHL)
 			    			}else{
+			    				logger.info("Fetching default values starting ...");
 			    				//populate with default values since this record was created with only CREATE-NEW SEEDS
 			    				rr = this.setDefaultValuesOnGui(appUser.getUser(), rr);
 			    				Collection<JsonSadImportSpecificTopicRecord> list = new ArrayList<JsonSadImportSpecificTopicRecord>();

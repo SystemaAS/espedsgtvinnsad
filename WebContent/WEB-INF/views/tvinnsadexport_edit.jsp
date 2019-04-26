@@ -206,11 +206,23 @@
 		<%-- UPDATE MODE --%> 
 	    <c:when test="${editActionOnTopic=='doUpdate' or editActionOnTopic=='doFetch'}">
 	    		<input type="hidden" name="avd" id="avd" value='${model.record.seavd}'>
-			<input type="hidden" name="sesg" id="sesg" value='${model.record.sesg}'>
 			<tr >
 				<td align="left" class="text14MediumBlue" >
 					&nbsp;&nbsp;&nbsp;&nbsp;<span title="seavd">Avdeling:</span>&nbsp;<b>${model.record.seavd}</b>&nbsp;&nbsp;<span title="setdn">Tolldeknr:&nbsp;</span><b>${model.record.setdn}</b>
-					&nbsp;&nbsp;<span title="sesg">Sign:</span>&nbsp;<b>${model.record.sesg}</b>
+					&nbsp;&nbsp;<span title="sesg">Sign:</span>
+					<select class="selectMediumBlueE2" name="sesg" id="sesg">
+	            		<option value="">-velg-</option>
+	 				  	<c:forEach var="record" items="${model.signList}" >
+                       	 	<c:choose>
+							<c:when test="${empty model.record.sesg}">
+								<option value="${record.sign}"<c:if test="${user.tvinnSadSign == record.sign}"> selected </c:if> >${record.sign}</option>
+							</c:when>
+							<c:otherwise>
+								<option value="${record.sign}"<c:if test="${model.record.sesg == record.sign}"> selected </c:if> >${record.sign}</option>
+							</c:otherwise>
+							</c:choose> 		
+						</c:forEach> 
+					</select>
 					&nbsp;&nbsp;
 					<img onMouseOver="showPop('status_info');" onMouseOut="hidePop('status_info');" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 					Stat<a tabindex=-1 id="updateStatusLink" name="updateStatusLink" runat="server" href="#"><font class="text14MediumBlue">u</font></a>s:
