@@ -214,7 +214,7 @@
 	            		<option value="">-velg-</option>
 	 				  	<c:forEach var="record" items="${model.signList}" >
                        	 	<c:choose>
-							<c:when test="${empty model.record.sesg || model.record.sesg == 'CW1' }">
+							<c:when test="${empty model.record.sesg}">
 								<option value="${record.sign}"<c:if test="${user.tvinnSadSign == record.sign}"> selected </c:if> >${record.sign}</option>
 							</c:when>
 							<c:otherwise>
