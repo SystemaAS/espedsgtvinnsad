@@ -43,7 +43,8 @@ import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelning
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelningRecord;
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureContainer;
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureRecord;
-
+import no.systema.tvinn.sad.model.jsonjackson.customer.JsonTvinnSadCustomerContainer;
+import no.systema.tvinn.sad.model.jsonjackson.customer.JsonTvinnSadCustomerRecord;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicFaktTotalContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicFaktTotalRecord;
@@ -64,8 +65,7 @@ import no.systema.tvinn.sad.sadexport.service.SadExportSpecificTopicItemService;
 import no.systema.tvinn.sad.sadexport.util.RpgReturnResponseHandler;
 import no.systema.tvinn.sad.sadexport.util.manager.CodeDropDownMgr;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicAvdDataContainer;
-
-
+import no.systema.tvinn.sad.service.TvinnSadCustomerService;
 import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService;
 import no.systema.tvinn.sad.util.TvinnSadConstants;
 import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
@@ -291,6 +291,9 @@ public class SadExportHeaderController {
 						recordToValidate.setSeavd(avd);
 						recordToValidate.setSesg(sign);
 					}
+					//Fill up tollkreditnr if applicable
+					this.adjustTollkredit(appUser, recordToValidate);
+					
 					SadExportHeaderValidator validator = new SadExportHeaderValidator();
 					validator.validate(recordToValidate, bindingResult);
 					//test indicator in validation field
@@ -327,6 +330,12 @@ public class SadExportHeaderController {
 				            //test indicator
 				            jsonSadExportSpecificTopicRecord.setSe0035(se0035);
 				            jsonSadExportSpecificTopicRecord.setSemi(innstikk);
+				            //set tollkredit
+				            if(strMgr.isNotNull(recordToValidate.getSekta())){
+				            	jsonSadExportSpecificTopicRecord.setSegkd(recordToValidate.getSegkd());
+				            	jsonSadExportSpecificTopicRecord.setSekta(recordToValidate.getSekta());
+				            	jsonSadExportSpecificTopicRecord.setSektb(recordToValidate.getSektb());
+				            }
 							
 						}else{
 							logger.info("CREATE NEW follow by UDATE transaction...");
@@ -364,6 +373,12 @@ public class SadExportHeaderController {
 					            //test indicator
 					            jsonSadExportSpecificTopicRecord.setSe0035(se0035);
 					            jsonSadExportSpecificTopicRecord.setSemi(innstikk);
+					            //set tollkredit
+					            if(strMgr.isNotNull(recordToValidate.getSekta())){
+					            	jsonSadExportSpecificTopicRecord.setSegkd(recordToValidate.getSegkd());
+					            	jsonSadExportSpecificTopicRecord.setSekta(recordToValidate.getSekta());
+					            	jsonSadExportSpecificTopicRecord.setSektb(recordToValidate.getSektb());
+					            }
 							}else{
 								//Some kind of error occurred. Set the transaction as invalid...
 								isValidCreatedRecordTransactionOnRPG = false;
@@ -461,6 +476,67 @@ public class SadExportHeaderController {
 	    	return successView;
 		}
 	}
+
+	/**
+	 * 
+	 * @param jsonSadExportSpecificTopicRecord
+	 * @return
+	 */
+	private void adjustTollkredit(SystemaWebUser appUser, JsonSadExportSpecificTopicRecord recordToValidate){
+		//Conditions: Avgifter (seski)=empty, 48.kontonr.tollkredit(sekta) and a valid customer nr (seknk)
+		logger.info("1:" + recordToValidate.getSeski());
+		logger.info("2:" + recordToValidate.getSekta());
+		logger.info("3:" + recordToValidate.getSeknk());
+		
+		if(strMgr.isNull(recordToValidate.getSeski()) && strMgr.isNull(recordToValidate.getSekta()) ){
+			if(strMgr.isNotNull(recordToValidate.getSeknk())){
+				this.getTollKredit(appUser, recordToValidate);
+			}
+		}
+		
+		
+	}
+	/**
+	 * 
+	 * @param appUser
+	 * @param recordToValidate
+	 * @param session
+	 * @param request
+	 */
+	private void getTollKredit(SystemaWebUser appUser, JsonSadExportSpecificTopicRecord recordToValidate){
+		logger.info("Inside getTollKredit");
+		String customerNr = recordToValidate.getSeknk();
+		
+		Collection<JsonTvinnSadCustomerRecord> list = new ArrayList<JsonTvinnSadCustomerRecord>();
+		//prepare the access CGI with RPG back-end
+		if( strMgr.isNotNull(customerNr)){
+			String BASE_URL = TvinnSadUrlDataStore.TVINN_SAD_FETCH_CUSTOMER_URL;
+			String urlRequestParamsKeys = "user=" + appUser.getUser() + "&knr=" + customerNr;
+			logger.info("URL: " + BASE_URL);
+			logger.info("PARAMS: " + urlRequestParamsKeys);
+			logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+			String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+			//Should be removed as soon as RPG return the correct container name = customerlist (not capitalized in the first letter)
+			logger.info(jsonPayload);
+			logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+			  
+			if(jsonPayload!=null){
+		  		JsonTvinnSadCustomerContainer container = this.tvinnSadCustomerService.getTvinnSadCustomerContainer(jsonPayload);
+		  		if(container!=null){
+		  			list = container.getCustomerlist();
+		  			for(JsonTvinnSadCustomerRecord  record : container.getCustomerlist()){
+		  				recordToValidate.setSegkd(record.getWsktc());
+		  				recordToValidate.setSekta(record.getWskta());
+		  				recordToValidate.setSektb(record.getWsktb());
+		  				logger.info("CUSTOMER: " + record.getKnavn() + " NUMBER:" + record.getKundnr());
+		  				logger.info("TOLLKREDITnr: " + recordToValidate.getSegkd() + "_" + recordToValidate.getSekta() + "_" + recordToValidate.getSektb());  
+		  			}
+		  		}
+		  	}
+		}
+			
+	}
+		
 	/**
 	 * 
 	 * @param applicationUser
@@ -1996,6 +2072,13 @@ public class SadExportHeaderController {
 	public void setNotisblockService (NotisblockService value){ this.notisblockService=value; }
 	public NotisblockService getNotisblockService(){return this.notisblockService;}
 	
+	@Qualifier 
+	private TvinnSadCustomerService tvinnSadCustomerService;
+	@Autowired
+	@Required	
+	public void setTvinnSadCustomerService(TvinnSadCustomerService value){this.tvinnSadCustomerService = value;}
+	public TvinnSadCustomerService getTvinnSadCustomerService(){ return this.tvinnSadCustomerService; }
+	 
 	
 }
 
