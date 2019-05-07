@@ -8,6 +8,7 @@ import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpeci
 
 import java.util.*;
 import java.lang.reflect.Field;
+import no.systema.main.util.NumberFormatterLocaleAware;
 /**
  * @author oscardelatorre
  * @date Maj 2, 2014
@@ -16,6 +17,7 @@ import java.lang.reflect.Field;
  *
  */
 public class JsonSadExportSpecificTopicRecord extends JsonAbstractGrandFatherRecord{
+	private NumberFormatterLocaleAware numberFormatter = new NumberFormatterLocaleAware();
 	
 	private String o2_sest = null;
 	public void setO2_sest(String value) {  this.o2_sest = value; }
@@ -56,7 +58,8 @@ public class JsonSadExportSpecificTopicRecord extends JsonAbstractGrandFatherRec
 	
 	private String sumTotalAmountItemLinesStr = null;
 	public String getSumTotalAmountItemLinesStr() {
-		this.sumTotalAmountItemLinesStr = String.valueOf(this.sumTotalAmountItemLines);
+		//OLD -- this.sumTotalAmountItemLinesStr = String.valueOf(this.sumTotalAmountItemLines);
+		this.sumTotalAmountItemLinesStr = numberFormatter.getDoubleToPlainString(this.sumTotalAmountItemLines, 2);
 		return this.sumTotalAmountItemLinesStr;
 	}
 	
@@ -66,7 +69,8 @@ public class JsonSadExportSpecificTopicRecord extends JsonAbstractGrandFatherRec
 	
 	private String sumTotalBruttoViktItemLinesStr = null;
 	public String getSumTotalBruttoViktItemLinesStr() {
-		this.sumTotalBruttoViktItemLinesStr = String.valueOf(this.sumTotalBruttoViktItemLines);
+		//OLD -- this.sumTotalBruttoViktItemLinesStr = String.valueOf(this.sumTotalBruttoViktItemLines);
+		this.sumTotalBruttoViktItemLinesStr = numberFormatter.getDoubleToPlainString(this.sumTotalBruttoViktItemLines, 2);
 		return this.sumTotalBruttoViktItemLinesStr;
 	}
 	

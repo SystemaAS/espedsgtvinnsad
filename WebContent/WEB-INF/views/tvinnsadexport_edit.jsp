@@ -1741,7 +1741,7 @@
 							<tr>
 				        		<td class="text14Gray" align="left" >Kolli&nbsp;</td>
 					        	<td >
-				            		<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="sumOfAntalKolliInItemLines" id="sumOfAntalKolliInItemLines" size="10" maxlength="7" value="${ model.record.sumOfAntalKolliInItemLinesStr}">
+				            		<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="sumOfAntalKolliInItemLines" id="sumOfAntalKolliInItemLines" size="12" maxlength="7" value="${ model.record.sumOfAntalKolliInItemLinesStr}">
 				            		<c:if test="${not empty ( model.record.sumOfAntalKolliInItemLinesStr &&  model.record.sentk)}">
 					            		<c:if test="${ model.record.sentk !=  model.record.sumOfAntalKolliInItemLinesStr}">
 							            <img onMouseOver="showPop('itemsSumKolli_info');" onMouseOut="hidePop('itemsSumKolli_info');" width="18px" height="20px" src="resources/images/redFlag.png" border="0" alt="kolliantal warning">	
@@ -1762,7 +1762,7 @@
 					        <tr>
 				        		<td class="text14Gray" align="left" >Varelinjer &nbsp;</td>
 					        	<td >
-				            		<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="sumOfAntalItemLines" id="sumOfAntalItemLines" size="10" value="${ model.record.sumOfAntalItemLinesStr}">
+				            		<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="sumOfAntalItemLines" id="sumOfAntalItemLines" size="12" value="${ model.record.sumOfAntalItemLinesStr}">
 				            		<c:if test="${not empty ( model.record.sumOfAntalItemLinesStr)}">
 					            		<c:if test="${ model.record.sumOfAntalItemLines <= 0 }">
 							            <img onMouseOver="showPop('itemsSum_info');" onMouseOut="hidePop('itemsSum_info');" width="18px" height="20px" src="resources/images/redFlag.png" border="0" alt="varelinjerantal warning">	
@@ -1778,7 +1778,7 @@
 					        <tr>
 					        		<td class="text14Gray" align="left" >Beløp&nbsp;</td>
 						        	<td >
-					            		<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="sumTotalAmountItemLines" id="sumTotalAmountItemLines" size="10" value="${ model.record.sumTotalAmountItemLinesStr}">
+					            		<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="sumTotalAmountItemLines" id="sumTotalAmountItemLines" size="12" value="${ model.record.sumTotalAmountItemLinesStr}">
 						            	<c:if test="${model.record.sumTotalAmountItemLines != model.record.sebel1Dbl}">
 						            		<img onMouseOver="showPop('itemsAmountSum_info');" onMouseOut="hidePop('itemsAmountSum_info');" width="18px" height="20px" src="resources/images/redFlag.png" border="0" alt="vare-sum warning">	
 							            <div class="text11" style="position: relative;" align="left">
@@ -1792,7 +1792,7 @@
 					        <tr>
 					        		<td class="text14Gray" align="left" >Bruttovekt&nbsp;</td>
 						        	<td >
-					            		<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="sumTotalBruttoViktItemLines" id="sumTotalBruttoViktItemLines" size="10" value="${ model.record.sumTotalBruttoViktItemLinesStr}">
+					            		<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="sumTotalBruttoViktItemLines" id="sumTotalBruttoViktItemLines" size="12" value="${ model.record.sumTotalBruttoViktItemLinesStr}">
 						            	<c:if test="${model.record.sumTotalBruttoViktItemLines != model.record.sevkbDbl}">
 						            		<img onMouseOver="showPop('itemsBruttoVektSum_info');" onMouseOut="hidePop('itemsBruttoVektSum_info');" width="18px" height="20px" src="resources/images/redFlag.png" border="0" alt="bruttovekt warning">	
 							            <div class="text11" style="position: relative;" align="left">

@@ -17,7 +17,6 @@ public class SadExportSpecificTopicTotalItemLinesObject {
 	public void setSumOfAntalKolliInItemLines(Integer value) {  this.sumOfAntalKolliInItemLines = value; }
 	public Integer getSumOfAntalKolliInItemLines() {return this.sumOfAntalKolliInItemLines;}
 	
-	
 	private Integer sumOfAntalItemLines = 0;
 	public void setSumOfAntalItemLines(Integer value) {  this.sumOfAntalItemLines = value; }
 	public Integer getSumOfAntalItemLines() {return this.sumOfAntalItemLines;}
@@ -42,6 +41,5 @@ public class SadExportSpecificTopicTotalItemLinesObject {
 	private String finansOpplysningarTotKurs = null;
 	public void setFinansOpplysningarTotKurs(String value) {  this.finansOpplysningarTotKurs = value; }
 	public String getFinansOpplysningarTotKurs() { return this.finansOpplysningarTotKurs; }
-	
 	
 }

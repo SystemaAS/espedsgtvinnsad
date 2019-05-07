@@ -1,7 +1,8 @@
 package no.systema.tvinn.sad.sadexport.controller;
 
 import java.util.*;
-
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.springframework.validation.BindingResult;
@@ -89,6 +90,7 @@ public class SadExportHeaderController {
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
 	private NumberFormatterLocaleAware numberFormatter = new NumberFormatterLocaleAware();	
+	private DecimalFormat decimalFormatter = new DecimalFormat("#.##"); 
 	private StringManager strMgr = new StringManager();
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	private ApplicationContext context;
@@ -484,10 +486,6 @@ public class SadExportHeaderController {
 	 */
 	private void adjustTollkredit(SystemaWebUser appUser, JsonSadExportSpecificTopicRecord recordToValidate){
 		//Conditions: Avgifter (seski)=empty, 48.kontonr.tollkredit(sekta) and a valid customer nr (seknk)
-		logger.info("1:" + recordToValidate.getSeski());
-		logger.info("2:" + recordToValidate.getSekta());
-		logger.info("3:" + recordToValidate.getSeknk());
-		
 		if(strMgr.isNull(recordToValidate.getSeski()) && strMgr.isNull(recordToValidate.getSekta()) ){
 			if(strMgr.isNotNull(recordToValidate.getSeknk())){
 				this.getTollKredit(appUser, recordToValidate);
@@ -1393,10 +1391,10 @@ public class SadExportHeaderController {
 	    	if(numberOfItemLines>0 && antalKolli==0){
 	    		antalKolli = -1;
 	    	}
-	    	totalItemLinesObject.setSumOfAntalItemLines(numberOfItemLines);
 	    	totalItemLinesObject.setSumOfAntalKolliInItemLines(antalKolli);
-	    	totalItemLinesObject.setSumTotalAmountItemLines(numberFormatter.getDouble(numberFormatter.getString(totalAmount, 3, false, "NO")));
-	    	totalItemLinesObject.setSumTotalBruttoViktItemLines(numberFormatter.getDouble(numberFormatter.getString(totalGrossWeight, 3, false, "NO")));
+	    	totalItemLinesObject.setSumOfAntalItemLines(numberOfItemLines);
+	    	totalItemLinesObject.setSumTotalAmountItemLines(numberFormatter.formatBigDecimal(2,new BigDecimal(totalAmount)).doubleValue());
+	    	totalItemLinesObject.setSumTotalBruttoViktItemLines(numberFormatter.formatBigDecimal(2,new BigDecimal(totalGrossWeight)).doubleValue());
 	    	//DEBUG
 	    	logger.info("AntalKolli: " + totalItemLinesObject.getSumOfAntalKolliInItemLines());
 	    	logger.info("AntalItems: " + totalItemLinesObject.getSumOfAntalItemLines());
