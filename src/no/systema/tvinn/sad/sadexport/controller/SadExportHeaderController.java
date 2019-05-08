@@ -334,7 +334,7 @@ public class SadExportHeaderController {
 				            jsonSadExportSpecificTopicRecord.setSemi(innstikk);
 				            //set tollkredit
 				            if(strMgr.isNotNull(recordToValidate.getSekta())){
-				            	jsonSadExportSpecificTopicRecord.setSegkd(recordToValidate.getSegkd());
+				            	jsonSadExportSpecificTopicRecord.setSektc(recordToValidate.getSektc());
 				            	jsonSadExportSpecificTopicRecord.setSekta(recordToValidate.getSekta());
 				            	jsonSadExportSpecificTopicRecord.setSektb(recordToValidate.getSektb());
 				            }
@@ -377,7 +377,7 @@ public class SadExportHeaderController {
 					            jsonSadExportSpecificTopicRecord.setSemi(innstikk);
 					            //set tollkredit
 					            if(strMgr.isNotNull(recordToValidate.getSekta())){
-					            	jsonSadExportSpecificTopicRecord.setSegkd(recordToValidate.getSegkd());
+					            	jsonSadExportSpecificTopicRecord.setSektc(recordToValidate.getSektc());
 					            	jsonSadExportSpecificTopicRecord.setSekta(recordToValidate.getSekta());
 					            	jsonSadExportSpecificTopicRecord.setSektb(recordToValidate.getSektb());
 					            }
@@ -523,11 +523,11 @@ public class SadExportHeaderController {
 		  		if(container!=null){
 		  			list = container.getCustomerlist();
 		  			for(JsonTvinnSadCustomerRecord  record : container.getCustomerlist()){
-		  				recordToValidate.setSegkd(record.getWsktc());
+		  				recordToValidate.setSektc(record.getWsktc());
 		  				recordToValidate.setSekta(record.getWskta());
 		  				recordToValidate.setSektb(record.getWsktb());
 		  				logger.info("CUSTOMER: " + record.getKnavn() + " NUMBER:" + record.getKundnr());
-		  				logger.info("TOLLKREDITnr: " + recordToValidate.getSegkd() + "_" + recordToValidate.getSekta() + "_" + recordToValidate.getSektb());  
+		  				logger.info("TOLLKREDITnr: " + recordToValidate.getSektc() + "_" + recordToValidate.getSekta() + "_" + recordToValidate.getSektb());  
 		  			}
 		  		}
 		  	}

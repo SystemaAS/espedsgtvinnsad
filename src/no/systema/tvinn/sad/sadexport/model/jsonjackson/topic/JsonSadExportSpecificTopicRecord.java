@@ -58,8 +58,8 @@ public class JsonSadExportSpecificTopicRecord extends JsonAbstractGrandFatherRec
 	
 	private String sumTotalAmountItemLinesStr = null;
 	public String getSumTotalAmountItemLinesStr() {
-		//OLD -- this.sumTotalAmountItemLinesStr = String.valueOf(this.sumTotalAmountItemLines);
-		this.sumTotalAmountItemLinesStr = numberFormatter.getDoubleToPlainString(this.sumTotalAmountItemLines, 2);
+		this.sumTotalAmountItemLinesStr = String.valueOf(this.sumTotalAmountItemLines);
+		//this.sumTotalAmountItemLinesStr = numberFormatter.getDoubleToPlainString(this.sumTotalAmountItemLines, 2);
 		return this.sumTotalAmountItemLinesStr;
 	}
 	
@@ -69,8 +69,8 @@ public class JsonSadExportSpecificTopicRecord extends JsonAbstractGrandFatherRec
 	
 	private String sumTotalBruttoViktItemLinesStr = null;
 	public String getSumTotalBruttoViktItemLinesStr() {
-		//OLD -- this.sumTotalBruttoViktItemLinesStr = String.valueOf(this.sumTotalBruttoViktItemLines);
-		this.sumTotalBruttoViktItemLinesStr = numberFormatter.getDoubleToPlainString(this.sumTotalBruttoViktItemLines, 2);
+		this.sumTotalBruttoViktItemLinesStr = String.valueOf(this.sumTotalBruttoViktItemLines);
+		//this.sumTotalBruttoViktItemLinesStr = numberFormatter.getDoubleToPlainString(this.sumTotalBruttoViktItemLines, 2);
 		return this.sumTotalBruttoViktItemLinesStr;
 	}
 	
@@ -289,6 +289,7 @@ public class JsonSadExportSpecificTopicRecord extends JsonAbstractGrandFatherRec
 	private String sektb = null;
 	public void setSektb(String value) {  this.sektb = value; }
 	public String getSektb() {return this.sektb;}
+	
 	
 	private String segn = null;
 	public void setSegn(String value) {  this.segn = value; }
