@@ -614,6 +614,7 @@
 											<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="sektc" id="sektc" size="1" maxlength="1" value="${model.record.sektc}">
 											<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="sekta" id="sekta" size="5" maxlength="5" value="${model.record.sekta}">
 											<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="sektb" id="sektb" size="2" maxlength="2" value="${model.record.sektb}">
+											<input tabindex=-1 type="checkbox" name="opdknum" id="opdknum" value="1" ><font class="text12">Oppdater kundregister</</font>
 										</td>
 							        </tr>
 							         

@@ -290,6 +290,10 @@ public class JsonSadExportSpecificTopicRecord extends JsonAbstractGrandFatherRec
 	public void setSektb(String value) {  this.sektb = value; }
 	public String getSektb() {return this.sektb;}
 	
+	private String opdknum = null;
+	public void setOpdknum(String value) {  this.opdknum = value; }
+	public String getOpdknum() {return this.opdknum;}
+	
 	
 	private String segn = null;
 	public void setSegn(String value) {  this.segn = value; }
