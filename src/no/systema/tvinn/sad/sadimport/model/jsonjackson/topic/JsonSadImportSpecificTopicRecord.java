@@ -362,6 +362,10 @@ public class JsonSadImportSpecificTopicRecord extends JsonAbstractGrandFatherRec
 	public void setSiktb(String value) {  this.siktb = value; }
 	public String getSiktb() {return this.siktb;}
 	
+	private String opdknum = null;
+	public void setOpdknum(String value) {  this.opdknum = value; }
+	public String getOpdknum() {return this.opdknum;}
+	
 	private String sign = null;
 	public void setSign(String value) {  this.sign = value; }
 	public String getSign() {return this.sign;}
