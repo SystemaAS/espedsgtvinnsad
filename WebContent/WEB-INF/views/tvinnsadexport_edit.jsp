@@ -614,7 +614,7 @@
 											<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="sektc" id="sektc" size="1" maxlength="1" value="${model.record.sektc}">
 											<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="sekta" id="sekta" size="5" maxlength="5" value="${model.record.sekta}">
 											<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="sektb" id="sektb" size="2" maxlength="2" value="${model.record.sektb}">
-											<input tabindex=-1 type="checkbox" name="opdknum" id="opdknum" value="1" ><font class="text12">Oppdater kundregister</</font>
+											<input tabindex=-1 type="checkbox" name="opdknum" id="opdknum" value="1" ><font class="text12">Oppdater kundereg.</font>
 										</td>
 							        </tr>
 							         
@@ -1574,7 +1574,7 @@
 	        					<tr>
 					            <td class="text14" align="left" >
 					            <img onMouseOver="showPop('brut_info');" onMouseOut="hidePop('brut_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">	
-					            <font class="text16RedBold" >*</font><span title="sevkb">Brutto vekt</span>
+					            <font class="text16RedBold" >*</font><span title="sevkb">Bruttovekt</span>
 					            <div class="text11" style="position: relative;" align="left">
 					            <span style="position:absolute;top:2px; width:250px;" id="brut_info" class="popupWithInputText text11"  >
 					           			<b>Bruttovekt</b> 
