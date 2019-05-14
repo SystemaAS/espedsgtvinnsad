@@ -57,7 +57,8 @@ public class JsonSadImportSpecificTopicRecord extends JsonAbstractGrandFatherRec
 	
 	private String sumTotalAmountItemLinesStr = null;
 	public String getSumTotalAmountItemLinesStr() {
-		this.sumTotalAmountItemLinesStr = String.valueOf(sumTotalAmountItemLines);
+		//this.sumTotalAmountItemLinesStr = String.valueOf(sumTotalAmountItemLines);
+		this.sumTotalAmountItemLinesStr = numberFormatter.getDoubleToPlainString(this.sumTotalAmountItemLines,2);
 		return this.sumTotalAmountItemLinesStr;
 	}
 	
@@ -67,7 +68,7 @@ public class JsonSadImportSpecificTopicRecord extends JsonAbstractGrandFatherRec
 	
 	private String sumTotalBruttoViktItemLinesStr = null;
 	public String getSumTotalBruttoViktItemLinesStr() {
-		this.sumTotalBruttoViktItemLinesStr = String.valueOf(sumTotalBruttoViktItemLines);
+		this.sumTotalBruttoViktItemLinesStr = numberFormatter.getDoubleToPlainString(this.sumTotalBruttoViktItemLines,2);
 		return this.sumTotalBruttoViktItemLinesStr;
 	}
 	

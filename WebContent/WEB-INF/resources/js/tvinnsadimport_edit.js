@@ -168,6 +168,8 @@
   	jq(function() {
   		jq("#sadImportSaveNewTopicForm").submit(function() {
   			setBlockUI();
+  			jq("#sumTotalAmountItemLines").val(jq("#sumTotalAmountItemLines").val().replace(',', '.'));
+  			jq("#sumTotalBruttoViktItemLines").val(jq("#sumTotalBruttoViktItemLines").val().replace(',', '.'));
 	  	});
   		//=====================================
 	  	//START Child window for general codes

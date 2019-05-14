@@ -306,7 +306,7 @@ public class SadExportHeaderController {
 					//----------------------------
 					if(bindingResult.hasErrors()){
 						logger.info("[ERROR Validation] Record does not validate)");
-					    	//put domain objects and do go back to the original view...
+					    //put domain objects and do go back to the original view...
 						recordToValidate.setSetdn(opd);
 						recordToValidate.setSeavd(avd);
 						recordToValidate.setSesg(sign);
@@ -1395,6 +1395,8 @@ public class SadExportHeaderController {
 	    	totalItemLinesObject.setSumOfAntalItemLines(numberOfItemLines);
 	    	totalItemLinesObject.setSumTotalAmountItemLines(numberFormatter.formatBigDecimal(2,new BigDecimal(totalAmount)).doubleValue());
 	    	totalItemLinesObject.setSumTotalBruttoViktItemLines(numberFormatter.formatBigDecimal(2,new BigDecimal(totalGrossWeight)).doubleValue());
+	    	//totalItemLinesObject.setSumTotalAmountItemLines(numberFormatter.getDouble(numberFormatter.getString(totalAmount, 3, false, "NO")));
+	    	//totalItemLinesObject.setSumTotalBruttoViktItemLines(numberFormatter.getDouble(numberFormatter.getString(totalGrossWeight, 3, false, "NO")));
 	    	//DEBUG
 	    	logger.info("AntalKolli: " + totalItemLinesObject.getSumOfAntalKolliInItemLines());
 	    	logger.info("AntalItems: " + totalItemLinesObject.getSumOfAntalItemLines());
