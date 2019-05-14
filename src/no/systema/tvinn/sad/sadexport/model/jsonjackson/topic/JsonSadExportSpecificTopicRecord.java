@@ -460,6 +460,10 @@ public class JsonSadExportSpecificTopicRecord extends JsonAbstractGrandFatherRec
 	public void setSesam(String value) {  this.sesam = value; }
 	public String getSesam() { return this.sesam;}
 	
+	private String fiskavg = null; 
+	public void setFiskavg(String value) {  this.fiskavg = value; }
+	public String getFiskavg() { return this.fiskavg;}
+	
 	//OMBEREGNING variables
 	private String om_setype = null; 
 	public void setOm_setype(String value) {  this.om_setype = value; }

@@ -1803,7 +1803,21 @@
 										</div>
 					            		</c:if>
 					            </td>
-					        </tr> 						        
+					        </tr> 
+					        <tr>
+					        		<td class="text14Gray" align="left" >Eksportavgift for fisk&nbsp;</td>
+					        		<td>
+					        			<c:choose>
+					        			<c:when test="${not empty model.record.fiskavg}">
+					        				<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="fiskavg" id="fiskavg" size="12" value="${ model.record.fiskavg}">
+					        			</c:when>
+					        			<c:otherwise>
+					        				<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="fiskavg" id="fiskavg" size="12" value="0">
+					        			</c:otherwise>
+					        			</c:choose>
+					        			
+					        		</td>
+					        </tr>						        
 						</table>
 					</td>
 				</tr>

@@ -81,6 +81,11 @@ public class SadExportHeaderValidator implements Validator {
 		//Logical (RULES) controls if we passed the NOT NULL errors
 		if(!errors.hasFieldErrors()){
 			if(record!=null){
+				
+				//signaturkontroll mot CargoWise signatur vid EDI - integration
+				if("CW1".equals (record.getSesg())){
+					errors.rejectValue("sesg", "systema.tvinn.sad.export.header.error.rule.invalid.sesg");
+				}
 				if(!this.isValidProcedureTypeForAvsLand(record)){
 					errors.rejectValue("selka", "systema.tvinn.sad.export.header.error.rule.avsLandNotNorwayAndBestLandNorway"); 
 				}
