@@ -92,12 +92,20 @@ public class SadExportHeaderValidator implements Validator {
 				if(!this.isValidProcedureTypeForBestLand(record)){
 					errors.rejectValue("selkb", "systema.tvinn.sad.export.header.error.rule.avsLandNotNorwayAndBestLandNorway"); 
 				}
+				
+				
 				//if tullkredit = not exists
-				if("".equals(record.getSekta())){
+				if(!this.isValidTollkreditValue(record.getSekta())){
 					if("".equals(record.getSeski())){
 						errors.rejectValue("seski", "systema.tvinn.sad.export.header.error.rule.seski.tollMvaValueMandatory"); 
 					}
 				}
+				if(!this.isValidTollkreditValue(record.getSekta())){
+					if("".equals(record.getSekddk())){
+						errors.rejectValue("seski", "systema.tvinn.sad.export.header.error.rule.sekddk.tollMvaValueMandatory"); 
+					}
+				}
+				
 //				2018-09-04 Remarked due to not needed, according to CB. 
 //				//if tullkredit = exists
 //				if(!"".equals(record.getSekta()) && !"".equals(record.getSektb()) ){
@@ -186,6 +194,26 @@ public class SadExportHeaderValidator implements Validator {
 			}
 			
 		}
+		return retval;
+	}
+	
+	/**
+	 * 
+	 * @param value
+	 * @return
+	 */
+	private boolean isValidTollkreditValue(String value){
+		logger.info("Inside isValidTollkreditValue");
+		boolean retval = false;
+		Integer creditField = 0;
+		if(strMgr.isNotNull(value)){
+			creditField = Integer.valueOf(value);
+			if(creditField>0){
+				retval = true;
+				//logger.info("€€€€€€€€€€€€€€€€:" + value);
+			}
+		}
+		
 		return retval;
 	}
 	/**
