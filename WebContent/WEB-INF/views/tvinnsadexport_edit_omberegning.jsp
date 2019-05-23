@@ -988,8 +988,23 @@
 		 						&nbsp;<font class="text16RedBold" >*</font>Meldings funksjon Omberegning<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 		 						<div class="text11" style="position: relative;" align="left">
 		 						<span style="position:absolute;top:2px; width:250px;" id="edi_info" class="popupWithInputText text11" >
-				           			<b>Meldings funksjon Omberegning</b><br/><br/>
-									Send till TVINN (EDI) ...
+				           			<b>Meldings funksjon Omberegning</b><br/>
+									Send till TVINN (EDI) - 
+									<p>
+									<b>Meldingsfunskjon:</b>
+									<ul>
+									<li><b>DEB</b> = Etterberegning</li>        
+									<li><b>DRE</b> = Refusjon</li>              
+									<li><b>DSO</b> = Statistisk oppretting</li> 
+									</ul>
+									                          
+									<b>Ekspedisjonsenhet</b>&nbsp;(exempel): 
+									  <ul>                    
+										<li><b>DSO</b> = 11111</li>  
+										<li><b>DEB/DRE</b> = 22222</li>
+									  </ul>	
+									</p>
+									
 								</span>
 								</div>
 			 				</td>

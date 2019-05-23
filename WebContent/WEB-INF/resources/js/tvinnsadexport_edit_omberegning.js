@@ -147,10 +147,13 @@
     
   //General functions
   	jq(function() {
-  		jq("#sadExportSaveNewTopicForm").submit(function() {
+  		
+  		jq( "#sadExportSaveNewTopicForm" ).submit(function( event ) {
   			setBlockUI();
+  			jq("#sumTotalAmountItemLines").val(jq("#sumTotalAmountItemLines").val().replace(',', '.'));
+  			jq("#sumTotalBruttoViktItemLines").val(jq("#sumTotalBruttoViktItemLines").val().replace(',', '.'));
+  			
 	  	});
-    	
   		
   		//=====================================
 	  	//START Child window for general codes
