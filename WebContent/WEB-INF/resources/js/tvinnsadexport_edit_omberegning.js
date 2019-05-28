@@ -79,6 +79,18 @@
     		refreshCustomValidity(jq('#seval1')[0]);
   		}
   	});
+  	
+  	jq('#m1n07').focus(function() {
+    	if(jq('#m1n07').val()!=''){
+    		refreshCustomValidity(jq('#m1n07')[0]);
+  		}
+  	});
+  	jq('#m3039e').focus(function() {
+    	if(jq('#m3039e').val()!=''){
+    		refreshCustomValidity(jq('#m3039e')[0]);
+  		}
+  	});
+  	
   	jq('#selkb').focus(function() {
     	if(jq('#selkb').val()!=''){
     		refreshCustomValidity(jq('#selkb')[0]);

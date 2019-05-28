@@ -1000,8 +1000,8 @@
 									                          
 									<b>Ekspedisjonsenhet</b>&nbsp;(exempel): 
 									  <ul>                    
-										<li><b>DSO</b> = 11111</li>  
-										<li><b>DEB/DRE</b> = 22222</li>
+										<li><b>DSO</b> = 17559</li>  
+										<li><b>DEB/DRE</b> = 17512</li>
 									  </ul>	
 									</p>
 									
@@ -1024,17 +1024,17 @@
 							            <td class="text14Bold" align="left" >&nbsp;</td> 
 							        </tr>
 							        <tr>
-							            <td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font><span title="todo">Meldings funksjon&nbsp;</span></td>
+							            <td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font><span title="m1n07">Meldings funksjon&nbsp;</span></td>
 							            <td class="text14" >
-								            <select class="inputTextMediumBlueMandatoryField" name="todo" id="todo" >
-							 				  <option value="DEB"<c:if test="${ Xmodel.record.seval1 == 'DEB'}"> selected </c:if> >DEB</option>
-											  <option value="DRE"<c:if test="${ Xmodel.record.seval1 == 'DRE'}"> selected </c:if> >DRE</option>
-											  <option value="DSO"<c:if test="${ Xmodel.record.seval1 == 'DSO'}"> selected </c:if> >DSO</option>
+								            <select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="m1n07" id="m1n07" >
+							 				  <option value="DEB"<c:if test="${ model.record.m1n07 == 'DEB'}"> selected </c:if> >DEB</option>
+											  <option value="DRE"<c:if test="${ model.record.m1n07 == 'DRE'}"> selected </c:if> >DRE</option>
+											  <option value="DSO"<c:if test="${ model.record.m1n07 == 'DSO'}"> selected </c:if> >DSO</option>
 											</select>
 							            </td>
-							            <td class="text14">&nbsp;<font class="text16RedBold" >*</font><span title="todo">Ekspedisjonsenhet</span>&nbsp;&nbsp;</td>
+							            <td class="text14">&nbsp;<font class="text16RedBold" >*</font><span title="m3039e">Ekspedisjonsenhet</span>&nbsp;&nbsp;</td>
 							            <td class="text14">	
-			 								<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="todo" id="todo" size="8" maxlength="6" value="${Xmodel.record.todo}">
+			 								<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="m3039e" id="m3039e" size="8" maxlength="6" value="${model.record.m3039e}">
 			 							</td>
 							        </tr>
 							        <tr height="4"><td class="text14" align="left" ></td> 

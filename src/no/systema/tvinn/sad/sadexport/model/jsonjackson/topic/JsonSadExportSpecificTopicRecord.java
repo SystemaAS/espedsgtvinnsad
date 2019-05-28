@@ -554,6 +554,14 @@ public class JsonSadExportSpecificTopicRecord extends JsonAbstractGrandFatherRec
 	public String getOm_sebl05() { return this.om_sebl05;}
 	
 	
+	private String m1n07 = null; 
+	public void setM1n07(String value) {  this.m1n07 = value; }
+	public String getM1n07() { return this.m1n07;}
+	
+	private String m3039e = null; 
+	public void setM3039e(String value) {  this.m3039e = value; }
+	public String getM3039e() { return this.m3039e;}
+	
 	/**
 	 * Used for java reflection in other classes
 	 * @return
