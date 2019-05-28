@@ -1481,7 +1481,7 @@
 							<tr>
 								<td class="text14" align="left" >
 								<img onMouseOver="showPop('andraKostPM_info');" onMouseOut="hidePop('andraKostPM_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-				 				<span title="siftg2">+/-&nbsp;(P/M)</span>
+				 				<span title="seftg2">+/-&nbsp;(P/M)</span>
 				 				<div class="text11" style="position: relative;" align="left">
 				 				<span style="position:absolute;top:2px; width:300px;" id="andraKostPM_info" class="popupWithInputText text11"  >
 					           			<b>Andre kostnader +/- (P/M)</b>&nbsp;
@@ -1495,7 +1495,7 @@
 								</div>
 				 				</td>
 			 					<td class="text14">
-			 						<input type="text" class="inputTextMediumBlue" name="seftg2" id="seftg2" size="1" maxlength="1" value="${model.record.seftg2}">
+			 						<input type="text" class="inputTextMediumBlueUPPERCASE" name="seftg2" id="seftg2" size="1" maxlength="1" value="${model.record.seftg2}">
 			 					</td>
 							</tr>
 							

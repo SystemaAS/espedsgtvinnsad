@@ -1950,17 +1950,21 @@ public class SadExportHeaderController {
 			record.setSedtg(dateSedtgISO);
 		}
 		if(record.getSedt()!=null && !"".equals(record.getSedt())){
-			logger.info("A");
 			dateSedtISO = this.dateFormatter.convertToDate_ISO(record.getSedt());
 			record.setSedt(dateSedtISO);
 		}else{
-			logger.info("B");
 			//this is used when there is a CREATE NEW event
 			DateTimeManager dateMgr = new DateTimeManager();
 			String now = dateMgr.getCurrentDate_ISO();
 			record.setSedt(now);
 		}
+		//upper case
+		if(strMgr.isNotNull(record.getSeftg2())){
+			record.setSeftg2(record.getSeftg2().toUpperCase());
+		}
+		
 		logger.info("sedt:" + record.getSedt());
+		logger.info("seftg2" + record.getSeftg2());
 	}
 	
 	/**
