@@ -1037,6 +1037,7 @@
 			 								<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="m3039e" id="m3039e" size="8" maxlength="6" value="${model.record.m3039e}">
 			 							</td>
 							        </tr>
+							        <%--
 							        <tr height="4"><td class="text14" align="left" ></td> 
 							        </tr>
 							        <tr>
@@ -1050,6 +1051,7 @@
 			 								<input type="text" class="inputTextReadOnly" size="8" maxlength="6" value="${Xmodel.record.todo}">
 			 							</td>
 							        </tr>
+							         --%>
 							        <tr height="5">
 							            <td class="text14Bold" align="left" >&nbsp;</td> 
 							        </tr>
