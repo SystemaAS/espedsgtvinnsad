@@ -29,6 +29,7 @@ import org.springframework.web.bind.WebDataBinder;
 
 //application imports
 import no.systema.main.service.UrlCgiProxyService;
+import no.systema.main.service.general.CurrencyRateService;
 import no.systema.main.service.general.notisblock.NotisblockService;
 import no.systema.main.url.store.MainUrlDataStore;
 import no.systema.main.util.AppConstants;
@@ -296,7 +297,7 @@ public class SadExportHeaderController {
 					//Fill up tollkreditnr if applicable
 					this.adjustTollkredit(appUser, recordToValidate);
 					
-					SadExportHeaderValidator validator = new SadExportHeaderValidator();
+					SadExportHeaderValidator validator = new SadExportHeaderValidator(this.urlCgiProxyService, appUser.getUser(), currencyRateService);
 					validator.validate(recordToValidate, bindingResult);
 					//test indicator in validation field
 					recordToValidate.setSe0035(se0035);
@@ -2040,6 +2041,12 @@ public class SadExportHeaderController {
 	public void setUrlCgiProxyService (UrlCgiProxyService value){ this.urlCgiProxyService = value; }
 	public UrlCgiProxyService getUrlCgiProxyService(){ return this.urlCgiProxyService; }
 	
+	@Qualifier ("currencyRateService")
+	private CurrencyRateService currencyRateService;
+	@Autowired
+	public void setCurrencyRateService (CurrencyRateService value){ this.currencyRateService=value; }
+	public CurrencyRateService getCurrencyRateService(){return this.currencyRateService;}
+	  
 	
 	@Qualifier ("sadExportSpecificTopicItemService")
 	private SadExportSpecificTopicItemService sadExportSpecificTopicItemService;

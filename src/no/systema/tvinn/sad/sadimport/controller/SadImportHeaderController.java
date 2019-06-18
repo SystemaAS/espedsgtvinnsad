@@ -27,6 +27,7 @@ import org.springframework.web.bind.WebDataBinder;
 
 //application imports
 import no.systema.main.service.UrlCgiProxyService;
+import no.systema.main.service.general.CurrencyRateService;
 import no.systema.main.service.general.notisblock.NotisblockService;
 import no.systema.main.url.store.MainUrlDataStore;
 import no.systema.main.util.AppConstants;
@@ -339,7 +340,7 @@ public class SadImportHeaderController {
 					this.adjustTollkredit(appUser, recordToValidate);
 					
 					
-					SadImportHeaderValidator validator = new SadImportHeaderValidator();
+					SadImportHeaderValidator validator = new SadImportHeaderValidator(this.urlCgiProxyService, this.currencyRateService);
 					validator.setSystemWebUser(appUser);
 					validator.setSadImportSpecificTopicService(this.sadImportSpecificTopicService);
 					validator.setUrlCgiProxyService(this.urlCgiProxyService);
@@ -2119,6 +2120,12 @@ public class SadImportHeaderController {
 	@Required
 	public void setUrlCgiProxyService (UrlCgiProxyService value){ this.urlCgiProxyService = value; }
 	public UrlCgiProxyService getUrlCgiProxyService(){ return this.urlCgiProxyService; }
+	
+	@Qualifier ("currencyRateService")
+	private CurrencyRateService currencyRateService;
+	@Autowired
+	public void setCurrencyRateService (CurrencyRateService value){ this.currencyRateService=value; }
+	public CurrencyRateService getCurrencyRateService(){return this.currencyRateService;}
 	
 	
 	@Qualifier ("sadImportSpecificTopicItemService")

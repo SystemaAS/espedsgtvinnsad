@@ -1,19 +1,31 @@
 package no.systema.tvinn.sad.sadexport.validator;
 
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.math.BigDecimal;
 
 import org.apache.log4j.Logger;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import no.systema.main.util.StringManager;
 import no.systema.main.validator.DateValidator;
+import no.systema.main.model.jsonjackson.general.JsonCurrencyRateContainer;
+import no.systema.main.model.jsonjackson.general.JsonCurrencyRateRecord;
 import no.systema.main.util.NumberFormatterLocaleAware;
+import no.systema.main.util.DateTimeManager;
+import no.systema.main.service.UrlCgiProxyService;
+import no.systema.main.service.UrlCgiProxyServiceImpl;
+import no.systema.main.service.general.CurrencyRateService;
 
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicRecord;
+import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
 import no.systema.tvinn.sad.util.TvinnSadConstants;
 
 /**
@@ -27,12 +39,23 @@ public class SadExportHeaderValidator implements Validator {
 	private StringManager strMgr = new StringManager();
 	private DateValidator dateValidator = new DateValidator();
 	private NumberFormatterLocaleAware numberFormatter = new NumberFormatterLocaleAware();
+	private DateTimeManager dateMgr = new DateTimeManager();
+	private UrlCgiProxyService urlCgiProxyService = null;
+	private CurrencyRateService currencyRateService = null;
+	private String applicationUser = null;
 	/**
 	 * 
 	 */
 	public boolean supports(Class clazz) {
 		return JsonSadExportSpecificTopicRecord.class.isAssignableFrom(clazz); 
 	}
+	
+	public SadExportHeaderValidator (UrlCgiProxyService urlCgiProxyServiceParam, String applicationUserParam, CurrencyRateService currencyRateServiceParam){
+		this.urlCgiProxyService = urlCgiProxyServiceParam;
+		this.currencyRateService =  currencyRateServiceParam;
+		this.applicationUser = applicationUserParam;
+	}
+	
 	
 	/**
 	 * @param obj
@@ -140,10 +163,20 @@ public class SadExportHeaderValidator implements Validator {
 						errors.rejectValue("selkb", "systema.tvinn.sad.export.header.error.rule.selkb.invalidCountryDeklType"); 	
 					}
 				}
-				//Kostnader can not be equal or greater than the invoice sum
+				//Costs can not be equal or greater than the invoice sum (take currency into account as well)
 				if(strMgr.isNotNull(record.getSebel1()) && strMgr.isNotNull(record.getSebel2()) ){
 					BigDecimal faktSum = new BigDecimal(Double.valueOf(record.getSebel1().replace(",", ".")));
 					BigDecimal costs = new BigDecimal(Double.valueOf(record.getSebel2().replace(",", ".")));
+					
+					//now apply currency (when applic.) ... otherwise currency = NOK
+					if(strMgr.isNotNull(record.getSeval1()) && strMgr.isNotNull(record.getSeval2())){
+						BigDecimal tmp1 = this.getCurrencyRate(record.getSeval1());
+						BigDecimal tmp2 = this.getCurrencyRate(record.getSeval2());
+						//
+						faktSum = faktSum.multiply(tmp1);
+						costs = costs.multiply(tmp2);
+					}
+					//now compare
 					if(costs.compareTo(faktSum)>=0 ){
 						errors.rejectValue("sebel2", "systema.tvinn.sad.export.header.error.rule.invalid.sebel2");
 					}
@@ -291,5 +324,49 @@ public class SadExportHeaderValidator implements Validator {
 		return retval;
 	}
 	*/
+	
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param currencyCode
+	 * @param currencyRateService
+	 * @return
+	 */
+	public BigDecimal getCurrencyRate(String currencyCode) {
+		
+		  String METHOD = "[DEBUG] method:getCurrencyRate"; 
+		  String validDate = dateMgr.getCurrentDate_ISO();
+		  //build
+		  String BASE_URL_CURRENCY_RATE = TvinnSadUrlDataStore.TVINN_SAD_FETCH_CURRENCY_RATE_URL;
+		  StringBuffer urlRequestParamsCurrencyRate = new StringBuffer();
+		  urlRequestParamsCurrencyRate.append("user=" + applicationUser);
+		  urlRequestParamsCurrencyRate.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "kod=" + currencyCode);
+		  urlRequestParamsCurrencyRate.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "datum=" + validDate);
+		  //execute
+		  String jsonPayloadCurrencyRate = this.urlCgiProxyService.getJsonContent(BASE_URL_CURRENCY_RATE, urlRequestParamsCurrencyRate.toString());
+		  logger.info(METHOD + "CURRENCY URL:" + BASE_URL_CURRENCY_RATE);
+		  logger.info(METHOD + "CURRENCY PARAMS:" + urlRequestParamsCurrencyRate.toString());
+		  logger.info(METHOD + jsonPayloadCurrencyRate);
+		  //now map and process json
+		  Double resultPartial = 1.00D;
+		  Double factor = 1.00D;
+		  BigDecimal result = new BigDecimal(1);
+		  
+		  if(jsonPayloadCurrencyRate!=null){
+			  JsonCurrencyRateContainer jsonCurrencyRateContainer = this.currencyRateService.getCurrencyRateContainer(jsonPayloadCurrencyRate);
+			  for(JsonCurrencyRateRecord record : jsonCurrencyRateContainer.getValutakurs()){
+				  //Debug
+				  logger.info(METHOD + "Currency RATE: " + record.getKvakrs() + " Currency FACTOR: " + record.getKvaomr() + " Currency DATE: " + validDate);
+				  if(strMgr.isNotNull(record.getKvakrs()) && strMgr.isNotNull(record.getKvaomr())){
+					  resultPartial = Double.valueOf(record.getKvakrs().replace(",", "."));
+					  factor = Double.valueOf(record.getKvaomr().replace(",", "."));
+					  //
+					  BigDecimal tmp = new BigDecimal(resultPartial / factor);
+					  result = this.numberFormatter.formatBigDecimal(2, tmp);
+				  }
+			  }
+		  } 
+		  return result;
+	  }
 	
 }
