@@ -2,6 +2,7 @@ package no.systema.tvinn.sad.sadexport.validator;
 
 import java.util.Arrays;
 import java.util.List;
+import java.math.BigDecimal;
 
 import org.apache.log4j.Logger;
 import org.springframework.validation.Errors;
@@ -10,6 +11,8 @@ import org.springframework.validation.Validator;
 
 import no.systema.main.util.StringManager;
 import no.systema.main.validator.DateValidator;
+import no.systema.main.util.NumberFormatterLocaleAware;
+
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicRecord;
 import no.systema.tvinn.sad.util.TvinnSadConstants;
 
@@ -23,7 +26,7 @@ public class SadExportHeaderValidator implements Validator {
 	private static final Logger logger = Logger.getLogger(SadExportHeaderValidator.class.getName());
 	private StringManager strMgr = new StringManager();
 	private DateValidator dateValidator = new DateValidator();
-	
+	private NumberFormatterLocaleAware numberFormatter = new NumberFormatterLocaleAware();
 	/**
 	 * 
 	 */
@@ -136,6 +139,15 @@ public class SadExportHeaderValidator implements Validator {
 					if(!isValidCountryForDeklaration(record)){
 						errors.rejectValue("selkb", "systema.tvinn.sad.export.header.error.rule.selkb.invalidCountryDeklType"); 	
 					}
+				}
+				//Kostnader can not be equal or greater than the invoice sum
+				if(strMgr.isNotNull(record.getSebel1()) && strMgr.isNotNull(record.getSebel2()) ){
+					BigDecimal faktSum = new BigDecimal(Double.valueOf(record.getSebel1().replace(",", ".")));
+					BigDecimal costs = new BigDecimal(Double.valueOf(record.getSebel2().replace(",", ".")));
+					if(costs.compareTo(faktSum)>=0 ){
+						errors.rejectValue("sebel2", "systema.tvinn.sad.export.header.error.rule.invalid.sebel2");
+					}
+					
 				}
 			}
 		}
