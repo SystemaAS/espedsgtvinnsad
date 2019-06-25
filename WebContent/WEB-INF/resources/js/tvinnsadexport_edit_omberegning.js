@@ -90,6 +90,11 @@
     		refreshCustomValidity(jq('#m3039e')[0]);
   		}
   	});
+  	jq('#m0035').focus(function() {
+    	if(jq('#m0035').val()!=''){
+    		refreshCustomValidity(jq('#m0035')[0]);
+  		}
+  	});
   	
   	jq('#selkb').focus(function() {
     	if(jq('#selkb').val()!=''){

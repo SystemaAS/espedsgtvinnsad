@@ -562,6 +562,10 @@ public class JsonSadExportSpecificTopicRecord extends JsonAbstractGrandFatherRec
 	public void setM3039e(String value) {  this.m3039e = value; }
 	public String getM3039e() { return this.m3039e;}
 	
+	private String m0035 = null; 
+	public void setM0035(String value) {  this.m0035 = value; }
+	public String getM0035() { return this.m0035;}
+	
 	/**
 	 * Used for java reflection in other classes
 	 * @return

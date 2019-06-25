@@ -482,7 +482,7 @@ public class SadExportOmberegningController {
 	 * @return
 	 */
 	@RequestMapping(value="tvinnsadexport_edit_omberegning_send.do")
-	public ModelAndView doSadExportSend(HttpSession session, HttpServletRequest request){
+	public ModelAndView doSadExportSend(@ModelAttribute ("record") JsonSadExportSpecificTopicRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
 		ModelAndView successView = new ModelAndView("redirect:tvinnsadexport.do?action=doFind&sg=" + appUser.getTvinnSadSign());
@@ -513,7 +513,7 @@ public class SadExportOmberegningController {
 			//-------------------
 			String urlRequestParamsKeys = this.getRequestUrlKeyParameters(action, avd, opd, sign, appUser);
 			//there are only key parameters in doSend. No other topic (record) specific parameters from GUI or such
-			String urlRequestParams = urlRequestParamsKeys;
+			String urlRequestParams = urlRequestParamsKeys + "&m1n07=" + recordToValidate.getM1n07() + "&m3039e=" + recordToValidate.getM3039e() + "&m0035=" + recordToValidate.getM0035();
 			//for debugging purposes
 			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, BASE_URL); 
 			

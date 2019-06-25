@@ -1019,12 +1019,12 @@
 				 	<table width="90%" align="left" class="formFrameTitaniumGrayRoundBottom" border="0" cellspacing="0" cellpadding="0">
 				 		<tr>
 					 		<td>
-						 		<table align="left" border="0" cellspacing="0" cellpadding="0">
+						 		<table width="80%" align="left" border="0" cellspacing="0" cellpadding="0">
 							 		<tr height="15">
 							            <td class="text14Bold" align="left" >&nbsp;</td> 
 							        </tr>
 							        <tr>
-							            <td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font><span title="m1n07">Meldings funksjon&nbsp;</span></td>
+							            <td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font><span title="m1n07">Meldings funksjon</span></td>
 							            <td class="text14" >
 								            <select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="m1n07" id="m1n07" >
 							 				  <option value="DEB"<c:if test="${ model.record.m1n07 == 'DEB'}"> selected </c:if> >DEB</option>
@@ -1032,10 +1032,17 @@
 											  <option value="DSO"<c:if test="${ model.record.m1n07 == 'DSO'}"> selected </c:if> >DSO</option>
 											</select>
 							            </td>
-							            <td class="text14">&nbsp;<font class="text16RedBold" >*</font><span title="m3039e">Ekspedisjonsenhet</span>&nbsp;&nbsp;</td>
+							            <td class="text14">&nbsp;<font class="text16RedBold" >*</font><span title="m3039e">Ekspedisjonsenhet</span></td>
 							            <td class="text14">	
 			 								<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="m3039e" id="m3039e" size="8" maxlength="6" value="${model.record.m3039e}">
 			 							</td>
+			 							<td class="text14">&nbsp;<font class="text16RedBold" >*</font><span title="m0035">Testekode</span></td>
+										<td class="text14">
+											<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="m0035" id="m0035">
+							            		<option value="2" <c:if test="${model.record.m0035 == '2'}"> selected </c:if> >Test</option>
+							            		<option value="" <c:if test="${empty model.record.m0035}"> selected </c:if> >Prod</option>
+											</select>
+										</td>
 							        </tr>
 							        <%--
 							        <tr height="4"><td class="text14" align="left" ></td> 

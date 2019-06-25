@@ -2029,7 +2029,7 @@
 						<td class="text14" align="left" title="m0035">Testekode</td>
 						<td class="text14MediumBlue">
 							<select class="selectMediumBlueE2" name="m0035" id="m0035">
-			            		<option value="1" <c:if test="${model.record.sendParametersRecord.m0035 == '1'}"> selected </c:if> >Test</option>
+			            		<option value="2" <c:if test="${model.record.sendParametersRecord.m0035 == '2'}"> selected </c:if> >Test</option>
 			            		<option value="" <c:if test="${empty model.record.sendParametersRecord.m0035}"> selected </c:if> >Prod</option>
 							</select>
 						</td>
