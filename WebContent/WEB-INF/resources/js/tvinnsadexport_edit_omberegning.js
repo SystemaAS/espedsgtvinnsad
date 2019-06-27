@@ -85,11 +85,7 @@
     		refreshCustomValidity(jq('#m1n07')[0]);
   		}
   	});
-  	jq('#m3039e').focus(function() {
-    	if(jq('#m3039e').val()!=''){
-    		refreshCustomValidity(jq('#m3039e')[0]);
-  		}
-  	});
+  	
   	jq('#m0035').focus(function() {
     	if(jq('#m0035').val()!=''){
     		refreshCustomValidity(jq('#m0035')[0]);
@@ -935,3 +931,25 @@
 		  
 	  }
 	  	
+	  jq(function() { 
+	    jq('#m1n07').change(function() {
+	    	doDSO();
+	    });
+	  });
+	  
+	  
+	  jq(document).ready(function() {
+		  doDSO();
+	  });
+	  
+	  function doDSO(){
+		  if(jq('#m1n07').val() != ''){
+			  	 var code = '17512';
+				 if(jq('#m1n07').val() == 'DSO'){
+					 code = '17559';
+				 }
+				 
+				 //
+				 jq('#m3039e').val(code);
+			  }
+	  }

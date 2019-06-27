@@ -1019,7 +1019,7 @@
 				 	<table width="90%" align="left" class="formFrameTitaniumGrayRoundBottom" border="0" cellspacing="0" cellpadding="0">
 				 		<tr>
 					 		<td>
-						 		<table width="80%" align="left" border="0" cellspacing="0" cellpadding="0">
+						 		<table width="100%" align="left" border="0" cellspacing="0" cellpadding="0">
 							 		<tr height="15">
 							            <td class="text14Bold" align="left" >&nbsp;</td> 
 							        </tr>
@@ -1034,7 +1034,7 @@
 							            </td>
 							            <td class="text14">&nbsp;<font class="text16RedBold" >*</font><span title="m3039e">Ekspedisjonsenhet</span></td>
 							            <td class="text14">	
-			 								<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="m3039e" id="m3039e" size="8" maxlength="6" value="${model.record.m3039e}">
+			 								<input readonly type="text" class="inputTextReadOnly" name="m3039e" id="m3039e" size="8" value="${model.record.m3039e}">
 			 							</td>
 			 							<td class="text14">&nbsp;<font class="text16RedBold" >*</font><span title="m0035">Testekode</span></td>
 										<td class="text14">
