@@ -1046,6 +1046,45 @@
 		  //open now
 		  jq('#dialogSendWithParameters').dialog('open');
 	  }
+	  
+	  
+	  jq(function() { 
+	    jq('#m1N07').change(function() {
+	    	doDSO();
+	    });
+	    jq('#m3039e').change(function() {
+	    	doDSO();
+	    });
+	  });
+	  
+	  jq(document).ready(function() {
+		  doDSO();
+	  });
+	  
+	  function doDSO(){
+		  if(jq('#m1N07').val() != ''){
+		  	 if(jq('#m1N07').val() == 'DSO'){
+		  		 console.log("DSO");
+		  		 if(jq('#m3039e').val() == '17558'){
+		  			jq("#m3039e").addClass( "isa_success" );
+		  			jq("#m3039e").removeClass( "isa_error" );
+		  		 }else{
+		  			jq("#m3039e").removeClass( "isa_success" );
+		  			jq("#m3039e").addClass( "isa_error" );
+		  		 }
+				
+			 }else{
+				 console.log("DRE ...");
+				 if(jq('#m3039e').val() == '17511'){
+			  			jq("#m3039e").addClass( "isa_success" );
+			  			jq("#m3039e").removeClass( "isa_error" );
+		  		 }else{
+		  			jq("#m3039e").removeClass( "isa_success" );
+		  			jq("#m3039e").addClass( "isa_error" );
+		  		 }
+			 }
+		  }
+	  }
 
 	  
 	  

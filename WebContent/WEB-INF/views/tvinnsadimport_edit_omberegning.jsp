@@ -1985,7 +1985,31 @@
 			 	<input type="hidden" name="sign" id="sign" value="${model.record.sign}">
 				<table>
 					<tr>
-						<td class="text14" align="left" title="m1N07">Meldings funksjon</td>
+						<td class="text14" align="left" title="m1N07">Meldings funksjon
+						<img onMouseOver="showPop('edi_info');" onMouseOut="hidePop('edi_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+		 						<div class="text11" style="position: relative;" align="left">
+		 						<span style="position:absolute;top:2px; width:250px;" id="edi_info" class="popupWithInputText text11" >
+				           			<b>Meldings funksjon Omberegning</b><br/>
+									Send till TVINN (EDI) - 
+									<p>
+									<b>Meldingsfunskjon:</b>
+									<ul>
+									<li><b>DEB</b> = Etterberegning</li>        
+									<li><b>DRE</b> = Refusjon</li>              
+									<li><b>DSO</b> = Statistisk oppretting</li> 
+									</ul>
+									                          
+									<b>Ekspedisjonsenhet</b>&nbsp;(exempel): 
+									  <ul>                    
+										<li><b>DSO</b> = 17558</li>  
+										<li><b>DEB/DRE</b> = 17511</li>
+									  </ul>	
+									</p>
+									
+								</span>
+								</div>
+						
+						</td>
 						<td class="text14MediumBlue">
 							<select class="selectMediumBlueE2" name="m1N07" id="m1N07">
 			            		<option value="">-velg-</option>
