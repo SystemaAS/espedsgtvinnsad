@@ -850,6 +850,9 @@
 	    		}	
 	    });
 	});
+	
+	
+	
 	//private function
 	function getCurrencyData(isoDate) {
 		jq.ajax({
@@ -861,9 +864,14 @@
 			dataType: 'json',
 			success: function(data) {
 				var len = data.length;
-				for ( var i = 0; i < len; i++) {
-					jq('#sevku').val(data[i].kvakrs);
-					jq('#factor').val(data[i].kvaomr);
+				if(len>0){
+					for ( var i = 0; i < len; i++) {
+						jq('#sevku').val(data[i].kvakrs);
+						jq('#factor').val(data[i].kvaomr);
+					}
+				}else{
+					jq('#sevku').val('');
+					jq('#factor').val('');
 				}
 			}
 		});

@@ -966,7 +966,7 @@
 			 			</tr>
 			 			<tr>
 			 				<td class="text14">
-			 					<b>&nbsp;23.</b><font class="text16RedBold" >*</font><span title="sivku">Kurs&nbsp;</span>
+			 					<b>&nbsp;23.</b><font class="text16RedBold" >*</font><span title="sevku">Kurs&nbsp;</span>
 				 			</td>
 				 			<td class="text14" align="left" ><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField"  name="sevku" id="sevku" size="10" maxlength="7" value="${model.record.sevku}"></td>
 				 			
