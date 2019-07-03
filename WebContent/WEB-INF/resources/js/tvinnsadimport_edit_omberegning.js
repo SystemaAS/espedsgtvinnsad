@@ -1065,7 +1065,7 @@
 		  if(jq('#m1N07').val() != ''){
 		  	 if(jq('#m1N07').val() == 'DSO'){
 		  		 console.log("DSO");
-		  		 if(jq('#m3039e').val() == '17558'){
+		  		 if(jq('#m3039e').val() == '10173'){
 		  			jq("#m3039e").addClass( "isa_success" );
 		  			jq("#m3039e").removeClass( "isa_error" );
 		  		 }else{
@@ -1075,7 +1075,7 @@
 				
 			 }else{
 				 console.log("DRE ...");
-				 if(jq('#m3039e').val() == '17511'){
+				 if(jq('#m3039e').val() == '10175'){
 			  			jq("#m3039e").addClass( "isa_success" );
 			  			jq("#m3039e").removeClass( "isa_error" );
 		  		 }else{

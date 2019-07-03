@@ -1000,8 +1000,8 @@
 									                          
 									<b>Ekspedisjonsenhet</b>&nbsp;(exempel): 
 									  <ul>                    
-										<li><b>DSO</b> = 17559</li>  
-										<li><b>DEB/DRE</b> = 17512</li>
+										<li><b>DSO</b> = 10174</li>  
+										<li><b>DEB/DRE</b> = 10172</li>
 									  </ul>	
 									</p>
 									

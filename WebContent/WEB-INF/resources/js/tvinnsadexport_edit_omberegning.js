@@ -944,9 +944,9 @@
 	  
 	  function doDSO(){
 		  if(jq('#m1n07').val() != ''){
-			  	 var code = '17512';
+			  	 var code = '10172';
 				 if(jq('#m1n07').val() == 'DSO'){
-					 code = '17559';
+					 code = '10174';
 				 }
 				 
 				 //

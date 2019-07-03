@@ -2001,8 +2001,8 @@
 									                          
 									<b>Ekspedisjonsenhet</b>&nbsp;(exempel): 
 									  <ul>                    
-										<li><b>DSO</b> = 17558</li>  
-										<li><b>DEB/DRE</b> = 17511</li>
+										<li><b>DSO</b> = 10173</li>  
+										<li><b>DEB/DRE</b> = 10175</li>
 									  </ul>	
 									</p>
 									
