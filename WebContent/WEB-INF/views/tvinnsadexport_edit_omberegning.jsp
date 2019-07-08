@@ -615,7 +615,7 @@
 							        <tr>
 							            <td align="left"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="serg" id="serg" size="20" maxlength="11" value="${model.record.serg}"></td>
 							            	<td align="left">
-											<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="segkd" id="segkd" size="1" maxlength="1" value="${model.record.segkd}">
+											<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="segkd" id="sektc" size="1" maxlength="1" value="${model.record.sektc}">
 											<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="sekta" id="sekta" size="5" maxlength="5" value="${model.record.sekta}">
 											<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="sektb" id="sektb" size="2" maxlength="2" value="${model.record.sektb}">
 										</td>

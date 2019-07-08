@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 import org.springframework.validation.Validator;
+import org.apache.log4j.Logger;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 
@@ -19,6 +20,8 @@ import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpeci
  *
  */
 public class SadExportOmberegningHeaderValidator implements Validator {
+	private static final Logger logger = Logger.getLogger(SadExportOmberegningHeaderValidator.class.getName());
+	
 	private StringManager strMgr = new StringManager();
 	private DateValidator dateValidator = new DateValidator();
 	
@@ -84,8 +87,21 @@ public class SadExportOmberegningHeaderValidator implements Validator {
 					errors.rejectValue("selka", "systema.tvinn.sad.export.header.error.rule.avsLandNotNorwayAndBestLandNorway"); 
 				}
 				if(!this.isValidProcedureTypeForBestLand(record)){
-					errors.rejectValue("selka", "systema.tvinn.sad.export.header.error.rule.avsLandNotNorwayAndBestLandNorway"); 
+					errors.rejectValue("selkb", "systema.tvinn.sad.export.header.error.rule.avsLandNotNorwayAndBestLandNorway"); 
 				}
+				
+				//if tullkredit = not exists
+				if(!this.isValidTollkreditValue(record.getSekta())){
+					if("".equals(record.getSeski())){
+						errors.rejectValue("seski", "systema.tvinn.sad.export.header.error.rule.seski.tollMvaValueMandatory"); 
+					}
+				}
+				if(!this.isValidTollkreditValue(record.getSekta())){
+					if("".equals(record.getSekddk())){
+						errors.rejectValue("seski", "systema.tvinn.sad.export.header.error.rule.sekddk.tollMvaValueMandatory"); 
+					}
+				}
+				/*
 				//if tullkredit = not exists
 				if("".equals(record.getSekta()) || "".equals(record.getSektb()) ){
 					if("".equals(record.getSeski())){
@@ -100,7 +116,7 @@ public class SadExportOmberegningHeaderValidator implements Validator {
 						errors.rejectValue("seski", "systema.tvinn.sad.export.header.error.rule.seski.tollMvaValueDiscreteMandatoryValues"); 
 					}
 				}
-				
+				*/
 				//------
 				//dates 
 				//------
@@ -112,9 +128,7 @@ public class SadExportOmberegningHeaderValidator implements Validator {
 				}
 			
 			}
-			
-			
-			
+		
 		}
 	}
 	
@@ -174,5 +188,24 @@ public class SadExportOmberegningHeaderValidator implements Validator {
 		return retval;
 	}
 
+	/**
+	 * 
+	 * @param value
+	 * @return
+	 */
+	private boolean isValidTollkreditValue(String value){
+		logger.info("Inside isValidTollkreditValue");
+		boolean retval = false;
+		Integer creditField = 0;
+		if(strMgr.isNotNull(value)){
+			creditField = Integer.valueOf(value);
+			if(creditField>0){
+				retval = true;
+				//logger.info("€€€€€€€€€€€€€€€€:" + value);
+			}
+		}
+		
+		return retval;
+	}
 	
 }
