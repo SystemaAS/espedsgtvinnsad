@@ -498,6 +498,9 @@ public class JsonSadImportSpecificTopicItemRecord  extends JsonAbstractGrandFath
 	public void setWk8(String value) {  this.wk8 = value; }
 	public String getWk8() { return this.wk8; }
 		
+	private String svcnr = null;
+	public void setSvcnr(String value) {  this.svcnr = value; }
+	public String getSvcnr() { return this.svcnr; }
 	
 	
 	

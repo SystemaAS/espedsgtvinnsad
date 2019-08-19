@@ -5,6 +5,7 @@ package no.systema.tvinn.sad.sadexport.service;
 
 import no.systema.tvinn.sad.model.jsonjackson.JsonSadAutoControlErrorContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportSpecificTopicItemContainer;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportSpecificTopicItemContainernrContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportSpecificTopicItemAvgifterContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportTolltariffKundensRegisterVarukodContainer;
 
@@ -22,5 +23,5 @@ public interface SadExportSpecificTopicItemService {
 	public JsonSadAutoControlErrorContainer getSadExportSpecificTopicItemAutoControlErrorContainer(String utfPayload);
 	
 	public JsonSadExportTolltariffKundensRegisterVarukodContainer getKundRegisterVarukodContainer(String utfPayload) throws Exception;
-	
+	public JsonSadExportSpecificTopicItemContainernrContainer getSadExportSpecificTopicItemContainernrContainer(String utfPayload);
 }

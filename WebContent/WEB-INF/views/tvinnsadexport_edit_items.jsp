@@ -970,9 +970,13 @@
 											</span>
 											--%>	
 										</td>
+										<td class="text14" align="left"><span title="svcnr">Containernr.</span>
+											
+										</td>
+
 									</tr>
 									<tr>
-										<td class="text14" align="center" >&nbsp;<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="svavtp" id="svavtp" size="8" maxlength="7" value="${model.record.svavtp}"></td>
+									<td class="text14" align="center" >&nbsp;<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="svavtp" id="svavtp" size="8" maxlength="7" value="${model.record.svavtp}"></td>
 				            			<td class="text14" align="left" >
 											<select class="selectMediumBlueE2" name="svavts" id="svavts">
 						        		    			<option value="">-velg-</option>
@@ -994,25 +998,29 @@
 											<a tabindex="-1" id="svlkIdLink">
 												<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 											</a>
-										</td>																			
-								    	<td align="left" colspan="2">
-												<c:choose>	
-													<c:when test="${model.status == 'M' || empty model.status }">
-														<input class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadexport_edit_items.do';" value='<spring:message code="systema.tvinn.sad.export.item.createnew.submit"/>'>
-														&nbsp;&nbsp;
-														
-														<%-- SEND button: is causing some issues in the Stat.värde calculation
-															 We shall have the send button ONLY at one place (so far) and that is at the header level
-									 				    	<c:if test="${not empty totalNumberOfItemLines && '0' != totalNumberOfItemLines}">
-									 				    		<input tabindex=-1 class="inputFormSubmit" type="submit" name="send" id="send" onclick="javascript: form.action='skatimport_send.do';" value='<spring:message code="systema.skat.import.createnew.send"/>'/>
-									 				    	</c:if>
-									 				  	 --%>
-													</c:when>
-													<c:otherwise>
-							 				    		<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
-							 				    	</c:otherwise>	
-						 				    	</c:choose>	
 										</td>
+										
+									<td colspan="3" class="text14" align="left" >
+										<input type="text" class="inputText" name="svcnr" id="svcnr" size="18" maxlength="17" value="${model.record.svcnr}">
+										<button name="itemContainerNr" id="itemContainerNr" class="buttonGray" style="font-size:12" type="button" >Mere...</button>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										 <c:choose>	
+											<c:when test="${model.status == 'M' || empty model.status }">
+												<input class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadexport_edit_items.do';" value='<spring:message code="systema.tvinn.sad.export.item.createnew.submit"/>'>
+												&nbsp;&nbsp;
+												
+												<%-- SEND button: is causing some issues in the Stat.värde calculation
+													 We shall have the send button ONLY at one place (so far) and that is at the header level
+							 				    	<c:if test="${not empty totalNumberOfItemLines && '0' != totalNumberOfItemLines}">
+							 				    		<input tabindex=-1 class="inputFormSubmit" type="submit" name="send" id="send" onclick="javascript: form.action='skatimport_send.do';" value='<spring:message code="systema.skat.import.createnew.send"/>'/>
+							 				    	</c:if>
+							 				  	 --%>
+											</c:when>
+											<c:otherwise>
+						 				    		<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
+						 				    	</c:otherwise>	
+					 				    	</c:choose>	
+									</td>
 																	        	
 							        </tr>									
 								</table>

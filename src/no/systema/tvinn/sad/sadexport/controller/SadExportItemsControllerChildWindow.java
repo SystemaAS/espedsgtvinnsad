@@ -38,8 +38,10 @@ import no.systema.main.util.AppConstants;
 import no.systema.main.util.DateTimeManager;
 import no.systema.main.util.EncodingTransformer;
 import no.systema.main.util.JsonDebugger;
+import no.systema.main.util.StringManager;
 import no.systema.main.model.SystemaWebUser;
-
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportSpecificTopicItemContainernrContainer;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportSpecificTopicItemContainernrRecord;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportTolltariffKundensRegisterVarukodContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportTolltariffKundensRegisterVarukodRecord;
 import no.systema.tvinn.sad.sadexport.service.SadExportGeneralCodesChildWindowService;
@@ -75,7 +77,7 @@ public class SadExportItemsControllerChildWindow {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(2000);
 	//customer
 	private final String DATATABLE_LIST = "list";
-
+	private StringManager strMgr = new StringManager();
 	
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	private ApplicationContext context;
@@ -190,6 +192,97 @@ public class SadExportItemsControllerChildWindow {
 			model.put("kundensVareRegList", list);
 			model.put("vkod", vkod);
 			model.put("senId", senderId);
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsadexport_edit_items_childwindow_containernr.do", params="action=doInit",  method={RequestMethod.GET} )
+	public ModelAndView doInitContainernr(@ModelAttribute ("record") JsonSadExportSpecificTopicItemContainernrContainer recordToValidate, HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doInitContainernr");
+		Map model = new HashMap();
+		model.put("avd", recordToValidate.getAvd());
+		model.put("opd", recordToValidate.getOpd());
+		//default
+		String lineNr = recordToValidate.getLin();
+		model.put("lin", lineNr);
+		
+		if(strMgr.isNull(lineNr) ){
+			//special case since the item line will be created after the container nr. has been created. 
+			//meaning that this number will create an orphan line nr in the container nr db-table (until the item line nr. (parent) has been created)
+			if(strMgr.isNotNull(request.getParameter("linx"))){
+				Integer nextLineNr = Integer.parseInt(request.getParameter("linx"));
+				String futureLineNr = String.valueOf(++ nextLineNr);
+				model.put("lin", futureLineNr);
+				lineNr = futureLineNr;
+			}else{
+				lineNr = "1";
+				model.put("lin", lineNr);
+			}
+		}
+		
+		
+		ModelAndView successView = new ModelAndView("tvinnsadexport_edit_items_childwindow_containernr");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			  
+			List list = this.getContainernrList(appUser, recordToValidate.getAvd(), recordToValidate.getOpd(), lineNr );
+			model.put("containernrList", list);
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsadexport_edit_items_childwindow_containernr_edit.do",   method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doEditContainernr(@ModelAttribute ("record") JsonSadExportSpecificTopicItemContainernrRecord recordToValidate, HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doEditContainernr");
+		Map model = new HashMap();
+		model.put("avd", recordToValidate.getSvavd());
+		model.put("opd", recordToValidate.getSvtdn());
+		model.put("lin", recordToValidate.getSvli());
+		String action = request.getParameter("action");
+		
+		ModelAndView successView = new ModelAndView("tvinnsadexport_edit_items_childwindow_containernr");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			//Update
+			String mode = TvinnSadConstants.MODE_ADD;
+			if("doDelete".equals(action)){
+				mode = TvinnSadConstants.MODE_DELETE;
+			}
+			this.updateContainernr(appUser, recordToValidate, mode);
+			
+			
+			//get list
+			List list = this.getContainernrList(appUser, recordToValidate.getSvavd(), recordToValidate.getSvtdn(), recordToValidate.getSvli() );
+			model.put("containernrList", list);
 			
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 			
@@ -370,6 +463,91 @@ public class SadExportItemsControllerChildWindow {
 		return list;
 	}
 
+	/**
+	 * 
+	 * @param appUser
+	 * @param avd
+	 * @param opd
+	 * @param lineNr
+	 * @return
+	 */
+	private List<JsonSadExportSpecificTopicItemContainernrRecord> getContainernrList(SystemaWebUser appUser, String avd, String opd, String lineNr){
+		List<JsonSadExportSpecificTopicItemContainernrRecord> list = new ArrayList<JsonSadExportSpecificTopicItemContainernrRecord>();
+
+		logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+		String BASE_URL = SadExportUrlDataStore.SAD_EXPORT_BASE_CONTAINERNR_ITEMLIST_URL;
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + appUser.getUser());
+		urlRequestParams.append("&avd=" + avd);
+		urlRequestParams.append("&opd=" + opd);
+		urlRequestParams.append("&lin=" + lineNr);
+		
+		
+		logger.info(BASE_URL);
+		logger.info(urlRequestParams);
+		
+		UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
+		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+		logger.info(this.jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+		JsonSadExportSpecificTopicItemContainernrContainer container = null;
+		try{
+			if(jsonPayload!=null){
+				container = this.sadExportSpecificTopicItemService.getSadExportSpecificTopicItemContainernrContainer(jsonPayload);
+				if(container!=null){
+					for(JsonSadExportSpecificTopicItemContainernrRecord  record : container.getContainerlist()){
+						list.add(record);
+					}
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	/**
+	 * 
+	 * @param appUser
+	 * @param recordToValidate
+	 * @param mode
+	 * @return
+	 */
+	private boolean updateContainernr(SystemaWebUser appUser, JsonSadExportSpecificTopicItemContainernrRecord recordToValidate, String mode){
+		boolean retval = true;
+
+		logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+		String BASE_URL = SadExportUrlDataStore.SAD_EXPORT_BASE_UPDATE_CONTAINERNR_URL;
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + appUser.getUser());
+		urlRequestParams.append("&avd=" + recordToValidate.getSvavd());
+		urlRequestParams.append("&opd=" + recordToValidate.getSvtdn());
+		urlRequestParams.append("&lin=" + recordToValidate.getSvli());
+		urlRequestParams.append("&svcnr=" + recordToValidate.getSvcnr());
+		urlRequestParams.append("&mode=" + mode);
+		
+		logger.info(BASE_URL);
+		logger.info(urlRequestParams);
+		
+		UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
+		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+		logger.info(this.jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+		JsonSadExportSpecificTopicItemContainernrContainer container = null;
+		try{
+			if(jsonPayload!=null){
+				container = this.sadExportSpecificTopicItemService.getSadExportSpecificTopicItemContainernrContainer(jsonPayload);
+				if(container!=null){
+					
+				}else{
+				  retval = true;	
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return retval;
+	}
+	
+	
 
 	//SERVICES
 	@Qualifier ("urlCgiProxyService")

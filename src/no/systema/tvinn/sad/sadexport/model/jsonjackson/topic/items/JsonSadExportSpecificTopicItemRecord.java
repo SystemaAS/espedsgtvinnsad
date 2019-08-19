@@ -180,6 +180,10 @@ public class JsonSadExportSpecificTopicItemRecord  extends JsonAbstractGrandFath
 	public void setSvnyl(String value) {  this.svnyl = value; }
 	public String getSvnyl() { return this.svnyl; }
 	
+	private String svcnr = null;
+	public void setSvcnr(String value) {  this.svcnr = value; }
+	public String getSvcnr() { return this.svcnr; }
+	
 	
 	//These w(x)(n) group is not a database field but an agreed work variable array from/to the 
 	//service program...

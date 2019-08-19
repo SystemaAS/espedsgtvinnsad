@@ -100,6 +100,12 @@ public final class SadExportUrlDataStore {
 	static public String SAD_EXPORT_BASE_ANGRE_OMB_ITEMLIST_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOE010R.pgm";
 	//http://gw.systema.no/sycgip/TNOE010R.pgm?user=OSCAR&avd=1&opd=91132&mode=R
 	
+	//[5.3] Containernr list (child window)
+	static public String SAD_EXPORT_BASE_CONTAINERNR_ITEMLIST_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOE025R.pgm";
+	//http://gw.systema.no/sycgip/TNOE025R.pgm?user=OSCAR&avd=1&opd=91132&lin=3
+	static public String SAD_EXPORT_BASE_UPDATE_CONTAINERNR_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOE026R.pgm";
+	//http://gw.systema.no/sycgip/TNOE026R.pgm?user=OSCAR&avd=1&opd=91132&lin=3&mode=A/D&svcnr=XXXV (no update)
+		
 	
 	//-----------------------------------
 	//[6] EDIT A SPECIFIC ITEM RECORD

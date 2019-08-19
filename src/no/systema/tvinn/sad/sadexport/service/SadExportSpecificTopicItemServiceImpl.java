@@ -7,6 +7,7 @@ import no.systema.tvinn.sad.mapper.jsonjackson.TvinnSadAutoControlErrorMapper;
 import no.systema.tvinn.sad.model.jsonjackson.JsonSadAutoControlErrorContainer;
 import no.systema.tvinn.sad.sadexport.mapper.jsonjackson.SadExportSpecificTopicItemMapper;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportSpecificTopicItemContainer;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportSpecificTopicItemContainernrContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportSpecificTopicItemAvgifterContainer;
 import no.systema.tvinn.sad.sadexport.mapper.jsonjackson.SadExportTolltariffKundensRegisterVarukodMapper;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportTolltariffKundensRegisterVarukodContainer;
@@ -76,6 +77,22 @@ public class SadExportSpecificTopicItemServiceImpl implements SadExportSpecificT
 	 */
 	public JsonSadExportTolltariffKundensRegisterVarukodContainer getKundRegisterVarukodContainer(String utfPayload) throws Exception{
 		return this.kundensRegisterVarukodMapper.getContainer(utfPayload);
+	}
+	
+	/**
+	 * 
+	 * @param utfPayload
+	 * @return
+	 */
+	public JsonSadExportSpecificTopicItemContainernrContainer getSadExportSpecificTopicItemContainernrContainer(String utfPayload) {
+		JsonSadExportSpecificTopicItemContainernrContainer container = null;
+		try{
+			SadExportSpecificTopicItemMapper mapper = new SadExportSpecificTopicItemMapper();
+			container = mapper.getContainernrContainer(utfPayload);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return container;
 	}
 
 }
