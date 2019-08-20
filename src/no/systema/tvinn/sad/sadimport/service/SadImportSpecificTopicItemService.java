@@ -3,6 +3,7 @@
  */
 package no.systema.tvinn.sad.sadimport.service;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportSpecificTopicItemContainer;
+import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportSpecificTopicItemContainernrContainer;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.preference.JsonSadImportSpecificTopicItemPreferenceContainer;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.pva.JsonSadImportSpecificTopicItemPvaContainer;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportSpecificTopicItemAvgifterBeforeCalculationContainer;
@@ -27,4 +28,6 @@ public interface SadImportSpecificTopicItemService {
 	public JsonSadImportSpecificTopicItemAvgifterAfterCalculationContainer getSadImportSpecificTopicItemAvgifterAfterCalculationContainer(String utfPayload);
 	public JsonSadAutoControlErrorContainer getSadImportSpecificTopicItemAutoControlErrorContainer(String utfPayload);
 	public JsonSadImportTolltariffKundensRegisterVarukodContainer getKundRegisterVarukodContainer(String utfPayload) throws Exception;
+	//
+	public JsonSadImportSpecificTopicItemContainernrContainer getSadImportSpecificTopicItemContainernrContainer(String utfPayload);
 }

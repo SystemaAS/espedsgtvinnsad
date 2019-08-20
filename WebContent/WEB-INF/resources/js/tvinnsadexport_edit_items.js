@@ -256,6 +256,7 @@
 				jq('#svavts').val(""); jq('#svavts').val(data[i].svavts);
 				jq('#svfyl').val(""); jq('#svfyl').val(data[i].svfyl);
 				jq('#svlk').val(""); jq('#svlk').val(data[i].svlk);
+				jq('#svcnr').val(""); jq('#svcnr').val(data[i].svcnr);
 				
 				//Varetext (1)
 				jq('#wd1').val(""); jq('#wd1').val(data[i].wd1); //svvt

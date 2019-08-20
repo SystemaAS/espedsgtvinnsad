@@ -90,6 +90,12 @@ public final class SadImportUrlDataStore {
 	static public String SAD_IMPORT_BASE_UPDATE_TOLLTARIFF_KUNDENSVAREREG_VARUKODER_ITEMS_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOI042R.pgm";
 	//http://gw.systema.no/sycgip/tnoi042r.pgm?user=OSCAR&varenr=koste&varebe=solsommar&levenr=1&etc...
 	
+	//[5.3] Containernr list (child window)
+	static public String SAD_IMPORT_BASE_CONTAINERNR_ITEMLIST_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOI025R.pgm";
+	//http://gw.systema.no/sycgip/TNOI025R.pgm?user=OSCAR&avd=1&opd=91132&lin=3
+	static public String SAD_IMPORT_BASE_UPDATE_CONTAINERNR_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOI026R.pgm";
+	//http://gw.systema.no/sycgip/TNOI026R.pgm?user=OSCAR&avd=1&opd=91132&lin=3&mode=A/D&svcnr=XXXV (no update)
+		
 	
 	//-----------------------------------
 	//[6] EDIT A SPECIFIC ITEM RECORD

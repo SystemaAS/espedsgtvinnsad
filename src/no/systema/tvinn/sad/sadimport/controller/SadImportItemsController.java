@@ -32,12 +32,13 @@ import no.systema.main.context.TdsServletContext;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.JsonDebugger;
-
+import no.systema.main.util.StringManager;
 import no.systema.tvinn.sad.sadimport.model.KundensVareRegisterUpdateItemRecord;
 import no.systema.tvinn.sad.sadimport.service.SadImportSpecificTopicItemService;
 import no.systema.tvinn.sad.sadimport.mapper.url.request.UrlRequestParameterMapper;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportSpecificTopicItemAvgifterBeforeCalculationRecord;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportSpecificTopicItemContainer;
+import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportSpecificTopicItemContainernrRecord;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportSpecificTopicItemRecord;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportSpecificTopicRecord;
 import no.systema.tvinn.sad.sadimport.url.store.SadImportUrlDataStore;
@@ -50,11 +51,14 @@ import no.systema.tvinn.sad.sadimport.util.RpgReturnResponseHandler;
 import no.systema.tvinn.sad.sadimport.util.SadImportCalculator;
 import no.systema.tvinn.sad.sadimport.util.manager.CodeDropDownMgr;
 import no.systema.tvinn.sad.sadimport.util.manager.SadImportItemsAutoControlMgr;
+import no.systema.tvinn.sad.sadimport.util.manager.SadImportItemsContainernrMgr;
 import no.systema.tvinn.sad.sadimport.util.manager.SadImportAvgiftsberakningenMgr;
 import no.systema.tvinn.sad.sadimport.validator.SadImportItemsValidator;
 import no.systema.tvinn.sad.service.TvinnSadTolltariffVarukodService;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadTolltariffVarukodContainer;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadTolltariffVarukodRecord;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportSpecificTopicItemContainernrRecord;
+import no.systema.tvinn.sad.sadexport.util.manager.SadExportItemsContainernrMgr;
 
 
 
@@ -77,7 +81,7 @@ public class SadImportItemsController {
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private SadImportCalculator sadImportCalculator = new SadImportCalculator();
 	private SadImportAvgiftsberakningenMgr avgiftsberakningenMgr = null;
-	//private SkatImportTweaker skatImportTweaker = new SkatImportTweaker();
+	private StringManager strMgr = new StringManager();
 	
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	private final String NOT_FOUND = "NOT FOUND";
@@ -316,7 +320,28 @@ public class SadImportItemsController {
 				    	}else{
 				    		//Update succefully done!
 				    		logger.info("[INFO] Valid STEP[2] Update -- Record successfully updated, OK ");
-				    		//put domain objects (it is not necessary since the fetch below (onFetch) will clean this up anyway)
+				    		
+				    		//now create the container nr if applicable (child record)
+				    		if(strMgr.isNotNull(jsonSadImportSpecificTopicItemRecord.getSvcnr())){
+				    			//check if already exists
+				    			boolean svcnrExists = false;
+				    			SadImportItemsContainernrMgr containerMgr = new SadImportItemsContainernrMgr(this.getSadImportSpecificTopicItemService(),jsonSadImportSpecificTopicItemRecord.getSvavd(), jsonSadImportSpecificTopicItemRecord.getSvtdn(), jsonSadImportSpecificTopicItemRecord.getSvli(), jsonSadImportSpecificTopicItemRecord.getSvcnr());
+				    			List<JsonSadImportSpecificTopicItemContainernrRecord> tmpList = containerMgr.getContainernrList(appUser.getUser());
+				    			
+				    			for(JsonSadImportSpecificTopicItemContainernrRecord record : tmpList){
+				    				if(jsonSadImportSpecificTopicItemRecord.getSvcnr().equals(record.getSvcnr())){
+				    					//do nothing
+				    					logger.info("containernr EXISTS !!!!");
+				    					svcnrExists = true;
+				    					break;
+				    				}
+				    			}
+				    			if(!svcnrExists){
+				    				logger.info("containernr NOT EXISTS !!!!");
+				    				containerMgr.updateContainernr(appUser.getUser(), TvinnSadConstants.MODE_ADD);
+				    			}
+				    		}
+				    		
 				    	}
 					}else{
 						rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on CREATE, at tuid, syop generation : " + rpgReturnResponseHandler.getErrorMessage());

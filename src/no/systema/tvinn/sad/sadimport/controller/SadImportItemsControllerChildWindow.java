@@ -38,8 +38,10 @@ import no.systema.main.util.AppConstants;
 import no.systema.main.util.DateTimeManager;
 import no.systema.main.util.EncodingTransformer;
 import no.systema.main.util.JsonDebugger;
+import no.systema.main.util.StringManager;
 import no.systema.main.model.SystemaWebUser;
-
+import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportSpecificTopicItemContainernrContainer;
+import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportSpecificTopicItemContainernrRecord;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportTolltariffKundensRegisterVarukodContainer;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportTolltariffKundensRegisterVarukodRecord;
 import no.systema.tvinn.sad.sadimport.service.SadImportGeneralCodesChildWindowService;
@@ -49,10 +51,12 @@ import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeContainer;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadTolltariffVarukodContainer;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadTolltariffVarukodRecord;
-
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportSpecificTopicItemContainernrContainer;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportSpecificTopicItemContainernrRecord;
+import no.systema.tvinn.sad.sadexport.util.manager.SadExportItemsContainernrMgr;
 import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
 import no.systema.tvinn.sad.sadimport.url.store.SadImportUrlDataStore;
-
+import no.systema.tvinn.sad.sadimport.util.manager.SadImportItemsContainernrMgr;
 import no.systema.tvinn.sad.util.TvinnSadConstants;
 
 
@@ -82,7 +86,7 @@ public class SadImportItemsControllerChildWindow {
 	private LoginValidator loginValidator = new LoginValidator();
 	//private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private DateTimeManager dateTimeMgr = new DateTimeManager();
-	
+	private StringManager strMgr = new StringManager();
 	
 	@PostConstruct
 	public void initIt() throws Exception {
@@ -195,6 +199,97 @@ public class SadImportItemsControllerChildWindow {
 			model.put("kundensVareRegList", list);
 			model.put("vkod", vkod);
 			model.put("recId", receiverId);
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsadimport_edit_items_childwindow_containernr.do", params="action=doInit",  method={RequestMethod.GET} )
+	public ModelAndView doInitContainernr(@ModelAttribute ("record") JsonSadImportSpecificTopicItemContainernrContainer recordToValidate, HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doInitContainernr");
+		Map model = new HashMap();
+		model.put("avd", recordToValidate.getAvd());
+		model.put("opd", recordToValidate.getOpd());
+		//default
+		String lineNr = recordToValidate.getLin();
+		model.put("lin", lineNr);
+		
+		if(strMgr.isNull(lineNr) ){
+			//special case since the item line will be created after the container nr. has been created. 
+			//meaning that this number will create an orphan line nr in the container nr db-table (until the item line nr. (parent) has been created)
+			if(strMgr.isNotNull(request.getParameter("linx"))){
+				Integer nextLineNr = Integer.parseInt(request.getParameter("linx"));
+				String futureLineNr = String.valueOf(++ nextLineNr);
+				model.put("lin", futureLineNr);
+				lineNr = futureLineNr;
+			}else{
+				lineNr = "1";
+				model.put("lin", lineNr);
+			}
+		}
+		ModelAndView successView = new ModelAndView("tvinnsadimport_edit_items_childwindow_containernr");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			SadImportItemsContainernrMgr containerMgr = new SadImportItemsContainernrMgr(this.getSadImportSpecificTopicItemService(), recordToValidate.getAvd(), recordToValidate.getOpd(), lineNr, null);
+			List list = containerMgr.getContainernrList(appUser.getUser());
+			logger.info("List:" + list.size());
+			model.put("containernrList", list);
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsadimport_edit_items_childwindow_containernr_edit.do",   method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doEditContainernr(@ModelAttribute ("record") JsonSadImportSpecificTopicItemContainernrRecord recordToValidate, HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doEditContainernr");
+		Map model = new HashMap();
+		model.put("avd", recordToValidate.getSvavd());
+		model.put("opd", recordToValidate.getSvtdn());
+		model.put("lin", recordToValidate.getSvli());
+		String action = request.getParameter("action");
+		
+		ModelAndView successView = new ModelAndView("tvinnsadimport_edit_items_childwindow_containernr");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			//Update
+			String mode = TvinnSadConstants.MODE_ADD;
+			if("doDelete".equals(action)){
+				mode = TvinnSadConstants.MODE_DELETE;
+			}
+			SadImportItemsContainernrMgr containerMgr = new SadImportItemsContainernrMgr(this.getSadImportSpecificTopicItemService(), recordToValidate.getSvavd(), recordToValidate.getSvtdn(), recordToValidate.getSvli(), recordToValidate.getSvcnr());
+			containerMgr.updateContainernr(appUser.getUser(), mode);
+			
+			//get list
+			List list = containerMgr.getContainernrList(appUser.getUser());
+			model.put("containernrList", list);
 			
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 			

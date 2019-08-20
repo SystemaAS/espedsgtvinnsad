@@ -29,6 +29,7 @@ import no.systema.main.util.JsonDebugger;
 
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicRecord;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportSpecificTopicItemContainer;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportSpecificTopicItemContainernrRecord;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportSpecificTopicItemRecord;
 import no.systema.tvinn.sad.sadexport.url.store.SadExportUrlDataStore;
 import no.systema.tvinn.sad.util.TvinnSadConstants;
@@ -54,6 +55,7 @@ import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopic
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicFinansOpplysningerRecord;
 import no.systema.tvinn.sad.sadexport.model.topic.SadExportSpecificTopicFinansOpplysningarAjaxObject;
 import no.systema.tvinn.sad.sadexport.util.SadExportCalculator;
+import no.systema.tvinn.sad.sadexport.util.manager.SadExportItemsContainernrMgr;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicFinansOpplysningerExternalForUpdateContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicFaktTotalContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicFaktTotalRecord;
@@ -154,8 +156,16 @@ public class SadExportAjaxHandlerController {
 						 //we must tweak this in order to present the correct value at the GUI
 						 //record.setDkiv_402a(this.skatImportTweaker.setSummariskAngivelse_402a(record));
 						 record.setDebugPrintlnAjax(BASE_URL + "?" + urlRequestParamsKeys + " <JSON> " + jsonPayload + "</JSON>");
-				         logger.info("=====>debugFetch: OK output on GUI");
-				         result.add(record);
+				         
+				         //get containernr (first record in the list)
+				         SadExportItemsContainernrMgr containerMgr = new SadExportItemsContainernrMgr(this.getSadExportSpecificTopicItemService(),record.getSvavd(), record.getSvtdn(), record.getSvli(), null);
+			    		List<JsonSadExportSpecificTopicItemContainernrRecord> tmpList = containerMgr.getContainernrList(applicationUser);
+			    		for(JsonSadExportSpecificTopicItemContainernrRecord cRecord :tmpList){
+			    			record.setSvcnr(cRecord.getSvcnr());
+			    			break;
+			    		}
+				        logger.info("=====>debugFetch: OK output on GUI");
+			    		result.add(record);	
 					 }
 				 }
 			 }

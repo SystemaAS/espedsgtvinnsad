@@ -10,6 +10,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper; 
 //application library
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportSpecificTopicItemContainer;
+import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportSpecificTopicItemContainernrContainer;
+import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportSpecificTopicItemContainernrRecord;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportSpecificTopicItemRecord;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.preference.JsonSadImportSpecificTopicItemPreferenceContainer;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.preference.JsonSadImportSpecificTopicItemPreferenceRecord;
@@ -151,6 +153,21 @@ public class SadImportSpecificTopicItemMapper {
 		Collection<JsonSadImportSpecificTopicItemAvgifterAfterCalculationRecord> list = container.getCalcavgifter();
 		for(JsonSadImportSpecificTopicItemAvgifterAfterCalculationRecord record : list){
 			//logger.info("TODO");
+		}
+		return container;
+	}
+	
+	
+	public JsonSadImportSpecificTopicItemContainernrContainer getContainernrContainer(String utfPayload) throws Exception{
+		ObjectMapper mapper = new ObjectMapper();
+		//At this point we now have an UTF-8 payload
+		JsonSadImportSpecificTopicItemContainernrContainer container = mapper.readValue(utfPayload.getBytes(), JsonSadImportSpecificTopicItemContainernrContainer.class); 
+		//logger.info(mapper.writeValueAsString(topicListContainer));
+		//logger.info("[JSON-String payload status=OK]  " + container.getUser());
+		//DEBUG
+		Collection<JsonSadImportSpecificTopicItemContainernrRecord> list = container.getContainerlist();
+		for(JsonSadImportSpecificTopicItemContainernrRecord record : list){
+			//logger.info("Item description: " + record.getSviv_stva());
 		}
 		return container;
 	}

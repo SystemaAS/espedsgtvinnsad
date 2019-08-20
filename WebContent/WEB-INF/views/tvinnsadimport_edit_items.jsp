@@ -1071,6 +1071,8 @@
 											</span>
 											</div>
 										</td>
+										<td colspan="2" class="text14" align="left"><span title="svcnr">Containernr.</span>
+										
 							        </tr>
 							        
 							        <tr>
@@ -1087,13 +1089,17 @@
 										<td class="text14" align="left" ><input type="text" class="inputText" name="svas" id="svas" size="8" maxlength="7" value="${model.record.svas}"></td>
 										<td class="text14" align="left" >
 											<select class="inputTextMediumBlueMandatoryField" name="svmfr" id="svmfr">
-				        		    			<option value="">-velg-</option>
+				        		    					<option value="">-velg-</option>
 			  								  	<option value="F"<c:if test="${ model.record.svmfr == 'F'}"> selected </c:if> >F</option>		
 											  	<option value="1"<c:if test="${ model.record.svmfr == '1' || empty model.record.svmfr}"> selected </c:if> >1</option>
 											  	<option value="2"<c:if test="${ model.record.svmfr == '2'}"> selected </c:if> >2</option>
 											</select>
 										</td>
-										<td align="left" >
+										<td colspan="2" align="left" >
+											<input type="text" class="inputText" name="svcnr" id="svcnr" size="18" maxlength="17" value="${model.record.svcnr}">
+											<button name="itemContainerNr" id="itemContainerNr" class="buttonGray" style="font-size:12" type="button" >Mere...</button>
+										</td>
+										<td align="left">	
 											<c:choose>	
 												<c:when test="${model.status == 'M' || empty model.status || model.status == '10' || model.status == '20'}">
 													<input class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadimport_edit_items.do';" value='<spring:message code="systema.tvinn.sad.import.item.createnew.submit"/>'>

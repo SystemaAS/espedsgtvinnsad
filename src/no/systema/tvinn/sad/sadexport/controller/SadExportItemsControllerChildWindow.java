@@ -47,7 +47,7 @@ import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExpor
 import no.systema.tvinn.sad.sadexport.service.SadExportGeneralCodesChildWindowService;
 import no.systema.tvinn.sad.sadexport.service.SadExportSpecificTopicItemService;
 import no.systema.tvinn.sad.sadexport.url.store.SadExportUrlDataStore;
-
+import no.systema.tvinn.sad.sadexport.util.manager.SadExportItemsContainernrMgr;
 import no.systema.tvinn.sad.service.TvinnSadTolltariffVarukodService;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeContainer;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
@@ -84,7 +84,6 @@ public class SadExportItemsControllerChildWindow {
 	private LoginValidator loginValidator = new LoginValidator();
 	//private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private DateTimeManager dateTimeMgr = new DateTimeManager();
-	
 	
 	@PostConstruct
 	public void initIt() throws Exception {
@@ -229,8 +228,6 @@ public class SadExportItemsControllerChildWindow {
 				model.put("lin", lineNr);
 			}
 		}
-		
-		
 		ModelAndView successView = new ModelAndView("tvinnsadexport_edit_items_childwindow_containernr");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		//check user (should be in session already)
@@ -238,8 +235,9 @@ public class SadExportItemsControllerChildWindow {
 			return this.loginView;
 			
 		}else{
-			  
-			List list = this.getContainernrList(appUser, recordToValidate.getAvd(), recordToValidate.getOpd(), lineNr );
+			SadExportItemsContainernrMgr containerMgr = new SadExportItemsContainernrMgr(this.getSadExportSpecificTopicItemService(), recordToValidate.getAvd(), recordToValidate.getOpd(), lineNr, null);
+			List list = containerMgr.getContainernrList(appUser.getUser());
+			logger.info("List:" + list.size());
 			model.put("containernrList", list);
 			
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
@@ -277,11 +275,11 @@ public class SadExportItemsControllerChildWindow {
 			if("doDelete".equals(action)){
 				mode = TvinnSadConstants.MODE_DELETE;
 			}
-			this.updateContainernr(appUser, recordToValidate, mode);
-			
+			SadExportItemsContainernrMgr containerMgr = new SadExportItemsContainernrMgr(this.getSadExportSpecificTopicItemService(), recordToValidate.getSvavd(), recordToValidate.getSvtdn(), recordToValidate.getSvli(), recordToValidate.getSvcnr());
+			containerMgr.updateContainernr(appUser.getUser(), mode);
 			
 			//get list
-			List list = this.getContainernrList(appUser, recordToValidate.getSvavd(), recordToValidate.getSvtdn(), recordToValidate.getSvli() );
+			List list = containerMgr.getContainernrList(appUser.getUser());
 			model.put("containernrList", list);
 			
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
@@ -463,89 +461,6 @@ public class SadExportItemsControllerChildWindow {
 		return list;
 	}
 
-	/**
-	 * 
-	 * @param appUser
-	 * @param avd
-	 * @param opd
-	 * @param lineNr
-	 * @return
-	 */
-	private List<JsonSadExportSpecificTopicItemContainernrRecord> getContainernrList(SystemaWebUser appUser, String avd, String opd, String lineNr){
-		List<JsonSadExportSpecificTopicItemContainernrRecord> list = new ArrayList<JsonSadExportSpecificTopicItemContainernrRecord>();
-
-		logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
-		String BASE_URL = SadExportUrlDataStore.SAD_EXPORT_BASE_CONTAINERNR_ITEMLIST_URL;
-		StringBuffer urlRequestParams = new StringBuffer();
-		urlRequestParams.append("user=" + appUser.getUser());
-		urlRequestParams.append("&avd=" + avd);
-		urlRequestParams.append("&opd=" + opd);
-		urlRequestParams.append("&lin=" + lineNr);
-		
-		
-		logger.info(BASE_URL);
-		logger.info(urlRequestParams);
-		
-		UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
-		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
-		logger.info(this.jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
-		JsonSadExportSpecificTopicItemContainernrContainer container = null;
-		try{
-			if(jsonPayload!=null){
-				container = this.sadExportSpecificTopicItemService.getSadExportSpecificTopicItemContainernrContainer(jsonPayload);
-				if(container!=null){
-					for(JsonSadExportSpecificTopicItemContainernrRecord  record : container.getContainerlist()){
-						list.add(record);
-					}
-				}
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return list;
-	}
-	
-	/**
-	 * 
-	 * @param appUser
-	 * @param recordToValidate
-	 * @param mode
-	 * @return
-	 */
-	private boolean updateContainernr(SystemaWebUser appUser, JsonSadExportSpecificTopicItemContainernrRecord recordToValidate, String mode){
-		boolean retval = true;
-
-		logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
-		String BASE_URL = SadExportUrlDataStore.SAD_EXPORT_BASE_UPDATE_CONTAINERNR_URL;
-		StringBuffer urlRequestParams = new StringBuffer();
-		urlRequestParams.append("user=" + appUser.getUser());
-		urlRequestParams.append("&avd=" + recordToValidate.getSvavd());
-		urlRequestParams.append("&opd=" + recordToValidate.getSvtdn());
-		urlRequestParams.append("&lin=" + recordToValidate.getSvli());
-		urlRequestParams.append("&svcnr=" + recordToValidate.getSvcnr());
-		urlRequestParams.append("&mode=" + mode);
-		
-		logger.info(BASE_URL);
-		logger.info(urlRequestParams);
-		
-		UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
-		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
-		logger.info(this.jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
-		JsonSadExportSpecificTopicItemContainernrContainer container = null;
-		try{
-			if(jsonPayload!=null){
-				container = this.sadExportSpecificTopicItemService.getSadExportSpecificTopicItemContainernrContainer(jsonPayload);
-				if(container!=null){
-					
-				}else{
-				  retval = true;	
-				}
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return retval;
-	}
 	
 	
 

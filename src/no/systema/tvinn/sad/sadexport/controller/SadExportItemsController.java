@@ -34,10 +34,13 @@ import no.systema.main.context.TdsServletContext;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.JsonDebugger;
+import no.systema.main.util.StringManager;
 
 import no.systema.tvinn.sad.sadexport.service.SadExportSpecificTopicItemService;
 import no.systema.tvinn.sad.sadexport.mapper.url.request.UrlRequestParameterMapper;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportSpecificTopicItemContainer;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportSpecificTopicItemContainernrContainer;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportSpecificTopicItemContainernrRecord;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportSpecificTopicItemRecord;
 //import no.systema.skat.skatimport.model.jsonjackson.topic.items.JsonSkatImportSpecificTopicItemToldvaerdiRecord;
 //import no.systema.skat.skatimport.model.jsonjackson.topic.items.JsonSkatImportSpecificTopicItemAvgifterRecord;
@@ -52,6 +55,7 @@ import no.systema.tvinn.sad.sadexport.util.RpgReturnResponseHandler;
 import no.systema.tvinn.sad.sadexport.util.SadExportCalculator;
 import no.systema.tvinn.sad.sadexport.util.manager.CodeDropDownMgr;
 import no.systema.tvinn.sad.sadexport.util.manager.SadExportItemsAutoControlMgr;
+import no.systema.tvinn.sad.sadexport.util.manager.SadExportItemsContainernrMgr;
 import no.systema.tvinn.sad.sadexport.validator.SadExportItemsValidator;
 import no.systema.tvinn.sad.sadexport.model.KundensVareRegisterUpdateItemRecord;
 
@@ -80,7 +84,7 @@ public class SadExportItemsController {
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private SadExportCalculator sadExportCalculator = new SadExportCalculator();
 	//private SkatImportTweaker skatImportTweaker = new SkatImportTweaker();
-	
+	private StringManager strMgr = new StringManager();
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	private final String NOT_FOUND = "NOT FOUND";
 	private final String MATCH = "MATCH";
@@ -274,26 +278,45 @@ public class SadExportItemsController {
 						session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_UPDATE_TVINN_SAD, BASE_URL_UPDATE + "==>params: " + urlRequestParams.toString()); 
 						
 						logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-					    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL_UPDATE));
-					    	logger.info("URL PARAMS: " + urlRequestParams);
-					    	//----------------------------------------------------------------------------
-					    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
-					    	//----------------------------------------------------------------------------
+				    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL_UPDATE));
+				    	logger.info("URL PARAMS: " + urlRequestParams);
+				    	//----------------------------------------------------------------------------
+				    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
+				    	//----------------------------------------------------------------------------
 						String rpgReturnPayload = this.urlCgiProxyService.getJsonContent(BASE_URL_UPDATE, urlRequestParams);
-					    	
-						//Debug --> 
-					    	logger.info("Checking errMsg in rpgReturnPayload" + rpgReturnPayload);
-					    	//we must evaluate a return RPG code in order to know if the Update was OK or not
-					    	rpgReturnResponseHandler.evaluateRpgResponseOnTopicItemCreateOrUpdate(rpgReturnPayload);
-					    	if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){
-					    		rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on UPDATE: " + rpgReturnResponseHandler.getErrorMessage());
-					    		this.setFatalError(model, rpgReturnResponseHandler, jsonSadExportSpecificTopicItemRecord);
-					    		
-					    	}else{
-					    		//Update succefully done!
-					    		logger.info("[INFO] Valid STEP[2] Update -- Record successfully updated, OK ");
-					    		//put domain objects (it is not necessary since the fetch below (onFetch) will clean this up anyway)
-					    	}
+					    //Debug --> 
+				    	logger.info("Checking errMsg in rpgReturnPayload" + rpgReturnPayload);
+				    	//we must evaluate a return RPG code in order to know if the Update was OK or not
+				    	rpgReturnResponseHandler.evaluateRpgResponseOnTopicItemCreateOrUpdate(rpgReturnPayload);
+				    	if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){
+				    		rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on UPDATE: " + rpgReturnResponseHandler.getErrorMessage());
+				    		this.setFatalError(model, rpgReturnResponseHandler, jsonSadExportSpecificTopicItemRecord);
+				    		
+				    	}else{
+				    		//Update succefully done!
+				    		logger.info("[INFO] Valid STEP[2] Update -- Record successfully updated, OK ");
+				    		
+				    		//now create the container nr if applicable (child record)
+				    		if(strMgr.isNotNull(jsonSadExportSpecificTopicItemRecord.getSvcnr())){
+				    			//check if already exists
+				    			boolean svcnrExists = false;
+				    			SadExportItemsContainernrMgr containerMgr = new SadExportItemsContainernrMgr(this.getSadExportSpecificTopicItemService(),jsonSadExportSpecificTopicItemRecord.getSvavd(), jsonSadExportSpecificTopicItemRecord.getSvtdn(), jsonSadExportSpecificTopicItemRecord.getSvli(), jsonSadExportSpecificTopicItemRecord.getSvcnr());
+				    			List<JsonSadExportSpecificTopicItemContainernrRecord> tmpList = containerMgr.getContainernrList(appUser.getUser());
+				    			
+				    			for(JsonSadExportSpecificTopicItemContainernrRecord record : tmpList){
+				    				if(jsonSadExportSpecificTopicItemRecord.getSvcnr().equals(record.getSvcnr())){
+				    					//do nothing
+				    					logger.info("containernr EXISTS !!!!");
+				    					svcnrExists = true;
+				    					break;
+				    				}
+				    			}
+				    			if(!svcnrExists){
+				    				logger.info("containernr NOT EXISTS !!!!");
+				    				containerMgr.updateContainernr(appUser.getUser(), TvinnSadConstants.MODE_ADD);
+				    			}
+				    		}
+				    	}
 					}else{
 						rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on CREATE, at tuid, syop generation : " + rpgReturnResponseHandler.getErrorMessage());
 						this.setFatalError(model, rpgReturnResponseHandler, jsonSadExportSpecificTopicItemRecord);
@@ -368,6 +391,7 @@ public class SadExportItemsController {
 		    	jsonSadExportSpecificTopicItemContainer.setDiffItemLinesTotalAmountWithInvoiceTotalAmount(diffItemLinesTotalAmountWithInvoiceTotalAmount);
 		    	//some aspects for GUI
 		    	jsonSadExportSpecificTopicItemContainer.setLastSelectedItemLineNumber(lastSelectedItemLineNumber);
+		    	
 	    	}
 	    	
 	    	//drop downs populated from back-end
@@ -623,6 +647,91 @@ public class SadExportItemsController {
 		return retval;
 	}
 	*/
+	
+	/**
+	 * 
+	 * @param appUser
+	 * @param avd
+	 * @param opd
+	 * @param lineNr
+	 * @return
+	 */
+	public List<JsonSadExportSpecificTopicItemContainernrRecord> getContainernrList(SystemaWebUser appUser, String avd, String opd, String lineNr){
+		List<JsonSadExportSpecificTopicItemContainernrRecord> list = new ArrayList<JsonSadExportSpecificTopicItemContainernrRecord>();
+
+		logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+		String BASE_URL = SadExportUrlDataStore.SAD_EXPORT_BASE_CONTAINERNR_ITEMLIST_URL;
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + appUser.getUser());
+		urlRequestParams.append("&avd=" + avd);
+		urlRequestParams.append("&opd=" + opd);
+		urlRequestParams.append("&lin=" + lineNr);
+		
+		
+		logger.info(BASE_URL);
+		logger.info(urlRequestParams);
+		
+		UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
+		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+		logger.info(this.jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+		JsonSadExportSpecificTopicItemContainernrContainer container = null;
+		try{
+			if(jsonPayload!=null){
+				container = this.sadExportSpecificTopicItemService.getSadExportSpecificTopicItemContainernrContainer(jsonPayload);
+				if(container!=null){
+					for(JsonSadExportSpecificTopicItemContainernrRecord  record : container.getContainerlist()){
+						list.add(record);
+					}
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	/**
+	 * 
+	 * @param appUser
+	 * @param recordToValidate
+	 * @param mode
+	 * @return
+	 */
+	private boolean updateContainernr(SystemaWebUser appUser, JsonSadExportSpecificTopicItemRecord recordToValidate, String mode){
+		boolean retval = true;
+
+		logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+		String BASE_URL = SadExportUrlDataStore.SAD_EXPORT_BASE_UPDATE_CONTAINERNR_URL;
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + appUser.getUser());
+		urlRequestParams.append("&avd=" + recordToValidate.getSvavd());
+		urlRequestParams.append("&opd=" + recordToValidate.getSvtdn());
+		urlRequestParams.append("&lin=" + recordToValidate.getSvli());
+		urlRequestParams.append("&svcnr=" + recordToValidate.getSvcnr());
+		urlRequestParams.append("&mode=" + mode);
+		
+		logger.info(BASE_URL);
+		logger.info(urlRequestParams);
+		
+		UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
+		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+		logger.info(this.jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+		JsonSadExportSpecificTopicItemContainernrContainer container = null;
+		try{
+			if(jsonPayload!=null){
+				container = this.sadExportSpecificTopicItemService.getSadExportSpecificTopicItemContainernrContainer(jsonPayload);
+				if(container!=null){
+					
+				}else{
+				  retval = true;	
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return retval;
+	}
+	
 	/**
 	 * 
 	 * @param applicationUser

@@ -35,15 +35,19 @@ import no.systema.tvinn.sad.util.TvinnSadConstants;
 import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadTolltariffVarukodContainer;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadTolltariffVarukodRecord;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportSpecificTopicItemContainernrRecord;
+import no.systema.tvinn.sad.sadexport.util.manager.SadExportItemsContainernrMgr;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeContainer;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
 
 import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
 import no.systema.tvinn.sad.sadimport.url.store.SadImportUrlDataStore;
 import no.systema.tvinn.sad.sadimport.util.SadImportCalculator;
+import no.systema.tvinn.sad.sadimport.util.manager.SadImportItemsContainernrMgr;
 import no.systema.tvinn.sad.sadimport.model.topic.SadImportSpecificTopicFinansOpplysningarAjaxObject;
 import no.systema.tvinn.sad.sadimport.model.topic.items.SadImportSpecificTopicItemAvgiftDynamicObject;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportSpecificTopicItemContainer;
+import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportSpecificTopicItemContainernrRecord;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportSpecificTopicItemRecord;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportSpecificTopicItemAvgifterBeforeCalculationContainer;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportSpecificTopicItemAvgifterBeforeCalculationRecord;
@@ -158,9 +162,17 @@ public class SadImportAjaxHandlerController {
 				 if(container!=null){
 					 for(JsonSadImportSpecificTopicItemRecord  record : container.getOrderList()){
 						 record.setDebugPrintlnAjax(BASE_URL + "?" + urlRequestParamsKeys + " <JSON> " + jsonPayload + "</JSON>");
-				         logger.info("=====>debugFetch: OK output on GUI");
+				         //get containernr (first record in the list)
+				         SadImportItemsContainernrMgr containerMgr = new SadImportItemsContainernrMgr(this.getSadImportSpecificTopicItemService(),record.getSvavd(), record.getSvtdn(), record.getSvli(), null);
+			    		 List<JsonSadImportSpecificTopicItemContainernrRecord> tmpList = containerMgr.getContainernrList(applicationUser);
+			    		 for(JsonSadImportSpecificTopicItemContainernrRecord cRecord :tmpList){
+			    			record.setSvcnr(cRecord.getSvcnr());
+			    			break;
+			    		 } 
+						 
+						 logger.info("=====>debugFetch: OK output on GUI");
 				         result.add(record);
-				         //logger.info("svvf:" + record.getSvvf());
+				         
 					 }
 				 }
 			 }
