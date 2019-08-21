@@ -970,9 +970,7 @@
 											</span>
 											--%>	
 										</td>
-										<td class="text14" align="left"><span title="svcnr">Containernr.</span>
-											
-										</td>
+										<td class="text14" align="left"><span title="svcnr">Containernr.</span></td>
 
 									</tr>
 									<tr>

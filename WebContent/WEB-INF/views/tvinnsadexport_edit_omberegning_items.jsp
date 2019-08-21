@@ -899,30 +899,12 @@
 												</span>	
 											 --%>	
 										</td>
-										<td class="text14" align="left"><span title="svlk">Lk.Oppr.</span>
-											<%-- info span 
-											<img onClick="showPop('landCodeOpprInfo');" tabindex=-1 style="cursor:pointer;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
-											<span style="position:absolute; left:800px; top:580px; width:350px; height:150px;" id="landCodeOpprInfo" class="popupWithInputText"  >
-								           		<div class="text10" align="left">
-							           				<select class="text11" id="opprland" name="opprland" size="5" onDblClick="hidePop('landCodeOpprInfo');">
-								           				<c:forEach var="country" items="${model.countryCodeList}" >
-								 				  			<option value="${country.zkod}">${country.zkod}&nbsp;${country.ztxt}</option>
-														</c:forEach>
-								           			</select>
-								           			<table width="100%" align="left" border="0">
-														<tr height="10">&nbsp;<td class="text11">&nbsp;</td></tr>
-														<tr align="left" >
-															<td class="text11">&nbsp;<button name="opprlandButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('landCodeOpprInfo');">&nbsp;<spring:message code="systema.tvinn.sad.export.ok"/></button> 
-															</td>
-														</tr>
-													</table>
-												</div>
-											</span>
-											--%>	
-										</td>
+										<td class="text14" align="left"><span title="svlk">Lk.Oppr.</span></td>
+										<td colspan="2" class="text14" align="left"><span title="svcnr">Containernr.</span></td>
+										
 									</tr>
 									<tr>
-										<td class="text14" align="left" >&nbsp;<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="svavtp" id="svavtp" size="8" maxlength="7" value="${model.record.svavtp}"></td>
+									<td class="text14" align="left" >&nbsp;<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="svavtp" id="svavtp" size="8" maxlength="7" value="${model.record.svavtp}"></td>
 				            			<td class="text14" align="left" >
 											<select  class="selectMediumBlueE2" name="svavts" id="svavts">
 						        		    			<option value="">-velg-</option>
@@ -945,8 +927,11 @@
 												<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 											</a>
 										</td>																			
-								    	<td align="left" colspan="2">
-								    		<c:choose>	
+								    <td colspan="2" class="text14" align="left" >
+										<input type="text" class="inputText" name="svcnr" id="svcnr" size="18" maxlength="17" value="${model.record.svcnr}">
+										<button name="itemContainerNr" id="itemContainerNr" class="buttonGray" style="font-size:12" type="button" >Mere...</button>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<c:choose>	
 												<c:when test="${model.selectedOmb != 'readonly'}">
 								    				<input class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadexport_edit_omberegning_items.do';" value='<spring:message code="systema.tvinn.sad.export.item.createnew.submit"/>'>
 													&nbsp;&nbsp;

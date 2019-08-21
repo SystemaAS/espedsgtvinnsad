@@ -1013,6 +1013,8 @@
 											</span>
 											</div>
 										</td>
+										<td colspan="2" class="text14" align="left"><span title="svcnr">Containernr.</span>
+										
 							        </tr>
 									<tr>
 										<td  class="text14" align="left"><input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="svvktb" id="svvktb" size="13" maxlength="12" value="${model.record.svvktb}"></td>
@@ -1039,6 +1041,10 @@
 											  	<option value="1"<c:if test="${ model.record.svmfr == '1' || empty model.record.svmfr}"> selected </c:if> >1</option>
 											  	<option value="2"<c:if test="${ model.record.svmfr == '2'}"> selected </c:if> >2</option>
 											</select>
+										</td>
+										<td colspan="2" align="left" >
+											<input type="text" class="inputText" name="svcnr" id="svcnr" size="18" maxlength="17" value="${model.record.svcnr}">
+											<button name="itemContainerNr" id="itemContainerNr" class="buttonGray" style="font-size:12" type="button" >Mere...</button>
 										</td>
 										<td align="left" >
 												<c:choose>	

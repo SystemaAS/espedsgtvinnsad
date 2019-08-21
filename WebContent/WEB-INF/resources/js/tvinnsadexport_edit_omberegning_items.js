@@ -137,10 +137,22 @@
 			}
 	    });
 	    
-	    
 	    //=====================================
 	  	//END Child window for general codes
 	  	//=====================================
+	    
+	    
+	    //CONTAINER NR Child window
+	    jq('#itemContainerNr').click(function() {
+	    	jq('#itemContainerNr').attr('target','_blank');
+	    	window.open('tvinnsadexport_edit_items_childwindow_containernr.do?action=doInit&avd=' + jq('#avd').val() + '&opd=' + jq('#opd').val() + '&lin=' + jq('#lineSvli').val()  + '&linx=' + jq('#numberOfItemLinesInTopic').val(), "codeContainernrWin", "top=300px,left=500px,height=500px,width=500px,scrollbars=no,status=no,location=no");
+	    });
+	    jq('#itemContainerNr').keypress(function(e){ //extra feature for the end user
+			if(e.which == 13) {
+				jq('#itemContainerNr').click();
+			}
+	    });
+	    
   	});
   	
   	//----------------
@@ -251,6 +263,7 @@
 				jq('#svavts').val(""); jq('#svavts').val(data[i].svavts);
 				jq('#svfyl').val(""); jq('#svfyl').val(data[i].svfyl);
 				jq('#svlk').val(""); jq('#svlk').val(data[i].svlk);
+				jq('#svcnr').val(""); jq('#svcnr').val(data[i].svcnr);
 				
 				//Varetext (1)
 				jq('#wd1').val(""); jq('#wd1').val(data[i].wd1); //svvt
