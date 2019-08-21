@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
+import no.systema.main.util.StringManager;
 
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportSpecificTopicItemRecord;
 
@@ -16,8 +17,8 @@ import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExpor
  * 
  */
 public class SadExportItemsValidator implements Validator {
-	
-	
+	private String nameRegex = "[A-Z]{4}[0-9]{7}";
+	private StringManager strMgr = new StringManager();
 	/**
 	 * 
 	 */
@@ -97,6 +98,17 @@ public class SadExportItemsValidator implements Validator {
 						errors.rejectValue("svlk", "systema.tvinn.sad.export.header.error.rule.item.svlk.landkodOppr.mustNotExist");
 					}
 				}
+				//Containernr
+				if(strMgr.isNotNull(record.getSvcnr())){
+					Pattern namePattern = Pattern.compile(nameRegex);
+			        Matcher nameMatcher = namePattern.matcher(record.getSvcnr());
+			        if (nameMatcher.find()) {
+			            //OK
+			        } else {
+			        	errors.rejectValue("svcnr", "systema.tvinn.sad.general.error.rule.item.svcnr.containernr.invalid");
+			        }
+				}
+				
 			}
 		}
 	}

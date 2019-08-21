@@ -54,9 +54,11 @@ import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadTolltariffVaruko
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportSpecificTopicItemContainernrContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportSpecificTopicItemContainernrRecord;
 import no.systema.tvinn.sad.sadexport.util.manager.SadExportItemsContainernrMgr;
+import no.systema.tvinn.sad.sadexport.validator.SadExportItemsContainernrValidator;
 import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
 import no.systema.tvinn.sad.sadimport.url.store.SadImportUrlDataStore;
 import no.systema.tvinn.sad.sadimport.util.manager.SadImportItemsContainernrMgr;
+import no.systema.tvinn.sad.sadimport.validator.SadImportItemsContainernrValidator;
 import no.systema.tvinn.sad.util.TvinnSadConstants;
 
 
@@ -263,7 +265,7 @@ public class SadImportItemsControllerChildWindow {
 	 * @return
 	 */
 	@RequestMapping(value="tvinnsadimport_edit_items_childwindow_containernr_edit.do",   method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doEditContainernr(@ModelAttribute ("record") JsonSadImportSpecificTopicItemContainernrRecord recordToValidate, HttpSession session, HttpServletRequest request){
+	public ModelAndView doEditContainernr(@ModelAttribute ("record") JsonSadImportSpecificTopicItemContainernrRecord recordToValidate, BindingResult bindingResult,HttpSession session, HttpServletRequest request){
 		this.context = TdsAppContext.getApplicationContext();
 		logger.info("Inside: doEditContainernr");
 		Map model = new HashMap();
@@ -279,14 +281,28 @@ public class SadImportItemsControllerChildWindow {
 			return this.loginView;
 			
 		}else{
-			//Update
-			String mode = TvinnSadConstants.MODE_ADD;
-			if("doDelete".equals(action)){
-				mode = TvinnSadConstants.MODE_DELETE;
-			}
 			SadImportItemsContainernrMgr containerMgr = new SadImportItemsContainernrMgr(this.getSadImportSpecificTopicItemService(), recordToValidate.getSvavd(), recordToValidate.getSvtdn(), recordToValidate.getSvli(), recordToValidate.getSvcnr());
-			containerMgr.updateContainernr(appUser.getUser(), mode);
 			
+			//-----------
+			//Validation
+			//-----------
+			SadImportItemsContainernrValidator validator = new SadImportItemsContainernrValidator();
+			if(!"doDelete".equals(action)){
+				validator.validate(recordToValidate, bindingResult);
+			}
+			//check for ERRORS
+			if(bindingResult.hasErrors()){
+			    logger.info("Error in validation ...");	
+				model.put("record", recordToValidate);
+				
+		    }else{
+				//Update
+				String mode = TvinnSadConstants.MODE_ADD;
+				if("doDelete".equals(action)){
+					mode = TvinnSadConstants.MODE_DELETE;
+				}
+				containerMgr.updateContainernr(appUser.getUser(), mode);
+			}
 			//get list
 			List list = containerMgr.getContainernrList(appUser.getUser());
 			model.put("containernrList", list);
@@ -295,6 +311,7 @@ public class SadImportItemsControllerChildWindow {
 			
 	    	return successView;
 		}
+		
 	}
 	
 	/**

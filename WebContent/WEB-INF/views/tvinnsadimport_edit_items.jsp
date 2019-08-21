@@ -1096,7 +1096,7 @@
 											</select>
 										</td>
 										<td colspan="2" align="left" >
-											<input type="text" class="inputText" name="svcnr" id="svcnr" size="18" maxlength="17" value="${model.record.svcnr}">
+											<input type="text" class="inputText" name="svcnr" id="svcnr" size="13" maxlength="11" value="${model.record.svcnr}">
 											<button name="itemContainerNr" id="itemContainerNr" class="buttonGray" style="font-size:12" type="button" >Mere...</button>
 										</td>
 										<td align="left">	

@@ -1,10 +1,14 @@
 package no.systema.tvinn.sad.sadimport.validator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.apache.log4j.Logger;
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 
+import no.systema.main.util.StringManager;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.items.JsonSadImportSpecificTopicItemRecord;
 import no.systema.tvinn.sad.sadimport.util.manager.SadImportItemsAutoControlMgr;
 
@@ -21,6 +25,8 @@ import no.systema.tvinn.sad.sadimport.util.manager.SadImportItemsAutoControlMgr;
  */
 public class SadImportItemsValidator implements Validator {
 	private static final Logger logger = Logger.getLogger(SadImportItemsValidator.class.getName());
+	private String nameRegex = "[A-Z]{4}[0-9]{7}";
+	private StringManager strMgr = new StringManager();
 	/**
 	 * 
 	 */
@@ -83,6 +89,17 @@ public class SadImportItemsValidator implements Validator {
 					errors.rejectValue("wg1", "systema.tvinn.sad.import.header.error.rule.item.wg1.avgifter.mustExist");
 				}
 				*/
+				
+				//Containernr
+				if(strMgr.isNotNull(record.getSvcnr())){
+					Pattern namePattern = Pattern.compile(nameRegex);
+			        Matcher nameMatcher = namePattern.matcher(record.getSvcnr());
+			        if (nameMatcher.find()) {
+			            //OK
+			        } else {
+			        	errors.rejectValue("svcnr", "systema.tvinn.sad.general.error.rule.item.svcnr.containernr.invalid");
+			        }
+				}
 			}
 		}
 		

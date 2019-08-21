@@ -162,7 +162,7 @@
 					            		</tr>
 							        <tr>
 						        		    <td class="text14" align="left" >
-							        			&nbsp;<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="svcnr" id="svcnr" size="18" maxlength="17" value="${model.record.svcnr}">
+							        			&nbsp;<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="svcnr" id="svcnr" size="13" maxlength="11" value="${model.record.svcnr}">
 							        			&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='<spring:message code="systema.tvinn.sad.export.item.line.init.createnew.submit"/>'>
 							        		</td>
 							        		
