@@ -36,7 +36,7 @@
 				  opener.jq('#seadk2').val(adr2);
 				  opener.jq('#seadk3').val(adr3);
 				  //tollkredit
-				  opener.jq('#segkd').val(wsktc);
+				  opener.jq('#sektc').val(wsktc);
 				  opener.jq('#sekta').val(wskta);
 				  opener.jq('#sektb').val(wsktb);
 				  opener.jq('#senak').focus();

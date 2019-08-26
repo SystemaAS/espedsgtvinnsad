@@ -512,7 +512,7 @@
 			  jq('#seadk2').val("");
 			  jq('#seadk3').val("");
 			  //tollkredit
-			  jq('#segkd').val("");
+			  jq('#sektc').val("");
 			  jq('#sekta').val("");
 			  jq('#sektb').val("");
 			  //now populate (if applicable)
@@ -525,7 +525,7 @@
 			  jq('#seadk2').val(customer.adr2);
 			  jq('#seadk3').val(customer.adr3);
 			  //tollkredit
-			  jq('#segkd').val(customer.tollkreditFieldC);
+			  jq('#sektc').val(customer.tollkreditFieldC);
 			  jq('#sekta').val(customer.tollkreditFieldA);
 			  jq('#sektb').val(customer.tollkreditFieldB);
 	    	  }
@@ -541,7 +541,7 @@
 		  jq('#seadk1').val(jq("#orig_seadk1").val());
 		  jq('#seadk2').val(jq("#orig_seadk2").val());
 		  jq('#seadk3').val(jq("#orig_seadk3").val());
-		  jq('#segkd').val("");
+		  jq('#sektc').val("");
 		  jq('#sekta').val("");
 		  jq('#sektb').val("");
 	    });
@@ -617,7 +617,7 @@
 						jq('#seadk2').val(customer.adr2);
 						jq('#seadk3').val(customer.adr3);
 						//tollkredit
-						jq('#segkd').val(customer.tollkreditFieldC);	
+						jq('#sektc').val(customer.tollkreditFieldC);	
 						jq('#sekta').val(customer.tollkreditFieldA);
 						jq('#sektb').val(customer.tollkreditFieldB);
 					}else{
@@ -628,7 +628,7 @@
 						jq('#seadk2').val("");
 						jq('#seadk3').val("");
 						//tollkredit
-						jq('#segkd').val("");
+						jq('#sektc').val("");
 						jq('#sekta').val("");
 						jq('#sektb').val("");
 					}
