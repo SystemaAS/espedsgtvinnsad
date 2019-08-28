@@ -83,12 +83,23 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="10%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<a id="alinkItemLines" style="display:block;" href="tvinnsadexport_edit_items.do?action=doFetch&avd=${ model.record.seavd}&sign=${ model.record.sesg}
-													&opd=${ model.record.setdn}&status=${model.record.sest}&datum=${model.record.sedt}&fabl=${ XX.dkih_222}&o2_sest=${ model.record.o2_sest}&o2_sedt=${ model.record.o2_sedt}&o2_semf=${ model.record.o2_semf}">
-							<font class="tabDisabledLink">
-								&nbsp;<spring:message code="systema.tvinn.sad.export.item.createnew.tab"/>
-							</font>
-						</a>
+						<c:choose>
+							<c:when test="${not empty model.record.sebel1}">
+								<a id="alinkItemLines" style="display:block;" href="tvinnsadexport_edit_items.do?action=doFetch&avd=${ model.record.seavd}&sign=${ model.record.sesg}
+									&opd=${ model.record.setdn}&status=${model.record.sest}&datum=${model.record.sedt}&fabl=${ XX.dkih_222}&o2_sest=${ model.record.o2_sest}&o2_sedt=${ model.record.o2_sedt}&o2_semf=${ model.record.o2_semf}">
+									<font class="tabDisabledLink">
+										&nbsp;<spring:message code="systema.tvinn.sad.export.item.createnew.tab"/>
+									</font>
+								</a>
+							</c:when>
+							<c:otherwise>
+								<font title="Du må lagre Tolldekl. først! " class="tabDisabledLink" style="color:red;">
+									&nbsp;<spring:message code="systema.tvinn.sad.export.item.createnew.tab"/>
+								</font>
+								
+							</c:otherwise>
+						</c:choose>
+						
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="10%" valign="bottom" class="tabDisabled" align="center" nowrap>
