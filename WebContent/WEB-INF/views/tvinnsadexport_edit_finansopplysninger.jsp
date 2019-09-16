@@ -268,7 +268,8 @@
 									<tr>
 										<td class="text12Bold">
 											<input tabindex=-1 class="inputFormSubmitStd" type="submit" name="submit" onclick="javascript: form.action='tvinnsadexport_edit_finansopplysninger.do';" value="<spring:message code="systema.tvinn.sad.import.item.line.init.createnew.submit"/>">
-												&nbsp;<button title="Import av eksterna fakturaer" name="importInvoicesButton" id="importInvoicesButton" class="buttonGrayWithGreenFrame" type="button" >Importera eksterna fakturaer</button>
+											&nbsp;<button title="Import av eksterna fakturaer" name="importInvoicesButton" id="importInvoicesButton" class="buttonGrayWithGreenFrame" type="button" >Importera eksterna fakturaer</button>
+											&nbsp;&nbsp;<img title="Laste opp faktura (.csv)" style="vertical-align: bottom;cursor: pointer;" id="uploadFileImg" width="25px" height="25px" src="resources/images/upload.png" border="0" alt="Upload dokument (.csv)">
 											
 										</td>
 									</tr>
@@ -534,7 +535,8 @@
 					    <tr>	
 						    							        	
 				        </tr>
-        	        </table>
+        	        	</table>
+        	        	</form>
 		        </td>
 		    </tr>
 			<tr height="20"><td colspan="2" ></td></tr>
@@ -542,10 +544,88 @@
 			
 		</table>
 		</td>
+		
 		</tr>
+		
+		
+		
+		
+		
+ 	<%-- -------------------------- --%>	
+ 	<%-- upload file dialog         --%>	
+ 	<%-- -------------------------- --%>	
+	<tr>
+		<td valign="bottom" >
+			<div id="dialogUploadArchiveDocument" title="Dialog">
+				<table align="left" class="popupFloatingWithRoundCorners3D">
+				    <tr height="2"><td></td></tr>
+			    	<tr>
+					<td valign="top">
+					<form name="uploadFileForm" id="uploadFileForm" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="applicationUserUpload" id="applicationUserUpload" value='${user.user}'>
+						<input type="hidden" name="wsavd" id="wsavd" value='${model.avd}'>
+						<input type="hidden" name="wsopd" id="wsopd" value='${model.opd}'>
+						<input type="hidden" name="userDate" id="userDate" value=''>
+						<input type="hidden" name="userTime" id="userTime" value=''>
+						
+							<table id="containerdatatableTable" cellspacing="2" align="left">
+								<tr>
+									<td colspan="3" class="text14Bold">&nbsp;
+										<img style="vertical-align:bottom;" src="resources/images/upload.png" border="0" width="20" height="20" alt="upload">
+										&nbsp;File Upload&nbsp;							
+									</td>
+								</tr>
+								<tr>
+								<tr height="5"><td></td></tr>
+								<tr>
+								<td>
+									<table>
+									<%--
+									<tr>
+										<td class="text11">&nbsp;Nytt filnavn:</td>
+										<td class="text11">&nbsp;<input tabindex=-1 type="text" class="inputText" name="fileNameNew" id="fileNameNew" size="20" maxlength="20" value=""></td>
+									</tr>
+									 --%>
+									<tr>
+										<td class="text11">&nbsp;Arkiv typen:</td>
+										<td class="text11">&nbsp;
+											<select class="selectMediumBlueE2" tabindex=-1 name="wstype" id="wstype">
+												<%--
+												<c:forEach var="record" items="${user.arkivKodOpdList}" >
+						                       	 	<option value="${record.arkKod}">${record.arkKod}-${record.arkTxt}</option>
+												</c:forEach> 
+												 --%>
+												<option value="Z1">Z1-Faktura .csv</option>
+												
+											</select>	
+										</td>
+									</tr>
+									<tr height="5"><td></td></tr>
+									<tr>	
+										<td class="text11">&nbsp;Fil:</td>
+										<td class="text11">
+			           						&nbsp;<input type="file" name="fileUpload" id="fileUpload" accept=".csv, .txt" />
+			       						</td>
+					           		</tr>
+					           		</table>
+								</td>
+								</tr>
+								<tr height="5"><td></td></tr>
+			       			</table>
+					</form>	
+					</td>
+					</tr>
+				</table>
+		</div>		
+		</td>
+	</tr>
+		
+		
+		
+		
 	</table>    
 	
-	</form>
+	
 		
 <!-- ======================= footer ===========================-->
 <jsp:include page="/WEB-INF/views/footer.jsp" />

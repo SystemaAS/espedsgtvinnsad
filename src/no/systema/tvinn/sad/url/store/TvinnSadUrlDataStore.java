@@ -101,6 +101,14 @@ public final class TvinnSadUrlDataStore {
 	//static public String SKAT_FETCH_SIGNATURE_NAME_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TSVG017R.pgm"; 
 	
 	
+	//-------------
+	//Upload CSV
+	//-------------
+	static public String SYSTEMA_UPLOAD_FILE_CSV_INVOICE_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOG020R.pgm";	
+	//http://gw.systema.no/sycgip/TNOG020R.pgm?user=OSCAR&wsdokn=tarzan.jpg
+	//{ "user": "OSCAR", "wsdokn": "tarzan.jpg","valids": "Y", "tmpdir": "/pdf/tmp/", "errMsg": "", "uploadcsv": [] } 
+	
+	
 	/**
 	 * Return invalid kunder for firma where mismatch against data.brreg.no. <br><br>
 	 * 

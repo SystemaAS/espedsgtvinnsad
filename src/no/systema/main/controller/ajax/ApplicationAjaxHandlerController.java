@@ -31,6 +31,7 @@ import no.systema.main.model.jsonjackson.general.notisblock.JsonNotisblockContai
 import no.systema.main.model.jsonjackson.general.notisblock.JsonNotisblockRecord;
 import no.systema.main.url.store.MainUrlDataStore;
 import no.systema.main.util.AppConstants;
+import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
 /**
  * This Ajax handler is the class handling ajax request general in the whole Application. 
  * It will usually be called from within a jQuery function or other javascript alike... 
@@ -184,6 +185,87 @@ public class ApplicationAjaxHandlerController {
         }
 	    
 	}
+	
+	/**
+	 * Special upload of invoice file (.csv, .txt - other text file format)
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="uploadFileToArchiveInvoice.do", method = RequestMethod.POST)
+    public @ResponseBody String uploadFileToArchiveInvoice(MultipartHttpServletRequest request) {
+		final String ERROR_TAG = "[ERROR] ";
+		
+		logger.info("Inside: uploadFileToArchiveInvoice");
+		Iterator<String> itr = request.getFileNames();
+	    MultipartFile file = null;
+	    try {
+	        file = request.getFile(itr.next()); //Get the file.
+	    } catch (NoSuchElementException e) {
+	    	logger.info(ERROR_TAG + e.toString());
+	    }
+	    String applicationUser = request.getParameter("applicationUserUpload");
+	    String avd = request.getParameter("wsavd");
+	    String opd = request.getParameter("wsopd");
+	    String type = request.getParameter("wstype");
+	    String fileNameNew = request.getParameter("fileNameNew");
+	    //timestamps (when applicable)
+	    String userDate = request.getParameter("userDate");
+	    String userTime = request.getParameter("userTime");
+	    //logger.info("userDate:" + userDate);
+	    //logger.info("userTime:" + userTime);
+	    
+	    
+	    if (file!=null && !file.isEmpty()) {
+    		String fileName = file.getOriginalFilename();
+    		logger.info("FILE NAME:" + fileName);
+    		if(fileNameNew!=null && !"".equals(fileNameNew)){ fileName = fileNameNew; }
+            //validate file
+    		JsonFileUploadToArchiveValidationContainer uploadValidationContainer = this.validateFileUploadCsv(fileName, applicationUser);
+            //if valid
+            if(uploadValidationContainer!=null && "".equals(uploadValidationContainer.getErrMsg())){
+                // TEST String rootPath = System.getProperty("catalina.home");
+            		String rootPath	= uploadValidationContainer.getTmpdir();
+            	    File dir = new File(rootPath);
+            	    
+	        	    try {
+		                byte[] bytes = file.getBytes();
+		                // Create the file on server
+		                File serverFile = new File(dir.getAbsolutePath() + File.separator +  fileName);
+		                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+		                stream.write(bytes);
+		                stream.close();
+		                logger.info("Server File Location=" + serverFile.getAbsolutePath());
+		                //catch parameters
+		                //uploadValidationContainer.setWsavd(avd);
+        	    		//uploadValidationContainer.setWsopd(opd);
+        	    		//uploadValidationContainer.setWstype(type);
+        	    		//this will check if either the wstur or wsavd/wsopd will save the upload
+        	    		//uploadValidationContainer = this.saveFileUpload(uploadValidationContainer, fileName, applicationUser, userDate, userTime);
+		                String suffixMsg = "";
+	                	suffixMsg = "  -->Avd/Opd:" + "["+ avd + "/" + opd + "]";
+	                	return "[OK] You successfully uploaded file:" + fileName +  suffixMsg;
+		                
+	        	    } catch (Exception e) {
+	            		//run time upload error
+	            		String absoluteFileName = rootPath + File.separator + fileName;
+	            		return ERROR_TAG + "You failed to upload to:" + fileName + " runtime error:" + e.getMessage();
+	        	    }
+
+            }else{
+	        		if(uploadValidationContainer!=null){
+	        			logger.info(uploadValidationContainer.getErrMsg());
+	        			//Back-end error message output upon validation
+	        			return ERROR_TAG + uploadValidationContainer.getErrMsg();
+	        		}else{
+	        			return ERROR_TAG + "NULL on upload file validation Object??";
+	        		}
+        	}
+        } else {
+        	logger.info("FILE NAME empty!");
+        	return ERROR_TAG + "You failed to upload " + fileNameNew + " because the file was empty.";
+        }
+	    
+	}
 	/**
 	 * 
 	 * @param fileName
@@ -194,6 +276,30 @@ public class ApplicationAjaxHandlerController {
 		JsonFileUploadToArchiveValidationContainer uploadValidationContainer = null;
 		//prepare the access CGI with RPG back-end
 		String BASE_URL = MainUrlDataStore.SYSTEMA_UPLOAD_FILE_VALIDATION_URL;
+		String urlRequestParamsKeys = "user=" + applicationUser + "&wsdokn=" + fileName;
+		logger.info("URL: " + BASE_URL);
+		logger.info("PARAMS: " + urlRequestParamsKeys);
+		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+		//Debug -->
+		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+		if(jsonPayload!=null){
+			uploadValidationContainer = this.uploadFileToArchiveService.getFileUploadValidationContainer(jsonPayload);
+			logger.info(uploadValidationContainer.getErrMsg());
+		}
+		return uploadValidationContainer;
+	}
+	
+	/**
+	 * 
+	 * @param fileName
+	 * @param applicationUser
+	 * @return
+	 */
+	private JsonFileUploadToArchiveValidationContainer validateFileUploadCsv(String fileName, String applicationUser){
+		JsonFileUploadToArchiveValidationContainer uploadValidationContainer = null;
+		//prepare the access CGI with RPG back-end
+		String BASE_URL = TvinnSadUrlDataStore.SYSTEMA_UPLOAD_FILE_CSV_INVOICE_URL;
 		String urlRequestParamsKeys = "user=" + applicationUser + "&wsdokn=" + fileName;
 		logger.info("URL: " + BASE_URL);
 		logger.info("PARAMS: " + urlRequestParamsKeys);

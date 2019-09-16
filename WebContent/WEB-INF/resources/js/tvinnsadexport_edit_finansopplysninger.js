@@ -196,3 +196,128 @@
     });
 
 	
+    
+    
+    
+      //-------------------------------------------
+	  //START Model dialog: "File upload"
+	  //-------------------------------------------
+	  //Initialize <div> here
+	  jq(function() { 
+		  jq("#dialogUploadArchiveDocument").dialog({
+			  autoOpen: false,
+			  maxWidth:400,
+	          maxHeight: 300,
+	          width: 400,
+	          height: 300,
+			  modal: true
+		  });
+	  });
+	  //----------------------------
+	  //Present dialog box onClick 
+	  //----------------------------
+	  jq(function() {
+		  jq("#uploadFileImg").click(function() {
+			  presentUploadFileDialog();
+		  });
+		  
+	  });
+	  function presentUploadFileDialog(){
+		//setters (add more if needed)
+		  jq('#dialogUploadArchiveDocument').dialog( "option", "title", "Upload dokument" );
+		  //deal with buttons for this modal window
+		  jq('#dialogUploadArchiveDocument').dialog({
+			 buttons: [ 
+			     /* N/A (look at file-change event instead     
+	            {
+	             	
+				 id: "dialogSaveTU",	
+				 text: "Ok",
+				 click: function(){
+					 		jq('#uploadFileForm').submit();
+				 		}
+			 	 },*/
+	 	 		{
+			 	 id: "dialogCancelTU",
+			 	 text: "Avbryt", 
+				 click: function(){
+					 		//back to initial state of form elements on modal dialog
+					 		//jq("#dialogSaveTU").button("option", "disabled", true);
+					 		//jq("#wstype").val("");
+					 		jq( this ).dialog( "close" ); 
+				 		} 
+	 	 		 } ] 
+		  });
+		  //init values
+		  //jq("#dialogSaveTU").button("option", "disabled", false);
+		  //open now
+		  jq('#dialogUploadArchiveDocument').dialog('open');
+	  }
+	  
+	  //Events for the drop downs (some kind of "implicit validation" since all drop downs are mandatory)
+	  jq(function() {
+		  jq("#fileUpload").change(function() {
+			  uploadFile();
+		  });
+		  
+	  });
+	  //Upload file
+	  function uploadFile(){
+			//grab all form data  
+			  var form = new FormData(document.getElementById('uploadFileForm'));
+			  setBlockUI();
+			  
+			  jq.ajax({
+			  	  type: 'POST',
+			  	  url: 'uploadFileToArchiveInvoice.do',
+			  	  data: form,  
+			  	  dataType: 'text',
+			  	  cache: false,
+			  	  processData: false,
+			  	  contentType: false,
+		  		  success: function(data) {
+				  	  var len = data.length;
+			  		  if(len>0){
+			  			jq("#file").val("");
+					  	//Check for errors or successfully processed
+					  	var exists = data.indexOf("ERROR");
+					  	if(exists>0){
+					  		//ERROR on back-end
+					  		jq("#file").addClass( "isa_error" );
+					  		jq("#file").removeClass( "isa_success" );
+					  	}else{
+					  		//OK
+					  		jq("#file").addClass( "isa_success" );
+					  		jq("#file").removeClass( "isa_error" );
+					  	}
+					  	//response to end user 
+					  	alert(data);
+					  	if(data.indexOf('[OK') == 0) {
+						  	var trip = '';
+						  	var avd = jq("#avd").val();
+						  	var opd = jq("#opd").val();
+						  	var sign = jq("#sign").val();
+						  	//reload
+						  	window.location = "tvinnsadexport_edit_finansopplysninger.do?action=doFetch&avd=" + avd + "&opd=" + opd + "&sign=" +  sign;
+					  	}
+					  	//unblock
+					  	jq.unblockUI();
+			  		  }
+			  	  }, 
+			  	  error: function() {
+			  		  jq.unblockUI();
+			  		  alert('Error loading ...');
+			  		  jq("#file").val("");
+			  		  //cosmetics
+			  		  jq("#file").addClass( "isa_error" );
+			  		  jq("#file").removeClass( "isa_success" );
+				  }
+			  });
+			    
+			  
+		  }
+	  
+	  //-------------------------------------------
+	  //END Model dialog: "File upload"
+	  //-------------------------------------------
+	
