@@ -2,6 +2,7 @@
  * 
  */
 package no.systema.tvinn.sad.nctsexport.url.store;
+import no.systema.main.model.UrlDataStoreAnnotationForField;
 import no.systema.main.util.AppConstants;
 /**
  * 
@@ -17,17 +18,21 @@ public final class SadNctsExportUrlDataStore {
 	//[1] FETCH ARENDE LIST
 	//----------------------------
 	//http://gw.systema.no/sycgip/ttce000r.pgm?user=YBC&datum=20140101;
+	@UrlDataStoreAnnotationForField (name="@SadNctsExportController - tvinnsadnctsexport.do ", description=" --> NCTS_EXPORT_BASE_TOPICLIST_URL - main list")
 	static public String NCTS_EXPORT_BASE_TOPICLIST_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE000R.pgm"; 
 	//http://gw.systema.no/sycgip/ttce000r.pgm?user=YBC&tvdref=xxxx
+	@UrlDataStoreAnnotationForField (name="@SadNctsExportController - tvinnsadnctsexport.do ", description=" --> NCTS_EXPORT_BASE_TOPICLIST_DOCREF_URL - main list doc.ref.")
 	static public String NCTS_EXPORT_BASE_TOPICLIST_DOCREF_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE000R2.pgm"; 
 		
 	//---------------------------------------------------------------
 	//[2] FETCH A SPECIFIC ARENDE or Default values for a NEW ARENDE
 	//---------------------------------------------------------------
+	@UrlDataStoreAnnotationForField (name="@SadNctsExportController - tvinnsadnctsexport_edit.do ", description=" --> NCTS_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_URL - fetch topic")
 	static public String NCTS_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE001R.pgm";
 	//http://gw.systema.no/sycgip/TTCE001R.pgm?user=OSCAR&avd=1&opd=50013
 	//http://gw.systema.no/sycgip/TTCE001R.pgm?user=OSCAR&avd=1 (for default values with CREATE NEW)
 	//2.1 FETCH Sikkerhet (extra information)
+	@UrlDataStoreAnnotationForField (name="@SadNctsExportHeaderController - tvinnsadnctsexport_edit.do ", description=" --> NCTS_EXPORT_BASE_FETCH_SPECIFIC_SIKKERHET_TOPIC_URL - fetch topic (sikkerhet)")
 	static public String NCTS_EXPORT_BASE_FETCH_SPECIFIC_SIKKERHET_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE021R.pgm";
 	//http://gw.systema.no/sycgip/ttce021r.pgm?user=OSCAR&avd=1&opd=900040
 		
@@ -39,19 +44,23 @@ public final class SadNctsExportUrlDataStore {
 	//mode=C (Copy existing topic) from Norskimport or fallback to the origin: transportuppdrag
 	//mode=S (Send topic)
 	//------------------------------		
+	@UrlDataStoreAnnotationForField (name="@SadNctsExportHeaderController - tvinnsadnctsexport_edit.do ", description=" --> NCTS_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_URL - update topic")
 	static public String NCTS_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE002R.pgm";
 	//http://gw.systema.no/sycgip/TDCE002R.pgm?user=OSCAR&thavd=1&sign=CB&mode=A
 	//http://gw.systema.no/sycgip/TDCE002R.pgm?user=OSCAR&thavd=1&newavd=1&thtdn=50013&mode=C&newsign=OT
 	
 	//Validate Guarantee
+	@UrlDataStoreAnnotationForField (name="@SadNctsExportHeaderValidator - isValidGuarantee() ", description=" --> NCTS_EXPORT_BASE_VALIDATE_SPECIFIC_TOPIC_GUARRANTEE_URL - validate")
 	static public String NCTS_EXPORT_BASE_VALIDATE_SPECIFIC_TOPIC_GUARRANTEE_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE003R.pgm";
 	//http://gw.systema.no/sycgip/TTCE003R.pgm?user=YBC&thgft1=09SE00005000000W7&thgadk=2222
 	
 	//Validate Sensitive goods
+	@UrlDataStoreAnnotationForField (name="@SadNctsExportItemsValidator - isValidGuarantee() ", description=" --> NCTS_EXPORT_BASE_VALIDATE_SPECIFIC_TOPIC_ITEM_SENSITIVE_GOODS_URL - validate")
 	static public String NCTS_EXPORT_BASE_VALIDATE_SPECIFIC_TOPIC_ITEM_SENSITIVE_GOODS_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE017R.pgm";
 	//http://gw.systema.no/sycgip/TTCE017R.pgm?user=OSCAR&tftanr=170199(valid varukod) --->010290 (valid varukod)
 	
 	//Refresh ARENDE
+	@UrlDataStoreAnnotationForField (name="@SadNctsExportItemsController - tvinnsadnctsexport_edit_items.do ", description=" --> NCTS_EXPORT_BASE_REFRESH_SPECIFIC_TOPIC_URL - refresh")
 	static public String NCTS_EXPORT_BASE_REFRESH_SPECIFIC_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE004R.pgm";
 	
 	//-----------------------------------------

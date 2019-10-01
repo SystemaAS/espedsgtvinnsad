@@ -2,6 +2,7 @@ package no.systema.main.testsuite;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
@@ -9,6 +10,8 @@ import java.net.URL;
 import java.util.*;
 
 import org.apache.log4j.Logger;
+
+import no.systema.main.model.UrlDataStoreAnnotationForField;
 
 /**
  * 
@@ -48,6 +51,17 @@ public class JavaReflectionManager {
 					if(value!=null && !"".equals(value)){
 						//logger.info(field.getName() + " Value:" + value);
 						testersuiteObject = new TestersuiteObject();
+						
+						//annotations
+						Annotation[] annotations = field.getDeclaredAnnotations();
+						for(Annotation annotation : annotations){
+						    if(annotation instanceof UrlDataStoreAnnotationForField){
+						    	UrlDataStoreAnnotationForField myAnnotation = (UrlDataStoreAnnotationForField) annotation;
+						        //logger.info("########MyAnnotation: " + myAnnotation.name() + myAnnotation.description());
+						        testersuiteObject.setDescription(myAnnotation.name() + myAnnotation.description());
+						    }
+						}
+						
 						testersuiteObject.setModuleName(value);
 						testersuiteObject.setServiceUrl(value);
 						
