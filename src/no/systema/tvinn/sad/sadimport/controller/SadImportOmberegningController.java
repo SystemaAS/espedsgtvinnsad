@@ -606,17 +606,36 @@ public class SadImportOmberegningController {
 	 * @param request
 	 * @return
 	 */
-	/*
-	@RequestMapping(value="tvinnsadimport_edit_printTopic.do",  method={RequestMethod.GET, RequestMethod.POST })
+
+	@RequestMapping(value="tvinnsadimport_edit_omberegning_printTopic.do",  method={RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView doSadImportEditPrintTopic(HttpSession session, HttpServletRequest request){
 		Map model = new HashMap();
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
-		ModelAndView successView = new ModelAndView("redirect:tvinnsadimport.do?action=doFind&sg=" + appUser.getTvinnSadSign());
-		
-		String method = "doSadImportEditPrintTopic [RequestMapping-->tvinnsadimport_edit_printTopic.do]";
+		String method = "doSadImportEditPrintTopic [RequestMapping-->tvinnsadimport_edit_omberegning_printTopic.do]";
 		logger.info("Method: " + method);
-		String opd = request.getParameter("opd");
+		
+		//params for redirect
 		String avd = request.getParameter("avd");
+		String opd = request.getParameter("opd");
+		String status = request.getParameter("status");
+		String sign = request.getParameter("sign");
+		String fabl = request.getParameter("fabl");
+		String o2_sist = request.getParameter("o2_sist");
+		String o2_sidt = request.getParameter("o2_sidt");
+		String o2_simf = request.getParameter("o2_simf");
+		//&avd=1&sign=OT&opd=91365-&status=&fabl=2,00&o2_sist=M&o2_sidt=20180622&o2_simf=">
+		StringBuffer redirectStr = new StringBuffer("tvinnsadimport_edit_omberegning.do?action=doFetch");
+		redirectStr.append("&avd=" + avd);
+		redirectStr.append("&sign=" + sign);
+		redirectStr.append("&opd=" + opd);
+		redirectStr.append("&status=" + status);
+		redirectStr.append("&fabl=" + fabl);
+		redirectStr.append("&o2_sist=" + o2_sist);
+		redirectStr.append("&o2_sidt=" + o2_sidt);
+		redirectStr.append("&o2_simf=" + o2_simf);
+		
+		ModelAndView successView = new ModelAndView("redirect:" + redirectStr);
+		
 		
 		//check user (should be in session already)
 		if(appUser==null){
@@ -647,7 +666,7 @@ public class SadImportOmberegningController {
 		
 		return successView;
 	}
-	*/
+	
 	
 	/**
 	 * 

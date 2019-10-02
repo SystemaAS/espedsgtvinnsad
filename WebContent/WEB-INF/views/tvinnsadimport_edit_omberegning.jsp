@@ -241,7 +241,7 @@
 					
 				</td>
 				<td align="right" valign="top" >
-					<a tabindex=-1 href="tvinnsadimport_edit_omberegning_printTopic.do?avd=${model.record.siavd}&opd=${model.record.sitdn}">
+					<a tabindex=-1 href="tvinnsadimport_edit_omberegning_printTopic.do?avd=${model.record.siavd}&opd=${model.record.sitdn}&sign=${model.record.sisg}&status=${ model.record.sist}&fabl=${model.record.sibel3}&o2_sist=${ model.record.o2_sist}&o2_sidt=${ model.record.o2_sidt}&o2_simf=${ model.record.o2_simf}">
 					 	<img style="cursor:pointer;" src="resources/images/printer.png" width="30" hight="30" border="0" alt="Print">
 						&nbsp;&nbsp;&nbsp;
 					</a>

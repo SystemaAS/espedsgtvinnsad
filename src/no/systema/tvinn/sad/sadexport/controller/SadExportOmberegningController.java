@@ -603,17 +603,36 @@ public class SadExportOmberegningController {
 	 * @param request
 	 * @return
 	 */
-	/*
-	@RequestMapping(value="tvinnsadexport_edit_printTopic.do",  method={RequestMethod.GET, RequestMethod.POST })
+	
+	@RequestMapping(value="tvinnsadexport_edit_omberegning_printTopic.do",  method={RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView doSadExportEditPrintTopic(HttpSession session, HttpServletRequest request){
 		Map model = new HashMap();
-		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
-		ModelAndView successView = new ModelAndView("redirect:tvinnsadexport.do?action=doFind&sg=" + appUser.getTvinnSadSign());
 		
-		String method = "doSadExportEditPrintTopic [RequestMapping-->tvinnsadexport_edit_printTopic.do]";
+		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
+		String method = "doSadExportEditPrintTopic [RequestMapping-->tvinnsadexport_edit_omberegning_printTopic.do]";
 		logger.info("Method: " + method);
-		String opd = request.getParameter("opd");
+		
+		//params for redirect
 		String avd = request.getParameter("avd");
+		String opd = request.getParameter("opd");
+		String status = request.getParameter("status");
+		String sign = request.getParameter("sign");
+		String fabl = request.getParameter("fabl");
+		String o2_sest = request.getParameter("o2_sest");
+		String o2_sedt = request.getParameter("o2_sedt");
+		String o2_semf = request.getParameter("o2_semf");
+		
+		StringBuffer redirectStr = new StringBuffer("tvinnsadexport_edit_omberegning.do?action=doFetch");
+		redirectStr.append("&avd=" + avd);
+		redirectStr.append("&sign=" + sign);
+		redirectStr.append("&opd=" + opd);
+		redirectStr.append("&status=" + status);
+		redirectStr.append("&fabl=" + fabl);
+		redirectStr.append("&o2_sest=" + o2_sest);
+		redirectStr.append("&o2_sedt=" + o2_sedt);
+		redirectStr.append("&o2_semf=" + o2_semf);
+		
+		ModelAndView successView = new ModelAndView("redirect:" + redirectStr);
 		
 		
 		//check user (should be in session already)
@@ -646,7 +665,7 @@ public class SadExportOmberegningController {
 		
 		return successView;
 	}
-	*/
+	
 
 	
 	/**

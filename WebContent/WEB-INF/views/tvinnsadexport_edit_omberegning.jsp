@@ -249,7 +249,7 @@
 						<input tabindex=-1 type="checkbox" name="se0035" id="se0035" value="2" <c:if test="${model.record.se0035 == '2'}"> checked </c:if> ><font class="text14MediumBlue"><b>TEST flag</b></font>&nbsp;&nbsp;&nbsp;						
 					</c:if>
 					--%>
-					<a tabindex=-1 href="tvinnsadexport_edit_omberegning_printTopic.do?avd=${model.record.seavd}&opd=${model.record.setdn}">
+					<a tabindex=-1 href="tvinnsadexport_edit_omberegning_printTopic.do?avd=${model.record.seavd}&opd=${model.record.setdn}&sign=${model.record.sesg}&status=${ model.record.sest}&fabl=${model.record.sebel1}&o2_sest=${ model.record.o2_sest}&o2_sedt=${ model.record.o2_sedt}&o2_semf=${ model.record.o2_semf}&selectedOmb=${ model.selectedOmb}">
 					 	<img style="cursor:pointer;" src="resources/images/printer.png" width="30" hight="30" border="0" alt="Print">
 						&nbsp;&nbsp;&nbsp;
 					</a>
