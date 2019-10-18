@@ -120,7 +120,7 @@ public final class TvinnSadConstants {
 
 	public static final List<String>LIST_EU_COUNTRIES = Arrays.asList("AD" ,"AT" ,"BE", "BG", "CH", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", 
 														"FL", "FR", "GB", "GR", "HR", "HU" ,"IE", "IS", "IT", "LI", "LT", "LU", "LV",
-														"MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "SJ", "SK", "RS", "XK");
+														"MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "SJ", "SK", "XK");
 	//get list of EU-countries (more dynamic implementation ...)
 	public List<String> getListEUCountries(String applicationUser){   
 		return new TvinnSadGeneralDatabaseManager().fetchListEU_Countries(applicationUser);
