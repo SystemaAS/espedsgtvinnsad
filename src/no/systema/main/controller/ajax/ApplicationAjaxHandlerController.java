@@ -6,6 +6,14 @@ package no.systema.main.controller.ajax;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.GroupPrincipal;
+import java.nio.file.attribute.PosixFileAttributeView;
+import java.nio.file.attribute.UserPrincipalLookupService;
 import java.util.*;
 
 import org.apache.log4j.Logger;
@@ -31,6 +39,7 @@ import no.systema.main.model.jsonjackson.general.notisblock.JsonNotisblockContai
 import no.systema.main.model.jsonjackson.general.notisblock.JsonNotisblockRecord;
 import no.systema.main.url.store.MainUrlDataStore;
 import no.systema.main.util.AppConstants;
+import no.systema.main.util.StringManager;
 import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
 /**
  * This Ajax handler is the class handling ajax request general in the whole Application. 
@@ -43,7 +52,7 @@ import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
 @Controller
 public class ApplicationAjaxHandlerController {
 	private static final Logger logger = Logger.getLogger(ApplicationAjaxHandlerController.class.getName());
-	
+	private StringManager strMgr = new StringManager();
 	
 	/**
 	 * 
@@ -146,7 +155,7 @@ public class ApplicationAjaxHandlerController {
 		                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
 		                stream.write(bytes);
 		                stream.close();
-		                logger.info("Server File Location=" + serverFile.getAbsolutePath());
+		                logger.info("File delivered to server file location=" + serverFile.getAbsolutePath());
 		                //catch parameters
 		                uploadValidationContainer.setWsavd(avd);
         	    		uploadValidationContainer.setWsopd(opd);
@@ -231,6 +240,17 @@ public class ApplicationAjaxHandlerController {
 		                byte[] bytes = file.getBytes();
 		                // Create the file on server
 		                File serverFile = new File(dir.getAbsolutePath() + File.separator +  fileName);
+		                
+		                //group persmissions
+		                /*Path p = Paths.get(serverFile.getPath());
+		                String groupStr = "QPGMR";
+		                UserPrincipalLookupService lookupService = FileSystems.getDefault()
+		                            .getUserPrincipalLookupService();
+		                GroupPrincipal group = lookupService.lookupPrincipalByGroupName(groupStr);
+		                Files.getFileAttributeView(p, PosixFileAttributeView.class, LinkOption.NOFOLLOW_LINKS).setGroup(group);
+		                //
+		                */
+		                
 		                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
 		                stream.write(bytes);
 		                stream.close();
@@ -354,7 +374,11 @@ public class ApplicationAjaxHandlerController {
 		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 		if(jsonPayload!=null){
 			uploadValidationContainer = this.uploadFileToArchiveService.getFileUploadValidationContainer(jsonPayload);
-			logger.info(uploadValidationContainer.getErrMsg());
+			if(strMgr.isNotNull(uploadValidationContainer.getErrMsg())){
+				logger.info("ERROR:" + uploadValidationContainer.getErrMsg());
+			}else{
+				logger.info("Service executed successfully ...");
+			}
 		}
 		return uploadValidationContainer;
 	}
