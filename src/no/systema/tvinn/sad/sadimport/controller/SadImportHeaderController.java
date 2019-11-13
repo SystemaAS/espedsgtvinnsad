@@ -657,7 +657,7 @@ public class SadImportHeaderController {
 	    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
 	    	logger.info("URL PARAMS: " + urlRequestParams);
 	    	
-	    	/* TO REACTIVATE
+	    	
 	    	//----------------------------------------------------------------------------
 	    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
 	    	//----------------------------------------------------------------------------
@@ -670,13 +670,13 @@ public class SadImportHeaderController {
 	    		rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on UPDATE: " + rpgReturnResponseHandler.getErrorMessage());
 	    		//TODO ERROR HANDLING HERE... stay in the same page ?
 	    	}else{
-	    		//Update succefully done!
+	    		//Update successfully done!
 	    		logger.info("[INFO] Record successfully sent [changed status], OK ");
 	    		//put domain objects
 	    		//this.setDomainObjectsInView(session, model, jsonTdsImportSpecificTopicRecord);
 	    		//TODO SUCCESS should stay at the same side or not? Right now we go to the list of topics
 	    	}
-	    	*/
+	    	
 		}
 		return successView;
 	}
