@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.net.URLEncoder;
 //application imports
 import no.systema.main.util.AppConstants;
+import no.systema.tvinn.sad.util.manager.Log4jMgr;
 
 
 @Controller
@@ -34,6 +35,8 @@ public class LogoutController {
 		//String pwd = request.getParameter("password");
 		//String aes = request.getParameter("aes");
 		
+		Log4jMgr log4jMgr = new Log4jMgr();
+		log4jMgr.doLogoutLogger();
 		
 		if (session!=null){ 
             session.removeAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);

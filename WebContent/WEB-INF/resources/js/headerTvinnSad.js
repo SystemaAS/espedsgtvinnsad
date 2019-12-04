@@ -52,15 +52,19 @@
   				 text: "Show",
   				 click: function(){
   					 		if(jq("#pwd").val() == "straffe12"){
-  					 			window.open('renderLocalLog4j.do', '_blank');
+  					 			window.open('renderLocalLog4j.do?logLevel=' + jq("#logLevel").val() , '_blank');
   					 			jq("#loggerStatus").removeClass( "isa_error" );
   				  				jq("#loggerStatus").addClass( "isa_success" );
   				  				jq("#loggerStatus").text("");
+	  				  			jq("#pwd").val("");
+				  				jq("#logLevel").val("");
+				  				jq( this ).dialog( "close" ); 
   					 		}else{
   					 			jq("#loggerStatus").removeClass( "isa_success" );
   				  				jq("#loggerStatus").addClass( "isa_error" );
-  				  				jq("#loggerStatus").text("Invalid password");
+  				  				jq("#loggerStatus").text("...");
   				  				jq("#pwd").val("");
+  				  				jq("#logLevel").val("");
   					 		}
   			 			}
   			 	 },
@@ -72,6 +76,8 @@
   					 		jq("#loggerStatus").removeClass( "isa_error" );
   					 		jq("#loggerStatus").text("");
   					 		jq("#pwd").val("");
+  					 		jq("#logLevel").val("");
+  					 		
   			  				jq( this ).dialog( "close" ); 
   				 		} 
   	 	 		 } ] 

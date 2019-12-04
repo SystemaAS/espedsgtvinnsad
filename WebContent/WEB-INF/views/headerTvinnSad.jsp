@@ -404,7 +404,14 @@
 							<input type="password" class="inputText" id="pwd" name="pwd" size="15" maxlength="15" value=''>
 						</td>
 					</tr>
-  						<tr height="10"><td></td></tr>
+					
+					<tr height="5"><td></td></tr>
+  					<tr >
+						<td>
+							<input type="text" class="inputText" id="logLevel" name="logLevel" size="8" maxlength="8" value=''>
+						</td>
+					</tr>
+					<tr height="10"><td></td></tr>
 					<tr>
 						<td colspan="3" class="text14MediumBlue" align="left">
 							<label id="loggerStatus"></label>
