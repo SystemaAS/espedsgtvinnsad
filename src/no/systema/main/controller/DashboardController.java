@@ -119,7 +119,9 @@ public class DashboardController {
 	
 		    }else{
 		    	//Decrypt password to be able to work with it. 
-		    	//All sub-modules will be passed an encrypted password (from the dashboard). ALWAYS!
+		    	//All sub-modules will be passed an encrypted user/password (from the dashboard). ALWAYS!
+		    	appUser.setEncryptedUser(appUser.getUser());
+		    	appUser.setUser(this.aesManager.decrypt(appUser.getUser()));
 		    	appUser.setEncryptedPassword(appUser.getPassword());
 		    	appUser.setPassword(this.aesManager.decrypt(appUser.getPassword()));
 		    	//logger.info("DECRYPT...:" + appUser.getPassword());
@@ -202,7 +204,8 @@ public class DashboardController {
 			    	if(appUser.getTomcatPort()!=null && !"".equals(appUser.getTomcatPort())){
 				    	String urlRedirectTomcatToSubsidiaryCompany = this.getTomcatServerRedirectionUrl(appUser, request);
 				    	RedirectView rw = new RedirectView();
-				    	logger.info("Redirecting to:" + urlRedirectTomcatToSubsidiaryCompany);
+				    	logger.warn("Redirecting to lognWRedDashboard");
+				    	logger.debug("Redirecting to:" + urlRedirectTomcatToSubsidiaryCompany);
 				    	rw.setUrl(urlRedirectTomcatToSubsidiaryCompany);
 				    	successView = new ModelAndView(rw);
 			    	}
@@ -231,7 +234,8 @@ public class DashboardController {
 		String user = request.getParameter("ru");
 		String pwd = request.getParameter("dp");
 		//set attributes since the method call do not uses those fields' names
-		appUser.setUser(user);
+		appUser.setEncryptedUser(user);
+		appUser.setUser(this.aesManager.decrypt(user));
 		appUser.setEncryptedPassword(pwd);
 		appUser.setPassword(this.aesManager.decrypt(pwd));
 		
@@ -262,7 +266,7 @@ public class DashboardController {
 		    	//int pwd = urlRequestParamsKeys.indexOf("&pwd");
 		    	//String credentailsPwd = urlRequestParamsKeys.substring(pwd + 5);
 		    	//logger.info("URL PARAMS: " + urlRequestParamsKeys.substring(0,pwd)+"&md5");
-		    	logger.info("URL PARAMS: " + urlRequestParamsKeys);
+		    	logger.debug("URL PARAMS: " + urlRequestParamsKeys);
 		    	
 		    	//--------------------------------------
 		    	//EXECUTE the FETCH (RPG program) here
@@ -366,7 +370,7 @@ public class DashboardController {
 		
 		//We must user GET until we get Spring 4 (in order to send params on POST)
 		try{
-			retval = hostRaw + request.getContextPath() + "/logonWRedDashboard.do?" + "ru=" + appUser.getUser() + "&dp=" + URLEncoder.encode(appUser.getEncryptedPassword(), "UTF-8");
+			retval = hostRaw + request.getContextPath() + "/logonWRedDashboard.do?" + "ru=" + URLEncoder.encode(appUser.getEncryptedUser(), "UTF-8") + "&dp=" + URLEncoder.encode(appUser.getEncryptedPassword(), "UTF-8");
 		}catch(Exception e){
 			//logger.info("XXXXX:" + request.getContextPath());
 		}
