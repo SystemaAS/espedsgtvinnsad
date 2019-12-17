@@ -25,7 +25,7 @@ import org.springframework.web.bind.WebDataBinder;
 import no.systema.main.service.UrlCgiProxyService;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.io.PayloadContentFlusher;
-
+import no.systema.main.validator.IPAddressValidator;
 import no.systema.main.context.TdsServletContext;
 import no.systema.main.model.SystemaWebUser;
 
@@ -80,33 +80,36 @@ public class GeneralPdfRenderController {
 			if(localFilePath!=null && !"".equals(localFilePath)){
 				
                 String absoluteFilePath = localFilePath;
-                
-                //must know the file type in order to put the correct content type on the Servlet response.
-                String fileType = this.payloadContentFlusher.getFileType(localFilePath);
-                if(AppConstants.DOCUMENTTYPE_PDF.equals(fileType)){
-                		response.setContentType(AppConstants.HTML_CONTENTTYPE_PDF);
-                }else if(AppConstants.DOCUMENTTYPE_TIFF.equals(fileType) || AppConstants.DOCUMENTTYPE_TIF.equals(fileType)){
-            			response.setContentType(AppConstants.HTML_CONTENTTYPE_TIFF);
-                }else if(AppConstants.DOCUMENTTYPE_JPEG.equals(fileType) || AppConstants.DOCUMENTTYPE_JPG.equals(fileType)){
-                		response.setContentType(AppConstants.HTML_CONTENTTYPE_JPEG);
-                }else if(AppConstants.DOCUMENTTYPE_TXT.equals(fileType)){
-            			response.setContentType(AppConstants.HTML_CONTENTTYPE_TEXTHTML);
-                }else if(AppConstants.DOCUMENTTYPE_DOC.equals(fileType)){
-            			response.setContentType(AppConstants.HTML_CONTENTTYPE_WORD);
-                }else if(AppConstants.DOCUMENTTYPE_XLS.equals(fileType) || AppConstants.DOCUMENTTYPE_XLSX.equals(fileType)){
-            			response.setContentType(AppConstants.HTML_CONTENTTYPE_EXCEL);
-                }
-                //--> with browser dialogbox: response.setHeader ("Content-disposition", "attachment; filename=\"edifactPayload.txt\"");
-                response.setHeader ("Content-disposition", "filename=\"MyDocument." + fileType + "\"");
-                
-                logger.info("Start flushing file payload...");
-                //send the file output to the ServletOutputStream
-                try{
-                		InputStream inputStream = session.getServletContext().getResourceAsStream(absoluteFilePath);
-                		this.payloadContentFlusher.flushServletOutputOnLocalServletFile(response, inputStream);
-                	
-                }catch (Exception e){
-                		e.printStackTrace();
+                if(!new IPAddressValidator().isValidAbsoluteFilePathFor_RenderFile(absoluteFilePath)){
+                	return (null);
+                }else{	
+	                //must know the file type in order to put the correct content type on the Servlet response.
+	                String fileType = this.payloadContentFlusher.getFileType(localFilePath);
+	                if(AppConstants.DOCUMENTTYPE_PDF.equals(fileType)){
+	                		response.setContentType(AppConstants.HTML_CONTENTTYPE_PDF);
+	                }else if(AppConstants.DOCUMENTTYPE_TIFF.equals(fileType) || AppConstants.DOCUMENTTYPE_TIF.equals(fileType)){
+	            			response.setContentType(AppConstants.HTML_CONTENTTYPE_TIFF);
+	                }else if(AppConstants.DOCUMENTTYPE_JPEG.equals(fileType) || AppConstants.DOCUMENTTYPE_JPG.equals(fileType)){
+	                		response.setContentType(AppConstants.HTML_CONTENTTYPE_JPEG);
+	                }else if(AppConstants.DOCUMENTTYPE_TXT.equals(fileType)){
+	            			response.setContentType(AppConstants.HTML_CONTENTTYPE_TEXTHTML);
+	                }else if(AppConstants.DOCUMENTTYPE_DOC.equals(fileType)){
+	            			response.setContentType(AppConstants.HTML_CONTENTTYPE_WORD);
+	                }else if(AppConstants.DOCUMENTTYPE_XLS.equals(fileType) || AppConstants.DOCUMENTTYPE_XLSX.equals(fileType)){
+	            			response.setContentType(AppConstants.HTML_CONTENTTYPE_EXCEL);
+	                }
+	                //--> with browser dialogbox: response.setHeader ("Content-disposition", "attachment; filename=\"edifactPayload.txt\"");
+	                response.setHeader ("Content-disposition", "filename=\"MyDocument." + fileType + "\"");
+	                
+	                logger.info("Start flushing file payload...");
+	                //send the file output to the ServletOutputStream
+	                try{
+	                		InputStream inputStream = session.getServletContext().getResourceAsStream(absoluteFilePath);
+	                		this.payloadContentFlusher.flushServletOutputOnLocalServletFile(response, inputStream);
+	                	
+	                }catch (Exception e){
+	                		e.printStackTrace();
+	                }
                 }
             }
 			//this to present the output in an independent window
