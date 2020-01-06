@@ -111,6 +111,18 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 			<property name="paramName" value="lang" />
 		</bean>
+		
+		<!-- token interceptor for cookies -->
+		<mvc:interceptor>
+		    <mvc:mapping path="/**"/>
+		    <mvc:exclude-mapping path="/login.do/**"/>
+		    <mvc:exclude-mapping path="/logout.do/**"/>
+		    <mvc:exclude-mapping path="/logonDashboard.do/**"/>
+		    <!-- <mvc:exclude-mapping path="/logonWRedDashboard.do/**"/>  -->
+		    <mvc:exclude-mapping path="/resources/**"/>  
+		    <bean class="no.systema.main.cookie.CookieAuthorizationInterceptor" />
+		</mvc:interceptor>
+		
 	</mvc:interceptors>
 
 	<mvc:annotation-driven>
