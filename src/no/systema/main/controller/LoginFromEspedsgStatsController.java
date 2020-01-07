@@ -41,6 +41,7 @@ import no.systema.tvinn.sad.sadexport.url.store.SadExportUrlDataStore;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportTopicListContainer;
 import no.systema.tvinn.sad.sadimport.service.SadImportTopicListService;
 import no.systema.tvinn.sad.sadimport.url.store.SadImportUrlDataStore;
+import no.systema.main.cookie.SessionCookieManager;
 //application imports
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.model.jsonjackson.JsonSystemaUserContainer;
@@ -109,6 +110,16 @@ public class LoginFromEspedsgStatsController {
 		ModelAndView successView = this.getSuccessView(appUser, request);
 		
 		Map model = new HashMap();
+		SessionCookieManager cookieMgr = new SessionCookieManager();
+		
+		//Init cookie token since this page is excluded in the interceptor
+		cookieMgr.removeLocalCookie(response);
+		//appUser.setUser(this.aesManager.decrypt(appUser.getUser()));
+		appUser.setUser(appUser.getUser());
+		appUser.setEncryptedPassword(appUser.getPassword());
+    	appUser.setPassword(this.aesManager.decrypt(appUser.getPassword()));
+		appUser.setEncryptedToken(this.aesManager.encrypt(request.getSession().getId() + "&" + appUser.getUser()));
+    	
 		
 		if(appUser==null){
 			return this.loginView;
@@ -132,12 +143,6 @@ public class LoginFromEspedsgStatsController {
 		    	return loginView;
 	
 		    }else{
-		    	//Decrypt password to be able to work with it. 
-		    	//All sub-modules will be passed an encrypted password (from the dashboard). ALWAYS!
-		    	
-		    	logger.info("DECRYPT...:" + appUser.getPassword());
-		    	appUser.setEncryptedPassword(appUser.getPassword());
-		    	appUser.setPassword(this.aesManager.decrypt(appUser.getPassword()));
 		    	
 		    	//get the company code for the comming user
 		    	//this routine was triggered by Totens upgrade (Jan-2017 V12). Ref. JOVOs requirement
@@ -196,6 +201,8 @@ public class LoginFromEspedsgStatsController {
 	    					return loginView;
 				    	}
 				    	
+				    	//create cookie for security token
+				    	cookieMgr.addLocalCookieToken( appUser.getEncryptedToken(), response);
 				    	session.setAttribute(AppConstants.SYSTEMA_WEB_USER_KEY, appUser);
 				    	
 			    	}catch(Exception e){

@@ -119,6 +119,10 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 		    <mvc:exclude-mapping path="/logout.do/**"/>
 		    <mvc:exclude-mapping path="/logonDashboard.do/**"/>
 		    <!-- <mvc:exclude-mapping path="/logonWRedDashboard.do/**"/>  -->
+		    
+		    <!-- this external login is coming from espedsgstats as an indirect login. We must exclude it until we get the token  -->
+		    <mvc:exclude-mapping path="/logonAnalyseReports_toSad.do/**"/>
+		    
 		    <mvc:exclude-mapping path="/resources/**"/>  
 		    <bean class="no.systema.main.cookie.CookieAuthorizationInterceptor" />
 		</mvc:interceptor>
