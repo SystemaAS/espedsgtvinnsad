@@ -95,7 +95,7 @@ public class DashboardController {
 	public ModelAndView logon(@ModelAttribute (AppConstants.SYSTEMA_WEB_USER_KEY) SystemaWebUser appUser, BindingResult bindingResult, HttpSession session, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttr){
 		ModelAndView successView = new ModelAndView("tvinnsadgate");
 		Map model = new HashMap();
-		SessionCookieManager cookieMgr = new SessionCookieManager();
+		SessionCookieManager cookieMgr = new SessionCookieManager(request);
 		
 		//Init cookie token since this page is excluded in the interceptor
 		cookieMgr.removeLocalCookie(response);

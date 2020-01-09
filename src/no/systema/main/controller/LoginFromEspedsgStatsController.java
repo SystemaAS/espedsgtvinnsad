@@ -110,7 +110,7 @@ public class LoginFromEspedsgStatsController {
 		ModelAndView successView = this.getSuccessView(appUser, request);
 		
 		Map model = new HashMap();
-		SessionCookieManager cookieMgr = new SessionCookieManager();
+		SessionCookieManager cookieMgr = new SessionCookieManager(request);
 		
 		//Init cookie token since this page is excluded in the interceptor
 		cookieMgr.removeLocalCookie(response);
