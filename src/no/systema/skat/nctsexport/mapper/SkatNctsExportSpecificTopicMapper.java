@@ -38,7 +38,8 @@ public class SkatNctsExportSpecificTopicMapper {
 		//DEBUG
 		
 		Collection<JsonSkatNctsExportSpecificTopicRecord> fields = topicListContainer.getOneorder();
-		for(JsonSkatNctsExportSpecificTopicRecord record : fields){
+		if(fields!=null){
+		//for(JsonSkatNctsExportSpecificTopicRecord record : fields){
 			/*logger.info("SVEH_SYAV: " + record.getSveh_syav());
 			logger.info("SVEH_SYOP: " + record.getSveh_syop());
 			logger.info("SVEH_AVTL: " + record.getSveh_avtl());
@@ -48,8 +49,8 @@ public class SkatNctsExportSpecificTopicMapper {
 			logger.info("SVEH_FATX: " + record.getSveh_fatx());
 			logger.info("SVEH_VAKD: " + record.getSveh_vakd());
 			*/
-		}
-			
+		//}
+		}	
 		return topicListContainer;
 	}
 }
