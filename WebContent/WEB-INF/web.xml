@@ -60,14 +60,17 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
   <session-config>
-    <session-timeout>360</session-timeout>
+    <!-- in minutes 0=standard=never ever-->
+    <session-timeout>0</session-timeout>
     
     <cookie-config>
     	  <http-only>true</http-only> 
     	  <!-- secure flag will not accept http. If we want to be able to handle both http & https the secure flag must not exist -->
       <secure>true</secure>
-      <!-- in seconds -->
-      <max-age>1800</max-age>
+      
+      <!-- in seconds, without this property it will disapear until browser is closed
+      <max-age>1800</max-age> 
+      -->
     </cookie-config>
     <!-- to avoid jsessionid in URL -->
     <tracking-mode>COOKIE</tracking-mode>
