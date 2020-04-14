@@ -225,7 +225,9 @@ public class SadImportController {
 					successView.addObject(TvinnSadConstants.DOMAIN_LIST,outputList);
 					successView.addObject(TvinnSadConstants.DOMAIN_LIST_SIZE, outputList.size());	
 					successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
-		    		
+					//set a session variable in order to make the list available to an external view controller (Excel/PDF- Controller)
+					session.setAttribute(session.getId() + TvinnSadConstants.SESSION_LIST, outputList);
+					
 					if (session.getAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADIMPORT) == null || session.getAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADIMPORT).equals("")){
 						successView.addObject(TvinnSadConstants.DOMAIN_SEARCH_FILTER_SADIMPORT, searchFilter);
 					}

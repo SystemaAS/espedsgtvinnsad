@@ -182,6 +182,21 @@
 	<%-- list component --%>
 	<c:if test="${not empty list}">
 	<tr>
+		<td width="100%" >
+	     <table width="100%" >
+	     	<tr >
+			<td class="text14" align="right">
+	        		<a href="tvinnsadImportMainListExcelView.do" target="_blank">
+               		<img id="itemListExcel" src="resources/images/excel.png" border="0" alt="excel">&nbsp;Excel
+	        		</a>&nbsp;
+	        	</td>	
+		</tr>
+		</table>
+		</td>
+	</tr>
+	
+	
+	<tr>
 		<td>		
 		<table width="100%" cellspacing="0" border="0" cellpadding="0">
 	    	<%-- separator --%>
@@ -211,12 +226,12 @@
 	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.import.list.search.label.vikt"/></th>
 	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.import.list.search.label.godsnr"/></th>
 	                    <th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.import.list.search.label.innstikk"/></th>
-	                    <th class="tableHeaderField" >epost</th>
+	                    <th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.import.list.search.label.email"/></th>
 	                    <%-- START Omberegning --%>
-	                    <th class="tableHeaderFieldOmberegning" >Omber</th>
-	                    <th class="tableHeaderFieldOmberegning" >St</th>
-	                    <th class="tableHeaderFieldOmberegning" >Dato</th>
-	                    <th class="tableHeaderFieldOmberegning" >Løpenr</th>
+	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.omber.omber"/></th>
+	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.omber.status"/></th>
+	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.omber.datum"/></th>
+	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.omber.lopenr"/></th>
 	                    <%-- END Omberegning --%>
 	                    <th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.import.list.search.label.notisblock"/></th>	                    
 	                    <th class="tableHeaderField" nowrap><spring:message code="systema.tvinn.sad.import.list.search.label.kopieraArende"/></th>

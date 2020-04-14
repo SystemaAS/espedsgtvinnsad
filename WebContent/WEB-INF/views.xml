@@ -7,6 +7,7 @@
     
     <!-- TVINN-SAD Import -->
     <bean id="tvinnsadImportItemListExcelView" class="no.systema.tvinn.sad.sadimport.view.ItemLineListExcelBuilder" />
+    <bean id="tvinnsadImportMainListExcelView" class="no.systema.tvinn.sad.sadimport.view.MainListExcelBuilder" />
     <!-- TVINN-SAD Export -->
     <bean id="tvinnsadExportItemListExcelView" class="no.systema.tvinn.sad.sadexport.view.ItemLineListExcelBuilder" />
     <bean id="tvinnsadExportMainListExcelView" class="no.systema.tvinn.sad.sadexport.view.MainListExcelBuilder" />
