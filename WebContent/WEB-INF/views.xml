@@ -11,7 +11,8 @@
     <!-- TVINN-SAD Export -->
     <bean id="tvinnsadExportItemListExcelView" class="no.systema.tvinn.sad.sadexport.view.ItemLineListExcelBuilder" />
     <bean id="tvinnsadExportMainListExcelView" class="no.systema.tvinn.sad.sadexport.view.MainListExcelBuilder" />
-
+	<!-- TVINN-SAD NCTS Export -->
+	<bean id="tvinnsadNctsExportMainListExcelView" class="no.systema.tvinn.sad.nctsexport.view.MainListExcelBuilder" />
 
 <!-- 
 
