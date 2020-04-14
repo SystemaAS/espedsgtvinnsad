@@ -9,7 +9,29 @@
     <bean id="tvinnsadImportItemListExcelView" class="no.systema.tvinn.sad.sadimport.view.ItemLineListExcelBuilder" />
     <!-- TVINN-SAD Export -->
     <bean id="tvinnsadExportItemListExcelView" class="no.systema.tvinn.sad.sadexport.view.ItemLineListExcelBuilder" />
+    <bean id="tvinnsadExportMainListExcelView" class="no.systema.tvinn.sad.sadexport.view.MainListExcelBuilder" />
 
+
+<!-- 
+
+	TDS Import
+    <bean id="tdsImportItemListExcelView" class="no.systema.tds.tdsimport.view.ItemLineListExcelBuilder" />
+    <bean id="tdsImportMainListExcelView" class="no.systema.tds.tdsimport.view.MainListExcelBuilder" />
+    
+   	TDS Export 
+    <bean id="tdsExportItemListExcelView" class="no.systema.tds.tdsexport.view.ItemLineListExcelBuilder" />
+    <bean id="tdsExportMainListExcelView" class="no.systema.tds.tdsexport.view.MainListExcelBuilder" />
+    
+    TDS NCTS-Export 
+    <bean id="tdsNctsExportItemListExcelView" class="no.systema.tds.nctsexport.view.ItemLineListExcelBuilder" />
+    <bean id="tdsNctsExportMainListExcelView" class="no.systema.tds.nctsexport.view.MainListExcelBuilder" />
+    
+    TDS NCTS-Import 
+    <bean id="tdsNctsImportItemListExcelView" class="no.systema.tds.nctsimport.view.ItemLineListExcelBuilder" />
+    <bean id="tdsNctsImportUnloadingItemListExcelView" class="no.systema.tds.nctsimport.view.UnloadingItemLineListExcelBuilder" />
+    <bean id="tdsNctsImportMainListExcelView" class="no.systema.tds.nctsimport.view.MainListExcelBuilder" />
+    
+ -->   
 
 
      

@@ -171,8 +171,24 @@
 		</td>
 	</tr>
 	</spring:hasBindErrors>	
+	
+	
 	<%-- list component --%>
 	<c:if test="${not empty list}">
+	<tr>
+		<td width="100%" >
+	     <table width="100%" >
+	     	<tr >
+			<td class="text14" align="right">
+	        		<a href="tvinnsadExportMainListExcelView.do" target="_blank">
+               		<img id="itemListExcel" src="resources/images/excel.png" border="0" alt="excel">&nbsp;Excel
+	        		</a>&nbsp;
+	        	</td>	
+		</tr>
+		</table>
+		</td>
+	</tr>
+	
 	<tr>
 		<td>		
 		<table width="100%" cellspacing="0" border="0" cellpadding="0">
@@ -200,12 +216,12 @@
 	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.export.list.search.label.mottagare"/></th>
 	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.export.list.search.label.godsnr"/></th>
 	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.export.list.search.label.innstikk"/></th>
-	                    <th class="tableHeaderField">epost</th>
+	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.export.list.search.label.email"/></th>
 	                     <%-- START Omberegning --%>
-	                    <th class="tableHeaderFieldOmberegning">Omber&nbsp;</th>
-	                    <th class="tableHeaderFieldOmberegning">St&nbsp;</th>
-	                    <th class="tableHeaderFieldOmberegning">Dato&nbsp;</th>
-	                    <th class="tableHeaderFieldOmberegning">Løpenr&nbsp;</th>
+	                    <th class="tableHeaderFieldOmberegning"><spring:message code="systema.tvinn.sad.export.list.search.label.omber.omber"/>&nbsp;</th>
+	                    <th class="tableHeaderFieldOmberegning"><spring:message code="systema.tvinn.sad.export.list.search.label.omber.status"/>&nbsp;</th>
+	                    <th class="tableHeaderFieldOmberegning"><spring:message code="systema.tvinn.sad.export.list.search.label.omber.datum"/>&nbsp;</th>
+	                    <th class="tableHeaderFieldOmberegning"><spring:message code="systema.tvinn.sad.export.list.search.label.omber.lopenr"/>&nbsp;</th>
 	                    <%-- END Omberegning --%>
 	                    <th class="tableHeaderField" >&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.notisblock"/>&nbsp;</th>	                    
 	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.export.list.search.label.kopieraArende"/></th>
