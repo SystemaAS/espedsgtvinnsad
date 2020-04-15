@@ -1198,10 +1198,36 @@
 		  //open now
 		  jq('#dialogUploadArchiveDocument').dialog('open');
 	  }
+	//----------------
+	// UPLOAD FILE 
+	//----------------
+	  function myFileUploadDragEnter(e){
+		  jq("#fileUpload").addClass( "isa_blue" );
+	  }
+	  function myFileUploadDragLeave(e){
+		  jq("#fileUpload").removeClass( "isa_blue" );
+	  }
 	  
 	  //Events for the drop downs (some kind of "implicit validation" since all drop downs are mandatory)
 	  jq(function() {
+		//Triggers drag-and-drop
+		  jq('#fileUpload').hover(function(){
+			  jq("#fileUpload").removeClass( "isa_success" );
+			  jq("#fileUpload").removeClass( "isa_error" );
+		  });   
+		  
 		  jq("#fileUpload").change(function() {
+			//Init by removing the class used in dragEnter
+			  jq("#fileUpload").removeClass( "isa_blue" );
+			  /*
+			  if(jq("#wstype").val() == 'ZP'){
+				 showTimestampPopup();  
+			  }else{
+				 jq("#userDate").val("");
+				 jq("#userTime").val("");
+				 uploadFile();  
+			  }
+			  */
 			  uploadFile();
 		  });
 		  
@@ -1223,17 +1249,17 @@
 		  		  success: function(data) {
 				  	  var len = data.length;
 			  		  if(len>0){
-			  			jq("#file").val("");
+			  			jq("#fileUpload").val("");
 					  	//Check for errors or successfully processed
 					  	var exists = data.indexOf("ERROR");
 					  	if(exists>0){
 					  		//ERROR on back-end
-					  		jq("#file").addClass( "isa_error" );
-					  		jq("#file").removeClass( "isa_success" );
+					  		jq("#fileUpload").addClass( "isa_error" );
+					  		jq("#fileUpload").removeClass( "isa_success" );
 					  	}else{
 					  		//OK
-					  		jq("#file").addClass( "isa_success" );
-					  		jq("#file").removeClass( "isa_error" );
+					  		jq("#fileUpload").addClass( "isa_success" );
+					  		jq("#fileUpload").removeClass( "isa_error" );
 					  	}
 					  	//response to end user 
 					  	alert(data);
@@ -1252,10 +1278,10 @@
 			  	  error: function() {
 			  		  jq.unblockUI();
 			  		  alert('Error loading ...');
-			  		  jq("#file").val("");
+			  		  jq("#fileUpload").val("");
 			  		  //cosmetics
-			  		  jq("#file").addClass( "isa_error" );
-			  		  jq("#file").removeClass( "isa_success" );
+			  		  jq("#fileUpload").addClass( "isa_error" );
+			  		  jq("#fileUpload").removeClass( "isa_success" );
 				  }
 			  });
 			    
@@ -1263,7 +1289,7 @@
 		  }
 	  
 	  //-------------------------------------------
-	  //END Model dialog: "File upload"
+	  ////END UPLOAD --> Model dialog: "File upload"
 	  //-------------------------------------------
 	
 	
