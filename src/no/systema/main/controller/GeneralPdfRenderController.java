@@ -71,7 +71,7 @@ public class GeneralPdfRenderController {
 			//session.setAttribute(SkatConstants.ACTIVE_URL_RPG_SKAT, SkatConstants.ACTIVE_URL_RPG_INITVALUE); 
 			
 			String localFileName = request.getParameter("fn");
-			String localFilePath = this.FILE_RESOURCE_PATH + localFileName; 
+			String localFilePath = request.getSession().getServletContext().getRealPath(FILE_RESOURCE_PATH + localFileName); 
 			
 			//String path="/WEB-INF/ProjectFiles/Risultati/risultati_test.txt";
 			//InputStream inputStream = this.getServletConfig().getServletContext().getResourceAsStream(path);
@@ -104,11 +104,10 @@ public class GeneralPdfRenderController {
 	                logger.info("Start flushing file payload...");
 	                //send the file output to the ServletOutputStream
 	                try{
-	                		InputStream inputStream = session.getServletContext().getResourceAsStream(absoluteFilePath);
-	                		this.payloadContentFlusher.flushServletOutputOnLocalServletFile(response, inputStream);
+	                	this.payloadContentFlusher.flushServletOutput(response, absoluteFilePath);
 	                	
 	                }catch (Exception e){
-	                		e.printStackTrace();
+	                	e.printStackTrace();
 	                }
                 }
             }
