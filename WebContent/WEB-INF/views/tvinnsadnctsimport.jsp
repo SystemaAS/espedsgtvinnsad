@@ -173,6 +173,22 @@
 	<%-- list component --%>
 	<c:if test="${not empty list}">
 	<tr>
+		<td width="100%" >
+	     <table width="100%" >
+	     	<tr >
+			<td class="text14" align="right">
+	        		<a href="tvinnsadNctsImportMainListExcelView.do" target="_blank">
+               		<img id="itemListExcel" src="resources/images/excel.png" border="0" alt="excel">&nbsp;Excel
+	        		</a>&nbsp;
+	        	</td>	
+		</tr>
+		</table>
+		</td>
+	</tr>
+	
+	
+	
+	<tr>
 		<td>		
 		<table width="100%" cellspacing="0" border="0" cellpadding="0">
 	    	<%-- separator --%>

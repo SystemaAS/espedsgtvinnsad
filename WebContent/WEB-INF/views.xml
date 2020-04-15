@@ -4,7 +4,6 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
     
-    
     <!-- TVINN-SAD Import -->
     <bean id="tvinnsadImportItemListExcelView" class="no.systema.tvinn.sad.sadimport.view.ItemLineListExcelBuilder" />
     <bean id="tvinnsadImportMainListExcelView" class="no.systema.tvinn.sad.sadimport.view.MainListExcelBuilder" />
@@ -13,28 +12,8 @@
     <bean id="tvinnsadExportMainListExcelView" class="no.systema.tvinn.sad.sadexport.view.MainListExcelBuilder" />
 	<!-- TVINN-SAD NCTS Export -->
 	<bean id="tvinnsadNctsExportMainListExcelView" class="no.systema.tvinn.sad.nctsexport.view.MainListExcelBuilder" />
-
-<!-- 
-
-	TDS Import
-    <bean id="tdsImportItemListExcelView" class="no.systema.tds.tdsimport.view.ItemLineListExcelBuilder" />
-    <bean id="tdsImportMainListExcelView" class="no.systema.tds.tdsimport.view.MainListExcelBuilder" />
-    
-   	TDS Export 
-    <bean id="tdsExportItemListExcelView" class="no.systema.tds.tdsexport.view.ItemLineListExcelBuilder" />
-    <bean id="tdsExportMainListExcelView" class="no.systema.tds.tdsexport.view.MainListExcelBuilder" />
-    
-    TDS NCTS-Export 
-    <bean id="tdsNctsExportItemListExcelView" class="no.systema.tds.nctsexport.view.ItemLineListExcelBuilder" />
-    <bean id="tdsNctsExportMainListExcelView" class="no.systema.tds.nctsexport.view.MainListExcelBuilder" />
-    
-    TDS NCTS-Import 
-    <bean id="tdsNctsImportItemListExcelView" class="no.systema.tds.nctsimport.view.ItemLineListExcelBuilder" />
-    <bean id="tdsNctsImportUnloadingItemListExcelView" class="no.systema.tds.nctsimport.view.UnloadingItemLineListExcelBuilder" />
-    <bean id="tdsNctsImportMainListExcelView" class="no.systema.tds.nctsimport.view.MainListExcelBuilder" />
-    
- -->   
-
-
-     
+	<!-- TVINN-SAD NCTS Import -->
+	<bean id="tvinnsadNctsImportMainListExcelView" class="no.systema.tvinn.sad.nctsimport.view.MainListExcelBuilder" />
+	
+	
 </beans>
