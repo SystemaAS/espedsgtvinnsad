@@ -3,6 +3,8 @@
  */
 package no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items;
 
+import lombok.Data;
+
 /**
  * 
  * @author oscardelatorre
@@ -10,9 +12,16 @@ package no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items;
  * 
  * 
  */
+@Data
 public class JsonSadExportTolltariffKundensRegisterVarukodRecord {
+	//SADVARE (db-file)
+	private String varenr = null;
+	private String w2lk = null;
+	private String w2vnti = null;
+	private String w2vktb = null;
+	private String varebe = null;
 	
-	
+	//OLD attributes outside SADVARE
 	private String slalfa = null;
 	public void setSlalfa(String value){ this.slalfa = value;}
 	public String getSlalfa(){ return this.slalfa; }

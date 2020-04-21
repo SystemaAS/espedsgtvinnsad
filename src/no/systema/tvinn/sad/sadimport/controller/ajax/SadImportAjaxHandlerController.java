@@ -148,8 +148,8 @@ public class SadImportAjaxHandlerController {
 			 lineId = fields[1];
 			 logger.info(METHOD + "user:" + applicationUser + "-" + "elementValue:" + elementValue + "-" + "avd:" + avd + "-" + "opd:" + opd + "- linenr:" + lineId);
 			 String urlRequestParamsKeys = this.getRequestUrlKeyParametersForItem(applicationUser, avd, opd, lineId);
-			 logger.info(METHOD + "URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
-			 logger.info(METHOD + "PARAMS: " + urlRequestParamsKeys);
+			 logger.warn(METHOD + "URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+			 logger.warn(METHOD + "PARAMS: " + urlRequestParamsKeys);
 			 logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
 			 String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
 			 logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");		

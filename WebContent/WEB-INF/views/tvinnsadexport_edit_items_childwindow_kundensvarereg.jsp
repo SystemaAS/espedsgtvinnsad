@@ -65,13 +65,13 @@
 			                       <tr class="text14">
 			                   </c:otherwise>
 			               </c:choose>
-			               <td nowrap style="cursor:pointer;" class="text14MediumBlue" id="varenr${record.slalfa}@varebe${record.sltxt}@tariffnr${record.sltanr}@vekt${record.slvekt}@fylk${record.sloppl}" >
-               			   		<img title="select" valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;${record.slalfa}
+			               <td nowrap style="cursor:pointer;" class="text14MediumBlue" id="varenr${record.varenr}@varebe${record.varebe}@tariffnr${record.w2vnti}@vekt${record.w2vktb}@fylk${record.w2lk}" >
+               			   		<img title="select" valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;${record.varenr}
 			               </td>
-		               	   <td class="text14">&nbsp;${record.sltanr}</td>
-		               	   <td class="text14">&nbsp;${record.sltxt}</td>
-		               	   <td class="text14">&nbsp;${record.sloppl}</td>
-		               	   <td class="text14">&nbsp;${record.slvekt}</td>
+		               	   <td class="text14">&nbsp;${record.w2vnti}</td>
+		               	   <td class="text14">&nbsp;${record.varebe}</td>
+		               	   <td class="text14">&nbsp;${record.w2lk}</td>
+		               	   <td class="text14">&nbsp;${record.w2vktb}</td>
 		               	   
 			            </tr> 
 			            </c:forEach>

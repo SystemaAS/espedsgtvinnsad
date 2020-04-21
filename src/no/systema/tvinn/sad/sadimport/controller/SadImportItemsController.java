@@ -661,7 +661,7 @@ public class SadImportItemsController {
 	 */
 	@RequestMapping(value="tvinnsadimport_edit_items_doUpdateKundensVareregister.do")
 	public ModelAndView sadImportEditItemUpdateKundensVaruregister(@ModelAttribute ("record") KundensVareRegisterUpdateItemRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
-		logger.info("Inside: sadImportEditItemUpdateKundensVaruregister");
+		logger.warn("Inside: sadImportEditItemUpdateKundensVaruregister");
 		
 		ModelAndView successView = null;
 		RpgReturnResponseHandler rpgReturnResponseHandler = new RpgReturnResponseHandler();
@@ -683,11 +683,11 @@ public class SadImportItemsController {
             //---------------------------
 			String BASE_URL = SadImportUrlDataStore.SAD_IMPORT_BASE_UPDATE_TOLLTARIFF_KUNDENSVAREREG_VARUKODER_ITEMS_URL;
 			String urlRequestParamsTopicItem = "user=" + appUser.getUser() + this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate));
-			logger.info("URL:" + BASE_URL );
-			logger.info("PARAMS:" + urlRequestParamsTopicItem);
+			logger.warn("URL:" + BASE_URL );
+			logger.warn("PARAMS:" + urlRequestParamsTopicItem);
 			String rpgReturnPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsTopicItem);
 			
-			logger.info("Checking errMsg in rpgReturnPayload" + rpgReturnPayload);
+			logger.warn("Checking errMsg in rpgReturnPayload" + rpgReturnPayload);
 	    	//we must evaluate a return RPG code in order to know if the Update was OK or not
 	    	rpgReturnResponseHandler.evaluateRpgResponseOnItemKundensVarRegisterUpdate(rpgReturnPayload);
 	    	if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){

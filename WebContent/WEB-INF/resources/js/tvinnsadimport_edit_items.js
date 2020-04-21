@@ -834,7 +834,6 @@
 				jq('#w2as').val(data[i].svas);
 				jq('#w2mfr').val(data[i].svmfr);
 				
-				
 				//Start dialog
 				//deal with buttons and attributes for this modal window
 				jq('#dialogKundensVareregister').dialog( "option", "title", "LAGRE i kundens vareregister" );

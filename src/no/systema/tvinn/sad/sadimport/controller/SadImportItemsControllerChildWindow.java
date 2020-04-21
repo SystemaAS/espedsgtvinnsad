@@ -371,12 +371,12 @@ public class SadImportItemsControllerChildWindow {
 		urlRequestParams.append("&levenr=" + receiverId);
 		urlRequestParams.append("&varnr=" + vkod);
 		
-		logger.info(BASE_URL);
-		logger.info(urlRequestParams);
+		logger.warn(BASE_URL);
+		logger.warn(urlRequestParams);
 		
 		UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
 		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
-		logger.info(this.jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+		logger.warn(this.jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
 		JsonSadImportTolltariffKundensRegisterVarukodContainer container = null;
 		try{
 			if(jsonPayload!=null){

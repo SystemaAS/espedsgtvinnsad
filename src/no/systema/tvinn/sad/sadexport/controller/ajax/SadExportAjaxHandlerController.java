@@ -140,8 +140,8 @@ public class SadExportAjaxHandlerController {
 			 lineId = fields[1];
 			 logger.info(METHOD + "user:" + applicationUser + "-" + "elementValue:" + elementValue + "-" + "avd:" + avd + "-" + "opd:" + opd + "- linenr:" + lineId);
 			 String urlRequestParamsKeys = this.getRequestUrlKeyParametersForItem(applicationUser, avd, opd, lineId);
-			 logger.info(METHOD + "URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
-			 logger.info(METHOD + "PARAMS: " + urlRequestParamsKeys);
+			 logger.warn(METHOD + "URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+			 logger.warn(METHOD + "PARAMS: " + urlRequestParamsKeys);
 			 logger.info(METHOD + Calendar.getInstance().getTime() +  " CGI-start timestamp");
 			 String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
 			 logger.info(METHOD + Calendar.getInstance().getTime() +  " CGI-end timestamp");		
@@ -149,7 +149,7 @@ public class SadExportAjaxHandlerController {
 				 //we must replace wrong name in order to use the same JSON item record. The RPG name "oneline" should be replaced (at the back end)
 				 //in the future by orderList... We do that here and now
 				 jsonPayload = jsonPayload.replaceFirst("oneline", "orderList");
-				 logger.info(METHOD + jsonPayload);
+				 logger.warn(METHOD + jsonPayload);
 				 JsonSadExportSpecificTopicItemContainer container = this.sadExportSpecificTopicItemService.getSadExportSpecificTopicItemContainer(jsonPayload);
 				 if(container!=null){
 					 for(JsonSadExportSpecificTopicItemRecord  record : container.getOrderList()){

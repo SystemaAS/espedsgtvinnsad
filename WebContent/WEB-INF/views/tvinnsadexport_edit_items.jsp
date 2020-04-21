@@ -1549,16 +1549,11 @@
 			<div id="dialogKundensVareregister" title="Dialog">
 				<form  action="tvinnsadexport_edit_items_doUpdateKundensVareregister.do" name="updateKundensVareregisterForm" id="updateKundensVareregisterForm" method="post">
 				 	<input type="hidden" name="action" id="action" value='doUpdate'/>
-				 	<input type="hidden" name="sltxt" id="sltxt" value=""/>
-				 	<%--
-				 	<input type="hidden" name="sltar" id="sltar" value=""/>
-				 	<input type="hidden" name="slpva" id="slpva" value=""/>
-				 	<input type="hidden" name="slsats" id="slsats" value=""/>
-				 	<input type="hidden" name="sltn" id="sltn" value=""/>
-				 	 --%>
+				 	<input type="hidden" name="varebe" id="varebe" value=""/>
+				 	
 					<table>
 						<tr>
-							<td colspan="6">Beskrivning:&nbsp;<label class="text14Bold" id="description_sltxt" name="description_sltxt"></label></td>
+							<td colspan="6">Beskrivning:&nbsp;<label class="text14Bold" id="svvt" name="svvt"></label></td>
 						</tr>
 						<tr height="5"><td></td></tr>
 						
@@ -1570,11 +1565,11 @@
           					<td class="tableHeaderField" align="left" >&nbsp;Kundenr.</td>
           				</tr>
 						<tr>
-							<td class="tableCell11"><input readonly class="inputTextReadOnly" type="text"  id="sloppl" name="sloppl" size="10px" value=""></input></td>
-							<td class="tableCellFirst11"><input class="inputTextReadOnly" type="text" id="sltanr" name="sltanr" size="10px" value=""></input></td>
-							<td class="tableCell11"><input readonly class="inputTextReadOnly" type="text"  id="slvekt" name="slvekt" size="10px" value=""></input></td>
-							<td class="tableCell11"><input  class="inputTextMediumBlue" type="text"  id="slalfa" name="slalfa" size="10px" value=""></input></td>
-							<td class="tableCell11"><input  class="inputTextMediumBlue" type="text"  id="slknr" name="slknr" size="10px" value=""></input></td>
+							<td class="tableCell11"><input readonly class="inputTextReadOnly" type="text"  id="w2lk" name="w2lk" size="10px" value=""></input></td>
+							<td class="tableCellFirst11"><input class="inputTextReadOnly" type="text" id="w2vnti" name="w2vnti" size="10px" value=""></input></td>
+							<td class="tableCell11"><input readonly class="inputTextReadOnly" type="text"  id="w2vktb" name="w2vktb" size="10px" value=""></input></td>
+							<td class="tableCell11"><input  class="inputTextMediumBlue" type="text"  id="varenr" name="varenr" size="10px" value=""></input></td>
+							<td class="tableCell11"><input  class="inputTextMediumBlue" type="text"  id="levenr" name="levenr" size="10px" value=""></input></td>
 						</tr>
 						
 					</table>

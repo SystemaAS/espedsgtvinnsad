@@ -2194,7 +2194,7 @@
 				 	<input type="hidden" name="w2pva" id="w2pva" value=""/>
 				 	<input type="hidden" name="w2as" id="w2as" value=""/>
 				 	<input type="hidden" name="w2mfr" id="w2mfr" value=""/>
-				 	
+
 					<table>
 						<tr>
 							<td colspan="6">Beskrivning:&nbsp;<label class="text14Bold" id="svvt" name="svvt"></label></td>

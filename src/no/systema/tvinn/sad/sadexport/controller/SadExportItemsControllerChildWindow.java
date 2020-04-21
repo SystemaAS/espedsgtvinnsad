@@ -170,7 +170,7 @@ public class SadExportItemsControllerChildWindow {
 	@RequestMapping(value="tvinnsadexport_edit_items_childwindow_kundensvarereg.do", params="action=doInit",  method={RequestMethod.GET, RequestMethod.POST } )
 	public ModelAndView doInitKundVareReg(@ModelAttribute ("record") JsonSadExportTolltariffKundensRegisterVarukodContainer recordToValidate, HttpSession session, HttpServletRequest request){
 		this.context = TdsAppContext.getApplicationContext();
-		logger.info("Inside: doInitKundVareReg");
+		logger.warn("Inside: doInitKundVareReg");
 		Map model = new HashMap();
 		String senderId = request.getParameter("senId");
 		
@@ -355,19 +355,19 @@ public class SadExportItemsControllerChildWindow {
 	private List<JsonSadExportTolltariffKundensRegisterVarukodRecord> getKundVareRegList(SystemaWebUser appUser, String senderId, String vkod){
 		List<JsonSadExportTolltariffKundensRegisterVarukodRecord> list = new ArrayList<JsonSadExportTolltariffKundensRegisterVarukodRecord>();
 		
-		logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+		logger.warn(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
 		String BASE_URL = SadExportUrlDataStore.SAD_EXPORT_FETCH_TOLLTARIFF_KUNDENSVAREREG_VARUKODER_ITEMS_URL;
 		StringBuffer urlRequestParams = new StringBuffer();
 		urlRequestParams.append("user=" + appUser.getUser());
 		urlRequestParams.append("&levenr=" + senderId);
 		urlRequestParams.append("&varnr=" + vkod);
 		
-		logger.info(BASE_URL);
-		logger.info(urlRequestParams);
+		logger.warn(BASE_URL);
+		logger.warn(urlRequestParams);
 		
 		UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
 		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
-		logger.info(this.jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+		logger.warn(this.jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
 		JsonSadExportTolltariffKundensRegisterVarukodContainer container = null;
 		try{
 			if(jsonPayload!=null){

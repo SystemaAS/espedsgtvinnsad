@@ -633,19 +633,13 @@
 	  		var len = data.length;
 			for ( var i = 0; i < len; i++) {
 				//back-end data
-				jq('#slknr').val(jq('#senderId').val());
-				jq('#sloppl').val(data[i].svfyl);
-				jq('#sltanr').val(data[i].svvnt);
-				jq('#slvekt').val(data[i].svvktb);
-				jq('#description_sltxt').text(data[i].wd1);
+				jq('#levenr').val(jq('#senderId').val()); //levenr
+				jq('#w2lk').val(data[i].svfyl);  
+				jq('#w2vnti').val(data[i].svvnt);  //w2vnti
+				jq('#w2vktb').val(data[i].svvktb); //w2vktb
+				jq('#svvt').text(data[i].wd1); //svvt
 				//hidden fields
-				jq('#sltxt').val(data[i].wd1);
-				/*
-				jq('#sltar').val(data[i].?);
-				jq('#slpva').val(data[i].?);
-				jq('#slsats').val(data[i].?);
-				jq('#sltn').val(data[i].?);
-				*/
+				jq('#varebe').val(data[i].wd1);
 				
 				//Start dialog
 				//deal with buttons and attributes for this modal window
@@ -684,15 +678,15 @@
 	
 	//Events on dialog fields
     jq(function() {
-  	  jq("#slalfa").blur(function() {
-  		  if(jq("#slalfa").val()!='' && jq("#slknr").val()!=''){
+  	  jq("#varenr").blur(function() {
+  		  if(jq("#varenr").val()!='' && jq("#levenr").val()!=''){
   			  jq("#dialogSaveTU").button("option", "disabled", false);
   		  }else{
   			  jq("#dialogSaveTU").button("option", "disabled", true);
   		  }
   	  });
-  	  jq("#slknr").blur(function() {
-		  if(jq("#slknr").val()!='' && jq("#slalfa").val()!=''){
+  	  jq("#levenr").blur(function() {
+		  if(jq("#levenr").val()!='' && jq("#varenr").val()!=''){
 			  jq("#dialogSaveTU").button("option", "disabled", false);
 		  }else{
 			  jq("#dialogSaveTU").button("option", "disabled", true);
