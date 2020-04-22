@@ -247,6 +247,7 @@
 				jq('#lineSvli').val(""); jq('#lineSvli').val(data[i].svli);
 				
 				jq('#svvnt').val(""); jq('#svvnt').val(data[i].svvnt);
+				jq('#svpre').val(""); jq('#svpre').val(data[i].svpre);
 				jq('#svbelt').val(""); jq('#svbelt').val(data[i].svbelt);
 				jq('#svvktb').val(""); jq('#svvktb').val(data[i].svvktb);
 				jq('#svvktn').val(""); jq('#svvktn').val(data[i].svvktn);

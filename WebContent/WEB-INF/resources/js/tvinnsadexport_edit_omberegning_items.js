@@ -254,6 +254,7 @@
 				jq("#svvnt").removeClass("inputTextMediumBlueMandatoryField");
 				jq("#svvnt").addClass("inputTextReadOnly");
 				
+				jq('#svpre').val(""); jq('#svpre').val(data[i].svpre);
 				jq('#svbelt').val(""); jq('#svbelt').val(data[i].svbelt);
 				jq('#svvktb').val(""); jq('#svvktb').val(data[i].svvktb);
 				jq('#svvktn').val(""); jq('#svvktn').val(data[i].svvktn);

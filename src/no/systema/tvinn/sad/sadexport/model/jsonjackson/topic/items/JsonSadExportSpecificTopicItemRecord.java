@@ -66,6 +66,11 @@ public class JsonSadExportSpecificTopicItemRecord  extends JsonAbstractGrandFath
 		return this.svliInt;
 	}
 	
+	private String svpre = null;
+	public void setSvpre(String value) {  this.svpre = value; }
+	public String getSvpre() {return this.svpre;}
+	
+	
 	private String svbelt = null;
 	public void setSvbelt(String value) {  this.svbelt = value; }
 	public String getSvbelt() {return this.svbelt;}

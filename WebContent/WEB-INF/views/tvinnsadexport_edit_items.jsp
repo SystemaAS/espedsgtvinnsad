@@ -288,6 +288,7 @@
 												                    <th class="text14" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.export.item.list.label.svvnt.vareNr"/>&nbsp;</th>
 												                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.export.item.list.label.svvktn.nettov"/>&nbsp;</th>
 												                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.export.item.list.label.svntm.mengde"/>&nbsp;</th>
+												                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.export.item.list.label.svpre.preference"/>&nbsp;</th>
 												                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.export.item.list.label.svbelt.varansPris"/>&nbsp;</th>
 												                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.export.item.list.label.svavt.ff"/></th>
 												                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.export.item.list.label.svavtp.tollsats"/></th>
@@ -313,6 +314,7 @@
 														               <td class="text14" >&nbsp;${record.svvnt}</td>
 														               <td class="text14" >&nbsp;${record.svvktn}</td>
 														               <td class="text14" >&nbsp;${record.svntm}</td>
+														               <td class="text14" >&nbsp;${record.svpre}</td>
 														               <td class="text14" >&nbsp;${record.svbelt}</td>
 														               <td class="text14" >&nbsp;${record.svavt}</td>
 														               <td class="text14" >&nbsp;${record.svavtp}</td>
@@ -433,6 +435,7 @@
 					                    <th class="text14" nowrap>&nbsp;<spring:message code="systema.tvinn.sad.export.item.list.label.svvnt.vareNr"/>&nbsp;</th>
 					                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.export.item.list.label.svvktn.nettov"/>&nbsp;</th>
 					                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.export.item.list.label.svntm.mengde"/>&nbsp;</th>
+					                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.export.item.list.label.svpre.preference"/>&nbsp;</th>
 					                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.export.item.list.label.svbelt.varansPris"/>&nbsp;</th>
 					                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.export.item.list.label.svavt.ff"/></th>
 					                    <th class="text14">&nbsp;<spring:message code="systema.tvinn.sad.export.item.list.label.svavtp.tollsats"/></th>
@@ -465,6 +468,7 @@
 							               </td>
 							               <td class="text14" >&nbsp;${record.svvktn}</td>
 							               <td class="text14" >&nbsp;${record.svntm}</td>
+							               <td class="text14" >&nbsp;${record.svpre}</td>
 							               <td class="text14" >&nbsp;${record.svbelt}</td>
 							               <td class="text14" >&nbsp;${record.svavt}</td>
 							               <td class="text14" >&nbsp;${record.svavtp}</td>
@@ -739,6 +743,40 @@
 										</span>	
 										 --%>
 							            </td>
+							            <td class="text14" align="left">
+							            <img onMouseOver="showPop('svpre_info');" onMouseOut="hidePop('svpre_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info" >
+				 						<b>36.</b><span title="svpre">Preferense</span>
+				 						<div class="text11" style="position: relative;" align="left">
+				 						<span style="position:absolute;top:2px; width:250px;"id="svpre_info" class="popupWithInputText text11"  >
+						           			<b>36. Preferense</b>
+						           			<br/><br/>
+						           			 	<ul>
+													<li><b>A</b> EØS-land, dvs. alle EU-land samt Island og Liechtenstein</li>
+													<li><b>B</b> Bilaterale handelsavtalen EF/Norge</li>
+													<li><b>C</b> EFTA konvensjonen, Sveits</li>
+													<li><b>G</b> Det norske GSP systemet</li>
+													<li><b>P</b> alle andre frihandelsavtaler; som for eksempel Marokko, Chile mm</li>
+													<li><b>N</b> Det foreligger ikke et opprinnelsesbevis (blank=samme)</li>
+													
+												</ul>
+											<br><br>	
+											<p>Disse kodene kan endre seg ved foreskrift fra myndighetene
+											Systemet vil selv automatisk på bakgrunn av opprinnelsesland foreslå preferansekode hvis ikke noe annet tastes manuellt.
+											(Vedlikehold av preferansekoder/land: Se OPP). Når opprinnelsesland tilhører EF/EFTA-området vil systemet foreslå kode A med mindre tollsatsen for EF- respektive EFTA-avtalen er lavere enn under EØS-avtalen.
+											Dette gjelder ikke for Sveits og Lichtenstein (CH / LI) hvor kun preferansekode C er gyldig.
+											</p>
+											<p>
+											I TVINN MÅ rubr. 44 (og "SER" i Rf-feltet) fylles ut ved preferanse.
+											Systemet styrer selv tollsatser ved bruk av kodene. Hvis preferansekode ikke skal benyttes må man endre koden til J dersom landkoden tilsier at preferanse kan være aktuelt.
+											(EF/EFTA/GSP-land m.m) (Gir full toll men rett til senere refusjon.)"J" skal ikke benyttes ved utførsel.
+											<br/><br/>
+											OM EN VET AT PREFERANSE IKKE VIL/KAN FOREKOMME (F.eks GSP-land men varenr ikke i fritaksliste) MÅ EN HINDRE "JA" VED Å TASTE "N" I PREF.
+											</p>
+										</span>
+				 						</div>
+				 						</td>
+							            
+							            
 							            
 							            <td class="text14" align="left">
 							            <img onMouseOver="showPop('svbelt_info');" onMouseOut="hidePop('svbelt_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
@@ -874,12 +912,25 @@
 											
 												
 										</td>
-						        		<td class="text14" align="left">
+						        			<td class="text14" align="left">
 						            		<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField"  name="svvnt" id="svvnt" size="9" maxlength="8" value="${model.record.svvnt}">
 						            		<a tabindex="-1" id="svvntIdLink">
 												<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 											</a>
 							            </td>
+							            <td class="text14" align="left" nowrap>
+											<select class="selectMediumBlueE2" name="svpre" id="svpre">
+						        		    			<option value="">-velg-</option>
+			  								  	<option title="EØS-land" value="A"<c:if test="${ model.record.svpre == 'A'}"> selected </c:if> >A</option>
+											  	<option title="Bilaterale handelsavtalen" value="B"<c:if test="${ model.record.svpre == 'B'}"> selected </c:if> >B</option>
+											  	<option title="EFTA konvensjonen" value="C"<c:if test="${ model.record.svpre == 'C'}"> selected </c:if> >C</option>
+											  	<option title="Det norske GSP systemet" value="G"<c:if test="${ model.record.svpre == 'G'}"> selected </c:if> >G</option>
+											  	<option title="Andre frihandelsavtaler" value="P"<c:if test="${ model.record.svpre == 'P'}"> selected </c:if> >P</option>
+											  	<option title="Nej" value="N"<c:if test="${ model.record.svpre == 'N'}"> selected </c:if> >N</option>		
+											  	
+											</select>
+										</td>
+							            
 										<td class="text14" align="left" nowrap>
 											<c:choose>
 												<%-- only when it is a new line  --%>
