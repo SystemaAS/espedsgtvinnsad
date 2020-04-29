@@ -267,10 +267,11 @@
 								<table width="80%" cellspacing="0" border="0" cellpadding="0">
 									<tr>
 										<td class="text12Bold">
-											<input tabindex=-1 class="inputFormSubmitStd" type="submit" name="submit" onclick="javascript: form.action='tvinnsadexport_edit_finansopplysninger.do';" value="<spring:message code="systema.tvinn.sad.import.item.line.init.createnew.submit"/>">
-											&nbsp;<button title="Import av eksterna fakturaer" name="importInvoicesButton" id="importInvoicesButton" class="buttonGrayWithGreenFrame" type="button" >Importera eksterna fakturaer</button>
-											&nbsp;&nbsp;<img title="Laste opp faktura (.csv)" style="vertical-align: bottom;cursor: pointer;" id="uploadFileImg" width="25px" height="25px" src="resources/images/upload.png" border="0" alt="Upload dokument (.csv)">
-											
+											<c:if test="${model.status == 'M' || empty model.status}">
+												<input tabindex=-1 class="inputFormSubmitStd" type="submit" name="submit" onclick="javascript: form.action='tvinnsadexport_edit_finansopplysninger.do';" value="<spring:message code="systema.tvinn.sad.import.item.line.init.createnew.submit"/>">
+												&nbsp;<button title="Import av eksterna fakturaer" name="importInvoicesButton" id="importInvoicesButton" class="buttonGrayWithGreenFrame" type="button" >Importera eksterna fakturaer</button>
+												&nbsp;&nbsp;<img title="Laste opp faktura (.csv)" style="vertical-align: bottom;cursor: pointer;" id="uploadFileImg" width="25px" height="25px" src="resources/images/upload.png" border="0" alt="Upload dokument (.csv)">
+											</c:if>
 										</td>
 									</tr>
 									<tr>
@@ -547,10 +548,7 @@
 		
 		</tr>
 		
-		
-		
-		
-		
+
  	<%-- -------------------------- --%>	
  	<%-- upload file dialog         --%>	
  	<%-- -------------------------- --%>	
@@ -604,7 +602,7 @@
 									<tr>	
 										<td class="text11">&nbsp;Fil:</td>
 										<td class="text11">
-			           						&nbsp;<input type="file" name="fileUpload" id="fileUpload" accept=".csv, .txt" />
+			           						&nbsp;<input ondragenter="myFileUploadDragEnter(event)" ondragleave="myFileUploadDragLeave(event)" tabindex=-1 class="tableBorderWithRoundCornersLightYellow3D noFileChosenTransparent" style="width:150px;height:60px;display:block;" type="file" name="fileUpload" id="fileUpload" accept=".csv, .txt" />
 			       						</td>
 					           		</tr>
 					           		</table>
