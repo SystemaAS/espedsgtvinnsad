@@ -142,7 +142,7 @@
 								<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 								<td width="10%" valign="bottom" class="tabDisabled" align="center" nowrap>
 									<a id="alinkOmberegning" style="display:block;" href="tvinnsadexport_edit_omberegning.do?action=doFetch&avd=${ model.record.seavd}&sign=${ model.record.sesg}
-																&opd=${ model.record.setdn}-&status=${ model.record.sest}&fabl=${ model.record.sebel1}&o2_sest=${ model.record.o2_sest}&o2_sedt=${ model.record.o2_sedt}&o2_semf=${ model.record.o2_semf}">
+																&opd=${ model.record.setdn}-&status=${ model.record.sest}&pstatus=${ model.record.sest}&fabl=${ model.record.sebel1}&o2_sest=${ model.record.o2_sest}&o2_sedt=${ model.record.o2_sedt}&o2_semf=${ model.record.o2_semf}">
 										<font class="tabDisabledLink">
 											&nbsp;<spring:message code="systema.tvinn.sad.export.omberegning.mastertopic.tab"/>
 										</font>

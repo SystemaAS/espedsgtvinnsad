@@ -139,6 +139,7 @@ public class SadImportOmberegningController {
 		String opd = request.getParameter("opd");
 		String avd = request.getParameter("avd");
 		String sign = request.getParameter("sign");
+		String parentstatus = request.getParameter("pstatus");
 		String si0035 = request.getParameter("si0035"); //test indicator
 		String innstikk = request.getParameter("simi"); //innstikk indicator
 		String omberegningFlag = request.getParameter("o2_sist"); //omberegning indicator
@@ -158,7 +159,8 @@ public class SadImportOmberegningController {
 		
 		logger.info("Fakturabelop (sibel3):" + recordToValidate.getSibel3());
 		Map model = new HashMap();
-		
+		//Parent status
+		model.put("pstatus", parentstatus);
 		
 		if(appUser==null){
 			return this.loginView;

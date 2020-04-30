@@ -133,6 +133,7 @@ public class SadExportOmberegningController {
 		String opd = request.getParameter("opd");
 		String avd = request.getParameter("avd");
 		String sign = request.getParameter("sign");
+		String parentstatus = request.getParameter("pstatus");
 		String se0035 = request.getParameter("se0035"); //test indicator
 		String innstikk = request.getParameter("semi"); //innstikk indicator
 		//Omberegning
@@ -140,7 +141,6 @@ public class SadExportOmberegningController {
 		String omberegningDate = request.getParameter("o2_sedt"); //omberegning indicator
 		String omberegningType = request.getParameter("o2_semf"); //omberegning indicator (DFU,DTK,DEB, etc)
 		String selectedOmb = request.getParameter("selectedOmb"); //omberegning indicator from User Input dialog
-		
 		
 		logger.info("TEST flag:<" + se0035 +">");		
 		//Action (doFetch, doUpdate, doCreate)
@@ -152,6 +152,8 @@ public class SadExportOmberegningController {
 		//logger.info("Sedt:" + sedt);
 		
 		Map model = new HashMap();
+		//Parent status
+		model.put("pstatus", parentstatus);
 		
 		
 		if(appUser==null){

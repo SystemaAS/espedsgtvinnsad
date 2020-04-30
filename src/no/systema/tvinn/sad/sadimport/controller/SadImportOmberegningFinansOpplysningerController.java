@@ -138,6 +138,7 @@ public class SadImportOmberegningFinansOpplysningerController {
 			String avd = request.getParameter("avd");
 			String sign = request.getParameter("sign");
 			String status = request.getParameter("status");
+			String parentstatus = request.getParameter("pstatus");
 			String datum = request.getParameter("datum");
 			String omberegningFlag = request.getParameter("o2_sist");
 			String omberegningDate = request.getParameter("o2_sidt");
@@ -157,6 +158,7 @@ public class SadImportOmberegningFinansOpplysningerController {
 			model.put("opd", opd);
 			model.put("sign", sign);
 			model.put("status", status);
+			model.put("pstatus", parentstatus);
 			model.put("datum", datum);
 			model.put("o2_sist", omberegningFlag);
 			model.put("o2_sidt", omberegningDate);

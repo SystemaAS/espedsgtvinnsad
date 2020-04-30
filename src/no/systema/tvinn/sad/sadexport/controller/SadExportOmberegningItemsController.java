@@ -136,6 +136,7 @@ public class SadExportOmberegningItemsController {
 			String sign = request.getParameter("sign");
 			String refnr = request.getParameter("refnr");
 			String status = request.getParameter("status");
+			String parentstatus = request.getParameter("pstatus");
 			String datum = request.getParameter("datum");
 			String startItemLineNr = request.getParameter("startItemLineNr");
 			String tariffNr = request.getParameter("tariffNr");
@@ -177,6 +178,7 @@ public class SadExportOmberegningItemsController {
 			model.put("sign", sign);
 			model.put("refnr(tullid)", refnr);
 			model.put("status", status);
+			model.put("pstatus", parentstatus);
 			model.put("datum", datum);
 			//Omberegning flag
 			model.put("o2_sest", omberegningFlag);

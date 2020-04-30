@@ -78,7 +78,7 @@
   	 * 
   	 * @param record
   	 */
-  	
+  
   	function getFinansOpplysningerItemData(record) {
 	  	var htmlValue = record.id;
 	  	var applicationUserParam = jq('#applicationUser').val();

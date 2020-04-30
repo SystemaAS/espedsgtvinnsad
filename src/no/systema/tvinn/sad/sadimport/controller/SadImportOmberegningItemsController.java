@@ -138,6 +138,7 @@ public class SadImportOmberegningItemsController {
 			String sign = request.getParameter("sign");
 			String refnr = request.getParameter("refnr");
 			String status = request.getParameter("status");
+			String parentstatus = request.getParameter("pstatus");
 			String datum = request.getParameter("datum");
 			//String invoiceTotalAmount = request.getParameter("fabl"); //Changed to getSibel3() from header...
 			String startItemLineNr = request.getParameter("startItemLineNr");
@@ -180,6 +181,7 @@ public class SadImportOmberegningItemsController {
 			model.put("sign", sign);
 			model.put("refnr(tullid)", refnr);
 			model.put("status", status);
+			model.put("pstatus", parentstatus);
 			model.put("datum", datum);
 			//Omberegning flag
 			model.put("o2_sist", omberegningFlag);

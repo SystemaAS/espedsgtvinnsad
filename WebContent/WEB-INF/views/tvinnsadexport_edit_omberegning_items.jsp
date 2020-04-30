@@ -46,7 +46,7 @@
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
 				<a id="alinkHeader" style="display:block;" href="tvinnsadexport_edit.do?action=doFetch&avd=${model.avd}&opd=${fn:replace(model.opd,'-','')}
-						&sysg=${model.sign}&tuid=${refnr}&syst=${model.status}&sydt=${model.datum}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
+						&sysg=${model.sign}&tuid=${refnr}&syst=${model.pstatus}&sydt=${model.datum}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
 					<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.export.created.mastertopic.tab"/></font>
 					<font class="text14MediumBlue">[${fn:replace(model.opd,'-','')}]</font>
 					<c:if test="${model.status == 'M' || empty model.status}">
@@ -58,7 +58,7 @@
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			<td width="10%" valign="bottom" class="tabDisabled" align="center" nowrap>
 				<a id="alinkInvoices" style="display:block;" href="tvinnsadexport_edit_finansopplysninger.do?action=doFetch&avd=${ model.avd}&sign=${ model.sign}
-					&opd=${fn:replace(model.opd,'-','')}&status=${ model.status}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
+					&opd=${fn:replace(model.opd,'-','')}&status=${model.pstatus}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
 					<font class="tabDisabledLink">
 						&nbsp;<spring:message code="systema.tvinn.sad.export.finansopplys.createnew.tab"/>
 					</font>
@@ -66,7 +66,7 @@
 			</td>
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			<td width="10%" valign="bottom" class="tabDisabled" align="center" nowrap>
-				<a style="display:block;" href="editNotisblock.do?action=doFetch&subsys=sade&orig=topic&avd=${model.avd}&sign=${ model.sign}&opd=${fn:replace(model.opd,'-','')}&status=${ model.status}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
+				<a style="display:block;" href="editNotisblock.do?action=doFetch&subsys=sade&orig=topic&avd=${model.avd}&sign=${ model.sign}&opd=${fn:replace(model.opd,'-','')}&status=${ model.pstatus}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
 					<font class="tabDisabledLink">
 						&nbsp;<spring:message code="systema.tvinn.sad.export.notisblock.createnew.tab"/>
 					</font>
@@ -75,7 +75,7 @@
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
 				<a id="alinkItemLines" style="display:block;" href="tvinnsadexport_edit_items.do?action=doFetch&avd=${model.avd}&sign=${ model.sign}
-									&opd=${fn:replace(model.opd,'-','')}&status=${ model.status}&fabl=&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
+									&opd=${fn:replace(model.opd,'-','')}&status=${model.pstatus}&fabl=&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
 					<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.export.item.createnew.tab"/></font>
 					<c:if test="${model.status == 'M' || empty model.status || model.status == '10' || model.status == '20'}">
 						<img valign="bottom" src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
@@ -85,7 +85,7 @@
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			<td width="10%" valign="bottom" class="tabDisabled" align="center" nowrap>
 				<a id="alinkLogging" style="display:block;" href="tvinnsadexport_logging.do?avd=${model.avd}&sign=${model.sign}&opd=${fn:replace(model.opd,'-','')}&refnr=${dkih_07}
-					&status=${model.status}&datum=${model.datum}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
+					&status=${model.pstatus}&datum=${model.datum}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
 					<font class="tabDisabledLink">
 						&nbsp;<spring:message code="systema.tvinn.sad.export.logging.tab"/>
 					</font>
@@ -95,7 +95,7 @@
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			<td width="10%" valign="bottom" class="tabDisabled" align="center" nowrap>
 				<a id="alinkArchive" style="display:block;" href="tvinnsadexport_archive.do?avd=${model.avd}&sign=${model.sign}&opd=${fn:replace(model.opd,'-','')}&refnr=${dkih_07}
-					&status=${model.status}&datum=${model.datum}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
+					&status=${model.pstatus}&datum=${model.datum}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
 					<font class="tabDisabledLink">
 						&nbsp;<spring:message code="systema.tvinn.sad.export.archive.tab"/>
 					</font>
@@ -111,7 +111,7 @@
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			<td width="10%" valign="bottom" class="tabDisabled" align="center" nowrap>
 				<a id="alinkEur" style="display:block;" href="tvinnsadexport_edit_eur.do?avd=${model.avd}&sign=${model.sign}
-					&opd=${model.opd}&status=${model.status}&datum=${model.datum}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
+					&opd=${model.opd}&status=${model.pstatus}&datum=${model.datum}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}">
 					<font class="tabDisabledLink">
 						&nbsp;<spring:message code="systema.tvinn.sad.export.eur.tab"/>
 					</font>
@@ -136,7 +136,7 @@
 				<td width="2px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 				<td width="8%" valign="bottom" class="tabDisabledSub" align="center" nowrap>
 					<a id="alinkOmberegningSubTab" style="display:block;" href="tvinnsadexport_edit_omberegning.do?action=doFetch&avd=${model.avd}&sign=${model.sign}
-						&opd=${model.opd}&status=${model.status}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}&selectedOmb=${ model.selectedOmb}">
+						&opd=${model.opd}&status=${model.status}&pstatus=${model.pstatus}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}&selectedOmb=${ model.selectedOmb}">
 						<font class="text14Gray">Hode</font>
 					</a>	
 				</td>
@@ -145,7 +145,7 @@
 				</td>
 				<td width="8%" valign="bottom" class="tabDisabledSub" align="center" nowrap>
 					<a id="alinkOmberegningItemLinesSubTab" style="display:block;" href="tvinnsadexport_edit_omberegning_finansopplysninger.do?action=doFetch&avd=${ model.avd}&sign=${ model.sign}
-						&opd=${ model.opd}&status=${ model.status}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}&selectedOmb=${ model.selectedOmb}">
+						&opd=${ model.opd}&status=${ model.status}&pstatus=${model.pstatus}&o2_sest=${ model.o2_sest}&o2_sedt=${ model.o2_sedt}&o2_semf=${ model.o2_semf}&selectedOmb=${ model.selectedOmb}">
 						<font class="text14Gray">Finans.oppl.</font>
 					</a>
 				</td>
@@ -294,6 +294,7 @@
 								<input type="hidden" name="opd" id="opd" value='${model.opd}'>
 				 				<input type="hidden" name="refnr" id="refnr" value='${dkih_07}'>
 				 				<input type="hidden" name="status" id="status" value='${model.status}'>
+				 				<input type="hidden" name="pstatus" id="pstatus" value='${model.pstatus}'>
 				 				<input type="hidden" name="datum" id="datum" value='${model.datum}'>
 				 				<input type="hidden" name="fabl" id="fabl" value='${recordTopicTvinnSad.sebel1}'>
 				 				<input type="hidden" name="totalGrossWeight" id="totalGrossWeight" value='${recordTopicTvinnSad.sevkb}'>
@@ -586,6 +587,7 @@
 				 	<input type="hidden" name="sign" id="sign" value="${model.sign}"/>
 				 	<input type="hidden" name="refnr" id="refnr" value="${dkih_07}"/>
 				 	<input type="hidden" name="status" id="status" value="${model.status}"/>
+				 	<input type="hidden" name="pstatus" id="pstatus" value='${model.pstatus}'>
 				 	<input type="hidden" name="datum" id="datum" value="${model.datum}"/>
 				 	<input type="hidden" name="fabl" id="fabl" value="${recordTopicTvinnSad.sebel1}"/>
 				 	<input type="hidden" name="svli" id="svli" value=''/>
