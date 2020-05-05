@@ -279,7 +279,21 @@
   		  dateFormat: 'ddmmy'  
   	  });
   	});
-  	
+  	jq(function() {
+	  	jq("#deta").datetimepicker({ 
+	  		//dateFormat: 'yymmdd',
+	  		dateFormat: 'ddmmy', 
+	  		controlType: 'select',
+	  		timeFormat: 'HHmm' 
+	  	});
+  	});
+  	//no space characters allowed..
+  	jq(function() {
+	  	jq('#deta').change(function() {
+	  		var val = jq("#deta").val();
+	  		jq("#deta").val(val.replace(' ', ''));
+	  	});
+  	});
   	//onChange avd list
 	jq(function() { 
 	    jq('#avd').change(function() {
@@ -960,6 +974,47 @@
 	});
 	*/
 	
+	//Update ETA
+	jq(function() {
+	  jq("#updateEtaByUserImg").click(function() {
+		  	if(jq('#deta').val()!='' && jq('#deta').val().length==10){
+			  	jq.ajax({
+					type: 'POST',
+					url: 'updateETA_SadImport.do',
+					data: { 
+						applicationUser : jq('#applicationUser').val(),
+						avd : jq('#avd').val(),
+						opd : jq('#opd').val(),
+						detaNO : jq('#deta').val()},
+							
+					dataType: 'json',
+					success: function(data) {
+						var len = data.length;
+						for ( var i = 0; i < len; i++) {
+							if(data[i].errmsg!=null){
+								alert("something went wrong ...");
+								jq("#deta").addClass( "isa_error" );
+						  		jq("#deta").removeClass( "isa_success" );
+							}else{
+								jq("#deta").removeClass( "isa_error" );
+						  		jq("#deta").addClass( "isa_success" );
+							}
+						}
+					},error: function() {
+				  		  alert('Error loading ...');
+				  		  //jq("#fileUpload").val("");
+				  		  //cosmetics
+				  		  jq("#deta").addClass( "isa_error" );
+				  		  jq("#deta").removeClass( "isa_success" );
+					  }
+				});
+		  	}else{
+		  		alert("At least 10 chars:<ddMMyyHHmm>");
+		  	}
+	  });
+	  
+		  
+	});
 	
 	  //-------------------------------------------
 	  //START Model dialog ADMIN: "Update status"

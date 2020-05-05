@@ -115,6 +115,17 @@
                 <td class="text14" align="left" title="simi">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.innstikk"/></td>
                 <td class="text14" align="left" title="inv">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.faknr"/></td>
                 <td class="text14" align="left" title="r31">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.r31"/></td>
+                <td class="text14" align="left" title="eta">&nbsp;&nbsp;
+                <img onMouseOver="showPop('eta_info');" onMouseOut="hidePop('eta_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+	            	<spring:message code="systema.tvinn.sad.import.list.search.label.eta"/>
+                	<div class="text11" style="position: relative;" align="left">
+	                <span style="position:absolute;top:2px; width:250px;" id="eta_info" class="popupWithInputText text11"  >
+			           		<b>ETA: Estimated Time of Arrival</b>
+		           		 	<p>Bare status <b>T</b>(manuell ekspedering hos Tollvesenet) vises.</p> 
+					</span>	
+					</div>
+                
+                </td>
                 
                 <td>&nbsp;</td>
 			</tr>
@@ -149,6 +160,7 @@
 				<td align="left" ><input type="text" class="inputText" name="innstikk" id="innstikk" size="1" maxlength="1" value='${searchFilterSadImport.innstikk}'>&nbsp;</td>
 				<td align="left" ><input type="text" class="inputText" name="inv" id="inv" size="10" maxlength="17" value='${searchFilterSadImport.inv}'>&nbsp;</td>
 				<td align="left" ><input type="text" class="inputText" name="r31" id="r31" size="10" maxlength="30" value='${searchFilterSadImport.r31}'>&nbsp;</td>
+				<td align="left" ><input type="text" class="inputText" name="eta" id="eta" size="10" maxlength="30" value='${searchFilterSadImport.eta}'>&nbsp;</td>
 				<td valign="top" align="left" >
                    &nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='<spring:message code="systema.tvinn.sad.search"/>'>
                 </td>
@@ -227,6 +239,8 @@
 	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.import.list.search.label.godsnr"/></th>
 	                    <th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.import.list.search.label.innstikk"/></th>
 	                    <th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.import.list.search.label.email"/></th>
+						<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.import.list.search.label.eta"/></th>
+	                    	                    
 	                    <%-- START Omberegning --%>
 	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.omber.omber"/></th>
 	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.omber.status"/></th>
@@ -241,8 +255,8 @@
 	                </tr>   
 	                </thead>
 	                <tbody>  
-		            <c:forEach items="${list}" var="topic" varStatus="counter">    
-		               <tr class="tableRow" height="20" >
+		            <c:forEach items="${list}" var="topic" varStatus="counter">
+		            	   <tr class="tableRow" height="20" >
 		               
 		               <td class="tableCellFirst" align="center" width="5%">&nbsp;${topic.avd}</td>
 		               <td class="tableCell" align="center" >&nbsp;${topic.sg}</td>
@@ -274,6 +288,7 @@
 		               <td class="tableCell" align="center" >${topic.sign}</td>
 		               <td class="tableCell" align="center"><b>${topic.simi}</b></td>
 		               <td class="tableCell" align="center" >${topic.epjn}</td>
+		               <td class="tableCell" align="center" >${topic.detaout}</td>
 		               <td class="tableCellOmberegning" align="center" >${topic.o2_simf}</td>
 		               <td class="tableCellOmberegning" align="center" >${topic.o2_sist}</td>
 		               <td class="tableCellOmberegning" align="center" >${topic.o2_sidt}</td>
@@ -347,7 +362,7 @@
 						</c:if>	
 		               </td>
 		               
-		            </tr> 
+		            </tr>
 		            </c:forEach>
 		            </tbody>
 	            </table>

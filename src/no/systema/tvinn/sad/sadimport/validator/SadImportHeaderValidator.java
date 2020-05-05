@@ -157,6 +157,16 @@ public class SadImportHeaderValidator implements Validator {
 						errors.rejectValue("sifid", "systema.tvinn.sad.import.header.error.rule.invalidFaktDate"); 	
 					}
 				}
+				//format: ddMMyyHHmm
+				if(strMgr.isNotNull(record.getDeta())){
+					if(record.getDeta().length()==10){
+						if(!dateValidator.validateDate(record.getDeta().substring(0,6), DateValidator.DATE_MASK_NO)){
+							errors.rejectValue("sidtg", "systema.tvinn.sad.import.header.error.rule.invalidETADate"); 	
+						}
+					}else{
+						errors.rejectValue("sidtg", "systema.tvinn.sad.import.header.error.rule.invalidETADate"); 	
+					}
+				}
 				//Avs.Land vs Dekl.typ (EU vs IM)
 				if(strMgr.isNotNull(record.getSilka())){
 					if(!isValidCountryForDeklaration(record)){

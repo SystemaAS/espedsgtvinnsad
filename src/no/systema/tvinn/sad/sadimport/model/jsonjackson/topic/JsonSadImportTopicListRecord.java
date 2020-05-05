@@ -105,6 +105,19 @@ public class JsonSadImportTopicListRecord extends JsonAbstractGrandFatherRecord 
 	public void setEpjnl(String value) {  this.epjn = value; }
 	public String getEpjn() { return this.epjn;}
 	
+	private String detaout= null;
+	public void setDetaout(String value) {  this.detaout = value; }
+	public String getDetaout() {
+		if(this.detaout != null && !"".equals(this.detaout)){
+			//in case the string has time-stamp in it
+			if(this.detaout!=null && this.detaout.length()>8){
+				this.detaout = this.detaout.substring(0,8);
+			}
+			return dateFormatter.convertToDate_NO(this.detaout);
+		}else{
+			return this.detaout;
+		}
+	}
 	
 	
 	private Collection<JsonNotisblockRecord> notisblockList;

@@ -2,6 +2,7 @@ package no.systema.tvinn.sad.sadimport.controller;
 
 import java.util.*;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.springframework.validation.BindingResult;
@@ -1219,6 +1220,9 @@ public class SadImportHeaderController {
 		return successView;
 	}
 	
+	
+	
+	
 	/**
 	 * 
 	 * @param user
@@ -1987,6 +1991,7 @@ public class SadImportHeaderController {
 		String dateSifidISO = null;
 		String dateSidtgISO = null;
 		String dateSidtISO =null;
+		String dateDetaISO = null;
 		
 		if(jsonSadImportSpecificTopicRecord.getSifid()!=null){
 			if(!"999999".equals(jsonSadImportSpecificTopicRecord.getSifid())){
@@ -2002,6 +2007,12 @@ public class SadImportHeaderController {
 			jsonSadImportSpecificTopicRecord.setSidtg(dateSidtgISO);
 		}
 		
+		if(strMgr.isNotNull(jsonSadImportSpecificTopicRecord.getDeta()) && jsonSadImportSpecificTopicRecord.getDeta().length()>6){
+			String time = jsonSadImportSpecificTopicRecord.getDeta().substring(6);
+			dateDetaISO = this.dateFormatter.convertToDate_ISO(jsonSadImportSpecificTopicRecord.getDeta().substring(0,6));
+			jsonSadImportSpecificTopicRecord.setDeta(dateDetaISO + time);
+		}
+		
 		if(jsonSadImportSpecificTopicRecord.getSidt()!=null && !"".equals(jsonSadImportSpecificTopicRecord.getSidt())){
 			dateSidtISO = this.dateFormatter.convertToDate_ISO(jsonSadImportSpecificTopicRecord.getSidt());
 			jsonSadImportSpecificTopicRecord.setSidt(dateSidtISO);
@@ -2011,8 +2022,8 @@ public class SadImportHeaderController {
 			String now = dateMgr.getCurrentDate_ISO();
 			jsonSadImportSpecificTopicRecord.setSidt(now);
 		}
-
-		logger.info("sidt:" + jsonSadImportSpecificTopicRecord.getSidt());		
+		logger.info("sidt:" + jsonSadImportSpecificTopicRecord.getSidt());
+		
 		
 	}
 	
@@ -2025,6 +2036,7 @@ public class SadImportHeaderController {
 		String dateSifiNO = null;
 		String dateSidtgNO = null;
 		String dateSidtNO = null;
+		String dateDetaNO = null;
 		
 		if(jsonSadImportSpecificTopicRecord!=null){
 			if(jsonSadImportSpecificTopicRecord.getSifid()!=null){
@@ -2041,11 +2053,19 @@ public class SadImportHeaderController {
 				jsonSadImportSpecificTopicRecord.setSidtg(dateSidtgNO);
 			}
 			
+			
 			if(jsonSadImportSpecificTopicRecord.getSidt()!=null){
 				dateSidtNO = this.dateFormatter.convertToDate_NO(jsonSadImportSpecificTopicRecord.getSidt());
 				jsonSadImportSpecificTopicRecord.setSidt(dateSidtNO);
 			}
-			
+		
+			//logger.info(jsonSadImportSpecificTopicRecord.getDeta());
+			if(strMgr.isNotNull(jsonSadImportSpecificTopicRecord.getDeta()) && jsonSadImportSpecificTopicRecord.getDeta().length()>8){
+				String time = jsonSadImportSpecificTopicRecord.getDeta().substring(8);
+				dateDetaNO = this.dateFormatter.convertToDate_NO(jsonSadImportSpecificTopicRecord.getDeta().substring(0,8));
+				jsonSadImportSpecificTopicRecord.setDeta(dateDetaNO + time);
+			}
+			//logger.info(jsonSadImportSpecificTopicRecord.getDeta());
 		}
 	}
 	

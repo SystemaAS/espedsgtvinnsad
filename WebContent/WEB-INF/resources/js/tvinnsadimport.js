@@ -22,6 +22,11 @@
 		  dateFormat: 'ddmmy' 
 		  //defaultDate: "-6m"	  
 	  });
+	  jq("#eta").datepicker({ 
+		  //dateFormat: 'yymmdd', 
+		  dateFormat: 'ddmmy' 
+		  //defaultDate: "-6m"	  
+	  });
 	  jq( "#submit" ).click(function( event ) {
   		  setBlockUI();
   	  });

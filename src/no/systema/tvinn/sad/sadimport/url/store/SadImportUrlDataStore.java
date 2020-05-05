@@ -178,6 +178,8 @@ public final class SadImportUrlDataStore {
 	// Change status (Admin Role)
 	//-----------------------------
 	static public String SAD_IMPORT_BASE_UPDATE_STATUS_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOI051R.pgm";
-		
+	
+	//http://10.13.3.22/sycgip/TNOI052R.pgm?user=CB&avd=1&opd=91495&deta=202005081345
+	static public String SAD_IMPORT_BASE_UPDATE_ETA_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOI052R.pgm";
 	
 }

@@ -85,6 +85,10 @@ public class SearchFilterSadImportTopicList {
 	public void setR31(String value) {  this.r31 = value; }
 	public String getR31() { return this.r31;}
 	
+	private String eta = null;
+	public void setEta(String value) {  this.eta = value; }
+	public String getEta() { return this.eta;}
+	
 	
 	/**
 	 * Gets the populated values by reflection

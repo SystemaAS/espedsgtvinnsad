@@ -5,6 +5,7 @@ package no.systema.tvinn.sad.sadimport.controller.ajax;
 
 import java.util.*;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -855,7 +856,53 @@ public class SadImportAjaxHandlerController {
 		  
 		  return result;
 	  }
-	  
+	  /**
+	   * 
+	   * @param applicationUser
+	   * @param requestParams
+	   * @return
+	   */
+	  @RequestMapping(value = "updateETA_SadImport.do", method = RequestMethod.POST)
+	  public @ResponseBody Set<JsonSadImportTopicFinansOpplysningerExternalForUpdateContainer> updateETA(@RequestParam String applicationUser, 
+			  	@RequestParam String avd, @RequestParam String opd, @RequestParam String detaNO) {
+		  logger.info("Inside updateETA_SadImport");
+		  //just this any container you wish as long as ErrMsg is there
+		  Set<JsonSadImportTopicFinansOpplysningerExternalForUpdateContainer> result = new HashSet<JsonSadImportTopicFinansOpplysningerExternalForUpdateContainer>();
+		  
+		  try{
+			  String BASE_URL = SadImportUrlDataStore.SAD_IMPORT_BASE_UPDATE_ETA_URL;
+			  String detaISO = this.convertToIso(detaNO);
+			  String urlRequestParamsKeys = "user=" + applicationUser + "&avd=" + avd + "&opd=" + opd + "&deta=" + detaISO;
+			  logger.info("URL:" + BASE_URL);
+			  logger.info("PARAMS:" + urlRequestParamsKeys);
+			  
+			  UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
+			  String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+			  
+			  JsonSadImportTopicFinansOpplysningerExternalForUpdateContainer container = this.sadImportSpecificTopicService.getSadImportTopicFinansOpplysningerContainerOneInvoiceExternalForUpdate(jsonPayload);
+			  if(container!=null && ( container.getErrmsg()!=null && !"".equals(container.getErrmsg())) ){
+				  logger.info("[ERROR] " + container.getErrmsg());
+			  }else{
+				  logger.info("[INFO]" + " Update successfully done!");
+				  result.add(container);
+				  
+			  }
+			  	
+		  }catch(Exception e){
+			  //e.printStackTrace();
+		  }
+		  
+		  return result;
+	  }
+	  private String convertToIso(String dateNO){
+		  String result = dateNO;
+		  if(StringUtils.isNotEmpty(dateNO) && dateNO.length()>6){//meaning that it is comming with time stamp
+			  String time = dateNO.substring(6);
+			  String dateISO = dateFormatter.convertToDate_ISO(dateNO.substring(0,6));
+			  result = dateISO + time;
+		  }
+		  return result;
+	  }
 	  
 	  /**
 	   * 

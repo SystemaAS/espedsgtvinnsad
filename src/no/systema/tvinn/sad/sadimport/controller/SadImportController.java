@@ -400,6 +400,9 @@ public class SadImportController {
 		if(searchFilter.getR31()!=null && !"".equals(searchFilter.getR31())){
 			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "r31=" + searchFilter.getR31());
 		}
+		if(searchFilter.getEta()!=null && !"".equals(searchFilter.getEta())){
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "detain=" + this.dateFormatter.convertToDate_ISO(searchFilter.getEta()));
+		}
 		
 		return urlRequestParamsKeys.toString();
 	}

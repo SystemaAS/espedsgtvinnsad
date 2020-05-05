@@ -480,11 +480,19 @@
 				 				<input type="text" class="inputText" name="h_xref" id="h_xref" size="15" maxlength="35" value="${model.record.h_xref}">
 			 				</td>
 				 			<td class="text14" >&nbsp;
-		 						<span title="sidtg" id="v_sidtg" class="validation">Dekl. godkj.dato&nbsp;</span>
+		 						<span title="sidtg" id="v_sidtg" class="validation">Dekl.godkj.dato&nbsp;</span>
 				 			</td>
 			 				<td class="text14" align="left">
 			 					<input type="text" class="inputTextMediumBlue" name="sidtg" id="sidtg" size="12" maxlength="6" value="${model.record.sidtg}">
 		            			</td>
+		            			<td class="text14" >&nbsp;
+		 						<span title="deta" id="v_deta" class="validation">ETA&nbsp;</span>
+				 			</td>
+			 				<td class="text14" align="left">
+			 					<input type="text" class="inputTextMediumBlue" name="deta" id="deta" size="14" maxlength="12" value="${model.record.deta}">
+		            				<img title="change ETA..." style="vertical-align: bottom;cursor: pointer;" id="updateEtaByUserImg" width="20px" height="20px" src="resources/images/changeStatus.png" border="0" alt="change time stamp">
+		            			</td>
+		            			
 				 		</tr>
 				 		<tr>	
 				 			<td class="text14">&nbsp;
