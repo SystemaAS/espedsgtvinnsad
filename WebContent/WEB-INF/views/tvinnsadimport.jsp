@@ -258,9 +258,9 @@
 		            <c:forEach items="${list}" var="topic" varStatus="counter">
 		            	   <tr class="tableRow" height="20" >
 		               
-		               <td class="tableCellFirst" align="center" width="5%">&nbsp;${topic.avd}</td>
+		               <td class="tableCellFirst" align="center" width="1%">&nbsp;${topic.avd}</td>
 		               <td class="tableCell" align="center" >&nbsp;${topic.sg}</td>
-		               <td nowrap class="tableCell" align="center">
+		               <td width="1%" class="tableCell" align="center">
 	               	   		<a id="alinkCurrentHeaderId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadimport_edit.do?action=doFetch&avd=${topic.avd}&opd=${topic.opd}&sysg=${topic.sg}&sitll=${topic.sitll}&syst=${topic.status}&sydt=${topic.datum}&o2_sist=${topic.o2_sist}&o2_sidt=${topic.o2_sidt}&o2_simf=${topic.o2_simf}">
 	               				<c:choose>
 		               				<c:when test="${ topic.status == 'M' || empty  topic.status }">
@@ -281,16 +281,16 @@
 		               <td class="tableCell" align="center" >${topic.datum}</td>
 		               <td class="tableCell" align="center" >${topic.sitll}</td>
 		               <td class="tableCell" align="center" >${topic.sitle}</td>
-		               <td class="tableCell" align="center" ><b>${topic.status}</b></td>
+		               <td width="1%" class="tableCell" align="center" ><b>${topic.status}</b></td>
 		               <td class="tableCell" align="left" >&nbsp;${topic.avsNavn}</td>
 		               <td class="tableCell" align="left" >&nbsp;${topic.motNavn}</td>
 		               <td class="tableCell" align="right" >${topic.sivkb}</td>
 		               <td class="tableCell" align="center" >${topic.sign}</td>
-		               <td class="tableCell" align="center"><b>${topic.simi}</b></td>
-		               <td class="tableCell" align="center" >${topic.epjn}</td>
+		               <td width="1%" class="tableCell" align="center"><b>${topic.simi}</b></td>
+		               <td width="1%" class="tableCell" align="center" >${topic.epjn}</td>
 		               <td class="tableCell" align="center" >${topic.detaout}</td>
 		               <td class="tableCellOmberegning" align="center" >${topic.o2_simf}</td>
-		               <td class="tableCellOmberegning" align="center" >${topic.o2_sist}</td>
+		               <td width="1%" class="tableCellOmberegning" align="center" >${topic.o2_sist}</td>
 		               <td class="tableCellOmberegning" align="center" >${topic.o2_sidt}</td>
 		               <td class="tableCellOmberegning" align="center" >${topic.o2_sitll}</td>
 
