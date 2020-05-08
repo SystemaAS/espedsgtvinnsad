@@ -5,7 +5,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
  
  
-  <display-name>Systema eSpedsg2 TVINN-SAD Application (2020-05-07)</display-name>
+  <display-name>Systema eSpedsg2 TVINN-SAD Application (2020-05-08)</display-name>
   <welcome-file-list>
     <welcome-file>/WEB-INF/index.jsp</welcome-file>
   </welcome-file-list>
@@ -59,21 +59,12 @@
     <servlet-name>espedsgtvinnsad</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+  
   <session-config>
-    <!-- in minutes 0=standard=never ever-->
+  	<!-- in minutes 0=standard=never ever-->
     <session-timeout>0</session-timeout>
-    
-    <cookie-config>
-    	  <http-only>true</http-only> 
-    	  <!-- secure flag will not accept http. If we want to be able to handle both http & https the secure flag must not exist -->
-      <secure>true</secure>
-      
-      <!-- in seconds, without this property it will disapear until browser is closed
-      <max-age>1800</max-age> 
-      -->
-    </cookie-config>
     <!-- to avoid jsessionid in URL -->
-    <tracking-mode>COOKIE</tracking-mode>
+    <tracking-mode>COOKIE</tracking-mode> 
   </session-config>
   
   <filter>  
