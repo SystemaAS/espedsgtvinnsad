@@ -749,28 +749,38 @@
 				 						<div class="text11" style="position: relative;" align="left">
 				 						<span style="position:absolute;top:2px; width:250px;"id="svpre_info" class="popupWithInputText text11"  >
 						           			<b>36. Preferense</b>
-						           			<br/><br/>
+						           			<br/>
+						           			Hvis det foreligger tilfredsstillende opprinnelsesdokumentasjon ved utførsel, skal rubrikken fylles ut med en av følgende koder:
 						           			 	<ul>
 													<li><b>A</b> EØS-land, dvs. alle EU-land samt Island og Liechtenstein</li>
 													<li><b>B</b> Bilaterale handelsavtalen EF/Norge</li>
 													<li><b>C</b> EFTA konvensjonen, Sveits</li>
 													<li><b>G</b> Det norske GSP systemet</li>
 													<li><b>P</b> alle andre frihandelsavtaler; som for eksempel Marokko, Chile mm</li>
-													<li><b>N</b> Det foreligger ikke et opprinnelsesbevis (blank=samme)</li>
 													
 												</ul>
-											<br><br>	
-											<p>Disse kodene kan endre seg ved foreskrift fra myndighetene
-											Systemet vil selv automatisk på bakgrunn av opprinnelsesland foreslå preferansekode hvis ikke noe annet tastes manuellt.
-											(Vedlikehold av preferansekoder/land: Se OPP). Når opprinnelsesland tilhører EF/EFTA-området vil systemet foreslå kode A med mindre tollsatsen for EF- respektive EFTA-avtalen er lavere enn under EØS-avtalen.
-											Dette gjelder ikke for Sveits og Lichtenstein (CH / LI) hvor kun preferansekode C er gyldig.
+											<br>	
+											<p>
+											Hvis det ikke foreligger tilfredsstillende opprinnelsesdokumentasjon ved utførsel, skal rubrikken fylles ut med følgende kode:
+												<ul>
+													<li><b>N</b> Det foreligger ikke et opprinnelsesbevis</li>
+												</ul>	
+												N: Det foreligger ikke et opprinnelsesbevis
+												Koden som skal benyttes knytter seg til gjeldende handelsavtale/preferanseordning man eksporterer under. Bokstaven J skal ikke benyttes ved utførsel. Dersom opprinnelsesbevis blir utstedt på et senere tidspunkt, skal det sendes inn en elektronisk omberegning med de nevnte opplysningene i rubrikk 36 og 44.
 											</p>
 											<p>
-											I TVINN MÅ rubr. 44 (og "SER" i Rf-feltet) fylles ut ved preferanse.
-											Systemet styrer selv tollsatser ved bruk av kodene. Hvis preferansekode ikke skal benyttes må man endre koden til J dersom landkoden tilsier at preferanse kan være aktuelt.
-											(EF/EFTA/GSP-land m.m) (Gir full toll men rett til senere refusjon.)"J" skal ikke benyttes ved utførsel.
-											<br/><br/>
-											OM EN VET AT PREFERANSE IKKE VIL/KAN FOREKOMME (F.eks GSP-land men varenr ikke i fritaksliste) MÅ EN HINDRE "JA" VED Å TASTE "N" I PREF.
+											<b>Rubrikk 44</b><br/>
+											Rubrikken skal fylles ut dersom det foreligger et opprinnelsesbevis ved utførsel.
+											<br/>
+											Dersom opprinnelsesbeviset er et opprinnelsessertifikat skal det anføres «SER» og sertifikatets nummer.
+											<br/>
+											Dersom opprinnelsesbeviset er en faktura/opprinnelseserklæring skal det anføres «SER» og autorisasjonsnummeret eller; dersom eksportøren ikke er godkjent eksportør anføres «SER» og opprinnelseserklæring.
+											<br/>
+											Det er regelverket på deklarasjonstidspunktet som gjelder. Når regelverket trer i kraft 1. mai så gjelder det nye kravet kun deklarasjoner med deklarasjonsdato etter 1. mai.
+											<br/>
+											Omberegninger når opprinnelig deklarasjon har deklarasjonsdato før 1. mai – ingen krav til preferanse ved omberegning.
+											FO-deklarasjon før første 1. mai, etterfulgt av EN-deklarasjon etter 1. mai - ingen krav til preferanse ved utførsel
+											Til bakedatert MA med deklarasjonsdato før 1. mai – ingen krav til preferanse ved utførsel.
 											</p>
 										</span>
 				 						</div>
