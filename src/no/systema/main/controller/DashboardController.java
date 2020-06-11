@@ -436,6 +436,11 @@ public class DashboardController {
 		appUser.setSystemaLogo(jsonSystemaUserContainer.getSystemaLogo());
 		appUser.setSignatur(jsonSystemaUserContainer.getSignatur());
 		appUser.setFiland(jsonSystemaUserContainer.getFiland());
+		//in order to make specific adaptations on a specific customer
+		appUser.setInsid(jsonSystemaUserContainer.getInsid());
+		appUser.setSpedKuKod(jsonSystemaUserContainer.getSpedKuKod());
+		appUser.setSpedKuNrs(jsonSystemaUserContainer.getSpedKuNrs());
+
 		appUser.setDftdg(jsonSystemaUserContainer.getDftdg());
 		appUser.setAsavd(jsonSystemaUserContainer.getAsavd());
 		
