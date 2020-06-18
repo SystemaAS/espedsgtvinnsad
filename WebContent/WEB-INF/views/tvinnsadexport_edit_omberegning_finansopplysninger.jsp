@@ -562,9 +562,11 @@
 							        <tr height="10"><td class="text" align="left"></td></tr>
 						        </table>
 					        </td>
-					        <td align="left" >				
+					        <td align="left" >
+					        		<c:if test="${ model.status == 'M' || empty  model.status }">				
 								<input class="inputFormSubmit" type="submit" name="submit" onclick="javascript: form.action='tvinnsadexport_edit_omberegning_finansopplysninger.do';" value='<spring:message code="systema.tvinn.sad.export.item.createnew.submit"/>'>
 								&nbsp;&nbsp;
+								</c:if>
 							</td>
 				        </tr>
 					    <tr height="2"><td colspan="2" ></td></tr>

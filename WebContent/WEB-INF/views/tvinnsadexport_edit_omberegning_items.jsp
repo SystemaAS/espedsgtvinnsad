@@ -308,8 +308,9 @@
 									<tr>
 										<td class="text14Bold">
 											<c:if test="${model.selectedOmb != 'readonly'}">
-											<input tabindex=-1 class="inputFormSubmitStd" type="submit" name="submit" onclick="javascript: form.action='tvinnsadexport_edit_omberegning_items.do';" value="<spring:message code="systema.tvinn.sad.export.item.line.init.createnew.submit"/>">
-											
+											<c:if test="${ model.status == 'M' || empty  model.status }">
+												<input tabindex=-1 class="inputFormSubmitStd" type="submit" name="submit" onclick="javascript: form.action='tvinnsadexport_edit_omberegning_items.do';" value="<spring:message code="systema.tvinn.sad.export.item.line.init.createnew.submit"/>">
+											</c:if>
 											<button name="allItemsButton" class="inputFormSubmitStd" type="button" onClick="showPop('allItems');" >Vis alle</button> 
 										        <span style="background-color:#EEEEEE; position:absolute; left:50px; top:200px; width:1200px; height:1000px;" id="allItems" class="popupWithInputTextThickBorder"  >
 									           		
@@ -984,12 +985,14 @@
 										<button name="itemContainerNr" id="itemContainerNr" class="buttonGray" style="font-size:12" type="button" >Mere...</button>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<c:choose>	
-												<c:when test="${model.selectedOmb != 'readonly'}">
-								    				<input class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadexport_edit_omberegning_items.do';" value='<spring:message code="systema.tvinn.sad.export.item.createnew.submit"/>'>
+											<c:when test="${model.selectedOmb != 'readonly'}">
+												<c:if test="${ model.status == 'M' || empty  model.status }">
+								    					<input class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadexport_edit_omberegning_items.do';" value='<spring:message code="systema.tvinn.sad.export.item.createnew.submit"/>'>
 													&nbsp;&nbsp;
-												</c:when>
-												<c:otherwise>
-						 				    		<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
+												</c:if>
+											</c:when>
+											<c:otherwise>
+					 				    			<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
 						 				    	</c:otherwise>	
 					 				    	</c:choose>
 										</td>

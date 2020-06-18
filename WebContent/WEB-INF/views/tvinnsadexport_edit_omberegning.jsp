@@ -1564,21 +1564,40 @@
 							<tr>
 								<td class="text14" align="left" >
 								<img onMouseOver="showPop('andraKostPM_info');" onMouseOut="hidePop('andraKostPM_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-				 				<span title="siftg2">+/-&nbsp;(P/M)</span>
+				 				<span title="seftg2">+/-&nbsp;(P/M)</span>
 				 				<div class="text11" style="position: relative;" align="left">
 				 				<span style="position:absolute;top:2px; width:300px;" id="andraKostPM_info" class="popupWithInputText text11"  >
 					           			<b>Andre kostnader +/- (P/M)</b>&nbsp;
 					           			<p>
-											HVIS MAN IKKE ØNSKER AT RUBR. 22 SKAL PÅVIRKES KAN MAN BENYTTE KODENE
-											<b>M</b>(-) ELLER <b>P</b>(+)
-											<br/><br/>
-											Når man taster M eller P i feltet vil totalt fakturabeløp i rubr. 22 ikke påvirkes / endres, men det blir gjort fratrekk i "Statistisk verdi" som er grunnlaget for beregning av toll og avgifter.
+										Oppgi summen av eventuelle tillegg og/eller fradrag. Dersom det er mer å trekke fra enn å legge til fakturabeløpet, blir det et negativt beløp her.
+										Eksempel på tillegg: Provisjon,royalty,Innpakk..
+										Eksempel på fradrag: Diverse rabatter som er gitt i tilknyttning til de innførte varer.
 										</p>
+										<p>
+										HER KAN DET TASTES I ØNSKET VALUTA MED <b>+</b> ELLER <b>-</b>. DET TASTEDE BELØP
+										GJELDER FOR HELE SENDINGEN. SYSTEMET BESØRGER FORDELINGEN PR.VARELINJE.
+										Vær oppmerksom på at verdien i rubr. 22 "Fakturasum" vil bli justert tilsvarende når man benytter +/-.
+										Dette vises ikke i selve skjermbildet, men vil være den verdien som blir skrevet i rubr. 22 ved sending til TVINN og også ved utskrift av deklarasjonen.
+										Verdien man taster i rubr. 22 i SKJERMBILDET vil være grunnlaget man deklarer mot på varelinjenivå.
+										</p>
+										<p>
+										For å unngå differanse mellom vareverdi og deklarert verdi ved avsluttning av deklarasjonen, justeres ikke rubr. 22 med andre kostnader før ved sending/utskrift.
+										HVIS MAN IKKE ØNSKER AT RUBR. 22 SKAL PÅVIRKES KAN MAN BENYTTE KODENE
+										<b>M</b> (minus) ELLER <b>P</b>(pluss)
+										Når man taster M eller P i feltet vil totalt fakturabeløp i rubr. 22 ikke påvirkes / endres, men det blir gjort fratrekk i "Statistisk verdi" som er grunnlaget for beregning av toll og avgifter.
+ 										</p>
+										
 								</span>
 								</div>
 				 				</td>
 			 					<td class="text14">
-			 						<input type="text" class="inputTextMediumBlue" name="seftg2" id="seftg2" size="1" maxlength="1" value="${model.record.seftg2}">
+			 						<select class="selectMediumBlueE2" name="seftg2" id="seftg2">
+						            		<option value="">-velg-</option>
+						            		<option value="+"<c:if test="${model.record.seftg2 == '+'}"> selected </c:if> >+</option>
+										<option value="-"<c:if test="${model.record.seftg2 == '-'}"> selected </c:if> >-</option>
+					 					<option value="P"<c:if test="${model.record.seftg2 == 'P'}"> selected </c:if> >P</option>
+										<option value="M"<c:if test="${model.record.seftg2 == 'M'}"> selected </c:if> >M</option>
+									</select>
 			 					</td>
 							</tr>
 							
@@ -1843,7 +1862,7 @@
 							<tr>
 				        		<td class="text14Gray" align="left" >Kolli&nbsp;</td>
 					        	<td >
-				            		<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="sumOfAntalKolliInItemLines" id="sumOfAntalKolliInItemLines" size="10" maxlength="7" value="${ model.record.sumOfAntalKolliInItemLinesStr}">
+				            		<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="sumOfAntalKolliInItemLines" id="sumOfAntalKolliInItemLines" size="12" maxlength="7" value="${ model.record.sumOfAntalKolliInItemLinesStr}">
 				            		<c:if test="${not empty ( model.record.sumOfAntalKolliInItemLinesStr &&  model.record.sentk)}">
 					            		<c:if test="${ model.record.sentk !=  model.record.sumOfAntalKolliInItemLinesStr}">
 							            <img onMouseOver="showPop('itemsSumKolli_info');" onMouseOut="hidePop('itemsSumKolli_info');" width="18px" height="20px" src="resources/images/redFlag.png" border="0" alt="kolliantal warning">	
@@ -1864,7 +1883,7 @@
 					        <tr>
 				        		<td class="text14Gray" align="left" >Varelinjer &nbsp;</td>
 					        	<td >
-				            		<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="sumOfAntalItemLines" id="sumOfAntalItemLines" size="10" value="${ model.record.sumOfAntalItemLinesStr}">
+				            		<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="sumOfAntalItemLines" id="sumOfAntalItemLines" size="12" value="${ model.record.sumOfAntalItemLinesStr}">
 				            		<c:if test="${not empty ( model.record.sumOfAntalItemLinesStr)}">
 					            		<c:if test="${ model.record.sumOfAntalItemLines <= 0 }">
 							            <img onMouseOver="showPop('itemsSum_info');" onMouseOut="hidePop('itemsSum_info');" width="18px" height="20px" src="resources/images/redFlag.png" border="0" alt="varelinjerantal warning">	
@@ -1880,7 +1899,7 @@
 					        <tr>
 					        		<td class="text14Gray" align="left" >Beløp&nbsp;</td>
 						        	<td >
-					            		<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="sumTotalAmountItemLines" id="sumTotalAmountItemLines" size="10" value="${ model.record.sumTotalAmountItemLinesStr}">
+					            		<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="sumTotalAmountItemLines" id="sumTotalAmountItemLines" size="12" value="${ model.record.sumTotalAmountItemLinesStr}">
 						            	<c:if test="${model.record.sumTotalAmountItemLines != model.record.sebel1Dbl}">
 						            		<img onMouseOver="showPop('itemsAmountSum_info');" onMouseOut="hidePop('itemsAmountSum_info');" width="18px" height="20px" src="resources/images/redFlag.png" border="0" alt="vare-sum warning">	
 							            <div class="text11" style="position: relative;" align="left">
@@ -1894,7 +1913,7 @@
 					        <tr>
 					        		<td class="text14Gray" align="left" >Bruttovekt&nbsp;</td>
 						        	<td >
-					            		<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="sumTotalBruttoViktItemLines" id="sumTotalBruttoViktItemLines" size="10" value="${ model.record.sumTotalBruttoViktItemLinesStr}">
+					            		<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="sumTotalBruttoViktItemLines" id="sumTotalBruttoViktItemLines" size="12" value="${ model.record.sumTotalBruttoViktItemLinesStr}">
 						            	<c:if test="${model.record.sumTotalBruttoViktItemLines != model.record.sevkbDbl}">
 						            		<img onMouseOver="showPop('itemsBruttoVektSum_info');" onMouseOut="hidePop('itemsBruttoVektSum_info');" width="18px" height="20px" src="resources/images/redFlag.png" border="0" alt="bruttovekt warning">	
 							            <div class="text11" style="position: relative;" align="left">
@@ -1904,7 +1923,22 @@
 										</div>
 					            		</c:if>
 					            </td>
-					        </tr> 						        
+					        </tr>
+					        <tr>
+					        		<td class="text14Gray" align="left" >Eksportavgift for fisk&nbsp;</td>
+					        		<td>
+					        			<c:choose>
+					        			<c:when test="${not empty model.record.fiskavg}">
+					        				<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="fiskavg" id="fiskavg" size="12" value="${ model.record.fiskavg}">
+					        			</c:when>
+					        			<c:otherwise>
+					        				<input readonly style="text-align: right" type="text" class="inputTextReadOnly" name="fiskavg" id="fiskavg" size="12" value="0">
+					        			</c:otherwise>
+					        			</c:choose>
+					        			
+					        		</td>
+					        </tr>		
+					         						        
 						</table>
 					</td>
 				</tr>
@@ -1925,18 +1959,44 @@
 				            <tr >	
 			            		<td class="text">&nbsp;</td> 
 			 				    <td class="text9BlueGreen" valign="bottom" align="right" >
+			 				    	
 									<c:choose>	
 										<c:when test="${model.selectedOmb != 'readonly'}">
-				 				    	<input tabindex=-1 class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadexport_edit_omberegning.do';" value='<spring:message code="systema.tvinn.sad.export.createnew.submit"/>'/>
-				 				    	&nbsp;&nbsp;
-				 				    	<c:if test="${not empty  model.record.setdn && model.record.validUpdate}">
-				 				    		<input tabindex=-2 class="inputFormSubmit" type="submit" name="send" id="send" onclick="javascript: form.action='tvinnsadexport_edit_omberegning_send.do';" value='<spring:message code="systema.tvinn.sad.export.createnew.send"/>'/>
-				 				    	</c:if>
-				 				    	</c:when>
+											<c:choose>
+											<c:when test="${ model.record.sest == 'M' || empty  model.record.sest }">
+							 				    	<input tabindex=-1 class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadexport_edit_omberegning.do';" value='<spring:message code="systema.tvinn.sad.export.createnew.submit"/>'/>
+							 				    	&nbsp;&nbsp;
+							 				    	<c:if test="${not empty  model.record.setdn && model.record.validUpdate}">
+							 				    		<input tabindex=-2 class="inputFormSubmit" type="submit" name="send" id="send" onclick="javascript: form.action='tvinnsadexport_edit_omberegning_send.do';" value='<spring:message code="systema.tvinn.sad.export.createnew.send"/>'/>
+							 				    	</c:if>
+						 				    	</c:when>
+						 				    	<c:otherwise>
+							 				    	<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
+						 				    </c:otherwise>
+						 				    </c:choose>
+					 				    	</c:when>
 										<c:otherwise>
-					 				    	<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
+						 				    	<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
 					 				    </c:otherwise>
-					 				</c:choose>    
+					 				</c:choose> 
+					 			
+					 				
+					 			<%-- only status = M or emtpy status is allowed 
+			 				    <c:choose>
+				 				    <c:when test="${ model.record.sest == 'M' || empty  model.record.sest }">
+					 				    	<input tabindex=-1 class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadexport_edit_omberegning_send.do';" value='<spring:message code="systema.tvinn.sad.export.createnew.submit"/>'/>
+					 				    	&nbsp;&nbsp;
+					 				    	<c:if test="${not empty model.record.setdn && model.record.validUpdate}">
+					 				    		<input tabindex=-2 class="inputFormSubmit" type="button" name="send" id="send" onclick="javascript: form.action='tvinnsadexport_edit_omberegning_send.do';" value='<spring:message code="systema.tvinn.sad.export.createnew.send"/>'/>
+					 				    	</c:if>
+				 				    </c:when>
+				 				    <c:otherwise>
+				 				    		<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
+				 				    </c:otherwise>	
+			 				    </c:choose>
+					 			--%>	
+					 				
+					 				   
                 				</td>
 					        </tr>
 				            

@@ -1512,16 +1512,36 @@
 				 				<span style="position:absolute; top:2px; width:250px;" id="andraKostPM_info" class="popupWithInputText text14"  >
 					           			<b>Andre kostnader +/- (P/M)</b>&nbsp;
 					           			<p>
-											HVIS MAN IKKE ØNSKER AT RUBR. 22 SKAL PÅVIRKES KAN MAN BENYTTE KODENE
-											<b>M</b>(-) ELLER <b>P</b>(+)
-											<br/><br/>
-											Når man taster M eller P i feltet vil totalt fakturabeløp i rubr. 22 ikke påvirkes / endres, men det blir gjort fratrekk i "Statistisk verdi" som er grunnlaget for beregning av toll og avgifter.
+										Oppgi summen av eventuelle tillegg og/eller fradrag. Dersom det er mer å trekke fra enn å legge til fakturabeløpet, blir det et negativt beløp her.
+										Eksempel på tillegg: Provisjon,royalty,Innpakk..
+										Eksempel på fradrag: Diverse rabatter som er gitt i tilknyttning til de innførte varer.
 										</p>
+										<p>
+										HER KAN DET TASTES I ØNSKET VALUTA MED <b>+</b> ELLER <b>-</b>. DET TASTEDE BELØP
+										GJELDER FOR HELE SENDINGEN. SYSTEMET BESØRGER FORDELINGEN PR.VARELINJE.
+										Vær oppmerksom på at verdien i rubr. 22 "Fakturasum" vil bli justert tilsvarende når man benytter +/-.
+										Dette vises ikke i selve skjermbildet, men vil være den verdien som blir skrevet i rubr. 22 ved sending til TVINN og også ved utskrift av deklarasjonen.
+										Verdien man taster i rubr. 22 i SKJERMBILDET vil være grunnlaget man deklarer mot på varelinjenivå.
+										</p>
+										<p>
+										For å unngå differanse mellom vareverdi og deklarert verdi ved avsluttning av deklarasjonen, justeres ikke rubr. 22 med andre kostnader før ved sending/utskrift.
+										HVIS MAN IKKE ØNSKER AT RUBR. 22 SKAL PÅVIRKES KAN MAN BENYTTE KODENE
+										<b>M</b> (minus) ELLER <b>P</b>(pluss)
+										Når man taster M eller P i feltet vil totalt fakturabeløp i rubr. 22 ikke påvirkes / endres, men det blir gjort fratrekk i "Statistisk verdi" som er grunnlaget for beregning av toll og avgifter.
+ 										</p>
+										
+
 								</span>
 								</div>
 				 				</td>
 			 					<td class="text14">
-			 						<input type="text" class="inputTextMediumBlue" name="siftg2" id="siftg2" size="1" maxlength="1" value="${model.record.siftg2}">
+			 						<select class="selectMediumBlueE2" name="siftg2" id="siftg2">
+						            		<option value="">-velg-</option>
+						            		<option value="+"<c:if test="${model.record.siftg2 == '+'}"> selected </c:if> >+</option>
+										<option value="-"<c:if test="${model.record.siftg2 == '-'}"> selected </c:if> >-</option>
+					 					<option value="P"<c:if test="${model.record.siftg2 == 'P'}"> selected </c:if> >P</option>
+										<option value="M"<c:if test="${model.record.siftg2 == 'M'}"> selected </c:if> >M</option>
+									</select>
 			 					</td>
 							</tr>
 							<tr>
@@ -1909,14 +1929,21 @@
 			 				    <td class="text9BlueGreen" valign="bottom" align="right" >
 									<c:choose>
 										<c:when test="${model.selectedOmb != 'readonly'}">
-											<input tabindex=-1 class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadimport_edit_omberegning.do';" value='<spring:message code="systema.tvinn.sad.import.createnew.submit"/>'/>
-					 				    	&nbsp;&nbsp;
-					 				    	<c:if test="${not empty  model.record.sitdn && model.record.validUpdate}">
-					 				    		<input tabindex=-2 class="inputFormSubmit" type="button" name="sendButton" id="sendButton" onclick="javascript: form.action='tvinnsadimport_edit_omberegning_send.do';" value='<spring:message code="systema.tvinn.sad.import.createnew.send"/>'/>
-					 				    	</c:if>
+											<c:choose>
+											<c:when test="${ model.record.sist == 'M' || empty  model.record.sist }">
+												<input tabindex=-1 class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadimport_edit_omberegning.do';" value='<spring:message code="systema.tvinn.sad.import.createnew.submit"/>'/>
+							 				    	&nbsp;&nbsp;
+							 				    	<c:if test="${not empty  model.record.sitdn && model.record.validUpdate}">
+							 				    		<input tabindex=-2 class="inputFormSubmit" type="button" name="sendButton" id="sendButton" onclick="javascript: form.action='tvinnsadimport_edit_omberegning_send.do';" value='<spring:message code="systema.tvinn.sad.import.createnew.send"/>'/>
+							 				    	</c:if>
+						 				    	</c:when>
+						 				    	<c:otherwise>
+						 				    		<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
+						 				    </c:otherwise>
+						 				    	</c:choose>
 					 				    </c:when>
 					 				    <c:otherwise>
-					 				    	<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
+					 				    		<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
 					 				    </c:otherwise>
 				 				    </c:choose>
                 				</td>
