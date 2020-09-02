@@ -119,32 +119,45 @@
 				<table id="mainList" class="display compact cell-border" >
 					<thead>
 					<tr class="tableHeaderField" height="20" >
-                    	<th width="5%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.update"/></th>
-                		<th width="5%" class="tableHeaderFieldFirst" ><spring:message code="systema.tvinn.sad.manifest.list.search.label.avd"/></th>
-                		<th width="5%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.manifest.list.search.label.signatur"/></th>
-                		<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.manifest.list.search.label.arende"/></th>
-                		<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.manifest.list.search.label.datum"/></th>    
-                	</tr>
+                    	<th width="2%" class="tableHeaderFieldFirst" ><spring:message code="systema.tvinn.sad.update"/></th>
+                		<th width="2%" class="tableHeaderField" >Avd</th>
+                		<th width="2%" class="tableHeaderField" >Turnr</th>
+                		<th width="2%" class="tableHeaderField" >Sig</th>
+                		<th width="2%" class="tableHeaderField" >St</th>
+                		<th width="2%" class="tableHeaderField" >T.sd</th>
+                		<th width="2%" class="tableHeaderField" >E.enh</th>
+                		<th width="2%" class="tableHeaderField" >St</th>
+                		<th width="2%" class="tableHeaderField" >Passering ETA</th>
+                		<th width="2%" class="tableHeaderField" >Passering ATA</th>
+                		<th width="2%" class="tableHeaderField" >Bilnr</th>
+                		<th width="2%" class="tableHeaderField" >Sjåførs navn</th>
+                		<th width="2%" class="tableHeaderField" >Reg.dato</th>
+                		</tr>
                 	</thead>
                 	<tbody> 
-		           	<c:forEach items="${model.list}" var="record" varStatus="counter">    
+		           	<c:forEach items="${list}" var="record" varStatus="counter">    
 		              <tr class="tableRow" height="20" >
 		          
-		          	   <td class="tableCellFirst" align="center" width="5%" >
-		               		<a style="display: block;" href="tvinnsadmanifest_edit.do?action=doFetch&avd=${Xrecord.avd}&opd=${Xrecord.opd}&id=${record.id}" onClick="setBlockUI();">
+		          	   <td width="2%" class="tableCellFirst" align="center">
+		               		<a style="display: block;" href="tvinnsadmanifest_edit.do?action=doFetch&efavd=${record.efavd}&efpro=${record.efpro}&efuuid=${record.efuuid}" onClick="setBlockUI();">
                					<img src="resources/images/update.gif" border="0" alt="edit">
                				</a>
 	               	   </td>
-		               <td class="tableCell" align="center" width="5%">${record.id}</td>
-		               <td class="tableCell" align="center" width="5%">${Xrecord.sign}</td>
-		               
-               		   <td class="tableCell" align="left" >${Xrecord.opd}</td>
-		               <td class="tableCell" align="center">${Xrecord.datum}</td>
-		              
+		               <td width="2%" align="center" class="tableCell" >${record.efavd}</td>
+		               <td width="2%" align="center" class="tableCell" >${record.efpro}</td>
+		               <td width="2%" align="center" class="tableCell" >${record.efsg}</td>
+		               <td width="2%" align="center" class="tableCell" >${record.efst}</td>
+		               <td width="2%" class="tableCell" >${record.eftsd}</td>
+		               <td width="2%" class="tableCell" >${record.ef3039e}</td>
+		               <td width="2%" align="center" class="tableCell" >${record.efst2}</td>
+		               <td width="2%" class="tableCell" >${record.efeta}&nbsp;${record.efetm}</td>
+		               <td width="2%" class="tableCell" >${record.efata}&nbsp;${record.efatm}</td>
+		               <td width="2%" class="tableCell" >${record.efkmrk}</td>
+		               <td width="2%" class="tableCell" >${record.efsjaf}</td>
+		               <td width="2%" class="tableCell" >${record.efdtr}</td> 
 		            </tr> 
 		            </c:forEach>
 		            </tbody>
-		            
 	            </table>
 	            </td>
 	            </tr>

@@ -19,7 +19,7 @@
 		<tr height="2"><td></td></tr>
 		<tr height="25"> 
 			<c:choose> 
-			    <c:when test="${not empty record.id}">
+			    <c:when test="${not empty record.efuuid}">
 					<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a tabindex=-1 id="alinkManifestList" style="display:block;" href="tvinnsadmanifest.do?action=doFind&avd=${Xmodel.record.tiavd}&sign=${Xmodel.record.tisg}&opd=${Xmodel.record.titdn}">
 							<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.manifest.list.tab"/></font>
@@ -28,18 +28,18 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			
-					<td width="20%" valign="bottom" class="tab" align="center" nowrap>
+					<td title="${record.efuuid}" width="20%" valign="bottom" class="tab" align="center" nowrap>
 						<font class="tabLink">
 							&nbsp;<spring:message code="systema.tvinn.sad.manifest.created.header.tab"/>
 						</font>
-						<font class="text14MediumBlue">[${record.id}]</font>
+						<font class="text14MediumBlue">[${record.efpro}]</font>
 						<img src="resources/images/update.gif" border="0" alt="edit">
 						
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a tabindex=-1 id="alinkItems" style="display:block;" href="tvinnsadmanifest_edit_items.do?action=doFetch&avd=${Xmodel.record.tiavd}&sign=${Xmodel.record.tisg}
-													&opd=${Xmodel.record.titdn}&id=${record.id}">
+													&opd=${Xmodel.record.titdn}&id=${record.efuuid}">
 							<font class="tabDisabledLink">
 								&nbsp;<spring:message code="systema.tvinn.sad.manifest.createnew.last.tab"/>
 							</font>
@@ -135,7 +135,7 @@
 						<table style="width:100%" class="formFrameHeader" border="0" cellspacing="1" cellpadding="0">
 					 		<tr height="15">
 					 			<td class="text14White">&nbsp;&nbsp;Transport&nbsp;</td>
-					 			<td class="text14" align="right">Transportør - Systema&nbsp;</td>
+					 			<td title="Manifestid" class="text12" align="right">Turnr:${record.efpro}&nbsp;</td>
 			 				</tr>
 			            </table>
 			            </td>
@@ -200,11 +200,11 @@
 			 				</tr>
 			 				<tr >
 					 			<td class="text14">
-					 				<select class="inputTextMediumBlueMandatoryField" name="svlk" id="svlk" >
-				 						<option value="">Velg</option>
-		 		 				  		<option value="1">Kjøretøy med henger</option>
-		 		 				  		<option value="2">Kjøretøy med semitrailer og henger</option>
-		 		 				  		<option value="3">Kjøretøy uten henger</option>
+					 				<select class="inputTextMediumBlue" name="efktyp" id="efktyp">
+					            		<option value="">-select-</option>
+					 				  	<c:forEach var="record" items="${model.ktTypeList}" >
+				                       	 	<option title="${record.kftxt}" value="${record.kfkod}">${record.kfkod}&nbsp;${record.kftxt}</option>
+										</c:forEach> 
 									</select>
 					 			</td>
 			 				</tr>
@@ -221,10 +221,10 @@
 					 			</td>
 			 				</tr>
 			 				<tr >
-								<td class="text14">&nbsp;<span title="titin">Kjøretøy kjennemerke</span><font class="text16RedBold" >*</font></td>
+								<td class="text14">&nbsp;<span title="efkmrk">Kjøretøy kjennemerke</span><font class="text16RedBold" >*</font></td>
 			 				</tr>
 			 				<tr >
-					 			<td colspan="2" class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="titin" id="titin" size="15" maxlength="20" value="${Xmodel.record.titin}"></td>
+					 			<td colspan="2" class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="efkmrk" id="efkmrk" size="15" maxlength="30" value="${model.record.efkmrk}"></td>
 			 				</tr>
 			            </table>
 			            </td>
@@ -248,16 +248,16 @@
 					 	<td>
 						<table style="width:100%" class="formFrame" border="0" cellspacing="1" cellpadding="0">
 					 		<tr >
-					 			<td class="text14">&nbsp;<span title="tikn">Fornavn</span><font class="text16RedBold" >*</font></td>
+					 			<td class="text14">&nbsp;<span title="efsjaf">Fornavn</span><font class="text16RedBold" >*</font></td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="tikn" id="tikn" size="35" maxlength="35" value="${Xmodel.record.tikn}"></td>
+					 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="efsjaf" id="efsjaf" size="31" maxlength="30" value="${model.record.efsjaf}"></td>
 			 				</tr>
 			 				<tr >
-								<td class="text14">&nbsp;<span title="titin">Etternavn</span><font class="text16RedBold" >*</font></td>
+								<td class="text14">&nbsp;<span title="efsjae">Etternavn</span><font class="text16RedBold" >*</font></td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="titin" id="titin" size="35" maxlength="35" value="${Xmodel.record.titin}"></td>
+					 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="efsjae" id="efsjae" size="31" maxlength="30" value="${model.record.efsjae}"></td>
 			 				</tr>
 			 				<tr >
 								<td class="text14">&nbsp;<span title="titin">Statsborger i</span><font class="text16RedBold" >*</font></td>

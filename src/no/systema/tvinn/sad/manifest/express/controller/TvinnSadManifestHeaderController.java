@@ -31,23 +31,27 @@ import no.systema.main.validator.LoginValidator;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.DateTimeManager;
 import no.systema.main.util.JsonDebugger;
+import no.systema.jservices.bcore.z.maintenance.model.dao.services.KofastDaoServices;
+import no.systema.jservices.bcore.z.maintenance.model.dao.entities.KofastDao;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.util.StringManager;
 import no.systema.main.util.DateTimeManager;
-import no.systema.jservices.common.dao.GodsafDao;
-import no.systema.jservices.common.dao.GodsjfDao;
-import no.systema.jservices.common.dao.GodsgfDao;
+
 
 import no.systema.tvinn.sad.util.TvinnSadConstants;
-import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
+import no.systema.z.main.maintenance.service.MaintMainKofastService;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
-import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
+import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
+import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
+import no.systema.tvinn.sad.manifest.express.util.manager.CodeDropDownMgr;
+
 
 /**
  * Sad Manifest Header Controller
  * 
  * @author oscardelatorre
- * @date Sep 2018
+ * @date Sep 2020
  * 
  */
 
@@ -59,6 +63,7 @@ public class TvinnSadManifestHeaderController {
 	private LoginValidator loginValidator = new LoginValidator();
 	private StringManager strMgr = new StringManager();
 	DateTimeManager dateMgr = new DateTimeManager();
+	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	//private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
 	
 	
@@ -87,8 +92,8 @@ public class TvinnSadManifestHeaderController {
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		
 		String action = request.getParameter("action");
-		String avd = request.getParameter("avd");
-		String sign = request.getParameter("sign");
+		//String avd = request.getParameter("avd");
+		//String sign = request.getParameter("sign");
 		//String updateFlag = request.getParameter("updateFlag");
 		logger.info("action:" + action);
 		
@@ -102,7 +107,7 @@ public class TvinnSadManifestHeaderController {
 			return loginView;
 		
 		}else{
-			logger.info("ASAVD:" + appUser.getAsavd());
+			logger.warn("ASAVD:" + appUser.getAsavd());
 			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
 			
 			if(TvinnSadConstants.ACTION_UPDATE.equals(action)){
@@ -146,12 +151,14 @@ public class TvinnSadManifestHeaderController {
 			//--------------
 			//Fetch record
 			//--------------
+			//dropdowns
+			this.setCodeDropDownMgr(appUser, model);
+			
 			if(strMgr.isNotNull(recordToValidate.getEfuuid()) ){
-				
 				if(isValidRecord){
-					//GodsjfDao updatedDao = this.getRecordGodsjf(appUser, recordToValidate);
+					JsonTvinnSadManifestRecord manifest = this.getRecord(appUser, recordToValidate.getEfuuid());
 					//this.adjustFieldsForFetch(updatedDao);
-					//model.addAttribute(TvinnSadConstants.DOMAIN_RECORD, updatedDao);
+					model.addAttribute(TvinnSadConstants.DOMAIN_RECORD, manifest);
 					
 				}else{
 					//in case of validation errors
@@ -171,10 +178,48 @@ public class TvinnSadManifestHeaderController {
 			//model.addAttribute("avd", avd);
 			//logger.info("AVD:" + avd);
 			logger.info("END of method");
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
 			return successView;
 		}
 	}
-	
+	/**
+	 * Get a specific manifest
+	 * @param appUser
+	 * @param efuuid
+	 * @return
+	 */
+	private JsonTvinnSadManifestRecord getRecord(SystemaWebUser appUser, String efuuid){
+		JsonTvinnSadManifestRecord retval = null;
+		//get BASE URL
+		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_MANIFEST_EXPRESS_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser() + "&efuuid=" + efuuid;
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		JsonTvinnSadManifestContainer jsonTvinnSadManifestContainer = this.tvinnSadManifestListService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<JsonTvinnSadManifestRecord> outputList = jsonTvinnSadManifestContainer.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(JsonTvinnSadManifestRecord record : outputList ){
+					retval = record;
+					//logger.info(retval.toString());
+				}
+			}
+    	}
+    	return retval;
+	}
 	
 	/**
 	 * 
@@ -234,8 +279,9 @@ public class TvinnSadManifestHeaderController {
 	 * 
 	 * @param recordToValidate
 	 */
+	/*
 	private void adjustFieldsForUpdate(GodsjfDao recordToValidate){
-		/*
+		
 		recordToValidate.setGogrdt(this.convertToDate_ISO(recordToValidate.getGogrdt()));
 		recordToValidate.setGolsdt(this.convertToDate_ISO(recordToValidate.getGolsdt()));
 		
@@ -247,19 +293,20 @@ public class TvinnSadManifestHeaderController {
 		//date and time
 		if(recordToValidate.getGolsdt()==null){ recordToValidate.setGolsdt("0"); }
 		if(recordToValidate.getGolskl()==null){ recordToValidate.setGolskl(0); }
-		*/
 		
-	}
+		
+	}*/
 	/**
 	 * 
 	 * @param recordToValidate
 	 */
+	/*
 	private void adjustFieldsForFetch(GodsjfDao recordToValidate){
-		/*
+		
 		recordToValidate.setGogrdt(this.convertToDate_NO(recordToValidate.getGogrdt()));
 		recordToValidate.setGolsdt(this.convertToDate_NO(recordToValidate.getGolsdt()));
-		*/
-	}
+		
+	}*/
 	/**
 	 * 
 	 * @param value
@@ -284,18 +331,31 @@ public class TvinnSadManifestHeaderController {
 		DateTimeManager dateMgr = new DateTimeManager();
 		return dateMgr.getDateFormatted_NO(value, DateTimeManager.ISO_FORMAT);
 	}
-	
-	
-	
+
+	/**
+	 * 
+	 * @param appUser
+	 * @param model
+	 */
+	private void setCodeDropDownMgr(SystemaWebUser appUser, Map model){
+		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(appUser, this.codeDropDownMgr.CODE_VEHICLE_TYPES, model, urlCgiProxyService, maintMainKofastService);
+	}
 	
 	//SERVICES
-	@Qualifier ("urlCgiProxyService")
-	private UrlCgiProxyService urlCgiProxyService;
 	@Autowired
-	@Required
+	private UrlCgiProxyService urlCgiProxyService;
 	public void setUrlCgiProxyService (UrlCgiProxyService value){ this.urlCgiProxyService = value; }
 	public UrlCgiProxyService getUrlCgiProxyService(){ return this.urlCgiProxyService; }
 	
+	@Autowired
+	private TvinnSadManifestListService tvinnSadManifestListService;
+	public void setTvinnSadManifestListService (TvinnSadManifestListService value){ this.tvinnSadManifestListService = value; }
+	public TvinnSadManifestListService getTvinnSadManifestListService(){ return this.tvinnSadManifestListService; }
+	
+	@Autowired
+	private MaintMainKofastService maintMainKofastService;
+	public void setMaintMainKofastService(MaintMainKofastService value) { this.maintMainKofastService = value; }
+	public MaintMainKofastService getMaintMainKofastService() { return this.maintMainKofastService; }
 	
 }
 

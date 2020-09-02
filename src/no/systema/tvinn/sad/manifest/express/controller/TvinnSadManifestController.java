@@ -120,7 +120,7 @@ public class TvinnSadManifestController {
             }
             
             //get BASE URL
-    		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_MANIFEST_EXPRESS_MAIN_LIST_URL;
+    		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_MANIFEST_EXPRESS_URL;
     		//add URL-parameters
     		String urlRequestParams = this.getRequestUrlKeyParameters(searchFilter, appUser);
     		session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, BASE_URL + "?" + urlRequestParams.toString()); 
@@ -140,7 +140,7 @@ public class TvinnSadManifestController {
 				//now filter the topic list with the search filter (if applicable)
 				//----------------------------------------------------------------
 				outputList = jsonTvinnSadManifestContainer.getList();	
-				logger.warn(outputList.toString());
+				logger.info(outputList.toString());
 	    	}	
 			//--------------------------------------
 			//Final successView with domain objects
@@ -326,28 +326,18 @@ public class TvinnSadManifestController {
 	}
 	
 	//SERVICES
-	
-	@Qualifier ("urlCgiProxyService")
-	private UrlCgiProxyService urlCgiProxyService;
 	@Autowired
-	@Required
+	private UrlCgiProxyService urlCgiProxyService;
 	public void setUrlCgiProxyService (UrlCgiProxyService value){ this.urlCgiProxyService = value; }
 	public UrlCgiProxyService getUrlCgiProxyService(){ return this.urlCgiProxyService; }
 	
-	
-	@Qualifier ("tvinnSadDropDownListPopulationService")
-	private TvinnSadDropDownListPopulationService tvinnSadDropDownListPopulationService;
 	@Autowired
+	private TvinnSadDropDownListPopulationService tvinnSadDropDownListPopulationService;
 	public void setTvinnSadDropDownListPopulationService (TvinnSadDropDownListPopulationService value){ this.tvinnSadDropDownListPopulationService=value; }
 	public TvinnSadDropDownListPopulationService getTvinnSadDropDownListPopulationService(){return this.tvinnSadDropDownListPopulationService;}
 	
-	
-	
-	
-	@Qualifier ("tvinnSadManifestListService")
-	private TvinnSadManifestListService tvinnSadManifestListService;
 	@Autowired
-	@Required
+	private TvinnSadManifestListService tvinnSadManifestListService;
 	public void setTvinnSadManifestListService (TvinnSadManifestListService value){ this.tvinnSadManifestListService = value; }
 	public TvinnSadManifestListService getTvinnSadManifestListService(){ return this.tvinnSadManifestListService; }
 	
