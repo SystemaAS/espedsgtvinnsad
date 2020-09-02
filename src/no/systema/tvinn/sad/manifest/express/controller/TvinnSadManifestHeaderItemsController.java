@@ -52,9 +52,9 @@ import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
  */
 
 @Controller
-public class SadManifestHeaderItemsController {
+public class TvinnSadManifestHeaderItemsController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(3000);
-	private static Logger logger = Logger.getLogger(SadManifestHeaderItemsController.class.getName());
+	private static Logger logger = Logger.getLogger(TvinnSadManifestHeaderItemsController.class.getName());
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	private LoginValidator loginValidator = new LoginValidator();
 	private StringManager strMgr = new StringManager();

@@ -61,9 +61,9 @@ import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService
  * 
  */
 @Controller
-public class SadManifestController {
+public class TvinnSadManifestController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = Logger.getLogger(SadManifestController.class.getName());
+	private static final Logger logger = Logger.getLogger(TvinnSadManifestController.class.getName());
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	private ApplicationContext context;
 	private LoginValidator loginValidator = new LoginValidator();
