@@ -29,7 +29,6 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd">
     <bean id="tvinnSadTolltariffVarukodService" class="no.systema.tvinn.sad.service.TvinnSadTolltariffVarukodServiceImpl"/>
     <bean id="tvinnSadTullkontorService" class="no.systema.tvinn.sad.service.TvinnSadTullkontorServiceImpl"/>
     <bean id="tvinnSadGodsnrService" class="no.systema.tvinn.sad.service.TvinnSadGodsnrServiceImpl"/>
-    <bean id="tvinnSadManifestService" class="no.systema.tvinn.sad.service.TvinnSadManifestServiceImpl"/>
     <!-- TVINN - Drop down bean --> 
     <bean id="tvinnSadDropDownListPopulationService" class="no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService"/>
     
@@ -81,6 +80,11 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 	<bean id="sadAdminTransportService" class="no.systema.tvinn.sad.admin.service.SadAdminTransportServiceImpl"/>
 	<bean id="sadAdminAvggrunnlagService" class="no.systema.tvinn.sad.admin.service.SadAdminAvggrunnlagServiceImpl"/>
 	
+	<!-- ============================  -->
+	<!-- TVINN-SAD MANIFEST EXPRESS    -->
+	<!-- ============================  -->
+	<bean id="tvinnSadManifestListService" class="no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListServiceImpl"/>
+	
 	
 	<!-- ============================  -->
 	<!-- TROR - Oppdragsregistrering   -->
@@ -91,5 +95,6 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 	<!-- SKAT-NCTS EXPORT  -->
 	<!-- ================  -->
 	<bean id="skatNctsExportSkatSpecificTopicService" class="no.systema.skat.nctsexport.service.SkatNctsExportSpecificTopicServiceImpl"/>
+	
 	
 </beans>

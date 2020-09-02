@@ -1,4 +1,4 @@
-package no.systema.tvinn.sad.manifest.controller;
+package no.systema.tvinn.sad.manifest.express.controller;
 
 import java.util.*;
 import java.util.regex.*;
@@ -40,9 +40,8 @@ import no.systema.jservices.common.dao.GodsgfDao;
 
 import no.systema.tvinn.sad.util.TvinnSadConstants;
 import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
 import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
-
-import no.systema.tvinn.sad.manifest.model.jsonjackson.JsonTvinnSadManifestRecord;
 
 /**
  * Sad Manifest Header Controller
@@ -125,7 +124,7 @@ public class SadManifestHeaderController {
 					StringBuffer errMsg = new StringBuffer();
 					int dmlRetval = 0;
 					
-					if(strMgr.isNotNull( recordToValidate.getId()) ){
+					if(strMgr.isNotNull( recordToValidate.getEfuuid()) ){
 						logger.info("doUpdate");
 						//dmlRetval = this.updateRecord(appUser.getUser(), recordToValidate, TvinnSadConstants.MODE_UPDATE, errMsg);
 							
@@ -147,7 +146,7 @@ public class SadManifestHeaderController {
 			//--------------
 			//Fetch record
 			//--------------
-			if(strMgr.isNotNull(recordToValidate.getId()) ){
+			if(strMgr.isNotNull(recordToValidate.getEfuuid()) ){
 				
 				if(isValidRecord){
 					//GodsjfDao updatedDao = this.getRecordGodsjf(appUser, recordToValidate);

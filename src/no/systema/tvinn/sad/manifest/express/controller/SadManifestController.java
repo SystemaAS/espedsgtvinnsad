@@ -1,4 +1,4 @@
-package no.systema.tvinn.sad.manifest.controller;
+package no.systema.tvinn.sad.manifest.express.controller;
 
 import java.util.*;
 
@@ -26,7 +26,6 @@ import org.springframework.web.bind.ServletRequestDataBinder;
 
 
 //application imports
-import no.systema.main.context.TdsAppContext;
 import no.systema.main.service.UrlCgiProxyService;
 import no.systema.main.validator.LoginValidator;
 import no.systema.main.util.AppConstants;
@@ -39,21 +38,17 @@ import no.systema.tvinn.sad.util.TvinnSadConstants;
 import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
 import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
 import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService;
-import no.systema.tvinn.sad.nctsimport.model.jsonjackson.topic.JsonSadNctsImportTopicListContainer;
-import no.systema.tvinn.sad.nctsimport.model.jsonjackson.topic.JsonSadNctsImportTopicListRecord;
-import no.systema.tvinn.sad.nctsimport.service.SadNctsImportTopicListService;
-import no.systema.tvinn.sad.manifest.filter.SearchFilterManifestList;
-import no.systema.tvinn.sad.nctsimport.validator.SadNctsImportListValidator;
-import no.systema.tvinn.sad.nctsimport.url.store.SadNctsImportUrlDataStore;
 import no.systema.tvinn.sad.nctsimport.util.RpgReturnResponseHandler;
 //Avd/Sign
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelningContainer;
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelningRecord;
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureContainer;
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureRecord;
-import no.systema.tvinn.sad.manifest.model.jsonjackson.JsonTvinnSadManifestContainer;
-import no.systema.tvinn.sad.manifest.model.jsonjackson.JsonTvinnSadManifestRecord;
-import no.systema.tvinn.sad.service.TvinnSadManifestService;
+import no.systema.tvinn.sad.manifest.express.filter.SearchFilterManifestList;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
+import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
+import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
 
 
 
@@ -90,8 +85,8 @@ public class SadManifestController {
 	 */
 	@RequestMapping(value="tvinnsadmanifest.do", params="action=doFind",  method={RequestMethod.GET, RequestMethod.POST} )
 	public ModelAndView doFind(@ModelAttribute ("record") SearchFilterManifestList recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
-		this.context = TdsAppContext.getApplicationContext();
-		Collection<JsonSadNctsImportTopicListRecord> outputList = new ArrayList<JsonSadNctsImportTopicListRecord>();
+		//this.context = TdsAppContext.getApplicationContext();
+		Collection<JsonTvinnSadManifestRecord> outputList = new ArrayList<JsonTvinnSadManifestRecord>();
 		Map model = new HashMap();
 		
 		ModelAndView successView = new ModelAndView("tvinnsadmanifest");
@@ -123,25 +118,15 @@ public class SadManifestController {
             		searchFilter = sessionFilter;
             	}
             }
-            //FAKE
-            JsonTvinnSadManifestContainer fakeContainer = new JsonTvinnSadManifestContainer();
-            JsonTvinnSadManifestRecord fakeRecord = new JsonTvinnSadManifestRecord();
-            fakeRecord.setId("111");
-            Collection list = new ArrayList(); 
-            list.add(fakeRecord);
-            fakeContainer.setList(list);
-            model.put("list", list);
-            successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
-            //END FAKE
-            /*
+            
             //get BASE URL
-    		final String BASE_URL = SadNctsImportUrlDataStore.NCTS_IMPORT_BASE_TOPICLIST_URL;
+    		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_MANIFEST_EXPRESS_MAIN_LIST_URL;
     		//add URL-parameters
     		String urlRequestParams = this.getRequestUrlKeyParameters(searchFilter, appUser);
     		session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, BASE_URL + "?" + urlRequestParams.toString()); 
 	    	logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-	    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
-	    	logger.info("URL PARAMS: " + urlRequestParams);
+	    	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+	    	logger.warn("URL PARAMS: " + urlRequestParams);
 	    	
 	    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
 
@@ -150,38 +135,34 @@ public class SadManifestController {
 	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 	    	if(jsonPayload!=null){
 	    		
-	    		JsonSadNctsImportTopicListContainer jsonSadNctsImportTopicListContainer = this.sadNctsImportTopicListService.getNctsImportTopicListContainer(jsonPayload);
+	    		JsonTvinnSadManifestContainer jsonTvinnSadManifestContainer = this.tvinnSadManifestListService.getListContainer(jsonPayload);
 	    		//----------------------------------------------------------------
 				//now filter the topic list with the search filter (if applicable)
 				//----------------------------------------------------------------
-				outputList = jsonSadNctsImportTopicListContainer.getOrderList();	
-				
-				//--------------------------------------
-				//Final successView with domain objects
-				//--------------------------------------
-				//drop downs
-				this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
-				this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
-				this.setCodeDropDownMgr(appUser, model);
-				
-				//domain and search filter
-				successView.addObject(TvinnSadConstants.DOMAIN_LIST,outputList);
-				successView.addObject(TvinnSadConstants.DOMAIN_LIST_SIZE, outputList.size());	
-				successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
-	    		
+				outputList = jsonTvinnSadManifestContainer.getList();	
+				logger.warn(outputList.toString());
+	    	}	
+			//--------------------------------------
+			//Final successView with domain objects
+			//--------------------------------------
+			//drop downs
+			this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
+			this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
+			this.setCodeDropDownMgr(appUser, model);
+			
+			//domain and search filter
+			successView.addObject(TvinnSadConstants.DOMAIN_LIST,outputList);
+			successView.addObject(TvinnSadConstants.DOMAIN_LIST_SIZE, outputList.size());	
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+    		
 			if (session.getAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADIMPORT_NCTS) == null || session.getAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADIMPORT_NCTS).equals("")){
 				successView.addObject(TvinnSadConstants.DOMAIN_SEARCH_FILTER_SADIMPORT_NCTS, searchFilter);
 			}
-			*/
-			
-			logger.info(Calendar.getInstance().getTime() + " CONTROLLER end - timestamp");
 	    	
-			return successView;
-	    	
+	    
+		}	
+		return successView;
 	}
-		
-}
-
 	
 	/**
 	 * log Errors in Aspects and Domain objects in order to render on GUI
@@ -362,20 +343,13 @@ public class SadManifestController {
 	
 	
 	
-	@Qualifier ("sadNctsImportTopicListService")
-	private SadNctsImportTopicListService sadNctsImportTopicListService;
+	
+	@Qualifier ("tvinnSadManifestListService")
+	private TvinnSadManifestListService tvinnSadManifestListService;
 	@Autowired
 	@Required
-	public void setSadNctsImportTopicListService (SadNctsImportTopicListService value){ this.sadNctsImportTopicListService = value; }
-	public SadNctsImportTopicListService getSadNctsImportTopicListService(){ return this.sadNctsImportTopicListService; }
-	
-	
-	@Qualifier ("tvinnSadManifestService")
-	private TvinnSadManifestService tvinnSadManifestService;
-	@Autowired
-	@Required
-	public void setTvinnSadManifestService (TvinnSadManifestService value){ this.tvinnSadManifestService = value; }
-	public TvinnSadManifestService getTvinnSadManifestService(){ return this.tvinnSadManifestService; }
+	public void setTvinnSadManifestListService (TvinnSadManifestListService value){ this.tvinnSadManifestListService = value; }
+	public TvinnSadManifestListService getTvinnSadManifestListService(){ return this.tvinnSadManifestListService; }
 	
 
 }

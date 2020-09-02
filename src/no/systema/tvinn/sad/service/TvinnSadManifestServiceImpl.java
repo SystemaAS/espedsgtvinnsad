@@ -3,8 +3,8 @@
  */
 package no.systema.tvinn.sad.service;
 
-import no.systema.tvinn.sad.manifest.mapper.jsonjackson.TvinnSadManifestMapper;
-import no.systema.tvinn.sad.manifest.model.jsonjackson.JsonTvinnSadManifestContainer;
+import no.systema.tvinn.sad.manifest.express.mapper.jsonjackson.TvinnSadManifestMapper;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
 
 
 /**

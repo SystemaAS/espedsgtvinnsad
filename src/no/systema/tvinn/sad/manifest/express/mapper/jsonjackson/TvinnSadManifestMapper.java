@@ -1,17 +1,15 @@
 /**
  * 
  */
-package no.systema.tvinn.sad.manifest.mapper.jsonjackson;
+package no.systema.tvinn.sad.manifest.express.mapper.jsonjackson;
 
 //jackson library
 import org.apache.log4j.Logger;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper; 
-//application library
-import no.systema.tvinn.sad.manifest.model.jsonjackson.JsonTvinnSadManifestContainer;
-import no.systema.tvinn.sad.manifest.model.jsonjackson.JsonTvinnSadManifestRecord;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
 
 import java.util.*;
 

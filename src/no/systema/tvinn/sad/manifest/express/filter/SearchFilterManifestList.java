@@ -1,7 +1,7 @@
 /**
  * 
  */
-package no.systema.tvinn.sad.manifest.filter;
+package no.systema.tvinn.sad.manifest.express.filter;
 
 import java.lang.reflect.Field;
 import java.util.*;

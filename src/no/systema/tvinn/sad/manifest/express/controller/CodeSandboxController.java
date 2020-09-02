@@ -1,4 +1,4 @@
-package no.systema.tvinn.sad.manifest.controller;
+package no.systema.tvinn.sad.manifest.express.controller;
 
 import java.net.URI;
 import java.util.List;

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package no.systema.tvinn.sad.manifest.model.jsonjackson;
+package no.systema.tvinn.sad.manifest.express.model.jsonjackson;
 
 import java.util.Collection;
 
