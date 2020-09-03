@@ -33,6 +33,9 @@
 	  jq('#alinkTopicListMenuNctsImp').click(function() { 
 		  setBlockUI();
 	  });
+	  jq('#alinkTopicListMenuManifest').click(function() { 
+	    	setBlockUI();
+	    });
   });
   
   function setBlockUI(element){

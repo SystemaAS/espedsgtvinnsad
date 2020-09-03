@@ -91,6 +91,8 @@ public final class TvinnSadConstants {
 	public static final String DOMAIN_SEARCH_FILTER_SADEXPORT = "searchFilterSadExport";
 	public static final String DOMAIN_SEARCH_FILTER_SADIMPORT_NCTS = "searchFilterSadImportNcts";
 	public static final String DOMAIN_SEARCH_FILTER_SADEXPORT_NCTS = "searchFilterSadExportNcts";
+	public static final String DOMAIN_SEARCH_FILTER_SADMANIFEST = "searchFilterSadManifest";
+	
 	public static final String SESSION_SEARCH_FILTER_SADIMPORT = "searchFilterSadImport";
 	public static final String SESSION_SEARCH_FILTER_SADEXPORT = "searchFilterSadExport";
 	public static final String SESSION_SEARCH_FILTER_SADIMPORT_NCTS = "searchFilterSadImportNcts";

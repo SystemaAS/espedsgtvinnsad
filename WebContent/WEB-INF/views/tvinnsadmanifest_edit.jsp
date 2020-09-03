@@ -134,8 +134,8 @@
 					 	<td >
 						<table style="width:100%" class="formFrameHeader" border="0" cellspacing="1" cellpadding="0">
 					 		<tr height="15">
-					 			<td class="text14White">&nbsp;&nbsp;Transport&nbsp;</td>
-					 			<td title="Manifestid" class="text12" align="right">Turnr:${record.efpro}&nbsp;</td>
+					 			<td class="text14White">&nbsp;&nbsp;Turnr:&nbsp;${model.record.efpro}&nbsp;&nbsp;Avd:&nbsp;${model.record.efavd}</td>
+					 			<td title="Manifestid" class="text12" align="right">&nbsp;</td>
 			 				</tr>
 			            </table>
 			            </td>
@@ -144,34 +144,42 @@
 					 	<td>
 						<table style="width:100%" class="formFrame" border="0" cellspacing="1" cellpadding="0">
 			 				<tr >
-								<td class="text14">&nbsp;<span title="titin">Transportmåte</span><font class="text16RedBold" >*</font></td>
+								<td class="text14">&nbsp;Manifestid:&nbsp;<font class="text14SkyBlue">${model.record.efuuid}</font></td>
+			 				</tr>
+			 				
+			 				<tr height="2"><td></td></tr>
+			 				
+			 				<tr >
+								<td class="text14">&nbsp;<span title="eftm">Transportmåte</span><font class="text16RedBold" >*</font></td>
 			 				</tr>
 			 				<tr >
 					 			<td class="text14">
-					 				<select class="inputTextMediumBlueMandatoryField" name="svlk" id="svlk" style="width:100px;">
+					 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="eftm" id="eftm">
 				 						<option value="">Velg</option>
-		 		 				  		<option value="30">30 Bil</option>
+		 		 				  		<option value="BIL" <c:if test="${model.record.eftm == 'BIL'}"> selected </c:if> >(30) Bil (veitransport)</option>
 									</select>
+									
 					 			</td>
 			 				</tr>
 			 				<tr >
-								<td class="text14">&nbsp;<span title="titin">ID-type kjøretøyeier</span><font class="text16RedBold" >*</font></td>
+								<td class="text14">&nbsp;<span title="efrgd">ID-type kjøretøyeier</span><font class="text16RedBold" >*</font></td>
 			 				</tr>
 			 				<tr >
 					 			<td class="text14">
-					 				<select class="inputTextMediumBlueMandatoryField" name="svlk" id="svlk" style="width:100px;">
-				 						<option value="">Velg</option>
-		 		 				  		<option value="O">Org.nr</option>
+					 				<select class="inputTextMediumBlueMandatoryField" name="todo" id="todo" style="width:100px;">
+				 						<option value="O">Org.nr</option>
+				 						<%--
 		 		 				  		<option value="E">EORI</option>
+		 		 				  		 --%>
 									</select>
-									&nbsp;&nbsp;<input type="text" class="inputTextMediumBlueMandatoryField" name="titin" id="titin" size="20" maxlength="25" value="${Xmodel.record.titin}">
+									&nbsp;&nbsp;<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efrgd" id="efrgd" size="10" maxlength="9" value="${model.record.efrgd}">
 								</td>
 			 				</tr>
 			 				<tr >
-								<td class="text14">&nbsp;<span title="titin">Kjøretøyeier</span><font class="text16RedBold" >*</font></td>
+								<td class="text14">&nbsp;<span title="todo">Kjøretøyeier</span><font class="text16RedBold" >*</font></td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="titin" id="titin" size="45" maxlength="35" value="${Xmodel.record.titin}"></td>
+					 			<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="todo" id="todo" size="45" maxlength="35" value="${Xmodel.record.titin}"></td>
 			 				</tr>
 			            </table>
 			            </td>
@@ -195,36 +203,59 @@
 					 	<td>
 						<table style="width:100%;" class="formFrame" border="0" cellspacing="1" cellpadding="0">
 					 		<tr >
-					 			<td class="text14">&nbsp;<span title="tikn">Kjøretøytype</span></td>
+					 			<td class="text14">&nbsp;<span title="efktyp">Kjøretøytype</span><font class="text16RedBold" >*</font></td>
 					 			<td class="text14">&nbsp;</td>
 			 				</tr>
 			 				<tr >
 					 			<td class="text14">
-					 				<select class="inputTextMediumBlue" name="efktyp" id="efktyp">
+					 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="efktyp" id="efktyp">
 					            		<option value="">-select-</option>
 					 				  	<c:forEach var="record" items="${model.ktTypeList}" >
-				                       	 	<option title="${record.kftxt}" value="${record.kfkod}">${record.kfkod}&nbsp;${record.kftxt}</option>
+				                       	 	<option title="${record.kftxt}" value="${record.kfkod}" <c:if test="${model.record.efktyp == record.kfkod}"> selected </c:if> >${record.kfkod}&nbsp;${record.kftxt}</option>
 										</c:forEach> 
 									</select>
 					 			</td>
 			 				</tr>
-			 				<tr >
-								<td class="text14">&nbsp;<span title="titin">Kjøretøy nasjonalitet</span><font class="text16RedBold" >*</font></td>
-			 				</tr>
-			 				<tr >
-					 			<td class="text14">
-					 				<select class="inputTextMediumBlueMandatoryField" name="svlk" id="svlk" style="width:100px;">
-				 						<option value="">Velg</option>
-		 		 				  		<option value="SE">Sverige</option>
-		 		 				  		<option value="NO">Norge</option>
-									</select>
-					 			</td>
-			 				</tr>
-			 				<tr >
-								<td class="text14">&nbsp;<span title="efkmrk">Kjøretøy kjennemerke</span><font class="text16RedBold" >*</font></td>
-			 				</tr>
-			 				<tr >
-					 			<td colspan="2" class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="efkmrk" id="efkmrk" size="15" maxlength="30" value="${model.record.efkmrk}"></td>
+			 				
+			 				<tr>
+				 				<td>
+				 				<table>
+				 				<tr >
+									<td class="text14">&nbsp;<span title="efkmrk">Kjøretøy kjennemerke</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="efklk">Kjøretøy nasjonalitet</span><font class="text16RedBold" >*</font></td>
+									
+				 				</tr>
+				 				<tr >
+									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efkmrk" id="efkmrk" size="15" maxlength="30" value="${model.record.efkmrk}"></td>
+									<td class="text14">
+						 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="efklk" id="efklk">
+					 						<option value="">-velg-</option>
+						 				  	<c:forEach var="country" items="${model.countryCodeList}" >
+						 				  		<option title="${country.ztxt}" value="${country.zkod}"<c:if test="${model.record.efklk == country.zkod}"> selected </c:if> >${country.zkod}</option>
+											</c:forEach>  
+										</select>
+						 			</td>
+				 				</tr>
+				 				<tr height="2"><td>&nbsp;</td></tr>
+				 				<tr >
+									<td class="text14">&nbsp;<span title="efpmrk">Passiv kjøretøy kjennemerke</span></td>
+									<td class="text14">&nbsp;<span title="efplk">Passiv kjøretøy nasjonalitet</span></td>
+									
+				 				</tr>
+				 				<tr >
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efpmrk" id="efpmrk" size="15" maxlength="30" value="${model.record.efpmrk}"></td>
+									<td class="text14">
+						 				<select  class="inputTextMediumBlue" name="efplk" id="efplk">
+					 						<option value="">-velg-</option>
+						 				  	<c:forEach var="country" items="${model.countryCodeList}" >
+						 				  		<option title="${country.ztxt}" value="${country.zkod}"<c:if test="${model.record.efplk == country.zkod}"> selected </c:if> >${country.zkod}</option>
+											</c:forEach>  
+										</select>
+						 			</td>
+				 				</tr>
+				 				
+				 				</table>
+				 				</td>
 			 				</tr>
 			            </table>
 			            </td>
@@ -251,24 +282,26 @@
 					 			<td class="text14">&nbsp;<span title="efsjaf">Fornavn</span><font class="text16RedBold" >*</font></td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="efsjaf" id="efsjaf" size="31" maxlength="30" value="${model.record.efsjaf}"></td>
+					 			<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efsjaf" id="efsjaf" size="31" maxlength="30" value="${model.record.efsjaf}"></td>
 			 				</tr>
 			 				<tr >
 								<td class="text14">&nbsp;<span title="efsjae">Etternavn</span><font class="text16RedBold" >*</font></td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="efsjae" id="efsjae" size="31" maxlength="30" value="${model.record.efsjae}"></td>
+					 			<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efsjae" id="efsjae" size="31" maxlength="30" value="${model.record.efsjae}"></td>
 			 				</tr>
 			 				<tr >
-								<td class="text14">&nbsp;<span title="titin">Statsborger i</span><font class="text16RedBold" >*</font></td>
+								<td class="text14">&nbsp;<span title="efsjalk">Statsborger i</span><font class="text16RedBold" >*</font></td>
 			 				</tr>
 			 				<tr >
 					 			<td class="text14">
-					 				<select class="inputTextMediumBlueMandatoryField" name="svlk" id="svlk" style="width:100px;">
-				 						<option value="">Velg</option>
-		 		 				  		<option value="SE">Sverige</option>
-		 		 				  		<option value="NO">Norge</option>
+					 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="efsjalk" id="efsjalk">
+				 						<option value="">-velg-</option>
+					 				  	<c:forEach var="country" items="${model.countryCodeList}" >
+					 				  		<option title="${country.ztxt}" value="${country.zkod}"<c:if test="${model.record.efsjalk == country.zkod}"> selected </c:if> >${country.zkod}</option>
+										</c:forEach>  
 									</select>
+									
 					 			</td>
 			 				</tr>
 			 				<tr height="15"><td colspan="2">&nbsp;</td></tr>

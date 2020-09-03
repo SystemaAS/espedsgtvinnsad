@@ -49,10 +49,11 @@
                 <td class="text14" align="left" title="avd" >&nbsp;&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.manifest.list.search.label.avd"/></td>
                 <td class="text14" align="left" title="sign" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.manifest.list.search.label.signatur"/></td>
                 
-                <td class="text14" align="left" ><span title="datum"><spring:message code="systema.tvinn.sad.manifest.list.search.label.arende"/></span></td>
+                <td class="text14" align="left" ><span title="turnr"><spring:message code="systema.tvinn.sad.manifest.list.search.label.turnr"/></span></td>
                 <td class="text14" align="left" ><span title="datum"><spring:message code="systema.tvinn.sad.manifest.list.search.label.fdatum"/></span></td>
+                <%--
                 <td class="text14" align="left" ><span title="datumt"><spring:message code="systema.tvinn.sad.manifest.list.search.label.tdatum"/></span></td>
-                
+                 --%>
 			</tr>
  	        <tr>
 				<td align="left" >&nbsp;
@@ -71,9 +72,11 @@
 						</c:forEach> 
 					</select>
 				</td>
-				<td align="left" ><input type="text" class="inputText" name="opd" id="opd" size="8" maxlength="10" value="${searchFilterSadImportNcts.opd}">&nbsp;</td>
-				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="datum" id="datum" size="6" maxlength="6" value="${searchFilterSadImportNcts.datum}">&nbsp;</td>
-				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="datumt" id="datumt" size="6" maxlength="6" value="${searchFilterSadImportNcts.datumt}">&nbsp;</td>
+				<td align="left" ><input type="text" class="inputText" name="turnr" id="turnr" size="10" maxlength="8" value="${searchFilterSadManifest.turnr}">&nbsp;</td>
+				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="datum" id="datum" size="6" maxlength="6" value="${searchFilterSadManifest.datum}">&nbsp;</td>
+				<%--
+				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="datumt" id="datumt" size="6" maxlength="6" value="${searchFilterSadManifest.datumt}">&nbsp;</td>
+				--%>
 				<td valign="top" align="left" >
                    <input class="inputFormSubmit" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.search"/>'>
                 </td>
@@ -144,17 +147,17 @@
                				</a>
 	               	   </td>
 		               <td width="2%" align="center" class="tableCell" >${record.efavd}</td>
-		               <td width="2%" align="center" class="tableCell" >${record.efpro}</td>
+		               <td width="2%" align="center" class="tableCell" ><c:if test="${record.efpro > 0}">${record.efpro}</c:if></td>
 		               <td width="2%" align="center" class="tableCell" >${record.efsg}</td>
 		               <td width="2%" align="center" class="tableCell" >${record.efst}</td>
-		               <td width="2%" class="tableCell" >${record.eftsd}</td>
-		               <td width="2%" class="tableCell" >${record.ef3039e}</td>
+		               <td width="2%" class="tableCell" ><c:if test="${record.eftsd > 0}">${record.eftsd}</c:if></td>
+		               <td width="2%" class="tableCell" ><c:if test="${record.ef3039e > 0}">${record.ef3039e}</c:if></td>
 		               <td width="2%" align="center" class="tableCell" >${record.efst2}</td>
 		               <td width="2%" class="tableCell" >${record.efeta}&nbsp;${record.efetm}</td>
 		               <td width="2%" class="tableCell" >${record.efata}&nbsp;${record.efatm}</td>
 		               <td width="2%" class="tableCell" >${record.efkmrk}</td>
 		               <td width="2%" class="tableCell" >${record.efsjaf}</td>
-		               <td width="2%" class="tableCell" >${record.efdtr}</td> 
+		               <td width="2%" class="tableCell" ><c:if test="${record.efdtr > 0}">${record.efdtr}</c:if></td> 
 		            </tr> 
 		            </c:forEach>
 		            </tbody>

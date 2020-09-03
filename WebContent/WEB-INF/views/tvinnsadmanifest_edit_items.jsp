@@ -29,11 +29,11 @@
 	
 			<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
 				<a tabindex=-1 id="alinkHeader" style="display:block;" href="tvinnsadmanifest_edit.do?action=doFetch&avd=${Xrecord.avd}&opd=${Xrecord.opd}
-											&opd=${Xmodel.record.titdn}&id=${record.id}">
+											&opd=${Xmodel.record.titdn}&id=${record.efuuid}">
 					<font class="tabDisabledLink">
 						&nbsp;<spring:message code="systema.tvinn.sad.manifest.created.header.tab"/>
 					</font>
-					<font class="text14MediumBlue">[${record.id}]</font>
+					<font class="text14MediumBlue">[${record.efuuid}]</font>
 				</a>
 			</td>
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
@@ -131,11 +131,11 @@
 		              <tr class="tableRow" height="20" >
 		          
 		          	   <td width="5%" class="tableCellFirst" align="center" >
-		               		<a id="id_${record.id}@opd_${Xrecord.opd}@avd_${Xrecord.avd}">
+		               		<a id="id_${record.efuuid}@opd_${Xrecord.opd}@avd_${Xrecord.avd}">
                					<img src="resources/images/update.gif" border="0" alt="edit">
                				</a>
 	               	   </td>
-		               <td width="5%" class="tableCell" align="center" >${record.id}</td>
+		               <td width="5%" class="tableCell" align="center" >${record.efuuid}</td>
 		               <td width="5%" class="tableCell" align="center" >${Xrecord.sign}</td>
 		            </tr> 
 		            </c:forEach>

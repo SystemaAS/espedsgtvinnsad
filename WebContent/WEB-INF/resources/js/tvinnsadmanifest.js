@@ -13,9 +13,10 @@
     jq('#alinkItems').click(function() { 
     	setBlockUI();
     });
-    jq( "#submit" ).click(function( event ) {
-    	setBlockUI();
-	});
+    jq("#searchForm").submit(function() {
+  		  setBlockUI();
+  	 });
+
     //General Header Menus
     jq('#alinkTopicListMenuImp').click(function() { 
     	setBlockUI();
@@ -32,6 +33,18 @@
     jq('#alinkTopicListMenuManifest').click(function() { 
     	setBlockUI();
     });
+  });
+  
+  jq(function() {
+	  jq("#datum").datepicker({ 
+		  dateFormat: 'ddmmy' 	  
+	  });
+	  
+	  jq("#datumt").datepicker({ 
+		  dateFormat: 'ddmmy' 
+	  });
+	  
+	  
   });
   
   

@@ -15,11 +15,16 @@
   		 );
   	 }
   	
-  	  
-  	 
+  	jq(function() {
+	  	jq('#alinkTopicListMenuManifest').click(function() { 
+	    	setBlockUI();
+	    });
+  	});
+  	
+  	
   	//---------------------------------
-  	  //START Model dialog: "Logger"
-  	  //------------------------------
+  	//START Model dialog: "Logger"
+  	//------------------------------
   	  //Initialize <div> here
   	  jq(function() { 
   		  jq("#dialogLogger").dialog({

@@ -44,6 +44,7 @@ import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManif
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
 import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
+import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService;
 import no.systema.tvinn.sad.manifest.express.util.manager.CodeDropDownMgr;
 
 
@@ -339,6 +340,8 @@ public class TvinnSadManifestHeaderController {
 	 */
 	private void setCodeDropDownMgr(SystemaWebUser appUser, Map model){
 		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(appUser, this.codeDropDownMgr.CODE_VEHICLE_TYPES, model, urlCgiProxyService, maintMainKofastService);
+		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(this.urlCgiProxyService, this.tvinnSadDropDownListPopulationService, 
+																	 model,appUser,CodeDropDownMgr.CODE_2_COUNTRY, null, null);
 	}
 	
 	//SERVICES
@@ -356,6 +359,11 @@ public class TvinnSadManifestHeaderController {
 	private MaintMainKofastService maintMainKofastService;
 	public void setMaintMainKofastService(MaintMainKofastService value) { this.maintMainKofastService = value; }
 	public MaintMainKofastService getMaintMainKofastService() { return this.maintMainKofastService; }
+	
+	@Autowired
+	private TvinnSadDropDownListPopulationService tvinnSadDropDownListPopulationService;
+	public void setTvinnSadDropDownListPopulationService (TvinnSadDropDownListPopulationService value){ this.tvinnSadDropDownListPopulationService=value; }
+	public TvinnSadDropDownListPopulationService getTvinnSadDropDownListPopulationService(){return this.tvinnSadDropDownListPopulationService;}
 	
 }
 

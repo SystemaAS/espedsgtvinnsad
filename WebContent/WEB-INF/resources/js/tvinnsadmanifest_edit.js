@@ -13,9 +13,7 @@
     jq('#alinkItems').click(function() { 
     	setBlockUI();
     });
-    jq( "#submit" ).click(function( event ) {
-    	setBlockUI();
-	});
+    
     //General Header Menus
     jq('#alinkTopicListMenuImp').click(function() { 
     	setBlockUI();

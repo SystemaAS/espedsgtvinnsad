@@ -123,11 +123,9 @@ public class TvinnSadManifestController {
     		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_MANIFEST_EXPRESS_URL;
     		//add URL-parameters
     		String urlRequestParams = this.getRequestUrlKeyParameters(searchFilter, appUser);
-    		session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, BASE_URL + "?" + urlRequestParams.toString()); 
-	    	logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
 	    	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
 	    	logger.warn("URL PARAMS: " + urlRequestParams);
-	    	
 	    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
 
 	    	//Debug --> 
@@ -155,8 +153,8 @@ public class TvinnSadManifestController {
 			successView.addObject(TvinnSadConstants.DOMAIN_LIST_SIZE, outputList.size());	
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
     		
-			if (session.getAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADIMPORT_NCTS) == null || session.getAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADIMPORT_NCTS).equals("")){
-				successView.addObject(TvinnSadConstants.DOMAIN_SEARCH_FILTER_SADIMPORT_NCTS, searchFilter);
+			if (session.getAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADMANIFEST) == null || session.getAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADMANIFEST).equals("")){
+				successView.addObject(TvinnSadConstants.DOMAIN_SEARCH_FILTER_SADMANIFEST, searchFilter);
 			}
 	    	
 	    
@@ -269,24 +267,20 @@ public class TvinnSadManifestController {
 		
 		urlRequestParamsKeys.append("user=" + appUser.getUser());
 		if(searchFilter.getAvd()!=null && !"".equals(searchFilter.getAvd())){
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "avd=" + searchFilter.getAvd());
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "efavd=" + searchFilter.getAvd());
 		}
-		if(searchFilter.getOpd()!=null && !"".equals(searchFilter.getOpd())){
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "opd=" + searchFilter.getOpd());
+		if(searchFilter.getTurnr()!=null && !"".equals(searchFilter.getTurnr())){
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "efpro=" + searchFilter.getTurnr());
 		}
 		if(searchFilter.getSign()!=null && !"".equals(searchFilter.getSign())){
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "sign=" + searchFilter.getSign());
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "efsg=" + searchFilter.getSign());
 		}
 		
 		if(searchFilter.getDatum()!=null && !"".equals(searchFilter.getDatum())){
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "datum=" + this.dateFormatter.convertToDate_ISO(searchFilter.getDatum()));
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "efdtr=" + this.dateFormatter.convertToDate_ISO(searchFilter.getDatum()));
 		}
 		if(searchFilter.getDatumt()!=null && !"".equals(searchFilter.getDatumt())){
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "datumt=" + this.dateFormatter.convertToDate_ISO(searchFilter.getDatumt()));
-		}
-		
-		if(searchFilter.getDatumFr()!=null && !"".equals(searchFilter.getDatumFr())){
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "datumFr=" + this.dateFormatter.convertToDate_ISO(searchFilter.getDatumFr()));
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "_efdtrt=" + this.dateFormatter.convertToDate_ISO(searchFilter.getDatumt()));
 		}
 		
 		

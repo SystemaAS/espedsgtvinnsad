@@ -19,10 +19,10 @@ public class SearchFilterManifestList {
 	
 	private String avd = null;
 	private String opd = null;
+	private String turnr = null;
 	private String sign = null;
 	private String datum = null;
 	private String datumt = null;
-	private String datumFr = null;
 	
 	
 	
