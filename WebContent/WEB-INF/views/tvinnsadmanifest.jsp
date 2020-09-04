@@ -142,7 +142,7 @@
 		              <tr class="tableRow" height="20" >
 		          
 		          	   <td width="2%" class="tableCellFirst" align="center">
-		               		<a style="display: block;" href="tvinnsadmanifest_edit.do?action=doFetch&efavd=${record.efavd}&efpro=${record.efpro}&efuuid=${record.efuuid}" onClick="setBlockUI();">
+		               		<a style="display: block;" href="tvinnsadmanifest_edit.do?action=doFetch&efuuid=${record.efuuid}" onClick="setBlockUI();">
                					<img src="resources/images/update.gif" border="0" alt="edit">
                				</a>
 	               	   </td>

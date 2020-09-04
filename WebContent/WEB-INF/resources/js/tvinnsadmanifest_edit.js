@@ -31,6 +31,14 @@
     	setBlockUI();
     });
   });
+  
+  jq(function() {
+	  jq("#efeta").datepicker({ 
+		  dateFormat: 'ddmmy' 	  
+	  });
+	  
+	  
+  });
  
   
  

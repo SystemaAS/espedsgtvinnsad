@@ -12,18 +12,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.context.annotation.Scope;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.springframework.ui.ModelMap;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 //application imports
 import no.systema.main.service.UrlCgiProxyService;
@@ -39,6 +31,7 @@ import no.systema.main.util.DateTimeManager;
 
 
 import no.systema.tvinn.sad.util.TvinnSadConstants;
+import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
 import no.systema.z.main.maintenance.service.MaintMainKofastService;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
@@ -46,7 +39,8 @@ import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService
 import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService;
 import no.systema.tvinn.sad.manifest.express.util.manager.CodeDropDownMgr;
-
+import no.systema.tvinn.sad.manifest.express.util.manager.ManifestExpressMgr;
+import no.systema.tvinn.sad.mapper.url.request.UrlRequestParameterMapper;
 
 /**
  * Sad Manifest Header Controller
@@ -65,8 +59,12 @@ public class TvinnSadManifestHeaderController {
 	private StringManager strMgr = new StringManager();
 	DateTimeManager dateMgr = new DateTimeManager();
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
-	//private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
+	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
+	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
 	
+	
+	@Autowired
+	ManifestExpressMgr manifestExpressMgr;
 	
 	@PostConstruct
 	public void initIt() throws Exception {
@@ -86,18 +84,16 @@ public class TvinnSadManifestHeaderController {
 	 * @return
 	 */
 	@RequestMapping(value="tvinnsadmanifest_edit.do", method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doManifestEdit(ModelMap model, @ModelAttribute ("record") JsonTvinnSadManifestRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+	public ModelAndView doManifestEdit(JsonTvinnSadManifestRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		ModelAndView successView = new ModelAndView("tvinnsadmanifest_edit");
-		logger.info("Inside: doManifestEdit");
+		logger.warn("Inside: doManifestEdit");
 		
+		Map model = new HashMap();
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		
-		String action = request.getParameter("action");
-		//String avd = request.getParameter("avd");
-		//String sign = request.getParameter("sign");
-		//String updateFlag = request.getParameter("updateFlag");
-		logger.info("action:" + action);
-		
+		String action = request.getParameter("actionU");
+		logger.warn("actionU:" + action);
+		logger.warn("uuid:" + recordToValidate.getEfuuid());
 		/*if(strMgr.isNotNull(updateFlag)){
 			model.addAttribute("updateFlag", "1");
 		}*/
@@ -124,25 +120,30 @@ public class TvinnSadManifestHeaderController {
 		    		
 			    }else{
 			    	//adjust some db-fields
-			    	//this.adjustFieldsForUpdate(recordToValidate);
+			    	this.adjustFieldsForUpdate(recordToValidate);
 			    	
 			    	//Start DML operations if applicable
 					StringBuffer errMsg = new StringBuffer();
 					int dmlRetval = 0;
-					
+					logger.warn("step 2");
 					if(strMgr.isNotNull( recordToValidate.getEfuuid()) ){
-						logger.info("doUpdate");
-						//dmlRetval = this.updateRecord(appUser.getUser(), recordToValidate, TvinnSadConstants.MODE_UPDATE, errMsg);
+						
+						logger.warn("doUpdate:" + recordToValidate.getEfuuid());
+						dmlRetval = this.updateRecord(appUser.getUser(), recordToValidate, TvinnSadConstants.MODE_UPDATE, errMsg);
 							
 					}else{
+						//set manifest-uuid
+						try{recordToValidate.setEfuuid(this.manifestExpressMgr.getUuid());logger.info(recordToValidate.getEfuuid()); }
+						catch(Exception e){ logger.error("#####################:" + e.getMessage()); }
+						
 						logger.info("doCreate branch starting...");
 						logger.info("doCreate");
-						//dmlRetval = this.updateRecord(appUser.getUser(), recordToValidate, TvinnSadConstants.MODE_ADD, errMsg);
+						dmlRetval = this.updateRecord(appUser.getUser(), recordToValidate, TvinnSadConstants.MODE_ADD, errMsg);
 					}
 					logger.info(Calendar.getInstance().getTime() + " CONTROLLER end - timestamp");
 					if(dmlRetval<0){
 						isValidRecord = false;
-						model.addAttribute(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errMsg.toString());
+						model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errMsg.toString());
 					}else{
 						//Create OK. Prepare for upcoming Update
 						//model.addAttribute("updateFlag", "1");
@@ -157,14 +158,14 @@ public class TvinnSadManifestHeaderController {
 			
 			if(strMgr.isNotNull(recordToValidate.getEfuuid()) ){
 				if(isValidRecord){
-					JsonTvinnSadManifestRecord manifest = this.getRecord(appUser, recordToValidate.getEfuuid());
-					//this.adjustFieldsForFetch(updatedDao);
-					model.addAttribute(TvinnSadConstants.DOMAIN_RECORD, manifest);
+					JsonTvinnSadManifestRecord record = this.getRecord(appUser, recordToValidate.getEfuuid());
+					this.adjustFieldsForFetch(record);
+					model.put(TvinnSadConstants.DOMAIN_RECORD, record);
 					
 				}else{
 					//in case of validation errors
 					//this.adjustFieldsForFetch(recordToValidate);
-					model.addAttribute(TvinnSadConstants.DOMAIN_RECORD, recordToValidate);
+					model.put(TvinnSadConstants.DOMAIN_RECORD, recordToValidate);
 				}
 				
 			}
@@ -175,7 +176,7 @@ public class TvinnSadManifestHeaderController {
 				action = "doUpdate";
 			}
 			
-			model.addAttribute("action", action);
+			model.put("action", action);
 			//model.addAttribute("avd", avd);
 			//logger.info("AVD:" + avd);
 			logger.info("END of method");
@@ -223,6 +224,49 @@ public class TvinnSadManifestHeaderController {
 	}
 	
 	/**
+	 * Update record
+	 * @param applicationUser
+	 * @param recordToValidate
+	 * @param mode
+	 * @param errMsg
+	 * @return
+	 */
+	private int updateRecord(String applicationUser, JsonTvinnSadManifestRecord recordToValidate, String mode, StringBuffer errMsg){
+		int retval = -1;
+		//get BASE URL
+		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_UPDATE_MANIFEST_EXPRESS_URL;
+		//add URL-parameters
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + applicationUser + "&mode=" + mode);
+		urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate)));
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+
+    	//Debug --> 
+    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		JsonTvinnSadManifestContainer jsonTvinnSadManifestContainer = this.tvinnSadManifestListService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<JsonTvinnSadManifestRecord> outputList = jsonTvinnSadManifestContainer.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(JsonTvinnSadManifestRecord record : outputList ){
+					retval = 0;
+					logger.warn(record.toString());
+				}
+			}
+    	}
+    	
+    	return retval;
+	}
+	
+	/**
 	 * 
 	 * @param model
 	 * @param recordToValidate
@@ -232,7 +276,7 @@ public class TvinnSadManifestHeaderController {
 	 * @return
 	 */
 	@RequestMapping(value="tvinnsadmanifest_edit_delete.do", method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doGodsnoDelete(ModelMap model, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+	public ModelAndView doGodsnoDelete(BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		ModelAndView successView = new ModelAndView("redirect:tvinnsadmanifest.do");
 		logger.info("Inside: doGodsnoDelete");
 		
@@ -280,23 +324,17 @@ public class TvinnSadManifestHeaderController {
 	 * 
 	 * @param recordToValidate
 	 */
-	/*
-	private void adjustFieldsForUpdate(GodsjfDao recordToValidate){
+
+	private void adjustFieldsForUpdate(JsonTvinnSadManifestRecord recordToValidate){
 		
-		recordToValidate.setGogrdt(this.convertToDate_ISO(recordToValidate.getGogrdt()));
-		recordToValidate.setGolsdt(this.convertToDate_ISO(recordToValidate.getGolsdt()));
+		recordToValidate.setEfdtr(new DateTimeManager().getCurrentDate_ISO());
+		recordToValidate.setEfeta(this.convertToDate_ISO(recordToValidate.getEfeta()));
 		
-		//Numbers... since the fucking Spring converter is not working ...
-		if(recordToValidate.getGotrdt()==null){ recordToValidate.setGotrdt(0); }
-		//date and time
-		if(recordToValidate.getGogrdt()==null){ recordToValidate.setGogrdt("0"); }
-		if(recordToValidate.getGogrkl()==null){ recordToValidate.setGogrkl(0); }
-		//date and time
-		if(recordToValidate.getGolsdt()==null){ recordToValidate.setGolsdt("0"); }
-		if(recordToValidate.getGolskl()==null){ recordToValidate.setGolskl(0); }
-		
-		
-	}*/
+	}
+	
+	private void adjustFieldsForFetch(JsonTvinnSadManifestRecord recordToValidate){
+		recordToValidate.setEfeta(this.convertToDate_NO(recordToValidate.getEfeta()));
+	}
 	/**
 	 * 
 	 * @param recordToValidate
