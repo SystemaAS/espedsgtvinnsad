@@ -150,7 +150,25 @@
 					 		<tr height="15">
 					 			<c:choose>
 						 			<c:when test="${not empty model.record.efuuid}">
-						 				<td class="text14White">&nbsp;&nbsp;Turnr:&nbsp;${model.record.efpro}&nbsp;&nbsp;Avd:&nbsp;${model.record.efavd}</td>
+						 				<td class="text14White">
+						 						&nbsp;&nbsp;Turnr:&nbsp;${model.record.efpro}
+						 						&nbsp;&nbsp;Avd:&nbsp;${model.record.efavd}</td>
+						 				<td class="text14" align="right">		
+						 						<font style="color:#606060;">S.status:</font>&nbsp;
+						 						<c:choose>
+						 						<c:when test="${model.record.efst2 == 'S' || model.record.efst2 == 'D'}">
+						 							<c:if test="${model.record.efst2 == 'S'}">
+						 								<font style="color:#606060;">SUBMITTED</font>
+						 							</c:if>
+						 							<c:if test="${model.record.efst2 == 'D'}">
+						 								<font style="color:#606060;">DELETED</font>
+						 							</c:if>
+						 						</c:when>
+						 						<c:otherwise>
+						 							<font style="color:#606060;">${model.record.efst2}</font>
+						 						</c:otherwise>
+						 						</c:choose>
+						 				</td>
 						 			</c:when>
 						 			<c:otherwise>
 						 				<td class="text14White">&nbsp;&nbsp;Transport</td>
@@ -430,17 +448,19 @@
             </td>			 
 		</tr>
 		<tr height="10"><td></td></tr>
-		<tr>
-			<td colspan="3" class="text14" valign="top">
-				<table style="width:96%" border="0" cellspacing="1" cellpadding="0">
-					<tr>
-						<td align="right" >
-							<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
+		<c:if test="${model.record.efst2 != 'D'}">
+			<tr>
+				<td colspan="3" class="text14" valign="top">
+					<table style="width:96%" border="0" cellspacing="1" cellpadding="0">
+						<tr>
+							<td align="right" >
+								<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</c:if>
 		<tr height="20"><td colspan="2">&nbsp;</td></tr>
 	
 </table>

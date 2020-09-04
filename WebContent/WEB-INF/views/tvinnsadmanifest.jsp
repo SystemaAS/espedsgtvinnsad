@@ -135,6 +135,7 @@
                 		<th width="2%" class="tableHeaderField" >Bilnr</th>
                 		<th width="2%" class="tableHeaderField" >Sjåførs navn</th>
                 		<th width="2%" class="tableHeaderField" >Reg.dato</th>
+                		<th width="2%" class="tableHeaderField" >Slett</th>
                 		</tr>
                 	</thead>
                 	<tbody> 
@@ -143,7 +144,14 @@
 		          
 		          	   <td width="2%" class="tableCellFirst" align="center">
 		               		<a style="display: block;" href="tvinnsadmanifest_edit.do?action=doFetch&efuuid=${record.efuuid}" onClick="setBlockUI();">
-               					<img src="resources/images/update.gif" border="0" alt="edit">
+               					<c:choose>
+		               				<c:when test="${record.efst2 != 'D'}">
+		               					<img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">
+		               				</c:when>
+		               				<c:otherwise>
+		               					<img title="Read" style="vertical-align:bottom;" src="resources/images/eye.png" height="18px" width="18px" border="0" alt="read">
+		               				</c:otherwise>
+	               				</c:choose>
                				</a>
 	               	   </td>
 		               <td width="2%" align="center" class="tableCell" >${record.efavd}</td>
@@ -157,7 +165,30 @@
 		               <td width="2%" class="tableCell" >${record.efata}&nbsp;${record.efatm}</td>
 		               <td width="2%" class="tableCell" >${record.efkmrk}</td>
 		               <td width="2%" class="tableCell" >${record.efsjaf}</td>
-		               <td width="2%" class="tableCell" ><c:if test="${record.efdtr > 0}">${record.efdtr}</c:if></td> 
+		               <td width="2%" class="tableCell" ><c:if test="${record.efdtr > 0}">${record.efdtr}</c:if></td>
+		               <td width="2%" class="tableCell" align="center">
+		               		<c:choose>
+	               				<c:when test="${record.efst2 != 'D'}">
+	               					<a class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
+										<img src="resources/images/delete.gif" border="0" alt="remove">
+									</a>
+									<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
+										<form action="tvinnsadmanifest_edit_delete.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
+										 	<input type="hidden" name="currentUuid${counter.count}" id="currentUuid${counter.count}" value="${record.efuuid}">
+										 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="D">
+											<p class="text14" >Er du sikker på at du vil slette denne?</p>
+											<p class="text14"> Tekst </p>
+											<input type="text" class="inputText" name="currentText${counter.count}" id="currentText${counter.count}" size="45" maxlength="70" value=''>&nbsp;</td>
+											
+										</form>
+									</div>
+	               				</c:when>
+	               				<c:otherwise>
+	               					 &nbsp;
+	               				</c:otherwise>
+               				</c:choose>
+
+	               	   </td> 
 		            </tr> 
 		            </c:forEach>
 		            </tbody>

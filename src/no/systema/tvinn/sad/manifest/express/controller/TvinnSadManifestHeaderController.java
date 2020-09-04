@@ -185,6 +185,75 @@ public class TvinnSadManifestHeaderController {
 			return successView;
 		}
 	}
+	
+	/**
+	 * 
+	 * @param model
+	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsadmanifest_edit_delete.do", method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doDelete(JsonTvinnSadManifestRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		Map model = new HashMap();
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		
+		ModelAndView successView = new ModelAndView("redirect:tvinnsadmanifest.do?action=doFind&sign=" + appUser.getSignatur());
+		
+		logger.warn("Inside: doDelete");
+		String uuid = null;
+		String notisText = null;
+		Enumeration requestParameters = request.getParameterNames();
+	    while (requestParameters.hasMoreElements()) {
+	        String element = (String) requestParameters.nextElement();
+	        String value = request.getParameter(element);
+	        if (element != null && value != null) {
+        		logger.warn("####################################################");
+    			logger.warn("param Name : " + element + " value: " + value);
+    			if(element.startsWith("currentUuid")){
+    				uuid = value;
+    			}else if(element.startsWith("currentText")){
+    				notisText = value;
+    			}
+    		}
+    	}
+	    
+		
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			//----------------------------
+			//Fetch record and update it 
+			//----------------------------
+			//TODO
+			
+			if(strMgr.isNotNull( uuid )){
+				recordToValidate.setEfuuid(uuid);
+				recordToValidate.setEfst2("D");
+				int dmlRetval = 0;
+				StringBuffer errMsg = new StringBuffer();
+				//fetch record
+				logger.warn("doDelete");
+				//Update with delete flag
+				dmlRetval = this.deleteRecord(appUser.getUser(), recordToValidate, errMsg);
+				if(dmlRetval<0){
+					logger.info("ERROR on delete ... ??? check your code");
+					//model.addAttribute(GodsnoConstants.ASPECT_ERROR_MESSAGE, errMsg.toString());
+					
+				}else{
+					logger.info("doDelete = OK");
+				}
+				
+				
+			}
+
+			return successView;
+		}
+	}
 	/**
 	 * Get a specific manifest
 	 * @param appUser
@@ -266,59 +335,47 @@ public class TvinnSadManifestHeaderController {
     	return retval;
 	}
 	
+	
 	/**
 	 * 
-	 * @param model
+	 * @param applicationUser
 	 * @param recordToValidate
-	 * @param bindingResult
-	 * @param session
-	 * @param request
+	 * @param errMsg
 	 * @return
 	 */
-	@RequestMapping(value="tvinnsadmanifest_edit_delete.do", method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doGodsnoDelete(BindingResult bindingResult, HttpSession session, HttpServletRequest request){
-		ModelAndView successView = new ModelAndView("redirect:tvinnsadmanifest.do");
-		logger.info("Inside: doGodsnoDelete");
-		
-		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
-		
-		//check user (should be in session already)
-		if(appUser==null){
-			return loginView;
-		
-		}else{
-			//----------------------------
-			//Fetch record and update it 
-			//----------------------------
-			//TODO
-			/*
-			if(strMgr.isNotNull(recordToValidate.getGogn()) ){
-				int dmlRetval = 0;
-				StringBuffer errMsg = new StringBuffer();
-				//fetch record
-				GodsjfDao recordToDelete = this.getRecordGodsjf(appUser, recordToValidate);
-				if(recordToDelete!=null && strMgr.isNotNull( recordToDelete.getGogn()) ){
-					//adjust some db-fields
-					recordToDelete.setGotrnr(DELETE_TEXT_ON_DB);
-					this.adjustFieldsForUpdate(recordToDelete);
-					logger.info("doDelete");
-					//Update with delete flag
-					dmlRetval = this.updateRecord(appUser.getUser(), recordToDelete, GodsnoConstants.MODE_UPDATE, errMsg);
-					if(dmlRetval<0){
-						logger.info("ERROR on delete ... ??? check your code");
-						model.addAttribute(GodsnoConstants.ASPECT_ERROR_MESSAGE, errMsg.toString());
-						
-					}else{
-						logger.info("doDelete = OK");
-					}
-				}
-				
-			}*/
+	private int deleteRecord(String applicationUser, JsonTvinnSadManifestRecord recordToValidate, StringBuffer errMsg){
+		int retval = -1;
+		//get BASE URL
+		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_UPDATE_MANIFEST_EXPRESS_URL;
+		//add URL-parameters
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + applicationUser + "&mode=D" + "&efuuid=" + recordToValidate.getEfuuid() + "&efst2=" + recordToValidate.getEfst2());
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
 
-			return successView;
-		}
+    	//Debug --> 
+    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		JsonTvinnSadManifestContainer jsonTvinnSadManifestContainer = this.tvinnSadManifestListService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<JsonTvinnSadManifestRecord> outputList = jsonTvinnSadManifestContainer.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(JsonTvinnSadManifestRecord record : outputList ){
+					retval = 0;
+					logger.warn(record.toString());
+				}
+			}
+    	}
+    	
+    	return retval;
 	}
-	
 	
 	/**
 	 * 
