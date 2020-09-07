@@ -9,7 +9,7 @@ import java.util.Collection;
  * @author oscardelatorre
  * @date Sep, 2018
  */
-public class JsonTvinnSadManifestContainer <T> {
+public class JsonTvinnSadManifestCargoLinesContainer <T> {
 	private String user = null;
 	public void setUser(String value){ this.user = value;}
 	public String getUser(){ return this.user; }
@@ -22,9 +22,9 @@ public class JsonTvinnSadManifestContainer <T> {
 	public void setErrMsg(String value){ this.errMsg = value;}
 	public String getErrMsg(){ return this.errMsg; }
 	
-	private Collection<JsonTvinnSadManifestRecord> list = null;
-	public void setList(Collection<JsonTvinnSadManifestRecord> value){ this.list = value;}
-	public Collection<JsonTvinnSadManifestRecord> getList(){ return this.list; }
+	private Collection<JsonTvinnSadManifestCargoLinesRecord> list = null;
+	public void setList(Collection<JsonTvinnSadManifestCargoLinesRecord> value){ this.list = value;}
+	public Collection<JsonTvinnSadManifestCargoLinesRecord> getList(){ return this.list; }
 	
 	
 }

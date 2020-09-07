@@ -37,5 +37,8 @@ public final class TvinnSadManifestUrlDataStore {
 	//http://localhost:8080/syjservicestn/syjsSADEFFR_U.do?user=OSCAR&mode=U/A/D and/or
 	static public String TVINN_SAD_UPDATE_MANIFEST_EXPRESS_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADEFFR_U.do";
 		
+	//Child windows
+	//http://gw.systema.no:8080/syjservicestn/syjsSYFT04R.do?user=OSCAR
+	//static public String TROR_BASE_CHILDWINDOW_TOLLSTED_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSYFT04R.do";
 		
 }

@@ -210,17 +210,18 @@
 			 				</c:choose>
 			 				
 			 				<tr >
-								<td class="text14">&nbsp;<span title="eftm">Transportmåte</span><font class="text16RedBold" >*</font></td>
+								<td class="text14">&nbsp;<span title="efknd">Kundenr.</span><font class="text16RedBold" >*</font></td>
 			 				</tr>
 			 				<tr >
 					 			<td class="text14">
-					 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="eftm" id="eftm">
-				 						<option value="">Velg</option>
-		 		 				  		<option value="BIL" <c:if test="${model.record.eftm == 'BIL'}"> selected </c:if> >(30) Bil (veitransport)</option>
-									</select>
-									
-					 			</td>
+					 				&nbsp;<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efknd" id="efknd" size="8" maxlength="8" value="${model.record.efknd}">
+					 				<a tabindex="-1" id="efkndIdLink">
+										<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
+									</a>
+					 				&nbsp;&nbsp;<input class="inputTextReadOnly" name="own_efkndName" id="own_efkndName" size="25" maxlength="30" value="${Xmodel.record.efkndName}">
+								</td>
 			 				</tr>
+			 				
 			 				<tr >
 								<td class="text14">&nbsp;<span title="efrgd">ID-type kjøretøyeier</span><font class="text16RedBold" >*</font></td>
 			 				</tr>
@@ -232,16 +233,30 @@
 		 		 				  		<option value="E">EORI</option>
 		 		 				  		 --%>
 									</select>
-									&nbsp;&nbsp;<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efrgd" id="efrgd" size="10" maxlength="9" value="${model.record.efrgd}">
+									&nbsp;&nbsp;<input type="text" class="inputTextReadOnly" name="efrgd" id="efrgd" size="10" maxlength="9" value="${model.record.efrgd}">
 								</td>
 			 				</tr>
+			 				<tr height="3"><td></td></tr>
+			 				<tr >
+								<td class="text14">&nbsp;<span title="eftm">Transportmåte</span><font class="text16RedBold" >*</font></td>
+			 				</tr>
+			 				<tr >
+					 			<td class="text14">
+					 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="eftm" id="eftm">
+				 						<option value="">Velg</option>
+		 		 				  		<option value="BIL" <c:if test="${model.record.eftm == 'BIL'}"> selected </c:if> >(30) Bil (veitransport)</option>
+									</select>
+									
+					 			</td>
+			 				</tr>
+			 				<%-- this is replaced with the customer name 
 			 				<tr >
 								<td class="text14">&nbsp;<span title="todo">Kjøretøyeier</span><font class="text16RedBold" >*</font></td>
 			 				</tr>
 			 				<tr >
 					 			<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="todo" id="todo" size="45" maxlength="35" value="${Xmodel.record.titin}"></td>
 			 				</tr>
-			 				
+			 				--%>
 			 				<tr>
 			 				<td>
 			 				<table width="80%" >
@@ -282,6 +297,9 @@
 					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="eftsd" id="eftsd" size="5" maxlength="4" value="">
 					 				</c:otherwise>
 					 				</c:choose>
+					 				<a tabindex="-1" id="eftsdIdLink">
+										<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
+									</a>
 					 			</td>
 								<td>
 									<c:choose>

@@ -12,7 +12,9 @@
 		
 		<%-- datatables grid CSS --%>
 		<link type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css" rel="stylesheet">
-		
+		<link type="text/css" href="//cdn.datatables.net/responsive/1.0.7/css/responsive.dataTables.min.css" rel="stylesheet">
+		<link type="text/css" href="//cdn.datatables.net/plug-ins/1.10.19/features/searchHighlight/dataTables.searchHighlight.css" rel="stylesheet">
+	
 		<c:choose>
 			<c:when test="${ fn:contains(user.cssEspedsg, 'Toten') }"> 
 				<link rel="SHORTCUT ICON" type="image/ico" href="resources/images/toten_ico.ico"></link>
@@ -35,5 +37,9 @@
 
 	<%--datatables grid --%>
 	<script type="text/javascript" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
-	
+	<%-- searchHighlight on datatables --%>
+		<script type="text/javascript" src="//bartaz.github.io/sandbox.js/jquery.highlight.js"></script>
+		<script type="text/javascript" src="//cdn.datatables.net/responsive/1.0.7/js/dataTables.responsive.min.js"></script>
+		<script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.10.19/features/searchHighlight/dataTables.searchHighlight.min.js"></script>
+		
 	

@@ -82,6 +82,15 @@
 				  opener.jq('#avggCustomerId').val(knr);
 				  opener.jq('#avggCustomerName').val(knavn);
 				  opener.jq('#avggCustomerId').focus();
+			  
+			  //============================
+			  //Manifest express edit header
+			  //============================  
+			  }else if(callerType == 'efknd'){
+				  opener.jq('#efknd').val(knr);
+				  opener.jq('#own_efkndName').val(knavn);
+				  opener.jq('#efrgd').val(syrg);
+				  opener.jq('#efrgd').focus();
 			  }
 			  
 			  //close child window

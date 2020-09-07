@@ -427,6 +427,8 @@ public class TvinnSadManifestHeaderController {
 		DateTimeManager dateMgr = new DateTimeManager();
 		return dateMgr.getDateFormatted_NO(value, DateTimeManager.ISO_FORMAT);
 	}
+	
+	
 
 	/**
 	 * 
