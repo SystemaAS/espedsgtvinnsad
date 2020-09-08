@@ -32,7 +32,7 @@ public final class TvinnSadManifestUrlDataStore {
 	static public String TVINN_SAD_FETCH_MANIFEST_UUID_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicesbcore/syjsuuid.do";
 		
 	//----------------------------
-	//[2] UPDATE EKSPRESS MANIFEST
+	//[1.1] UPDATE EKSPRESS MANIFEST
 	//----------------------------
 	//http://localhost:8080/syjservicestn/syjsSADEFFR_U.do?user=OSCAR&mode=U/A/D and/or
 	static public String TVINN_SAD_UPDATE_MANIFEST_EXPRESS_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADEFFR_U.do";
@@ -40,5 +40,14 @@ public final class TvinnSadManifestUrlDataStore {
 	//Child windows
 	//http://gw.systema.no:8080/syjservicestn/syjsSYFT04R.do?user=OSCAR
 	//static public String TROR_BASE_CHILDWINDOW_TOLLSTED_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSYFT04R.do";
+	
+	
+	//----------------------------------------------------
+	//[2] FETCH CARGO LINES' LIST of a specific MANIFEST
+	//----------------------------------------------------
+		
+	//FETCH CARGO LINE list
+	//http://localhost:8080/syjservicestn/syjsSADEFCFR.do?user=OSCAR and/or user=OSCAR&clpro=turNr
+	static public String TVINN_SAD_FETCH_MANIFEST_EXPRESS_CARGOLINESURL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADEFCFR.do";
 		
 }

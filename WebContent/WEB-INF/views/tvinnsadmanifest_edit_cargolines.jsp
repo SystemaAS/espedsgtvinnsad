@@ -8,7 +8,7 @@
 	<%-- specific jQuery functions for this JSP (must reside under the resource map since this has been
 		specified in servlet.xml as static <mvc:resources mapping="/resources/**" location="WEB-INF/resources/" order="1"/> --%>
 	<SCRIPT type="text/javascript" src="resources/js/tvinnsadglobal_edit.js?ver=${user.versionEspedsg}"></SCRIPT>	
-	<SCRIPT type="text/javascript" src="resources/js/tvinnsadmanifest_edit_items.js?ver=${user.versionEspedsg}"></SCRIPT>
+	<SCRIPT type="text/javascript" src="resources/js/tvinnsadmanifest_edit_cargolines.js?ver=${user.versionEspedsg}"></SCRIPT>
 	
 <table style="width:100%;"  cellspacing="0" border="0" cellpadding="0">
 
@@ -20,7 +20,7 @@
 		<tr height="25"> 
 			
 			<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
-				<a tabindex=-1 id="alinkManifestList" style="display:block;" href="tvinnsadmanifest.do?action=doFind&avd=${Xmodel.record.tiavd}&sign=${Xmodel.record.tisg}&opd=${Xmodel.record.titdn}">
+				<a tabindex=-1 id="alinkManifestList" style="display:block;" href="tvinnsadmanifest.do?action=doFind&avd=${model.efavd}&sign=${model.efsg}">
 					<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.manifest.list.tab"/></font>
 					<img src="resources/images/list.gif" border="0" alt="general list">
 				</a>
@@ -28,12 +28,11 @@
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 	
 			<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
-				<a tabindex=-1 id="alinkHeader" style="display:block;" href="tvinnsadmanifest_edit.do?action=doFetch&avd=${Xrecord.avd}&opd=${Xrecord.opd}
-											&opd=${Xmodel.record.titdn}&id=${record.efuuid}">
+				<a tabindex=-1 id="alinkHeader" style="display:block;" href="tvinnsadmanifest_edit.do?action=doFetch&efuuid=${model.efuuid}">
 					<font class="tabDisabledLink">
 						&nbsp;<spring:message code="systema.tvinn.sad.manifest.created.header.tab"/>
 					</font>
-					<font class="text14MediumBlue">[${record.efuuid}]</font>
+					<font class="text14MediumBlue">[${model.efpro}]</font>
 				</a>
 			</td>
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
@@ -56,6 +55,8 @@
  	<%-- tab area container PRIMARY  --%>
 	<%-- --------------------------- --%>
 	<form name="manifestForm" id="manifestForm" method="post">
+	<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
+			
 	<table style="width:100%;" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
  		<tr height="10"><td colspan="10">&nbsp;</td></tr>
  		
@@ -121,22 +122,36 @@
 				<table id="mainList" class="display compact cell-border" >
 					<thead>
 					<tr class="tableHeaderField" height="20" >
-                    	<th width="5%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.update"/></th>
-                		<th width="5%" class="tableHeaderFieldFirst" >Id</th>
-                		<th width="5%" class="tableHeaderField" >Beskrivelse</th>
+                    	<th width="2%" class="tableHeaderFieldFirst" ><spring:message code="systema.tvinn.sad.update"/></th>
+                		<th class="tableHeaderField" >Avd</th>
+                		<th class="tableHeaderField" >Oppdrag</th>
+                		<th class="tableHeaderField" >St</th>
+                		<th class="tableHeaderField" >Eksport type</th>
+                		<th class="tableHeaderField" >EksportId</th>
+                		<th class="tableHeaderField" >Ser</th>
+                		<th class="tableHeaderField" >Bilnr</th>
+                		<th class="tableHeaderField" >E.enh.</th>
                 	</tr>
                 	</thead>
                 	<tbody> 
 		           	<c:forEach items="${model.list}" var="record" varStatus="counter">    
 		              <tr class="tableRow" height="20" >
 		          
-		          	   <td width="5%" class="tableCellFirst" align="center" >
-		               		<a id="id_${record.efuuid}@opd_${Xrecord.opd}@avd_${Xrecord.avd}">
+		          	   <td width="2%" class="tableCellFirst" align="center" >
+		               		<a id="clpro_${record.clpro}@cltdn_${record.cltdn}@clavd_${record.clavd}" href="#" onClick="getItemData(this);">
                					<img src="resources/images/update.gif" border="0" alt="edit">
                				</a>
+               				
 	               	   </td>
-		               <td width="5%" class="tableCell" align="center" >${record.efuuid}</td>
-		               <td width="5%" class="tableCell" align="center" >${Xrecord.sign}</td>
+		               <td width="2%" class="tableCell" align="center" >${record.clavd}</td>
+		               <td width="2%" class="tableCell" align="center" >${record.cltdn}</td>
+		               <td width="2%" class="tableCell" align="center" >${record.clst}</td>
+		               <td width="2%" class="tableCell" align="center" >${record.cletyp}&nbsp;${record.cletypt}</td>
+		               <td width="2%" class="tableCell" align="center" >${record.cleid}</td>
+		               <td width="2%" class="tableCell" align="center" >${record.cleser}</td>
+		               <td width="2%" class="tableCell" align="center" >${record.cltrid}</td>
+		               <td width="2%" class="tableCell" align="center" >${record.cl3039e}</td>
+		               
 		            </tr> 
 		            </c:forEach>
 		            </tbody>
@@ -158,7 +173,11 @@
 				 	<td >
 					<table style="width:100%" class="formFrameHeader" border="0" cellspacing="1" cellpadding="0">
 				 		<tr height="15">
-				 			<td class="text14White">&nbsp;&nbsp;Last&nbsp;</td>
+				 			<td class="text14White">&nbsp;&nbsp;Last&nbsp;&nbsp;-
+				 				&nbsp;&nbsp;Turnr:&nbsp;${model.efpro}
+	 							&nbsp;&nbsp;Avd:&nbsp;${model.efavd}&nbsp;&nbsp;
+	 							&nbsp;&nbsp;Manifestid:&nbsp;${model.efuuid}
+				 			</td>
 		 				</tr>
 		            </table>
 		            </td>
@@ -170,7 +189,7 @@
 							<td colspan="4" class="text16"><b>&nbsp;Import</b></td>
 						<tr >
 		 				<tr >
-							<td class="text14">&nbsp;<span title="todo">Varebeskrivelse</span><font class="text16RedBold" >*</font></td>
+							<td class="text14">&nbsp;<span title="clvt">Varebeskrivelse</span><font class="text16RedBold" >*</font></td>
 							<td class="text14">&nbsp;<span title="todo">Deklarantnr.</span><font class="text16RedBold" >*</font></td>
 							<td class="text14">&nbsp;<span title="todo">Dato</span><font class="text16RedBold" >*</font></td>
 							<td class="text14">&nbsp;<span title="todo">Sekvensnr.</span><font class="text16RedBold" >*</font></td>
@@ -181,7 +200,7 @@
 							<td class="text14">&nbsp;<span title="todo">Br.vkt. (kg) i fraktbr.</span><font class="text16RedBold" >*</font></td>
 		 				</tr>
 		 				<tr >
-				 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="todo" id="todo" size="35" maxlength="35" value="${Xmodel.record.titin}"></td>
+				 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="clvt" id="clvt" size="31" maxlength="30" value="${Xmodel.record.titin}"></td>
 				 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="todo" id="todo" size="20" maxlength="20" value="${Xmodel.record.titin}"></td>
 				 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="todo" id="todo" size="8" maxlength="8" value="${Xmodel.record.titin}"></td>
 				 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="todo" id="todo" size="20" maxlength="20" value="${Xmodel.record.titin}"></td>

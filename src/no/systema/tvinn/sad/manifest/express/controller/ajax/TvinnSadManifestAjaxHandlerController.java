@@ -1,0 +1,88 @@
+package no.systema.tvinn.sad.manifest.express.controller.ajax;
+
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javawebparts.core.org.apache.commons.lang.StringUtils;
+import no.systema.main.service.UrlCgiProxyService;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesRecord;
+import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
+import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
+
+
+
+/**
+ * 
+ * @author oscardelatorre
+ * @date Sep 2020
+ * 
+ */
+@Controller
+public class TvinnSadManifestAjaxHandlerController {
+	private static final Logger logger = Logger.getLogger(TvinnSadManifestAjaxHandlerController.class.getName());
+	
+	/**
+	 * Gets a specific cargo line
+	 * @param applicationUser
+	 * @param tur
+	 * @param avd
+	 * @param opd
+	 * @return
+	 */
+	@RequestMapping(value = "getSpecificCargoLine_TvinnSadManifest.do", method = RequestMethod.GET)
+	public @ResponseBody Set<JsonTvinnSadManifestCargoLinesRecord> getSpecificCargoLine
+	  						(@RequestParam String applicationUser, @RequestParam String htmlParams ) {
+		 logger.warn("Inside: getSpecificCargoLine_TvinnSadManifest.do()");
+		 logger.warn(htmlParams);
+		 Set result = new HashSet();
+		 String[] params = htmlParams.split("@");
+		 String tur = params[0].replace("clpro_", "");
+		 String opd = params[0].replace("cltdn_", "");
+		 String avd = params[0].replace("clavd_", "");
+		 
+		 if(StringUtils.isNotEmpty(tur) && StringUtils.isNotEmpty(avd) && StringUtils.isNotEmpty(opd) ){
+		 
+			 //prepare the access CGI with RPG back-end
+			 String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_MANIFEST_EXPRESS_CARGOLINESURL;
+			 String urlRequestParams = "user=" + applicationUser + "&clpro=" + tur + "&clavd=" + avd + "&cltdn=" + opd; 
+			 logger.warn("URL: " + BASE_URL);
+			 logger.warn("URL PARAMS: " + urlRequestParams);
+			
+			 String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+			 if(jsonPayload!=null){
+				
+				JsonTvinnSadManifestCargoLinesContainer container = this.tvinnSadManifestListService.getListCargolinesContainer(jsonPayload);
+				//----------------------------------------------------------------
+				//now filter the topic list with the search filter (if applicable)
+				//----------------------------------------------------------------
+				Collection<JsonTvinnSadManifestCargoLinesRecord> outputList = container.getList();
+				for(JsonTvinnSadManifestCargoLinesRecord record : outputList){
+					result.add(record);
+				}
+			 }
+		 }else{
+			 logger.error("[ERROR] on fields[]...null or incorrect length???...");
+		 }
+		 
+		 return result;
+	 }
+
+	//SERVICES
+	@Autowired
+	private TvinnSadManifestListService tvinnSadManifestListService;
+	
+	@Autowired
+	private UrlCgiProxyService urlCgiProxyService;
+	
+}

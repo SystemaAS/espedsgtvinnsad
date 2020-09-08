@@ -40,7 +40,12 @@ import no.systema.jservices.common.dao.GodsgfDao;
 
 import no.systema.tvinn.sad.util.TvinnSadConstants;
 import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesRecord;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
+import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
+import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
 
 /**
@@ -52,9 +57,9 @@ import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
  */
 
 @Controller
-public class TvinnSadManifestHeaderItemsController {
+public class TvinnSadManifestHeaderCargoLinesController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(3000);
-	private static Logger logger = Logger.getLogger(TvinnSadManifestHeaderItemsController.class.getName());
+	private static Logger logger = Logger.getLogger(TvinnSadManifestHeaderCargoLinesController.class.getName());
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	private LoginValidator loginValidator = new LoginValidator();
 	private StringManager strMgr = new StringManager();
@@ -79,18 +84,22 @@ public class TvinnSadManifestHeaderItemsController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="tvinnsadmanifest_edit_items.do", method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doManifestEditItems(ModelMap model, @ModelAttribute ("record") JsonTvinnSadManifestRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
-		ModelAndView successView = new ModelAndView("tvinnsadmanifest_edit_items");
-		logger.info("Inside: doManifestEditItems");
+	@RequestMapping(value="tvinnsadmanifest_edit_cargolines.do", method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doManifestEditCargolines(JsonTvinnSadManifestCargoLinesRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		ModelAndView successView = new ModelAndView("tvinnsadmanifest_edit_cargolines");
+		logger.info("Inside: doManifestEditCargolines");
 		
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		
+		Map model = new HashMap();
 		String action = request.getParameter("action");
-		String avd = request.getParameter("avd");
-		String sign = request.getParameter("sign");
+		String efuuid = request.getParameter("efuuid");
+		String efsg = request.getParameter("efsg");
+		String efavd = request.getParameter("efavd");
+		
+		
 		//String updateFlag = request.getParameter("updateFlag");
-		logger.info("action:" + action);
+		logger.warn("action:" + action);
 		
 		/*if(strMgr.isNotNull(updateFlag)){
 			model.addAttribute("updateFlag", "1");
@@ -124,7 +133,7 @@ public class TvinnSadManifestHeaderItemsController {
 					StringBuffer errMsg = new StringBuffer();
 					int dmlRetval = 0;
 					
-					if(strMgr.isNotNull( recordToValidate.getEfuuid()) ){
+					if(strMgr.isNotNull( recordToValidate.getClpro()) ){
 						logger.info("doUpdate");
 						//dmlRetval = this.updateRecord(appUser.getUser(), recordToValidate, TvinnSadConstants.MODE_UPDATE, errMsg);
 							
@@ -136,7 +145,7 @@ public class TvinnSadManifestHeaderItemsController {
 					logger.info(Calendar.getInstance().getTime() + " CONTROLLER end - timestamp");
 					if(dmlRetval<0){
 						isValidRecord = false;
-						model.addAttribute(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errMsg.toString());
+						model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errMsg.toString());
 					}else{
 						//Create OK. Prepare for upcoming Update
 						//model.addAttribute("updateFlag", "1");
@@ -146,8 +155,16 @@ public class TvinnSadManifestHeaderItemsController {
 			//--------------
 			//Fetch record
 			//--------------
-			if(strMgr.isNotNull(recordToValidate.getEfuuid()) ){
+			if(strMgr.isNotNull(recordToValidate.getClpro()) ){
+				List outputList =  null;
+				if("doFetch".equals(action)){
+					outputList = (List)this.getList(appUser, recordToValidate.getClpro());
+					model.put("list", outputList );
+				}else{
+					//model.put("list", this.getList(appUser, updatedDao.getClpro());
+				}
 				
+				/*
 				if(isValidRecord){
 					//GodsjfDao updatedDao = this.getRecordGodsjf(appUser, recordToValidate);
 					//this.adjustFieldsForFetch(updatedDao);
@@ -156,8 +173,8 @@ public class TvinnSadManifestHeaderItemsController {
 				}else{
 					//in case of validation errors
 					//this.adjustFieldsForFetch(recordToValidate);
-					model.addAttribute(TvinnSadConstants.DOMAIN_RECORD, recordToValidate);
-				}
+					model.put(TvinnSadConstants.DOMAIN_RECORD, recordToValidate);
+				}*/
 				
 			}
 			
@@ -167,10 +184,16 @@ public class TvinnSadManifestHeaderItemsController {
 				action = "doUpdate";
 			}
 			
-			model.addAttribute("action", action);
-			//model.addAttribute("avd", avd);
-			//logger.info("AVD:" + avd);
+			model.put("action", action);
+			model.put("efuuid", efuuid);
+			model.put("efsg", efsg);
+			model.put("efavd", efavd);
+			model.put("efpro", recordToValidate.getClpro());
+			
 			logger.info("END of method");
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL, model);
+			
 			return successView;
 		}
 	}
@@ -185,12 +208,16 @@ public class TvinnSadManifestHeaderItemsController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="tvinnsadmanifest_edit_items_delete.do", method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doItemDelete(ModelMap model, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
-		ModelAndView successView = new ModelAndView("redirect:tvinnsadmanifest_edit_items.do");
-		logger.info("Inside: doItemDelete");
+	@RequestMapping(value="tvinnsadmanifest_edit_cargolines_delete.do", method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doCargolinesDelete(JsonTvinnSadManifestCargoLinesRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		ModelAndView successView = new ModelAndView("redirect:tvinnsadmanifest_edit_cargolines.do");
+		logger.info("Inside: doCargolinesDelete");
 		
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		Map model = new HashMap();
+		
+		String efuuid = request.getParameter("efuuid");
+		String efsg = request.getParameter("efsg");
 		
 		//check user (should be in session already)
 		if(appUser==null){
@@ -252,6 +279,38 @@ public class TvinnSadManifestHeaderItemsController {
 	}
 	/**
 	 * 
+	 * @param appUser
+	 * @param tur
+	 * @return
+	 */
+	private Collection<JsonTvinnSadManifestCargoLinesRecord> getList(SystemaWebUser appUser, String tur){
+		Collection<JsonTvinnSadManifestCargoLinesRecord> retval = null;
+		//get BASE URL
+		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_MANIFEST_EXPRESS_CARGOLINESURL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser() + "&clpro=" + tur;
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		JsonTvinnSadManifestCargoLinesContainer container = this.tvinnSadManifestListService.getListCargolinesContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<JsonTvinnSadManifestCargoLinesRecord> outputList = container.getList();	
+			retval = outputList;
+    	}
+    	return retval;
+	}
+	/**
+	 * 
 	 * @param recordToValidate
 	 */
 	private void adjustFieldsForFetch(GodsjfDao recordToValidate){
@@ -287,14 +346,12 @@ public class TvinnSadManifestHeaderItemsController {
 	
 	
 	
-	
 	//SERVICES
-	@Qualifier ("urlCgiProxyService")
-	private UrlCgiProxyService urlCgiProxyService;
 	@Autowired
-	@Required
-	public void setUrlCgiProxyService (UrlCgiProxyService value){ this.urlCgiProxyService = value; }
-	public UrlCgiProxyService getUrlCgiProxyService(){ return this.urlCgiProxyService; }
+	private TvinnSadManifestListService tvinnSadManifestListService;
+	
+	@Autowired
+	private UrlCgiProxyService urlCgiProxyService;
 	
 	
 }

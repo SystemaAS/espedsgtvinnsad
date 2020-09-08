@@ -53,7 +53,7 @@
   	  "scrollY": "300px",
   	  "scrollCollapse":  true,
 	  "tabIndex": -1,
-	  //"order": [[ 5, "desc" ]], //date
+	  "order": [[ 2, "asc" ]], 
 	  "lengthMenu": [ 25, 50, 100],
 	  "fnDrawCallback": function( oSettings ) {
     	jq('.dataTables_filter input').addClass("inputText12LightYellow");
@@ -64,6 +64,39 @@
     		filterGlobal();
     });
   });
+  
+  
+  function getItemData(record) {
+	  	var applicationUserParam = jq('#applicationUser').val();
+	  	var htmlValue = record.id;
+	  	//alert(applicationUserParam + ' ' + htmlValue);
+	  	
+	  	jq.ajax({
+	  	  type: 'GET',
+	  	  url: 'getSpecificCargoLine_TvinnSadManifest.do',
+	  	  data: { applicationUser : applicationUserParam, 
+	  		  	  htmlParams : htmlValue },
+	  	  dataType: 'json',
+	  	  cache: false,
+	  	  contentType: 'application/json',
+	  	  success: function(data) {
+	  		var len = data.length;
+			for ( var i = 0; i < len; i++) {
+				
+				jq('#clvt').val(""); jq('#clvt').val(data[i].clvt);
+								
+				//debug information on Fetch item
+				//jq('#debugPrintlnAjaxItemFetchInfo').text(data[i].debugPrintlnAjax);
+				
+			}
+	  	  },
+	  	  error: function() {
+	  	    alert('Error loading ...');
+	  	  }
+	  	});
+	  	
+	}
+	
  
   
  

@@ -3,6 +3,7 @@
  */
 package no.systema.tvinn.sad.manifest.express.service;
 
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
 
 /**
@@ -12,4 +13,5 @@ import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManif
  */
 public interface TvinnSadManifestListService {
 	public JsonTvinnSadManifestContainer getListContainer(String utfPayload);
+	public JsonTvinnSadManifestCargoLinesContainer getListCargolinesContainer(String utfPayload);
 }
