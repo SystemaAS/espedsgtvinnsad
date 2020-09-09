@@ -10,6 +10,10 @@
 	<SCRIPT type="text/javascript" src="resources/js/tvinnsadglobal_edit.js?ver=${user.versionEspedsg}"></SCRIPT>	
 	<SCRIPT type="text/javascript" src="resources/js/tvinnsadmanifest_edit_cargolines.js?ver=${user.versionEspedsg}"></SCRIPT>
 	
+	<style type = "text/css">
+	.ui-datepicker { font-size:9pt;}
+	</style>
+	
 <table style="width:100%;"  cellspacing="0" border="0" cellpadding="0">
 
  <tr>
@@ -110,7 +114,7 @@
  		
  	<tr>
 		<td>		
-		<table style="width:100%;" cellspacing="0" border="0" cellpadding="0">
+		<table style="width:75%;" cellspacing="0" border="0" cellpadding="0">
 	    	<%-- separator --%>
 	        <tr height="1"><td></td></tr> 
 			<tr>
@@ -168,7 +172,7 @@
  		
 	<tr>
 		<td class="text14" valign="top">
-			<table style="width:100%" align="left" border="0" cellspacing="1" cellpadding="0">
+			<table style="width:75%" align="left" border="0" cellspacing="1" cellpadding="0">
 			 	<tr >
 				 	<td >
 					<table style="width:100%" class="formFrameHeader" border="0" cellspacing="1" cellpadding="0">
@@ -189,79 +193,77 @@
 							<td colspan="4" class="text16"><b>&nbsp;Import</b></td>
 						<tr >
 		 				<tr >
+							<%--
 							<td class="text14">&nbsp;<span title="clvt">Varebeskrivelse</span><font class="text16RedBold" >*</font></td>
-							<td class="text14">&nbsp;<span title="todo">Deklarantnr.</span><font class="text16RedBold" >*</font></td>
-							<td class="text14">&nbsp;<span title="todo">Dato</span><font class="text16RedBold" >*</font></td>
-							<td class="text14">&nbsp;<span title="todo">Sekvensnr.</span><font class="text16RedBold" >*</font></td>
-							<td class="text14">&nbsp;<span title="todo">Mottaker</span></td>
-							<td class="text14">&nbsp;<span title="todo">Antall kolli i dekl.</span><font class="text16RedBold" >*</font></td>
-							<td class="text14">&nbsp;<span title="todo">Br.vkt. (kg) i dekl.</span><font class="text16RedBold" >*</font></td>
-							<td class="text14">&nbsp;<span title="todo">Antall i fraktbr.</span><font class="text16RedBold" >*</font></td>
-							<td class="text14">&nbsp;<span title="todo">Br.vkt. (kg) i fraktbr.</span><font class="text16RedBold" >*</font></td>
+							 --%>
+							<td class="text14">&nbsp;<span title="clrg">Deklarantnr.</span><font class="text16RedBold" >*</font></td>
+							<td class="text14">&nbsp;<span title="cl0068a">Dato</span><font class="text16RedBold" >*</font></td>
+							<td class="text14">&nbsp;<span title="cl0068b">Sekvensnr.</span><font class="text16RedBold" >*</font></td>
+							<td class="text14">&nbsp;<span title="cllkf/clsdf/clsdft">Fra sted</span><font class="text16RedBold" >*</font></td>
+							<td class="text14">&nbsp;<span title="cllkt/clsdt/clsdtt">Til sted</span><font class="text16RedBold" >*</font></td>
+							<td class="text14">&nbsp;<span title="clpr">Prosedyre</span><font class="text16RedBold" >*</font></td>
+							
 		 				</tr>
 		 				<tr >
+		 					<%--
 				 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="clvt" id="clvt" size="31" maxlength="30" value="${Xmodel.record.titin}"></td>
-				 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="todo" id="todo" size="20" maxlength="20" value="${Xmodel.record.titin}"></td>
-				 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="todo" id="todo" size="8" maxlength="8" value="${Xmodel.record.titin}"></td>
-				 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="todo" id="todo" size="20" maxlength="20" value="${Xmodel.record.titin}"></td>
-							<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="todo" id="todo" size="20" maxlength="20" value="${Xmodel.record.titin}"></td>
-							<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="todo" id="todo" size="10" maxlength="10" value="${Xmodel.record.titin}"></td>
-							<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="todo" id="todo" size="10" maxlength="10" value="${Xmodel.record.titin}"></td>
-							<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="todo" id="todo" size="10" maxlength="10" value="${Xmodel.record.titin}"></td>
-							<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="todo" id="todo" size="10" maxlength="10" value="${Xmodel.record.titin}"></td>
+				 			 --%>
+				 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="clrg" id="clrg" size="12" maxlength="11" value="${Xmodel.record.titin}"></td>
+				 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="cl0068a" id="cl0068a" size="7" maxlength="6" value="${Xmodel.record.titin}"></td>
+				 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="cl0068b" id="cl0068b" size="7" maxlength="6" value="${Xmodel.record.titin}"></td>
+							<td class="text14">
+								<input type="text" class="inputTextMediumBlueMandatoryField" name="cllkf" id="cllkf" size="3" maxlength="2" value="${Xmodel.record.titin}">
+								<input type="text" class="inputTextMediumBlueMandatoryField" name="clsdf" id="clsdf" size="6" maxlength="5" value="${Xmodel.record.titin}">
+								<input type="text" class="inputTextMediumBlueMandatoryField" name="clsdft" id="clsdft" size="20" maxlength="30" value="${Xmodel.record.titin}">
+							</td>
+							<td class="text14">
+								<input type="text" class="inputTextMediumBlueMandatoryField" name="cllkt" id="cllkt" size="3" maxlength="2" value="${Xmodel.record.titin}">
+								<input type="text" class="inputTextMediumBlueMandatoryField" name="clsdt" id="clsdt" size="6" maxlength="5" value="${Xmodel.record.titin}">
+								<input type="text" class="inputTextMediumBlueMandatoryField" name="clsdtt" id="clsdtt" size="20" maxlength="30" value="${Xmodel.record.titin}">
+							</td>
+							<td>
+								<select class="inputTextMediumBlueMandatoryField" name="clpr" id="clpr" >
+			 						<option value="">-select-</option>
+					 				  	<c:forEach var="record" items="${Xmodel.procedureList}" >
+				                       	 	<option title="${record.todo--text}" value="${record.todo}" <c:if test="${model.record.clpr == record.todo}"> selected </c:if> >${record.todo}&nbsp;${record.kftxt}</option>
+										</c:forEach>
+								</select>
+							</td>
+							
 		 				</tr>
 		 				<tr height="15"><td></td></tr>
-		 				
 		 				<tr>
-					 		<td colspan="2">
-								<table class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="0">
+					 		<td colspan="4">
+								<table width="65%" class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="0">
 				 				<tr >
-									<td colspan="2" class="text16"><b>&nbsp;Eksport</b></td>
+									<td class="text16"><b>&nbsp;Eksport</b></td>
 								<tr >
 								<tr >
-									<td class="text14">&nbsp;<span title="todo">Eksporttype</span><font class="text16RedBold" >*</font></td>
-									<td class="text14">&nbsp;<span title="todo"><label id="lblExporttypeName">&nbsp;</label></td>									
+									<td class="text14">&nbsp;<span title="cletyp">Eksporttype</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="cleid">Eksportid</span></td>
+									<td class="text14">&nbsp;<span title="cleid">Sertifisert</span></td>
+																		
 								</tr>
 								<tr>
 									<td class="text14">
-						 				<select class="inputTextMediumBlueMandatoryField" name="todo" id="todo" >
+						 				<select class="inputTextMediumBlueMandatoryField" name="cletyp" id="cletyp" >
 					 						<option value="">Velg</option>
-			 		 				  		<option value="UGE">UGE</option>
+			 		 				  		<option title="UGE_EXPORT" value="5">UGE_EXPORT</option>
 			 		 				  		<option value="2">Kvalitetssikres</option>
 										</select>
 						 			</td>
-						 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="todo" id="todo" size="30" maxlength="30" value="${Xmodel.record.titin}"></td>						 			
-								</tr>
-								<tr height="10"><td></td></tr>
-								</table>
-							</td>
-							
-							<td colspan="3">
-								<table class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="0">
-				 				<tr >
-									<td colspan="2" class="text16"><b>&nbsp;Laste/Losse</b></td>
-								<tr >
-								<tr >
-									<td class="text14">&nbsp;<span title="todo">Lastes i</span></td>
-									<td class="text14">&nbsp;<span title="todo">Lastested</span></td>
-									<td class="text14">&nbsp;<span title="todo">Lossested</span></td>
-								</tr>
-								<tr>
-									<%--laste/losse --%> 
-									<td class="text14">
-						 				<select class="inputTextMediumBlue" name="todo" id="todo" style="width:100px;">
-					 						<option value="">Velg</option>
-			 		 				  		<option value="SE">Sverige</option>
-			 		 				  		<option value="NO">Norge</option>
+						 			<td class="text14"><input type="text" class="inputTextMediumBlue" name="cleid" id="cleid" size="20" maxlength="18" value="${Xmodel.record.titin}"></td>
+						 			<td class="text14">
+						 				<select class="inputTextMediumBlue" name="cleser" id="cleser" >
+					 						<option value="N">Nei</option>
+			 		 				  		<option value="J">Ja</option>
 										</select>
-						 			</td>
-						 			<td class="text14"><input type="text" class="inputTextMediumBlue" name="todo" id="todo" size="20" maxlength="20" value="${Xmodel.record.titin}"></td>
-						 			<td class="text14"><input type="text" class="inputTextMediumBlue" name="todo" id="todo" size="20" maxlength="20" value="${Xmodel.record.titin}"></td>
+						 			</td>						 			
 								</tr>
 								<tr height="10"><td></td></tr>
 								</table>
 							</td>
-						</tr>						
+						</tr>				
 		 				<tr height="10"><td></td></tr>		 					 		
 		 			</table>
 		 			</td>	

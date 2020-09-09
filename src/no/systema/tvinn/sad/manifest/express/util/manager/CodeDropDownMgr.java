@@ -37,7 +37,6 @@ import no.systema.z.main.maintenance.url.store.MaintenanceMainUrlDataStore;
 public class CodeDropDownMgr {
 	private static final Logger logger = Logger.getLogger(CodeDropDownMgr.class.getName());
 	
-	public static final String CODE_VEHICLE_TYPES = "SADEFBKODE";
 	//public static final String CODE_1_EKSPEDISJONSTYPER_IMPORT = "1";
 	public static final String CODE_2_COUNTRY = "2";
 	public static final String CODE_4_TRANSPORTMATER = "4";
@@ -71,7 +70,7 @@ public class CodeDropDownMgr {
 		String BASE_URL = MaintenanceMainUrlDataStore.MAINTENANCE_MAIN_BASE_KOFAST_GET_LIST_URL;
 		StringBuffer urlRequestParams = new StringBuffer();
 		urlRequestParams.append("user=" + appUser.getUser());
-		urlRequestParams.append("&kftyp=" + FasteKoder.SADEFBKODE.toString());
+		urlRequestParams.append("&kftyp=" + type);
 		logger.info(BASE_URL);
 		logger.info(urlRequestParams);
 
@@ -92,8 +91,11 @@ public class CodeDropDownMgr {
 		} catch (Exception e) {
 			logger.info("Error: ",e);
 		}
-		
-    	model.put(TvinnSadManifestConstants.RESOURCE_MODEL_KEY_VEHICLE_LIST, list);
+		if(type.equals(FasteKoder.SADEFBKODE.toString())){
+			model.put(TvinnSadManifestConstants.RESOURCE_MODEL_KEY_VEHICLE_LIST, list);
+		}else if(type.equals(FasteKoder.SADEFETYPE.toString())){
+			model.put(TvinnSadManifestConstants.RESOURCE_MODEL_KEY_EXPORTTYPES_LIST, list);
+		}
 	}	
 
     /**

@@ -40,6 +40,9 @@
 	  jq("#efeta").datepicker({ 
 		  dateFormat: 'ddmmy' 	  
 	  });
+	  jq("#efsjadt").datepicker({ 
+		  dateFormat: 'ddmmy' 	  
+	  });
 	  
 	  //CHILD-WINDOWS
 	  //Tollsted

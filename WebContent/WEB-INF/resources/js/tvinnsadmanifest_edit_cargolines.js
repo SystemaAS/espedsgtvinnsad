@@ -34,6 +34,12 @@
     });
   });
   
+  jq(function() {
+	  jq("#cl0068a").datepicker({ 
+		  dateFormat: 'ddmmy' 	  
+	  });
+  });
+  
 //-------------------
   //Datatables jquery
   //-------------------
@@ -49,6 +55,7 @@
     //init table (no ajax, no columns since the payload is already there by means of HTML produced on the back-end)
     jq('#mainList').dataTable( {
   	  //"dom": '<"top"f>t<"bottom"><"clear">',
+      "searchHighlight": true,	
   	  "dom": '<"top"f>t<"bottom"><"clear">',
   	  "scrollY": "300px",
   	  "scrollCollapse":  true,
@@ -84,7 +91,23 @@
 			for ( var i = 0; i < len; i++) {
 				
 				jq('#clvt').val(""); jq('#clvt').val(data[i].clvt);
-								
+				jq('#cl0068a').val(""); jq('#cl0068a').val(data[i].cl0068a);
+				jq('#cl0068b').val(""); jq('#cl0068b').val(data[i].cl0068b);
+				jq('#clntk').val(""); jq('#clntk').val(data[i].clntk);
+				jq('#clvkb').val(""); jq('#clvkb').val(data[i].clvkb);
+				jq('#clrg').val(""); jq('#clrg').val(data[i].clrg);
+				//Loading
+				jq('#cllkf').val(""); jq('#cllkf').val(data[i].cllkf);
+				jq('#clsdf').val(""); jq('#clsdf').val(data[i].clsdf);
+				jq('#clsdft').val(""); jq('#clsdft').val(data[i].clsdft);
+				//Unloading
+				jq('#cllkt').val(""); jq('#cllkt').val(data[i].cllkt);
+				jq('#clsdt').val(""); jq('#clsdt').val(data[i].clsdt);
+				jq('#clsdtt').val(""); jq('#clsdtt').val(data[i].clsdtt);
+				//Export 
+				jq('#cleid').val(""); jq('#cleid').val(data[i].cleid);
+				jq('#cleser').val(""); jq('#cleser').val(data[i].cleser);
+				
 				//debug information on Fetch item
 				//jq('#debugPrintlnAjaxItemFetchInfo').text(data[i].debugPrintlnAjax);
 				

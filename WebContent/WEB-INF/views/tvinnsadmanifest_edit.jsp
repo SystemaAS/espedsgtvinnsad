@@ -438,8 +438,17 @@
 			 				<tr >
 					 			<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efsjae" id="efsjae" size="31" maxlength="30" value="${model.record.efsjae}"></td>
 			 				</tr>
+			 				
+			 				<tr>
+			 				<td>
+			 				<table width="70%">
 			 				<tr >
-								<td class="text14">&nbsp;<span title="efsjalk">Statsborger i</span><font class="text16RedBold" >*</font></td>
+								<td class="text14">&nbsp;<span title="efsjalk">Statsborger i</span><font class="text16RedBold" >*</font>
+								</td>
+								<td class="text14">&nbsp;<span title="efsjadt">Fødselsdato</span><font class="text16RedBold" >*</font>
+								</td>
+								<td class="text14">&nbsp;<span title="efbekr">Bekreftelse</span><font class="text16RedBold" >*</font>
+								</td>
 			 				</tr>
 			 				<tr >
 					 			<td class="text14">
@@ -449,9 +458,28 @@
 					 				  		<option title="${country.ztxt}" value="${country.zkod}"<c:if test="${model.record.efsjalk == country.zkod}"> selected </c:if> >${country.zkod}</option>
 										</c:forEach>  
 									</select>
-									
+								</td>
+								<td class="text14">
+									<c:choose>
+					 				<c:when test="${record.efsjadt != '0'}">
+					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efsjadt" id="efsjadt" size="7" maxlength="6" value="${model.record.efsjadt}">
+					 				</c:when>
+					 				<c:otherwise>
+					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efsjadt" id="efsjadt" size="7" maxlength="6" value="${model.record.efsjadt}">
+					 				</c:otherwise>
+					 				</c:choose>
 					 			</td>
+					 			<td class="text14">
+					 				<select class="inputTextMediumBlue" name="efbekr" id="efbekr">
+				 						<option value="N"<c:if test="${model.record.efbekr == 'N'}"> selected </c:if> >Nei</option>
+										<option value="J"<c:if test="${model.record.efbekr == 'J'}"> selected </c:if> >Ja</option>
+									</select>
+								</td>
 			 				</tr>
+			 				</table>
+			 				</td>
+			 				</tr>
+			 				
 			 				<tr height="15"><td colspan="2">&nbsp;</td></tr>
 			 				<tr >
 								<td class="text14">&nbsp;<span title="titin">Kort beskrivelse</span></td>

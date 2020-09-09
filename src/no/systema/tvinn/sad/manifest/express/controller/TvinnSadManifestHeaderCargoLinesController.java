@@ -158,9 +158,11 @@ public class TvinnSadManifestHeaderCargoLinesController {
 			if(strMgr.isNotNull(recordToValidate.getClpro()) ){
 				List outputList =  null;
 				if("doFetch".equals(action)){
+					this.adjustFieldsForFetch(recordToValidate);
 					outputList = (List)this.getList(appUser, recordToValidate.getClpro());
 					model.put("list", outputList );
 				}else{
+					//this.adjustFieldsForFetch(updatedDao);
 					//model.put("list", this.getList(appUser, updatedDao.getClpro());
 				}
 				
@@ -256,27 +258,6 @@ public class TvinnSadManifestHeaderCargoLinesController {
 		}
 	}
 	
-	
-	/**
-	 * 
-	 * @param recordToValidate
-	 */
-	private void adjustFieldsForUpdate(GodsjfDao recordToValidate){
-		/*
-		recordToValidate.setGogrdt(this.convertToDate_ISO(recordToValidate.getGogrdt()));
-		recordToValidate.setGolsdt(this.convertToDate_ISO(recordToValidate.getGolsdt()));
-		
-		//Numbers... since the fucking Spring converter is not working ...
-		if(recordToValidate.getGotrdt()==null){ recordToValidate.setGotrdt(0); }
-		//date and time
-		if(recordToValidate.getGogrdt()==null){ recordToValidate.setGogrdt("0"); }
-		if(recordToValidate.getGogrkl()==null){ recordToValidate.setGogrkl(0); }
-		//date and time
-		if(recordToValidate.getGolsdt()==null){ recordToValidate.setGolsdt("0"); }
-		if(recordToValidate.getGolskl()==null){ recordToValidate.setGolskl(0); }
-		*/
-		
-	}
 	/**
 	 * 
 	 * @param appUser
@@ -309,15 +290,15 @@ public class TvinnSadManifestHeaderCargoLinesController {
     	}
     	return retval;
 	}
-	/**
-	 * 
-	 * @param recordToValidate
-	 */
-	private void adjustFieldsForFetch(GodsjfDao recordToValidate){
-		/*
-		recordToValidate.setGogrdt(this.convertToDate_NO(recordToValidate.getGogrdt()));
-		recordToValidate.setGolsdt(this.convertToDate_NO(recordToValidate.getGolsdt()));
-		*/
+	
+	private void adjustFieldsForUpdate(JsonTvinnSadManifestCargoLinesRecord recordToValidate){
+	
+		recordToValidate.setCl0068a(this.convertToDate_ISO(recordToValidate.getCl0068a()));
+		
+	}
+	
+	private void adjustFieldsForFetch(JsonTvinnSadManifestCargoLinesRecord recordToValidate){
+		recordToValidate.setCl0068a(this.convertToDate_NO(recordToValidate.getCl0068a()));
 	}
 	/**
 	 * 

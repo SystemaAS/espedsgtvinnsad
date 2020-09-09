@@ -24,6 +24,7 @@ import no.systema.main.util.AppConstants;
 import no.systema.main.util.DateTimeManager;
 import no.systema.main.util.JsonDebugger;
 import no.systema.jservices.bcore.z.maintenance.model.dao.services.KofastDaoServices;
+import no.systema.jservices.common.values.FasteKoder;
 import no.systema.jservices.bcore.z.maintenance.model.dao.entities.KofastDao;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.util.StringManager;
@@ -39,6 +40,7 @@ import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService
 import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService;
 import no.systema.tvinn.sad.manifest.express.util.manager.CodeDropDownMgr;
+import no.systema.tvinn.sad.manifest.express.util.manager.ManifestDateManager;
 import no.systema.tvinn.sad.manifest.express.util.manager.ManifestExpressMgr;
 import no.systema.tvinn.sad.mapper.url.request.UrlRequestParameterMapper;
 
@@ -385,47 +387,13 @@ public class TvinnSadManifestHeaderController {
 	private void adjustFieldsForUpdate(JsonTvinnSadManifestRecord recordToValidate){
 		
 		recordToValidate.setEfdtr(new DateTimeManager().getCurrentDate_ISO());
-		recordToValidate.setEfeta(this.convertToDate_ISO(recordToValidate.getEfeta()));
-		
+		recordToValidate.setEfeta(new ManifestDateManager().convertToDate_ISO(recordToValidate.getEfeta()));
+		recordToValidate.setEfsjadt(new ManifestDateManager().convertToDate_ISO(recordToValidate.getEfsjadt()));
 	}
 	
 	private void adjustFieldsForFetch(JsonTvinnSadManifestRecord recordToValidate){
-		recordToValidate.setEfeta(this.convertToDate_NO(recordToValidate.getEfeta()));
-	}
-	/**
-	 * 
-	 * @param recordToValidate
-	 */
-	/*
-	private void adjustFieldsForFetch(GodsjfDao recordToValidate){
-		
-		recordToValidate.setGogrdt(this.convertToDate_NO(recordToValidate.getGogrdt()));
-		recordToValidate.setGolsdt(this.convertToDate_NO(recordToValidate.getGolsdt()));
-		
-	}*/
-	/**
-	 * 
-	 * @param value
-	 * @return
-	 */
-	private String convertToDate_ISO (String value){
-		String retval = null;
-		
-		if(strMgr.isNotNull(value)){
-			DateTimeManager dateMgr = new DateTimeManager();
-			retval = dateMgr.getDateFormatted_ISO(value, DateTimeManager.NO_FORMAT);
-		}
-		return retval;
-	}
-	/**
-	 * 
-	 * @param value
-	 * @return
-	 */
-	private String convertToDate_NO (String value){
-		
-		DateTimeManager dateMgr = new DateTimeManager();
-		return dateMgr.getDateFormatted_NO(value, DateTimeManager.ISO_FORMAT);
+		recordToValidate.setEfeta(new ManifestDateManager().convertToDate_NO(recordToValidate.getEfeta()));
+		recordToValidate.setEfsjadt(new ManifestDateManager().convertToDate_NO(recordToValidate.getEfsjadt()));
 	}
 	
 	
@@ -436,7 +404,7 @@ public class TvinnSadManifestHeaderController {
 	 * @param model
 	 */
 	private void setCodeDropDownMgr(SystemaWebUser appUser, Map model){
-		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(appUser, this.codeDropDownMgr.CODE_VEHICLE_TYPES, model, urlCgiProxyService, maintMainKofastService);
+		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(appUser, FasteKoder.SADEFBKODE.toString(), model, urlCgiProxyService, maintMainKofastService);
 		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(this.urlCgiProxyService, this.tvinnSadDropDownListPopulationService, 
 																	 model,appUser,CodeDropDownMgr.CODE_2_COUNTRY, null, null);
 	}

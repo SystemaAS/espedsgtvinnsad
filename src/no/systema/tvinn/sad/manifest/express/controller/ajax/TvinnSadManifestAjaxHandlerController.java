@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javawebparts.core.org.apache.commons.lang.StringUtils;
 import no.systema.main.service.UrlCgiProxyService;
+import no.systema.main.util.DateTimeManager;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesRecord;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
+import no.systema.tvinn.sad.manifest.express.util.manager.ManifestDateManager;
 import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 
 
@@ -68,6 +71,7 @@ public class TvinnSadManifestAjaxHandlerController {
 				//----------------------------------------------------------------
 				Collection<JsonTvinnSadManifestCargoLinesRecord> outputList = container.getList();
 				for(JsonTvinnSadManifestCargoLinesRecord record : outputList){
+					this.adjustFieldsForFetch(record);
 					result.add(record);
 				}
 			 }
@@ -77,6 +81,14 @@ public class TvinnSadManifestAjaxHandlerController {
 		 
 		 return result;
 	 }
+	
+	private void adjustFieldsForUpdate(JsonTvinnSadManifestCargoLinesRecord record){
+		record.setCl0068a(new ManifestDateManager().convertToDate_ISO(record.getCl0068a()));
+	}
+	
+	private void adjustFieldsForFetch(JsonTvinnSadManifestCargoLinesRecord record){
+		record.setCl0068a(new ManifestDateManager().convertToDate_NO(record.getCl0068a()));
+	}
 
 	//SERVICES
 	@Autowired
