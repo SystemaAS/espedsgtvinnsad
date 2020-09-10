@@ -105,6 +105,7 @@
 				jq('#clsdt').val(""); jq('#clsdt').val(data[i].clsdt);
 				jq('#clsdtt').val(""); jq('#clsdtt').val(data[i].clsdtt);
 				//Export 
+				jq('#cletyp').val(""); jq('#cletyp').val(data[i].cletyp);
 				jq('#cleid').val(""); jq('#cleid').val(data[i].cleid);
 				jq('#cleser').val(""); jq('#cleser').val(data[i].cleser);
 				

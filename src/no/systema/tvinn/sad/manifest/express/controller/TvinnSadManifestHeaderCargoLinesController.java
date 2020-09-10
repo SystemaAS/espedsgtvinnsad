@@ -36,16 +36,21 @@ import no.systema.main.util.StringManager;
 import no.systema.main.util.DateTimeManager;
 import no.systema.jservices.common.dao.GodsafDao;
 import no.systema.jservices.common.dao.GodsjfDao;
+import no.systema.jservices.common.values.FasteKoder;
 import no.systema.jservices.common.dao.GodsgfDao;
 
 import no.systema.tvinn.sad.util.TvinnSadConstants;
 import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
+import no.systema.z.main.maintenance.service.MaintMainKofastService;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesRecord;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
+import no.systema.tvinn.sad.manifest.express.util.manager.CodeDropDownMgr;
+import no.systema.tvinn.sad.manifest.express.util.manager.ManifestDateManager;
 import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
+import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService;
 import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
 
 /**
@@ -64,6 +69,7 @@ public class TvinnSadManifestHeaderCargoLinesController {
 	private LoginValidator loginValidator = new LoginValidator();
 	private StringManager strMgr = new StringManager();
 	DateTimeManager dateMgr = new DateTimeManager();
+	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	//private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
 	
 	
@@ -101,9 +107,6 @@ public class TvinnSadManifestHeaderCargoLinesController {
 		//String updateFlag = request.getParameter("updateFlag");
 		logger.warn("action:" + action);
 		
-		/*if(strMgr.isNotNull(updateFlag)){
-			model.addAttribute("updateFlag", "1");
-		}*/
 		boolean isValidRecord = true;
 		
 		//check user (should be in session already)
@@ -155,6 +158,9 @@ public class TvinnSadManifestHeaderCargoLinesController {
 			//--------------
 			//Fetch record
 			//--------------
+			//dropdowns
+			this.setCodeDropDownMgr(appUser, model);
+			
 			if(strMgr.isNotNull(recordToValidate.getClpro()) ){
 				List outputList =  null;
 				if("doFetch".equals(action)){
@@ -290,46 +296,43 @@ public class TvinnSadManifestHeaderCargoLinesController {
     	}
     	return retval;
 	}
-	
+	/**
+	 * 
+	 * @param recordToValidate
+	 */
 	private void adjustFieldsForUpdate(JsonTvinnSadManifestCargoLinesRecord recordToValidate){
 	
-		recordToValidate.setCl0068a(this.convertToDate_ISO(recordToValidate.getCl0068a()));
+		recordToValidate.setCl0068a(new ManifestDateManager().convertToDate_ISO(recordToValidate.getCl0068a()));
 		
 	}
-	
+	/**
+	 * 
+	 * @param recordToValidate
+	 */
 	private void adjustFieldsForFetch(JsonTvinnSadManifestCargoLinesRecord recordToValidate){
-		recordToValidate.setCl0068a(this.convertToDate_NO(recordToValidate.getCl0068a()));
-	}
-	/**
-	 * 
-	 * @param value
-	 * @return
-	 */
-	private String convertToDate_ISO (String value){
-		String retval = null;
-		
-		if(strMgr.isNotNull(value)){
-			DateTimeManager dateMgr = new DateTimeManager();
-			retval = dateMgr.getDateFormatted_ISO(value, DateTimeManager.NO_FORMAT);
-		}
-		return retval;
-	}
-	/**
-	 * 
-	 * @param value
-	 * @return
-	 */
-	private String convertToDate_NO (String value){
-		
-		DateTimeManager dateMgr = new DateTimeManager();
-		return dateMgr.getDateFormatted_NO(value, DateTimeManager.ISO_FORMAT);
+		recordToValidate.setCl0068a(new ManifestDateManager().convertToDate_NO(recordToValidate.getCl0068a()));
 	}
 	
-	
+	/**
+	 * 
+	 * @param appUser
+	 * @param model
+	 */
+	private void setCodeDropDownMgr(SystemaWebUser appUser, Map model){
+		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(appUser, FasteKoder.SADEFETYPE.toString(), model, urlCgiProxyService, maintMainKofastService);
+		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(this.urlCgiProxyService, this.tvinnSadDropDownListPopulationService, 
+																	 model,appUser,CodeDropDownMgr.CODE_2_COUNTRY, null, null);
+	}
 	
 	//SERVICES
 	@Autowired
 	private TvinnSadManifestListService tvinnSadManifestListService;
+	
+	@Autowired
+	private TvinnSadDropDownListPopulationService tvinnSadDropDownListPopulationService;
+	
+	@Autowired
+	private MaintMainKofastService maintMainKofastService;
 	
 	@Autowired
 	private UrlCgiProxyService urlCgiProxyService;

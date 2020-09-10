@@ -247,9 +247,10 @@
 								<tr>
 									<td class="text14">
 						 				<select class="inputTextMediumBlueMandatoryField" name="cletyp" id="cletyp" >
-					 						<option value="">Velg</option>
-			 		 				  		<option title="UGE_EXPORT" value="5">UGE_EXPORT</option>
-			 		 				  		<option value="2">Kvalitetssikres</option>
+					 						<option value="">-select-</option>
+						 				  	<c:forEach var="record" items="${model.etTypeList}" >
+					                       	 	<option title="${record.kftxt}" value="${record.kfkod}" <c:if test="${model.record.cletyp == record.kfkod}"> selected </c:if> >${record.kfkod}&nbsp;${record.kftxt}</option>
+											</c:forEach>
 										</select>
 						 			</td>
 						 			<td class="text14"><input type="text" class="inputTextMediumBlue" name="cleid" id="cleid" size="20" maxlength="18" value="${Xmodel.record.titin}"></td>
