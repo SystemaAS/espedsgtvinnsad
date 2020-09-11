@@ -114,7 +114,7 @@
  		
  	<tr>
 		<td>		
-		<table style="width:75%;" cellspacing="0" border="0" cellpadding="0">
+		<table style="width:90%;" cellspacing="0" border="0" cellpadding="0">
 	    	<%-- separator --%>
 	        <tr height="1"><td></td></tr> 
 			<tr>
@@ -172,7 +172,7 @@
  		
 	<tr>
 		<td class="text14" valign="top">
-			<table style="width:75%" align="left" border="0" cellspacing="1" cellpadding="0">
+			<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">
 			 	<tr >
 				 	<td >
 					<table style="width:100%" class="formFrameHeader" border="0" cellspacing="1" cellpadding="0">
@@ -199,8 +199,16 @@
 							<td class="text14">&nbsp;<span title="clrg">Deklarantnr.</span><font class="text16RedBold" >*</font></td>
 							<td class="text14">&nbsp;<span title="cl0068a">Dato</span><font class="text16RedBold" >*</font></td>
 							<td class="text14">&nbsp;<span title="cl0068b">Sekvensnr.</span><font class="text16RedBold" >*</font></td>
-							<td class="text14">&nbsp;<span title="cllkf/clsdf/clsdft">Fra sted</span><font class="text16RedBold" >*</font></td>
-							<td class="text14">&nbsp;<span title="cllkt/clsdt/clsdtt">Til sted</span><font class="text16RedBold" >*</font></td>
+							<td class="text14">&nbsp;<span title="cllkf/clsdf/clsdft">Fra sted</span><font class="text16RedBold" >*</font>
+								<a tabindex="-1" id="clsdfIdLink">
+									<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
+								</a>
+							</td>
+							<td class="text14">&nbsp;<span title="cllkt/clsdt/clsdtt">Til sted</span><font class="text16RedBold" >*</font>
+								<a tabindex="-1" id="clsdtIdLink">
+									<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
+								</a>
+							</td>
 							<td class="text14">&nbsp;<span title="clpr">Prosedyre</span><font class="text16RedBold" >*</font></td>
 							
 		 				</tr>
@@ -212,20 +220,31 @@
 				 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="cl0068a" id="cl0068a" size="7" maxlength="6" value="${Xmodel.record.titin}"></td>
 				 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="cl0068b" id="cl0068b" size="7" maxlength="6" value="${Xmodel.record.titin}"></td>
 							<td class="text14">
-								<input type="text" class="inputTextMediumBlueMandatoryField" name="cllkf" id="cllkf" size="3" maxlength="2" value="${Xmodel.record.titin}">
+								<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="cllkf" id="cllkf">
+			 						<option value="">-velg-</option>
+				 				  	<c:forEach var="country" items="${model.countryCodeList}" >
+				 				  		<option title="${country.ztxt}" value="${country.zkod}"<c:if test="${model.record.cllkf == country.zkod}"> selected </c:if> >${country.zkod}</option>
+									</c:forEach>  
+								</select>
 								<input type="text" class="inputTextMediumBlueMandatoryField" name="clsdf" id="clsdf" size="6" maxlength="5" value="${Xmodel.record.titin}">
-								<input type="text" class="inputTextMediumBlueMandatoryField" name="clsdft" id="clsdft" size="20" maxlength="30" value="${Xmodel.record.titin}">
+								<input readonly type="text" class="inputTextReadOnly" name="clsdft" id="clsdft" size="30" value="${Xmodel.record.titin}">
 							</td>
 							<td class="text14">
-								<input type="text" class="inputTextMediumBlueMandatoryField" name="cllkt" id="cllkt" size="3" maxlength="2" value="${Xmodel.record.titin}">
+								<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="cllkt" id="cllkt">
+			 						<option value="">-velg-</option>
+				 				  	<c:forEach var="country" items="${model.countryCodeList}" >
+				 				  		<option title="${country.ztxt}" value="${country.zkod}"<c:if test="${model.record.cllkt == country.zkod}"> selected </c:if> >${country.zkod}</option>
+									</c:forEach>  
+								</select>
+								
 								<input type="text" class="inputTextMediumBlueMandatoryField" name="clsdt" id="clsdt" size="6" maxlength="5" value="${Xmodel.record.titin}">
-								<input type="text" class="inputTextMediumBlueMandatoryField" name="clsdtt" id="clsdtt" size="20" maxlength="30" value="${Xmodel.record.titin}">
+								<input readonly type="text" class="inputTextReadOnly" name="clsdtt" id="clsdtt" size="30" value="${Xmodel.record.titin}">
 							</td>
 							<td>
 								<select class="inputTextMediumBlueMandatoryField" name="clpr" id="clpr" >
 			 						<option value="">-select-</option>
-					 				  	<c:forEach var="record" items="${Xmodel.procedureList}" >
-				                       	 	<option title="${record.todo--text}" value="${record.todo}" <c:if test="${model.record.clpr == record.todo}"> selected </c:if> >${record.todo}&nbsp;${record.kftxt}</option>
+					 				  	<c:forEach var="record" items="${model.prTypeList}" >
+				                       	 	<option title="${record.kftxt}" value="${record.kfkod}" <c:if test="${model.record.cletyp == record.kfkod}"> selected </c:if> >${record.kfkod}&nbsp;${record.kftxt}</option>
 										</c:forEach>
 								</select>
 							</td>
@@ -234,7 +253,7 @@
 		 				<tr height="15"><td></td></tr>
 		 				<tr>
 					 		<td colspan="4">
-								<table width="65%" class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="0">
+								<table width="80%" class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="0">
 				 				<tr >
 									<td class="text16"><b>&nbsp;Eksport</b></td>
 								<tr >

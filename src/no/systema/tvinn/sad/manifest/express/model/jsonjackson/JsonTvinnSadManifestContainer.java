@@ -7,7 +7,7 @@ import java.util.Collection;
 
 /**
  * @author oscardelatorre
- * @date Sep, 2018
+ * @date Sep, 2020
  */
 public class JsonTvinnSadManifestContainer <T> {
 	private String user = null;

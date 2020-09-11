@@ -4,4 +4,5 @@ public final class TvinnSadManifestConstants {
 	
 	public static final String RESOURCE_MODEL_KEY_VEHICLE_LIST = "ktTypeList";
 	public static final String RESOURCE_MODEL_KEY_EXPORTTYPES_LIST = "etTypeList";
+	public static final String RESOURCE_MODEL_KEY_PROCEDURETYPES_LIST = "prTypeList";
 }

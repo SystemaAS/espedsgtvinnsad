@@ -1,33 +1,24 @@
 package no.systema.tvinn.sad.manifest.express.controller;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.*;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.springframework.web.bind.ServletRequestDataBinder;
 
 //application imports
 import no.systema.main.context.TdsAppContext;
@@ -39,7 +30,10 @@ import no.systema.main.util.DateTimeManager;
 import no.systema.main.util.EncodingTransformer;
 import no.systema.main.util.JsonDebugger;
 import no.systema.main.model.SystemaWebUser;
-
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestPostalCodeContainer;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestPostalCodeRecord;
+import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestChildwindowService;
+import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeContainer;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
 import no.systema.tvinn.sad.sadimport.service.SadImportGeneralCodesChildWindowService;
@@ -91,6 +85,80 @@ public class TvinnSadManifestControllerChildWindow {
 	/**
 	 * 
 	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsadmanifest_childwindow_postalcodes_sted2.do", params="action=doFind",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doFindPostalCodes(@ModelAttribute ("record") JsonTvinnSadManifestPostalCodeRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doFindPostalCodes");
+		Collection outputList = new ArrayList();
+		Map model = new HashMap();
+		ModelAndView successView = new ModelAndView("tvinnsadmanifest_childwindow_postalcodes_sted2");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//to catch the sender since there could be more then one caller field
+		String ctype = request.getParameter("ctype");
+		model.put("ctype", ctype);
+		
+		if(appUser==null){
+			return loginView;
+			
+		}else{
+			//appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_FRAKTKALKULATOR);
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			
+			
+		    //check for ERRORS
+			if(bindingResult.hasErrors()){
+	    		logger.info("[ERROR Validation] search-filter does not validate)");
+	    		//put domain objects and do go back to the successView from here
+	    		//this.setCodeDropDownMgr(appUser, model);
+	    		model.put(TvinnSadConstants.DOMAIN_RECORD, recordToValidate);
+				successView.addObject(TvinnSadConstants.DOMAIN_MODEL, model);
+				return successView;
+	    		
+		    }else{
+				
+	    		//prepare the access CGI with RPG back-end
+	    		String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_CHILDWINDOW_POSTALCODE_STED2_URL;
+	    		String urlRequestParamsKeys = this.getRequestUrlKeyParametersSearchChildWindow(recordToValidate, appUser);
+	    		logger.info("URL: " + BASE_URL);
+	    		logger.info("PARAMS: " + urlRequestParamsKeys);
+	    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+	    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+	    		//Debug -->
+		    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+	    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+		    
+	    		if(jsonPayload!=null){
+	    			JsonTvinnSadManifestPostalCodeContainer container = this.tvinnSadManifestChildwindowService.getPostalCodeListContainer(jsonPayload);
+		    		if(container!=null){
+		    			List<JsonTvinnSadManifestPostalCodeRecord> list = new ArrayList<JsonTvinnSadManifestPostalCodeRecord>();
+		    			for(JsonTvinnSadManifestPostalCodeRecord  record : container.getDtoList()){
+		    				//logger.info("ID:" + record.getVmtran());
+		    				//logger.info("NAME:" + record.getVmnavn());
+		    				list.add(record);
+		    			}
+		    			model.put("postalCodeList", list);
+		    			model.put(TvinnSadConstants.DOMAIN_RECORD, recordToValidate);
+		    		}
+	    			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+	    			logger.info(Calendar.getInstance().getTime() + " CONTROLLER end - timestamp");
+	    			return successView;
+	    			
+		    	}else{
+		    		logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+		    		return loginView;
+		    	}
+		    }
+		}
+	}
+	
+	/**
+	 * 
+	 * @param recordToValidate
 	 * @param session
 	 * @param request
 	 * @return
@@ -122,6 +190,19 @@ public class TvinnSadManifestControllerChildWindow {
 			
 	    	return successView;
 		}
+	}
+	
+	private String getRequestUrlKeyParametersSearchChildWindow(JsonTvinnSadManifestPostalCodeRecord searchFilter, SystemaWebUser appUser){
+		StringBuffer urlRequestParamsKeys = new StringBuffer();
+		urlRequestParamsKeys.append("user=" + appUser.getUser());
+		if(StringUtils.isNotEmpty(searchFilter.getSt2lk())){
+			urlRequestParamsKeys.append("&st2lk=" + searchFilter.getSt2lk());
+		}
+		if(StringUtils.isNotEmpty(searchFilter.getSt2kod())){
+			urlRequestParamsKeys.append("&st2kod=" + searchFilter.getSt2kod());
+		}
+		
+		return urlRequestParamsKeys.toString();
 	}
 	
 	/**
@@ -222,23 +303,17 @@ public class TvinnSadManifestControllerChildWindow {
 	
 	
 	//SERVICES
-	@Qualifier ("urlCgiProxyService")
-	private UrlCgiProxyService urlCgiProxyService;
 	@Autowired
-	@Required
-	public void setUrlCgiProxyService (UrlCgiProxyService value){ this.urlCgiProxyService = value; }
-	public UrlCgiProxyService getUrlCgiProxyService(){ return this.urlCgiProxyService; }
+	private UrlCgiProxyService urlCgiProxyService;
 	
 	@Autowired
 	private SadImportGeneralCodesChildWindowService sadImportGeneralCodesChildWindowService;
-	public void setSadImportGeneralCodesChildWindowService(SadImportGeneralCodesChildWindowService value){this.sadImportGeneralCodesChildWindowService = value;}
-	public SadImportGeneralCodesChildWindowService getSadImportGeneralCodesChildWindowService(){ return this.sadImportGeneralCodesChildWindowService; }
 	
 	@Autowired
 	private MaintSadImportKodttsService maintSadImportKodttsService;
-	public void setMaintSadImportKodttsService (MaintSadImportKodttsService value){ this.maintSadImportKodttsService = value; }
-	public MaintSadImportKodttsService getMaintSadImportKodttsService(){ return this.maintSadImportKodttsService; }
 	
+	@Autowired
+	TvinnSadManifestChildwindowService tvinnSadManifestChildwindowService;
 	
 }
 

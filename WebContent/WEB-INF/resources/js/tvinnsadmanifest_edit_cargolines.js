@@ -38,6 +38,29 @@
 	  jq("#cl0068a").datepicker({ 
 		  dateFormat: 'ddmmy' 	  
 	  });
+	  
+	//CHILD-WINDOWS
+	//Postnr/sted FROM
+	  jq('#clsdfIdLink').click(function() {
+	  	jq('#clsdfIdLink').attr('target','_blank');
+	  	window.open('tvinnsadmanifest_childwindow_postalcodes_sted2.do?action=doFind&ctype=clsdf&direction=fra&st2lk=' + jq('#cllkf').val() + '&st2kod=' + jq('#clsdf').val() + '&caller=clsdf', "postalcodeSted2Win", "top=300px,left=450px,height=600px,width=700px,scrollbars=no,status=no,location=no");
+	  });
+	  jq('#clsdfIdLink').keypress(function(e){ //extra feature for the end user
+			if(e.which == 13) {
+				jq('#clsdfIdLink').click();
+			}
+	  });
+	//Postnr/sted TO
+	  jq('#clsdtIdLink').click(function() {
+	  	jq('#clsdtIdLink').attr('target','_blank');
+	  	window.open('tvinnsadmanifest_childwindow_postalcodes_sted2.do?action=doFind&ctype=clsdt&direction=fra&st2lk=' + jq('#cllkt').val() + '&st2kod=' + jq('#clsdt').val() + '&caller=clsdt', "postalcodeSted2Win", "top=300px,left=450px,height=600px,width=700px,scrollbars=no,status=no,location=no");
+	  });
+	  jq('#clsdtIdLink').keypress(function(e){ //extra feature for the end user
+			if(e.which == 13) {
+				jq('#clsdtIdLink').click();
+			}
+	  });
+	   
   });
   
 //-------------------
@@ -104,6 +127,7 @@
 				jq('#cllkt').val(""); jq('#cllkt').val(data[i].cllkt);
 				jq('#clsdt').val(""); jq('#clsdt').val(data[i].clsdt);
 				jq('#clsdtt').val(""); jq('#clsdtt').val(data[i].clsdtt);
+				jq('#clpr').val(""); jq('#clpr').val(data[i].clpr);
 				//Export 
 				jq('#cletyp').val(""); jq('#cletyp').val(data[i].cletyp);
 				jq('#cleid').val(""); jq('#cleid').val(data[i].cleid);

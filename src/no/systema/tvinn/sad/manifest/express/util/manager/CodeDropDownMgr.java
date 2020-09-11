@@ -93,10 +93,17 @@ public class CodeDropDownMgr {
 		}
 		if(type.equals(FasteKoder.SADEFBKODE.toString())){
 			model.put(TvinnSadManifestConstants.RESOURCE_MODEL_KEY_VEHICLE_LIST, list);
+		
 		}else if(type.equals(FasteKoder.SADEFETYPE.toString())){
 			model.put(TvinnSadManifestConstants.RESOURCE_MODEL_KEY_EXPORTTYPES_LIST, list);
+			
+		}else if(type.equals(FasteKoder.SADEFPR.toString())){
+			model.put(TvinnSadManifestConstants.RESOURCE_MODEL_KEY_PROCEDURETYPES_LIST, list);
 		}
+		
+		
 	}	
+	
 
     /**
      * 	

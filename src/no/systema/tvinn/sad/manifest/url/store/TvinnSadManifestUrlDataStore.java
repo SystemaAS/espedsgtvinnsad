@@ -38,14 +38,13 @@ public final class TvinnSadManifestUrlDataStore {
 	static public String TVINN_SAD_UPDATE_MANIFEST_EXPRESS_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADEFFR_U.do";
 		
 	//Child windows
-	//http://gw.systema.no:8080/syjservicestn/syjsSYFT04R.do?user=OSCAR
-	//static public String TROR_BASE_CHILDWINDOW_TOLLSTED_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSYFT04R.do";
-	
+	//http://gw.systema.no:8080/syjservicestn/syjsSTED2.do?user=OSCAR&st2lk=NL&st2kod=AMS
+	static public String TVINN_SAD_CHILDWINDOW_POSTALCODE_STED2_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSTED2.do";
+		
 	
 	//----------------------------------------------------
 	//[2] FETCH CARGO LINES' LIST of a specific MANIFEST
 	//----------------------------------------------------
-		
 	//FETCH CARGO LINE list
 	//http://localhost:8080/syjservicestn/syjsSADEFCFR.do?user=OSCAR and/or user=OSCAR&clpro=turNr
 	static public String TVINN_SAD_FETCH_MANIFEST_EXPRESS_CARGOLINESURL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADEFCFR.do";

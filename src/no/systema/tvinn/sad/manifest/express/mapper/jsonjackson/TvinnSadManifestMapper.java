@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestPostalCodeContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
 
 import java.util.*;
@@ -54,6 +55,25 @@ public class TvinnSadManifestMapper {
 			
 		return container;
 	}
+	/**
+	 * 
+	 * @param utfPayload
+	 * @return
+	 * @throws Exception
+	 */
+	public JsonTvinnSadManifestPostalCodeContainer getPostalCodeContainer(String utfPayload) throws Exception{
+		ObjectMapper mapper = new ObjectMapper();  
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+		JsonTvinnSadManifestPostalCodeContainer container = null;
+		if(utfPayload!=null){
+			//At this point we now have an UTF-8 payload
+			container = mapper.readValue(utfPayload.getBytes(), JsonTvinnSadManifestPostalCodeContainer.class); 
+			
+		}
+			
+		return container;
+	}
+	
 	
 
 }

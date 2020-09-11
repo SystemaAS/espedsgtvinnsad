@@ -320,6 +320,7 @@ public class TvinnSadManifestHeaderCargoLinesController {
 	 */
 	private void setCodeDropDownMgr(SystemaWebUser appUser, Map model){
 		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(appUser, FasteKoder.SADEFETYPE.toString(), model, urlCgiProxyService, maintMainKofastService);
+		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(appUser, FasteKoder.SADEFPR.toString(), model, urlCgiProxyService, maintMainKofastService);
 		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(this.urlCgiProxyService, this.tvinnSadDropDownListPopulationService, 
 																	 model,appUser,CodeDropDownMgr.CODE_2_COUNTRY, null, null);
 	}
