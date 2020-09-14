@@ -13,9 +13,7 @@
     jq('#alinkItems').click(function() { 
     	setBlockUI();
     });
-    jq( "#submit" ).click(function( event ) {
-    	setBlockUI();
-	});
+    
     //General Header Menus
     jq('#alinkTopicListMenuImp').click(function() { 
     	setBlockUI();
@@ -32,6 +30,10 @@
     jq('#alinkTopicListMenuManifest').click(function() { 
     	setBlockUI();
     });
+    jq('#cargoLineForm').submit(function() { 
+    	setBlockUI();
+    });
+    
   });
   
   jq(function() {
@@ -112,6 +114,10 @@
 	  	  success: function(data) {
 	  		var len = data.length;
 			for ( var i = 0; i < len; i++) {
+				jq('#clpro').val(""); jq('#clpro').val(data[i].clpro);
+				jq('#clavd').val(""); jq('#clavd').val(data[i].clavd);
+				jq('#cltdn').val(""); jq('#cltdn').val(data[i].cltdn);
+				jq('#clst').val(""); jq('#clst').val(data[i].clst);
 				
 				jq('#clvt').val(""); jq('#clvt').val(data[i].clvt);
 				jq('#cl0068a').val(""); jq('#cl0068a').val(data[i].cl0068a);

@@ -313,7 +313,7 @@
 									
 								</td>
 			 				</tr>
-			 				
+			 				<%-- Avvakta med denna Eksport id på denna nivå
 			 				<tr >
 								<td colspan="4" class="text14">&nbsp;<span title="efeid">EksportId</span></td>
 								
@@ -324,7 +324,7 @@
 					 			</td>
 								
 			 				</tr>
-			 				
+			 				 --%>
 			 				</table>
 			 				</td>
 			 				</tr>
@@ -391,9 +391,9 @@
 									
 				 				</tr>
 				 				<tr >
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efpmrk" id="efpmrk" size="15" maxlength="30" value="${model.record.efpmrk}"></td>
+									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efpmrk" id="efpmrk" size="15" maxlength="30" value="${model.record.efpmrk}"></td>
 									<td class="text14">
-						 				<select  class="inputTextMediumBlue" name="efplk" id="efplk">
+						 				<select  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="efplk" id="efplk">
 					 						<option value="">-velg-</option>
 						 				  	<c:forEach var="country" items="${model.countryCodeList}" >
 						 				  		<option title="${country.ztxt}" value="${country.zkod}"<c:if test="${model.record.efplk == country.zkod}"> selected </c:if> >${country.zkod}</option>
@@ -481,12 +481,14 @@
 			 				</tr>
 			 				
 			 				<tr height="15"><td colspan="2">&nbsp;</td></tr>
+			 				<%-- Avvakta med denna. Finns bara i Tolls web
 			 				<tr >
 								<td class="text14">&nbsp;<span title="titin">Kort beskrivelse</span></td>
 			 				</tr>
 			 				<tr >
 					 			<td class="text14"><input type="text" class="inputTextMediumBlue" name="titin" id="titin" size="50" maxlength="50" value="${Xmodel.record.titin}"></td>
 			 				</tr>
+			 				 --%>
 			            </table>
 			            </td>
 		            </tr>

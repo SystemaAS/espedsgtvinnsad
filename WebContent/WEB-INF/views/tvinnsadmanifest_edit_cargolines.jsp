@@ -58,8 +58,6 @@
 	<%-- --------------------------- --%>	
  	<%-- tab area container PRIMARY  --%>
 	<%-- --------------------------- --%>
-	<form name="manifestForm" id="manifestForm" method="post">
-	<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
 			
 	<table style="width:100%;" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
  		<tr height="10"><td colspan="10">&nbsp;</td></tr>
@@ -131,7 +129,7 @@
                 		<th class="tableHeaderField" >Oppdrag</th>
                 		<th class="tableHeaderField" >St</th>
                 		<th class="tableHeaderField" >Eksport type</th>
-                		<th class="tableHeaderField" >EksportId</th>
+                		<th class="tableHeaderField" >MRN nr.</th>
                 		<th class="tableHeaderField" >Ser</th>
                 		<th class="tableHeaderField" >Bilnr</th>
                 		<th class="tableHeaderField" >E.enh.</th>
@@ -172,6 +170,16 @@
  		
 	<tr>
 		<td class="text14" valign="top">
+			<form name="cargoLineForm" id="cargoLineForm" action="tvinnsadmanifest_edit_cargolines.do" method="post">
+			<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
+			<input type="hidden" name="efuuid" id="efuuid" value="${model.efuuid}">
+			<input type="hidden" name="action" id="action" value="doUpdate">
+			<input type="hidden" name="clpro" id="clpro" value="${model.record.clpro}">
+			<input type="hidden" name="clavd" id="clavd" value="${model.record.clavd}">
+			<input type="hidden" name="cltdn" id="cltdn" value="${model.record.cltdn}">
+			<input type="hidden" name="clst" id="clst" value="${model.record.clst}">
+			
+			
 			<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">
 			 	<tr >
 				 	<td >
@@ -216,9 +224,9 @@
 		 					<%--
 				 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="clvt" id="clvt" size="31" maxlength="30" value="${Xmodel.record.titin}"></td>
 				 			 --%>
-				 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="clrg" id="clrg" size="12" maxlength="11" value="${Xmodel.record.titin}"></td>
-				 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="cl0068a" id="cl0068a" size="7" maxlength="6" value="${Xmodel.record.titin}"></td>
-				 			<td class="text14"><input type="text" class="inputTextMediumBlueMandatoryField" name="cl0068b" id="cl0068b" size="7" maxlength="6" value="${Xmodel.record.titin}"></td>
+				 			<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="clrg" id="clrg" size="12" maxlength="11" value="${model.record.clrg}"></td>
+				 			<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="cl0068a" id="cl0068a" size="7" maxlength="6" value="${model.record.cl0068a}"></td>
+				 			<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="cl0068b" id="cl0068b" size="7" maxlength="6" value="${model.record.cl0068b}"></td>
 							<td class="text14">
 								<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="cllkf" id="cllkf">
 			 						<option value="">-velg-</option>
@@ -226,8 +234,8 @@
 				 				  		<option title="${country.ztxt}" value="${country.zkod}"<c:if test="${model.record.cllkf == country.zkod}"> selected </c:if> >${country.zkod}</option>
 									</c:forEach>  
 								</select>
-								<input type="text" class="inputTextMediumBlueMandatoryField" name="clsdf" id="clsdf" size="6" maxlength="5" value="${Xmodel.record.titin}">
-								<input readonly type="text" class="inputTextReadOnly" name="clsdft" id="clsdft" size="30" value="${Xmodel.record.titin}">
+								<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="clsdf" id="clsdf" size="6" maxlength="5" value="${model.record.clsdf}">
+								<input readonly type="text" class="inputTextReadOnly" name="clsdft" id="clsdft" size="30" value="${model.record.clsdft}">
 							</td>
 							<td class="text14">
 								<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="cllkt" id="cllkt">
@@ -237,14 +245,14 @@
 									</c:forEach>  
 								</select>
 								
-								<input type="text" class="inputTextMediumBlueMandatoryField" name="clsdt" id="clsdt" size="6" maxlength="5" value="${Xmodel.record.titin}">
-								<input readonly type="text" class="inputTextReadOnly" name="clsdtt" id="clsdtt" size="30" value="${Xmodel.record.titin}">
+								<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="clsdt" id="clsdt" size="6" maxlength="5" value="${model.record.clsdt}">
+								<input readonly type="text" class="inputTextReadOnly" name="clsdtt" id="clsdtt" size="30" value="${model.record.clsdtt}">
 							</td>
 							<td>
-								<select class="inputTextMediumBlueMandatoryField" name="clpr" id="clpr" >
+								<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="clpr" id="clpr" >
 			 						<option value="">-select-</option>
 					 				  	<c:forEach var="record" items="${model.prTypeList}" >
-				                       	 	<option title="${record.kftxt}" value="${record.kfkod}" <c:if test="${model.record.cletyp == record.kfkod}"> selected </c:if> >${record.kfkod}&nbsp;${record.kftxt}</option>
+				                       	 	<option title="${record.kftxt}" value="${record.kfkod}" <c:if test="${model.record.clpr == record.kfkod}"> selected </c:if> >${record.kfkod}&nbsp;${record.kftxt}</option>
 										</c:forEach>
 								</select>
 							</td>
@@ -259,22 +267,22 @@
 								<tr >
 								<tr >
 									<td class="text14">&nbsp;<span title="cletyp">Eksporttype</span><font class="text16RedBold" >*</font></td>
-									<td class="text14">&nbsp;<span title="cleid">Eksportid</span></td>
-									<td class="text14">&nbsp;<span title="cleid">Sertifisert</span></td>
+									<td class="text14">&nbsp;<span title="cleid">MRN nr.</span></td>
+									<td class="text14">&nbsp;<span title="cleser">Sertifisert</span></td>
 																		
 								</tr>
 								<tr>
 									<td class="text14">
-						 				<select class="inputTextMediumBlueMandatoryField" name="cletyp" id="cletyp" >
+						 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="cletyp" id="cletyp" >
 					 						<option value="">-select-</option>
 						 				  	<c:forEach var="record" items="${model.etTypeList}" >
 					                       	 	<option title="${record.kftxt}" value="${record.kfkod}" <c:if test="${model.record.cletyp == record.kfkod}"> selected </c:if> >${record.kfkod}&nbsp;${record.kftxt}</option>
 											</c:forEach>
 										</select>
 						 			</td>
-						 			<td class="text14"><input type="text" class="inputTextMediumBlue" name="cleid" id="cleid" size="20" maxlength="18" value="${Xmodel.record.titin}"></td>
+						 			<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="cleid" id="cleid" size="20" maxlength="18" value="${model.record.cleid}"></td>
 						 			<td class="text14">
-						 				<select class="inputTextMediumBlue" name="cleser" id="cleser" >
+						 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="cleser" id="cleser" >
 					 						<option value="N">Nei</option>
 			 		 				  		<option value="J">Ja</option>
 										</select>
@@ -283,12 +291,35 @@
 								<tr height="10"><td></td></tr>
 								</table>
 							</td>
+							<td >
+								<table width="90%" class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="0">
+				 				<tr >
+									<td class="text16"><b>&nbsp;Vareinfo.</b></td>
+								<tr >
+								<tr >
+									<td class="text14">&nbsp;<span title="clvt">Varebeskrivelse</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="clntk">Kolli</span></td>
+									<td class="text14">&nbsp;<span title="clvkb">Vekt</span></td>
+																		
+								</tr>
+								<tr>
+									<td class="text14">&nbsp;<input tabindex=-1 type="text" class="inputTextReadOnly" name="clvt" id="clvt" size="20" value="${model.record.clvt}"></td>
+						 			<td class="text14"><input tabindex=-1 type="text" class="inputTextReadOnly" name="clntk" id="clntk" size="8" value="${model.record.clntk}"></td>
+						 			<td class="text14"><input tabindex=-1 type="text" class="inputTextReadOnly" name="clvkb" id="clvkb" size="10" value="${model.record.clvkb}"></td>					 			
+								</tr>
+								<tr height="10"><td></td></tr>
+								</table>
+							</td>
+							<td valign="bottom">
+								<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
+							</td>
 						</tr>				
 		 				<tr height="10"><td></td></tr>		 					 		
 		 			</table>
 		 			</td>	
 	            </tr>            
             </table>
+            </form>
            </td>
 	</tr>
 	<tr height="10"><td></td></tr>
@@ -299,7 +330,6 @@
 	</tr>
 		
 	</table> 
-	</form>
 	</td>
 	</tr>
 </table>

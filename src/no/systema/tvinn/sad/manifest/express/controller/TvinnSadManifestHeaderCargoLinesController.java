@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Scope;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -31,13 +30,10 @@ import no.systema.main.validator.LoginValidator;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.DateTimeManager;
 import no.systema.main.util.JsonDebugger;
+import no.systema.jservices.common.values.FasteKoder;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.util.StringManager;
-import no.systema.main.util.DateTimeManager;
-import no.systema.jservices.common.dao.GodsafDao;
-import no.systema.jservices.common.dao.GodsjfDao;
-import no.systema.jservices.common.values.FasteKoder;
-import no.systema.jservices.common.dao.GodsgfDao;
+
 
 import no.systema.tvinn.sad.util.TvinnSadConstants;
 import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
@@ -52,7 +48,7 @@ import no.systema.tvinn.sad.manifest.express.util.manager.ManifestDateManager;
 import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService;
 import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
-
+import no.systema.tvinn.sad.mapper.url.request.UrlRequestParameterMapper;
 /**
  * Sad Manifest Header Items Controller
  * 
@@ -70,7 +66,7 @@ public class TvinnSadManifestHeaderCargoLinesController {
 	private StringManager strMgr = new StringManager();
 	DateTimeManager dateMgr = new DateTimeManager();
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
-	//private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
+	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
 	
 	
 	@PostConstruct
@@ -103,7 +99,6 @@ public class TvinnSadManifestHeaderCargoLinesController {
 		String efsg = request.getParameter("efsg");
 		String efavd = request.getParameter("efavd");
 		
-		
 		//String updateFlag = request.getParameter("updateFlag");
 		logger.warn("action:" + action);
 		
@@ -130,18 +125,18 @@ public class TvinnSadManifestHeaderCargoLinesController {
 		    		
 			    }else{
 			    	//adjust some db-fields
-			    	//this.adjustFieldsForUpdate(recordToValidate);
+			    	this.adjustFieldsForUpdate(recordToValidate);
 			    	
 			    	//Start DML operations if applicable
 					StringBuffer errMsg = new StringBuffer();
 					int dmlRetval = 0;
 					
-					if(strMgr.isNotNull( recordToValidate.getClpro()) ){
-						logger.info("doUpdate");
-						//dmlRetval = this.updateRecord(appUser.getUser(), recordToValidate, TvinnSadConstants.MODE_UPDATE, errMsg);
+					if(strMgr.isNotNull( recordToValidate.getClpro()) && strMgr.isNotNull( recordToValidate.getCltdn()) ){
+						logger.warn("doUpdate branch starting...");
+						dmlRetval = this.updateRecord(appUser.getUser(), recordToValidate, TvinnSadConstants.MODE_UPDATE, errMsg);
 							
 					}else{
-						logger.info("doCreate branch starting...");
+						logger.warn("doCreate branch starting...");
 						logger.info("doCreate");
 						//dmlRetval = this.updateRecord(appUser.getUser(), recordToValidate, TvinnSadConstants.MODE_ADD, errMsg);
 					}
@@ -162,28 +157,21 @@ public class TvinnSadManifestHeaderCargoLinesController {
 			this.setCodeDropDownMgr(appUser, model);
 			
 			if(strMgr.isNotNull(recordToValidate.getClpro()) ){
-				List outputList =  null;
-				if("doFetch".equals(action)){
-					this.adjustFieldsForFetch(recordToValidate);
-					outputList = (List)this.getList(appUser, recordToValidate.getClpro());
-					model.put("list", outputList );
-				}else{
-					//this.adjustFieldsForFetch(updatedDao);
-					//model.put("list", this.getList(appUser, updatedDao.getClpro());
+				//doFetch
+				List<JsonTvinnSadManifestCargoLinesRecord> outputList = (List<JsonTvinnSadManifestCargoLinesRecord>)this.getList(appUser, recordToValidate.getClpro());
+				model.put(TvinnSadConstants.DOMAIN_LIST, outputList );
+				
+				if("doUpdate".equals(action)){
+					//try to get the newly updated record in order to retain all values in the GUI
+					for(JsonTvinnSadManifestCargoLinesRecord record : outputList){
+						if (record.getClpro().equals(recordToValidate.getClpro())){
+							if(record.getCltdn().equals(recordToValidate.getCltdn()) && record.getClavd().equals(recordToValidate.getClavd())){
+								this.adjustFieldsForFetch(record);
+								model.put(TvinnSadConstants.DOMAIN_RECORD, record);
+							}
+						}
+					}
 				}
-				
-				/*
-				if(isValidRecord){
-					//GodsjfDao updatedDao = this.getRecordGodsjf(appUser, recordToValidate);
-					//this.adjustFieldsForFetch(updatedDao);
-					//model.addAttribute(TvinnSadConstants.DOMAIN_RECORD, updatedDao);
-					
-				}else{
-					//in case of validation errors
-					//this.adjustFieldsForFetch(recordToValidate);
-					model.put(TvinnSadConstants.DOMAIN_RECORD, recordToValidate);
-				}*/
-				
 			}
 			
 			if(action==null || "".equals(action)){ 
@@ -273,7 +261,7 @@ public class TvinnSadManifestHeaderCargoLinesController {
 	private Collection<JsonTvinnSadManifestCargoLinesRecord> getList(SystemaWebUser appUser, String tur){
 		Collection<JsonTvinnSadManifestCargoLinesRecord> retval = null;
 		//get BASE URL
-		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_MANIFEST_EXPRESS_CARGOLINESURL;
+		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_MANIFEST_EXPRESS_CARGOLINES_URL;
 		//add URL-parameters
 		String urlRequestParams = "user=" + appUser.getUser() + "&clpro=" + tur;
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
@@ -296,6 +284,50 @@ public class TvinnSadManifestHeaderCargoLinesController {
     	}
     	return retval;
 	}
+	
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param recordToValidate
+	 * @param mode
+	 * @param errMsg
+	 * @return
+	 */
+	private int updateRecord(String applicationUser, JsonTvinnSadManifestCargoLinesRecord recordToValidate, String mode, StringBuffer errMsg){
+		int retval = -1;
+		//get BASE URL
+		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_UPDATE_MANIFEST_EXPRESS_CARGOLINES_URL;
+		//add URL-parameters
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + applicationUser + "&mode=" + mode);
+		urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate)));
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+
+    	//Debug --> 
+    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		JsonTvinnSadManifestCargoLinesContainer container = this.tvinnSadManifestListService.getListCargolinesContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<JsonTvinnSadManifestCargoLinesRecord> outputList = container.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(JsonTvinnSadManifestCargoLinesRecord record : outputList ){
+					retval = 0;
+					logger.warn(record.toString());
+				}
+			}
+    	}
+    	
+    	return retval;
+	}
+	
 	/**
 	 * 
 	 * @param recordToValidate

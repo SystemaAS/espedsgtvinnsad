@@ -50,15 +50,15 @@ public class TvinnSadManifestAjaxHandlerController {
 		 logger.warn(htmlParams);
 		 Set result = new HashSet();
 		 String[] params = htmlParams.split("@");
-		 String tur = params[0].replace("clpro_", "");
-		 String opd = params[0].replace("cltdn_", "");
-		 String avd = params[0].replace("clavd_", "");
+		 String pro = params[0].replace("clpro_", "");
+		 String tdn = params[1].replace("cltdn_", "");
+		 String avd = params[2].replace("clavd_", "");
 		 
-		 if(StringUtils.isNotEmpty(tur) && StringUtils.isNotEmpty(avd) && StringUtils.isNotEmpty(opd) ){
+		 if(StringUtils.isNotEmpty(pro) && StringUtils.isNotEmpty(avd) && StringUtils.isNotEmpty(tdn) ){
 		 
 			 //prepare the access CGI with RPG back-end
-			 String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_MANIFEST_EXPRESS_CARGOLINESURL;
-			 String urlRequestParams = "user=" + applicationUser + "&clpro=" + tur + "&clavd=" + avd + "&cltdn=" + opd; 
+			 String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_MANIFEST_EXPRESS_CARGOLINES_URL;
+			 String urlRequestParams = "user=" + applicationUser + "&clpro=" + pro + "&clavd=" + avd + "&cltdn=" + tdn; 
 			 logger.warn("URL: " + BASE_URL);
 			 logger.warn("URL PARAMS: " + urlRequestParams);
 			

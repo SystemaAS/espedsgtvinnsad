@@ -23,12 +23,9 @@ import no.systema.main.validator.LoginValidator;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.DateTimeManager;
 import no.systema.main.util.JsonDebugger;
-import no.systema.jservices.bcore.z.maintenance.model.dao.services.KofastDaoServices;
 import no.systema.jservices.common.values.FasteKoder;
-import no.systema.jservices.bcore.z.maintenance.model.dao.entities.KofastDao;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.util.StringManager;
-import no.systema.main.util.DateTimeManager;
 
 
 import no.systema.tvinn.sad.util.TvinnSadConstants;
