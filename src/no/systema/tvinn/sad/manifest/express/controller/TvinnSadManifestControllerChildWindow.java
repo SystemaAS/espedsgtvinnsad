@@ -30,9 +30,12 @@ import no.systema.main.util.DateTimeManager;
 import no.systema.main.util.EncodingTransformer;
 import no.systema.main.util.JsonDebugger;
 import no.systema.main.model.SystemaWebUser;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesRecord;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestPostalCodeContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestPostalCodeRecord;
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestChildwindowService;
+import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
 import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeContainer;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
@@ -191,7 +194,45 @@ public class TvinnSadManifestControllerChildWindow {
 	    	return successView;
 		}
 	}
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsadmanifest_childwindow_released_cargolines.do", params="action=doInit",  method={RequestMethod.GET} )
+	public ModelAndView doInitReleasedCargoLines(@ModelAttribute ("record") JsonTvinnSadManifestCargoLinesRecord recordToValidate, HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doInitReleasedCargoLines");
+		Map model = new HashMap();
+		
+		String callerType = request.getParameter("ctype");
+		
+		ModelAndView successView = new ModelAndView("tvinnsadmanifest_childwindow_released_cargolines");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			Collection<JsonTvinnSadManifestCargoLinesRecord> list00= this.getReleasedCargoLinesList(appUser);
+			model.put("releasedCargoLinesList", list00);
+			model.put("callerType", callerType);
+			model.put("parentClpro", recordToValidate.getClpro());
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
 	
+	/**
+	 * 
+	 * @param searchFilter
+	 * @param appUser
+	 * @return
+	 */
 	private String getRequestUrlKeyParametersSearchChildWindow(JsonTvinnSadManifestPostalCodeRecord searchFilter, SystemaWebUser appUser){
 		StringBuffer urlRequestParamsKeys = new StringBuffer();
 		urlRequestParamsKeys.append("user=" + appUser.getUser());
@@ -301,6 +342,37 @@ public class TvinnSadManifestControllerChildWindow {
 		return list;
 	}
 	
+	/**
+	 * Gets the list of released cargo lines in order to bind these to a specific tur
+	 * @param appUser
+	 * @return
+	 */
+	private Collection<JsonTvinnSadManifestCargoLinesRecord> getReleasedCargoLinesList(SystemaWebUser appUser){
+		Collection<JsonTvinnSadManifestCargoLinesRecord> retval = null;
+		//get BASE URL
+		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_MANIFEST_EXPRESS_CARGOLINES_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser() + "&clpro=0&pick=1";
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		JsonTvinnSadManifestCargoLinesContainer container = this.tvinnSadManifestListService.getListCargolinesContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<JsonTvinnSadManifestCargoLinesRecord> outputList = container.getList();	
+			retval = outputList;
+    	}
+    	return retval;
+	}
 	
 	//SERVICES
 	@Autowired
@@ -314,6 +386,9 @@ public class TvinnSadManifestControllerChildWindow {
 	
 	@Autowired
 	TvinnSadManifestChildwindowService tvinnSadManifestChildwindowService;
+	
+	@Autowired
+	private TvinnSadManifestListService tvinnSadManifestListService;
 	
 }
 

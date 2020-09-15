@@ -167,15 +167,17 @@
 		</table>
 		</td>
 	</tr>
- 		
+ 	<td>
+		<input class="inputFormSubmitBlue" type="button" name="cnButton" id="cnButton" value='Plukke oppdrag'>
+	</td>	
 	<tr>
 		<td class="text14" valign="top">
 			<form name="cargoLineForm" id="cargoLineForm" action="tvinnsadmanifest_edit_cargolines.do" method="post">
 			<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
 			<input type="hidden" name="efuuid" id="efuuid" value="${model.efuuid}">
 			<input type="hidden" name="action" id="action" value="doUpdate">
-			<input type="hidden" name="clpro" id="clpro" value="${model.record.clpro}">
-			<input type="hidden" name="clavd" id="clavd" value="${model.record.clavd}">
+			<input type="hidden" name="clpro" id="clpro" value="${model.efpro}">
+			<input type="hidden" name="clavd" id="clavd" value="${model.efavd}">
 			<input type="hidden" name="cltdn" id="cltdn" value="${model.record.cltdn}">
 			<input type="hidden" name="clst" id="clst" value="${model.record.clst}">
 			

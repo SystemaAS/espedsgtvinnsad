@@ -82,6 +82,39 @@ public class TvinnSadManifestAjaxHandlerController {
 		 return result;
 	 }
 	
+	
+	@RequestMapping(value = "bindOppdragToTur_TvinnSadManifest.do", method = RequestMethod.GET)
+	public @ResponseBody Set<JsonTvinnSadManifestCargoLinesRecord> bindOppdragToTur
+	  						(@RequestParam String applicationUser, @RequestParam String requestParams ) {
+		 logger.warn("Inside: bindOppdragToTur_TvinnSadManifest.do()");
+		 logger.warn(requestParams);
+		 Set result = new HashSet();
+		 
+		 
+		 //prepare the access CGI with RPG back-end
+		 String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_UPDATE_MANIFEST_EXPRESS_CARGOLINES_URL;
+		 String urlRequestParams = "user=" + applicationUser + requestParams; 
+		 logger.warn("URL: " + BASE_URL);
+		 logger.warn("URL PARAMS: " + urlRequestParams);
+		
+		 String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+		 if(jsonPayload!=null){
+			
+			JsonTvinnSadManifestCargoLinesContainer container = this.tvinnSadManifestListService.getListCargolinesContainer(jsonPayload);
+			//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+			Collection<JsonTvinnSadManifestCargoLinesRecord> outputList = container.getList();
+			for(JsonTvinnSadManifestCargoLinesRecord record : outputList){
+				this.adjustFieldsForFetch(record);
+				result.add(record);
+			}
+		 }
+		 
+		 return result;
+	 }
+	
+	
 	private void adjustFieldsForUpdate(JsonTvinnSadManifestCargoLinesRecord record){
 		record.setCl0068a(new ManifestDateManager().convertToDate_ISO(record.getCl0068a()));
 	}

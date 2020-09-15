@@ -1,6 +1,7 @@
   //this variable is a global jQuery var instead of using "$" all the time. Very handy
   var jq = jQuery.noConflict();
   var counterIndex = 0;
+  var BLOCKUI_OVERLAY_MESSAGE_DEFAULT = "Please wait...";
   
   //Overlay on tab (to mark visually a delay...)
   jq(function() {
@@ -36,6 +37,12 @@
     
   });
   
+  //used and called only from a childwindow in order to reload this page with BlockUI() ...
+  function callParent(){
+	  setBlockUI();
+	  window.location.reload(false); 
+  }
+  
   jq(function() {
 	  jq("#cl0068a").datepicker({ 
 		  dateFormat: 'ddmmy' 	  
@@ -62,6 +69,17 @@
 				jq('#clsdtIdLink').click();
 			}
 	  });
+	  
+	//Plocka oppdrag
+	  jq('#cnButton').click(function() {
+	  	jq('#cnButton').attr('target','_blank');
+	  	window.open('tvinnsadmanifest_childwindow_released_cargolines.do?action=doInit&ctype=cnButton&clpro=' + + jq('#clpro').val(), "releasedCargolinesWin", "top=300px,left=450px,height=600px,width=700px,scrollbars=no,status=no,location=no");
+	  });
+	  jq('#cnButton').keypress(function(e){ //extra feature for the end user
+			if(e.which == 13) {
+				jq('#cnButton').click();
+			}
+	  });
 	   
   });
   
@@ -76,6 +94,7 @@
   }
 
   jq(document).ready(function() {
+	 
 	//jq.fn.dataTable.moment( 'DDMMYY' );    
     //init table (no ajax, no columns since the payload is already there by means of HTML produced on the back-end)
     jq('#mainList').dataTable( {
@@ -95,6 +114,7 @@
     jq('input.mainList_filter').on( 'keyup click', function () {
     		filterGlobal();
     });
+    
   });
   
   
