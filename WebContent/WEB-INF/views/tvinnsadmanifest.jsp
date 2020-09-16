@@ -145,7 +145,7 @@
 		          	   <td width="2%" class="tableCellFirst" align="center">
 		               		<a style="display: block;" href="tvinnsadmanifest_edit.do?action=doFetch&efuuid=${record.efuuid}" onClick="setBlockUI();">
                					<c:choose>
-		               				<c:when test="${record.efst2 != 'D'}">
+		               				<c:when test="${record.efst != 'S'}">
 		               					<img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">
 		               				</c:when>
 		               				<c:otherwise>
@@ -168,14 +168,14 @@
 		               <td width="2%" class="tableCell" ><c:if test="${record.efdtr > 0}">${record.efdtr}</c:if></td>
 		               <td width="2%" class="tableCell" align="center">
 		               		<c:choose>
-	               				<c:when test="${record.efst2 != 'D'}">
+	               				<c:when test="${record.efst != 'S'}">
 	               					<a class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
 										<img src="resources/images/delete.gif" border="0" alt="remove">
 									</a>
 									<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
 										<form action="tvinnsadmanifest_edit_delete.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
 										 	<input type="hidden" name="currentUuid${counter.count}" id="currentUuid${counter.count}" value="${record.efuuid}">
-										 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="D">
+										 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="S">
 											<p class="text14" >Er du sikker på at du vil slette denne?</p>
 											<p class="text14"> Tekst </p>
 											<input type="text" class="inputText" name="currentText${counter.count}" id="currentText${counter.count}" size="45" maxlength="70" value=''>&nbsp;</td>

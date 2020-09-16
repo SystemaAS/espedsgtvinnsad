@@ -206,51 +206,112 @@ public class TvinnSadManifestHeaderCargoLinesController {
 	 */
 	@RequestMapping(value="tvinnsadmanifest_edit_cargolines_delete.do", method={RequestMethod.GET, RequestMethod.POST} )
 	public ModelAndView doCargolinesDelete(JsonTvinnSadManifestCargoLinesRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
-		ModelAndView successView = new ModelAndView("redirect:tvinnsadmanifest_edit_cargolines.do");
 		logger.info("Inside: doCargolinesDelete");
 		
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		Map model = new HashMap();
 		
-		String efuuid = request.getParameter("efuuid");
-		String efsg = request.getParameter("efsg");
+		String clpro = null;
+		String cltdn = null;
+		String clavd = null;
+		String euuid = null;
+		String efsg = null;
+		
+		Enumeration requestParameters = request.getParameterNames();
+	    while (requestParameters.hasMoreElements()) {
+	        String element = (String) requestParameters.nextElement();
+	        String value = request.getParameter(element);
+	        if (element != null && value != null) {
+        		logger.warn("####################################################");
+    			logger.warn("param Name : " + element + " value: " + value);
+    			if(element.startsWith("currentClpro")){
+    				clpro = value;
+    			}else if(element.startsWith("currentCltdn")){
+    				cltdn = value;
+    			}else if(element.startsWith("currentClavd")){
+    				clavd = value;
+    			}else if(element.startsWith("currentEuuid")){
+    				euuid = value;
+    			}else if(element.startsWith("currentEfsg")){
+    				efsg = value;
+    			}
+    			
+    		}
+    	}
+	    String redirect = "tvinnsadmanifest_edit_cargolines.do?action=doFetch&clpro=" + clpro + "&efsg=" + efsg + "&efavd=" + clavd + "&efuuid=" + euuid; 
+	    ModelAndView successView = new ModelAndView("redirect:" + redirect);
+		
 		
 		//check user (should be in session already)
 		if(appUser==null){
 			return loginView;
 		
 		}else{
-			//----------------------------
-			//Fetch record and update it 
-			//----------------------------
-			//TODO
-			/*
-			if(strMgr.isNotNull(recordToValidate.getGogn()) ){
+			
+			if(strMgr.isNotNull( clpro ) && strMgr.isNotNull(cltdn) && strMgr.isNotNull(clavd)){
+				recordToValidate.setClpro(clpro);
+				recordToValidate.setCltdn(cltdn);
+				recordToValidate.setClavd(clavd);
 				int dmlRetval = 0;
 				StringBuffer errMsg = new StringBuffer();
 				//fetch record
-				GodsjfDao recordToDelete = this.getRecordGodsjf(appUser, recordToValidate);
-				if(recordToDelete!=null && strMgr.isNotNull( recordToDelete.getGogn()) ){
-					//adjust some db-fields
-					recordToDelete.setGotrnr(DELETE_TEXT_ON_DB);
-					this.adjustFieldsForUpdate(recordToDelete);
-					logger.info("doDelete");
-					//Update with delete flag
-					dmlRetval = this.updateRecord(appUser.getUser(), recordToDelete, GodsnoConstants.MODE_UPDATE, errMsg);
-					if(dmlRetval<0){
-						logger.info("ERROR on delete ... ??? check your code");
-						model.addAttribute(GodsnoConstants.ASPECT_ERROR_MESSAGE, errMsg.toString());
-						
-					}else{
-						logger.info("doDelete = OK");
-					}
+				logger.warn("doDelete");
+				//Update with delete flag
+				dmlRetval = this.deleteRecord(appUser.getUser(), recordToValidate, errMsg);
+				if(dmlRetval<0){
+					logger.info("ERROR on delete ... ??? check your code");
+					
+				}else{
+					logger.info("doDelete = OK");
 				}
-				
-			}*/
+
+			}
 
 			return successView;
 		}
 	}
+	
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param recordToValidate
+	 * @param errMsg
+	 * @return
+	 */
+	private int deleteRecord(String applicationUser, JsonTvinnSadManifestCargoLinesRecord recordToValidate, StringBuffer errMsg){
+		int retval = -1;
+		//get BASE URL
+		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_UPDATE_MANIFEST_EXPRESS_CARGOLINES_URL;
+		//add URL-parameters
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + applicationUser + "&mode=R" + "&clavd=" + recordToValidate.getClavd() + "&cltdn=" + recordToValidate.getCltdn() + "&clpro=" + recordToValidate.getClpro());
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+
+    	//Debug --> 
+    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		JsonTvinnSadManifestCargoLinesContainer container = this.tvinnSadManifestListService.getListCargolinesContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<JsonTvinnSadManifestCargoLinesRecord> outputList = container.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(JsonTvinnSadManifestCargoLinesRecord record : outputList ){
+					retval = 0;
+					logger.warn(record.toString());
+				}
+			}
+    	}
+    	
+    	return retval;
+	}
+	
 	
 	/**
 	 * 

@@ -204,6 +204,8 @@ public class TvinnSadManifestHeaderController {
 		logger.warn("Inside: doDelete");
 		String uuid = null;
 		String notisText = null;
+		String status = null;
+		
 		Enumeration requestParameters = request.getParameterNames();
 	    while (requestParameters.hasMoreElements()) {
 	        String element = (String) requestParameters.nextElement();
@@ -213,6 +215,8 @@ public class TvinnSadManifestHeaderController {
     			logger.warn("param Name : " + element + " value: " + value);
     			if(element.startsWith("currentUuid")){
     				uuid = value;
+    			}else if(element.startsWith("selectedStatus")){
+    				status = value;
     			}else if(element.startsWith("currentText")){
     				notisText = value;
     			}
@@ -232,7 +236,7 @@ public class TvinnSadManifestHeaderController {
 			
 			if(strMgr.isNotNull( uuid )){
 				recordToValidate.setEfuuid(uuid);
-				recordToValidate.setEfst2("D");
+				recordToValidate.setEfst(status);
 				int dmlRetval = 0;
 				StringBuffer errMsg = new StringBuffer();
 				//fetch record
@@ -348,7 +352,7 @@ public class TvinnSadManifestHeaderController {
 		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_UPDATE_MANIFEST_EXPRESS_URL;
 		//add URL-parameters
 		StringBuffer urlRequestParams = new StringBuffer();
-		urlRequestParams.append("user=" + applicationUser + "&mode=D" + "&efuuid=" + recordToValidate.getEfuuid() + "&efst2=" + recordToValidate.getEfst2());
+		urlRequestParams.append("user=" + applicationUser + "&mode=D" + "&efuuid=" + recordToValidate.getEfuuid() + "&efst=" + recordToValidate.getEfst());
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
     	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
     	logger.warn("URL PARAMS: " + urlRequestParams);

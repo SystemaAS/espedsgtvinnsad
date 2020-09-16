@@ -128,11 +128,12 @@
                 		<th class="tableHeaderField" >Avd</th>
                 		<th class="tableHeaderField" >Oppdrag</th>
                 		<th class="tableHeaderField" >St</th>
-                		<th class="tableHeaderField" >Eksport type</th>
-                		<th class="tableHeaderField" >MRN nr.</th>
-                		<th class="tableHeaderField" >Ser</th>
+                		<th class="tableHeaderField" >Eksp.type</th>
+                		<th class="tableHeaderField" >MRN nr</th>
+                		<th class="tableHeaderField" >Sert</th>
                 		<th class="tableHeaderField" >Bilnr</th>
-                		<th class="tableHeaderField" >E.enh.</th>
+                		<th class="tableHeaderField" >E.enh</th>
+                		<th class="tableHeaderField" >Slett</th>
                 	</tr>
                 	</thead>
                 	<tbody> 
@@ -153,7 +154,24 @@
 		               <td width="2%" class="tableCell" align="center" >${record.cleser}</td>
 		               <td width="2%" class="tableCell" align="center" >${record.cltrid}</td>
 		               <td width="2%" class="tableCell" align="center" >${record.cl3039e}</td>
-		               
+		               <td width="2%" class="tableCell" align="center" >
+		               		<a class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
+								<img src="resources/images/delete.gif" border="0" alt="remove">
+							</a>
+							<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
+								<form action="tvinnsadmanifest_edit_cargolines_delete.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
+								 	<input type="hidden" name="currentClpro${counter.count}" id="currentClpro${counter.count}" value="${record.clpro}">
+								 	<input type="hidden" name="currentCltdn${counter.count}" id="currentCltdn${counter.count}" value="${record.cltdn}">
+								 	<input type="hidden" name="currentClavd${counter.count}" id="currentClavd${counter.count}" value="${record.clavd}">
+								 	<input type="hidden" name="currentEuuid${counter.count}" id="currentEuuid${counter.count}" value="${model.efuuid}">
+								 	<input type="hidden" name="currentEfsg${counter.count}" id="currentEfsg${counter.count}" value="${model.efsg}">
+								 	<p class="text14" >Er du sikker på at du vil slette denne?</p>
+									<p class="text14"> Tekst </p>
+									<input type="text" class="inputText" name="currentText${counter.count}" id="currentText${counter.count}" size="45" maxlength="70" value=''>&nbsp;</td>
+									
+								</form>
+							</div>
+	               	   </td>
 		            </tr> 
 		            </c:forEach>
 		            </tbody>
