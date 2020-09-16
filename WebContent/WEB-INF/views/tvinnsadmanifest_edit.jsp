@@ -80,15 +80,15 @@
 	<%-- --------------------------- --%>	
  	<%-- tab area container PRIMARY  --%>
 	<%-- --------------------------- --%>
-	<form name="manifestForm" id="manifestForm" method="post">
+	<form name="manifestForm" id="manifestForm" action="tvinnsadmanifest_edit.do" method="post">
 			<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
 			<input type="hidden" name="updateId" id="updateId" value=""> <%-- this value is set in AJAX in order to know if the SAVE = ADD or UPDATE --%>
 			<input type="hidden" name="actionU" id="actionU" value="doUpdate">
 			<c:if test="${not empty model.record.efuuid}">
+				<input type="hidden" name="efuuid" id=efuuid value="${model.record.efuuid}">
 				<input type="hidden" name="efavd" id=efavd value="${model.record.efavd}">
 				<input type="hidden" name="efsg" id=efsg value="${model.record.efsg}">
-				<input type="hidden" name="efpro" id=efpro value="${model.record.efpro}">
-								
+				<input type="hidden" name="efpro" id=efpro value="${model.record.efpro}">			
 			</c:if>
 			
 	<table style="width:100%;" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
@@ -140,6 +140,23 @@
 					</table>
 				</td>
 			</tr>
+			</c:if>
+			
+			<c:if test="${not empty model.invalidManifest}">
+				<tr>
+					<td colspan="10">
+		            	<table align="left" border="0" cellspacing="0" cellpadding="0">
+		            	<tr>
+					<td class="text14 tableCellGray" style="color: #9F6000;">
+	           			<font class="inputText" style="background-color: #FEEFB3;color: #9F6000;">
+	           				&nbsp;Lasten er ikke gyldig.&nbsp;&nbsp;Manifestet kan derfor ikke sendes.
+	           				&nbsp;&nbsp;Kontroller at alle linjene i manifestet har status=OK, og at det finnes minst en linje.
+	           			</font>
+	           		</td>           			
+	           		</tr>
+	           		</table>
+	           		</td>
+				</tr>
 			</c:if>
  		<tr>
 			<td style="width:30%" class="text14" valign="top">
@@ -503,6 +520,9 @@
 						<tr>
 							<td align="right" >
 								<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
+								<c:if test="${empty model.invalidManifest}">
+									&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
+								</c:if>
 							</td>
 						</tr>
 					</table>

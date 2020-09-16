@@ -137,9 +137,15 @@
                 	</tr>
                 	</thead>
                 	<tbody> 
-		           	<c:forEach items="${model.list}" var="record" varStatus="counter">    
-		              <tr class="tableRow" height="20" >
-		          
+		           	<c:forEach items="${model.list}" var="record" varStatus="counter">
+		           	 <c:choose>    
+			              <c:when test="${record.clst == 'O'}">
+			              	<tr class="tableRow" height="20" >
+			          	  </c:when>
+			          	  <c:otherwise>
+			          	  	<tr class="tableRow" style="background-color: #FEEFB3;color: #9F6000;" height="20" >
+			          	  </c:otherwise>
+		          	  </c:choose>	
 		          	   <td width="2%" class="tableCellFirst" align="center" >
 		               		<a id="clpro_${record.clpro}@cltdn_${record.cltdn}@clavd_${record.clavd}" href="#" onClick="getItemData(this);">
                					<img src="resources/images/update.gif" border="0" alt="edit">

@@ -31,6 +31,8 @@ import no.systema.main.util.StringManager;
 import no.systema.tvinn.sad.util.TvinnSadConstants;
 import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
 import no.systema.z.main.maintenance.service.MaintMainKofastService;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesRecord;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
@@ -72,8 +74,25 @@ public class TvinnSadManifestHeaderController {
 		}
 	}
 	
-	
-		  
+	/**
+	 * Send the manifest to a queue
+	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsadmanifest_send.do", method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doManifestSend(JsonTvinnSadManifestRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		logger.warn("Inside: doManifestSend");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		String redirect = "redirect:tvinnsadmanifest_edit.do?action=doFetch&user=" + appUser.getUser() + "&efuuid=" + recordToValidate.getEfuuid();
+		ModelAndView successView = new ModelAndView(redirect);
+		
+		//TODO
+		
+		return successView;
+	}	  
 	/**
 	 * 
 	 * @param recordToValidate
@@ -135,8 +154,8 @@ public class TvinnSadManifestHeaderController {
 						try{recordToValidate.setEfuuid(this.manifestExpressMgr.getUuid());logger.info(recordToValidate.getEfuuid()); }
 						catch(Exception e){ logger.error("#####################:" + e.getMessage()); }
 						
-						logger.info("doCreate branch starting...");
-						logger.info("doCreate");
+						logger.warn("doCreate branch starting...");
+						logger.warn("doCreate");
 						dmlRetval = this.updateRecord(appUser.getUser(), recordToValidate, TvinnSadConstants.MODE_ADD, errMsg);
 					}
 					logger.info(Calendar.getInstance().getTime() + " CONTROLLER end - timestamp");
@@ -160,7 +179,10 @@ public class TvinnSadManifestHeaderController {
 					JsonTvinnSadManifestRecord record = this.getRecord(appUser, recordToValidate.getEfuuid());
 					this.adjustFieldsForFetch(record);
 					model.put(TvinnSadConstants.DOMAIN_RECORD, record);
-					
+					//check if the manifest cargo lines are valid
+					if(!this.isValidManifest(appUser, record.getEfpro())){
+						model.put("invalidManifest", "1");
+					}
 				}else{
 					//in case of validation errors
 					//this.adjustFieldsForFetch(recordToValidate);
@@ -408,6 +430,46 @@ public class TvinnSadManifestHeaderController {
 		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(appUser, FasteKoder.SADEFBKODE.toString(), model, urlCgiProxyService, maintMainKofastService);
 		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(this.urlCgiProxyService, this.tvinnSadDropDownListPopulationService, 
 																	 model,appUser,CodeDropDownMgr.CODE_2_COUNTRY, null, null);
+	}
+	
+	/**
+	 * 
+	 * @param appUser
+	 * @param tur
+	 * @return
+	 */
+	private boolean isValidManifest(SystemaWebUser appUser, String tur){
+		String STATUS_OK = "O";
+		boolean retval = true;
+		//get BASE URL
+		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_MANIFEST_EXPRESS_CARGOLINES_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser() + "&clpro=" + tur;
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		JsonTvinnSadManifestCargoLinesContainer container = this.tvinnSadManifestListService.getListCargolinesContainer(jsonPayload);
+    		if(container.getList()!=null && container.getList().size()>0){
+    			Collection<JsonTvinnSadManifestCargoLinesRecord> list = container.getList();	
+				outer: for(JsonTvinnSadManifestCargoLinesRecord record: list ){
+					if (!record.getClst().equals(STATUS_OK)){
+						retval = false;
+						break outer;
+					}
+				}
+    		}else{
+    			retval = false;
+    		}
+    	}
+    	return retval;
 	}
 	
 	//SERVICES

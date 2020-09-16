@@ -35,6 +35,11 @@
     	setBlockUI();
     });
     
+    jq('#sendButton').click(function() { 
+    	setBlockUI();
+		window.location = 'tvinnsadmanifest_send.do?efuuid=' + jq('#efuuid').val();
+    });
+    
   });
   
   jq(function() {
