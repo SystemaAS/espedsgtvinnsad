@@ -147,7 +147,7 @@
 			          	  </c:otherwise>
 		          	  </c:choose>	
 		          	   <td width="2%" class="tableCellFirst" align="center" >
-		               		<a id="clpro_${record.clpro}@cltdn_${record.cltdn}@clavd_${record.clavd}" href="#" onClick="getItemData(this);">
+		               		<a style="display: block; width: 100%; height: 100%;" id="clpro_${record.clpro}@cltdn_${record.cltdn}@clavd_${record.clavd}" href="#" onClick="getItemData(this);">
                					<img src="resources/images/update.gif" border="0" alt="edit">
                				</a>
                				
@@ -170,7 +170,7 @@
 		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cltrid}</td>
 		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cl3039e}</td>
 		               <td width="2%" class="tableCell" align="center" >
-		               		<a class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
+		               		<a style="display: block; width: 100%; height: 100%;" class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
 								<img src="resources/images/delete.gif" border="0" alt="remove">
 							</a>
 							<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">

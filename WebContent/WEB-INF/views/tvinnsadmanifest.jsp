@@ -150,7 +150,7 @@
 		          	  </c:choose>	
 		          
 		          	   <td width="2%" class="tableCellFirst" align="center">
-		               		<a style="display: block;" href="tvinnsadmanifest_edit.do?action=doFetch&efuuid=${record.efuuid}" onClick="setBlockUI();">
+		               		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsadmanifest_edit.do?action=doFetch&efuuid=${record.efuuid}" onClick="setBlockUI();">
                					<c:choose>
 		               				<c:when test="${record.efst != 'S'}">
 		               					<img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">
@@ -194,7 +194,7 @@
 		               <td width="2%" class="tableCell" align="center">
 		               		<c:choose>
 	               				<c:when test="${record.efst != 'S'}">
-	               					<a class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
+	               					<a style="display: block; width: 100%; height: 100%;" class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
 										<img src="resources/images/delete.gif" border="0" alt="remove">
 									</a>
 									<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
