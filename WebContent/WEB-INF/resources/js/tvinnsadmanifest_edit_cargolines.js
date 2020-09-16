@@ -73,7 +73,7 @@
 	//Plocka oppdrag
 	  jq('#cnButton').click(function() {
 	  	jq('#cnButton').attr('target','_blank');
-	  	window.open('tvinnsadmanifest_childwindow_released_cargolines.do?action=doInit&ctype=cnButton&clpro=' + + jq('#clpro').val(), "releasedCargolinesWin", "top=300px,left=450px,height=600px,width=700px,scrollbars=no,status=no,location=no");
+	  	window.open('tvinnsadmanifest_childwindow_released_cargolines.do?action=doInit&ctype=cnButton&clpro=' + + jq('#efpro').val(), "releasedCargolinesWin", "top=300px,left=450px,height=600px,width=700px,scrollbars=no,status=no,location=no");
 	  });
 	  jq('#cnButton').keypress(function(e){ //extra feature for the end user
 			if(e.which == 13) {

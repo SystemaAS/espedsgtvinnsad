@@ -148,7 +148,16 @@
 	               	   </td>
 		               <td width="2%" class="tableCell" align="center" >${record.clavd}</td>
 		               <td width="2%" class="tableCell" align="center" >${record.cltdn}</td>
-		               <td width="2%" class="tableCell" align="center" >${record.clst}</td>
+		               <td width="2%" class="tableCell" align="center" >
+	               			<c:choose>
+	               				<c:when test="${record.clst == 'O'}">
+	               					OK
+	               				</c:when>
+	               				<c:otherwise>
+	               					${record.clst}
+	               				</c:otherwise>
+               				</c:choose>
+		               </td>
 		               <td width="2%" class="tableCell" align="center" >${record.cletyp}&nbsp;${record.cletypt}</td>
 		               <td width="2%" class="tableCell" align="center" >${record.cleid}</td>
 		               <td width="2%" class="tableCell" align="center" >${record.cleser}</td>
@@ -192,11 +201,11 @@
 		<td class="text14" valign="top">
 			<form name="cargoLineForm" id="cargoLineForm" action="tvinnsadmanifest_edit_cargolines.do" method="post">
 			<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
+			<input type="hidden" name="efpro" id="efpro" value="${model.efpro}">
 			<input type="hidden" name="efuuid" id="efuuid" value="${model.efuuid}">
 			<input type="hidden" name="action" id="action" value="doUpdate">
 			<input type="hidden" name="clpro" id="clpro" value="${model.record.clpro}">
 			<input type="hidden" name="clavd" id="clavd" value="${model.record.clavd}">
-			<input type="hidden" name="cltdn" id="cltdn" value="${model.record.cltdn}">
 			<input type="hidden" name="clst" id="clst" value="O"> <%-- O=OK always  --%>
 			
 			
@@ -224,9 +233,8 @@
 							<td colspan="4" class="text16"><b>&nbsp;Import</b></td>
 						<tr >
 		 				<tr >
-							<%--
-							<td class="text14">&nbsp;<span title="clvt">Varebeskrivelse</span><font class="text16RedBold" >*</font></td>
-							 --%>
+							<td class="text14">&nbsp;<span title="cltdn">Oppdrag</span></td>
+
 							<td class="text14">&nbsp;<span title="clrg">Deklarantnr.</span><font class="text16RedBold" >*</font></td>
 							<td class="text14">&nbsp;<span title="cl0068a">Dato</span><font class="text16RedBold" >*</font></td>
 							<td class="text14">&nbsp;<span title="cl0068b">Sekvensnr.</span><font class="text16RedBold" >*</font></td>
@@ -237,7 +245,8 @@
 							
 		 				</tr>
 		 				<tr >
-		 					<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="clrg" id="clrg" size="12" maxlength="11" value="${model.record.clrg}"></td>
+		 					<td class="text14"><input type="text" class="inputTextReadOnly" style="color:yellow;background-color:#BBBBBB;" name="cltdn" id="cltdn" size="8" maxlength="7" value="${model.record.cltdn}"></td>
+				 			<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="clrg" id="clrg" size="12" maxlength="11" value="${model.record.clrg}"></td>
 				 			<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="cl0068a" id="cl0068a" size="7" maxlength="6" value="${model.record.cl0068a}"></td>
 				 			<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="cl0068b" id="cl0068b" size="7" maxlength="6" value="${model.record.cl0068b}"></td>
 							<td>
