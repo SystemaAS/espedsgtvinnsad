@@ -50,7 +50,8 @@ public class JsonTvinnSadManifestRecord extends JsonAbstractGrandFatherRecord {
 	private String efsjadt = "0"; //SONET (8,0) Sjåfør Sjåfør fødselsdato
 	private String efbekr = ""; //TEGN (1) Sjåfør bekreftelse
 	private String eferr = ""; //TEGN (50) Feilmelding ved SND
-	
+	//
+	private int own_valid = 1;
 	/**
 	 * 
 	 * @return

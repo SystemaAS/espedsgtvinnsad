@@ -49,6 +49,7 @@ import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManif
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
 import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
+import no.systema.tvinn.sad.manifest.express.util.manager.ManifestExpressMgr;
 
 
 
@@ -137,7 +138,13 @@ public class TvinnSadManifestController {
 	    		//----------------------------------------------------------------
 				//now filter the topic list with the search filter (if applicable)
 				//----------------------------------------------------------------
-				outputList = jsonTvinnSadManifestContainer.getList();	
+				outputList = jsonTvinnSadManifestContainer.getList();
+				for(JsonTvinnSadManifestRecord record: outputList){
+					//check if the manifest cargo lines are valid
+					if(!manifestExpressMgr.isValidManifest(appUser, record.getEfpro())){
+						record.setOwn_valid(-1);
+					}
+				}
 				logger.info(outputList.toString());
 	    	}	
 			//--------------------------------------
@@ -322,19 +329,15 @@ public class TvinnSadManifestController {
 	//SERVICES
 	@Autowired
 	private UrlCgiProxyService urlCgiProxyService;
-	public void setUrlCgiProxyService (UrlCgiProxyService value){ this.urlCgiProxyService = value; }
-	public UrlCgiProxyService getUrlCgiProxyService(){ return this.urlCgiProxyService; }
 	
 	@Autowired
 	private TvinnSadDropDownListPopulationService tvinnSadDropDownListPopulationService;
-	public void setTvinnSadDropDownListPopulationService (TvinnSadDropDownListPopulationService value){ this.tvinnSadDropDownListPopulationService=value; }
-	public TvinnSadDropDownListPopulationService getTvinnSadDropDownListPopulationService(){return this.tvinnSadDropDownListPopulationService;}
 	
 	@Autowired
 	private TvinnSadManifestListService tvinnSadManifestListService;
-	public void setTvinnSadManifestListService (TvinnSadManifestListService value){ this.tvinnSadManifestListService = value; }
-	public TvinnSadManifestListService getTvinnSadManifestListService(){ return this.tvinnSadManifestListService; }
 	
+	@Autowired
+	ManifestExpressMgr manifestExpressMgr;
 
 }
 

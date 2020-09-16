@@ -140,7 +140,14 @@
                 	</thead>
                 	<tbody> 
 		           	<c:forEach items="${list}" var="record" varStatus="counter">    
-		              <tr class="tableRow" height="20" >
+		              <c:choose>    
+			              <c:when test="${record.own_valid > 0}">
+			              	<tr class="tableRow" height="20" >
+			          	  </c:when>
+			          	  <c:otherwise>
+			          	  	<tr class="tableRow" style="background-color: #FEEFB3;color:#9F6000;" height="20" >
+			          	  </c:otherwise>
+		          	  </c:choose>	
 		          
 		          	   <td width="2%" class="tableCellFirst" align="center">
 		               		<a style="display: block;" href="tvinnsadmanifest_edit.do?action=doFetch&efuuid=${record.efuuid}" onClick="setBlockUI();">
@@ -154,10 +161,10 @@
 	               				</c:choose>
                				</a>
 	               	   </td>
-		               <td width="2%" align="center" class="tableCell" >${record.efavd}</td>
-		               <td width="2%" align="center" class="tableCell" ><c:if test="${record.efpro > 0}">${record.efpro}</c:if></td>
-		               <td width="2%" align="center" class="tableCell" >${record.efsg}</td>
-		               <td width="2%" align="center" class="tableCell" >
+		               <td width="2%" align="center" class="tableCell" <c:if test="${record.own_valid < 0}">style="color: #9F6000;" </c:if> >${record.efavd}</td>
+		               <td width="2%" align="center" class="tableCell" <c:if test="${record.own_valid < 0}">style="color: #9F6000;" </c:if> ><c:if test="${record.efpro > 0}">${record.efpro}</c:if></td>
+		               <td width="2%" align="center" class="tableCell" <c:if test="${record.own_valid < 0}">style="color: #9F6000;" </c:if> >${record.efsg}</td>
+		               <td width="2%" align="center" class="tableCell" <c:if test="${record.own_valid < 0}">style="color: #9F6000;" </c:if> >
 		               	  <c:choose>
 		               		<c:when test="${record.efst == 'S'}">
 		               			SLETTET
@@ -167,9 +174,9 @@
 		               		</c:otherwise>
 		               	   </c:choose>
 		              	</td>
-		               <td width="2%" class="tableCell" ><c:if test="${record.eftsd > 0}">${record.eftsd}</c:if></td>
-		               <td width="2%" class="tableCell" ><c:if test="${record.ef3039e > 0}">${record.ef3039e}</c:if></td>
-		               <td width="2%" align="center" class="tableCell" >
+		               <td width="2%" class="tableCell" <c:if test="${record.own_valid < 0}">style="color: #9F6000;" </c:if> ><c:if test="${record.eftsd > 0}">${record.eftsd}</c:if></td>
+		               <td width="2%" class="tableCell" <c:if test="${record.own_valid < 0}">style="color: #9F6000;" </c:if> ><c:if test="${record.ef3039e > 0}">${record.ef3039e}</c:if></td>
+		               <td width="2%" align="center" class="tableCell" <c:if test="${record.own_valid < 0}">style="color: #9F6000;" </c:if> >
 		               		<c:choose>
 		               		<c:when test="${record.efst2 == 'S'}">
 		               			SUBMITTED
@@ -179,11 +186,11 @@
 		               		</c:otherwise>
 		               		</c:choose>
 		               </td>
-		               <td width="2%" class="tableCell" >${record.efeta}&nbsp;${record.efetm}</td>
-		               <td width="2%" class="tableCell" >${record.efata}&nbsp;${record.efatm}</td>
-		               <td width="2%" class="tableCell" >${record.efkmrk}</td>
-		               <td width="2%" class="tableCell" >${record.efsjaf}</td>
-		               <td width="2%" class="tableCell" ><c:if test="${record.efdtr > 0}">${record.efdtr}</c:if></td>
+		               <td width="2%" class="tableCell" <c:if test="${record.own_valid < 0}">style="color: #9F6000;" </c:if> >${record.efeta}&nbsp;${record.efetm}</td>
+		               <td width="2%" class="tableCell" <c:if test="${record.own_valid < 0}">style="color: #9F6000;" </c:if> >${record.efata}&nbsp;${record.efatm}</td>
+		               <td width="2%" class="tableCell" <c:if test="${record.own_valid < 0}">style="color: #9F6000;" </c:if> >${record.efkmrk}</td>
+		               <td width="2%" class="tableCell" <c:if test="${record.own_valid < 0}">style="color: #9F6000;" </c:if> >${record.efsjaf}</td>
+		               <td width="2%" class="tableCell" <c:if test="${record.own_valid < 0}">style="color: #9F6000;" </c:if> ><c:if test="${record.efdtr > 0}">${record.efdtr}</c:if></td>
 		               <td width="2%" class="tableCell" align="center">
 		               		<c:choose>
 	               				<c:when test="${record.efst != 'S'}">

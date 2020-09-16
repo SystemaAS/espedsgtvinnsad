@@ -152,9 +152,9 @@
                				</a>
                				
 	               	   </td>
-		               <td width="2%" class="tableCell" align="center" >${record.clavd}</td>
-		               <td width="2%" class="tableCell" align="center" >${record.cltdn}</td>
-		               <td width="2%" class="tableCell" align="center" >
+		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="background-color: #FEEFB3;color: #9F6000;" </c:if> align="center" >${record.clavd}</td>
+		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="background-color: #FEEFB3;color: #9F6000;" </c:if> align="center" >${record.cltdn}</td>
+		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="background-color: #FEEFB3;color: #9F6000;" </c:if> align="center" >
 	               			<c:choose>
 	               				<c:when test="${record.clst == 'O'}">
 	               					OK
@@ -164,11 +164,11 @@
 	               				</c:otherwise>
                				</c:choose>
 		               </td>
-		               <td width="2%" class="tableCell" align="center" >${record.cletyp}&nbsp;${record.cletypt}</td>
-		               <td width="2%" class="tableCell" align="center" >${record.cleid}</td>
-		               <td width="2%" class="tableCell" align="center" >${record.cleser}</td>
-		               <td width="2%" class="tableCell" align="center" >${record.cltrid}</td>
-		               <td width="2%" class="tableCell" align="center" >${record.cl3039e}</td>
+		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cletyp}&nbsp;${record.cletypt}</td>
+		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cleid}</td>
+		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cleser}</td>
+		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cltrid}</td>
+		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cl3039e}</td>
 		               <td width="2%" class="tableCell" align="center" >
 		               		<a class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
 								<img src="resources/images/delete.gif" border="0" alt="remove">

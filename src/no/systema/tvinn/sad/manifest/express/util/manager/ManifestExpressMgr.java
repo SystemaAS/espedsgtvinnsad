@@ -13,6 +13,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import no.systema.jservices.common.values.FasteKoder;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.service.UrlCgiProxyService;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesRecord;
+import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
 import no.systema.tvinn.sad.manifest.express.util.TvinnSadManifestConstants;
 import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 import no.systema.tvinn.sad.model.external.url.UrlTvinnSadTolltariffenObject;
@@ -46,6 +49,10 @@ public class ManifestExpressMgr {
 	@Autowired
 	private UrlCgiProxyService urlCgiProxyService;
 	
+	@Autowired
+	private TvinnSadManifestListService tvinnSadManifestListService;
+	
+	
 	/**
 	 *REQUEST: http://localhost:8080/syjservicesbcore/syjsuuid.do
 	 *RESPONSE: {"uuid":"65a074ca-a87f-477c-90ac-6d1db5305350"} 
@@ -65,6 +72,46 @@ public class ManifestExpressMgr {
 		
 		return (String)result.get("uuid");
 	}
+	
+	/**
+	 * 
+	 * @param appUser
+	 * @param tur
+	 * @return
+	 */
+	public boolean isValidManifest(SystemaWebUser appUser, String tur){
+		String STATUS_OK = "O";
+		boolean retval = true;
+		//get BASE URL
+		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_MANIFEST_EXPRESS_CARGOLINES_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser() + "&clpro=" + tur;
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		JsonTvinnSadManifestCargoLinesContainer container = this.tvinnSadManifestListService.getListCargolinesContainer(jsonPayload);
+    		if(container.getList()!=null && container.getList().size()>0){
+    			Collection<JsonTvinnSadManifestCargoLinesRecord> list = container.getList();	
+				outer: for(JsonTvinnSadManifestCargoLinesRecord record: list ){
+					if (!record.getClst().equals(STATUS_OK)){
+						retval = false;
+						break outer;
+					}
+				}
+    		}else{
+    			retval = false;
+    		}
+    	}
+    	return retval;
+	}
+	
 
 }
 
