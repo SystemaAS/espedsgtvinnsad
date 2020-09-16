@@ -194,7 +194,7 @@
 				jq('#clpro').val(""); jq('#clpro').val(data[i].clpro);
 				jq('#clavd').val(""); jq('#clavd').val(data[i].clavd);
 				jq('#cltdn').val(""); jq('#cltdn').val(data[i].cltdn);
-				jq('#clst').val(""); jq('#clst').val(data[i].clst);
+				//The status is always in the html = O --->jq('#clst').val(""); jq('#clst').val(data[i].clst);
 				
 				jq('#clvt').val(""); jq('#clvt').val(data[i].clvt);
 				jq('#cl0068a').val(""); jq('#cl0068a').val(data[i].cl0068a);

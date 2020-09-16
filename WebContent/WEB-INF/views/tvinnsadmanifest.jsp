@@ -126,10 +126,10 @@
                 		<th width="2%" class="tableHeaderField" >Avd</th>
                 		<th width="2%" class="tableHeaderField" >Turnr</th>
                 		<th width="2%" class="tableHeaderField" >Sig</th>
-                		<th width="2%" class="tableHeaderField" >St</th>
+                		<th title="S=SLETTET" width="2%" class="tableHeaderField" >Status</th>
                 		<th width="2%" class="tableHeaderField" >T.sd</th>
                 		<th width="2%" class="tableHeaderField" >E.enh</th>
-                		<th width="2%" class="tableHeaderField" >St</th>
+                		<th title="S=SUBMITTED" width="2%" class="tableHeaderField" >Manif.st</th>
                 		<th width="2%" class="tableHeaderField" >Passering ETA</th>
                 		<th width="2%" class="tableHeaderField" >Passering ATA</th>
                 		<th width="2%" class="tableHeaderField" >Bilnr</th>
@@ -157,10 +157,28 @@
 		               <td width="2%" align="center" class="tableCell" >${record.efavd}</td>
 		               <td width="2%" align="center" class="tableCell" ><c:if test="${record.efpro > 0}">${record.efpro}</c:if></td>
 		               <td width="2%" align="center" class="tableCell" >${record.efsg}</td>
-		               <td width="2%" align="center" class="tableCell" >${record.efst}</td>
+		               <td width="2%" align="center" class="tableCell" >
+		               	  <c:choose>
+		               		<c:when test="${record.efst == 'S'}">
+		               			SLETTET
+		               		</c:when>
+		               		<c:otherwise>
+		               			${record.efst}
+		               		</c:otherwise>
+		               	   </c:choose>
+		              	</td>
 		               <td width="2%" class="tableCell" ><c:if test="${record.eftsd > 0}">${record.eftsd}</c:if></td>
 		               <td width="2%" class="tableCell" ><c:if test="${record.ef3039e > 0}">${record.ef3039e}</c:if></td>
-		               <td width="2%" align="center" class="tableCell" >${record.efst2}</td>
+		               <td width="2%" align="center" class="tableCell" >
+		               		<c:choose>
+		               		<c:when test="${record.efst2 == 'S'}">
+		               			SUBMITTED
+		               		</c:when>
+		               		<c:otherwise>
+		               			${record.efst2}
+		               		</c:otherwise>
+		               		</c:choose>
+		               </td>
 		               <td width="2%" class="tableCell" >${record.efeta}&nbsp;${record.efetm}</td>
 		               <td width="2%" class="tableCell" >${record.efata}&nbsp;${record.efatm}</td>
 		               <td width="2%" class="tableCell" >${record.efkmrk}</td>

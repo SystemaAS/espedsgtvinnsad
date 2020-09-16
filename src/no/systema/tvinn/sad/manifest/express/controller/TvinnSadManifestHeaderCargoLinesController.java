@@ -284,7 +284,8 @@ public class TvinnSadManifestHeaderCargoLinesController {
 		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_UPDATE_MANIFEST_EXPRESS_CARGOLINES_URL;
 		//add URL-parameters
 		StringBuffer urlRequestParams = new StringBuffer();
-		urlRequestParams.append("user=" + applicationUser + "&mode=R" + "&clavd=" + recordToValidate.getClavd() + "&cltdn=" + recordToValidate.getCltdn() + "&clpro=" + recordToValidate.getClpro());
+		urlRequestParams.append("user=" + applicationUser + "&mode=R&clst=S" + "&clavd=" + recordToValidate.getClavd());
+		urlRequestParams.append("&cltdn=" + recordToValidate.getCltdn() + "&clpro=" + recordToValidate.getClpro());
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
     	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
     	logger.warn("URL PARAMS: " + urlRequestParams);
@@ -304,7 +305,7 @@ public class TvinnSadManifestHeaderCargoLinesController {
 			if(outputList!=null && outputList.size()>0){
 				for(JsonTvinnSadManifestCargoLinesRecord record : outputList ){
 					retval = 0;
-					logger.warn(record.toString());
+					logger.info(record.toString());
 				}
 			}
     	}
@@ -381,7 +382,7 @@ public class TvinnSadManifestHeaderCargoLinesController {
 			if(outputList!=null && outputList.size()>0){
 				for(JsonTvinnSadManifestCargoLinesRecord record : outputList ){
 					retval = 0;
-					logger.warn(record.toString());
+					logger.info(record.toString());
 				}
 			}
     	}
