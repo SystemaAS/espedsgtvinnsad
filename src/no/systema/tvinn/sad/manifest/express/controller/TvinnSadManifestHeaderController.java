@@ -64,8 +64,6 @@ public class TvinnSadManifestHeaderController {
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
 	
 	
-	@Autowired
-	ManifestExpressMgr manifestExpressMgr;
 	
 	@PostConstruct
 	public void initIt() throws Exception {
@@ -180,7 +178,7 @@ public class TvinnSadManifestHeaderController {
 					this.adjustFieldsForFetch(record);
 					model.put(TvinnSadConstants.DOMAIN_RECORD, record);
 					//check if the manifest cargo lines are valid
-					if(!this.isValidManifest(appUser, record.getEfpro())){
+					if(!manifestExpressMgr.isValidManifest(appUser, record.getEfpro())){
 						model.put("invalidManifest", "1");
 					}
 				}else{
@@ -432,66 +430,23 @@ public class TvinnSadManifestHeaderController {
 																	 model,appUser,CodeDropDownMgr.CODE_2_COUNTRY, null, null);
 	}
 	
-	/**
-	 * 
-	 * @param appUser
-	 * @param tur
-	 * @return
-	 */
-	private boolean isValidManifest(SystemaWebUser appUser, String tur){
-		String STATUS_OK = "O";
-		boolean retval = true;
-		//get BASE URL
-		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_MANIFEST_EXPRESS_CARGOLINES_URL;
-		//add URL-parameters
-		String urlRequestParams = "user=" + appUser.getUser() + "&clpro=" + tur;
-		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-    	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
-    	logger.warn("URL PARAMS: " + urlRequestParams);
-    	
-    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
-
-    	//Debug --> 
-    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
-    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-    	if(jsonPayload!=null){
-    		
-    		JsonTvinnSadManifestCargoLinesContainer container = this.tvinnSadManifestListService.getListCargolinesContainer(jsonPayload);
-    		if(container.getList()!=null && container.getList().size()>0){
-    			Collection<JsonTvinnSadManifestCargoLinesRecord> list = container.getList();	
-				outer: for(JsonTvinnSadManifestCargoLinesRecord record: list ){
-					if (!record.getClst().equals(STATUS_OK)){
-						retval = false;
-						break outer;
-					}
-				}
-    		}else{
-    			retval = false;
-    		}
-    	}
-    	return retval;
-	}
+	
 	
 	//SERVICES
 	@Autowired
 	private UrlCgiProxyService urlCgiProxyService;
-	public void setUrlCgiProxyService (UrlCgiProxyService value){ this.urlCgiProxyService = value; }
-	public UrlCgiProxyService getUrlCgiProxyService(){ return this.urlCgiProxyService; }
 	
 	@Autowired
 	private TvinnSadManifestListService tvinnSadManifestListService;
-	public void setTvinnSadManifestListService (TvinnSadManifestListService value){ this.tvinnSadManifestListService = value; }
-	public TvinnSadManifestListService getTvinnSadManifestListService(){ return this.tvinnSadManifestListService; }
 	
 	@Autowired
 	private MaintMainKofastService maintMainKofastService;
-	public void setMaintMainKofastService(MaintMainKofastService value) { this.maintMainKofastService = value; }
-	public MaintMainKofastService getMaintMainKofastService() { return this.maintMainKofastService; }
 	
 	@Autowired
 	private TvinnSadDropDownListPopulationService tvinnSadDropDownListPopulationService;
-	public void setTvinnSadDropDownListPopulationService (TvinnSadDropDownListPopulationService value){ this.tvinnSadDropDownListPopulationService=value; }
-	public TvinnSadDropDownListPopulationService getTvinnSadDropDownListPopulationService(){return this.tvinnSadDropDownListPopulationService;}
 	
+	@Autowired
+	private ManifestExpressMgr manifestExpressMgr;
+
 }
 

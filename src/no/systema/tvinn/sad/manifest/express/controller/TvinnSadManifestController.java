@@ -337,7 +337,7 @@ public class TvinnSadManifestController {
 	private TvinnSadManifestListService tvinnSadManifestListService;
 	
 	@Autowired
-	ManifestExpressMgr manifestExpressMgr;
+	private ManifestExpressMgr manifestExpressMgr;
 
 }
 

@@ -152,9 +152,9 @@
                				</a>
                				
 	               	   </td>
-		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="background-color: #FEEFB3;color: #9F6000;" </c:if> align="center" >${record.clavd}</td>
-		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="background-color: #FEEFB3;color: #9F6000;" </c:if> align="center" >${record.cltdn}</td>
-		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="background-color: #FEEFB3;color: #9F6000;" </c:if> align="center" >
+		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.clavd}</td>
+		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cltdn}</td>
+		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >
 	               			<c:choose>
 	               				<c:when test="${record.clst == 'O'}">
 	               					OK
