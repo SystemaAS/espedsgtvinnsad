@@ -211,7 +211,7 @@
 										<form action="tvinnsadmanifest_edit_delete.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
 										 	<input type="hidden" name="currentUuid${counter.count}" id="currentUuid${counter.count}" value="${record.efuuid}">
 										 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="S">
-											<p class="text14" >Er du sikker på at du vil slette denne?</p>
+											<p class="text14" >Er du sikker på at du vil slette Turnr. <b>${record.efpro}</b></p>
 											<p class="text14"> Tekst </p>
 											<input type="text" class="inputText" name="currentText${counter.count}" id="currentText${counter.count}" size="45" maxlength="70" value=''>&nbsp;</td>
 											

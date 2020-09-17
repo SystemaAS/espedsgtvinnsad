@@ -40,6 +40,8 @@
 		window.location = 'tvinnsadmanifest_send.do?efuuid=' + jq('#efuuid').val();
     });
     
+    
+    
   });
   
   jq(function() {
@@ -49,6 +51,19 @@
 	  jq("#efsjadt").datepicker({ 
 		  dateFormat: 'ddmmy' 	  
 	  });
+	  
+	  //custom validity
+	    jq('#efeta').focus(function() {
+	    	if(jq('#efeta').val()!=''){
+	    		refreshCustomValidity(jq('#efeta')[0]);
+	  		}
+	  	});
+	    jq('#efsjadt').focus(function() {
+	    	if(jq('#efsjadt').val()!=''){
+	    		refreshCustomValidity(jq('#efsjadt')[0]);
+	  		}
+	  	});
+	  
 	  
 	  //CHILD-WINDOWS
 	  //Tollsted
@@ -143,7 +158,18 @@
   //-------------------------------------------
   //Initialize <div> here
   jq(function() { 
-	  jq("#dialogUpdateStatus").dialog({
+	  jq("#dialogUpdateManifestStatus").dialog({
+		  autoOpen: false,
+		  maxWidth:500,
+          maxHeight: 400,
+          width: 280,
+          height: 220,
+		  modal: true
+	  });
+  });
+//Initialize <div> here
+  jq(function() { 
+	  jq("#dialogUpdateInternalStatus").dialog({
 		  autoOpen: false,
 		  maxWidth:500,
           maxHeight: 400,
@@ -156,22 +182,25 @@
   //Present dialog box onClick 
   //----------------------------
   jq(function() {
-	  jq("#updateStatusLink").click(function() {
-		  presentChangeStatusDialog();
+	  jq("#updateManifestStatusLink").click(function() {
+		  presentChangeManifestStatusDialog();
+	  });
+	  jq("#updateInternalStatusLink").click(function() {
+		  presentChangeInternalStatusDialog();
 	  });
 	  
   });
-  function presentChangeStatusDialog(){
+  function presentChangeManifestStatusDialog(){
 	//setters (add more if needed)
-	  jq('#dialogUpdateStatus').dialog( "option", "title", "Update Status" );
+	  jq('#dialogUpdateManifestStatus').dialog( "option", "title", "Update Manifest Status" );
 	  //deal with buttons for this modal window
-	  jq('#dialogUpdateStatus').dialog({
+	  jq('#dialogUpdateManifestStatus').dialog({
 		 buttons: [ 
             {
 			 id: "dialogSaveTU",	
 			 text: "Ok",
 			 click: function(){
-				 		jq('#updateStatusForm').submit();
+				 		jq('#updateManifestStatusForm').submit();
 				 		setBlockUI();
 			 		}
 		 	 },
@@ -189,8 +218,40 @@
 	  //init values
 	  jq("#dialogSaveSU").button("option", "disabled", true);
 	  //open now
-	  jq('#dialogUpdateStatus').dialog('open');
+	  jq('#dialogUpdateManifestStatus').dialog('open');
   }
+  
+  
+  function presentChangeInternalStatusDialog(){
+		//setters (add more if needed)
+		  jq('#dialogUpdateInternalStatus').dialog( "option", "title", "Update Internal Status" );
+		  //deal with buttons for this modal window
+		  jq('#dialogUpdateInternalStatus').dialog({
+			 buttons: [ 
+	            {
+				 id: "dialogSaveTU",	
+				 text: "Ok",
+				 click: function(){
+					 		jq('#updateInternalStatusForm').submit();
+					 		setBlockUI();
+				 		}
+			 	 },
+	 	 		{
+			 	 id: "dialogCancelTU",
+			 	 text: "Cancel", 
+				 click: function(){
+					 		//back to initial state of form elements on modal dialog
+					 		jq("#dialogSaveSU").button("option", "disabled", true);
+					 		jq("#selectedStatus").val("");
+					 		jq( this ).dialog( "close" ); 
+				 		} 
+	 	 		 } ] 
+		  });
+		  //init values
+		  jq("#dialogSaveSU").button("option", "disabled", true);
+		  //open now
+		  jq('#dialogUpdateInternalStatus').dialog('open');
+	  }
   
  
   

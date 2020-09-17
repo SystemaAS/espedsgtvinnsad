@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,7 @@ import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulation
 import no.systema.tvinn.sad.manifest.express.util.manager.CodeDropDownMgr;
 import no.systema.tvinn.sad.manifest.express.util.manager.ManifestDateManager;
 import no.systema.tvinn.sad.manifest.express.util.manager.ManifestExpressMgr;
+import no.systema.tvinn.sad.manifest.express.validator.TvinnSadManifestHeaderValidator;
 import no.systema.tvinn.sad.mapper.url.request.UrlRequestParameterMapper;
 
 /**
@@ -62,7 +64,8 @@ public class TvinnSadManifestHeaderController {
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
-	
+	private final String MODE_UPDATE_MANIFEST_STATUS = "UMS";
+	private final String MODE_UPDATE_INTERNAL_STATUS = "US";
 	
 	
 	@PostConstruct
@@ -80,9 +83,9 @@ public class TvinnSadManifestHeaderController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="tvinnsadmanifest_updateStatus.do", method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doManifestUpdateStatus(JsonTvinnSadManifestRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
-		logger.warn("Inside: doManifestUpdateStatus");
+	@RequestMapping(value="tvinnsadmanifest_updateManifestStatus.do", method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doManifestUpdateManifestStatus(JsonTvinnSadManifestRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		logger.warn("Inside: doManifestUpdateManifestStatus");
 		
 		Map model = new HashMap();
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
@@ -91,8 +94,8 @@ public class TvinnSadManifestHeaderController {
 		//Execute
 		StringBuffer errMsg = new StringBuffer();
 		int dmlRetval = 0;
-		if(StringUtils.isNotEmpty(recordToValidate.getEfuuid()) && StringUtils.isNotEmpty(recordToValidate.getEfst2())){
-			dmlRetval = this.updateManifestStatus(appUser.getUser(), recordToValidate, errMsg);
+		if(StringUtils.isNotEmpty(recordToValidate.getEfuuid()) ){
+			dmlRetval = this.updateStatus(appUser.getUser(), this.MODE_UPDATE_MANIFEST_STATUS, recordToValidate, errMsg);
 		}
 		//Result
 		if(dmlRetval<0){
@@ -102,7 +105,39 @@ public class TvinnSadManifestHeaderController {
 		}	
 		
 		return successView;
-	}	  
+	}	
+	
+	/**
+	 * Updates the internal status (SYSPED) M,blank,P,Z,etc
+	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsadmanifest_updateInternalStatus.do", method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doManifestUpdateInternalStatus(JsonTvinnSadManifestRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		logger.warn("Inside: doManifestUpdateInternalStatus");
+		
+		Map model = new HashMap();
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		String redirect = "redirect:tvinnsadmanifest_edit.do?action=doFetch&user=" + appUser.getUser() + "&efuuid=" + recordToValidate.getEfuuid();
+		ModelAndView successView = new ModelAndView(redirect);
+		//Execute
+		StringBuffer errMsg = new StringBuffer();
+		int dmlRetval = 0;
+		if(StringUtils.isNotEmpty(recordToValidate.getEfuuid())){
+			dmlRetval = this.updateStatus(appUser.getUser(), this.MODE_UPDATE_INTERNAL_STATUS, recordToValidate, errMsg);
+		}
+		//Result
+		if(dmlRetval<0){
+			model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errMsg.toString());
+			successView.addObject(model);
+			logger.error("ERROR!!!!!!!!!!ERROR!!!!!!!!!!!!!ERROR!:" + errMsg.toString());
+		}	
+		
+		return successView;
+	}	
 	
 	/**
 	 * Sends the manifest to a queue
@@ -132,7 +167,7 @@ public class TvinnSadManifestHeaderController {
 	 * @return
 	 */
 	@RequestMapping(value="tvinnsadmanifest_edit.do", method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doManifestEdit(JsonTvinnSadManifestRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+	public ModelAndView doManifestEdit(@ModelAttribute ("record") JsonTvinnSadManifestRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		ModelAndView successView = new ModelAndView("tvinnsadmanifest_edit");
 		logger.warn("Inside: doManifestEdit");
 		
@@ -142,12 +177,8 @@ public class TvinnSadManifestHeaderController {
 		String action = request.getParameter("actionU");
 		logger.warn("actionU:" + action);
 		logger.warn("uuid:" + recordToValidate.getEfuuid());
-		/*if(strMgr.isNotNull(updateFlag)){
-			model.addAttribute("updateFlag", "1");
-		}*/
 		boolean isValidRecord = true;
 		
-		//check user (should be in session already)
 		if(appUser==null){
 			return loginView;
 		
@@ -157,13 +188,11 @@ public class TvinnSadManifestHeaderController {
 			
 			if(TvinnSadConstants.ACTION_UPDATE.equals(action)){
 				//validator
-				//GodsnoRegistreringValidator validator = new GodsnoRegistreringValidator();
-				//validator.validate(recordToValidate, bindingResult);
+				TvinnSadManifestHeaderValidator validator = new TvinnSadManifestHeaderValidator();
+				validator.validate(recordToValidate, bindingResult);
 			    //check for ERRORS
 				if(bindingResult.hasErrors()){
-		    		logger.info("[ERROR Validation] record does not validate)");
-		    		//put domain objects and do go back to the successView from here
-		    		//drop downs
+		    		logger.warn("[ERROR Validation] record does not validate)");
 		    		isValidRecord = false;
 		    		
 			    }else{
@@ -434,18 +463,25 @@ public class TvinnSadManifestHeaderController {
 	/**
 	 * 
 	 * @param applicationUser
+	 * @param mode
 	 * @param recordToValidate
 	 * @param errMsg
 	 * @return
 	 */
-	private int updateManifestStatus(String applicationUser, JsonTvinnSadManifestRecord recordToValidate, StringBuffer errMsg){
+	private int updateStatus(String applicationUser, String mode, JsonTvinnSadManifestRecord recordToValidate, StringBuffer errMsg){
 		int retval = -1;
 		//get BASE URL
 		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_UPDATE_MANIFEST_EXPRESS_URL;
 		//add URL-parameters
 		//http://localhost:8080/syjservicestn/syjsSADEFFR_U.do?user=OSCAR&mode=UMS&efuuid=cb9717e2-e55a-4ff0-9931-60e0a7c5fbe7&efst2=S
 		StringBuffer urlRequestParams = new StringBuffer();
-		urlRequestParams.append("user=" + applicationUser + "&mode=UMS" + "&efuuid=" + recordToValidate.getEfuuid() + "&efst2=" + recordToValidate.getEfst2());
+		urlRequestParams.append("user=" + applicationUser + "&mode=" + mode  + "&efuuid=" + recordToValidate.getEfuuid());
+		if("UMS".equals(mode)){
+			urlRequestParams.append("&efst2=" + recordToValidate.getEfst2());
+		}else if("US".equals(mode)){
+			urlRequestParams.append("&efst=" + recordToValidate.getEfst());
+		}
+		
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
     	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
     	logger.warn("URL PARAMS: " + urlRequestParams);

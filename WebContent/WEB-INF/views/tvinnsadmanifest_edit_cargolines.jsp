@@ -1,6 +1,6 @@
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp" %>
-
+f
 <!-- ======================= header ===========================-->
 <jsp:include page="/WEB-INF/views/headerTvinnSad.jsp" />
 <!-- =====================end header ==========================-->
@@ -207,6 +207,8 @@
 		<td class="text14" valign="top">
 			<form name="cargoLineForm" id="cargoLineForm" action="tvinnsadmanifest_edit_cargolines.do" method="post">
 			<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
+			<input type="hidden" name="efavd" id="efavd" value="${model.efavd}">
+			<input type="hidden" name="efsg" id="efsg" value="${model.efsg}">
 			<input type="hidden" name="efpro" id="efpro" value="${model.efpro}">
 			<input type="hidden" name="efuuid" id="efuuid" value="${model.efuuid}">
 			<input type="hidden" name="action" id="action" value="doUpdate">

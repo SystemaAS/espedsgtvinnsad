@@ -88,7 +88,9 @@
 				<input type="hidden" name="efuuid" id=efuuid value="${model.record.efuuid}">
 				<input type="hidden" name="efavd" id=efavd value="${model.record.efavd}">
 				<input type="hidden" name="efsg" id=efsg value="${model.record.efsg}">
-				<input type="hidden" name="efpro" id=efpro value="${model.record.efpro}">			
+				<input type="hidden" name="efpro" id=efpro value="${model.record.efpro}">
+				<input type="hidden" name="efst" id=efst value="${model.record.efst}">	
+				<input type="hidden" name="efst2" id=efst2 value="${model.record.efst2}">		
 			</c:if>
 			
 	<table style="width:100%;" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
@@ -169,9 +171,11 @@
 						 			<c:when test="${not empty model.record.efuuid}">
 						 				<td class="text14White">
 						 						&nbsp;&nbsp;Turnr:&nbsp;${model.record.efpro}
-						 						&nbsp;&nbsp;Avd:&nbsp;${model.record.efavd}</td>
+						 						&nbsp;&nbsp;Avd:&nbsp;${model.record.efavd}  
+						 						&nbsp;&nbsp;<font style="color:#606060;">Stat<a tabindex=-1 id="updateInternalStatusLink" name="updateInternalStatusLink" runat="server" href="#"><font class="text14MediumBlue">u</font></a>s:${model.record.efst}</font>
+						 				</td>
 						 				<td class="text14" align="right">		
-						 						<font style="color:#606060;">Manifest stat<a tabindex=-1 id="updateStatusLink" name="updateStatusLink" runat="server" href="#"><font class="text14MediumBlue">u</font></a>s:</font>&nbsp;
+						 						<font style="color:#606060;">Manifest stat<a tabindex=-1 id="updateManifestStatusLink" name="updateManifestStatusLink" runat="server" href="#"><font class="text14MediumBlue">u</font></a>s:</font>&nbsp;
 						 						<c:choose>
 						 						<c:when test="${model.record.efst2 == 'S' || model.record.efst2 == 'R' || model.record.efst2 == 'D'}">
 						 							<c:if test="${model.record.efst2 == 'S'}">
@@ -234,7 +238,7 @@
 			 				</tr>
 			 				<tr >
 					 			<td class="text14">
-					 				&nbsp;<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efknd" id="efknd" size="8" maxlength="8" value="${model.record.efknd}">
+					 				<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efknd" id="efknd" size="8" maxlength="8" value="${model.record.efknd}">
 					 				<a tabindex="-1" id="efkndIdLink">
 										<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 									</a>
@@ -269,17 +273,11 @@
 									
 					 			</td>
 			 				</tr>
-			 				<%-- this is replaced with the customer name 
-			 				<tr >
-								<td class="text14">&nbsp;<span title="todo">Kjøretøyeier</span><font class="text16RedBold" >*</font></td>
-			 				</tr>
-			 				<tr >
-					 			<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="todo" id="todo" size="45" maxlength="35" value="${Xmodel.record.titin}"></td>
-			 				</tr>
-			 				--%>
+			 				
 			 				<tr>
 			 				<td>
 			 				<table width="80%" >
+			 				<tr>
 								<td class="text14">&nbsp;<span title="efeta">ETA</span><font class="text16RedBold" >*</font></td>
 								<td class="text14">&nbsp;<span title="efetm">Tid</span><font class="text16RedBold" >*</font></td>
 								<td class="text14">&nbsp;<span title="eftsd">Pass.tollsted</span><font class="text16RedBold" >*</font></td>
@@ -288,7 +286,7 @@
 			 				<tr >
 					 			<td class="text14">
 					 				<c:choose>
-					 				<c:when test="${record.efeta != '0'}">
+					 				<c:when test="${model.record.efeta != '0'}">
 					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efeta" id="efeta" size="7" maxlength="6" value="${model.record.efeta}">
 					 				</c:when>
 					 				<c:otherwise>
@@ -298,7 +296,7 @@
 					 			</td>
 								<td>
 									<c:choose>
-					 				<c:when test="${record.efetm != '0'}">
+					 				<c:when test="${model.record.efetm != '0'}">
 					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efetm" id="efetm" size="7" maxlength="6" value="${model.record.efetm}">
 					 				</c:when>
 					 				<c:otherwise>
@@ -310,7 +308,7 @@
 			 				
 					 			<td class="text14">
 					 				<c:choose>
-					 				<c:when test="${record.eftsd != '0'}">
+					 				<c:when test="${model.record.eftsd != '0'}">
 					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="eftsd" id="eftsd" size="5" maxlength="4" value="${model.record.eftsd}">
 					 				</c:when>
 					 				<c:otherwise>
@@ -323,7 +321,7 @@
 					 			</td>
 								<td>
 									<c:choose>
-					 				<c:when test="${record.ef3039e != '0'}">
+					 				<c:when test="${model.record.ef3039e != '0'}">
 					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="ef3039e" id="ef3039e" size="7" maxlength="6" value="${model.record.ef3039e}">
 					 				</c:when>
 					 				<c:otherwise>
@@ -481,11 +479,11 @@
 								</td>
 								<td class="text14">
 									<c:choose>
-					 				<c:when test="${record.efsjadt != '0'}">
+					 				<c:when test="${model.record.efsjadt != '0'}">
 					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efsjadt" id="efsjadt" size="7" maxlength="6" value="${model.record.efsjadt}">
 					 				</c:when>
 					 				<c:otherwise>
-					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efsjadt" id="efsjadt" size="7" maxlength="6" value="${model.record.efsjadt}">
+					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efsjadt" id="efsjadt" size="7" maxlength="6" value="">
 					 				</c:otherwise>
 					 				</c:choose>
 					 			</td>
@@ -542,12 +540,12 @@
 </td>
 </tr>
 
-<%-- Dialog update status --%>		
+<%-- Dialog update manifest status --%>		
 <tr>
 	<td>
-		<div id="dialogUpdateStatus" title="Dialog">
+		<div id="dialogUpdateManifestStatus" title="Dialog">
 			
-			<form action="tvinnsadmanifest_updateStatus.do" name="updateStatusForm" id="updateStatusForm" method="post">
+			<form action="tvinnsadmanifest_updateManifestStatus.do" name="updateManifestStatusForm" id="updateManifestStatusForm" method="post">
 			 	<input type="hidden" name="efuuid" id="efuuid" value="${model.record.efuuid}">
 			 	<p class="text14" >Change Manifest status as needed.</p>
 				<table>
@@ -559,6 +557,33 @@
 		            		  		<option value="R">REOPENED/DRAFT</option>
 							  	<option value="D">SLETTET</option>
 							  	<option value="S">SUBMITTED</option>
+							  	
+							</select>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</td>
+</tr> 
+
+
+<%-- Dialog update manifest status --%>		
+<tr>
+	<td>
+		<div id="dialogUpdateInternalStatus" title="Dialog">
+			
+			<form action="tvinnsadmanifest_updateInternalStatus.do" name="updateInternalStatusForm" id="updateInternalStatusForm" method="post">
+			 	<input type="hidden" name="efuuid" id="efuuid" value="${model.record.efuuid}">
+			 	<p class="text14" >Change Internal status as needed.</p>
+				<table>
+					<tr>
+						<td class="text14" align="left" >&nbsp;Status</td>
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="efst" id="efst">
+			            		  	<option value=" ">-velg-</option>
+		            		  		<option value="M">M</option>
+							  	<option value="S">SLETTET</option>
 							  	
 							</select>
 						</td>
