@@ -5,7 +5,7 @@ import java.util.regex.*;
 
 import javax.annotation.PostConstruct;
 
-
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.springframework.validation.BindingResult;
@@ -73,7 +73,39 @@ public class TvinnSadManifestHeaderController {
 	}
 	
 	/**
-	 * Send the manifest to a queue
+	 * Update the manifest status (SUBMITTED, DELETED, REOPENED/DRAFT) - COMPLETED is done in toll.no not here
+	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsadmanifest_updateStatus.do", method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doManifestUpdateStatus(JsonTvinnSadManifestRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		logger.warn("Inside: doManifestUpdateStatus");
+		
+		Map model = new HashMap();
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		String redirect = "redirect:tvinnsadmanifest_edit.do?action=doFetch&user=" + appUser.getUser() + "&efuuid=" + recordToValidate.getEfuuid();
+		ModelAndView successView = new ModelAndView(redirect);
+		//Execute
+		StringBuffer errMsg = new StringBuffer();
+		int dmlRetval = 0;
+		if(StringUtils.isNotEmpty(recordToValidate.getEfuuid()) && StringUtils.isNotEmpty(recordToValidate.getEfst2())){
+			dmlRetval = this.updateManifestStatus(appUser.getUser(), recordToValidate, errMsg);
+		}
+		//Result
+		if(dmlRetval<0){
+			model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errMsg.toString());
+			successView.addObject(model);
+			logger.error("ERROR!!!!!!!!!!ERROR!!!!!!!!!!!!!ERROR!:" + errMsg.toString());
+		}	
+		
+		return successView;
+	}	  
+	
+	/**
+	 * Sends the manifest to a queue
 	 * @param recordToValidate
 	 * @param bindingResult
 	 * @param session
@@ -373,6 +405,47 @@ public class TvinnSadManifestHeaderController {
 		//add URL-parameters
 		StringBuffer urlRequestParams = new StringBuffer();
 		urlRequestParams.append("user=" + applicationUser + "&mode=D" + "&efuuid=" + recordToValidate.getEfuuid() + "&efst=" + recordToValidate.getEfst());
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+
+    	//Debug --> 
+    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		JsonTvinnSadManifestContainer jsonTvinnSadManifestContainer = this.tvinnSadManifestListService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<JsonTvinnSadManifestRecord> outputList = jsonTvinnSadManifestContainer.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(JsonTvinnSadManifestRecord record : outputList ){
+					retval = 0;
+					logger.warn(record.toString());
+				}
+			}
+    	}
+    	
+    	return retval;
+	}
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param recordToValidate
+	 * @param errMsg
+	 * @return
+	 */
+	private int updateManifestStatus(String applicationUser, JsonTvinnSadManifestRecord recordToValidate, StringBuffer errMsg){
+		int retval = -1;
+		//get BASE URL
+		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_UPDATE_MANIFEST_EXPRESS_URL;
+		//add URL-parameters
+		//http://localhost:8080/syjservicestn/syjsSADEFFR_U.do?user=OSCAR&mode=UMS&efuuid=cb9717e2-e55a-4ff0-9931-60e0a7c5fbe7&efst2=S
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + applicationUser + "&mode=UMS" + "&efuuid=" + recordToValidate.getEfuuid() + "&efst2=" + recordToValidate.getEfst2());
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
     	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
     	logger.warn("URL PARAMS: " + urlRequestParams);

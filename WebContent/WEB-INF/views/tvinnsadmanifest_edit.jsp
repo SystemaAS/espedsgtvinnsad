@@ -171,14 +171,17 @@
 						 						&nbsp;&nbsp;Turnr:&nbsp;${model.record.efpro}
 						 						&nbsp;&nbsp;Avd:&nbsp;${model.record.efavd}</td>
 						 				<td class="text14" align="right">		
-						 						<font style="color:#606060;">Manif.status:</font>&nbsp;
+						 						<font style="color:#606060;">Manifest stat<a tabindex=-1 id="updateStatusLink" name="updateStatusLink" runat="server" href="#"><font class="text14MediumBlue">u</font></a>s:</font>&nbsp;
 						 						<c:choose>
-						 						<c:when test="${model.record.efst2 == 'S' || model.record.efst2 == 'D'}">
+						 						<c:when test="${model.record.efst2 == 'S' || model.record.efst2 == 'R' || model.record.efst2 == 'D'}">
 						 							<c:if test="${model.record.efst2 == 'S'}">
-						 								<font style="color:#606060;">SUBMITTED</font>
+						 								<font style="color:#FFFFFF;">SUBMITTED</font>
 						 							</c:if>
 						 							<c:if test="${model.record.efst2 == 'D'}">
-						 								<font style="color:#606060;">DRAFT</font>
+						 								<font style="color:#FFFFFF;">SLETTET</font>
+						 							</c:if>
+						 							<c:if test="${model.record.efst2 == 'R'}">
+						 								<font style="color:#FFFFFF;">REOPENED/DRAFT</font>
 						 							</c:if>
 						 						</c:when>
 						 						<c:otherwise>
@@ -531,14 +534,42 @@
 		</c:if>
 		<tr height="20"><td colspan="2">&nbsp;</td></tr>
 	
-</table>
+	</table>
+	</td>
+	</tr>	
+	</table> 
+	</form>
 </td>
 </tr>
-		
-</table> 
-</form>
-</td>
-</tr>
+
+<%-- Dialog update status --%>		
+<tr>
+	<td>
+		<div id="dialogUpdateStatus" title="Dialog">
+			
+			<form action="tvinnsadmanifest_updateStatus.do" name="updateStatusForm" id="updateStatusForm" method="post">
+			 	<input type="hidden" name="efuuid" id="efuuid" value="${model.record.efuuid}">
+			 	<p class="text14" >Change Manifest status as needed.</p>
+				<table>
+					<tr>
+						<td class="text14" align="left" >&nbsp;Status</td>
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="efst2" id="efst2">
+			            		  	<option value=" ">-velg-</option>
+		            		  		<option value="R">REOPENED/DRAFT</option>
+							  	<option value="D">SLETTET</option>
+							  	<option value="S">SUBMITTED</option>
+							  	
+							</select>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</td>
+</tr> 
+
+
 </table>
  
  	

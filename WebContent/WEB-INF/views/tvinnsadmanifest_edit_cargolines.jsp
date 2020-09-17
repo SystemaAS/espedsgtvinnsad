@@ -157,10 +157,10 @@
 		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >
 	               			<c:choose>
 	               				<c:when test="${record.clst == 'O'}">
-	               					OK
+	               					<img title="${record.clst}" src="resources/images/bulletGreen.png" width="12" height="12" border="0" >
 	               				</c:when>
 	               				<c:otherwise>
-	               					${record.clst}
+	               					<img title="${record.clst}" src="resources/images/bulletRed.png" width="12" height="12" border="0" >
 	               				</c:otherwise>
                				</c:choose>
 		               </td>

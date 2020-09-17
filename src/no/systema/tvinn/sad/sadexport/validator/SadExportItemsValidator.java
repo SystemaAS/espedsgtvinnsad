@@ -109,6 +109,10 @@ public class SadExportItemsValidator implements Validator {
 				}
 				//Landkod Oppr. must not exist in some combinations
 				if("91".equals(record.getSvfyl())){
+					if("".equals(record.getSvlk())){
+						errors.rejectValue("svlk", "systema.tvinn.sad.export.header.error.rule.item.svlk.landkodOppr.mustExist");
+					}
+				}else{
 					if(!"".equals(record.getSvlk())){
 						errors.rejectValue("svlk", "systema.tvinn.sad.export.header.error.rule.item.svlk.landkodOppr.mustNotExist");
 					}

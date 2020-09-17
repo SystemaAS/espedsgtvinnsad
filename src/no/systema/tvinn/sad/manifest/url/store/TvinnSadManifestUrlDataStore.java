@@ -31,9 +31,9 @@ public final class TvinnSadManifestUrlDataStore {
 	//http://localhost:8080/syjservicesbcore/syjsuuid.do
 	static public String TVINN_SAD_FETCH_MANIFEST_UUID_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicesbcore/syjsuuid.do";
 		
-	//----------------------------
+	//-------------------------------
 	//[1.1] UPDATE EKSPRESS MANIFEST
-	//----------------------------
+	//-------------------------------
 	//http://localhost:8080/syjservicestn/syjsSADEFFR_U.do?user=OSCAR&mode=U/A/D and/or
 	static public String TVINN_SAD_UPDATE_MANIFEST_EXPRESS_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADEFFR_U.do";
 		
