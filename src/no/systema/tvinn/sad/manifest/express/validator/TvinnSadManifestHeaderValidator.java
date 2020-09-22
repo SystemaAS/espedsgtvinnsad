@@ -67,6 +67,11 @@ public class TvinnSadManifestHeaderValidator implements Validator {
 					}else{
 						if(!dateValidator.validateDate(record.getEfsjadt(), DateValidator.DATE_MASK_NO)){
 							errors.rejectValue("efsjadt", "systema.tvinn.sad.manifest.express.header.error.rule.invalidDriverBirthday"); 	
+						}else{
+							//check if the driver is older than 18 years since toll.no has this check
+							if(!dateValidator.validDrivingAgeNorway(record.getEfsjadt())){
+								errors.rejectValue("efsjadt", "systema.tvinn.sad.manifest.express.header.error.rule.invalidDriversAge");
+							}
 						}
 					}
 				}
