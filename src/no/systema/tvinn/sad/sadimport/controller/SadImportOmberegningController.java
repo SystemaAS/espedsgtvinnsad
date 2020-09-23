@@ -845,12 +845,15 @@ public class SadImportOmberegningController {
 		    		//Bruttovikt
 		    		//============
 		    		//logger.info("(C)####### svvktb: " + record.getSvvktb());
-		    		if(record.getSvvktb()!=null && !"".equals(record.getSvvktb())){
-		    			try{
-		    				totalGrossWeight += Double.parseDouble(record.getSvvktb().replace(",", "."));
-		    			}catch(Exception e){
-		    				logger.info("[ERROR] on BRUTTOVIKT CATCH");
-		    			}
+		    		//Do not count with all (S)=deleted lines
+		    		if(!"S".equals(record.getSvpreae())){
+			    		if(record.getSvvktb()!=null && !"".equals(record.getSvvktb())){
+			    			try{
+			    				totalGrossWeight += Double.parseDouble(record.getSvvktb().replace(",", "."));
+			    			}catch(Exception e){
+			    				logger.info("[ERROR] on BRUTTOVIKT CATCH");
+			    			}
+			    		}
 		    		}
 		    		//logger.info("(D)####### total gross weight: " + totalGrossWeight);
 		    	}

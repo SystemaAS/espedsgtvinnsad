@@ -232,7 +232,7 @@
 				 					</tr>
 				 				</c:otherwise>
 			 				</c:choose>
-			 				
+			 				<%-- OBSOLETE ... must be orgnr from db-table SADEFDEF 
 			 				<tr >
 								<td class="text14">&nbsp;<span title="efknd">Kundenr.</span><font class="text16RedBold" >*</font></td>
 			 				</tr>
@@ -245,7 +245,7 @@
 					 				&nbsp;&nbsp;<input class="inputTextReadOnly" name="own_efkndName" id="own_efkndName" size="25" maxlength="30" value="${Xmodel.record.efkndName}">
 								</td>
 			 				</tr>
-			 				
+			 				--%>
 			 				<tr >
 								<td class="text14">&nbsp;<span title="efrgd">ID-type kjøretøyeier</span><font class="text16RedBold" >*</font></td>
 			 				</tr>
@@ -257,7 +257,7 @@
 		 		 				  		<option value="E">EORI</option>
 		 		 				  		 --%>
 									</select>
-									&nbsp;&nbsp;<input type="text" class="inputTextReadOnly" name="efrgd" id="efrgd" size="10" maxlength="9" value="${model.record.efrgd}">
+									&nbsp;&nbsp;<input readonly type="text" class="inputTextReadOnly" name="efrgd" id="efrgd" size="10" maxlength="9" value="${model.record.efrgd}">
 								</td>
 			 				</tr>
 			 				<tr height="3"><td></td></tr>
@@ -297,10 +297,10 @@
 								<td>
 									<c:choose>
 					 				<c:when test="${model.record.efetm != '0'}">
-					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efetm" id="efetm" size="7" maxlength="6" value="${model.record.efetm}">
+					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efetm" id="efetm" size="6" maxlength="4" value="${model.record.efetm}">
 					 				</c:when>
 					 				<c:otherwise>
-					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efetm" id="efetm" size="7" maxlength="6" value="">
+					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efetm" id="efetm" size="6" maxlength="4" value="">
 					 				</c:otherwise>
 					 				</c:choose>
 									

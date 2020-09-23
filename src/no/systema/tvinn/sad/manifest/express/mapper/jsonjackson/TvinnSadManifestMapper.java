@@ -12,6 +12,7 @@ import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManif
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestPostalCodeContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRpgContainer;
 
 import java.util.*;
 
@@ -37,6 +38,19 @@ public class TvinnSadManifestMapper {
 		if(utfPayload!=null){
 			//At this point we now have an UTF-8 payload
 			container = mapper.readValue(utfPayload.getBytes(), JsonTvinnSadManifestContainer.class); 
+			
+		}
+			
+		return container;
+	}
+	
+	public JsonTvinnSadManifestRpgContainer getContainerRgp132Raw(String utfPayload) throws Exception{
+		ObjectMapper mapper = new ObjectMapper();  
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+		JsonTvinnSadManifestRpgContainer container = null;
+		if(utfPayload!=null){
+			//At this point we now have an UTF-8 payload
+			container = mapper.readValue(utfPayload.getBytes(), JsonTvinnSadManifestRpgContainer.class); 
 			
 		}
 			

@@ -45,11 +45,24 @@ public final class TvinnSadManifestUrlDataStore {
 	//----------------------------------------------------
 	//[2] FETCH CARGO LINES' LIST of a specific MANIFEST
 	//----------------------------------------------------
+	//EXECUTE RPG service
+	//http://10.13.3.22/sycgip/SAD132RAW.pgm?user=OSCAR&pro=999991
+	static public String TVINN_SAD_EXECUTE_RPG_MANIFEST_EXPRESS_CARGOLINES_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/SAD132RAW.pgm";
+		
 	//FETCH CARGO LINE list
 	//http://localhost:8080/syjservicestn/syjsSADEFCFR.do?user=OSCAR and/or user=OSCAR&clpro=turNr
 	static public String TVINN_SAD_FETCH_MANIFEST_EXPRESS_CARGOLINES_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADEFCFR.do";
 		
 	//http://localhost:8080/syjservicestn/syjsSADEFCFR_U.do?user=OSCAR&mode=U/A/D and/or
 	static public String TVINN_SAD_UPDATE_MANIFEST_EXPRESS_CARGOLINES_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADEFCFR_U.do";
+	
+	
+	//----------------------------------------------------------
+	//[3] FETCH EKSPRESS MANIFEST MAIN LIST for default values
+	//----------------------------------------------------------
+		
+	//FETCH MANIFEST list
+	//http://localhost:8080/syjservicestn/syjsSADEFDEFR.do?user=OSCAR 
+	static public String TVINN_SAD_FETCH_MANIFEST_DEFAULT_VALUES_EXPRESS_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADEFDEFR.do";
 		
 }

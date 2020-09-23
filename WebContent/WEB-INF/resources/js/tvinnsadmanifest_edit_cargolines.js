@@ -52,7 +52,7 @@
 	//Postnr/sted FROM
 	  jq('#clsdfIdLink').click(function() {
 	  	jq('#clsdfIdLink').attr('target','_blank');
-	  	window.open('tvinnsadmanifest_childwindow_postalcodes_sted2.do?action=doFind&ctype=clsdf&direction=fra&st2lk=' + jq('#cllkf').val() + '&st2kod=' + jq('#clsdf').val() + '&caller=clsdf', "postalcodeSted2Win", "top=300px,left=450px,height=600px,width=700px,scrollbars=no,status=no,location=no");
+	  	window.open('tvinnsadmanifest_childwindow_postalcodes_sted2.do?action=doFind&ctype=cllkf&direction=fra&st2lk=' + jq('#cllkf').val() + '&st2kod=', "postalcodeSted2Win", "top=300px,left=450px,height=600px,width=700px,scrollbars=no,status=no,location=no");
 	  });
 	  jq('#clsdfIdLink').keypress(function(e){ //extra feature for the end user
 			if(e.which == 13) {
@@ -62,7 +62,7 @@
 	//Postnr/sted TO
 	  jq('#clsdtIdLink').click(function() {
 	  	jq('#clsdtIdLink').attr('target','_blank');
-	  	window.open('tvinnsadmanifest_childwindow_postalcodes_sted2.do?action=doFind&ctype=clsdt&direction=fra&st2lk=' + jq('#cllkt').val() + '&st2kod=' + jq('#clsdt').val() + '&caller=clsdt', "postalcodeSted2Win", "top=300px,left=450px,height=600px,width=700px,scrollbars=no,status=no,location=no");
+	  	window.open('tvinnsadmanifest_childwindow_postalcodes_sted2.do?action=doFind&ctype=cllkt&direction=fra&st2lk=' + jq('#cllkt').val() + '&st2kod=', "postalcodeSted2Win", "top=300px,left=450px,height=600px,width=700px,scrollbars=no,status=no,location=no");
 	  });
 	  jq('#clsdtIdLink').keypress(function(e){ //extra feature for the end user
 			if(e.which == 13) {
@@ -70,17 +70,21 @@
 			}
 	  });
 	  
-	//Plocka oppdrag
+	  //Plocka oppdrag
 	  jq('#cnButton').click(function() {
 	  	jq('#cnButton').attr('target','_blank');
-	  	window.open('tvinnsadmanifest_childwindow_released_cargolines.do?action=doInit&ctype=cnButton&clpro=' + + jq('#efpro').val(), "releasedCargolinesWin", "top=300px,left=450px,height=600px,width=700px,scrollbars=no,status=no,location=no");
+	  	window.open('tvinnsadmanifest_childwindow_released_cargolines.do?action=doInit&ctype=cnButton&clpro=' + jq('#efpro').val(), "releasedCargolinesWin", "top=300px,left=450px,height=600px,width=700px,scrollbars=no,status=no,location=no");
 	  });
-	  jq('#cnButton').keypress(function(e){ //extra feature for the end user
+	  /*jq('#cnButton').keypress(function(e){ //extra feature for the end user
 			if(e.which == 13) {
 				jq('#cnButton').click();
 			}
-	  });
-	   
+	  });*/
+	  
+	  jq('#newButton').click(function() {
+		  setBlockUI();
+		  window.location.reload(false);
+	  }); 
   });
   
   

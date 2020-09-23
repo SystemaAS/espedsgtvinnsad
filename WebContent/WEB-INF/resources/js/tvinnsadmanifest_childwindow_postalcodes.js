@@ -11,15 +11,16 @@
 			  var postalCode = record[0].replace("postalcode_","");
 			  var countryCode = record[1].replace("country_","");
 			  var city = record[2].replace("city_","");
-			  var caller= jq("#ctype").val()
-			  if(opener.jq('#clsdf').length && caller =='clsdf'){ 
+			  var caller= jq("#ctype").val();
+			  
+			  if(opener.jq('#cllkf').length && caller =='cllkf'){ 
 				  opener.jq('#cllkf').val(countryCode);
-				  opener.jq('#clsdf').val(postalCode);
+				  //opener.jq('#clsdf').val(postalCode);
 				  opener.jq('#clsdft').val(city);
 				  
-			  }else if(opener.jq('#clsdt').length && caller =='clsdt'){
+			  }else if(opener.jq('#cllkt').length && caller =='cllkt'){
 				  opener.jq('#cllkt').val(countryCode);
-				  opener.jq('#clsdt').val(postalCode);
+				  //opener.jq('#clsdt').val(postalCode);
 				  opener.jq('#clsdtt').val(city);
 			  }
 			  

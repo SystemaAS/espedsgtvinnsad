@@ -5,7 +5,7 @@ import java.util.regex.*;
 
 import javax.annotation.PostConstruct;
 
-
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.springframework.validation.BindingResult;
@@ -42,6 +42,7 @@ import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManif
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesRecord;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRpgContainer;
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
 import no.systema.tvinn.sad.manifest.express.util.manager.CodeDropDownMgr;
 import no.systema.tvinn.sad.manifest.express.util.manager.ManifestDateManager;
@@ -99,7 +100,7 @@ public class TvinnSadManifestHeaderCargoLinesController {
 		String efsg = request.getParameter("efsg");
 		String efavd = request.getParameter("efavd");
 		
-		//String updateFlag = request.getParameter("updateFlag");
+		String updateFlag = request.getParameter("updateFlag");
 		logger.warn("action:" + action);
 		
 		boolean isValidRecord = true;
@@ -157,6 +158,14 @@ public class TvinnSadManifestHeaderCargoLinesController {
 			this.setCodeDropDownMgr(appUser, model);
 			
 			if(strMgr.isNotNull(recordToValidate.getClpro()) ){
+				//execute RPG first
+				JsonTvinnSadManifestRpgContainer rpgContainer = this.executeRpgSad132RawForCargoLines(appUser, recordToValidate.getClpro());
+				if(rpgContainer!=null){
+					//check for errors
+					if(StringUtils.isNotEmpty(rpgContainer.getErrMsg()) || StringUtils.isNotEmpty(rpgContainer.getErrMsgT()) ){
+						model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, "SERVER_ERROR:" + rpgContainer.getErrMsg() + rpgContainer.getErrMsgT());
+					}
+				}
 				//doFetch
 				List<JsonTvinnSadManifestCargoLinesRecord> outputList = (List<JsonTvinnSadManifestCargoLinesRecord>)this.getList(appUser, recordToValidate.getClpro());
 				model.put(TvinnSadConstants.DOMAIN_LIST, outputList );
@@ -185,6 +194,8 @@ public class TvinnSadManifestHeaderCargoLinesController {
 			model.put("efsg", efsg);
 			model.put("efavd", efavd);
 			model.put("efpro", recordToValidate.getClpro());
+			model.put("updateFlag", updateFlag);
+			
 			
 			logger.info("END of method");
 			
@@ -346,6 +357,34 @@ public class TvinnSadManifestHeaderCargoLinesController {
     	}
     	return retval;
 	}
+	/**
+	 * 
+	 * @param appUser
+	 * @param tur
+	 * @return
+	 */
+	private JsonTvinnSadManifestRpgContainer executeRpgSad132RawForCargoLines(SystemaWebUser appUser, String tur){
+		JsonTvinnSadManifestRpgContainer retval = null;
+		//get BASE URL
+		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_EXECUTE_RPG_MANIFEST_EXPRESS_CARGOLINES_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser() + "&pro=" + tur;
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		JsonTvinnSadManifestRpgContainer container = this.tvinnSadManifestListService.getContainerRpg132Raw(jsonPayload);
+    		retval = container;
+    	}
+    	return retval;
+	}
+	
 	
 	/**
 	 * 

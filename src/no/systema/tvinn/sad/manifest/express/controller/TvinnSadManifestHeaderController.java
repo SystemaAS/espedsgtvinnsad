@@ -248,6 +248,11 @@ public class TvinnSadManifestHeaderController {
 					model.put(TvinnSadConstants.DOMAIN_RECORD, recordToValidate);
 				}
 				
+			}else{
+				//get standard values from default avd (proposed)
+				recordToValidate = this.getDefaultValuesRecord(appUser);
+				this.adjustFieldsForFetch(recordToValidate);
+				model.put(TvinnSadConstants.DOMAIN_RECORD, recordToValidate);
 			}
 			
 			if(action==null || "".equals(action)){ 
@@ -337,6 +342,42 @@ public class TvinnSadManifestHeaderController {
 
 			return successView;
 		}
+	}
+	/**
+	 * 
+	 * @param appUser
+	 * @return
+	 */
+	private JsonTvinnSadManifestRecord getDefaultValuesRecord(SystemaWebUser appUser){
+		JsonTvinnSadManifestRecord retval = null;
+		//get BASE URL
+		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_MANIFEST_DEFAULT_VALUES_EXPRESS_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser();
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		JsonTvinnSadManifestContainer jsonTvinnSadManifestContainer = this.tvinnSadManifestListService.getListContainerDefaultValues(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<JsonTvinnSadManifestRecord> outputList = jsonTvinnSadManifestContainer.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(JsonTvinnSadManifestRecord record : outputList ){
+					retval = record;
+					//logger.info(retval.toString());
+				}
+			}
+    	}
+    	return retval;
 	}
 	/**
 	 * Get a specific manifest

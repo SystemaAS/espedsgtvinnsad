@@ -99,8 +99,8 @@
 	  
  
 	jq(document).ready(function() {
-		  //in order to get the customer name
-		  fetchCustomer();
+		  //in order to get the customer name and orgnr
+		  //fetchCustomer(); OBSOLETE ?
 	  });
   
 	
