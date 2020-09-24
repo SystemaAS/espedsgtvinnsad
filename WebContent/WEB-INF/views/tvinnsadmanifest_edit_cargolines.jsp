@@ -129,7 +129,12 @@ f
                 		<th class="tableHeaderField" >Oppdrag</th>
                 		<th title="S=UPDATED and RELEASED by USER, O=OK" class="tableHeaderField" >St</th>
                 		<th class="tableHeaderField" >Eksp.type</th>
-                		<th class="tableHeaderField" >MRN nr</th>
+                		<th class="tableHeaderField" >MRNnr/Eksp.id</th>
+                		
+                		<th class="tableHeaderField" >Varebesk.</th>
+                		<th class="tableHeaderField" >Kolli</th>
+                		<th class="tableHeaderField" >B.vekt</th>
+                		
                 		<th class="tableHeaderField" >Sert</th>
                 		<th class="tableHeaderField" >Bilnr</th>
                 		<th class="tableHeaderField" >E.enh</th>
@@ -166,6 +171,12 @@ f
 		               </td>
 		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cletyp}&nbsp;${record.cletypt}</td>
 		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cleid}</td>
+		               
+		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="left" >${record.clvt}</td>
+		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="right" >${record.clntk}</td>
+		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="right" >${record.clvkb}</td>
+		               
+		               
 		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cleser}</td>
 		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cltrid}</td>
 		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cl3039e}</td>
@@ -216,8 +227,8 @@ f
 			<input type="hidden" name="clpro" id="clpro" value="${model.record.clpro}">
 			<input type="hidden" name="clavd" id="clavd" value="${model.record.clavd}">
 			<input type="hidden" name="clst" id="clst" value="O"> <%-- O=OK always  --%>
-			
-			
+			<%--sets in jquery on dropdown event --%>
+			<input type="hidden" name="cletypt" id="cletypt" value="${model.record.cletypt}">
 			<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">
 			 	<tr >
 				 	<td >
@@ -333,7 +344,7 @@ f
 							<tr >
 							<tr >
 								<td class="text14">&nbsp;<span title="cletyp">Eksporttype</span><font class="text16RedBold" >*</font></td>
-								<td class="text14">&nbsp;<span title="cleid">MRN nr.</span><font class="text16RedBold" >*</font></td>
+								<td class="text14">&nbsp;<span title="cleid">MRNnr/Eksp.id</span><font class="text16RedBold" >*</font></td>
 								<td class="text14">&nbsp;<span title="cleser">Sertifisert</span><font class="text16RedBold" >*</font></td>
 																	
 							</tr>

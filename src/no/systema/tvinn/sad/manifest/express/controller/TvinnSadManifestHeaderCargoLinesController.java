@@ -46,6 +46,8 @@ import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManif
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
 import no.systema.tvinn.sad.manifest.express.util.manager.CodeDropDownMgr;
 import no.systema.tvinn.sad.manifest.express.util.manager.ManifestDateManager;
+import no.systema.tvinn.sad.manifest.express.validator.TvinnSadManifestHeaderCargoLinesValidator;
+import no.systema.tvinn.sad.manifest.express.validator.TvinnSadManifestHeaderValidator;
 import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService;
 import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
@@ -88,7 +90,7 @@ public class TvinnSadManifestHeaderCargoLinesController {
 	 * @return
 	 */
 	@RequestMapping(value="tvinnsadmanifest_edit_cargolines.do", method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doManifestEditCargolines(JsonTvinnSadManifestCargoLinesRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+	public ModelAndView doManifestEditCargolines(@ModelAttribute ("record") JsonTvinnSadManifestCargoLinesRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		ModelAndView successView = new ModelAndView("tvinnsadmanifest_edit_cargolines");
 		logger.info("Inside: doManifestEditCargolines");
 		
@@ -99,11 +101,16 @@ public class TvinnSadManifestHeaderCargoLinesController {
 		String efuuid = request.getParameter("efuuid");
 		String efsg = request.getParameter("efsg");
 		String efavd = request.getParameter("efavd");
+		//special treatment for efpro
+		String efpro = request.getParameter("efpro");
+		recordToValidate.setClpro(efpro);
 		
 		String updateFlag = request.getParameter("updateFlag");
 		logger.warn("action:" + action);
 		
 		boolean isValidRecord = true;
+		
+		
 		
 		//check user (should be in session already)
 		if(appUser==null){
@@ -115,13 +122,11 @@ public class TvinnSadManifestHeaderCargoLinesController {
 			
 			if(TvinnSadConstants.ACTION_UPDATE.equals(action)){
 				//validator
-				//GodsnoRegistreringValidator validator = new GodsnoRegistreringValidator();
-				//validator.validate(recordToValidate, bindingResult);
+				TvinnSadManifestHeaderCargoLinesValidator validator = new TvinnSadManifestHeaderCargoLinesValidator();
+				validator.validate(recordToValidate, bindingResult);
 			    //check for ERRORS
 				if(bindingResult.hasErrors()){
-		    		logger.info("[ERROR Validation] record does not validate)");
-		    		//put domain objects and do go back to the successView from here
-		    		//drop downs
+		    		logger.error("[ERROR Validation] record does not validate)");
 		    		isValidRecord = false;
 		    		
 			    }else{
@@ -139,7 +144,10 @@ public class TvinnSadManifestHeaderCargoLinesController {
 					}else{
 						logger.warn("doCreate branch starting...");
 						logger.info("doCreate");
-						//dmlRetval = this.updateRecord(appUser.getUser(), recordToValidate, TvinnSadConstants.MODE_ADD, errMsg);
+						recordToValidate.setClpro(efpro);
+						recordToValidate.setClavd("0");//always 0
+						recordToValidate.setCltdn("0");//always 0
+						dmlRetval = this.updateRecord(appUser.getUser(), recordToValidate, TvinnSadConstants.MODE_ADD, errMsg);
 					}
 					logger.info(Calendar.getInstance().getTime() + " CONTROLLER end - timestamp");
 					if(dmlRetval<0){
@@ -159,28 +167,38 @@ public class TvinnSadManifestHeaderCargoLinesController {
 			
 			if(strMgr.isNotNull(recordToValidate.getClpro()) ){
 				//execute RPG first
-				JsonTvinnSadManifestRpgContainer rpgContainer = this.executeRpgSad132RawForCargoLines(appUser, recordToValidate.getClpro());
-				if(rpgContainer!=null){
-					//check for errors
-					if(StringUtils.isNotEmpty(rpgContainer.getErrMsg()) || StringUtils.isNotEmpty(rpgContainer.getErrMsgT()) ){
-						model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, "SERVER_ERROR:" + rpgContainer.getErrMsg() + rpgContainer.getErrMsgT());
-					}
-				}
-				//doFetch
-				List<JsonTvinnSadManifestCargoLinesRecord> outputList = (List<JsonTvinnSadManifestCargoLinesRecord>)this.getList(appUser, recordToValidate.getClpro());
-				model.put(TvinnSadConstants.DOMAIN_LIST, outputList );
-				
-				if("doUpdate".equals(action)){
-					//try to get the newly updated record in order to retain all values in the GUI
-					for(JsonTvinnSadManifestCargoLinesRecord record : outputList){
-						if (record.getClpro().equals(recordToValidate.getClpro())){
-							if(record.getCltdn().equals(recordToValidate.getCltdn()) && record.getClavd().equals(recordToValidate.getClavd())){
-								this.adjustFieldsForFetch(record);
-								model.put(TvinnSadConstants.DOMAIN_RECORD, record);
-							}
+				if(isValidRecord){
+					JsonTvinnSadManifestRpgContainer rpgContainer = this.executeRpgSad132RawForCargoLines(appUser, recordToValidate.getClpro());
+					if(rpgContainer!=null){
+						//check for errors
+						if(StringUtils.isNotEmpty(rpgContainer.getErrMsg()) || StringUtils.isNotEmpty(rpgContainer.getErrMsgT()) ){
+							model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, "SERVER_ERROR:" + rpgContainer.getErrMsg() + rpgContainer.getErrMsgT());
 						}
 					}
 				}
+				//doFetch: always after RPG execution
+				List<JsonTvinnSadManifestCargoLinesRecord> outputList = (List<JsonTvinnSadManifestCargoLinesRecord>)this.getList(appUser, recordToValidate.getClpro());
+				model.put(TvinnSadConstants.DOMAIN_LIST, outputList );
+	
+				if("doUpdate".equals(action)){
+					if(isValidRecord){
+						//try to get the newly updated record in order to retain all values in the GUI
+						for(JsonTvinnSadManifestCargoLinesRecord record : outputList){
+							if (record.getClpro().equals(recordToValidate.getClpro())){
+								if(record.getCltdn().equals(recordToValidate.getCltdn()) && record.getClavd().equals(recordToValidate.getClavd())){
+									this.adjustFieldsForFetch(record);
+									model.put(TvinnSadConstants.DOMAIN_RECORD, record);
+								}
+							}
+						}
+					}else{
+						//in case of validation errors
+						//this.adjustFieldsForFetch(recordToValidate);
+						model.put(TvinnSadConstants.DOMAIN_RECORD, recordToValidate);
+					}
+				}
+				
+				
 			}
 			
 			if(action==null || "".equals(action)){ 
@@ -193,7 +211,7 @@ public class TvinnSadManifestHeaderCargoLinesController {
 			model.put("efuuid", efuuid);
 			model.put("efsg", efsg);
 			model.put("efavd", efavd);
-			model.put("efpro", recordToValidate.getClpro());
+			model.put("efpro", efpro);
 			model.put("updateFlag", updateFlag);
 			
 			
@@ -249,7 +267,7 @@ public class TvinnSadManifestHeaderCargoLinesController {
     			
     		}
     	}
-	    String redirect = "tvinnsadmanifest_edit_cargolines.do?action=doFetch&clpro=" + clpro + "&efsg=" + efsg + "&efavd=" + clavd + "&efuuid=" + euuid; 
+	    String redirect = "tvinnsadmanifest_edit_cargolines.do?action=doFetch&efpro=" + clpro + "&efsg=" + efsg + "&efavd=" + clavd + "&efuuid=" + euuid; 
 	    ModelAndView successView = new ModelAndView("redirect:" + redirect);
 		
 		
@@ -414,16 +432,18 @@ public class TvinnSadManifestHeaderCargoLinesController {
     	if(jsonPayload!=null){
     		
     		JsonTvinnSadManifestCargoLinesContainer container = this.tvinnSadManifestListService.getListCargolinesContainer(jsonPayload);
-    		//----------------------------------------------------------------
-			//now filter the topic list with the search filter (if applicable)
-			//----------------------------------------------------------------
-    		Collection<JsonTvinnSadManifestCargoLinesRecord> outputList = container.getList();	
-			if(outputList!=null && outputList.size()>0){
-				for(JsonTvinnSadManifestCargoLinesRecord record : outputList ){
-					retval = 0;
-					logger.info(record.toString());
+    		if(container!=null){
+	    		//----------------------------------------------------------------
+				//now filter the topic list with the search filter (if applicable)
+				//----------------------------------------------------------------
+	    		Collection<JsonTvinnSadManifestCargoLinesRecord> outputList = container.getList();	
+				if(outputList!=null && outputList.size()>0){
+					for(JsonTvinnSadManifestCargoLinesRecord record : outputList ){
+						retval = 0;
+						logger.info(record.toString());
+					}
 				}
-			}
+    		}
     	}
     	
     	return retval;

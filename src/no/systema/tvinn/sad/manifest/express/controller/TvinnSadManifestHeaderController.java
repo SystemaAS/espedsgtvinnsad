@@ -192,7 +192,7 @@ public class TvinnSadManifestHeaderController {
 				validator.validate(recordToValidate, bindingResult);
 			    //check for ERRORS
 				if(bindingResult.hasErrors()){
-		    		logger.warn("[ERROR Validation] record does not validate)");
+		    		logger.error("[ERROR Validation] record does not validate)");
 		    		isValidRecord = false;
 		    		
 			    }else{

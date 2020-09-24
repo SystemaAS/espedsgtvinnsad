@@ -35,6 +35,9 @@
     	setBlockUI();
     });
     
+    jq('#cletyp').change(function() {
+    	jq('#cletypt').val(jq(this).find("option:selected").attr("title"));
+     });
   });
   
   //used and called only from a childwindow in order to reload this page with BlockUI() ...
@@ -83,7 +86,7 @@
 	  
 	  jq('#newButton').click(function() {
 		  setBlockUI();
-		  window.location.reload(false);
+		  window.location = "tvinnsadmanifest_edit_cargolines.do?action=doFetch&efpro=" + jq('#efpro').val() + "&efsg=" + jq('#efsg').val() + "&efavd=" + jq('#efavd').val() + "&efuuid=" + jq('#efuuid').val();
 	  }); 
   });
   
@@ -217,6 +220,7 @@
 				jq('#clpr').val(""); jq('#clpr').val(data[i].clpr);
 				//Export 
 				jq('#cletyp').val(""); jq('#cletyp').val(data[i].cletyp);
+				jq('#cletypt').val(""); jq('#cletypt').val(data[i].cletypt);
 				jq('#cleid').val(""); jq('#cleid').val(data[i].cleid);
 				jq('#cleser').val(""); jq('#cleser').val(data[i].cleser);
 				
