@@ -397,7 +397,7 @@ public class TvinnSadManifestHeaderCargoLinesController {
     	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
     	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
     	if(jsonPayload!=null){
-    		JsonTvinnSadManifestRpgContainer container = this.tvinnSadManifestListService.getContainerRpg132Raw(jsonPayload);
+    		JsonTvinnSadManifestRpgContainer container = this.tvinnSadManifestListService.getContainerRpgResult(jsonPayload);
     		retval = container;
     	}
     	return retval;

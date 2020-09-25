@@ -165,21 +165,21 @@
 				<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
-						<table style="width:100%" class="formFrameHeader" border="0" cellspacing="1" cellpadding="0">
+						<table class="formFrameHeader" style="width:100%;<c:if test="${model.record.efst=='B'}">background-color:#4E78A0;</c:if>"  border="0" cellspacing="1" cellpadding="0">
 					 		<tr height="15">
 					 			<c:choose>
 						 			<c:when test="${not empty model.record.efuuid}">
 						 				<td class="text14White">
 						 						&nbsp;&nbsp;Turnr:&nbsp;${model.record.efpro}
 						 						&nbsp;&nbsp;Avd:&nbsp;${model.record.efavd}  
-						 						&nbsp;&nbsp;<font style="color:#606060;">Stat<a tabindex=-1 id="updateInternalStatusLink" name="updateInternalStatusLink" runat="server" href="#"><font class="text14MediumBlue">u</font></a>s:${model.record.efst}</font>
+						 						&nbsp;&nbsp;Stat<a tabindex=-1 id="updateInternalStatusLink" name="updateInternalStatusLink" runat="server" href="#"><font style="color:#FFFFFF;">u</font></a>s:&nbsp;${model.record.efst}</font>
 						 				</td>
-						 				<td class="text14" align="right">		
-						 						<font style="color:#606060;">Manifest stat<a tabindex=-1 id="updateManifestStatusLink" name="updateManifestStatusLink" runat="server" href="#"><font class="text14MediumBlue">u</font></a>s:</font>&nbsp;
+						 				<td class="text14White" align="right">		
+						 						Manifest stat<a tabindex=-1 id="updateManifestStatusLink" name="updateManifestStatusLink" runat="server" href="#"><font style="color:#FFFFFF;">u</font></a>s:</font>&nbsp;
 						 						<c:choose>
 						 						<c:when test="${model.record.efst2 == 'S' || model.record.efst2 == 'R' || model.record.efst2 == 'D'}">
 						 							<c:if test="${model.record.efst2 == 'S'}">
-						 								<font style="color:#FFFFFF;">SUBMITTED</font>
+						 								<font style="color:yellow;">SUBMITTED</font>
 						 							</c:if>
 						 							<c:if test="${model.record.efst2 == 'D'}">
 						 								<font style="color:#FFFFFF;">SLETTET</font>
@@ -204,7 +204,7 @@
 		            </tr>
 		            <tr >
 					 	<td>
-						<table style="width:100%" class="formFrame" border="0" cellspacing="1" cellpadding="0">
+						<table class="formFrame" style="width:100%;" border="0" cellspacing="1" cellpadding="0">
 			 				<c:choose>
 					 			<c:when test="${not empty model.record.efuuid}">
 					 				<tr >
@@ -358,7 +358,7 @@
 				<table style="width:90%;" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
-						<table style="width:100%" class="formFrameHeader" border="0" cellspacing="1" cellpadding="0">
+						<table class="formFrameHeader" style="width:100%;<c:if test="${model.record.efst=='B'}">background-color:#4E78A0;</c:if>"  border="0" cellspacing="1" cellpadding="0">
 					 		<tr height="15">
 					 			<td class="text14White">&nbsp;&nbsp;Kjøretøy&nbsp;</td>
 			 				</tr>
@@ -434,7 +434,7 @@
 				<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
-						<table style="width:100%" class="formFrameHeader" border="0" cellspacing="1" cellpadding="0">
+						<table class="formFrameHeader" style="width:100%;<c:if test="${model.record.efst=='B'}">background-color:#4E78A0;</c:if>"  border="0" cellspacing="1" cellpadding="0">
 					 		<tr height="15">
 					 			<td class="text14White">&nbsp;&nbsp;Fører&nbsp;</td>
 			 				</tr>
@@ -521,7 +521,7 @@
 						<tr>
 							<td align="right" >
 								<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
-								<c:if test="${empty model.invalidManifest}">
+								<c:if test="${empty model.invalidManifest && model.record.efst!='B'}">
 									&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
 								</c:if>
 							</td>
@@ -582,6 +582,7 @@
 						<td class="text14MediumBlue">
 							<select class="selectMediumBlueE2" name="efst" id="efst">
 			            		  	<option value=" ">-velg-</option>
+			            		  	<option value="B">B</option>
 		            		  		<option value="M">M</option>
 							  	<option value="S">SLETTET</option>
 							  	

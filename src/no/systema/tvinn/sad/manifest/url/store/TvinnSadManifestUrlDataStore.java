@@ -65,4 +65,13 @@ public final class TvinnSadManifestUrlDataStore {
 	//http://localhost:8080/syjservicestn/syjsSADEFDEFR.do?user=OSCAR 
 	static public String TVINN_SAD_FETCH_MANIFEST_DEFAULT_VALUES_EXPRESS_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADEFDEFR.do";
 		
+	
+	//-------------------------
+	//[4] SEND via RPG execute
+	//-------------------------
+	//http://10.13.3.22/sycgip/SADEFJSONW.pgm?user=OSCAR&pro=999991
+	static public String TVINN_SAD_EXECUTE_RPG_SEND_MANIFEST_EXPRESS_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/SADEFJSONW.pgm";
+		
+	
+	
 }

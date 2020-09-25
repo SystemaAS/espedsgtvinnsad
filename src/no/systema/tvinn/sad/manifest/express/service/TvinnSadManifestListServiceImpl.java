@@ -59,7 +59,7 @@ public class TvinnSadManifestListServiceImpl implements TvinnSadManifestListServ
 		
 	}
 	
-	public JsonTvinnSadManifestRpgContainer getContainerRpg132Raw(String utfPayload) {
+	public JsonTvinnSadManifestRpgContainer getContainerRpgResult(String utfPayload) {
 		JsonTvinnSadManifestRpgContainer container = null;
 		try{
 			TvinnSadManifestMapper mapper = new TvinnSadManifestMapper();

@@ -36,6 +36,7 @@ import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManif
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesRecord;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRpgContainer;
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
 import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService;
@@ -91,19 +92,25 @@ public class TvinnSadManifestHeaderController {
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		String redirect = "redirect:tvinnsadmanifest_edit.do?action=doFetch&user=" + appUser.getUser() + "&efuuid=" + recordToValidate.getEfuuid();
 		ModelAndView successView = new ModelAndView(redirect);
-		//Execute
-		StringBuffer errMsg = new StringBuffer();
-		int dmlRetval = 0;
-		if(StringUtils.isNotEmpty(recordToValidate.getEfuuid()) ){
-			dmlRetval = this.updateStatus(appUser.getUser(), this.MODE_UPDATE_MANIFEST_STATUS, recordToValidate, errMsg);
-		}
-		//Result
-		if(dmlRetval<0){
-			model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errMsg.toString());
-			successView.addObject(model);
-			logger.error("ERROR!!!!!!!!!!ERROR!!!!!!!!!!!!!ERROR!:" + errMsg.toString());
-		}	
 		
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			//Execute
+			StringBuffer errMsg = new StringBuffer();
+			int dmlRetval = 0;
+			if(StringUtils.isNotEmpty(recordToValidate.getEfuuid()) ){
+				dmlRetval = this.updateStatus(appUser.getUser(), this.MODE_UPDATE_MANIFEST_STATUS, recordToValidate, errMsg);
+			}
+			//Result
+			if(dmlRetval<0){
+				model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errMsg.toString());
+				successView.addObject(model);
+				logger.error("ERROR!!!!!!!!!!ERROR!!!!!!!!!!!!!ERROR!:" + errMsg.toString());
+			}	
+		}
 		return successView;
 	}	
 	
@@ -123,19 +130,25 @@ public class TvinnSadManifestHeaderController {
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		String redirect = "redirect:tvinnsadmanifest_edit.do?action=doFetch&user=" + appUser.getUser() + "&efuuid=" + recordToValidate.getEfuuid();
 		ModelAndView successView = new ModelAndView(redirect);
-		//Execute
-		StringBuffer errMsg = new StringBuffer();
-		int dmlRetval = 0;
-		if(StringUtils.isNotEmpty(recordToValidate.getEfuuid())){
-			dmlRetval = this.updateStatus(appUser.getUser(), this.MODE_UPDATE_INTERNAL_STATUS, recordToValidate, errMsg);
-		}
-		//Result
-		if(dmlRetval<0){
-			model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errMsg.toString());
-			successView.addObject(model);
-			logger.error("ERROR!!!!!!!!!!ERROR!!!!!!!!!!!!!ERROR!:" + errMsg.toString());
-		}	
 		
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			//Execute
+			StringBuffer errMsg = new StringBuffer();
+			int dmlRetval = 0;
+			if(StringUtils.isNotEmpty(recordToValidate.getEfuuid())){
+				dmlRetval = this.updateStatus(appUser.getUser(), this.MODE_UPDATE_INTERNAL_STATUS, recordToValidate, errMsg);
+			}
+			//Result
+			if(dmlRetval<0){
+				model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errMsg.toString());
+				successView.addObject(model);
+				logger.error("ERROR!!!!!!!!!!ERROR!!!!!!!!!!!!!ERROR!:" + errMsg.toString());
+			}	
+		}
 		return successView;
 	}	
 	
@@ -150,11 +163,30 @@ public class TvinnSadManifestHeaderController {
 	@RequestMapping(value="tvinnsadmanifest_send.do", method={RequestMethod.GET, RequestMethod.POST} )
 	public ModelAndView doManifestSend(JsonTvinnSadManifestRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		logger.warn("Inside: doManifestSend");
+		
+		Map model = new HashMap();
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		String redirect = "redirect:tvinnsadmanifest_edit.do?action=doFetch&user=" + appUser.getUser() + "&efuuid=" + recordToValidate.getEfuuid();
 		ModelAndView successView = new ModelAndView(redirect);
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
 		
-		//TODO
+		}else{
+			//execute RPG first
+			if(StringUtils.isNotEmpty(recordToValidate.getEfpro())){
+				JsonTvinnSadManifestRpgContainer rpgContainer = this.executeRpgSADEFJSONW(appUser, recordToValidate.getEfpro());
+				if(rpgContainer!=null){
+					//check for errors
+					if(StringUtils.isNotEmpty(rpgContainer.getErrMsg()) || StringUtils.isNotEmpty(rpgContainer.getErrMsgT()) ){
+						String errorMessage = "SERVER_ERROR:" + rpgContainer.getErrMsg() + rpgContainer.getErrMsgT();
+						model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errorMessage);
+						logger.error(errorMessage);
+					}
+				}
+			}
+			
+		}
 		
 		return successView;
 	}	  
@@ -567,7 +599,34 @@ public class TvinnSadManifestHeaderController {
 		recordToValidate.setEfsjadt(new ManifestDateManager().convertToDate_NO(recordToValidate.getEfsjadt()));
 	}
 	
-	
+	/**
+	 * Sends the manifest
+	 * 
+	 * @param appUser
+	 * @param tur
+	 * @return
+	 */
+	private JsonTvinnSadManifestRpgContainer executeRpgSADEFJSONW(SystemaWebUser appUser, String tur){
+		JsonTvinnSadManifestRpgContainer retval = null;
+		//get BASE URL
+		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_EXECUTE_RPG_SEND_MANIFEST_EXPRESS_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser() + "&pro=" + tur;
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		JsonTvinnSadManifestRpgContainer container = this.tvinnSadManifestListService.getContainerRpgResult(jsonPayload);
+    		retval = container;
+    	}
+    	return retval;
+	}
 
 	/**
 	 * 

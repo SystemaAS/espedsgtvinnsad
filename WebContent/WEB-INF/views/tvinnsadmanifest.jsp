@@ -123,13 +123,14 @@
 					<thead>
 					<tr class="tableHeaderField" height="20" >
                     	<th width="2%" class="tableHeaderFieldFirst" ><spring:message code="systema.tvinn.sad.update"/></th>
-                		<th width="2%" class="tableHeaderField" >Avd</th>
+                    	<th width="2%" class="tableHeaderField" >Avd</th>
                 		<th width="2%" class="tableHeaderField" >Turnr</th>
                 		<th width="2%" class="tableHeaderField" >Sig</th>
                 		<th title="S=SLETTET" width="2%" class="tableHeaderField" >Status</th>
                 		<th width="2%" class="tableHeaderField" >T.sd</th>
                 		<th width="2%" class="tableHeaderField" >E.enh</th>
-                		<th title="S=SUBMITTED" width="2%" class="tableHeaderField" >Manif.st</th>
+                		<th width="2%" class="tableHeaderField" >Manif.id</th>
+                		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET" width="2%" class="tableHeaderField" >Manif.st</th>
                 		<th width="2%" class="tableHeaderField" >Passering ETA</th>
                 		<th width="2%" class="tableHeaderField" >Passering ATA</th>
                 		<th width="2%" class="tableHeaderField" >Bilnr</th>
@@ -162,6 +163,7 @@
 	               				</c:choose>
                				</a>
 	               	   </td>
+	               	   
 		               <td width="2%" align="center" class="tableCell" <c:if test="${record.own_valid < 0 || record.efst2 == 'D' || empty record.efst2 }">style="color: #9F6000;" </c:if> >${record.efavd}</td>
 		               <td width="2%" align="center" class="tableCell" <c:if test="${record.own_valid < 0 || record.efst2 == 'D' || empty record.efst2 }">style="color: #9F6000;" </c:if> ><c:if test="${record.efpro > 0}">${record.efpro}</c:if></td>
 		               <td width="2%" align="center" class="tableCell" <c:if test="${record.own_valid < 0 || record.efst2 == 'D' || empty record.efst2 }">style="color: #9F6000;" </c:if> >${record.efsg}</td>
@@ -177,10 +179,12 @@
 		              	</td>
 		               <td width="2%" class="tableCell" <c:if test="${record.own_valid < 0 || record.efst2 == 'D' || empty record.efst2 }">style="color: #9F6000;" </c:if> ><c:if test="${record.eftsd > 0}">${record.eftsd}</c:if></td>
 		               <td width="2%" class="tableCell" <c:if test="${record.own_valid < 0 || record.efst2 == 'D' || empty record.efst2 }">style="color: #9F6000;" </c:if> ><c:if test="${record.ef3039e > 0}">${record.ef3039e}</c:if></td>
+		               <td width="2%" class="tableCell" <c:if test="${record.own_valid < 0 || record.efst2 == 'D' || empty record.efst2 }">style="color: #9F6000;" </c:if> ><font style="font-size:11px;">${record.efuuid}</font></td>
 		               <td width="2%" align="center" class="tableCell" <c:if test="${record.own_valid < 0 || record.efst2 == 'D' || empty record.efst2 }">style="color: #9F6000;" </c:if> >
 		               		<c:choose>
 		               		<c:when test="${record.efst2 == 'S' || record.efst2 == 'R' || record.efst2 == 'D'}">
 		               			<c:if test="${record.efst2 == 'S'}">
+		               				<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
 		               				SUBMITTED
 		               			</c:if>
 		               			<c:if test="${record.efst2 == 'R'}">
