@@ -182,6 +182,21 @@ public class TvinnSadManifestHeaderController {
 						String errorMessage = "SERVER_ERROR:" + rpgContainer.getErrMsg() + rpgContainer.getErrMsgT();
 						model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errorMessage);
 						logger.error(errorMessage);
+					}else{
+						//Ok with RPG execute. Now change the status to B
+						//Execute
+						StringBuffer errMsg = new StringBuffer();
+						int dmlRetval = 0;
+						if(StringUtils.isNotEmpty(recordToValidate.getEfuuid())){
+							logger.warn("Status after RPG send:" + recordToValidate.getEfst());
+							dmlRetval = this.updateStatus(appUser.getUser(), this.MODE_UPDATE_INTERNAL_STATUS, recordToValidate, errMsg);
+						
+							//Result
+							if(dmlRetval<0){
+								model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errMsg.toString());
+								logger.error("ERROR!!!!!!!!!!ERROR!!!!!!!!!!!!!ERROR!:" + errMsg.toString());
+							}
+						}
 					}
 				}
 			}

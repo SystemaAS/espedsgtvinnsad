@@ -37,7 +37,7 @@
     
     jq('#sendButton').click(function() { 
     	setBlockUI();
-		window.location = 'tvinnsadmanifest_send.do?efuuid=' + jq('#efuuid').val() + '&efpro=' + jq('#efpro').val();
+		window.location = 'tvinnsadmanifest_send.do?efuuid=' + jq('#efuuid').val() + '&efpro=' + jq('#efpro').val() + '&efst=B';
     });
     
     

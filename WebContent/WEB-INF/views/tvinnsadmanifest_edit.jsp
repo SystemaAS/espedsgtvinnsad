@@ -179,10 +179,12 @@
 						 						<c:choose>
 						 						<c:when test="${model.record.efst2 == 'S' || model.record.efst2 == 'R' || model.record.efst2 == 'D'}">
 						 							<c:if test="${model.record.efst2 == 'S'}">
-						 								<font style="color:yellow;">SUBMITTED</font>
+						 								<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
+						 								<font style="color:#FFFFCC;">SUBMITTED</font>
 						 							</c:if>
 						 							<c:if test="${model.record.efst2 == 'D'}">
-						 								<font style="color:#FFFFFF;">SLETTET</font>
+						 								<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
+						 								<font style="color:red;">SLETTET</font>
 						 							</c:if>
 						 							<c:if test="${model.record.efst2 == 'R'}">
 						 								<font style="color:#FFFFFF;">REOPENED/DRAFT</font>
