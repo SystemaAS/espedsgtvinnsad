@@ -54,6 +54,10 @@
   });
   
   function blockTransitFields(){
+	  jq(".toggleTransit").prop("disabled", true);
+	  jq('#tblTransit').removeClass('tableBorderWithRoundCorners');
+	  jq('#tblTransit').addClass('tableBorderWithRoundCornersLightGray');
+	  
 	  jq('#cltrnr').val("");
 	  jq('#cltrnr').removeClass('inputTextMediumBlue');
 	  jq('#cltrnr').addClass('inputTextReadOnly');
@@ -70,6 +74,10 @@
 	  jq('#clnak').attr('readonly','readonly');
   }
   function unblockTransitFields(){
+	  jq(".toggleTransit").prop("disabled", false);
+	  jq('#tblTransit').removeClass('tableBorderWithRoundCornersLightGray');
+	  jq('#tblTransit').addClass('tableBorderWithRoundCorners');
+	  
 	  jq('#cltrnr').removeClass('inputTextReadOnly');
 	  jq('#cltrnr').removeAttr('readonly');
 	  jq('#cltrnr').addClass('inputTextMediumBlue'); 
@@ -84,6 +92,10 @@
   }
   
   function blockImmediateReleaseFields(){
+	  jq(".toggleDirektfortolling").prop("disabled", true);
+	  jq('#tblDirektfortolling').removeClass('tableBorderWithRoundCorners');
+	  jq('#tblDirektfortolling').addClass('tableBorderWithRoundCornersLightGray');
+	  
 	  jq('#clrg').val("");
 	  jq('#clrg').removeClass('inputTextMediumBlue');
 	  jq('#clrg').addClass('inputTextReadOnly');
@@ -115,6 +127,9 @@
 	  
   }
   function unblockImmediateReleaseFields(){
+	  jq(".toggleDirektfortolling").prop("disabled", false);
+	  jq('#tblDirektfortolling').removeClass('tableBorderWithRoundCornersLightGray');
+	  jq('#tblDirektfortolling').addClass('tableBorderWithRoundCorners');
 	  
 	  jq('#clrg').removeClass('inputTextReadOnly');
 	  jq('#clrg').addClass('inputTextMediumBlue');
