@@ -38,7 +38,109 @@
     jq('#cletyp').change(function() {
     	jq('#cletypt').val(jq(this).find("option:selected").attr("title"));
      });
+    
+    jq('#clpr').change(function() {
+    	if(jq('#clpr').val() == "01"){
+    		unblockImmediateReleaseFields();
+    		blockTransitFields();
+    	}else if (jq('#clpr').val() == "02"){
+    		blockImmediateReleaseFields();
+    		unblockTransitFields();
+    	}else{
+    		unblockImmediateReleaseFields();
+    		unblockTransitFields();
+    	}
+     });
   });
+  
+  function blockTransitFields(){
+	  jq('#cltrnr').val("");
+	  jq('#cltrnr').removeClass('inputTextMediumBlue');
+	  jq('#cltrnr').addClass('inputTextReadOnly');
+	  jq('#cltrnr').attr('readonly','readonly');
+	  
+	  jq('#clnas').val("");
+	  jq('#clnas').removeClass('inputTextMediumBlue');
+	  jq('#clnas').addClass('inputTextReadOnly');
+	  jq('#clnas').attr('readonly','readonly');
+	  
+	  jq('#clnak').val("");
+	  jq('#clnak').removeClass('inputTextMediumBlue');
+	  jq('#clnak').addClass('inputTextReadOnly');
+	  jq('#clnak').attr('readonly','readonly');
+  }
+  function unblockTransitFields(){
+	  jq('#cltrnr').removeClass('inputTextReadOnly');
+	  jq('#cltrnr').removeAttr('readonly');
+	  jq('#cltrnr').addClass('inputTextMediumBlue'); 
+	  
+	  jq('#clnas').removeClass('inputTextReadOnly');
+	  jq('#clnas').removeAttr('readonly');
+	  jq('#clnas').addClass('inputTextMediumBlue');
+	  
+	  jq('#clnak').removeClass('inputTextReadOnly');
+	  jq('#clnak').removeAttr('readonly');
+	  jq('#clnak').addClass('inputTextMediumBlue');
+  }
+  
+  function blockImmediateReleaseFields(){
+	  jq('#clrg').val("");
+	  jq('#clrg').removeClass('inputTextMediumBlue');
+	  jq('#clrg').addClass('inputTextReadOnly');
+	  jq('#clrg').attr('readonly','readonly');
+	  
+	  jq('#cl0068a').val("");
+	  jq('#cl0068a').removeClass('inputTextMediumBlue');
+	  jq('#cl0068a').addClass('inputTextReadOnly');
+	  jq('#cl0068a').attr('readonly','readonly');
+	  jq("#cl0068a" ).datepicker( "option", "disabled", true );
+	  
+	  jq('#cl0068b').val("");
+	  jq('#cl0068b').removeClass('inputTextMediumBlue');
+	  jq('#cl0068b').addClass('inputTextReadOnly');
+	  jq('#cl0068b').attr('readonly','readonly');
+	  
+	  jq('#cletyp').val("");
+	  jq("#cletyp").prop("disabled", true);
+	  jq('#cletyp').removeClass('inputTextMediumBlue');
+	  jq('#cletyp').addClass('inputTextReadOnly');
+	  jq('#cletyp').attr('readonly','readonly');
+	  
+	  jq('#cleid').val("");
+	  jq('#cleid').removeClass('inputTextMediumBlue');
+	  jq('#cleid').addClass('inputTextReadOnly');
+	  jq('#cleid').attr('readonly','readonly');
+	  
+	  
+	  
+  }
+  function unblockImmediateReleaseFields(){
+	  
+	  jq('#clrg').removeClass('inputTextReadOnly');
+	  jq('#clrg').addClass('inputTextMediumBlue');
+	  jq('#clrg').removeAttr('readonly');
+	  
+	  jq('#cl0068a').removeClass('inputTextReadOnly');
+	  jq('#cl0068a').addClass('inputTextMediumBlue');
+	  jq('#cl0068a').removeAttr('readonly');
+	  jq("#cl0068a" ).datepicker( "option", "disabled", false );
+	  
+	  jq('#cl0068b').removeClass('inputTextReadOnly');
+	  jq('#cl0068b').addClass('inputTextMediumBlue');
+	  jq('#cl0068b').removeAttr('readonly');
+	  
+	  jq("#cletyp").prop("disabled", false);
+	  jq('#cletyp').removeClass('inputTextReadOnly');
+	  jq('#cletyp').addClass('inputTextMediumBlue');
+	  jq('#cletyp').removeAttr('readonly');
+	  
+	  jq('#cleid').removeClass('inputTextReadOnly');
+	  jq('#cleid').addClass('inputTextMediumBlue');
+	  jq('#cleid').removeAttr('readonly');
+	  
+	  
+	  
+  }
   
   //used and called only from a childwindow in order to reload this page with BlockUI() ...
   function callParent(){
@@ -209,6 +311,19 @@
 				jq('#clntk').val(""); jq('#clntk').val(data[i].clntk);
 				jq('#clvkb').val(""); jq('#clvkb').val(data[i].clvkb);
 				jq('#clrg').val(""); jq('#clrg').val(data[i].clrg);
+				if(jq('#clrg').val()!=''){
+					unblockImmediateReleaseFields();
+		    		blockTransitFields();
+				}
+				//transit
+				jq('#cltrnr').val(""); jq('#cltrnr').val(data[i].cltrnr);
+				jq('#clnas').val(""); jq('#clnas').val(data[i].clnas);
+				jq('#clnak').val(""); jq('#clnak').val(data[i].clnak);
+				if(jq('#cltrnr').val()!=''){
+					blockImmediateReleaseFields();
+					unblockTransitFields();
+				}
+				
 				//Loading
 				jq('#cllkf').val(""); jq('#cllkf').val(data[i].cllkf);
 				jq('#clsdf').val(""); jq('#clsdf').val(data[i].clsdf);

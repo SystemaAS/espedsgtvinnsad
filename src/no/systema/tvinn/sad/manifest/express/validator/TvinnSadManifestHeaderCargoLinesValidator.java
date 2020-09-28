@@ -3,6 +3,7 @@ package no.systema.tvinn.sad.manifest.express.validator;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -50,15 +51,28 @@ public class TvinnSadManifestHeaderCargoLinesValidator implements Validator {
 		//Logical (RULES) controls if we passed the NOT NULL errors
 		if(!errors.hasFieldErrors()){
 			if(record!=null){
+				//Direktfortolling 
+				if("01".equals(record.getClpr())){
+					if(StringUtils.isEmpty(record.getCl0068a()) || StringUtils.isEmpty(record.getCl0068b()) || StringUtils.isEmpty(record.getClrg())){
+						errors.rejectValue("clrg", "systema.tvinn.sad.manifest.express.cargolines.error.rule.directfortolling.mandatory.ids");
+					}
+				}else if ("02".equals(record.getClpr())){
+					if(StringUtils.isEmpty(record.getCltrnr()) || StringUtils.isEmpty(record.getClnas()) || StringUtils.isEmpty(record.getClnak()) ){
+						errors.rejectValue("clrg", "systema.tvinn.sad.manifest.express.cargolines.error.rule.transit.mandatory.ids");
+					}
+				}
+				
 				//------
 				//dates 
 				//------
 				if(strMgr.isNotNull(record.getCl0068a())  && !"999999".equals(record.getCl0068a())){
-					if(record.getCl0068a().length()>6){
-						errors.rejectValue("cl0068a", "systema.tvinn.sad.manifest.express.cargolines.error.rule.invalidDeklDate");
-					}else{
-						if(!dateValidator.validateDate(record.getCl0068a(), DateValidator.DATE_MASK_NO)){
-							errors.rejectValue("cl0068a", "systema.tvinn.sad.manifest.express.cargolines.error.rule.invalidDeklDate"); 	
+					if(!"0".equals(record.getCl0068a())){
+						if(record.getCl0068a().length()>6){
+							errors.rejectValue("cl0068a", "systema.tvinn.sad.manifest.express.cargolines.error.rule.invalidDeklDate");
+						}else{
+							if(!dateValidator.validateDate(record.getCl0068a(), DateValidator.DATE_MASK_NO)){
+								errors.rejectValue("cl0068a", "systema.tvinn.sad.manifest.express.cargolines.error.rule.invalidDeklDate"); 	
+							}
 						}
 					}
 				}

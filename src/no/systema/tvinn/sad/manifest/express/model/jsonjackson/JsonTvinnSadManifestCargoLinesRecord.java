@@ -21,11 +21,16 @@ public class JsonTvinnSadManifestCargoLinesRecord extends JsonAbstractGrandFathe
 	private String clpro = "0"; //SONET (8,0) Turnr
 	private String cltdn = "0"; //SONET (8,0) Oppnr
 	private String clrg = ""; //TEGN (11) Orgnr
+	private String cl0068a = "0"; //SONET (8,0) Sendingsdato
+	private String cl0068b = "0"; //SONET (6,0) Sendingssekv
 	
-	private String cl0068a = ""; //SONET (8,0) Sendingsdato
-	private String cl0068b = ""; //SONET (6,0) Sendingssekv
-	private String clntk = ""; //SONET (7,0) Total kolli
-	private String clvkb = ""; //SONET (9,0) Total vekt
+	private String cltrnr = ""; //TEGN (18) MRN-nr
+	private String clnas = ""; //TEGN (30) Avsender
+	private String clnak = ""; //TEGN (30) Mottaker
+	
+	
+	private String clntk = "0"; //SONET (7,0) Total kolli
+	private String clvkb = "0"; //SONET (9,0) Total vekt
 	private String clvt = ""; //TEGN (30) Varebeskrivelse
 	
 	private String cltrid = ""; //TEGN (17) Bilnr

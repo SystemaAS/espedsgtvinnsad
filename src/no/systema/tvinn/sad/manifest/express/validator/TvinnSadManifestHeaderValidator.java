@@ -68,7 +68,7 @@ public class TvinnSadManifestHeaderValidator implements Validator {
 							}else{
 								if(this.dateIsToday(record.getEfeta(), DateTimeManager.NO_FORMAT)){
 									record.setEfetm(dateTimeMgr.adjustUserTimeToHHmm(record.getEfetm()));
-									//check the hour. At least one hour ahead
+									//check the hour. At least 2 hour ahead
 									if(!this.isValidTime(record.getEfetm())){
 										errors.rejectValue("efetm", "systema.tvinn.sad.manifest.express.header.error.rule.invalidEtaTimeForward");
 									}
@@ -138,7 +138,7 @@ public class TvinnSadManifestHeaderValidator implements Validator {
 	 */
 	private boolean isValidTime(String timeUserValue){
 		boolean retval = false;
-		int _LIMIT_HOURS = 1;
+		int _LIMIT_HOURS = 2;
 		try{
 			Calendar now = Calendar.getInstance();
 		    // Incrementing hours by _LIMIT_HOURS

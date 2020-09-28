@@ -454,9 +454,14 @@ public class TvinnSadManifestHeaderCargoLinesController {
 	 * @param recordToValidate
 	 */
 	private void adjustFieldsForUpdate(JsonTvinnSadManifestCargoLinesRecord recordToValidate){
-	
-		recordToValidate.setCl0068a(new ManifestDateManager().convertToDate_ISO(recordToValidate.getCl0068a()));
-		
+		if(StringUtils.isEmpty(recordToValidate.getCl0068a()) || "0".equals(recordToValidate.getCl0068a())){
+			//Meaning these fields have been disabled
+			recordToValidate.setCl0068a("0");
+			recordToValidate.setCl0068b("0");
+		}else{
+			recordToValidate.setCl0068a(new ManifestDateManager().convertToDate_ISO(recordToValidate.getCl0068a()));
+			
+		}
 	}
 	/**
 	 * 
