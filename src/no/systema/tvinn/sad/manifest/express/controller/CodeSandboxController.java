@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import no.systema.jservices.common.dto.TransportationCompanyDto;
+import no.systema.jservices.common.dto.expressfortolling.ManifestTransportationCompanyDto;
 import no.systema.main.util.AppConstants;
 
 /**
@@ -39,7 +39,7 @@ public class CodeSandboxController {
 		
 		try {
 
-			List<TransportationCompanyDto> dtoList =  getTransportationCompany(id);
+			List<ManifestTransportationCompanyDto> dtoList =  getTransportationCompany(id);
 			
 			logger.info("dtoList="+dtoList);
 
@@ -67,7 +67,7 @@ public class CodeSandboxController {
 	 * @return
 	 */
 	
-	private List<TransportationCompanyDto> getTransportationCompany(String id) {
+	private List<ManifestTransportationCompanyDto> getTransportationCompany(String id) {
 		String BASE_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn-expft/transportationCompany.do";
 	    UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL)
 		        .queryParam("user", "SYSTEMA")
@@ -76,7 +76,7 @@ public class CodeSandboxController {
 		logger.info("uri="+uri);
 		
 		
-		ResponseEntity<List<TransportationCompanyDto>> response = restTemplate.exchange(uri,HttpMethod.GET, null, new ParameterizedTypeReference<List<TransportationCompanyDto>>() {});
+		ResponseEntity<List<ManifestTransportationCompanyDto>> response = restTemplate.exchange(uri,HttpMethod.GET, null, new ParameterizedTypeReference<List<ManifestTransportationCompanyDto>>() {});
 		return response.getBody();		
 	}	
 	
