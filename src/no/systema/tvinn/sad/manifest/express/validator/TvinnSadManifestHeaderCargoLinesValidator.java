@@ -60,6 +60,10 @@ public class TvinnSadManifestHeaderCargoLinesValidator implements Validator {
 					if(StringUtils.isEmpty(record.getCltrnr()) || StringUtils.isEmpty(record.getClnas()) || StringUtils.isEmpty(record.getClnak()) ){
 						errors.rejectValue("clrg", "systema.tvinn.sad.manifest.express.cargolines.error.rule.transit.mandatory.ids");
 					}
+					//Certified check
+					if(record.getCleser().equals("J")){
+						errors.rejectValue("cleser", "systema.tvinn.sad.manifest.express.cargolines.error.rule.transit.certified.invalid");
+					}
 				}
 				
 				//------

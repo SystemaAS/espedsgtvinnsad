@@ -43,6 +43,9 @@
 	<%-- search filter component --%>
 		
  		<table style="width:100%;" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
+ 		<tr>
+ 		<td>
+ 		<table style="width:70%;">
  	        <form name="searchForm" id="searchForm" action="tvinnsadmanifest.do?action=doFind" method="post" >
  	        <tr height="3"><td></td></tr>
  	        <tr>	
@@ -83,6 +86,10 @@
 			</tr>
 			<tr height="10"><td></td></tr>
 			</form>
+			</table>
+			</td>
+			</tr>
+			
 		</table>
 	</td>
 	</tr>
@@ -110,12 +117,12 @@
 	<%-- list component --%>
 	<tr>
 		<td>		
-		<table style="width:100%;" cellspacing="0" border="0" cellpadding="0">
+		<table style="width:100%;" border="0" >
 	    	<%-- separator --%>
 	        <tr height="1"><td></td></tr> 
 			<tr>
 				<td>
-				<table id="containerdatatableTable" width="100%" cellspacing="2" align="left" >
+				<table style="width:100%;" id="containerdatatableTable" cellspacing="2" align="left" >
 				<tr>
 				<td class="text11">
 							
@@ -127,15 +134,14 @@
                 		<th width="2%" class="tableHeaderField" >Turnr</th>
                 		<th width="2%" class="tableHeaderField" >Sig</th>
                 		<th title="S=SLETTET" width="2%" class="tableHeaderField" >Status</th>
-                		<th width="2%" class="tableHeaderField" >T.sd</th>
-                		<th width="2%" class="tableHeaderField" >E.enh</th>
-                		<th width="2%" class="tableHeaderField" >Manif.id</th>
-                		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET" width="2%" class="tableHeaderField" >Manif.st</th>
                 		<th width="2%" class="tableHeaderField" >Passering ETA</th>
-                		<th width="2%" class="tableHeaderField" >Passering ATA</th>
+                		<th width="2%" class="tableHeaderField" >Tollsted</th>
+                		<th width="2%" class="tableHeaderField" >Eksp.enh</th>
                 		<th width="2%" class="tableHeaderField" >Bilnr</th>
                 		<th width="2%" class="tableHeaderField" >Sjåførs navn</th>
                 		<th width="2%" class="tableHeaderField" >Reg.dato</th>
+                		<th width="2%" class="tableHeaderField" >Manif.id</th>
+                		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET" width="2%" class="tableHeaderField" >Manif.st</th>
                 		<th width="2%" class="tableHeaderField" >Slett</th>
                 		</tr>
                 	</thead>
@@ -154,7 +160,7 @@
 		          	   <td width="2%" class="tableCellFirst" align="center">
 		               		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsadmanifest_edit.do?action=doFetch&efuuid=${record.efuuid}" onClick="setBlockUI();">
                					<c:choose>
-		               				<c:when test="${record.efst != 'S'}">
+		               				<c:when test="${record.own_editable > 0}">
 		               					<img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">
 		               				</c:when>
 		               				<c:otherwise>
@@ -164,10 +170,10 @@
                				</a>
 	               	   </td>
 	               	   
-		               <td width="2%" align="center" class="tableCell" <c:if test="${record.own_valid < 0 || record.efst2 == 'D' || empty record.efst2 }">style="color: #9F6000;" </c:if> >${record.efavd}</td>
-		               <td width="2%" align="center" class="tableCell" <c:if test="${record.own_valid < 0 || record.efst2 == 'D' || empty record.efst2 }">style="color: #9F6000;" </c:if> ><c:if test="${record.efpro > 0}">${record.efpro}</c:if></td>
-		               <td width="2%" align="center" class="tableCell" <c:if test="${record.own_valid < 0 || record.efst2 == 'D' || empty record.efst2 }">style="color: #9F6000;" </c:if> >${record.efsg}</td>
-		               <td width="2%" align="center" class="tableCell" <c:if test="${record.own_valid < 0 || record.efst2 == 'D' || empty record.efst2 }">style="color: #9F6000;" </c:if> >
+		               <td width="2%" align="center" class="tableCell" >${record.efavd}</td>
+		               <td width="2%" align="center" class="tableCell" ><c:if test="${record.efpro > 0}">${record.efpro}</c:if></td>
+		               <td width="2%" align="center" class="tableCell" >${record.efsg}</td>
+		               <td width="2%" align="center" class="tableCell" >
 		               	  <c:choose>
 		               		<c:when test="${record.efst == 'S'}">
 		               			SLETTET
@@ -177,10 +183,23 @@
 		               		</c:otherwise>
 		               	   </c:choose>
 		              	</td>
-		               <td width="2%" class="tableCell" <c:if test="${record.own_valid < 0 || record.efst2 == 'D' || empty record.efst2 }">style="color: #9F6000;" </c:if> ><c:if test="${record.eftsd > 0}">${record.eftsd}</c:if></td>
-		               <td width="2%" class="tableCell" <c:if test="${record.own_valid < 0 || record.efst2 == 'D' || empty record.efst2 }">style="color: #9F6000;" </c:if> ><c:if test="${record.ef3039e > 0}">${record.ef3039e}</c:if></td>
-		               <td width="2%" class="tableCell" <c:if test="${record.own_valid < 0 || record.efst2 == 'D' || empty record.efst2 }">style="color: #9F6000;" </c:if> ><font style="font-size:11px;">${record.efuuid}</font></td>
-		               <td width="2%" align="center" class="tableCell" <c:if test="${record.own_valid < 0 || record.efst2 == 'D' || empty record.efst2 }">style="color: #9F6000;" </c:if> >
+		              	<td width="2%" class="tableCell" >
+		              		<c:choose>
+							<c:when test="${record.own_editable < 0 }">
+								<font color="red">${record.efeta}&nbsp;${record.efetm}</font>
+							</c:when>
+							<c:otherwise>
+								${record.efeta}&nbsp;${record.efetm}
+							</c:otherwise>		              	
+		              		</c:choose>
+		              	</td>
+		               <td align="center" width="2%" class="tableCell" ><c:if test="${record.eftsd > 0}">${record.eftsd}</c:if></td>
+		               <td align="center" width="2%" class="tableCell" ><c:if test="${record.ef3039e > 0}">${record.ef3039e}</c:if></td>
+		               <td width="2%" class="tableCell" >${record.efkmrk}</td>
+		               <td width="2%" class="tableCell" >${record.efsjaf}</td>
+		               <td width="2%" class="tableCell" ><c:if test="${record.efdtr > 0}">${record.efdtr}</c:if></td>
+		               <td width="2%" class="tableCell" ><font style="font-size:11px;">${record.efuuid}</font></td>
+		               <td width="2%" align="center" class="tableCell" >
 		               		<c:choose>
 		               		<c:when test="${record.efst2 == 'S' || record.efst2 == 'R' || record.efst2 == 'D'}">
 		               			<c:if test="${record.efst2 == 'S'}">
@@ -191,7 +210,7 @@
 		               				REOPENED/DRAFT
 		               			</c:if>
 		               			<c:if test="${record.efst2 == 'D'}">
-		               				SLETTET
+		               				<font color="red">SLETTET</font>
 		               			</c:if>
 		               			
 		               		</c:when>
@@ -200,33 +219,24 @@
 		               		</c:otherwise>
 		               		</c:choose>
 		               </td>
-		               <td width="2%" class="tableCell" <c:if test="${record.own_valid < 0 || record.efst2 == 'D' || empty record.efst2 }">style="color: #9F6000;" </c:if> >${record.efeta}&nbsp;${record.efetm}</td>
-		               <td width="2%" class="tableCell" <c:if test="${record.own_valid < 0 || record.efst2 == 'D' || empty record.efst2 }">style="color: #9F6000;" </c:if> >${record.efata}&nbsp;${record.efatm}</td>
-		               <td width="2%" class="tableCell" <c:if test="${record.own_valid < 0 || record.efst2 == 'D' || empty record.efst2 }">style="color: #9F6000;" </c:if> >${record.efkmrk}</td>
-		               <td width="2%" class="tableCell" <c:if test="${record.own_valid < 0 || record.efst2 == 'D' || empty record.efst2 }">style="color: #9F6000;" </c:if> >${record.efsjaf}</td>
-		               <td width="2%" class="tableCell" <c:if test="${record.own_valid < 0 || record.efst2 == 'D' || empty record.efst2 }">style="color: #9F6000;" </c:if> ><c:if test="${record.efdtr > 0}">${record.efdtr}</c:if></td>
-		               <td width="2%" class="tableCell" align="center">
-		               		<c:choose>
-	               				<c:when test="${record.efst != 'S'}">
-	               					<a style="display: block; width: 100%; height: 100%;" class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
-										<img src="resources/images/delete.gif" border="0" alt="remove">
-									</a>
-									<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
-										<form action="tvinnsadmanifest_edit_delete.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
-										 	<input type="hidden" name="currentUuid${counter.count}" id="currentUuid${counter.count}" value="${record.efuuid}">
-										 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="S">
-											<p class="text14" >Er du sikker på at du vil slette Turnr. <b>${record.efpro}</b></p>
-											<p class="text14"> Tekst </p>
-											<input type="text" class="inputText" name="currentText${counter.count}" id="currentText${counter.count}" size="45" maxlength="70" value=''>&nbsp;</td>
-											
-										</form>
-									</div>
-	               				</c:when>
-	               				<c:otherwise>
-	               					 &nbsp;
-	               				</c:otherwise>
-               				</c:choose>
 
+		               <td width="2%" class="tableCell" align="center">   		
+			   				<c:if test="${record.own_editable > 0}">
+	              				<a style="display: block; width: 100%; height: 100%;" class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
+									<img src="resources/images/delete.gif" border="0" alt="remove">
+								</a>
+								<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
+									<form action="tvinnsadmanifest_edit_delete.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
+									 	<input type="hidden" name="currentUuid${counter.count}" id="currentUuid${counter.count}" value="${record.efuuid}">
+									 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="D">
+									 	<input type="hidden" name="selectedPro${counter.count}" id="selectedPro${counter.count}" value="${record.efpro}">
+										<p class="text14" >Er du sikker på at du vil slette Turnr. <b>${record.efpro}</b></p>
+										<p class="text14"> Tekst </p>
+										<input type="text" class="inputText" name="currentText${counter.count}" id="currentText${counter.count}" size="45" maxlength="70" value=''>&nbsp;</td>
+										
+									</form>
+								</div>
+              				</c:if>
 	               	   </td> 
 		            </tr> 
 		            </c:forEach>

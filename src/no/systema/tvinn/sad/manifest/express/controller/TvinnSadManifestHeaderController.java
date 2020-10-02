@@ -182,21 +182,6 @@ public class TvinnSadManifestHeaderController {
 						String errorMessage = "SERVER_ERROR:" + rpgContainer.getErrMsg() + rpgContainer.getErrMsgT();
 						model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errorMessage);
 						logger.error(errorMessage);
-					}else{
-						//Ok with RPG execute. Now change the status to B
-						//Execute
-						StringBuffer errMsg = new StringBuffer();
-						int dmlRetval = 0;
-						if(StringUtils.isNotEmpty(recordToValidate.getEfuuid())){
-							logger.warn("Status after RPG send:" + recordToValidate.getEfst());
-							dmlRetval = this.updateStatus(appUser.getUser(), this.MODE_UPDATE_INTERNAL_STATUS, recordToValidate, errMsg);
-						
-							//Result
-							if(dmlRetval<0){
-								model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errMsg.toString());
-								logger.error("ERROR!!!!!!!!!!ERROR!!!!!!!!!!!!!ERROR!:" + errMsg.toString());
-							}
-						}
 					}
 				}
 			}
@@ -284,15 +269,24 @@ public class TvinnSadManifestHeaderController {
 				if(isValidRecord){
 					JsonTvinnSadManifestRecord record = this.getRecord(appUser, recordToValidate.getEfuuid());
 					this.adjustFieldsForFetch(record);
-					model.put(TvinnSadConstants.DOMAIN_RECORD, record);
 					//check if the manifest cargo lines are valid
 					if(!manifestExpressMgr.isValidManifest(appUser, record.getEfpro())){
 						model.put("invalidManifest", "1");
 					}
+					//check it the manifest is editable
+					if(!manifestExpressMgr.isEditableManifest(appUser, record)){
+						record.setOwn_editable(-1);
+						logger.warn(record.getOwn_editable());
+						
+					}
+					model.put(TvinnSadConstants.DOMAIN_RECORD, record);
+					session.setAttribute(TvinnSadConstants.SESSION_HEADER_RECORD_SADMANIFEST, record);
+					
 				}else{
 					//in case of validation errors
 					//this.adjustFieldsForFetch(recordToValidate);
 					model.put(TvinnSadConstants.DOMAIN_RECORD, recordToValidate);
+					session.setAttribute(TvinnSadConstants.SESSION_HEADER_RECORD_SADMANIFEST, recordToValidate);
 				}
 				
 			}else{
@@ -338,7 +332,7 @@ public class TvinnSadManifestHeaderController {
 		String uuid = null;
 		String notisText = null;
 		String status = null;
-		
+		String pro = null;
 		Enumeration requestParameters = request.getParameterNames();
 	    while (requestParameters.hasMoreElements()) {
 	        String element = (String) requestParameters.nextElement();
@@ -350,6 +344,8 @@ public class TvinnSadManifestHeaderController {
     				uuid = value;
     			}else if(element.startsWith("selectedStatus")){
     				status = value;
+    			}else if(element.startsWith("selectedPro")){
+    				pro = value;
     			}else if(element.startsWith("currentText")){
     				notisText = value;
     			}
@@ -362,14 +358,16 @@ public class TvinnSadManifestHeaderController {
 			return loginView;
 		
 		}else{
-			//----------------------------
-			//Fetch record and update it 
-			//----------------------------
+			//--------------------------------
+			//Delete and Send (if applicable)
+			//--------------------------------
 			//TODO
 			
 			if(strMgr.isNotNull( uuid )){
 				recordToValidate.setEfuuid(uuid);
-				recordToValidate.setEfst(status);
+				recordToValidate.setEfst2(status);
+				recordToValidate.setEfpro(pro);
+				
 				int dmlRetval = 0;
 				StringBuffer errMsg = new StringBuffer();
 				//fetch record
@@ -377,11 +375,29 @@ public class TvinnSadManifestHeaderController {
 				//Update with delete flag
 				dmlRetval = this.deleteRecord(appUser.getUser(), recordToValidate, errMsg);
 				if(dmlRetval<0){
-					logger.info("ERROR on delete ... ??? check your code");
-					//model.addAttribute(GodsnoConstants.ASPECT_ERROR_MESSAGE, errMsg.toString());
+					String errorMessage = "ERROR on delete ... ??? check your code";
+					logger.error(errorMessage);
+					model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errorMessage);
 					
 				}else{
 					logger.info("doDelete = OK");
+					//for TEST!!!! (SEND only if text is not null)
+					if(StringUtils.isNotEmpty(notisText)){
+						//execute RPG first
+						if(StringUtils.isNotEmpty(recordToValidate.getEfpro())){
+							JsonTvinnSadManifestRpgContainer rpgContainer = this.executeRpgSADEFJSONW(appUser, recordToValidate.getEfpro());
+							if(rpgContainer!=null){
+								//check for errors
+								if(StringUtils.isNotEmpty(rpgContainer.getErrMsg()) || StringUtils.isNotEmpty(rpgContainer.getErrMsgT()) ){
+									String errorMessage = "SERVER_ERROR:" + rpgContainer.getErrMsg() + rpgContainer.getErrMsgT();
+									model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errorMessage);
+									logger.error(errorMessage);
+								}else{
+									logger.warn("Send after delete = OK");
+								}
+							}
+						}
+					}
 				}
 				
 				
@@ -521,7 +537,7 @@ public class TvinnSadManifestHeaderController {
 		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_UPDATE_MANIFEST_EXPRESS_URL;
 		//add URL-parameters
 		StringBuffer urlRequestParams = new StringBuffer();
-		urlRequestParams.append("user=" + applicationUser + "&mode=D" + "&efuuid=" + recordToValidate.getEfuuid() + "&efst=" + recordToValidate.getEfst());
+		urlRequestParams.append("user=" + applicationUser + "&mode=D" + "&efuuid=" + recordToValidate.getEfuuid() + "&efst2=" + recordToValidate.getEfst2());
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
     	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
     	logger.warn("URL PARAMS: " + urlRequestParams);
@@ -541,7 +557,7 @@ public class TvinnSadManifestHeaderController {
 			if(outputList!=null && outputList.size()>0){
 				for(JsonTvinnSadManifestRecord record : outputList ){
 					retval = 0;
-					logger.warn(record.toString());
+					//logger.warn(record.toString());
 				}
 			}
     	}

@@ -49,6 +49,7 @@ import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManif
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
 import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
+import no.systema.tvinn.sad.manifest.express.util.manager.ManifestDateManager;
 import no.systema.tvinn.sad.manifest.express.util.manager.ManifestExpressMgr;
 
 
@@ -144,6 +145,12 @@ public class TvinnSadManifestController {
 					if(!manifestExpressMgr.isValidManifest(appUser, record.getEfpro())){
 						record.setOwn_valid(-1);
 					}
+					//check it the manifest is editable
+					if(!manifestExpressMgr.isEditableManifest(appUser, record)){
+						record.setOwn_editable(-1);
+					}
+					//dates
+					this.adjustFieldsForFetch(record);
 				}
 				logger.info(outputList.toString());
 	    	}	
@@ -294,24 +301,7 @@ public class TvinnSadManifestController {
 		return urlRequestParamsKeys.toString();
 	}
 	
-	/**
-	 * 
-	 * @param avd
-	 * @param opd
-	 * @param appUser
-	 * @return
-	 */
-	private String getRequestUrlKeyParametersDoDelete(String avd, String opd, SystemaWebUser appUser){
-		final String MODE_DELETE = "D";
-		StringBuffer urlRequestParamsKeys = new StringBuffer();
-		//String action = request.getParameter("action");
-		urlRequestParamsKeys.append("user=" + appUser.getUser());
-		urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "avd=" + avd);
-		urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "opd=" + opd);
-		urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "mode=" + MODE_DELETE);
-		
-		return urlRequestParamsKeys.toString();
-	}
+	
 	
 	/**
 	 * 
@@ -324,6 +314,12 @@ public class TvinnSadManifestController {
 		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(this.urlCgiProxyService, this.tvinnSadDropDownListPopulationService,
 				 model,appUser,CodeDropDownMgr.CODE_012_SPRAK, null, null);
 		*/
+	}
+	
+	private void adjustFieldsForFetch(JsonTvinnSadManifestRecord recordToValidate){
+		recordToValidate.setEfeta(new ManifestDateManager().convertToDate_NO(recordToValidate.getEfeta()));
+		recordToValidate.setEfdtr(new ManifestDateManager().convertToDate_NO(recordToValidate.getEfdtr()));
+		recordToValidate.setEfsjadt(new ManifestDateManager().convertToDate_NO(recordToValidate.getEfsjadt()));
 	}
 	
 	//SERVICES

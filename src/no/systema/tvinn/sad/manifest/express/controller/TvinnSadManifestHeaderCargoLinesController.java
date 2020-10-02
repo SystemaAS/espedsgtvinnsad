@@ -95,6 +95,7 @@ public class TvinnSadManifestHeaderCargoLinesController {
 		logger.info("Inside: doManifestEditCargolines");
 		
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		JsonTvinnSadManifestRecord headerRecord = (JsonTvinnSadManifestRecord)session.getAttribute(TvinnSadConstants.SESSION_HEADER_RECORD_SADMANIFEST);
 		
 		Map model = new HashMap();
 		String action = request.getParameter("action");
@@ -172,7 +173,10 @@ public class TvinnSadManifestHeaderCargoLinesController {
 					if(rpgContainer!=null){
 						//check for errors
 						if(StringUtils.isNotEmpty(rpgContainer.getErrMsg()) || StringUtils.isNotEmpty(rpgContainer.getErrMsgT()) ){
-							model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, "SERVER_ERROR:" + rpgContainer.getErrMsg() + rpgContainer.getErrMsgT());
+							//do not present in GUI only in logg
+							String rpgErrorMessage = "SERVER_ERROR:" + rpgContainer.getErrMsg() + rpgContainer.getErrMsgT();
+							logger.error(rpgErrorMessage);
+							//model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, rpgErrorMessage);
 						}
 					}
 				}

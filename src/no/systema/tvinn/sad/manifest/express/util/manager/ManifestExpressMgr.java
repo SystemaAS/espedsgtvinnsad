@@ -13,8 +13,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import no.systema.jservices.common.values.FasteKoder;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.service.UrlCgiProxyService;
+import no.systema.main.util.DateTimeManager;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesRecord;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
 import no.systema.tvinn.sad.manifest.express.util.TvinnSadManifestConstants;
 import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
@@ -45,6 +47,7 @@ import no.systema.z.main.maintenance.url.store.MaintenanceMainUrlDataStore;
 @Service
 public class ManifestExpressMgr {
 	private static final Logger logger = Logger.getLogger(ManifestExpressMgr.class.getName());
+	
 	
 	@Autowired
 	private UrlCgiProxyService urlCgiProxyService;
@@ -111,7 +114,52 @@ public class ManifestExpressMgr {
     	}
     	return retval;
 	}
-	
+	/**
+	 * Checks if the manifest has passed the today date (or today's time)
+	 * @param appUser
+	 * @param tur
+	 * @return
+	 */
+	public boolean isEditableManifest(SystemaWebUser appUser, JsonTvinnSadManifestRecord record){
+		boolean retval = true;
+		//check all this ONLY when SUBMITTED or DELETED to toll.no
+		if(JsonTvinnSadManifestRecord.MANIFEST_SUBMITTED.equals(record.getEfst2()) || JsonTvinnSadManifestRecord.MANIFEST_DELETED.equals(record.getEfst2()) ){
+			//under sending
+			if(JsonTvinnSadManifestRecord.MANIFEST_INTERNAL_STATUS_SENDING.equals(record.getEfst())){
+				retval = false;
+			}else{
+				//logger.warn("A");
+				//now check deeper into date and/or time(in case of today)
+				DateTimeManager dateTimeMgr = new DateTimeManager();
+				String eta = record.getEfeta();
+				String etm = record.getEfetm();
+				if(eta!=null && eta.length()>6){ //ISO
+					//logger.warn("B");
+					eta = new ManifestDateManager().convertToDate_NO(eta);
+				}
+				//logger.warn("eta:" + eta);
+				if(dateTimeMgr.isValidForwardDateNO(eta)){
+					//OK
+				}else{
+					if(dateTimeMgr.isToday(eta, DateTimeManager.NO_FORMAT)){
+						//logger.warn("C");
+						etm = dateTimeMgr.adjustUserTimeToHHmm(etm);
+						//check the hour. At least 2 hour ahead
+						if(!dateTimeMgr.isValidTime(etm, JsonTvinnSadManifestRecord.MANIFEST_AT_LEAST_HOURS_AHEAD_VALID)){
+							retval = false;
+						}
+					}else{
+						//logger.warn("ZZZ");
+						//meaning is before today
+						retval = false;
+					}
+				}
+				
+			}
+		}
+		
+		return retval;
+	}
 
 }
 

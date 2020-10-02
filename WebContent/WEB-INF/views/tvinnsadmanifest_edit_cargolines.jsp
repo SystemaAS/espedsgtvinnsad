@@ -152,10 +152,16 @@
 			          	  </c:otherwise>
 		          	  </c:choose>	
 		          	   <td width="2%" class="tableCellFirst" align="center" >
-		               		<a style="display: block; width: 100%; height: 100%;" id="clpro_${record.clpro}@cltdn_${record.cltdn}@clavd_${record.clavd}" href="#" onClick="getItemData(this);">
-               					<img src="resources/images/update.gif" border="0" alt="edit">
-               				</a>
-               				
+			          	   <a style="display: block; width: 100%; height: 100%;" id="clpro_${record.clpro}@cltdn_${record.cltdn}@clavd_${record.clavd}" href="#" onClick="getItemData(this);">
+				          	   <c:choose>
+				          	   <c:when test="${headerRecord.own_editable > 0}">
+				               		<img src="resources/images/update.gif" border="0" alt="edit">
+		               		   </c:when>
+		               		   <c:otherwise>
+		            					<img title="Read" style="vertical-align:bottom;" src="resources/images/eye.png" height="18px" width="18px" border="0" alt="read">
+		            				</c:otherwise>
+		            				</c:choose>
+	               		   </a>
 	               	   </td>
 		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.clavd}</td>
 		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cltdn}</td>
@@ -181,22 +187,25 @@
 		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cltrid}</td>
 		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cl3039e}</td>
 		               <td width="2%" class="tableCell" align="center" >
-		               		<a style="display: block; width: 100%; height: 100%;" class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
-								<img src="resources/images/delete.gif" border="0" alt="remove">
-							</a>
-							<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
-								<form action="tvinnsadmanifest_edit_cargolines_delete.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
-								 	<input type="hidden" name="currentClpro${counter.count}" id="currentClpro${counter.count}" value="${record.clpro}">
-								 	<input type="hidden" name="currentCltdn${counter.count}" id="currentCltdn${counter.count}" value="${record.cltdn}">
-								 	<input type="hidden" name="currentClavd${counter.count}" id="currentClavd${counter.count}" value="${record.clavd}">
-								 	<input type="hidden" name="currentEuuid${counter.count}" id="currentEuuid${counter.count}" value="${model.efuuid}">
-								 	<input type="hidden" name="currentEfsg${counter.count}" id="currentEfsg${counter.count}" value="${model.efsg}">
-								 	<p class="text14" >Er du sikker på at du vil slette denne?</p>
-									<p class="text14"> Tekst </p>
-									<input type="text" class="inputText" name="currentText${counter.count}" id="currentText${counter.count}" size="45" maxlength="70" value=''>&nbsp;</td>
-									
-								</form>
-							</div>
+		               		<c:if test="${headerRecord.own_editable > 0}">
+			               		<a style="display: block; width: 100%; height: 100%;" class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
+									<img src="resources/images/delete.gif" border="0" alt="remove">
+								</a>
+								<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
+									<form action="tvinnsadmanifest_edit_cargolines_delete.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
+									 	<input type="hidden" name="currentClpro${counter.count}" id="currentClpro${counter.count}" value="${record.clpro}">
+									 	<input type="hidden" name="currentCltdn${counter.count}" id="currentCltdn${counter.count}" value="${record.cltdn}">
+									 	<input type="hidden" name="currentClavd${counter.count}" id="currentClavd${counter.count}" value="${record.clavd}">
+									 	<input type="hidden" name="currentEuuid${counter.count}" id="currentEuuid${counter.count}" value="${model.efuuid}">
+									 	<input type="hidden" name="currentEfsg${counter.count}" id="currentEfsg${counter.count}" value="${model.efsg}">
+									 	<p class="text14" >Er du sikker på at du vil slette denne?</p>
+										<p class="text14"> Tekst </p>
+										<input type="text" class="inputText" name="currentText${counter.count}" id="currentText${counter.count}" size="45" maxlength="70" value=''>&nbsp;</td>
+										
+									</form>
+								</div>
+							</c:if>
+							
 	               	   </td>
 		            </tr> 
 		            </c:forEach>
@@ -211,10 +220,14 @@
 		</table>
 		</td>
 	</tr>
+ 	<tr>
  	<td>
- 		<input class="inputFormSubmitStd" type="button" name="newButton" id="newButton" value='Lage ny'>
-		<input class="inputFormSubmitBlue" type="button" name="cnButton" id="cnButton" value='Plukke oppdrag'>
-	</td>	
+ 		<c:if test="${headerRecord.own_editable > 0}">
+	 		<input class="inputFormSubmitStd" type="button" name="newButton" id="newButton" value='Lage ny'>
+			<input class="inputFormSubmitBlue" type="button" name="cnButton" id="cnButton" value='Plukke oppdrag'>
+		</c:if>
+	</td>
+	</tr>	
 	<tr>
 		<td class="text14" valign="top">
 			<form name="cargoLineForm" id="cargoLineForm" action="tvinnsadmanifest_edit_cargolines.do" method="post">
@@ -238,9 +251,31 @@
 				 				&nbsp;&nbsp;Turnr:&nbsp;${model.efpro}
 	 							&nbsp;&nbsp;Avd:&nbsp;${model.efavd}&nbsp;&nbsp;
 	 							&nbsp;&nbsp;Manifestid:&nbsp;${model.efuuid}
+	 							
+	 							
 				 			</td>
-				 			<td align="right" text14">
-				 				<b>Import&nbsp;</b>
+				 			<td align="right" class="text14" >
+				 				Status:&nbsp;${headerRecord.efst}
+				 				&nbsp;&nbsp;&nbsp;<b>Manifest status:&nbsp;</b>
+		 						<c:choose>
+		 						<c:when test="${headerRecord.efst2 == 'S' || headerRecord.efst2 == 'R' || headerRecord.efst2 == 'D'}">
+		 							<c:if test="${headerRecord.efst2 == 'S'}">
+		 								<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
+		 								<font style="color:#FFFFCC;">SUBMITTED</font>
+		 							</c:if>
+		 							<c:if test="${headerRecord.efst2 == 'D'}">
+		 								<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
+		 								<font style="color:red;">SLETTET</font>
+		 							</c:if>
+		 							<c:if test="${headerRecord.efst2 == 'R'}">
+		 								<font style="color:#FFFFFF;">REOPENED/DRAFT</font>
+		 							</c:if>
+		 						</c:when>
+		 						<c:otherwise>
+		 							<font style="color:#606060;">${headerRecord.efst2}</font>
+		 						</c:otherwise>
+		 						</c:choose>
+				 				
 				 			</td>
 		 				</tr>
 		            </table>
@@ -419,7 +454,16 @@
 	 					<table width="95%" border="0" cellspacing="1" cellpadding="0">
 			 			<tr>	
 	 					<td valign="bottom" align="right">
-							<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>&nbsp;
+							<c:choose>
+								<c:when test="${headerRecord.own_editable > 0}">
+									<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>&nbsp;
+								</c:when>
+								<c:otherwise>
+									<input title="Status combination or date = blocked" class="inputFormSubmitStd isa_error" type="button" name="fakeButton" id="fakeButton" value='Blokkert'>
+								</c:otherwise>
+							</c:choose>
+							
+							
 						</td>
 						</tr>
 						</table>

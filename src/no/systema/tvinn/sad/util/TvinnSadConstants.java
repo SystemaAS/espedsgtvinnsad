@@ -103,6 +103,8 @@ public final class TvinnSadConstants {
 	public static final String SESSION_CODE_MANAGER_EXISTS_SADEXPORT = "codeMgrExistsSadExport";
 	public static final String SESSION_CODE_MANAGER_EXISTS_SADEXPORT_NCTS = "codeMgrExistsSadImportNcts";
 	public static final String SESSION_CODE_MANAGER_EXISTS_SADIMPORT_NCTS = "codeMgrExistsSadExportNcts";
+	//
+	public static final String SESSION_HEADER_RECORD_SADMANIFEST = "headerRecord";
 	
 	
 	public static final String DOMAIN_RECORD_TOPIC_TVINN_SAD = "recordTopicTvinnSad";

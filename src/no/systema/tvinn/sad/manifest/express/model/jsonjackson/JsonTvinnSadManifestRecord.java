@@ -15,6 +15,14 @@ import no.systema.main.model.jsonjackson.general.JsonAbstractGrandFatherRecord;
  */
 @Data
 public class JsonTvinnSadManifestRecord extends JsonAbstractGrandFatherRecord {
+	public static final String MANIFEST_SUBMITTED = "S";
+	public static final String MANIFEST_DELETED = "D";
+	public static final String MANIFEST_INTERNAL_STATUS_SENDING = "B";
+	public static final String MANIFEST_INTERNAL_STATUS_COMPLETED = "C";
+	public static final String MANIFEST_INTERNAL_STATUS_ERROR = "M";
+	public static final int MANIFEST_AT_LEAST_HOURS_AHEAD_VALID = 2;
+	
+	
 	
 	private String efst = ""; //TEGN (1) Status
 	private String efuuid = ""; //TEGN (36) ManifestID (uuid)
@@ -52,6 +60,8 @@ public class JsonTvinnSadManifestRecord extends JsonAbstractGrandFatherRecord {
 	private String eferr = ""; //TEGN (50) Feilmelding ved SND
 	//
 	private int own_valid = 1;
+	private int own_editable = 1;
+	
 	/**
 	 * 
 	 * @return

@@ -165,17 +165,18 @@
 				<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
-						<table class="formFrameHeader" style="width:100%;<c:if test="${model.record.efst=='B'}">background-color:#4E78A0;</c:if>"  border="0" cellspacing="1" cellpadding="0">
+						<table class="formFrameHeader" style="width:100%;"  border="0" cellspacing="1" cellpadding="0">
 					 		<tr height="15">
 					 			<c:choose>
 						 			<c:when test="${not empty model.record.efuuid}">
 						 				<td class="text14White">
 						 						&nbsp;&nbsp;Turnr:&nbsp;${model.record.efpro}
 						 						&nbsp;&nbsp;Avd:&nbsp;${model.record.efavd}  
-						 						&nbsp;&nbsp;Stat<a tabindex=-1 id="updateInternalStatusLink" name="updateInternalStatusLink" runat="server" href="#"><font style="color:#FFFFFF;">u</font></a>s:&nbsp;${model.record.efst}</font>
+						 						
 						 				</td>
-						 				<td class="text14White" align="right">		
-						 						Manifest stat<a tabindex=-1 id="updateManifestStatusLink" name="updateManifestStatusLink" runat="server" href="#"><font style="color:#FFFFFF;">u</font></a>s:</font>&nbsp;
+						 				<td class="text14" align="right">
+						 						Stat<a tabindex=-1 id="updateInternalStatusLink" name="updateInternalStatusLink" runat="server" href="#"><font class="text14">u</font></a>s:&nbsp;${model.record.efst}
+						 						&nbsp;&nbsp;&nbsp;<b>Manifest stat<a tabindex=-1 id="updateManifestStatusLink" name="updateManifestStatusLink" runat="server" href="#"><font class="text14">u</font></a>s:&nbsp;</b>
 						 						<c:choose>
 						 						<c:when test="${model.record.efst2 == 'S' || model.record.efst2 == 'R' || model.record.efst2 == 'D'}">
 						 							<c:if test="${model.record.efst2 == 'S'}">
@@ -289,7 +290,14 @@
 					 			<td class="text14">
 					 				<c:choose>
 					 				<c:when test="${model.record.efeta != '0'}">
-					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efeta" id="efeta" size="7" maxlength="6" value="${model.record.efeta}">
+					 					<c:choose>
+					 					<c:when test="${model.record.own_editable > 0 }">
+					 						<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efeta" id="efeta" size="7" maxlength="6" value="${model.record.efeta}">
+					 					</c:when>
+					 					<c:otherwise>
+					 						<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlueMandatoryField isa_error" name="efeta" id="efeta" size="7" maxlength="6" value="${model.record.efeta}">
+					 					</c:otherwise>
+					 					</c:choose>
 					 				</c:when>
 					 				<c:otherwise>
 					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efeta" id="efeta" size="7" maxlength="6" value="">
@@ -360,7 +368,7 @@
 				<table style="width:90%;" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
-						<table class="formFrameHeader" style="width:100%;<c:if test="${model.record.efst=='B'}">background-color:#4E78A0;</c:if>"  border="0" cellspacing="1" cellpadding="0">
+						<table class="formFrameHeader" style="width:100%; border="0" cellspacing="1" cellpadding="0">
 					 		<tr height="15">
 					 			<td class="text14White">&nbsp;&nbsp;Kjøretøy&nbsp;</td>
 			 				</tr>
@@ -436,7 +444,7 @@
 				<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
-						<table class="formFrameHeader" style="width:100%;<c:if test="${model.record.efst=='B'}">background-color:#4E78A0;</c:if>"  border="0" cellspacing="1" cellpadding="0">
+						<table class="formFrameHeader" style="width:100%;" border="0" cellspacing="1" cellpadding="0">
 					 		<tr height="15">
 					 			<td class="text14White">&nbsp;&nbsp;Fører&nbsp;</td>
 			 				</tr>
@@ -522,10 +530,18 @@
 					<table style="width:96%" border="0" cellspacing="1" cellpadding="0">
 						<tr>
 							<td align="right" >
-								<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
-								<c:if test="${empty model.invalidManifest && model.record.efst!='B'}">
-									&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
-								</c:if>
+							<c:choose>
+								<c:when test="${model.record.own_editable > 0}">
+									<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
+									<c:if test="${empty model.invalidManifest}">
+										&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
+									</c:if>
+								</c:when>
+								<c:otherwise>
+									<input title="Status combination or date = blocked" class="inputFormSubmitStd isa_error" type="button" name="fakeButton" id="fakeButton" value='Blokkert'>
+									
+								</c:otherwise>
+							</c:choose>
 							</td>
 						</tr>
 					</table>
