@@ -71,7 +71,7 @@ public class TvinnSadManifestController {
 	private LoginValidator loginValidator = new LoginValidator();
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
-
+	
 	@PostConstruct
 	public void initIt() throws Exception {
 		if("DEBUG".equals(AppConstants.LOG4J_LOGGER_LEVEL)){
@@ -140,19 +140,25 @@ public class TvinnSadManifestController {
 				//now filter the topic list with the search filter (if applicable)
 				//----------------------------------------------------------------
 				outputList = jsonTvinnSadManifestContainer.getList();
-				for(JsonTvinnSadManifestRecord record: outputList){
-					//check if the manifest cargo lines are valid
-					if(!manifestExpressMgr.isValidManifest(appUser, record.getEfpro())){
-						record.setOwn_valid(-1);
+				if(outputList!=null && outputList.size() > JsonTvinnSadManifestContainer.LIMIT_SIZE_OF_MAIN_LIST_OF_MANIFESTS){
+					outputList = new ArrayList();
+					model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, "Too many lines. Narrow your search please ...");
+				}else{
+					for(JsonTvinnSadManifestRecord record: outputList){
+						//check if the manifest cargo lines are valid
+						if(!manifestExpressMgr.isValidManifest(appUser, record.getEfpro())){
+							record.setOwn_valid(-1);
+						}
+						//check it the manifest is editable
+						if(!manifestExpressMgr.isEditableManifest(appUser, record)){
+							record.setOwn_editable(-1);
+						}
+						//dates
+						this.adjustFieldsForFetch(record);
 					}
-					//check it the manifest is editable
-					if(!manifestExpressMgr.isEditableManifest(appUser, record)){
-						record.setOwn_editable(-1);
-					}
-					//dates
-					this.adjustFieldsForFetch(record);
+					logger.info(outputList.toString());
 				}
-				logger.info(outputList.toString());
+				
 	    	}	
 			//--------------------------------------
 			//Final successView with domain objects
@@ -294,7 +300,13 @@ public class TvinnSadManifestController {
 			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "efdtr=" + this.dateFormatter.convertToDate_ISO(searchFilter.getDatum()));
 		}
 		if(searchFilter.getDatumt()!=null && !"".equals(searchFilter.getDatumt())){
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "_efdtrt=" + this.dateFormatter.convertToDate_ISO(searchFilter.getDatumt()));
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "own_efdtr=" + this.dateFormatter.convertToDate_ISO(searchFilter.getDatumt()));
+		}
+		if(searchFilter.getEtaDatum()!=null && !"".equals(searchFilter.getEtaDatum())){
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "efeta=" + this.dateFormatter.convertToDate_ISO(searchFilter.getEtaDatum()));
+		}
+		if(searchFilter.getEtaDatumt()!=null && !"".equals(searchFilter.getEtaDatumt())){
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "own_efeta=" + this.dateFormatter.convertToDate_ISO(searchFilter.getEtaDatumt()));
 		}
 		
 		

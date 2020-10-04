@@ -40,7 +40,13 @@ public final class TvinnSadManifestUrlDataStore {
 	//Child windows
 	//http://gw.systema.no:8080/syjservicestn/syjsSTED2.do?user=OSCAR&st2lk=NL&st2kod=AMS
 	static public String TVINN_SAD_CHILDWINDOW_POSTALCODE_STED2_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSTED2.do";
-		
+	
+	//Manifest info from toll.no (API)
+	//http://gw.systema.no:8080/syjservicestn-expft/getManifestRaw.do?user=SYSTEMA&id=e35a52a6-18ae-4746-a4b4-9e3f0edbacc6
+	static public String TVINN_SAD_CHILDWINDOW_MANIFEST_RAW_INFO_TOLL_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn-expft/getManifestRaw.do";
+	//http://gw.systema.no:8080/syjservicestn-expft/getManifest.do?user=SYSTEMA&id=e35a52a6-18ae-4746-a4b4-9e3f0edbacc6
+	static public String TVINN_SAD_CHILDWINDOW_MANIFEST_INFO_TOLL_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn-expft/getManifest.do";
+				
 	
 	//----------------------------------------------------
 	//[2] FETCH CARGO LINES' LIST of a specific MANIFEST

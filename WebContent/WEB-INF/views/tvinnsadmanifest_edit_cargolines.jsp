@@ -459,7 +459,7 @@
 									<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>&nbsp;
 								</c:when>
 								<c:otherwise>
-									<input title="Status combination or date = blocked" class="inputFormSubmitStd isa_error" type="button" name="fakeButton" id="fakeButton" value='Blokkert'>
+									<input title="Status combination or date = blocked" class="inputFormSubmitStd isa_info" type="button" name="fakeButton" id="fakeButton" value='<spring:message code="systema.tvinn.sad.manifest.disabled.button"/>'>
 								</c:otherwise>
 							</c:choose>
 							

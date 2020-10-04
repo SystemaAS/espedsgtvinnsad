@@ -211,7 +211,10 @@
 			 				<c:choose>
 					 			<c:when test="${not empty model.record.efuuid}">
 					 				<tr >
-										<td class="text14">&nbsp;Manifestid:&nbsp;<font class="text14SkyBlue">${model.record.efuuid}</font></td>
+										<td class="text14">
+										<img id="imgManifestIdInfo" style="vertical-align:middle;cursor:pointer;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+											Manif<a tabindex=-1 id="alinkManifestRawIdInfo"><font class="text14">e</font></a>stid:&nbsp;<font class="text14SkyBlue">${model.record.efuuid}</font>
+										</td>
 					 				</tr>
 					 				<tr height="2"><td></td></tr>
 			 					</c:when>
@@ -290,15 +293,8 @@
 					 			<td class="text14">
 					 				<c:choose>
 					 				<c:when test="${model.record.efeta != '0'}">
-					 					<c:choose>
-					 					<c:when test="${model.record.own_editable > 0 }">
-					 						<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efeta" id="efeta" size="7" maxlength="6" value="${model.record.efeta}">
-					 					</c:when>
-					 					<c:otherwise>
-					 						<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlueMandatoryField isa_error" name="efeta" id="efeta" size="7" maxlength="6" value="${model.record.efeta}">
-					 					</c:otherwise>
-					 					</c:choose>
-					 				</c:when>
+					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efeta" id="efeta" size="7" maxlength="6" value="${model.record.efeta}">
+					 				</c:when>	
 					 				<c:otherwise>
 					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efeta" id="efeta" size="7" maxlength="6" value="">
 					 				</c:otherwise>
@@ -538,7 +534,7 @@
 									</c:if>
 								</c:when>
 								<c:otherwise>
-									<input title="Status combination or date = blocked" class="inputFormSubmitStd isa_error" type="button" name="fakeButton" id="fakeButton" value='Blokkert'>
+									<input title="Status combination or date = blocked" class="inputFormSubmitStd isa_info" type="button" name="fakeButton" id="fakeButton" value='<spring:message code="systema.tvinn.sad.manifest.disabled.button"/>'>
 									
 								</c:otherwise>
 							</c:choose>

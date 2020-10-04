@@ -7,6 +7,14 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -66,6 +74,7 @@ public class TvinnSadManifestControllerChildWindow {
 	
 	private static final Logger logger = Logger.getLogger(TvinnSadManifestControllerChildWindow.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(2000);
+		
 	//customer
 	private final String DATATABLE_LIST = "list";
 
@@ -85,6 +94,45 @@ public class TvinnSadManifestControllerChildWindow {
 	}
 	
 
+	
+	@RequestMapping(value="tvinnsadmanifest_childwindow_manifestinfo.do",  method={RequestMethod.GET} )
+	public ModelAndView doManifestInfo(HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doManifestInfo");
+		Map model = new HashMap();
+		String id = request.getParameter("id");
+		String raw = request.getParameter("raw");
+		
+		
+		ModelAndView successView = new ModelAndView("tvinnsadmanifest_childwindow_manifestinfo");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			String url = TvinnSadManifestUrlDataStore.TVINN_SAD_CHILDWINDOW_MANIFEST_INFO_TOLL_URL;
+			if(StringUtils.isNotEmpty(raw)){
+				url = TvinnSadManifestUrlDataStore.TVINN_SAD_CHILDWINDOW_MANIFEST_RAW_INFO_TOLL_URL;
+			}
+			String BASE_URL = url;
+    		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&id=" + id;
+    		logger.info("URL: " + BASE_URL);
+    		logger.info("PARAMS: " + urlRequestParamsKeys);
+    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+    		//Debug -->
+	    	logger.debug(jsonPayload);
+    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    		
+    		model.put("content", jsonPayload);
+    		
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	
 	/**
 	 * 
 	 * @param recordToValidate

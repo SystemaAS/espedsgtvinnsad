@@ -53,10 +53,11 @@
                 <td class="text14" align="left" title="sign" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.manifest.list.search.label.signatur"/></td>
                 
                 <td class="text14" align="left" ><span title="turnr"><spring:message code="systema.tvinn.sad.manifest.list.search.label.turnr"/></span></td>
+                <td class="text14" align="left" ><span title="datum"><spring:message code="systema.tvinn.sad.manifest.list.search.label.etafdatum"/></span></td>
+                <td class="text14" align="left" ><span title="datumt"><spring:message code="systema.tvinn.sad.manifest.list.search.label.etatdatum"/></span></td>
                 <td class="text14" align="left" ><span title="datum"><spring:message code="systema.tvinn.sad.manifest.list.search.label.fdatum"/></span></td>
-                <%--
                 <td class="text14" align="left" ><span title="datumt"><spring:message code="systema.tvinn.sad.manifest.list.search.label.tdatum"/></span></td>
-                 --%>
+                
 			</tr>
  	        <tr>
 				<td align="left" >&nbsp;
@@ -76,10 +77,10 @@
 					</select>
 				</td>
 				<td align="left" ><input type="text" class="inputText" name="turnr" id="turnr" size="10" maxlength="8" value="${searchFilterSadManifest.turnr}">&nbsp;</td>
+				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="etaDatum" id="etaDatum" size="6" maxlength="6" value="${searchFilterSadManifest.etaDatum}">&nbsp;</td>
+				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="etaDatumt" id="etaDatumt" size="6" maxlength="6" value="${searchFilterSadManifest.etaDatumt}">&nbsp;</td>
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="datum" id="datum" size="6" maxlength="6" value="${searchFilterSadManifest.datum}">&nbsp;</td>
-				<%--
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="datumt" id="datumt" size="6" maxlength="6" value="${searchFilterSadManifest.datumt}">&nbsp;</td>
-				--%>
 				<td valign="top" align="left" >
                    <input class="inputFormSubmit" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.search"/>'>
                 </td>
@@ -114,6 +115,25 @@
 		</td>
 	</tr>
 	</spring:hasBindErrors>	
+	<%-- Other errors (none validation errors) --%>
+	<c:if test="${not empty model.errorMessage}">
+	<tr>
+		<td colspan="10">
+           	<table align="left" border="0" cellspacing="0" cellpadding="0">
+		 		<tr>
+		 			<td class="textError">
+		 				<ul>
+                                  <li>
+                                    	${model.errorMessage} 
+                                  </li>
+                                  
+                              </ul>
+		 			</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	</c:if>
 	<%-- list component --%>
 	<tr>
 		<td>		
@@ -183,15 +203,7 @@
 		               		</c:otherwise>
 		               	   </c:choose>
 		              	</td>
-		              	<td width="2%" class="tableCell" >
-		              		<c:choose>
-							<c:when test="${record.own_editable < 0 }">
-								<font color="red">${record.efeta}&nbsp;${record.efetm}</font>
-							</c:when>
-							<c:otherwise>
-								${record.efeta}&nbsp;${record.efetm}
-							</c:otherwise>		              	
-		              		</c:choose>
+		              	<td width="2%" class="tableCell" >${record.efeta}&nbsp;${record.efetm}
 		              	</td>
 		               <td align="center" width="2%" class="tableCell" ><c:if test="${record.eftsd > 0}">${record.eftsd}</c:if></td>
 		               <td align="center" width="2%" class="tableCell" ><c:if test="${record.ef3039e > 0}">${record.ef3039e}</c:if></td>

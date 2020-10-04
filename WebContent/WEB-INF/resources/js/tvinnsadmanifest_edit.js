@@ -40,6 +40,18 @@
 		window.location = 'tvinnsadmanifest_send.do?efuuid=' + jq('#efuuid').val() + '&efpro=' + jq('#efpro').val() + '&efst=B';
     });
     
+    jq('#imgManifestIdInfo').click(function() { 
+    	jq('#imgManifestIdInfo').attr('target','_blank');
+	  	window.open('tvinnsadmanifest_childwindow_manifestinfo.do?id=' + jq('#efuuid').val(), "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");
+
+    });
+    jq('#alinkManifestRawIdInfo').click(function() { 
+    	jq('#alinkManifestRawIdInfo').attr('target','_blank');
+	  	window.open('tvinnsadmanifest_childwindow_manifestinfo.do?id=' + jq('#efuuid').val() + "&raw=1", "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");
+
+    });
+    
+    
     
     
   });

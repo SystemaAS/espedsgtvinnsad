@@ -21,8 +21,11 @@ public class SearchFilterManifestList {
 	private String opd = null;
 	private String turnr = null;
 	private String sign = null;
+	private String etaDatum = null;
+	private String etaDatumt = null;
 	private String datum = null;
 	private String datumt = null;
+	
 	
 	
 	

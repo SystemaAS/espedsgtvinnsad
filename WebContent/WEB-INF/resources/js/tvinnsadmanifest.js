@@ -37,6 +37,14 @@
   });
   
   jq(function() {
+	  jq("#etaDatum").datepicker({ 
+		  dateFormat: 'ddmmy' 	  
+	  });
+	  
+	  jq("#etaDatumt").datepicker({ 
+		  dateFormat: 'ddmmy' 
+	  });
+	  
 	  jq("#datum").datepicker({ 
 		  dateFormat: 'ddmmy' 	  
 	  });

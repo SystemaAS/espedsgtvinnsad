@@ -10,6 +10,8 @@ import java.util.Collection;
  * @date Sep, 2020
  */
 public class JsonTvinnSadManifestContainer <T> {
+	public static final int LIMIT_SIZE_OF_MAIN_LIST_OF_MANIFESTS = 20;
+	
 	private String user = null;
 	public void setUser(String value){ this.user = value;}
 	public String getUser(){ return this.user; }
