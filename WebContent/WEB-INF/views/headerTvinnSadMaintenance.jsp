@@ -152,6 +152,24 @@
 			    			</a>
 			    			&nbsp;<font color="#FF6600"; style="font-weight: bold;">|</font>
 			    			
+			    			
+			    			<%-- --------------------------------- --%>
+			    			<%-- TVINN-SAD EKSPRESSFORTOLLING MENU --%>
+			    			<%-- --------------------------------- --%>
+			    			<a id="alinkTopicListMenuExpressfortolling" tabindex=-1 href="tvinnsadmaintenance_manifest.do?">
+			    				&nbsp;<font
+			    				<c:choose>           
+		                   			<c:when test="${user.activeMenu=='TVINN_SAD_MAINTENANCE_EXPRESSFORTOLLING'}">
+		                       			class="headerMenuOrange"
+		                   			</c:when>
+		                   			<c:otherwise>   
+		                       			class="headerMenuWhite"
+		                   			</c:otherwise>
+		               			</c:choose>
+			    				>&nbsp;<spring:message code="systema.tvinn.sad.manifest.label"/>&nbsp;</font>
+			    			</a>
+			    			&nbsp;<font color="#FF6600"; style="font-weight: bold;">|</font>
+			    			
 			    			<%-- ----------------------- --%>
 			    			<%-- VEDLIKEHOLD FELLES      --%>
 			    			<%-- ----------------------- --%>
