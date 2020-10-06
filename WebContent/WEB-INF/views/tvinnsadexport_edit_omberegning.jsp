@@ -2053,6 +2053,11 @@
 			 	<input type="hidden" name="avd" id="avd" value="${model.record.seavd}">
 			 	<input type="hidden" name="opd" id="opd" value="${model.record.setdn}">
 			 	<input type="hidden" name="sign" id="sign" value="${model.record.segn}">
+			 	<%--hidden fields only for jquery issues --%>
+			 	<input type="hidden" name="_m3039e" id="_m3039e" value="${model.record.sendParametersRecord.m3039e}">
+			 	<input type="hidden" name="_m3039eo1" id="_m3039eo1" value="${model.record.sendParametersRecord.m3039eo1}">
+			 	<input type="hidden" name="_m3039eo2" id="_m3039eo2" value="${model.record.sendParametersRecord.m3039eo2}">
+			 	
 				<table>
 					<tr>
 						<td class="text14" align="left" title="m1N07">Meldings funksjon</td>

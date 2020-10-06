@@ -255,7 +255,7 @@
   			buttonImageOnly: true, buttonImage: 'resources/images/calculator.png', decimalChar: ','});
   	});
 	
-  	 
+  	
   	jq(function() {
 	  jq("#sefid").datepicker({ 
 		  dateFormat: 'ddmmy'  
@@ -941,47 +941,27 @@
 		    jq('#m1N07').change(function() {
 		    	doDSO();
 		    });
-		    jq('#m3039e').change(function() {
-		    	doDSO();
-		    });
-		  });
+		    
+	  });
 		  
-		  jq(document).ready(function() {
-			  doDSO();
-		  });
+	  jq(document).ready(function() {
+		  doDSO();
+	  });
 		  
-		  function doDSO(){
-			  if(jq('#m1N07').val() != ''){
-				 /* 
-			  	 if(jq('#m1N07').val() == 'DSO'){
-			  		 console.log("DSO");
-			  		 if(jq('#m3039e').val() == '10173'){
-			  			jq("#m3039e").addClass( "isa_success" );
-			  			jq("#m3039e").removeClass( "isa_error" );
-			  		 }else{
-			  			jq("#m3039e").removeClass( "isa_success" );
-			  			jq("#m3039e").addClass( "isa_error" );
-			  		 }
-					
-				 }else{
-					 console.log("DRE ...");
-					 if(jq('#m3039e').val() == '10175'){
-				  			jq("#m3039e").addClass( "isa_success" );
-				  			jq("#m3039e").removeClass( "isa_error" );
-			  		 }else{
-			  			jq("#m3039e").removeClass( "isa_success" );
-			  			jq("#m3039e").addClass( "isa_error" );
-			  		 }
-				 }
-				 */
-			  }
+	  function doDSO(){
+		  if(jq('#m1N07').val() != ''){
+			 if(jq('#m1N07').val()=='DSO'){
+				 jq('#m3039e').val(jq('#_m3039eo1').val());
+			 }else{
+				 jq('#m3039e').val(jq('#_m3039eo2').val());
+			 }
+				 
+		  }else{
+			  jq('#m3039e').val(jq('#_m3039e').val()); 
 		  }
-	  	
-	  
-	  
+	  }
 	
-	
-	//-------------------------------------------
+	  //-------------------------------------------
 	  //START Model dialog ADMIN: "Update status"
 	  //-------------------------------------------
 	  //Initialize <div> here
