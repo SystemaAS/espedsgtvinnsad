@@ -182,6 +182,15 @@ public class SadExportHeaderValidator implements Validator {
 					}
 					
 				}
+				//DHLs requirement on sign (Belop andra kost)
+				if(strMgr.isNotNull(record.getSebel2())){
+					if(strMgr.isNotNull(record.getSeftg2())){
+						//OK
+					}else{
+						errors.rejectValue("seftg2", "systema.tvinn.sad.export.header.error.rule.invalid.seftg2");
+					}
+				}
+				
 			}
 		}
 	}

@@ -61,7 +61,38 @@
 			</c:if>
 			
 	<table style="width:100%;" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
- 		<tr height="10"><td colspan="10">&nbsp;</td></tr>
+ 		<tr height="5"><td colspan="10">&nbsp;</td></tr>
+ 		
+ 		<tr>
+			<td class="text14">
+			<table id="mainList" class="display compact cell-border" >
+				<thead>
+				<tr>
+					<th width="2%" class="tableHeaderField" align="center" >&nbsp;Endre</th>
+                    <th width="80%" class="tableHeaderField" align="left" >&nbsp;Beskrivelse&nbsp;</th>
+                </tr>  
+                </thead> 
+                <tbody >  
+	            <c:forEach var="record" items="${model.list}" varStatus="counter">   
+	               <tr class="tableRow" height="20" >
+	              
+	               <td width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" align="center">
+	        	       		<a id="alinkRecordId_${counter.count}" onClick="setBlockUI(this);" >
+  							<img src="resources/images/update.gif" border="0" alt="edit">
+               			</a>
+	               </td>
+	               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" width="80%"  >
+	               		
+	               </td>
+	               
+	            </tr> 
+	            </c:forEach>
+	            </tbody>
+            </table>
+		</td>	
+		</tr>
+ 		
+ 		<tr height="5"><td colspan="10">&nbsp;</td></tr>
  		
 		<%-- --------------- --%>
 		<%-- CONTENT --%>

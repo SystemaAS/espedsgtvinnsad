@@ -2101,8 +2101,13 @@
 					<tr>
 						<td class="text14" align="left" title="m3039e">Til ekspedisjonsenhet</td>
 						<td class="text14MediumBlue">
-							<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue"  name="m3039e" id="m3039e" size="8" maxlength="6" value="${model.record.sendParametersRecord.m3039e}">
+							<select class="selectMediumBlueE2" name="m3039e" id="m3039e">
+							<option value="${model.record.sendParametersRecord.m3039e}" >${model.record.sendParametersRecord.m3039e}</option>
+			            		<option value="${model.record.sendParametersRecord.m3039eo1}" >${model.record.sendParametersRecord.m3039eo1}</option>
+			            		<option value="${model.record.sendParametersRecord.m3039eo2}" >${model.record.sendParametersRecord.m3039eo2}</option>
+							</select>
 						</td>
+					</tr>
 					</tr>
 					<tr>
 						<td class="text14" align="left" title="m2005b">Ønsket behandlingsdato</td>

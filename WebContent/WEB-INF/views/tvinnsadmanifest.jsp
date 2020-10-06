@@ -161,7 +161,7 @@
                 		<th width="2%" class="tableHeaderField" >Sjåførs navn</th>
                 		<th width="2%" class="tableHeaderField" >Reg.dato</th>
                 		<th width="2%" class="tableHeaderField" >Manif.id</th>
-                		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET" width="2%" class="tableHeaderField" >Manif.st</th>
+                		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED" width="2%" class="tableHeaderField" >Manif.st</th>
                 		<th width="2%" class="tableHeaderField" >Slett</th>
                 		</tr>
                 	</thead>
@@ -213,16 +213,19 @@
 		               <td width="2%" class="tableCell" ><font style="font-size:11px;">${record.efuuid}</font></td>
 		               <td width="2%" align="center" class="tableCell" >
 		               		<c:choose>
-		               		<c:when test="${record.efst2 == 'S' || record.efst2 == 'R' || record.efst2 == 'D'}">
+		               		<c:when test="${record.efst2 == 'S' || record.efst2 == 'R' || record.efst2 == 'D' || record.efst2 == 'C'}">
 		               			<c:if test="${record.efst2 == 'S'}">
 		               				<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
-		               				SUBMITTED
+		               				<span title="S" >SUBMITTED</span>
 		               			</c:if>
 		               			<c:if test="${record.efst2 == 'R'}">
-		               				REOPENED/DRAFT
+		               				<span title="R" >REOPENED/DRAFT</span>
 		               			</c:if>
 		               			<c:if test="${record.efst2 == 'D'}">
-		               				<font color="red">SLETTET</font>
+		               				<font title="D" color="red">SLETTET</font>
+		               			</c:if>
+		               			<c:if test="${record.efst2 == 'C'}">
+		               				<font title="C" color="red">COMPLETED</font>
 		               			</c:if>
 		               			
 		               		</c:when>

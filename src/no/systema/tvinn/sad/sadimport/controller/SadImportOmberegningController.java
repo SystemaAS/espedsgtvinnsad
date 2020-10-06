@@ -590,9 +590,10 @@ public class SadImportOmberegningController {
 		    	if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){
 		    		rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on UPDATE: " + rpgReturnResponseHandler.getErrorMessage());
 		    		//TODO ERROR HANDLING HERE... stay in the same page ?
+		    		logger.error("[ERROR] error when sending ?? ");
 		    	}else{
 		    		//Update succefully done!
-		    		logger.info("[INFO] Record successfully sent [changed status], OK ");
+		    		logger.warn("[INFO] Record successfully sent [changed status], OK ");
 		    		//put domain objects
 		    		//this.setDomainObjectsInView(session, model, jsonTdsImportSpecificTopicRecord);
 		    		//TODO SUCCESS should stay at the same side or not? Right now we go to the list of topics

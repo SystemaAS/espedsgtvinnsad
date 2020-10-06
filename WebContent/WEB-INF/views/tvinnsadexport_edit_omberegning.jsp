@@ -1004,12 +1004,12 @@
 					</td>
 			</tr>
 			
-			<%-- Communcation EDI parameters --%>
+			<%-- Replaced with POP-UP window at SEND --> Communcation EDI parameters 
 			<tr height="20"><td></td></tr>
 			<tr>
 				<td width="5">&nbsp;</td>
 	            <td >
-					<%-- Special section --%>
+					 
 					<table width="90%" align="left" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
 				 		<tr height="15">
 				 			<td class="text14White">
@@ -1041,11 +1041,12 @@
 	 				</table>
 	 			</td>
  			</tr>
+ 			--%>
+ 			<%-- 
 			<tr>
 	 			<td width="5">&nbsp;</td>
 	            <td >
-	 				<%-- create record --%>
-				 	<table width="90%" align="left" class="formFrameTitaniumGrayRoundBottom" border="0" cellspacing="0" cellpadding="0">
+	 				<table width="90%" align="left" class="formFrameTitaniumGrayRoundBottom" border="0" cellspacing="0" cellpadding="0">
 				 		<tr>
 					 		<td>
 						 		<table width="100%" align="left" border="0" cellspacing="0" cellpadding="0">
@@ -1073,21 +1074,7 @@
 											</select>
 										</td>
 							        </tr>
-							        <%--
-							        <tr height="4"><td class="text14" align="left" ></td> 
-							        </tr>
-							        <tr>
-							            <td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font><span title="todo">Sekvens</span></td>
-							            	
-							            <td class="text14">	
-							           		<input type="text" class="inputTextReadOnly" size="8" maxlength="6" value="${Xmodel.record.todo}">
-							            </td>
-							            <td class="text14">&nbsp;<font class="text16RedBold" >*</font><span title="todo">Versjon</span></td>
-							            <td class="text14">	
-			 								<input type="text" class="inputTextReadOnly" size="8" maxlength="6" value="${Xmodel.record.todo}">
-			 							</td>
-							        </tr>
-							         --%>
+							        
 							        <tr height="5">
 							            <td class="text14Bold" align="left" >&nbsp;</td> 
 							        </tr>
@@ -1095,12 +1082,14 @@
 							</td>
 						</tr>
 					</table>
+				</td	 
 				</td>
 		  	</tr>
-			
+			--%>	
 			</table>
 			
 		</td>
+		
 		<%-- --------------- --%>
 		<%-- RIGHT SIDE CELL --%>
 		<%-- --------------- --%>
@@ -1967,7 +1956,7 @@
 							 				    	<input tabindex=-1 class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadexport_edit_omberegning.do';" value='<spring:message code="systema.tvinn.sad.export.createnew.submit"/>'/>
 							 				    	&nbsp;&nbsp;
 							 				    	<c:if test="${not empty  model.record.setdn && model.record.validUpdate}">
-							 				    		<input tabindex=-2 class="inputFormSubmit" type="submit" name="send" id="send" onclick="javascript: form.action='tvinnsadexport_edit_omberegning_send.do';" value='<spring:message code="systema.tvinn.sad.export.createnew.send"/>'/>
+							 				    		<input tabindex=-2 class="inputFormSubmit" type="button" name="sendButton" id="sendButton" onclick="javascript: form.action='tvinnsadexport_edit_omberegning_send.do';" value='<spring:message code="systema.tvinn.sad.export.createnew.send"/>'/>
 							 				    	</c:if>
 						 				    	</c:when>
 						 				    	<c:otherwise>
@@ -2054,5 +2043,80 @@
 	</td>
 </tr> 
  
-
+<%-- -------------------------- --%>	
+	 <%-- Send button's extra info   --%>	
+	 <%-- -------------------------- --%>	
+	 <tr>
+		<td>
+			<div id="dialogSendWithParameters" title="Dialog">
+			<form action="tvinnsadexport_edit_omberegning_send.do" name="sendWithParamtersForm" id="sendWithParamtersForm" method="post">
+			 	<input type="hidden" name="avd" id="avd" value="${model.record.seavd}">
+			 	<input type="hidden" name="opd" id="opd" value="${model.record.setdn}">
+			 	<input type="hidden" name="sign" id="sign" value="${model.record.segn}">
+				<table>
+					<tr>
+						<td class="text14" align="left" title="m1N07">Meldings funksjon</td>
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="m1N07" id="m1N07">
+			            		<option value="">-velg-</option>
+			            		<option value="DEB" <c:if test="${model.record.sendParametersRecord.m1N07 == 'DEB'}"> selected </c:if> >DEB</option>
+			            		<option value="DRE" <c:if test="${model.record.sendParametersRecord.m1N07 == 'DRE'}"> selected </c:if> >DRE</option>
+			            		<option value="DSO" <c:if test="${model.record.sendParametersRecord.m1N07 == 'DSO'}"> selected </c:if> >DSO</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="text14" align="left" title="m3039e">Til ekspedisjonsenhet</td>
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="m3039e" id="m3039e">
+							<option value="${model.record.sendParametersRecord.m3039e}" >${model.record.sendParametersRecord.m3039e}</option>
+			            		<option value="${model.record.sendParametersRecord.m3039eo1}" >${model.record.sendParametersRecord.m3039eo1}</option>
+			            		<option value="${model.record.sendParametersRecord.m3039eo2}" >${model.record.sendParametersRecord.m3039eo2}</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="text14" align="left" title="m2005b">Ønsket behandlingsdato</td>
+						<td class="text14MediumBlue">
+							<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue"  name="m2005b" id="m2005b" size="8" maxlength="6" value="${model.record.sendParametersRecord.m2005b}">
+						</td>
+					</tr>
+					<tr>
+						<td class="text14" align="left" title="m5004d">Depositum beløp</td>
+						<td class="text14MediumBlue">
+							<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue"  name="m5004d" id="m5004d" size="12" maxlength="10" value="${model.record.sendParametersRecord.m5004d}">
+						</td>
+					</tr>
+					<tr>
+						<td class="text14" align="left" title="mven">Ventegrupe</td>
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="mven" id="mven">
+			            		<option value="" <c:if test="${empty model.record.sendParametersRecord.mven}"> selected </c:if> >Nej</option>
+			            		<option value="1" <c:if test="${model.record.sendParametersRecord.mven == '1'}"> selected </c:if> >Ja</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="text14" align="left" title="m0035">Testekode</td>
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="m0035" id="m0035">
+			            		<option value="2" <c:if test="${model.record.sendParametersRecord.m0035 == '2'}"> selected </c:if> >Test</option>
+			            		<option value="" <c:if test="${empty model.record.sendParametersRecord.m0035}"> selected </c:if> >Prod</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="text14" align="left" title="m9n01">Eksped.prioritet</td>
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="m9n01" id="m9n01">
+			            		<option value="1" <c:if test="${empty model.record.sendParametersRecord.m9n01 || model.record.sendParametersRecord.m9n01 == '1'}"> selected </c:if> >Express</option>
+			            		<option value="2" <c:if test="${not empty model.record.sendParametersRecord.m9n01 && model.record.sendParametersRecord.m9n01 != '1'}"> selected </c:if> >Annen</option>
+							</select>
+						</td>
+					</tr>
+				</table>
+			</form>
+			</div>
+		</td>
+	</tr> 
 	

@@ -381,28 +381,22 @@ public class TvinnSadManifestHeaderController {
 					
 				}else{
 					logger.info("doDelete = OK");
-					//for TEST!!!! (SEND only if text is not null)
-					if(StringUtils.isNotEmpty(notisText)){
-						//execute RPG first
-						if(StringUtils.isNotEmpty(recordToValidate.getEfpro())){
-							JsonTvinnSadManifestRpgContainer rpgContainer = this.executeRpgSADEFJSONW(appUser, recordToValidate.getEfpro());
-							if(rpgContainer!=null){
-								//check for errors
-								if(StringUtils.isNotEmpty(rpgContainer.getErrMsg()) || StringUtils.isNotEmpty(rpgContainer.getErrMsgT()) ){
-									String errorMessage = "SERVER_ERROR:" + rpgContainer.getErrMsg() + rpgContainer.getErrMsgT();
-									model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errorMessage);
-									logger.error(errorMessage);
-								}else{
-									logger.warn("Send after delete = OK");
-								}
+					//execute RPG first
+					if(StringUtils.isNotEmpty(recordToValidate.getEfpro())){
+						JsonTvinnSadManifestRpgContainer rpgContainer = this.executeRpgSADEFJSONW(appUser, recordToValidate.getEfpro());
+						if(rpgContainer!=null){
+							//check for errors
+							if(StringUtils.isNotEmpty(rpgContainer.getErrMsg()) || StringUtils.isNotEmpty(rpgContainer.getErrMsgT()) ){
+								String errorMessage = "SERVER_ERROR:" + rpgContainer.getErrMsg() + rpgContainer.getErrMsgT();
+								model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errorMessage);
+								logger.error(errorMessage);
+							}else{
+								logger.warn("Send after delete = OK");
 							}
 						}
 					}
 				}
-				
-				
 			}
-
 			return successView;
 		}
 	}

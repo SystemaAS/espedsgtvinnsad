@@ -112,7 +112,7 @@
  		
  	<tr>
 		<td>		
-		<table style="width:90%;" cellspacing="0" border="0" cellpadding="0">
+		<table style="width:95%;" cellspacing="0" border="0" cellpadding="0">
 	    	<%-- separator --%>
 	        <tr height="1"><td></td></tr> 
 			<tr>
@@ -130,14 +130,17 @@
                 		<th title="S=UPDATED and RELEASED by USER, O=OK" class="tableHeaderField" >St</th>
                 		<th class="tableHeaderField" >Eksp.type</th>
                 		<th class="tableHeaderField" >Eksp.id</th>
+                		<th class="tableHeaderField" style="background-color:lightyellow;">MRN</th>
+                		<th class="tableHeaderField" style="background-color:lightyellow;">Avs</th>
+                		<th class="tableHeaderField" style="background-color:lightyellow;">Mottak.</th>
+                		<th class="tableHeaderField" >Lastested</th>
+                		<th class="tableHeaderField" >Lossested</th>
                 		
                 		<th class="tableHeaderField" >Varebesk.</th>
                 		<th class="tableHeaderField" >Kolli</th>
                 		<th class="tableHeaderField" >B.vekt</th>
                 		
                 		<th class="tableHeaderField" >Sert</th>
-                		<th class="tableHeaderField" >Bilnr</th>
-                		<th class="tableHeaderField" >E.enh</th>
                 		<th class="tableHeaderField" >Slett</th>
                 	</tr>
                 	</thead>
@@ -178,14 +181,20 @@
 		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cletyp}&nbsp;${record.cletypt}</td>
 		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cleid}</td>
 		               
+		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cltrnr}</td>
+		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.clnas}</td>
+		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.clnak}</td>
+		               
+		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="left" >${record.clsdft}</td>
+		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="left" >${record.clsdtt}</td>
+		               
+		               
 		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="left" >${record.clvt}</td>
 		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="right" >${record.clntk}</td>
 		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="right" >${record.clvkb}</td>
 		               
 		               
 		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cleser}</td>
-		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cltrid}</td>
-		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cl3039e}</td>
 		               <td width="2%" class="tableCell" align="center" >
 		               		<c:if test="${headerRecord.own_editable > 0}">
 			               		<a style="display: block; width: 100%; height: 100%;" class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
@@ -242,7 +251,7 @@
 			<input type="hidden" name="clst" id="clst" value="O"> <%-- O=OK always  --%>
 			<%--sets in jquery on dropdown event --%>
 			<input type="hidden" name="cletypt" id="cletypt" value="${model.record.cletypt}">
-			<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">
+			<table style="width:95%" align="left" border="0" cellspacing="1" cellpadding="0">
 			 	<tr >
 				 	<td >
 					<table style="width:100%" class="formFrameHeader" border="0" cellspacing="1" cellpadding="0">

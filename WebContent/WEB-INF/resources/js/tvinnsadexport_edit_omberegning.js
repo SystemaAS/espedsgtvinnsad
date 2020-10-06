@@ -260,6 +260,10 @@
 	  jq("#sefid").datepicker({ 
 		  dateFormat: 'ddmmy'  
 	  });
+	  jq("#m2005b").datepicker({ 
+		  dateFormat: 'ddmmy'  
+	  });
+	  
     });
   	
   	//onChange avd list
@@ -881,6 +885,102 @@
 	//============================
 
 	
+	//-------------------------------------------------
+	  //START Model dialog SEND: "Send with parameters"
+	  //-----------------------------------------------
+	  //Initialize <div> here
+	  jq(function() { 
+		  jq("#dialogSendWithParameters").dialog({
+			  autoOpen: false,
+			  maxWidth:500,
+	          maxHeight: 400,
+	          width: 360,
+	          height: 360,
+			  modal: true
+		  });
+	  });
+	  //----------------------------
+	  //Present dialog box onClick 
+	  //----------------------------
+	  jq(function() {
+		  jq("#sendButton").click(function() {
+			  presentSendWithParametersDialog();
+		  });
+		  
+		  
+	  });
+	  function presentSendWithParametersDialog(){
+		//setters (add more if needed)
+		  jq('#dialogSendWithParameters').dialog( "option", "title", "Send tolldeklaration" );
+		  //deal with buttons for this modal window
+		  jq('#dialogSendWithParameters').dialog({
+			 buttons: [ 
+	            {
+				 id: "dialogSaveTU",	
+				 text: "Ok",
+				 click: function(){
+					 		jq('#sendWithParamtersForm').submit();
+				 		}
+			 	 },
+	 	 		{
+			 	 id: "dialogCancelTU",
+			 	 text: "Cancel", 
+				 click: function(){
+					 		//back to initial state of form elements on modal dialog
+					 		//jq("#dialogSaveSU").button("option", "disabled", true);
+					 		jq( this ).dialog( "close" ); 
+				 		} 
+	 	 		 } ] 
+		  });
+		  //init values
+		  //jq("#dialogSaveSU").button("option", "disabled", true);
+		  //open now
+		  jq('#dialogSendWithParameters').dialog('open');
+	  }
+	  jq(function() { 
+		    jq('#m1N07').change(function() {
+		    	doDSO();
+		    });
+		    jq('#m3039e').change(function() {
+		    	doDSO();
+		    });
+		  });
+		  
+		  jq(document).ready(function() {
+			  doDSO();
+		  });
+		  
+		  function doDSO(){
+			  if(jq('#m1N07').val() != ''){
+				 /* 
+			  	 if(jq('#m1N07').val() == 'DSO'){
+			  		 console.log("DSO");
+			  		 if(jq('#m3039e').val() == '10173'){
+			  			jq("#m3039e").addClass( "isa_success" );
+			  			jq("#m3039e").removeClass( "isa_error" );
+			  		 }else{
+			  			jq("#m3039e").removeClass( "isa_success" );
+			  			jq("#m3039e").addClass( "isa_error" );
+			  		 }
+					
+				 }else{
+					 console.log("DRE ...");
+					 if(jq('#m3039e').val() == '10175'){
+				  			jq("#m3039e").addClass( "isa_success" );
+				  			jq("#m3039e").removeClass( "isa_error" );
+			  		 }else{
+			  			jq("#m3039e").removeClass( "isa_success" );
+			  			jq("#m3039e").addClass( "isa_error" );
+			  		 }
+				 }
+				 */
+			  }
+		  }
+	  	
+	  
+	  
+	
+	
 	//-------------------------------------------
 	  //START Model dialog ADMIN: "Update status"
 	  //-------------------------------------------
@@ -939,25 +1039,4 @@
 		  
 	  }
 	  	
-	  jq(function() { 
-	    jq('#m1n07').change(function() {
-	    	doDSO();
-	    });
-	  });
 	  
-	  
-	  jq(document).ready(function() {
-		  doDSO();
-	  });
-	  
-	  function doDSO(){
-		  if(jq('#m1n07').val() != ''){
-			  	 var code = '10172';
-				 if(jq('#m1n07').val() == 'DSO'){
-					 code = '10174';
-				 }
-				 
-				 //
-				 jq('#m3039e').val(code);
-			  }
-	  }

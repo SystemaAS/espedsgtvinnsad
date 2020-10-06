@@ -1063,6 +1063,7 @@
 	  
 	  function doDSO(){
 		  if(jq('#m1N07').val() != ''){
+			 /* 
 		  	 if(jq('#m1N07').val() == 'DSO'){
 		  		 console.log("DSO");
 		  		 if(jq('#m3039e').val() == '10173'){
@@ -1083,6 +1084,7 @@
 		  			jq("#m3039e").addClass( "isa_error" );
 		  		 }
 			 }
+			 */
 		  }
 	  }
 

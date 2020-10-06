@@ -45,6 +45,8 @@ import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpeci
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicFaktTotalContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicFaktTotalRecord;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicRecord;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicSendParametersContainer;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicSendParametersRecord;
 import no.systema.tvinn.sad.sadexport.service.SadExportSpecificTopicService;
 import no.systema.tvinn.sad.sadexport.model.topic.SadExportSpecificTopicTotalItemLinesObject;
 import no.systema.tvinn.sad.sadexport.mapper.url.request.UrlRequestParameterMapper;
@@ -367,6 +369,8 @@ public class SadExportOmberegningController {
 					    	}else{
 					    		//Update successfully done!
 					    		logger.info("[INFO] Record successfully updated, OK ");
+					    		//get SEND-parameters
+					    		this.fetchSendParameters(appUser, jsonSadExportSpecificTopicRecord);
 					    		//put domain objects
 					    		this.setDomainObjectsInView(session, model, jsonSadExportSpecificTopicRecord, totalItemLinesObject, omberegningFlag, omberegningDate, omberegningType);
 					    		if(totalItemLinesObject.getSumOfAntalItemLines()>0 || this.ACTIVE_INNSTIKK_CODE.equals(jsonSadExportSpecificTopicRecord.getSemi())){
@@ -567,15 +571,16 @@ public class SadExportOmberegningController {
 			//-------------------
 			//add URL-parameter 
 			//-------------------
-			String urlRequestParamsKeys = this.getRequestUrlKeyParameters(action, avd, opd, sign, appUser);
+			String urlRequestParamsKeys = this.getRequestUrlKeyParameters(action, appUser, request);
 			//there are only key parameters in doSend. No other topic (record) specific parameters from GUI or such
-			String urlRequestParams = urlRequestParamsKeys + "&m1n07=" + recordToValidate.getM1n07() + "&m3039e=" + recordToValidate.getM3039e() + "&m0035=" + recordToValidate.getM0035();
+			String urlRequestParams = urlRequestParamsKeys;
+			
 			//for debugging purposes
 			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, BASE_URL); 
 			
 			logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-	    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
-	    	logger.info("URL PARAMS: " + urlRequestParams);
+	    	logger.warn("URL: " + BASE_URL);
+	    	logger.warn("URL PARAMS: " + urlRequestParams);
 	    	//----------------------------------------------------------------------------
 	    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
 	    	//----------------------------------------------------------------------------
@@ -587,9 +592,10 @@ public class SadExportOmberegningController {
 	    	if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){
 	    		rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on UPDATE: " + rpgReturnResponseHandler.getErrorMessage());
 	    		//TODO ERROR HANDLING HERE... stay in the same page ?
+	    		logger.error("[ERROR] error when sending ?? ");
 	    	}else{
 	    		//Update succefully done!
-	    		logger.info("[INFO] Record successfully sent [changed status], OK ");
+	    		logger.warn("[INFO] Record successfully sent [changed status], OK ");
 	    		//put domain objects
 	    		//this.setDomainObjectsInView(session, model, jsonTdsExportSpecificTopicRecord);
 	    		//TODO SUCCESS should stay at the same side or not? Right now we go to the list of topics
@@ -597,7 +603,49 @@ public class SadExportOmberegningController {
 		}
 		return successView;
 	}
-	
+	/**
+	 * 
+	 * @param action
+	 * @param appUser
+	 * @param request
+	 * @return
+	 */
+	private String getRequestUrlKeyParameters(String action, SystemaWebUser appUser, HttpServletRequest request){
+		//logger.info("Inside getRequestUrlKeyParameters for SEND...");
+		StringBuffer urlRequestParamsKeys = new StringBuffer();
+		String opd = request.getParameter("opd");
+		String avd = request.getParameter("avd");
+		//logger.info("OPD:" + opd + "AVD:" + avd);
+		//
+		String m1N07 = request.getParameter("m1N07");
+		String m3039e = request.getParameter("m3039e");
+		String m2005b = request.getParameter("m2005b");
+		String m5004d = request.getParameter("m5004d");
+		String mven = request.getParameter("mven");
+		String m0035 = request.getParameter("m0035");
+		String m9n01 = request.getParameter("m9n01");
+		//date special
+		String m2005bISO = "";
+		if(m2005b!=null){
+			m2005bISO = this.dateFormatter.convertToDate_ISO(m2005b);
+		}
+		
+		if(TvinnSadConstants.ACTION_SEND.equals(action)){
+			urlRequestParamsKeys.append("user=" + appUser.getUser());
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "avd=" + avd);
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "opd=" + opd);
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "mode=" + TvinnSadConstants.MODE_SEND);
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "m1N07=" + m1N07);
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "m3039e=" + m3039e);
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "m2005b=" + m2005bISO);
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "m5004d=" + m5004d);
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "mven=" + mven);
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "m0035=" + m0035);
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "m9n01=" + m9n01);
+			
+		}
+		return urlRequestParamsKeys.toString();
+	}
 	
 	/**
 	 * Prints a specific topic
@@ -1257,6 +1305,42 @@ public class SadExportOmberegningController {
     	}
 		
 		return returnRecord;
+	}
+	
+	
+	/**
+	 * 
+	 * @param appUser
+	 * @param headerRecord
+	 */
+	
+	public void fetchSendParameters(SystemaWebUser appUser, JsonSadExportSpecificTopicRecord headerRecord){
+		//---------------------------
+		//get BASE URL = RPG-PROGRAM
+        //---------------------------
+		String BASE_URL = SadExportUrlDataStore.SAD_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_SEND_PARAMS_URL;
+		//-------------------
+		//add URL-parameter 
+		//-------------------
+		StringBuffer urlRequestParamsKeys = new StringBuffer();
+		urlRequestParamsKeys.append("user=" + appUser.getUser());
+		urlRequestParamsKeys.append("&avd=" + headerRecord.getSeavd() + "&opd=" + headerRecord.getSetdn());
+		
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+    	logger.info("URL PARAMS: " + urlRequestParamsKeys.toString());
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
+		
+    	if(jsonPayload!=null){
+    		JsonSadExportSpecificTopicSendParametersContainer container = this.sadExportSpecificTopicService.getSadExportSpecificTopicSendParametersContainer(jsonPayload);
+    		if(container!=null){
+    			for (JsonSadExportSpecificTopicSendParametersRecord record : container.getGetcmn()){
+    				headerRecord.setSendParametersRecord(record);
+    			}
+    		}
+    	}
+	
 	}
 	
 	//SERVICES
