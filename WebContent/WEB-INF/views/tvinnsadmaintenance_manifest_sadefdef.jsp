@@ -68,23 +68,64 @@
 			<table id="mainList" class="display compact cell-border" >
 				<thead>
 				<tr>
-					<th width="2%" class="tableHeaderField" align="center" >&nbsp;Endre</th>
-                    <th width="80%" class="tableHeaderField" align="left" >&nbsp;Beskrivelse&nbsp;</th>
+					<th class="tableHeaderFieldFirst" >&nbsp;Endre</th>
+                    <th class="tableHeaderField" >&nbsp;Avd&nbsp;</th>
+                    <th class="tableHeaderField" >&nbsp;Sign&nbsp;</th>
+                    <th class="tableHeaderField" >&nbsp;Turnr.&nbsp;</th>
+                    <th class="tableHeaderField" >&nbsp;Orgnr.&nbsp;</th>
+                    <th class="tableHeaderField" >&nbsp;Transportmåte&nbsp;</th>
+                    <th class="tableHeaderField" >&nbsp;Pass.tollsted&nbsp;</th>
+                    <th class="tableHeaderField" >&nbsp;Eksped.enhet&nbsp;</th>
+                    <th class="tableHeaderField" >&nbsp;Slett&nbsp;</th>
                 </tr>  
                 </thead> 
                 <tbody >  
 	            <c:forEach var="record" items="${model.list}" varStatus="counter">   
 	               <tr class="tableRow" height="20" >
 	              
-	               <td width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" align="center">
-	        	       		<a id="alinkRecordId_${counter.count}" onClick="setBlockUI(this);" >
+	               <td align="center" width="2%" class="tableCell" style="border-style:solid; border-width:0px 1px 1px 0px; border-color:#FAEBD7;" >
+	        	       		<a style="display:block;width:100%; height:100%;" id="efavd_${record.efavd}" href="#" onClick="getItemData(this);">
   							<img src="resources/images/update.gif" border="0" alt="edit">
                			</a>
 	               </td>
-	               <td class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" width="80%"  >
-	               		
+	               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >
+	               		${record.efavd}
 	               </td>
-	               
+	               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >
+	               		${record.efsg}
+	               </td>
+	               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >
+	               		${record.efpro}
+	               </td>
+	               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >
+	               		${record.efrgd}
+	               </td>
+	               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >
+	               		${record.eftm}
+	               </td>
+	               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >
+	               		${record.eftsd}
+	               </td>
+	               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >
+	               		${record.ef3039e}
+	               </td>
+	               <td align="center" width="2%" class="tableCell" >   		
+			   				
+              				<a style="display:block; width:100%; height:100%;" class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
+								<img src="resources/images/delete.gif" border="0" alt="remove">
+							</a>
+							<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
+								<form action="tvinnsadmaintenance_manifest_sadefdef_delete.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
+								 	<input type="hidden" name="currentUuid${counter.count}" id="currentUuid${counter.count}" value="${record.efuuid}">
+								 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="D">
+								 	<input type="hidden" name="selectedPro${counter.count}" id="selectedPro${counter.count}" value="${record.efpro}">
+									<p class="text14" >Er du sikker på at du vil slette Turnr. <b>${record.efpro}</b></p>
+									<p class="text14"> Tekst </p>
+									<input type="text" class="inputText" name="currentText${counter.count}" id="currentText${counter.count}" size="45" maxlength="70" value=''>&nbsp;</td>
+									
+								</form>
+							</div>	
+	               	   </td> 
 	            </tr> 
 	            </c:forEach>
 	            </tbody>
@@ -206,50 +247,25 @@
 		            <tr >
 					 	<td>
 						<table class="formFrame" style="width:100%;" border="0" cellspacing="1" cellpadding="0">
-			 				<c:choose>
-					 			<c:when test="${not empty model.record.efuuid}">
-					 				<tr >
-										<td class="text14">
-										<img id="imgManifestIdInfo" style="vertical-align:middle;cursor:pointer;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-											Manif<a tabindex=-1 id="alinkManifestRawIdInfo"><font class="text14">e</font></a>stid:&nbsp;<font class="text14SkyBlue">${model.record.efuuid}</font>
-										</td>
-					 				</tr>
-					 				<tr height="2"><td></td></tr>
-			 					</c:when>
-				 				<c:otherwise>
-									<tr>
-									<td>
-									<table width="80%">
-									<tr>
-					 					<td class="text14">&nbsp;Avd&nbsp;</td>
-					 					<td class="text14">&nbsp;Sign&nbsp;</td>
-					 					<td class="text14">&nbsp;Tur&nbsp;</td>
-					 					
-				 					</tr>				 				
-				 					<tr>
-					 					<td><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efavd" id="efavd" size="5" maxlength="4" value=""></td>
-					 					<td><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efsg" id="efsg" size="4" maxlength="3" value=""></td>
-					 					<td><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efpro" id="efpro" size="9" maxlength="8" value=""></td>
-				 					</tr>
-				 					</table>
-				 					</td>
-				 					</tr>
-				 				</c:otherwise>
-			 				</c:choose>
-			 				<%-- OBSOLETE ... must be orgnr from db-table SADEFDEF 
-			 				<tr >
-								<td class="text14">&nbsp;<span title="efknd">Kundenr.</span><font class="text16RedBold" >*</font></td>
-			 				</tr>
-			 				<tr >
-					 			<td class="text14">
-					 				<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efknd" id="efknd" size="8" maxlength="8" value="${model.record.efknd}">
-					 				<a tabindex="-1" id="efkndIdLink">
-										<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
-									</a>
-					 				&nbsp;&nbsp;<input class="inputTextReadOnly" name="own_efkndName" id="own_efkndName" size="25" maxlength="30" value="${Xmodel.record.efkndName}">
-								</td>
-			 				</tr>
-			 				--%>
+			 				
+							<tr>
+								<td>
+								<table width="80%">
+								<tr>
+				 					<td class="text14">&nbsp;Avd&nbsp;</td>
+				 					<td class="text14">&nbsp;Sign&nbsp;</td>
+				 					<td class="text14">&nbsp;Tur&nbsp;</td>
+				 					
+			 					</tr>				 				
+			 					<tr>
+				 					<td><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efavd" id="efavd" size="5" maxlength="4" value=""></td>
+				 					<td><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efsg" id="efsg" size="4" maxlength="3" value=""></td>
+				 					<td><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efpro" id="efpro" size="9" maxlength="8" value=""></td>
+			 					</tr>
+			 					</table>
+			 					</td>
+		 					</tr>
+
 			 				<tr >
 								<td class="text14">&nbsp;<span title="efrgd">ID-type kjøretøyeier</span><font class="text16RedBold" >*</font></td>
 			 				</tr>
@@ -261,16 +277,16 @@
 		 		 				  		<option value="E">EORI</option>
 		 		 				  		 --%>
 									</select>
-									&nbsp;&nbsp;<input readonly type="text" class="inputTextReadOnly" name="efrgd" id="efrgd" size="10" maxlength="9" value="${model.record.efrgd}">
+									&nbsp;&nbsp;<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efrgd" id="efrgd" size="10" maxlength="9" value="${model.record.efrgd}">
 								</td>
 			 				</tr>
 			 				<tr height="3"><td></td></tr>
 			 				<tr >
-								<td class="text14">&nbsp;<span title="eftm">Transportmåte</span><font class="text16RedBold" >*</font></td>
+								<td class="text14">&nbsp;<span title="eftm">Transportmåte</span></td>
 			 				</tr>
 			 				<tr >
 					 			<td class="text14">
-					 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="eftm" id="eftm">
+					 				<select class="inputTextMediumBlue" name="eftm" id="eftm">
 				 						<option value="">Velg</option>
 		 		 				  		<option value="BIL" <c:if test="${model.record.eftm == 'BIL'}"> selected </c:if> >(30) Bil (veitransport)</option>
 									</select>
@@ -282,57 +298,29 @@
 			 				<td>
 			 				<table width="80%" >
 			 				<tr>
-								<td class="text14">&nbsp;<span title="efeta">ETA</span><font class="text16RedBold" >*</font></td>
-								<td class="text14">&nbsp;<span title="efetm">Tid</span><font class="text16RedBold" >*</font></td>
-								<td class="text14">&nbsp;<span title="eftsd">Pass.tollsted</span><font class="text16RedBold" >*</font></td>
-								<td class="text14">&nbsp;<span title="ef3039e">Eksped.enhet</span><font class="text16RedBold" >*</font></td>
+								<td class="text14">&nbsp;<span title="efeta">ETA</span></td>
+								<td class="text14">&nbsp;<span title="efetm">Tid</span></td>
+								<td class="text14">&nbsp;<span title="eftsd">Pass.tollsted</span></td>
+								<td class="text14">&nbsp;<span title="ef3039e">Eksped.enhet</span></td>
 			 				</tr>
 			 				<tr >
 					 			<td class="text14">
-					 				<c:choose>
-					 				<c:when test="${model.record.efeta != '0'}">
-					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efeta" id="efeta" size="7" maxlength="6" value="${model.record.efeta}">
-					 				</c:when>	
-					 				<c:otherwise>
-					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efeta" id="efeta" size="7" maxlength="6" value="">
-					 				</c:otherwise>
-					 				</c:choose>
+					 				<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="efeta" id="efeta" size="7" maxlength="6" value="${model.record.efeta}">
+					 				
 					 			</td>
 								<td>
-									<c:choose>
-					 				<c:when test="${model.record.efetm != '0'}">
-					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efetm" id="efetm" size="6" maxlength="4" value="${model.record.efetm}">
-					 				</c:when>
-					 				<c:otherwise>
-					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efetm" id="efetm" size="6" maxlength="4" value="">
-					 				</c:otherwise>
-					 				</c:choose>
-									
+									<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="efetm" id="efetm" size="6" maxlength="4" value="${model.record.efetm}">
+					 				
 								</td>
 			 				
 					 			<td class="text14">
-					 				<c:choose>
-					 				<c:when test="${model.record.eftsd != '0'}">
-					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="eftsd" id="eftsd" size="5" maxlength="4" value="${model.record.eftsd}">
-					 				</c:when>
-					 				<c:otherwise>
-					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="eftsd" id="eftsd" size="5" maxlength="4" value="">
-					 				</c:otherwise>
-					 				</c:choose>
+					 				<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="eftsd" id="eftsd" size="5" maxlength="4" value="${model.record.eftsd}">
 					 				<a tabindex="-1" id="eftsdIdLink">
 										<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 									</a>
 					 			</td>
 								<td>
-									<c:choose>
-					 				<c:when test="${model.record.ef3039e != '0'}">
-					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="ef3039e" id="ef3039e" size="7" maxlength="6" value="${model.record.ef3039e}">
-					 				</c:when>
-					 				<c:otherwise>
-					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="ef3039e" id="ef3039e" size="7" maxlength="6" value="">
-					 				</c:otherwise>
-					 				</c:choose>
-									
+									<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="ef3039e" id="ef3039e" size="7" maxlength="6" value="${model.record.ef3039e}">
 								</td>
 			 				</tr>
 			 				<%-- Avvakta med denna Eksport id på denna nivå
@@ -373,12 +361,12 @@
 					 	<td>
 						<table style="width:100%;" class="formFrame" border="0" cellspacing="1" cellpadding="0">
 					 		<tr >
-					 			<td class="text14">&nbsp;<span title="efktyp">Kjøretøytype</span><font class="text16RedBold" >*</font></td>
+					 			<td class="text14">&nbsp;<span title="efktyp">Kjøretøytype</span></td>
 					 			<td class="text14">&nbsp;</td>
 			 				</tr>
 			 				<tr >
 					 			<td class="text14">
-					 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="efktyp" id="efktyp">
+					 				<select class="inputTextMediumBlue" name="efktyp" id="efktyp">
 					            		<option value="">-select-</option>
 					 				  	<c:forEach var="record" items="${model.ktTypeList}" >
 				                       	 	<option title="${record.kftxt}" value="${record.kfkod}" <c:if test="${model.record.efktyp == record.kfkod}"> selected </c:if> >${record.kfkod}&nbsp;${record.kftxt}</option>
@@ -391,14 +379,14 @@
 				 				<td>
 				 				<table>
 				 				<tr >
-									<td class="text14">&nbsp;<span title="efkmrk">Kjøretøy kjennemerke</span><font class="text16RedBold" >*</font></td>
-									<td class="text14">&nbsp;<span title="efklk">Kjøretøy nasjonalitet</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="efkmrk">Kjøretøy kjennemerke</span></td>
+									<td class="text14">&nbsp;<span title="efklk">Kjøretøy nasjonalitet</span></td>
 									
 				 				</tr>
 				 				<tr >
-									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efkmrk" id="efkmrk" size="15" maxlength="30" value="${model.record.efkmrk}"></td>
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="15" maxlength="30" value="${model.record.efkmrk}"></td>
 									<td class="text14">
-						 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="efklk" id="efklk">
+						 				<select class="inputTextMediumBlue" name="efklk" id="efklk">
 					 						<option value="">-velg-</option>
 						 				  	<c:forEach var="country" items="${model.countryCodeList}" >
 						 				  		<option title="${country.ztxt}" value="${country.zkod}"<c:if test="${model.record.efklk == country.zkod}"> selected </c:if> >${country.zkod}</option>
@@ -413,9 +401,9 @@
 									
 				 				</tr>
 				 				<tr >
-									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efpmrk" id="efpmrk" size="15" maxlength="30" value="${model.record.efpmrk}"></td>
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efpmrk" id="efpmrk" size="15" maxlength="30" value="${model.record.efpmrk}"></td>
 									<td class="text14">
-						 				<select  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="efplk" id="efplk">
+						 				<select class="inputTextMediumBlue" name="efplk" id="efplk">
 					 						<option value="">-velg-</option>
 						 				  	<c:forEach var="country" items="${model.countryCodeList}" >
 						 				  		<option title="${country.ztxt}" value="${country.zkod}"<c:if test="${model.record.efplk == country.zkod}"> selected </c:if> >${country.zkod}</option>
@@ -449,32 +437,32 @@
 					 	<td>
 						<table style="width:100%" class="formFrame" border="0" cellspacing="1" cellpadding="0">
 					 		<tr >
-					 			<td class="text14">&nbsp;<span title="efsjaf">Fornavn</span><font class="text16RedBold" >*</font></td>
+					 			<td class="text14">&nbsp;<span title="efsjaf">Fornavn</span></td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efsjaf" id="efsjaf" size="31" maxlength="30" value="${model.record.efsjaf}"></td>
+					 			<td class="text14"><input type="text" class="inputTextMediumBlue" name="efsjaf" id="efsjaf" size="31" maxlength="30" value="${model.record.efsjaf}"></td>
 			 				</tr>
 			 				<tr >
-								<td class="text14">&nbsp;<span title="efsjae">Etternavn</span><font class="text16RedBold" >*</font></td>
+								<td class="text14">&nbsp;<span title="efsjae">Etternavn</span></td>
 			 				</tr>
 			 				<tr >
-					 			<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efsjae" id="efsjae" size="31" maxlength="30" value="${model.record.efsjae}"></td>
+					 			<td class="text14"><input type="text" class="inputTextMediumBlue" name="efsjae" id="efsjae" size="31" maxlength="30" value="${model.record.efsjae}"></td>
 			 				</tr>
 			 				
 			 				<tr>
 			 				<td>
 			 				<table width="70%">
 			 				<tr >
-								<td class="text14">&nbsp;<span title="efsjalk">Statsborger i</span><font class="text16RedBold" >*</font>
+								<td class="text14">&nbsp;<span title="efsjalk">Statsborger i</span>
 								</td>
-								<td class="text14">&nbsp;<span title="efsjadt">Fødselsdato</span><font class="text16RedBold" >*</font>
+								<td class="text14">&nbsp;<span title="efsjadt">Fødselsdato</span>
 								</td>
-								<td class="text14">&nbsp;<span title="efbekr">Bekreftelse</span><font class="text16RedBold" >*</font>
+								<td class="text14">&nbsp;<span title="efbekr">Bekreftelse</span>
 								</td>
 			 				</tr>
 			 				<tr >
 					 			<td class="text14">
-					 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="efsjalk" id="efsjalk">
+					 				<select class="inputTextMediumBlue" name="efsjalk" id="efsjalk">
 				 						<option value="">-velg-</option>
 					 				  	<c:forEach var="country" items="${model.countryCodeList}" >
 					 				  		<option title="${country.ztxt}" value="${country.zkod}"<c:if test="${model.record.efsjalk == country.zkod}"> selected </c:if> >${country.zkod}</option>
@@ -482,14 +470,8 @@
 									</select>
 								</td>
 								<td class="text14">
-									<c:choose>
-					 				<c:when test="${model.record.efsjadt != '0'}">
-					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efsjadt" id="efsjadt" size="7" maxlength="6" value="${model.record.efsjadt}">
-					 				</c:when>
-					 				<c:otherwise>
-					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efsjadt" id="efsjadt" size="7" maxlength="6" value="">
-					 				</c:otherwise>
-					 				</c:choose>
+									<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="efsjadt" id="efsjadt" size="7" maxlength="6" value="${model.record.efsjadt}">
+					 				
 					 			</td>
 					 			<td class="text14">
 					 				<select class="inputTextMediumBlue" name="efbekr" id="efbekr">
@@ -524,18 +506,7 @@
 					<table style="width:96%" border="0" cellspacing="1" cellpadding="0">
 						<tr>
 							<td align="right" >
-							<c:choose>
-								<c:when test="${model.record.own_editable > 0}">
-									<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
-									<c:if test="${empty model.invalidManifest}">
-										&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
-									</c:if>
-								</c:when>
-								<c:otherwise>
-									<input title="Status combination or date = blocked" class="inputFormSubmitStd isa_info" type="button" name="fakeButton" id="fakeButton" value='<spring:message code="systema.tvinn.sad.manifest.disabled.button"/>'>
-									
-								</c:otherwise>
-							</c:choose>
+								<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
 							</td>
 						</tr>
 					</table>

@@ -5,6 +5,7 @@ import java.util.*;
 
 import org.apache.log4j.Logger;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import no.systema.main.util.*;
@@ -46,6 +47,8 @@ public class TvinnSadManifestHeaderValidator implements Validator {
 	public void validate(Object obj, Errors errors) { 
 		JsonTvinnSadManifestRecord record = (JsonTvinnSadManifestRecord)obj;
 		
+		//Check for Mandatory fields first
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "efrgd", "systema.tvinn.sad.manifest.express.header.error.null.orgnr");
 		
 		//Logical (RULES) controls if we passed the NOT NULL errors
 		if(!errors.hasFieldErrors()){

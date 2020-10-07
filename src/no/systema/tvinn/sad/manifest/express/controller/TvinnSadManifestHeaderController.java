@@ -290,10 +290,15 @@ public class TvinnSadManifestHeaderController {
 				}
 				
 			}else{
-				//get standard values from default avd (proposed)
-				recordToValidate = this.getDefaultValuesRecord(appUser);
-				this.adjustFieldsForFetch(recordToValidate);
-				model.put(TvinnSadConstants.DOMAIN_RECORD, recordToValidate);
+				if(isValidRecord){
+					//get standard values from default avd (proposed)
+					JsonTvinnSadManifestRecord tmp = this.getDefaultValuesRecord(appUser);
+					if(tmp!=null){ recordToValidate = tmp; }
+					this.adjustFieldsForFetch(recordToValidate);
+					model.put(TvinnSadConstants.DOMAIN_RECORD, recordToValidate);
+				}else{
+					model.put(TvinnSadConstants.DOMAIN_RECORD, recordToValidate);
+				}
 			}
 			
 			if(action==null || "".equals(action)){ 
@@ -428,10 +433,20 @@ public class TvinnSadManifestHeaderController {
 			//----------------------------------------------------------------
     		Collection<JsonTvinnSadManifestRecord> outputList = jsonTvinnSadManifestContainer.getList();	
 			if(outputList!=null && outputList.size()>0){
+				int counter = 1;
 				for(JsonTvinnSadManifestRecord record : outputList ){
-					retval = record;
-					//logger.info(retval.toString());
+					//Default first one
+					if(counter==1){
+						retval = record;
+					}
+					//user's default avd on global level ASAVD (go esped --> 8)
+					if(record.getEfavd().equals(appUser.getAsavd())){
+						retval = record;
+						break;
+					}
+					counter++;
 				}
+				
 			}
     	}
     	return retval;

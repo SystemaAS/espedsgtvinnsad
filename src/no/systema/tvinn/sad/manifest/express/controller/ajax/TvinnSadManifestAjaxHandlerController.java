@@ -18,6 +18,7 @@ import no.systema.main.service.UrlCgiProxyService;
 import no.systema.main.util.DateTimeManager;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesRecord;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
 import no.systema.tvinn.sad.manifest.express.util.manager.ManifestDateManager;
@@ -82,7 +83,12 @@ public class TvinnSadManifestAjaxHandlerController {
 		 return result;
 	 }
 	
-	
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param requestParams
+	 * @return
+	 */
 	@RequestMapping(value = "bindOppdragToTur_TvinnSadManifest.do", method = RequestMethod.GET)
 	public @ResponseBody Set<JsonTvinnSadManifestCargoLinesRecord> bindOppdragToTur
 	  						(@RequestParam String applicationUser, @RequestParam String requestParams ) {
@@ -114,13 +120,75 @@ public class TvinnSadManifestAjaxHandlerController {
 		 return result;
 	 }
 	
-	
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param htmlParams
+	 * @return
+	 */
+	@RequestMapping(value = "getSpecificDefaultValue_TvinnSadManifest.do", method = RequestMethod.GET)
+	public @ResponseBody Set<JsonTvinnSadManifestRecord> getSpecificDefaultRecord
+	  						(@RequestParam String applicationUser, @RequestParam String htmlParams ) {
+		 logger.warn("Inside: getSpecificDefaultValue_TvinnSadManifest.do()");
+		 logger.warn(htmlParams);
+		 Set result = new HashSet();
+		 String[] params = htmlParams.split("@");
+		 String avd = params[0].replace("efavd_", "");
+		 
+		 if(StringUtils.isNotEmpty(avd)){
+		 
+			 //prepare the access CGI with RPG back-end
+			 String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_MANIFEST_DEFAULT_VALUES_EXPRESS_URL;
+			 String urlRequestParams = "user=" + applicationUser + "&efavd=" + avd; 
+			 logger.warn("URL: " + BASE_URL);
+			 logger.warn("URL PARAMS: " + urlRequestParams);
+			
+			 String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+			 if(jsonPayload!=null){
+				
+				 JsonTvinnSadManifestContainer container = this.tvinnSadManifestListService.getListContainerDefaultValues(jsonPayload);
+				//----------------------------------------------------------------
+				//now filter the topic list with the search filter (if applicable)
+				//----------------------------------------------------------------
+				if(container!=null){ 
+					Collection<JsonTvinnSadManifestRecord> outputList = container.getList();
+					for(JsonTvinnSadManifestRecord record : outputList){
+						this.adjustFieldsForFetch(record);
+						result.add(record);
+					}
+				}
+			 }
+		 }else{
+			 logger.error("[ERROR] on fields[]...null or incorrect length???...");
+		 }
+		 
+		 return result;
+	 }
+	/**
+	 * 
+	 * @param record
+	 */
 	private void adjustFieldsForUpdate(JsonTvinnSadManifestCargoLinesRecord record){
 		record.setCl0068a(new ManifestDateManager().convertToDate_ISO(record.getCl0068a()));
 	}
-	
+	/**
+	 * 
+	 * @param record
+	 */
 	private void adjustFieldsForFetch(JsonTvinnSadManifestCargoLinesRecord record){
 		record.setCl0068a(new ManifestDateManager().convertToDate_NO(record.getCl0068a()));
+	}
+	/**
+	 * 
+	 * @param record
+	 */
+	private void adjustFieldsForFetch(JsonTvinnSadManifestRecord record){
+		if(StringUtils.isNotEmpty(record.getEfeta()) && !"0".equals(record.getEfeta())){
+			record.setEfeta(new ManifestDateManager().convertToDate_NO(record.getEfeta()));
+		}
+		if(StringUtils.isNotEmpty(record.getEfsjadt()) && !"0".equals(record.getEfsjadt())){
+			record.setEfsjadt(new ManifestDateManager().convertToDate_NO(record.getEfsjadt()));
+		}
 	}
 
 	//SERVICES

@@ -223,35 +223,31 @@
 									<td>
 									<table width="80%">
 									<tr>
-					 					<td class="text14">&nbsp;Avd&nbsp;</td>
-					 					<td class="text14">&nbsp;Sign&nbsp;</td>
-					 					<td class="text14">&nbsp;Tur&nbsp;</td>
+					 					<td class="text14" title="efavd">&nbsp;Avd&nbsp;</td>
+					 					<td class="text14" title="efsg">&nbsp;Sign&nbsp;</td>
+					 					<td class="text14" title="efpro">&nbsp;Tur&nbsp;</td>
 					 					
 				 					</tr>				 				
 				 					<tr>
-					 					<td><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efavd" id="efavd" size="5" maxlength="4" value=""></td>
-					 					<td><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efsg" id="efsg" size="4" maxlength="3" value=""></td>
-					 					<td><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efpro" id="efpro" size="9" maxlength="8" value=""></td>
+					 					<td><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efavd" id="efavd" size="5" maxlength="4" value="${model.record.efavd}"></td>
+					 					<td><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efsg" id="efsg" size="4" maxlength="3" value="${model.record.efsg}"></td>
+					 					<td>
+					 						<c:choose>
+							 				<c:when test="${model.record.efpro != '0'}">
+							 					<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efpro" id="efpro" size="9" maxlength="8" value="${model.record.efpro}">
+							 				</c:when>	
+							 				<c:otherwise>
+							 					<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efpro" id="efpro" size="9" maxlength="8" value="">
+							 				</c:otherwise>
+							 				</c:choose>
+					 					</td>
 				 					</tr>
 				 					</table>
 				 					</td>
 				 					</tr>
 				 				</c:otherwise>
 			 				</c:choose>
-			 				<%-- OBSOLETE ... must be orgnr from db-table SADEFDEF 
-			 				<tr >
-								<td class="text14">&nbsp;<span title="efknd">Kundenr.</span><font class="text16RedBold" >*</font></td>
-			 				</tr>
-			 				<tr >
-					 			<td class="text14">
-					 				<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efknd" id="efknd" size="8" maxlength="8" value="${model.record.efknd}">
-					 				<a tabindex="-1" id="efkndIdLink">
-										<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
-									</a>
-					 				&nbsp;&nbsp;<input class="inputTextReadOnly" name="own_efkndName" id="own_efkndName" size="25" maxlength="30" value="${Xmodel.record.efkndName}">
-								</td>
-			 				</tr>
-			 				--%>
+			 				
 			 				<tr >
 								<td class="text14">&nbsp;<span title="efrgd">ID-type kjøretøyeier</span><font class="text16RedBold" >*</font></td>
 			 				</tr>
@@ -415,9 +411,9 @@
 									
 				 				</tr>
 				 				<tr >
-									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efpmrk" id="efpmrk" size="15" maxlength="30" value="${model.record.efpmrk}"></td>
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efpmrk" id="efpmrk" size="15" maxlength="30" value="${model.record.efpmrk}"></td>
 									<td class="text14">
-						 				<select  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="efplk" id="efplk">
+						 				<select class="inputTextMediumBlue" name="efplk" id="efplk">
 					 						<option value="">-velg-</option>
 						 				  	<c:forEach var="country" items="${model.countryCodeList}" >
 						 				  		<option title="${country.ztxt}" value="${country.zkod}"<c:if test="${model.record.efplk == country.zkod}"> selected </c:if> >${country.zkod}</option>
