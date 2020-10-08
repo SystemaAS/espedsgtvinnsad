@@ -149,108 +149,62 @@
 
   }
   
-  
-//-------------------------------------------
-  //START Model dialog ADMIN: "Update status"
-  //-------------------------------------------
-  //Initialize <div> here
+
+//Initialize <div> here for all clazz_dialog
   jq(function() { 
-	  jq("#dialogUpdateManifestStatus").dialog({
-		  autoOpen: false,
-		  maxWidth:500,
-          maxHeight: 400,
-          width: 280,
-          height: 220,
-		  modal: true
+	  jq( ".clazz_dialog" ).each(function(){
+		jq(this).dialog({
+			autoOpen: false,
+			maxWidth:500,
+			maxHeight: 400,
+			width: 280,
+			height: 280,
+			modal: true
+		});
 	  });
   });
-//Initialize <div> here
-  jq(function() { 
-	  jq("#dialogUpdateInternalStatus").dialog({
-		  autoOpen: false,
-		  maxWidth:500,
-          maxHeight: 400,
-          width: 280,
-          height: 220,
-		  modal: true
-	  });
-  });
-  //----------------------------
-  //Present dialog box onClick 
-  //----------------------------
+  //------------------------------------
+  //START Model dialog: "Delete record" 
+  //------------------------------------
+  //Present dialog box onClick (href in parent JSP)
   jq(function() {
-	  jq("#updateManifestStatusLink").click(function() {
-		  presentChangeManifestStatusDialog();
-	  });
-	  jq("#updateInternalStatusLink").click(function() {
-		  presentChangeInternalStatusDialog();
-	  });
-	  
-  });
-  function presentChangeManifestStatusDialog(){
-	//setters (add more if needed)
-	  jq('#dialogUpdateManifestStatus').dialog( "option", "title", "Update Manifest Status" );
-	  //deal with buttons for this modal window
-	  jq('#dialogUpdateManifestStatus').dialog({
-		 buttons: [ 
-            {
-			 id: "dialogSaveTU",	
-			 text: "Ok",
-			 click: function(){
-				 		jq('#updateManifestStatusForm').submit();
-				 		setBlockUI();
-			 		}
-		 	 },
- 	 		{
-		 	 id: "dialogCancelTU",
-		 	 text: "Cancel", 
-			 click: function(){
-				 		//back to initial state of form elements on modal dialog
-				 		jq("#dialogSaveSU").button("option", "disabled", true);
-				 		jq("#selectedStatus").val("");
-				 		jq( this ).dialog( "close" ); 
-			 		} 
- 	 		 } ] 
-	  });
-	  //init values
-	  jq("#dialogSaveSU").button("option", "disabled", true);
-	  //open now
-	  jq('#dialogUpdateManifestStatus').dialog('open');
-  }
-  
-  
-  function presentChangeInternalStatusDialog(){
-		//setters (add more if needed)
-		  jq('#dialogUpdateInternalStatus').dialog( "option", "title", "Update Internal Status" );
+	  jq(".removeLink").click(function() {
+		  var id = this.id;
+		  counterIndex = id.replace("removeLink","");
+		  
+		  jq('#dialogDelete'+counterIndex).dialog( "option", "title", "Slette Avd " + jq('#currentEfavd'+counterIndex).val() );
 		  //deal with buttons for this modal window
-		  jq('#dialogUpdateInternalStatus').dialog({
+		  jq('#dialogDelete'+counterIndex).dialog({
 			 buttons: [ 
 	            {
-				 id: "dialogSaveTU",	
+				 id: "dialogSaveTU"+counterIndex,	
 				 text: "Ok",
 				 click: function(){
-					 		jq('#updateInternalStatusForm').submit();
-					 		setBlockUI();
+					 		jq('#deleteForm'+counterIndex).submit();
+					 		jq( this ).dialog( "close" );
+					 		jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
 				 		}
 			 	 },
 	 	 		{
-			 	 id: "dialogCancelTU",
+			 	 id: "dialogCancelTU"+counterIndex,
 			 	 text: "Cancel", 
 				 click: function(){
 					 		//back to initial state of form elements on modal dialog
-					 		jq("#dialogSaveSU").button("option", "disabled", true);
-					 		jq("#selectedStatus").val("");
+					 		//jq("#dialogSaveSU"+counterIndex).button("option", "disabled", true);
 					 		jq( this ).dialog( "close" ); 
 				 		} 
 	 	 		 } ] 
 		  });
 		  //init values
-		  jq("#dialogSaveSU").button("option", "disabled", true);
+		  //jq("#dialogSaveSU"+counterIndex).button("option", "disabled", true);
 		  //open now
-		  jq('#dialogUpdateInternalStatus').dialog('open');
-	  }
+		  jq('#dialogDelete'+counterIndex).dialog('open');
+		 
+	  });
+  });
   
- 
+  
+
   
 //-------------------
   //Datatables jquery
@@ -296,6 +250,9 @@
 	  	  success: function(data) {
 	  		var len = data.length;
 			for ( var i = 0; i < len; i++) {
+				//update
+				jq('#updateId').val(""); jq('#updateId').val("U");
+				
 				jq('#efpro').val(""); jq('#efpro').val(data[i].efpro);
 				jq('#efavd').val(""); jq('#efavd').val(data[i].efavd);
 				jq('#efsg').val(""); jq('#efsg').val(data[i].efsg);
@@ -309,7 +266,7 @@
 				
 				jq('#efktyp').val(""); jq('#efktyp').val(data[i].efktyp);
 				jq('#efkmrk').val(""); jq('#efkmrk').val(data[i].efkmrk);
-				jq('#efklk').val(""); jq('##efklk').val(data[i].efklk);
+				jq('#efklk').val(""); jq('#efklk').val(data[i].efklk);
 				jq('#efpmrk').val(""); jq('#efpmrk').val(data[i].efpmrk);
 				jq('#efplk').val(""); jq('#efplk').val(data[i].efplk);
 				
@@ -329,8 +286,13 @@
 	  	});
 	  	
 	}
-	
 
+  jq(function() {
+	  jq('#newButton').click(function() {
+		  setBlockUI();
+		  window.location = "tvinnsadmaintenance_manifest_sadefdef.do?id=SADEFDEF";
+	  }); 
+  });
 
 
 

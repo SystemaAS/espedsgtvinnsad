@@ -186,6 +186,7 @@ public class TvinnSadManifestAjaxHandlerController {
 		if(StringUtils.isNotEmpty(record.getEfeta()) && !"0".equals(record.getEfeta())){
 			record.setEfeta(new ManifestDateManager().convertToDate_NO(record.getEfeta()));
 		}
+		logger.debug(record.getEfsjadt());
 		if(StringUtils.isNotEmpty(record.getEfsjadt()) && !"0".equals(record.getEfsjadt())){
 			record.setEfsjadt(new ManifestDateManager().convertToDate_NO(record.getEfsjadt()));
 		}

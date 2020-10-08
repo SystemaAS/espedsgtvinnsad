@@ -17,4 +17,6 @@ public interface TvinnSadManifestListService {
 	public JsonTvinnSadManifestCargoLinesContainer getListCargolinesContainer(String utfPayload);
 	public JsonTvinnSadManifestContainer getListContainerDefaultValues(String utfPayload);
 	public JsonTvinnSadManifestRpgContainer getContainerRpgResult(String utfPayload);
+	
+	
 }

@@ -44,22 +44,6 @@
  
  <tr>
  	<td>
-	<%-- --------------------------- --%>	
- 	<%-- tab area container PRIMARY  --%>
-	<%-- --------------------------- --%>
-	<form name="manifestForm" id="manifestForm" action="tvinnsadmanifest_edit.do" method="post">
-			<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
-			<input type="hidden" name="updateId" id="updateId" value=""> <%-- this value is set in AJAX in order to know if the SAVE = ADD or UPDATE --%>
-			<input type="hidden" name="actionU" id="actionU" value="doUpdate">
-			<c:if test="${not empty model.record.efuuid}">
-				<input type="hidden" name="efuuid" id=efuuid value="${model.record.efuuid}">
-				<input type="hidden" name="efavd" id=efavd value="${model.record.efavd}">
-				<input type="hidden" name="efsg" id=efsg value="${model.record.efsg}">
-				<input type="hidden" name="efpro" id=efpro value="${model.record.efpro}">
-				<input type="hidden" name="efst" id=efst value="${model.record.efst}">	
-				<input type="hidden" name="efst2" id=efst2 value="${model.record.efst2}">		
-			</c:if>
-			
 	<table style="width:100%;" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
  		<tr height="5"><td colspan="10">&nbsp;</td></tr>
  		
@@ -109,19 +93,16 @@
 	               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >
 	               		${record.ef3039e}
 	               </td>
-	               <td align="center" width="2%" class="tableCell" >   		
+	               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >   		
 			   				
-              				<a style="display:block; width:100%; height:100%;" class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
+              				<a style="display:block;" class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
 								<img src="resources/images/delete.gif" border="0" alt="remove">
 							</a>
-							<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
-								<form action="tvinnsadmaintenance_manifest_sadefdef_delete.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
-								 	<input type="hidden" name="currentUuid${counter.count}" id="currentUuid${counter.count}" value="${record.efuuid}">
+							<div style="display: none;" class="clazz_dialog" id="dialogDelete${counter.count}" title="Dialog">
+								<form action="tvinnsadmaintenance_manifest_sadefdef_delete.do" name="deleteForm${counter.count}" id="deleteForm${counter.count}" method="post">
+								 	<input type="hidden" name="currentEfavd${counter.count}" id="currentEfavd${counter.count}" value="${record.efavd}">
 								 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="D">
-								 	<input type="hidden" name="selectedPro${counter.count}" id="selectedPro${counter.count}" value="${record.efpro}">
-									<p class="text14" >Er du sikker på at du vil slette Turnr. <b>${record.efpro}</b></p>
-									<p class="text14"> Tekst </p>
-									<input type="text" class="inputText" name="currentText${counter.count}" id="currentText${counter.count}" size="45" maxlength="70" value=''>&nbsp;</td>
+								 	<p class="text14" >Er du sikker på at du vil slette Avd&nbsp;<b>${record.efavd}</b></p>
 									
 								</form>
 							</div>	
@@ -138,8 +119,19 @@
 		<%-- --------------- --%>
 		<%-- CONTENT --%>
 		<%-- --------------- --%>
+		
+		<tr>
+		 	<td>
+		 		<input class="inputFormSubmitStd" type="button" name="newButton" id="newButton" value='Lage ny'>
+			</td>
+		</tr>	
 		<tr>
 		<td >
+		<form name="manifestForm" id="manifestForm" action="tvinnsadmaintenance_manifest_sadefdef_edit.do" method="post">
+			<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
+			<input type="hidden" name="updateId" id="updateId" value=""> <%-- this value is set in AJAX in order to know if the SAVE = ADD or UPDATE --%>
+			<input type="hidden" name="actionU" id="actionU" value="doUpdate">
+			
 		<table align="center" style="width:100%;"  border="0" cellspacing="1" cellpadding="0">
 			
 			<%-- Validation errors --%>
@@ -183,63 +175,16 @@
 			</tr>
 			</c:if>
 			
-			<c:if test="${not empty model.invalidManifest}">
-				<tr>
-					<td colspan="10">
-		            	<table align="left" border="0" cellspacing="0" cellpadding="0">
-		            	<tr>
-					<td class="text14 tableCellGray" style="color: #9F6000;">
-	           			<font class="inputText" style="background-color: #FEEFB3;color: #9F6000;">
-	           				&nbsp;Lasten er ikke gyldig.&nbsp;&nbsp;Manifestet kan derfor ikke sendes.
-	           				&nbsp;&nbsp;Kontroller at alle linjene i manifestet har status=OK, og at det finnes minst en linje.
-	           			</font>
-	           		</td>           			
-	           		</tr>
-	           		</table>
-	           		</td>
-				</tr>
-			</c:if>
+			
  		<tr>
-			<td style="width:30%" class="text14" valign="top">
-				<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">
+ 			<td style="width:30%" class="text14" valign="top">
+ 				<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
 						<table class="formFrameHeader" style="width:100%;"  border="0" cellspacing="1" cellpadding="0">
 					 		<tr height="15">
-					 			<c:choose>
-						 			<c:when test="${not empty model.record.efuuid}">
-						 				<td class="text14White">
-						 						&nbsp;&nbsp;Turnr:&nbsp;${model.record.efpro}
-						 						&nbsp;&nbsp;Avd:&nbsp;${model.record.efavd}  
-						 						
-						 				</td>
-						 				<td class="text14" align="right">
-						 						Stat<a tabindex=-1 id="updateInternalStatusLink" name="updateInternalStatusLink" runat="server" href="#"><font class="text14">u</font></a>s:&nbsp;${model.record.efst}
-						 						&nbsp;&nbsp;&nbsp;<b>Manifest stat<a tabindex=-1 id="updateManifestStatusLink" name="updateManifestStatusLink" runat="server" href="#"><font class="text14">u</font></a>s:&nbsp;</b>
-						 						<c:choose>
-						 						<c:when test="${model.record.efst2 == 'S' || model.record.efst2 == 'R' || model.record.efst2 == 'D'}">
-						 							<c:if test="${model.record.efst2 == 'S'}">
-						 								<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
-						 								<font style="color:#FFFFCC;">SUBMITTED</font>
-						 							</c:if>
-						 							<c:if test="${model.record.efst2 == 'D'}">
-						 								<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
-						 								<font style="color:red;">SLETTET</font>
-						 							</c:if>
-						 							<c:if test="${model.record.efst2 == 'R'}">
-						 								<font style="color:#FFFFFF;">REOPENED/DRAFT</font>
-						 							</c:if>
-						 						</c:when>
-						 						<c:otherwise>
-						 							<font style="color:#606060;">${model.record.efst2}</font>
-						 						</c:otherwise>
-						 						</c:choose>
-						 				</td>
-						 			</c:when>
-						 			<c:otherwise>
-						 				<td class="text14White">&nbsp;&nbsp;Transport</td>
-						 			</c:otherwise>
-					 			</c:choose>
+					 			<td class="text14White">&nbsp;&nbsp;Transport</td>
+						 			
 			 				</tr>
 			            </table>
 			            </td>
@@ -323,18 +268,7 @@
 									<input onKeyPress="return numberKey(event)" style="text-align: right" type="text" class="inputTextMediumBlue" name="ef3039e" id="ef3039e" size="7" maxlength="6" value="${model.record.ef3039e}">
 								</td>
 			 				</tr>
-			 				<%-- Avvakta med denna Eksport id på denna nivå
-			 				<tr >
-								<td colspan="4" class="text14">&nbsp;<span title="efeid">EksportId</span></td>
-								
-			 				</tr>
-			 				<tr >
-					 			<td colspan="2" class="text14">
-					 				<input type="text" class="inputTextMediumBlue" name="efeid" id="efeid" size="20" maxlength="18" value="${model.record.efeid}">
-					 			</td>
-								
-			 				</tr>
-			 				 --%>
+			 				
 			 				</table>
 			 				</td>
 			 				</tr>
@@ -485,14 +419,7 @@
 			 				</tr>
 			 				
 			 				<tr height="15"><td colspan="2">&nbsp;</td></tr>
-			 				<%-- Avvakta med denna. Finns bara i Tolls web
-			 				<tr >
-								<td class="text14">&nbsp;<span title="titin">Kort beskrivelse</span></td>
-			 				</tr>
-			 				<tr >
-					 			<td class="text14"><input type="text" class="inputTextMediumBlue" name="titin" id="titin" size="50" maxlength="50" value="${Xmodel.record.titin}"></td>
-			 				</tr>
-			 				 --%>
+			 				
 			            </table>
 			            </td>
 		            </tr>
@@ -500,7 +427,7 @@
             </td>			 
 		</tr>
 		<tr height="10"><td></td></tr>
-		<c:if test="${model.record.efst != 'S'}">
+		
 			<tr>
 				<td colspan="3" class="text14" valign="top">
 					<table style="width:96%" border="0" cellspacing="1" cellpadding="0">
@@ -512,71 +439,17 @@
 					</table>
 				</td>
 			</tr>
-		</c:if>
+
 		<tr height="20"><td colspan="2">&nbsp;</td></tr>
 	
 	</table>
+	</form>
 	</td>
 	</tr>	
 	</table> 
-	</form>
 </td>
 </tr>
 
-<%-- Dialog update manifest status --%>		
-<tr>
-	<td>
-		<div id="dialogUpdateManifestStatus" title="Dialog">
-			
-			<form action="tvinnsadmanifest_updateManifestStatus.do" name="updateManifestStatusForm" id="updateManifestStatusForm" method="post">
-			 	<input type="hidden" name="efuuid" id="efuuid" value="${model.record.efuuid}">
-			 	<p class="text14" >Change Manifest status as needed.</p>
-				<table>
-					<tr>
-						<td class="text14" align="left" >&nbsp;Status</td>
-						<td class="text14MediumBlue">
-							<select class="selectMediumBlueE2" name="efst2" id="efst2">
-			            		  	<option value=" ">-velg-</option>
-		            		  		<option value="R">REOPENED/DRAFT</option>
-							  	<option value="D">SLETTET</option>
-							  	<option value="S">SUBMITTED</option>
-							  	
-							</select>
-						</td>
-					</tr>
-				</table>
-			</form>
-		</div>
-	</td>
-</tr> 
-
-
-<%-- Dialog update manifest status --%>		
-<tr>
-	<td>
-		<div id="dialogUpdateInternalStatus" title="Dialog">
-			
-			<form action="tvinnsadmanifest_updateInternalStatus.do" name="updateInternalStatusForm" id="updateInternalStatusForm" method="post">
-			 	<input type="hidden" name="efuuid" id="efuuid" value="${model.record.efuuid}">
-			 	<p class="text14" >Change Internal status as needed.</p>
-				<table>
-					<tr>
-						<td class="text14" align="left" >&nbsp;Status</td>
-						<td class="text14MediumBlue">
-							<select class="selectMediumBlueE2" name="efst" id="efst">
-			            		  	<option value=" ">-velg-</option>
-			            		  	<option value="B">B</option>
-		            		  		<option value="M">M</option>
-							  	<option value="S">SLETTET</option>
-							  	
-							</select>
-						</td>
-					</tr>
-				</table>
-			</form>
-		</div>
-	</td>
-</tr> 
 
 
 </table>

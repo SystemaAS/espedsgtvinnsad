@@ -47,7 +47,7 @@ public class MaintTvinnSadManifestController {
 	 * @return
 	 */
 	@RequestMapping(value="tvinnsadmaintenance_manifest.do", method=RequestMethod.GET)
-	public ModelAndView doSkatImportList(HttpSession session, HttpServletRequest request){
+	public ModelAndView doManifest(HttpSession session, HttpServletRequest request){
 		ModelAndView successView = new ModelAndView("tvinnsadmaintenance_manifest");
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
 		//SearchFilterSadExportTopicList searchFilter = new SearchFilterSadExportTopicList();
