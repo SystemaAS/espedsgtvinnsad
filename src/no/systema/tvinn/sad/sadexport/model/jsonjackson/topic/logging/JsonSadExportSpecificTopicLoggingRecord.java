@@ -94,6 +94,11 @@ public class JsonSadExportSpecificTopicLoggingRecord extends JsonAbstractGrandFa
 	public void setMtm(String value) {  this.mtm = value; }
 	public String getMtm() {return this.mtm;}
 	
+	private String deklarant = null;//time
+	public void setDeklarant(String value) {  this.deklarant = value; }
+	public String getDeklarant() {return this.deklarant;}
+	
+	
 	private String wtxt = null;
 	public void setWtxt(String value) {  this.wtxt = value; }
 	public String getWtxt() {return this.wtxt;}

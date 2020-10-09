@@ -162,7 +162,8 @@
                 		<th width="2%" class="tableHeaderField" >Reg.dato</th>
                 		<th width="2%" class="tableHeaderField" >Manif.id</th>
                 		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED" width="2%" class="tableHeaderField" >Manif.st</th>
-                		<th width="2%" class="tableHeaderField" >Slett</th>
+                		<th width="2%" class="tableHeaderField" title="Fjerner manifest fra Tollvesenet" >Slett</th>
+                		<th width="2%" class="tableHeaderField" title="Fjerner manifest lokalt (SYSPED)">Kanseller</th>
                 		</tr>
                 	</thead>
                 	<tbody> 
@@ -178,7 +179,7 @@
 		          	  </c:choose>	
 		          
 		          	   <td width="2%" class="tableCellFirst" align="center">
-		               		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsadmanifest_edit.do?action=doFetch&efuuid=${record.efuuid}" onClick="setBlockUI();">
+		          	   		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsadmanifest_edit.do?action=doFetch&efuuid=${record.efuuid}" onClick="setBlockUI();">
                					<c:choose>
 		               				<c:when test="${record.own_editable > 0}">
 		               					<img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">
@@ -188,6 +189,7 @@
 		               				</c:otherwise>
 	               				</c:choose>
                				</a>
+               				
 	               	   </td>
 	               	   
 		               <td width="2%" align="center" class="tableCell" >${record.efavd}</td>
@@ -196,7 +198,7 @@
 		               <td width="2%" align="center" class="tableCell" >
 		               	  <c:choose>
 		               		<c:when test="${record.efst == 'S'}">
-		               			SLETTET
+		               			<font class="inputFormSubmit isa_error">KANSELLERT</font>
 		               		</c:when>
 		               		<c:otherwise>
 		               			${record.efst}
@@ -225,7 +227,8 @@
 		               				<font title="D" color="red">SLETTET</font>
 		               			</c:if>
 		               			<c:if test="${record.efst2 == 'C'}">
-		               				<font title="C" color="red">COMPLETED</font>
+		               				<img style="vertical-align:middle;" title="Completed tolldekl at toll.no" src="resources/images/complete-icon.png" width="14px" height="12px" border="0" alt="completion">
+		               				<font title="C" color="green">COMPLETED</font>
 		               			</c:if>
 		               			
 		               		</c:when>
@@ -235,24 +238,40 @@
 		               		</c:choose>
 		               </td>
 
-		               <td width="2%" class="tableCell" align="center">   		
-			   				<c:if test="${record.own_editable > 0}">
-	              				<a style="display: block; width: 100%; height: 100%;" class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
-									<img src="resources/images/delete.gif" border="0" alt="remove">
-								</a>
-								<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
-									<form action="tvinnsadmanifest_edit_delete.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
+		               <td width="2%" class="tableCell" align="center"> 
+		               		  		
+				   				<c:if test="${record.own_editable > 0}">
+		              				<a style="display: block; width: 100%; height: 100%;" class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
+										<img src="resources/images/delete.gif" border="0" alt="remove">
+									</a>
+									<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
+										<form action="tvinnsadmanifest_edit_delete.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
+										 	<input type="hidden" name="currentUuid${counter.count}" id="currentUuid${counter.count}" value="${record.efuuid}">
+										 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="D">
+										 	<input type="hidden" name="selectedPro${counter.count}" id="selectedPro${counter.count}" value="${record.efpro}">
+											<p class="text14" >Er du sikker på at du vil slette Turnr. <b>${record.efpro}</b> fra <b>Tollvesenet</b> ?</p>
+											
+										</form>
+									</div>
+	              				</c:if>
+              				
+	               	   </td>
+	               	   <td width="2%" class="tableCell" align="center">
+	               	   		<c:if test="${record.efst == 'M' || empty record.efst}">   		
+				   				<a style="display: block; width: 100%; height: 100%;" class="cancelLink" id="cancelLink${counter.count}" runat="server" href="#">
+									<img src="resources/images/remove.png" width="14" height="14" border="0" alt="remove">
+								</a> 
+								<div id="dialogUpdateInternalStatus${counter.count}" class="clazz_dialog" title="Dialog">
+									<form action="tvinnsadmanifest_updateInternalStatus.do" name="updateInternalStatusForm${counter.count}" id="updateInternalStatusForm${counter.count}" method="post">
 									 	<input type="hidden" name="currentUuid${counter.count}" id="currentUuid${counter.count}" value="${record.efuuid}">
-									 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="D">
-									 	<input type="hidden" name="selectedPro${counter.count}" id="selectedPro${counter.count}" value="${record.efpro}">
-										<p class="text14" >Er du sikker på at du vil slette Turnr. <b>${record.efpro}</b></p>
-										<p class="text14"> Tekst </p>
-										<input type="text" class="inputText" name="currentText${counter.count}" id="currentText${counter.count}" size="45" maxlength="70" value=''>&nbsp;</td>
-										
+									 	<input type="hidden" name="currentSign${counter.count}" id="currentSign${counter.count}" value="${record.efsg}">
+									 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="S">
+									 	<p class="text14" >Er du sikker på at du vil kansellere Turnr. <b>${record.efpro}</b> fra <b>SYSPED</b> ?</p>
+											
 									</form>
 								</div>
-              				</c:if>
-	               	   </td> 
+							</c:if>
+						</td>	
 		            </tr> 
 		            </c:forEach>
 		            </tbody>

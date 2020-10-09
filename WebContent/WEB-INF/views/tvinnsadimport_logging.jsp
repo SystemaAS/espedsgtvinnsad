@@ -120,6 +120,7 @@
 	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.import.logging.list.label.eksp"/>&nbsp;</th>
 	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.import.logging.list.label.s"/>&nbsp;</th>
 	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.import.logging.list.label.sent"/>&nbsp;</th>
+	                    <th class="tableHeaderField">&nbsp;Deklarantnr&nbsp;</th>
 	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.import.logging.list.label.sentReceive"/>&nbsp;</th>
 	                    <th class="tableHeaderField">&nbsp;<spring:message code="systema.tvinn.sad.import.logging.list.label.text"/>&nbsp;</th>
 
@@ -160,6 +161,7 @@
 		               <td class="tableCell" <c:if test="${record.msr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;${record.m3039e}</td>
 		               <td class="tableCell" <c:if test="${record.msr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;${record.mst}</td>
 		               <td class="tableCell" <c:if test="${record.msr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;${record.mdt}-${record.mtm}</td>
+		               <td class="tableCell" <c:if test="${record.msr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;${record.deklarant}</td>
 		               <td class="tableCell" <c:if test="${record.msr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;${record.msr}</td>
 		               <td class="tableCell" <c:if test="${record.msr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;${record.wtxt}
 		               		<c:if test="${record.wmore == 'X'}">

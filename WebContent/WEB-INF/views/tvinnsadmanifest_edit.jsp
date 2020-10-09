@@ -174,9 +174,9 @@
 						 						&nbsp;&nbsp;Avd:&nbsp;${model.record.efavd}  
 						 						
 						 				</td>
-						 				<td class="text14" align="right">
-						 						Stat<a tabindex=-1 id="updateInternalStatusLink" name="updateInternalStatusLink" runat="server" href="#"><font class="text14">u</font></a>s:&nbsp;${model.record.efst}
-						 						&nbsp;&nbsp;&nbsp;<b>Manifest stat<a tabindex=-1 id="updateManifestStatusLink" name="updateManifestStatusLink" runat="server" href="#"><font class="text14">u</font></a>s:&nbsp;</b>
+						 				<td class="text14White" align="right">
+						 						Stat<a tabindex=-1 id="updateInternalStatusLink" name="updateInternalStatusLink" runat="server" href="#"><font class="text14White">u</font></a>s:&nbsp;${model.record.efst}
+						 						&nbsp;&nbsp;&nbsp;<b>Manifest stat<a tabindex=-1 id="updateManifestStatusLink" name="updateManifestStatusLink" runat="server" href="#"><font class="text14White">u</font></a>s:&nbsp;</b>
 						 						<c:choose>
 						 						<c:when test="${model.record.efst2 == 'S' || model.record.efst2 == 'R' || model.record.efst2 == 'D'}">
 						 							<c:if test="${model.record.efst2 == 'S'}">
@@ -593,8 +593,10 @@
 							<select class="selectMediumBlueE2" name="efst" id="efst">
 			            		  	<option value=" ">-velg-</option>
 			            		  	<option value="B">B</option>
+		            		  		<option value="C">C</option>
 		            		  		<option value="M">M</option>
-							  	<option value="S">SLETTET</option>
+		            		  		<option value="S">SLETTET</option>
+							  	<option value="X">X</option>
 							  	
 							</select>
 						</td>

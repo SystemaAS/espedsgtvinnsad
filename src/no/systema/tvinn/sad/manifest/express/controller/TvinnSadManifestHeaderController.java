@@ -128,7 +128,37 @@ public class TvinnSadManifestHeaderController {
 		
 		Map model = new HashMap();
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
-		String redirect = "redirect:tvinnsadmanifest_edit.do?action=doFetch&user=" + appUser.getUser() + "&efuuid=" + recordToValidate.getEfuuid();
+		
+		String uuid = null;
+		String status = null;
+		String sign = null;
+		String redirect = null;
+		
+		if(StringUtils.isEmpty(recordToValidate.getEfuuid())){
+			Enumeration requestParameters = request.getParameterNames();
+		    while (requestParameters.hasMoreElements()) {
+		        String element = (String) requestParameters.nextElement();
+		        String value = request.getParameter(element);
+		        if (element != null && value != null) {
+	        		logger.warn("####################################################");
+	    			logger.warn("param Name : " + element + " value: " + value);
+	    			if(element.startsWith("currentUuid")){
+	    				uuid = value;
+	    			}else if(element.startsWith("currentSign")){
+	    				sign = value;
+	    			}else if(element.startsWith("selectedStatus")){
+	    				status = value;
+	    			}
+	    			
+	    		}
+	    	}
+		    //we are overriding here in case the call came from a list (usually "Kanseller")
+		    recordToValidate.setEfuuid(uuid);
+		    recordToValidate.setEfst(status);
+		    redirect = "redirect:tvinnsadmanifest.do?action=doFind&sign=" + sign;
+		}else{
+			redirect = "redirect:tvinnsadmanifest_edit.do?action=doFetch&user=" + appUser.getUser() + "&efuuid=" + recordToValidate.getEfuuid();
+		}
 		ModelAndView successView = new ModelAndView(redirect);
 		
 		//check user (should be in session already)

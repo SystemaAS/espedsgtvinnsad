@@ -123,9 +123,14 @@ public class ManifestExpressMgr {
 	public boolean isEditableManifest(SystemaWebUser appUser, JsonTvinnSadManifestRecord record){
 		boolean retval = true;
 		//check all this ONLY when SUBMITTED or DELETED to toll.no
-		if(JsonTvinnSadManifestRecord.MANIFEST_SUBMITTED.equals(record.getEfst2()) || JsonTvinnSadManifestRecord.MANIFEST_DELETED.equals(record.getEfst2()) ){
+		if(JsonTvinnSadManifestRecord.MANIFEST_SUBMITTED.equals(record.getEfst2()) || 
+				JsonTvinnSadManifestRecord.MANIFEST_DELETED.equals(record.getEfst2()) ||
+				JsonTvinnSadManifestRecord.MANIFEST_COMPLETED.equals(record.getEfst2()) ){
 			//under sending
-			if(JsonTvinnSadManifestRecord.MANIFEST_INTERNAL_STATUS_SENDING.equals(record.getEfst())){
+			if(JsonTvinnSadManifestRecord.MANIFEST_COMPLETED.equals(record.getEfst2()) ){
+				retval = false;
+			}else if(JsonTvinnSadManifestRecord.MANIFEST_INTERNAL_STATUS_SENDING.equals(record.getEfst()) ||
+					JsonTvinnSadManifestRecord.MANIFEST_INTERNAL_STATUS_DELETED.equals(record.getEfst()) ){ 
 				retval = false;
 			}else{
 				//logger.warn("A");
@@ -156,6 +161,8 @@ public class ManifestExpressMgr {
 				}
 				
 			}
+		}else if(JsonTvinnSadManifestRecord.MANIFEST_INTERNAL_STATUS_DELETED.equals(record.getEfst())){
+			retval = false;
 		}
 		
 		return retval;
