@@ -32,7 +32,26 @@
 					<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
 				</a>
 			</td>
-			<td width="60%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
+			<td width="60%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
+				<img id="imgInfoRpgJarStart" style="cursor:pointer;" onClick="showPop('jarStartCmd');" src="resources/images/info4.png" width="12" height="12" border="0" alt="info">
+				<div class="text12" style="position: relative;display: inline;" align="left">
+				<span style="position:absolute; left:-580px; top:3px;" id="jarStartCmd" class="popupWithInputText"  >
+	           		<div class="text11" align="left">
+	           			<b>Communication API</b>&nbsp;upload-engine-expressmanif-client.jar<br/>
+	           			<p><b>Stop</b> go tvinmnu --> 2 ...</p>
+	           			<p><b>Start</b> SBMJOB CMD(CALL PGM(SADEMSNDC)) JOB(EXPMANSND) JOBQ(SYJOBQNMAX) USER(SY400USR)
+	           			</p>
+	           			<p>
+		           			<a class="text11" target="_blank" id="alinkHeader" style="display:block;" href="renderLocalLog4jExpft.do?user=${user.user}">
+		           				log4j_syjservicestn-expft.log
+		           			</a>
+	           			</p>
+	           			<br/>
+	           			<button name="_ButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('jarStartCmd');">Close</button> 
+	           		</div>
+	           	</span>
+	           	</div>
+			</td>
 		</tr>
 	</table>
 	</td>
@@ -155,6 +174,7 @@
                 		<th width="2%" class="tableHeaderField" >Sig</th>
                 		<th title="S=SLETTET" width="2%" class="tableHeaderField" >Status</th>
                 		<th width="2%" class="tableHeaderField" >Passering ETA</th>
+                		<th width="2%" class="tableHeaderField" >Passering ATA</th>
                 		<th width="2%" class="tableHeaderField" >Tollsted</th>
                 		<th width="2%" class="tableHeaderField" >Eksp.enh</th>
                 		<th width="2%" class="tableHeaderField" >Bilnr</th>
@@ -205,8 +225,8 @@
 		               		</c:otherwise>
 		               	   </c:choose>
 		              	</td>
-		              	<td width="2%" class="tableCell" >${record.efeta}&nbsp;${record.efetm}
-		              	</td>
+		               <td width="2%" class="tableCell" >${record.efeta}&nbsp;${record.efetm}</td>
+		               <td width="2%" class="tableCell" >${record.efata}&nbsp;${record.efatm}</td>
 		               <td align="center" width="2%" class="tableCell" ><c:if test="${record.eftsd > 0}">${record.eftsd}</c:if></td>
 		               <td align="center" width="2%" class="tableCell" ><c:if test="${record.ef3039e > 0}">${record.ef3039e}</c:if></td>
 		               <td width="2%" class="tableCell" >${record.efkmrk}</td>
@@ -259,7 +279,7 @@
 	               	   <td width="2%" class="tableCell" align="center">
 	               	   		<c:if test="${record.efst == 'M' || empty record.efst}">   		
 				   				<a style="display: block; width: 100%; height: 100%;" class="cancelLink" id="cancelLink${counter.count}" runat="server" href="#">
-									<img src="resources/images/remove.png" width="14" height="14" border="0" alt="remove">
+									<img src="resources/images/remove.png" width="16" height="16" border="0" alt="remove">
 								</a> 
 								<div id="dialogUpdateInternalStatus${counter.count}" class="clazz_dialog" title="Dialog">
 									<form action="tvinnsadmanifest_updateInternalStatus.do" name="updateInternalStatusForm${counter.count}" id="updateInternalStatusForm${counter.count}" method="post">
