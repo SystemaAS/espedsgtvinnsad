@@ -4,6 +4,7 @@
 package no.systema.tvinn.sad.manifest.express.model.jsonjackson;
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import lombok.Data;
@@ -48,6 +49,11 @@ public class JsonTvinnSadManifestCargoLinesRecord extends JsonAbstractGrandFathe
 	private String cletypt = ""; //TEGN (30) Type text
 	private String cleid = ""; //TEGN (18) Export id
 	private String cleser = ""; //TEGN (1) Certified / Sertifisert
+	
+	
+	private Collection<JsonTvinnSadManifestArchivedDocsRecord> getdocs;
+	public void setGetdocs(Collection<JsonTvinnSadManifestArchivedDocsRecord> value){ this.getdocs = value; }
+	public Collection<JsonTvinnSadManifestArchivedDocsRecord> getGetdocs(){ return getdocs; }
 	
 	
 	/**

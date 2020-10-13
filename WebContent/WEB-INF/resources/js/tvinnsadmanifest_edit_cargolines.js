@@ -354,8 +354,72 @@
 				jq('#cleid').val(""); jq('#cleid').val(data[i].cleid);
 				jq('#cleser').val(""); jq('#cleser').val(data[i].cleser);
 				
-				//debug information on Fetch item
-				//jq('#debugPrintlnAjaxItemFetchInfo').text(data[i].debugPrintlnAjax);
+				//-----------------------------
+  				//START populate ArchDocs list
+  				//-----------------------------
+  				var docslen = data[i].getdocs.length;
+  				jq('#resultUploadedDocs').text("");
+  				
+  				var table = jq('<table></table>').addClass('foo');
+  				var row = jq('<tr></tr>').addClass('tableHeaderField');
+  				var td_1 = jq('<th align="left"></th>').addClass('text14').text('Dok.type');
+  				row.append(td_1);
+  				var td_2 = jq('<th align="left"></th>').addClass('text14').text('Dok.navn');
+  				row.append(td_2);
+  				var td_3 = jq('<th align="left"></th>').addClass('text14').text('Dato/kl');
+  				row.append(td_3);
+  				//TABLE APPEND row
+  				table.append(row);
+  				
+  				//fill in table
+  				for ( var j = 0; j < docslen; j++) {
+  					var documentText = data[i].getdocs[j].doctxt;
+  					if(documentText==''){
+  						documentText = data[i].getdocs[j].doclnk;
+  					}
+  					var row = jq('<tr></tr>').addClass('tableRow');
+	  				var td_1 = jq('<td ></td>').addClass('tableCellFirst');td_1.css('white-space','nowrap')
+	  				var td_2 = jq('<td></td>').addClass('tableCell');td_2.css('white-space','nowrap')
+	  				var td_3 = jq('<td></td>').addClass('tableCell');td_3.css('white-space','nowrap');
+	  				
+  					if(data[i].getdocs[j].doclnk.indexOf(".pdf")>0 ||data[i].getdocs[j].doclnk.indexOf(".PDF")>0){
+			  			imgSrc="resources/images/pdf.png";
+  					}else{
+  						imgSrc="resources/images/jpg.png";
+  					}
+  					
+  					//ROW APPEND TD_1 
+  					td_1.text(data[i].getdocs[j].doctyp);
+  					row.append(td_1);
+  					
+  					//ROW APPEND TD_2 
+  					jq('<img/>',{
+  						src: imgSrc,
+  						width: '14px',
+  						height: '14px'
+		  			  	}).appendTo(td_2);
+  					
+  					jq('<a>',{
+		  			    text: documentText,
+		  			    target: '_blank',
+		  			    href: 'tvinnsadmanifest_renderArchive.do?doclnk='+data[i].getdocs[j].doclnk,
+		  			    click: function(){ BlahFunc( options.rowId );return false;}
+  					}).appendTo(td_2);
+  					row.append(td_2);
+  					
+  					//ROW APPEND TD_3 
+  					td_3.text(data[i].getdocs[j].docdat + " " + data[i].getdocs[j].doctim);
+  					row.append(td_3);
+  					
+  					//
+  					table.append(row);
+			  	}
+  				//append TABLE to DIV
+  				jq('#resultUploadedDocs').append(table);
+  				//--------------
+  				//END ArchDocs
+  				//--------------
+  				
 				
 			}
 	  	  },

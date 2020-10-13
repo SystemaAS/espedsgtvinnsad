@@ -83,5 +83,11 @@ public final class TvinnSadManifestUrlDataStore {
 	//http://localhost:8080/syjservicestn/syjsSADEFDEFR_U.do?user=OSCAR&mode=U/A/D and/or
 	static public String TVINN_SAD_UPDATE_MANIFEST_EXPRESS_SADEFDEF_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADEFDEFR_U.do";
 		
+	//-----------------
+	//[6] Archive docs
+	//-----------------
+	//http://10.13.3.22/sycgip/TJGE12R.pgm?User=JOVO&AVD=1&OPD=900171
+	static public String TVINN_SAD_FETCH_ARCHIVED_UPLOADED_DOCS_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TJGE12R.pgm";
+	
 	
 }

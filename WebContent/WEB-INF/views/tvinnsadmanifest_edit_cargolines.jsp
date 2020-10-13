@@ -456,14 +456,54 @@
 		 				</tr>
 	 					</table>
 	 					</td>
-
 		 			</tr>	
 		 			<tr height="5"><td></td></tr>
 	 				<tr>
-	 					<td>
+	 					<td valign="top" >
 	 					<table width="95%" border="0" cellspacing="1" cellpadding="0">
-			 			<tr>	
-	 					<td valign="bottom" align="right">
+	 					
+	 					<tr>	
+	 					<td valign="top" class="text14">
+		 				  <table class="tableBorderWithRoundCorners" >
+							<tr>
+					 		 <td valign="top" class="text12">
+				 					Arkiv docs.&nbsp;
+				 					<div id="resultUploadedDocs">
+				 						<table >
+					 						<tr class="tableHeaderField" >
+					 						<th align="left" class="text14">Dok.type</th>
+					 						<th align="left" class="text14">Dok.navn</th>
+					 						<th align="left" class="text14">Dato/kl</th>
+					 						</tr>
+				 						
+						 					<c:forEach items="${model.record.getdoctrip}" var="record" varStatus="counter">
+						 						<tr class="text14 tableRow">
+						 						<td class="tableCellFirst" style="white-space:nowrap">${record.doctyp}</td>
+		 										<td class="tableCell" style="white-space:nowrap">
+						 						<a target="_blank" href="transportdisp_workflow_renderArchivedDocs.do?doclnk=${record.doclnk}">
+		    		    							<c:choose>
+			    		    							<c:when test="${fn:contains(record.doclnk, '.pdf')}">
+			    		    								<img title="Archive" style="vertical-align:middle;" src="resources/images/pdf.png" width="14" height="14" border="0" alt="PDF arch.">
+			    		    							</c:when>
+			    		    							<c:otherwise>
+			    		    								<img title="Archive" style="vertical-align:middle;" src="resources/images/jpg.png" width="14" height="14" border="0" alt="Other arch.">
+			    		    							</c:otherwise>
+		    		    							</c:choose>
+		    		    							${record.doctxt}
+				   								</a>
+				   								</td>
+					   							<td class="tableCell" style="white-space:nowrap">${record.docdat}&nbsp;${record.doctim}</td>
+				   								</tr>
+						 					</c:forEach>
+						 				</table>
+				 					</div>
+				 				</td>
+								</tr>
+							</table>
+		 				</td>
+		 				
+	 					
+	 					<td valign="top" align="right">
 							<c:choose>
 								<c:when test="${headerRecord.own_editable > 0}">
 									<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>&nbsp;
@@ -472,8 +512,6 @@
 									<input title="Status combination or date = blocked" class="inputFormSubmitStd isa_info" type="button" name="fakeButton" id="fakeButton" value='<spring:message code="systema.tvinn.sad.manifest.disabled.button"/>'>
 								</c:otherwise>
 							</c:choose>
-							
-							
 						</td>
 						</tr>
 						</table>

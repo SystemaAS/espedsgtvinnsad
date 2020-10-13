@@ -4,6 +4,7 @@
 package no.systema.tvinn.sad.manifest.express.service;
 
 import no.systema.tvinn.sad.manifest.express.mapper.jsonjackson.TvinnSadManifestMapper;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestArchivedDocsContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRpgContainer;
@@ -64,6 +65,23 @@ public class TvinnSadManifestListServiceImpl implements TvinnSadManifestListServ
 		try{
 			TvinnSadManifestMapper mapper = new TvinnSadManifestMapper();
 			container = mapper.getContainerRgp132Raw(utfPayload);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return container;
+		
+	}
+	/**
+	 * 
+	 * @param utfPayload
+	 * @return
+	 */
+	public JsonTvinnSadManifestArchivedDocsContainer getArchiveDocsContainer(String utfPayload) {
+		JsonTvinnSadManifestArchivedDocsContainer container = null;
+		try{
+			TvinnSadManifestMapper mapper = new TvinnSadManifestMapper();
+			container = mapper.getArchiveDocsContainer(utfPayload);
 		}catch(Exception e){
 			e.printStackTrace();
 		}

@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.ui.ModelMap;
 import java.time.LocalDateTime;
@@ -26,6 +27,7 @@ import java.time.format.DateTimeFormatter;
 
 //application imports
 import no.systema.main.service.UrlCgiProxyService;
+import no.systema.main.validator.IPAddressValidator;
 import no.systema.main.validator.LoginValidator;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.DateTimeManager;
@@ -33,8 +35,7 @@ import no.systema.main.util.JsonDebugger;
 import no.systema.jservices.common.values.FasteKoder;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.util.StringManager;
-
-
+import no.systema.main.util.io.PayloadContentFlusher;
 import no.systema.tvinn.sad.util.TvinnSadConstants;
 import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
 import no.systema.z.main.maintenance.service.MaintMainKofastService;
@@ -70,6 +71,7 @@ public class TvinnSadManifestHeaderCargoLinesController {
 	DateTimeManager dateMgr = new DateTimeManager();
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
+	private PayloadContentFlusher payloadContentFlusher = new PayloadContentFlusher();
 	
 	
 	@PostConstruct
@@ -303,6 +305,68 @@ public class TvinnSadManifestHeaderCargoLinesController {
 			return successView;
 		}
 	}
+	
+	/**
+	 * 
+	 * @param session
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsadmanifest_renderArchive.do", method={ RequestMethod.GET })
+	public ModelAndView doManifestRenderArchive(HttpSession session, HttpServletRequest request, HttpServletResponse response){
+		logger.info("Inside doManifestRenderArchive...");
+		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
+		
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			
+			//session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE); 
+			String filePath = request.getParameter("doclnk");
+			
+			if(filePath!=null && !"".equals(filePath)){
+				
+                String absoluteFilePath = filePath;
+                if(!new IPAddressValidator().isValidAbsoluteFilePathFor_RenderFile(absoluteFilePath)){
+                	return (null);
+                }else{	
+	                //must know the file type in order to put the correct content type on the Servlet response.
+	                String fileType = this.payloadContentFlusher.getFileType(filePath);
+	                if(AppConstants.DOCUMENTTYPE_PDF.equals(fileType)){
+	                		response.setContentType(AppConstants.HTML_CONTENTTYPE_PDF);
+	                }else if(AppConstants.DOCUMENTTYPE_TIFF.equals(fileType) || AppConstants.DOCUMENTTYPE_TIF.equals(fileType)){
+	            			response.setContentType(AppConstants.HTML_CONTENTTYPE_TIFF);
+	                }else if(AppConstants.DOCUMENTTYPE_JPEG.equals(fileType) || AppConstants.DOCUMENTTYPE_JPG.equals(fileType)){
+	                		response.setContentType(AppConstants.HTML_CONTENTTYPE_JPEG);
+	                }else if(AppConstants.DOCUMENTTYPE_TXT.equals(fileType)){
+	            			response.setContentType(AppConstants.HTML_CONTENTTYPE_TEXTHTML);
+	                }else if(AppConstants.DOCUMENTTYPE_DOC.equals(fileType)){
+	            			response.setContentType(AppConstants.HTML_CONTENTTYPE_WORD);
+	                }else if(AppConstants.DOCUMENTTYPE_XLS.equals(fileType)){
+	            			response.setContentType(AppConstants.HTML_CONTENTTYPE_EXCEL);
+	                }
+	                //--> with browser dialogbox: response.setHeader ("Content-disposition", "attachment; filename=\"edifactPayload.txt\"");
+	                response.setHeader ("Content-disposition", "filename=\"archiveDocument." + fileType + "\"");
+	                
+	                logger.info("Start flushing file payload...");
+	                //send the file output to the ServletOutputStream
+	                try{
+	                		this.payloadContentFlusher.flushServletOutput(response, absoluteFilePath);
+	                		//payloadContentFlusher.flushServletOutput(response, "plain text test...".getBytes());
+	                	
+	                }catch (Exception e){
+	                		e.printStackTrace();
+	                }
+                }
+            }
+			//this to present the output in an independent window
+            return(null);
+			
+		}
+			
+	}	
 	
 	/**
 	 * 
