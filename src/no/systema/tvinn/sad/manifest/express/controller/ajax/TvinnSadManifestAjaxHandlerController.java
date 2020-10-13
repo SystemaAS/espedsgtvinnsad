@@ -105,9 +105,6 @@ public class TvinnSadManifestAjaxHandlerController {
 		 logger.warn("Inside: getTripHeadingArchiveDocs");
 		 //prepare the access CGI with RPG back-end
 		 String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_ARCHIVED_UPLOADED_DOCS_URL;
-		 //TEST TEST
-		 tdn="900171";
-		 avd="1";
 		 
 		 String urlRequestParamsKeys = "user=" + applicationUser + "&avd=" + avd + "&opd=" + tdn ;
 		 logger.warn("URL: " + BASE_URL);
