@@ -29,6 +29,7 @@ import org.springframework.web.bind.ServletRequestDataBinder;
 import no.systema.main.service.UrlCgiProxyService;
 import no.systema.main.validator.LoginValidator;
 import no.systema.main.util.AppConstants;
+import no.systema.main.util.DateTimeManager;
 import no.systema.main.util.JsonDebugger;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.tvinn.sad.nctsimport.util.manager.CodeDropDownMgr;
@@ -71,6 +72,7 @@ public class TvinnSadManifestController {
 	private LoginValidator loginValidator = new LoginValidator();
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
+	DateTimeManager dateMgr = new DateTimeManager();
 	
 	@PostConstruct
 	public void initIt() throws Exception {
@@ -118,6 +120,10 @@ public class TvinnSadManifestController {
             	if(sessionFilter!=null){
             		//Use the session filter when applicable
             		searchFilter = sessionFilter;
+            		
+            	}else{
+            		//first time propose today
+            		searchFilter.setEtaDatum(dateMgr.getNewDateFromNow(DateTimeManager.NO_FORMAT, -1));
             	}
             }
             
