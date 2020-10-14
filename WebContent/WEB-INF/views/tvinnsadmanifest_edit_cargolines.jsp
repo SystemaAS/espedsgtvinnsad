@@ -142,6 +142,7 @@
                 		<th class="tableHeaderField" >B.vekt</th>
                 		
                 		<th class="tableHeaderField" >Sert</th>
+                		<th class="tableHeaderField" >Arkiv</th>
                 		<th class="tableHeaderField" >Slett</th>
                 	</tr>
                 	</thead>
@@ -196,6 +197,9 @@
 		               
 		               
 		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cleser}</td>
+		               <td width="2%" align="center" class="text14 tableCellGray">
+	            		   		<input class="inputFormSubmit11Slim" type="button" value="Upload" name="uplButton${counter.count}" onClick="window.open('tvinnsadmanifest_childwindow_uploadFile.do?action=doInit&wsavd=${record.clavd}&wsopd=${record.cltdn}','cargoLineListFileUpload','top=300px,left=800px,height=250px,width=330px,scrollbars=no,status=no,location=no')">	 
+	            		   </td>
 		               <td width="2%" class="tableCell" align="center" >
 		               		<c:if test="${headerRecord.own_editable > 0}">
 			               		<a style="display: block; width: 100%; height: 100%;" class="removeLink" id="removeLink${counter.count}" runat="server" href="#">

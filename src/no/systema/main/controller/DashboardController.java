@@ -460,6 +460,9 @@ public class DashboardController {
 		if(jsonSystemaUserContainer.getArkivKodTurList()!=null){
 			appUser.setArkivKodTurList(jsonSystemaUserContainer.getArkivKodTurList());
 		}
+		if(jsonSystemaUserContainer.getArkivKodExpList()!=null){
+			appUser.setArkivKodExpList(jsonSystemaUserContainer.getArkivKodExpList());
+		}
 		if(jsonSystemaUserContainer.getMultiUser()!=null){
 			appUser.setMultiUser(jsonSystemaUserContainer.getMultiUser());
 		}

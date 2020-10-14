@@ -4,6 +4,7 @@
 package no.systema.tvinn.sad.manifest.express.service;
 
 import no.systema.tvinn.sad.manifest.express.mapper.jsonjackson.TvinnSadManifestMapper;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestFileUploadValidationContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestPostalCodeContainer;
 
 
@@ -31,6 +32,20 @@ public class TvinnSadManifestChildwindowServiceImpl implements TvinnSadManifestC
 		return container;
 		
 		
+	}
+	
+	/**
+	 * 
+	 */
+	public JsonTvinnSadManifestFileUploadValidationContainer getFileUploadValidationContainer(String utfPayload){
+		JsonTvinnSadManifestFileUploadValidationContainer container = null;
+		try{
+			TvinnSadManifestMapper mapper = new TvinnSadManifestMapper();
+			container = mapper.getFileUploadValidationContainer(utfPayload);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return container;
 	}
 	
 }

@@ -1,5 +1,8 @@
 package no.systema.tvinn.sad.manifest.express.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
@@ -18,7 +21,10 @@ import com.google.gson.JsonParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -40,6 +46,7 @@ import no.systema.main.util.JsonDebugger;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesRecord;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestFileUploadValidationContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestPostalCodeContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestPostalCodeRecord;
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestChildwindowService;
@@ -273,6 +280,176 @@ public class TvinnSadManifestControllerChildWindow {
 			
 	    	return successView;
 		}
+	}
+	
+	
+	/**
+	 * 
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsadmanifest_childwindow_uploadFile.do", params="action=doInit",  method={RequestMethod.GET} )
+	public ModelAndView doInitUploadFile(HttpSession session, HttpServletRequest request){
+		//this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doInitUploadFile");
+		Map model = new HashMap();
+		String wsavd = request.getParameter("wsavd");
+		String wsopd = request.getParameter("wsopd");
+		
+		
+		ModelAndView successView = new ModelAndView("tvinnsadmanifest_childwindow_uploadfile");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			logger.warn(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			model.put("wsavd", wsavd);
+			model.put("wsopd", wsopd);
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+	    	return successView;
+		}
+	}
+	/**
+	 * 
+	 * @param file
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsadmanifest_childwindow_uploadFile.do", params="action=doSave", method = RequestMethod.POST)
+    public @ResponseBody String uploadFileHandler(@RequestParam("file") MultipartFile file, HttpSession session, HttpServletRequest request ) {
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return "Not logged in...?";
+		}else{
+			logger.info("User:" + appUser.getUser());
+	        if (!file.isEmpty()) {
+        		String fileName = file.getOriginalFilename();
+        		logger.info("FILE NAME:" + fileName);
+                //validate file
+        		JsonTvinnSadManifestFileUploadValidationContainer uploadValidationContainer = this.validateFileUpload(fileName, appUser);
+                //if valid
+                if(uploadValidationContainer!=null && "".equals(uploadValidationContainer.getErrMsg())){
+	                	// TEST String rootPath = System.getProperty("catalina.home");
+                		String rootPath	= uploadValidationContainer.getTmpdir();
+                	    File dir = new File(rootPath);
+                	    
+		        	    try {
+			                byte[] bytes = file.getBytes();
+			                // Create the file on server
+			                File serverFile = new File(dir.getAbsolutePath() + File.separator +  fileName);
+			                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+			                stream.write(bytes);
+			                stream.close();
+			                logger.info("Server File Location=" + serverFile.getAbsolutePath());
+			                //catch parameters
+			                uploadValidationContainer.setWstur(request.getParameter("wstur"));
+	        	    		uploadValidationContainer.setWsavd(request.getParameter("wsavd"));
+	        	    		uploadValidationContainer.setWsopd(request.getParameter("wsopd"));
+	        	    		uploadValidationContainer.setWstype(request.getParameter("wstype"));
+	        	    		//this will check if either the wstur or wsavd/wsopd will save the upload
+	        	    		uploadValidationContainer = this.saveFileUpload(uploadValidationContainer, fileName, appUser);
+			                if(uploadValidationContainer!=null && uploadValidationContainer.getErrMsg()==""){
+			                		String suffixMsg = "";
+			                		if(uploadValidationContainer.getWstur()!=null && !"".equals(uploadValidationContainer.getWstur())){
+			                			suffixMsg = "  -->Tur:" + "["+ uploadValidationContainer.getWstur() + "]";
+			                		}else{
+			                			suffixMsg = "  -->Avd/Opd:" + "["+ uploadValidationContainer.getWsavd() + "/" + uploadValidationContainer.getWsopd() + "]";
+			                		}
+			                		return "You successfully uploaded file:" + fileName +  suffixMsg;
+			                }else{
+			                		return "You failed to upload [on MOVE] =" + fileName;
+			                }
+		        	    } catch (Exception e) {
+		            		//run time upload error
+		            		String absoluteFileName = rootPath + File.separator + fileName;
+		            		return "You failed to upload to:" + fileName + " runtime error:" + e.getMessage();
+		            }
+
+                }else{
+		        		if(uploadValidationContainer!=null){
+		        			//Back-end error message output upon validation
+		        			return uploadValidationContainer.getErrMsg();
+		        		}else{
+		        			return "NULL on upload file validation Object??";
+		        		}
+		        	}
+	        } else {
+	            return "You failed to upload an empty file.";
+	        }
+		}
+    }
+	/**
+	 * 
+	 * @param uploadValidationContainer
+	 * @param fileName
+	 * @param appUser
+	 * @return
+	 */
+	private JsonTvinnSadManifestFileUploadValidationContainer saveFileUpload(JsonTvinnSadManifestFileUploadValidationContainer uploadValidationContainer, String fileName, SystemaWebUser appUser){
+		//prepare the access CGI with RPG back-end
+		String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_MANIFEST_CHILDWINDOW_UPLOAD_FILE_AFTER_VALIDATION_APPROVAL_URL;
+		String absoluteFileName = uploadValidationContainer.getTmpdir() + fileName;
+		StringBuffer urlRequestParamsKeys = new StringBuffer();
+		urlRequestParamsKeys.append("user=" + appUser.getUser());
+		//Either TUR or AVD/OPD (order level)... Depending on the caller (Tur-level OR order-level)
+		if(uploadValidationContainer.getWstur()!=null && !"".equals(uploadValidationContainer.getWstur())){
+			urlRequestParamsKeys.append("&wstur=" + uploadValidationContainer.getWstur());
+		}else{
+			if(uploadValidationContainer.getWsavd()!=null && !"".equals(uploadValidationContainer.getWsavd())){
+				urlRequestParamsKeys.append("&wsavd=" + uploadValidationContainer.getWsavd());
+			}
+			if(uploadValidationContainer.getWsopd()!=null && !"".equals(uploadValidationContainer.getWsopd())){
+				urlRequestParamsKeys.append("&wsopd=" + uploadValidationContainer.getWsopd());
+			}
+		}
+		urlRequestParamsKeys.append("&wstype=" + uploadValidationContainer.getWstype());
+		urlRequestParamsKeys.append("&wsdokn=" + absoluteFileName);
+		
+		
+		
+		logger.info("URL: " + BASE_URL);
+		logger.info("PARAMS: " + urlRequestParamsKeys);
+		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
+		//Debug -->
+		logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+		if(jsonPayload!=null){
+			uploadValidationContainer = this.tvinnSadManifestChildwindowService.getFileUploadValidationContainer(jsonPayload);
+			logger.info(uploadValidationContainer.getErrMsg());
+		}
+		return uploadValidationContainer;
+	}
+	
+	
+	/**
+	 * 
+	 * @param fileName
+	 * @param appUser
+	 * @return
+	 */
+	private JsonTvinnSadManifestFileUploadValidationContainer validateFileUpload(String fileName, SystemaWebUser appUser){
+		JsonTvinnSadManifestFileUploadValidationContainer uploadValidationContainer = null;
+		//prepare the access CGI with RPG back-end
+		String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_MANIFEST_CHILDWINDOW_UPLOAD_FILE_VALIDATION_URL;
+		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&wsdokn=" + fileName;
+		logger.info("URL: " + BASE_URL);
+		logger.info("PARAMS: " + urlRequestParamsKeys);
+		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+		//Debug -->
+		logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+		if(jsonPayload!=null){
+			uploadValidationContainer = this.tvinnSadManifestChildwindowService.getFileUploadValidationContainer(jsonPayload);
+			logger.info(uploadValidationContainer.getErrMsg());
+		}
+		return uploadValidationContainer;
 	}
 	
 	/**

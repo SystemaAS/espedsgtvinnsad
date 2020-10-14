@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestArchivedDocsContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestFileUploadValidationContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestPostalCodeContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRpgContainer;
@@ -101,6 +102,25 @@ public class TvinnSadManifestMapper {
 		if(utfPayload!=null){
 			//At this point we now have an UTF-8 payload
 			container = mapper.readValue(utfPayload.getBytes(), JsonTvinnSadManifestArchivedDocsContainer.class); 
+			
+		}
+			
+		return container;
+	}
+	
+	/**
+	 * 
+	 * @param utfPayload
+	 * @return
+	 * @throws Exception
+	 */
+	public JsonTvinnSadManifestFileUploadValidationContainer getFileUploadValidationContainer(String utfPayload) throws Exception{
+		ObjectMapper mapper = new ObjectMapper();  
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+		JsonTvinnSadManifestFileUploadValidationContainer container = null;
+		if(utfPayload!=null){
+			//At this point we now have an UTF-8 payload
+			container = mapper.readValue(utfPayload.getBytes(), JsonTvinnSadManifestFileUploadValidationContainer.class); 
 			
 		}
 			
