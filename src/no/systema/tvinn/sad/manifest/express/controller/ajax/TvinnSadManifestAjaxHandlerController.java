@@ -25,7 +25,9 @@ import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManif
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
 import no.systema.tvinn.sad.manifest.express.util.manager.ManifestDateManager;
+import no.systema.tvinn.sad.manifest.express.util.manager.ManifestExpressMgr;
 import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
+import no.systema.tvinn.sad.util.TvinnSadConstants;
 
 
 
@@ -38,6 +40,7 @@ import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 @Controller
 public class TvinnSadManifestAjaxHandlerController {
 	private static final Logger logger = Logger.getLogger(TvinnSadManifestAjaxHandlerController.class.getName());
+	private DateTimeManager dateMgr = new DateTimeManager();
 	
 	/**
 	 * Gets a specific cargo line
@@ -76,7 +79,7 @@ public class TvinnSadManifestAjaxHandlerController {
 				Collection<JsonTvinnSadManifestCargoLinesRecord> outputList = container.getList();
 				for(JsonTvinnSadManifestCargoLinesRecord record : outputList){
 					this.adjustFieldsForFetch(record);
-					Collection listDocs = this.fetchArchiveDocs(applicationUser, avd, tdn);
+					Collection listDocs = this.manifestExpressMgr.fetchArchiveDocs(applicationUser, avd, tdn);
 					if(listDocs!=null){
 						record.setGetdocs(listDocs);
 					}
@@ -90,44 +93,6 @@ public class TvinnSadManifestAjaxHandlerController {
 		 return result;
 	 }
 	
-	/**
-	 * 
-	 * @param applicationUser
-	 * @param avd
-	 * @param tdn
-	 * @return
-	 */
-	private Collection<JsonTvinnSadManifestArchivedDocsRecord> fetchArchiveDocs(String applicationUser, String avd, String tdn) {
-		 Collection<JsonTvinnSadManifestArchivedDocsRecord> outputList = new ArrayList<JsonTvinnSadManifestArchivedDocsRecord>();
-		 //===========
-		 //FETCH LIST
-		 //===========
-		 logger.warn("Inside: getTripHeadingArchiveDocs");
-		 //prepare the access CGI with RPG back-end
-		 String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_ARCHIVED_UPLOADED_DOCS_URL;
-		 
-		 String urlRequestParamsKeys = "user=" + applicationUser + "&avd=" + avd + "&opd=" + tdn ;
-		 logger.warn("URL: " + BASE_URL);
-		 logger.warn("PARAMS: " + urlRequestParamsKeys);
-		 logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
-		 String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
-		 logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-		 logger.info(jsonPayload);
-		 if(jsonPayload!=null){
-			 	try{
-			 		JsonTvinnSadManifestArchivedDocsContainer container = this.tvinnSadManifestListService.getArchiveDocsContainer(jsonPayload);
-					if(container!=null){
-						outputList = container.getGetdoc();
-						for(JsonTvinnSadManifestArchivedDocsRecord record : outputList){
-							//logger.info("####Link:" + record.getDoclnk());
-						}
-					}
-			 	}catch(Exception e){
-			 		e.printStackTrace();
-			 	}
-			 }
-		 return outputList;
-	}
 	
 	/**
 	 * 
@@ -164,6 +129,59 @@ public class TvinnSadManifestAjaxHandlerController {
 		 }
 		 
 		 return result;
+	 }
+	
+	
+	/**
+	 * Entry point in order to upload file to toll.no
+	 * @param applicationUser
+	 * @param docType
+	 * @param docPath
+	 * @param declNr
+	 * @param declDate
+	 * @param declSekvens
+	 * @return
+	 */
+	@RequestMapping(value = "sendFileToToll_TvinnSadManifest.do", method = RequestMethod.GET)
+	public @ResponseBody Set<String> sendFileToToll
+	  						(@RequestParam String applicationUser, @RequestParam String docType, @RequestParam String docPath,
+	  						 @RequestParam String declNr, @RequestParam String declDate, @RequestParam String declSekvens) {
+		 
+			logger.warn("Inside: sendFileToToll_TvinnSadManifest.do");
+			logger.warn(docType);
+			logger.warn(docPath);
+			logger.warn(declNr);
+			logger.warn(declDate);
+			logger.warn(declSekvens);
+			 
+			Set result = new HashSet();
+			//format NO date to ISO-reversed	 
+			
+			String declDateFormatted = dateMgr.getDateFormatted_ISO(declDate, DateTimeManager.NO_FORMAT, DateTimeManager.ISO_FORMAT_REVERSED);
+			String declId = declNr + "-" + declDateFormatted + "-" + declSekvens;
+			//TEST
+			//declId = "974309742-12102020-698";
+			
+			//find type
+			String docTypeFormatted = this.getDocumentType(docType, docPath);
+			
+			String url = TvinnSadManifestUrlDataStore.TVINN_SAD_SEND_DOCUMENT_TO_TOLL_URL;
+			String BASE_URL = url;
+	 		StringBuffer urlRequestParamsKeys = new StringBuffer();
+	 		urlRequestParamsKeys.append("user=" + applicationUser + "&declId=" + declId + "&docType=" + docTypeFormatted );
+	 		urlRequestParamsKeys.append("&docPath=" + docPath );
+	 		logger.warn("URL: " + BASE_URL);
+	 		logger.warn("PARAMS: " + urlRequestParamsKeys.toString());
+	 		
+	 		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+	 		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
+	 		//Debug -->
+		    logger.warn(jsonPayload);
+	 		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	 	 
+		 	result.add(jsonPayload);
+		 	
+		 	return result;
 	 }
 	
 	/**
@@ -212,6 +230,25 @@ public class TvinnSadManifestAjaxHandlerController {
 	 }
 	/**
 	 * 
+	 * @param docType
+	 * @param docPath
+	 * @return
+	 */
+	private String getDocumentType(String docType, String docPath){
+		//docType is too bad to elucidate something. We use the docPath since this carries information about type
+		String retval = "faktura";
+		if(docPath!=null){
+			if(docPath.contains("/ZH") || docPath.contains("/ZO")){
+				retval = "faktura";
+			}else{
+				//other types here (tillatelser, fraktregning, opprinnelsesdokumentasjon, fraktbrev)
+			}
+		}
+		
+		return retval;
+	}
+	/**
+	 * 
 	 * @param record
 	 */
 	private void adjustFieldsForUpdate(JsonTvinnSadManifestCargoLinesRecord record){
@@ -245,4 +282,6 @@ public class TvinnSadManifestAjaxHandlerController {
 	@Autowired
 	private UrlCgiProxyService urlCgiProxyService;
 	
+	@Autowired
+	private ManifestExpressMgr manifestExpressMgr;
 }

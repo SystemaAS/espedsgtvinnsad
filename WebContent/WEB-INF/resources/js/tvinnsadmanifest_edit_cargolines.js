@@ -362,6 +362,7 @@
   				
   				var table = jq('<table></table>').addClass('foo');
   				var row = jq('<tr></tr>').addClass('tableHeaderField');
+  				
   				var td_1 = jq('<th align="left"></th>').addClass('text14').text('Dok.type');
   				row.append(td_1);
   				var td_2 = jq('<th align="left"></th>').addClass('text14').text('Dok.navn');
@@ -410,10 +411,18 @@
   					//ROW APPEND TD_3 
   					td_3.text(data[i].getdocs[j].docdat + " " + data[i].getdocs[j].doctim);
   					row.append(td_3);
-  					
   					//
   					table.append(row);
 			  	}
+  				var row_last = jq('<tr></tr>').addClass('tableRow');
+  				var sendButton = jq('<input/>'). attr({ type: 'button', name:'sbutton', id:'sbutton', value:'Send til toll.no' });
+  				jq(document).on("click", "#sbutton", function(){
+  				  //childwindow
+  				  window.open('tvinnsadmanifest_childwindow_uploadfile_to_toll.do?action=doInit&wsavd=' + jq('#clavd').val() + '&wsopd=' + jq('#cltdn').val() + '&clrg=' + jq('#clrg').val() + '&cl0068a=' + jq('#cl0068a').val() + '&cl0068b=' + jq('#cl0068b').val(), "releasedCargolinesWin", "top=300px,left=450px,height=400px,width=850px,scrollbars=yes,status=no,location=no");
+  				});
+  				row_last.append(sendButton);
+  				table.append(row_last);
+  				
   				//append TABLE to DIV
   				jq('#resultUploadedDocs').append(table);
   				//--------------
@@ -430,6 +439,7 @@
 	  	
 	}
 	
+  
  
   
  

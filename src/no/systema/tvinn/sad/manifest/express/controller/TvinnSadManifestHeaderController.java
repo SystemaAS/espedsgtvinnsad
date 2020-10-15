@@ -61,7 +61,7 @@ public class TvinnSadManifestHeaderController {
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	private LoginValidator loginValidator = new LoginValidator();
 	private StringManager strMgr = new StringManager();
-	DateTimeManager dateMgr = new DateTimeManager();
+	private DateTimeManager dateMgr = new DateTimeManager();
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();

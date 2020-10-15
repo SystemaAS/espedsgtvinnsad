@@ -51,6 +51,7 @@ import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManif
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestPostalCodeRecord;
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestChildwindowService;
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
+import no.systema.tvinn.sad.manifest.express.util.manager.ManifestExpressMgr;
 import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeContainer;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
@@ -385,6 +386,44 @@ public class TvinnSadManifestControllerChildWindow {
     }
 	/**
 	 * 
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsadmanifest_childwindow_uploadfile_to_toll.do", params="action=doInit",  method={RequestMethod.GET} )
+	public ModelAndView doInitArchiveDocs(HttpSession session, HttpServletRequest request){
+		//this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doInitArchiveDocs");
+		Map model = new HashMap();
+		String wsavd = request.getParameter("wsavd");
+		String wsopd = request.getParameter("wsopd");
+		String clrg = request.getParameter("clrg");
+		String cl0068a = request.getParameter("cl0068a");
+		String cl0068b = request.getParameter("cl0068b");
+		
+		
+		
+		ModelAndView successView = new ModelAndView("tvinnsadmanifest_childwindow_uploadfile_to_toll");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			Collection list = manifestExpressMgr.fetchArchiveDocs(appUser.getUser(), wsavd, wsopd);
+			model.put("list", list);
+			model.put("wsavd", wsavd);
+			model.put("wsopd", wsopd);
+			model.put("clrg", clrg);
+			model.put("cl0068a", cl0068a);
+			model.put("cl0068b", cl0068b);
+
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+	    	return successView;
+		}
+	}
+	/**
+	 * 
 	 * @param uploadValidationContainer
 	 * @param fileName
 	 * @param appUser
@@ -614,6 +653,8 @@ public class TvinnSadManifestControllerChildWindow {
 	
 	@Autowired
 	private TvinnSadManifestListService tvinnSadManifestListService;
-	
+
+	@Autowired
+	private ManifestExpressMgr manifestExpressMgr;
 }
 

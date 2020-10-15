@@ -480,7 +480,7 @@
 					 						<th align="left" class="text14">Dato/kl</th>
 					 						</tr>
 				 						
-						 					<c:forEach items="${model.record.getdoctrip}" var="record" varStatus="counter">
+						 					<c:forEach items="${model.record.getdocs}" var="record" varStatus="counter">
 						 						<tr class="text14 tableRow">
 						 						<td class="tableCellFirst" style="white-space:nowrap">${record.doctyp}</td>
 		 										<td class="tableCell" style="white-space:nowrap">
@@ -497,8 +497,16 @@
 				   								</a>
 				   								</td>
 					   							<td class="tableCell" style="white-space:nowrap">${record.docdat}&nbsp;${record.doctim}</td>
+					   							
 				   								</tr>
+				   								
 						 					</c:forEach>
+						 					<tr>
+						 					<td>	
+						 						<input class="inputFormSubmitStd" type="button" name="sttButton" id="sttButton" value='Send til toll.no'>
+						 					</td>
+						 					</tr>
+						 					
 						 				</table>
 				 					</div>
 				 				</td>
