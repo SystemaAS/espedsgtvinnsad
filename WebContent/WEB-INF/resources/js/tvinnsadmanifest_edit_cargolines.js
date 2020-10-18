@@ -418,7 +418,7 @@
   				var sendButton = jq('<input/>'). attr({ type: 'button', name:'sbutton', id:'sbutton', value:'Send til toll.no' });
   				jq(document).on("click", "#sbutton", function(){
   				  //childwindow
-  				  window.open('tvinnsadmanifest_childwindow_uploadfile_to_toll.do?action=doInit&wsavd=' + jq('#clavd').val() + '&wsopd=' + jq('#cltdn').val() + '&clrg=' + jq('#clrg').val() + '&cl0068a=' + jq('#cl0068a').val() + '&cl0068b=' + jq('#cl0068b').val(), "releasedCargolinesWin", "top=300px,left=450px,height=400px,width=850px,scrollbars=yes,status=no,location=no");
+  				  openUploadFileToToll();
   				});
   				row_last.append(sendButton);
   				table.append(row_last);
@@ -438,6 +438,20 @@
 	  	});
 	  	
 	}
+  
+  
+  jq(function() {
+		jq('#sttButton').click(function() { 
+			if(jq('#clavd').val()!='' && jq('#cltdn').val()!=''){
+				openUploadFileToToll();
+			}
+	    });
+  });
+  
+  function openUploadFileToToll(){
+	  window.open('tvinnsadmanifest_childwindow_uploadfile_to_toll.do?action=doInit&wsavd=' + jq('#clavd').val() + '&wsopd=' + jq('#cltdn').val() + '&clrg=' + jq('#clrg').val() + '&cl0068a=' + jq('#cl0068a').val() + '&cl0068b=' + jq('#cl0068b').val(), "releasedCargolinesWin", "top=300px,left=450px,height=400px,width=850px,scrollbars=yes,status=no,location=no");
+  }
+  
 	
   
  

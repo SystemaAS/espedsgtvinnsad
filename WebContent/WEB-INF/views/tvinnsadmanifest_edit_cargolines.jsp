@@ -484,7 +484,7 @@
 						 						<tr class="text14 tableRow">
 						 						<td class="tableCellFirst" style="white-space:nowrap">${record.doctyp}</td>
 		 										<td class="tableCell" style="white-space:nowrap">
-						 						<a target="_blank" href="transportdisp_workflow_renderArchivedDocs.do?doclnk=${record.doclnk}">
+						 						<a target="_blank" href="tvinnsadmanifest_renderArchive.do?doclnk=${record.doclnk}">
 		    		    							<c:choose>
 			    		    							<c:when test="${fn:contains(record.doclnk, '.pdf')}">
 			    		    								<img title="Archive" style="vertical-align:middle;" src="resources/images/pdf.png" width="14" height="14" border="0" alt="PDF arch.">
@@ -493,7 +493,7 @@
 			    		    								<img title="Archive" style="vertical-align:middle;" src="resources/images/jpg.png" width="14" height="14" border="0" alt="Other arch.">
 			    		    							</c:otherwise>
 		    		    							</c:choose>
-		    		    							${record.doctxt}
+		    		    							${record.doclnk}
 				   								</a>
 				   								</td>
 					   							<td class="tableCell" style="white-space:nowrap">${record.docdat}&nbsp;${record.doctim}</td>

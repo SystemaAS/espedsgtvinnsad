@@ -47,6 +47,7 @@ import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManif
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
 import no.systema.tvinn.sad.manifest.express.util.manager.CodeDropDownMgr;
 import no.systema.tvinn.sad.manifest.express.util.manager.ManifestDateManager;
+import no.systema.tvinn.sad.manifest.express.util.manager.ManifestExpressMgr;
 import no.systema.tvinn.sad.manifest.express.validator.TvinnSadManifestHeaderCargoLinesValidator;
 import no.systema.tvinn.sad.manifest.express.validator.TvinnSadManifestHeaderValidator;
 import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
@@ -193,6 +194,8 @@ public class TvinnSadManifestHeaderCargoLinesController {
 							if (record.getClpro().equals(recordToValidate.getClpro())){
 								if(record.getCltdn().equals(recordToValidate.getCltdn()) && record.getClavd().equals(recordToValidate.getClavd())){
 									this.adjustFieldsForFetch(record);
+									//get archive docs
+									record.setGetdocs(this.manifestExpressMgr.fetchArchiveDocs(appUser.getUser(), record.getClavd(), record.getCltdn()));
 									model.put(TvinnSadConstants.DOMAIN_RECORD, record);
 								}
 							}
@@ -563,6 +566,9 @@ public class TvinnSadManifestHeaderCargoLinesController {
 	
 	@Autowired
 	private UrlCgiProxyService urlCgiProxyService;
+	
+	@Autowired
+	private ManifestExpressMgr manifestExpressMgr;
 	
 	
 }
