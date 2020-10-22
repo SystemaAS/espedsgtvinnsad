@@ -36,6 +36,7 @@
 		 						<th align="left" class="text14">Send</th>
 		 						<th align="left" class="text14">Dok.type</th>
 		 						<th align="left" class="text14">Dok.navn</th>
+		 						<th align="left" class="text14">Dok.fil</th>
 		 						<th align="left" class="text14">Dato/kl</th>
 		 						</tr>
 	 						
@@ -45,6 +46,7 @@
 			 							<input title="doctyp${record.doctyp}_doclnk${record.doclnk}" id="${counter.count}" class="inputFormSubmit11Slim isa_warning" type="button" name="uplButton${counter.count}" value="Send til toll.no" onClick="sendFile(this);">
 			 						</td>
 			 						<td class="tableCell" style="white-space:nowrap">${record.doctyp}</td>
+			 						<td class="tableCell" style="white-space:nowrap;color:darkgray">${record.doctxt}</td>
 									<td class="tableCell" style="white-space:nowrap">
 			 						<a target="_blank" href="tvinnsadmanifest_renderArchive.do?doclnk=${record.doclnk}">
    		    							<c:choose>

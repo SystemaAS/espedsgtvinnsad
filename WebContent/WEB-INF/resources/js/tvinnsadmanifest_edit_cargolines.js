@@ -156,11 +156,15 @@
 	  
 	  
   }
+  //refresh CargoLines
+  function refreshCargoLines(){
+	  setBlockUI();
+	  window.location = "tvinnsadmanifest_edit_cargolines.do?action=doFetch&efpro=" + jq('#efpro').val() + "&efsg=" + jq('#efsg').val() + "&efavd=" + jq('#efavd').val() + "&efuuid=" + jq('#efuuid').val();
+  }
   
   //used and called only from a childwindow in order to reload this page with BlockUI() ...
   function callParent(){
-	  setBlockUI();
-	  window.location.reload(false); 
+	  refreshCargoLines(); 
   }
   
   jq(function() {
@@ -202,8 +206,7 @@
 	  });*/
 	  
 	  jq('#newButton').click(function() {
-		  setBlockUI();
-		  window.location = "tvinnsadmanifest_edit_cargolines.do?action=doFetch&efpro=" + jq('#efpro').val() + "&efsg=" + jq('#efsg').val() + "&efavd=" + jq('#efavd').val() + "&efuuid=" + jq('#efuuid').val();
+		  refreshCargoLines();
 	  }); 
   });
   
@@ -367,21 +370,26 @@
   				row.append(td_1);
   				var td_2 = jq('<th align="left"></th>').addClass('text14').text('Dok.navn');
   				row.append(td_2);
-  				var td_3 = jq('<th align="left"></th>').addClass('text14').text('Dato/kl');
+  				var td_3 = jq('<th align="left"></th>').addClass('text14').text('Dok.fil');
   				row.append(td_3);
+  				var td_4 = jq('<th align="left"></th>').addClass('text14').text('Dato/kl');
+  				row.append(td_4);
   				//TABLE APPEND row
   				table.append(row);
   				
   				//fill in table
   				for ( var j = 0; j < docslen; j++) {
+  					/*
   					var documentText = data[i].getdocs[j].doctxt;
   					if(documentText==''){
   						documentText = data[i].getdocs[j].doclnk;
-  					}
+  					}*/
+  					
   					var row = jq('<tr></tr>').addClass('tableRow');
-	  				var td_1 = jq('<td ></td>').addClass('tableCellFirst');td_1.css('white-space','nowrap')
-	  				var td_2 = jq('<td></td>').addClass('tableCell');td_2.css('white-space','nowrap')
+	  				var td_1 = jq('<td ></td>').addClass('tableCellFirst');td_1.css('white-space','nowrap');
+	  				var td_2 = jq('<td></td>').addClass('tableCell');td_2.css('white-space','nowrap');td_2.css('color','darkgray');
 	  				var td_3 = jq('<td></td>').addClass('tableCell');td_3.css('white-space','nowrap');
+	  				var td_4 = jq('<td></td>').addClass('tableCell');td_4.css('white-space','nowrap');
 	  				
   					if(data[i].getdocs[j].doclnk.indexOf(".pdf")>0 ||data[i].getdocs[j].doclnk.indexOf(".PDF")>0){
 			  			imgSrc="resources/images/pdf.png";
@@ -394,23 +402,27 @@
   					row.append(td_1);
   					
   					//ROW APPEND TD_2 
+  					td_2.text(data[i].getdocs[j].doctxt);
+  					row.append(td_2);
+  					
+  					//ROW APPEND TD_3 
   					jq('<img/>',{
   						src: imgSrc,
   						width: '14px',
   						height: '14px'
-		  			  	}).appendTo(td_2);
+		  			  	}).appendTo(td_3);
   					
   					jq('<a>',{
-		  			    text: documentText,
+		  			    text: data[i].getdocs[j].doclnk,
 		  			    target: '_blank',
 		  			    href: 'tvinnsadmanifest_renderArchive.do?doclnk='+data[i].getdocs[j].doclnk,
 		  			    click: function(){ BlahFunc( options.rowId );return false;}
-  					}).appendTo(td_2);
-  					row.append(td_2);
-  					
-  					//ROW APPEND TD_3 
-  					td_3.text(data[i].getdocs[j].docdat + " " + data[i].getdocs[j].doctim);
+  					}).appendTo(td_3);
   					row.append(td_3);
+  					
+  					//ROW APPEND TD_4 
+  					td_4.text(data[i].getdocs[j].docdat + " " + data[i].getdocs[j].doctim);
+  					row.append(td_4);
   					//
   					table.append(row);
 			  	}
@@ -449,7 +461,7 @@
   });
   
   function openUploadFileToToll(){
-	  window.open('tvinnsadmanifest_childwindow_uploadfile_to_toll.do?action=doInit&wsavd=' + jq('#clavd').val() + '&wsopd=' + jq('#cltdn').val() + '&clrg=' + jq('#clrg').val() + '&cl0068a=' + jq('#cl0068a').val() + '&cl0068b=' + jq('#cl0068b').val(), "releasedCargolinesWin", "top=300px,left=450px,height=400px,width=850px,scrollbars=yes,status=no,location=no");
+	  window.open('tvinnsadmanifest_childwindow_uploadfile_to_toll.do?action=doInit&wsavd=' + jq('#clavd').val() + '&wsopd=' + jq('#cltdn').val() + '&clrg=' + jq('#clrg').val() + '&cl0068a=' + jq('#cl0068a').val() + '&cl0068b=' + jq('#cl0068b').val(), "releasedCargolinesWin", "top=300px,left=450px,height=350px,width=1000px,scrollbars=yes,status=no,location=no");
   }
   
 	

@@ -63,7 +63,8 @@
 		                    <th width="2%" class="text14">&nbsp;Oppdrag</th>
 		                    <th width="2%" class="text14">&nbsp;St</th>
 		                    <th width="2%" class="text14">&nbsp;Eksp.type</th>
-		                    <th width="2%" class="text14">&nbsp;MRNnr</th>
+		                    <th width="2%" class="text14">&nbsp;Eksp.id</th>
+		                    <th width="2%" class="text14">&nbsp;MRN.nr</th>
 		                    <th width="2%" class="text14">&nbsp;Sert</th>
 		                    <th width="2%" class="text14">&nbsp;Bilnr</th>
 		                    <th width="2%" class="text14">&nbsp;E.enh.</th>
@@ -83,6 +84,7 @@
 			               <td align="center" width="2%" class="text14" >&nbsp;${record.clst}</td>
 			               <td width="2%" class="text14" >&nbsp;${record.cletypt}</td> 
 			               <td width="2%" class="text14" >&nbsp;${record.cleid}</td>
+			               <td width="2%" class="text14" >&nbsp;${record.cltrnr}</td>
 			               <td align="center" width="2%" class="text14" >&nbsp;${record.cleser}</td>
 			               <td width="2%" class="text14" >&nbsp;${record.cltrid}</td> 
 			               <td width="2%" class="text14" >&nbsp;${record.cl3039e}</td> 

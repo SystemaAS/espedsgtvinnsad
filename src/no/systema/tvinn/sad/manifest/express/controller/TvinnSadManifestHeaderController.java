@@ -203,15 +203,30 @@ public class TvinnSadManifestHeaderController {
 			return loginView;
 		
 		}else{
-			//execute RPG first
-			if(StringUtils.isNotEmpty(recordToValidate.getEfpro())){
-				JsonTvinnSadManifestRpgContainer rpgContainer = this.executeRpgSADEFJSONW(appUser, recordToValidate.getEfpro());
-				if(rpgContainer!=null){
-					//check for errors
-					if(StringUtils.isNotEmpty(rpgContainer.getErrMsg()) || StringUtils.isNotEmpty(rpgContainer.getErrMsgT()) ){
-						String errorMessage = "SERVER_ERROR:" + rpgContainer.getErrMsg() + rpgContainer.getErrMsgT();
-						model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errorMessage);
-						logger.error(errorMessage);
+			//Change status
+			StringBuffer errMsg = new StringBuffer();
+			int dmlRetval = 0;
+			if(StringUtils.isNotEmpty(recordToValidate.getEfuuid()) ){
+				dmlRetval = this.updateStatus(appUser.getUser(), this.MODE_UPDATE_MANIFEST_STATUS, recordToValidate, errMsg);
+			}
+			
+			//Result
+			if(dmlRetval<0){
+				model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errMsg.toString());
+				successView.addObject(model);
+				logger.error("ERROR!!!!!!!!!!ERROR!!!!!!!!!!!!!ERROR!:" + errMsg.toString());
+			}else{
+				logger.warn("Manifest status successfully changed to 'S'... moving on to RPG-call ...");
+				//execute RPG last
+				if(StringUtils.isNotEmpty(recordToValidate.getEfpro())){
+					JsonTvinnSadManifestRpgContainer rpgContainer = this.executeRpgSADEFJSONW(appUser, recordToValidate.getEfpro());
+					if(rpgContainer!=null){
+						//check for errors
+						if(StringUtils.isNotEmpty(rpgContainer.getErrMsg()) || StringUtils.isNotEmpty(rpgContainer.getErrMsgT()) ){
+							String errorMessage = "SERVER_ERROR:" + rpgContainer.getErrMsg() + rpgContainer.getErrMsgT();
+							model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errorMessage);
+							logger.error(errorMessage);
+						}
 					}
 				}
 			}
@@ -393,11 +408,9 @@ public class TvinnSadManifestHeaderController {
 			return loginView;
 		
 		}else{
-			//--------------------------------
-			//Delete and Send (if applicable)
-			//--------------------------------
-			//TODO
-			
+			//---------
+			//Delete 
+			//---------
 			if(strMgr.isNotNull( uuid )){
 				recordToValidate.setEfuuid(uuid);
 				recordToValidate.setEfst2(status);
@@ -409,6 +422,7 @@ public class TvinnSadManifestHeaderController {
 				logger.warn("doDelete");
 				//Update with delete flag
 				dmlRetval = this.deleteRecord(appUser.getUser(), recordToValidate, errMsg);
+				
 				if(dmlRetval<0){
 					String errorMessage = "ERROR on delete ... ??? check your code";
 					logger.error(errorMessage);
@@ -416,7 +430,7 @@ public class TvinnSadManifestHeaderController {
 					
 				}else{
 					logger.info("doDelete = OK");
-					//execute RPG first
+					//execute RPG last
 					if(StringUtils.isNotEmpty(recordToValidate.getEfpro())){
 						JsonTvinnSadManifestRpgContainer rpgContainer = this.executeRpgSADEFJSONW(appUser, recordToValidate.getEfpro());
 						if(rpgContainer!=null){

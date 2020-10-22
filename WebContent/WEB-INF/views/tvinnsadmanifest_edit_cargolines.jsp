@@ -129,6 +129,7 @@
                 		<th class="tableHeaderField" >Avd</th>
                 		<th class="tableHeaderField" >Oppdrag</th>
                 		<th title="S=UPDATED and RELEASED by USER, O=OK" class="tableHeaderField" >St</th>
+                		<th class="tableHeaderField" >Prosedyre</th>
                 		<th class="tableHeaderField" >Eksp.type</th>
                 		<th class="tableHeaderField" >Eksp.id</th>
                 		<th class="tableHeaderField" style="background-color:lightyellow;">MRN</th>
@@ -180,6 +181,7 @@
 	               				</c:otherwise>
                				</c:choose>
 		               </td>
+		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.clpr}&nbsp;</td>
 		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cletyp}&nbsp;${record.cletypt}</td>
 		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cleid}</td>
 		               
@@ -477,12 +479,14 @@
 					 						<tr class="tableHeaderField" >
 					 						<th align="left" class="text14">Dok.type</th>
 					 						<th align="left" class="text14">Dok.navn</th>
+					 						<th align="left" class="text14">Dok.fil</th>
 					 						<th align="left" class="text14">Dato/kl</th>
 					 						</tr>
 				 						
 						 					<c:forEach items="${model.record.getdocs}" var="record" varStatus="counter">
 						 						<tr class="text14 tableRow">
 						 						<td class="tableCellFirst" style="white-space:nowrap">${record.doctyp}</td>
+						 						<td class="tableCell" style="white-space:nowrap;color:darkgray">${record.doctxt}</td>
 		 										<td class="tableCell" style="white-space:nowrap">
 						 						<a target="_blank" href="tvinnsadmanifest_renderArchive.do?doclnk=${record.doclnk}">
 		    		    							<c:choose>
