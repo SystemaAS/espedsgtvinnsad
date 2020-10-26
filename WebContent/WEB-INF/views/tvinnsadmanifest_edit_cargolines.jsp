@@ -312,7 +312,7 @@
 		 					<td class="text14"><input type="text" class="inputTextReadOnly" style="color:yellow;background-color:#BBBBBB;" name="cltdn" id="cltdn" size="8" maxlength="7" value="${model.record.cltdn}"></td>
 				 			<td>
 								<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="clpr" id="clpr" >
-			 						<option value="">-select-</option>
+			 						<option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.prTypeList}" >
 					 				  		<%--filter the goodsregistrering (03) so far --%>
 					 				  		<c:if test="${record.kfkod != '03'}">
@@ -348,7 +348,7 @@
 							<tr>
 								<td class="text14">
 					 				<select class="inputTextMediumBlue toggleDirektfortolling" name="cletyp" id="cletyp" >
-				 						<option value="">-select-</option>
+				 						<option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.etTypeList}" >
 				                       	 	<option title="${record.kftxt}" value="${record.kfkod}" <c:if test="${model.record.cletyp == record.kfkod}"> selected </c:if> >${record.kfkod}&nbsp;${record.kftxt}</option>
 										</c:forEach>
@@ -400,6 +400,7 @@
 					 			<td class="text14"><input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="clvkb" id="clvkb" size="10" maxlength="9" value="${model.record.clvkb}"></td>
 					 			<td class="text14">
 					 				<select class="inputTextMediumBlue" name="cleser" id="cleser" >
+					 					<option value="">-velg-</option>
 				 						<option value="N">Nei</option>
 		 		 				  		<option value="J">Ja</option>
 									</se	lect>

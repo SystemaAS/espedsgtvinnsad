@@ -100,7 +100,6 @@ public class TvinnSadManifestController {
 		//check user (should be in session already)
 		if(appUser==null){
 			return loginView;
-			
 		}else{
 			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
 			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_MANIFEST);
