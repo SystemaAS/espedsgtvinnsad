@@ -2086,15 +2086,30 @@
 		            		<tr height="3"><td>&nbsp;</td></tr>
 				        	<tr>
 				        		<td width="50%" align="center" valign="top">
-								<table width="500px" align="left" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
+								<table width="800px" align="left" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
 							 		<tr height="18px">
 							 			<td class="text14White">
 							 				&nbsp;
 					 						&nbsp;Avsender - Sikkerhet&nbsp;<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 						 				</td>
+						 				
 					 				</tr>
 			 					</table>
-			 					<table width="500px" align="left" class="formFrame" border="0" cellspacing="0" cellpadding="0">
+			 				</td>
+			 				<td width="50%" align="center" valign="top">
+			 				<table width="800px" align="left" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
+							 		<tr height="18px">
+							 			<td class="text14White">
+							 				&nbsp;
+					 						&nbsp;Mottaker - Sikkerhet&nbsp;<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
+						 				</td>
+					 				</tr>
+			 				</table>
+			 				</td>
+		 				</tr>
+		 				<tr>
+			 				<td width="50%" align="center" valign="top">		
+			 					<table width="800pxpx" align="left" class="formFrame" border="0" cellspacing="0" cellpadding="0">
 							 		<tr>	
 							 			<td width="5">&nbsp;</td>
 							            <td >	
@@ -2215,16 +2230,9 @@
 		 						</table>
 			 					
 			        			</td>
-			        			<td width="50%" align="left" valign="top">
-								<table width="500px" align="left" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
-							 		<tr height="18px">
-							 			<td class="text14White">
-							 				&nbsp;
-					 						&nbsp;Mottaker - Sikkerhet&nbsp;<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
-						 				</td>
-					 				</tr>
-			 					</table>
-			 					<table width="500px" align="left" class="formFrame" border="0" cellspacing="0" cellpadding="0">
+			        			
+			        			<td width="50%" align="center" valign="top">
+								<table width="800px" align="left" class="formFrame" border="0" cellspacing="0" cellpadding="0">
 							 		<tr>	
 							 			<td width="5">&nbsp;</td>
 							            <td >	
