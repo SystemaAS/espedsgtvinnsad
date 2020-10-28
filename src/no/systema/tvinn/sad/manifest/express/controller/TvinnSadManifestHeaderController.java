@@ -672,10 +672,15 @@ public class TvinnSadManifestHeaderController {
 	 */
 
 	private void adjustFieldsForUpdate(JsonTvinnSadManifestRecord recordToValidate){
-		
 		recordToValidate.setEfdtr(new DateTimeManager().getCurrentDate_ISO());
 		recordToValidate.setEfeta(new ManifestDateManager().convertToDate_ISO(recordToValidate.getEfeta()));
 		recordToValidate.setEfsjadt(new ManifestDateManager().convertToDate_ISO(recordToValidate.getEfsjadt()));
+		//time could be corrupted with seconds (RPG-GUI)
+		if(StringUtils.isNotEmpty(recordToValidate.getEfetm())){
+			if(recordToValidate.getEfetm().length()>4){
+				recordToValidate.setEfetm(recordToValidate.getEfetm().substring(0,4));
+			}
+		}
 	}
 	
 	private void adjustFieldsForFetch(JsonTvinnSadManifestRecord recordToValidate){

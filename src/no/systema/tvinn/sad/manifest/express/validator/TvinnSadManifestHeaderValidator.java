@@ -58,21 +58,25 @@ public class TvinnSadManifestHeaderValidator implements Validator {
 				//------
 				if(strMgr.isNotNull(record.getEfeta())  && !"999999".equals(record.getEfeta())){
 					if(record.getEfeta().length()>6){
+						logger.warn("A");
 						errors.rejectValue("efeta", "systema.tvinn.sad.manifest.express.header.error.rule.invalidEtaDate");
 					}else{
 						if(!dateValidator.validateDate(record.getEfeta(), DateValidator.DATE_MASK_NO)){
+							logger.warn("B");
 							errors.rejectValue("efeta", "systema.tvinn.sad.manifest.express.header.error.rule.invalidEtaDate"); 	
 						}else{
 							//logical check. ETA must be at least 2 hours ahead from now
 							DateTimeManager dateTimeMgr = new DateTimeManager();
-							boolean isValidDate = dateTimeMgr.isValidForwardDateNO(record.getEfeta());
+							boolean isValidDate = dateTimeMgr.isValidCurrentAndForwardDateNO(record.getEfeta());
 							if(!isValidDate){
+								logger.warn("C");
 								errors.rejectValue("efeta", "systema.tvinn.sad.manifest.express.header.error.rule.invalidEtaDateForward"); 
 							}else{
 								if(dateTimeMgr.isToday(record.getEfeta(), DateTimeManager.NO_FORMAT)){
 									record.setEfetm(dateTimeMgr.adjustUserTimeToHHmm(record.getEfetm()));
 									//check the hour. At least 2 hour ahead
 									if(!dateTimeMgr.isValidTime(record.getEfetm(), JsonTvinnSadManifestRecord.MANIFEST_AT_LEAST_HOURS_AHEAD_VALID)){
+										logger.warn("D");
 										errors.rejectValue("efetm", "systema.tvinn.sad.manifest.express.header.error.rule.invalidEtaTimeForward");
 									}
 								}
