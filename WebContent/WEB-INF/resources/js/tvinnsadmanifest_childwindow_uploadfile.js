@@ -12,10 +12,10 @@
   	});
   	//drag enter/leave
 	  function myFileUploadDragEnter(event, element){
-		  jq("#fileUpload").addClass( "isa_blue" );
+		  jq("#file").addClass( "isa_blue" );
 	  }
 	  function myFileUploadDragLeave(event, element){
-		  jq("#fileUpload").removeClass( "isa_blue" );
+		  jq("#file").removeClass( "isa_blue" );
 	  }
   	
   	
