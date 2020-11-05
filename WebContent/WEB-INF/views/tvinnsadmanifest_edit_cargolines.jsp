@@ -47,7 +47,17 @@
 					</font>
 					<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
 			</td>
-			<td width="80%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
+			
+			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
+			<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
+				<a tabindex=-1 id="alinkItems" style="display:block;" href="tvinnsadmanifest_logging.do?pro=${model.efpro}">
+					<font class="tabDisabledLink">
+						&nbsp;<spring:message code="systema.tvinn.sad.manifest.created.header.logging.tab"/>
+					</font>
+					<img style="vertical-align: bottom" src="resources/images/log-icon.png" width="16" hight="16" border="0" alt="show log">
+				</a>
+			</td>
+			<td width="50%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 		</tr>
 	</table>
 	</td>
@@ -200,7 +210,7 @@
 		               
 		               <td width="2%" class="tableCell" <c:if test="${record.clst != 'O'}">style="color: #9F6000;" </c:if> align="center" >${record.cleser}</td>
 		               <td width="2%" align="center" class="text14 tableCellGray">
-	            		   		<input class="inputFormSubmit11Slim" type="button" value="Upload" name="uplButton${counter.count}" onClick="window.open('tvinnsadmanifest_childwindow_uploadFile.do?action=doInit&wsavd=${record.clavd}&wsopd=${record.cltdn}','cargoLineListFileUpload','top=300px,left=800px,height=250px,width=330px,scrollbars=no,status=no,location=no')">	 
+	            		   		<input class="inputFormSubmit11Slim" type="button" value="Til arkivet" name="uplButton${counter.count}" onClick="window.open('tvinnsadmanifest_childwindow_uploadFile.do?action=doInit&wsavd=${record.clavd}&wsopd=${record.cltdn}','cargoLineListFileUpload','top=300px,left=800px,height=250px,width=330px,scrollbars=no,status=no,location=no')">	 
 	            		   </td>
 		               <td width="2%" class="tableCell" align="center" >
 		               		<c:if test="${headerRecord.own_editable > 0}">

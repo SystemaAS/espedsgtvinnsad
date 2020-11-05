@@ -51,8 +51,17 @@
 							
 						</a>
 					</td>
+					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
+					<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
+						<a tabindex=-1 id="alinkItems" style="display:block;" href="tvinnsadmanifest_logging.do?pro=${model.record.efpro}">
+							<font class="tabDisabledLink">
+								&nbsp;<spring:message code="systema.tvinn.sad.manifest.created.header.logging.tab"/>
+							</font>
+							<img style="vertical-align: bottom" src="resources/images/log-icon.png" width="16" hight="16" border="0" alt="show log">
+						</a>
+					</td>
 					
-					<td width="80%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
+					<td width="50%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 				</c:when>
 				<c:otherwise>
 					<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>

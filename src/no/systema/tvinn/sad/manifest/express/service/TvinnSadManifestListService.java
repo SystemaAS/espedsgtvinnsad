@@ -6,6 +6,7 @@ package no.systema.tvinn.sad.manifest.express.service;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestArchivedDocsContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestLoggingContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRpgContainer;
 
 /**
@@ -19,5 +20,6 @@ public interface TvinnSadManifestListService {
 	public JsonTvinnSadManifestContainer getListContainerDefaultValues(String utfPayload);
 	public JsonTvinnSadManifestRpgContainer getContainerRpgResult(String utfPayload);
 	public JsonTvinnSadManifestArchivedDocsContainer getArchiveDocsContainer(String utfPayload);
+	public JsonTvinnSadManifestLoggingContainer getLoggingContainer(String utfPayload);
 	
 }

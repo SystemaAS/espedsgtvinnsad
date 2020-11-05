@@ -98,6 +98,12 @@ public final class TvinnSadManifestUrlDataStore {
 	static public String TVINN_SAD_FETCH_ARCHIVED_UPLOADED_DOCS_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TJGE12R.pgm";
 	//http://localhost:8080/syjservicestn-expft/uploadFileByUser.do?user=SYSTEMA&declId=999888777&docType=faktura&docPath=/pdf/sca/ZH20201900171xHgkHa8Os3.pdf
 	static public String TVINN_SAD_SEND_DOCUMENT_TO_TOLL_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn-expft/uploadFileByUser.do";
+	
+	//-----------------
+	//[7] Logging
+	//-----------------
+	//http://10.13.3.22/sycgip/tjge35r.pgm?user=SYSTEMA&pro=501924
+	static public String TVINN_SAD_FETCH_LOGGING_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TJGE35R.pgm";
 		
 	
 }

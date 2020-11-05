@@ -32,8 +32,6 @@ import no.systema.main.util.StringManager;
 import no.systema.tvinn.sad.util.TvinnSadConstants;
 import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
 import no.systema.z.main.maintenance.service.MaintMainKofastService;
-import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
-import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesRecord;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRpgContainer;
@@ -203,30 +201,23 @@ public class TvinnSadManifestHeaderController {
 			return loginView;
 		
 		}else{
-			//Change status
+			//Change status OBSOLETE...is done in RpgSADEFJSONW
+			/*
 			StringBuffer errMsg = new StringBuffer();
 			int dmlRetval = 0;
 			if(StringUtils.isNotEmpty(recordToValidate.getEfuuid()) ){
 				dmlRetval = this.updateStatus(appUser.getUser(), this.MODE_UPDATE_MANIFEST_STATUS, recordToValidate, errMsg);
 			}
-			
-			//Result
-			if(dmlRetval<0){
-				model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errMsg.toString());
-				successView.addObject(model);
-				logger.error("ERROR!!!!!!!!!!ERROR!!!!!!!!!!!!!ERROR!:" + errMsg.toString());
-			}else{
-				logger.warn("Manifest status successfully changed to 'S'... moving on to RPG-call ...");
-				//execute RPG last
-				if(StringUtils.isNotEmpty(recordToValidate.getEfpro())){
-					JsonTvinnSadManifestRpgContainer rpgContainer = this.executeRpgSADEFJSONW(appUser, recordToValidate.getEfpro());
-					if(rpgContainer!=null){
-						//check for errors
-						if(StringUtils.isNotEmpty(rpgContainer.getErrMsg()) || StringUtils.isNotEmpty(rpgContainer.getErrMsgT()) ){
-							String errorMessage = "SERVER_ERROR:" + rpgContainer.getErrMsg() + rpgContainer.getErrMsgT();
-							model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errorMessage);
-							logger.error(errorMessage);
-						}
+			*/
+			//execute RPG last
+			if(StringUtils.isNotEmpty(recordToValidate.getEfpro())){
+				JsonTvinnSadManifestRpgContainer rpgContainer = this.executeRpgSADEFJSONW(appUser, recordToValidate.getEfpro());
+				if(rpgContainer!=null){
+					//check for errors
+					if(StringUtils.isNotEmpty(rpgContainer.getErrMsg()) || StringUtils.isNotEmpty(rpgContainer.getErrMsgT()) ){
+						String errorMessage = "SERVER_ERROR:" + rpgContainer.getErrMsg() + rpgContainer.getErrMsgT();
+						model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, errorMessage);
+						logger.error(errorMessage);
 					}
 				}
 			}
@@ -449,6 +440,32 @@ public class TvinnSadManifestHeaderController {
 			return successView;
 		}
 	}
+	
+	/**
+	 * 
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsadmanifest_logging.do", method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doLogging(HttpSession session, HttpServletRequest request){
+		
+		ModelAndView successView = new ModelAndView("tvinnsadmanifest_logging");
+		Map model = new HashMap();
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+			
+		}else{
+			//TODO
+		}
+		return successView;
+	}
+	
+	
+	
 	/**
 	 * 
 	 * @param appUser
@@ -675,10 +692,10 @@ public class TvinnSadManifestHeaderController {
 		recordToValidate.setEfdtr(new DateTimeManager().getCurrentDate_ISO());
 		recordToValidate.setEfeta(new ManifestDateManager().convertToDate_ISO(recordToValidate.getEfeta()));
 		recordToValidate.setEfsjadt(new ManifestDateManager().convertToDate_ISO(recordToValidate.getEfsjadt()));
-		//time could be corrupted with seconds (RPG-GUI)
+		//time must send seconds (RPG-GUI)
 		if(StringUtils.isNotEmpty(recordToValidate.getEfetm())){
-			if(recordToValidate.getEfetm().length()>4){
-				recordToValidate.setEfetm(recordToValidate.getEfetm().substring(0,4));
+			if(recordToValidate.getEfetm().length()==4){
+				recordToValidate.setEfetm(recordToValidate.getEfetm() + "00");
 			}
 		}
 	}
@@ -686,6 +703,12 @@ public class TvinnSadManifestHeaderController {
 	private void adjustFieldsForFetch(JsonTvinnSadManifestRecord recordToValidate){
 		recordToValidate.setEfeta(new ManifestDateManager().convertToDate_NO(recordToValidate.getEfeta()));
 		recordToValidate.setEfsjadt(new ManifestDateManager().convertToDate_NO(recordToValidate.getEfsjadt()));
+		//time must be presented without seconds (WEB-GUI
+		if(StringUtils.isNotEmpty(recordToValidate.getEfetm())){
+			if(recordToValidate.getEfetm().length()>4){
+				recordToValidate.setEfetm(recordToValidate.getEfetm().substring(0,4));
+			}
+		}
 	}
 	
 	/**

@@ -18,6 +18,8 @@ import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManif
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestArchivedDocsRecord;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesRecord;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestLoggingContainer;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestLoggingRecord;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
 import no.systema.tvinn.sad.manifest.express.util.TvinnSadManifestConstants;
@@ -182,7 +184,7 @@ public class ManifestExpressMgr {
 		 //===========
 		 //FETCH LIST
 		 //===========
-		 logger.warn("Inside: getTripHeadingArchiveDocs");
+		 logger.warn("Inside: fetchArchiveDocs");
 		 //prepare the access CGI with RPG back-end
 		 String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_ARCHIVED_UPLOADED_DOCS_URL;
 		 
@@ -200,6 +202,45 @@ public class ManifestExpressMgr {
 						outputList = container.getGetdoc();
 						for(JsonTvinnSadManifestArchivedDocsRecord record : outputList){
 							//logger.info("####Link:" + record.getDoclnk());
+						}
+					}
+			 	}catch(Exception e){
+			 		e.printStackTrace();
+			 	}
+			 }
+		 return outputList;
+	}
+
+	/**
+	 * Gets all logging on db
+	 * 
+	 * @param applicationUser
+	 * @param pro
+	 * @return
+	 */
+	public Collection<JsonTvinnSadManifestLoggingRecord> fetchLogging(String applicationUser, String pro) {
+		 Collection<JsonTvinnSadManifestLoggingRecord> outputList = new ArrayList<JsonTvinnSadManifestLoggingRecord>();
+		 //===========
+		 //FETCH LIST
+		 //===========
+		 logger.warn("Inside: fetchLogging");
+		 //prepare the access CGI with RPG back-end
+		 String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_LOGGING_URL;
+		 
+		 String urlRequestParamsKeys = "user=" + applicationUser + "&pro=" + pro;
+		 logger.warn("URL: " + BASE_URL);
+		 logger.warn("PARAMS: " + urlRequestParamsKeys);
+		 logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		 String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+		 logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+		 logger.info(jsonPayload);
+		 if(jsonPayload!=null){
+			 	try{
+			 		JsonTvinnSadManifestLoggingContainer container = this.tvinnSadManifestListService.getLoggingContainer(jsonPayload);
+					if(container!=null){
+						outputList = container.getLogg();
+						for(JsonTvinnSadManifestLoggingRecord record : outputList){
+							//todo
 						}
 					}
 			 	}catch(Exception e){

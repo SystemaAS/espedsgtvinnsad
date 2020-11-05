@@ -7,6 +7,7 @@ import no.systema.tvinn.sad.manifest.express.mapper.jsonjackson.TvinnSadManifest
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestArchivedDocsContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestLoggingContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRpgContainer;
 
 /**
@@ -89,5 +90,21 @@ public class TvinnSadManifestListServiceImpl implements TvinnSadManifestListServ
 		return container;
 		
 	}
+	/**
+	 * 
+	 */
+	public JsonTvinnSadManifestLoggingContainer getLoggingContainer(String utfPayload) {
+		JsonTvinnSadManifestLoggingContainer container = null;
+		try{
+			TvinnSadManifestMapper mapper = new TvinnSadManifestMapper();
+			container = mapper.getLoggingContainer(utfPayload);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return container;
+		
+	}
+	
 
 }
