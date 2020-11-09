@@ -30,7 +30,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<a tabindex=-1 id="alinkItems" style="display:block;" href="tvinnsadmanifest_edit_cargolines.do?action=doFetch&efpro=${model.record.efpro}&efsg=${model.record.efsg}
+						<a tabindex=-1 id="alinkItems" style="display:block;" href="tvinnsadmanifest_edit_cargolines.do?action=doFetch&efpro=${model.efpro}&efsg=${model.efsg}
 													&efavd=${model.efavd}&efuuid=${model.efuuid}">
 							<font class="tabDisabledLink">
 								&nbsp;<spring:message code="systema.tvinn.sad.manifest.createnew.last.tab"/>
@@ -57,12 +57,16 @@
 		<td>		
 		<table width="100%" cellspacing="0" border="0" cellpadding="0">
 	    	<%-- separator --%>
-	        <tr height="2"><td></td></tr> 
+	        <tr height="1"><td></td></tr> 
 			<tr>
 				<td>
-				<table width="100%" cellspacing="0" border="0" cellpadding="0">
+				<table style="width:100%;" id="containerdatatableTable" cellspacing="2" align="left" >
+				<tr>
+				<td class="text11">
+
+				<table id="mainList" class="display compact cell-border" >
 					<thead>
-					<tr class="tableHeaderField" height="20" valign="left">
+					<tr class="tableHeaderField" height="20" >
 						<th class="tableHeaderFieldFirst">&nbsp;Avsender&nbsp;</th>
 						<th class="tableHeaderField">&nbsp;Mottaker&nbsp;</th>
 					    <th class="tableHeaderField">&nbsp;Msg Id&nbsp;</th>
@@ -70,7 +74,7 @@
 	                    <th class="tableHeaderField">&nbsp;Status&nbsp;</th>
 	                    <th class="tableHeaderField">&nbsp;Fil&nbsp;</th>
 	                    <th class="tableHeaderField">&nbsp;Sent&nbsp;</th>
-	                    <th class="tableHeaderField">&nbsp;In/Outbound&nbsp;</th>
+	                    <th title="S=SEND; R=RECEIVED" class="tableHeaderField">&nbsp;S/R&nbsp;</th>
 	                    
 	               </tr> 
 	               </thead>
@@ -85,23 +89,26 @@
 		                   </c:otherwise>
 		               </c:choose>
 		               
-		               <td class="tableCellFirst" <c:if test="${record.ssr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;${record.s0004}</td>
+		               <td width="2%" class="tableCellFirst" <c:if test="${record.ssr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;${record.s0004}</td>
 		               
-		               <td class="tableCell" <c:if test="${record.ssr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;${record.s0010}</td>
-		               <td class="tableCell" <c:if test="${record.ssr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;${record.s0026}</td>
-		               <td class="tableCell" <c:if test="${record.ssr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;${record.s0036}</td>
-		               <td class="tableCell" <c:if test="${record.ssr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;${record.sst}</td>
+		               <td width="2%" class="tableCell" <c:if test="${record.ssr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;${record.s0010}</td>
+		               <td align="center" width="2%" class="tableCell" <c:if test="${record.ssr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;${record.s0026}</td>
+		               <td align="center" width="2%" class="tableCell" <c:if test="${record.ssr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;${record.s0036}</td>
+		               <td align="center" width="2%" class="tableCell" <c:if test="${record.ssr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;${record.sst}</td>
 		               <td class="tableCell">&nbsp;
-		               		<a <c:if test="${record.ssr == 'R'}">style="color:#9F6000;"</c:if>  href="TODOtvinnsadimport_renderJson.do?fp=${record.wurl}" target="_new" >
-			               		<img src="resources/images/list.gif" border="0" width="12px" height="12px" alt="Vis payload" >
-			               		&nbsp;${record.wurl}
+		               		<a <c:if test="${record.ssr == 'R'}">style="color:#9F6000;"</c:if>  href="tvinnsadmanifest_logging_renderJson.do?fp=${record.wurl}" target="_new" >
+			               		<img src="resources/images/largeTextContent.png" border="0" width="16px" height="16px" alt="Vis payload" >
+			               		&nbsp;${record.own_fileName}
 	               		   	</a>
 		               </td>
-		               <td class="tableCell" <c:if test="${record.ssr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;${record.sdt}&nbsp;${record.stm}</td>
-		               <td class="tableCell" <c:if test="${record.ssr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;${record.ssr}</td>
+		               <td align="center" width="2%" class="tableCell" <c:if test="${record.ssr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;${record.sdt}&nbsp;${record.stm}</td>
+		               <td align="center" width="2%" class="tableCell" <c:if test="${record.ssr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;${record.ssr}</td>
 		            </tr> 
 		            </c:forEach>
 		            </tbody>
+	            </table>
+	            </td>
+	            </tr>
 	            </table>
 			</td>	
 			</tr>

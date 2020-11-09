@@ -26,7 +26,7 @@ public class JsonTvinnSadManifestLoggingRecord extends JsonAbstractGrandFatherRe
 	private String sdt = null;
 	private String stm = null;
 	private String wurl = null;
-	
+	private String own_fileName = null;
 	
 	/**
 	 * Used for java reflection in other classes

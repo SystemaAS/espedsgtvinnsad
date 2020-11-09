@@ -441,29 +441,6 @@ public class TvinnSadManifestHeaderController {
 		}
 	}
 	
-	/**
-	 * 
-	 * @param session
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping(value="tvinnsadmanifest_logging.do", method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doLogging(HttpSession session, HttpServletRequest request){
-		
-		ModelAndView successView = new ModelAndView("tvinnsadmanifest_logging");
-		Map model = new HashMap();
-		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
-		
-		//check user (should be in session already)
-		if(appUser==null){
-			return loginView;
-			
-		}else{
-			//TODO
-		}
-		return successView;
-	}
-	
 	
 	
 	/**
