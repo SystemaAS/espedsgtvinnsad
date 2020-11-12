@@ -339,12 +339,12 @@
 							<td colspan="2" width="50%" valign="top">
 							<table id="tblDirektfortolling" width="100%" class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="0">
 				 			<tr >
-								<td class="text16"><b>&nbsp;Direktfortolling</b></td>
+								<td class="text16"><b>&nbsp;Direktefortolling</b></td>
 							<tr >
 				 			<tr>
-				 				<td class="text14">&nbsp;<span title="clrg">Deklarantnr.</span></td>
-								<td class="text14">&nbsp;<span title="cl0068a">Dato</span></td>
-								<td class="text14">&nbsp;<span title="cl0068b">Sekvensnr.</span></td>
+				 				<td class="text14">&nbsp;<span title="clrg">Deklarantnr.<font class="text16RedBold" >*</font></span></td>
+								<td class="text14">&nbsp;<span title="cl0068a">Dato<font class="text16RedBold" >*</font></span></td>
+								<td class="text14">&nbsp;<span title="cl0068b">Sekvensnr.<font class="text16RedBold" >*</font></span></td>
 							</tr>
 							<tr>
 								<td class="text14"><input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="clrg" id="clrg" size="12" maxlength="11" value="${model.record.clrg}"></td>
@@ -352,8 +352,8 @@
 				 				<td class="text14"><input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="cl0068b" id="cl0068b" size="7" maxlength="6" value='<c:if test="${model.record.cl0068b!='0'}">${model.record.cl0068b}</c:if>'></td>
 							</tr>
 							<tr >
-								<td class="text14">&nbsp;<span title="cletyp">Eksporttype</span></td>
-								<td colspan="2" class="text14">&nbsp;<span title="cleid">Eksp.id</span></td>							
+								<td class="text14">&nbsp;<span title="cletyp">Eksporttype<font class="text16RedBold" >*</font></span></td>
+								<td colspan="2" class="text14">&nbsp;<span title="cleid">Eksp.id<font class="text16RedBold" >*</font></span></td>							
 							</tr>
 							
 							<tr>
@@ -378,9 +378,9 @@
 								<td class="text16"><b>&nbsp;Transitering</b></td>
 							<tr >
 				 			<tr >
-				 				<td class="text14">&nbsp;<span title="cltrnr">MRNnr.</span></td>
-								<td class="text14">&nbsp;<span title="clnas">Avsender</span></td>
-								<td class="text14">&nbsp;<span title="clnak">Mottaker</span></td>
+				 				<td class="text14">&nbsp;<span title="cltrnr">MRNnr.<font class="text16RedBold" >*</font></span></td>
+								<td class="text14">&nbsp;<span title="clnas">Avsender<font class="text16RedBold" >*</font></span></td>
+								<td class="text14">&nbsp;<span title="clnak">Mottaker<font class="text16RedBold" >*</font></span></td>
 					 		</tr>
 					 		<tr>
 								<td class="text14"><input type="text" class="inputTextMediumBlue toggleTransit" name="cltrnr" id="cltrnr" size="20" maxlength="18" value="${model.record.cltrnr}"></td>

@@ -179,7 +179,7 @@ public class TvinnSadManifestHeaderCargoLinesController {
 							//do not present in GUI only in logg
 							String rpgErrorMessage = "SERVER_ERROR:" + rpgContainer.getErrMsg() + rpgContainer.getErrMsgT();
 							logger.error(rpgErrorMessage);
-							//model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, rpgErrorMessage);
+							model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, rpgErrorMessage);
 						}
 					}
 				}
@@ -249,9 +249,9 @@ public class TvinnSadManifestHeaderCargoLinesController {
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		Map model = new HashMap();
 		
+		String clavd = null;
 		String clpro = null;
 		String cltdn = null;
-		String clavd = null;
 		String euuid = null;
 		String efsg = null;
 		
@@ -267,7 +267,7 @@ public class TvinnSadManifestHeaderCargoLinesController {
     			}else if(element.startsWith("currentCltdn")){
     				cltdn = value;
     			}else if(element.startsWith("currentClavd")){
-    				clavd = value;
+    				clavd = value; 
     			}else if(element.startsWith("currentEuuid")){
     				euuid = value;
     			}else if(element.startsWith("currentEfsg")){
@@ -293,9 +293,9 @@ public class TvinnSadManifestHeaderCargoLinesController {
 				int dmlRetval = 0;
 				StringBuffer errMsg = new StringBuffer();
 				//fetch record
-				logger.warn("doDelete");
-				//Update with delete flag
-				dmlRetval = this.deleteRecord(appUser.getUser(), recordToValidate, errMsg);
+				logger.warn("doRelease");
+				//Update with release flag
+				dmlRetval = this.releaseRecord(appUser.getUser(), recordToValidate, errMsg);
 				if(dmlRetval<0){
 					logger.info("ERROR on delete ... ??? check your code");
 					
@@ -378,13 +378,16 @@ public class TvinnSadManifestHeaderCargoLinesController {
 	 * @param errMsg
 	 * @return
 	 */
-	private int deleteRecord(String applicationUser, JsonTvinnSadManifestCargoLinesRecord recordToValidate, StringBuffer errMsg){
+	private int releaseRecord(String applicationUser, JsonTvinnSadManifestCargoLinesRecord recordToValidate, StringBuffer errMsg){
 		int retval = -1;
+		String MODE_RELEASE = "R";
+		String STATUS_FLAG = "S";
+		
 		//get BASE URL
 		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_UPDATE_MANIFEST_EXPRESS_CARGOLINES_URL;
 		//add URL-parameters
 		StringBuffer urlRequestParams = new StringBuffer();
-		urlRequestParams.append("user=" + applicationUser + "&mode=R&clst=S" + "&clavd=" + recordToValidate.getClavd());
+		urlRequestParams.append("user=" + applicationUser + "&mode=" + MODE_RELEASE + "&clst=" + STATUS_FLAG + "&clavd=" + recordToValidate.getClavd());
 		urlRequestParams.append("&cltdn=" + recordToValidate.getCltdn() + "&clpro=" + recordToValidate.getClpro());
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
     	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
@@ -471,6 +474,7 @@ public class TvinnSadManifestHeaderCargoLinesController {
     		JsonTvinnSadManifestRpgContainer container = this.tvinnSadManifestListService.getContainerRpgResult(jsonPayload);
     		retval = container;
     	}
+    	logger.warn("raw result from SAD132RAW:" + retval.toString());
     	return retval;
 	}
 	

@@ -606,6 +606,8 @@
 		            		  		<option value="M">M</option>
 		            		  		<option value="S">SLETTET</option>
 							  	<option value="X">X</option>
+							  	<option value="Z">Z</option>
+							  	
 							  	
 							</select>
 						</td>

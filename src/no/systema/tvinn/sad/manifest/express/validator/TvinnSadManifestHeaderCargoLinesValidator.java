@@ -53,12 +53,13 @@ public class TvinnSadManifestHeaderCargoLinesValidator implements Validator {
 			if(record!=null){
 				//Direktfortolling 
 				if("01".equals(record.getClpr())){
-					if(StringUtils.isEmpty(record.getCl0068a()) || StringUtils.isEmpty(record.getCl0068b()) || StringUtils.isEmpty(record.getClrg())){
+					if(StringUtils.isEmpty(record.getCl0068a()) || StringUtils.isEmpty(record.getCl0068b()) || StringUtils.isEmpty(record.getClrg())
+							|| StringUtils.isEmpty(record.getCletyp()) || StringUtils.isEmpty(record.getCleid())  ){
 						errors.rejectValue("clrg", "systema.tvinn.sad.manifest.express.cargolines.error.rule.directfortolling.mandatory.ids");
 					}
 				}else if ("02".equals(record.getClpr())){
 					if(StringUtils.isEmpty(record.getCltrnr()) || StringUtils.isEmpty(record.getClnas()) || StringUtils.isEmpty(record.getClnak()) ){
-						errors.rejectValue("clrg", "systema.tvinn.sad.manifest.express.cargolines.error.rule.transit.mandatory.ids");
+						errors.rejectValue("cltrnr", "systema.tvinn.sad.manifest.express.cargolines.error.rule.transit.mandatory.ids");
 					}
 					//Certified check
 					if(record.getCleser().equals("J")){
