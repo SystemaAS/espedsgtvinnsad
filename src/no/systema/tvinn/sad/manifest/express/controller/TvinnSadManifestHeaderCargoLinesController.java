@@ -22,6 +22,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.ui.ModelMap;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -169,9 +172,10 @@ public class TvinnSadManifestHeaderCargoLinesController {
 			//dropdowns
 			this.setCodeDropDownMgr(appUser, model);
 			
-			if(strMgr.isNotNull(recordToValidate.getClpro()) ){
+			if(StringUtils.isNotEmpty(recordToValidate.getClpro())) {
 				//execute RPG first
-				if(isValidRecord){
+				if(isValidRecord && this.isValidSad132RawFetch(headerRecord)){
+					logger.warn("calling SAD132RAW ...");
 					JsonTvinnSadManifestRpgContainer rpgContainer = this.executeRpgSad132RawForCargoLines(appUser, recordToValidate.getClpro());
 					if(rpgContainer!=null){
 						//check for errors
@@ -231,7 +235,21 @@ public class TvinnSadManifestHeaderCargoLinesController {
 			return successView;
 		}
 	}
-	
+	/**
+	 * Checks if the back-end pgm should be called or not
+	 * @param headerRecord
+	 * @return
+	 */
+	private boolean isValidSad132RawFetch(JsonTvinnSadManifestRecord headerRecord){
+		boolean retval = true;
+		//These status should block the call of this back-end service pgm
+		if(headerRecord.MANIFEST_INTERNAL_STATUS_DELETED.equals(headerRecord.getEfst()) || 
+			headerRecord.MANIFEST_INTERNAL_STATUS_FINISHED_Z.equals(headerRecord.getEfst()) ){
+			retval = false;
+		}
+		
+		return retval;
+	}
 	
 	/**
 	 * 

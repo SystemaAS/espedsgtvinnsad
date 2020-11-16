@@ -31,13 +31,17 @@ import no.systema.main.util.StringManager;
 
 import no.systema.tvinn.sad.util.TvinnSadConstants;
 import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
+import no.systema.z.main.maintenance.model.jsonjackson.dbtable.JsonMaintMainChildWindowKofastContainer;
+import no.systema.z.main.maintenance.model.jsonjackson.dbtable.JsonMaintMainChildWindowKofastRecord;
 import no.systema.z.main.maintenance.service.MaintMainKofastService;
+import no.systema.z.main.maintenance.url.store.MaintenanceMainUrlDataStore;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRpgContainer;
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
 import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService;
+import no.systema.tvinn.sad.manifest.express.util.TvinnSadManifestConstants;
 import no.systema.tvinn.sad.manifest.express.util.manager.CodeDropDownMgr;
 import no.systema.tvinn.sad.manifest.express.util.manager.ManifestDateManager;
 import no.systema.tvinn.sad.manifest.express.util.manager.ManifestExpressMgr;
@@ -201,14 +205,13 @@ public class TvinnSadManifestHeaderController {
 			return loginView;
 		
 		}else{
-			//Change status OBSOLETE...is done in RpgSADEFJSONW
-			/*
+			
 			StringBuffer errMsg = new StringBuffer();
 			int dmlRetval = 0;
 			if(StringUtils.isNotEmpty(recordToValidate.getEfuuid()) ){
 				dmlRetval = this.updateStatus(appUser.getUser(), this.MODE_UPDATE_MANIFEST_STATUS, recordToValidate, errMsg);
 			}
-			*/
+			
 			//execute RPG last
 			if(StringUtils.isNotEmpty(recordToValidate.getEfpro())){
 				JsonTvinnSadManifestRpgContainer rpgContainer = this.executeRpgSADEFJSONW(appUser, recordToValidate.getEfpro());
@@ -265,7 +268,7 @@ public class TvinnSadManifestHeaderController {
 		    		
 			    }else{
 			    	//adjust some db-fields
-			    	this.adjustFieldsForUpdate(recordToValidate);
+			    	this.adjustFieldsForUpdate(appUser.getUser(), recordToValidate);
 			    	
 			    	//Start DML operations if applicable
 					StringBuffer errMsg = new StringBuffer();
@@ -307,7 +310,7 @@ public class TvinnSadManifestHeaderController {
 					this.adjustFieldsForFetch(record);
 					//check if the manifest cargo lines are valid
 					if(!manifestExpressMgr.isValidManifest(appUser, record.getEfpro())){
-						model.put("invalidManifest", "1");
+						model.put("invalidManifest", "-1");
 					}
 					//check it the manifest is editable
 					if(!manifestExpressMgr.isEditableManifest(appUser, record)){
@@ -662,10 +665,10 @@ public class TvinnSadManifestHeaderController {
 	
 	/**
 	 * 
+	 * @param applicationUser
 	 * @param recordToValidate
 	 */
-
-	private void adjustFieldsForUpdate(JsonTvinnSadManifestRecord recordToValidate){
+	private void adjustFieldsForUpdate(String applicationUser, JsonTvinnSadManifestRecord recordToValidate){
 		recordToValidate.setEfdtr(new DateTimeManager().getCurrentDate_ISO());
 		recordToValidate.setEfeta(new ManifestDateManager().convertToDate_ISO(recordToValidate.getEfeta()));
 		recordToValidate.setEfsjadt(new ManifestDateManager().convertToDate_ISO(recordToValidate.getEfsjadt()));
@@ -675,8 +678,13 @@ public class TvinnSadManifestHeaderController {
 				recordToValidate.setEfetm(recordToValidate.getEfetm() + "00");
 			}
 		}
+		//get efktypt (text) for efktyp(comming from a drop-down)
+		recordToValidate.setEfktypt(this.getText(applicationUser, recordToValidate.getEfktyp()));
 	}
-	
+	/**
+	 * 
+	 * @param recordToValidate
+	 */
 	private void adjustFieldsForFetch(JsonTvinnSadManifestRecord recordToValidate){
 		recordToValidate.setEfeta(new ManifestDateManager().convertToDate_NO(recordToValidate.getEfeta()));
 		recordToValidate.setEfsjadt(new ManifestDateManager().convertToDate_NO(recordToValidate.getEfsjadt()));
@@ -686,6 +694,43 @@ public class TvinnSadManifestHeaderController {
 				recordToValidate.setEfetm(recordToValidate.getEfetm().substring(0,4));
 			}
 		}
+	}
+	/**
+	 * Completes an important text field not present in GUI
+	 * @param applicationUser
+	 * @param efktyp
+	 * @return
+	 */
+	private String getText(String applicationUser, String efktyp){
+		String retval = "";
+		String BASE_URL = MaintenanceMainUrlDataStore.MAINTENANCE_MAIN_BASE_KOFAST_GET_LIST_URL;
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + applicationUser);
+		urlRequestParams.append("&kftyp=" + FasteKoder.SADEFBKODE.toString());
+		urlRequestParams.append("&kfkod=" + efktyp);
+		
+		logger.info(BASE_URL);
+		logger.info(urlRequestParams);
+
+		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+		JsonMaintMainChildWindowKofastContainer container = null;
+		Collection <JsonMaintMainChildWindowKofastRecord> list = new ArrayList<JsonMaintMainChildWindowKofastRecord>();
+		try {
+			if (jsonPayload != null) {
+				container = maintMainKofastService.getContainer(jsonPayload);
+				if (container != null) {
+					for (JsonMaintMainChildWindowKofastRecord record :  container.getDtoList()) {
+						if (!"DEFN".equals(record.getKfkod())) {
+							retval = record.getKftxt(); 
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			logger.info("Error: ",e);
+		}
+		
+		return retval;
 	}
 	
 	/**

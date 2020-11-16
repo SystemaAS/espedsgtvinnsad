@@ -18,10 +18,12 @@ public class JsonTvinnSadManifestRecord extends JsonAbstractGrandFatherRecord {
 	public static final String MANIFEST_SUBMITTED = "S";
 	public static final String MANIFEST_DELETED = "D";
 	public static final String MANIFEST_COMPLETED = "C";
+	
 	public static final String MANIFEST_INTERNAL_STATUS_SENDING = "B";
 	public static final String MANIFEST_INTERNAL_STATUS_COMPLETED = "C";
 	public static final String MANIFEST_INTERNAL_STATUS_ERROR = "M";
 	public static final String MANIFEST_INTERNAL_STATUS_DELETED = "S";
+	public static final String MANIFEST_INTERNAL_STATUS_FINISHED_Z = "Z";
 	
 	public static final int MANIFEST_AT_LEAST_HOURS_AHEAD_VALID = 2;
 	
