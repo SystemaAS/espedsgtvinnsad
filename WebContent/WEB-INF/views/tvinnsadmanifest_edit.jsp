@@ -537,6 +537,7 @@
 									<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
 									<c:if test="${not empty model.record.efuuid && empty model.invalidManifest}">
 										&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
+										
 									</c:if>
 								</c:when>
 								<c:otherwise>

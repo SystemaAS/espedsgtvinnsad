@@ -36,8 +36,10 @@
     });
     
     jq('#sendButton').click(function() { 
+    	var status = "S";
+    	
     	setBlockUI();
-		window.location = 'tvinnsadmanifest_send.do?efuuid=' + jq('#efuuid').val() + '&efpro=' + jq('#efpro').val() + '&efst2=S';
+		window.location = 'tvinnsadmanifest_send.do?efuuid=' + jq('#efuuid').val() + '&efpro=' + jq('#efpro').val() + '&efst2=' + status;
     });
     
     jq('#imgManifestIdInfo').click(function() { 
