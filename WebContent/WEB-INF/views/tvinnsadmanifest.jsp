@@ -232,7 +232,15 @@
 		               <td width="2%" class="tableCell" >${record.efkmrk}</td>
 		               <td width="2%" class="tableCell" >${record.efsjaf}</td>
 		               <td width="2%" class="tableCell" ><c:if test="${record.efdtr > 0}">${record.efdtr}</c:if></td>
+		               <%--
 		               <td width="2%" class="tableCell" ><font style="font-size:11px;">${record.efuuid}</font></td>
+		                --%>
+		               <td width="2%" class="tableCell" >
+		               		<a style="display: block; width: 100%; height: 100%;" class="uuidLink text14SkyBlue" id="${record.efuuid}">
+								${record.efuuid}
+							</a>  
+		               </td>
+		               
 		               <td width="2%" align="center" class="tableCell" >
 		               		<c:choose>
 		               		<c:when test="${record.efst2 == 'S' || record.efst2 == 'R' || record.efst2 == 'D' || record.efst2 == 'C'}">

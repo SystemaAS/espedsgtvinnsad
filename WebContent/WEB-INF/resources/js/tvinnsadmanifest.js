@@ -152,6 +152,13 @@
   
   
   
+  jq(function() {
+	  jq(".uuidLink").click(function() {
+		  var id = this.id;
+		  jq("#"+id).attr(('target','_blank'));
+		  window.open('tvinnsadmanifest_childwindow_manifestinfo.do?id=' + id, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");
+	  });
+  });
   
   
 //-------------------
