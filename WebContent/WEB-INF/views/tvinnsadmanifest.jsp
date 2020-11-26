@@ -236,7 +236,7 @@
 		               <td width="2%" class="tableCell" ><font style="font-size:11px;">${record.efuuid}</font></td>
 		                --%>
 		               <td width="2%" class="tableCell" >
-		               		<a style="display: block; width: 100%; height: 100%;" class="uuidLink text14SkyBlue" id="${record.efuuid}">
+		               		<a style="display: block; width: 100%; height: 100%; cursor:pointer" class="uuidLink text14SkyBlue" id="${record.efuuid}">
 								${record.efuuid}
 							</a>  
 		               </td>
