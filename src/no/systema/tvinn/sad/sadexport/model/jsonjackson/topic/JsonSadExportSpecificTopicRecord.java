@@ -566,6 +566,11 @@ public class JsonSadExportSpecificTopicRecord extends JsonAbstractGrandFatherRec
 	public void setM0035(String value) {  this.m0035 = value; }
 	public String getM0035() { return this.m0035;}
 	
+	//
+	private boolean validTranspmateAndCity = true; 
+	public void setValidTranspmateAndCity(boolean value) {  this.validTranspmateAndCity = value; }
+	public boolean IsValidTranspmateAndCity() { return this.validTranspmateAndCity;}
+	
 	/**
 	 * Used for java reflection in other classes
 	 * @return

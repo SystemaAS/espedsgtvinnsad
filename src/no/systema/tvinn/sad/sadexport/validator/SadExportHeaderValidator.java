@@ -190,6 +190,10 @@ public class SadExportHeaderValidator implements Validator {
 						errors.rejectValue("seftg2", "systema.tvinn.sad.export.header.error.rule.invalid.seftg2");
 					}
 				}
+				//if the combination of 25.Transp.måte och 29.Utpass.sted is not valid
+				if(!record.IsValidTranspmateAndCity()){
+					errors.rejectValue("setrm", "systema.tvinn.sad.export.header.error.rule.invalid.setrm");
+				}
 				
 			}
 		}
@@ -377,5 +381,6 @@ public class SadExportHeaderValidator implements Validator {
 		  } 
 		  return result;
 	  }
+	
 	
 }

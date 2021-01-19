@@ -3,6 +3,8 @@ package no.systema.tvinn.sad.sadexport.controller;
 import java.util.*;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.springframework.validation.BindingResult;
@@ -45,6 +47,8 @@ import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelning
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelningRecord;
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureContainer;
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureRecord;
+import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeContainer;
+import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
 import no.systema.tvinn.sad.model.jsonjackson.customer.JsonTvinnSadCustomerContainer;
 import no.systema.tvinn.sad.model.jsonjackson.customer.JsonTvinnSadCustomerRecord;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicContainer;
@@ -296,6 +300,8 @@ public class SadExportHeaderController {
 					}
 					//Fill up tollkreditnr if applicable
 					this.adjustTollkredit(appUser, recordToValidate);
+					//adjust extra fields before validations
+					this.adjustFieldsBeforeValidation(appUser, recordToValidate);
 					
 					SadExportHeaderValidator validator = new SadExportHeaderValidator(this.urlCgiProxyService, appUser.getUser(), currencyRateService);
 					validator.validate(recordToValidate, bindingResult);
@@ -2031,6 +2037,54 @@ public class SadExportHeaderController {
     	}
 		
 		return returnRecord;
+	}
+	/**
+	 * Adjusts some fields before the validation
+	 * 
+	 * @param appUser
+	 * @param recordToValidate
+	 */
+	public void adjustFieldsBeforeValidation(SystemaWebUser appUser, JsonSadExportSpecificTopicRecord recordToValidate){
+		
+		try{
+			//(1) ADJUST field: validTranspmateAndCity (Checks combination between: 25.Tranportmåte && 29.Utpass.sted).	
+			String CODES_URL = TvinnSadUrlDataStore.TVINN_SAD_CODES_URL;
+			StringBuffer urlRequestParamsKeys = new StringBuffer();
+			urlRequestParamsKeys.append("user=" + appUser.getUser());
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "typ=" + this.codeDropDownMgr.CODE_HA_HAVNKODER);
+			String utfPayload = urlCgiProxyService.getJsonContent(CODES_URL, urlRequestParamsKeys.toString());
+			JsonTvinnSadCodeContainer codeContainer = tvinnSadDropDownListPopulationService.getCodeContainer(utfPayload);
+			List<JsonTvinnSadCodeRecord> list = new ArrayList();
+			//get the postal code alone
+			logger.info(recordToValidate.getSekdh());
+			String[] tmp = recordToValidate.getSekdh().split("@");
+			String postalCode = tmp[0];
+			//start the logic
+			for(JsonTvinnSadCodeRecord codeRecord: codeContainer.getKodlista()){
+				//find the city chosen by the end user
+				if(codeRecord.getZkod().equals(postalCode)){
+					logger.info(codeRecord.getZtxt2());
+					//pick the list of Ztxt2 values
+					if(StringUtils.isNotEmpty(codeRecord.getZtxt2())){
+						logger.info(Arrays.toString(codeRecord.getZtxt2Array()));
+						for (String i : codeRecord.getZtxt2Array()){
+							//look for a match with Transport means field. If it matches then the combintation is not valid. Look further on into Validator
+				        	if(i.equals(recordToValidate.getSetrm())){
+				        		logger.info("FALSE!!!!!");
+				        		recordToValidate.setValidTranspmateAndCity(false);
+				        	}
+				        }
+					}
+				}
+			}
+			
+			//(2) ADJUST field: next field in the future
+			//here ...
+			
+		}catch (Exception e){
+			logger.error(e);
+		}
+		
 	}
 	
 	//SERVICES

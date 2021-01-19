@@ -4,6 +4,7 @@
 package no.systema.tvinn.sad.sadexport.util.manager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -168,6 +169,14 @@ public class CodeDropDownMgr {
 			
 			}else if(this.CODE_HA_HAVNKODER.equalsIgnoreCase(paramTYP)){
 				model.put(SadExportConstants.RESOURCE_MODEL_KEY_CODE_HA_HAVNKODER_LIST,list);
+				//DEBUG for Yang's change on Jan 19th 2021 - SAD Export (validation)
+				/*
+				for(JsonTvinnSadCodeRecord rec : list){
+					logger.warn(rec.getZtxt2());
+					if(rec.getZtxt2Array()!=null){
+						logger.warn(Arrays.toString(rec.getZtxt2Array()));
+					}
+				}*/
 			
 			}else if(this.CODE_O_TYPETILFELLE.equalsIgnoreCase(paramTYP)){
 				model.put(SadExportConstants.RESOURCE_MODEL_KEY_CODE_O_TYPETILFELLE_OMBEREGNING_LIST,list);
