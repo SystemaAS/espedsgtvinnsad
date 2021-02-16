@@ -518,35 +518,35 @@ public class SadExportItemsController {
 			    		    			}else{
 			    		    				//Set error
 			    		    				logger.info(ERROR_FRAME_STD_OUTPUT);
-				    						logger.info("ERROR level (FINAL) - Mandatory Fields:" + idDebug);
+				    						logger.info("ERROR level (FINAL) - Mandatory Fields: " + idDebug);
 				    						logger.info(ERROR_FRAME_STD_OUTPUT);
 				    						autoControlMgr.updateItemWithAutoControlError(appUser.getUser(), AUTO_CONTROL_ERROR_FLAG_VALUE);
 			    		    			}
 		    						}else{
 		    							//Set error
 		    							logger.info(ERROR_FRAME_STD_OUTPUT);
-			    						logger.info("ERROR level (4) - Country code:" + idDebug);
+			    						logger.info("ERROR level (4) - Country code: " + idDebug);
 			    						logger.info(ERROR_FRAME_STD_OUTPUT);
 			    						autoControlMgr.updateItemWithAutoControlError(appUser.getUser(), AUTO_CONTROL_ERROR_FLAG_VALUE);
 		    						}
 	        					}else{
 	        						//Set error
 	        						logger.info(ERROR_FRAME_STD_OUTPUT);
-	        						logger.info("ERROR level (3) - Mengde must Not Exist:" + idDebug);
+	        						logger.info("ERROR level (3) - Mengde must Not Exist: " + idDebug);
 	        						logger.info(ERROR_FRAME_STD_OUTPUT);
 	        						autoControlMgr.updateItemWithAutoControlError(appUser.getUser(), AUTO_CONTROL_ERROR_FLAG_VALUE);
 	        					}
 	    					}else{
 	    						//Set error
 	    						logger.info(ERROR_FRAME_STD_OUTPUT);
-	    						logger.info("ERROR level (2) - Mengde must exist:" + idDebug);
+	    						logger.info("ERROR level (2) - Mengde must exist: " + idDebug);
 	    						logger.info(ERROR_FRAME_STD_OUTPUT);
 	    						autoControlMgr.updateItemWithAutoControlError(appUser.getUser(), AUTO_CONTROL_ERROR_FLAG_VALUE);
 	    					}
 						}else{
 							//Set error
 							logger.info(ERROR_FRAME_STD_OUTPUT);
-							logger.info("ERROR level (1) - Weights:" + idDebug);
+							logger.info("ERROR level (1) - Weights: " + idDebug);
 							logger.info(ERROR_FRAME_STD_OUTPUT);
 							autoControlMgr.updateItemWithAutoControlError(appUser.getUser(), AUTO_CONTROL_ERROR_FLAG_VALUE);
 						}
@@ -555,7 +555,7 @@ public class SadExportItemsController {
 	    				//Begin with the validity checks
 		    			String idDebug = record.getSvli() + "-" + record.getSvvnt();
 						logger.info(ERROR_FRAME_STD_OUTPUT);
-						logger.info("ERROR level (INIT) - Tolltariff nr:" + idDebug);
+						logger.info("ERROR level (INIT) - Tolltariff nr: " + idDebug);
 						logger.info(ERROR_FRAME_STD_OUTPUT);
 						autoControlMgr.updateItemWithAutoControlError(appUser.getUser(), AUTO_CONTROL_ERROR_FLAG_VALUE);
 	    			}

@@ -4,6 +4,7 @@ import java.util.*;
 
 import org.apache.log4j.Logger;
 
+import javawebparts.core.org.apache.commons.lang.StringUtils;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.service.UrlCgiProxyService;
 /*
@@ -83,19 +84,21 @@ public class SadExportItemsAutoControlMgr {
 	 *
 	 */
 	public void checkValidGrossAndNetWeight(){
-		if(this.record.getSvvktb()!=null && !"".equals(this.record.getSvvktb())){
-			if(this.record.getSvvktn()!=null && !"".equals(this.record.getSvvktn())){
+		if(StringUtils.isNotEmpty(this.record.getSvvktb())){
+			if(StringUtils.isNotEmpty(this.record.getSvvktn())){
 				try{
 					String grossFormatTmp = this.record.getSvvktb().replace(".", "");
 					double grossWeight = Double.parseDouble(grossFormatTmp.replace(",", "."));
 					String netFormatTmp = this.record.getSvvktn().replace(".", "");
 					double netWeight = Double.parseDouble(netFormatTmp.replace(",", "."));
-					
+					logger.warn(grossWeight);
+					logger.warn(netWeight);
 					//Net can not be > than Gross
 					if (netWeight>grossWeight){
 						this.validRecord = false;
 					}
 				}catch(Exception e){
+					logger.error(e.toString());
 					this.validRecord = false;
 				}
 			}
