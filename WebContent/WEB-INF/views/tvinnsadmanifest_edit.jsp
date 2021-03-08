@@ -532,6 +532,11 @@
 					<table style="width:96%" border="0" cellspacing="1" cellpadding="0">
 						<tr>
 							<td align="right" >
+							<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
+							<c:if test="${not empty model.record.efuuid && empty model.invalidManifest}">
+								&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
+							</c:if>
+							<%-- Due to emergencies ... we remove validations
 							<c:choose>
 								<c:when test="${model.record.own_editable > 0}">
 									<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
@@ -544,6 +549,7 @@
 									<input title="Status combination or date = blocked" class="inputFormSubmitStd isa_info" type="button" name="fakeButton" id="fakeButton" value='<spring:message code="systema.tvinn.sad.manifest.disabled.button"/>'>
 								</c:otherwise>
 							</c:choose>
+							 --%>
 							</td>
 						</tr>
 					</table>

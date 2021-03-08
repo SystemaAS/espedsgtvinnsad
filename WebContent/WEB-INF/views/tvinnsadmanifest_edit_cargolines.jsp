@@ -532,6 +532,10 @@
 		 				
 	 					
 	 					<td valign="top" align="right">
+	 					
+	 						<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>&nbsp;
+	 						
+	 						<%-- Because of some emergencies we must allow for edit no matter what...
 							<c:choose>
 								<c:when test="${headerRecord.own_editable > 0}">
 									<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>&nbsp;
@@ -540,6 +544,7 @@
 									<input title="Status combination or date = blocked" class="inputFormSubmitStd isa_info" type="button" name="fakeButton" id="fakeButton" value='<spring:message code="systema.tvinn.sad.manifest.disabled.button"/>'>
 								</c:otherwise>
 							</c:choose>
+							 --%>
 						</td>
 						</tr>
 						</table>
