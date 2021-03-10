@@ -2063,7 +2063,6 @@
 						<td class="text14" align="left" title="m1N07">Meldings funksjon</td>
 						<td class="text14MediumBlue">
 							<select class="selectMediumBlueE2" name="m1N07" id="m1N07">
-			            		<option value="">-velg-</option>
 			            		<option value="DEB" <c:if test="${model.record.sendParametersRecord.m1N07 == 'DEB'}"> selected </c:if> >DEB</option>
 			            		<option value="DRE" <c:if test="${model.record.sendParametersRecord.m1N07 == 'DRE'}"> selected </c:if> >DRE</option>
 			            		<option value="DSO" <c:if test="${model.record.sendParametersRecord.m1N07 == 'DSO'}"> selected </c:if> >DSO</option>
