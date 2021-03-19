@@ -427,12 +427,19 @@
   					table.append(row);
 			  	}
   				var row_last = jq('<tr></tr>').addClass('tableRow');
-  				var sendButton = jq('<input/>'). attr({ type: 'button', name:'sbutton', id:'sbutton', value:'Send til toll.no' });
-  				jq(document).on("click", "#sbutton", function(){
-  				  //childwindow
-  				  openUploadFileToToll();
-  				});
-  				row_last.append(sendButton);
+  				//----------------------------------------------------------------------------------------------------
+  				//show button ONLY with "Direktefortolling". "Transiteringen" does not allow sending of docs via API.
+  				//----------------------------------------------------------------------------------------------------
+  				if(jq('#clrg').val()!=''){
+	  				var sendButton = jq('<input/>'). attr({ type: 'button', name:'sbutton', id:'sbutton', value:'Send til toll.no' });
+	  				jq(document).on("click", "#sbutton", function(){
+	  				  //childwindow
+	  				  openUploadFileToToll();
+	  				});
+	  				row_last.append(sendButton);
+  				}
+  				
+  				
   				table.append(row_last);
   				
   				//append TABLE to DIV
