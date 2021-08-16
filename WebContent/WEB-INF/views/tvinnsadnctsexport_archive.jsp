@@ -114,10 +114,25 @@
 		               <td class="tableCell" >&nbsp;${record.additionalInfo}</td>
 		               <%-- <td class="tableCell" >&nbsp;${record.url}</td> --%>
 		               <td class="tableCell" >&nbsp;
-		               		<a href="tvinnsadnctsexport_renderArchive.do?fp=${record.url}" target="_new" >
-			               		<img src="resources/images/pdf.png" border="0" width="16px" height="16px" alt="Visa arkivdokument" >
-			               		${record.documentName}
-		               		</a>
+		               		
+		               		<c:choose>
+		              		<c:when test="${fn:startsWith(record.url, 'http')}">
+								<a href="${record.url}" target="_new" >
+			               			<img src="resources/images/pdf.png" border="0" width="16px" height="16px" alt="Visa arkivdokument on cloud" >
+			               			${record.documentName}
+		               			</a>		              
+		               		</c:when>
+		               		<c:otherwise>
+		               			<a href="tvinnsadnctsexport_renderArchive.do?fp=${record.url}" target="_new" >
+				               		<img src="resources/images/pdf.png" border="0" width="16px" height="16px" alt="Visa arkivdokument" >
+				               		${record.documentName}
+			               		</a>
+		               		
+		               		</c:otherwise>
+		               		</c:choose>
+		               		
+		               		
+		               		
 		               </td>
 		            </tr> 
 		            </c:forEach>

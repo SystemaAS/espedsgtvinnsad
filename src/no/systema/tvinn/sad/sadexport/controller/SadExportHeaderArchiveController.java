@@ -34,6 +34,7 @@ import no.systema.tvinn.sad.sadexport.service.SadExportSpecificTopicService;
 import no.systema.tvinn.sad.sadexport.url.store.SadExportUrlDataStore;
 import no.systema.tvinn.sad.sadexport.util.RpgReturnResponseHandler;
 import no.systema.tvinn.sad.util.TvinnSadConstants;
+import no.systema.tvinn.sad.util.manager.ArchiveGoogleCloudManager;
 
 
 /**
@@ -110,13 +111,16 @@ public class SadExportHeaderArchiveController {
 		    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 		    	
 			if(jsonPayload!=null){
-		    		JsonSadExportSpecificTopicArchiveContainer jsonSadExportSpecificTopicArchiveContainer = this.sadExportSpecificTopicService.getSadExportSpecificTopicArchiveContainer(jsonPayload);
+		    		JsonSadExportSpecificTopicArchiveContainer container = this.sadExportSpecificTopicService.getSadExportSpecificTopicArchiveContainer(jsonPayload);
+		    		//adjust to google cloud if needed
+		    		container = new ArchiveGoogleCloudManager().adjustUrl(appUser, container);
 		    		
-		    		this.setDomainObjectsInView(model, jsonSadExportSpecificTopicArchiveContainer);
+		    		
+		    		this.setDomainObjectsInView(model, container);
 		    		this.setDomainObjectsInView(request, model);
 		    		
 	    		successView.addObject(TvinnSadConstants.DOMAIN_MODEL, model);
-				successView.addObject(TvinnSadConstants.DOMAIN_LIST,jsonSadExportSpecificTopicArchiveContainer.getArchiveElements());
+				successView.addObject(TvinnSadConstants.DOMAIN_LIST,container.getArchiveElements());
 				
 		    	}else{
 				logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");

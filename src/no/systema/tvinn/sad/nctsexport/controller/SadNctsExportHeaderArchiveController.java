@@ -33,6 +33,7 @@ import no.systema.skat.nctsexport.service.SkatNctsExportSpecificTopicService;
 import no.systema.skat.nctsexport.url.store.SkatNctsExportUrlDataStore;
 import no.systema.skat.nctsexport.util.RpgReturnResponseHandler;
 import no.systema.skat.util.SkatConstants;
+import no.systema.tvinn.sad.util.manager.ArchiveGoogleCloudManager;
 
 
 
@@ -109,13 +110,17 @@ public class SadNctsExportHeaderArchiveController {
 		    	logger.info(" --> jsonPayload:" + jsonPayload);
 		    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 		    	if(jsonPayload!=null){
+		    		//we ar using SKAT service for some legacy reason...
 		    		JsonSkatNctsExportSpecificTopicArchiveContainer container = this.skatNctsExportSpecificTopicService.getNctsExportSpecificTopicArchiveContainer(jsonPayload);
+		    		//adjust to google cloud if needed
+		    		container = new ArchiveGoogleCloudManager().adjustUrl(appUser, container);
+		    		
 		    		//add domain objects here
 		    		this.setDomainObjectsInView(model, container);
 		    		this.setDomainObjectsInView(request, model);
 		    		
 		    		successView.addObject(SkatConstants.DOMAIN_MODEL, model);
-				successView.addObject(SkatConstants.DOMAIN_LIST,container.getArchiveElements());
+		    		successView.addObject(SkatConstants.DOMAIN_LIST,container.getArchiveElements());
 		    		
 		    	}else{
 				logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");

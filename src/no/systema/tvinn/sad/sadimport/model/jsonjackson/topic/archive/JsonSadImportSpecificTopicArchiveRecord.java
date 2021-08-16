@@ -25,6 +25,11 @@ public class JsonSadImportSpecificTopicArchiveRecord {
 		if(this.url!=null){
 			int x = this.url.lastIndexOf("/");
 			this.documentName = url.substring(x+1);
+			
+			if(this.url.lastIndexOf("=")>0) {
+				int y = this.url.lastIndexOf("=");
+				this.documentName = url.substring(y+1);
+			}
 		}
 		return this.documentName;
 	}
