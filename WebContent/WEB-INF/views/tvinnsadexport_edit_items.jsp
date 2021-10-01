@@ -1031,7 +1031,9 @@
 											</span>
 											--%>	
 										</td>
+										<td class="text14" align="left"><span title="svvf">VF.</span></td>
 										<td class="text14" align="left"><span title="svcnr">Containernr.</span></td>
+										
 
 									</tr>
 									<tr>
@@ -1058,7 +1060,7 @@
 												<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 											</a>
 										</td>
-										
+									<td class="text14" align="left" >&nbsp;<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="svvf" id="svvf" size="2" maxlength="1" value="${model.record.svvf}"></td>	
 									<td colspan="3" class="text14" align="left" >
 										<input type="text" class="inputText" name="svcnr" id="svcnr" size="13" maxlength="11" value="${model.record.svcnr}">
 										<button name="itemContainerNr" id="itemContainerNr" class="buttonGray" style="font-size:12" type="button" >Mere...</button>
@@ -1080,6 +1082,7 @@
 						 				    	</c:otherwise>	
 					 				    	</c:choose>	
 									</td>
+									
 																	        	
 							        </tr>									
 								</table>
