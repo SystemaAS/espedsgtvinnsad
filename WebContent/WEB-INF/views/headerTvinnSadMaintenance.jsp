@@ -37,7 +37,7 @@
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js""></script>
 	<script type="text/javascript" src="resources/js/jquery.blockUI.js"></script>
-	<script type="text/javascript" src="/espedsg2/resources/js/systemaWebGlobal.js?ver=${user.versionEspedsg}"></script>
+	<script type="text/javascript" src="resources/js/systemaWebGlobal.js?ver=${user.versionEspedsg}"></script>
 	<SCRIPT type="text/javascript" src="resources/js/headerTvinnSadMaintenance.js?ver=${user.versionEspedsg}"></SCRIPT>
 	
 	<input type="hidden" name="language" id=language value="${user.usrLang}">
