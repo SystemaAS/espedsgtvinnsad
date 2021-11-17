@@ -35,7 +35,7 @@ public class ArchiveGoogleCloudManager {
 	//private final String GOOGLE_BUCKET_PREFIX_URL = "https://storage.googleapis.com/gc_"; //complete should be e.g--> "https://storage.googleapis.com/gc_a12/si20210003100088296FVQzjftv.pdf"
 	
 	//API-SYSTEMA -->File passthrough, kan brukes for å vise fil til bruker. Returnere faktisk fil (pdf) :
-	//GET http://10.13.3.22:9886/api/files?comanyid=a12&filename=si201200060073243gS3b26AwqC.pdf
+	//GET http://10.13.3.22:9886/api/files?companyid=a12&filename=si201200060073243gS3b26AwqC.pdf
 	//private final String GOOGLE_BUCKET_PREFIX_URL = "http://10.13.3.22:9886/api/files?";
 	
 	private final String GOOGLE_BUCKET_PREFIX_URL = ApplicationPropertiesUtil.getProperty("archive.cloud.endpoint.prefix");
@@ -198,12 +198,12 @@ public class ArchiveGoogleCloudManager {
 		String tmp = this.adjustPdfSuffix(suffix, strToReplace);
 		logger.warn(tmp);
 		//We now have a string in this format: a12/xxxx.pdf
-		//We aim to have this suffix: "comanyid=a12&filename=si201200060073243gS3b26AwqC.pdf
+		//We aim to have this suffix: "companyid=a12&filename=si201200060073243gS3b26AwqC.pdf
 		int index = tmp.lastIndexOf("/");
-		String comanyid = tmp.substring(0, index);
+		String companyid = tmp.substring(0, index);
 		String filename = tmp.substring(index + 1);
 		
-		result = "comanyid=" + comanyid + "&filename=" + filename;
+		result = "companyid=" + companyid + "&filename=" + filename;
 		
 		return result;
 		
@@ -216,46 +216,46 @@ public class ArchiveGoogleCloudManager {
 	 */
 	private String setAdjustedUrl(SystemaWebUser appUser, String url) {
 		String retval = url;
-		logger.info("original url:" + url);
+		logger.warn("original url:" + url);
 		
 		if(url.startsWith(SAAS_ROOT_PATH_ON_FILE_SYSTEM) || url.startsWith(SAAS_ROOT_PATH_ON_FILE_SYSTEM_UPPERCASE) ) {
-			logger.info("Saas!");
-			logger.info("local url:" + url);
+			logger.warn("Saas!");
+			logger.warn("local url:" + url);
 			if(!new File(url).exists()){
-				logger.info("File does not exists locally!...going to google cloud ...");
+				logger.warn("File does not exists locally!...going to google cloud ...");
 				String strToReplace = SAAS_ROOT_PATH_ON_FILE_SYSTEM;
 				if(url.startsWith(SAAS_ROOT_PATH_ON_FILE_SYSTEM_UPPERCASE)) { strToReplace = SAAS_ROOT_PATH_ON_FILE_SYSTEM_UPPERCASE; }
 				
 				if(GOOGLE_BUCKET_PREFIX_URL.toLowerCase().contains(this.GOOGLE)) {
 					//do it
 					retval = GOOGLE_BUCKET_PREFIX_URL + this.adjustPdfSuffix(url, strToReplace);
-					logger.info("cloud url:" + retval);
+					logger.warn("cloud url:" + retval);
 					
-				}else if(GOOGLE_BUCKET_PREFIX_URL.toLowerCase().contains(this.SYSTEMA_HOST_IP)) {
+				}else if(GOOGLE_BUCKET_PREFIX_URL.toLowerCase().contains(this.SYSTEMA_HOST_IP) || GOOGLE_BUCKET_PREFIX_URL.toLowerCase().contains(this.SYSTEMA_HOST_DNS)) {
 					//implement other API in case the direct google API is not used. Probably an inhouse API (Vidars)
 					retval = GOOGLE_BUCKET_PREFIX_URL + this.adjustPdfApiSuffix(url, strToReplace);
-					logger.info("api url:" + retval);
+					logger.warn("api url:" + retval);
 					
 				}
 			}
 			
 		}else if(url.toLowerCase().startsWith(LOCALHOST_ROOT_PATH_ON_FILE_SYSTEM) && (appUser.getServletHostWithoutHttpPrefix().equals("localhost") || appUser.getServletHostWithoutHttpPrefix().equals("gw.systema.no"))) {
-			logger.info("localhost! or gw.systema test");
+			logger.warn("localhost! or gw.systema test");
 			logger.info("local url:" + url);
 			if(!new File(url).exists()){
-				logger.info("File does not exists locally!...going to google cloud ...");
+				logger.warn("File does not exists locally!...going to google cloud ...");
 				String strToReplace = LOCALHOST_ROOT_PATH_ON_FILE_SYSTEM;
 				
 				if(GOOGLE_BUCKET_PREFIX_URL.toLowerCase().contains(this.GOOGLE)) {
 					//do it
 					retval = GOOGLE_BUCKET_PREFIX_URL + this.adjustPdfSuffix(url, strToReplace);
 					// TEST record.setUrl(googleBucketPrefix + "a12/si20210003100088296FVQzjftv.pdf");
-					logger.info("cloud url:" + retval);
+					logger.warn("cloud url:" + retval);
 					
 				}else if(GOOGLE_BUCKET_PREFIX_URL.toLowerCase().contains(this.SYSTEMA_HOST_IP) || GOOGLE_BUCKET_PREFIX_URL.toLowerCase().contains(this.SYSTEMA_HOST_DNS)) {
 					//implement other API in case the direct google API is not used. Probably an inhouse API (Vidars)
 					retval = GOOGLE_BUCKET_PREFIX_URL + this.adjustPdfApiSuffix(url, strToReplace);
-					logger.info("api url:" + retval);
+					logger.warn("api url:" + retval);
 					
 				}
 			}
