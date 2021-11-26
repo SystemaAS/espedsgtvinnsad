@@ -210,6 +210,29 @@ public class ArchiveGoogleCloudManager {
 	}
 	/**
 	 * 
+	 * @param suffix
+	 * @param strToReplace
+	 * @return
+	 */
+	private String adjustPdfApiSuffixLocalhost(String suffix, String strToReplace) {
+		String LOCALHOST_BUCKET_ON_GOOGLE = "sytst"; //Systemas own test env on the cloud
+		String result = "";
+		String tmp = this.adjustPdfSuffix(suffix, strToReplace);
+		logger.warn(tmp);
+		//We now have a string in this format: a12/xxxx.pdf
+		//We aim to have this suffix: "companyid=a12&filename=si201200060073243gS3b26AwqC.pdf
+		int index = tmp.lastIndexOf("/");
+		//String companyid = tmp.substring(0, index);
+		String companyid = LOCALHOST_BUCKET_ON_GOOGLE;
+		String filename = tmp.substring(index + 1);
+		
+		result = "companyid=" + companyid + "&filename=" + filename;
+		
+		return result;
+		
+	}
+	/**
+	 * 
 	 * @param appUser
 	 * @param url
 	 * @return
@@ -254,7 +277,7 @@ public class ArchiveGoogleCloudManager {
 					
 				}else if(GOOGLE_BUCKET_PREFIX_URL.toLowerCase().contains(this.SYSTEMA_HOST_IP) || GOOGLE_BUCKET_PREFIX_URL.toLowerCase().contains(this.SYSTEMA_HOST_DNS)) {
 					//implement other API in case the direct google API is not used. Probably an inhouse API (Vidars)
-					retval = GOOGLE_BUCKET_PREFIX_URL + this.adjustPdfApiSuffix(url, strToReplace);
+					retval = GOOGLE_BUCKET_PREFIX_URL + this.adjustPdfApiSuffixLocalhost(url, strToReplace);
 					logger.warn("api url:" + retval);
 					
 				}
