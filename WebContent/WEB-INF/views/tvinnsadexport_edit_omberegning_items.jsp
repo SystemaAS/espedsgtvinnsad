@@ -1000,13 +1000,27 @@
 										</td>	
 										<td class="text14" align="left" >
 											<select class="selectMediumBlueE2" name="svvf" id="svvf">
-						        		    	<option title="Tollverdien fastsatt på grunnlag av transaksjonsverdien" value="1"<c:if test="${ empty model.record.svvf || model.record.svvf == '1'}"> selected </c:if> >1</option>
-											  	<option title="Identiske varer" value="2"<c:if test="${ model.record.svvf == '2'}"> selected </c:if> >2</option>
-											  	<option title="Liknende varer" value="3"<c:if test="${ model.record.svvf == '3'}"> selected </c:if> >3</option>
-											  	<option title="Vidaresalgsprisen" value="4"<c:if test="${ model.record.svvf == '4'}"> selected </c:if> >4</option>
-											  	<option title="Beregnet verdi" value="5"<c:if test="${ model.record.svvf == '5'}"> selected </c:if> >5</option>
-											  	<option title="Skjønnsmessig fastsettelse" value="6"<c:if test="${ model.record.svvf == '6'}"> selected </c:if> >6</option>		
-											</select>
+											
+											<c:choose>
+												<c:when test="${ not empty model.record.svvf}">
+											    	<option title="Tollverdien fastsatt på grunnlag av transaksjonsverdien" value="1"<c:if test="${ model.record.svvf == '1'}"> selected </c:if> >1</option>
+												  	<option title="Identiske varer" value="2"<c:if test="${ model.record.svvf == '2'}"> selected </c:if> >2</option>
+												  	<option title="Liknende varer" value="3"<c:if test="${ model.record.svvf == '3'}"> selected </c:if> >3</option>
+												  	<option title="Vidaresalgsprisen" value="4"<c:if test="${ model.record.svvf == '4'}"> selected </c:if> >4</option>
+												  	<option title="Beregnet verdi" value="5"<c:if test="${ model.record.svvf == '5'}"> selected </c:if> >5</option>
+												  	<option title="Skjønnsmessig fastsettelse" value="6"<c:if test="${ model.record.svvf == '6'}"> selected </c:if> >6</option>		
+												</c:when>
+												<c:otherwise>
+													<option title="Tollverdien fastsatt på grunnlag av transaksjonsverdien" value="1"<c:if test="${ recordTopicTvinnSad.sevf == '1'}"> selected </c:if> >1</option>
+												  	<option title="Identiske varer" value="2"<c:if test="${ recordTopicTvinnSad.sevf == '2'}"> selected </c:if> >2</option>
+												  	<option title="Liknende varer" value="3"<c:if test="${ recordTopicTvinnSad.sevf == '3'}"> selected </c:if> >3</option>
+												  	<option title="Vidaresalgsprisen" value="4"<c:if test="${ recordTopicTvinnSad.sevf == '4'}"> selected </c:if> >4</option>
+												  	<option title="Beregnet verdi" value="5"<c:if test="${ recordTopicTvinnSad.sevf == '5'}"> selected </c:if> >5</option>
+												  	<option title="Skjønnsmessig fastsettelse" value="6"<c:if test="${ recordTopicTvinnSad.sevf == '6'}"> selected </c:if> >6</option>		
+												</c:otherwise>
+											</c:choose>
+											
+										</select>
 										</td>	
 								    	<td colspan="2" class="text14" align="left" >
 										<input type="text" class="inputText" name="svcnr" id="svcnr" size="13" maxlength="11" value="${model.record.svcnr}">

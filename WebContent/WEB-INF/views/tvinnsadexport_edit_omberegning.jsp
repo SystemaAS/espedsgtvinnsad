@@ -1823,6 +1823,41 @@
 					            </td>
 					        </tr>
 					        
+					        <tr>
+					            <td class="text14" align="left" >
+					            <img onMouseOver="showPop('vf_info');" onMouseOut="hidePop('vf_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+					            <span title="sefvk">VF</span>
+					            	<div class="text11" style="position: relative;" align="left">
+					            	<span style="position:absolute;top:2px; width:250px;" id="vf_info" class="popupWithInputText text11"  >
+					           			<b>VF</b>
+					           			<p>
+				           				VF Kode - standardverdi for alle varelinjer
+					           			</p>
+				           					<ol>
+						           				<li>Tollverdien fastsatt på grunnlag av transaksjonsverdien</li>
+						           				<li>Identiske varer</li>
+						           				<li>Liknende varer</li>
+						           				<li>Vidaresalgsprisen</li>
+						           				<li>Beregnet verdi</li>
+						           				<li>Skjønnsmessig fastsettelse</li>
+						           			</ol>
+									</span>
+									</div>
+				            	</td>
+					            <td >
+				            		<select class="selectMediumBlueE2" name="sevf" id="sevf">
+				        		    	<option title="Tollverdien fastsatt på grunnlag av transaksjonsverdien" value="1"<c:if test="${model.record.sevf == '1'}"> selected </c:if> >1</option>
+									  	<option title="Identiske varer" value="2"<c:if test="${ model.record.sevf == '2'}"> selected </c:if> >2</option>
+									  	<option title="Liknende varer" value="3"<c:if test="${ model.record.sevf == '3'}"> selected </c:if> >3</option>
+									  	<option title="Vidaresalgsprisen" value="4"<c:if test="${ model.record.sevf == '4'}"> selected </c:if> >4</option>
+									  	<option title="Beregnet verdi" value="5"<c:if test="${ model.record.sevf == '5'}"> selected </c:if> >5</option>
+									  	<option title="Skjønnsmessig fastsettelse" value="6"<c:if test="${ model.record.sevf == '6'}"> selected </c:if> >6</option>		
+									  	
+									</select>
+					            </td>
+					        </tr>
+					        
+					        
 					        <tr height="2"><td></td></tr> 
 					        <tr>
 					        	<td valign="top" class="text14" colspan="2">

@@ -456,6 +456,10 @@ public class JsonSadExportSpecificTopicRecord extends JsonAbstractGrandFatherRec
 	public void setSefvk(String value) {  this.sefvk = value; }
 	public String getSefvk() { return this.sefvk;}
 	
+	private String sevf = null; //VF-default för alla linjer
+	public void setSevf(String value) {  this.sevf = value; }
+	public String getSevf() { return this.sevf;}
+	
 	private String sesam = null; //slå samman J/N
 	public void setSesam(String value) {  this.sesam = value; }
 	public String getSesam() { return this.sesam;}
