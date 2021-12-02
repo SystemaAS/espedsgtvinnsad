@@ -1031,9 +1031,24 @@
 											</span>
 											--%>	
 										</td>
-										<td class="text14" align="left"><span title="svvf">VF.</span></td>
+										<td class="text14" align="left">
+											<img onMouseOver="showPop('vf_info');" onMouseOut="hidePop('vf_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+											<span title="svvf">VF.</span>
+											<div class="text11" style="position: relative;" align="left">
+											<span style="position:absolute;top:2px; width:250px;" id="vf_info" class="popupWithInputText text11">
+							           			<b>VF Kode</b>
+							           			<ol>
+							           				<li>Tollverdien fastsatt på grunnlag av transaksjonsverdien</li>
+							           				<li>Identiske varer</li>
+							           				<li>Liknende varer</li>
+							           				<li>Vidaresalgsprisen</li>
+							           				<li>Beregnet verdi</li>
+							           				<li>Skjønnsmessig fastsettelse</li>
+							           			</ol>
+											</span>
+											</div>
+										</td>
 										<td class="text14" align="left"><span title="svcnr">Containernr.</span></td>
-										
 
 									</tr>
 									<tr>
@@ -1060,7 +1075,17 @@
 												<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 											</a>
 										</td>
-									<td class="text14" align="left" >&nbsp;<input onKeyPress="return amountKey(event)" type="text" class="inputText" name="svvf" id="svvf" size="2" maxlength="1" value="${model.record.svvf}"></td>	
+									<td class="text14" align="left" >
+										<select class="selectMediumBlueE2" name="svvf" id="svvf">
+						        		    	<option title="Tollverdien fastsatt på grunnlag av transaksjonsverdien" value="1"<c:if test="${ empty model.record.svvf || model.record.svvf == '1'}"> selected </c:if> >1</option>
+											  	<option title="Identiske varer" value="2"<c:if test="${ model.record.svvf == '2'}"> selected </c:if> >2</option>
+											  	<option title="Liknende varer" value="3"<c:if test="${ model.record.svvf == '3'}"> selected </c:if> >3</option>
+											  	<option title="Vidaresalgsprisen" value="4"<c:if test="${ model.record.svvf == '4'}"> selected </c:if> >4</option>
+											  	<option title="Beregnet verdi" value="5"<c:if test="${ model.record.svvf == '5'}"> selected </c:if> >5</option>
+											  	<option title="Skjønnsmessig fastsettelse" value="6"<c:if test="${ model.record.svvf == '6'}"> selected </c:if> >6</option>		
+											  	
+											</select>
+									</td>	
 									<td colspan="3" class="text14" align="left" >
 										<input type="text" class="inputText" name="svcnr" id="svcnr" size="13" maxlength="11" value="${model.record.svcnr}">
 										<button name="itemContainerNr" id="itemContainerNr" class="buttonGray" style="font-size:12" type="button" >Mere...</button>
