@@ -28,7 +28,7 @@ import no.systema.main.validator.IPAddressValidator;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.service.UrlCgiProxyService;
 import no.systema.tvinn.sad.util.TvinnSadConstants;
-
+import no.systema.tvinn.sad.util.manager.ArchiveGoogleCloudManager;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.logging.JsonSadExportSpecificTopicLoggingContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.logging.JsonSadExportSpecificTopicLoggingLargeTextContainer;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.logging.JsonSadExportSpecificTopicLoggingLargeTextRecord;
@@ -112,13 +112,16 @@ public class SadExportHeaderLoggingController {
 		    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 		    	
 			if(jsonPayload!=null){
-		    		JsonSadExportSpecificTopicLoggingContainer jsonSadExportSpecificTopicLoggingContainer = this.sadExportSpecificTopicService.getSadExportSpecificTopicLoggingContainer(jsonPayload);
+		    		JsonSadExportSpecificTopicLoggingContainer container = this.sadExportSpecificTopicService.getSadExportSpecificTopicLoggingContainer(jsonPayload);
+		    		//adjust to google cloud if needed
+		    		container = new ArchiveGoogleCloudManager().adjustUrl(appUser, container);
+		    		
 		    		//add domain objects here
-		    		this.setDomainObjectsInView(model, jsonSadExportSpecificTopicLoggingContainer);
+		    		this.setDomainObjectsInView(model, container);
 		    		this.setDomainObjectsInView(request, model);
 		    		
 		    		successView.addObject(TvinnSadConstants.DOMAIN_MODEL, model);
-				successView.addObject(TvinnSadConstants.DOMAIN_LIST,jsonSadExportSpecificTopicLoggingContainer.getLogg());
+				successView.addObject(TvinnSadConstants.DOMAIN_LIST,container.getLogg());
 		    		
 		    		
 		    	}else{

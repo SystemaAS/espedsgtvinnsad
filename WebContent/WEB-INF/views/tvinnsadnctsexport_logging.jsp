@@ -113,10 +113,20 @@
 		               		</a>
 		               	</td>
 		               <td class="tableCell" >&nbsp;
-		               		<a <c:if test="${record.m1225 == 'R'}">style="color:#9F6000;"</c:if> href="tvinnsadnctsexport_renderEdifact.do?fp=${record.wurl}" target="_new" >
-			               		<img src="resources/images/list.gif" border="0" width="12px" height="12px" alt="Visa Edifact" >
-			               		&nbsp;${record.mmn}
-	               		   	</a>
+		               		<c:choose>
+		              		<c:when test="${fn:startsWith(record.wurl, 'http')}">
+								<a <c:if test="${record.msr == 'R'}">style="color:#9F6000;"</c:if> href="${record.wurl}" target="_new" >
+			               			<img src="resources/images/list.gif" border="0" width="16px" height="16px" alt="Show file on cloud" >
+			               			${record.mmn}
+		               			</a>		              
+		               		</c:when>
+		               		<c:otherwise>
+		               			<a <c:if test="${record.msr == 'R'}">style="color:#9F6000;"</c:if> href="tvinnsadnctsexport_renderEdifact.do?fp=${record.wurl}" target="_new" >
+			               			<img src="resources/images/list.gif" border="0" width="12px" height="12px" alt="Show file" >
+			               			&nbsp;${record.mmn}
+	               		   		</a>
+		               		</c:otherwise>
+		               		</c:choose>
 		               </td>
 		               <td class="tableCell" <c:if test="${record.msr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;${record.m1225}</td>
 		               <td class="tableCell" <c:if test="${record.msr == 'R'}">style="color:#9F6000;"</c:if> >&nbsp;${record.mdt}</td>

@@ -40,6 +40,7 @@ import no.systema.tvinn.sad.nctsexport.service.SadNctsExportSpecificTopicService
 import no.systema.tvinn.sad.nctsexport.url.store.SadNctsExportUrlDataStore;
 import no.systema.tvinn.sad.nctsexport.util.RpgReturnResponseHandler;
 import no.systema.tvinn.sad.util.TvinnSadConstants;
+import no.systema.tvinn.sad.util.manager.ArchiveGoogleCloudManager;
 
 
 /**
@@ -113,13 +114,16 @@ public class SadNctsExportHeaderLoggingController {
 	    	logger.info(" --> jsonPayload:" + jsonPayload);
 	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 	    	if(jsonPayload!=null){
-	    		JsonSadNctsExportSpecificTopicLoggingContainer jsonNctsExportSpecificTopicLoggingContainer = this.sadNctsExportSpecificTopicService.getNctsExportSpecificTopicLoggingContainer(jsonPayload);
+	    		JsonSadNctsExportSpecificTopicLoggingContainer container = this.sadNctsExportSpecificTopicService.getNctsExportSpecificTopicLoggingContainer(jsonPayload);
+	    		//adjust to google cloud if needed
+	    		container = new ArchiveGoogleCloudManager().adjustUrl(appUser, container);
+	    		
 	    		//add domain objects here
-	    		this.setDomainObjectsInView(model, jsonNctsExportSpecificTopicLoggingContainer);
+	    		this.setDomainObjectsInView(model, container);
 	    		this.setDomainObjectsInView(request, model);
 	    		
 	    		successView.addObject(TvinnSadConstants.DOMAIN_MODEL, model);
-	    		successView.addObject(TvinnSadConstants.DOMAIN_LIST,jsonNctsExportSpecificTopicLoggingContainer.getLogg());
+	    		successView.addObject(TvinnSadConstants.DOMAIN_LIST,container.getLogg());
 	    		
 	    	}else{
 	    		logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");

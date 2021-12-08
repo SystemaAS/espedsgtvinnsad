@@ -8,9 +8,14 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import javawebparts.core.org.apache.commons.lang.StringUtils;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.archive.JsonSadExportSpecificTopicArchiveRecord;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.logging.JsonSadExportSpecificTopicLoggingContainer;
+import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.logging.JsonSadExportSpecificTopicLoggingRecord;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.archive.JsonSadImportSpecificTopicArchiveContainer;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.archive.JsonSadImportSpecificTopicArchiveRecord;
+import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.logging.JsonSadImportSpecificTopicLoggingContainer;
+import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.logging.JsonSadImportSpecificTopicLoggingRecord;
 import no.systema.jservices.common.dao.ArkivpDao;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.util.ApplicationPropertiesUtil;
@@ -18,9 +23,12 @@ import no.systema.skat.nctsexport.model.JsonSkatNctsExportSpecificTopicArchiveCo
 import no.systema.skat.nctsexport.model.JsonSkatNctsExportSpecificTopicArchiveRecord;
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.archive.JsonSadNctsExportSpecificTopicArchiveContainer;
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.archive.JsonSadNctsExportSpecificTopicArchiveRecord;
+import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.logging.JsonSadNctsExportSpecificTopicLoggingContainer;
+import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.logging.JsonSadNctsExportSpecificTopicLoggingRecord;
 import no.systema.tvinn.sad.nctsimport.model.jsonjackson.topic.archive.JsonSadNctsImportSpecificTopicArchiveContainer;
 import no.systema.tvinn.sad.nctsimport.model.jsonjackson.topic.archive.JsonSadNctsImportSpecificTopicArchiveRecord;
-
+import no.systema.tvinn.sad.nctsimport.model.jsonjackson.topic.logging.JsonSadNctsImportSpecificTopicLoggingContainer;
+import no.systema.tvinn.sad.nctsimport.model.jsonjackson.topic.logging.JsonSadNctsImportSpecificTopicLoggingRecord;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.archive.JsonSadExportSpecificTopicArchiveContainer;
 
 /**
@@ -43,6 +51,9 @@ public class ArchiveGoogleCloudManager {
 	private final String SAAS_ROOT_PATH_ON_FILE_SYSTEM = "/asp/";
 	private final String SAAS_ROOT_PATH_ON_FILE_SYSTEM_UPPERCASE = "/ASP/";
 	private final String LOCALHOST_ROOT_PATH_ON_FILE_SYSTEM = "/pdf/";
+	private final String EDI_EDISE_PATH_ON_FILE_SYSTEM = "/EDISE";
+	private final String EDI_EDIRE_PATH_ON_FILE_SYSTEM = "/EDIRE";
+	
 	private final String GOOGLE = "google";
 	private final String SYSTEMA_HOST_IP = "10.13.3.22";
 	private final String SYSTEMA_HOST_DNS = "gw.systema.no";
@@ -139,6 +150,73 @@ public class ArchiveGoogleCloudManager {
 		return result;
 	}
 	
+	public JsonSadNctsImportSpecificTopicLoggingContainer adjustUrl(SystemaWebUser appUser, JsonSadNctsImportSpecificTopicLoggingContainer container ) {
+		JsonSadNctsImportSpecificTopicLoggingContainer result = container;
+		List newList = new ArrayList();
+		
+		//change the url to the external google cloud url
+		for(JsonSadNctsImportSpecificTopicLoggingRecord record : container.getLogg()) {
+			String originalUrl = record.getWurl();
+			record.setWurl(this.setAdjustedUrl(appUser, originalUrl));
+			newList.add(record);
+		}
+		if(newList.size()>0) {
+			result.setLogg(newList);
+		}
+				
+		return result;
+	}
+	
+	public JsonSadNctsExportSpecificTopicLoggingContainer adjustUrl(SystemaWebUser appUser, JsonSadNctsExportSpecificTopicLoggingContainer container ) {
+		JsonSadNctsExportSpecificTopicLoggingContainer result = container;
+		List newList = new ArrayList();
+		
+		//change the url to the external google cloud url
+		for(JsonSadNctsExportSpecificTopicLoggingRecord record : container.getLogg()) {
+			String originalUrl = record.getWurl();
+			record.setWurl(this.setAdjustedUrl(appUser, originalUrl));
+			newList.add(record);
+		}
+		if(newList.size()>0) {
+			result.setLogg(newList);
+		}
+				
+		return result;
+	}
+	
+	public JsonSadExportSpecificTopicLoggingContainer adjustUrl(SystemaWebUser appUser, JsonSadExportSpecificTopicLoggingContainer container ) {
+		JsonSadExportSpecificTopicLoggingContainer result = container;
+		List newList = new ArrayList();
+		
+		//change the url to the external google cloud url
+		for(JsonSadExportSpecificTopicLoggingRecord record : container.getLogg()) {
+			String originalUrl = record.getWurl();
+			record.setWurl(this.setAdjustedUrl(appUser, originalUrl));
+			newList.add(record);
+		}
+		if(newList.size()>0) {
+			result.setLogg(newList);
+		}
+				
+		return result;
+	}
+	
+	public JsonSadImportSpecificTopicLoggingContainer adjustUrl(SystemaWebUser appUser, JsonSadImportSpecificTopicLoggingContainer container ) {
+		JsonSadImportSpecificTopicLoggingContainer result = container;
+		List newList = new ArrayList();
+		
+		//change the url to the external google cloud url
+		for(JsonSadImportSpecificTopicLoggingRecord record : container.getLogg()) {
+			String originalUrl = record.getWurl();
+			record.setWurl(this.setAdjustedUrl(appUser, originalUrl));
+			newList.add(record);
+		}
+		if(newList.size()>0) {
+			result.setLogg(newList);
+		}
+				
+		return result;
+	}
 	
 	
 	/**
@@ -231,6 +309,29 @@ public class ArchiveGoogleCloudManager {
 		return result;
 		
 	}
+	
+	/**
+	 * 
+	 * @param url
+	 * @param isSaas
+	 * @return
+	 */
+	private String adjustEdiFileApiSuffix(String url, boolean isSaas) {
+		String LOCALHOST_BUCKET_ON_GOOGLE = "sytst"; //Systemas own test env on the cloud
+		String result = "";
+		//We aim to have this suffix: "companyid=a12&filename=si201200060073243gS3b26AwqC.pdf
+		int index = url.lastIndexOf("/");
+		//String companyid = tmp.substring(0, index);
+		String companyid = LOCALHOST_BUCKET_ON_GOOGLE;
+		if(isSaas) { companyid = url.substring(1,4).toLowerCase(); }
+		String filename = url.substring(index + 1);
+		
+		result = "companyid=" + companyid + "&filename=" + filename;
+		logger.warn("google cloud edi-file:" + result);
+		return result;
+		
+	}
+	
 	/**
 	 * 
 	 * @param appUser
@@ -240,51 +341,69 @@ public class ArchiveGoogleCloudManager {
 	private String setAdjustedUrl(SystemaWebUser appUser, String url) {
 		String retval = url;
 		logger.warn("original url:" + url);
-		
-		if(url.startsWith(SAAS_ROOT_PATH_ON_FILE_SYSTEM) || url.startsWith(SAAS_ROOT_PATH_ON_FILE_SYSTEM_UPPERCASE) ) {
-			logger.warn("Saas!");
-			logger.warn("local url:" + url);
-			if(!new File(url).exists()){
-				logger.warn("File does not exists locally!...going to google cloud ...");
-				String strToReplace = SAAS_ROOT_PATH_ON_FILE_SYSTEM;
-				if(url.startsWith(SAAS_ROOT_PATH_ON_FILE_SYSTEM_UPPERCASE)) { strToReplace = SAAS_ROOT_PATH_ON_FILE_SYSTEM_UPPERCASE; }
+		if(StringUtils.isNotEmpty(url)) {
+			if(url.startsWith(SAAS_ROOT_PATH_ON_FILE_SYSTEM) || url.startsWith(SAAS_ROOT_PATH_ON_FILE_SYSTEM_UPPERCASE) ) {
+				logger.warn("Saas!");
+				logger.warn("local url:" + url);
+				if(!new File(url).exists()){
+					logger.warn("File does not exists locally!...going to google cloud ...");
+					String strToReplace = SAAS_ROOT_PATH_ON_FILE_SYSTEM;
+					if(url.startsWith(SAAS_ROOT_PATH_ON_FILE_SYSTEM_UPPERCASE)) { strToReplace = SAAS_ROOT_PATH_ON_FILE_SYSTEM_UPPERCASE; }
+					
+					if(GOOGLE_BUCKET_PREFIX_URL.toLowerCase().contains(this.GOOGLE)) {
+						//do it
+						retval = GOOGLE_BUCKET_PREFIX_URL + this.adjustPdfSuffix(url, strToReplace);
+						logger.warn("cloud url:" + retval);
+						
+					}else if(GOOGLE_BUCKET_PREFIX_URL.toLowerCase().contains(this.SYSTEMA_HOST_IP) || GOOGLE_BUCKET_PREFIX_URL.toLowerCase().contains(this.SYSTEMA_HOST_DNS)) {
+						//implement other API in case the direct google API is not used. Probably an inhouse API (Vidars)
+						retval = GOOGLE_BUCKET_PREFIX_URL + this.adjustPdfApiSuffix(url, strToReplace);
+						logger.warn("api url:" + retval);
+						
+					}
+				}
 				
-				if(GOOGLE_BUCKET_PREFIX_URL.toLowerCase().contains(this.GOOGLE)) {
-					//do it
-					retval = GOOGLE_BUCKET_PREFIX_URL + this.adjustPdfSuffix(url, strToReplace);
-					logger.warn("cloud url:" + retval);
+			}else if(url.toLowerCase().startsWith(LOCALHOST_ROOT_PATH_ON_FILE_SYSTEM) && (appUser.getServletHostWithoutHttpPrefix().equals("localhost") || appUser.getServletHostWithoutHttpPrefix().equals("gw.systema.no"))) {
+				logger.warn("localhost! or gw.systema test");
+				logger.info("local url:" + url);
+				if(!new File(url).exists()){
+					logger.warn("File does not exists locally!...going to google cloud ...");
+					String strToReplace = LOCALHOST_ROOT_PATH_ON_FILE_SYSTEM;
 					
-				}else if(GOOGLE_BUCKET_PREFIX_URL.toLowerCase().contains(this.SYSTEMA_HOST_IP) || GOOGLE_BUCKET_PREFIX_URL.toLowerCase().contains(this.SYSTEMA_HOST_DNS)) {
-					//implement other API in case the direct google API is not used. Probably an inhouse API (Vidars)
-					retval = GOOGLE_BUCKET_PREFIX_URL + this.adjustPdfApiSuffix(url, strToReplace);
-					logger.warn("api url:" + retval);
-					
+					if(GOOGLE_BUCKET_PREFIX_URL.toLowerCase().contains(this.GOOGLE)) {
+						//do it
+						retval = GOOGLE_BUCKET_PREFIX_URL + this.adjustPdfSuffix(url, strToReplace);
+						// TEST record.setUrl(googleBucketPrefix + "a12/si20210003100088296FVQzjftv.pdf");
+						logger.warn("cloud url:" + retval);
+						
+					}else if(GOOGLE_BUCKET_PREFIX_URL.toLowerCase().contains(this.SYSTEMA_HOST_IP) || GOOGLE_BUCKET_PREFIX_URL.toLowerCase().contains(this.SYSTEMA_HOST_DNS)) {
+						//implement other API in case the direct google API is not used. Probably an inhouse API (Vidars)
+						retval = GOOGLE_BUCKET_PREFIX_URL + this.adjustPdfApiSuffixLocalhost(url, strToReplace);
+						logger.warn("api url:" + retval);
+						
+					}
+				}
+				
+			}else if(url.contains(this.EDI_EDISE_PATH_ON_FILE_SYSTEM) || url.contains(this.EDI_EDIRE_PATH_ON_FILE_SYSTEM)) {
+				//branch for the EDI logg files on (text files or xml)
+				logger.warn("EDI log files " + url);
+				if(!new File(url).exists()){
+					logger.warn("File does not exists locally!...going to google cloud ...");
+					//branch for SaaS:ar and local test
+					if(GOOGLE_BUCKET_PREFIX_URL.toLowerCase().contains(this.SYSTEMA_HOST_IP) || GOOGLE_BUCKET_PREFIX_URL.toLowerCase().contains(this.SYSTEMA_HOST_DNS)) {
+						//implement other API in case the direct google API is not used. Probably an inhouse API (Vidars)
+						boolean isSaas = false;
+						if(url.startsWith("/A")) { isSaas = true;}
+						retval = GOOGLE_BUCKET_PREFIX_URL + this.adjustEdiFileApiSuffix(url, isSaas);
+						logger.warn("api url:" + retval);
+						
+					}
 				}
 			}
-			
-		}else if(url.toLowerCase().startsWith(LOCALHOST_ROOT_PATH_ON_FILE_SYSTEM) && (appUser.getServletHostWithoutHttpPrefix().equals("localhost") || appUser.getServletHostWithoutHttpPrefix().equals("gw.systema.no"))) {
-			logger.warn("localhost! or gw.systema test");
-			logger.info("local url:" + url);
-			if(!new File(url).exists()){
-				logger.warn("File does not exists locally!...going to google cloud ...");
-				String strToReplace = LOCALHOST_ROOT_PATH_ON_FILE_SYSTEM;
-				
-				if(GOOGLE_BUCKET_PREFIX_URL.toLowerCase().contains(this.GOOGLE)) {
-					//do it
-					retval = GOOGLE_BUCKET_PREFIX_URL + this.adjustPdfSuffix(url, strToReplace);
-					// TEST record.setUrl(googleBucketPrefix + "a12/si20210003100088296FVQzjftv.pdf");
-					logger.warn("cloud url:" + retval);
-					
-				}else if(GOOGLE_BUCKET_PREFIX_URL.toLowerCase().contains(this.SYSTEMA_HOST_IP) || GOOGLE_BUCKET_PREFIX_URL.toLowerCase().contains(this.SYSTEMA_HOST_DNS)) {
-					//implement other API in case the direct google API is not used. Probably an inhouse API (Vidars)
-					retval = GOOGLE_BUCKET_PREFIX_URL + this.adjustPdfApiSuffixLocalhost(url, strToReplace);
-					logger.warn("api url:" + retval);
-					
-				}
-			}
+			logger.warn("adjusted url:" + retval);
+		}else {
+			logger.warn("original url is empty...");
 		}
-		
-		logger.warn("adjusted url:" + retval);
 		
 		return retval;
 	}
