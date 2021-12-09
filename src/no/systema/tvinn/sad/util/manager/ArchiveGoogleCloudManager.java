@@ -341,7 +341,7 @@ public class ArchiveGoogleCloudManager {
 	private String setAdjustedUrl(SystemaWebUser appUser, String url) {
 		String retval = url;
 		logger.warn("original url:" + url);
-		if(StringUtils.isNotEmpty(url)) {
+		if(StringUtils.isNotEmpty(url) && !url.contains("http")) {
 			if(url.startsWith(SAAS_ROOT_PATH_ON_FILE_SYSTEM) || url.startsWith(SAAS_ROOT_PATH_ON_FILE_SYSTEM_UPPERCASE) ) {
 				logger.warn("Saas!");
 				logger.warn("local url:" + url);
@@ -402,7 +402,7 @@ public class ArchiveGoogleCloudManager {
 			}
 			logger.warn("adjusted url:" + retval);
 		}else {
-			logger.warn("original url is empty...");
+			logger.warn("original and adjusted url:" + retval);
 		}
 		
 		return retval;
