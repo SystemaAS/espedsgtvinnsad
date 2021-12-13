@@ -6,7 +6,7 @@ package no.systema.tvinn.sad.nctsimport.service.html.dropdown;
 import java.util.List;
 import javax.servlet.ServletContext;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.web.context.ServletContextAware;
 
 import no.systema.main.context.TdsServletContext;
@@ -32,7 +32,7 @@ import no.systema.tvinn.sad.util.TvinnSadConstants;
 public class SadNctsImportDropDownListPopulationService {
 	private final String FILE_RESOURCE_PATH = TvinnSadConstants.RESOURCE_FILES_PATH;
 	private TextFileReaderService textFileReaderService = new TextFileReaderService();
-	private static final Logger logger = Logger.getLogger(SadNctsImportDropDownListPopulationService.class.getName());
+	private static final Logger logger = LogManager.getLogger(SadNctsImportDropDownListPopulationService.class.getName());
 	
 	
 	/**

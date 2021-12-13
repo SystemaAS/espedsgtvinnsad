@@ -4,7 +4,7 @@
 package no.systema.tvinn.sad.mapper.jsonjackson.authorization;
 
 //jackson library
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import com.fasterxml.jackson.databind.DeserializationConfig;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper; 
@@ -22,7 +22,7 @@ import java.util.*;
  * 
  */
 public class TvinnSadAuthorizationMapper {
-	private static final Logger logger = Logger.getLogger(TvinnSadAuthorizationMapper.class.getName());
+	private static final Logger logger = LogManager.getLogger(TvinnSadAuthorizationMapper.class.getName());
 	
 	public JsonTvinnSadAuthorizationContainer getContainer(String utfPayload) throws Exception{
 		ObjectMapper mapper = new ObjectMapper();  

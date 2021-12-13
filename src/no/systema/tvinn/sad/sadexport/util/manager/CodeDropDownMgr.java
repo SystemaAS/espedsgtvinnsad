@@ -11,7 +11,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.service.UrlCgiProxyService;
@@ -67,7 +67,7 @@ import no.systema.tvinn.sad.z.maintenance.sadimport.model.jsonjackson.dbtable.Js
  */
 
 public class CodeDropDownMgr {
-	private static final Logger logger = Logger.getLogger(CodeDropDownMgr.class.getName());
+	private static final Logger logger = LogManager.getLogger(CodeDropDownMgr.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
 
 	//

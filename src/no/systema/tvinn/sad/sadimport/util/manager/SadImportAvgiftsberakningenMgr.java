@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,7 +53,7 @@ import no.systema.main.util.JsonDebugger;
  */
 public class SadImportAvgiftsberakningenMgr {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(1000);
-	private static final Logger logger = Logger.getLogger(SadImportAvgiftsberakningenMgr.class.getName());
+	private static final Logger logger = LogManager.getLogger(SadImportAvgiftsberakningenMgr.class.getName());
 	private SadImportSpecificTopicItemService sadImportSpecificTopicItemService;
 	private UrlCgiProxyService urlCgiProxyService;
 	

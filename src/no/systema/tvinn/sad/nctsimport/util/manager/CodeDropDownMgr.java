@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.stereotype.Controller;
 
 import no.systema.main.model.SystemaWebUser;
@@ -38,7 +38,7 @@ import no.systema.tvinn.sad.nctsimport.util.SadNctsImportConstants;
  * 
  */
 public class CodeDropDownMgr {
-	private static final Logger logger = Logger.getLogger(CodeDropDownMgr.class.getName());
+	private static final Logger logger = LogManager.getLogger(CodeDropDownMgr.class.getName());
 	
 	/**
 		012= KOD_SPRAK

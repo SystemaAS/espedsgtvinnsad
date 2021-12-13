@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.main.service.UrlCgiProxyService;
 import no.systema.main.service.UrlCgiProxyServiceImpl;
@@ -22,7 +22,7 @@ import no.systema.tvinn.sad.z.maintenance.sadimport.url.store.TvinnSadMaintenanc
  *
  */
 public class TvinnSadGeneralDatabaseManager {
-	private static final Logger logger = Logger.getLogger(TvinnSadGeneralDatabaseManager.class.getName());
+	private static final Logger logger = LogManager.getLogger(TvinnSadGeneralDatabaseManager.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
 	//
 	private UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();

@@ -8,7 +8,7 @@ import no.systema.main.model.jsonjackson.general.JsonAbstractGrandFatherRecord;
 import java.lang.reflect.Field;
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 /**
  * @author oscardelatorre
@@ -17,7 +17,7 @@ import org.apache.log4j.Logger;
  *
  */
 public class JsonSkatNctsExportSpecificTopicRecord extends JsonAbstractGrandFatherRecord {
-	private static final Logger logger = Logger.getLogger(JsonSkatNctsExportSpecificTopicRecord.class.getName());
+	private static final Logger logger = LogManager.getLogger(JsonSkatNctsExportSpecificTopicRecord.class.getName());
 	
 	//This record is used in special occasions when the session object is impossible to use
 	//Typically in a Validator when we want to check further into RPG and we need the user name in a parameter (user=Oscar)

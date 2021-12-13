@@ -12,7 +12,7 @@ import java.text.NumberFormat;
 import java.math.BigDecimal;
 import java.util.Locale;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 /**
  * @author oscardelatorre
  * @date Sep 29, 2014
@@ -20,7 +20,7 @@ import org.apache.log4j.Logger;
  * 
  */
 public class SadImportCalculator {
-	private static final Logger logger = Logger.getLogger(SadImportCalculator.class.getName());
+	private static final Logger logger = LogManager.getLogger(SadImportCalculator.class.getName());
 	
 	/**
 	 * 

@@ -2,7 +2,7 @@ package no.systema.tvinn.sad.nctsimport.controller;
 
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +50,7 @@ import no.systema.tvinn.sad.util.manager.ArchiveGoogleCloudManager;
 @Scope("session")
 public class SadNctsImportHeaderArchiveController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = Logger.getLogger(SadNctsImportHeaderArchiveController.class.getName());
+	private static final Logger logger = LogManager.getLogger(SadNctsImportHeaderArchiveController.class.getName());
 	private PayloadContentFlusher payloadContentFlusher = new PayloadContentFlusher();
 	
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");

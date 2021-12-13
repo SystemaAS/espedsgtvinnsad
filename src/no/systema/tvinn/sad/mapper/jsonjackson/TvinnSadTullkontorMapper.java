@@ -4,7 +4,7 @@
 package no.systema.tvinn.sad.mapper.jsonjackson;
 
 //jackson library
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import com.fasterxml.jackson.databind.DeserializationConfig;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper; 
@@ -24,7 +24,7 @@ import java.util.*;
  * 
  */
 public class TvinnSadTullkontorMapper {
-	private static final Logger logger = Logger.getLogger(TvinnSadTullkontorMapper.class.getName());
+	private static final Logger logger = LogManager.getLogger(TvinnSadTullkontorMapper.class.getName());
 	
 	public JsonTvinnSadTullkontorContainer getContainer(String utfPayload) throws Exception{
 		ObjectMapper mapper = new ObjectMapper();  

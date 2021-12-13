@@ -6,7 +6,7 @@ package no.systema.tvinn.sad.sadimport.util;
 import java.util.*;
 
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 /**
  * The class evaluates return codes from RPG operations.
@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
  * 
  */
 public class RpgReturnResponseHandler {
-	private static final Logger logger = Logger.getLogger(RpgReturnResponseHandler.class.getName());
+	private static final Logger logger = LogManager.getLogger(RpgReturnResponseHandler.class.getName());
 	
 	
 	private String errorMessage = null;

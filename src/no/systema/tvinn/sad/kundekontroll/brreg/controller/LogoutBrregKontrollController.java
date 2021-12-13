@@ -3,7 +3,7 @@ package no.systema.tvinn.sad.kundekontroll.brreg.controller;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +23,7 @@ import no.systema.main.util.AppConstants;
 @SessionAttributes(AppConstants.SYSTEMA_WEB_USER_KEY)
 @Scope("session")
 public class LogoutBrregKontrollController {
-	private static final Logger logger = Logger.getLogger(LogoutBrregKontrollController.class.getName());
+	private static final Logger logger = LogManager.getLogger(LogoutBrregKontrollController.class.getName());
 	private ModelAndView successView = new ModelAndView("dashboard");
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	

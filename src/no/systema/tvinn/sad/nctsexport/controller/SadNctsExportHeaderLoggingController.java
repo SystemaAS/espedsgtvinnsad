@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,7 +55,7 @@ import no.systema.tvinn.sad.util.manager.ArchiveGoogleCloudManager;
 @Scope("session")
 public class SadNctsExportHeaderLoggingController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = Logger.getLogger(SadNctsExportHeaderLoggingController.class.getName());
+	private static final Logger logger = LogManager.getLogger(SadNctsExportHeaderLoggingController.class.getName());
 	private PayloadContentFlusher payloadContentFlusher = new PayloadContentFlusher();
 	private StackTraceUtil stackTraceUtil = new StackTraceUtil();
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");

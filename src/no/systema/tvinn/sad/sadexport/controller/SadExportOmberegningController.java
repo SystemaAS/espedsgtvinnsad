@@ -3,7 +3,7 @@ package no.systema.tvinn.sad.sadexport.controller;
 import java.util.*;
 
 import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -78,7 +78,7 @@ import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
 @Scope("session")
 public class SadExportOmberegningController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = Logger.getLogger(SadExportOmberegningController.class.getName());
+	private static final Logger logger = LogManager.getLogger(SadExportOmberegningController.class.getName());
 	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
@@ -105,7 +105,7 @@ public class SadExportOmberegningController {
 	@PostConstruct
 	public void initIt() throws Exception {
 		if("DEBUG".equals(AppConstants.LOG4J_LOGGER_LEVEL)){
-			logger.setLevel(Level.DEBUG);
+			 
 		}
 	}	
 	

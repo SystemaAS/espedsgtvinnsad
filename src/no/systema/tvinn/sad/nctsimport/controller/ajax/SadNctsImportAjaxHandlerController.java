@@ -5,7 +5,7 @@ package no.systema.tvinn.sad.nctsimport.controller.ajax;
 
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Required;
@@ -53,7 +53,7 @@ import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
 
 @Controller
 public class SadNctsImportAjaxHandlerController {
-	private static final Logger logger = Logger.getLogger(SadNctsImportAjaxHandlerController.class.getName());
+	private static final Logger logger = LogManager.getLogger(SadNctsImportAjaxHandlerController.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(); 
 	
 	/**

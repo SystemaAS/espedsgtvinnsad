@@ -33,7 +33,7 @@ import no.systema.tvinn.sad.sadimport.mapper.jsonjackson.SadImportTopicIncoterms
 
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 /**
  * @author oscardelatorre
@@ -41,7 +41,7 @@ import org.apache.log4j.Logger;
  * 
  */
 public class SadImportSpecificTopicServiceImpl implements SadImportSpecificTopicService{
-	private static final Logger logger = Logger.getLogger(SadImportHeaderController.class.getName());
+	private static final Logger logger = LogManager.getLogger(SadImportHeaderController.class.getName());
 
 	/**
 	 * 

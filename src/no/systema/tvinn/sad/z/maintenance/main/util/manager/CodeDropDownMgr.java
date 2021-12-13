@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.jservices.common.values.FasteKoder;
 import no.systema.main.model.SystemaWebUser;
@@ -51,7 +51,7 @@ import no.systema.z.main.maintenance.url.store.MaintenanceMainUrlDataStore;
  */
 
 public class CodeDropDownMgr {
-	private static final Logger logger = Logger.getLogger(CodeDropDownMgr.class.getName());
+	private static final Logger logger = LogManager.getLogger(CodeDropDownMgr.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
 
 	/**

@@ -1,6 +1,6 @@
 package no.systema.tvinn.sad.nctsimport.validator;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -15,7 +15,7 @@ import no.systema.tvinn.sad.nctsimport.filter.SearchFilterSadNctsImportTopicList
  *
  */
 public class SadNctsImportListValidator implements Validator {
-	private static final Logger logger = Logger.getLogger(SadNctsImportListValidator.class.getName());
+	private static final Logger logger = LogManager.getLogger(SadNctsImportListValidator.class.getName());
 	
 	/**
 	 * 

@@ -3,7 +3,7 @@ package no.systema.tvinn.sad.sadimport.validator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -24,7 +24,7 @@ import no.systema.tvinn.sad.sadimport.util.manager.SadImportItemsAutoControlMgr;
  * @date Jun 4, 2014
  */
 public class SadImportItemsValidator implements Validator {
-	private static final Logger logger = Logger.getLogger(SadImportItemsValidator.class.getName());
+	private static final Logger logger = LogManager.getLogger(SadImportItemsValidator.class.getName());
 	private String nameRegex = "[A-Z]{4}[0-9]{7}";
 	private StringManager strMgr = new StringManager();
 	/**

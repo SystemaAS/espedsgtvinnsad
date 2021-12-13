@@ -4,7 +4,7 @@ import java.util.*;
 
 
 import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -76,7 +76,7 @@ import no.systema.tvinn.sad.sadexport.util.manager.SadExportItemsContainernrMgr;
 @Scope("session")
 public class SadImportItemsController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = Logger.getLogger(SadImportItemsController.class.getName());
+	private static final Logger logger = LogManager.getLogger(SadImportItemsController.class.getName());
 	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private SadImportCalculator sadImportCalculator = new SadImportCalculator();
@@ -96,7 +96,7 @@ public class SadImportItemsController {
 	@PostConstruct
 	public void initIt() throws Exception {
 		if("DEBUG".equals(AppConstants.LOG4J_LOGGER_LEVEL)){
-			logger.setLevel(Level.DEBUG);
+			 
 		}
 	}
 	/**

@@ -3,7 +3,7 @@ package no.systema.tvinn.sad.nctsimport.validator;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -23,7 +23,7 @@ import no.systema.tvinn.sad.nctsimport.model.jsonjackson.topic.unloading.JsonSad
  * 
  */
 public class SadNctsImportUnloadingValidator implements Validator {
-	private static final Logger logger = Logger.getLogger(SadNctsImportUnloadingValidator.class.getName());
+	private static final Logger logger = LogManager.getLogger(SadNctsImportUnloadingValidator.class.getName());
 	//Intantiate services here since we are not capable to configure injection with Autowired. Check that further...
 	private UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
 	//private SkatNctsImportSpecificTopicService nctsImportSpecificTopicService = new SkatNctsImportSpecificTopicServiceImpl();

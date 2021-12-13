@@ -4,7 +4,7 @@
 package no.systema.tvinn.sad.manifest.express.util.manager;
 
 import java.util.*;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.jservices.common.values.FasteKoder;
 import no.systema.main.model.SystemaWebUser;
@@ -35,7 +35,7 @@ import no.systema.z.main.maintenance.url.store.MaintenanceMainUrlDataStore;
  * 
  */
 public class CodeDropDownMgr {
-	private static final Logger logger = Logger.getLogger(CodeDropDownMgr.class.getName());
+	private static final Logger logger = LogManager.getLogger(CodeDropDownMgr.class.getName());
 	
 	//public static final String CODE_1_EKSPEDISJONSTYPER_IMPORT = "1";
 	public static final String CODE_2_COUNTRY = "2";

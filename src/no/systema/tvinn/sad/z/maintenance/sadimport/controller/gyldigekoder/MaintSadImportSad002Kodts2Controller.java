@@ -2,7 +2,7 @@ package no.systema.tvinn.sad.z.maintenance.sadimport.controller.gyldigekoder;
 
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
@@ -52,7 +52,7 @@ import no.systema.tvinn.sad.z.maintenance.sadimport.validator.gyldigekoder.Maint
 @Scope("session")
 public class MaintSadImportSad002Kodts2Controller {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = Logger.getLogger(MaintSadImportSad002Kodts2Controller.class.getName());
+	private static final Logger logger = LogManager.getLogger(MaintSadImportSad002Kodts2Controller.class.getName());
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	private ApplicationContext context;
 	private LoginValidator loginValidator = new LoginValidator();

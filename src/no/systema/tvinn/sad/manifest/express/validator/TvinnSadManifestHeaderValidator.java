@@ -3,7 +3,7 @@ package no.systema.tvinn.sad.manifest.express.validator;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -20,7 +20,7 @@ import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManif
  *
  */
 public class TvinnSadManifestHeaderValidator implements Validator {
-	private static final Logger logger = Logger.getLogger(TvinnSadManifestHeaderValidator.class.getName());
+	private static final Logger logger = LogManager.getLogger(TvinnSadManifestHeaderValidator.class.getName());
 	private StringManager strMgr = new StringManager();
 	private DateValidator dateValidator = new DateValidator();
 	

@@ -3,7 +3,7 @@ package no.systema.tvinn.sad.manifest.express.controller;
 import java.net.URI;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -28,7 +28,7 @@ import no.systema.main.util.AppConstants;
  */
 @Controller
 public class CodeSandboxController {
-	private static Logger logger = Logger.getLogger(CodeSandboxController.class.getName());
+	private static Logger logger = LogManager.getLogger(CodeSandboxController.class.getName());
 	
 	@Autowired
 	RestTemplate restTemplate;

@@ -6,7 +6,7 @@ package no.systema.tvinn.sad.z.maintenance.main.mapper.url.request;
 import java.lang.reflect.Field;
 import java.net.URLEncoder;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.main.model.jsonjackson.general.JsonAbstractGrandFatherRecord;
 import no.systema.tvinn.sad.z.maintenance.main.util.TvinnSadMaintenanceConstants;
@@ -17,7 +17,7 @@ import no.systema.tvinn.sad.z.maintenance.main.util.TvinnSadMaintenanceConstants
  * @param Jun 7, 2016
  */
 public class UrlRequestParameterMapper {
-	private static final Logger logger = Logger.getLogger(UrlRequestParameterMapper.class.getName());
+	private static final Logger logger = LogManager.getLogger(UrlRequestParameterMapper.class.getName());
 	
 	
 	/**

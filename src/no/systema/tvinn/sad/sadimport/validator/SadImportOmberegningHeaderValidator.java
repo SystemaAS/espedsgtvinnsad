@@ -3,7 +3,7 @@ package no.systema.tvinn.sad.sadimport.validator;
 import java.lang.reflect.Array;
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -27,7 +27,7 @@ import no.systema.tvinn.sad.sadimport.url.store.SadImportUrlDataStore;
  *
  */
 public class SadImportOmberegningHeaderValidator implements Validator {
-	private static final Logger logger = Logger.getLogger(SadImportHeaderController.class.getName());
+	private static final Logger logger = LogManager.getLogger(SadImportHeaderController.class.getName());
 	private DateValidator dateValidator = new DateValidator();
 	private StringManager strMgr = new StringManager();
 	

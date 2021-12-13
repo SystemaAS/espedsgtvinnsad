@@ -7,7 +7,7 @@ import javax.annotation.PostConstruct;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
@@ -68,7 +68,7 @@ import no.systema.tvinn.sad.mapper.url.request.UrlRequestParameterMapper;
 @Controller
 public class TvinnSadManifestHeaderCargoLinesController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(3000);
-	private static Logger logger = Logger.getLogger(TvinnSadManifestHeaderCargoLinesController.class.getName());
+	private static Logger logger = LogManager.getLogger(TvinnSadManifestHeaderCargoLinesController.class.getName());
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	private LoginValidator loginValidator = new LoginValidator();
 	private StringManager strMgr = new StringManager();
@@ -81,7 +81,7 @@ public class TvinnSadManifestHeaderCargoLinesController {
 	@PostConstruct
 	public void initIt() throws Exception {
 		if("DEBUG".equals(AppConstants.LOG4J_LOGGER_LEVEL)){
-			logger.setLevel(Level.DEBUG);
+			 
 		}
 	}
 	

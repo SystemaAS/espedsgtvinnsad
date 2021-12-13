@@ -6,7 +6,7 @@ package no.systema.tvinn.sad.nctsexport.controller.ajax;
 import java.util.*;
 
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Required;
@@ -58,7 +58,7 @@ import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.validation.JsonSa
  */
 @Controller
 public class SadNctsExportAjaxHandlerController {
-	private static final Logger logger = Logger.getLogger(SadNctsExportAjaxHandlerController.class.getName());
+	private static final Logger logger = LogManager.getLogger(SadNctsExportAjaxHandlerController.class.getName());
 	/**
 	 * 
 	 * @param applicationUser

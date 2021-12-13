@@ -2,7 +2,7 @@ package no.systema.tvinn.sad.sadimport.util.manager;
 
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.main.service.UrlCgiProxyService;
 /*
@@ -27,7 +27,7 @@ import no.systema.tvinn.sad.sadimport.url.store.SadImportUrlDataStore;
 
 
 public class SadImportItemsContainernrMgr {
-	private static final Logger logger = Logger.getLogger(SadImportItemsContainernrMgr.class.getName());
+	private static final Logger logger = LogManager.getLogger(SadImportItemsContainernrMgr.class.getName());
 	private UrlCgiProxyService urlCgiProxyService = null;
 	private SadImportSpecificTopicItemService sadImportSpecificTopicItemService = null;
 	NumberFormatterLocaleAware formatter = new NumberFormatterLocaleAware();

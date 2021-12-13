@@ -3,7 +3,7 @@ package no.systema.main.controller;
 import java.util.*;
 import java.io.InputStream;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +43,7 @@ import no.systema.main.model.SystemaWebUser;
 @Controller
 @Scope("session")
 public class GeneralPdfRenderController {
-	private static final Logger logger = Logger.getLogger(GeneralPdfRenderController.class.getName());
+	private static final Logger logger = LogManager.getLogger(GeneralPdfRenderController.class.getName());
 	private PayloadContentFlusher payloadContentFlusher = new PayloadContentFlusher();
 	private final String FILE_RESOURCE_PATH = AppConstants.RESOURCE_FILES_PATH;
 	

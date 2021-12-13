@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
@@ -71,7 +71,7 @@ import no.systema.tvinn.sad.nctsexport.url.store.SadNctsExportUrlDataStore;
 @Scope("session")
 public class SadNctsExportController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = Logger.getLogger(SadNctsExportController.class.getName());
+	private static final Logger logger = LogManager.getLogger(SadNctsExportController.class.getName());
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	private ApplicationContext context;
 	private LoginValidator loginValidator = new LoginValidator();
@@ -82,7 +82,7 @@ public class SadNctsExportController {
 	@PostConstruct
 	public void initIt() throws Exception {
 		if("DEBUG".equals(AppConstants.LOG4J_LOGGER_LEVEL)){
-			logger.setLevel(Level.DEBUG);
+			 
 		}
 	}
 	

@@ -6,7 +6,7 @@ package no.systema.tvinn.sad.manifest.express.filter;
 import java.lang.reflect.Field;
 import java.util.*;
 import lombok.Data;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 /**
  * 
@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
  */
 @Data
 public class SearchFilterManifestList {
-	private static final Logger logger = Logger.getLogger(SearchFilterManifestList.class.getName());
+	private static final Logger logger = LogManager.getLogger(SearchFilterManifestList.class.getName());
 	
 	private String avd = null;
 	private String opd = null;

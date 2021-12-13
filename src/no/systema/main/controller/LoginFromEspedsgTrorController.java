@@ -4,7 +4,7 @@ package no.systema.main.controller;
 import java.net.URLEncoder;
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -79,7 +79,7 @@ import no.systema.jservices.common.util.AesEncryptionDecryptionManager;
 @Controller
 @Scope("session")
 public class LoginFromEspedsgTrorController {
-	private static final Logger logger = Logger.getLogger(LoginFromEspedsgTrorController.class.getName());
+	private static final Logger logger = LogManager.getLogger(LoginFromEspedsgTrorController.class.getName());
 	private final String COMPANY_CODE_REQUIRED_FLAG_VALUE = "1";
 	private AesEncryptionDecryptionManager aesManager = new AesEncryptionDecryptionManager();
 	private StringManager strMgr = new StringManager();

@@ -1,6 +1,6 @@
 package no.systema.tvinn.sad.z.maintenance.sadimport.validator;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -16,7 +16,7 @@ import no.systema.tvinn.sad.z.maintenance.sadimport.model.jsonjackson.dbtable.Js
  *
  */
 public class MaintSadImportSad001arValidator implements Validator {
-	private static final Logger logger = Logger.getLogger(MaintSadImportSad001arValidator.class.getName());
+	private static final Logger logger = LogManager.getLogger(MaintSadImportSad001arValidator.class.getName());
 	private NumberFormatterLocaleAware numberFormatter = new NumberFormatterLocaleAware();
 	/**
 	 * 

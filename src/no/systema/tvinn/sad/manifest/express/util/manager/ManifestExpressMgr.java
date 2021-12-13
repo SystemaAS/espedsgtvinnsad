@@ -4,7 +4,7 @@
 package no.systema.tvinn.sad.manifest.express.util.manager;
 
 import java.util.*;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +50,7 @@ import no.systema.z.main.maintenance.url.store.MaintenanceMainUrlDataStore;
  */
 @Service
 public class ManifestExpressMgr {
-	private static final Logger logger = Logger.getLogger(ManifestExpressMgr.class.getName());
+	private static final Logger logger = LogManager.getLogger(ManifestExpressMgr.class.getName());
 	
 	
 	@Autowired

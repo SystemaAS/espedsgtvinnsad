@@ -2,7 +2,7 @@ package no.systema.tvinn.sad.z.maintenance.sadexport.controller.ajax.manager;
 
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Component;
@@ -53,7 +53,7 @@ import no.systema.tvinn.sad.z.maintenance.sadexport.url.store.TvinnSadMaintenanc
 @Component
 public class MaintSadExportGyldigeKoderAjaxHandlerManager {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = Logger.getLogger(MaintSadExportGyldigeKoderAjaxHandlerManager.class.getName());
+	private static final Logger logger = LogManager.getLogger(MaintSadExportGyldigeKoderAjaxHandlerManager.class.getName());
 		
 	
 	/**

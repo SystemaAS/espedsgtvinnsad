@@ -4,7 +4,7 @@
 package no.systema.tvinn.sad.sadexport.mapper.jsonjackson;
 
 //jackson library
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.main.mapper.jsonjackson.general.ObjectMapperAbstractGrandFather;
 //application library
@@ -19,7 +19,7 @@ import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopic
  * 
  */
 public class SadExportTopicEurMapper extends ObjectMapperAbstractGrandFather {
-	private static final Logger logger = Logger.getLogger(SadExportTopicEurMapper.class.getName());
+	private static final Logger logger = LogManager.getLogger(SadExportTopicEurMapper.class.getName());
 	
 	/**
 	 * 

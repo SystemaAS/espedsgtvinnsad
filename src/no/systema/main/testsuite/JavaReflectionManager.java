@@ -9,7 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.main.model.UrlDataStoreAnnotationForField;
 
@@ -21,7 +21,7 @@ import no.systema.main.model.UrlDataStoreAnnotationForField;
  */
 public class JavaReflectionManager {
 	private static JsonSpecialCharactersManager jsonFixMgr = new JsonSpecialCharactersManager();
-	private static Logger logger = Logger.getLogger(JavaReflectionManager.class.getName());
+	private static Logger logger = LogManager.getLogger(JavaReflectionManager.class.getName());
 	
 	private final String GREEN_STATUS = "OK";
 	private final String RED_STATUS = "NOK";

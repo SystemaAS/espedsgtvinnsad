@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Required;
@@ -44,7 +44,7 @@ import no.systema.z.main.maintenance.model.jsonjackson.dbtable.JsonMaintMainCund
 @Scope("session")
 public class MaintNctsExportAjaxHandlerController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = Logger.getLogger(MaintNctsExportAjaxHandlerController.class.getName());
+	private static final Logger logger = LogManager.getLogger(MaintNctsExportAjaxHandlerController.class.getName());
 
 	@RequestMapping(value = "getSpecificRecord_tr030r.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody List<JsonMaintNctsTrughRecord> getRecordTr030r(@RequestParam String applicationUser,

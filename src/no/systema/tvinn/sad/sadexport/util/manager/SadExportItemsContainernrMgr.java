@@ -2,7 +2,7 @@ package no.systema.tvinn.sad.sadexport.util.manager;
 
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.service.UrlCgiProxyService;
@@ -36,7 +36,7 @@ import no.systema.tvinn.sad.model.jsonjackson.JsonSadAutoControlErrorContainer;
 
 
 public class SadExportItemsContainernrMgr {
-	private static final Logger logger = Logger.getLogger(SadExportItemsContainernrMgr.class.getName());
+	private static final Logger logger = LogManager.getLogger(SadExportItemsContainernrMgr.class.getName());
 	private UrlCgiProxyService urlCgiProxyService = null;
 	private SadExportSpecificTopicItemService sadExportSpecificTopicItemService = null;
 	NumberFormatterLocaleAware formatter = new NumberFormatterLocaleAware();

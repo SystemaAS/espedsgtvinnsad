@@ -8,7 +8,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.net.URLEncoder;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpecificTopicRecord;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.items.JsonSadExportSpecificTopicItemRecord;
@@ -23,7 +23,7 @@ import no.systema.tvinn.sad.util.TvinnSadConstants;
  * @param Maj 2, 2014
  */
 public class UrlRequestParameterMapper {
-	private static final Logger logger = Logger.getLogger(UrlRequestParameterMapper.class.getName());
+	private static final Logger logger = LogManager.getLogger(UrlRequestParameterMapper.class.getName());
 	
 	/**
 	 * Builds the final url parameter list (to send with a GET or POST form method)

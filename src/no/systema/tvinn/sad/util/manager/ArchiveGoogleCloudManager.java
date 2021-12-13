@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.stereotype.Service;
 
 import javawebparts.core.org.apache.commons.lang.StringUtils;
@@ -39,7 +39,7 @@ import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.archive.JsonSadExp
  */
 @Service
 public class ArchiveGoogleCloudManager {
-	private static final Logger logger = Logger.getLogger(ArchiveGoogleCloudManager.class.getName());
+	private static final Logger logger = LogManager.getLogger(ArchiveGoogleCloudManager.class.getName());
 	//private final String GOOGLE_BUCKET_PREFIX_URL = "https://storage.googleapis.com/gc_"; //complete should be e.g--> "https://storage.googleapis.com/gc_a12/si20210003100088296FVQzjftv.pdf"
 	
 	//API-SYSTEMA -->File passthrough, kan brukes for å vise fil til bruker. Returnere faktisk fil (pdf) :

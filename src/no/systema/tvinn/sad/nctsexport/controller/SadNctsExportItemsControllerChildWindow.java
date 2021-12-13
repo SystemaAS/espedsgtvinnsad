@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import java.util.*;
 
 import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -70,7 +70,7 @@ import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
 @Scope("session")
 public class SadNctsExportItemsControllerChildWindow {
 	
-	private static final Logger logger = Logger.getLogger(SadNctsExportItemsControllerChildWindow.class.getName());
+	private static final Logger logger = LogManager.getLogger(SadNctsExportItemsControllerChildWindow.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(2000);
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
 	
@@ -91,7 +91,7 @@ public class SadNctsExportItemsControllerChildWindow {
 	@PostConstruct
 	public void initIt() throws Exception {
 		if("DEBUG".equals(AppConstants.LOG4J_LOGGER_LEVEL)){
-			logger.setLevel(Level.DEBUG);
+			 
 		}
 	}
 	

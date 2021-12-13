@@ -6,7 +6,7 @@ package no.systema.tvinn.sad.sadexport.filter;
 import java.lang.reflect.Field;
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 
 /**
@@ -20,7 +20,7 @@ import org.apache.log4j.Logger;
  * 
  */
 public class SearchFilterSadExportTopicList {
-	private static final Logger logger = Logger.getLogger(SearchFilterSadExportTopicList.class.getName());
+	private static final Logger logger = LogManager.getLogger(SearchFilterSadExportTopicList.class.getName());
 	
 	private String avd = null;
 	public void setAvd(String value) {  this.avd = value; }

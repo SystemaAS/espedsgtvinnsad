@@ -2,7 +2,7 @@ package no.systema.tvinn.sad.nctsimport.validator;
 
 import java.util.Calendar;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -25,7 +25,7 @@ import no.systema.tvinn.sad.nctsimport.url.store.SadNctsImportUrlDataStore;
  * 
  */
 public class SadNctsImportUnloadingItemsValidator implements Validator {
-	private static final Logger logger = Logger.getLogger(SadNctsImportUnloadingItemsValidator.class.getName());
+	private static final Logger logger = LogManager.getLogger(SadNctsImportUnloadingItemsValidator.class.getName());
 	//Intantiate services here since we are not capable to configure injection with Autowired. Check that further...
 	private UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
 	private SadNctsImportSpecificTopicUnloadingItemService sadNctsImportSpecificTopicUnloadingItemServiceImpl = new SadNctsImportSpecificTopicUnloadingItemServiceImpl();

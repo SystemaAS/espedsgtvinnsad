@@ -4,7 +4,7 @@
 package no.systema.tvinn.sad.z.maintenance.sadexport.mapper.jsonjackson.dbtable;
 
 //jackson library
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper; 
 
@@ -16,7 +16,7 @@ import no.systema.tvinn.sad.z.maintenance.sadexport.model.jsonjackson.dbtable.Js
  * 
  */
 public class MaintSadExportTvineMapper {
-	private static final Logger logger = Logger.getLogger(MaintSadExportTvineMapper.class.getName());
+	private static final Logger logger = LogManager.getLogger(MaintSadExportTvineMapper.class.getName());
 	
 	public JsonMaintSadExportTvineContainer getContainer(String utfPayload) throws Exception{
 		ObjectMapper mapper = new ObjectMapper();  

@@ -6,7 +6,7 @@ package no.systema.tvinn.sad.sadimport.mapper.url.request;
 import java.lang.reflect.Field;
 import java.net.URLEncoder;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportSpecificTopicRecord;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportTopicFinansOpplysningerRecord;
@@ -20,7 +20,7 @@ import no.systema.tvinn.sad.util.TvinnSadConstants;
  * 
  */
 public class UrlRequestParameterMapper {
-	private static final Logger logger = Logger.getLogger(UrlRequestParameterMapper.class.getName());
+	private static final Logger logger = LogManager.getLogger(UrlRequestParameterMapper.class.getName());
 	
 	/**
 	 * Builds the final url parameter list (to send with a GET or POST form method)

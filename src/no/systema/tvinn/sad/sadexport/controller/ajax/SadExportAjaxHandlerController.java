@@ -6,7 +6,7 @@ package no.systema.tvinn.sad.sadexport.controller.ajax;
 import java.util.*;
 
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Required;
@@ -73,7 +73,7 @@ import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulation
 @Controller
 public class SadExportAjaxHandlerController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = Logger.getLogger(SadExportAjaxHandlerController.class.getName());
+	private static final Logger logger = LogManager.getLogger(SadExportAjaxHandlerController.class.getName());
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
 	private SadExportCalculator sadExportCalculator = new SadExportCalculator();
 	
