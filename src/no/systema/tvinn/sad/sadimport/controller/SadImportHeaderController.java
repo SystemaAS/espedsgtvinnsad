@@ -3,7 +3,7 @@ package no.systema.tvinn.sad.sadimport.controller;
 import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Level;
+ 
 import org.apache.logging.log4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
