@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import no.systema.jservices.common.values.FasteKoder;
 import no.systema.main.model.SystemaWebUser;
@@ -51,7 +51,7 @@ import no.systema.z.main.maintenance.url.store.MaintenanceMainUrlDataStore;
  */
 
 public class CodeDropDownMgr {
-	private static final Logger logger = LogManager.getLogger(CodeDropDownMgr.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(CodeDropDownMgr.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
 
 	/**
@@ -177,7 +177,7 @@ public class CodeDropDownMgr {
 		urlRequestParams.append("user=" + applicationUser);
 		urlRequestParams.append("&kftyp=" + FasteKoder.DELSYS.toString());
 		logger.info(BASE_URL);
-		logger.info(urlRequestParams);
+		logger.info(urlRequestParams.toString());
 
 		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
 		JsonMaintMainChildWindowKofastContainer container = null;

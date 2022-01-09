@@ -8,7 +8,7 @@ import java.util.*;
 
 import no.systema.main.util.io.TextFileReaderService;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 /**
  * This search class is used at the GUI search behavior
@@ -20,7 +20,7 @@ import org.apache.logging.log4j.*;
  * @date 	Sep 8, 2014
  */
 public class SearchFilterSadNctsExportTopicList {
-	private static final Logger logger = LogManager.getLogger(SearchFilterSadNctsExportTopicList.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SearchFilterSadNctsExportTopicList.class.getName());
 	
 	private String avd = null;
 	public void setAvd(String value) {  this.avd = value; }

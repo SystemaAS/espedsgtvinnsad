@@ -4,7 +4,7 @@ import java.util.*;
 
 
  
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,7 +73,7 @@ import no.systema.tvinn.sad.service.TvinnSadTolltariffVarukodService;
 @Scope("session")
 public class SadExportOmberegningFinansOpplysningerController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = LogManager.getLogger(SadExportOmberegningFinansOpplysningerController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadExportOmberegningFinansOpplysningerController.class.getName());
 	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private SadExportCalculator sadExportCalculator = new SadExportCalculator();

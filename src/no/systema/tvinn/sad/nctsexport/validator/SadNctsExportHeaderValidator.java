@@ -3,7 +3,7 @@ package no.systema.tvinn.sad.nctsexport.validator;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Required;
@@ -32,7 +32,7 @@ import no.systema.tvinn.sad.util.TvinnSadConstants;
  *
  */
 public class SadNctsExportHeaderValidator implements Validator {
-	private static final Logger logger = LogManager.getLogger(SadNctsExportHeaderValidator.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadNctsExportHeaderValidator.class.getName());
 	//Intantiate services here since we are not capable to configure injection with Autowired. Check that further...
 	private UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
 	private SadNctsExportSpecificTopicService nctsExportSpecificTopicService = new SadNctsExportSpecificTopicServiceImpl();

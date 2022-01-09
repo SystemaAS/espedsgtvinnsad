@@ -4,7 +4,7 @@
 package no.systema.tvinn.sad.sadimport.mapper.jsonjackson;
 
 //jackson library
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 //application library
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportTopicListContainer;
@@ -18,7 +18,7 @@ import no.systema.main.mapper.jsonjackson.general.ObjectMapperAbstractGrandFathe
  * 
  */
 public class SadImportTopicListMapper extends ObjectMapperAbstractGrandFather{
-	private static final Logger logger = LogManager.getLogger(SadImportTopicListMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadImportTopicListMapper.class.getName());
 	
 	public JsonSadImportTopicListContainer getContainer(String utfPayload) throws Exception{
 		//At this point we now have an UTF-8 payload

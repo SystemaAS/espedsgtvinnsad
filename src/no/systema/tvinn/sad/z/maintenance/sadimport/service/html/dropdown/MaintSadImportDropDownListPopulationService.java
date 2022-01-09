@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.*;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 
 import no.systema.main.util.JsonDebugger;
@@ -29,7 +29,7 @@ import no.systema.tvinn.sad.z.maintenance.sadimport.url.store.TvinnSadMaintenanc
  */
 public class MaintSadImportDropDownListPopulationService {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = LogManager.getLogger(MaintSadImportDropDownListPopulationService.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(MaintSadImportDropDownListPopulationService.class.getName());
 	
 	/**
 	 * 

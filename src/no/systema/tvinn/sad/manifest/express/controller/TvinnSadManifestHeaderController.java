@@ -7,7 +7,7 @@ import javax.annotation.PostConstruct;
 
 import org.apache.commons.lang3.StringUtils;
  
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
@@ -59,7 +59,7 @@ import no.systema.tvinn.sad.mapper.url.request.UrlRequestParameterMapper;
 @Controller
 public class TvinnSadManifestHeaderController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(3000);
-	private static Logger logger = LogManager.getLogger(TvinnSadManifestHeaderController.class.getName());
+	private static Logger logger = LoggerFactory.getLogger(TvinnSadManifestHeaderController.class.getName());
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	private LoginValidator loginValidator = new LoginValidator();
 	private StringManager strMgr = new StringManager();
@@ -317,7 +317,7 @@ public class TvinnSadManifestHeaderController {
 					//check it the manifest is editable
 					if(!manifestExpressMgr.isEditableManifest(appUser, record)){
 						record.setOwn_editable(-1);
-						logger.warn(record.getOwn_editable());
+						//logger.warn(record.getOwn_editable());
 						
 					}
 					model.put(TvinnSadConstants.DOMAIN_RECORD, record);
@@ -712,7 +712,7 @@ public class TvinnSadManifestHeaderController {
 		urlRequestParams.append("&kfkod=" + efktyp);
 		
 		logger.info(BASE_URL);
-		logger.info(urlRequestParams);
+		logger.info(urlRequestParams.toString());
 
 		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
 		JsonMaintMainChildWindowKofastContainer container = null;

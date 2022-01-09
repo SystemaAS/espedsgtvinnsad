@@ -4,7 +4,7 @@
 package no.systema.main.session;
 
 import javax.servlet.http.HttpSession;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import java.util.*;
 
@@ -17,7 +17,7 @@ import java.util.*;
  * 
  */
 public class SessionMgr {
-	private static final Logger logger = LogManager.getLogger(SessionMgr.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SessionMgr.class.getName());
 
 	/**
 	 * Clears the session from attributes regarding UOPP (Ufortollede Oppdrag)

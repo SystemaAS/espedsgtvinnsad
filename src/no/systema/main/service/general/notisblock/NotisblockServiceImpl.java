@@ -3,7 +3,7 @@
  */
 package no.systema.main.service.general.notisblock;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import no.systema.main.model.jsonjackson.general.notisblock.JsonNotisblockContainer;
 import no.systema.main.mapper.jsonjackson.general.notisblock.NotisblockMapper;
@@ -15,7 +15,7 @@ import no.systema.main.mapper.jsonjackson.general.notisblock.NotisblockMapper;
  * 
  */
 public class NotisblockServiceImpl implements NotisblockService{
-	private static final Logger logger = LogManager.getLogger(NotisblockMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(NotisblockMapper.class.getName());
 	
 	public JsonNotisblockContainer getNotisblockListContainer(String utfPayload) {
 		JsonNotisblockContainer container = null;

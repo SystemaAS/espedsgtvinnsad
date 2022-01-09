@@ -5,7 +5,7 @@ import java.util.Calendar;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +23,7 @@ import no.systema.tvinn.sad.util.TvinnSadConstants;
 @SessionAttributes(AppConstants.SYSTEMA_WEB_USER_KEY)
 @Scope("session")
 public class LogoutTvinnSadController {
-	private static final Logger logger = LogManager.getLogger(LogoutTvinnSadController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(LogoutTvinnSadController.class.getName());
 	private ModelAndView successView = new ModelAndView("dashboard");
 	private ModelAndView loginView = new ModelAndView("login");
 	

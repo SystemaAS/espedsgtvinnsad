@@ -3,7 +3,7 @@ package no.systema.tvinn.sad.sadimport.controller;
 import java.util.*;
 
  
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -80,7 +80,7 @@ import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignature
 @Scope("session")
 public class SadImportOmberegningController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = LogManager.getLogger(SadImportOmberegningController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadImportOmberegningController.class.getName());
 	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
@@ -257,7 +257,7 @@ public class SadImportOmberegningController {
 						successView.addObject(TvinnSadConstants.EDIT_ACTION_ON_TOPIC, TvinnSadConstants.ACTION_UPDATE);
 						
 			    	}else{
-			    		logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+			    		logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 			    		return loginView;
 			    	}
 			    	logger.info(Calendar.getInstance().getTime() +  "END of FETCH");

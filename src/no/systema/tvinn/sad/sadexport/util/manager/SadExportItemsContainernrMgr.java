@@ -2,7 +2,7 @@ package no.systema.tvinn.sad.sadexport.util.manager;
 
 import java.util.*;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.service.UrlCgiProxyService;
@@ -36,7 +36,7 @@ import no.systema.tvinn.sad.model.jsonjackson.JsonSadAutoControlErrorContainer;
 
 
 public class SadExportItemsContainernrMgr {
-	private static final Logger logger = LogManager.getLogger(SadExportItemsContainernrMgr.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadExportItemsContainernrMgr.class.getName());
 	private UrlCgiProxyService urlCgiProxyService = null;
 	private SadExportSpecificTopicItemService sadExportSpecificTopicItemService = null;
 	NumberFormatterLocaleAware formatter = new NumberFormatterLocaleAware();
@@ -80,7 +80,7 @@ public class SadExportItemsContainernrMgr {
 		urlRequestParams.append("&lin=" + this.lin);
 		
 		logger.info(BASE_URL);
-		logger.info(urlRequestParams);
+		logger.info(urlRequestParams.toString());
 		
 		UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
 		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
@@ -124,7 +124,7 @@ public class SadExportItemsContainernrMgr {
 		urlRequestParams.append("&mode=" + mode);
 		
 		logger.info(BASE_URL);
-		logger.info(urlRequestParams);
+		logger.info(urlRequestParams.toString());
 		
 		UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
 		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());

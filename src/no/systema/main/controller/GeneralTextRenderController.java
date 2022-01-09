@@ -2,7 +2,7 @@ package no.systema.main.controller;
 
 import java.util.ResourceBundle;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,10 +38,10 @@ import no.systema.main.model.SystemaWebUser;
 public class GeneralTextRenderController {
 	//OBSOLETE:  static final ResourceBundle resources = AppResources.getBundle();
 	
-	private static final Logger logger = LogManager.getLogger(GeneralTextRenderController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(GeneralTextRenderController.class.getName());
 	private PayloadContentFlusher payloadContentFlusher = new PayloadContentFlusher();
 	
-	private final String RELATIVE_LOGFILE_PATH = "logs/" + ApplicationPropertiesUtil.getProperty("log4j.logger.file");   //OBSOLETE: resources.getString("log4j.logger.file");
+	private final String RELATIVE_LOGFILE_PATH = "logs/" + ApplicationPropertiesUtil.getProperty("logsg.logger.file");   //OBSOLETE: resources.getString("log4j.logger.file");
 	private final String RELATIVE_LOGFILE_EXPRESS_FORTOLLING_SERVICE_PATH = "logs/log4j_syjservicestn-expft.log";
 	private final String SERVLET_CONTEXT_WEBAPPS_ROOT = "webapps";
 	
@@ -56,9 +56,9 @@ public class GeneralTextRenderController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="renderLocalLog4j.do", method={ RequestMethod.GET })
-	public ModelAndView doRenderLocalLog4j(HttpSession session, HttpServletRequest request, HttpServletResponse response){
-		logger.info("Inside doRenderLocalLog4j...");
+	@RequestMapping(value="renderLocalLogsg.do", method={ RequestMethod.GET })
+	public ModelAndView doRenderLocalLogsg(HttpSession session, HttpServletRequest request, HttpServletResponse response){
+		logger.info("Inside doRenderLocalLogsg...");
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
 		Log4jMgr log4jMgr = new Log4jMgr();
 		if(appUser==null){

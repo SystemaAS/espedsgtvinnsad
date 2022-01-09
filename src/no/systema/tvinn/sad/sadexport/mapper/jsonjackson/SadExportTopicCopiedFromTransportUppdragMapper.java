@@ -4,7 +4,7 @@
 package no.systema.tvinn.sad.sadexport.mapper.jsonjackson;
 
 //jackson library
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import com.fasterxml.jackson.databind.DeserializationConfig;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper; 
@@ -18,7 +18,7 @@ import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopic
  * 
  */
 public class SadExportTopicCopiedFromTransportUppdragMapper {
-	private static final Logger logger = LogManager.getLogger(SadExportTopicCopiedFromTransportUppdragMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadExportTopicCopiedFromTransportUppdragMapper.class.getName());
 	
 	public JsonSadExportTopicCopiedFromTransportUppdragContainer getContainer(String utfPayload) throws Exception{
 		ObjectMapper mapper = new ObjectMapper();  

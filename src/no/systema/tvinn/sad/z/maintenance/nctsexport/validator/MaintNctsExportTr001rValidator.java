@@ -1,6 +1,6 @@
 package no.systema.tvinn.sad.z.maintenance.nctsexport.validator;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -16,7 +16,7 @@ import no.systema.tvinn.sad.z.maintenance.nctsexport.model.jsonjackson.dbtable.J
  *
  */
 public class MaintNctsExportTr001rValidator implements Validator {
-	private static final Logger logger = LogManager.getLogger(MaintNctsExportTr001rValidator.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(MaintNctsExportTr001rValidator.class.getName());
 
 	public boolean supports(Class clazz) {
 		return JsonMaintNctsTrughRecord.class.isAssignableFrom(clazz); 

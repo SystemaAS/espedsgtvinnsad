@@ -4,7 +4,7 @@
 package no.systema.tvinn.sad.mapper.jsonjackson;
 
 //jackson library
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import com.fasterxml.jackson.databind.DeserializationConfig;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper; 
@@ -18,7 +18,7 @@ import java.util.*;
  * 
  */
 public class TvinnSadAutoControlErrorMapper {
-	private static final Logger logger = LogManager.getLogger(TvinnSadAutoControlErrorMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(TvinnSadAutoControlErrorMapper.class.getName());
 	
 	/**
 	 * 

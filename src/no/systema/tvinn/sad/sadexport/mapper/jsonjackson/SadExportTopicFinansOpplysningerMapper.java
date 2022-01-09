@@ -4,7 +4,7 @@
 package no.systema.tvinn.sad.sadexport.mapper.jsonjackson;
 
 //jackson library
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import no.systema.main.mapper.jsonjackson.general.ObjectMapperAbstractGrandFather;
 //application library
@@ -22,7 +22,7 @@ import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopic
  * 
  */
 public class SadExportTopicFinansOpplysningerMapper extends ObjectMapperAbstractGrandFather {
-	private static final Logger logger = LogManager.getLogger(SadExportTopicFinansOpplysningerMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadExportTopicFinansOpplysningerMapper.class.getName());
 	
 	public JsonSadExportTopicFinansOpplysningerContainer getContainer(String utfPayload) throws Exception{
 		//At this point we now have an UTF-8 payload

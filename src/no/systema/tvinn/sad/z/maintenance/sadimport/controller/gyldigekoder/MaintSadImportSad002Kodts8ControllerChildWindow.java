@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import java.util.*;
 
  
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -62,7 +62,7 @@ import no.systema.tvinn.sad.z.maintenance.sadimport.url.store.TvinnSadMaintenanc
 @Scope("session")
 public class MaintSadImportSad002Kodts8ControllerChildWindow {
 	
-	private static final Logger logger = LogManager.getLogger(MaintSadImportSad002Kodts8ControllerChildWindow.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(MaintSadImportSad002Kodts8ControllerChildWindow.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(2000);
 	
 
@@ -128,7 +128,7 @@ public class MaintSadImportSad002Kodts8ControllerChildWindow {
 		urlRequestParams.append("user=" + appUser.getUser());
 		
 		logger.info(BASE_URL);
-		logger.info(urlRequestParams);
+		logger.info(urlRequestParams.toString());
 		
 		UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
 		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());

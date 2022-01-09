@@ -1,6 +1,6 @@
 package no.systema.tvinn.sad.z.maintenance.felles.validator;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -15,7 +15,7 @@ import no.systema.tvinn.sad.z.maintenance.felles.model.jsonjackson.dbtable.JsonM
  *
  */
 public class MaintSadFellesSyft10rValidator implements Validator {
-	private static final Logger logger = LogManager.getLogger(MaintSadFellesSyft10rValidator.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(MaintSadFellesSyft10rValidator.class.getName());
 	/**
 	 * 
 	 */

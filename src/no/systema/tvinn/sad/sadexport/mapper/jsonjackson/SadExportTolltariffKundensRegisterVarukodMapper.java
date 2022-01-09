@@ -4,7 +4,7 @@
 package no.systema.tvinn.sad.sadexport.mapper.jsonjackson;
 
 //jackson library
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import com.fasterxml.jackson.databind.DeserializationConfig;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper; 
@@ -22,7 +22,7 @@ import java.util.*;
  * 
  */
 public class SadExportTolltariffKundensRegisterVarukodMapper {
-	private static final Logger logger = LogManager.getLogger(SadExportTolltariffKundensRegisterVarukodMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadExportTolltariffKundensRegisterVarukodMapper.class.getName());
 	
 	/**
 	 * 

@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,7 +54,7 @@ import no.systema.tvinn.sad.util.manager.ArchiveGoogleCloudManager;
 @Scope("session")
 public class SadNctsImportHeaderLoggingController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = LogManager.getLogger(SadNctsImportHeaderLoggingController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadNctsImportHeaderLoggingController.class.getName());
 	private PayloadContentFlusher payloadContentFlusher = new PayloadContentFlusher();
 	private StackTraceUtil stackTraceUtil = new StackTraceUtil();
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
@@ -123,7 +123,7 @@ public class SadNctsImportHeaderLoggingController {
 				successView.addObject(TvinnSadConstants.DOMAIN_LIST,container.getLogg());
 		    		
 		    	}else{
-				logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+				logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 				return loginView;
 			}
 
@@ -242,7 +242,7 @@ public class SadNctsImportHeaderLoggingController {
 		                }
 		            }
 		    	}else{
-				logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+				logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 				return loginView;
 			}
 

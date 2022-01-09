@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +39,7 @@ import no.systema.tvinn.sad.util.TvinnSadConstants;
  */
 @Controller
 public class TvinnSadManifestAjaxHandlerController {
-	private static final Logger logger = LogManager.getLogger(TvinnSadManifestAjaxHandlerController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(TvinnSadManifestAjaxHandlerController.class.getName());
 	private DateTimeManager dateMgr = new DateTimeManager();
 	
 	/**

@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Required;
@@ -41,7 +41,7 @@ import no.systema.tvinn.sad.z.maintenance.main.url.store.MaintenanceUrlDataStore
 @Scope("session")
 public class MaintAjaxHandlerController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = LogManager.getLogger(MaintAjaxHandlerController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(MaintAjaxHandlerController.class.getName());
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
 
 	

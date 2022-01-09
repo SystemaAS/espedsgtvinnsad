@@ -8,7 +8,7 @@ import java.util.*;
 
 import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 /**
  * 
@@ -16,7 +16,7 @@ import org.apache.logging.log4j.*;
  * @date 	Sep 15, 2016
  */
 public class SearchFilterSadAdminAvggrunnlag {
-	private static final Logger logger = LogManager.getLogger(SearchFilterSadAdminAvggrunnlag.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SearchFilterSadAdminAvggrunnlag.class.getName());
 	protected TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
 	
 	private String fromDate = null;

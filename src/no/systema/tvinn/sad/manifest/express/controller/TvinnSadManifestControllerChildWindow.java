@@ -7,7 +7,7 @@ import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
  
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -80,7 +80,7 @@ import no.systema.tvinn.sad.z.maintenance.sadimport.url.store.TvinnSadMaintenanc
 @Scope("session")
 public class TvinnSadManifestControllerChildWindow {
 	
-	private static final Logger logger = LogManager.getLogger(TvinnSadManifestControllerChildWindow.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(TvinnSadManifestControllerChildWindow.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(2000);
 		
 	//customer
@@ -208,7 +208,7 @@ public class TvinnSadManifestControllerChildWindow {
 	    			return successView;
 	    			
 		    	}else{
-		    		logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+		    		logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 		    		return loginView;
 		    	}
 		    }
@@ -586,7 +586,7 @@ public class TvinnSadManifestControllerChildWindow {
 		urlRequestParams.append("&typ=" + typeCode);
 		
 		logger.info(BASE_URL);
-		logger.info(urlRequestParams);
+		logger.info(urlRequestParams.toString());
 		
 		UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
 		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());

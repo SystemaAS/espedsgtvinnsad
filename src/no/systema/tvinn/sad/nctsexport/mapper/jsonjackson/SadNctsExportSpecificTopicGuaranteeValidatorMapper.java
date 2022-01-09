@@ -5,7 +5,7 @@ package no.systema.tvinn.sad.nctsexport.mapper.jsonjackson;
 
 
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import com.fasterxml.jackson.databind.DeserializationConfig;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper; 
@@ -21,7 +21,7 @@ import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.validation.JsonSa
  *
  */
 public class SadNctsExportSpecificTopicGuaranteeValidatorMapper {
-	private static final Logger logger = LogManager.getLogger(SadNctsExportSpecificTopicGuaranteeValidatorMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadNctsExportSpecificTopicGuaranteeValidatorMapper.class.getName());
 		
 	public JsonSadNctsExportSpecificTopicGuaranteeValidatorContainer getContainer(String utfPayload) throws Exception{
 		ObjectMapper mapper = new ObjectMapper();  

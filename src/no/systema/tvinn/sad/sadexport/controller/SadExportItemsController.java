@@ -4,7 +4,7 @@ import java.util.*;
 
 
  
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -80,7 +80,7 @@ import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadTolltariffVaruko
 @Scope("session")
 public class SadExportItemsController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(800);
-	private static final Logger logger = LogManager.getLogger(SadExportItemsController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadExportItemsController.class.getName());
 	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private SadExportCalculator sadExportCalculator = new SadExportCalculator();
@@ -670,7 +670,7 @@ public class SadExportItemsController {
 		
 		
 		logger.info(BASE_URL);
-		logger.info(urlRequestParams);
+		logger.info(urlRequestParams.toString());
 		
 		UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
 		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
@@ -712,7 +712,7 @@ public class SadExportItemsController {
 		urlRequestParams.append("&mode=" + mode);
 		
 		logger.info(BASE_URL);
-		logger.info(urlRequestParams);
+		logger.info(urlRequestParams.toString());
 		
 		UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
 		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());

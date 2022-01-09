@@ -16,7 +16,7 @@ import java.nio.file.attribute.PosixFileAttributeView;
 import java.nio.file.attribute.UserPrincipalLookupService;
 import java.util.*;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Required;
@@ -51,7 +51,7 @@ import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
  */
 @Controller
 public class ApplicationAjaxHandlerController {
-	private static final Logger logger = LogManager.getLogger(ApplicationAjaxHandlerController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(ApplicationAjaxHandlerController.class.getName());
 	private StringManager strMgr = new StringManager();
 	
 	/**

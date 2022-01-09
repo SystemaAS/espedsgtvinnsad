@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 
 import no.systema.main.context.TdsServletContext;
@@ -17,7 +17,7 @@ import no.systema.main.controller.GeneralTextRenderController;
 
 public class Log4jMgr {
 
-	private static final Logger logger = LogManager.getLogger(Log4jMgr.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(Log4jMgr.class.getName());
 	
 	/**
 	 * 

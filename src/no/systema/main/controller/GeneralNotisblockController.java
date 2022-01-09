@@ -3,7 +3,7 @@ package no.systema.main.controller;
 import java.util.*;
 
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,7 +52,7 @@ import no.systema.main.validator.NotisblockValidator;
 //@SessionAttributes(AppConstants.SYSTEMA_WEB_USER_KEY)
 @Scope("session")
 public class GeneralNotisblockController {
-	private static final Logger logger = LogManager.getLogger(GeneralNotisblockController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(GeneralNotisblockController.class.getName());
 	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
 	private final String SUBSYSTEM_TVINN_SAD_IMPORT = "sadi";
 	private final String SUBSYSTEM_TVINN_SAD_EXPORT = "sade";

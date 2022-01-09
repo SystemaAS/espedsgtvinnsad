@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.math.BigDecimal;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -35,7 +35,7 @@ import no.systema.tvinn.sad.util.TvinnSadConstants;
  *
  */
 public class SadExportHeaderValidator implements Validator {
-	private static final Logger logger = LogManager.getLogger(SadExportHeaderValidator.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadExportHeaderValidator.class.getName());
 	private StringManager strMgr = new StringManager();
 	private DateValidator dateValidator = new DateValidator();
 	private NumberFormatterLocaleAware numberFormatter = new NumberFormatterLocaleAware();

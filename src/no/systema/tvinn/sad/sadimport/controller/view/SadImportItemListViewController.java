@@ -2,7 +2,7 @@ package no.systema.tvinn.sad.sadimport.controller.view;
 
 import java.util.*;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
@@ -40,7 +40,7 @@ import no.systema.tvinn.sad.util.TvinnSadConstants;
 @Controller
 public class SadImportItemListViewController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = LogManager.getLogger(SadImportItemListViewController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadImportItemListViewController.class.getName());
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	
 	/**

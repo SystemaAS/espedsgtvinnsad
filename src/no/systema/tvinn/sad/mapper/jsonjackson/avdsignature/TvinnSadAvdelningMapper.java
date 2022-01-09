@@ -4,7 +4,7 @@
 package no.systema.tvinn.sad.mapper.jsonjackson.avdsignature;
 
 //jackson library
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import com.fasterxml.jackson.databind.DeserializationConfig;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper; 
@@ -22,7 +22,7 @@ import java.util.*;
  * 
  */
 public class TvinnSadAvdelningMapper {
-	private static final Logger logger = LogManager.getLogger(TvinnSadAvdelningMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(TvinnSadAvdelningMapper.class.getName());
 	
 	/**
 	 * 

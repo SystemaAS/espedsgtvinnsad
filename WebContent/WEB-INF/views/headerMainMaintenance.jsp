@@ -138,7 +138,7 @@
 					           		<div class="text11" align="left">
 					           			&nbsp;<b>${user.versionEspedsg}</b>
 					           			<br/><br/>
-					           			&nbsp;<a href="renderLocalLog4j.do" target="_blank"><font class="text12Orange">log4j</font></a>
+					           			&nbsp;<a href="renderLocalLog4j.do" target="_blank"><font class="text12Orange">logsg</font></a>
 					           			<br/><br/><br/>
 					           			<button name="versionInformationButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('versionInfo');">Close</button> 
 					           		</div>

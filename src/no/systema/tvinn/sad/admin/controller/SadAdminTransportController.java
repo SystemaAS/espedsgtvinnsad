@@ -3,7 +3,7 @@ package no.systema.tvinn.sad.admin.controller;
 import java.lang.reflect.Field;
 import java.util.*;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
@@ -73,7 +73,7 @@ import no.systema.tvinn.sad.admin.model.jsonjackson.topic.JsonSadAdminTransportL
 @Scope("session")
 public class SadAdminTransportController {
 	
-	private static final Logger logger = LogManager.getLogger(SadAdminTransportController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadAdminTransportController.class.getName());
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	private ApplicationContext context;
 	private LoginValidator loginValidator = new LoginValidator();
@@ -200,7 +200,7 @@ public class SadAdminTransportController {
 					return successView;
 					
 				}else{
-					logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+					logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 					return loginView;
 				}
 		    }

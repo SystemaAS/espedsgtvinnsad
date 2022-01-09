@@ -5,7 +5,7 @@ package no.systema.tvinn.sad.sadexport.service.html.dropdown;
 
 import java.util.List;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import no.systema.main.context.TdsServletContext;
 import no.systema.main.util.io.TextFileReaderService;
@@ -26,7 +26,7 @@ import no.systema.tvinn.sad.util.TvinnSadConstants;
  * 
  */
 public class SadExportDropDownListPopulationService {
-	private static final Logger logger = LogManager.getLogger(SadExportDropDownListPopulationService.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadExportDropDownListPopulationService.class.getName());
 	
 	private final String FILE_RESOURCE_PATH = TvinnSadConstants.RESOURCE_FILES_PATH;
 	private TextFileReaderService textFileReaderService = new TextFileReaderService();

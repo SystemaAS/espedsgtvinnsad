@@ -2,7 +2,7 @@ package no.systema.tvinn.sad.sadimport.util.manager;
 
 import java.util.*;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,7 +43,7 @@ import no.systema.tvinn.sad.model.jsonjackson.JsonSadAutoControlErrorContainer;
 
 
 public class SadImportItemsAutoControlMgr {
-	private static final Logger logger = LogManager.getLogger(SadImportItemsAutoControlMgr.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadImportItemsAutoControlMgr.class.getName());
 	private UrlCgiProxyService urlCgiProxyService = null;
 	private SadImportSpecificTopicItemService sadImportSpecificTopicItemService = null;
 	

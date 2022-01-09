@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import java.util.*;
 
  
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -64,7 +64,7 @@ import no.systema.tvinn.sad.util.TvinnSadConstants;
 @Scope("session")
 public class SadExportHeaderControllerChildWindow {
 	
-	private static final Logger logger = LogManager.getLogger(SadExportHeaderControllerChildWindow.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadExportHeaderControllerChildWindow.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(2000);
 	//customer
 	private final String DATATABLE_LIST = "list";
@@ -189,7 +189,7 @@ public class SadExportHeaderControllerChildWindow {
 		urlRequestParams.append("&typ=" + typeCode);
 		
 		logger.info(BASE_URL);
-		logger.info(urlRequestParams);
+		logger.info(urlRequestParams.toString());
 		
 		UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
 		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());

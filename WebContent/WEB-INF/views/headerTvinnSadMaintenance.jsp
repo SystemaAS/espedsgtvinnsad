@@ -228,7 +228,7 @@
 						           			<b>${user.versionEspedsg}</b>
 						           			
 					           			<p>
-					           			&nbsp;<a id="alinkLog4jLogger" ><font class="text14Orange style="cursor:pointer;">log4j</font></a>
+					           			&nbsp;<a id="alinkLog4jLogger" ><font class="text14Orange style="cursor:pointer;">logsg</font></a>
 					           			</p>
 					           			<button name="versionInformationButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('versionInfo');">Close</button> 
 					           			</div>

@@ -2,7 +2,7 @@ package no.systema.tvinn.sad.sadexport.util.manager;
 
 import java.util.*;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import javawebparts.core.org.apache.commons.lang.StringUtils;
 import no.systema.main.model.SystemaWebUser;
@@ -34,7 +34,7 @@ import no.systema.tvinn.sad.model.jsonjackson.JsonSadAutoControlErrorContainer;
 
 
 public class SadExportItemsAutoControlMgr {
-	private static final Logger logger = LogManager.getLogger(SadExportItemsAutoControlMgr.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadExportItemsAutoControlMgr.class.getName());
 	private UrlCgiProxyService urlCgiProxyService = null;
 	private SadExportSpecificTopicItemService sadExportSpecificTopicItemService = null;
 	NumberFormatterLocaleAware formatter = new NumberFormatterLocaleAware();
@@ -91,8 +91,8 @@ public class SadExportItemsAutoControlMgr {
 					double grossWeight = Double.parseDouble(grossFormatTmp.replace(",", "."));
 					String netFormatTmp = this.record.getSvvktn().replace(".", "");
 					double netWeight = Double.parseDouble(netFormatTmp.replace(",", "."));
-					logger.warn(grossWeight);
-					logger.warn(netWeight);
+					logger.warn(String.valueOf(grossWeight));
+					logger.warn(String.valueOf(netWeight));
 					//Net can not be > than Gross
 					if (netWeight>grossWeight){
 						this.validRecord = false;

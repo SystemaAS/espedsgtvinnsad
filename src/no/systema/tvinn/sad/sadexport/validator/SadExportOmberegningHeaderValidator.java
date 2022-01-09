@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 import org.springframework.validation.Validator;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 
@@ -20,7 +20,7 @@ import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportSpeci
  *
  */
 public class SadExportOmberegningHeaderValidator implements Validator {
-	private static final Logger logger = LogManager.getLogger(SadExportOmberegningHeaderValidator.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadExportOmberegningHeaderValidator.class.getName());
 	
 	private StringManager strMgr = new StringManager();
 	private DateValidator dateValidator = new DateValidator();

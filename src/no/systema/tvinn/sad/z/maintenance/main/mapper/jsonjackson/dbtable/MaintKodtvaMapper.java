@@ -4,7 +4,7 @@
 package no.systema.tvinn.sad.z.maintenance.main.mapper.jsonjackson.dbtable;
 
 //jackson library
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper; 
 //application library
@@ -19,7 +19,7 @@ import java.util.*;
  * 
  */
 public class MaintKodtvaMapper {
-	private static final Logger logger = LogManager.getLogger(MaintKodtvaMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(MaintKodtvaMapper.class.getName());
 	
 	public JsonMaintKodtvaContainer getContainer(String utfPayload) throws Exception{
 		ObjectMapper mapper = new ObjectMapper();  

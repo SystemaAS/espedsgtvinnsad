@@ -2,7 +2,7 @@ package no.systema.tvinn.sad.sadimport.controller;
 
 import java.util.*;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,7 +51,7 @@ import no.systema.tvinn.sad.util.manager.ArchiveGoogleCloudManager;
 @Scope("session")
 public class SadImportHeaderLoggingController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = LogManager.getLogger(SadImportHeaderLoggingController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadImportHeaderLoggingController.class.getName());
 	private PayloadContentFlusher payloadContentFlusher = new PayloadContentFlusher();
 	
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
@@ -124,7 +124,7 @@ public class SadImportHeaderLoggingController {
 				successView.addObject(TvinnSadConstants.DOMAIN_LIST,container.getLogg());
 		    		
 		    	}else{
-				logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+				logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 				return loginView;
 			}
 
@@ -238,7 +238,7 @@ public class SadImportHeaderLoggingController {
 		                }
 		            }
 		    	}else{
-				logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+				logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 				return loginView;
 			}
 

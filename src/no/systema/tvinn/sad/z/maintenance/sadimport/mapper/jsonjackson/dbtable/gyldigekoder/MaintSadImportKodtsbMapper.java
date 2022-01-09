@@ -4,7 +4,7 @@
 package no.systema.tvinn.sad.z.maintenance.sadimport.mapper.jsonjackson.dbtable.gyldigekoder;
 
 //jackson library
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import no.systema.main.mapper.jsonjackson.general.ObjectMapperAbstractGrandFather;
 //application library
@@ -20,7 +20,7 @@ import java.util.*;
  * 
  */
 public class MaintSadImportKodtsbMapper extends ObjectMapperAbstractGrandFather {
-	private static final Logger logger = LogManager.getLogger(MaintSadImportKodtsbMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(MaintSadImportKodtsbMapper.class.getName());
 	
 	public JsonMaintSadImportKodtsbContainer getContainer(String utfPayload) throws Exception{
 		

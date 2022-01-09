@@ -4,7 +4,7 @@
 package no.systema.tror.mapper;
 
 //jackson library
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper; 
 //application library
@@ -19,7 +19,7 @@ import no.systema.tror.model.JsonTrorOrderListRecord;
  * 
  */
 public class JsonTrorOrderListMapper {
-	private static final Logger logger = LogManager.getLogger(JsonTrorOrderListMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(JsonTrorOrderListMapper.class.getName());
 	/**
 	 * 
 	 * @param utfPayload

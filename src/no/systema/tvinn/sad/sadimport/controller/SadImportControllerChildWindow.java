@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import java.util.*;
 
  
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -70,7 +70,7 @@ import no.systema.tvinn.sad.util.TvinnSadConstants;
 @Scope("session")
 public class SadImportControllerChildWindow {
 	
-	private static final Logger logger = LogManager.getLogger(SadImportControllerChildWindow.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadImportControllerChildWindow.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(2000);
 	//customer
 	private final String DATATABLE_LIST = "list";
@@ -238,7 +238,7 @@ public class SadImportControllerChildWindow {
 		urlRequestParams.append("&lk=" + countryCode + "&vata=" + itemCode);
 		
 		logger.info(BASE_URL);
-		logger.info(urlRequestParams);
+		logger.info(urlRequestParams.toString());
 		
 		UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
 		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
@@ -277,7 +277,7 @@ public class SadImportControllerChildWindow {
 		urlRequestParams.append("user=" + appUser.getUser() + "&ie=" + IE_MODE);
 		urlRequestParams.append("&lk=" + countryCode + "&vata=" + itemCode + "&fokd=" + formansCode);
 		logger.info(BASE_URL);
-		logger.info(urlRequestParams);
+		logger.info(urlRequestParams.toString());
 		  
 		UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
 		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());

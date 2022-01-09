@@ -4,7 +4,7 @@
 package no.systema.tvinn.sad.manifest.express.util.manager;
 
 import java.util.*;
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import no.systema.jservices.common.values.FasteKoder;
 import no.systema.main.model.SystemaWebUser;
@@ -35,7 +35,7 @@ import no.systema.z.main.maintenance.url.store.MaintenanceMainUrlDataStore;
  * 
  */
 public class CodeDropDownMgr {
-	private static final Logger logger = LogManager.getLogger(CodeDropDownMgr.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(CodeDropDownMgr.class.getName());
 	
 	//public static final String CODE_1_EKSPEDISJONSTYPER_IMPORT = "1";
 	public static final String CODE_2_COUNTRY = "2";
@@ -72,7 +72,7 @@ public class CodeDropDownMgr {
 		urlRequestParams.append("user=" + appUser.getUser());
 		urlRequestParams.append("&kftyp=" + type);
 		logger.info(BASE_URL);
-		logger.info(urlRequestParams);
+		logger.info(urlRequestParams.toString());
 
 		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
 		JsonMaintMainChildWindowKofastContainer container = null;

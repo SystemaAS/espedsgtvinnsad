@@ -6,7 +6,7 @@ import java.text.DecimalFormat;
 
 import org.apache.commons.lang3.StringUtils;
  
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -90,7 +90,7 @@ import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
 @Scope("session")
 public class SadExportHeaderController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = LogManager.getLogger(SadExportHeaderController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadExportHeaderController.class.getName());
 	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
@@ -265,7 +265,7 @@ public class SadExportHeaderController {
 			    		successView.addObject(TvinnSadConstants.EDIT_ACTION_ON_TOPIC, TvinnSadConstants.ACTION_UPDATE);
 			    		
 			    	}else{
-			    		logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+			    		logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 			    		return loginView;
 			    	}
 			    	logger.info(Calendar.getInstance().getTime() +  "END of FETCH");
@@ -834,12 +834,12 @@ public class SadExportHeaderController {
 		    		if(jsonSadExportTopicCopiedContainer!=null){
 		    			//Check for errors
 		    			if(jsonSadExportTopicCopiedContainer.getErrMsg()!=null && !"".equals(jsonSadExportTopicCopiedContainer.getErrMsg())){
-		    				logger.fatal("[ERROR FATAL] errMsg containing: " + jsonSadExportTopicCopiedContainer.getErrMsg());
+		    				logger.error("[ERROR FATAL] errMsg containing: " + jsonSadExportTopicCopiedContainer.getErrMsg());
 		    				return fallbackOnErrorView;
 		    			}
 		    		}
 		    	}else{
-				logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+				logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 				return loginView;
 			}
 		    
@@ -879,7 +879,7 @@ public class SadExportHeaderController {
 				successView.addObject(TvinnSadConstants.EDIT_ACTION_ON_TOPIC, TvinnSadConstants.ACTION_UPDATE);
 		    		
 		    	}else{
-				logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+				logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 				return loginView;
 			}
 			
@@ -964,7 +964,7 @@ public class SadExportHeaderController {
 			    			}
 			    		}
 			    	}else{
-					logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+					logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 					return loginView;
 				}
 			    
@@ -1003,7 +1003,7 @@ public class SadExportHeaderController {
 			    		successView.addObject(TvinnSadConstants.EDIT_ACTION_ON_TOPIC, TvinnSadConstants.ACTION_UPDATE);
 			    		
 			    	}else{
-					logger.fatal("[ERROR fatal] NO CONTENT on jsonPayload from URL... ??? <Null>");
+					logger.error("[ERROR fatal] NO CONTENT on jsonPayload from URL... ??? <Null>");
 					return loginView;
 				}
 			}else if(strMgr.isNotNull(avd)){
@@ -2082,7 +2082,7 @@ public class SadExportHeaderController {
 			//here ...
 			
 		}catch (Exception e){
-			logger.error(e);
+			logger.error(e.toString());
 		}
 		
 	}

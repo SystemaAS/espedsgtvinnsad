@@ -4,7 +4,7 @@
 package no.systema.tvinn.sad.mapper.jsonjackson;
 
 //jackson library
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper; 
 //application library
@@ -24,7 +24,7 @@ import java.util.*;
  * 
  */
 public class TvinnSadGodsnrMapper {
-	private static final Logger logger = LogManager.getLogger(TvinnSadGodsnrMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(TvinnSadGodsnrMapper.class.getName());
 	
 	/**
 	 * 

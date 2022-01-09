@@ -12,7 +12,7 @@ import java.text.NumberFormat;
 import java.math.BigDecimal;
 import java.util.Locale;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 /**
  * @author oscardelatorre
@@ -21,7 +21,7 @@ import org.apache.logging.log4j.*;
  * 
  */
 public class SadExportCalculator {
-	private static final Logger logger = LogManager.getLogger(SadExportCalculator.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadExportCalculator.class.getName());
 	
 	
 	/**

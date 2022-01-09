@@ -8,7 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Required;
@@ -37,7 +37,7 @@ import no.systema.tvinn.sad.z.maintenance.main.util.TvinnSadMaintenanceConstants
 @SessionAttributes(AppConstants.SYSTEMA_WEB_USER_KEY)
 @Scope("session")
 public class MaintSadExportController {
-	private static final Logger logger = LogManager.getLogger(MaintSadExportController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(MaintSadExportController.class.getName());
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 
 	/**

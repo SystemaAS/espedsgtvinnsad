@@ -3,7 +3,7 @@ package no.systema.tvinn.sad.controller;
 import java.net.InetAddress;
 import java.util.*;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +40,7 @@ import no.systema.main.util.AppConstants;
 
 @Controller
 public class TvinnSadGateController {
-	private static final Logger logger = LogManager.getLogger(TvinnSadGateController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(TvinnSadGateController.class.getName());
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	
 	/**

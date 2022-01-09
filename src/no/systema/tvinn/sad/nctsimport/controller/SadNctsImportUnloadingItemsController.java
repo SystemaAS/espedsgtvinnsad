@@ -3,7 +3,7 @@ package no.systema.tvinn.sad.nctsimport.controller;
 import java.util.*;
 
  
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,7 +67,7 @@ import no.systema.tvinn.sad.util.TvinnSadConstants;
 @Scope("session")
 public class SadNctsImportUnloadingItemsController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = LogManager.getLogger(SadNctsImportUnloadingItemsController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadNctsImportUnloadingItemsController.class.getName());
 	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();

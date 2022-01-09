@@ -1,6 +1,6 @@
 package no.systema.tvinn.sad.z.maintenance.sad.validator.gyldigekoder;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -16,7 +16,7 @@ import no.systema.tvinn.sad.z.maintenance.sad.model.jsonjackson.dbtable.gyldigek
  *
  */
 public class MaintSadSad002KodtsorValidator implements Validator {
-	private static final Logger logger = LogManager.getLogger(MaintSadSad002KodtsorValidator.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(MaintSadSad002KodtsorValidator.class.getName());
 	private NumberFormatterLocaleAware numberFormatter = new NumberFormatterLocaleAware();
 	/**
 	 * 

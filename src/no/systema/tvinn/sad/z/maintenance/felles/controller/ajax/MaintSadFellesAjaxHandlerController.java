@@ -2,7 +2,7 @@ package no.systema.tvinn.sad.z.maintenance.felles.controller.ajax;
 
 import java.util.*;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
@@ -55,7 +55,7 @@ import no.systema.tvinn.sad.z.maintenance.felles.url.store.TvinnSadMaintenanceFe
 @Scope("session")
 public class MaintSadFellesAjaxHandlerController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = LogManager.getLogger(MaintSadFellesAjaxHandlerController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(MaintSadFellesAjaxHandlerController.class.getName());
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	private ApplicationContext context;
 	private LoginValidator loginValidator = new LoginValidator();

@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.util.*;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -35,7 +35,7 @@ import no.systema.main.validator.DateValidator;
  *
  */
 public class SadImportHeaderValidator implements Validator {
-	private static final Logger logger = LogManager.getLogger(SadImportHeaderController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadImportHeaderController.class.getName());
 	private StringManager strMgr = new StringManager();
 	private DateValidator dateValidator = new DateValidator();
 	private UrlCgiProxyService urlCgiProxyService = null;

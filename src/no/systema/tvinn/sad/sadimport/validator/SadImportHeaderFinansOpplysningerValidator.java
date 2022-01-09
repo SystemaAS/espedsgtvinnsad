@@ -1,6 +1,6 @@
 package no.systema.tvinn.sad.sadimport.validator;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -15,7 +15,7 @@ import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportTopic
  * @date Sep 24, 2014
  */
 public class SadImportHeaderFinansOpplysningerValidator implements Validator {
-	private static final Logger logger = LogManager.getLogger(SadImportHeaderFinansOpplysningerValidator.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadImportHeaderFinansOpplysningerValidator.class.getName());
 	private DateValidator dateValidator = new DateValidator();
 	
 	/**

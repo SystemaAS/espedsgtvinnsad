@@ -6,7 +6,7 @@ package no.systema.tvinn.sad.controller.ajax;
 import java.util.*;
 
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Required;
@@ -47,7 +47,7 @@ import no.systema.tvinn.sad.service.TvinnSadCustomerService;
 @Controller
 
 public class TvinnSadAjaxHandlerController {
-	private static final Logger logger = LogManager.getLogger(TvinnSadAjaxHandlerController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(TvinnSadAjaxHandlerController.class.getName());
 	 
 	
 	  /**

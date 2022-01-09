@@ -3,7 +3,7 @@
  */
 package no.systema.tvinn.sad.nctsexport.mapper.jsonjackson;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import com.fasterxml.jackson.databind.DeserializationConfig;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper; 
@@ -20,7 +20,7 @@ import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.items.validation.
  *
  */
 public class SadNctsExportSpecificTopicItemSensitiveGoodsValidatorMapper {
-	private static final Logger logger = LogManager.getLogger(SadNctsExportSpecificTopicItemSensitiveGoodsValidatorMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadNctsExportSpecificTopicItemSensitiveGoodsValidatorMapper.class.getName());
 		
 	public JsonSadNctsExportSpecificTopicItemSensitiveGoodsValidatorContainer getContainer(String utfPayload) throws Exception{
 		ObjectMapper mapper = new ObjectMapper();  

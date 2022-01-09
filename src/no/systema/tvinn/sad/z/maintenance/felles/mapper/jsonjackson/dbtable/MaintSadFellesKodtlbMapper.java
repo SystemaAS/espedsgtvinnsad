@@ -4,7 +4,7 @@
 package no.systema.tvinn.sad.z.maintenance.felles.mapper.jsonjackson.dbtable;
 
 //jackson library
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper; 
 //application library
@@ -19,7 +19,7 @@ import java.util.*;
  * 
  */
 public class MaintSadFellesKodtlbMapper {
-	private static final Logger logger = LogManager.getLogger(MaintSadFellesKodtlbMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(MaintSadFellesKodtlbMapper.class.getName());
 	
 	public JsonMaintSadFellesKodtlbContainer getContainer(String utfPayload) throws Exception{
 		ObjectMapper mapper = new ObjectMapper();  

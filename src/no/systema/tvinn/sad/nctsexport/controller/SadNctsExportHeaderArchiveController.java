@@ -2,7 +2,7 @@ package no.systema.tvinn.sad.nctsexport.controller;
 
 import java.util.*;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,7 +51,7 @@ import no.systema.tvinn.sad.util.manager.ArchiveGoogleCloudManager;
 @Scope("session")
 public class SadNctsExportHeaderArchiveController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = LogManager.getLogger(SadNctsExportHeaderArchiveController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SadNctsExportHeaderArchiveController.class.getName());
 	private PayloadContentFlusher payloadContentFlusher = new PayloadContentFlusher();
 	
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
@@ -123,7 +123,7 @@ public class SadNctsExportHeaderArchiveController {
 		    		successView.addObject(SkatConstants.DOMAIN_LIST,container.getArchiveElements());
 		    		
 		    	}else{
-				logger.fatal("NO CONTENT on jsonPayload from URL... ??? <Null>");
+				logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
 				return loginView;
 			}
 		}

@@ -2,7 +2,7 @@ package no.systema.tvinn.sad.z.maintenance.manifest.express.controller;
 
 import java.util.*;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +36,7 @@ import no.systema.tvinn.sad.z.maintenance.main.util.TvinnSadMaintenanceConstants
 @SessionAttributes(AppConstants.SYSTEMA_WEB_USER_KEY)
 @Scope("session")
 public class MaintTvinnSadManifestController {
-	private static final Logger logger = LogManager.getLogger(MaintTvinnSadManifestController.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(MaintTvinnSadManifestController.class.getName());
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	
 	/**

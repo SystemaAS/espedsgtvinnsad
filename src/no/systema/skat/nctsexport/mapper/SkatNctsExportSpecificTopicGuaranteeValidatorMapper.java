@@ -5,7 +5,7 @@ package no.systema.skat.nctsexport.mapper;
 
 
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,7 +21,7 @@ import no.systema.skat.nctsexport.model.JsonSkatNctsExportSpecificTopicGuarantee
  *
  */
 public class SkatNctsExportSpecificTopicGuaranteeValidatorMapper {
-	private static final Logger logger = LogManager.getLogger(SkatNctsExportSpecificTopicGuaranteeValidatorMapper.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(SkatNctsExportSpecificTopicGuaranteeValidatorMapper.class.getName());
 		
 	public JsonSkatNctsExportSpecificTopicGuaranteeValidatorContainer getContainer(String utfPayload) throws Exception{
 		ObjectMapper mapper = new ObjectMapper();  
