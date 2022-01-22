@@ -42,8 +42,8 @@
 	           			<p><b>Start</b> SBMJOB CMD(CALL PGM(SADEMSNDC)) JOB(EXPMANSND) JOBQ(SYJOBQNMAX) USER(SY400USR)
 	           			</p>
 	           			<p>
-		           			<a class="text11" target="_blank" id="alinkHeader" style="display:block;" href="renderLocalLog4jExpft.do?user=${user.user}">
-		           				log4j_syjservicestn-expft.log
+		           			<a class="text11" target="_blank" id="alinkHeader" style="display:block;" href="renderLocalLogsgExpft.do?user=${user.user}">
+		           				logsg_syjservicestn-expft.log
 		           			</a>
 	           			</p>
 	           			<br/>

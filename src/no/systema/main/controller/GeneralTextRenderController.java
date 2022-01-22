@@ -42,7 +42,7 @@ public class GeneralTextRenderController {
 	private PayloadContentFlusher payloadContentFlusher = new PayloadContentFlusher();
 	
 	private final String RELATIVE_LOGFILE_PATH = "logs/" + ApplicationPropertiesUtil.getProperty("logsg.logger.file");   //OBSOLETE: resources.getString("log4j.logger.file");
-	private final String RELATIVE_LOGFILE_EXPRESS_FORTOLLING_SERVICE_PATH = "logs/log4j_syjservicestn-expft.log";
+	private final String RELATIVE_LOGFILE_EXPRESS_FORTOLLING_SERVICE_PATH = "logs/logsg_syjservicestn-expft.log";
 	private final String SERVLET_CONTEXT_WEBAPPS_ROOT = "webapps";
 	
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
@@ -115,9 +115,9 @@ public class GeneralTextRenderController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value="renderLocalLog4jExpft.do", method={ RequestMethod.GET })
+	@RequestMapping(value="renderLocalLogsgExpft.do", method={ RequestMethod.GET })
 	public ModelAndView doRenderLocalLog4jExpFt(HttpSession session, HttpServletRequest request, HttpServletResponse response){
-		logger.info("Inside doRenderLocalLog4jExpFt...");
+		logger.info("Inside doRenderLocalLogsgExpFt...");
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
 		Log4jMgr log4jMgr = new Log4jMgr();
 		if(appUser==null){
