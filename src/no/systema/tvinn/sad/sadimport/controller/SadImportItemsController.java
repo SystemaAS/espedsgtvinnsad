@@ -1053,6 +1053,8 @@ public class SadImportItemsController {
 		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(this.urlCgiProxyService, this.tvinnSadDropDownListPopulationService,
 				 model,appUser,CodeDropDownMgr.CODE_2_COUNTRY, null, null);
 		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(this.urlCgiProxyService, this.tvinnSadDropDownListPopulationService,
+				 model,appUser,CodeDropDownMgr.CODE_1_EKSPEDISJONSTYPER_IMPORT, null, null);
+		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(this.urlCgiProxyService, this.tvinnSadDropDownListPopulationService,
 				 model,appUser,CodeDropDownMgr.CODE_8_AVGIFTSKODER, null, null);
 		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(this.urlCgiProxyService, this.tvinnSadDropDownListPopulationService,
 				 model,appUser,CodeDropDownMgr.CODE_8B_AVGIFTSKODER_SEKV, null, null);

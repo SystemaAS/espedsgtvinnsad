@@ -1081,8 +1081,20 @@
 											</span>
 											</div>
 										</td>
-										<td colspan="2" class="text14" align="left"><span title="svcnr">Containernr.</span>
-										
+										<td class="text14" align="left"><span title="svcnr">Containernr.</span>
+										<td class="text14" align="left">
+											<img onMouseOver="showPop('prosedyr_info');" onMouseOut="hidePop('prosedyr_info');"style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+							 				<div class="text11" style="position: relative;display:inline;" align="left">
+							 				<span style="position:absolute; top:2px; width:250px;" id="prosedyr_info" class="popupWithInputText text11">
+								           		<ul>
+								           			<c:forEach var="record" items="${model.ekspedisjonstyperImportCodeList}" >
+								           			<li><b>${record.zkod}</b>&nbsp;${record.ztxt}</li>
+								           			</c:forEach>
+								           		</ul>
+											</span>
+											</div>
+											<span title="svdp">Prosedyre</span>
+										</td>
 							        </tr>
 							        
 							        <tr>
@@ -1105,10 +1117,18 @@
 											  	<option value="2"<c:if test="${ model.record.svmfr == '2'}"> selected </c:if> >2</option>
 											</select>
 										</td>
-										<td colspan="2" align="left" >
+										<td align="left" >
 											<input type="text" class="inputText" name="svcnr" id="svcnr" size="13" maxlength="11" value="${model.record.svcnr}">
 											<button name="itemContainerNr" id="itemContainerNr" class="buttonGray" style="font-size:12" type="button" >Mere...</button>
 										</td>
+										<td>
+							 				<select class="selectMediumBlueE2" name="svdp" id="svdp" size="1" >
+							 				  <option value="">-velg-</option>
+								 				  	<c:forEach var="record" items="${model.ekspedisjonstyperImportCodeList}" >
+								 				  		<option value="${record.zkod}" title="${record.ztxt}"  <c:if test="${model.record.svdp == record.zkod}"> selected </c:if> >${record.zkod}</option>
+													</c:forEach>  
+											</select>
+							 			</td>
 										<td align="left">	
 											<c:choose>	
 												<c:when test="${model.status == 'M' || empty model.status || model.status == '10' || model.status == '20'}">

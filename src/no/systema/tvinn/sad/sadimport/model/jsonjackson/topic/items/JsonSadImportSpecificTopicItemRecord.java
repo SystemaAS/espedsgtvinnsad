@@ -41,6 +41,7 @@ public class JsonSadImportSpecificTopicItemRecord  extends JsonAbstractGrandFath
 	public String getExtraMangdEnhet() {return this.extraMangdEnhet;}
 		
 	
+	
 	private String svavd = null;
 	public void setSvavd(String value) {  this.svavd = value; }
 	public String getSvavd() {return this.svavd;}
@@ -502,6 +503,13 @@ public class JsonSadImportSpecificTopicItemRecord  extends JsonAbstractGrandFath
 	public void setSvcnr(String value) {  this.svcnr = value; }
 	public String getSvcnr() { return this.svcnr; }
 	
+	private String svdp = null;
+	public void setSvdp(String value) {  this.svdp = value; }
+	public String getSvdp() { return this.svdp; }
+	//From header in order to send to validator (place holder)
+	private String ekspedType = null;
+	public void setEkspedType(String value) {  this.ekspedType = value; }
+	public String getEkspedType() { return this.ekspedType; }
 	
 	
 	/**
