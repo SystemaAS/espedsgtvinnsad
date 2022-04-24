@@ -1,21 +1,47 @@
 package no.systema.tvinn.sad.manifest.express.controller.ajax;
 
+import java.net.URI;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.BufferingClientHttpRequestFactory;
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 
 import javawebparts.core.org.apache.commons.lang.StringUtils;
+import no.systema.jservices.common.util.CommonClientHttpRequestInterceptor;
+import no.systema.jservices.common.util.CommonResponseErrorHandler;
+import no.systema.main.model.SystemaWebUser;
 import no.systema.main.service.UrlCgiProxyService;
+import no.systema.main.util.AppConstants;
+import no.systema.main.util.ApplicationPropertiesUtil;
 import no.systema.main.util.DateTimeManager;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestArchivedDocsContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestArchivedDocsRecord;
@@ -28,6 +54,7 @@ import no.systema.tvinn.sad.manifest.express.util.manager.ManifestDateManager;
 import no.systema.tvinn.sad.manifest.express.util.manager.ManifestExpressMgr;
 import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 import no.systema.tvinn.sad.util.TvinnSadConstants;
+import no.systema.tvinn.sad.util.manager.ArchiveGoogleCloudManager;
 
 
 
@@ -41,6 +68,7 @@ import no.systema.tvinn.sad.util.TvinnSadConstants;
 public class TvinnSadManifestAjaxHandlerController {
 	private static final Logger logger = LoggerFactory.getLogger(TvinnSadManifestAjaxHandlerController.class.getName());
 	private DateTimeManager dateMgr = new DateTimeManager();
+	private final String GOOGLE_BUCKET_PREFIX_URL = ApplicationPropertiesUtil.getProperty("archive.cloud.endpoint.prefix");
 	
 	/**
 	 * Gets a specific cargo line
@@ -52,7 +80,7 @@ public class TvinnSadManifestAjaxHandlerController {
 	 */
 	@RequestMapping(value = "getSpecificCargoLine_TvinnSadManifest.do", method = RequestMethod.GET)
 	public @ResponseBody Set<JsonTvinnSadManifestCargoLinesRecord> getSpecificCargoLine
-	  						(@RequestParam String applicationUser, @RequestParam String htmlParams ) {
+	  						(@RequestParam String applicationUser, @RequestParam String htmlParams, HttpSession session ) {
 		 logger.warn("Inside: getSpecificCargoLine_TvinnSadManifest.do()");
 		 logger.warn(htmlParams);
 		 Set result = new HashSet();
@@ -79,7 +107,9 @@ public class TvinnSadManifestAjaxHandlerController {
 				Collection<JsonTvinnSadManifestCargoLinesRecord> outputList = container.getList();
 				for(JsonTvinnSadManifestCargoLinesRecord record : outputList){
 					this.adjustFieldsForFetch(record);
-					Collection listDocs = this.manifestExpressMgr.fetchArchiveDocs(applicationUser, avd, tdn);
+					//must use the session user for Google Archive ...
+					SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
+					Collection listDocs = this.manifestExpressMgr.fetchArchiveDocs(appUser, avd, tdn);
 					if(listDocs!=null){
 						record.setGetdocs(listDocs);
 					}
@@ -159,12 +189,18 @@ public class TvinnSadManifestAjaxHandlerController {
 			
 			String declDateFormatted = dateMgr.getDateFormatted_ISO(declDate, DateTimeManager.NO_FORMAT, DateTimeManager.ISO_FORMAT_REVERSED);
 			String declId = declNr + "-" + declDateFormatted + "-" + declSekvens;
-			//TEST
-			//declId = "974309742-12102020-698";
 			
 			//find type
 			String docTypeFormatted = this.getDocumentType(docType, docPath);
 			
+			if(docPath.startsWith("http")) {
+				//Download to local directory from Google Cloud
+				if(applicationUser.equalsIgnoreCase("OSCAR")) {
+					docPath = new ArchiveGoogleCloudManager().downloadPdfFromGoogleCloudTest(docPath);
+				}else {
+					docPath = new ArchiveGoogleCloudManager().downloadPdfFromGoogleCloudSimple(docPath);
+				}
+			}
 			String url = TvinnSadManifestUrlDataStore.TVINN_SAD_SEND_DOCUMENT_TO_TOLL_URL;
 			String BASE_URL = url;
 	 		StringBuffer urlRequestParamsKeys = new StringBuffer();
@@ -183,6 +219,8 @@ public class TvinnSadManifestAjaxHandlerController {
 		 	
 		 	return result;
 	 }
+	
+
 	
 	/**
 	 * 
@@ -274,6 +312,7 @@ public class TvinnSadManifestAjaxHandlerController {
 			record.setEfsjadt(new ManifestDateManager().convertToDate_NO(record.getEfsjadt()));
 		}
 	}
+	
 
 	//SERVICES
 	@Autowired

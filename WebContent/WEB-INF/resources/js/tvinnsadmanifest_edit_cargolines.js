@@ -391,12 +391,27 @@
 	  				var td_3 = jq('<td></td>').addClass('tableCell');td_3.css('white-space','nowrap');
 	  				var td_4 = jq('<td></td>').addClass('tableCell');td_4.css('white-space','nowrap');
 	  				
-  					if(data[i].getdocs[j].doclnk.indexOf(".pdf")>0 ||data[i].getdocs[j].doclnk.indexOf(".PDF")>0){
+  					if(data[i].getdocs[j].doclnk.indexOf(".pdf")>=0 ||data[i].getdocs[j].doclnk.indexOf(".PDF")>=0){
 			  			imgSrc="resources/images/pdf.png";
   					}else{
   						imgSrc="resources/images/jpg.png";
   					}
+			
+					//Archive
+					var doclnkHref = data[i].getdocs[j].doclnk;
+					console.log("A-######### doclnkHref:" + doclnkHref + "-->indexOf:" + doclnkHref.indexOf("http"));
+					
+					if(doclnkHref.indexOf("http")>=0 ){
+						//Google Archive
+						console.log("B-######### doclnkHref:" + doclnkHref);
+					}else{
+						console.log("C-######### doclnkHref:" + doclnkHref);
+						//To local Spring Controller (PDF on local machine)
+						doclnkHref = 'tvinnsadmanifest_renderArchive.do?doclnk='+data[i].getdocs[j].doclnk;
+					}
   					
+			
+			
   					//ROW APPEND TD_1 
   					td_1.text(data[i].getdocs[j].doctyp);
   					row.append(td_1);
@@ -415,7 +430,7 @@
   					jq('<a>',{
 		  			    text: data[i].getdocs[j].doclnk,
 		  			    target: '_blank',
-		  			    href: 'tvinnsadmanifest_renderArchive.do?doclnk='+data[i].getdocs[j].doclnk,
+		  			    href: doclnkHref,
 		  			    click: function(){ BlahFunc( options.rowId );return false;}
   					}).appendTo(td_3);
   					row.append(td_3);

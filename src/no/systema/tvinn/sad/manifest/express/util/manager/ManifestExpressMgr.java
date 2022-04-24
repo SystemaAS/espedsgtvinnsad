@@ -32,6 +32,7 @@ import no.systema.tvinn.sad.sadimport.util.SadImportConstants;
 import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService;
 import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
 import no.systema.tvinn.sad.util.TvinnSadConstants;
+import no.systema.tvinn.sad.util.manager.ArchiveGoogleCloudManager;
 import no.systema.z.main.maintenance.model.jsonjackson.dbtable.JsonMaintMainChildWindowKofastContainer;
 import no.systema.z.main.maintenance.model.jsonjackson.dbtable.JsonMaintMainChildWindowKofastRecord;
 import no.systema.z.main.maintenance.service.MaintMainKofastService;
@@ -179,7 +180,8 @@ public class ManifestExpressMgr {
 	 * @param tdn
 	 * @return
 	 */
-	public Collection<JsonTvinnSadManifestArchivedDocsRecord> fetchArchiveDocs(String applicationUser, String avd, String tdn) {
+	
+	public Collection<JsonTvinnSadManifestArchivedDocsRecord> fetchArchiveDocs(SystemaWebUser appUser, String avd, String tdn) {
 		 Collection<JsonTvinnSadManifestArchivedDocsRecord> outputList = new ArrayList<JsonTvinnSadManifestArchivedDocsRecord>();
 		 //===========
 		 //FETCH LIST
@@ -188,7 +190,7 @@ public class ManifestExpressMgr {
 		 //prepare the access CGI with RPG back-end
 		 String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_ARCHIVED_UPLOADED_DOCS_URL;
 		 
-		 String urlRequestParamsKeys = "user=" + applicationUser + "&avd=" + avd + "&opd=" + tdn ;
+		 String urlRequestParamsKeys = "user=" + appUser.getUser() + "&avd=" + avd + "&opd=" + tdn ;
 		 logger.warn("URL: " + BASE_URL);
 		 logger.warn("PARAMS: " + urlRequestParamsKeys);
 		 logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
@@ -198,10 +200,13 @@ public class ManifestExpressMgr {
 		 if(jsonPayload!=null){
 			 	try{
 			 		JsonTvinnSadManifestArchivedDocsContainer container = this.tvinnSadManifestListService.getArchiveDocsContainer(jsonPayload);
+			 		//adjust to google cloud if needed
+		    		container = new ArchiveGoogleCloudManager().adjustUrl(appUser, container);
+		    		
 					if(container!=null){
 						outputList = container.getGetdoc();
 						for(JsonTvinnSadManifestArchivedDocsRecord record : outputList){
-							//logger.info("####Link:" + record.getDoclnk());
+							logger.warn("####Link:" + record.getDoclnk());
 						}
 					}
 			 	}catch(Exception e){
@@ -210,6 +215,8 @@ public class ManifestExpressMgr {
 			 }
 		 return outputList;
 	}
+	
+	
 
 	/**
 	 * Gets all logging on db

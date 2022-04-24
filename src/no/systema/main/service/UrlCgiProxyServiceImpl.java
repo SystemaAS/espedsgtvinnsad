@@ -73,7 +73,7 @@ public class UrlCgiProxyServiceImpl implements UrlCgiProxyService{
 	 
     	}catch(Exception e){
     		e.printStackTrace();
-    		logger.info("Error:", e);
+    		logger.error("Error:", e);
     	}
 		
 		return utfPayload;
@@ -115,7 +115,7 @@ public class UrlCgiProxyServiceImpl implements UrlCgiProxyService{
 			
 		}catch(Exception e){
     		e.printStackTrace();
-    		logger.info("Error:", e);
+    		logger.error("Error:", e);
     		
     	}
 		return utfPayload;
@@ -137,7 +137,7 @@ public class UrlCgiProxyServiceImpl implements UrlCgiProxyService{
 			
     	}catch(Exception e){
     		e.printStackTrace();
-    		logger.info("Error:", e);
+    		logger.error("Error:", e);
     	}
 		
 		return utfPayload;

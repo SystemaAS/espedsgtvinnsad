@@ -410,7 +410,7 @@ public class TvinnSadManifestControllerChildWindow {
 			return this.loginView;
 			
 		}else{
-			Collection list = manifestExpressMgr.fetchArchiveDocs(appUser.getUser(), wsavd, wsopd);
+			Collection list = manifestExpressMgr.fetchArchiveDocs(appUser, wsavd, wsopd);
 			model.put("list", list);
 			model.put("wsavd", wsavd);
 			model.put("wsopd", wsopd);

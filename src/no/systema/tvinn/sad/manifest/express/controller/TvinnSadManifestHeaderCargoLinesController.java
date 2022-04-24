@@ -199,7 +199,7 @@ public class TvinnSadManifestHeaderCargoLinesController {
 								if(record.getCltdn().equals(recordToValidate.getCltdn()) && record.getClavd().equals(recordToValidate.getClavd())){
 									this.adjustFieldsForFetch(record);
 									//get archive docs
-									record.setGetdocs(this.manifestExpressMgr.fetchArchiveDocs(appUser.getUser(), record.getClavd(), record.getCltdn()));
+									record.setGetdocs(this.manifestExpressMgr.fetchArchiveDocs(appUser, record.getClavd(), record.getCltdn()));
 									model.put(TvinnSadConstants.DOMAIN_RECORD, record);
 								}
 							}
