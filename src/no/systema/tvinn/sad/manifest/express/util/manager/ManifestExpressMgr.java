@@ -204,9 +204,22 @@ public class ManifestExpressMgr {
 		    		container = new ArchiveGoogleCloudManager().adjustUrl(appUser, container);
 		    		
 					if(container!=null){
-						outputList = container.getGetdoc();
-						for(JsonTvinnSadManifestArchivedDocsRecord record : outputList){
-							logger.warn("####Link:" + record.getDoclnk());
+						Collection<JsonTvinnSadManifestArchivedDocsRecord> tmp = container.getGetdoc();
+						for(JsonTvinnSadManifestArchivedDocsRecord record : tmp){
+							logger.info("####Link:" + record.getDoclnk());
+							//in case Google link (bad to show)
+							if(record.getDoclnk().startsWith("http")) {
+								//default
+								record.setDoctxtaux(record.getDoclnk());
+								//adjust
+								int i = record.getDoclnk().indexOf("&filename=");
+								if(i>=0) {
+									String xx = record.getDoclnk().substring(i);
+									xx = xx.replace("&filename=", ".../"); 
+									record.setDoctxtaux(xx);
+								}
+							}
+							outputList.add(record);
 						}
 					}
 			 	}catch(Exception e){

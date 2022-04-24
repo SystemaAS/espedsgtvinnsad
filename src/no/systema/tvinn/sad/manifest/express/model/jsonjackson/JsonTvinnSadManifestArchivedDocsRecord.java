@@ -21,6 +21,7 @@ public class JsonTvinnSadManifestArchivedDocsRecord extends JsonAbstractGrandFat
 	private String doctyp = null;
 	private String docdat = null;
 	private String doctim = null;
+	private String doctxtaux = null;
 	
 	/**
 	 * Used for java reflection in other classes

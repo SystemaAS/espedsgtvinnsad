@@ -504,7 +504,7 @@
 									              		<c:when test="${fn:startsWith(record.doclnk, 'http')}">
 															<a href="${record.doclnk}" target="_new" >
 										               			<img src="resources/images/pdf.png" border="0" width="16px" height="16px" alt="Visa arkivdokument on cloud" >
-										               			${record.doclnk}
+										               			${record.doctxtaux}
 									               			</a>		              
 									               		</c:when>
 									               		<c:otherwise>

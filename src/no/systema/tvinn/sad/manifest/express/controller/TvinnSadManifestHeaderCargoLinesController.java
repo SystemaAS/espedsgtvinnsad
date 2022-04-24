@@ -42,6 +42,7 @@ import no.systema.main.util.io.PayloadContentFlusher;
 import no.systema.tvinn.sad.util.TvinnSadConstants;
 import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
 import no.systema.z.main.maintenance.service.MaintMainKofastService;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestArchivedDocsRecord;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesRecord;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
@@ -201,6 +202,7 @@ public class TvinnSadManifestHeaderCargoLinesController {
 									//get archive docs
 									record.setGetdocs(this.manifestExpressMgr.fetchArchiveDocs(appUser, record.getClavd(), record.getCltdn()));
 									model.put(TvinnSadConstants.DOMAIN_RECORD, record);
+									logger.warn("D...");
 								}
 							}
 						}
@@ -209,6 +211,7 @@ public class TvinnSadManifestHeaderCargoLinesController {
 						//this.adjustFieldsForFetch(recordToValidate);
 						model.put(TvinnSadConstants.DOMAIN_RECORD, recordToValidate);
 					}
+				
 				}
 				
 				
@@ -458,15 +461,17 @@ public class TvinnSadManifestHeaderCargoLinesController {
     	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
     	if(jsonPayload!=null){
     		
-    		JsonTvinnSadManifestCargoLinesContainer container = this.tvinnSadManifestListService.getListCargolinesContainer(jsonPayload);
+    		JsonTvinnSadManifestCargoLinesContainer<JsonTvinnSadManifestCargoLinesRecord> container = this.tvinnSadManifestListService.getListCargolinesContainer(jsonPayload);
     		//----------------------------------------------------------------
 			//now filter the topic list with the search filter (if applicable)
 			//----------------------------------------------------------------
-    		Collection<JsonTvinnSadManifestCargoLinesRecord> outputList = container.getList();	
-			retval = outputList;
+    		Collection<JsonTvinnSadManifestCargoLinesRecord> outputList = container.getList();
+    		retval = outputList;
     	}
+    	
     	return retval;
 	}
+	
 	/**
 	 * 
 	 * @param appUser

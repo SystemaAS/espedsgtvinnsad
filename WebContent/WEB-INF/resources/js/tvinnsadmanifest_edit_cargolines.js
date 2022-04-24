@@ -399,19 +399,23 @@
 			
 					//Archive
 					var doclnkHref = data[i].getdocs[j].doclnk;
-					console.log("A-######### doclnkHref:" + doclnkHref + "-->indexOf:" + doclnkHref.indexOf("http"));
-					
+					var docText = doclnkHref;
+					//console.log("A-######### doclnkHref:" + doclnkHref + "-->indexOf:" + doclnkHref.indexOf("http"));
 					if(doclnkHref.indexOf("http")>=0 ){
 						//Google Archive
-						console.log("B-######### doclnkHref:" + doclnkHref);
+						//console.log("B-######### doclnkHref:" + doclnkHref);
+						var tmpIndex = doclnkHref.indexOf("&filename=");
+						if (tmpIndex>=0){
+							docText = doclnkHref.substring(tmpIndex);
+							docText = docText.replace("&filename=", ".../");
+							console.log("B-######### docText:" + docText);
+						}
 					}else{
-						console.log("C-######### doclnkHref:" + doclnkHref);
 						//To local Spring Controller (PDF on local machine)
 						doclnkHref = 'tvinnsadmanifest_renderArchive.do?doclnk='+data[i].getdocs[j].doclnk;
+						console.log("C-######### doclnkHref:" + doclnkHref);
 					}
   					
-			
-			
   					//ROW APPEND TD_1 
   					td_1.text(data[i].getdocs[j].doctyp);
   					row.append(td_1);
@@ -427,8 +431,9 @@
   						height: '14px'
 		  			  	}).appendTo(td_3);
   					
+					
   					jq('<a>',{
-		  			    text: data[i].getdocs[j].doclnk,
+		  			    text: docText,
 		  			    target: '_blank',
 		  			    href: doclnkHref,
 		  			    click: function(){ BlahFunc( options.rowId );return false;}
