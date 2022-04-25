@@ -365,7 +365,10 @@
 										</c:forEach>
 									</select>
 					 			</td>
-					 			<td colspan="2" class="text14"><input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="cleid" id="cleid" size="20" maxlength="18" value="${model.record.cleid}"></td>
+					 			<td colspan="2" class="text14"><input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="cleid" id="cleid" size="21" maxlength="18" value="${model.record.cleid}">
+					 					<input class="inputFormSubmitStd" type="button" name="manyExpIdButton" id="manyExpIdButton" value='Lage flere Eksp.id'>
+					 					<img style="cursor:pointer;vertical-align: middle;" src="resources/images/add.png" width="12px" height="12px" border="0" alt="create new" >
+					 			</td>
 					 								 			
 							</tr>
 							<tr height="5"><td></td></tr>

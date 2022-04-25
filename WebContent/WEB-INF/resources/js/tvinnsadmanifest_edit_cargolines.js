@@ -486,10 +486,20 @@
 			}
 	    });
   });
-  
   function openUploadFileToToll(){
 	  window.open('tvinnsadmanifest_childwindow_uploadfile_to_toll.do?action=doInit&wsavd=' + jq('#clavd').val() + '&wsopd=' + jq('#cltdn').val() + '&clrg=' + jq('#clrg').val() + '&cl0068a=' + jq('#cl0068a').val() + '&cl0068b=' + jq('#cl0068b').val(), "releasedCargolinesWin", "top=300px,left=450px,height=450px,width=1000px,scrollbars=yes,status=no,location=no");
   }
+
+
+  jq(function() {
+		jq('#manyExpIdButton').click(function() { 
+			if(jq('#clavd').val()!='' && jq('#cltdn').val()!=''){
+				window.open('tvinnsadmanifest_childwindow_many_expid_per_cargoline.do?action=doInit&wsavd=' + jq('#clavd').val() + '&wsopd=' + jq('#cltdn').val() + '&clrg=' + jq('#clrg').val()
+				 + '&cl0068a='	+ jq('#cl0068a').val() + '&cl0068b=' + jq('#cl0068b').val() + '&cleid=' + jq('#cleid').val() + '&cletyp=' + jq('#cletyp').val(), 
+				"manyExpIdWin", "top=300px,left=450px,height=450px,width=1000px,scrollbars=yes,status=no,location=no");
+			}
+	    });
+  });
   
 	
   

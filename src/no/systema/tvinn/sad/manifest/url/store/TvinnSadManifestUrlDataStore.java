@@ -62,6 +62,11 @@ public final class TvinnSadManifestUrlDataStore {
 	//http://localhost:8080/syjservicestn/syjsSADEFCFR_U.do?user=OSCAR&mode=U/A/D and/or
 	static public String TVINN_SAD_UPDATE_MANIFEST_EXPRESS_CARGOLINES_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADEFCFR_U.do";
 	
+	//FETCH list of several ExpId SE from a specific CARGO LINE
+	//http://gw.systema.no:8080/syjservicestn/syjsSADEFCMF.do?user=OSCAR&cmavd=1&cmtdn=501921
+	static public String TVINN_SAD_FETCH_MANIFEST_EXPRESS_EXPIDS_IN_CARGOLINE_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADEFCMF.do";
+		
+	
 	//[2.1] ARCHIVE FILE VALIDATION - Upload of file to the archive - file validation
 	//http://gw.systema.no/sycgip/TJETUR07A.pgm?user=OSCAR&wsdokn=tarzan.jpg
 	//{ "user": "OSCAR", "wsdokn": "tarzan.jpg","valids": "Y", "tmpdir": "/pdf/tmp/", "errMsg": "", "chksuffix": [] } 

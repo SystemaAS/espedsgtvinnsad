@@ -4,6 +4,7 @@
 package no.systema.tvinn.sad.manifest.express.service;
 
 import no.systema.tvinn.sad.manifest.express.mapper.jsonjackson.TvinnSadManifestMapper;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestExportIdLinesContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestFileUploadValidationContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestPostalCodeContainer;
 
@@ -47,5 +48,17 @@ public class TvinnSadManifestChildwindowServiceImpl implements TvinnSadManifestC
 		}
 		return container;
 	}
+	
+	public JsonTvinnSadManifestExportIdLinesContainer getExportIdListContainer(String utfPayload) {
+		JsonTvinnSadManifestExportIdLinesContainer container = null;
+		try{
+			TvinnSadManifestMapper mapper = new TvinnSadManifestMapper();
+			container = mapper.getExportIdListContainer(utfPayload);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return container;
+	}
+
 	
 }

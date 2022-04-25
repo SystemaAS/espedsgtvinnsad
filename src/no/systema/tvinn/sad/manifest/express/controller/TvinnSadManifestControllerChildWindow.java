@@ -46,6 +46,8 @@ import no.systema.main.util.JsonDebugger;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesRecord;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestExportIdLinesContainer;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestExportIdLinesRecord;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestFileUploadValidationContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestPostalCodeContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestPostalCodeRecord;
@@ -422,6 +424,54 @@ public class TvinnSadManifestControllerChildWindow {
 	    	return successView;
 		}
 	}
+	
+	/**
+	 * 
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsadmanifest_childwindow_many_expid_per_cargoline.do", params="action=doInit",  method={RequestMethod.GET} )
+	public ModelAndView doFetchManyExpId(HttpSession session, HttpServletRequest request){
+		
+		logger.info("Inside: doFetchManyExpId");
+		Map<String,Object> model = new HashMap();
+		String wsavd = request.getParameter("wsavd");
+		String wsopd = request.getParameter("wsopd");
+		String exportId = request.getParameter("wscleid");
+		String exportType = request.getParameter("wscletyp");
+		String clrg = request.getParameter("clrg");
+		String cl0068a = request.getParameter("cl0068a");
+		String cl0068b = request.getParameter("cl0068b");
+		//record
+		JsonTvinnSadManifestExportIdLinesRecord record = new JsonTvinnSadManifestExportIdLinesRecord();
+		record.setCmavd(wsavd);
+		record.setCmtdn(wsopd);
+		
+		
+		ModelAndView successView = new ModelAndView("tvinnsadmanifest_childwindow_many_expid_per_cargoline");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			
+			Collection<JsonTvinnSadManifestExportIdLinesRecord> list = this.getExportIdLinesList(record, appUser, false);
+			model.put("list", list);
+			model.put("wsavd", wsavd);
+			model.put("wsopd", wsopd);
+			model.put("exportId", exportId);
+			model.put("exportType", exportType);
+			model.put("clrg", clrg);
+			model.put("cl0068a", cl0068a);
+			model.put("cl0068b", cl0068b);
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
 	/**
 	 * 
 	 * @param uploadValidationContainer
@@ -464,8 +514,6 @@ public class TvinnSadManifestControllerChildWindow {
 		}
 		return uploadValidationContainer;
 	}
-	
-	
 	/**
 	 * 
 	 * @param fileName
@@ -636,6 +684,38 @@ public class TvinnSadManifestControllerChildWindow {
 			retval = outputList;
     	}
     	return retval;
+	}
+	
+	
+	private Collection<JsonTvinnSadManifestExportIdLinesRecord> getExportIdLinesList(JsonTvinnSadManifestExportIdLinesRecord dto, SystemaWebUser appUser, boolean oneLine){
+		Collection<JsonTvinnSadManifestExportIdLinesRecord> outputList = null;
+		
+		//get BASE URL
+		String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_MANIFEST_EXPRESS_EXPIDS_IN_CARGOLINE_URL;
+		StringBuffer urlRequestParamsKeys = new StringBuffer();
+		urlRequestParamsKeys.append("user=" + appUser.getUser() + "&cmavd=" + dto.getCmavd() + "&cmtdn=" + dto.getCmtdn());
+		if(oneLine) {
+			urlRequestParamsKeys.append("&cmli=" + dto.getCmli());
+		}
+		
+		logger.info("URL: " + BASE_URL);
+		logger.info("PARAMS: " + urlRequestParamsKeys);
+		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
+		//Debug -->
+		logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+		if(jsonPayload!=null){
+			JsonTvinnSadManifestExportIdLinesContainer container = this.tvinnSadManifestChildwindowService.getExportIdListContainer(jsonPayload);
+			if(container!=null){
+				outputList = container.getList();
+				/*for(JsonTvinnSadManifestExportIdLinesRecord record : container.getList()){
+					retval.add(record);
+				}*/
+			}
+		}
+		
+    	return outputList;
 	}
 	
 	//SERVICES
