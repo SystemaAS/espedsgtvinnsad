@@ -8,9 +8,9 @@ import lombok.Data;
 @Data
 @JsonPropertyOrder(alphabetic = false)
 public class DtoNodeGoogleCloudApiFileTest {
-	@JsonProperty("Companyid")
+	//@JsonProperty("Companyid")
 	String companyid = "a12";
 	
-	@JsonProperty("Filename")
+	//@JsonProperty("Filename")
 	String filename = "si201300170000658WtGAj87xw0.pdf";
 }

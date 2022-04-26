@@ -12,9 +12,9 @@ import lombok.Data;
 @JsonPropertyOrder({"localWritePath", "Files" })
 public class DtoNodeGoogleCloudApiContainer {
 
-	@JsonProperty("LocalWritePath")
+	//@JsonProperty("LocalWritePath")
 	String localWritePath;
 	
-	@JsonProperty("Files")
+	//@JsonProperty("Files")
 	List<DtoNodeGoogleCloudApiFile> files = new ArrayList<DtoNodeGoogleCloudApiFile>();
 }
