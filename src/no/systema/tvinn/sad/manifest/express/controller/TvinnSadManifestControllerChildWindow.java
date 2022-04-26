@@ -434,7 +434,7 @@ public class TvinnSadManifestControllerChildWindow {
 	@RequestMapping(value="tvinnsadmanifest_childwindow_many_expid_per_cargoline.do", params="action=doInit",  method={RequestMethod.GET} )
 	public ModelAndView doFetchManyExpId(HttpSession session, HttpServletRequest request){
 		
-		logger.info("Inside: doFetchManyExpId");
+		logger.warn("Inside: doFetchManyExpId");
 		Map<String,Object> model = new HashMap();
 		String wsavd = request.getParameter("wsavd");
 		String wsopd = request.getParameter("wsopd");

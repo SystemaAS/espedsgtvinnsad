@@ -297,7 +297,7 @@ public class ArchiveGoogleCloudManager {
 	 */
 	
 	//Denna kan inte användas förrän API:et ger support till java naming convention. Inte Companyid men också companyid...
-	private String downloadPdfFromGoogleCloud(String gcFile) {
+	public String downloadPdfFromGoogleCloud(String gcFile) {
 		//adjust to the getfiles end-point
 		int x = this.GOOGLE_BUCKET_PREFIX_URL.indexOf("/files?");
 		String apiRoot = this.GOOGLE_BUCKET_PREFIX_URL.substring(0,x);
@@ -313,8 +313,8 @@ public class ArchiveGoogleCloudManager {
 		URI uri = UriComponentsBuilder
 				.fromUriString(apiRoot)
 				.path("/getfiles")
-				.queryParam("LocalWritePath", dtoContainer.getLocalWritePath())
-				.queryParam("Files", dtoContainer.getFiles() ) 
+				.queryParam("localWritePath", dtoContainer.getLocalWritePath())
+				.queryParam("files", dtoContainer.getFiles() ) 
 				.build()
 				.toUri();
 		
@@ -326,6 +326,7 @@ public class ArchiveGoogleCloudManager {
 			HttpEntity<?> entity = new HttpEntity<>(headerParams);
 			
 			ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.POST, entity, String.class);
+			logger.warn(response.getStatusCode().toString());
 			String json = response.getBody();
 			logger.warn(json);
 			//Build the new file path
@@ -387,7 +388,55 @@ public class ArchiveGoogleCloudManager {
 		
 	}
 	
-	public String downloadPdfFromGoogleCloudTest(String gcFile) {
+	//Denna kan inte användas förrän API:et ger support till java naming convention. Inte Companyid men också companyid...
+		public String downloadPdfFromGoogleCloudTest(String gcFile) {
+			//adjust to the getfiles end-point
+			int x = this.GOOGLE_BUCKET_PREFIX_URL.indexOf("/files?");
+			String apiRoot = this.GOOGLE_BUCKET_PREFIX_URL.substring(0,x);
+			
+			RestTemplate restTemplate = this.restTemplate();
+			String tmpFileAbsolutePath = null;
+			//TEST 
+			//DtoContainerTest dtoContainer = this.getNodeApiParamsTest(gcFile);
+			//PROD 
+			DtoNodeGoogleCloudApiContainer dtoContainer = this.getNodeApiParams(gcFile);
+			logger.warn(dtoContainer.toString());
+			
+			URI uri = UriComponentsBuilder
+					.fromUriString(apiRoot)
+					.path("/getfiles")
+					.queryParam("localWritePath", dtoContainer.getLocalWritePath())
+					.queryParam("files", dtoContainer.getFiles() ) 
+					.build()
+					.toUri();
+			
+			try {
+				HttpHeaders headerParams = new HttpHeaders();
+				//headerParams.add("Accept", "*/*");
+				headerParams.add("Content-Type", "application/json");
+				
+				HttpEntity<?> entity = new HttpEntity<>(headerParams);
+				
+				ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.POST, entity, String.class);
+				logger.warn(response.getStatusCode().toString());
+				String json = response.getBody();
+				logger.warn(json);
+				//Build the new file path
+				for(DtoNodeGoogleCloudApiFile record: dtoContainer.getFiles()) {
+					tmpFileAbsolutePath = dtoContainer.getLocalWritePath() + record.getFilename();
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+				logger.error(e.toString());
+			}
+			logger.info("tmpFileAbsolutePath:" + tmpFileAbsolutePath);
+			
+			return tmpFileAbsolutePath;
+			
+		}
+		
+	public String downloadPdfFromGoogleCloudTestSimple(String gcFile) {
 		//adjust to the getfiles end-point
 		int x = this.GOOGLE_BUCKET_PREFIX_URL.indexOf("/files?");
 		String apiRoot = this.GOOGLE_BUCKET_PREFIX_URL.substring(0,x);
