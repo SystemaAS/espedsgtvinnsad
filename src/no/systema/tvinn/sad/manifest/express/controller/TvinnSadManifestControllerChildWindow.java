@@ -34,6 +34,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import no.systema.jservices.common.values.FasteKoder;
 //application imports
 import no.systema.main.context.TdsAppContext;
 import no.systema.main.service.UrlCgiProxyService;
@@ -53,10 +54,12 @@ import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManif
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestPostalCodeRecord;
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestChildwindowService;
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
+import no.systema.tvinn.sad.manifest.express.util.manager.CodeDropDownMgr;
 import no.systema.tvinn.sad.manifest.express.util.manager.ManifestExpressMgr;
 import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeContainer;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
+import no.systema.tvinn.sad.sadexport.mapper.url.request.UrlRequestParameterMapper;
 import no.systema.tvinn.sad.sadimport.service.SadImportGeneralCodesChildWindowService;
 
 import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
@@ -65,6 +68,7 @@ import no.systema.tvinn.sad.z.maintenance.sadimport.model.jsonjackson.dbtable.Js
 import no.systema.tvinn.sad.z.maintenance.sadimport.model.jsonjackson.dbtable.JsonMaintSadImportKodttsRecord;
 import no.systema.tvinn.sad.z.maintenance.sadimport.service.MaintSadImportKodttsService;
 import no.systema.tvinn.sad.z.maintenance.sadimport.url.store.TvinnSadMaintenanceImportUrlDataStore;
+import no.systema.z.main.maintenance.service.MaintMainKofastService;
 
 
 
@@ -84,17 +88,14 @@ public class TvinnSadManifestControllerChildWindow {
 	
 	private static final Logger logger = LoggerFactory.getLogger(TvinnSadManifestControllerChildWindow.class.getName());
 	private static final JsonDebugger jsonDebugger = new JsonDebugger(2000);
-		
 	//customer
 	private final String DATATABLE_LIST = "list";
-
-	
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	private ApplicationContext context;
 	private LoginValidator loginValidator = new LoginValidator();
-	//private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
+	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private DateTimeManager dateTimeMgr = new DateTimeManager();
-	
+	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
 	
 	@PostConstruct
 	public void initIt() throws Exception {
@@ -443,6 +444,7 @@ public class TvinnSadManifestControllerChildWindow {
 		String clrg = request.getParameter("clrg");
 		String cl0068a = request.getParameter("cl0068a");
 		String cl0068b = request.getParameter("cl0068b");
+		Integer newLineCounter = 1;
 		//record
 		JsonTvinnSadManifestExportIdLinesRecord record = new JsonTvinnSadManifestExportIdLinesRecord();
 		record.setCmavd(wsavd);
@@ -458,7 +460,12 @@ public class TvinnSadManifestControllerChildWindow {
 		}else{
 			
 			Collection<JsonTvinnSadManifestExportIdLinesRecord> list = this.getExportIdLinesList(record, appUser, false);
+			if(list!=null && list.size()>0) {
+				newLineCounter = list.size();
+				newLineCounter++;
+			}
 			model.put("list", list);
+			model.put("newLineCounter", newLineCounter);
 			model.put("wsavd", wsavd);
 			model.put("wsopd", wsopd);
 			model.put("exportId", exportId);
@@ -466,11 +473,71 @@ public class TvinnSadManifestControllerChildWindow {
 			model.put("clrg", clrg);
 			model.put("cl0068a", cl0068a);
 			model.put("cl0068b", cl0068b);
-			
+			this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(appUser, FasteKoder.SADEFETYPE.toString(), model, urlCgiProxyService, maintMainKofastService);
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 			
 	    	return successView;
 		}
+	}
+	@RequestMapping(value="tvinnsadmanifest_childwindow_many_expid_edit.do", params="action=doSave",  method={RequestMethod.POST} )
+	public ModelAndView doSaveManyExpId(JsonTvinnSadManifestExportIdLinesRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		
+		logger.warn("Inside: doSaveManyExpId");
+		Map<String,Object> model = new HashMap();
+		String wsavd = request.getParameter("wsavd");
+		String wsopd = request.getParameter("wsopd");
+		String mode = request.getParameter("mode");
+		Integer newLineCounter = 1;
+		recordToValidate.setCmavd(wsavd);
+		recordToValidate.setCmtdn(wsopd);
+		logger.warn(recordToValidate.toString());
+		
+		ModelAndView successView = new ModelAndView("tvinnsadmanifest_childwindow_many_expid_per_cargoline");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			//Update
+			if( this.validForUpdateExpIds(recordToValidate) ) {
+				logger.info("Before update/create/delete ...");
+				this.updateExportIdLinesList(mode, recordToValidate, appUser);
+				logger.info("After update/create/delete ...");
+			}else {
+				logger.warn("ERROR: Not valid dto for UPDATE/INSERT/DELETE ... ? <check form parameters i JSP!>");
+			}
+			
+			//Fetch list
+			Collection<JsonTvinnSadManifestExportIdLinesRecord> list = this.getExportIdLinesList(recordToValidate, appUser, false);
+			if(list!=null && list.size()>0) {
+				newLineCounter = list.size();
+				newLineCounter++;
+			}
+			model.put("list", list);
+			model.put("newLineCounter", newLineCounter);
+			model.put("wsavd", wsavd);
+			model.put("wsopd", wsopd);
+			//model.put("exportId", exportId);
+			//model.put("exportType", exportType);
+			//model.put("clrg", clrg);
+			//model.put("cl0068a", cl0068a);
+			//model.put("cl0068b", cl0068b);
+			this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(appUser, FasteKoder.SADEFETYPE.toString(), model, urlCgiProxyService, maintMainKofastService);
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	private boolean validForUpdateExpIds(JsonTvinnSadManifestExportIdLinesRecord dto) {
+		boolean retval = false;
+		if ( 	(StringUtils.isNotEmpty(dto.getCmavd()) && !dto.getCmavd().equals("0")) &&
+				(StringUtils.isNotEmpty(dto.getCmtdn()) && !dto.getCmtdn().equals("0")) &&
+				(StringUtils.isNotEmpty(dto.getCmli()) && !dto.getCmli().equals("0")) ) {
+			retval = true;
+		}
+		
+		return retval;
 	}
 	/**
 	 * 
@@ -698,8 +765,8 @@ public class TvinnSadManifestControllerChildWindow {
 			urlRequestParamsKeys.append("&cmli=" + dto.getCmli());
 		}
 		
-		logger.info("URL: " + BASE_URL);
-		logger.info("PARAMS: " + urlRequestParamsKeys);
+		logger.warn("URL: " + BASE_URL);
+		logger.warn("PARAMS: " + urlRequestParamsKeys);
 		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
 		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
 		//Debug -->
@@ -717,6 +784,38 @@ public class TvinnSadManifestControllerChildWindow {
 		
     	return outputList;
 	}
+	/**
+	 * Update several SE Export ids in a cargo line
+	 * @param dto
+	 * @param appUser
+	 * @param oneLine
+	 */
+	private void updateExportIdLinesList(String mode, JsonTvinnSadManifestExportIdLinesRecord dto, SystemaWebUser appUser){
+		
+		//get BASE URL
+		String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_UPDATE_MANIFEST_EXPRESS_EXPIDS_IN_CARGOLINE_URL;
+		StringBuffer urlRequestParamsKeys = new StringBuffer();
+		urlRequestParamsKeys.append("user=" + appUser.getUser() + "&mode=" + mode );
+		String urlRequestParams = this.urlRequestParameterMapper.getUrlParameterValidString((dto));
+		
+		
+		logger.warn("URL: " + BASE_URL);
+		logger.warn("PARAMS: " + urlRequestParamsKeys + urlRequestParams);
+		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString() + urlRequestParams);
+		//Debug -->
+		logger.warn(jsonPayload);
+		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+		if(jsonPayload!=null){
+			JsonTvinnSadManifestExportIdLinesContainer container = this.tvinnSadManifestChildwindowService.getExportIdListContainer(jsonPayload);
+			if(container!=null){
+				if(StringUtils.isNotEmpty(container.getErrMsg())){
+					logger.error("ERROR on UPDATE ..." + container.getErrMsg());
+				}
+			}
+		}
+		
+	}
 	
 	//SERVICES
 	@Autowired
@@ -724,6 +823,10 @@ public class TvinnSadManifestControllerChildWindow {
 	
 	@Autowired
 	private SadImportGeneralCodesChildWindowService sadImportGeneralCodesChildWindowService;
+	
+	@Autowired
+	private MaintMainKofastService maintMainKofastService;
+	
 	
 	@Autowired
 	private MaintSadImportKodttsService maintSadImportKodttsService;

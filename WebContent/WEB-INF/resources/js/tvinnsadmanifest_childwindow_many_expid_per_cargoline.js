@@ -1,8 +1,48 @@
 	//this variable is a global jQuery var instead of using "$" all the time. Very handy
   	var jq = jQuery.noConflict();
   	var BLOCKUI_OVERLAY_MESSAGE_DEFAULT = "Please wait...";
-  	 
+  	
   	jq(function() {
+		jq('#newButton').click(function() {
+		  	jq('#cmli').val(jq('#newLineCounter').val());
+			jq('#cmavde').val("");	
+			jq('#cmtdne').val("");	
+			jq('#cmetyp').val("");	
+			jq('#cmeid').val("");	
+			jq('#cmeser').val("");	
+	  	});
+ 		jq('#cmavde').focus(function() {
+    	if(jq('#cmavde').val()!=''){
+    		refreshCustomValidity(jq('#cmavde')[0]);
+  		}
+        });
+		jq('#cmtdne').focus(function() {
+    	if(jq('#cmtdne').val()!=''){
+    		refreshCustomValidity(jq('#cmtdne')[0]);
+  		}
+        });
+		jq('#cmetyp').focus(function() {
+    	if(jq('#cmetyp').val()!=''){
+    		refreshCustomValidity(jq('#cmetyp')[0]);
+  		}
+        });
+		jq('#cmeid').focus(function() {
+    	if(jq('#cmeid').val()!=''){
+    		refreshCustomValidity(jq('#cmeid')[0]);
+  		}
+        });
+		jq('#cmeser').focus(function() {
+    	if(jq('#cmeser').val()!=''){
+    		refreshCustomValidity(jq('#cmeser')[0]);
+  		}
+        });
+
+			
+		jq( "#mainForm" ).submit(function( event ) {
+  			setBlockUI();
+	  	 }); 
+		
+		
   		/*
 		jq('#buttonCloseOk').click(function(){
 			setBlockUI();
@@ -54,73 +94,14 @@
 		*/
 	});
   	
+  	//refreshes all html 5 CustomValidity functions from jQuery
+    function refreshCustomValidity(element){
+  	  element.setCustomValidity('');
+    }
+
+
+ 
   	
-  	function sendFile(element) {
-	  	var applicationUserParam = jq('#applicationUser').val();
-	  	var rowCounter = element.id;
-	  	var title = jq("#"+element.id).attr("title");
-	  	
-	  	var record = title.split('_');
-	  	var docType = record[0].replace("doctyp", "");
-	  	var docPath = record[1].replace("doclnk", "");
-		
-	  	jq.ajax({
-	  	  type: 'GET',
-	  	  url: 'sendFileToToll_TvinnSadManifest.do',
-	  	  data: { applicationUser : applicationUserParam, 
-	  		  	  docType : docType,
-	  		  	  docPath : docPath,
-	  		  	  declNr :  jq('#clrg').val(),
-	  		  	  declDate : jq('#cl0068a').val(),
-	  		  	  declSekvens : jq('#cl0068b').val(),
-		  	  },
-	  	    	  
-	  	  dataType: 'json',
-	  	  cache: false,
-	  	  contentType: 'application/json',
-	  	  success: function(data) {
-	  		var len = data.length;
-	  		if(len>0){
-	  			if(data[0]!=null && data[0].toUpperCase().indexOf('ERROR') == -1){
-	  				console.log(data[0]);
-	  				jq("#"+element.id).removeClass("isa_error");
-	  				jq("#"+element.id).removeClass("isa_warning");
-	  				jq("#"+element.id).addClass("isa_success");
-	  				//error message
-	  				jq("#tollErrorMessage").text("");
-	  				jq("#tollErrorMessage").removeClass("inputFormSubmitStd");
-	  				jq("#tollErrorMessage").removeClass("isa_error");
-	  			}else{
-	  				console.log("ERROR:" + data[0]);
-	  				jq("#"+element.id).removeClass("isa_warning");
-	  				jq("#"+element.id).removeClass("isa_success");
-	  				jq("#"+element.id).addClass("isa_error");
-	  				//error message
-	  				jq("#tollErrorMessage").text("");
-	  				jq("#tollErrorMessage").addClass("inputFormSubmitStd");
-	  				jq("#tollErrorMessage").addClass("isa_error");
-	  				jq("#tollErrorMessage").text(data[0]);
-	  			}
-	  		}else{
-	  			var errMsg = "ERROR ... no data ?";
-	  			console.log(errMsg);
-  				jq("#"+element.id).removeClass("isa_warning");
-  				jq("#"+element.id).removeClass("isa_success");
-  				jq("#"+element.id).addClass("isa_error");
-  				//error message
-  				jq("#tollErrorMessage").text("");
-  				jq("#tollErrorMessage").addClass("inputFormSubmitStd");
-  				jq("#tollErrorMessage").addClass("isa_error");
-  				jq("#tollErrorMessage").text(errMsg);
-	  		}
-			
-	  	  },
-	  	  error: function() {
-	  	    alert('Error on send ...');
-	  	  }
-	  	});
-	  	
-  	}
   	
    
     

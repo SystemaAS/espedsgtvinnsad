@@ -65,6 +65,9 @@ public final class TvinnSadManifestUrlDataStore {
 	//FETCH list of several ExpId SE from a specific CARGO LINE
 	//http://gw.systema.no:8080/syjservicestn/syjsSADEFCMF.do?user=OSCAR&cmavd=1&cmtdn=501921
 	static public String TVINN_SAD_FETCH_MANIFEST_EXPRESS_EXPIDS_IN_CARGOLINE_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADEFCMF.do";
+	//UPDATE several SE Export Ids
+	//http://gw.systema.no:8080/syjservicestn/syjsSADEFCMF_U.do?user=OSCAR&mode=U/A/D
+	static public String TVINN_SAD_UPDATE_MANIFEST_EXPRESS_EXPIDS_IN_CARGOLINE_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADEFCMF_U.do";	
 		
 	
 	//[2.1] ARCHIVE FILE VALIDATION - Upload of file to the archive - file validation
