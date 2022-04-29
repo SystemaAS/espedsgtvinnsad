@@ -465,7 +465,7 @@ public class TvinnSadManifestControllerChildWindow {
 				newLineCounter++;
 			}
 			model.put("list", list);
-			model.put("newLineCounter", newLineCounter);
+			model.put("newLineCounter", this.getNewLineCounter(list));
 			model.put("wsavd", wsavd);
 			model.put("wsopd", wsopd);
 			model.put("exportId", exportId);
@@ -479,6 +479,14 @@ public class TvinnSadManifestControllerChildWindow {
 	    	return successView;
 		}
 	}
+	/**
+	 * INSERT/UPDATE
+	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="tvinnsadmanifest_childwindow_many_expid_edit.do", params="action=doSave",  method={RequestMethod.POST} )
 	public ModelAndView doSaveManyExpId(JsonTvinnSadManifestExportIdLinesRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		
@@ -505,30 +513,109 @@ public class TvinnSadManifestControllerChildWindow {
 				this.updateExportIdLinesList(mode, recordToValidate, appUser);
 				logger.info("After update/create/delete ...");
 			}else {
-				logger.warn("ERROR: Not valid dto for UPDATE/INSERT/DELETE ... ? <check form parameters i JSP!>");
+				logger.warn("ERROR: Not valid dto for INSERT/UPDATE ... ? <check form parameters i JSP!>");
 			}
 			
 			//Fetch list
 			Collection<JsonTvinnSadManifestExportIdLinesRecord> list = this.getExportIdLinesList(recordToValidate, appUser, false);
-			if(list!=null && list.size()>0) {
-				newLineCounter = list.size();
-				newLineCounter++;
-			}
 			model.put("list", list);
-			model.put("newLineCounter", newLineCounter);
+			model.put("newLineCounter", this.getNewLineCounter(list));
 			model.put("wsavd", wsavd);
 			model.put("wsopd", wsopd);
-			//model.put("exportId", exportId);
-			//model.put("exportType", exportType);
-			//model.put("clrg", clrg);
-			//model.put("cl0068a", cl0068a);
-			//model.put("cl0068b", cl0068b);
+			
 			this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(appUser, FasteKoder.SADEFETYPE.toString(), model, urlCgiProxyService, maintMainKofastService);
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 			
 	    	return successView;
 		}
 	}
+	/**
+	 * DELETE
+	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsadmanifest_childwindow_many_expid_delete.do",  method={RequestMethod.POST} )
+	public ModelAndView doDeleteManyExpId(JsonTvinnSadManifestExportIdLinesRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		
+		logger.warn("Inside: doDeleteManyExpId");
+		Map<String,Object> model = new HashMap();
+		String wsavd = null;
+		String wsopd = null;
+		String cmavd = null;
+		String cmtdn = null;
+		String cmli = null;
+		String mode = "D";
+		Integer newLineCounter = 1;
+		
+		Enumeration requestParameters = request.getParameterNames();
+	    while (requestParameters.hasMoreElements()) {
+	        String element = (String) requestParameters.nextElement();
+	        String value = request.getParameter(element);
+	        if (element != null && value != null) {
+        		logger.warn("####################################################");
+    			logger.warn("param Name : " + element + " value: " + value);
+    			if(element.startsWith("currentCmli")){
+    				cmli = value;
+    			}else if(element.startsWith("currentCmtdn")){
+    				cmtdn = value;
+    			}else if(element.startsWith("currentCmavd")){
+    				cmavd = value; 
+    			}else if(element.startsWith("wsavd")){
+    				wsavd = value; 
+    			}else if(element.startsWith("wsopd")){
+    				wsopd = value; 
+    			}
+    		}
+    	}
+	    recordToValidate.setCmli(cmli);
+		recordToValidate.setCmavd(cmavd);
+		recordToValidate.setCmtdn(cmtdn);
+		logger.warn(recordToValidate.toString());
+		
+		ModelAndView successView = new ModelAndView("tvinnsadmanifest_childwindow_many_expid_per_cargoline");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			//Update
+			if( this.validForUpdateExpIds(recordToValidate) ) {
+				logger.info("Before update/create/delete ...");
+				this.updateExportIdLinesList(mode, recordToValidate, appUser);
+				logger.info("After delete ...");
+			}else {
+				logger.warn("ERROR: Not valid dto for UPDATE/INSERT/DELETE ... ? <check form parameters i JSP!>");
+			}
+			
+			//Fetch list
+			Collection<JsonTvinnSadManifestExportIdLinesRecord> list = this.getExportIdLinesList(recordToValidate, appUser, false);
+			model.put("list", list);
+			model.put("newLineCounter", this.getNewLineCounter(list));
+			model.put("wsavd", wsavd);
+			model.put("wsopd", wsopd);
+			
+			
+			this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(appUser, FasteKoder.SADEFETYPE.toString(), model, urlCgiProxyService, maintMainKofastService);
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	private Integer getNewLineCounter(Collection<JsonTvinnSadManifestExportIdLinesRecord> list) {
+		Integer newLineCounter = 1;//default
+		if(list!=null && list.size()>0) {
+			for(JsonTvinnSadManifestExportIdLinesRecord line:list) {
+				newLineCounter = Integer.parseInt(line.getCmli());
+			}
+			newLineCounter++;
+		}
+		return newLineCounter;
+	}
+	
 	private boolean validForUpdateExpIds(JsonTvinnSadManifestExportIdLinesRecord dto) {
 		boolean retval = false;
 		if ( 	(StringUtils.isNotEmpty(dto.getCmavd()) && !dto.getCmavd().equals("0")) &&

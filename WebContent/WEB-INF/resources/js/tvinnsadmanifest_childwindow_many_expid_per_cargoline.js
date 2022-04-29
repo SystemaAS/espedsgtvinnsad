@@ -100,6 +100,62 @@
     }
 
 
+
+	//Initialize <div> here for all clazz_dialog
+  jq(function() { 
+	  jq( ".clazz_dialog" ).each(function(){
+		jq(this).dialog({
+			autoOpen: false,
+			maxWidth:400,
+			maxHeight: 300,
+			width: 300,
+			height: 180,
+			modal: true
+		});
+	  });
+  });
+  //----------------------------------------------------------------
+  //START Model dialog: "Delete cargo line" (implicit "Update status")
+  //----------------------------------------------------------------
+  //Present dialog box onClick (href in parent JSP)
+  jq(function() {
+	  jq(".removeLink").click(function() {
+		  var id = this.id;
+		  counterIndex = id.replace("removeLink","");
+		  jq('#dialogRemove'+counterIndex).dialog( "option", "title", "Slette Eksport id " + jq('#currentCmtdn'+counterIndex).val() );
+		  //deal with buttons for this modal window
+		  jq('#dialogRemove'+counterIndex).dialog({
+			 buttons: [ 
+	            {
+				 id: "dialogSaveTU"+counterIndex,	
+				 text: "Ok",
+				 click: function(){
+					 		jq('#deleteForm'+counterIndex).submit();
+					 		jq( this ).dialog( "close" );
+					 		jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+				 		}
+			 	 },
+	 	 		{
+			 	 id: "dialogCancelTU"+counterIndex,
+			 	 text: "Cancel", 
+				 click: function(){
+					 		//back to initial state of form elements on modal dialog
+					 		//jq("#dialogSaveSU"+counterIndex).button("option", "disabled", true);
+					 		jq( this ).dialog( "close" ); 
+				 		} 
+	 	 		 } ] 
+		  });
+		  //init values
+		  //jq("#dialogSaveSU"+counterIndex).button("option", "disabled", true);
+		  //open now
+		  jq('#dialogRemove'+counterIndex).dialog('open');
+		 
+	  });
+  });
+  
+
+
+
  
   	
   	
