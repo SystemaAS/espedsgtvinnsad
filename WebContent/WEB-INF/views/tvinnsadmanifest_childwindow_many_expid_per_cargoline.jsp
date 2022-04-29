@@ -106,9 +106,9 @@
 			 				<td class="text14">&nbsp;<span title="cmli">Lnr.</span></td>
 			 				<td class="text14">&nbsp;<span title="cmetyp">Eksp.type<font class="text16RedBold" >*</font></span></td>
 							<td class="text14">&nbsp;<span title="cmeid">Eksp.id<font class="text16RedBold" >*</font></span></td>
-							<td class="text14">&nbsp;<span title="cmeser">Sert.</span></td>
 							<td class="text14">&nbsp;<span title="cmavde">Eksp.avd.SE<font class="text16RedBold" >*</font></span></td>
 							<td class="text14">&nbsp;<span title="cmtdne">Eksp.oppd.SE<font class="text16RedBold" >*</font></span></td>
+							<td class="text14">&nbsp;<span title="cmeser">Sert.</span></td>
 							
 						</tr>
 						<tr>
@@ -122,16 +122,16 @@
 								</select>
 				 			</td>
 				 			<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlue" name="cmeid" id="cmeid" size="21" maxlength="18" value="${model.record.cmeid}"></td>
-				 			<td class="text14">
+				 			<td class="text14"><input onKeyPress="return numberKey(event)" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlue " name="cmavde" id="cmavde" size="5" maxlength="4" value='<c:if test="${model.record.cmavde!='0'}">${model.record.cmavde}</c:if>'></td>
+			 				<td class="text14"><input onKeyPress="return numberKey(event)" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlue " name="cmtdne" id="cmtdne" size="8" maxlength="7" value='<c:if test="${model.record.cmtdne!='0'}">${model.record.cmtdne}</c:if>'></td>
+			 				<td class="text14">
 				 				<select class="inputTextMediumBlue" name="cmeser" id="cmeser" >
 				 					<option value="">-velg-</option>
 			 						<option value="N">Nei</option>
 	 		 				  		<option value="J">Ja</option>
 								</select>
 				 			</td>
-				 			<td class="text14"><input onKeyPress="return numberKey(event)" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlue toggleDirektfortolling" name="cmavde" id="cmavde" size="5" maxlength="4" value='<c:if test="${model.record.cmavde!='0'}">${model.record.cmavde}</c:if>'></td>
-			 				<td class="text14"><input onKeyPress="return numberKey(event)" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlue toggleDirektfortolling" name="cmtdne" id="cmtdne" size="8" maxlength="7" value='<c:if test="${model.record.cmtdne!='0'}">${model.record.cmtdne}</c:if>'></td>
-			 				<td><input class="inputFormSubmit" type="submit" name="saveButton" id="saveButton" value='Lagre'></td>
+				 			<td><input class="inputFormSubmit" type="submit" name="saveButton" id="saveButton" value='Lagre'></td>
 						</tr>
 						<tr height="5"><td></td></tr>
 						</table>
