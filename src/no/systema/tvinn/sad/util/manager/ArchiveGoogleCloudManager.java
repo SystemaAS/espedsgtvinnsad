@@ -290,7 +290,7 @@ public class ArchiveGoogleCloudManager {
 	 * Example
 	 * POST https://gw.systema.no:9886/api/getfiles
 	 *	Content-Type: application/json	
-	 *	{ "LocalWritePath": "/temp/", "Files": [ { "Companyid": "a12", "Filename": "si201300170000658WtGAj87xw0.pdf" } ] }
+	 *	{ "localwritepath": "/temp/", "Files": [ { "companyid": "a12", "filename": "si201300170000658WtGAj87xw0.pdf" } ] }
 	 * 
 	 * @param gcFile
 	 * @return
@@ -313,7 +313,7 @@ public class ArchiveGoogleCloudManager {
 		URI uri = UriComponentsBuilder
 				.fromUriString(apiRoot)
 				.path("/getfiles")
-				.queryParam("localWritePath", dtoContainer.getLocalWritePath())
+				.queryParam("localwritepath", dtoContainer.getLocalwritepath())
 				.queryParam("files", dtoContainer.getFiles() ) 
 				.build()
 				.toUri();
@@ -331,7 +331,7 @@ public class ArchiveGoogleCloudManager {
 			logger.warn(json);
 			//Build the new file path
 			for(DtoNodeGoogleCloudApiFile record: dtoContainer.getFiles()) {
-				tmpFileAbsolutePath = dtoContainer.getLocalWritePath() + record.getFilename();
+				tmpFileAbsolutePath = dtoContainer.getLocalwritepath() + record.getFilename();
 			}
 			
 		}catch(Exception e) {
@@ -375,7 +375,7 @@ public class ArchiveGoogleCloudManager {
 			
 			//Build the new file path (in local machine)
 			for(DtoNodeGoogleCloudApiFile record: dtoContainer.getFiles()) {
-				tmpFileAbsolutePath = dtoContainer.getLocalWritePath() + record.getFilename();
+				tmpFileAbsolutePath = dtoContainer.getLocalwritepath() + record.getFilename();
 			}
 		
 		}catch(Exception e) {
@@ -405,7 +405,7 @@ public class ArchiveGoogleCloudManager {
 			URI uri = UriComponentsBuilder
 					.fromUriString(apiRoot)
 					.path("/getfiles")
-					.queryParam("localWritePath", dtoContainer.getLocalWritePath())
+					.queryParam("localwritepath", dtoContainer.getLocalwritepath())
 					.queryParam("files", dtoContainer.getFiles() ) 
 					.build()
 					.toUri();
@@ -423,7 +423,7 @@ public class ArchiveGoogleCloudManager {
 				logger.warn(json);
 				//Build the new file path
 				for(DtoNodeGoogleCloudApiFile record: dtoContainer.getFiles()) {
-					tmpFileAbsolutePath = dtoContainer.getLocalWritePath() + record.getFilename();
+					tmpFileAbsolutePath = dtoContainer.getLocalwritepath() + record.getFilename();
 				}
 				
 			}catch(Exception e) {
@@ -466,7 +466,7 @@ public class ArchiveGoogleCloudManager {
 			
 			//Build the new file path (in local machine)
 			for(DtoNodeGoogleCloudApiFileTest record: dtoContainer.getFiles()) {
-				tmpFileAbsolutePath = dtoContainer.getLocalWritePath() + record.getFilename();
+				tmpFileAbsolutePath = dtoContainer.getLocalwritepath() + record.getFilename();
 			}
 		
 		}catch(Exception e) {
@@ -507,7 +507,7 @@ public class ArchiveGoogleCloudManager {
 		list.add(dtoFile);
 		//
 		dtoContainer.setFiles(list);
-		dtoContainer.setLocalWritePath(AS400_TEMP_DIR);
+		dtoContainer.setLocalwritepath(AS400_TEMP_DIR);
 		
 		return dtoContainer;
 	}
@@ -534,7 +534,7 @@ public class ArchiveGoogleCloudManager {
 		list.add(dtoFile);
 		//
 		dtoContainer.setFiles(list);
-		dtoContainer.setLocalWritePath(AS400_TEMP_DIR);
+		dtoContainer.setLocalwritepath(AS400_TEMP_DIR);
 		
 		return dtoContainer;
 	}

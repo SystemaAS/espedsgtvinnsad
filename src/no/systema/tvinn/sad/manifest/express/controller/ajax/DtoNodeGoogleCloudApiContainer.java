@@ -9,11 +9,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 
 @Data
-@JsonPropertyOrder({"localWritePath", "Files" })
+@JsonPropertyOrder({"localwritepath", "Files" })
 public class DtoNodeGoogleCloudApiContainer {
 
 	//@JsonProperty("LocalWritePath")
-	String localWritePath;
+	String localwritepath;
 	
 	//@JsonProperty("Files")
 	List<DtoNodeGoogleCloudApiFile> files = new ArrayList<DtoNodeGoogleCloudApiFile>();

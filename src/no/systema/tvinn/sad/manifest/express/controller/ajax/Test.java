@@ -40,7 +40,7 @@ public class Test {
 			list.add(dtoFile);
 			//
 			DtoNodeGoogleCloudApiContainer dtoContainer = new DtoNodeGoogleCloudApiContainer();
-			dtoContainer.setLocalWritePath("/temp/");
+			dtoContainer.setLocalwritepath("/temp/");
 			dtoContainer.setFiles(list);
 			
 			ObjectWriter ow = new ObjectMapper().writer();//.withDefaultPrettyPrinter();

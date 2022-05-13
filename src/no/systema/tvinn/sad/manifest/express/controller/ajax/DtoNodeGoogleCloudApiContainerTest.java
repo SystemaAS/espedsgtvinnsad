@@ -13,7 +13,7 @@ import lombok.Data;
 public class DtoNodeGoogleCloudApiContainerTest {
 
 	//@JsonProperty("LocalWritePath")
-	String localWritePath = "/temp/";
+	String localwritepath = "/temp/";
 	
 	//@JsonProperty("Files")
 	List<DtoNodeGoogleCloudApiFileTest> files = new ArrayList<DtoNodeGoogleCloudApiFileTest>();

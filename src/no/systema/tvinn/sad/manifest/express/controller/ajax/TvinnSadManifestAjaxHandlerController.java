@@ -197,7 +197,7 @@ public class TvinnSadManifestAjaxHandlerController {
 				//Download to local directory from Google Cloud
 				if(applicationUser.equalsIgnoreCase("OSCAR")) {
 					logger.warn("####### -->Using downloadPdfFromGoogleCloudTest (hardcoded A12 + .pdf just for testing ...");
-					docPath = new ArchiveGoogleCloudManager().downloadPdfFromGoogleCloudTest(docPath);
+					docPath = new ArchiveGoogleCloudManager().downloadPdfFromGoogleCloudTestSimple(docPath);
 				}else {
 					docPath = new ArchiveGoogleCloudManager().downloadPdfFromGoogleCloudSimple(docPath);
 				}
