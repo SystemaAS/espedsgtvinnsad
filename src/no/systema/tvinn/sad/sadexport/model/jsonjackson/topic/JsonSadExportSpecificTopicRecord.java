@@ -122,9 +122,17 @@ public class JsonSadExportSpecificTopicRecord extends JsonAbstractGrandFatherRec
 	public void setSedty(String value) {  this.sedty = value; }
 	public String getSedty() {return this.sedty;}
 	
+	private String own_sedp = null;
+	public void setOwn_sedp(String value) {  this.own_sedp = value; }
+	public String getOwn_sedp() {return this.own_sedp;}
+	
 	private String sedp = null;
 	public void setSedp(String value) {  this.sedp = value; }
 	public String getSedp() {return this.sedp;}
+	
+	private String sedp2 = null;
+	public void setSedp2(String value) {  this.sedp2 = value; }
+	public String getSedp2() {return this.sedp2;}
 
 	private String sekns = null;
 	public void setSekns(String value) {  this.sekns = value; }

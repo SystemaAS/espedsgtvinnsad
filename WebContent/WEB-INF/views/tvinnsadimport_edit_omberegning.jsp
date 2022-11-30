@@ -348,13 +348,13 @@
 				           		</ul>
 							</span>
 							</div>
-			 				<b>1.2</b><font class="text16RedBold" >*</font><span title="sidp">&nbsp;Eksped.type</span>
+			 				<b>1.2</b><font class="text16RedBold" >*</font><span title="own_sidp">&nbsp;Eksped.type/Prosed.</span>
 			 				</td>
 				 			<td>
-				 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="sidp" id="sidp" >
+				 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="own_sidp" id="own_sidp" >
 				 				  <option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.ekspedisjonstyperImportCodeList}" >
-					 				  		<option value="${record.zkod}" title="${record.ztxt}" <c:if test="${model.record.sidp == record.zkod}"> selected </c:if> >${record.zkod}</option>
+					 				  		<option value="${record.zkod}" title="${record.ztxt}" <c:if test="${model.record.sidp.concat(model.record.sidp2) == record.zkod}"> selected </c:if> >${record.zkod}</option>
 										</c:forEach>  
 								</select>
 				 			</td>
@@ -1009,20 +1009,30 @@
 				 				<b>24.</b><font class="text16RedBold" >*</font><span title="sitst">Tr.type</span>
 				 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="sitst" id="sitst" >
 				 				  <option value="">-velg-</option>	
-				 				  <option value="1" title="Kjøp i fast regning" <c:if test="${model.record.sitst == '1'}"> selected </c:if> >1</option>	
-				 				  <option value="2" title="Konsignasjon/Kommisjon" <c:if test="${model.record.sitst == '2'}"> selected </c:if> >2</option>	
-				 				  <option value="3" title="Leie (herunder leasing)Lån" <c:if test="${model.record.sitst == '3'}"> selected </c:if> >3</option>	
-				 				  <option value="9" title="Annet" <c:if test="${model.record.sitst == '9'}"> selected </c:if> >9</option>	
+				 				  <option value="1" <c:if test="${model.record.sitst == '1'}"> selected </c:if> >1</option>	
+				 				   <option value="2" <c:if test="${model.record.sitst == '2'}"> selected </c:if> >2</option>
+				 				   <option value="3" <c:if test="${model.record.sitst == '3'}"> selected </c:if> >3</option>	
+				 				   <option value="4" <c:if test="${model.record.sitst == '4'}"> selected </c:if> >4</option>
+				 				   <option value="5" <c:if test="${model.record.sitst == '5'}"> selected </c:if> >5</option>	
+				 				   <option value="6" <c:if test="${model.record.sitst == '6'}"> selected </c:if> >6</option>
+				 				   <option value="8" <c:if test="${model.record.sitst == '8'}"> selected </c:if> >8</option>	
+				 				   <option value="9" <c:if test="${model.record.sitst == '9'}"> selected </c:if> >9</option>
+				 				   <option value="10" <c:if test="${model.record.sitst == '10'}"> selected </c:if> >10</option>		
 				 				</select>
 				 				<div class="text14" style="position: relative;" align="left">
 				 				<span style="position:absolute; top:2px; width:250px;" id="24_info" class="popupWithInputText text14"  >
 					           		<b>24.&nbsp;Transaksjonstype</b><br/><br/>
 									Oppgi med kode:
 									<ul>
-										<li><b>1</b>&nbsp;Kjøp i fast regning</li>
-										<li><b>2</b>&nbsp;Konsignasjon/Kommisjon</li>
-										<li><b>3</b>&nbsp;Leie (herunder leasing)Lån</li>
-										<li><b>9</b>&nbsp;Annet</li>
+										<li><b>1</b>&nbsp;Kjøp mot vederlag, finansiell leasing</li>
+										<li><b>2</b>&nbsp;Gratis erstatningsleveranser </li>
+										<li><b>3</b>&nbsp;Gaver og andre leveranser som leveres uten kostnad</li>
+										<li><b>4</b>&nbsp;Midlertidig innførsel for betalt bearbeiding</li>
+										<li><b>5</b>&nbsp;Gjenutførsel etter betalt bearbeiding</li>
+										<li><b>6</b>&nbsp;Midlertidig innførsel for/gjeninnførsel etter reparasjon, leie, lån eller operasjonell leasing</li>
+										<li><b>8</b>&nbsp;Bygg og anlegg, inkludert delsendinger</li>
+										<li><b>9</b>&nbsp;Annet, eksempelvis flyttegods.</li>
+										<li><b>10</b>&nbsp;Varer i retur</li>	
 									</ul>
 								</span>
 								</div>

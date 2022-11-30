@@ -266,8 +266,8 @@ public class SadImportHeaderController {
 					session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, BASE_URL  + "==>params: " + urlRequestParamsKeys.toString()); 
 					
 					logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-			    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
-			    	logger.info("URL PARAMS: " + urlRequestParamsKeys);
+			    	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+			    	logger.warn("URL PARAMS: " + urlRequestParamsKeys);
 			    	//--------------------------------------
 			    	//EXECUTE the FETCH (RPG program) here
 			    	//--------------------------------------
@@ -339,7 +339,8 @@ public class SadImportHeaderController {
 					
 					//Fill up tollkreditnr if applicable
 					this.adjustTollkredit(appUser, recordToValidate);
-					
+					//adjust extra fields before validations
+					this.adjustFieldsBeforeValidation(appUser, recordToValidate);
 					
 					SadImportHeaderValidator validator = new SadImportHeaderValidator(this.urlCgiProxyService, this.currencyRateService);
 					validator.setSystemWebUser(appUser);
@@ -460,8 +461,8 @@ public class SadImportHeaderController {
 							session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, BASE_URL); 
 					    	
 							logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-					    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
-					    	logger.info("URL PARAMS: " + urlRequestParams);
+					    	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+					    	logger.warn("URL PARAMS: " + urlRequestParams);
 					    	//----------------------------------------------------------------------------
 					    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
 					    	//----------------------------------------------------------------------------
@@ -534,6 +535,20 @@ public class SadImportHeaderController {
 			
 	    	return successView;
 		}
+	}
+	
+	public void adjustFieldsBeforeValidation(SystemaWebUser appUser, JsonSadImportSpecificTopicRecord recordToValidate){
+		try {
+			if(StringUtils.isNotEmpty(recordToValidate.getOwn_sidp())){
+				recordToValidate.setSidp(recordToValidate.getOwn_sidp().substring(0,2));
+				recordToValidate.setSidp2(recordToValidate.getOwn_sidp().substring(2));
+			}
+			
+			
+		}catch(Exception e) {
+			logger.error(e.toString());
+		}
+		
 	}
 	
 	private void adjustTollkredit(SystemaWebUser appUser, JsonSadImportSpecificTopicRecord recordToValidate){
@@ -2023,6 +2038,13 @@ public class SadImportHeaderController {
 			jsonSadImportSpecificTopicRecord.setSidt(now);
 		}
 		logger.info("sidt:" + jsonSadImportSpecificTopicRecord.getSidt());
+		
+		if(StringUtils.isNotEmpty(jsonSadImportSpecificTopicRecord.getOwn_sidp())){
+			jsonSadImportSpecificTopicRecord.setSidp(jsonSadImportSpecificTopicRecord.getOwn_sidp().substring(0,2));
+			jsonSadImportSpecificTopicRecord.setSidp2(jsonSadImportSpecificTopicRecord.getOwn_sidp().substring(2));
+		}
+		logger.warn("sidp:" + jsonSadImportSpecificTopicRecord.getSidp());
+		logger.warn("sidp2:" + jsonSadImportSpecificTopicRecord.getSidp2());
 		
 		
 	}

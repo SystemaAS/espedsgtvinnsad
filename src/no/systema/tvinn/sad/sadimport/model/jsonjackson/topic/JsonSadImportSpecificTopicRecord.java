@@ -167,9 +167,18 @@ public class JsonSadImportSpecificTopicRecord extends JsonAbstractGrandFatherRec
 	public void setSidty(String value) {  this.sidty = value; }
 	public String getSidty() {return this.sidty;}
 	
+	
+	private String own_sidp = null;
+	public void setOwn_sidp(String value) {  this.own_sidp = value; }
+	public String getOwn_sidp() {return this.own_sidp;}
+	
 	private String sidp = null;
 	public void setSidp(String value) {  this.sidp = value; }
 	public String getSidp() {return this.sidp;}
+	
+	private String sidp2 = null;
+	public void setSidp2(String value) {  this.sidp2 = value; }
+	public String getSidp2() {return this.sidp2;}
 	
 	private String sikns = null;
 	public void setSikns(String value) {  this.sikns = value; }

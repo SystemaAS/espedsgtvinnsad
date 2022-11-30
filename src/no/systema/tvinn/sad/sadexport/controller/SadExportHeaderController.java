@@ -418,8 +418,8 @@ public class SadExportHeaderController {
 							session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, BASE_URL); 
 					    	
 							logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-					    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
-					    	logger.info("URL PARAMS: " + urlRequestParams);
+					    	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+					    	logger.warn("URL PARAMS: " + urlRequestParams);
 					    	//----------------------------------------------------------------------------
 					    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
 					    	//----------------------------------------------------------------------------
@@ -1969,9 +1969,18 @@ public class SadExportHeaderController {
 		if(strMgr.isNotNull(record.getSeftg2())){
 			record.setSeftg2(record.getSeftg2().toUpperCase());
 		}
-		
 		logger.info("sedt:" + record.getSedt());
 		logger.info("seftg2" + record.getSeftg2());
+		
+		
+		
+		if(StringUtils.isNotEmpty(record.getOwn_sedp())){
+			record.setSedp(record.getOwn_sedp().substring(0,2));
+			record.setSedp2(record.getOwn_sedp().substring(2));
+		}
+		logger.warn("sedp:" + record.getSedp());
+		logger.warn("sedp2:" + record.getSedp2());
+		
 	}
 	
 	/**
@@ -2080,6 +2089,10 @@ public class SadExportHeaderController {
 			
 			//(2) ADJUST field: next field in the future
 			//here ...
+			if(StringUtils.isNotEmpty(recordToValidate.getOwn_sedp())){
+				recordToValidate.setSedp(recordToValidate.getOwn_sedp().substring(0,2));
+				recordToValidate.setSedp2(recordToValidate.getOwn_sedp().substring(2));
+			}
 			
 		}catch (Exception e){
 			logger.error(e.toString());

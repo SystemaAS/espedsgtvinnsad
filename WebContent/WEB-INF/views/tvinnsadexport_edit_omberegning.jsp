@@ -348,7 +348,7 @@
 			 				</td>
 			 				<td class="text14">&nbsp;
 				 				<img onMouseOver="showPop('ekspedtype_info');" onMouseOut="hidePop('ekspedtype_info');"style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-				 				<font class="text16RedBold" >*</font><span title="sedp">Eksped.type&nbsp;</span>
+				 				<font class="text16RedBold" >*</font><span title="own_sedp">Eksped.type/Prosed.&nbsp;</span>
 				 				<div class="text11" style="position: relative;" align="left">
 				 				<span style="position:absolute;top:2px; width:350px;" id="ekspedtype_info" class="popupWithInputText text11"  >
 				           			<ul>
@@ -360,10 +360,10 @@
 				 				</div>
 			 				</td>
 				 			<td>
-				 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="sedp" id="sedp" >
+				 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="own_sedp" id="own_sedp" >
 				 				  <option value="">-velg-</option>
 					 				  	<c:forEach var="record" items="${model.ekspedisjonstyperExportCodeList}" >
-					 				  		<option value="${record.zkod}" title="${record.ztxt}" <c:if test="${model.record.sedp == record.zkod}"> selected </c:if> >${record.zkod}</option>
+					 				  		<option value="${record.zkod}" title="${record.ztxt}" <c:if test="${model.record.sedp.concat(model.record.sedp2) == record.zkod}"> selected </c:if> >${record.zkod}</option>
 										</c:forEach>  
 								</select>
 				 			</td>
@@ -981,16 +981,30 @@
 				 				<img onMouseOver="showPop('24_info');" onMouseOut="hidePop('24_info');"style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 				 				<b>24.</b><font class="text16RedBold" >*</font><span title="setst">Tr.type</span>
 				 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="setst" id="setst" >
-					 			   <option value="0" <c:if test="${model.record.setst == '0'}"> selected </c:if> >0</option>	
+					 			   <option value="1" <c:if test="${model.record.setst == '1'}"> selected </c:if> >1</option>	
+				 				   <option value="2" <c:if test="${model.record.setst == '2'}"> selected </c:if> >2</option>
+				 				   <option value="3" <c:if test="${model.record.setst == '3'}"> selected </c:if> >3</option>	
+				 				   <option value="4" <c:if test="${model.record.setst == '4'}"> selected </c:if> >4</option>
 				 				   <option value="5" <c:if test="${model.record.setst == '5'}"> selected </c:if> >5</option>	
+				 				   <option value="6" <c:if test="${model.record.setst == '6'}"> selected </c:if> >6</option>
+				 				   <option value="8" <c:if test="${model.record.setst == '8'}"> selected </c:if> >8</option>	
+				 				   <option value="9" <c:if test="${model.record.setst == '9'}"> selected </c:if> >9</option>
+				 				   <option value="10" <c:if test="${model.record.setst == '10'}"> selected </c:if> >10</option>		
 				 				</select>
 				 				<div class="text11" style="position: relative;" align="left">
 				 				<span style="position:absolute; top:2px; width:250px;" id="24_info" class="popupWithInputText text11"  >
 					           		<b>24.&nbsp;Transaksjonstype</b><br/><br/>
 									Oppgi med kode:
 									<ul>
-										<li><b>0</b>&nbsp;Varen skal ikke betales</li>
-										<li><b>5</b>&nbsp;Varen skal betales, eller det vil bli utstedt kreditnota for varen</li>
+										<li><b>1</b>&nbsp;Salg mot vederlag, finansiell leasing</li>
+										<li><b>2</b>&nbsp;Gratis erstatningsleveranser </li>
+										<li><b>3</b>&nbsp;Gaver og andre leveranser som leveres uten kostnad</li>
+										<li><b>4</b>&nbsp;Midlertidig utførsel for betalt bearbeiding</li>
+										<li><b>5</b>&nbsp;Gjenutførsel etter betalt bearbeiding</li>
+										<li><b>6</b>&nbsp;Midlertidig utførsel for/gjenutførsel etter reparasjon, leie, lån eller operasjonell leasing</li>
+										<li><b>8</b>&nbsp;Bygg og anlegg, inkludert delsendinger</li>
+										<li><b>9</b>&nbsp;Annet, eksempelvis flyttegods.</li>
+										<li><b>10</b>&nbsp;Varer i retur</li>	
 									</ul>
 								</span>
 								</div>

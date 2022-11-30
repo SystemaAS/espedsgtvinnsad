@@ -59,6 +59,7 @@ public class SadImportOmberegningHeaderValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sisg", "systema.tvinn.sad.import.header.error.null.sisg");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sidty", "systema.tvinn.sad.import.header.error.null.sidty");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sidp", "systema.tvinn.sad.import.header.error.null.sidp");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sidp2", "systema.tvinn.sad.import.header.error.null.sidp2");
 
 		//Afsender
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sinas", "systema.tvinn.sad.import.header.error.null.sinas");

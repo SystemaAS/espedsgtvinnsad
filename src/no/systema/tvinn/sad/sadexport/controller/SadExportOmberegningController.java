@@ -2,7 +2,7 @@ package no.systema.tvinn.sad.sadexport.controller;
 
 import java.util.*;
 
- 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
@@ -192,7 +192,7 @@ public class SadExportOmberegningController {
 							}
 						}else{
 							//Add a minus sign (to indicate omberegning on service back-end will be fetched)
-							logger.info("Show omberegning BRANCH (A)...");
+							logger.warn("Show omberegning BRANCH (A)...");
 							if(!opdOmb.contains("-")){
 								opdOmb = opdOmb + "-"; 
 							}
@@ -203,18 +203,18 @@ public class SadExportOmberegningController {
 							opdOmb = opdOmb + "-";
 						}
 						if(!this.omberegningExists(action, avd, opdOmb, sign, appUser)){
-							logger.info("Create new omberegning automatically...");
+							logger.warn("Create new omberegning automatically...");
 							//at this point we do know that there IS NOT a previous omberegning
 							//(1) create first omberegning (will be prepared for fetch)
 							selectedOmb = this.OMBEREGNING_TYPE_OMB_ORIGINAL_BACKEND;
 							this.cloneOpdToOmberegning(appUser.getUser(), avd, opdOmb, sign, selectedOmb);
 						}else{
 							//this will be true in 1% of cases (only when there is some corrupt data - backend)
-							logger.info("Show omberegning BRANCH (B)...");
+							logger.warn("Show omberegning BRANCH (B)...");
 						}
 					}
-					logger.info("opdOmb:" + opdOmb);
-					logger.info("FETCH record transaction... after omberegning possible outcomes ...");
+					logger.warn("opdOmb:" + opdOmb);
+					logger.warn("FETCH record transaction... after omberegning possible outcomes ...");
 					//---------------------------
 					//get BASE URL = RPG-PROGRAM
 		            //---------------------------
@@ -242,6 +242,7 @@ public class SadExportOmberegningController {
 			    		this.setCodeDropDownMgr(appUser, model);	
 			    		this.setDomainObjectsInView(session, model, jsonSadExportSpecificTopicContainer, totalItemLinesObject, omberegningFlag, omberegningDate, omberegningType);
 			    		//extra
+			    		logger.warn("selectedOmb:" + selectedOmb);
 			    		model.put("selectedOmb", selectedOmb);
 			    		
 			    		successView.addObject(TvinnSadConstants.DOMAIN_MODEL, model);
@@ -284,6 +285,8 @@ public class SadExportOmberegningController {
 					}
 					//Fill up tollkreditnr if applicable
 					this.adjustTollkredit(appUser, recordToValidate);
+					//adjust extra fields before validations
+					this.adjustFieldsBeforeValidation(appUser, recordToValidate);
 					
 					SadExportOmberegningHeaderValidator validator = new SadExportOmberegningHeaderValidator();
 					validator.validate(recordToValidate, bindingResult);
@@ -420,6 +423,7 @@ public class SadExportOmberegningController {
 		}
 	}
 
+	
 	/**
 	 * 
 	 * @param action
@@ -506,6 +510,26 @@ public class SadExportOmberegningController {
 	private void adjustValidUpdateFlag(Map model, JsonSadExportSpecificTopicRecord record){
 		record.setValidUpdate(true);
 		model.put(TvinnSadConstants.DOMAIN_RECORD, record);
+	}
+	
+	/**
+	 * 
+	 * @param appUser
+	 * @param recordToValidate
+	 */
+	public void adjustFieldsBeforeValidation(SystemaWebUser appUser, JsonSadExportSpecificTopicRecord recordToValidate){
+		try {
+			//ADJUST fields
+			if(StringUtils.isNotEmpty(recordToValidate.getOwn_sedp())){
+				recordToValidate.setSedp(recordToValidate.getOwn_sedp().substring(0,2));
+				recordToValidate.setSedp2(recordToValidate.getOwn_sedp().substring(2));
+			}
+			//more fields here ...
+			
+			
+		}catch (Exception e){
+			logger.error(e.toString());
+		}
 	}
 	/**
 	 * 
@@ -1241,6 +1265,15 @@ public class SadExportOmberegningController {
 			record.setSedt(now);
 		}
 		logger.info("sedt:" + record.getSedt());
+		
+		
+		
+		if(StringUtils.isNotEmpty(record.getOwn_sedp())){
+			record.setSedp(record.getOwn_sedp().substring(0,2));
+			record.setSedp2(record.getOwn_sedp().substring(2));
+		}
+		logger.warn("sedp:" + record.getSedp());
+		logger.warn("sedp2:" + record.getSedp2());
 	}
 	
 	/**

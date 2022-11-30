@@ -2,7 +2,7 @@ package no.systema.tvinn.sad.sadimport.controller;
 
 import java.util.*;
 
- 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
@@ -290,6 +290,10 @@ public class SadImportOmberegningController {
 						recordToValidate.setSiavd(avd);
 						recordToValidate.setSisg(sign);
 					}
+					
+					//adjust extra fields before validations
+					this.adjustFieldsBeforeValidation(appUser, recordToValidate);
+					
 					SadImportOmberegningHeaderValidator validator = new SadImportOmberegningHeaderValidator();
 					validator.setSystemWebUser(appUser);
 					validator.setSadImportSpecificTopicService(this.sadImportSpecificTopicService);
@@ -1229,7 +1233,19 @@ public class SadImportOmberegningController {
 		
 	}
 	
-	
+	public void adjustFieldsBeforeValidation(SystemaWebUser appUser, JsonSadImportSpecificTopicRecord recordToValidate){
+		try {
+			if(StringUtils.isNotEmpty(recordToValidate.getOwn_sidp())){
+				recordToValidate.setSidp(recordToValidate.getOwn_sidp().substring(0,2));
+				recordToValidate.setSidp2(recordToValidate.getOwn_sidp().substring(2));
+			}
+			
+			
+		}catch(Exception e) {
+			logger.error(e.toString());
+		}
+		
+	}
 	
 	/**
 	 * Tollværdi fields must be adjusted (radio buttons)
@@ -1264,8 +1280,15 @@ public class SadImportOmberegningController {
 			String now = dateMgr.getCurrentDate_ISO();
 			jsonSadImportSpecificTopicRecord.setSidt(now);
 		}
-
-		logger.info("sidt:" + jsonSadImportSpecificTopicRecord.getSidt());		
+		logger.info("sidt:" + jsonSadImportSpecificTopicRecord.getSidt());	
+		
+		if(StringUtils.isNotEmpty(jsonSadImportSpecificTopicRecord.getOwn_sidp())){
+			jsonSadImportSpecificTopicRecord.setSidp(jsonSadImportSpecificTopicRecord.getOwn_sidp().substring(0,2));
+			jsonSadImportSpecificTopicRecord.setSidp2(jsonSadImportSpecificTopicRecord.getOwn_sidp().substring(2));
+		}
+		logger.warn("sidp:" + jsonSadImportSpecificTopicRecord.getSidp());
+		logger.warn("sidp2:" + jsonSadImportSpecificTopicRecord.getSidp2());
+		
 		
 	}
 	

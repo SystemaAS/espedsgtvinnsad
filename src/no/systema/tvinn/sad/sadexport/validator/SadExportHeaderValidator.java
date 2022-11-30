@@ -73,6 +73,8 @@ public class SadExportHeaderValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sesg", "systema.tvinn.sad.export.header.error.null.sesg");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sedty", "systema.tvinn.sad.export.header.error.null.sedty");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sedp", "systema.tvinn.sad.export.header.error.null.sedp");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sedp2", "systema.tvinn.sad.export.header.error.null.sedp2");
+		
 		//Parties
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "serg", "systema.tvinn.sad.export.header.error.null.serg");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "senas", "systema.tvinn.sad.export.header.error.null.senas");
@@ -112,12 +114,12 @@ public class SadExportHeaderValidator implements Validator {
 				if("CW1".equals (record.getSesg())){
 					errors.rejectValue("sesg", "systema.tvinn.sad.export.header.error.rule.invalid.sesg");
 				}
-				if(!this.isValidProcedureTypeForAvsLand(record)){
+				/*if(!this.isValidProcedureTypeForAvsLand(record)){
 					errors.rejectValue("selka", "systema.tvinn.sad.export.header.error.rule.avsLandNotNorwayAndBestLandNorway"); 
 				}
 				if(!this.isValidProcedureTypeForBestLand(record)){
 					errors.rejectValue("selkb", "systema.tvinn.sad.export.header.error.rule.avsLandNotNorwayAndBestLandNorway"); 
-				}
+				}*/
 				
 				
 				//if tullkredit = not exists
