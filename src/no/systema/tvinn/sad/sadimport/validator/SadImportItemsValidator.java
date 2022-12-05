@@ -100,7 +100,7 @@ public class SadImportItemsValidator implements Validator {
 			        	errors.rejectValue("svcnr", "systema.tvinn.sad.general.error.rule.item.svcnr.containernr.invalid");
 			        }
 				}
-				
+				/*
 				if(strMgr.isNotNull(record.getSvdp())) {
 					if(record.getEkspedType().substring(0,1).equals(record.getSvdp().substring(0,1))) {
 						//OK
@@ -108,7 +108,7 @@ public class SadImportItemsValidator implements Validator {
 						errors.rejectValue("svdp", "systema.tvinn.sad.general.error.rule.item.svpd.prosedyre.invalid");
 					}
 					
-				}
+				}*/
 			}
 		}
 		

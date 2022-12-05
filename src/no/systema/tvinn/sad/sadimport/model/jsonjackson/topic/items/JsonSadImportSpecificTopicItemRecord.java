@@ -503,9 +503,18 @@ public class JsonSadImportSpecificTopicItemRecord  extends JsonAbstractGrandFath
 	public void setSvcnr(String value) {  this.svcnr = value; }
 	public String getSvcnr() { return this.svcnr; }
 	
+	private String own_svdp = null;
+	public void setOwn_svdp(String value) {  this.own_svdp = value; }
+	public String getOwn_svdp() { return this.own_svdp; }
+	
 	private String svdp = null;
 	public void setSvdp(String value) {  this.svdp = value; }
 	public String getSvdp() { return this.svdp; }
+	
+	private String svdp2 = null;
+	public void setSvdp2(String value) {  this.svdp2 = value; }
+	public String getSvdp2() { return this.svdp2; }
+	
 	//From header in order to send to validator (place holder)
 	private String ekspedType = null;
 	public void setEkspedType(String value) {  this.ekspedType = value; }

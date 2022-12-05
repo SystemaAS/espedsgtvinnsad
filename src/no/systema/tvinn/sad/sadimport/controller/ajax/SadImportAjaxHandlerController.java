@@ -170,7 +170,7 @@ public class SadImportAjaxHandlerController {
 			    			record.setSvcnr(cRecord.getSvcnr());
 			    			break;
 			    		 } 
-						 
+						 logger.warn("svdp:" + record.getSvdp() + "svdp2:" + record.getSvdp2());
 						 logger.info("=====>debugFetch: OK output on GUI");
 				         result.add(record);
 				         

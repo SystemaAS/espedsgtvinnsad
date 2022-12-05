@@ -2,8 +2,7 @@ package no.systema.tvinn.sad.sadimport.controller;
 
 import java.util.*;
 
-
- 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
@@ -212,6 +211,7 @@ public class SadImportItemsController {
 						
 					}
 				}
+				this.adjustFields(appUser, jsonSadImportSpecificTopicItemRecord);
 				validator.validate(recordToValidate, bindingResult);
 				
 			    //check for ERRORS
@@ -240,10 +240,14 @@ public class SadImportItemsController {
 						logger.info("UPDATE(only) ITEM (existent item) on process...");
 						//take the rest from GUI.
 						jsonSadImportSpecificTopicItemRecord = new JsonSadImportSpecificTopicItemRecord();
+						
 						ServletRequestDataBinder binder = new ServletRequestDataBinder(jsonSadImportSpecificTopicItemRecord);
 			            //binder.registerCustomEditor(...); // if needed
-			            binder.bind(request);
-			            jsonSadImportSpecificTopicItemRecord.setSvli(lineSvli);
+						binder.bind(request);
+			            //adjust some fields
+						this.adjustFields(appUser, jsonSadImportSpecificTopicItemRecord);
+						
+						jsonSadImportSpecificTopicItemRecord.setSvli(lineSvli);
 			            jsonSadImportSpecificTopicItemRecord.setSvtdn(opd);
 			            jsonSadImportSpecificTopicItemRecord.setSvavd(avd);
 			            
@@ -267,7 +271,9 @@ public class SadImportItemsController {
 							ServletRequestDataBinder binder = new ServletRequestDataBinder(jsonSadImportSpecificTopicItemRecord);
 				            //binder.registerCustomEditor(...); // if needed
 				            binder.bind(request);
-				            
+				            //adjust some fields
+							this.adjustFields(appUser, jsonSadImportSpecificTopicItemRecord);
+							
 				            logger.info("[INFO] populate the svli:" + newLineNr);
 				            //put back the generated seed and the header keys (syop, syavd)
 				            jsonSadImportSpecificTopicItemRecord.setSvli(newLineNr);
@@ -302,8 +308,9 @@ public class SadImportItemsController {
 						session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_UPDATE_TVINN_SAD, BASE_URL_UPDATE + "==>params: " + urlRequestParams.toString()); 
 						
 						logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-				    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL_UPDATE));
-				    	logger.info("URL PARAMS: " + urlRequestParams);
+				    	//logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL_UPDATE));
+				    	logger.warn("URL: " + BASE_URL_UPDATE);
+				    	logger.warn("URL PARAMS: " + urlRequestParams);
 				    	//----------------------------------------------------------------------------
 				    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
 				    	//----------------------------------------------------------------------------
@@ -432,6 +439,25 @@ public class SadImportItemsController {
 	    	return successView;
 		}
 	}
+	/**
+	 * 
+	 * @param appUser
+	 * @param record
+	 */
+	public void adjustFields(SystemaWebUser appUser, JsonSadImportSpecificTopicItemRecord record){
+		try {
+			if(StringUtils.isNotEmpty(record.getOwn_svdp())){
+				record.setSvdp(record.getOwn_svdp().substring(0,2));
+				record.setSvdp2(record.getOwn_svdp().substring(2));
+			}
+			
+			
+		}catch(Exception e) {
+			logger.error(e.toString());
+		}
+		
+	}
+	
 	/**
 	 * 
 	 * @param jsonSadImportSpecificTopicItemRecord

@@ -1093,7 +1093,7 @@
 								           		</ul>
 											</span>
 											</div>
-											<span title="svdp">Prosedyre</span>
+											<span title="own_svdp">Prosedyre</span>
 										</td>
 							        </tr>
 							        
@@ -1122,10 +1122,10 @@
 											<button name="itemContainerNr" id="itemContainerNr" class="buttonGray" style="font-size:12" type="button" >Mere...</button>
 										</td>
 										<td>
-							 				<select class="selectMediumBlueE2" name="svdp" id="svdp" size="1" >
+							 				<select class="selectMediumBlueE2" name="own_svdp" id="own_svdp"  >
 							 				  <option value="">-velg-</option>
 								 				  	<c:forEach var="record" items="${model.ekspedisjonstyperImportCodeList}" >
-								 				  		<option value="${record.zkod}" title="${record.ztxt}"  <c:if test="${model.record.svdp == record.zkod}"> selected </c:if> >${record.zkod}</option>
+								 				  		<option value="${record.zkod}" title="${record.ztxt}"  <c:if test="${model.record.svdp.concat(model.record.svdp2) == record.zkod}"> selected </c:if> >${record.zkod}</option>
 													</c:forEach>  
 											</select>
 							 			</td>
