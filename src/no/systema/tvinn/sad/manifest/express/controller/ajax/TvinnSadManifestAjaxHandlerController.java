@@ -202,7 +202,11 @@ public class TvinnSadManifestAjaxHandlerController {
 					docPath = new ArchiveGoogleCloudManager().downloadPdfFromGoogleCloudSimple(docPath);
 				}
 			}
-			String url = TvinnSadManifestUrlDataStore.TVINN_SAD_SEND_DOCUMENT_TO_TOLL_URL;
+			//old version with maskinporten token
+			//String url = TvinnSadManifestUrlDataStore.TVINN_SAD_SEND_DOCUMENT_TO_TOLL_URL;
+			
+			//new version with maskinporten token + toll token
+			String url = TvinnSadManifestUrlDataStore.TVINN_SAD_SEND_DOCUMENT_TO_TOLL_URL_V2;
 			String BASE_URL = url;
 	 		StringBuffer urlRequestParamsKeys = new StringBuffer();
 	 		urlRequestParamsKeys.append("user=" + applicationUser + "&declId=" + declId + "&docType=" + docTypeFormatted );
