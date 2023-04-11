@@ -181,7 +181,49 @@ public class SadExportHeaderLoggingController {
 			
 		}
 			
-	}	
+	}
+	
+	@RequestMapping(value="tvinnsadexport_renderXml.do", method={ RequestMethod.GET })
+	public ModelAndView doSadExportRenderXml(HttpSession session, HttpServletRequest request, HttpServletResponse response){
+		logger.info("Inside doSadExportRenderXml...");
+		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
+		
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			
+			//appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_SIGN_PKI);
+			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE); 
+			String filePath = request.getParameter("fp");
+			
+			if(filePath!=null && !"".equals(filePath)){
+                String absoluteFilePath = filePath;
+                //String absoluteFilePath = appUser.getServletHost() + filePath;
+                if(!new IPAddressValidator().isValidAbsoluteFilePathFor_RenderFile(absoluteFilePath)){
+                	return (null);
+                }else{	
+	                response.setContentType(AppConstants.HTML_CONTENTTYPE_TEXTXML);
+	                //--> with browser dialogbox: response.setHeader ("Content-disposition", "attachment; filename=\"edifactPayload.txt\"");
+	                response.setHeader ("Content-disposition", "filename=\"xmlPayload.txt\"");
+	                
+	                logger.info("Start flushing file payload...");
+	                //send the file output to the ServletOutputStream
+	                try{
+	                		payloadContentFlusher.flushServletOutput(response, absoluteFilePath);
+	                		//payloadContentFlusher.flushServletOutput(response, "plain text test...".getBytes());
+	                	
+	                }catch (Exception e){
+	                		e.printStackTrace();
+	                }
+                }
+            }
+			//this to present the output in an independent window
+            return(null);
+			
+		}
+			
+	}
 	
 	
 	/**
