@@ -10,6 +10,8 @@ import java.util.*;
 
 import org.slf4j.*;
 
+import lombok.Data;
+
 /**
  * 
  * @author oscardelatorre
@@ -18,6 +20,7 @@ import org.slf4j.*;
  *
  *
  */
+@Data
 public class JsonSadNctsExportSpecificTopicRecord extends JsonAbstractGrandFatherRecord {
 	private static final Logger logger = LoggerFactory.getLogger(JsonSadNctsExportSpecificTopicRecord.class.getName());
 	
@@ -77,10 +80,89 @@ public class JsonSadNctsExportSpecificTopicRecord extends JsonAbstractGrandFathe
 	private String thdk = null;
 	public void setThdk(String value) {  this.thdk = value; }
 	public String getThdk() {return this.thdk;}
+	/*
+	THDKT      TEGN            1       1        38        Begge    ADDI. DECL.TYPE     
+	  Felttekst . . . . . . . . . . . . . . . . :  ADDI. DECL.TYPE                     
+	  ID for kodet tegnsett  . . . :                 277                               
+	THTIRN     TEGN           12      12        39        Begge    TIR CARNET NUMBER   
+	  Felttekst . . . . . . . . . . . . . . . . :  TIR CARNET NUMBER                   
+	  ID for kodet tegnsett  . . . :                 277                               
+	THSECU     SONET        1  0       1        51        Begge    SECURITY            
+	  Felttekst . . . . . . . . . . . . . . . . :  SECURITY                            
+	THRDIN     SONET        1  0       1        52        Begge    REDUCED DATASET IND.
+	  Felttekst . . . . . . . . . . . . . . . . :  REDUCED DATASET IND.                
+	THSCIN     TEGN            3       3        53        Begge    SP. CIRCUMSTANCE IND
+	*/
 	
+	private String thdkt = null; // 1 char ADDI. DECL.TYPE 
+	private String thtirn = null; //12char TIR CARNET NUMBER
+	private String thsecu = null; //1 int  SECURITY
+	private String thrdin = null; //1 int  REDUCED DATASET IND.
+	private String thscin = null; //3 char SP. CIRCUMSTANCE IND
+	private String thclkd = null; //2 char language Departure
+	private String thbini = null; //1 char BINGING ITINERARY
+	private String thlidt = null; //10 char LIMIT DATE
+	private String thatyp = null; //4 char 1. AUTORISATIONSTYPE
+	private String tharef = null; //35 char 1. AUTORISATIONSREF.
+	private String thteta1 = null; //8 int 
+	private String thtetat1 = null; //4 int
+	private String thteta2 = null;
+	private String thtetat2 = null;
+	private String thteta3 = null;
+	private String thtetat3 = null;
+	private String thteta4 = null;
+	private String thtetat4 = null;
+	private String thteta5 = null;
+	private String thtetat5 = null;
+	private String thteta6 = null;
+	private String thtetat6 = null;
+	private String thteta7 = null;
+	private String thtetat7 = null;
+	private String thteta8 = null;
+	private String thtetat8 = null;
+	private String thtsde = null; //8 char 1. OFFICE FOR EXIT
+	
+	//Holder of transit
+	private String thknh = null; //8 int HOLDER OG TRANSIT
+	private String thtinh = null; //17 char ID NUMMER
+	private String thtirh = null; //17 char TIR HOLDER ID NUMBER
+	private String thnah = null; //30 char HOLDER NAVN
+	private String thad1h = null; //30 char address 1
+	private String thpnh = null; //17 char post code
+	private String thpsh = null; //24 char city
+	private String thlkh = null; //2 char country
+	
+	private String thcph = null; //30 char contact person
+	private String thtlh = null; //20 char telefon
+	private String themh = null; //50 char email
+	
+	
+	//Huvudansvarig
 	private String thkna = null;
 	public void setThkna(String value) {  this.thkna = value; }
 	public String getThkna() {return this.thkna;}
+	
+	private String thtina = null;
+	public void setThtina(String value) {  this.thtina = value; }
+	public String getThtina() {return this.thtina;}
+	
+	private String thsta = null; //1 int STATUS ANSVARLIG
+	private String thcpa = null; //30 char Contact person
+	private String thtla = null; //20 char telefon
+	private String thema = null; //50 char email
+	
+	private String thtmin = null; //1 int inland tr mode
+	private String thtmgr = null; //1 int border tr mode
+	private String thucr = null; //35 UCR REFERANSE NR
+	private String thtinc = null;//17 TIN-KODE TRANSPORTØR
+	
+	//transportrör
+	private String thknc = null;//8 int Kundenr TRANSPORTØR
+	private String thnac = null;//30 char Navn TRANSPORTØR
+	private String thcpc = null; //30 char Contact person
+	private String thtlc = null; //20 char telefon
+	private String themc = null; //50 char email
+	
 	
 	private String thnaa = null;
 	public void setThnaa(String value) {  this.thnaa = value; }
@@ -93,7 +175,6 @@ public class JsonSadNctsExportSpecificTopicRecord extends JsonAbstractGrandFathe
 	private String thpna = null;
 	public void setThpna(String value) {  this.thpna = value; }
 	public String getThpna() {return this.thpna;}
-	
 	
 	
 	private String thpsa = null;
@@ -109,10 +190,7 @@ public class JsonSadNctsExportSpecificTopicRecord extends JsonAbstractGrandFathe
 	public String getThska() {return this.thska;}
 	
 	
-	private String thtina = null;
-	public void setThtina(String value) {  this.thtina = value; }
-	public String getThtina() {return this.thtina;}
-	
+	//Selger
 	private String thkns = null;
 	public void setThkns(String value) {  this.thkns = value; }
 	public String getThkns() {return this.thkns;}
@@ -145,10 +223,14 @@ public class JsonSadNctsExportSpecificTopicRecord extends JsonAbstractGrandFathe
 	public void setThtins(String value) {  this.thtins = value; }
 	public String getThtins() {return this.thtins;}
 	
+	private String thcps = null; //30 char Contact person
+	private String thtls = null; //20 char telefon
+	private String thems = null; //50 char email
+	
+	//Köpare
 	private String thknk = null;
 	public void setThknk(String value) {  this.thknk = value; }
 	public String getThknk() {return this.thknk;}
-	
 	
 	private String thnak = null;
 	public void setThnak(String value) {  this.thnak = value; }
@@ -177,6 +259,66 @@ public class JsonSadNctsExportSpecificTopicRecord extends JsonAbstractGrandFathe
 	private String thtink = null;
 	public void setThtink(String value) {  this.thtink = value; }
 	public String getThtink() { return this.thtink;}
+	
+	
+	private String thidr = null;//17 char role id
+	private String thcnr = null;//17 char container
+	private String tdfkd = null;//20 char förseglings id 
+	private String thginr = null;//5 char goods item nr
+	private String thlgty = null;//1 char type
+	
+	private String thlgid = null;//1 char QUALIFIER OF IDENT.
+	private String thlgau = null;//35 char AUTORISATION NUMBER
+	private String thlgai = null;//4 char ADDITIONAL IDENT.
+	private String thlgun = null;//17 char UN LOCCODE
+	private String thlgts = null;//8 char LOC. TOLLSTED
+	private String thlgla = null;//17 char LOC. LATITUDE 
+	private String thlglo = null;//17 char LOC. LATITUDE 
+	private String thkne = null;//8 int Kundenr ØKONOMI OPR 
+	private String thtine = null;//17 char TIN-KODE ØKONOMI OPR
+	private String thade1 = null;//30 char ADR-1 ØKONOMI OPR
+	
+	private String thpne = null;//17 char POSTNR ØKONOMI OPR
+	private String thpse = null;//24 char POSTSTED
+	private String thlke = null;//2 char LANDKODE
+	private String thade2 = null;//17 char HUS.NR
+	private String thpne2 = null;//17 char POSRNR 
+	private String thlke2 = null;//2 char LANDKODE HUS
+	private String thcpe = null;//30 char KONTAKTPERSON
+	
+	private String thtle = null;//20 char telefon
+	private String theme = null;//50 char mail
+	
+	private String thtgts = null;//8 char TOLLSTED VED GRENSE
+	private String thtrmg = null;//2 int Transportmåte
+	
+	private String thtgcn = null;//17 char CONVOYANCE REF.NR
+	private String thlsun = null;//17 char LASTESTED UN KODE
+	private String thlslk = null;//2 char LASTESTED LANDKODE
+	private String thlsna = null;//35 char LASTESTED NAVN
+	private String thloun = null;//17 char LOSSESTED UN KODE
+	private String thlolk = null;//2 char LOSSESTED LANDKODE
+	private String thlona = null;//35 char LOSSESTED NAVN
+	private String thpdty = null;//4 char DOK.TYPE
+	private String thpdrf = null;//70 char DOK.REF.NR
+	private String thpdin = null;//35 char KOMPL.INFO
+	private String thsdty = null;//4 char DOK.TYPE
+
+	private String thsdrf = null;//70 char dok.ref.nr.
+	private String thsdln = null;//5 int line item nr
+	private String thsdin = null;//35 char kompl.info
+	private String thstdty = null;//4 char dok type
+	private String thtdrf = null;//70 char dok ref.nr
+	private String thadty = null;//4 char doc type
+	private String thadrf = null;//70 char doc ref
+	
+	private String thaicd = null;//5 char  info code
+	private String thaitx = null;//70 char info text
+	private String thtrch = null;//1 char  betalningsmåte	 
+	
+	private String thdktx = null;//512 char control text
+	private String thlrn = null;//22 char LRN
+		
 	
 	private String thblk = null;
 	public void setThblk(String value) {  this.thblk = value; }

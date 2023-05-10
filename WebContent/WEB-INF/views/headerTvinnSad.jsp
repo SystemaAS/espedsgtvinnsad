@@ -167,20 +167,21 @@
 			    				>&nbsp;<spring:message code="systema.tvinn.sad.import.label"/>&nbsp;</font>
 			    			</a>
 			    			&nbsp;<font color="#FFFFFF"; style="font-weight: bold;">|</font>
+			    			
 			    			<%-- -------------------------- --%>
-			    			<%-- TVINN-SAD NCTS EXPORT MENU --%>
+			    			<%-- TVINN-SAD NCTS-5 EXPORT MENU --%>
 			    			<%-- -------------------------- --%>
-			    			<a id="alinkTopicListMenuNctsExp" tabindex=-1 href="tvinnsadnctsexport.do?action=doFind&sign=${user.tvinnSadSign}">
+			    			<a id="alinkTopicListMenuNctsExp" tabindex=-1 href="tvinnsadncts5export.do?action=doFind&sign=${user.tvinnSadSign}">
 			    				&nbsp;<font
 			    				<c:choose>           
-	                   			<c:when test="${user.activeMenu=='TVINN_SAD_NCTS_EXPORT'}">
+	                   			<c:when test="${user.activeMenu=='TVINN_SAD_NCTS5_EXPORT'}">
 	                       			class="headerMenuMediumGreen"
 	                   			</c:when>
 	                   			<c:otherwise>   
 	                       			class="headerMenuLightGreen"
 	                   			</c:otherwise>
 	               			</c:choose>
-			    				>&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.label"/>&nbsp;</font>
+			    				>&nbsp;<spring:message code="systema.tvinn.sad.ncts5.export.label"/>&nbsp;</font>
 			    			</a>
 			    			&nbsp;<font color="#FFFFFF"; style="font-weight: bold;">|</font>
 			    			<%--
@@ -188,21 +189,23 @@
 			    			 --%>  
 			    			 
 			    			<%-- --------------------- --%>
-			    			<%-- TVINN-SAD NCTS IMPORT MENU --%>
+			    			<%-- TVINN-SAD NCTS-5 IMPORT MENU --%>
 			    			<%-- --------------------- --%>
-			    			<a id="alinkTopicListMenuNctsImp" tabindex=-1 href="tvinnsadnctsimport.do?action=doFind&sign=${user.tvinnSadSign}">
+			    			<a id="alinkTopicListMenuNctsImp" tabindex=-1 href="tvinnsadncts5import.do?action=doFind&sign=${user.tvinnSadSign}">
 			    				&nbsp;<font
 			    				<c:choose>           
-		                   			<c:when test="${user.activeMenu=='TVINN_SAD_NCTS_IMPORT'}">
+		                   			<c:when test="${user.activeMenu=='TVINN_SAD_NCTS5_IMPORT'}">
 		                       			class="headerMenuMediumGreen"
 		                   			</c:when>
 		                   			<c:otherwise>   
 		                       			class="headerMenuLightGreen"
 		                   			</c:otherwise>
 		               			</c:choose>
-			    				>&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.label"/>&nbsp;</font>
+			    				>&nbsp;<spring:message code="systema.tvinn.sad.ncts5.import.label"/>&nbsp;</font>
 			    			</a>
 			    			&nbsp;<font color="#FFFFFF" style="font-weight: bold;">|</font>
+			    			
+			    			
 			    			<%-- --------------------- --%>
 			    			<%-- TVINN-SAD MANIFEST    --%>
 			    			<%-- --------------------- --%>
@@ -219,6 +222,44 @@
 			    				>&nbsp;<spring:message code="systema.tvinn.sad.manifest.label"/>&nbsp;</font>
 			    			</a>
 			    			&nbsp;<font color="#FFFFFF" style="font-weight: bold;">|</font>
+			    			
+			    			<%-- -------------------------- --%>
+			    			<%-- TVINN-SAD NCTS EXPORT MENU --%>
+			    			<%-- -------------------------- --%>
+			    			<a id="alinkTopicListMenuNctsExp" tabindex=-1 href="tvinnsadnctsexport.do?action=doFind&sign=${user.tvinnSadSign}">
+			    				&nbsp;<font
+			    				<c:choose>           
+	                   			<c:when test="${user.activeMenu=='TVINN_SAD_NCTS_EXPORT'}">
+	                       			class="headerMenuOrange"
+	                   			</c:when>
+	                   			<c:otherwise>   
+	                       			class="headerMenuWhite"
+	                   			</c:otherwise>
+	               			</c:choose>
+			    				>&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.label"/>&nbsp;</font>
+			    			</a>
+			    			&nbsp;<font color="#FFFFFF"; style="font-weight: bold;">|</font>
+			    			<%--
+			    			<font class="headerMenuLightGreen">&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.label"/>&nbsp;|</font> 
+			    			 --%>  
+			    			 
+			    			<%-- --------------------- --%>
+			    			<%-- TVINN-SAD NCTS IMPORT MENU --%>
+			    			<%-- --------------------- --%>
+			    			<a id="alinkTopicListMenuNctsImp" tabindex=-1 href="tvinnsadnctsimport.do?action=doFind&sign=${user.tvinnSadSign}">
+			    				&nbsp;<font
+			    				<c:choose>           
+		                   			<c:when test="${user.activeMenu=='TVINN_SAD_NCTS_IMPORT'}">
+		                       			class="headerMenuOrange"
+		                   			</c:when>
+		                   			<c:otherwise>   
+		                       			class="headerMenuWhite"
+		                   			</c:otherwise>
+		               			</c:choose>
+			    				>&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.label"/>&nbsp;</font>
+			    			</a>
+			    			&nbsp;<font color="#FFFFFF" style="font-weight: bold;">|</font>
+			    			
 			    			
 			    			
 			    			<%-- -------------- --%>

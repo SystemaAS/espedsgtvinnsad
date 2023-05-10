@@ -24,7 +24,7 @@
 </appender>  
 
 
-  <logger name="no.systema" level="WARN" additivity="false"> 
+  <logger name="no.systema" level="INFO" additivity="false"> 
         <appender-ref ref="FILE" /> 
   </logger> 
     

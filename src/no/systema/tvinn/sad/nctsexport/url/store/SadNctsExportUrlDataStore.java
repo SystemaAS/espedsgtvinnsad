@@ -23,18 +23,36 @@ public final class SadNctsExportUrlDataStore {
 	//http://gw.systema.no/sycgip/ttce000r.pgm?user=YBC&tvdref=xxxx
 	@UrlDataStoreAnnotationForField (name="@SadNctsExportController - tvinnsadnctsexport.do ", description=" --> NCTS_EXPORT_BASE_TOPICLIST_DOCREF_URL - main list doc.ref.")
 	static public String NCTS_EXPORT_BASE_TOPICLIST_DOCREF_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE000R2.pgm"; 
+	
+		//NCTS 5
+		//http://gw.systema.no/sycgip/ttce000r.pgm?user=YBC&datum=20140101;
+		@UrlDataStoreAnnotationForField (name="@SadNctsExportController - tvinnsadnctsexport.do ", description=" --> NCTS_EXPORT_BASE_TOPICLIST_URL - main list")
+		static public String NCTS5_EXPORT_BASE_TOPICLIST_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/T5CE000R.pgm"; 
+		//http://gw.systema.no/sycgip/ttce000r.pgm?user=YBC&tvdref=xxxx
+		@UrlDataStoreAnnotationForField (name="@SadNctsExportController - tvinnsadnctsexport.do ", description=" --> NCTS_EXPORT_BASE_TOPICLIST_DOCREF_URL - main list doc.ref.")
+		static public String NCTS5_EXPORT_BASE_TOPICLIST_DOCREF_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/T5CE000R2.pgm"; 
 		
 	//---------------------------------------------------------------
 	//[2] FETCH A SPECIFIC ARENDE or Default values for a NEW ARENDE
 	//---------------------------------------------------------------
 	@UrlDataStoreAnnotationForField (name="@SadNctsExportController - tvinnsadnctsexport_edit.do ", description=" --> NCTS_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_URL - fetch topic")
-	static public String NCTS_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE001R.pgm";
+	static public String NCTS_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/T5CE001R.pgm";
 	//http://gw.systema.no/sycgip/TTCE001R.pgm?user=OSCAR&avd=1&opd=50013
 	//http://gw.systema.no/sycgip/TTCE001R.pgm?user=OSCAR&avd=1 (for default values with CREATE NEW)
 	//2.1 FETCH Sikkerhet (extra information)
 	@UrlDataStoreAnnotationForField (name="@SadNctsExportHeaderController - tvinnsadnctsexport_edit.do ", description=" --> NCTS_EXPORT_BASE_FETCH_SPECIFIC_SIKKERHET_TOPIC_URL - fetch topic (sikkerhet)")
-	static public String NCTS_EXPORT_BASE_FETCH_SPECIFIC_SIKKERHET_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE021R.pgm";
+	static public String NCTS_EXPORT_BASE_FETCH_SPECIFIC_SIKKERHET_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/T5CE021R.pgm";
 	//http://gw.systema.no/sycgip/ttce021r.pgm?user=OSCAR&avd=1&opd=900040
+	
+		//NCTS5
+		@UrlDataStoreAnnotationForField (name="@SadNctsExportController - tvinnsadnctsexport_edit.do ", description=" --> NCTS_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_URL - fetch topic")
+		static public String NCTS5_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/T5CE001R.pgm";
+		//http://gw.systema.no/sycgip/TTCE001R.pgm?user=OSCAR&avd=1&opd=50013
+		//http://gw.systema.no/sycgip/TTCE001R.pgm?user=OSCAR&avd=1 (for default values with CREATE NEW)
+		//2.1 FETCH Sikkerhet (extra information)
+		@UrlDataStoreAnnotationForField (name="@SadNctsExportHeaderController - tvinnsadnctsexport_edit.do ", description=" --> NCTS_EXPORT_BASE_FETCH_SPECIFIC_SIKKERHET_TOPIC_URL - fetch topic (sikkerhet)")
+		static public String NCTS5_EXPORT_BASE_FETCH_SPECIFIC_SIKKERHET_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/T5CE021R.pgm";
+		//http://gw.systema.no/sycgip/ttce021r.pgm?user=OSCAR&avd=1&opd=900040
 		
 	//------------------------------
 	//[3] EDIT A SPECIFIC ARENDE
