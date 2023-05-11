@@ -65,6 +65,7 @@ public class SadNctsExportMainListViewController {
 			return this.loginView;
 		}else{
 			mainList = (List)session.getAttribute(session.getId() + TvinnSadConstants.SESSION_LIST);
+			logger.debug("SESSION ID from ExcelViewController:" + session.getId());
 		}	
 		
 		return new ModelAndView(EXCEL_VIEW, TvinnSadConstants.MAIN_TOPIC_LIST, mainList);

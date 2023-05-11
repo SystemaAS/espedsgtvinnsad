@@ -184,6 +184,7 @@ public class SadNcts5ExportController {
 					successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 					//set a session variable in order to make the list available to an external view controller (Excel/PDF- Controller)
 					session.setAttribute(session.getId() + TvinnSadConstants.SESSION_LIST, outputList);
+					logger.debug("SESSION ID from Controller:" + session.getId());
 					
 					if (session.getAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADEXPORT_NCTS) == null || session.getAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADEXPORT_NCTS).equals("")){
 						successView.addObject(TvinnSadConstants.DOMAIN_SEARCH_FILTER_SADEXPORT_NCTS, searchFilter);
