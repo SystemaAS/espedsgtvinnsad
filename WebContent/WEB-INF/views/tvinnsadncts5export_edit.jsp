@@ -185,7 +185,7 @@
 					&nbsp;&nbsp;
 					<font class="text16RedBold" >*</font><span title="thenkl">Type av prosedyre</span>&nbsp;
 					<%-- Must be model attribute in order to validate towards the filter (thsg) --%>
-           			<select class="text12" name="thenkl" id="thenkl">
+           			<select class="selectMediumBlueE2" name="thenkl" id="thenkl">
 	            		<option value="J"<c:if test="${model.record.thenkl == 'J'}"> selected </c:if> >Forenklet</option>
 					  	<option value="N"<c:if test="${model.record.thenkl == 'N'}"> selected </c:if> >Normal</option>
 					</select>
