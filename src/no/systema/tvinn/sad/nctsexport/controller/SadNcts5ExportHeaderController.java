@@ -500,7 +500,7 @@ public class SadNcts5ExportHeaderController {
 			//-------------------------------------
 			//get BASE URL = RPG-PROGRAM for PRINT
             //-------------------------------------
-			String BASE_URL = SadNctsExportUrlDataStore.NCTS_EXPORT_BASE_PRINT_FOR_SPECIFIC_TOPIC_URL;
+			String BASE_URL = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_PRINT_FOR_SPECIFIC_TOPIC_URL;
 			//url params
 			String urlRequestParamsKeys = this.getRequestUrlKeyParametersForPrint( avd, opd, appUser);
 			//for debug purposes in GUI
@@ -686,7 +686,7 @@ public class SadNcts5ExportHeaderController {
 			//---------------------------
 			//get BASE URL = RPG-PROGRAM
             //---------------------------
-			String BASE_URL = SadNctsExportUrlDataStore.NCTS_EXPORT_BASE_UPDATE_STATUS_URL;
+			String BASE_URL = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_UPDATE_STATUS_URL;
 			
 			//-------------------
 			//add URL-parameter 

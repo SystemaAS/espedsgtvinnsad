@@ -25,10 +25,10 @@ public final class SadNctsExportUrlDataStore {
 	static public String NCTS_EXPORT_BASE_TOPICLIST_DOCREF_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE000R2.pgm"; 
 	
 		//NCTS 5
-		//http://gw.systema.no/sycgip/ttce000r.pgm?user=YBC&datum=20140101;
+		//http://gw.systema.no/sycgip/t5ce000r.pgm?user=YBC&datum=20140101;
 		@UrlDataStoreAnnotationForField (name="@SadNctsExportController - tvinnsadnctsexport.do ", description=" --> NCTS_EXPORT_BASE_TOPICLIST_URL - main list")
 		static public String NCTS5_EXPORT_BASE_TOPICLIST_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/T5CE000R.pgm"; 
-		//http://gw.systema.no/sycgip/ttce000r.pgm?user=YBC&tvdref=xxxx
+		//http://gw.systema.no/sycgip/t5ce000r.pgm?user=YBC&tvdref=xxxx
 		@UrlDataStoreAnnotationForField (name="@SadNctsExportController - tvinnsadnctsexport.do ", description=" --> NCTS_EXPORT_BASE_TOPICLIST_DOCREF_URL - main list doc.ref.")
 		static public String NCTS5_EXPORT_BASE_TOPICLIST_DOCREF_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/T5CE000R2.pgm"; 
 		
@@ -47,12 +47,12 @@ public final class SadNctsExportUrlDataStore {
 		//NCTS5
 		@UrlDataStoreAnnotationForField (name="@SadNctsExportController - tvinnsadnctsexport_edit.do ", description=" --> NCTS_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_URL - fetch topic")
 		static public String NCTS5_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/T5CE001R.pgm";
-		//http://gw.systema.no/sycgip/TTCE001R.pgm?user=OSCAR&avd=1&opd=50013
-		//http://gw.systema.no/sycgip/TTCE001R.pgm?user=OSCAR&avd=1 (for default values with CREATE NEW)
+		//http://gw.systema.no/sycgip/T5CE001R.pgm?user=OSCAR&avd=1&opd=50013
+		//http://gw.systema.no/sycgip/T5CE001R.pgm?user=OSCAR&avd=1 (for default values with CREATE NEW)
 		//2.1 FETCH Sikkerhet (extra information)
 		@UrlDataStoreAnnotationForField (name="@SadNctsExportHeaderController - tvinnsadnctsexport_edit.do ", description=" --> NCTS_EXPORT_BASE_FETCH_SPECIFIC_SIKKERHET_TOPIC_URL - fetch topic (sikkerhet)")
 		static public String NCTS5_EXPORT_BASE_FETCH_SPECIFIC_SIKKERHET_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/T5CE021R.pgm";
-		//http://gw.systema.no/sycgip/ttce021r.pgm?user=OSCAR&avd=1&opd=900040
+		//http://gw.systema.no/sycgip/t5ce021r.pgm?user=OSCAR&avd=1&opd=900040
 		
 	//------------------------------
 	//[3] EDIT A SPECIFIC ARENDE
@@ -141,8 +141,26 @@ public final class SadNctsExportUrlDataStore {
 	static public String NCTS_EXPORT_BASE_LOG_LARGE_TEXT_FOR_SPECIFIC_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE016R.pgm";	
 	//http://gw.systema.no/sycgip/TTCE016R.pgm?user=OSCAR&fmn=85847 
 	
+				//This section contains external functions such as LOGGING, ARCHIVE, etc, for a specific topic within SKAT-NCTS EXPORT	
+				static public String NCTS5_EXPORT_BASE_LOG_LIST_FOR_SPECIFIC_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/T5CE015R.pgm";	
+				//http://gw.systema.no/sycgip/T5CE015R.pgm?user=OSCAR&avd=1&opd=50113
+				/* Typ kan vara:
+					0 = Norsk SAD Import  
+					1 = Norsk SAD Eksport
+					2 = Norsk NCTS Eksport      
+					3 = Norsk NCTS Import      
+					4 = All edifact
+					5 = Svensk NCTS Export  
+					6 = Svensk NCTS Import */	
+				
+				static public String NCTS5_EXPORT_BASE_LOG_LARGE_TEXT_FOR_SPECIFIC_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/T5CE016R.pgm";	
+				//http://gw.systema.no/sycgip/T5CE016R.pgm?user=OSCAR&fmn=85847 
+	
+	
+	//Denna här gäller för NCTS4 och NCTS5			
 	static public String NCTS_EXPORT_BASE_ARCHIVE_FOR_SPECIFIC_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TJGE001.pgm";	 
 	//http://gw.systema.no/sycgip/TJGE001.pgm?user=JOVO&avd=1&opd=???
+	
 	
 	//------------------------------------------
 	//[8] PRINT document for a SPECIFIC ARENDE
@@ -150,10 +168,15 @@ public final class SadNctsExportUrlDataStore {
 	static public String NCTS_EXPORT_BASE_PRINT_FOR_SPECIFIC_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE014R.pgm";	
 	//http://gw.systema.no/sycgip/TTCE014R.pgm?user=OSCAR&avd=1&opd=218	
 	
+			static public String NCTS5_EXPORT_BASE_PRINT_FOR_SPECIFIC_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/T5CE014R.pgm";	
+			//http://gw.systema.no/sycgip/TTCE014R.pgm?user=OSCAR&avd=1&opd=218	
+			
 	//-----------------------------
 	// Change status (Admin Role)
 	//-----------------------------
 	static public String NCTS_EXPORT_BASE_UPDATE_STATUS_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE051R.pgm";
+	
+			static public String NCTS5_EXPORT_BASE_UPDATE_STATUS_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/T5CE051R.pgm";
 	
 	
 }

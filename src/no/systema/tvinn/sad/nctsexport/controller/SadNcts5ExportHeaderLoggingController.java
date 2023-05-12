@@ -97,7 +97,7 @@ public class SadNcts5ExportHeaderLoggingController {
 			//---------------------------
 			//get BASE URL = RPG-PROGRAM
             //---------------------------
-			String BASE_URL = SadNctsExportUrlDataStore.NCTS_EXPORT_BASE_LOG_LIST_FOR_SPECIFIC_TOPIC_URL;
+			String BASE_URL = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_LOG_LIST_FOR_SPECIFIC_TOPIC_URL;
 			//url params
 			String urlRequestParamsKeys = this.getRequestUrlKeyParameters(avd, opd, appUser);
 			//for debug purposes in GUI
@@ -255,7 +255,7 @@ public class SadNcts5ExportHeaderLoggingController {
 			//---------------------------
 			//get BASE URL = RPG-PROGRAM
             //---------------------------
-			String BASE_URL = SadNctsExportUrlDataStore.NCTS_EXPORT_BASE_LOG_LARGE_TEXT_FOR_SPECIFIC_TOPIC_URL;
+			String BASE_URL = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_LOG_LARGE_TEXT_FOR_SPECIFIC_TOPIC_URL;
 			//url params
 			String urlRequestParamsKeys = this.getRequestUrlKeyParametersForLargeText(fmn, appUser);
 			//for debug purposes in GUI
