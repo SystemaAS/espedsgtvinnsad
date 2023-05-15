@@ -136,6 +136,7 @@
 			<input type="hidden" name="thst" id="thst" value='${model.record.thst}'>
 			<input type="hidden" name="thdt" id="thdt" value='${model.record.thdt}'>
 			<input type="hidden" name="thtuid" id="thtuid" value='${model.record.thtuid}'>
+			<input type="hidden" name="thtrnr" id="thtrnr" value='${model.record.thtrnr}'>
 			<input type="hidden" name="lrnNr" id="lrnNr" value='${model.record.thtuid}'>
 	    		<input type="hidden" name="avd" id="avd" value='${model.record.thavd}'>
 			<input type="hidden" name="sign" id="sign" value='${model.record.thsg}'>

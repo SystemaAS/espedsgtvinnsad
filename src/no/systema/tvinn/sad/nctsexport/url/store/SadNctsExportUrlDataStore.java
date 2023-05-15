@@ -67,6 +67,12 @@ public final class SadNctsExportUrlDataStore {
 	//http://gw.systema.no/sycgip/TDCE002R.pgm?user=OSCAR&thavd=1&sign=CB&mode=A
 	//http://gw.systema.no/sycgip/TDCE002R.pgm?user=OSCAR&thavd=1&newavd=1&thtdn=50013&mode=C&newsign=OT
 	
+		@UrlDataStoreAnnotationForField (name="@SadNctsExportHeaderController - tvinnsadnctsexport_edit.do ", description=" --> NCTS_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_URL - update topic")
+		static public String NCTS5_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/T5CE002R.pgm";
+		//http://gw.systema.no/sycgip/TDCE002R.pgm?user=OSCAR&thavd=1&sign=CB&mode=A
+		//http://gw.systema.no/sycgip/TDCE002R.pgm?user=OSCAR&thavd=1&newavd=1&thtdn=50013&mode=C&newsign=OT
+		
+	
 	//Validate Guarantee
 	@UrlDataStoreAnnotationForField (name="@SadNctsExportHeaderValidator - isValidGuarantee() ", description=" --> NCTS_EXPORT_BASE_VALIDATE_SPECIFIC_TOPIC_GUARRANTEE_URL - validate")
 	static public String NCTS_EXPORT_BASE_VALIDATE_SPECIFIC_TOPIC_GUARRANTEE_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE003R.pgm";
@@ -88,6 +94,7 @@ public final class SadNctsExportUrlDataStore {
 	//mode=D (Delete existing topic)	
 	//-----------------------------------------		
 	static public String NCTS_EXPORT_BASE_UPDATE_SPECIFIC_SIKKERHET_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE022R.pgm";
+		static public String NCTS5_EXPORT_BASE_UPDATE_SPECIFIC_SIKKERHET_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/T5CE022R.pgm";
 	
 	//-----------------------------
 	//[5] FETCH ITEM RECORDS (LIST)

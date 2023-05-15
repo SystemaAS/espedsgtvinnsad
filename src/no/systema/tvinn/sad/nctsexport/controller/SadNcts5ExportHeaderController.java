@@ -147,12 +147,14 @@ public class SadNcts5ExportHeaderController {
 		String opd = request.getParameter("opd");
 		String avd = request.getParameter("avd");
 		String sign = request.getParameter("sign");
+		String mrn = request.getParameter("thtrnr");
 		//String dkxh_0035 = request.getParameter("dkxh_0035"); //test indicator (only in production)
 		
 		
 		//Action (doFetch, doUpdate, doCreate)
 		logger.info("Action:" + action);
 		logger.info("Opd:" + opd);
+		logger.info("MRN:" + mrn);
 		Map model = new HashMap();
 		
 		if(appUser==null){
@@ -167,7 +169,7 @@ public class SadNcts5ExportHeaderController {
 					//---------------------------
 					//get BASE URL = RPG-PROGRAM
 		            //---------------------------
-					String BASE_URL = SadNctsExportUrlDataStore.NCTS_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_URL;
+					String BASE_URL = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_URL;
 					//url params
 					String urlRequestParamsKeys = this.getRequestUrlKeyParameters(action, avd, opd, sign, appUser);
 					//for debug purposes in GUI
@@ -228,6 +230,8 @@ public class SadNcts5ExportHeaderController {
 				    	//put domain objects and do go back to the original view...
 				    	recordToValidate.setThavd(avd);
 				    	recordToValidate.setThsg(sign);
+				    	recordToValidate.setThtrnr(mrn);
+				    	logger.info("MRN inside error:" + recordToValidate.getThtrnr());
 				    	this.setDomainObjectsInView(session, model, recordToValidate);
 				    	isValidCreatedRecordTransactionOnRPG = false;
 				    	if(opd==null || "".equals(opd)){
@@ -295,7 +299,7 @@ public class SadNcts5ExportHeaderController {
 				            //---------------------------
 							//get BASE URL = RPG-PROGRAM
 				            //---------------------------
-							String BASE_URL = SadNctsExportUrlDataStore.NCTS_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_URL;
+							String BASE_URL = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_URL;
 							
 							//-----------------------------------
 							//add URL-parameter "mode=U" (Update)
@@ -412,7 +416,7 @@ public class SadNcts5ExportHeaderController {
 	public ModelAndView doNctsExportSend(HttpSession session, HttpServletRequest request){
 
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
-		appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_NCTS_EXPORT);
+		appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_NCTS5_EXPORT);
 		ModelAndView successView = new ModelAndView("redirect:tvinnsadncts5export.do?action=doFind&sign=" + appUser.getTvinnSadSign());
 		
 		RpgReturnResponseHandler rpgReturnResponseHandler = new RpgReturnResponseHandler();
@@ -436,7 +440,7 @@ public class SadNcts5ExportHeaderController {
 		    //---------------------------
 			//get BASE URL = RPG-PROGRAM
             //---------------------------
-			String BASE_URL = SadNctsExportUrlDataStore.NCTS_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_URL;
+			String BASE_URL = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_URL;
 			
 			//-----------------------------------
 			//add URL-parameter "mode=S" (Send)
@@ -585,7 +589,7 @@ public class SadNcts5ExportHeaderController {
 			//STEP 1: COPY record
 			//--------------------
 			logger.info("starting COPY record transaction...");
-			String BASE_URL = SadNctsExportUrlDataStore.NCTS_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_URL;
+			String BASE_URL = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_URL;
 			String urlRequestParamsKeys = this.getRequestUrlKeyParametersForCopy(avd, newAvd, newSign, opd, appUser);
 			//for debug purposes in GUI
 			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, BASE_URL  + "?" + urlRequestParamsKeys.toString()); 
@@ -622,7 +626,7 @@ public class SadNcts5ExportHeaderController {
 			//---------------------------
 			//get BASE URL = RPG-PROGRAM
             //---------------------------
-			BASE_URL = SadNctsExportUrlDataStore.NCTS_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_URL;
+			BASE_URL = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_URL;
 			//url params
 			urlRequestParamsKeys = this.getRequestUrlKeyParameters(action, jsonNctsExportTopicCopiedContainer.getNewavd(), jsonNctsExportTopicCopiedContainer.getNewopd(), jsonNctsExportTopicCopiedContainer.getNewsign(), appUser);
 			//for debug purposes in GUI
@@ -731,7 +735,7 @@ public class SadNcts5ExportHeaderController {
 		String method = "fetchSecurityRecord";
 		logger.info("starting " + method + " transaction...");
 		
-		String BASE_URL = SadNctsExportUrlDataStore.NCTS_EXPORT_BASE_FETCH_SPECIFIC_SIKKERHET_TOPIC_URL;
+		String BASE_URL = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_FETCH_SPECIFIC_SIKKERHET_TOPIC_URL;
 		String urlRequestParamsKeys = "user=" + user + "&avd=" + avd + "&opd=" + opd;   
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
     	logger.info("URL: " + BASE_URL);
@@ -781,7 +785,7 @@ public class SadNcts5ExportHeaderController {
 		String method = "existsSecurityRecord";
 		logger.info("starting " + method + " transaction...");
 		
-		String BASE_URL = SadNctsExportUrlDataStore.NCTS_EXPORT_BASE_FETCH_SPECIFIC_SIKKERHET_TOPIC_URL;
+		String BASE_URL = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_FETCH_SPECIFIC_SIKKERHET_TOPIC_URL;
 		String urlRequestParamsKeys = "user=" + user + "&avd=" + avd + "&opd=" + opd;   
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
     	logger.info("URL: " + BASE_URL);
@@ -821,7 +825,7 @@ public class SadNcts5ExportHeaderController {
 		//-------------
 		//get BASE URL
         //-------------
-		String BASE_URL = SadNctsExportUrlDataStore.NCTS_EXPORT_BASE_UPDATE_SPECIFIC_SIKKERHET_TOPIC_URL;
+		String BASE_URL = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_UPDATE_SPECIFIC_SIKKERHET_TOPIC_URL;
 		//-----------------------------------------------------
 		//add URL-parameter "mode=U" (Update), (A)dd, (D)elete
 		//-----------------------------------------------------
@@ -872,7 +876,7 @@ public class SadNcts5ExportHeaderController {
 		//---------------------------
 		//get BASE URL = RPG-PROGRAM
         //---------------------------
-		String BASE_URL = SadNctsExportUrlDataStore.NCTS_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_URL;
+		String BASE_URL = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_URL;
 		
 		//----------------------------------------------------------------------------------------------------------
 		// STEP[PREPARE CREATION] --> generate new opd and tuid (if applicable) in order to be able to Add (Create)
