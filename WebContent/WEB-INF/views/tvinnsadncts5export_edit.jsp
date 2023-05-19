@@ -1748,33 +1748,19 @@
 					<tr>
 			 			<td width="5">&nbsp;</td>
 			            <td >		
-			 				<%-- ANSVARIG --%>
+			 				<%-- Ombud --%>
 			 				<table width="95%" align="left" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
 						 		<tr height="18px">
 						 			<td class="text14White">
 						 				&nbsp;
-						 				<img onMouseOver="showPop('14_info');" onMouseOut="hidePop('14_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+						 				<img onMouseOver="showPop('14_info');" onMouseOut="hidePop('ombud_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 				 						
-				 						<b>&nbsp;50.</b><font class="text16RedBold" >*</font>Ansvarlig&nbsp;<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
+				 						&nbsp;Representat/Ombud&nbsp;<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 				 						
 						 				<div class="text12" style="position: relative;" align="left">
-										<span style="position:absolute;top:2px; width:250px;" id="14_info" class="popupWithInputText text12"  >
-					           	
+										<span style="position:absolute;top:2px; width:250px;" id="ombud_info" class="popupWithInputText text12"  >
 						           			<br>
-						           			Ansvarlig. 
-						           			<ul>
-							           			<li>The principal’s name (full name of the person or company) and full address shall be
-													entered as well as the identification number, if any, allocated by the competent
-													authorities. 
-													<br/><br/>If appropriate, the full name (person or company) of the authorised
-													representative who signs on behalf of the principal shall be entered.
-													Subject to any specific provisions on the use of computerised systems, the original of
-													the handwritten signature of the person concerned must appear on the SAD copy no.1,
-													which is to be kept at the office of departure. If this is a legal person, the signatory
-													shall add after his signature his full name and the capacity in which he is signing.
-							           			</li>
-							           			
-							           		</ul>
+						           			Ombud 
 										</span>
 										</div>
 					 				</td>
@@ -1806,15 +1792,15 @@
 									        	<input type="hidden" name="orig_thpsa" id="orig_thpsa" value='${model.record.thpsa}'>
 									        	<input type="hidden" name="orig_thlka" id="orig_thlka" value='${model.record.thlka}'>
 									        	<input type="hidden" name="orig_thska" id="orig_thska" value='${model.record.thska}'> --%>
-							        			<td class="text14" align="left" >&nbsp;&nbsp;<font class="text16RedBold" >*</font><span title="thtina">TIN</span></td>
-									            <td class="text14" align="left" >&nbsp;&nbsp;<font class="text16RedBold" >*</font><span title="thcpa">Navn</span></td>
-									            <td class="text14" align="left" >&nbsp;&nbsp;<font class="text16RedBold" >*</font><span title="thtla">Telefon</span></td>
+							        			<td class="text14" align="left" >&nbsp;&nbsp;<span title="thtina">TIN</span></td>
+									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="thcpa">Navn</span></td>
+									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="thtla">Telefon</span></td>
 									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="thema">Email</span></td>
 									        </tr>
 									        <tr>
-									        	<td align="left"><input type="text" class="inputTextMediumBlueMandatoryField" name="thtina" id="thtina" size="18" maxlength="17" value="${model.record.thtina}"></td>
-									            <td align="left"><input type="text" class="inputTextMediumBlueMandatoryField" name="thcpa" id="thcpa" size="25" maxlength="30" value="${model.record.thcpa}"></td>
-									            <td align="left"><input type="text" class="inputTextMediumBlueMandatoryField" name="thtla" id="thtla" size="14" maxlength="20" value="${model.record.thtla}"></td>
+									        	<td align="left"><input type="text" class="inputTextMediumBlue" name="thtina" id="thtina" size="18" maxlength="17" value="${model.record.thtina}"></td>
+									            <td align="left"><input type="text" class="inputTextMediumBlue" name="thcpa" id="thcpa" size="25" maxlength="30" value="${model.record.thcpa}"></td>
+									            <td align="left"><input type="text" class="inputTextMediumBlue" name="thtla" id="thtla" size="14" maxlength="20" value="${model.record.thtla}"></td>
 									            <td colspan="3" align="left"><input type="text" class="inputTextMediumBlue" name="thema" id="thema" size="34" maxlength="52" value="${model.record.thema}"></td>
 									        </tr>
 												<%--
@@ -1839,6 +1825,156 @@
 		            		</td>
 		           	</tr> 
 		           	<tr height="20"><td></td></tr>
+		           	
+		           	
+		           	<tr>
+	 			<td width="5">&nbsp;</td>
+	            <td >		
+	 				<%-- Ansvarlig --%>
+	 				<table width="95%" align="left" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
+				 		<tr height="15">
+				 			<td class="text14White">
+								&nbsp;<img onMouseOver="showPop('2_info');" onMouseOut="hidePop('ansvarlig_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+					 			&nbsp;Holder of transit&nbsp; - hvis annet enn avsender&nbsp;<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
+				 				<div class="text12" style="position: relative;" align="left">
+										<span style="position:absolute;top:2px; width:250px;" id="ansvarlig_info" class="popupWithInputText text12"  >
+						           			<br>
+						           			Ansvarlig for transit 
+						           			<ul>
+							           			<li>The principal’s name (full name of the person or company) and full address shall be
+													entered as well as the identification number, if any, allocated by the competent
+													authorities. 
+													<br/><br/>If appropriate, the full name (person or company) of the authorised
+													representative who signs on behalf of the principal shall be entered.
+													Subject to any specific provisions on the use of computerised systems, the original of
+													the handwritten signature of the person concerned must appear on the SAD copy no.1,
+													which is to be kept at the office of departure. If this is a legal person, the signatory
+													shall add after his signature his full name and the capacity in which he is signing.
+							           			</li>
+							           			
+							           		</ul>
+										</span>
+										</div>
+
+				 				
+			 				</td>
+		 				</tr>
+	 				</table>
+	 			</td>
+	 		</tr>
+	 		<tr>	
+	 			<td width="5">&nbsp;</td>
+	            <td >	
+					<%-- create record --%>
+				 	<table width="95%" align="left" class="formFrame" border="0" cellspacing="0" cellpadding="0">
+				 		<tr>
+					 		<td width="100%">
+						 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							 		<tr height="10"><td ></td></tr>
+							        
+							        <tr>
+							        	<%-- ================================================================================== --%>
+							        	<%-- This hidden values are used when an AJAX event from within a dialog box is fired.  
+							        		 These original values will be used when the user clicks "Cancel" buttons (puttting
+							        		 back original value)																--%> 
+							        	<%-- ================================================================================== --%>
+							        	<input type="hidden" name="orig_thknh" id="orig_thknh" value='${model.record.thknh}'>
+							        	<input type="hidden" name="orig_thnah" id="orig_thnah" value='${model.record.thnah}'>
+							        	<input type="hidden" name="orig_thtinh" id="orig_thtinh" value='${model.record.thtinh}'>
+							        	<input type="hidden" name="orig_thad1h" id="orig_thad1h" value='${model.record.thad1h}'>
+							        	<input type="hidden" name="orig_thpnh" id="orig_thpnh" value='${model.record.thpnh}'>
+							        	<input type="hidden" name="orig_thpsh" id="orig_thpsh" value='${model.record.thpsh}'>
+							        	<input type="hidden" name="orig_thlkh" id="orig_thlkh" value='${model.record.thlkh}'>
+							   
+							        	
+							        	
+							            <td class="text14" align="left" >&nbsp;&nbsp;<span title="thknh">Kundenummer</span></td>
+							            <td class="text14" align="left" >&nbsp;<span title="thnah">Navn&nbsp;</span>
+							            	<a tabindex="-1" id="thnahIdLink">
+												<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
+											</a>
+							            </td>
+							        </tr>
+							        <tr>
+							            <td class="text14" align="left"><input type="text" class="inputTextMediumBlue" name="thknh" id="thknh" size="8" maxlength="8" value="${model.record.thknh}"></td>
+							            <td class="text14" align="left"><input type="text" class="inputTextMediumBlue" name="thnah" id="thnah" size="30" maxlength="35" value="${model.record.thnah}"></td>
+							            
+							        </tr>
+							        
+							        <tr>
+							            <td class="text14" align="left" >&nbsp;<span title="thtinh">TIN</span></td>
+							            <td class="text14" align="left" >&nbsp;&nbsp;</td>
+							        </tr>
+							        <tr>
+							            <td align="left"><input type="text" class="inputTextMediumBlue" name="thtinh" id="thtinh" size="20" maxlength="17" value="${model.record.thtinh}"></td>
+							            <td align="left">&nbsp;</td>
+							        </tr>
+							        <tr height="4"><td>&nbsp;</td></tr>
+							        <tr>
+							            <td class="text14" align="left" >&nbsp;<span title="thad1h">Adresse</span></td>
+							            
+							        </tr>
+							        <tr>
+							            <td align="left"><input type="text" class="inputTextMediumBlue" name="thad1h" id="thad1h" size="30" maxlength="35" value="${model.record.thad1h}"></td>
+							            
+							        </tr>
+							        <tr>
+							        		<td>
+								        		<table>
+								        		<tr>
+								            		<td class="text14" align="left" >&nbsp;<span title="thpsh">Postadresse</span></td>
+								            		<td align="left">&nbsp;</td>
+								            	</tr>
+								        		<tr>
+								            		<td align="left">
+								       				<input type="text" class="inputTextMediumBlue" name="thpsh" id="thpsh" size="30" maxlength="35" value="${model.record.thpsh}">
+							            			</td> 
+								            		<td align="left">&nbsp;</td>
+								        		</tr>    	
+								            	</table>
+							            </td>
+							            <td >
+								            	<table>
+								        		<tr>
+								        			<td class="text14" align="left" >&nbsp;<span title="thpnh">Postnummer</span></td>
+								            		<td class="text14" align="left" >&nbsp;<span title="thlkh">Land</span>
+								            		
+								            		</td>
+								            	</tr>
+								        		<tr >
+								        			<td align="left"><input type="text" class="inputTextMediumBlue" name="thpnh" id="thpnh" size="10" maxlength="9" value="${model.record.thpnh}"></td> 
+								            		<td align="left">
+								            			<select class="inputTextMediumBlue" name="thlkh" id="thlkh">
+										            		<option value="">-velg-</option>
+									 				  		<c:forEach var="country" items="${model.countryCodeList}" >
+					                                	 		<option value="${country.zkod}"<c:if test="${model.record.thlkh == country.zkod}"> selected </c:if> >${country.zkod}</option>
+															</c:forEach> 
+														</select>
+														<a tabindex="-1" id="thlkhIdLink">
+															<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
+														</a>
+								            		</td> 
+								        		</tr>  
+								            	</table>
+							            </td>
+						            	</tr>
+							        <tr height="15">
+							            <td class="text14Bold" align="left" >&nbsp;</td> 
+							        </tr>
+						        </table>
+					        </td>
+				        </tr>
+					</table>          
+            	</td>
+           	</tr> 
+           	<tr height="10"><td></td></tr>
+		           	
+		           	
+		           	
+		           	
+		           	
+		           	
+		           	
 		           	</table>
 				</td>
 				<%-- --------------- --%>

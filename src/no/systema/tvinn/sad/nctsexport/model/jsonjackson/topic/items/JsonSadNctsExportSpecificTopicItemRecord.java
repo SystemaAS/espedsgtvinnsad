@@ -6,6 +6,7 @@ package no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.items;
 import java.lang.reflect.Field;
 import java.util.*;
 
+import lombok.Data;
 import no.systema.main.model.jsonjackson.general.JsonAbstractGrandFatherRecord;
 
 /**
@@ -13,6 +14,7 @@ import no.systema.main.model.jsonjackson.general.JsonAbstractGrandFatherRecord;
  * @date Sep 5, 2014
  *
  */
+@Data
 public class JsonSadNctsExportSpecificTopicItemRecord extends JsonAbstractGrandFatherRecord  {
 	//This record is used in special occasions when the session object is impossible to use
 	//Typically in a Validator when we want to check further into RPG and we need the user name in a parameter (user=Oscar)
@@ -619,8 +621,54 @@ public class JsonSadNctsExportSpecificTopicItemRecord extends JsonAbstractGrandF
 	public void setTvtinks(String value) {  this.tvtinks = value; }
 	public String getTvtinks() { return this.tvtinks;}
 	
-	
 
+	
+	
+	//NCTSEI - CONSIGNMENT ITEM records for NCTS5
+	private String tiavd = null;
+	private String titdn = null;
+	private String tili = null; //5 char - HOUSE CONSIGNMENT NR
+	private String tili2 = null; //5 char - LINJENR I HOUSE
+	private String tilit = null; //5 char - LINJENR för alle
+	private String tiucr = null; //35 char - REF.NR UCR
+	
+	private String tilrol = null; //3 char - LEVERANDØR ROLLE
+	private String tilid = null; //17 char - LEVERANDØR ID
+	private String tictx = null; //120 char - TEXT
+	private String ticcus = null; //9 char - CUS code
+	private String ticch = null; //6 int - HARMONIZED SYS. CODE 
+	private String ticccd = null; //2 char - COMBINED NOMENCLATUR
+	private String tiunnr = null; //4 char - UN NR
+	
+	private String tivkb = null; //13(3) double - BRUTTOVEKT
+	private String tivkn = null; //13(3) double - NETTOVEKT
+	private String tints = null; //13(3) double - SUPPLEMENTARY UNITS
+	private String tipty = null; //2 char - PAKKTYPE 
+	private String tipnt = null; //8 int - ANTALL PAKKER
+	private String tipmrk = null; //120 char - MERKE & NR 
+	private String tipdty = null; //4 char - DOKUMENT TYPE  
+	
+	private String tipdrf = null; //70 char - DOKUMENT REF  
+	private String tipdgn = null; //5 int - GOODS ITEM NO  
+	private String tipdtp = null; //2 char - PAKKTYPE  
+	private String tipdan = null; //8 int - ANTALL PAKKER  
+	private String tipdun = null; //4 char - DOKUMENT TYPE  
+	private String tipdpc = null; //16(6) double - QUANTITY  
+	private String tipdin = null; //35 char - INFORMASJON  
+	private String tisdty = null; //4 char - DOKUMENT TYPE  
+	
+	private String tisdrf = null;//tegn  70  dokument ref.    
+	private String tisdln = null;//sonet 5   line item number 
+	private String tisdin = null;//tegn  35  informasjon      
+	private String titdty = null;//tegn  4   dokument type    
+	private String titdrf = null;//tegn  70  dokument ref.    
+	private String tiadty = null;//tegn  4   referense type   
+	
+	private String tiadrf = null;//tegn  70  referanse        
+	private String tiaicd = null;//tegn   5  informasjon kode 
+	private String tiaitx = null;//tegn  120 tekst            
+	private String titrch = null;//tegn  1   betalingsmåte    
+	                                                                                
 	/**
 	 * 
 	 * @return
