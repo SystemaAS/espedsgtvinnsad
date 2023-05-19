@@ -475,11 +475,11 @@
 							        	<input type="hidden" name="orig_thkns" id="orig_thkns" value='${model.record.thkns}'>
 							        	<input type="hidden" name="orig_thnas" id="orig_thnas" value='${model.record.thnas}'>
 							        	<input type="hidden" name="orig_thtins" id="orig_thtins" value='${model.record.thtins}'>
-							        	<input type="hidden" name="orig_thads1" id="orig_thads1" value='${model.record.thads1}'>
+							        	<input type="hidden" name="orig_thad1s" id="orig_thad1s" value='${model.record.thad1s}'>
 							        	<input type="hidden" name="orig_thpns" id="orig_thpns" value='${model.record.thpns}'>
 							        	<input type="hidden" name="orig_thpss" id="orig_thpss" value='${model.record.thpss}'>
 							        	<input type="hidden" name="orig_thlks" id="orig_thlks" value='${model.record.thlks}'>
-							        	<input type="hidden" name="orig_thsks" id="orig_thsks" value='${model.record.thsks}'>
+							   
 							        	
 							        	
 							            <td class="text14" align="left" >&nbsp;&nbsp;<span title="thkns">Kundenummer</span></td>
@@ -505,23 +505,12 @@
 							        </tr>
 							        <tr height="4"><td>&nbsp;</td></tr>
 							        <tr>
-							            <td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font><span title="thads1">Adresse</span></td>
-							            <td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font><span title="thsks">Språkkode</span>
-							            </td>
+							            <td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font><span title="thad1s">Adresse</span></td>
+							            
 							        </tr>
 							        <tr>
-							            <td align="left"><input type="text" class="inputTextMediumBlueMandatoryField" name="thads1" id="thads1" size="30" maxlength="35" value="${model.record.thads1}"></td>
-							            <td align="left" >
-					            		&nbsp;<select class="inputTextMediumBlueMandatoryField" name="thsks" id="thsks">
-						            		<option value="">-velg-</option>
-						 				  	<c:forEach var="code" items="${model.ncts012_Sprak_CodeList}" >
-		                                	 	<option value="${code.tkkode}"<c:if test="${model.record.thsks == code.tkkode}"> selected </c:if> >${code.tkkode}</option>
-											</c:forEach> 
-											</select>
-											<a tabindex="-1" id="thsksIdLink">
-												<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
-											</a>
-										</td>
+							            <td align="left"><input type="text" class="inputTextMediumBlueMandatoryField" name="thad1s" id="thad1s" size="30" maxlength="35" value="${model.record.thad1s}"></td>
+							            
 							        </tr>
 							        <tr>
 							        		<td>
@@ -618,11 +607,11 @@
 							        	<input type="hidden" name="orig_thknk" id="orig_thknk" value='${model.record.thknk}'>
 							        	<input type="hidden" name="orig_thnak" id="orig_thnak" value='${model.record.thnak}'>
 							        	<input type="hidden" name="orig_thtink" id="orig_thtink" value='${model.record.thtink}'>
-							        	<input type="hidden" name="orig_thadk1" id="orig_thadk1" value='${model.record.thadk1}'>
+							        	<input type="hidden" name="orig_thad1k" id="orig_thad1k" value='${model.record.thad1k}'>
 							        	<input type="hidden" name="orig_thpnk" id="orig_thpnk" value='${model.record.thpnk}'>
 							        	<input type="hidden" name="orig_thpsk" id="orig_thpsk" value='${model.record.thpsk}'>
 							        	<input type="hidden" name="orig_thlkk" id="orig_thlkk" value='${model.record.thlkk}'>
-							        	<input type="hidden" name="orig_thskk" id="orig_thskk" value='${model.record.thskk}'>
+							        	
 							        	
 							            <td class="text14" align="left" >&nbsp;&nbsp;<span title="thknk">Kundenummer</span></td>
 							            <td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font><span title="thnak">Navn&nbsp;</span>
@@ -646,24 +635,12 @@
 							        </tr>
 							        <tr height="4"><td>&nbsp;</td></tr>
 							        <tr>
-							            <td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font><span title="thadk1">Adresse</span></td>
-							            <td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font><span title="thskk">Språkkode</span>
-						            		
-							            </td>
+							            <td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font><span title="thad1k">Adresse</span></td>
+							            
 							        </tr>
 							        <tr>
-							            <td align="left"><input type="text" class="inputTextMediumBlueMandatoryField" name="thadk1" id="thadk1" size="30" maxlength="35" value="${model.record.thadk1}"></td>
-							            <td class="text14" align="left" >
-				            				&nbsp;<select class="inputTextMediumBlueMandatoryField" name="thskk" id="thskk">
-							            		<option value="">-velg-</option>
-							 				  	<c:forEach var="code" items="${model.ncts012_Sprak_CodeList}" >
-			                                	 	<option value="${code.tkkode}"<c:if test="${model.record.thskk == code.tkkode}"> selected </c:if> >${code.tkkode}</option>
-												</c:forEach> 
-											</select>
-											<a tabindex="-1" id="thskkIdLink">
-												<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
-											</a>	
-										</td>
+							            <td align="left"><input type="text" class="inputTextMediumBlueMandatoryField" name="thad1k" id="thad1k" size="30" maxlength="35" value="${model.record.thad1k}"></td>
+							            
 							        </tr>
 							        <tr>
 							        		<td>
@@ -1772,7 +1749,7 @@
 			 			<td width="5">&nbsp;</td>
 			            <td >		
 			 				<%-- ANSVARIG --%>
-			 				<table width="100%" align="left" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
+			 				<table width="95%" align="left" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
 						 		<tr height="18px">
 						 			<td class="text14White">
 						 				&nbsp;
@@ -1809,11 +1786,11 @@
 			 			<td width="5">&nbsp;</td>
 			            <td >	
 							<%-- create record --%>
-						 	<table width="100%" align="left" class="formFrame" border="0" cellspacing="0" cellpadding="0">
+						 	<table width="95%" align="left" class="formFrame" border="0" cellspacing="0" cellpadding="0">
 						 		<tr>
 							 		<td>
 								 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
-									 		<tr height="15">
+									 		<tr height="10">
 									            <td class="text14" align="left">&nbsp;</td> 
 									        </tr>
 									        <tr>
@@ -1823,92 +1800,36 @@
 									        		 back original value)																--%> 
 									        	<%-- ================================================================================== --%>
 									        	<input type="hidden" name="orig_sveh_dkkn" id="orig_sveh_dkkn" value='${dkkn}'>
-									        	<input type="hidden" name="orig_thnaa" id="orig_thnaa" value='${model.record.thnaa}'>
 									        	<input type="hidden" name="orig_thtina" id="orig_thtina" value='${model.record.thtina}'>
-									        	<input type="hidden" name="orig_thada1" id="orig_thada1" value='${model.record.thada1}'>
+									        	<%-- <input type="hidden" name="orig_thada1" id="orig_thada1" value='${model.record.thada1}'>
 									        	<input type="hidden" name="orig_thpna" id="orig_thpna" value='${model.record.thpna}'>
 									        	<input type="hidden" name="orig_thpsa" id="orig_thpsa" value='${model.record.thpsa}'>
 									        	<input type="hidden" name="orig_thlka" id="orig_thlka" value='${model.record.thlka}'>
-									        	<input type="hidden" name="orig_thska" id="orig_thska" value='${model.record.thska}'>
-							        				<td class="text14" align="left" >&nbsp;&nbsp;<font class="text16RedBold" >*</font><span title="thtina">TIN</span></td>
-									            <td class="text14" align="left" >&nbsp;&nbsp;<font class="text16RedBold" >*</font><span title="thnaa">Navn</span>
-									            	<a tabindex="-1" id="thnaaIdLink">
-														<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
-													</a>
-									            </td>
-									            
+									        	<input type="hidden" name="orig_thska" id="orig_thska" value='${model.record.thska}'> --%>
+							        			<td class="text14" align="left" >&nbsp;&nbsp;<font class="text16RedBold" >*</font><span title="thtina">TIN</span></td>
+									            <td class="text14" align="left" >&nbsp;&nbsp;<font class="text16RedBold" >*</font><span title="thcpa">Navn</span></td>
+									            <td class="text14" align="left" >&nbsp;&nbsp;<font class="text16RedBold" >*</font><span title="thtla">Telefon</span></td>
+									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="thema">Email</span></td>
 									        </tr>
 									        <tr>
-									        		<td align="left"><input type="text" class="inputTextMediumBlueMandatoryField" name="thtina" id="thtina" size="20" maxlength="17" value="${model.record.thtina}"></td>
-									            <td align="left"><input type="text" class="inputTextMediumBlueMandatoryField" name="thnaa" id="thnaa" size="30" maxlength="35" value="${model.record.thnaa}"></td>
-									            
+									        	<td align="left"><input type="text" class="inputTextMediumBlueMandatoryField" name="thtina" id="thtina" size="18" maxlength="17" value="${model.record.thtina}"></td>
+									            <td align="left"><input type="text" class="inputTextMediumBlueMandatoryField" name="thcpa" id="thcpa" size="25" maxlength="30" value="${model.record.thcpa}"></td>
+									            <td align="left"><input type="text" class="inputTextMediumBlueMandatoryField" name="thtla" id="thtla" size="14" maxlength="20" value="${model.record.thtla}"></td>
+									            <td colspan="3" align="left"><input type="text" class="inputTextMediumBlue" name="thema" id="thema" size="34" maxlength="52" value="${model.record.thema}"></td>
 									        </tr>
-
-									        <tr height="4"><td>&nbsp;</td></tr>
-									        <tr>
-									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="thada1">Adresse</span></td>
-									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="thska">Språkkode</span>
-								            		
-									            </td>
-									        </tr>
-									        <tr>
-									            <td align="left"><input type="text" class="inputTextMediumBlue" name="thada1" id="thada1" size="30" maxlength="35" value="${model.record.thada1}"></td>
-									            <td class="text14" align="left" >
-									            		&nbsp;<select class="selectMediumBlueE2" name="thska" id="thska">
-										            		<option value="">-velg-</option>
-										 				  	<c:forEach var="code" items="${model.ncts012_Sprak_CodeList}" >
-						                                	 	<option value="${code.tkkode}"<c:if test="${model.record.thska == code.tkkode}"> selected </c:if> >${code.tkkode}</option>
-															</c:forEach> 
-													</select>
-													<a tabindex="-1" id="thskaIdLink">
-														<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
-													</a>
-												</td>
-									        </tr>
-									        <tr>
-									        		<td>
-										        		<table>
-										        		<tr>
-										            		<td class="text14" align="left" >&nbsp;&nbsp;<span title="thpsa">By</span></td>
-										            		<td align="left">&nbsp;</td>
-										            	</tr>
-										        		<tr>
-										            		<td align="left">
-										       				<input type="text" class="inputTextMediumBlue" name="thpsa" id="thpsa" size="30" maxlength="35" value="${model.record.thpsa}">
-									            			</td> 
-										            		<td align="left">&nbsp;</td>
-										        		</tr>    	
-										            	</table>
-									            </td>
-									            <td >
-										            	<table>
-										        		<tr>
-										        			<td class="text14" align="left" >&nbsp;&nbsp;<span title="thpna">Postnummer</span></td>
-										            		<td class="text14" align="left" >&nbsp;<font class="text16RedBold" >*</font><span title="thlka">Land</span>
-										            		
-										            		</td>
-										            	</tr>
-										        		<tr >
-										        			<td align="left"><input type="text" class="inputTextMediumBlue" name="thpna" id="thpna" size="10" maxlength="9" value="${model.record.thpna}"></td> 
-										            		<td align="left">
-										            			<select class="inputTextMediumBlueMandatoryField" name="thlka" id="thlka">
-												            		<option value="">-velg-</option>
-											 				  	<c:forEach var="country" items="${model.countryCodeList}" >
-							                                	 	<option value="${country.zkod}"<c:if test="${model.record.thlka == country.zkod}"> selected </c:if> >${country.zkod}</option>
-																</c:forEach> 
-															</select>
-															<a tabindex="-1" id="thlkaIdLink">
-																<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
-															</a>
-										            		</td> 
-										        		</tr>  
-										            	</table>
-									            </td>
-								            	</tr>
-									        
-									        <tr height="15">
+												<%--
+										        <tr height="4"><td>&nbsp;</td></tr>
+										        <tr>
+										            <td class="text14" align="left" >&nbsp;&nbsp;<span title="thema">Email</span></td>
+										            
+										        </tr>
+										        <tr>
+										            <td colspan="3" align="left"><input type="text" class="inputTextMediumBlue" name="thema" id="thema" size="30" maxlength="52" value="${model.record.thema}"></td>
+										            
+										        </tr>
+									        	--%>
+									        <tr height="10">
 							            		<td class="text14Bold" align="left" >&nbsp;</td>
-							            		<td class="text14Bold" align="left" >&nbsp;</td> 
 									        </tr>  
 									        
 								        </table>
@@ -2256,7 +2177,7 @@
 													        	<input type="hidden" name="orig_thpnss" id="orig_thpnss" value='${model.record.thpnss}'>
 													        	<input type="hidden" name="orig_thpsss" id="orig_thpsss" value='${model.record.thpsss}'>
 													        	<input type="hidden" name="orig_thlkss" id="orig_thlkss" value='${model.record.thlkss}'>
-													        	<input type="hidden" name="orig_thskss" id="orig_thskss" value='${model.record.thskss}'>
+													        	
 													        	
 													        	<tr height="10">
 													            <td class="text14" align="left">&nbsp;</td> 
@@ -2283,7 +2204,7 @@
 													        <tr height="4"><td>&nbsp;</td></tr>
 													        <tr>
 													            <td class="text14" align="left" >&nbsp;&nbsp;<span title="thadss1">Adresse</span></td>
-													            <td class="text14" align="left" >&nbsp;&nbsp;<span title="thskss">Språkkode</span>
+													           
 												            		
 													            </td>
 													        </tr>

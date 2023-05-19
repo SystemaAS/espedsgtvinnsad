@@ -59,24 +59,22 @@ public class SadNctsExportHeaderValidator implements Validator {
 		//Avsender
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thnas", "systema.tvinn.sad.ncts.export.header.error.null.thnas"); 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thtins", "systema.tvinn.sad.ncts.export.header.error.null.thtins"); 
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thads1", "systema.tvinn.sad.ncts.export.header.error.null.thads1"); 
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thsks", "systema.tvinn.sad.ncts.export.header.error.null.thsks"); 
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thad1s", "systema.tvinn.sad.ncts.export.header.error.null.thad1s"); 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thpns", "systema.tvinn.sad.ncts.export.header.error.null.thpns"); 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thpss", "systema.tvinn.sad.ncts.export.header.error.null.thpss"); 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thlks", "systema.tvinn.sad.ncts.export.header.error.null.thlks"); 
 		//Mottaker
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thnak", "systema.tvinn.sad.ncts.export.header.error.null.thnak"); 
 		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thtins", "systema.tvinn.sad.ncts.export.header.error.null.thtink"); 
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thadk1", "systema.tvinn.sad.ncts.export.header.error.null.thadk1"); 
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thskk", "systema.tvinn.sad.ncts.export.header.error.null.thskk"); 
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thad1k", "systema.tvinn.sad.ncts.export.header.error.null.thad1k"); 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thpnk", "systema.tvinn.sad.ncts.export.header.error.null.thpnk"); 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thpsk", "systema.tvinn.sad.ncts.export.header.error.null.thpsk"); 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thlkk", "systema.tvinn.sad.ncts.export.header.error.null.thlkk"); 
 		
 		//ansvarig
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thnaa", "systema.tvinn.sad.ncts.export.header.error.null.thnaa"); 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thtina", "systema.tvinn.sad.ncts.export.header.error.null.thtina"); 
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thlka", "systema.tvinn.sad.ncts.export.header.error.null.thlka"); 
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thlka", "systema.tvinn.sad.ncts.export.header.error.null.thlka"); 
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thnaa", "systema.tvinn.sad.ncts.export.header.error.null.thnaa"); 
 		
 		//header
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thalk", "systema.tvinn.sad.ncts.export.header.error.null.thalk");

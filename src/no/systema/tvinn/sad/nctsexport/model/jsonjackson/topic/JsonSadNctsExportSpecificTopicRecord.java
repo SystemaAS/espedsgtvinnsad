@@ -146,10 +146,12 @@ public class JsonSadNctsExportSpecificTopicRecord extends JsonAbstractGrandFathe
 	public void setThtina(String value) {  this.thtina = value; }
 	public String getThtina() {return this.thtina;}
 	
-	private String thsta = null; //1 int STATUS ANSVARLIG
+	private String thsta = "2"; //1 int STATUS ANSVARLIG (alltid 2)
 	private String thcpa = null; //30 char Contact person
 	private String thtla = null; //20 char telefon
 	private String thema = null; //50 char email
+	
+	
 	
 	private String thtmin = null; //1 int inland tr mode
 	private String thtmgr = null; //1 int border tr mode
@@ -199,9 +201,9 @@ public class JsonSadNctsExportSpecificTopicRecord extends JsonAbstractGrandFathe
 	public void setThnas(String value) {  this.thnas = value; }
 	public String getThnas() {return this.thnas;}
 	
-	private String thads1 = null;
-	public void setThads1(String value) {  this.thads1 = value; }
-	public String getThads1() {return this.thads1;}
+	private String thad1s = null;
+	public void setThad1s(String value) {  this.thad1s = value; }
+	public String getThad1s() {return this.thad1s;}
 	
 	private String thpns = null;
 	public void setThpns(String value) {  this.thpns = value; }
@@ -236,9 +238,9 @@ public class JsonSadNctsExportSpecificTopicRecord extends JsonAbstractGrandFathe
 	public void setThnak(String value) {  this.thnak = value; }
 	public String getThnak() { return this.thnak;}
 	
-	private String thadk1 = null;
-	public void setThadk1(String value) {  this.thadk1 = value; }
-	public String getThadk1() { return this.thadk1;}
+	private String thad1k = null;
+	public void setThad1k(String value) {  this.thad1k = value; }
+	public String getThad1k() { return this.thad1k;}
 	
 	private String thpnk = null;
 	public void setThpnk(String value) {  this.thpnk = value; }

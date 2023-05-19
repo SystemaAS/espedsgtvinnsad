@@ -183,7 +183,7 @@ public class SadNcts5ExportHeaderController {
 			    	//--------------------------------------
 			    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
 					//Debug --> 
-			    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+			    	logger.info(jsonPayload);
 			    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 			    	if(jsonPayload!=null){
 			    		JsonSadNctsExportSpecificTopicContainer jsonNctsExportSpecificTopicContainer = this.sadNctsExportSpecificTopicService.getNctsExportSpecificTopicContainer(jsonPayload);

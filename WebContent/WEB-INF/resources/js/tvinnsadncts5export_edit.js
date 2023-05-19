@@ -659,7 +659,7 @@
 		  //init all fields
 		  jq('#thnak').val("");
 		  jq('#thtink').val("");
-		  jq('#thadk1').val("");
+		  jq('#thad1k').val("");
 		  jq('#thpnk').val("");
 		  jq('#thpsk').val("");
 		  jq('#thlkk').val("");	
@@ -671,7 +671,7 @@
 		  customer = map[key];
 		  jq('#thtink').val(customer.eori);
 		  jq('#thnak').val(customer.knavn);
-		  jq('#thadk1').val(customer.adr1);
+		  jq('#thad1k').val(customer.adr1);
 		  jq('#thpnk').val(customer.postnr);
 		  jq('#thpsk').val(customer.adr3);
 		  jq('#thlkk').val(customer.syland);
@@ -685,7 +685,7 @@
 	      jq('#thknk').val(jq("#orig_thknk").val());	
 		  jq('#thnak').val(jq("#orig_thnak").val());
 		  jq('#thtink').val(jq("#orig_thtink").val());
-		  jq('#thadk1').val(jq("#orig_thadk1").val());
+		  jq('#thad1k').val(jq("#orig_thad1k").val());
 		  jq('#thpnk').val(jq("#orig_thpnk").val());
 		  jq('#thpsk').val(jq("#orig_thpsk").val());
 		  jq('#thlkk').val(jq("#orig_thlkk").val());
@@ -754,7 +754,7 @@
 					jq('#thknk').val(customer.kundnr);
 					jq('#thtink').val(customer.eori);
 					jq('#thnak').val(customer.knavn);
-					jq('#thadk1').val(customer.adr1);
+					jq('#thad1k').val(customer.adr1);
 					jq('#thpnk').val(customer.postnr);
 					jq('#thpsk').val(customer.adr3);
 					jq('#thlkk').val(customer.syland);
@@ -763,7 +763,7 @@
 					//init fields
 					jq('#thtink').val("");
 					jq('#thnak').val("");
-					jq('#thadk1').val("");
+					jq('#thad1k').val("");
 					jq('#thpnk').val("");
 					jq('#thpsk').val("");
 					jq('#thlkk').val("");
