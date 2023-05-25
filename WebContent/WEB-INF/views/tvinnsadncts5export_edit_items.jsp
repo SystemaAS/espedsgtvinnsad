@@ -38,11 +38,20 @@
 				</a>
 			</td>
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
+			<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
+				<a id="alinkItemLines" tabindex=-1 style="display:block;" href="tvinnsadncts5export_edit_houseconsignment.do?action=doFetch&avd=${model.avd}&sign=${model.sign}
+											&opd=${model.opd}&tullId=${model.tullId}&mrnNr=${model.mrnNr}
+											&status=${model.status}&datum=${model.datum}">
+					<font class="tabDisabledLink">
+						&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.houseconsignment.createnew.tab"/>
+					</font>
+					
+				</a>
+			</td>		
+			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			<td width="15%" valign="bottom" class="tab" align="center" nowrap>
 				<font class="tabLink">&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.item.createnew.tab"/></font>
-				<c:if test="${model.status == 'G' ||  model.status=='F' || model.status == 'M' || empty model.status}">
-					<img valign="bottom" src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
-				</c:if>
+				
 			</td>
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>

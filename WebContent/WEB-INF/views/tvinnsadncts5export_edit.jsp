@@ -49,15 +49,23 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
+						<a id="alinkItemLines" tabindex=-1 style="display:block;" href="tvinnsadncts5export_edit_houseconsignment.do?action=doFetch&avd=${model.record.thavd}&sign=${model.record.thsg}
+													&opd=${model.record.thtdn}&tullId=${model.record.thtuid}&mrnNr=${model.record.thtrnr}
+													&status=${model.record.thst}&datum=${model.record.thdt}">
+							<font class="tabDisabledLink">
+								&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.houseconsignment.createnew.tab"/>
+							</font>
+							
+						</a>
+					</td>
+					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
+					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a id="alinkItemLines" tabindex=-1 style="display:block;" href="tvinnsadncts5export_edit_items.do?action=doFetch&avd=${model.record.thavd}&sign=${model.record.thsg}
 													&opd=${model.record.thtdn}&tullId=${model.record.thtuid}&mrnNr=${model.record.thtrnr}
 													&status=${model.record.thst}&datum=${model.record.thdt}">
 							<font class="tabDisabledLink">
 								&nbsp;<spring:message code="systema.tvinn.sad.ncts.export.item.createnew.tab"/>
 							</font>
-							<c:if test="${ model.record.thst == 'G' ||  model.status=='F' || model.record.thst == 'M' || empty model.record.thst}">
-								<img valign="bottom" src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
-							</c:if>
 							
 						</a>
 					</td>
