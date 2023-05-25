@@ -223,7 +223,7 @@
 	        			<tr height="10"><td></td></tr> 
 						<tr >
 							<td>
-							<form name="createNewItemLine" id="createNewItemLine" method="post" action="tvinnsadexport_edit_finansopplysninger.do">
+							<form name="createNewItemLine" id="createNewItemLine" method="post" action="tvinnsadexport_edit_houseconsignment.do">
 								<input type="hidden" name="action" id="action" value='doFetch'>
 				 				<input type="hidden" name="avd" id="avd" value='${model.avd	}'>
 				 				<input type="hidden" name="sign" id="sign" value='${model.sign}'>
@@ -259,7 +259,7 @@
 								<tr>
 								<td class="text12">
 										
-								<table id="tblInvoices" class="display compact cell-border" width="100%" >
+								<table id="tblHcLines" class="display compact cell-border" width="100%" >
 									<thead>
 									<tr class="tableHeaderField" height="20" >
 									    <th class="text14">&nbsp;Linjenr.&nbsp;</th>
@@ -378,25 +378,9 @@
 	 				<table width="80%" align="left" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
 				 		<tr height="15">
 				 			<td class="text12White" align="left" >
-				 				<b>&nbsp;&nbsp;V<label onClick="showPop('debugPrintlnAjaxItemFetchAdmin');" >a</label>relinje&nbsp;</b>
-				 				
-								<span style="position:absolute; left:150px; top:200px; width:800px; height:400px;" id="debugPrintlnAjaxItemFetchAdmin" class="popupWithInputText"  >
-				           		<div class="text12" align="left">
-				           			<label id="debugPrintlnAjaxItemFetchInfo"></label>
-				           			<br/>
-				           			&nbsp;&nbsp;
-				           			<button name="specialInformationButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('debugPrintlnAjaxItemFetchAdmin');">
-				           			Close
-				           			</button> 
-				           		</div>
-				        		</span>
+				 				<b>&nbsp;&nbsp;House consignment&nbsp;</b>
 				 				<img onClick="showPop('updateInfo');" src="resources/images/update.gif" border="0" alt="edit">
-				 				<span style="position:absolute; left:150px; top:200px; width:800px; height:400px;" id="updateInfo" class="popupWithInputText"  >
-		           		   			<div class="text14" align="left" style="display:block;width:700px;word-break:break-all;">
-		           		   				${activeUrlRPGUpdate_TvinnSad}<br/><br/>
-		           		   				<button name="updateInformationButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('updateInfo');">Close</button> 
-		           		   			</div>
-						        </span>  
+				 				  
 			 				</td>
 		 				</tr>
 	 				</table>

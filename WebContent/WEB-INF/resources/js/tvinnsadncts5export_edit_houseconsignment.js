@@ -130,26 +130,24 @@
   //-------------------
   //private function
   function filterGlobal () {
-    jq('#mainList').dataTable().search(
-    	jq('#mainList_filter').val()
+    jq('#tblHcLines').dataTable().search(
+    	jq('#tblHcLines_filter').val()
     ).draw();
   }
 
   jq(document).ready(function() {
 	  jq.fn.dataTable.moment( 'DDMMYY' );  
     //init table (no ajax, no columns since the payload is already there by means of HTML produced on the back-end)
-    jq('#mainList').dataTable( {
-  	  //"dom": '<"top"f>t<"bottom"><"clear">',
-      "searchHighlight": true,
-      "dom": '<"top"f>rt<"bottom"lip><"clear">',
-  	  "scrollY":        	"700px",
-  	  "scrollCollapse":  true,
-	  "tabIndex": -1,
-	  "order": [[ 6, "desc" ]], //date
-	  "lengthMenu": [ 25, 50, 100, 200]
-    });
+    jq('#tblHcLines').dataTable( {
+	    	  "dom": '<"top">t<"bottom"flip><"clear">',
+	    	  "scrollY":    "180px",
+	    	  "deferRender": true, //to speed the table load
+	    	  "scrollCollapse":  true,
+	  		  "columnDefs": [{ "type": "num", "targets": 0 }],
+	  		  "lengthMenu": [ 75, 100, 300, 400, 900]
+  	});
     //event on input field for search
-    jq('input.mainList_filter').on( 'keyup click', function () {
+    jq('input.tblHcLines_filter').on( 'keyup click', function () {
     		filterGlobal();
     });
    
