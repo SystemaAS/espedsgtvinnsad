@@ -5,6 +5,8 @@ package no.systema.tvinn.sad.nctsexport.service;
 
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.JsonSadNctsExportSpecificTopicContainer;
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.archive.JsonSadNctsExportSpecificTopicArchiveContainer;
+import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.houseconsignment.JsonSadNcts5ExportHouseConsignmentContainer;
+import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.houseconsignment.JsonSadNcts5ExportHouseConsignmentRecord;
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.logging.JsonSadNctsExportSpecificTopicLoggingContainer;
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.logging.JsonSadNctsExportSpecificTopicLoggingLargeTextContainer;
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.validation.JsonSadNctsExportSpecificTopicGuaranteeValidatorContainer;
@@ -24,4 +26,6 @@ public interface SadNctsExportSpecificTopicService {
 	public JsonSadNctsExportSpecificTopicLoggingLargeTextContainer getNctsExportSpecificTopicLoggingLargeTextContainer(String utfPayload);
 	public JsonSadNctsExportSpecificTopicGuaranteeValidatorContainer getNctsExportSpecificTopicGuaranteeValidatorContainer(String utfPayload);
 	public JsonSadNctsExportTopicCopiedContainer getNctsExportTopicCopiedContainer(String utfPayload);
+	//House Consignment NCTS 5
+	public JsonSadNcts5ExportHouseConsignmentContainer getNcts5ExportSpecificTopicHouseConsignmentContainer(String utfPayload);
 }

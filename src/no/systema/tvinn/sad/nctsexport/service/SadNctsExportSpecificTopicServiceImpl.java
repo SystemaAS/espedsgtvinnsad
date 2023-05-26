@@ -5,12 +5,14 @@ package no.systema.tvinn.sad.nctsexport.service;
 
 import no.systema.tvinn.sad.nctsexport.mapper.jsonjackson.SadNctsExportSpecificTopicMapper;
 import no.systema.tvinn.sad.nctsexport.mapper.jsonjackson.SadNctsExportSpecificTopicGuaranteeValidatorMapper;
+import no.systema.tvinn.sad.nctsexport.mapper.jsonjackson.SadNctsExportSpecificTopicHouseConsignmentMapper;
 import no.systema.tvinn.sad.nctsexport.mapper.jsonjackson.SadNctsExportSpecificTopicArchiveMapper;
 import no.systema.tvinn.sad.nctsexport.mapper.jsonjackson.SadNctsExportSpecificTopicLoggingLargeTextMapper;
 import no.systema.tvinn.sad.nctsexport.mapper.jsonjackson.SadNctsExportSpecificTopicLoggingMapper;
 import no.systema.tvinn.sad.nctsexport.mapper.jsonjackson.SadNctsExportTopicCopiedMapper;
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.JsonSadNctsExportSpecificTopicContainer;
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.archive.JsonSadNctsExportSpecificTopicArchiveContainer;
+import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.houseconsignment.JsonSadNcts5ExportHouseConsignmentContainer;
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.logging.JsonSadNctsExportSpecificTopicLoggingContainer;
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.logging.JsonSadNctsExportSpecificTopicLoggingLargeTextContainer;
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.validation.JsonSadNctsExportSpecificTopicGuaranteeValidatorContainer;
@@ -124,6 +126,21 @@ public class SadNctsExportSpecificTopicServiceImpl implements SadNctsExportSpeci
 		JsonSadNctsExportTopicCopiedContainer container = null;
 		try{
 			SadNctsExportTopicCopiedMapper mapper = new SadNctsExportTopicCopiedMapper();
+			container = mapper.getContainer(utfPayload);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return container;
+	}
+	
+	/**
+	 * 
+	 */
+	public JsonSadNcts5ExportHouseConsignmentContainer getNcts5ExportSpecificTopicHouseConsignmentContainer(String utfPayload) {
+		JsonSadNcts5ExportHouseConsignmentContainer container = null;
+		try{
+			SadNctsExportSpecificTopicHouseConsignmentMapper mapper = new SadNctsExportSpecificTopicHouseConsignmentMapper();
 			container = mapper.getContainer(utfPayload);
 		}catch(Exception e){
 			e.printStackTrace();

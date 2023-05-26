@@ -204,7 +204,7 @@ public class SadNcts5ExportHouseConsignmentController {
 						//-------
 						//UPDATE
 						//-------
-						logger.info("UPDATE(only) ITEM (existent item) in process...");
+						logger.info("UPDATE(only) HOUSE (existent item) in process...");
 						//take the rest from GUI.
 						jsonSadNctsExportSpecificTopicItemRecord = new JsonSadNctsExportSpecificTopicItemRecord();
 						ServletRequestDataBinder binder = new ServletRequestDataBinder(jsonSadNctsExportSpecificTopicItemRecord);
@@ -369,7 +369,7 @@ public class SadNcts5ExportHouseConsignmentController {
             //---------------------------
 			String BASE_URL_FETCH = SadNctsExportUrlDataStore.NCTS_EXPORT_BASE_FETCH_TOPIC_ITEMLIST_URL;
 			
-			urlRequestParamsKeys = this.getRequestUrlKeyParameters(request, avd, opd, appUser);
+			urlRequestParamsKeys = this.getRequestUrlKeyParameters(action, avd, opd, sign, appUser);
 			//for debug purposes in GUI
 			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, BASE_URL_FETCH + "==>params: " + urlRequestParamsKeys.toString()); 
 			
@@ -695,14 +695,12 @@ public class SadNcts5ExportHouseConsignmentController {
 	@Qualifier ("urlCgiProxyService")
 	private UrlCgiProxyService urlCgiProxyService;
 	@Autowired
-	@Required
 	public void setUrlCgiProxyService (UrlCgiProxyService value){ this.urlCgiProxyService = value; }
 	public UrlCgiProxyService getUrlCgiProxyService(){ return this.urlCgiProxyService; }
 	
 	@Qualifier ("sadNctsExportSpecificTopicService")
 	private SadNctsExportSpecificTopicService sadNctsExportSpecificTopicService;
 	@Autowired
-	@Required
 	public void setSadNctsExportSpecificTopicService (SadNctsExportSpecificTopicService value){ this.sadNctsExportSpecificTopicService = value; }
 	public SadNctsExportSpecificTopicService getSadNctsExportSpecificTopicService(){ return this.sadNctsExportSpecificTopicService; }
 	
