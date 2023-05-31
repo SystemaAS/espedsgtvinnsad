@@ -17,7 +17,7 @@ import lombok.Data;
 /**
  * @author oscardelatorre
  * @date May 25, 2023
- *
+ * maxOccurs 99 (HouseConsignment)
  */
 @Data
 public class JsonSadNcts5ExportHouseConsignmentRecord extends JsonAbstractGrandFatherRecord {
@@ -36,6 +36,7 @@ public class JsonSadNcts5ExportHouseConsignmentRecord extends JsonAbstractGrandF
 		}
 	}
 	
+	//parter NCTSEC - data file
 	private String tcavd = null;
 	private String tctdn = null;
 	private String tcli = null;
@@ -48,27 +49,55 @@ public class JsonSadNcts5ExportHouseConsignmentRecord extends JsonAbstractGrandF
  	private String tcavd2 = null;//4 int AVD. FOR HENTET OPD
  	private String tctdn2 = null;//7 int OPD. FOR HENTET OPD
  	private String tcxext = null;//35 char EKSTERN REF
- 	private String tcrole = null;//3 char LEVERANDØR ROLLE
- 	private String tcidr = null;//17 char LEVERANDØR ID
- 	private String tctaty = null;//2 char TYPE IDENTIFIKASJON
- 	private String tctaid = null;//35 char IDENTITET
- 	private String tctalk = null;//2 char Landk Tr.middel
- 	private String tcpdty = null;//4 char DOKUMENT TYPE
- 	private String tcpdrf = null;//70 char DOKUMENT REF.
- 	private String tcpdin = null;//35 char INFORMASJON
  	
- 	private String tcsdty = null;//4 char DOKUMENT TYPE
- 	private String tcsdrf = null;//70 char DOKUMENT REF.
- 	private String tcsdln = null;//5 char LINE ITEM NUMBER
- 	private String tcsdin = null;//35 INFORMASJON
- 	private String tctdty = null;//4 char DOKUMENT TYPE
- 	private String tctdrf = null;//70 char DOKUMENT REF.
+ 	private String tcrole = null;//3 char LEVERANDØR ROLLE /AdditionalSupplyChainActor/role (0-99)
+ 	private String tcidr = null;//17 char LEVERANDØR ID /AdditionalSupplyChainActor/identificationNumber
  	
- 	private String tcadty = null;//4 char REFERENSE TYPE
- 	private String tcadrf = null;//70 char REFERANSE
- 	private String tcaicd = null;//5 INFORMASJON KODE
- 	private String tcaitx = null;//120 char TEKST
- 	private String tctrch = null;//1 char BETALINGSMÅTE
+ 	private String tctaty = null;//2 char TYPE IDENTIFIKASJON /DepartureTransportMeans/typeOfIdentification (0-999)
+ 	private String tctaid = null;//35 char IDENTITET /DepartureTransportMeans/identificationNumber
+ 	private String tctalk = null;//2 char Landk Tr.middel /DepartureTransportMeans/nationality
+ 	
+ 	private String tcpdty = null;//4 char DOKUMENT TYPE /PreviousDocument (0-99)
+ 	private String tcpdrf = null;//70 char DOKUMENT REF. /PreviousDocument
+ 	private String tcpdin = null;//35 char INFORMASJON /PreviousDocument
+ 	
+ 	private String tcsdty = null;//4 char DOKUMENT TYPE /SupportingDocument (0-99)
+ 	private String tcsdrf = null;//70 char DOKUMENT REF. /SupportingDocument
+ 	private String tcsdln = null;//5 char LINE ITEM NUMBER /SupportingDocument/documentLineItemNumber
+ 	private String tcsdin = null;//35 INFORMASJON /SupportingDocument/complementOfInformation
+ 	
+ 	private String tctdty = null;//4 char DOKUMENT TYPE /TransportDocument/type (0-99)
+ 	private String tctdrf = null;//70 char DOKUMENT REF. /TransportDocument/referenceNr 
+ 	
+ 	private String tcadty = null;//4 char REFERENSE TYPE /AdditionalReference/type (0-99)
+ 	private String tcadrf = null;//70 char REFERANSE /AdditionalReference/referenceNumber
+ 	
+ 	private String tcaicd = null;//5 INFORMASJON KODE /AdditionalInformation/code (0-99)
+ 	private String tcaitx = null;//120 char TEKST /AdditionalInformation/text
+ 	
+ 	private String tctrch = null;//1 char BETALINGSMÅTE /TransportCharges/methodOfPayment minOccurs(0)
+ 	
+ 	//parter NCTSECAM - data file
+ 	private String tckns = null;//8 int kundenr selger
+ 	private String tcnas = null;//30 char navn
+ 	private String tcad1s = null;//30 char adress
+ 	private String tcpns = null;//9 char postnr
+ 	private String tcpss = null;//24 char poststed
+ 	private String tclks = null;//2 char landkode
+ 	private String tctins = null;//17 tin-kode
+ 	private String tccps = null;//30 kontaktperson selger
+ 	private String tctls = null;//20 telefon
+ 	private String tcems = null;//50 email
+ 	
+ 	private String tcknk = null;//8 int kundenr kjøper
+ 	private String tcnak = null;//30 char navn
+ 	private String tcad1k = null;//30 char adress
+ 	private String tcpnk = null;//9 char postnr
+ 	private String tcpsk = null;//24 char poststed
+ 	private String tclkk = null;//2 char landkode
+ 	private String tctink = null;//17 tin-kode
+ 	
+ 	
  	
  	
 	/**

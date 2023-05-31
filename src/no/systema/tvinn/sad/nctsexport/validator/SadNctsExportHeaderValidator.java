@@ -87,9 +87,9 @@ public class SadNctsExportHeaderValidator implements Validator {
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thtrm", "systema.tvinn.sad.ncts.export.header.error.null.thtrm");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thcats", "systema.tvinn.sad.ncts.export.header.error.null.thcats");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thskfd", "systema.tvinn.sad.ncts.export.header.error.null.thskfd");
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thskfd", "systema.tvinn.sad.ncts.export.header.error.null.thskfd");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thdst", "systema.tvinn.sad.ncts.export.header.error.null.thdst");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thdsk", "systema.tvinn.sad.ncts.export.header.error.null.thdsk");
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thdsk", "systema.tvinn.sad.ncts.export.header.error.null.thdsk");
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thtsd1", "systema.tvinn.sad.ncts.export.header.error.null.thtsd1");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "thtsb", "systema.tvinn.sad.ncts.export.header.error.null.thtsb");

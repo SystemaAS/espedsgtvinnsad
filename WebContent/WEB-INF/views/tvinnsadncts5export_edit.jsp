@@ -1398,35 +1398,7 @@
 								</td>	
 					        </tr>
 					        <tr height="2"><td>&nbsp;</td></tr>
-					        <tr>
-					            <td class="text14" align="left">
-					            <img onMouseOver="showPop('sprakkod_foljedok_info');" onMouseOut="hidePop('sprakkod_foljedok_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">	
-					            <font class="text16RedBold" >*</font><span title="thskfd">Språkkode på følgedok.&nbsp;</span>
-					            <div class="text12" style="position: relative;" align="left">
-								<span style="position:absolute;top:2px; width:250px;" id="status_info" class="popupWithInputText text12"  >
-					           			<b>Språkkode på følgedok</b>
-					           			<p>
-					           			Følgedokumenter (T-papir, lasteliste/vareliste) utstedt i Sysped er på norsk.<br/>
-					           			Språkkode = <b>NO</b> legges inn som standardverdi på avdelingen.
-					           			</p>
-					           	</span>	
-								</div>
-								</td>
-					            <td align="left">
-	            					<select class="inputTextMediumBlueMandatoryField" name="thskfd" id="thskfd">
-			            				<option value="">-velg-</option>
-			 				  			<c:forEach var="code" items="${model.ncts012_Sprak_CodeList}" >
-                               	 			<option value="${code.tkkode}"<c:if test="${model.record.thskfd == code.tkkode}"> selected </c:if> >${code.tkkode}</option>
-										</c:forEach> 
-								</select>
-			            		<a tabindex="-1" id="thskfdIdLink">
-									<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
-								</a>
-							
-								</td> 
-							</tr>
-							<tr height="2"><td>&nbsp;</td></tr>
-							
+					        
 					        <tr>
 					            <td class="text14" align="left" ><span title="thtrdt">Transittdato</span></td>
 					            <td class="text14" >
@@ -1449,16 +1421,7 @@
 					            
 					            <td class="text14" align="left" >
 					            	<input type="text" class="inputTextMediumBlueMandatoryField" name="thdst" id="thdst" size="10" maxlength="15" value="${model.record.thdst}">
-					            	&nbsp;<font class="text16RedBold" >*</font><span title="thdsk">Dekl.språk</span>
-					            	<select class="inputTextMediumBlueMandatoryField" name="thdsk" id="thdsk">
-			            				<option value="">-velg-</option>
-			 				  			<c:forEach var="code" items="${model.ncts012_Sprak_CodeList}" >
-                               	 			<option value="${code.tkkode}"<c:if test="${model.record.thdsk == code.tkkode}"> selected </c:if> >${code.tkkode}</option>
-										</c:forEach> 
-									</select>
-					            	<a tabindex="-1" id="thdskIdLink">
-										<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
-									</a>
+
 					            </td>
 					        </tr>
 					        <%--

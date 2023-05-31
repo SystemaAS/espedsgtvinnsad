@@ -391,15 +391,17 @@
 						 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							 		<tr>
 							 			
-							            <td class="text14" align="left"><span title="sfbl28">&nbsp;Ekst.ref.</span></td>
-							            <td class="text14" align="left"><span title="sfdt">&nbsp;Bruttovekt</span></td>
-							            <td class="text14" align="left"><span title="sfvk28">&nbsp;Avs.land</span></td>
-					            		<td class="text14" align="left"><span title="sfkr28">&nbsp;Best.land</span></td>
-					            		
+							            <td class="text14" align="left"><span title="tcxext">&nbsp;Ekst.ref.</span></td>
+							            <td class="text14" align="left"><span title="tcvktb">&nbsp;Bruttovekt</span></td>
+							            <td class="text14" align="left"><span title="tcalk">&nbsp;Avs.land</span></td>
+					            		<td class="text14" align="left"><span title="tcblk">&nbsp;Best.land</span></td>
+					            		<td class="text14" align="left"><span title="tcucr">&nbsp;Refnr.UCR</span></td>
+					            		<td class="text14" align="left"><span title="tcidr">&nbsp;Lev.id</span></td>
+					            		<td class="text14" align="left"><span title="tcrole">&nbsp;Lev.rolle</span></td>
 							        </tr>
 							        <tr>
 						        		<td align="left">
-						        			<input type="text" class="inputTextMediumBlue" name="tcxext" id="tcxext" size="30" maxlength="35" value="${Xmodel.record.tcxext}">
+						        			<input type="text" class="inputTextMediumBlue" name="tcxext" id="tcxext" size="20" maxlength="35" value="${Xmodel.record.tcxext}">
 										</td>
 										<td class="text14" align="left">
 						            		<input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="tcvktb" id="tcvktb" size="13" maxlength="15" value="${Xmodel.record.tcvktb}">
@@ -426,14 +428,70 @@
 												<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 											</a>
 				            			</td> 
+				            			<td align="left">
+						        			<input type="text" class="inputTextMediumBlue" name="tcucr" id="tcucr" size="30" maxlength="35" value="${Xmodel.record.tcucr}">
+										</td>
+										<td align="left">
+						        			<input type="text" class="inputTextMediumBlue" name="tcidr" id="tcidr" size="10" maxlength="17" value="${Xmodel.record.tcidr}">
+										</td>
+										<td align="left">
+						        			<input type="text" class="inputTextMediumBlue" name="tcrole" id="tcrole" size="3" maxlength="3" value="${Xmodel.record.tcrole}">
+										</td>
 							        </tr>
+							        
+							        <tr height="10"><td class="text" align="left" colspan="9"><hr></td></tr>
+							        	
+									<tr>
+							 			
+							            <td class="text14" align="left"><span title="tcxext">&nbsp;Ekst.ref.</span></td>
+							            <td class="text14" align="left"><span title="tcvktb">&nbsp;Bruttovekt</span></td>
+							            <td class="text14" align="left"><span title="tcalk">&nbsp;Avs.land</span></td>
+					            		<td class="text14" align="left"><span title="tcblk">&nbsp;Best.land</span></td>
+					            		<td class="text14" align="left"><span title="tcucr">&nbsp;Refnr.UCR</span></td>
+					            		
+							        </tr>
+							        <tr>
+						        		<td align="left">
+						        			<input type="text" class="inputTextMediumBlue" name="tcxext" id="tcxext" size="20" maxlength="35" value="${Xmodel.record.tcxext}">
+										</td>
+										<td class="text14" align="left">
+						            		<input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="tcvktb" id="tcvktb" size="13" maxlength="15" value="${Xmodel.record.tcvktb}">
+							            </td>
+										<td align="left">&nbsp;
+					            			<select class="selectMediumBlueE2" name="tcalk" id="tcalk">
+							            		<option value="">-velg-</option>
+						 				  		<c:forEach var="country" items="${model.countryCodeList}" >
+		                                	 	<option value="${country.zkod}"<c:if test="${model.record.tcalk == country.zkod}"> selected </c:if> >${country.zkod}</option>
+												</c:forEach> 
+											</select>
+											<a tabindex="-1" id="tcalkIdLink">
+												<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
+											</a>
+				            			</td> 
+				            			<td align="left">&nbsp;
+					            			<select class="selectMediumBlueE2" name="tcblk" id="tcblk">
+							            		<option value="">-velg-</option>
+						 				  		<c:forEach var="country" items="${model.countryCodeList}" >
+		                                	 	<option value="${country.zkod}"<c:if test="${model.record.tcblk == country.zkod}"> selected </c:if> >${country.zkod}</option>
+												</c:forEach> 
+											</select>
+											<a tabindex="-1" id="tcblkIdLink">
+												<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
+											</a>
+				            			</td> 
+				            			<td align="left">
+						        			<input type="text" class="inputTextMediumBlue" name="tcucr" id="tcucr" size="30" maxlength="35" value="${Xmodel.record.tcucr}">
+										</td>
+										<td align="left" >
+											<input class="inputFormSubmit" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.ncts.export.houseconsignment.createnew.submit"/>'>
+											&nbsp;&nbsp;
+										</td>
+							        </tr>
+									
 							        <tr height="10"><td class="text" align="left"></td></tr>
 						        </table>
 					        </td>
-					        <td align="left" >
-								<input class="inputFormSubmit" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.ncts.export.houseconsignment.createnew.submit"/>'>
-								&nbsp;&nbsp;
-							</td>
+					        
 				        </tr>
 					    <tr height="2"><td colspan="2" ></td></tr>
 					    <tr>	
