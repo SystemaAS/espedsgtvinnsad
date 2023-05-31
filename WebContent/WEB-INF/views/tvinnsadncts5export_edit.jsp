@@ -1871,38 +1871,46 @@
 							            <td class="text14" align="left"><input type="text" class="inputTextMediumBlue" name="thnah" id="thnah" size="30" maxlength="35" value="${model.record.thnah}"></td>
 							            
 							        </tr>
-							        
+							        <tr height="1"><td>&nbsp;</td></tr>
 							        <tr>
 							            <td class="text14" align="left" >&nbsp;<span title="thtinh">TIN</span></td>
-							            <td class="text14" align="left" >&nbsp;&nbsp;</td>
+							            
+								            <td class="text14" align="left" >&nbsp;<span title="thcph">Kontaktperson</span></td>
+								            <td class="text14" align="left" >&nbsp;<span title="thtlh">Telefon</span></td>
+							          
 							        </tr>
 							        <tr>
 							            <td align="left"><input type="text" class="inputTextMediumBlue" name="thtinh" id="thtinh" size="20" maxlength="17" value="${model.record.thtinh}"></td>
-							            <td align="left">&nbsp;</td>
+							            
+								        	
+							            	<td align="left" ><input type="text" class="inputTextMediumBlue" name="thcph" id="thcph" size="32" maxlength="30" value="${model.record.thcph}"></td>
+							            	<td align="left" ><input type="text" class="inputTextMediumBlue" name="thtlh" id="thtlh" size="15" maxlength="20" value="${model.record.thtlh}"></td>
+							            	
+							            
 							        </tr>
-							        <tr height="4"><td>&nbsp;</td></tr>
+							        
 							        <tr>
 							            <td class="text14" align="left" >&nbsp;<span title="thad1h">Adresse</span></td>
-							            
+							            <td class="text14" align="left" >&nbsp;<span title="themh">Email</span></td>
 							        </tr>
 							        <tr>
 							            <td align="left"><input type="text" class="inputTextMediumBlue" name="thad1h" id="thad1h" size="30" maxlength="35" value="${model.record.thad1h}"></td>
-							            
+							            <td align="left"><input type="text" class="inputTextMediumBlue" name="themh" id="themh" size="32" maxlength="50" value="${model.record.themh}"></td>
 							        </tr>
 							        <tr>
-							        		<td>
-								        		<table>
-								        		<tr>
-								            		<td class="text14" align="left" >&nbsp;<span title="thpsh">Postadresse</span></td>
-								            		<td align="left">&nbsp;</td>
-								            	</tr>
-								        		<tr>
-								            		<td align="left">
-								       				<input type="text" class="inputTextMediumBlue" name="thpsh" id="thpsh" size="30" maxlength="35" value="${model.record.thpsh}">
-							            			</td> 
-								            		<td align="left">&nbsp;</td>
-								        		</tr>    	
-								            	</table>
+						        		<td>
+							        		<table>
+							        		<tr>
+							            		<td class="text14" align="left" >&nbsp;<span title="thpsh">Postadresse</span></td>
+							            		<td align="left">&nbsp;</td>
+							            	</tr>
+							        		<tr>
+							            		<td align="left">
+							       				<input type="text" class="inputTextMediumBlue" name="thpsh" id="thpsh" size="30" maxlength="35" value="${model.record.thpsh}">
+						            			</td> 
+							            		<td align="left">&nbsp;</td>
+							        		</tr>    	
+							            	</table>
 							            </td>
 							            <td >
 								            	<table>
