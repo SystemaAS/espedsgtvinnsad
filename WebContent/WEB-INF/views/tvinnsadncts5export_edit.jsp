@@ -1349,12 +1349,39 @@
 			 				</tr>
 		 				</table>
 		 			</td>				 			
-		 		</tr>	
+		 		</tr>
+		 			
 				<tr>
 					<td width="2">&nbsp;</td>
 			 		<td>
 			 			<table border="0" cellspacing="1" cellpadding="0">
-						<tr>
+			 			<tr>
+							<td class="text14">
+			 				<img onMouseOver="showPop('19_info');" onMouseOut="hidePop('19_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+			 				<b>19.</b>&nbsp;<font class="text16RedBold" >*</font><span title="thkdc">Container&nbsp;&nbsp;</span>
+			 				<div class="text12" style="position: relative;" align="left">
+							<span style="position:absolute;top:2px; width:250px;" id="19_info" class="popupWithInputText text12"  >
+			           			<b>19. Container</b>
+			           			<p>
+								Oppgi, med fastsatte koder, om varene blir transportert i containere ved utpassering fra Norge.
+								</p>
+			           			<ul>
+				           			<li><b>0</b>&nbsp;-&nbsp;Varer som ikke transporteres i containere.</li>
+				           			<li><b>1</b>&nbsp;-&nbsp;Varer som transporteres i containere.</li>
+				           		</ul>
+				           		<p>Kan defineres som standardverdier pr. avdeling.</p>
+				           	</span>
+				           	</div>
+				           	</td>
+			 				<td class="text14" >
+	 							<select class="inputTextMediumBlueMandatoryField" name="thkdc" id="thkdc">
+			 						<option value="0"<c:if test="${model.record.thkdc == 0}"> selected </c:if> >0</option>
+							  		<option value="1"<c:if test="${model.record.thkdc == 1}"> selected </c:if> >1</option>
+							  	</select>
+	 						</td>
+			 			</tr>
+			 			
+			 			<tr>
 				            <td class="text14" align="left" >
 				            <img onMouseOver="showPop('lastplats_info');" onMouseOut="hidePop('lastplats_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">	
 				            <b>27.</b>&nbsp;<span title="thlsd">Lastested</span>
@@ -1372,7 +1399,96 @@
 						    	<input type="text" class="inputTextMediumBlue" name="thlsd" id="thlsd" size="17" maxlength="17" value="${model.record.thlsd}">
 						    </td>
 						</tr>
-	        				<tr height="10"><td class="text">&nbsp;</td> </tr>
+						<tr height="2"><td class="text">&nbsp;</td></tr>
+						<tr>
+							<td class="text14" align="left" >
+							<img onMouseOver="showPop('goodsLocType_info');" onMouseOut="hidePop('goodsLocType_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+						    	&nbsp;<span title="thlsd">Location of Goods</span>
+						    <div class="text12" style="position: relative;" align="left">
+							<span style="position:absolute;top:2px; width:250px;" id="goodsLocType_info" class="popupWithInputText text12"  >
+				           			<b>Location of Goods</b>
+				           			<p><b>Type</b></p>
+				           			<li>A - Anvist sted</li>							
+									<li>B - Autorisert sted</li>
+									<li>C - Godkjent sted</li>
+									<li>D - Annet</li>
+									<p><b>Qualifier</b></p>
+				           			<li>T - Postnr</li>							
+									<li>U - UN/LOCODE</li>
+									<li>V - Tollsted</li>
+									<li>W - GPS koord.</li>
+									<li>X - EORI</li>							
+									<li>Y - Bevilgningsnr</li>
+									<li>Z - Fritekst (then you must provide an address)</li>
+									
+							</span>
+							</div>	
+						    	
+						    </td>
+						</tr>
+						<tr>
+							<td class="text14" align="right" ><span title="thlgty">Type&nbsp;</span></td>
+						    <td class="text14" >
+						    	<select class="selectMediumBlueE2" name="thlgty" id="thlgty" >
+					           		  <option value="">-velg-</option>
+					 				  <option title="A" value="A"<c:if test="${model.record.thlgty == 'A'}"> selected </c:if> >Anvist sted</option>
+					 				  <option title="B" value="B"<c:if test="${model.record.thlgty == 'B'}"> selected </c:if> >Autorisert sted</option>
+									  <option title="C" value="C"<c:if test="${model.record.thlgty == 'C'}"> selected </c:if> >Godkjent sted</option>
+									  <option title="D" value="D"<c:if test="${model.record.thlgty == 'D'}"> selected </c:if> >Annet</option>
+								</select>
+						    </td>
+						 </tr>
+						 <tr>
+							<td class="text14" align="right" ><span title="thlgid">Qualifier&nbsp;</span></td>
+						    <td class="text14" >
+						    	<select class="selectMediumBlueE2" name="thlgid" id="thlgid" >
+					           		  <option value="">-velg-</option>
+					 				  <option title="T" value="T"<c:if test="${model.record.thlgid == 'T'}"> selected </c:if> >Postnr</option>
+					 				  <option title="U" value="U"<c:if test="${model.record.thlgid == 'U'}"> selected </c:if> >UN/LOCODE</option>
+									  <option title="V" value="V"<c:if test="${model.record.thlgid == 'V'}"> selected </c:if> >Tollsted</option>
+									  <option title="W" value="W"<c:if test="${model.record.thlgid == 'W'}"> selected </c:if> >GPS koor.</option>
+									  <option title="X" value="X"<c:if test="${model.record.thlgid == 'X'}"> selected </c:if> >EORI</option>
+									  <option title="Y" value="Y"<c:if test="${model.record.thlgid == 'Y'}"> selected </c:if> >Bevilg.nr</option>
+									  <option title="Z" value="Z"<c:if test="${model.record.thlgid == 'Z'}"> selected </c:if> >Fritekst</option>
+									  
+								</select>
+						    </td>
+						 </tr>
+						 <tr>
+							<td class="text12" align="right" ><span title="thlgun">UN/LOCODE&nbsp;</span></td>	
+						    <td class="text12" >
+						    	<input type="text" class="inputTextMediumBlue" name="thlgun" id="thlgun" size="15" maxlength="24" value="${model.record.thlgun}">
+						    </td>
+						 </tr>
+						 <tr height="2"><td class="text">&nbsp;</td></tr>
+						 <tr>
+							<td class="text14" align="right" >Adress&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="text12" align="right" ><span title="thpse">Poststed&nbsp;</span></td>	
+						    <td class="text12" >
+						    	<input type="text" class="inputTextMediumBlue" name="thpse" id="thpse" size="15" maxlength="24" value="${model.record.thpse}">
+						    </td>
+						 </tr>
+						 
+						 <tr>
+							<td class="text12" align="right" ><span title="thpne2">Postnr&nbsp;</span></td>	
+						    <td class="text12" >
+						    	<input type="text" class="inputTextMediumBlue" name="thpne2" id="thpne2" size="15" maxlength="24" value="${model.record.thpne2}">
+						    </td>
+						 </tr>
+	        			<tr>
+							<td class="text12" align="right" ><span title="thlke">Land&nbsp;</span></td>	
+						    <td class="text12" >
+						    	<select class="selectMediumBlueE2" name="thlke" id="thlke" font-size="12">
+				            		<option value="">-velg-</option>
+			 				  		<c:forEach var="country" items="${model.countryCodeList}" >
+                               	 		<option value="${country.zkod}"<c:if test="${model.record.thlke == country.zkod}"> selected </c:if> >${country.zkod}</option>
+									</c:forEach>
+								</select> 
+						    </td>
+						 </tr>
+	        			<tr height="10"><td class="text">&nbsp;</td> </tr>
 			 				<tr>
 					            <td class="text14" align="left">
 					            <img onMouseOver="showPop('tullkontor_info');" onMouseOut="hidePop('tullkontor_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">	
