@@ -1317,40 +1317,7 @@
 					</td>
 				</tr>
 				<tr height="15"><td class="text">&nbsp;</td> </tr>
-				
-				<tr>
-					<td width="2">&nbsp;</td>
-		 			<td class="text14">
-		 				<table align="left" border="0" cellspacing="0" cellpadding="0">
-			 				<tr>
-				 				<td class="text14">
-				 				<img onMouseOver="showPop('19_info');" onMouseOut="hidePop('19_info');"style="vertical-align:bottom;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-				 				<b>19.</b>&nbsp;<font class="text16RedBold" >*</font><span title="thkdc">Container&nbsp;&nbsp;</span>
-				 				<div class="text12" style="position: relative;" align="left">
-								<span style="position:absolute;top:2px; width:250px;" id="19_info" class="popupWithInputText text12"  >
-				           			<b>19. Container</b>
-				           			<p>
-									Oppgi, med fastsatte koder, om varene blir transportert i containere ved utpassering fra Norge.
-									</p>
-				           			<ul>
-					           			<li><b>0</b>&nbsp;-&nbsp;Varer som ikke transporteres i containere.</li>
-					           			<li><b>1</b>&nbsp;-&nbsp;Varer som transporteres i containere.</li>
-					           		</ul>
-					           		<p>Kan defineres som standardverdier pr. avdeling.</p>
-					           	</span>
-					           	</div>
-					           	</td>
-				 				<td class="text14" >
-		 							<select class="inputTextMediumBlueMandatoryField" name="thkdc" id="thkdc">
-				 						<option value="0"<c:if test="${model.record.thkdc == 0}"> selected </c:if> >0</option>
-								  		<option value="1"<c:if test="${model.record.thkdc == 1}"> selected </c:if> >1</option>
-								  	</select>
-		 						</td>
-			 				</tr>
-		 				</table>
-		 			</td>				 			
-		 		</tr>
-		 			
+					
 				<tr>
 					<td width="2">&nbsp;</td>
 			 		<td>
