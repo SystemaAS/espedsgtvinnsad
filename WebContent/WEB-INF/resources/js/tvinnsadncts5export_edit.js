@@ -266,6 +266,19 @@
 			}
 	    });
 	    
+    	//--------------------------------------
+	  	//Tullkontor - thlgun location of goods
+	  	//--------------------------------------
+	    jq('#thlgtsIdLink').click(function() {
+	    	jq('#thlgtsIdLink').attr('target','_blank');
+	    	window.open('tvinnsadnctsexport_edit_childwindow_tullkontor.do?action=doInit&tkkode=' + jq('#thlgts').val() + '&ctype=thlgts', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+	    });
+	    jq('#thlgtsIdLink').keypress(function(e){ //extra feature for the end user
+			if(e.which == 13) {
+				jq('#thlgtsIdLink').click();
+			}
+	    });
+
 	    //--------------------
 	  	//Tullkontor - thcats
 	  	//--------------------

@@ -164,6 +164,7 @@ public class SadNctsExportHeaderValidator implements Validator {
 				//-----------------
 				//Kontrollresultat
 				//-----------------
+				
 				if(record.getThenkl()!=null && "J".equals(record.getThenkl())){
 					if(!this.isForhandsvarsel(record.getThdk())){
 						if(!"A3".equals(record.getThdkr()) ){

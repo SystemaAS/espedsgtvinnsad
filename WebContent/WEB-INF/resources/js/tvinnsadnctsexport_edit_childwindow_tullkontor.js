@@ -52,6 +52,10 @@
 				  opener.jq('#thtsd8').val(tkkode);
 				  opener.jq('#thtsd8').focus();
 				  
+			  }else if (callerType == 'thlgts'){  
+				  opener.jq('#thlgts').val(tkkode);
+				  opener.jq('#thlgts').focus();
+				  
 			  }
 			  //close child window
 			  window.close();

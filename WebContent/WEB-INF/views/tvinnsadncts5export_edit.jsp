@@ -192,12 +192,29 @@
 					<img onMouseOver="showPop('status_info');" onMouseOut="hidePop('status_info');"style="vertical-align:middle;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
 					<span title="thst">Stat<a id="updateStatusLink" runat="server" href="#"><font class="text11MediumBlue">u</font></a>s:</span>&nbsp;<b>${model.record.thst}</b>
 					&nbsp;&nbsp;
-					<font class="text16RedBold" >*</font><span title="thenkl">Type av prosedyre</span>&nbsp;
-					<%-- Must be model attribute in order to validate towards the filter (thsg) --%>
+					<%-- <font class="text16RedBold" >*</font><span title="thenkl">Type av prosedyre</span>&nbsp;
+					Must be model attribute in order to validate towards the filter (thsg) 
            			<select class="selectMediumBlueE2" name="thenkl" id="thenkl">
 	            		<option value="J"<c:if test="${model.record.thenkl == 'J'}"> selected </c:if> >Forenklet</option>
 					  	<option value="N"<c:if test="${model.record.thenkl == 'N'}"> selected </c:if> >Normal</option>
+					</select> --%>
+					
+					<font class="text16RedBold" >*</font><span title="thdkt">Additional Dekl.type</span>&nbsp;
+					<%-- Must be model attribute in order to validate towards the filter (thsg) --%>
+           			<select class="selectMediumBlueE2" name="thdkt" id="thdkt">
+	            		<option value="A"<c:if test="${model.record.thdkt == 'A'}"> selected </c:if> >Normal</option>
+					  	<option value="D"<c:if test="${model.record.thdkt == 'D'}"> selected </c:if> >Lodging</option>
+								   
 					</select>
+					
+					<font class="text16RedBold" >*</font><span title="thrdin">Redusert datasett</span>&nbsp;
+					<%-- Must be model attribute in order to validate towards the filter (thsg) --%>
+           			<select class="selectMediumBlueE2" name="thrdin" id="thrdin">
+	            		<option value="0"<c:if test="${model.record.thrdin == '0'}"> selected </c:if> >Nei</option>
+					  	<option value="1"<c:if test="${model.record.thrdin == '1'}"> selected </c:if> >Ja</option>
+								   
+					</select>
+					
 						<div class="text12" style="position: relative;" align="left">
 						<span style="position:absolute;top:2px; width:250px;" id="status_info" class="popupWithInputText text12"  >
 		           		<br/>
@@ -270,13 +287,22 @@
                              	 	<option value="${record.sign}"<c:if test="${model.record.thsg == record.sign}"> selected </c:if> >${record.sign}</option>
 						</c:forEach> 
 					</select>
-					<font class="text16RedBold" >*</font><span title="thenkl">Type av prosedyre</span>&nbsp;
+					<font class="text16RedBold" >*</font><span title="thdkt">Additional Dekl.type</span>&nbsp;
 					<%-- Must be model attribute in order to validate towards the filter (thsg) --%>
-           			<select class="selectMediumBlueE2" name="thenkl" id="thenkl">
-	            		<option value="J"<c:if test="${model.record.thenkl == 'J'}"> selected </c:if> >Forenklet</option>
-					  	<option value="N"<c:if test="${model.record.thenkl == 'N'}"> selected </c:if> >Normal</option>
+           			<select class="selectMediumBlueE2" name="thdkt" id="thdkt">
+	            		<option value="A"<c:if test="${model.record.thdkt == 'A'}"> selected </c:if> >Normal</option>
+					  	<option value="D"<c:if test="${model.record.thdkt == 'D'}"> selected </c:if> >Lodging</option>
 								   
 					</select>
+					
+					<font class="text16RedBold" >*</font><span title="thrdin">Redusert datasett</span>&nbsp;
+					<%-- Must be model attribute in order to validate towards the filter (thsg) --%>
+           			<select class="selectMediumBlueE2" name="thrdin" id="thrdin">
+	            		<option value="0"<c:if test="${model.record.thrdin == '0'}"> selected </c:if> >Nei</option>
+					  	<option value="1"<c:if test="${model.record.thrdin == '1'}"> selected </c:if> >Ja</option>
+								   
+					</select>
+					
 				</td>
 				<td>&nbsp;</td>
 			</tr>	
@@ -310,10 +336,7 @@
 			 							
 					           			<ul>
 					           				<li>
-					           				 	<b>SS</b>&nbsp;SAFETY AND SECURITY (FORHÅNDSVARSL)
-					           				</li>
-					           				<li>
-					           				 	<b>T-</b>&nbsp;BÅDE T1 OG T2
+					           				 	<b>T</b>&nbsp;BÅDE T1 OG T2
 					           				</li>	
 											<li>
 					           				 	<b>T1</b>&nbsp;FELLES TRANSITTERING (=IKKE EF) 
@@ -334,8 +357,7 @@
 					           				</li>
 					           				
 					           			</ul>
-					           			Note: where the symbols T1, T2, T2F, T1bis, T2bis, T2Fbis, as appropriate, have been
-										omitted the goods shall be deemed to have been placed under the T1 procedure.
+					           			
 								</span>	
 								</div>	
 				 			</td>
@@ -1351,19 +1373,30 @@
 			 			<tr>
 				            <td class="text14" align="left" >
 				            <img onMouseOver="showPop('lastplats_info');" onMouseOut="hidePop('lastplats_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">	
-				            <b>27.</b>&nbsp;<span title="thlsd">Lastested</span>
+				            <span title="thlsna">Lastested</span>
 				            
 				            <div class="text12" style="position: relative;" align="left">
 							<span style="position:absolute;top:2px; width:250px;" id="lastplats_info" class="popupWithInputText text12"  >
-				           			<b>27. Lastested</b>
+				           			<b>Lastested</b>
 				           			<p>
-									Dette er ikke et obligatorisk felt. Rent tekstfelt. Fyll ut med f.eks. terminalnavn etc.								
+									Dette er obligatorisk felt hvis Additional Dekl.type = Lodging. 
+									</p>
+									<p>
+									Rent tekstfelt. Fyll ut med f.eks. terminalnavn etc.
+									Landkode må inkluderes hvis lastested finnes.								
 									</p>
 							</span>
 							</div>
 							</td>
 							<td class="text14" >
-						    	<input type="text" class="inputTextMediumBlue" name="thlsd" id="thlsd" size="17" maxlength="17" value="${model.record.thlsd}">
+						    	<input type="text" class="inputTextMediumBlue" name="thlsna" id="thlsna" size="17" maxlength="35" value="${model.record.thlsna}">
+						    	&nbsp;<span title="thlslk">Land&nbsp;</span>	
+								<select class="selectMediumBlueE2" name="thlslk" id="thlslk" font-size="12">
+				            		<option value="">-velg-</option>
+			 				  		<c:forEach var="country" items="${model.countryCodeList}" >
+                               	 		<option value="${country.zkod}"<c:if test="${model.record.thlslk == country.zkod}"> selected </c:if> >${country.zkod}</option>
+									</c:forEach>
+								</select>
 						    </td>
 						</tr>
 						<tr height="2"><td class="text">&nbsp;</td></tr>
@@ -1381,12 +1414,12 @@
 									<li>D - Annet</li>
 									<p><b>Qualifier</b></p>
 				           			<li>T - Postnr</li>							
-									<li>U - UN/LOCODE</li>
-									<li>V - Tollsted</li>
+									<li>U - UN/LOCODE (you must provide un/locode)</li>
+									<li>V - Tollsted (you must provide Tollsted - Customs office)</li>
 									<li>W - GPS koord.</li>
 									<li>X - EORI</li>							
 									<li>Y - Bevilgningsnr</li>
-									<li>Z - Fritekst (then you must provide an address)</li>
+									<li>Z - Fritekst (you must provide an address)</li>
 									
 							</span>
 							</div>	
@@ -1398,10 +1431,10 @@
 						    <td class="text14" >
 						    	<select class="selectMediumBlueE2" name="thlgty" id="thlgty" >
 					           		  <option value="">-velg-</option>
-					 				  <option title="A" value="A"<c:if test="${model.record.thlgty == 'A'}"> selected </c:if> >Anvist sted</option>
-					 				  <option title="B" value="B"<c:if test="${model.record.thlgty == 'B'}"> selected </c:if> >Autorisert sted</option>
-									  <option title="C" value="C"<c:if test="${model.record.thlgty == 'C'}"> selected </c:if> >Godkjent sted</option>
-									  <option title="D" value="D"<c:if test="${model.record.thlgty == 'D'}"> selected </c:if> >Annet</option>
+					 				  <option title="A" value="A"<c:if test="${model.record.thlgty == 'A'}"> selected </c:if> >A - Anvist sted</option>
+					 				  <option title="B" value="B"<c:if test="${model.record.thlgty == 'B'}"> selected </c:if> >B - Autorisert sted</option>
+									  <option title="C" value="C"<c:if test="${model.record.thlgty == 'C'}"> selected </c:if> >C - Godkjent sted</option>
+									  <option title="D" value="D"<c:if test="${model.record.thlgty == 'D'}"> selected </c:if> >D - Annet</option>
 								</select>
 						    </td>
 						 </tr>
@@ -1410,24 +1443,35 @@
 						    <td class="text14" >
 						    	<select class="selectMediumBlueE2" name="thlgid" id="thlgid" >
 					           		  <option value="">-velg-</option>
-					 				  <option title="T" value="T"<c:if test="${model.record.thlgid == 'T'}"> selected </c:if> >Postnr</option>
-					 				  <option title="U" value="U"<c:if test="${model.record.thlgid == 'U'}"> selected </c:if> >UN/LOCODE</option>
-									  <option title="V" value="V"<c:if test="${model.record.thlgid == 'V'}"> selected </c:if> >Tollsted</option>
-									  <option title="W" value="W"<c:if test="${model.record.thlgid == 'W'}"> selected </c:if> >GPS koor.</option>
-									  <option title="X" value="X"<c:if test="${model.record.thlgid == 'X'}"> selected </c:if> >EORI</option>
-									  <option title="Y" value="Y"<c:if test="${model.record.thlgid == 'Y'}"> selected </c:if> >Bevilg.nr</option>
-									  <option title="Z" value="Z"<c:if test="${model.record.thlgid == 'Z'}"> selected </c:if> >Fritekst</option>
+					 				  <option title="T" value="T"<c:if test="${model.record.thlgid == 'T'}"> selected </c:if> >T - Postnr</option>
+					 				  <option title="U" value="U"<c:if test="${model.record.thlgid == 'U'}"> selected </c:if> >U - UN/LOCODE</option>
+									  <option title="V" value="V"<c:if test="${model.record.thlgid == 'V'}"> selected </c:if> >V - Tollsted</option>
+									  <option title="W" value="W"<c:if test="${model.record.thlgid == 'W'}"> selected </c:if> >W - GPS koor.</option>
+									  <option title="X" value="X"<c:if test="${model.record.thlgid == 'X'}"> selected </c:if> >X - EORI</option>
+									  <option title="Y" value="Y"<c:if test="${model.record.thlgid == 'Y'}"> selected </c:if> >Y - Bevilg.nr</option>
+									  <option title="Z" value="Z"<c:if test="${model.record.thlgid == 'Z'}"> selected </c:if> >Z - Fritekst</option>
 									  
 								</select>
 						    </td>
 						 </tr>
+						 <tr height="2"><td class="text"></td></tr>
 						 <tr>
 							<td class="text12" align="right" ><span title="thlgun">UN/LOCODE&nbsp;</span></td>	
 						    <td class="text12" >
 						    	<input type="text" class="inputTextMediumBlue" name="thlgun" id="thlgun" size="15" maxlength="24" value="${model.record.thlgun}">
 						    </td>
 						 </tr>
-						 <tr height="2"><td class="text">&nbsp;</td></tr>
+						 <tr height="2"><td class="text"></td></tr>
+						 <tr>
+							<td class="text12" align="right" ><span title="thlgts">Tollsted&nbsp;</span></td>	
+						    <td class="text12" >
+						    	<input type="text" class="inputTextMediumBlue" name="thlgts" id="thlgts" size="9" maxlength="8" value="${model.record.thlgts}">
+						    	<a tabindex="-1" id="thlgtsIdLink">
+									<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
+								</a>
+						    </td>
+						 </tr>
+						 <tr height="2"><td class="text"></td></tr>
 						 <tr>
 							<td class="text14" align="right" >Adress&nbsp;</td>
 						</tr>
@@ -2172,13 +2216,24 @@
 					            				Sikkerhet - Indikator</span>&nbsp;
 					            				<div class="text12" style="position: relative;" align="left">
 												<span style="position:absolute;top:2px; width:250px;" id="sikkerhetIndicator_info" class="popupWithInputText text12"  >
-					           						Indikator for specifik omstendighet (0 eller 1)	
+					           						Indikator for specifik omstendighet (0,1,2 eller 3) <br/>
+					           						<ul>
+									           			<li><b>0</b>&nbsp;Not used for safety and security purposes</li>
+									           			<li><b>1</b>&nbsp;ENS</li>
+									           			<li><b>2</b>&nbsp;EXS</li>
+									           			<li><b>3</b>&nbsp;ENS og EXS</li>
+									           			
+									           		</ul>
+					           						
 												</span>	
 												</div>
 											
 					            				<select class="selectMediumBlueE2" name="thsik" id="thsik" >
 							 				  <option value="0"<c:if test="${model.record.thsik == '0'}"> selected </c:if> >0</option>
 											  <option value="1"<c:if test="${model.record.thsik == '1'}"> selected </c:if> >1</option>
+											  <option value="2"<c:if test="${model.record.thsik == '2'}"> selected </c:if> >2</option>
+											  <option value="3"<c:if test="${model.record.thsik == '3'}"> selected </c:if> >3</option>
+											  
 											</select>
 											&nbsp;&nbsp;<span title="thdta">Ank.dato</span>&nbsp;<input onKeyPress="return numberKey(event) type="text" class="inputTextMediumBlue" name="thdta" id="thdta" size="9" maxlength="8" value="${model.record.thdta}">
 											&nbsp;<span title="thtma">Tid</span>&nbsp;<input onKeyPress="return numberKey(event) type="text" class="inputTextMediumBlue" name="thtma" id="thtma" size="5" maxlength="4" value="${model.record.thtma}">

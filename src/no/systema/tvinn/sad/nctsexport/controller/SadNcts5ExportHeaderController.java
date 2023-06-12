@@ -758,7 +758,7 @@ public class SadNcts5ExportHeaderController {
         	if(topicSikkerhetContainer!=null && topicSikkerhetContainer.getSecurityhead()!=null){
         		for (JsonSadNctsExportSpecificTopicRecord topicSikkerhetRecord : topicSikkerhetContainer.getSecurityhead()){
         			sikkerhetRecord = topicSikkerhetRecord;
-        			//logger.info("A(thlosd):" + sikkerhetRecord.getThlosd());
+        			logger.info("A(thlosd):" + sikkerhetRecord.getThlosd());
             	}
         		//copy delta to target record
         		if(sikkerhetRecord!=null && targetRecord!=null){
