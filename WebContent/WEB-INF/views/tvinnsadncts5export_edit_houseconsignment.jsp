@@ -265,10 +265,10 @@
 									    <th class="text14">&nbsp;Linjenr.&nbsp;</th>
 									    <th class="text14">&nbsp;Endre&nbsp;</th>
 									    <th class="text14">&nbsp;Ekst.ref.&nbsp;</th>   
-					                    <th class="text14">&nbsp;Bruttovekt&nbsp;</th>
+					                    <th class="text14" align="right">&nbsp;Bruttovekt&nbsp;</th>
 					                    <th class="text14">&nbsp;Avs.land&nbsp;</th>
 					                    <th class="text14">&nbsp;Best.land&nbsp;</th>
-					                    <th class="text14">&nbsp;Best.land&nbsp;</th>
+					                    <th class="text14">&nbsp;Ref.UCR&nbsp;</th>
 					                    <c:if test="${model.status == 'M' || empty model.status}">
 					                    	<th align="center" class="text14" nowrap>Slett</th>
 					                    </c:if> 
@@ -291,13 +291,13 @@
 							               		</a>
 							               </td>
 							               <td align="right" class="text14" >&nbsp;${record.tcxext}</td>
-							               <td align="center" class="text14" >&nbsp;${Xrecord.todo}</td>
-							               <td align="right" class="text14" >&nbsp;${Xrecord.todo}</td>
-							               <td align="right" class="text14" >&nbsp;${Xrecord.todo}</td>
-							               <td align="right" class="text14" >&nbsp;${Xrecord.todo}</td>
+							               <td align="right" class="text14" >&nbsp;${record.tcvktb}</td>
+							               <td align="center" class="text14" >&nbsp;${record.tcalk}</td>
+							               <td align="center" class="text14" >&nbsp;${record.tcblk}</td>
+							               <td align="left" class="text14" >&nbsp;${record.tcucr}</td>
 										   <c:if test="${model.status == 'M' || empty model.status}">	
 								               <td class="text14" align="center" nowrap>
-								               	<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadexport_edit_houseconsignment.do?action=doDelete&sign=${model.sign}&avd=${Xrecord.tvavd}&opd=${Xrecord.tvtdn}&lin=${Xrecord.tvli}">
+								               	<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadexport_edit_houseconsignment.do?action=doDelete&sign=${model.sign}&avd=${record.tcavd}&opd=${record.tctdn}&lin=${record.tcli}">
 								               		<img valign="bottom" src="resources/images/delete.gif" border="0" alt="remove">
 								               	</a>	&nbsp;
 								               </td>
