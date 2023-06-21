@@ -2,7 +2,7 @@ package no.systema.tvinn.sad.nctsexport.controller;
 
 import java.util.*;
 
- 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,6 +41,7 @@ import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignature
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureRecord;
 
 import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService;
+import no.systema.tvinn.sad.nctsexport.validator.SadNcts5ExportHouseConsignmentValidator;
 import no.systema.tvinn.sad.nctsexport.validator.SadNctsExportHeaderValidator;
 import no.systema.tvinn.sad.nctsexport.validator.SadNctsExportItemsValidator;
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.JsonSadNctsExportSpecificTopicContainer;
@@ -108,7 +109,7 @@ public class SadNcts5ExportHouseConsignmentController {
 	 * @return
 	 */
 	@RequestMapping(value="tvinnsadncts5export_edit_houseconsignment.do")
-	public ModelAndView tvinnsadNcts5ExportEditHouseConsignment(@ModelAttribute ("record") JsonSadNctsExportSpecificTopicRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+	public ModelAndView tvinnsadNcts5ExportEditHouseConsignment(@ModelAttribute ("record") JsonSadNcts5ExportHouseConsignmentRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		
 		
 		logger.info("Method: doPrepareCreate [RequestMapping-->tvinnsadncts5export_edit_houseconsignment.do]");
@@ -119,7 +120,7 @@ public class SadNcts5ExportHouseConsignmentController {
 		RpgReturnResponseHandler rpgReturnResponseHandler = new RpgReturnResponseHandler();
 		
 		Map model = new HashMap();
-		String urlRequestParamsKeys = null;
+		//String urlRequestParamsKeys = null;
 		//Catch required action (doFetch or doUpdate)
 		String action = request.getParameter("action");
 		logger.info("ACTION: " + action);
@@ -129,7 +130,6 @@ public class SadNcts5ExportHouseConsignmentController {
 		}else{
 			
 			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_NCTS5_EXPORT);
-			boolean isValidCreatedRecordTransactionOnRPG = true;
 			
 			//Keys and header information
 			String opd = request.getParameter("opd");
@@ -141,15 +141,15 @@ public class SadNcts5ExportHouseConsignmentController {
 			String status = request.getParameter("status");
 			String datum = request.getParameter("datum");
 			//this key is only used with a real Update. When empty it will be a signal for a CREATE NEW (Add)
-			String lineNr = request.getParameter("tvli");
-			
+			String lineNr = request.getParameter("tcli");
+			String mode = "";
 			
 			
 			if(lineNr!=null && !"".equals(lineNr)){
 				//nothing
 			}else{
 				//this branch is necessary in order to get the line Nr after a validation error (ref. below att bindingResult.hasErrors in this same method)
-				lineNr = (String)session.getAttribute("tvli_SESSION");
+				lineNr = (String)session.getAttribute("tcli_SESSION");
 			}
 			model.put("avd", avd);
 			model.put("opd", opd);
@@ -160,175 +160,127 @@ public class SadNcts5ExportHouseConsignmentController {
 			model.put("mrnNr", mrnNr);
 			//logger.info("AA" + recordToValidate.getTvdref());
 		    
-			/*
+			
 			if(TvinnSadConstants.ACTION_UPDATE.equals(action)){
 				//-----------
 				//Validation
 				//-----------
-				SadNctsExportItemsValidator validator = new SadNctsExportItemsValidator();
+				SadNcts5ExportHouseConsignmentValidator validator = new SadNcts5ExportHouseConsignmentValidator();
 				logger.info("Host via HttpServletRequest.getHeader('Host'): " + request.getHeader("Host"));
-				//-------------------------------------------------------
-				//this is only for validation of gross weight 
-				//in first item line (mandatory), this is the only way
-				//-------------------------------------------------------
-				String numberOfItemLinesInTopicStr = request.getParameter("numberOfItemLinesInTopic");
-				if(numberOfItemLinesInTopicStr==null || "".equals(numberOfItemLinesInTopicStr)){
-					numberOfItemLinesInTopicStr = "0";
-				}
-				recordToValidate.setNumberOfItemLinesInTopicStr(numberOfItemLinesInTopicStr);
-				//in order to flag an update one-line item
-				if(lineNr!=null && !"".equals(lineNr)){
-					if("1".equals(numberOfItemLinesInTopicStr)){
-						recordToValidate.setNumberOfItemLinesInTopicStr("-99");
-					}
-				}
-				//Check if oppdrag ref (if any) is valid
-				if(!"".equals(recordToValidate.getTvtdn2())){
-					recordToValidate.setValidOppdragRef(this.isValidOppdragRef(appUser, recordToValidate));
-				}
+				
 				validator.validate(recordToValidate, bindingResult);
 				
 			    //check for ERRORS
 				if(bindingResult.hasErrors()){
-					recordToValidate.setTvli(null);
-				    	logger.info("[ERROR] Validation Item Record does not validate)");
+					recordToValidate.setTcli(null);
+				    	logger.info("[ERROR] Validation HouseConsignment Record does not validate)");
 				    	logger.info("[INFO] lineNr " + lineNr);
 
 				    	model.put("record", recordToValidate);
 				    	if(lineNr!=null && !"".equals(lineNr)){
 				    		logger.info("[INFO] lineNr ... filling old value: lineNr:" + lineNr);
 				    		session.setAttribute("tvli_SESSION", lineNr);
-				    		recordToValidate.setTvli(lineNr);
-					    	recordToValidate.setTvtdn(opd);
-				    		recordToValidate.setTvavd(avd);
+				    		recordToValidate.setTcli(lineNr);
+					    	recordToValidate.setTctdn(opd);
+				    		recordToValidate.setTcavd(avd);
 				    	}
 			    }else{
 					if(lineNr!=null && !"".equals(lineNr)){
 						//clean
-						session.removeAttribute("tvli_SESSION");
+						session.removeAttribute("tcli_SESSION");
 				    	
 						//-------
 						//UPDATE
 						//-------
+						mode = TvinnSadConstants.MODE_UPDATE;
+						logger.info("UPDATE on House in process...");
+						/*
 						logger.info("UPDATE(only) HOUSE (existent item) in process...");
 						//take the rest from GUI.
-						jsonSadNctsExportSpecificTopicItemRecord = new JsonSadNctsExportSpecificTopicItemRecord();
-						ServletRequestDataBinder binder = new ServletRequestDataBinder(jsonSadNctsExportSpecificTopicItemRecord);
+						JsonSadNcts5ExportHouseConsignmentRecord newRecord = new JsonSadNcts5ExportHouseConsignmentRecord();
+						ServletRequestDataBinder binder = new ServletRequestDataBinder(newRecord);
 			            //binder.registerCustomEditor(...); // if needed
 			            binder.bind(request);
 			            //put back the generated seed and the header keys (avd,opd)
-			            jsonSadNctsExportSpecificTopicItemRecord.setTvavd(avd);
-			            jsonSadNctsExportSpecificTopicItemRecord.setTvtdn(opd);
-			            //put back the values of sensitive goods
-			            jsonSadNctsExportSpecificTopicItemRecord.setTvfv(recordToValidate.getTvfv());
-			            jsonSadNctsExportSpecificTopicItemRecord.setTvfvnt(recordToValidate.getTvfvnt());
+			            newRecord.setTcavd(avd);
+			            newRecord.setTctdn(opd);
+			            */
+						//TODO update
 			            
-			            logger.info("[DEBUG] UPDATE on Line nr: " + jsonSadNctsExportSpecificTopicItemRecord.getTvli().trim());
-			            logger.info("[DEBUG] UPDATE on Opd: " + jsonSadNctsExportSpecificTopicItemRecord.getTvtdn());
-			            logger.info("[DEBUG] UPDATE on Avd: " + jsonSadNctsExportSpecificTopicItemRecord.getTvavd());
-			            logger.info("[DEBUG] UPDATE on tvtdsk: " + jsonSadNctsExportSpecificTopicItemRecord.getTvtdsk());
-			            logger.info("[DEBUG] UPDATE on tvtdo: " + jsonSadNctsExportSpecificTopicItemRecord.getTvtdo());
-						
 					}else{
 						//-------
 						//CREATE
 						//-------
-						logger.info("CREATE and UPDATE on ITEM (new fresh item) on process...");
+						logger.info("CREATE on House (new fresh house) in process...");
 						//This means that the update will be done AFTER a creation of an empty record. All this in the same transaction. 2 STEPS involved: (1)create and (2)update
 						//-----------------------------------------------------------------------------------------
 						//STEP[1] Generate new Item line key seeds (avd,opd,syli) by creating an empty new record. 
 						//		  This step is ONLY applicable for new item lines 
 						//-------------------------------------------------------------------------------------------
-						jsonSadNctsExportSpecificTopicItemRecord  = this.createNewItemKeySeeds(session, request, appUser);
-						if(jsonSadNctsExportSpecificTopicItemRecord!=null){
-							String newLineNr = jsonSadNctsExportSpecificTopicItemRecord.getTvli();
-							logger.info("[INFO] New LineNr:" + newLineNr);
-							//take the rest from GUI.
-							jsonSadNctsExportSpecificTopicItemRecord = new JsonSadNctsExportSpecificTopicItemRecord();
-							ServletRequestDataBinder binder = new ServletRequestDataBinder(jsonSadNctsExportSpecificTopicItemRecord);
-				            //binder.registerCustomEditor(...); // if needed
-				            binder.bind(request);
-				            
-				            jsonSadNctsExportSpecificTopicItemRecord.setTvli(newLineNr);
-				            //put back the generated seed and the header keys (avd,opd)
-				            jsonSadNctsExportSpecificTopicItemRecord.setTvtdn(opd);
-				            jsonSadNctsExportSpecificTopicItemRecord.setTvavd(avd);
-				            logger.info("[INFO] Varubeskrivning (on item record):" + jsonSadNctsExportSpecificTopicItemRecord.getTvvt());
-				            logger.info("[INFO] New line number (on item record):" + jsonSadNctsExportSpecificTopicItemRecord.getTvli());
-				            logger.info("[INFO] Yderligare oplys. (on item record):" + jsonSadNctsExportSpecificTopicItemRecord.getTvdty());
-				            logger.info("[INFO] Doc.ref (on item record):" + jsonSadNctsExportSpecificTopicItemRecord.getTvdref());
-				            //put back the values of sensitive goods
-				            jsonSadNctsExportSpecificTopicItemRecord.setTvfv(recordToValidate.getTvfv());
-				            jsonSadNctsExportSpecificTopicItemRecord.setTvfvnt(recordToValidate.getTvfvnt());
-				            
-						}else{
-							isValidCreatedRecordTransactionOnRPG = false;
+						String newLineNr  = "100"; //this.getNewLineNr(session, request, appUser);
+						if(StringUtils.isNotEmpty(newLineNr)) {
+							recordToValidate.setTcli(newLineNr);
+							mode = TvinnSadConstants.MODE_ADD;
 						}
 					}
 					//--------------------------------------------------
-					//At this point we are ready to do an update
-					//--------------------------------------------------
-					if(isValidCreatedRecordTransactionOnRPG){
-						
-			            logger.info("[INFO] Valid previous step successfully processed, OK ");
-			            logger.info("[INFO] Ready to move forward to do the UPDATE");
-			            
-						//---------------------------
-						//get BASE URL = RPG-PROGRAM
-			            //---------------------------
-						String BASE_URL_UPDATE = SadNctsExportUrlDataStore.NCTS_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_ITEM_URL;
-						urlRequestParamsKeys = this.getRequestUrlKeyParametersUpdate(jsonSadNctsExportSpecificTopicItemRecord, appUser, TvinnSadConstants.MODE_UPDATE);
-						String urlRequestParamsTopicItem = this.urlRequestParameterMapper.getUrlParameterValidString((jsonSadNctsExportSpecificTopicItemRecord));
-						//put the final valid param. string
-						String urlRequestParams = urlRequestParamsKeys + urlRequestParamsTopicItem;
-						//for debug purposes in GUI
-						session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_UPDATE_TVINN_SAD, BASE_URL_UPDATE + "==>params: " + urlRequestParams.toString()); 
-						
-						logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-				    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL_UPDATE));
-				    	logger.info("URL PARAMS: " + urlRequestParams);
-				    	//----------------------------------------------------------------------------
-				    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
-				    	//----------------------------------------------------------------------------
-				    	String rpgReturnPayload = this.urlCgiProxyService.getJsonContent(BASE_URL_UPDATE, urlRequestParams);
-				    	//Debug --> 
-				    	logger.info("Checking errMsg in rpgReturnPayload" + rpgReturnPayload);
-				    	//we must evaluate a return RPG code in order to know if the Update was OK or not
-				    	rpgReturnResponseHandler.evaluateRpgResponseOnTopicItemCreateOrUpdate(rpgReturnPayload);
-				    	if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){
-				    		rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on UPDATE: " + rpgReturnResponseHandler.getErrorMessage());
-				    		this.setFatalError(model, rpgReturnResponseHandler, jsonSadNctsExportSpecificTopicItemRecord);
-				    		
-				    	}else{
-				    		//Update successfully done!
-				    		logger.info("[INFO] Valid STEP[2] Update -- Record successfully updated, OK ");
-				    		//------------------------------------
-				    		//Update/Create now Security-Sikkerhet record
-				    		//------------------------------------
-				    		//Check if there is a record minimum of information in order to go on with security record - update
-				    		if(jsonSadNctsExportSpecificTopicItemRecord.getTvtkbm()!=null && !"".equals(jsonSadNctsExportSpecificTopicItemRecord.getTvtkbm())){
-					    		String mode = TvinnSadConstants.MODE_ADD; //Add - default
-					    		if(this.existsSecurityRecord(appUser.getUser(), avd, opd, jsonSadNctsExportSpecificTopicItemRecord.getTvli())){
-					    			mode = TvinnSadConstants.MODE_UPDATE; //Update
-					    		}
-				    			if(!this.updateSecurityRecord(jsonSadNctsExportSpecificTopicItemRecord, mode, appUser.getUser(), avd, opd)){
-					    			this.setFatalError(model, rpgReturnResponseHandler, jsonSadNctsExportSpecificTopicItemRecord);
-					    		}
+					//At this point we are ready to do an update/create
+					//
+					//get BASE URL = RPG-PROGRAM
+		            //---------------------------
+					String BASE_URL_UPDATE = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_UPDATE_SPECIFIC_HOUSECONSIGN_URL;
+					StringBuffer urlRequestParamsKeys = new StringBuffer();
+					urlRequestParamsKeys.append("user=" + appUser.getUser());
+					urlRequestParamsKeys.append("&mode=" + mode);
+					String urlRequestParamsHouseConsignment = this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate));
+					//put the final valid param. string
+					String urlRequestParams = urlRequestParamsKeys.toString() + urlRequestParamsHouseConsignment;
+					//for debug purposes in GUI
+					session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_UPDATE_TVINN_SAD, BASE_URL_UPDATE + "==>params: " + urlRequestParams.toString()); 
+					
+					logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+			    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL_UPDATE));
+			    	logger.info("URL PARAMS: " + urlRequestParams);
+			    	//----------------------------------------------------------------------------
+			    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
+			    	//----------------------------------------------------------------------------
+			    	String rpgReturnPayload = this.urlCgiProxyService.getJsonContent(BASE_URL_UPDATE, urlRequestParams);
+			    	//Debug --> 
+			    	logger.info("Checking errMsg in rpgReturnPayload" + rpgReturnPayload);
+			    	//we must evaluate a return RPG code in order to know if the Update was OK or not
+			    	rpgReturnResponseHandler.evaluateRpgResponseOnTopicItemCreateOrUpdate(rpgReturnPayload);
+			    	if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){
+			    		rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on UPDATE: " + rpgReturnResponseHandler.getErrorMessage());
+			    		this.setFatalError(model, rpgReturnResponseHandler, recordToValidate);
+			    		
+			    	}else{
+			    		//Update successfully done!
+			    		logger.info("[INFO] Valid STEP[2] Update -- Record successfully updated, OK ");
+			    		//------------------------------------
+			    		//Update/Create now Security-Sikkerhet record
+			    		//------------------------------------
+			    		//Check if there is a record minimum of information in order to go on with security record - update
+			    		/*if(jsonSadNctsExportSpecificTopicItemRecord.getTvtkbm()!=null && !"".equals(jsonSadNctsExportSpecificTopicItemRecord.getTvtkbm())){
+				    		String mode = TvinnSadConstants.MODE_ADD; //Add - default
+				    		if(this.existsSecurityRecord(appUser.getUser(), avd, opd, jsonSadNctsExportSpecificTopicItemRecord.getTvli())){
+				    			mode = TvinnSadConstants.MODE_UPDATE; //Update
 				    		}
-				    		//---------------------------
-				    		//REFRESH ON SOME VARIABLES
-				    		//---------------------------
-				    		//Update some variables on header such as (1)Number of item lines, (2)Kolliantal and (3)Gross weight-Bruttovikt
-				    		this.refreshHeaderVariables(appUser.getUser(), avd, opd);
-				    	}
-					}else{
-						rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on CREATE, at tuid, syop generation : " + rpgReturnResponseHandler.getErrorMessage());
-						this.setFatalError(model, rpgReturnResponseHandler, jsonSadNctsExportSpecificTopicItemRecord);
-					}
+			    			if(!this.updateSecurityRecord(jsonSadNctsExportSpecificTopicItemRecord, mode, appUser.getUser(), avd, opd)){
+				    			this.setFatalError(model, rpgReturnResponseHandler, jsonSadNctsExportSpecificTopicItemRecord);
+				    		}
+			    		}*/
+			    		//---------------------------
+			    		//REFRESH ON SOME VARIABLES
+			    		//---------------------------
+			    		//Update some variables on header such as (1)Number of item lines, (2)Kolliantal and (3)Gross weight-Bruttovikt
+			    		//this.refreshHeaderVariables(appUser.getUser(), avd, opd);
+			    	}
+					
 			    }
+			
 				
 			}else if(TvinnSadConstants.ACTION_DELETE.equals(action)){
-				logger.info("[INFO] Delete record start process... ");
+				/*logger.info("[INFO] Delete record start process... ");
 				String lineNrToDelete = request.getParameter("lin");
 				
 				//---------------------------
@@ -366,16 +318,16 @@ public class SadNcts5ExportHouseConsignmentController {
 		    		//Update some variables on header such as (1)Number of item lines, (2)Kolliantal and (3)Gross weight-Bruttovikt
 		    		this.refreshHeaderVariables(appUser.getUser(), avd, opd);
 		    	}
-			
+				*/
 			}
-			*/
+			
 			//FETCH the ITEM LIST of existent ITEMs for this TOPIC
 			//---------------------------
 			//get BASE URL = RPG-PROGRAM
             //---------------------------
-			String BASE_URL_FETCH = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_FETCH_TOPIC_HOUSECONFIGN_LIST_URL;
+			String BASE_URL_FETCH = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_FETCH_HOUSECONSIGN_LIST_URL;
 			
-			urlRequestParamsKeys = this.getRequestUrlKeyParameters(action, avd, opd, sign, appUser);
+			String urlRequestParamsKeys = this.getRequestUrlKeyParameters(action, avd, opd, sign, appUser);
 			//for debug purposes in GUI
 			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, BASE_URL_FETCH + "==>params: " + urlRequestParamsKeys.toString()); 
 			
@@ -477,6 +429,7 @@ public class SadNcts5ExportHouseConsignmentController {
 		}
 		return urlRequestParamsKeys.toString();
 	}
+	
 	
 	
 	/**

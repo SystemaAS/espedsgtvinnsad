@@ -108,7 +108,11 @@ public final class SadNctsExportUrlDataStore {
 	//-------------------------------------------------
 	//[4] FETCH HOUSE Consignment RECORDS (LIST) NCTS5
 	//-------------------------------------------------
-	static public String NCTS5_EXPORT_BASE_FETCH_TOPIC_HOUSECONFIGN_LIST_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsNCTSEC.do";
+	static public String NCTS5_EXPORT_BASE_FETCH_HOUSECONSIGN_LIST_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsNCTSEC.do";
+	//4.1 EDIT HOUSE specific record (DML)
+	static public String NCTS5_EXPORT_BASE_UPDATE_SPECIFIC_HOUSECONSIGN_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsNCTSEC_U.do";
+	
+		
 	
 	//-----------------------------
 	//[5] FETCH ITEM RECORDS (LIST)
