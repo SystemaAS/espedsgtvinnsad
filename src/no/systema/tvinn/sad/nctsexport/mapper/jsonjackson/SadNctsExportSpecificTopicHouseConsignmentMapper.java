@@ -32,13 +32,10 @@ public class SadNctsExportSpecificTopicHouseConsignmentMapper {
 		//logger.info(mapper.writeValueAsString(topicListContainer));
 		logger.info("[JSON-String payload status=OK]  " + container.getUser());
 		//DEBUG
-		Collection<JsonSadNcts5ExportHouseConsignmentRecord> list = container.getOneorder();
+		Collection<JsonSadNcts5ExportHouseConsignmentRecord> list = container.getList();
 		for(JsonSadNcts5ExportHouseConsignmentRecord record : list){
-			/*logger.info("Item description: " + record.getTvvt());
-			logger.info("Sender name: " + record.getTvnas());
-			logger.info("Receiver name: " + record.getTvnak());
-			logger.info("Tvdref: " + record.getTvdref());
-			*/
+			logger.info("Bruttovikt: " + record.getTcvktb());
+			
 		}
 		return container;
 	}

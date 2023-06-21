@@ -57,6 +57,10 @@ import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulation
  * 
  * Tvinn SAD NCTS-Export create items gateway
  * 
+ * Db-table --> NCTSEH (Header)
+ * Db-table --> NCTSEC (House Consignment)
+ * Db-table --> NCTSEI (Item lines)
+ * 
  * @author oscardelatorre
  * @date May 19, 2023
  * 

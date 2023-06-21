@@ -41,6 +41,7 @@ import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignature
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureRecord;
 
 import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService;
+import no.systema.tvinn.sad.nctsexport.validator.SadNcts5ExportHeaderValidator;
 import no.systema.tvinn.sad.nctsexport.validator.SadNctsExportHeaderValidator;
 
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.JsonSadNctsExportSpecificTopicContainer;
@@ -62,6 +63,10 @@ import no.systema.tvinn.sad.nctsexport.mapper.url.request.UrlRequestParameterMap
 
 /**
  * SAD-NCTS-5 Export Topic Controller 
+ * 
+ * Db-table --> NCTSEH (Header)
+ * Db-table --> NCTSEC (House Consignment)
+ * Db-table --> NCTSEI (Item lines)
  * 
  * @author oscardelatorre
  * @date Maj 10, 2023
@@ -206,7 +211,7 @@ public class SadNcts5ExportHeaderController {
 					//---------------------
 					//Validation Light GUI
 					//---------------------
-					SadNctsExportHeaderValidator validator = new SadNctsExportHeaderValidator();
+					SadNcts5ExportHeaderValidator validator = new SadNcts5ExportHeaderValidator();
 					logger.info("VALIDATING...");
 					if(opd!=null && !"".equals(opd)){
 						//Update...

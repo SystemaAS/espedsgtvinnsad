@@ -36,12 +36,12 @@ public final class SadNctsExportUrlDataStore {
 	//[2] FETCH A SPECIFIC ARENDE or Default values for a NEW ARENDE
 	//---------------------------------------------------------------
 	@UrlDataStoreAnnotationForField (name="@SadNctsExportController - tvinnsadnctsexport_edit.do ", description=" --> NCTS_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_URL - fetch topic")
-	static public String NCTS_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/T5CE001R.pgm";
+	static public String NCTS_EXPORT_BASE_FETCH_SPECIFIC_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE001R.pgm";
 	//http://gw.systema.no/sycgip/TTCE001R.pgm?user=OSCAR&avd=1&opd=50013
 	//http://gw.systema.no/sycgip/TTCE001R.pgm?user=OSCAR&avd=1 (for default values with CREATE NEW)
 	//2.1 FETCH Sikkerhet (extra information)
 	@UrlDataStoreAnnotationForField (name="@SadNctsExportHeaderController - tvinnsadnctsexport_edit.do ", description=" --> NCTS_EXPORT_BASE_FETCH_SPECIFIC_SIKKERHET_TOPIC_URL - fetch topic (sikkerhet)")
-	static public String NCTS_EXPORT_BASE_FETCH_SPECIFIC_SIKKERHET_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/T5CE021R.pgm";
+	static public String NCTS_EXPORT_BASE_FETCH_SPECIFIC_SIKKERHET_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE021R.pgm";
 	//http://gw.systema.no/sycgip/ttce021r.pgm?user=OSCAR&avd=1&opd=900040
 	
 		//NCTS5
@@ -78,11 +78,19 @@ public final class SadNctsExportUrlDataStore {
 	static public String NCTS_EXPORT_BASE_VALIDATE_SPECIFIC_TOPIC_GUARRANTEE_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE003R.pgm";
 	//http://gw.systema.no/sycgip/TTCE003R.pgm?user=YBC&thgft1=09SE00005000000W7&thgadk=2222
 	
+		@UrlDataStoreAnnotationForField (name="@SadNctsExportHeaderValidator - isValidGuarantee() ", description=" --> NCTS_EXPORT_BASE_VALIDATE_SPECIFIC_TOPIC_GUARRANTEE_URL - validate")
+		static public String NCTS5_EXPORT_BASE_VALIDATE_SPECIFIC_TOPIC_GUARRANTEE_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/T5CE003R.pgm";
+		//http://gw.systema.no/sycgip/TTCE003R.pgm?user=YBC&thgft1=09SE00005000000W7&thgadk=2222
+	
 	//Validate Sensitive goods
 	@UrlDataStoreAnnotationForField (name="@SadNctsExportItemsValidator - isValidGuarantee() ", description=" --> NCTS_EXPORT_BASE_VALIDATE_SPECIFIC_TOPIC_ITEM_SENSITIVE_GOODS_URL - validate")
 	static public String NCTS_EXPORT_BASE_VALIDATE_SPECIFIC_TOPIC_ITEM_SENSITIVE_GOODS_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE017R.pgm";
 	//http://gw.systema.no/sycgip/TTCE017R.pgm?user=OSCAR&tftanr=170199(valid varukod) --->010290 (valid varukod)
 	
+		@UrlDataStoreAnnotationForField (name="@SadNctsExportItemsValidator - isValidGuarantee() ", description=" --> NCTS_EXPORT_BASE_VALIDATE_SPECIFIC_TOPIC_ITEM_SENSITIVE_GOODS_URL - validate")
+		static public String NCTS5_EXPORT_BASE_VALIDATE_SPECIFIC_TOPIC_ITEM_SENSITIVE_GOODS_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/T5CE017R.pgm";
+		//http://gw.systema.no/sycgip/TTCE017R.pgm?user=OSCAR&tftanr=170199(valid varukod) --->010290 (valid varukod)
+		
 	//Refresh ARENDE
 	@UrlDataStoreAnnotationForField (name="@SadNctsExportItemsController - tvinnsadnctsexport_edit_items.do ", description=" --> NCTS_EXPORT_BASE_REFRESH_SPECIFIC_TOPIC_URL - refresh")
 	static public String NCTS_EXPORT_BASE_REFRESH_SPECIFIC_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE004R.pgm";
@@ -95,6 +103,12 @@ public final class SadNctsExportUrlDataStore {
 	//-----------------------------------------		
 	static public String NCTS_EXPORT_BASE_UPDATE_SPECIFIC_SIKKERHET_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TTCE022R.pgm";
 		static public String NCTS5_EXPORT_BASE_UPDATE_SPECIFIC_SIKKERHET_TOPIC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/T5CE022R.pgm";
+	
+		
+	//-------------------------------------------------
+	//[4] FETCH HOUSE Consignment RECORDS (LIST) NCTS5
+	//-------------------------------------------------
+	static public String NCTS5_EXPORT_BASE_FETCH_TOPIC_HOUSECONFIGN_LIST_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsNCTSEC.do";
 	
 	//-----------------------------
 	//[5] FETCH ITEM RECORDS (LIST)

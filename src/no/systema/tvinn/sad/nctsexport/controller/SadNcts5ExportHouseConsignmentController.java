@@ -46,6 +46,8 @@ import no.systema.tvinn.sad.nctsexport.validator.SadNctsExportItemsValidator;
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.JsonSadNctsExportSpecificTopicContainer;
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.JsonSadNctsExportSpecificTopicRecord;
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.JsonSadNctsExportTopicCopiedContainer;
+import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.houseconsignment.JsonSadNcts5ExportHouseConsignmentContainer;
+import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.houseconsignment.JsonSadNcts5ExportHouseConsignmentRecord;
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.items.JsonSadNctsExportSpecificTopicItemContainer;
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.items.JsonSadNctsExportSpecificTopicItemRecord;
 import no.systema.tvinn.sad.nctsexport.service.SadNctsExportSpecificTopicService;
@@ -63,6 +65,10 @@ import no.systema.tvinn.sad.nctsexport.mapper.url.request.UrlRequestParameterMap
 
 /**
  * SAD-NCTS-5 Export House Consignment Controller 
+ * 
+ * Db-table --> NCTSEH (Header)
+ * Db-table --> NCTSEC (House Consignment)
+ * Db-table --> NCTSEI (Item lines)
  * 
  * @author oscardelatorre
  * @date Maj 10, 2023
@@ -362,20 +368,20 @@ public class SadNcts5ExportHouseConsignmentController {
 		    	}
 			
 			}
-			
+			*/
 			//FETCH the ITEM LIST of existent ITEMs for this TOPIC
 			//---------------------------
 			//get BASE URL = RPG-PROGRAM
             //---------------------------
-			String BASE_URL_FETCH = SadNctsExportUrlDataStore.NCTS_EXPORT_BASE_FETCH_TOPIC_ITEMLIST_URL;
+			String BASE_URL_FETCH = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_FETCH_TOPIC_HOUSECONFIGN_LIST_URL;
 			
 			urlRequestParamsKeys = this.getRequestUrlKeyParameters(action, avd, opd, sign, appUser);
 			//for debug purposes in GUI
 			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, BASE_URL_FETCH + "==>params: " + urlRequestParamsKeys.toString()); 
 			
-			logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-			logger.info("FETCH av item list... ");
-	     	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL_FETCH));
+			logger.info(Calendar.getInstance().getTime() + " JavaServices-start timestamp");
+			logger.info("FETCH av houseConsign list... ");
+	     	logger.info("URL: " + BASE_URL_FETCH);
 	    	logger.info("URL PARAMS: " + urlRequestParamsKeys);
 	    	//--------------------------------------
 	    	//EXECUTE the FETCH (RPG program) here
@@ -384,12 +390,12 @@ public class SadNcts5ExportHouseConsignmentController {
 			//Debug --> 
 			logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayloadFetch));
 	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-	    	JsonSadNctsExportSpecificTopicItemContainer jsonSadNctsExportSpecificTopicItemContainer = this.sadNctsExportSpecificTopicItemService.getNctsExportSpecificTopicItemContainer(jsonPayloadFetch);
+	    	JsonSadNcts5ExportHouseConsignmentContainer container = this.sadNctsExportSpecificTopicService.getNcts5ExportSpecificTopicHouseConsignmentContainer(jsonPayloadFetch);
 	    	//add gui lists here
     		this.setCodeDropDownMgr(appUser, model);	
     		//domain objects
-	    	this.setDomainObjectsForListInView(model, jsonSadNctsExportSpecificTopicItemContainer);
-			*/
+	    	this.setDomainObjectsInView(model, container);
+			
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL,model);
 			 
 			
@@ -424,11 +430,11 @@ public class SadNcts5ExportHouseConsignmentController {
 	 * @param rpgReturnResponseHandler
 	 * @param jsonTdsExportSpecificTopicRecord
 	 */
-	private void setFatalError(Map model, RpgReturnResponseHandler rpgReturnResponseHandler, JsonSadNctsExportSpecificTopicRecord jsonNctsExportSpecificTopicRecord){
+	private void setFatalError(Map model, RpgReturnResponseHandler rpgReturnResponseHandler, JsonSadNcts5ExportHouseConsignmentRecord record){
 		logger.info(rpgReturnResponseHandler.getErrorMessage());
 		this.setAspectsInView(model, rpgReturnResponseHandler);
 		//No refresh on jsonRecord is done for the GUI (form fields). Must be implemented right here, if required. !!
-        this.setDomainObjectsInView(model, jsonNctsExportSpecificTopicRecord);
+        this.setDomainObjectsInView(model, record);
 	}
 	
 	/**
@@ -446,25 +452,25 @@ public class SadNcts5ExportHouseConsignmentController {
 		
 		if(TvinnSadConstants.ACTION_FETCH.equals(action)){
 			urlRequestParamsKeys.append("user=" + appUser.getUser());
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "avd=" + avd);
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "opd=" + opd);
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "tcavd=" + avd);
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "tctdn=" + opd);
 			
 		}else if(TvinnSadConstants.ACTION_UPDATE.equals(action)){
 			urlRequestParamsKeys.append("user=" + appUser.getUser());
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "avd=" + avd); //thavd is the one used in the AS400 pgm (sends in the jsonRecord bean but this must be sent, in addition)
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "opd=" + opd); //thtdn is the one used in the AS400 pgm (sends in the jsonRecord bean but this must be sent, in addition)
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "tcavd=" + avd); //thavd is the one used in the AS400 pgm (sends in the jsonRecord bean but this must be sent, in addition)
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "tctdn=" + opd); //thtdn is the one used in the AS400 pgm (sends in the jsonRecord bean but this must be sent, in addition)
 			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "mode=" + TvinnSadConstants.MODE_UPDATE);
 			
 		}else if(TvinnSadConstants.ACTION_CREATE.equals(action)){
 			urlRequestParamsKeys.append("user=" + appUser.getUser());
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "avd=" + avd); //thavd
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "opd=" + opd); //thtdn
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "tcavd=" + avd); //thavd
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "tctdn=" + opd); //thtdn
 			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "sign=" + sign);
 			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "mode=" + TvinnSadConstants.MODE_ADD);
 			
 		}else if(TvinnSadConstants.ACTION_SEND.equals(action)){
 			urlRequestParamsKeys.append("user=" + appUser.getUser());
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "thavd=" + avd);
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "tcavd=" + avd);
 			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "thtdn=" + opd);
 			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "mode=" + TvinnSadConstants.MODE_SEND);
 			
@@ -481,9 +487,9 @@ public class SadNcts5ExportHouseConsignmentController {
 	 * @param jsonNctsExportSpecificTopicContainer
 	 * @return
 	 */
-	private void setDomainObjectsInView(HttpSession session, Map model, JsonSadNctsExportSpecificTopicContainer jsonNctsExportSpecificTopicContainer){
+	private void setDomainObjectsInView(HttpSession session, Map model, JsonSadNcts5ExportHouseConsignmentContainer container){
 		//SET HEADER RECORDS  (from RPG)
-		for (JsonSadNctsExportSpecificTopicRecord record : jsonNctsExportSpecificTopicContainer.getOneorder()){
+		for (JsonSadNcts5ExportHouseConsignmentRecord record : container.getList()){
 			//Adjust dates
 			this.adjustDatesOnFetch(record);
 			model.put(TvinnSadConstants.DOMAIN_RECORD, record);
@@ -500,7 +506,7 @@ public class SadNcts5ExportHouseConsignmentController {
 	 * @param jsonTdsExportSpecificTopicRecord
 	 * @return
 	 */
-	private void setDomainObjectsInView(HttpSession session, Map model, JsonSadNctsExportSpecificTopicRecord record){
+	private void setDomainObjectsInView(HttpSession session, Map model, JsonSadNcts5ExportHouseConsignmentRecord record){
 		//SET HEADER RECORDS  (from RPG)
 		//Adjust dates
 		this.adjustDatesOnFetch(record);
@@ -509,18 +515,22 @@ public class SadNcts5ExportHouseConsignmentController {
 		//put the header topic in session for the coming item lines
 		session.setAttribute(TvinnSadConstants.DOMAIN_RECORD_TOPIC_TVINN_SAD, record);
 	}
-	/**
-	 * 
-	 * 
-	 * @param model
-	 * @param jsonTdsExportSpecificTopicRecord
-	 */
-	private void setDomainObjectsInView(Map model, JsonSadNctsExportSpecificTopicRecord record){
-		//SET HEADER RECORDS  (from RPG)
-		//Adjust dates
-		this.adjustDatesOnFetch(record);
-		
+	
+	private void setDomainObjectsInView(Map model, JsonSadNcts5ExportHouseConsignmentRecord record){
 		model.put(TvinnSadConstants.DOMAIN_RECORD, record);
+		
+	}
+	private void setDomainObjectsInView(Map model, JsonSadNcts5ExportHouseConsignmentContainer container){
+		List list = new ArrayList();
+		if(container!=null){
+			for (JsonSadNcts5ExportHouseConsignmentRecord record : container.getList()){
+				list.add(record);
+				logger.info("tcalk: " + record.getTcalk());
+				
+			}
+		}
+		model.put(TvinnSadConstants.DOMAIN_LIST, list);
+		
 	}
 	/**
 	 * Sets aspects 
@@ -645,11 +655,11 @@ public class SadNcts5ExportHouseConsignmentController {
 	 * 
 	 * @param record
 	 */
-	private void adjustDatesOnFetch(JsonSadNctsExportSpecificTopicRecord record){
+	private void adjustDatesOnFetch(JsonSadNcts5ExportHouseConsignmentRecord record){
 		String dateThtrdtNO = null;
 		String dateThddtNO = null;
 		String dateThdtaNO = null;
-		
+		/*
 		if(record.getThtrdt()!=null && !"".equals(record.getThtrdt())){
 			dateThtrdtNO = this.dateFormatter.convertToDate_NO(record.getThtrdt());
 			record.setThtrdt(dateThtrdtNO);
@@ -663,7 +673,7 @@ public class SadNcts5ExportHouseConsignmentController {
 			dateThdtaNO = this.dateFormatter.convertToDate_NO(record.getThdta());
 			record.setThdta(dateThdtaNO);
 		}
-		
+		*/
 	}
 	/**
 	 * 

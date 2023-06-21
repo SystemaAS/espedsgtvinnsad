@@ -905,7 +905,7 @@
 	jq(function() { 
 	    jq('#avd').change(function() {
 	    		//this parameters must match the AJAX controller parameter names in Spring exactly...
-	    		jq.getJSON('initCreateNewTopic_TvinnSadNctsExport.do', {
+	    		jq.getJSON('initCreateNewTopic_TvinnSadNcts5Export.do', {
 	    			applicationUser : jq('#applicationUser').val(),
 	    			avd : jq('#avd').val(),
 	    			ajax : 'true'
