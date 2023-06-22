@@ -223,12 +223,11 @@
 	        			<tr height="10"><td></td></tr> 
 						<tr >
 							<td>
-							<form name="createNewItemLine" id="createNewItemLine" method="post" action="tvinnsadexport_edit_houseconsignment.do">
+							<form name="createNewItemLine" id="createNewItemLine" method="post" >
 								<input type="hidden" name="action" id="action" value='doFetch'>
 				 				<input type="hidden" name="avd" id="avd" value='${model.avd	}'>
 				 				<input type="hidden" name="sign" id="sign" value='${model.sign}'>
 								<input type="hidden" name="opd" id="opd" value='${model.opd}'>
-				 				<input type="hidden" name="tullId" id="tullId" value='${model.tullId}'>
 				 				<input type="hidden" name="mrnNr" id="mrnNr" value='${model.mrnNr}'>
 				 				<input type="hidden" name="status" id="status" value='${model.status}'>
 				 				<input type="hidden" name="datum" id="datum" value='${model.datum}'>
@@ -238,7 +237,7 @@
 									<tr>
 										<td class="text12Bold">
 											<c:if test="${model.status == 'M' || empty model.status}">
-												<input tabindex=-1 class="inputFormSubmitStd" type="submit" name="submit" value="<spring:message code="systema.tvinn.sad.ncts.export.houseconsignment.createnew"/>">
+												<input tabindex=-1 class="inputFormSubmitStd" type="submit" name="submitNewLine" onclick="javascript: form.action='tvinnsadncts5export_edit_houseconsignment.do';" value="<spring:message code="systema.tvinn.sad.ncts.export.houseconsignment.createnew"/>">
 							
 											</c:if>
 										</td>
@@ -286,9 +285,10 @@
 							               </c:choose>
 							               <td width="2%" class="text14" align="right">${record.tcli}</td>
 							               <td width="2%" class="text14" align="center">
-							               		<a tabindex=-1 id="recordUpdate_${record.tcavd}_${record.tctdn}_${record.tcli}" href="#" onClick="getItemData(this);">
+							               		<a tabindex=-1 id="recordUpdate_${counter.count}_${record.tcli}" href="#" onClick="getItemData(this);">
 							               			<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 							               		</a>
+							               		
 							               </td>
 							               <td align="right" class="text14" >&nbsp;${record.tcxext}</td>
 							               <td align="right" class="text14" >&nbsp;${record.tcvktb}</td>

@@ -38,6 +38,8 @@ import no.systema.tvinn.sad.service.TvinnSadTolltariffVarukodService;
 import no.systema.tvinn.sad.nctsexport.url.store.SadNctsExportUrlDataStore;
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.JsonSadNctsExportSpecificTopicContainer;
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.JsonSadNctsExportSpecificTopicRecord;
+import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.houseconsignment.JsonSadNcts5ExportHouseConsignmentContainer;
+import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.houseconsignment.JsonSadNcts5ExportHouseConsignmentRecord;
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.items.JsonSadNctsExportSpecificTopicItemContainer;
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.items.JsonSadNctsExportSpecificTopicItemRecord;
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.items.JsonSadNctsExportSpecificTopicItemSecurityContainer;
@@ -59,6 +61,55 @@ import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.validation.JsonSa
 @Controller
 public class SadNcts5ExportAjaxHandlerController {
 	private static final Logger logger = LoggerFactory.getLogger(SadNcts5ExportAjaxHandlerController.class.getName());
+	
+	/**
+	   * 
+	   * @param applicationUser
+	   * @param elementValue
+	   * @param avd
+	   * @param opd
+	   * @return
+	   */
+	  @RequestMapping(value = "getSpecificHouseConsignmentChosenFromGuiElement_TvinnSadNcts5Export.do", method = RequestMethod.GET)
+		public @ResponseBody Set<JsonSadNctsExportSpecificTopicItemRecord> getSpecificHouseConsignmentChosenFromHtmlList
+		  						(@RequestParam String applicationUser, @RequestParam String elementValue, 
+		  						 @RequestParam String avd, @RequestParam String opd ) {
+			 logger.info("Inside: getSpecificTopicItemChosenFromGuiElement_TvinnSadNctsExport.do()");
+			 Set result = new HashSet();
+			 //prepare the access CGI with RPG back-end
+			 String BASE_URL = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_FETCH_HOUSECONSIGN_LIST_URL;
+			 String[] fields = elementValue.split("_");
+			 String lineNr = null;
+			 String lineCounter = null;
+			 if(fields!=null && fields.length==3){
+				 logger.info("FIELD: " + fields[0] + " " + fields[1] + " " + fields[2]);
+				 lineCounter = fields[1];
+				 lineNr = fields[2];
+				 logger.info(applicationUser + "-" + elementValue + "-" + avd + "-" + opd + "- linenr:" + lineNr);
+				 String urlRequestParamsKeys = this.getRequestUrlKeyParametersForHouse(applicationUser, avd, opd, lineNr);
+				 logger.info("URL: " + BASE_URL);
+				 logger.info("PARAMS: " + urlRequestParamsKeys);
+				 logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+				 String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+				 logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");		
+				 if(jsonPayload!=null){
+					 logger.info(jsonPayload);
+					 JsonSadNcts5ExportHouseConsignmentContainer container = this.sadNctsExportSpecificTopicService.getNcts5ExportSpecificTopicHouseConsignmentContainer(jsonPayload);
+					 if(container!=null){
+						 for(JsonSadNcts5ExportHouseConsignmentRecord  record : container.getList()){
+							 logger.info("=====>debugFetch - tcvktb (bruttovekt):" + record.getTcvktb());
+					         //complete record including security
+					         result.add(record);  
+						 }
+					 }
+				 }
+			 }else{
+				 logger.error("[ERROR] on fields[]...null or incorrect length???...");
+			 }
+			 return result;
+		 }
+	
+	
 	/**
 	 * 
 	 * @param applicationUser
@@ -286,6 +337,7 @@ public class SadNcts5ExportAjaxHandlerController {
 		return result;  
 	  }
 	  
+	  
 	  /**
 	   * 
 	   * @param applicationUser
@@ -317,6 +369,16 @@ public class SadNcts5ExportAjaxHandlerController {
 			  sb.append( TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "avd=" + avd );
 			  sb.append( TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "opd=" + opd );
 			  sb.append( TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "lin=" + lineNr );
+		  }
+		  return sb.toString();
+	  }
+	  private String getRequestUrlKeyParametersForHouse(String applicationUser, String avd, String opd,  String lineNr){
+		  StringBuffer sb = new StringBuffer();
+		  sb.append("user=" + applicationUser);
+		  if(avd!=null && !"".equals(avd) && opd!=null && !"".equals(opd) && lineNr!=null && !"".equals(lineNr)){
+			  sb.append( TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "tcavd=" + avd );
+			  sb.append( TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "tctdn=" + opd );
+			  sb.append( TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "tcli=" + lineNr );
 		  }
 		  return sb.toString();
 	  }

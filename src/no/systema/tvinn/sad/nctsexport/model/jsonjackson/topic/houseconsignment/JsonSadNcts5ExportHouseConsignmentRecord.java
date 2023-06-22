@@ -21,12 +21,13 @@ import lombok.Data;
  */
 @Data
 public class JsonSadNcts5ExportHouseConsignmentRecord extends JsonAbstractGrandFatherRecord {
-	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
+	//private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
 	
 	private String avd = null;
 	private String opd = null;
 	private String sign = null;
 	private String datum = null;
+	/*
 	public void setDatum(String value) {  this.datum = value; }
 	public String getDatum() {
 		if(this.datum != null && !"".equals(this.datum)){
@@ -34,7 +35,7 @@ public class JsonSadNcts5ExportHouseConsignmentRecord extends JsonAbstractGrandF
 		}else{
 			return this.datum;
 		}
-	}
+	}*/
 	
 	//parter NCTSEC - data file
 	private String tcavd = null;
