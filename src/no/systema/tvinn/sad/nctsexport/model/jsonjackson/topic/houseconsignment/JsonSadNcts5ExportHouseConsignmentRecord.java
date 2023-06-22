@@ -49,10 +49,10 @@ public class JsonSadNcts5ExportHouseConsignmentRecord extends JsonAbstractGrandF
  	private String tcavd2 = null;//4 int AVD. FOR HENTET OPD
  	private String tctdn2 = null;//7 int OPD. FOR HENTET OPD
  	private String tcxext = null;//35 char EKSTERN REF
- 	
  	//AdditionalSupplyChainActor (0-99)
  	private String tcrole = null;//3 char LEVERANDØR ROLLE /AdditionalSupplyChainActor/role (0-99)
  	private String tcidr = null;//17 char LEVERANDØR ID /AdditionalSupplyChainActor/identificationNumber
+ 	
  	//DepartureTransportMeans  (0-999)
  	private String tctaty = null;//2 char TYPE IDENTIFIKASJON /DepartureTransportMeans/typeOfIdentification (0-999)
  	private String tctaid = null;//35 char IDENTITET /DepartureTransportMeans/identificationNumber

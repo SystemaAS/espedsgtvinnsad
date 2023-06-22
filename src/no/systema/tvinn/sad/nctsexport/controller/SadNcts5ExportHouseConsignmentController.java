@@ -260,7 +260,7 @@ public class SadNcts5ExportHouseConsignmentController {
     		
     	}else{
     		//Update successfully done!
-    		logger.info("[INFO] Valid STEP[2] Update -- Record successfully updated, OK ");
+    		logger.info("[INFO] Valid STEP[2] Insert/Update -- Record successfully created/updated, OK ");
     		retval = 0;
     	}
 		

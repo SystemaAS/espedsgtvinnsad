@@ -391,7 +391,7 @@
 				 		<tr height="15"><td class="text" align="left"></td></tr>
 				 		<tr>
 					 		<td>
-						 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						 		<table width="100%" border="0" cellspacing="0" cellpadding="1">
 							 		<tr>
 							 			
 							            <td class="text14" align="left"><span title="tcxext">&nbsp;Ekst.ref.</span></td>
@@ -404,10 +404,10 @@
 							        </tr>
 							        <tr>
 						        		<td align="left">
-						        			<input type="text" class="inputTextMediumBlue" name="tcxext" id="tcxext" size="20" maxlength="35" value="${Xmodel.record.tcxext}">
+						        			<input type="text" class="inputTextMediumBlue" name="tcxext" id="tcxext" size="20" maxlength="35" value="${model.record.tcxext}">
 										</td>
 										<td class="text14" align="left">
-						            		<input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="tcvktb" id="tcvktb" size="13" maxlength="15" value="${Xmodel.record.tcvktb}">
+						            		<input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="tcvktb" id="tcvktb" size="13" maxlength="15" value="${model.record.tcvktb}">
 							            </td>
 										<td align="left">&nbsp;
 					            			<select class="selectMediumBlueE2" name="tcalk" id="tcalk">
@@ -432,72 +432,153 @@
 											</a>
 				            			</td> 
 				            			<td align="left">
-						        			<input type="text" class="inputTextMediumBlue" name="tcucr" id="tcucr" size="30" maxlength="35" value="${Xmodel.record.tcucr}">
+						        			<input type="text" class="inputTextMediumBlue" name="tcucr" id="tcucr" size="30" maxlength="35" value="${model.record.tcucr}">
 										</td>
 										<td align="left">
-						        			<input type="text" class="inputTextMediumBlue" name="tcidr" id="tcidr" size="10" maxlength="17" value="${Xmodel.record.tcidr}">
+						        			<input type="text" class="inputTextMediumBlue" name="tcidr" id="tcidr" size="10" maxlength="17" value="${model.record.tcidr}">
 										</td>
 										<td align="left">
-						        			<input type="text" class="inputTextMediumBlue" name="tcrole" id="tcrole" size="3" maxlength="3" value="${Xmodel.record.tcrole}">
+						        			<input type="text" class="inputTextMediumBlue" name="tcrole" id="tcrole" size="3" maxlength="3" value="${model.record.tcrole}">
 										</td>
-										<td align="left" >
-											<input class="inputFormSubmit" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.ncts.export.houseconsignment.createnew.submit"/>'>
-											&nbsp;&nbsp;
-										</td>
+										
 							        </tr>
 							        
 							        <tr height="10"><td class="text" align="left" colspan="9"><hr></td></tr>
 							        
-							        <%--	
-									<tr>
-							 			
-							            <td class="text14" align="left"><span title="tcxext">&nbsp;Ekst.ref.</span></td>
-							            <td class="text14" align="left"><span title="tcvktb">&nbsp;Bruttovekt</span></td>
-							            <td class="text14" align="left"><span title="tcalk">&nbsp;Avs.land</span></td>
-					            		<td class="text14" align="left"><span title="tcblk">&nbsp;Best.land</span></td>
-					            		<td class="text14" align="left"><span title="tcucr">&nbsp;Refnr.UCR</span></td>
-					            		
-							        </tr>
+							        <tr>
+							        	<td colspan="3">
+								        <table width="100%" class="tableBorderWithRoundCornersLightYellow" align="left" border="0" cellspacing="2" cellpadding="0">
+								        	<tr>
+									            <td colspan="3" class="text12" align="left"><b>Departure Transport Means</b></td>
+									        </tr>
+											<tr>
+									            <td class="text14" align="left"><span title="tctaty">&nbsp;Type.Ident.</span></td>
+									            <td class="text14" align="left"><span title="tctaid">&nbsp;Ident.nr</span></td>
+									            <td class="text14" align="left"><span title="tctalk">&nbsp;Landkode</span></td>
+							            		
+									        </tr>
+									        
+									        <tr>
+								        		<td align="left">
+								        			<input type="text" class="inputTextMediumBlue" name="tctaty" id="tctaty" size="3" maxlength="2" value="${model.record.tctaty}">
+												</td>
+												<td class="text14" align="left">
+								            		<input type="text" class="inputTextMediumBlue" name="tctaid" id="tctaid" size="13" maxlength="35" value="${model.record.tctaid}">
+									            </td>
+												<td align="left">&nbsp;
+							            			<select class="selectMediumBlueE2" name="tctalk" id="tctalk">
+									            		<option value="">-velg-</option>
+								 				  		<c:forEach var="country" items="${model.countryCodeList}" >
+				                                	 	<option value="${country.zkod}"<c:if test="${model.record.tctalk == country.zkod}"> selected </c:if> >${country.zkod}</option>
+														</c:forEach> 
+													</select>
+													
+						            			</td> 
+						            			
+									        </tr>
+								
+								        </table>
+							        	</td>
+							        	
+							      
+							        	<td colspan="3">
+								        <table width="100%" class="tableBorderWithRoundCornersLightYellow" align="left" border="0" cellspacing="2" cellpadding="0">
+								        	<tr>
+									            <td colspan="3" class="text12" align="left"><b>Previous Documents</b></td>
+									        </tr>
+											<tr>
+									            <td class="text14" align="left"><span title="tcpdty">&nbsp;Dok.type</span></td>
+							            		<td class="text14" align="left"><span title="tcpdrf">&nbsp;Dok.ref</span></td>
+							            		<td class="text14" align="left"><span title="tcpdin">&nbsp;Info.</span></td>
+									        </tr>
+									        
+									        <tr>
+								        		<td align="left">&nbsp;
+							            			<input type="text" class="inputTextMediumBlue" name="tcpdty" id="tcpdty" size="5" maxlength="4" value="${model.record.tcpdty}">
+						            			</td> 
+						            			<td align="left">
+								        			<input type="text" class="inputTextMediumBlue" name="tcpdrf" id="tcpdrf" size="30" maxlength="70" value="${model.record.tcpdrf}">
+												</td>
+												<td align="left">
+								        			<input type="text" class="inputTextMediumBlue" name="tcpdin" id="tcpdin" size="15" maxlength="35" value="${model.record.tcpdin}">
+												</td>
+												
+									        </tr>
+								
+								        </table>
+							        	</td>
+							        	
+						        		
+									</tr>
+									
+							        <tr height="10"><td class="text" align="left"></td></tr>
 							        
 							        <tr>
-						        		<td align="left">
-						        			<input type="text" class="inputTextMediumBlue" name="todo" id="todo" size="20" maxlength="35" value="${Xmodel.record.tcxext}">
-										</td>
-										<td class="text14" align="left">
-						            		<input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="tcvktb" id="tcvktb" size="13" maxlength="15" value="${Xmodel.record.tcvktb}">
-							            </td>
-										<td align="left">&nbsp;
-					            			<select class="selectMediumBlueE2" name="tcalk" id="tcalk">
-							            		<option value="">-velg-</option>
-						 				  		<c:forEach var="country" items="${model.countryCodeList}" >
-		                                	 	<option value="${country.zkod}"<c:if test="${model.record.tcalk == country.zkod}"> selected </c:if> >${country.zkod}</option>
-												</c:forEach> 
-											</select>
-											<a tabindex="-1" id="tcalkIdLink">
-												<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
-											</a>
-				            			</td> 
-				            			<td align="left">&nbsp;
-					            			<select class="selectMediumBlueE2" name="tcblk" id="tcblk">
-							            		<option value="">-velg-</option>
-						 				  		<c:forEach var="country" items="${model.countryCodeList}" >
-		                                	 	<option value="${country.zkod}"<c:if test="${model.record.tcblk == country.zkod}"> selected </c:if> >${country.zkod}</option>
-												</c:forEach> 
-											</select>
-											<a tabindex="-1" id="tcblkIdLink">
-												<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
-											</a>
-				            			</td> 
-				            			<td align="left">
-						        			<input type="text" class="inputTextMediumBlue" name="tcucr" id="tcucr" size="30" maxlength="35" value="${Xmodel.record.tcucr}">
-										</td>
-										<td align="left" >
+							        	<td colspan="3">
+								        <table width="100%" class="tableBorderWithRoundCornersLightGray" align="left" border="0" cellspacing="2" cellpadding="0">
+								        	<tr>
+									            <td colspan="3" class="text12" align="left"><b>Supporting Documents</b></td>
+									        </tr>
+											<tr>
+									            <td class="text14" align="left"><span title="tcsdty">&nbsp;Type.Ident.</span></td>
+									            <td class="text14" align="left"><span title="tcsdrf">&nbsp;Ident.nr</span></td>
+									            <td class="text14" align="left"><span title="tcsdln">&nbsp;Line ItemNr</span></td>
+							            		<td class="text14" align="left"><span title="tcsdin">&nbsp;Info.</span></td>
+									        </tr>
+									        
+									        <tr>
+								        		<td align="left">&nbsp;
+							            			<input type="text" class="inputTextMediumBlue" name="tcsdty" id="tcsdty" size="5" maxlength="4" value="${model.record.tcsdty}">
+						            			</td> 
+						            			<td align="left">
+								        			<input type="text" class="inputTextMediumBlue" name="tcsdrf" id="tcsdrf" size="30" maxlength="70" value="${model.record.tcsdrf}">
+												</td>
+												<td align="left">
+								        			<input type="text" class="inputTextMediumBlue" name="tcsdln" id="tcsdln" size="6" maxlength="5" value="${model.record.tcsdln}">
+												</td>
+						            			<td align="left">
+								        			<input type="text" class="inputTextMediumBlue" name="tcsdin" id="tcsdin" size="15" maxlength="35" value="${model.record.tcsdin}">
+												</td>
+									        </tr>
+								
+								        </table>
+							        	</td>
+							        	
+							      
+							        	<td colspan="3">
+								        <table width="100%" class="tableBorderWithRoundCornersLightGray" align="left" border="0" cellspacing="2" cellpadding="0">
+								        	<tr>
+									            <td colspan="3" class="text12" align="left"><b>Transport Documents</b></td>
+									        </tr>
+											<tr>
+									            <td class="text14" align="left"><span title="tctdty">&nbsp;Dok.type</span></td>
+							            		<td class="text14" align="left"><span title="tctdrf">&nbsp;Dok.ref</span></td>
+							            		<td class="text14" align="left">&nbsp;</td>
+									        </tr>
+									        
+									        <tr>
+								        		<td align="left">&nbsp;
+							            			<input type="text" class="inputTextMediumBlue" name="tctdty" id="tctdty" size="5" maxlength="4" value="${model.record.tctdty}">
+						            			</td> 
+						            			<td align="left">
+								        			<input type="text" class="inputTextMediumBlue" name="tctdrf" id="tctdrf" size="30" maxlength="70" value="${model.record.tctdrf}">
+												</td>
+												<td align="left">
+								        			&nbsp;
+												</td>
+												
+									        </tr>
+								
+								        </table>
+							        	</td>
+							        	
+						        		<td align="left" >
 											<input class="inputFormSubmit" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.ncts.export.houseconsignment.createnew.submit"/>'>
 											&nbsp;&nbsp;
 										</td>
-							        </tr>
-									 --%>
+									</tr>
 							        <tr height="10"><td class="text" align="left"></td></tr>
+							        
 						        </table>
 					        </td>
 					        

@@ -7,6 +7,7 @@ import java.lang.reflect.Field;
 import java.net.URLEncoder;
 import java.util.*;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.*;
 
 import no.systema.tvinn.sad.nctsexport.model.jsonjackson.topic.JsonSadNctsExportSpecificTopicRecord;
@@ -78,15 +79,16 @@ public class UrlRequestParameterMapper {
 					field.setAccessible(true);//we must do this in order to access private fields
 					String value = (String)field.get(object); 
 					if(value==null){
-						sb.append("");
+						continue;
 					}else{
 						//CRUCIAL! to encode the value in order to handle all special characters (%,&,",',()...) before JSON-call
 						//& will be converted into "%26", %="%25", etc. 
 						//Refer to URLEncode special characters for further info)
 						value = URLEncoder.encode(value, "UTF-8");
-						
-						sb.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + field.getName() + "=");
-						sb.append(value.trim());
+						if(StringUtils.isNotEmpty(value)) {
+							sb.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + field.getName() + "=");
+							sb.append(value.trim());
+						}
 					}
 				}catch(Exception e){
 					//Try Integer
