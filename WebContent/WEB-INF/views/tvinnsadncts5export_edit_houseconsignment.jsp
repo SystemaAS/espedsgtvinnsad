@@ -286,7 +286,7 @@
 							               </c:choose>
 							               <td width="2%" class="text14" align="right">${record.tcli}</td>
 							               <td width="2%" class="text14" align="center">
-							               		<a tabindex=-1 id="recordUpdate__${Xrecord.todo}__${Xrecord.todo}" href="#" onClick="getItemData(this);">
+							               		<a tabindex=-1 id="recordUpdate_${record.tcavd}_${record.tctdn}_${record.tcli}" href="#" onClick="getItemData(this);">
 							               			<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 							               		</a>
 							               </td>
@@ -297,7 +297,7 @@
 							               <td align="left" class="text14" >&nbsp;${record.tcucr}</td>
 										   <c:if test="${model.status == 'M' || empty model.status}">	
 								               <td class="text14" align="center" nowrap>
-								               	<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadexport_edit_houseconsignment.do?action=doDelete&sign=${model.sign}&avd=${record.tcavd}&opd=${record.tctdn}&lin=${record.tcli}">
+								               	<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadncts5export_edit_houseconsignment.do?action=doDelete&sign=${model.sign}&avd=${model.avd}&opd=${model.opd}&tcli=${record.tcli}">
 								               		<img valign="bottom" src="resources/images/delete.gif" border="0" alt="remove">
 								               	</a>	&nbsp;
 								               </td>
@@ -371,8 +371,8 @@
 				 	<input type="hidden" name="action" id="action" value='doUpdate'/>
 				 	<input type="hidden" name="tctdn" id="tctdn" value="${model.opd}"/>
 				 	<input type="hidden" name="tcavd" id="tcavd" value="${model.avd}"/>
-				 	<input type="hidden" name="avd" id="tctdn" value="${model.avd}"/>
-				 	<input type="hidden" name="opd" id="tcavd" value="${model.opd}"/>
+				 	<input type="hidden" name="avd" id="avd" value="${model.avd}"/>
+				 	<input type="hidden" name="opd" id="opd" value="${model.opd}"/>
 				 	<input type="hidden" name="sign" id="sign" value="${model.sign}"/>
 				 	<input type="hidden" name="status" id="status" value="${model.status}"/>
 				 	<input type="hidden" name="lineId" id="lineId" value="${model.lineId}">

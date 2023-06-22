@@ -209,6 +209,8 @@ public class SadNcts5ExportHouseConsignmentController {
 			    }
 			
 			}else if(TvinnSadConstants.ACTION_DELETE.equals(action)){
+				mode = TvinnSadConstants.MODE_DELETE;
+				int dmlRetval = this.deleteRecord(appUser.getUser(), mode, avd, opd, lineNr, model);
 				/*logger.info("[INFO] Delete record start process... ");
 				String lineNrToDelete = request.getParameter("lin");
 				
@@ -251,7 +253,7 @@ public class SadNcts5ExportHouseConsignmentController {
 			}
 			
 			//FETCH the ITEM LIST of existent ITEMs for this TOPIC
-			JsonSadNcts5ExportHouseConsignmentContainer container = this.getContainerWithList(action, avd, opd, sign, appUser);
+			JsonSadNcts5ExportHouseConsignmentContainer container = this.doFetchList(action, avd, opd, sign, appUser);
 			
 			//add gui lists here
     		this.setCodeDropDownMgr(appUser, model);	
@@ -307,7 +309,57 @@ public class SadNcts5ExportHouseConsignmentController {
     	return retval;
 	}
 	
-	private JsonSadNcts5ExportHouseConsignmentContainer getContainerWithList(String action, String avd, String opd, String sign, SystemaWebUser appUser) {
+	private int deleteRecord(String applicationUser, String mode, String avd, String opd, String lineNr, Map model) {
+		int retval = -1;
+		
+		RpgReturnResponseHandler rpgReturnResponseHandler = new RpgReturnResponseHandler();
+		
+		String BASE_URL_UPDATE = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_UPDATE_SPECIFIC_HOUSECONSIGN_URL;
+		StringBuffer urlRequestParamsKeys = new StringBuffer();
+		urlRequestParamsKeys.append("user=" + applicationUser);
+		urlRequestParamsKeys.append("&mode=" + mode);
+		urlRequestParamsKeys.append("&tcavd=" + avd);
+		urlRequestParamsKeys.append("&tctdn=" + opd);
+		urlRequestParamsKeys.append("&tcli=" + lineNr);
+		//put the final valid param. string
+		String urlRequestParams = urlRequestParamsKeys.toString();
+		
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.info("URL: " + BASE_URL_UPDATE);
+    	logger.info("URL PARAMS: " + urlRequestParams);
+    	//----------------------------------------------------------------------------
+    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
+    	//----------------------------------------------------------------------------
+    	String rpgReturnPayload = this.urlCgiProxyService.getJsonContent(BASE_URL_UPDATE, urlRequestParams);
+    	//Debug --> 
+    	logger.info("Checking errMsg in rpgReturnPayload" + rpgReturnPayload);
+    	//we must evaluate a return RPG code in order to know if the Update was OK or not
+    	rpgReturnResponseHandler.evaluateRpgResponseOnTopicItemCreateOrUpdate(rpgReturnPayload);
+    	if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){
+    		rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on UPDATE: " + rpgReturnResponseHandler.getErrorMessage());
+    		
+    		JsonSadNcts5ExportHouseConsignmentRecord errorRecord = new JsonSadNcts5ExportHouseConsignmentRecord();
+    		errorRecord.setTcavd(avd); errorRecord.setTctdn(opd); errorRecord.setTcli(lineNr);
+    		this.setFatalError(model, rpgReturnResponseHandler, errorRecord);
+    		
+    	}else{
+    		//Update successfully done!
+    		logger.info("[INFO] Valid STEP[2] Update -- Record successfully updated, OK ");
+    		retval = 0;
+    	}
+		
+    	return retval;
+	}
+	/**
+	 * 
+	 * @param action
+	 * @param avd
+	 * @param opd
+	 * @param sign
+	 * @param appUser
+	 * @return
+	 */
+	private JsonSadNcts5ExportHouseConsignmentContainer doFetchList(String action, String avd, String opd, String sign, SystemaWebUser appUser) {
 		String BASE_URL_FETCH = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_FETCH_HOUSECONSIGN_LIST_URL;
 		
 		String urlRequestParamsKeys = this.getRequestUrlKeyParameters(TvinnSadConstants.ACTION_FETCH, avd, opd, sign, appUser);
