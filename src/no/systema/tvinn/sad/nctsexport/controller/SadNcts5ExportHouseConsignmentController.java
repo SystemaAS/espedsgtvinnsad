@@ -133,9 +133,7 @@ public class SadNcts5ExportHouseConsignmentController {
 			String opd = request.getParameter("opd");
 			String avd = request.getParameter("avd");
 			String sign = request.getParameter("sign");
-			String tullId = request.getParameter("tullId");
 			String mrnNr = request.getParameter("mrnNr");
-			
 			String status = request.getParameter("status");
 			String datum = request.getParameter("datum");
 			//this key is only used with a real Update. When empty it will be a signal for a CREATE NEW (Add)
@@ -152,13 +150,11 @@ public class SadNcts5ExportHouseConsignmentController {
 			model.put("avd", avd);
 			model.put("opd", opd);
 			model.put("sign", sign);
-			model.put("tullId", tullId);
 			model.put("status", status);
 			model.put("datum", datum);
 			model.put("mrnNr", mrnNr);
 			//logger.info("AA" + recordToValidate.getTvdref());
 		    
-			
 			
 			if(TvinnSadConstants.ACTION_UPDATE.equals(action)){
 				//-----------
@@ -211,45 +207,7 @@ public class SadNcts5ExportHouseConsignmentController {
 			}else if(TvinnSadConstants.ACTION_DELETE.equals(action)){
 				mode = TvinnSadConstants.MODE_DELETE;
 				int dmlRetval = this.deleteRecord(appUser.getUser(), mode, avd, opd, lineNr, model);
-				/*logger.info("[INFO] Delete record start process... ");
-				String lineNrToDelete = request.getParameter("lin");
 				
-				//---------------------------
-				//get BASE URL = RPG-PROGRAM
-	            //---------------------------
-				String BASE_URL_DELETE = SadNctsExportUrlDataStore.NCTS_EXPORT_BASE_UPDATE_SPECIFIC_TOPIC_ITEM_URL;
-				jsonSadNctsExportSpecificTopicItemRecord = new JsonSadNctsExportSpecificTopicItemRecord();
-				jsonSadNctsExportSpecificTopicItemRecord.setTvli(lineNrToDelete);
-				jsonSadNctsExportSpecificTopicItemRecord.setTvavd(avd);
-				jsonSadNctsExportSpecificTopicItemRecord.setTvtdn(opd);
-				String urlRequestParams = this.getRequestUrlKeyParametersUpdate(jsonSadNctsExportSpecificTopicItemRecord, appUser,TvinnSadConstants.MODE_DELETE );
-				
-				logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-		    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL_DELETE));
-		    	logger.info("URL PARAMS: " + urlRequestParams);
-		    	//----------------------------------------------------------------------------
-		    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
-		    	//----------------------------------------------------------------------------
-				String rpgReturnPayload = this.urlCgiProxyService.getJsonContent(BASE_URL_DELETE, urlRequestParams);
-				//Debug --> 
-		    	logger.info("Checking errMsg in rpgReturnPayload" + rpgReturnPayload);
-		    	//we must evaluate a return RPG code in order to know if the Update was OK or not
-		    	rpgReturnResponseHandler.evaluateRpgResponseOnTopicItemCreateOrUpdate(rpgReturnPayload);
-		    	
-		    	if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){
-		    		rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on UPDATE: " + rpgReturnResponseHandler.getErrorMessage());
-		    		this.setFatalError(model, rpgReturnResponseHandler, jsonSadNctsExportSpecificTopicItemRecord);
-		    		
-		    	}else{
-		    		//Delete successfully done!
-		    		logger.info("[INFO] Valid Delete -- Record successfully deleted, OK ");
-		    		//---------------------------
-		    		//REFRESH ON SOME VARIABLES
-		    		//---------------------------
-		    		//Update some variables on header such as (1)Number of item lines, (2)Kolliantal and (3)Gross weight-Bruttovikt
-		    		this.refreshHeaderVariables(appUser.getUser(), avd, opd);
-		    	}
-				*/
 			}
 			
 			//FETCH the ITEM LIST of existent ITEMs for this TOPIC

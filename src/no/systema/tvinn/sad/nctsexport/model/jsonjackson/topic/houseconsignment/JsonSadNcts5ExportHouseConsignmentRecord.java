@@ -50,31 +50,32 @@ public class JsonSadNcts5ExportHouseConsignmentRecord extends JsonAbstractGrandF
  	private String tctdn2 = null;//7 int OPD. FOR HENTET OPD
  	private String tcxext = null;//35 char EKSTERN REF
  	
+ 	//AdditionalSupplyChainActor (0-99)
  	private String tcrole = null;//3 char LEVERANDØR ROLLE /AdditionalSupplyChainActor/role (0-99)
  	private String tcidr = null;//17 char LEVERANDØR ID /AdditionalSupplyChainActor/identificationNumber
- 	
+ 	//DepartureTransportMeans  (0-999)
  	private String tctaty = null;//2 char TYPE IDENTIFIKASJON /DepartureTransportMeans/typeOfIdentification (0-999)
  	private String tctaid = null;//35 char IDENTITET /DepartureTransportMeans/identificationNumber
  	private String tctalk = null;//2 char Landk Tr.middel /DepartureTransportMeans/nationality
- 	
+ 	//Previous Document (0-99)
  	private String tcpdty = null;//4 char DOKUMENT TYPE /PreviousDocument (0-99)
  	private String tcpdrf = null;//70 char DOKUMENT REF. /PreviousDocument
  	private String tcpdin = null;//35 char INFORMASJON /PreviousDocument
- 	
+ 	//Supporting Document (0-99)
  	private String tcsdty = null;//4 char DOKUMENT TYPE /SupportingDocument (0-99)
  	private String tcsdrf = null;//70 char DOKUMENT REF. /SupportingDocument
  	private String tcsdln = null;//5 char LINE ITEM NUMBER /SupportingDocument/documentLineItemNumber
  	private String tcsdin = null;//35 INFORMASJON /SupportingDocument/complementOfInformation
- 	
+ 	//Transport Document (0-99)
  	private String tctdty = null;//4 char DOKUMENT TYPE /TransportDocument/type (0-99)
  	private String tctdrf = null;//70 char DOKUMENT REF. /TransportDocument/referenceNr 
- 	
+ 	//Additional Reference (0-99)
  	private String tcadty = null;//4 char REFERENSE TYPE /AdditionalReference/type (0-99)
  	private String tcadrf = null;//70 char REFERANSE /AdditionalReference/referenceNumber
- 	
+ 	//Additional information (0-99)
  	private String tcaicd = null;//5 INFORMASJON KODE /AdditionalInformation/code (0-99)
  	private String tcaitx = null;//120 char TEKST /AdditionalInformation/text
- 	
+ 	//TransportCharges (1)
  	private String tctrch = null;//1 char BETALINGSMÅTE /TransportCharges/methodOfPayment minOccurs(0)
  	
  	//parter NCTSECAM - data file
