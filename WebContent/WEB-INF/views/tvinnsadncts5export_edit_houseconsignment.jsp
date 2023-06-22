@@ -366,11 +366,13 @@
            	<%-- ------------------------------------------------- --%>
            	<tr>
 	 			<td >
-	 				<form name="nctsExportEditTopicHouseConsigmentForm" id=""nctsExportEditTopicHouseConsigmentForm"" method="post">
+	 				<form action="tvinnsadncts5export_edit_houseconsignment.do"  name="nctsExportEditHouseConsigmentForm" id="nctsExportEditHouseConsigmentForm" method="post">
 				 	<%--Required key parameters from the Topic parent --%>
 				 	<input type="hidden" name="action" id="action" value='doUpdate'/>
-				 	<input type="hidden" name="opd" id="opd" value="${model.opd}"/>
-				 	<input type="hidden" name="avd" id="avd" value="${model.avd}"/>
+				 	<input type="hidden" name="tctdn" id="tctdn" value="${model.opd}"/>
+				 	<input type="hidden" name="tcavd" id="tcavd" value="${model.avd}"/>
+				 	<input type="hidden" name="avd" id="tctdn" value="${model.avd}"/>
+				 	<input type="hidden" name="opd" id="tcavd" value="${model.opd}"/>
 				 	<input type="hidden" name="sign" id="sign" value="${model.sign}"/>
 				 	<input type="hidden" name="status" id="status" value="${model.status}"/>
 				 	<input type="hidden" name="lineId" id="lineId" value="${model.lineId}">
@@ -438,10 +440,15 @@
 										<td align="left">
 						        			<input type="text" class="inputTextMediumBlue" name="tcrole" id="tcrole" size="3" maxlength="3" value="${Xmodel.record.tcrole}">
 										</td>
+										<td align="left" >
+											<input class="inputFormSubmit" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.ncts.export.houseconsignment.createnew.submit"/>'>
+											&nbsp;&nbsp;
+										</td>
 							        </tr>
 							        
 							        <tr height="10"><td class="text" align="left" colspan="9"><hr></td></tr>
-							        	
+							        
+							        <%--	
 									<tr>
 							 			
 							            <td class="text14" align="left"><span title="tcxext">&nbsp;Ekst.ref.</span></td>
@@ -451,9 +458,10 @@
 					            		<td class="text14" align="left"><span title="tcucr">&nbsp;Refnr.UCR</span></td>
 					            		
 							        </tr>
+							        
 							        <tr>
 						        		<td align="left">
-						        			<input type="text" class="inputTextMediumBlue" name="tcxext" id="tcxext" size="20" maxlength="35" value="${Xmodel.record.tcxext}">
+						        			<input type="text" class="inputTextMediumBlue" name="todo" id="todo" size="20" maxlength="35" value="${Xmodel.record.tcxext}">
 										</td>
 										<td class="text14" align="left">
 						            		<input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="tcvktb" id="tcvktb" size="13" maxlength="15" value="${Xmodel.record.tcvktb}">
@@ -488,7 +496,7 @@
 											&nbsp;&nbsp;
 										</td>
 							        </tr>
-									
+									 --%>
 							        <tr height="10"><td class="text" align="left"></td></tr>
 						        </table>
 					        </td>

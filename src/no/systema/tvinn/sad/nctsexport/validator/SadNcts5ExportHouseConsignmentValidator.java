@@ -57,10 +57,8 @@ public class SadNcts5ExportHouseConsignmentValidator implements Validator {
 		
 		//Check for Mandatory fields first
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "tcavd", "systema.tvinn.sad.ncts5.export.house.consignment.error.null.tcavd"); 
-		
-		
-		
-		
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "tcvktb", "systema.tvinn.sad.ncts5.export.house.consignment.error.null.tcvktb"); 
+				
 		//Logical controls if we passed the NOT NULL errors
 		if(!errors.hasFieldErrors()){
 			if(record!=null){

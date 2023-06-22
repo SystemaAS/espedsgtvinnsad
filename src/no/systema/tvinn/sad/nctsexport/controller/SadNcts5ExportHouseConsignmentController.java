@@ -111,8 +111,6 @@ public class SadNcts5ExportHouseConsignmentController {
 	@RequestMapping(value="tvinnsadncts5export_edit_houseconsignment.do")
 	public ModelAndView tvinnsadNcts5ExportEditHouseConsignment(@ModelAttribute ("record") JsonSadNcts5ExportHouseConsignmentRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		
-		
-		logger.info("Method: doPrepareCreate [RequestMapping-->tvinnsadncts5export_edit_houseconsignment.do]");
 		ModelAndView successView = new ModelAndView("tvinnsadncts5export_edit_houseconsignment");
 		String method = "doNctsExportEdit [RequestMapping-->tvinnsadncts5export_edit.do]";
 		logger.info("Method: " + method);
@@ -161,6 +159,7 @@ public class SadNcts5ExportHouseConsignmentController {
 			//logger.info("AA" + recordToValidate.getTvdref());
 		    
 			
+			
 			if(TvinnSadConstants.ACTION_UPDATE.equals(action)){
 				//-----------
 				//Validation
@@ -188,97 +187,27 @@ public class SadNcts5ExportHouseConsignmentController {
 					if(lineNr!=null && !"".equals(lineNr)){
 						//clean
 						session.removeAttribute("tcli_SESSION");
-				    	
 						//-------
 						//UPDATE
 						//-------
 						mode = TvinnSadConstants.MODE_UPDATE;
 						logger.info("UPDATE on House in process...");
-						/*
-						logger.info("UPDATE(only) HOUSE (existent item) in process...");
-						//take the rest from GUI.
-						JsonSadNcts5ExportHouseConsignmentRecord newRecord = new JsonSadNcts5ExportHouseConsignmentRecord();
-						ServletRequestDataBinder binder = new ServletRequestDataBinder(newRecord);
-			            //binder.registerCustomEditor(...); // if needed
-			            binder.bind(request);
-			            //put back the generated seed and the header keys (avd,opd)
-			            newRecord.setTcavd(avd);
-			            newRecord.setTctdn(opd);
-			            */
-						//TODO update
-			            
+						
 					}else{
 						//-------
 						//CREATE
 						//-------
 						logger.info("CREATE on House (new fresh house) in process...");
 						//This means that the update will be done AFTER a creation of an empty record. All this in the same transaction. 2 STEPS involved: (1)create and (2)update
-						//-----------------------------------------------------------------------------------------
-						//STEP[1] Generate new Item line key seeds (avd,opd,syli) by creating an empty new record. 
-						//		  This step is ONLY applicable for new item lines 
-						//-------------------------------------------------------------------------------------------
-						String newLineNr  = "100"; //this.getNewLineNr(session, request, appUser);
-						if(StringUtils.isNotEmpty(newLineNr)) {
-							recordToValidate.setTcli(newLineNr);
-							mode = TvinnSadConstants.MODE_ADD;
-						}
+						mode = TvinnSadConstants.MODE_ADD;
+						
 					}
 					//--------------------------------------------------
 					//At this point we are ready to do an update/create
-					//
-					//get BASE URL = RPG-PROGRAM
-		            //---------------------------
-					String BASE_URL_UPDATE = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_UPDATE_SPECIFIC_HOUSECONSIGN_URL;
-					StringBuffer urlRequestParamsKeys = new StringBuffer();
-					urlRequestParamsKeys.append("user=" + appUser.getUser());
-					urlRequestParamsKeys.append("&mode=" + mode);
-					String urlRequestParamsHouseConsignment = this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate));
-					//put the final valid param. string
-					String urlRequestParams = urlRequestParamsKeys.toString() + urlRequestParamsHouseConsignment;
-					//for debug purposes in GUI
-					session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_UPDATE_TVINN_SAD, BASE_URL_UPDATE + "==>params: " + urlRequestParams.toString()); 
-					
-					logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-			    	logger.info("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL_UPDATE));
-			    	logger.info("URL PARAMS: " + urlRequestParams);
-			    	//----------------------------------------------------------------------------
-			    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
-			    	//----------------------------------------------------------------------------
-			    	String rpgReturnPayload = this.urlCgiProxyService.getJsonContent(BASE_URL_UPDATE, urlRequestParams);
-			    	//Debug --> 
-			    	logger.info("Checking errMsg in rpgReturnPayload" + rpgReturnPayload);
-			    	//we must evaluate a return RPG code in order to know if the Update was OK or not
-			    	rpgReturnResponseHandler.evaluateRpgResponseOnTopicItemCreateOrUpdate(rpgReturnPayload);
-			    	if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){
-			    		rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on UPDATE: " + rpgReturnResponseHandler.getErrorMessage());
-			    		this.setFatalError(model, rpgReturnResponseHandler, recordToValidate);
-			    		
-			    	}else{
-			    		//Update successfully done!
-			    		logger.info("[INFO] Valid STEP[2] Update -- Record successfully updated, OK ");
-			    		//------------------------------------
-			    		//Update/Create now Security-Sikkerhet record
-			    		//------------------------------------
-			    		//Check if there is a record minimum of information in order to go on with security record - update
-			    		/*if(jsonSadNctsExportSpecificTopicItemRecord.getTvtkbm()!=null && !"".equals(jsonSadNctsExportSpecificTopicItemRecord.getTvtkbm())){
-				    		String mode = TvinnSadConstants.MODE_ADD; //Add - default
-				    		if(this.existsSecurityRecord(appUser.getUser(), avd, opd, jsonSadNctsExportSpecificTopicItemRecord.getTvli())){
-				    			mode = TvinnSadConstants.MODE_UPDATE; //Update
-				    		}
-			    			if(!this.updateSecurityRecord(jsonSadNctsExportSpecificTopicItemRecord, mode, appUser.getUser(), avd, opd)){
-				    			this.setFatalError(model, rpgReturnResponseHandler, jsonSadNctsExportSpecificTopicItemRecord);
-				    		}
-			    		}*/
-			    		//---------------------------
-			    		//REFRESH ON SOME VARIABLES
-			    		//---------------------------
-			    		//Update some variables on header such as (1)Number of item lines, (2)Kolliantal and (3)Gross weight-Bruttovikt
-			    		//this.refreshHeaderVariables(appUser.getUser(), avd, opd);
-			    	}
-					
+					//--------------------------------------------------
+					int dmlRetval = this.updateRecord(appUser.getUser(), mode, recordToValidate, model);
 			    }
 			
-				
 			}else if(TvinnSadConstants.ACTION_DELETE.equals(action)){
 				/*logger.info("[INFO] Delete record start process... ");
 				String lineNrToDelete = request.getParameter("lin");
@@ -322,32 +251,12 @@ public class SadNcts5ExportHouseConsignmentController {
 			}
 			
 			//FETCH the ITEM LIST of existent ITEMs for this TOPIC
-			//---------------------------
-			//get BASE URL = RPG-PROGRAM
-            //---------------------------
-			String BASE_URL_FETCH = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_FETCH_HOUSECONSIGN_LIST_URL;
+			JsonSadNcts5ExportHouseConsignmentContainer container = this.getContainerWithList(action, avd, opd, sign, appUser);
 			
-			String urlRequestParamsKeys = this.getRequestUrlKeyParameters(action, avd, opd, sign, appUser);
-			//for debug purposes in GUI
-			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, BASE_URL_FETCH + "==>params: " + urlRequestParamsKeys.toString()); 
-			
-			logger.info(Calendar.getInstance().getTime() + " JavaServices-start timestamp");
-			logger.info("FETCH av houseConsign list... ");
-	     	logger.info("URL: " + BASE_URL_FETCH);
-	    	logger.info("URL PARAMS: " + urlRequestParamsKeys);
-	    	//--------------------------------------
-	    	//EXECUTE the FETCH (RPG program) here
-	    	//--------------------------------------
-			String jsonPayloadFetch = this.urlCgiProxyService.getJsonContent(BASE_URL_FETCH, urlRequestParamsKeys);
-			//Debug --> 
-			logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayloadFetch));
-	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-	    	JsonSadNcts5ExportHouseConsignmentContainer container = this.sadNctsExportSpecificTopicService.getNcts5ExportSpecificTopicHouseConsignmentContainer(jsonPayloadFetch);
-	    	//add gui lists here
+			//add gui lists here
     		this.setCodeDropDownMgr(appUser, model);	
     		//domain objects
 	    	this.setDomainObjectsInView(model, container);
-			
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL,model);
 			 
 			
@@ -356,6 +265,71 @@ public class SadNcts5ExportHouseConsignmentController {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param applicationUser
+	 * @return
+	 */
+	private int updateRecord(String applicationUser, String mode, JsonSadNcts5ExportHouseConsignmentRecord recordToValidate, Map model) {
+		int retval = -1;
+		
+		RpgReturnResponseHandler rpgReturnResponseHandler = new RpgReturnResponseHandler();
+		
+		String BASE_URL_UPDATE = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_UPDATE_SPECIFIC_HOUSECONSIGN_URL;
+		StringBuffer urlRequestParamsKeys = new StringBuffer();
+		urlRequestParamsKeys.append("user=" + applicationUser);
+		urlRequestParamsKeys.append("&mode=" + mode);
+		String urlRequestParamsHouseConsignment = this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate));
+		//put the final valid param. string
+		String urlRequestParams = urlRequestParamsKeys.toString() + urlRequestParamsHouseConsignment;
+		
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.info("URL: " + BASE_URL_UPDATE);
+    	logger.info("URL PARAMS: " + urlRequestParams);
+    	//----------------------------------------------------------------------------
+    	//EXECUTE the UPDATE (RPG program) here (STEP [2] when creating a new record)
+    	//----------------------------------------------------------------------------
+    	String rpgReturnPayload = this.urlCgiProxyService.getJsonContent(BASE_URL_UPDATE, urlRequestParams);
+    	//Debug --> 
+    	logger.info("Checking errMsg in rpgReturnPayload" + rpgReturnPayload);
+    	//we must evaluate a return RPG code in order to know if the Update was OK or not
+    	rpgReturnResponseHandler.evaluateRpgResponseOnTopicItemCreateOrUpdate(rpgReturnPayload);
+    	if(rpgReturnResponseHandler.getErrorMessage()!=null && !"".equals(rpgReturnResponseHandler.getErrorMessage())){
+    		rpgReturnResponseHandler.setErrorMessage("[ERROR] FATAL on UPDATE: " + rpgReturnResponseHandler.getErrorMessage());
+    		this.setFatalError(model, rpgReturnResponseHandler, recordToValidate);
+    		
+    	}else{
+    		//Update successfully done!
+    		logger.info("[INFO] Valid STEP[2] Update -- Record successfully updated, OK ");
+    		retval = 0;
+    	}
+		
+    	return retval;
+	}
+	
+	private JsonSadNcts5ExportHouseConsignmentContainer getContainerWithList(String action, String avd, String opd, String sign, SystemaWebUser appUser) {
+		String BASE_URL_FETCH = SadNctsExportUrlDataStore.NCTS5_EXPORT_BASE_FETCH_HOUSECONSIGN_LIST_URL;
+		
+		String urlRequestParamsKeys = this.getRequestUrlKeyParameters(TvinnSadConstants.ACTION_FETCH, avd, opd, sign, appUser);
+		
+		logger.info(Calendar.getInstance().getTime() + " JavaServices-start timestamp");
+		logger.info("FETCH av houseConsign list... ");
+     	logger.info("URL: " + BASE_URL_FETCH);
+    	logger.info("URL PARAMS: " + urlRequestParamsKeys);
+    	//--------------------------------------
+    	//EXECUTE the FETCH (RPG program) here
+    	//--------------------------------------
+		String jsonPayloadFetch = this.urlCgiProxyService.getJsonContent(BASE_URL_FETCH, urlRequestParamsKeys);
+		//Debug --> 
+		logger.debug(jsonPayloadFetch);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	JsonSadNcts5ExportHouseConsignmentContainer container = this.sadNctsExportSpecificTopicService.getNcts5ExportSpecificTopicHouseConsignmentContainer(jsonPayloadFetch);
+    	
+    	
+    	return container;
+		
+		
+	}
 	/**
 	 * 
 	 * @param jsonNctsExportSpecificTopicRecord
