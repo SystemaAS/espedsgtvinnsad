@@ -297,7 +297,7 @@
 							               <td align="left" class="text14" >&nbsp;${record.tcucr}</td>
 										   <c:if test="${model.status == 'M' || empty model.status}">	
 								               <td class="text14" align="center" nowrap>
-								               	<a id="alinkDeleteLine" onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')?deleteLine(event):'';" tabindex=-1 href="tvinnsadncts5export_edit_houseconsignment.do?action=doDelete&sign=${model.sign}&avd=${model.avd}&opd=${model.opd}&lineNr=${record.tcli}">
+								               	<a id="alinkDeleteLine" onclick="return deleteConfirm()" tabindex=-1 href="tvinnsadncts5export_edit_houseconsignment.do?action=doDelete&sign=${model.sign}&avd=${model.avd}&opd=${model.opd}&lineNr=${record.tcli}">
 								               		<img valign="bottom" src="resources/images/delete.gif" border="0" alt="remove">
 								               	</a>	&nbsp;
 								               </td>
@@ -445,7 +445,7 @@
 										
 							        </tr>
 							        
-							        <tr height="10"><td class="text" align="left" colspan="9"><hr></td></tr>
+							        <tr height="5"><td class="text" align="left" ><hr></td></tr>
 							        
 							        <tr>
 							        	<td colspan="3">
@@ -509,12 +509,9 @@
 								
 								        </table>
 							        	</td>
-							        	
-						        		
 									</tr>
 									
-							        <tr height="10"><td class="text" align="left"></td></tr>
-							        
+							        <tr height="5"><td class="text" align="left"></td></tr>
 							        <tr>
 							        	<td colspan="3">
 								        <table width="100%" class="tableBorderWithRoundCornersLightGray" align="left" border="0" cellspacing="2" cellpadding="0">
@@ -574,12 +571,73 @@
 								        </table>
 							        	</td>
 							        	
+									</tr>
+									
+									<tr height="5"><td class="text" align="left"></td></tr>
+							        <tr>
+							        	<td colspan="3">
+								        <table width="100%" class="tableBorderWithRoundCornersLightYellow" align="left" border="0" cellspacing="2" cellpadding="0">
+								        	<tr>
+									            <td colspan="3" class="text12" align="left"><b>Additional References</b></td>
+									        </tr>
+											<tr>
+									            <td class="text14" align="left"><span title="tcadty">&nbsp;Type</span></td>
+									            <td class="text14" align="left"><span title="tcadrf">&nbsp;Ref.nr</span></td>
+									            
+									        
+									        <tr>
+								        		<td align="left">&nbsp;
+							            			<input type="text" class="inputTextMediumBlue" name="tcadty" id="tcadty" size="5" maxlength="4" value="${model.record.tcadty}">
+						            			</td> 
+						            			<td align="left">
+								        			<input type="text" class="inputTextMediumBlue" name="tcadrf" id="tcadrf" size="30" maxlength="70" value="${model.record.tcadrf}">
+												</td>
+												
+									        </tr>
+								
+								        </table>
+							        	</td>
+							        	
+							      
+							        	<td colspan="3">
+								        <table width="100%" class="tableBorderWithRoundCornersLightYellow" align="left" border="0" cellspacing="2" cellpadding="0">
+								        	<tr>
+									            <td colspan="3" class="text12" align="left"><b>Aditional Information</b></td>
+									        </tr>
+											<tr>
+									            <td class="text14" align="left"><span title="tcaicd">&nbsp;Dok.type</span></td>
+							            		<td class="text14" align="left"><span title="tctdrf">&nbsp;Dok.ref</span></td>
+							            		<td class="text14" align="left">&nbsp;</td>
+									        </tr>
+									        
+									        <tr>
+								        		<td align="left">&nbsp;
+							            			<input type="text" class="inputTextMediumBlue" name="tcaicd" id="tcaicd" size="6" maxlength="5" value="${model.record.tcaicd}">
+						            			</td> 
+						            			<td align="left">
+								        			<input type="text" class="inputTextMediumBlue" name="tcaitx" id="tcaitx" size="30" maxlength="120" value="${model.record.tcaitx}">
+												</td>
+												<td align="left">
+								        			&nbsp;
+												</td>
+												
+									        </tr>
+								
+								        </table>
+							        	</td>
+							        	
 						        		<td align="left" >
 											<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='<spring:message code="systema.tvinn.sad.ncts.export.houseconsignment.createnew.submit"/>'>
 											&nbsp;&nbsp;
 										</td>
 									</tr>
+							        
+							        
+							        
 							        <tr height="10"><td class="text" align="left"></td></tr>
+							        
+							        
+							        
 							        
 						        </table>
 					        </td>

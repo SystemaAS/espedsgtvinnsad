@@ -39,10 +39,18 @@
 		
   });	
 
-	function deleteLine(event){
-		setBlockUI();
+	function deleteConfirm(){
+		var result = confirm("Er du sikker på at du vil slette denne?");
+		if(result){ 
+			setBlockUI();
+			return result;
+		}else{
+			return false;
+		}
 	
 	}
+	
+	
    
   jq(function() {
 	  jq("#opd").focus();
