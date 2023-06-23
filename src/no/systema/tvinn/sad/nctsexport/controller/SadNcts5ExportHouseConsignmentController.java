@@ -137,24 +137,16 @@ public class SadNcts5ExportHouseConsignmentController {
 			String status = request.getParameter("status");
 			String datum = request.getParameter("datum");
 			//this key is only used with a real Update. When empty it will be a signal for a CREATE NEW (Add)
-			String lineNr = request.getParameter("tcli");
+			String lineNr = request.getParameter("lineNr");
 			String mode = "";
 			
-			
-			if(lineNr!=null && !"".equals(lineNr)){
-				//nothing
-			}else{
-				//this branch is necessary in order to get the line Nr after a validation error (ref. below att bindingResult.hasErrors in this same method)
-				lineNr = (String)session.getAttribute("tcli_SESSION");
-			}
+			//put in model
 			model.put("avd", avd);
 			model.put("opd", opd);
 			model.put("sign", sign);
 			model.put("status", status);
 			model.put("datum", datum);
 			model.put("mrnNr", mrnNr);
-			//logger.info("AA" + recordToValidate.getTvdref());
-		    
 			
 			if(TvinnSadConstants.ACTION_UPDATE.equals(action)){
 				//-----------
@@ -168,25 +160,25 @@ public class SadNcts5ExportHouseConsignmentController {
 			    //check for ERRORS
 				if(bindingResult.hasErrors()){
 					recordToValidate.setTcli(null);
-				    	logger.info("[ERROR] Validation HouseConsignment Record does not validate)");
-				    	logger.info("[INFO] lineNr " + lineNr);
+			    	logger.info("[ERROR] Validation HouseConsignment Record does not validate)");
+			    	logger.info("[INFO] lineNr " + lineNr);
 
-				    	model.put("record", recordToValidate);
-				    	if(lineNr!=null && !"".equals(lineNr)){
-				    		logger.info("[INFO] lineNr ... filling old value: lineNr:" + lineNr);
-				    		session.setAttribute("tvli_SESSION", lineNr);
-				    		recordToValidate.setTcli(lineNr);
-					    	recordToValidate.setTctdn(opd);
-				    		recordToValidate.setTcavd(avd);
-				    	}
+			    	if(lineNr!=null && !"".equals(lineNr)){
+			    		logger.info("[INFO] lineNr ... filling old value: lineNr:" + lineNr);
+			    		recordToValidate.setTcli(lineNr);
+				    	recordToValidate.setTctdn(opd);
+			    		recordToValidate.setTcavd(avd);
+			    		model.put("lineNr", lineNr);
+			    	}
+			    	model.put("record", recordToValidate);
+			    	
 			    }else{
 					if(lineNr!=null && !"".equals(lineNr)){
-						//clean
-						session.removeAttribute("tcli_SESSION");
 						//-------
 						//UPDATE
 						//-------
 						mode = TvinnSadConstants.MODE_UPDATE;
+						recordToValidate.setTcli(lineNr);
 						logger.info("UPDATE on House in process...");
 						
 					}else{

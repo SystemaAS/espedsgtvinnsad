@@ -27,7 +27,22 @@
 	  jq('#alinkTopicListMenuManifest').click(function() { 
 	    	setBlockUI();
 	    });
+
+		jq( "#submitNewLine" ).click(function( event ) {
+  			setBlockUI();
+		});
+		
+		jq( "#submit" ).click(function( event ) {
+  			setBlockUI();
+		});
+		
+		
   });	
+
+	function deleteLine(event){
+		setBlockUI();
+	
+	}
    
   jq(function() {
 	  jq("#opd").focus();
@@ -65,7 +80,11 @@ function getItemData(record) {
 	  	  success: function(data) {
 	  		var len = data.length;
 			for ( var i = 0; i < len; i++) {
+				jq('#lineNr').val(data[i].tcli)
 				jq('#tcvktb').val(data[i].tcvktb)
+				jq('#tcucr').val(data[i].tcucr)
+				
+				
 				/*
 				jq('#lineNr').val(data[i].tvli)
 				jq('#tvli').val(data[i].tvli); 

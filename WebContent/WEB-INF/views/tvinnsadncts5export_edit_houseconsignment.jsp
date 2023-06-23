@@ -223,7 +223,7 @@
 	        			<tr height="10"><td></td></tr> 
 						<tr >
 							<td>
-							<form name="createNewItemLine" id="createNewItemLine" method="post" >
+							<form action="tvinnsadncts5export_edit_houseconsignment.do" name="createNewItemLine" id="createNewItemLine" method="post" >
 								<input type="hidden" name="action" id="action" value='doFetch'>
 				 				<input type="hidden" name="avd" id="avd" value='${model.avd	}'>
 				 				<input type="hidden" name="sign" id="sign" value='${model.sign}'>
@@ -237,8 +237,7 @@
 									<tr>
 										<td class="text12Bold">
 											<c:if test="${model.status == 'M' || empty model.status}">
-												<input tabindex=-1 class="inputFormSubmitStd" type="submit" name="submitNewLine" onclick="javascript: form.action='tvinnsadncts5export_edit_houseconsignment.do';" value="<spring:message code="systema.tvinn.sad.ncts.export.houseconsignment.createnew"/>">
-							
+												<input tabindex=-1 class="inputFormSubmitStd" type="submit" name="submitNewLine" id="submitNewLine"  value="<spring:message code="systema.tvinn.sad.ncts.export.houseconsignment.createnew"/>">
 											</c:if>
 										</td>
 									</tr>
@@ -251,9 +250,10 @@
 						<tr>
 							<td >
 								<form name="formItemList" id="formItemList" method="POST" >
-					               		<input type="hidden" name="opdItemList" id="opdItemList" value="${model.opd}">
-				 						<input type="hidden" name="avdItemList" id="avdItemList" value="${model.avd}">
-				 						<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
+			               		<input type="hidden" name="opdItemList" id="opdItemList" value="${model.opd}">
+		 						<input type="hidden" name="avdItemList" id="avdItemList" value="${model.avd}">
+		 						<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
+		 						
 				 				<table id="container tableTable" width="80%" cellspacing="2" align="left" >
 								<tr>
 								<td class="text12">
@@ -297,7 +297,7 @@
 							               <td align="left" class="text14" >&nbsp;${record.tcucr}</td>
 										   <c:if test="${model.status == 'M' || empty model.status}">	
 								               <td class="text14" align="center" nowrap>
-								               	<a onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')" tabindex=-1 href="tvinnsadncts5export_edit_houseconsignment.do?action=doDelete&sign=${model.sign}&avd=${model.avd}&opd=${model.opd}&tcli=${record.tcli}">
+								               	<a id="alinkDeleteLine" onclick="javascript:return confirm('Er du sikker på at du vil slette denne?')?deleteLine(event):'';" tabindex=-1 href="tvinnsadncts5export_edit_houseconsignment.do?action=doDelete&sign=${model.sign}&avd=${model.avd}&opd=${model.opd}&lineNr=${record.tcli}">
 								               		<img valign="bottom" src="resources/images/delete.gif" border="0" alt="remove">
 								               	</a>	&nbsp;
 								               </td>
@@ -375,7 +375,9 @@
 				 	<input type="hidden" name="opd" id="opd" value="${model.opd}"/>
 				 	<input type="hidden" name="sign" id="sign" value="${model.sign}"/>
 				 	<input type="hidden" name="status" id="status" value="${model.status}"/>
-				 	<input type="hidden" name="lineId" id="lineId" value="${model.lineId}">
+				 	<input type="hidden" name="lineNr" id="lineNr" value="${model.lineNr}">
+				 	
+				 	
 				 	
 				 	<%-- Topic ITEM CREATE --%>
 	 				<table width="80%" align="left" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
@@ -573,7 +575,7 @@
 							        	</td>
 							        	
 						        		<td align="left" >
-											<input class="inputFormSubmit" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.ncts.export.houseconsignment.createnew.submit"/>'>
+											<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='<spring:message code="systema.tvinn.sad.ncts.export.houseconsignment.createnew.submit"/>'>
 											&nbsp;&nbsp;
 										</td>
 									</tr>
