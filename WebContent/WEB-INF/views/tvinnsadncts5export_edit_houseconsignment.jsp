@@ -445,7 +445,7 @@
 										
 							        </tr>
 							        
-							        <tr height="5"><td class="text" align="left" ><hr></td></tr>
+							        <tr height="5"><td class="text" align="left" ></td></tr>
 							        
 							        <tr>
 							        	<td colspan="3">
@@ -514,7 +514,7 @@
 							        <tr height="5"><td class="text" align="left"></td></tr>
 							        <tr>
 							        	<td colspan="3">
-								        <table width="100%" class="tableBorderWithRoundCornersLightGray" align="left" border="0" cellspacing="2" cellpadding="0">
+								        <table width="100%" class="tableBorderWithRoundCornersLightYellow" align="left" border="0" cellspacing="2" cellpadding="0">
 								        	<tr>
 									            <td colspan="3" class="text12" align="left"><b>Supporting Documents</b></td>
 									        </tr>
@@ -545,7 +545,7 @@
 							        	
 							      
 							        	<td colspan="3">
-								        <table width="100%" class="tableBorderWithRoundCornersLightGray" align="left" border="0" cellspacing="2" cellpadding="0">
+								        <table width="100%" class="tableBorderWithRoundCornersLightYellow" align="left" border="0" cellspacing="2" cellpadding="0">
 								        	<tr>
 									            <td colspan="3" class="text12" align="left"><b>Transport Documents</b></td>
 									        </tr>
@@ -626,19 +626,119 @@
 								        </table>
 							        	</td>
 							        	
-						        		<td align="left" >
+									</tr>
+
+							        <tr height="20"><td class="text" align="left"></td></tr>
+							        
+							        <tr>
+							        	<td colspan="3">
+							        	<table width="100%" align="left" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
+									 		<tr height="18px">
+									 			<td class="text14White">
+									 				&nbsp;
+							 						&nbsp;Avsender&nbsp;<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
+								 				</td>
+							 				</tr>
+					 					</table>
+								        <table width="100%" class="tableBorderWithRoundCorners" style="background-color:#F2F5F0;" align="left" border="0" cellspacing="2" cellpadding="0">
+									        <tr >
+									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="tckns">Kundenummer</span></td>
+									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="tcnas">Navn</span>
+									            	<a tabindex="-1" id="tcnasIdLink">
+														<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
+													</a>
+							            		</td>
+									        </tr>
+									        <tr>
+									        		<td align="left"><input type="text" class="inputTextMediumBlue" name="tckns" id="tckns" size="10" maxlength="8" value="${model.record.tckns}"></td>
+									            <td align="left"><input type="text" class="inputTextMediumBlue" name="tcnas" id="tcnas" size="30" maxlength="35" value="${model.record.tcnas}"></td>
+									        </tr>
+									        <tr>
+							        				<td class="text14" align="left" >&nbsp;&nbsp;<span title="tctins">TIN</span></td>
+									        </tr>
+									        <tr>
+									        		<td align="left"><input type="text" class="inputTextMediumBlue" name="tctins" id="tctins" size="20" maxlength="17" value="${model.record.tctins}"></td>
+									        </tr>
+		
+									        <tr height="4"><td>&nbsp;</td></tr>
+									        <tr>
+									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="thadss1">Adresse</span></td>
+									        </tr>
+									        <tr>
+									            <td align="left"><input type="text" class="inputTextMediumBlue" name="tcad1s" id="tcad1s" size="30" maxlength="30" value="${model.record.tcad1s}"></td>
+									            <td class="text14" align="left" >
+									            		&nbsp;<select class="selectMediumBlueE2" name="tclks" id="tclks">
+										            		<option value="">-velg-</option>
+										 				  	<c:forEach var="country" items="${model.countryCodeList}" >
+						                                	 	<option value="${country.zkod}"<c:if test="${model.record.tclks == country.zkod}"> selected </c:if> >${country.zkod}</option>
+															</c:forEach>  
+													</select>
+													
+												</td>
+									        </tr>
+							        	</table>
+							        	</td>
+							        	
+							        
+							        	<td colspan="3">
+							        	<table width="100%" align="left" class="formFrameHeader" border="0" cellspacing="0" cellpadding="0">
+									 		<tr height="18px">
+									 			<td class="text14White">
+									 				&nbsp;
+							 						&nbsp;Mottaker&nbsp;<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
+								 				</td>
+							 				</tr>
+					 					</table>
+								        <table width="100%" class="tableBorderWithRoundCorners" style="background-color:#F2F5F0;" align="left" border="0" cellspacing="2" cellpadding="0">
+									        <tr >
+									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="tcknk">Kundenummer</span></td>
+									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="tcnak">Navn</span>
+									            	<a tabindex="-1" id="thnassIdLink">
+														<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
+													</a>
+							            		</td>
+									        </tr>
+									        <tr>
+									        		<td align="left"><input type="text" class="inputTextMediumBlue" name="tcknk" id="tcknk" size="10" maxlength="8" value="${model.record.tcknk}"></td>
+									            <td align="left"><input type="text" class="inputTextMediumBlue" name="tcnak" id="tcnak" size="30" maxlength="35" value="${model.record.tcnak}"></td>
+									        </tr>
+									        <tr>
+							        				<td class="text14" align="left" >&nbsp;&nbsp;<span title="tctink">TIN</span></td>
+									        </tr>
+									        <tr>
+									        		<td align="left"><input type="text" class="inputTextMediumBlue" name="tctink" id="tctink" size="20" maxlength="17" value="${model.record.tctink}"></td>
+									        </tr>
+		
+									        <tr height="4"><td>&nbsp;</td></tr>
+									        <tr>
+									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="tcad1k">Adresse</span></td>
+									           
+								            		
+									            </td>
+									        </tr>
+									        <tr>
+									            <td align="left"><input type="text" class="inputTextMediumBlue" name="tcad1k" id="tcad1k" size="30" maxlength="30" value="${model.record.tcad1k}"></td>
+									            <td class="text14" align="left" >
+									            		&nbsp;<select class="selectMediumBlueE2" name="tclkk" id="tclkk">
+										            		<option value="">-velg-</option>
+										 				  	<c:forEach var="country" items="${model.countryCodeList}" >
+						                                	 	<option value="${country.zkod}"<c:if test="${model.record.tclkk == country.zkod}"> selected </c:if> >${country.zkod}</option>
+															</c:forEach>  
+													</select>
+													<a tabindex="-1" id="thskssIdLink">
+														<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
+													</a>
+												</td>
+									        </tr>
+							        	</table>
+							        	</td>
+							        	
+							        	<td align="left" valign="bottom" >
 											<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='<spring:message code="systema.tvinn.sad.ncts.export.houseconsignment.createnew.submit"/>'>
 											&nbsp;&nbsp;
 										</td>
-									</tr>
-							        
-							        
-							        
+							        </tr>
 							        <tr height="10"><td class="text" align="left"></td></tr>
-							        
-							        
-							        
-							        
 						        </table>
 					        </td>
 					        
