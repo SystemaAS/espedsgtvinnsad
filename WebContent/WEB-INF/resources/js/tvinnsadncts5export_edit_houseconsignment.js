@@ -117,11 +117,26 @@ function getItemData(record) {
 				jq('#tcaicd').val(data[i].tcaicd)
 				jq('#tcaitx').val(data[i].tcaitx)
 				jq('#tctrch').val(data[i].tctrch)
-				//parties
+				//avsender
 				jq('#tckns').val(data[i].tckns)
 				jq('#tcnas').val(data[i].tcnas)
+				jq('#tcad1s').val(data[i].tcad1s)
+				jq('#tcpns').val(data[i].tcpns)
+				jq('#tcpss').val(data[i].tcpss)
+				jq('#tclks').val(data[i].tclks)
+				jq('#tctins').val(data[i].tctins)
+				jq('#tccps').val(data[i].tccps)
+				jq('#tctls').val(data[i].tctls)
+				jq('#tcems').val(data[i].tcems)
+				//mottaker	
 				jq('#tcknk').val(data[i].tcknk)
 				jq('#tcnak').val(data[i].tcnak)
+				jq('#tcad1k').val(data[i].tcad1k)
+				jq('#tcpnk').val(data[i].tcpnk)
+				jq('#tcpsk').val(data[i].tcpsk)
+				jq('#tclkk').val(data[i].tclkk)
+				jq('#tctink').val(data[i].tctink)
+				
 			}
 	  	  },
 	  	  error: function() {

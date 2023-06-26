@@ -655,17 +655,26 @@
 									        </tr>
 									        <tr>
 							        				<td class="text14" align="left" >&nbsp;&nbsp;<span title="tctins">TIN</span></td>
+							        				<td class="text14" align="left" >&nbsp;&nbsp;<span title="tcad1s">Adresse</span></td>
+									  
 									        </tr>
 									        <tr>
 									        		<td align="left"><input type="text" class="inputTextMediumBlue" name="tctins" id="tctins" size="20" maxlength="17" value="${model.record.tctins}"></td>
+									        		<td align="left"><input type="text" class="inputTextMediumBlue" name="tcad1s" id="tcad1s" size="30" maxlength="30" value="${model.record.tcad1s}"></td>
+									            
 									        </tr>
 		
 									        <tr height="4"><td>&nbsp;</td></tr>
 									        <tr>
-									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="thadss1">Adresse</span></td>
+									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="tcpns">Postnr</span></td>
+									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="tcpss">Sted</span></td>
+									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="tclks">Land</span></td>
+									            
 									        </tr>
 									        <tr>
-									            <td align="left"><input type="text" class="inputTextMediumBlue" name="tcad1s" id="tcad1s" size="30" maxlength="30" value="${model.record.tcad1s}"></td>
+									            <td align="left"><input type="text" class="inputTextMediumBlue" name="tcpns" id="tcpns" size="10" maxlength="9" value="${model.record.tcpns}"></td>
+									            <td align="left"><input type="text" class="inputTextMediumBlue" name="tcpss" id="tcpss" size="20" maxlength="24" value="${model.record.tcpss}"></td>
+									            
 									            <td class="text14" align="left" >
 									            		&nbsp;<select class="selectMediumBlueE2" name="tclks" id="tclks">
 										            		<option value="">-velg-</option>
@@ -675,6 +684,19 @@
 													</select>
 													
 												</td>
+									        </tr>
+									        
+									        <tr>
+									        	<td class="text14" align="left" >&nbsp;&nbsp;<span title="tccps">Kontaktperson</span></td>
+									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="tctls">Telefon</span></td>
+									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="tcems">Email</span></td>
+									            
+									        </tr>
+									        <tr>
+									         	<td align="left"><input type="text" class="inputTextMediumBlue" name="tccps" id="tccps" size="15" maxlength="30" value="${model.record.tccps}"></td>
+									            <td align="left"><input type="text" class="inputTextMediumBlue" name="tctls" id="tctls" size="15" maxlength="20" value="${model.record.tctls}"></td>
+									            <td align="left"><input type="text" class="inputTextMediumBlue" name="tcems" id="tcems" size="20" maxlength="50" value="${model.record.tcems}"></td>
+									           
 									        </tr>
 							        	</table>
 							        	</td>
@@ -704,20 +726,23 @@
 									        </tr>
 									        <tr>
 							        				<td class="text14" align="left" >&nbsp;&nbsp;<span title="tctink">TIN</span></td>
+							        				<td class="text14" align="left" >&nbsp;&nbsp;<span title="tcad1k">Adresse</span></td>
 									        </tr>
 									        <tr>
 									        		<td align="left"><input type="text" class="inputTextMediumBlue" name="tctink" id="tctink" size="20" maxlength="17" value="${model.record.tctink}"></td>
+									        		<td align="left"><input type="text" class="inputTextMediumBlue" name="tcad1k" id="tcad1k" size="30" maxlength="30" value="${model.record.tcad1k}"></td>
 									        </tr>
 		
 									        <tr height="4"><td>&nbsp;</td></tr>
 									        <tr>
-									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="tcad1k">Adresse</span></td>
-									           
-								            		
-									            </td>
+									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="tcpnk">Postnr</span></td>
+									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="tcpsk">Sted</span></td>
+									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="tclkk">Land</span></td>
 									        </tr>
 									        <tr>
-									            <td align="left"><input type="text" class="inputTextMediumBlue" name="tcad1k" id="tcad1k" size="30" maxlength="30" value="${model.record.tcad1k}"></td>
+									            <td align="left"><input type="text" class="inputTextMediumBlue" name="tcpnk" id="tcpnk" size="10" maxlength="9" value="${model.record.tcpnk}"></td>
+									            <td align="left"><input type="text" class="inputTextMediumBlue" name="tcpsk" id="tcpsk" size="20" maxlength="24" value="${model.record.tcpsk}"></td>
+									            
 									            <td class="text14" align="left" >
 									            		&nbsp;<select class="selectMediumBlueE2" name="tclkk" id="tclkk">
 										            		<option value="">-velg-</option>
@@ -729,6 +754,19 @@
 														<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 													</a>
 												</td>
+									        </tr>
+									        
+									        <tr>
+									        	<td class="text14" align="left" >&nbsp;&nbsp;<span title="todo">Kontaktperson</span></td>
+									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="todo">Telefon</span></td>
+									            <td class="text14" align="left" >&nbsp;&nbsp;<span title="todo">Email</span></td>
+									            
+									        </tr>
+									        <tr>
+									         	<td align="left"><input type="text" readonly class="inputTextReadOnly" name="todo" id="todo" size="15" maxlength="30" value="${Xmodel.record.tccps}"></td>
+									            <td align="left"><input type="text" readonly class="inputTextReadOnly" name="todo" id="todo" size="15" maxlength="20" value="${Xmodel.record.tctls}"></td>
+									            <td align="left"><input type="text" readonly class="inputTextReadOnly" name="todo" id="todo" size="20" maxlength="50" value="${Xmodel.record.tcems}"></td>
+									           
 									        </tr>
 							        	</table>
 							        	</td>
