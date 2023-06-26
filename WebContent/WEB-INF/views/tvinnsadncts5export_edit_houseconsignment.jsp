@@ -285,7 +285,7 @@
 							               </c:choose>
 							               <td width="2%" class="text14" align="right">${record.tcli}</td>
 							               <td width="2%" class="text14" align="center">
-							               		<a tabindex=-1 id="recordUpdate_${counter.count}_${record.tcli}" href="#" onClick="getItemData(this);">
+							               		<a style="display: block;" tabindex=-1 id="recordUpdate_${counter.count}_${record.tcli}" href="#" onClick="getItemData(this);">
 							               			<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">
 							               		</a>
 							               		

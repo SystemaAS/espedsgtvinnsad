@@ -117,7 +117,11 @@ function getItemData(record) {
 				jq('#tcaicd').val(data[i].tcaicd)
 				jq('#tcaitx').val(data[i].tcaitx)
 				jq('#tctrch').val(data[i].tctrch)
-				
+				//parties
+				jq('#tckns').val(data[i].tckns)
+				jq('#tcnas').val(data[i].tcnas)
+				jq('#tcknk').val(data[i].tcknk)
+				jq('#tcnak').val(data[i].tcnak)
 			}
 	  	  },
 	  	  error: function() {
