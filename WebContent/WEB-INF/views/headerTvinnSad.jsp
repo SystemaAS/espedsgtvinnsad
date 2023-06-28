@@ -223,6 +223,23 @@
 			    			</a>
 			    			&nbsp;<font color="#FFFFFF" style="font-weight: bold;">|</font>
 			    			
+			    			<%-- --------------------- --%>
+			    			<%-- TVINN-SAD MANIFEST    --%>
+			    			<%-- --------------------- --%>
+			    			<a id="alinkTopicListMenuManifest" tabindex=-1 href="tvinnsaddigitollv2_edit_transport.do?sign=${user.tvinnSadSign}">
+			    				&nbsp;<font
+			    				<c:choose>           
+		                   			<c:when test="${user.activeMenu=='TVINN_SAD_DIGITOLLV2'}">
+		                       			class="headerMenuMediumGreen"
+		                   			</c:when>
+		                   			<c:otherwise>   
+		                       			class="headerMenuLightGreen"
+		                   			</c:otherwise>
+		               			</c:choose>
+			    				>&nbsp;Digitoll-v2&nbsp;</font>
+			    			</a>
+			    			&nbsp;<font color="#FFFFFF" style="font-weight: bold;">|</font>
+			    			
 			    			<%-- -------------------------- --%>
 			    			<%-- TVINN-SAD NCTS EXPORT MENU --%>
 			    			<%-- -------------------------- --%>
