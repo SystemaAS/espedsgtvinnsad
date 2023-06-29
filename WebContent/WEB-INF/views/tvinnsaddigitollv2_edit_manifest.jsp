@@ -8,7 +8,7 @@
 	<%-- specific jQuery functions for this JSP (must reside under the resource map since this has been
 		specified in servlet.xml as static <mvc:resources mapping="/resources/**" location="WEB-INF/resources/" order="1"/> --%>
 	<SCRIPT type="text/javascript" src="resources/js/tvinnsadglobal_edit.js?ver=${user.versionEspedsg}"></SCRIPT>	
-	<SCRIPT type="text/javascript" src="resources/js/tvinnsaddigitollv2_edit_transport.js?ver=${user.versionEspedsg}"></SCRIPT>
+	<SCRIPT type="text/javascript" src="resources/js/tvinnsaddigitollv2_edit_manifest.js?ver=${user.versionEspedsg}"></SCRIPT>
 	
 	<style type = "text/css">
 	.ui-datepicker { font-size:9pt;}
@@ -33,24 +33,25 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			
+					<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
+						<a tabindex=-1 id="alinkItems" style="display:block;" href="tvinnsaddigitollv2_edit_transport.do?action=doFetch&efpro=${Xmodel.record.efpro}&efsg=${Xmodel.record.efsg}
+													&efavd=${Xmodel.record.efavd}&efuuid=${Xmodel.record.efuuid}">
+							<font class="tabDisabledLink">
+								&nbsp;Transport
+							</font>
+							
+						</a>
+					</td>
+					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td title="${Xmodel.record.efuuid}" width="20%" valign="bottom" class="tab" align="center" nowrap>
 						<font class="tabLink">
-							&nbsp;Transport
+							&nbsp;Manifest
 						</font>
 						<font class="text14MediumBlue">[${XXmodel.record.efpro}]</font>
 						<img src="resources/images/update.gif" border="0" alt="edit">
 						
 					</td>
-					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<a tabindex=-1 id="alinkItems" style="display:block;" href="tvinnsaddigitollv2_edit_manifest.do?action=doFetch&efpro=${Xmodel.record.efpro}&efsg=${Xmodel.record.efsg}
-													&efavd=${Xmodel.record.efavd}&efuuid=${Xmodel.record.efuuid}">
-							<font class="tabDisabledLink">
-								&nbsp;Manifest
-							</font>
-							
-						</a>
-					</td>
+					
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a tabindex=-1 id="alinkItems" style="display:block;" href="tvinnsadmanifest_logging.do?efpro=${Xmodel.record.efpro}&efsg=${Xmodel.record.efsg}
@@ -219,244 +220,73 @@
 				</tr>
 			</c:if>
 			 --%>
+			 
+			 
+		<tr>
+			<td colspan="3" style="width:100%" class="text14" valign="top">
+				<table style="width:60%" align="left" border="0" cellspacing="1" cellpadding="0">
+					<tr height="4"><td>&nbsp;</td></tr>
+					<tr>
+						<td class="text14">&nbsp;<span title="todo">Container</span><font class="text16RedBold" >*</font></td>
+						<td class="text14">
+							<select required class="inputTextMediumBlueMandatoryField" name="todo" id="todo">
+		 						<option value="0"<c:if test="${Xmodel.record.efklk == 0}"> selected </c:if> >0</option>
+		 						<option value="1"<c:if test="${Xmodel.record.efklk == 1}"> selected </c:if> >1</option>
+								 
+							</select>										
+						</td>
+						<td class="text14">&nbsp;<span title="todo">Total Bruttovekt</span><font class="text16RedBold" >*</font></td>
+						<td class="text14">
+							<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efkmrk" id="efkmrk" size="17" maxlength="17" value="${Xmodel.record.efkmrk}">									
+						</td>
+						<td class="text14">&nbsp;<span title="todo">Transp.dok.type</span><font class="text16RedBold" >*</font></td>
+						<td class="text14">
+							<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efkmrk" id="efkmrk" size="5" maxlength="4" value="${Xmodel.record.efkmrk}">									
+						</td>
+						<td class="text14">&nbsp;<span title="todo">Transp.dok.id</span><font class="text16RedBold" >*</font></td>
+						<td class="text14">
+							<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efkmrk" id="efkmrk" size="25" maxlength="70" value="${Xmodel.record.efkmrk}">									
+						</td>
+						
+					</tr>
+					<tr height="2"><td>&nbsp;</td></tr>
+					<tr>
+						
+						<td class="text14">&nbsp;<span title="todo">Lastested</span></td>
+						<td class="text14">
+							<input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="17" maxlength="35" value="${Xmodel.record.efkmrk}">									
+						</td>
+						<td class="text14">&nbsp;<span title="todo">Landkode</span></td>
+						<td class="text14">
+							<select required class="inputTextMediumBlue" name="todo" id="todo">
+		 						 
+							</select>										
+						</td>
+						<td class="text14">&nbsp;<span title="todo">Lossested</span></td>
+						<td class="text14">
+							<input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="17" maxlength="35" value="${Xmodel.record.efkmrk}">									
+						</td>
+						<td class="text14">&nbsp;<span title="todo">Landkode</span></td>
+						<td class="text14">
+							<select required class="inputTextMediumBlue" name="todo" id="todo">
+		 						
+							</select>										
+						</td>
+						
+					</tr>		
+				</table>
+			</td>
+		</tr>
+		
+		<tr height="4"><td>&nbsp;</td></tr> 
  		<tr>
 			<td style="width:33%" class="text14" valign="top">
 				<table style="width:95%" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
-						<table class="formFrameHeader" style="width:100%;"  border="0" cellspacing="1" cellpadding="0">
+						<table class="formFrameHeader" style="width:100%;" border="0" cellspacing="1" cellpadding="0">
 					 		<tr height="15">
-					 			<c:choose>
-						 			<c:when test="${not empty Xmodel.record.efuuid}">
-						 				<td class="text14White">
-						 						&nbsp;&nbsp;Turnr:&nbsp;${Xmodel.record.efpro}
-						 						&nbsp;&nbsp;Avd:&nbsp;${Xmodel.record.efavd}  
-						 						
-						 				</td>
-						 				<td class="text14White" align="right">
-						 						Stat<a tabindex=-1 id="updateInternalStatusLink" name="updateInternalStatusLink" runat="server" href="#"><font class="text14White">u</font></a>s:&nbsp;${model.record.efst}
-						 						&nbsp;&nbsp;&nbsp;<b>Manif stat<a tabindex=-1 id="updateManifestStatusLink" name="updateManifestStatusLink" runat="server" href="#"><font class="text14White">u</font></a>s:&nbsp;</b>
-						 						<c:choose>
-						 						<c:when test="${Xmodel.record.efst2 == 'S' || Xmodel.record.efst2 == 'R' || Xmodel.record.efst2 == 'D'}">
-						 							<c:if test="${Xmodel.record.efst2 == 'S'}">
-						 								<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
-						 								<font style="color:#FFFFCC;">SUBMITTED</font>
-						 							</c:if>
-						 							<c:if test="${Xmodel.record.efst2 == 'D'}">
-						 								<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
-						 								<font style="color:red;">SLETTET</font>
-						 							</c:if>
-						 							<c:if test="${Xmodel.record.efst2 == 'R'}">
-						 								<font style="color:#FFFFFF;">REOPENED/DRAFT</font>
-						 							</c:if>
-						 						</c:when>
-						 						<c:otherwise>
-						 							<font style="color:#606060;">${Xmodel.record.efst2}</font>
-						 						</c:otherwise>
-						 						</c:choose>
-						 				</td>
-						 			</c:when>
-						 			<c:otherwise>
-						 				<td class="text14White">&nbsp;&nbsp;Transportinfo.</td>
-						 			</c:otherwise>
-					 			</c:choose>
-			 				</tr>
-			            </table>
-			            </td>
-		            </tr>
-		            <tr >
-					 	<td>
-						<table class="formFrame" style="width:100%;" border="0" cellspacing="1" cellpadding="0">
-			 				<c:choose>
-					 			<c:when test="${not empty Xmodel.record.efuuid}">
-					 				<tr >
-										<td colspan="5" class="text14">
-										<img id="imgManifestIdInfo" style="vertical-align:middle;cursor:pointer;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-											Id<a tabindex=-1 id="alinkManifestRawIdInfo">&nbsp;<font class="text14SkyBlue">${Xmodel.record.efuuid}</font>
-										</td>
-					 				</tr>
-					 				<tr height="2"><td>&nbsp;</td></tr>
-			 					</c:when>
-				 				<c:otherwise>
-									
-									<tr>
-					 					<td class="text12" title="efavd">&nbsp;Avd&nbsp;</td>
-					 					<td class="text12" title="efsg">&nbsp;Sign&nbsp;</td>
-					 					<td class="text12" title="efpro">&nbsp;Tur&nbsp;</td>
-					 					
-				 					</tr>				 				
-				 					<tr>
-					 					<td><input type="text12" readonly class="inputTextReadOnly" name="efavd" id="efavd" size="5" maxlength="4" value="${Xmodel.record.efavd}"></td>
-					 					<td><input type="text12" readonly class="inputTextReadOnly" name="efsg" id="efsg" size="4" maxlength="3" value="${Xmodel.record.efsg}"></td>
-					 					<td>
-					 						<c:choose>
-							 				<c:when test="${Xmodel.record.efpro != '0'}">
-							 					<input type="text12" readonly class="inputTextReadOnly" name="efpro" id="efpro" size="9" maxlength="8" value="${Xmodel.record.efpro}">
-							 				</c:when>	
-							 				<c:otherwise>
-							 					<input type="text12" readonly class="inputTextReadOnly" name="efpro" id="efpro" size="9" maxlength="8" value="">
-							 				</c:otherwise>
-							 				</c:choose>
-					 					</td>
-				 					</tr>
-				 					<tr height="2"><td>&nbsp;</td></tr>
-				 				</c:otherwise>
-			 				</c:choose>
-			 				
-				 				<tr >
-				 					<td class="text14">&nbsp;<span title="eftm">ID-type</span><font class="text16RedBold" >*</font></td>
-				 					<td class="text14">&nbsp;<span title="eftm">ID</span><font class="text16RedBold" >*</font></td>
-									<td class="text14">&nbsp;<span title="eftm">Transporttype</span><font class="text16RedBold" >*</font></td>
-									<td class="text14">&nbsp;<span title="eftm">Landkode</span><font class="text16RedBold" >*</font></td>
-				 				</tr>
-				 				<tr >
-				 					<td class="text14">
-										<select class="inputTextMediumBlue" name="todo" id="todo">
-				 							<option title="IMO skipsregistreringsnummer" value="10">10</option>
-					 						<option title="Vognnummer" value="20">20</option>
-					 						<option title="Tognummer" value="21">21</option>
-					 						<option title="Registreringsnummer for kjøretøy på vei" value="30">30</option>
-					 						<option title="Registreringsnummer for trailer på vei" value="31">31</option>
-					 						<option title="IATA Flight numbery" value="40">40</option>
-					 						<option title="Registreringsnummer for luftfartøy" value="41">41</option>
-					 						<option title="Europeisk skipsidentifikasjonsnummer" value="80">80</option>				 						
-						 				</select>
-						 				
-									</td>
-									<td><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efpro" id="efpro" size="9" maxlength="35" value="">
-									</td>
-									
-						 			<td class="text14">
-						 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="eftm" id="eftm">
-					 						<option value="">Velg</option>
-			 		 				  		<option value="BIL" <c:if test="${Xmodel.record.eftm == 'BIL'}"> selected </c:if> >(30) Bil (veitransport)</option>
-										</select>
-										
-						 			</td>
-						 			<td class="text14">
-						 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="efklk" id="efklk">
-					 						<option value="">-velg-</option>
-						 				  	<c:forEach var="country" items="${Xmodel.countryCodeList}" >
-						 				  		<option title="${country.ztxt}" value="${country.zkod}"<c:if test="${Xmodel.record.efklk == country.zkod}"> selected </c:if> >${country.zkod}</option>
-											</c:forEach>  
-										</select>
-						 			</td>
-						 			
-				 				</tr>
-				 				
-			 				
-			 				<tr height="2"><td>&nbsp;</td></tr>
-			 				<tr>
-			 					<td colspan="2" class="text14">&nbsp;<span title="efeta">Fører-navn</span><font class="text16RedBold" >*</font></td>
-								<td colspan="2" class="text14">&nbsp;<span title="efeta">Fører-epost</span><font class="text16RedBold" >*</font></td>
-								
-			 				</tr>
-			 				<tr >
-					 			<td colspan="2" class="text14">
-					 				<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efeta" id="efeta" size="20" maxlength="70" value="${Xmodel.record.efeta}">
-					 			</td>
-								<td colspan="2" class="text14">
-									<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efeta" id="efeta" size="20" maxlength="70" value="${Xmodel.record.efeta}">
-								</td>
-			 				</tr>
-			 				
-			 				
-			 				
-			 				
-			 				<tr>
-			 					<td class="text14">&nbsp;<span title="efeta">Transportmåte</span><font class="text16RedBold" >*</font></td>
-								<td class="text14">&nbsp;<span title="efeta">ETA</span><font class="text16RedBold" >*</font></td>
-								<td class="text14">&nbsp;<span title="efetm">Tid</span><font class="text16RedBold" >*</font></td>
-								<%-- <td class="text14">&nbsp;<span title="eftsd">Pass.tollsted</span><font class="text16RedBold" >*</font></td>  --%>
-								<td class="text14">&nbsp;<span title="ef3039e">Eksped.enhet</span><font class="text16RedBold" >*</font></td>
-			 				</tr>
-			 				<tr >
-			 					<td class="text14">
-										<select class="inputTextMediumBlue" name="todo" id="todo">
-				 							<option title="Maritime Transport" value="1">1</option>
-					 						<option title="Rail Transport" value="2">2</option>
-					 						<option title="Road Transport" value="3">3</option>
-					 						<option title="Air Transport" value="4">4</option> 						
-						 				</select>
-								</td>
-					 			
-					 			<td class="text14">
-					 				<c:choose>
-					 				<c:when test="${Xmodel.record.efeta != '0'}">
-					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efeta" id="efeta" size="7" maxlength="6" value="${Xmodel.record.efeta}">
-					 				</c:when>	
-					 				<c:otherwise>
-					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efeta" id="efeta" size="7" maxlength="6" value="">
-					 				</c:otherwise>
-					 				</c:choose>
-					 			</td>
-								<td>
-									<c:choose>
-					 				<c:when test="${Xmodel.record.efetm != '0'}">
-					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efetm" id="efetm" size="6" maxlength="4" value="${Xmodel.record.efetm}">
-					 				</c:when>
-					 				<c:otherwise>
-					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efetm" id="efetm" size="6" maxlength="4" value="">
-					 				</c:otherwise>
-					 				</c:choose>
-									
-								</td>
-			 					<%-- 
-					 			<td class="text14">
-					 				<c:choose>
-					 				<c:when test="${Xmodel.record.eftsd != '0'}">
-					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="eftsd" id="eftsd" size="5" maxlength="4" value="${Xmodel.record.eftsd}">
-					 				</c:when>
-					 				<c:otherwise>
-					 					<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="eftsd" id="eftsd" size="5" maxlength="4" value="">
-					 				</c:otherwise>
-					 				</c:choose>
-					 				<a tabindex="-1" id="eftsdIdLink">
-										<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
-									</a>
-					 			</td>
-					 			--%>
-								<td>
-									<c:choose>
-					 				<c:when test="${Xmodel.record.ef3039e != '0'}">
-					 					<input size="14" maxlength="8" class="selectMediumBlueE2" list="todo_list" id="todo" name="todo" value="${Xmodel.record.todo}">
-					 					<datalist id="todo_list">
-					 						<option value="">-velg-</option>
-						 				  	<c:forEach var="record" items="${model.custOfficeList}" >
-						 				  		<option title="${record.ztxt}" value="${record.zkod}"<c:if test="${Xmodel.record.todo == record.zkod}"> selected </c:if> >${record.zkod}</option>
-											</c:forEach>  
-										</datalist>
-					 				</c:when>
-					 				<c:otherwise>
-					 					<input size="14" maxlength="8" class="selectMediumBlueE2" list="todo_list" id="todo" name="todo" value="${Xmodel.record.todo}">
-					 					<datalist id="todo_list">
-					 						<option value="">-velg-</option>
-						 				  	<c:forEach var="record" items="${model.custOfficeList}" >
-						 				  		<option title="${record.ztxt}" value="${record.zkod}"<c:if test="${Xmodel.record.todo == record.zkod}"> selected </c:if> >${record.zkod}</option>
-											</c:forEach>  
-										</datalist>
-					 				</c:otherwise>
-					 				</c:choose>
-									
-								</td>
-			 				</tr>
-			 				<tr height="2"><td>&nbsp;</td></tr>
-			 				
-			 				
-			            </table>
-			            </td>
-		            </tr>
-	            
-	            </table>
-            </td>
-            
-           	<td style="width:33%;" class="text14" valign="top">
-				<table style="width:95%;" align="left" border="0" cellspacing="1" cellpadding="0">
-				 	<tr >
-					 	<td >
-						<table class="formFrameHeader" style="width:100%; border="0" cellspacing="1" cellpadding="0">
-					 		<tr height="15">
-					 			<td class="text14White">&nbsp;&nbsp;Transportør&nbsp;</td>
+					 			<td class="text14White">&nbsp;&nbsp;Avsender&nbsp;</td>
 			 				</tr>
 			            </table>
 			            </td>
@@ -468,25 +298,31 @@
 				 				<td>
 				 				<table>
 				 				<tr >
-									<td class="text14">&nbsp;<span title="efkmrk">Navn</span><font class="text16RedBold" >*</font></td>
-									<td class="text14">&nbsp;<span title="efkmrk">Kjøretøy kjennemerke</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="efkmrk">Navn</span></td>
+									<td class="text14">&nbsp;<span title="efkmrk">ID-type</span></td>
 									
 				 				</tr>
 				 				<tr >
-									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efkmrk" id="efkmrk" size="25" maxlength="70" value="${Xmodel.record.efkmrk}"></td>
-									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efkmrk" id="efkmrk" size="15" maxlength="17" value="${Xmodel.record.efkmrk}"></td>
-									
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="25" maxlength="70" value="${Xmodel.record.efkmrk}"></td>
+									<td class="text14">
+										<select class="inputTextMediumBlue" name="todo" id="todo" style="width:100px;">
+					 						<option value="O">Org.nr</option>
+					 						<option value="E">EORI</option>
+					 						
+										</select>
+										&nbsp;<input readonly type="text" class="inputTextReadOnly" name="efrgd" id="efrgd" size="20" maxlength="35" value="">
+									</td>
 				 				</tr>
 				 				
 				 				<tr >
-									<td class="text14">&nbsp;<span title="efkmrk">Sted</span><font class="text16RedBold" >*</font></td>
-									<td class="text14">&nbsp;<span title="efkmrk">Landkode</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="efkmrk">Sted</span></td>
+									<td class="text14">&nbsp;<span title="efkmrk">Landkode</span></td>
 									
 				 				</tr>
 				 				<tr >
-									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efkmrk" id="efkmrk" size="30" maxlength="35" value="${Xmodel.record.efkmrk}"></td>
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="30" maxlength="35" value="${Xmodel.record.efkmrk}"></td>
 									<td class="text14">
-						 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="efklk" id="efklk">
+						 				<select required class="inputTextMediumBlue" name="efklk" id="efklk">
 					 						<option value="">-velg-</option>
 						 				  	<c:forEach var="country" items="${Xmodel.countryCodeList}" >
 						 				  		<option title="${country.ztxt}" value="${country.zkod}"<c:if test="${Xmodel.record.efklk == country.zkod}"> selected </c:if> >${country.zkod}</option>
@@ -496,12 +332,12 @@
 				 				</tr>
 				 				
 				 				<tr >
-									<td class="text14">&nbsp;<span title="efkmrk">E-post</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="efkmrk">E-post</span></td>
 									<td class="text14">&nbsp;<span title="efkmrk">Telefon</span></td>
 									
 				 				</tr>
 				 				<tr >
-									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efkmrk" id="efkmrk" size="30" maxlength="35" value="${Xmodel.record.efkmrk}"></td>
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="30" maxlength="35" value="${Xmodel.record.efkmrk}"></td>
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="30" maxlength="35" value="${Xmodel.record.efkmrk}"></td>
 									
 				 				</tr>
@@ -509,12 +345,84 @@
 				 				
 				 				</table>
 				 				</td>
+				 				</tr>
+				 				</table>
+			            </td>
+		            </tr>
+	            </table>
+            </td>	
+            
+           	<td style="width:33%" class="text14" valign="top">
+				<table style="width:95%" align="left" border="0" cellspacing="1" cellpadding="0">
+				 	<tr >
+					 	<td >
+						<table class="formFrameHeader" style="width:100%;" border="0" cellspacing="1" cellpadding="0">
+					 		<tr height="15">
+					 			<td class="text14White">&nbsp;&nbsp;Mottaker&nbsp;</td>
 			 				</tr>
 			            </table>
 			            </td>
 		            </tr>
+		            <tr >
+					 	<td>
+						<table style="width:100%;" class="formFrame" border="0" cellspacing="1" cellpadding="0">
+					 		<tr>
+				 				<td>
+				 				<table>
+				 				<tr >
+									<td class="text14">&nbsp;<span title="efkmrk">Navn</span></td>
+									<td class="text14">&nbsp;<span title="efkmrk">ID-type</span></td>
+									
+				 				</tr>
+				 				<tr >
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="25" maxlength="70" value="${Xmodel.record.efkmrk}"></td>
+									<td class="text14">
+										<select class="inputTextMediumBlue" name="todo" id="todo" style="width:100px;">
+					 						<option value="O">Org.nr</option>
+					 						<option value="E">EORI</option>
+					 						
+										</select>
+										&nbsp;<input readonly type="text" class="inputTextReadOnly" name="efrgd" id="efrgd" size="20" maxlength="35" value="">
+									</td>
+				 				</tr>
+				 				
+				 				<tr >
+									<td class="text14">&nbsp;<span title="efkmrk">Sted</span></td>
+									<td class="text14">&nbsp;<span title="efkmrk">Landkode</span></td>
+									
+				 				</tr>
+				 				<tr >
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="30" maxlength="35" value="${Xmodel.record.efkmrk}"></td>
+									<td class="text14">
+						 				<select required class="inputTextMediumBlue" name="efklk" id="efklk">
+					 						<option value="">-velg-</option>
+						 				  	<c:forEach var="country" items="${Xmodel.countryCodeList}" >
+						 				  		<option title="${country.ztxt}" value="${country.zkod}"<c:if test="${Xmodel.record.efklk == country.zkod}"> selected </c:if> >${country.zkod}</option>
+											</c:forEach>  
+										</select>
+						 			</td>
+				 				</tr>
+				 				
+				 				<tr >
+									<td class="text14">&nbsp;<span title="efkmrk">E-post</span></td>
+									<td class="text14">&nbsp;<span title="efkmrk">Telefon</span></td>
+									
+				 				</tr>
+				 				<tr >
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="30" maxlength="35" value="${Xmodel.record.efkmrk}"></td>
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="30" maxlength="35" value="${Xmodel.record.efkmrk}"></td>
+									
+				 				</tr>
+				 				<tr height="2"><td>&nbsp;</td></tr>
+				 				
+				 				</table>
+				 				</td>
+				 				</tr>
+				 				</table>
+			            </td>
+		            </tr>
 	            </table>
-            </td>
+            </td>	
             
             
             <td style="width:33%" class="text14" valign="top">
