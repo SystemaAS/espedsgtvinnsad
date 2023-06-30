@@ -25,7 +25,7 @@
 			 
 			 		<%-- TEMP --%>
 			 
-			 		<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
+			 		<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a tabindex=-1 id="alinkManifestList" style="display:block;" href="tvinnsaddigitollv2.do?action=doFind&avd=${Xmodel.record.efavd}&sign=${Xmodel.record.efsg}">
 							<font class="tabDisabledLink">&nbsp;Transportlist</font>
 							<img src="resources/images/list.gif" border="0" alt="general list">
@@ -33,7 +33,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			
-					<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
+					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a tabindex=-1 id="alinkItems" style="display:block;" href="tvinnsaddigitollv2_edit_transport.do?action=doFetch&efpro=${Xmodel.record.efpro}&efsg=${Xmodel.record.efsg}
 													&efavd=${Xmodel.record.efavd}&efuuid=${Xmodel.record.efuuid}">
 							<font class="tabDisabledLink">
@@ -43,7 +43,7 @@
 						</a>
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td title="${Xmodel.record.efuuid}" width="20%" valign="bottom" class="tab" align="center" nowrap>
+					<td title="${Xmodel.record.efuuid}" width="15%" valign="bottom" class="tab" align="center" nowrap>
 						<font class="tabLink">
 							&nbsp;Manifest
 						</font>
@@ -53,7 +53,18 @@
 					</td>
 					
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
+					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
+						<a tabindex=-1 id="alinkItems" style="display:block;" href="tvinnsaddigitollv2_edit_house.do?action=doFetch&efpro=${Xmodel.record.efpro}&efsg=${Xmodel.record.efsg}
+													&efavd=${Xmodel.record.efavd}&efuuid=${Xmodel.record.efuuid}">
+							<font class="tabDisabledLink">
+								&nbsp;House
+							</font>
+							
+						</a>
+					</td>
+					
+					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
+					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a tabindex=-1 id="alinkItems" style="display:block;" href="tvinnsadmanifest_logging.do?efpro=${Xmodel.record.efpro}&efsg=${Xmodel.record.efsg}
 													&efavd=${Xmodel.record.efavd}&efuuid=${Xmodel.record.efuuid}">
 							<font class="tabDisabledLink">
@@ -63,14 +74,33 @@
 						</a>
 					</td>
 					
-					<td width="50%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-			 
+					<%-- <td width="50%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>  --%>
+			 		<td width="50%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
+						<img id="imgInfoRpgJarStart" style="cursor:pointer;" onClick="showPop('jarStartCmd');" src="resources/images/info4.png" width="12" height="12" border="0" alt="info">
+						<div class="text12" style="position: relative;display: inline;" align="left">
+						<span style="position:absolute; left:-580px; top:3px;" id="jarStartCmd" class="popupWithInputText"  >
+			           		<div class="text11" align="left">
+			           			<b>Communication API</b>&nbsp;upload-engine-expressmanif-client.jar<br/>
+			           			<p><b>Stop</b> go tvinmnu --> 2 ...</p>
+			           			<p><b>Start</b> SBMJOB CMD(CALL PGM(SADEMSNDC)) JOB(EXPMANSND) JOBQ(SYJOBQNMAX) USER(SY400USR)
+			           			</p>
+			           			<p>
+				           			<a class="text11" target="_blank" id="alinkHeader" style="display:block;" href="renderLocalLogsgExpft.do?user=${user.user}">
+				           				logsg_syjservicestn-expft.log
+				           			</a>
+			           			</p>
+			           			<br/>
+			           			<button name="_ButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('jarStartCmd');">Close</button> 
+			           		</div>
+			           	</span>
+			           	</div>
+					</td>
 			 
 			<%--
 				<c:choose> 
 			    <c:when test="${not empty model.record.efuuid}">
 		    	
-					<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
+					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a tabindex=-1 id="alinkManifestList" style="display:block;" href="tvinnsadmanifest.do?action=doFind&avd=${model.record.efavd}&sign=${model.record.efsg}">
 							<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.manifest.list.tab"/></font>
 							<img src="resources/images/list.gif" border="0" alt="general list">
@@ -78,7 +108,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			
-					<td title="${model.record.efuuid}" width="20%" valign="bottom" class="tab" align="center" nowrap>
+					<td title="${model.record.efuuid}" width="15%" valign="bottom" class="tab" align="center" nowrap>
 						<font class="tabLink">
 							&nbsp;<spring:message code="systema.tvinn.sad.manifest.created.header.tab"/>
 						</font>
@@ -87,7 +117,7 @@
 						
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
+					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a tabindex=-1 id="alinkItems" style="display:block;" href="tvinnsadmanifest_edit_cargolines.do?action=doFetch&efpro=${model.record.efpro}&efsg=${model.record.efsg}
 													&efavd=${model.record.efavd}&efuuid=${model.record.efuuid}">
 							<font class="tabDisabledLink">
@@ -98,7 +128,7 @@
 						</a>
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
+					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a tabindex=-1 id="alinkItems" style="display:block;" href="tvinnsadmanifest_logging.do?efpro=${model.record.efpro}&efsg=${model.record.efsg}
 													&efavd=${model.record.efavd}&efuuid=${model.record.efuuid}">
 							<font class="tabDisabledLink">
@@ -111,14 +141,14 @@
 					<td width="50%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 				</c:when>
 				<c:otherwise>
-					<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
+					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a id="alinkManifestList" tabindex=-1 style="display:block;" href="tvinnsadmanifest.do?action=doFind&sign=${user.tvinnSadSign}">
 							<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.manifest.list.tab"/></font>
 							<img src="resources/images/list.gif" border="0" alt="general list">
 						</a>
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td width="20%" valign="bottom" class="tab" align="center" nowrap>
+					<td width="15%" valign="bottom" class="tab" align="center" nowrap>
 						<font class="tabLink">&nbsp;<spring:message code="systema.tvinn.sad.createnew"/></font>
 						<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
 						
@@ -227,7 +257,16 @@
 				<table style="width:60%" align="left" border="0" cellspacing="1" cellpadding="0">
 					<tr height="4"><td>&nbsp;</td></tr>
 					<tr>
+						<td class="text14">&nbsp;<span title="todo">Total Bruttovekt</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="todo">Container</span><font class="text16RedBold" >*</font></td>
+						<td class="text14">&nbsp;<span title="todo">Transp.dok.type</span><font class="text16RedBold" >*</font></td>
+						<td class="text14">&nbsp;<span title="todo">Transp.dok.id</span><font class="text16RedBold" >*</font></td>
+						<td class="text14">&nbsp;<span title="efkmrk">Transportør ID-type</span><font class="text16RedBold" >*</font></td>
+					</tr>
+					<tr>	
+						<td class="text14">
+							<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efkmrk" id="efkmrk" size="17" maxlength="17" value="${Xmodel.record.efkmrk}">									
+						</td>
 						<td class="text14">
 							<select required class="inputTextMediumBlueMandatoryField" name="todo" id="todo">
 		 						<option value="0"<c:if test="${Xmodel.record.efklk == 0}"> selected </c:if> >0</option>
@@ -235,38 +274,41 @@
 								 
 							</select>										
 						</td>
-						<td class="text14">&nbsp;<span title="todo">Total Bruttovekt</span><font class="text16RedBold" >*</font></td>
-						<td class="text14">
-							<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efkmrk" id="efkmrk" size="17" maxlength="17" value="${Xmodel.record.efkmrk}">									
-						</td>
-						<td class="text14">&nbsp;<span title="todo">Transp.dok.type</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">
 							<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efkmrk" id="efkmrk" size="5" maxlength="4" value="${Xmodel.record.efkmrk}">									
 						</td>
-						<td class="text14">&nbsp;<span title="todo">Transp.dok.id</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">
 							<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efkmrk" id="efkmrk" size="25" maxlength="70" value="${Xmodel.record.efkmrk}">									
 						</td>
-						
+						<td class="text14">
+							<select class="inputTextMediumBlueMandatoryField" name="todo" id="todo" style="width:100px;">
+		 						<option value="O">Org.nr</option>
+		 						<option value="E">EORI</option>
+		 						
+							</select>
+							&nbsp;<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efrgd" id="efrgd" size="20" maxlength="35" value="">
+						</td>
 					</tr>
 					<tr height="2"><td>&nbsp;</td></tr>
+					
 					<tr>
-						
 						<td class="text14">&nbsp;<span title="todo">Lastested</span></td>
+						<td class="text14">&nbsp;<span title="todo">Landkode</span></td>
+						<td class="text14">&nbsp;<span title="todo">Lossested</span></td>
+						<td class="text14">&nbsp;<span title="todo">Landkode</span></td>
+					</tr>
+					<tr>	
 						<td class="text14">
 							<input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="17" maxlength="35" value="${Xmodel.record.efkmrk}">									
 						</td>
-						<td class="text14">&nbsp;<span title="todo">Landkode</span></td>
 						<td class="text14">
 							<select required class="inputTextMediumBlue" name="todo" id="todo">
 		 						 
 							</select>										
 						</td>
-						<td class="text14">&nbsp;<span title="todo">Lossested</span></td>
 						<td class="text14">
 							<input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="17" maxlength="35" value="${Xmodel.record.efkmrk}">									
 						</td>
-						<td class="text14">&nbsp;<span title="todo">Landkode</span></td>
 						<td class="text14">
 							<select required class="inputTextMediumBlue" name="todo" id="todo">
 		 						

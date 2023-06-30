@@ -31,12 +31,13 @@ import no.systema.main.validator.LoginValidator;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.DateTimeManager;
 import no.systema.main.util.JsonDebugger;
+import no.systema.jservices.common.values.FasteKoder;
 import no.systema.main.model.SystemaWebUser;
-import no.systema.tvinn.sad.nctsimport.util.manager.CodeDropDownMgr;
 
 //tvinn
 import no.systema.tvinn.sad.util.TvinnSadConstants;
 import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
+import no.systema.z.main.maintenance.service.MaintMainKofastService;
 import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
 import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService;
 import no.systema.tvinn.sad.nctsimport.util.RpgReturnResponseHandler;
@@ -53,6 +54,7 @@ import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
 import no.systema.tvinn.sad.manifest.express.util.manager.ManifestDateManager;
 import no.systema.tvinn.sad.manifest.express.util.manager.ManifestExpressMgr;
+import no.systema.tvinn.sad.manifest.express.util.manager.CodeDropDownMgr;
 
 
 
@@ -192,6 +194,14 @@ public class TvinnSadDigitollv2Controller {
 		return successView;
 	}
 	
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="tvinnsaddigitollv2_edit_manifest.do",  method={RequestMethod.GET, RequestMethod.POST} )
 	public ModelAndView doEditManifest(@ModelAttribute ("record") SearchFilterManifestList recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		//this.context = TdsAppContext.getApplicationContext();
@@ -295,6 +305,120 @@ public class TvinnSadDigitollv2Controller {
 		}	
 		return successView;
 	}
+	
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_edit_house.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doEditHouse(@ModelAttribute ("record") SearchFilterManifestList recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		//this.context = TdsAppContext.getApplicationContext();
+		Collection<JsonTvinnSadManifestRecord> outputList = new ArrayList<JsonTvinnSadManifestRecord>();
+		Map model = new HashMap();
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_edit_house");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		
+		
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+		}else{
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_DIGITOLLV2);
+			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE); 
+			
+			/*
+			//----------------------------------------------
+			//get Search Filter and populate (bind) it here
+			//----------------------------------------------
+			SearchFilterManifestList searchFilter = new SearchFilterManifestList();
+			ServletRequestDataBinder binder = new ServletRequestDataBinder(searchFilter);
+            //binder.registerCustomEditor(...); // if needed
+            binder.bind(request);
+            //Put in session for further use (within this module) ONLY with: POST method = doFind on search fields
+            if(request.getMethod().equalsIgnoreCase(RequestMethod.POST.toString())){
+            	session.setAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADMANIFEST, searchFilter);
+            }else{
+            	SearchFilterManifestList sessionFilter = (SearchFilterManifestList)session.getAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADMANIFEST);
+            	if(sessionFilter!=null){
+            		//Use the session filter when applicable
+            		searchFilter = sessionFilter;
+            		
+            	}else{
+            		//first time propose today
+            		searchFilter.setEtaDatum(dateMgr.getNewDateFromNow(DateTimeManager.NO_FORMAT, -1));
+            	}
+            }
+            
+            //get BASE URL
+    		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_MANIFEST_EXPRESS_URL;
+    		//add URL-parameters
+    		String urlRequestParams = this.getRequestUrlKeyParameters(searchFilter, appUser);
+    		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+	    	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+	    	logger.warn("URL PARAMS: " + urlRequestParams);
+	    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+	    	//Debug --> 
+	    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    	if(jsonPayload!=null){
+	    		
+	    		JsonTvinnSadManifestContainer jsonTvinnSadManifestContainer = this.tvinnSadManifestListService.getListContainer(jsonPayload);
+	    		//----------------------------------------------------------------
+				//now filter the topic list with the search filter (if applicable)
+				//----------------------------------------------------------------
+				outputList = jsonTvinnSadManifestContainer.getList();
+				if(outputList!=null && outputList.size() > JsonTvinnSadManifestContainer.LIMIT_SIZE_OF_MAIN_LIST_OF_MANIFESTS){
+					outputList = new ArrayList();
+					model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, "Too many lines. Narrow your search please ...");
+				}else{
+					for(JsonTvinnSadManifestRecord record: outputList){
+						//check if the manifest cargo lines are valid
+						if(!manifestExpressMgr.isValidManifest(appUser, record.getEfpro())){
+							record.setOwn_valid(-1);
+						}
+						//check it the manifest is editable
+						if(!manifestExpressMgr.isEditableManifest(appUser, record)){
+							record.setOwn_editable(-1);
+						}
+						//dates
+						this.adjustFieldsForFetch(record);
+					}
+					logger.info(outputList.toString());
+				}
+				
+	    	}	
+			//--------------------------------------
+			//Final successView with domain objects
+			//--------------------------------------
+			//drop downs
+			this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
+			this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
+			this.setCodeDropDownMgr(appUser, model);
+			
+			//domain and search filter
+			successView.addObject(TvinnSadConstants.DOMAIN_LIST,outputList);
+			successView.addObject(TvinnSadConstants.DOMAIN_LIST_SIZE, outputList.size());	
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+    		
+			if (session.getAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADMANIFEST) == null || session.getAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADMANIFEST).equals("")){
+				successView.addObject(TvinnSadConstants.DOMAIN_SEARCH_FILTER_SADMANIFEST, searchFilter);
+			}
+	    	*/
+			this.setCodeDropDownMgr(appUser, model);
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+	    
+		}	
+		return successView;
+	}
+	
+	
 	
 	/**
 	 * log Errors in Aspects and Domain objects in order to render on GUI
@@ -447,11 +571,10 @@ public class TvinnSadDigitollv2Controller {
 	 * @param model
 	 */
 	private void setCodeDropDownMgr(SystemaWebUser appUser, Map model){
-		/*this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(this.urlCgiProxyService, this.tvinnSadDropDownListPopulationService,
-				 model,appUser,CodeDropDownMgr.CODE_2_COUNTRY, null, null);
-		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(this.urlCgiProxyService, this.tvinnSadDropDownListPopulationService,
-				 model,appUser,CodeDropDownMgr.CODE_012_SPRAK, null, null);
-		*/
+		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(appUser, FasteKoder.SADEFETYPE.toString(), model, urlCgiProxyService, maintMainKofastService);
+		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(appUser, FasteKoder.SADEFPR.toString(), model, urlCgiProxyService, maintMainKofastService);
+		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(this.urlCgiProxyService, this.tvinnSadDropDownListPopulationService, 
+																	 model,appUser,CodeDropDownMgr.CODE_2_COUNTRY, null, null);
 	}
 	
 	private void adjustFieldsForFetch(JsonTvinnSadManifestRecord recordToValidate){
@@ -472,6 +595,9 @@ public class TvinnSadDigitollv2Controller {
 	
 	@Autowired
 	private ManifestExpressMgr manifestExpressMgr;
+	
+	@Autowired
+	private MaintMainKofastService maintMainKofastService;
 
 }
 

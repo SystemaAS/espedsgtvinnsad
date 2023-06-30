@@ -5,6 +5,7 @@
   
   //Overlay on tab (to mark visually a delay...)
   jq(function() {
+	/*
 	jq('#alinkManifestList').click(function() { 
     	setBlockUI();
     });
@@ -14,7 +15,8 @@
     jq('#alinkItems').click(function() { 
     	setBlockUI();
     });
-    
+    */
+
     //General Header Menus
     jq('#alinkTopicListMenuImp').click(function() { 
     	setBlockUI();
