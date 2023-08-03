@@ -141,7 +141,7 @@
 						<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
 						
 					</td>
-					<td width="80%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
+					<td width="fossilf%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 				</c:otherwise>
 				
 			</c:choose> --%>

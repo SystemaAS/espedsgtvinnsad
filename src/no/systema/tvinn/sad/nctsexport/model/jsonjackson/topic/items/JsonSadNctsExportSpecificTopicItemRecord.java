@@ -625,11 +625,15 @@ public class JsonSadNctsExportSpecificTopicItemRecord extends JsonAbstractGrandF
 	
 	
 	//NCTSEI - CONSIGNMENT ITEM records for NCTS5
+	private String ti01 = null; //1 icke i bruk
 	private String tiavd = null;
 	private String titdn = null;
 	private String tili = null; //5 char - HOUSE CONSIGNMENT NR
 	private String tili2 = null; //5 char - LINJENR I HOUSE
 	private String tilit = null; //5 char - LINJENR för alle
+	private String tidk = null; //5 char - DEKLARASJONSTYPE
+	private String tialk = null; //2 char - AvsLand
+	private String tiblk = null; //2 char - Best.land
 	private String tiucr = null; //35 char - REF.NR UCR
 	
 	private String tilrol = null; //3 char - LEVERANDØR ROLLE
@@ -646,6 +650,8 @@ public class JsonSadNctsExportSpecificTopicItemRecord extends JsonAbstractGrandF
 	private String tipty = null; //2 char - PAKKTYPE 
 	private String tipnt = null; //8 int - ANTALL PAKKER
 	private String tipmrk = null; //120 char - MERKE & NR 
+	private String ticnr = null; //17 char - CONTAINEnr
+	private String tidfkd = null; //20 char - FORSEGLING-ID KODE
 	private String tipdty = null; //4 char - DOKUMENT TYPE  
 	
 	private String tipdrf = null; //70 char - DOKUMENT REF  

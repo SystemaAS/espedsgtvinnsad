@@ -47,6 +47,17 @@ public class JsonSadNctsExportSpecificTopicRecord extends JsonAbstractGrandFathe
 	private String thst = null;
 	public void setThst(String value) {  this.thst = value; }
 	public String getThst() {return this.thst;}
+	
+	//status 928
+	private String thst928 = null;
+	//status 028
+	private String thst028 = null;
+	//status 029
+	private String thst029 = null;
+	
+	private String thst2 = null;
+	private String thst3 = null;
+				
 	//signatur
 	private String thsg = null;
 	public void setThsg(String value) {  this.thsg = value; }
@@ -101,6 +112,7 @@ public class JsonSadNctsExportSpecificTopicRecord extends JsonAbstractGrandFathe
 	private String thscin = null; //3 char SP. CIRCUMSTANCE IND
 	private String thclkd = null; //2 char language Departure
 	private String thbini = null; //1 char BINGING ITINERARY
+	private String thflag = null; //1 char ENDRINGSFLAG
 	private String thlidt = null; //10 char LIMIT DATE
 	private String thatyp = null; //4 char 1. AUTORISATIONSTYPE
 	private String tharef = null; //35 char 1. AUTORISATIONSREF.
@@ -229,7 +241,7 @@ public class JsonSadNctsExportSpecificTopicRecord extends JsonAbstractGrandFathe
 	private String thtls = null; //20 char telefon
 	private String thems = null; //50 char email
 	
-	//Köpare
+	//Köpare 
 	private String thknk = null;
 	public void setThknk(String value) {  this.thknk = value; }
 	public String getThknk() {return this.thknk;}
