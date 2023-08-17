@@ -87,6 +87,7 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 	<bean id="maintMainKofastService" class="no.systema.z.main.maintenance.service.MaintMainKofastServiceImpl"/>
 	<bean id="tvinnSadManifestChildwindowService" class="no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestChildwindowServiceImpl"/>
 	
+	
 	<!-- ============================  -->
 	<!-- TROR - Oppdragsregistrering   -->
 	<!-- ============================  -->
@@ -96,6 +97,14 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 	<!-- SKAT-NCTS EXPORT  -->
 	<!-- ================  -->
 	<bean id="skatNctsExportSkatSpecificTopicService" class="no.systema.skat.nctsexport.service.SkatNctsExportSpecificTopicServiceImpl"/>
+	
+	
+	<!-- ============================  -->
+	<!-- DIGITOLL V2                   -->
+	<!-- ============================  -->
+	<bean id="sadmotfListService" class="no.systema.tvinn.sad.digitollv2.service.SadmotfListServiceImpl"/>
+	
+	
 	
 	
 </beans>

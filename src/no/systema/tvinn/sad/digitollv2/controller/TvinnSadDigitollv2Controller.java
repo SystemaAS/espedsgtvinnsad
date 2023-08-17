@@ -6,6 +6,9 @@ import java.util.*;
 import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
+
+import javawebparts.core.org.apache.commons.lang.StringUtils;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -47,6 +50,11 @@ import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelning
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureContainer;
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureRecord;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
+import no.systema.tvinn.sad.digitollv2.filter.SearchFilterDigitollTransportList;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
+import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
+import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
 import no.systema.tvinn.sad.manifest.express.filter.SearchFilterManifestList;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
@@ -82,6 +90,128 @@ public class TvinnSadDigitollv2Controller {
 		if("DEBUG".equals(AppConstants.LOG4J_LOGGER_LEVEL)){
 			 
 		}
+	}
+	
+	/**
+	 * 
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doListTransport(@ModelAttribute ("record") SearchFilterManifestList recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		//this.context = TdsAppContext.getApplicationContext();
+		Collection<SadmotfRecord> outputList = new ArrayList<SadmotfRecord>();
+		Map model = new HashMap();
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		
+		String gate = request.getParameter("gate");
+		
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+		}else{
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_DIGITOLLV2);
+			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE); 
+			
+			
+			//----------------------------------------------
+			//get Search Filter and populate (bind) it here
+			//----------------------------------------------
+			SearchFilterDigitollTransportList searchFilter = new SearchFilterDigitollTransportList();
+			ServletRequestDataBinder binder = new ServletRequestDataBinder(searchFilter);
+            //binder.registerCustomEditor(...); // if needed
+            binder.bind(request);
+            //Put in session for further use (within this module) ONLY with: POST method = doFind on search fields
+            if(request.getMethod().equalsIgnoreCase(RequestMethod.POST.toString())){
+            	session.setAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADDIGITOLL_TRANSPORT_LIST, searchFilter);
+            }else{
+            	SearchFilterDigitollTransportList sessionFilter = (SearchFilterDigitollTransportList)session.getAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADDIGITOLL_TRANSPORT_LIST);
+            	if(sessionFilter!=null){
+            		//Use the session filter when applicable
+            		searchFilter = sessionFilter;
+            		
+            	}else{
+            		//first time propose today
+            		searchFilter.setEtaDatum(dateMgr.getNewDateFromNow(DateTimeManager.NO_FORMAT, -1));
+            	}
+            }
+            
+            if(StringUtils.isNotEmpty(gate)) {
+            	//nothing
+            	//The first search from the Digitoll meny is the gate and it should not fire any query...
+            	//with no gate as parameter will be normal-behavior in the search GUI (with filter)
+            	
+            }else {
+            	
+	            //get BASE URL
+	    		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TRANSPORT_URL;
+	    		//add URL-parameters
+	    		String urlRequestParams = this.getRequestUrlKeyParameters(searchFilter, appUser);
+	    		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+		    	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+		    	logger.warn("URL PARAMS: " + urlRequestParams);
+		    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+	
+		    	//Debug --> 
+		    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+		    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+		    	if(jsonPayload!=null){
+		    		
+		    		SadmotfContainer jsonContainer = this.sadmotfListService.getListContainer(jsonPayload);
+		    		//----------------------------------------------------------------
+					//now filter the topic list with the search filter (if applicable)
+					//----------------------------------------------------------------
+					outputList = jsonContainer.getList();
+					if(outputList!=null && outputList.size() > SadmotfContainer.LIMIT_SIZE_OF_MAIN_LIST_OF_TRANSPORTS){
+						outputList = new ArrayList();
+						model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, "Too many lines. Narrow your search please ...");
+					}else{
+						for(SadmotfRecord record: outputList){
+							/*//check if the manifest cargo lines are valid
+							if(!manifestExpressMgr.isValidManifest(appUser, record.getEfpro())){
+								record.setOwn_valid(-1);
+							}
+							//check it the manifest is editable
+							if(!manifestExpressMgr.isEditableManifest(appUser, record)){
+								record.setOwn_editable(-1);
+							}
+							//dates
+							this.adjustFieldsForFetch(record);
+							*/
+						}
+						logger.info(outputList.toString());
+					}
+					
+		    	}	
+            }
+			//--------------------------------------
+			//Final successView with domain objects
+			//--------------------------------------
+			//drop downs
+			/*this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
+			this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
+			this.setCodeDropDownMgr(appUser, model);
+			*/
+			//domain and search filter
+			successView.addObject(TvinnSadConstants.DOMAIN_LIST,outputList);
+			successView.addObject(TvinnSadConstants.DOMAIN_LIST_SIZE, outputList.size());	
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+    			
+			if (session.getAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADDIGITOLL_TRANSPORT_LIST) == null || session.getAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADDIGITOLL_TRANSPORT_LIST).equals("")){
+				successView.addObject(TvinnSadConstants.SESSION_SEARCH_FILTER_SADDIGITOLL_TRANSPORT_LIST, searchFilter);
+			}
+	    	
+			//this.populateCustomsOfficeOfFirstEntryHtmlDropDown(model);
+			
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+	    
+		}	
+		return successView;
 	}
 	
 	/**
@@ -531,33 +661,34 @@ public class TvinnSadDigitollv2Controller {
 	 * @param appUser
 	 * @return
 	 */
-	private String getRequestUrlKeyParameters(SearchFilterManifestList searchFilter, SystemaWebUser appUser){
+	private String getRequestUrlKeyParameters(SearchFilterDigitollTransportList searchFilter, SystemaWebUser appUser){
 		StringBuffer urlRequestParamsKeys = new StringBuffer();
 		//String action = request.getParameter("action");
 		
 		urlRequestParamsKeys.append("user=" + appUser.getUser());
 		if(searchFilter.getAvd()!=null && !"".equals(searchFilter.getAvd())){
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "efavd=" + searchFilter.getAvd());
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "etavd=" + searchFilter.getAvd());
 		}
 		if(searchFilter.getTurnr()!=null && !"".equals(searchFilter.getTurnr())){
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "efpro=" + searchFilter.getTurnr());
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "etpro=" + searchFilter.getTurnr());
 		}
-		if(searchFilter.getSign()!=null && !"".equals(searchFilter.getSign())){
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "efsg=" + searchFilter.getSign());
+		if(searchFilter.getDatum()!=null && !"".equals(searchFilter.getSign())){
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "etsg=" + searchFilter.getSign());
 		}
-		
 		if(searchFilter.getDatum()!=null && !"".equals(searchFilter.getDatum())){
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "efdtr=" + this.dateFormatter.convertToDate_ISO(searchFilter.getDatum()));
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "etdtr=" + this.dateFormatter.convertToDate_ISO(searchFilter.getDatum()));
 		}
+		/*
 		if(searchFilter.getDatumt()!=null && !"".equals(searchFilter.getDatumt())){
 			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "own_efdtr=" + this.dateFormatter.convertToDate_ISO(searchFilter.getDatumt()));
+		}*/
+		if(searchFilter.getDatum()!=null && !"".equals(searchFilter.getEtaDatum())){
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "etetad=" + this.dateFormatter.convertToDate_ISO(searchFilter.getEtaDatum()));
 		}
-		if(searchFilter.getEtaDatum()!=null && !"".equals(searchFilter.getEtaDatum())){
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "efeta=" + this.dateFormatter.convertToDate_ISO(searchFilter.getEtaDatum()));
-		}
+		/*
 		if(searchFilter.getEtaDatumt()!=null && !"".equals(searchFilter.getEtaDatumt())){
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "own_efeta=" + this.dateFormatter.convertToDate_ISO(searchFilter.getEtaDatumt()));
-		}
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "own_etetad=" + this.dateFormatter.convertToDate_ISO(searchFilter.getEtaDatumt()));
+		}*/
 		
 		
 		return urlRequestParamsKeys.toString();
@@ -591,7 +722,7 @@ public class TvinnSadDigitollv2Controller {
 	private TvinnSadDropDownListPopulationService tvinnSadDropDownListPopulationService;
 	
 	@Autowired
-	private TvinnSadManifestListService tvinnSadManifestListService;
+	private SadmotfListService sadmotfListService;
 	
 	@Autowired
 	private ManifestExpressMgr manifestExpressMgr;

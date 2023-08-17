@@ -226,7 +226,7 @@
 			    			<%-- --------------------- --%>
 			    			<%-- TVINN-SAD MANIFEST    --%>
 			    			<%-- --------------------- --%>
-			    			<a id="alinkTopicListMenuManifest" tabindex=-1 href="tvinnsaddigitollv2_edit_transport.do?sign=${user.tvinnSadSign}">
+			    			<a id="alinkTopicListMenuManifest" tabindex=-1 href="tvinnsaddigitollv2.do?sign=${user.tvinnSadSign}&gate=1">
 			    				&nbsp;<font
 			    				<c:choose>           
 		                   			<c:when test="${user.activeMenu=='TVINN_SAD_DIGITOLLV2'}">
