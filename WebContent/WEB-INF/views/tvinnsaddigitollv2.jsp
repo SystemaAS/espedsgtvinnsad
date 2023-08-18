@@ -99,12 +99,23 @@
 					
 				</td>
 				<td align="left" >
+           			<%-- 
            			<select class="selectMediumBlueE2" name="sign" id="sign">
 	            		<option value="">-velg-</option>
 	 				  	<c:forEach var="record" items="${model.signList}" >
                              	 	<option value="${record.sign}"<c:if test="${searchFilterSadDigitollTransportList.sign == record.sign}"> selected </c:if> >${record.sign}</option>
 						</c:forEach> 
 					</select>
+					--%>
+					<input size="8" maxlength="4" class="selectMediumBlueE2" list="sign_list" id="sign" name="sign" value="${searchFilterSadDigitollTransportList.sign}">
+					<datalist id="sign_list">
+					  <option value="">-Välj-</option>
+	 				  	<c:forEach var="record" items="${model.signList}" >
+	 				  		<option value="${record.sign}"<c:if test="${searchFilterSadDigitollTransportList.sign == record.sign}"> selected </c:if> >${record.sign}</option> 
+						</c:forEach>  
+					</datalist>
+					
+					
 				</td>
 				<td align="left" ><input type="text" class="inputText" name="turnr" id="turnr" size="10" maxlength="8" value="${searchFilterSadDigitollTransportList.turnr}">&nbsp;</td>
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="etaDatum" id="etaDatum" size="6" maxlength="6" value="${searchFilterSadDigitollTransportList.etaDatum}">&nbsp;</td>
