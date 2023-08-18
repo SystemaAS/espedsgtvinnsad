@@ -37,13 +37,15 @@
 				<div class="text12" style="position: relative;display: inline;" align="left">
 				<span style="position:absolute; left:-580px; top:3px;" id="jarStartCmd" class="popupWithInputText"  >
 	           		<div class="text11" align="left">
-	           			<b>Communication API</b>&nbsp;upload-engine-expressmanif-client.jar<br/>
-	           			<p><b>Stop</b> go tvinmnu --> 2 ...</p>
-	           			<p><b>Start</b> SBMJOB CMD(CALL PGM(SADEMSNDC)) JOB(EXPMANSND) JOBQ(SYJOBQNMAX) USER(SY400USR)
-	           			</p>
 	           			<p>
-		           			<a class="text11" target="_blank" id="alinkHeader" style="display:block;" href="renderLocalLogsgExpft.do?user=${user.user}">
+		           			<a class="text11" target="_blank" id="alinkHeader" href="renderLocalLogsgExpft.do?user=${user.user}">
 		           				logsg_syjservicestn-expft.log
+		           			</a>
+	           			</p>
+	           			
+	           			<p>
+		           			<a class="text11" target="_blank" id="alinkHeader" href="renderLocalCatalina.do?user=${user.user}">
+		           				catalina.out
 		           			</a>
 	           			</p>
 	           			<br/>

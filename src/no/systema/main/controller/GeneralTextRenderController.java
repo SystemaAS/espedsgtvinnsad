@@ -43,6 +43,7 @@ public class GeneralTextRenderController {
 	
 	private final String RELATIVE_LOGFILE_PATH = "logs/" + ApplicationPropertiesUtil.getProperty("logsg.logger.file");   //OBSOLETE: resources.getString("log4j.logger.file");
 	private final String RELATIVE_LOGFILE_EXPRESS_FORTOLLING_SERVICE_PATH = "logs/logsg_syjservicestn-expft.log";
+	private final String RELATIVE_LOGFILE_CATALINA_OUT = "logs/catalina.out";
 	private final String SERVLET_CONTEXT_WEBAPPS_ROOT = "webapps";
 	
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
@@ -137,6 +138,58 @@ public class GeneralTextRenderController {
 			String logFile = null;
 			if(pathRootIndex!=-1){
 				logFile = path.substring(0,pathRootIndex) + RELATIVE_LOGFILE_EXPRESS_FORTOLLING_SERVICE_PATH;
+				logger.info("logFile:" + logFile);
+			}
+			
+			if(logFile!=null ){
+				//must know the file type in order to put the correct content type on the Servlet response.
+                String fileType = this.payloadContentFlusher.getFileType(logFile);
+                if(AppConstants.DOCUMENTTYPE_LOG.equals(fileType)){
+                		response.setContentType(AppConstants.HTML_CONTENTTYPE_TEXTHTML);
+                }else if(AppConstants.DOCUMENTTYPE_TXT.equals(fileType)){
+            			response.setContentType(AppConstants.HTML_CONTENTTYPE_TEXTHTML);
+                }//--> with browser dialogbox: response.setHeader ("Content-disposition", "attachment; filename=\"edifactPayload.txt\"");
+                response.setHeader ("Content-disposition", "filename=\"log4jCustomer.txt" + fileType + "\"");
+                
+                logger.info("Start flushing file payload...");
+                //send the file output to the ServletOutputStream
+                try{
+                		//InputStream inputStream = session.getServletContext().getResourceAsStream(logFile);
+                		this.payloadContentFlusher.flushServletOutput(response, logFile);
+                	
+                }catch (Exception e){
+                		e.printStackTrace();
+                }
+            }
+			//this to present the output in an independent window
+            return(null);
+			
+		}
+			
+	}	
+	
+	@RequestMapping(value="renderLocalCatalina.do", method={ RequestMethod.GET })
+	public ModelAndView doRenderCatalina(HttpSession session, HttpServletRequest request, HttpServletResponse response){
+		logger.info("Inside doRenderLocalLogsgExpFt...");
+		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
+		Log4jMgr log4jMgr = new Log4jMgr();
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			
+			try{
+				//log4jMgr.doLevelUpdate(request, response);
+			}catch(Exception e){
+				e.toString();
+			}
+			
+			String path = TdsServletContext.getTdsServletContext().getRealPath("/");
+			//logger.info("ServletContext:" + path);
+			int pathRootIndex = path.indexOf(SERVLET_CONTEXT_WEBAPPS_ROOT);
+			String logFile = null;
+			if(pathRootIndex!=-1){
+				logFile = path.substring(0,pathRootIndex) + RELATIVE_LOGFILE_CATALINA_OUT;
 				logger.info("logFile:" + logFile);
 			}
 			
