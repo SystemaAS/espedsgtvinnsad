@@ -80,12 +80,23 @@
 			</tr>
  	        <tr>
 				<td align="left" >&nbsp;
-           			<select class="selectMediumBlueE2" name="avd" id="avd">
+           			<%--<select class="selectMediumBlueE2" name="avd" id="avd">
 	            		<option value="">-velg-</option>
 	 				  	<c:forEach var="record" items="${model.avdList}" >
                         	 	<option value="${record.avd}"<c:if test="${searchFilterSadDigitollTransportList.avd == record.avd}"> selected </c:if> >${record.avd}</option>                       	 	
 						</c:forEach> 
 					</select>
+					 --%>
+					 
+					<input size="8" maxlength="4" class="selectMediumBlueE2" list="avd_list" id="avd" name="avd" value="${searchFilterSadDigitollTransportList.avd}">
+					<datalist id="avd_list">
+					  <option value="">-Välj-</option>
+	 				  	<c:forEach var="record" items="${model.avdList}" >
+	 				  		<option value="${record.avd}"<c:if test="${searchFilterSadDigitollTransportList.avd == record.avd}"> selected </c:if> >${record.avd}</option> 
+						</c:forEach>  
+					</datalist>
+					
+					
 				</td>
 				<td align="left" >
            			<select class="selectMediumBlueE2" name="sign" id="sign">

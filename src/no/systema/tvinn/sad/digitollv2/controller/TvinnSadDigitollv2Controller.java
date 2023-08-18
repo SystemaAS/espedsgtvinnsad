@@ -192,10 +192,10 @@ public class TvinnSadDigitollv2Controller {
 			//Final successView with domain objects
 			//--------------------------------------
 			//drop downs
-			/*this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
+			this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
 			this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
 			this.setCodeDropDownMgr(appUser, model);
-			*/
+			
 			//domain and search filter
 			successView.addObject(TvinnSadConstants.DOMAIN_LIST,outputList);
 			successView.addObject(TvinnSadConstants.DOMAIN_LIST_SIZE, outputList.size());	

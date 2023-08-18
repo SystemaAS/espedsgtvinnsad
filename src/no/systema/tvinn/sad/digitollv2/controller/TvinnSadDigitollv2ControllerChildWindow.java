@@ -144,6 +144,57 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		}
 	}
 	
+	/**
+	 * Runs the API method
+	 * http://localhost:8080/syjservicestn-expft/digitollv2/getDocsRecMasterConsignment.do?user=OSCAR&mrn=23NONJB08UP98SOBT7
+	 * 
+	 * Gets the list of all documents received so far (at toll.no)
+	 * Example
+	 * --> https://api-test.toll.no/api/movement/road/status/v2/master-consignment/23NONJB08UP98SOBT7/transport-document/status
+	 * --> json answer (toll.no): --> getBody():[{"documentNumber":"111222333898758711","type":"N741","received":false}, "documentNumber":"9999999999999999999","type":"N741","received":true}, ] 
+	 * 
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_masterdocs_rec.do",  method={RequestMethod.GET} )
+	public ModelAndView doMasterDocsReceived(HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doMasterDocsReceived");
+		Map model = new HashMap();
+		String id = request.getParameter("id");
+		
+		
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_manifestinfo");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			StringBuilder url = new StringBuilder();
+			url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
+			url.append("getDocsRecMasterConsignment.do");
+			
+			String BASE_URL = url.toString();
+    		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&mrn=" + id;
+    		logger.info("URL: " + BASE_URL);
+    		logger.info("PARAMS: " + urlRequestParamsKeys);
+    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+    		//Debug -->
+	    	logger.debug(jsonPayload);
+    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    		
+    		model.put("content", jsonPayload);
+
+    		successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	
 	
 	
 	
