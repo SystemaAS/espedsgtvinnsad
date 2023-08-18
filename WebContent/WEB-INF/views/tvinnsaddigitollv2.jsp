@@ -173,10 +173,10 @@
                 		<th width="2%" class="tableHeaderField" >Turnr</th>
                 		<th width="2%" class="tableHeaderField" >Sig</th>
                 		<th title="S=SLETTET" width="2%" class="tableHeaderField" >Status</th>
-                		<th width="2%" class="tableHeaderField" >Passering ETA</th>
-                		<th width="2%" class="tableHeaderField" >Tollsted</th>
-                		<th width="2%" class="tableHeaderField" >MasterDoknr.</th>
-                		<th width="2%" class="tableHeaderField" >MasterDoktyp.</th>
+                		<th width="2%" class="tableHeaderField" >Pass. ETA</th>
+                		<th width="2%" class="tableHeaderField" >Tollst.</th>
+                		<th width="2%" class="tableHeaderField" >Doknr.</th>
+                		<th width="2%" class="tableHeaderField" >Doktyp.</th>
                 		<th width="2%" class="tableHeaderField" >Bilnr</th>
                 		<th width="2%" class="tableHeaderField" >Sjåførs navn</th>
                 		<th width="2%" class="tableHeaderField" >Reg.dato</th>
@@ -227,28 +227,24 @@
 		               		</c:otherwise>
 		               	   </c:choose>
 		              	</td>
-		               <td width="2%" class="tableCell" >${record.etetad}&nbsp;${record.etetat}</td>
-		               <td align="center" width="2%" class="tableCell" >${record.ettsd}</td>
-		               <td align="center" width="2%" class="tableCell" >${record.etdkm}</td>
-		               <td align="center" width="2%" class="tableCell" >${record.etdkmt}</td>
-		               <td width="2%" class="tableCell" >${record.etkmrk}</td>
-		               <td width="2%" class="tableCell" >${record.etsjaf}</td>
-		               <td width="2%" class="tableCell" ><c:if test="${record.etdtr > 0}">${record.etdtr}</c:if></td>
+		               <td class="tableCell" >${record.etetad}&nbsp;${record.etetat}</td>
+		               <td align="center" class="tableCell" >${record.ettsd}</td>
+		               <td align="center" class="tableCell" >${record.etdkm}</td>
+		               <td align="center" class="tableCell" >${record.etdkmt}</td>
+		               <td class="tableCell" >${record.etkmrk}</td>
+		               <td class="tableCell" >${record.etsjaf}</td>
+		               <td class="tableCell" ><c:if test="${record.etdtr > 0}">${record.etdtr}</c:if></td>
 		               <%--
 		               <td width="2%" class="tableCell" ><font style="font-size:11px;">${record.efuuid}</font></td>
 		                --%>
-		               <td width="2%" class="tableCell" >
-		               		<a style="display: block; width: 100%; height: 100%; cursor:pointer" class="uuidLink text14SkyBlue" id="${record.etmid}">
-								${record.etmid}
-							</a>  
-		               </td>
-		               <td width="2%" class="tableCell" >
-		               		<a style="display: block; width: 100%; height: 100%; cursor:pointer" class="uuidLink text14SkyBlue" id="${record.etuuid}">
+		               <td class="tableCell" ><span class="text14SkyBlue">${record.etmid}</span></td>
+		               <td class="tableCell" title="check status in toll.no">
+		               		<a style="display: block; width: 100%; height: 100%; cursor:pointer" class="uuidLink text12SkyBlue" id="${record.etuuid}">
 								${record.etuuid}
 							</a>  
 		               </td>
 		               
-		               <td width="2%" align="center" class="tableCell" >
+		               <td align="center" class="tableCell" >
 		               		<c:choose>
 		               		<c:when test="${record.etst2 == 'S' || record.etst2 == 'R' || record.etst2 == 'D' || record.etst2 == 'C'}">
 		               			<c:if test="${record.etst2 == 'S'}">
