@@ -46,11 +46,11 @@ public class SadmotfRecord extends JsonAbstractGrandFatherRecord  {
 	private String etemr = ""; // varchar(50), Epostadr/tlf  
 	private String etemrt = ""; // varchar(2),   Epostadr/tlf typ (TE-EM)
 	private String etkmrk = ""; // varchar(30), Kjennemerke (reg.nr)
-	private String etktm= ""; // varchar(4), Transportmiddel type
-	private String etktyp = ""; // varchar(2), Kjøretøy type
+	private String etktm= ""; // varchar(4), Transportmiddel type (typeOfMeansOfTransport)
+	private String etktyp = ""; // varchar(2), Kjøretøy type (typeOfIdentification)
 	private String etklk = ""; // varchar(2), Kjøretøynasjonalitet
 	private String etcref = ""; // varchar(17), Convay/turRef/flight
-	private String etktkd = ""; // varchar(1), Mode av transportKD
+	private String etktkd = ""; // varchar(1), Mode av transportKD (modeOfTransportCode)
 	
 	private String etsjaf = ""; // varchar(50), Sjåfør navn
 	private String etems = ""; // varchar(50), Epostadr/tlf
