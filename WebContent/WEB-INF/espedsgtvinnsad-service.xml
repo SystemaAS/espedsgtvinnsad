@@ -103,8 +103,7 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 	<!-- DIGITOLL V2                   -->
 	<!-- ============================  -->
 	<bean id="sadmotfListService" class="no.systema.tvinn.sad.digitollv2.service.SadmotfListServiceImpl"/>
-	
-	
+	<bean id="sadmomfListService" class="no.systema.tvinn.sad.digitollv2.service.SadmomfListServiceImpl"/>
 	
 	
 </beans>

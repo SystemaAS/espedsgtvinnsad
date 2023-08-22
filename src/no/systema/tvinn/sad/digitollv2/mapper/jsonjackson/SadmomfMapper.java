@@ -8,6 +8,7 @@ import org.slf4j.*;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestArchivedDocsContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
@@ -27,8 +28,8 @@ import java.util.*;
  * 
  * 
  */
-public class SadmotfMapper {
-	private static final Logger logger = LoggerFactory.getLogger(SadmotfMapper.class.getName());
+public class SadmomfMapper {
+	private static final Logger logger = LoggerFactory.getLogger(SadmomfMapper.class.getName());
 	
 	/**
 	 * 
@@ -36,19 +37,18 @@ public class SadmotfMapper {
 	 * @return
 	 * @throws Exception
 	 */
-	public SadmotfContainer getContainer(String utfPayload) throws Exception{
+	public SadmomfContainer getContainer(String utfPayload) throws Exception{
 		ObjectMapper mapper = new ObjectMapper();  
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
-		SadmotfContainer container = null;
+		SadmomfContainer container = null;
 		if(utfPayload!=null){
 			//At this point we now have an UTF-8 payload
-			container = mapper.readValue(utfPayload.getBytes(), SadmotfContainer.class); 
+			container = mapper.readValue(utfPayload.getBytes(), SadmomfContainer.class); 
 			
 		}
 			
 		return container;
 	}
-	
 	
 	
 

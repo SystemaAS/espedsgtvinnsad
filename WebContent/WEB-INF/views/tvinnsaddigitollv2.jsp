@@ -192,23 +192,24 @@
 				<table id="mainList" class="display compact cell-border" >
 					<thead>
 					<tr class="tableHeaderField" height="20" >
-                    	<th width="2%" class="tableHeaderFieldFirst" ><spring:message code="systema.tvinn.sad.update"/></th>
+                    	<th width="2%" class="tableHeaderFieldFirst" ><img title="Update" style="vertical-align:middle;" src="resources/images/update.gif" border="0" alt="edit"></th>
                     	<th width="2%" class="tableHeaderField" >Avd</th>
                 		<th width="2%" class="tableHeaderField" >Turnr</th>
                 		<th width="2%" class="tableHeaderField" >Sig</th>
-                		<th title="S=SLETTET" width="2%" class="tableHeaderField" >Status</th>
+                		<th title="S=SLETTET" width="2%" class="tableHeaderField" >St.</th>
                 		<th width="2%" class="tableHeaderField" >Pass. ETA</th>
                 		<th width="2%" class="tableHeaderField" >Tollst.</th>
                 		<th width="2%" class="tableHeaderField" >Doknr.</th>
-                		<th width="2%" class="tableHeaderField" >Doktyp.</th>
+                		<th width="2%" class="tableHeaderField" >Dokt.</th>
                 		<th width="2%" class="tableHeaderField" >Bilnr</th>
+                		<th width="2%" class="tableHeaderField" >Transp.</th>
                 		<th width="2%" class="tableHeaderField" >Sjåførs navn</th>
                 		<th width="2%" class="tableHeaderField" >Reg.dato</th>
                 		<th width="2%" class="tableHeaderField" >MRN-Api</th>
                 		<th width="2%" class="tableHeaderField" >Req.id</th>
                 		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED" width="2%" class="tableHeaderField" >Manif.st</th>
                 		<th width="2%" class="tableHeaderField" title="Fjerner manifest fra Tollvesenet" >Slett</th>
-                		<th width="2%" class="tableHeaderField" title="Fjerner manifest lokalt (SYSPED)">Kanseller</th>
+                		<th width="2%" class="tableHeaderField" title="Fjerner manifest lokalt (SYSPED)">Kans.</th>
                 		</tr>
                 	</thead>
                 	<tbody> 
@@ -225,7 +226,7 @@
 		          	  </c:choose>	
 		          
 		          	   <td width="2%" class="tableCellFirst" align="center">
-		          	   		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsadmanifest_edit.do?action=doFetch&efuuid=${Xrecord.efuuid}" onClick="setBlockUI();">
+		          	   		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_transport.do?action=doFind&etuuid=${record.etuuid}" onClick="setBlockUI();">
                					<c:choose>
 		               				<c:when test="${Xrecord.own_editable > 0}">
 		               					<img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">
@@ -256,6 +257,7 @@
 		               <td align="center" class="tableCell" >${record.etdkm}</td>
 		               <td align="center" class="tableCell" >${record.etdkmt}</td>
 		               <td class="tableCell" >${record.etkmrk}</td>
+		               <td class="tableCell" >${record.etnat}</td>
 		               <td class="tableCell" >${record.etsjaf}</td>
 		               <td class="tableCell" ><c:if test="${record.etdtr > 0}">${record.etdtr}</c:if></td>
 		               <%--

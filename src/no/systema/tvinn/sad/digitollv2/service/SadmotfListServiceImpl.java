@@ -5,16 +5,10 @@ package no.systema.tvinn.sad.digitollv2.service;
 
 import no.systema.tvinn.sad.digitollv2.mapper.jsonjackson.SadmotfMapper;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
-import no.systema.tvinn.sad.manifest.express.mapper.jsonjackson.TvinnSadManifestMapper;
-import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestArchivedDocsContainer;
-import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
-import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
-import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestLoggingContainer;
-import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRpgContainer;
 
 /**
  * @author oscardelatorre
- * @date Sep 2020
+ * @date Aug 2023
  */
 public class SadmotfListServiceImpl implements SadmotfListService {
 
@@ -30,83 +24,8 @@ public class SadmotfListServiceImpl implements SadmotfListService {
 		return container;
 		
 	}
-	/**
-	 * 
-	 */
-	public JsonTvinnSadManifestCargoLinesContainer getListCargolinesContainer(String utfPayload){
-		JsonTvinnSadManifestCargoLinesContainer container = null;
-		try{
-			TvinnSadManifestMapper mapper = new TvinnSadManifestMapper();
-			container = mapper.getCargolinesContainer(utfPayload);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-		return container;
-	}
 	
-	/**
-	 * 
-	 * @param utfPayload
-	 * @return
-	 */
-	public JsonTvinnSadManifestContainer getListContainerDefaultValues(String utfPayload) {
-		JsonTvinnSadManifestContainer container = null;
-		try{
-			TvinnSadManifestMapper mapper = new TvinnSadManifestMapper();
-			container = mapper.getContainer(utfPayload);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-		return container;
-		
-	}
 	
-	public JsonTvinnSadManifestRpgContainer getContainerRpgResult(String utfPayload) {
-		JsonTvinnSadManifestRpgContainer container = null;
-		try{
-			TvinnSadManifestMapper mapper = new TvinnSadManifestMapper();
-			container = mapper.getContainerRgp132Raw(utfPayload);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-		return container;
-		
-	}
-	/**
-	 * 
-	 * @param utfPayload
-	 * @return
-	 */
-	public JsonTvinnSadManifestArchivedDocsContainer getArchiveDocsContainer(String utfPayload) {
-		JsonTvinnSadManifestArchivedDocsContainer container = null;
-		try{
-			TvinnSadManifestMapper mapper = new TvinnSadManifestMapper();
-			container = mapper.getArchiveDocsContainer(utfPayload);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-		return container;
-		
-	}
-	/**
-	 * 
-	 */
-	public JsonTvinnSadManifestLoggingContainer getLoggingContainer(String utfPayload) {
-		JsonTvinnSadManifestLoggingContainer container = null;
-		try{
-			TvinnSadManifestMapper mapper = new TvinnSadManifestMapper();
-			container = mapper.getLoggingContainer(utfPayload);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-		return container;
-		
-	}
 	
 
 }

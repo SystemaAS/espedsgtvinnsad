@@ -2,6 +2,7 @@ package no.systema.tvinn.sad.digitollv2.model.jsonjackson;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,7 +56,7 @@ public class SadmotfRecord extends JsonAbstractGrandFatherRecord  {
 	private String etems = ""; // varchar(50), Epostadr/tlf
 	private String etemst = ""; // varchar(2), Epostadr/tlf typ (TE-EM) 
 	
-	private Integer etknt = 0; // numeric(8),  Representative
+	private Integer etknt = 0; // numeric(8),  Transportör
 	private String etrgt = ""; // varchar(17), Orgnr Repres.
 	private String etnat = ""; // varchar(30), Navn
 	private String etna2t = ""; // varchar(30), SubDivvision
@@ -74,6 +75,10 @@ public class SadmotfRecord extends JsonAbstractGrandFatherRecord  {
 	private String ettsd = ""; // varchar(8), Passeringstollsted
 	private String emerr = ""; // varchar(50), Feilmelding ved SND
 	
+	
+	private Collection<SadmomfRecord> listMasters = null;
+	public void setListMasters(Collection<SadmomfRecord> value){ this.listMasters = value;}
+	public Collection<SadmomfRecord> getListMasters(){ return this.listMasters; }
 	/**
 	 * 
 	 * @return

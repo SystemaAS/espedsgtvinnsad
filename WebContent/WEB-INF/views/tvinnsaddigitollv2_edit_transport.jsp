@@ -26,7 +26,7 @@
 			 		<%-- TEMP --%>
 			 
 			 		<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<a tabindex=-1 id="alinkManifestList" style="display:block;" href="tvinnsaddigitollv2.do?action=doFind&avd=${Xmodel.record.efavd}&sign=${Xmodel.record.efsg}">
+						<a tabindex=-1 id="alinkTransportList" style="display:block;" href="tvinnsaddigitollv2.do?action=doFind&avd=${Xmodel.record.efavd}&sign=${Xmodel.record.efsg}">
 							<font class="tabDisabledLink">&nbsp;Transportlist</font>
 							<img src="resources/images/list.gif" border="0" alt="general list">
 						</a>
@@ -487,42 +487,52 @@
 				 				<td>
 				 				<table>
 				 				<tr >
-									<td class="text14">&nbsp;<span title="efkmrk">Navn</span><font class="text16RedBold" >*</font></td>
-									<td class="text14">&nbsp;<span title="efkmrk">Kjøretøy kjennemerke</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="etnat">Navn</span></td>
+									<td class="text14">&nbsp;<span title="efkmrk">Kjøretøy kjennemerke</span></td>
 									
 				 				</tr>
 				 				<tr >
-									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efkmrk" id="efkmrk" size="25" maxlength="70" value="${Xmodel.record.efkmrk}"></td>
-									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efkmrk" id="efkmrk" size="15" maxlength="17" value="${Xmodel.record.efkmrk}"></td>
+									<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="etnat" id="etnat" size="35" maxlength="30" value="${model.record.etnat}"></td>
+									<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="etkmrk" id="etkmrk" size="15" maxlength="17" value="${model.record.etkmrk}"></td>
 									
 				 				</tr>
 				 				
 				 				<tr >
-									<td class="text14">&nbsp;<span title="efkmrk">Sted</span><font class="text16RedBold" >*</font></td>
-									<td class="text14">&nbsp;<span title="efkmrk">Landkode</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="etpst">Sted</span></td>
+									<td class="text14">&nbsp;<span title="efkmrk">Landkode</span></td>
 									
 				 				</tr>
 				 				<tr >
-									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efkmrk" id="efkmrk" size="30" maxlength="35" value="${Xmodel.record.efkmrk}"></td>
+									<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="etpst" id="etpst" size="25" maxlength="24" value="${model.record.etpst}"></td>
 									<td class="text14">
-						 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="efklk" id="efklk">
+										<input readonly type="text" class="inputTextMediumBlue" name="etlkt" id="etlkt" size="3" maxlength="2" value="${model.record.etlkt}">
+										<%-- 
+						 				<select readonly class="inputTextMediumBlue" name="etlkt" id="etlkt">
 					 						<option value="">-velg-</option>
 						 				  	<c:forEach var="country" items="${Xmodel.countryCodeList}" >
-						 				  		<option title="${country.ztxt}" value="${country.zkod}"<c:if test="${Xmodel.record.efklk == country.zkod}"> selected </c:if> >${country.zkod}</option>
+						 				  		<option title="${country.ztxt}" value="${country.zkod}"<c:if test="${Xmodel.record.etlkt == country.zkod}"> selected </c:if> >${country.zkod}</option>
 											</c:forEach>  
 										</select>
+										--%>
 						 			</td>
 				 				</tr>
 				 				
 				 				<tr >
-									<td class="text14">&nbsp;<span title="efkmrk">E-post</span><font class="text16RedBold" >*</font></td>
-									<td class="text14">&nbsp;<span title="efkmrk">Telefon</span></td>
+									<td class="text14">&nbsp;<span title="etemt">E-post</span></td>
+									<td class="text14">&nbsp;<span title="etemt">Telefon</span></td>
 									
 				 				</tr>
 				 				<tr >
-									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efkmrk" id="efkmrk" size="30" maxlength="35" value="${Xmodel.record.efkmrk}"></td>
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="30" maxlength="35" value="${Xmodel.record.efkmrk}"></td>
-									
+				 					<c:choose>
+				 					<c:when test="${model.record.etemtt == 'EM'}">
+				 						<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="etemt" id="etemt" size="35" maxlength="50" value="${model.record.etemt}"></td>
+				 						<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="empty" id="empty" size="35" maxlength="50" value=""></td>
+				 					</c:when>
+				 					<c:otherwise>
+				 						<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="empty" id="empty" size="35" maxlength="50" value=""></td>
+										<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="etemt" id="etemt" size="35" maxlength="50" value="${model.record.etemt}"></td>
+									</c:otherwise>
+									</c:choose>
 				 				</tr>
 				 				<tr height="2"><td>&nbsp;</td></tr>
 				 				
@@ -648,6 +658,188 @@
 	</form>
 </td>
 </tr>
+
+
+	<%-- list component --%>
+	<tr>
+		<td>		
+		<table style="width:100%;" border="0" >
+	    	<%-- separator --%>
+	        <tr height="1"><td></td></tr> 
+			<tr>
+				<td>
+				<table style="width:100%;" id="containerdatatableTable" cellspacing="2" align="left" >
+				<tr>
+				<td class="text11">
+							
+				<table id="mainList" class="display compact cell-border" >
+					<thead>
+					<tr class="tableHeaderField" height="20" >
+                    	<th width="2%" class="tableHeaderFieldFirst" ><img title="Update" style="vertical-align:middle;" src="resources/images/update.gif" border="0" alt="edit"></th>
+                    	<th width="2%" class="tableHeaderField" >Lnr</th>
+                    	<th width="2%" class="tableHeaderField" >Avd</th>
+                		<th width="2%" class="tableHeaderField" >Turnr</th>
+                		<th width="2%" class="tableHeaderField" >Sig</th>
+                		<th title="S=SLETTET" width="2%" class="tableHeaderField" >St.</th>
+                		<th width="2%" class="tableHeaderField" >Br.vekt</th>
+                		<th width="2%" class="tableHeaderField" >Doknr.</th>
+                		<th width="2%" class="tableHeaderField" >Dokt.</th>
+                		<th width="2%" class="tableHeaderField" >Mottaker</th>
+                		<th width="2%" class="tableHeaderField" >Avsender</th>
+                		<th width="2%" class="tableHeaderField" >Reg.dato</th>
+                		<th width="2%" class="tableHeaderField" >Sen.dato</th>
+                		<th width="2%" class="tableHeaderField" >MRN-Api</th>
+                		<th width="2%" class="tableHeaderField" >Req.id</th>
+                		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED" width="2%" class="tableHeaderField" >Manif.st</th>
+                		<th width="2%" class="tableHeaderField" title="Fjerner manifest fra Tollvesenet" >Slett</th>
+                		<th width="2%" class="tableHeaderField" title="Fjerner manifest lokalt (SYSPED)">Kans.</th>
+                		</tr>
+                	</thead>
+                	<tbody> 
+                	<c:forEach items="${model.record.listMasters}" var="masterConsignmentRecord" varStatus="counter">    
+		              <c:choose> 
+		              	  <%-- if the manifest is correct with all cargo lines OR the manifest has been SUBMITTED(S) or DELETED(D) don´t show it as a warning-line --%>	   
+			              <c:when test="${XmasterConsignmentRecord.own_valid > 0 || XmasterConsignmentRecord.efst2 == 'S' || XmasterConsignmentRecord.efst2 == 'D' }">
+			              	<tr class="tableRow" height="20" >
+			          	  </c:when>
+			          	  <c:otherwise>
+			          	  	<%-- <tr class="tableRow" style="background-color: #FEEFB3;color:#9F6000;" height="20" >  --%>
+			          	  	<tr class="tableRow" height="20" >
+			          	  </c:otherwise>
+		          	  </c:choose>	
+		          
+		          	   <td width="2%" class="tableCellFirst" align="center">
+		          	   		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_masterconsignment.do?action=doFind&etuuid=${record.etuuid}" onClick="setBlockUI();">
+               					<c:choose>
+		               				<c:when test="${XmasterConsignmentRecord.own_editable > 0}">
+		               					<img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">
+		               				</c:when>
+		               				<c:otherwise>
+		               					<img title="Read" style="vertical-align:bottom;" src="resources/images/eye.png" height="18px" width="18px" border="0" alt="read">
+		               				</c:otherwise>
+	               				</c:choose>
+               				</a>
+               				
+	               	   </td>
+	               	   <td width="2%" align="center" class="tableCell" >${masterConsignmentRecord.emlnrm}</td>
+		               <td width="2%" align="center" class="tableCell" >${masterConsignmentRecord.emavd}</td>
+		               <td width="2%" align="center" class="tableCell" ><c:if test="${masterConsignmentRecord.empro > 0}">${masterConsignmentRecord.empro}</c:if></td>
+		               <td width="2%" align="center" class="tableCell" >${masterConsignmentRecord.emsg}</td>
+		               <td width="2%" align="center" class="tableCell" >
+		               	  <c:choose>
+		               		<c:when test="${masterConsignmentRecord.emst == 'S'}">
+		               			<font class="inputFormSubmit isa_error">KANSELLERT</font>
+		               		</c:when>
+		               		<c:otherwise>
+		               			${masterConsignmentRecord.emst}
+		               		</c:otherwise>
+		               	   </c:choose>
+		              	</td>
+		               <td align="right" class="tableCell" >${masterConsignmentRecord.emvkb}</td>
+		               <td align="right" class="tableCell" >${masterConsignmentRecord.emdkm}</td>
+		               <td align="right" class="tableCell" >${masterConsignmentRecord.emdkmt}</td>
+		               
+		               <td align="center" class="tableCell" >${masterConsignmentRecord.emnam}&nbsp;-&nbsp;${masterConsignmentRecord.empsm}&nbsp;${masterConsignmentRecord.emlkm}</td>
+		               <td align="center" class="tableCell" >${masterConsignmentRecord.emnas}&nbsp;-&nbsp;${masterConsignmentRecord.empss}&nbsp;${masterConsignmentRecord.emlks}</td>
+		               <td class="tableCell" ><c:if test="${masterConsignmentRecord.emdtr > 0}">${masterConsignmentRecord.emdtr}</c:if></td>
+		               <td class="tableCell" ><c:if test="${masterConsignmentRecord.emdtin > 0}">${masterConsignmentRecord.emdtin}</c:if></td>
+		               
+		               <%--
+		               <td width="2%" class="tableCell" ><font style="font-size:11px;">${record.efuuid}</font></td>
+		                --%>
+		               <td class="tableCell" ><span class="text14SkyBlue">
+		               		<a style="display: block; width: 100%; height: 100%; cursor:pointer" class="uuidLink text12SkyBlue" id="${masterConsignmentRecord.emmid}">
+								${masterConsignmentRecord.emmid}
+							</a>
+		               </td>
+		               		
+		               <td class="tableCell" title="check status in toll.no">
+		               		<a style="display: block; width: 100%; height: 100%; cursor:pointer" class="uuidLink text12SkyBlue" id="${masterConsignmentRecord.emuuid}">
+								${masterConsignmentRecord.emuuid}
+							</a>  
+		               </td>
+		               
+		               <td align="center" class="tableCell" >
+		               		<c:choose>
+		               		<c:when test="${masterConsignmentRecord.emst2 == 'S' || masterConsignmentRecord.emst2 == 'R' || masterConsignmentRecord.emst2 == 'D' || masterConsignmentRecord.emst2 == 'C'}">
+		               			<c:if test="${masterConsignmentRecord.emst2 == 'S'}">
+		               				<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
+		               				<span title="S" >SUBMITTED</span>
+		               			</c:if>
+		               			<c:if test="${masterConsignmentRecord.emst2 == 'R'}">
+		               				<span title="R" >REOPENED/DRAFT</span>
+		               			</c:if>
+		               			<c:if test="${masterConsignmentRecord.emst2 == 'D'}">
+		               				<font title="D" color="red">SLETTET</font>
+		               			</c:if>
+		               			<c:if test="${masterConsignmentRecord.emst2 == 'C'}">
+		               				<img style="vertical-align:middle;" title="Completed tolldekl at toll.no" src="resources/images/complete-icon.png" width="14px" height="12px" border="0" alt="completion">
+		               				<font title="C" color="green">COMPLETED</font>
+		               			</c:if>
+		               			
+		               		</c:when>
+		               		<c:otherwise>
+		               			${masterConsignmentRecord.emst2}
+		               		</c:otherwise>
+		               		</c:choose>
+		               </td>
+
+		               <td width="2%" class="tableCell" align="center"> 
+		               		  		
+				   				<c:if test="${XmasterConsignmentRecord.own_editable > 0}">
+		              				<a style="display: block; width: 100%; height: 100%;" class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
+										<img src="resources/images/delete.gif" border="0" alt="remove">
+									</a>
+									<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
+										<form action="tvinnsadmanifest_edit_delete.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
+										 	<input type="hidden" name="currentUuid${counter.count}" id="currentUuid${counter.count}" value="${XmasterConsignmentRecord.efuuid}">
+										 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="D">
+										 	<input type="hidden" name="selectedPro${counter.count}" id="selectedPro${counter.count}" value="${XmasterConsignmentRecord.efpro}">
+											<p class="text14" >Er du sikker på at du vil slette Turnr. <b>${Xrecord.efpro}</b> fra <b>Tollvesenet</b> ?</p>
+											
+										</form>
+									</div>
+	              				</c:if>
+              				
+	               	   </td>
+	               	   <td width="2%" class="tableCell" align="center">
+	               	   		<c:if test="${XmasterConsignmentRecord.efst == 'M' || empty XmasterConsignmentRecord.efst}">   		
+				   				<a style="display: block; width: 100%; height: 100%;" class="cancelLink" id="cancelLink${counter.count}" runat="server" href="#">
+									<img src="resources/images/remove.png" width="16" height="16" border="0" alt="remove">
+								</a> 
+								<div id="dialogUpdateInternalStatus${counter.count}" class="clazz_dialog" title="Dialog">
+									<form action="tvinnsadmanifest_updateInternalStatus.do" name="updateInternalStatusForm${counter.count}" id="updateInternalStatusForm${counter.count}" method="post">
+									 	<input type="hidden" name="currentUuid${counter.count}" id="currentUuid${counter.count}" value="${XmasterConsignmentRecord.efuuid}">
+									 	<input type="hidden" name="currentSign${counter.count}" id="currentSign${counter.count}" value="${XmasterConsignmentRecord.efsg}">
+									 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="S">
+									 	<p class="text14" >Er du sikker på at du vil kansellere Turnr. <b>${XmasterConsignmentRecord.efpro}</b> fra <b>SYSPED</b> ?</p>
+											
+									</form>
+								</div>
+							</c:if>
+						</td>	
+		            </tr> 
+		            </c:forEach>
+		            </tbody>
+	            </table>
+	            </td>
+	            </tr>
+	            </table>
+	            
+			</td>	
+			</tr>
+		</table>
+		</td>
+	</tr>
+
+
+
+
+
+
+
+
+
 
 <%-- Dialog update manifest status --%>		
 <tr>

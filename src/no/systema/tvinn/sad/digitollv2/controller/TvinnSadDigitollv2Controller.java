@@ -51,8 +51,10 @@ import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignature
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureRecord;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
 import no.systema.tvinn.sad.digitollv2.filter.SearchFilterDigitollTransportList;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
+import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
 import no.systema.tvinn.sad.manifest.express.filter.SearchFilterManifestList;
@@ -99,7 +101,7 @@ public class TvinnSadDigitollv2Controller {
 	 * @return
 	 */
 	@RequestMapping(value="tvinnsaddigitollv2.do",  method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doListTransport(@ModelAttribute ("record") SearchFilterManifestList recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+	public ModelAndView doListTransport(@ModelAttribute ("record") SadmotfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		//this.context = TdsAppContext.getApplicationContext();
 		Collection<SadmotfRecord> outputList = new ArrayList<SadmotfRecord>();
 		Map model = new HashMap();
@@ -221,14 +223,15 @@ public class TvinnSadDigitollv2Controller {
 	 * @return
 	 */
 	@RequestMapping(value="tvinnsaddigitollv2_edit_transport.do",  method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doEditTransport(@ModelAttribute ("record") SearchFilterManifestList recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+	public ModelAndView doEditTransport(@ModelAttribute ("record") SadmotfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		//this.context = TdsAppContext.getApplicationContext();
-		Collection<JsonTvinnSadManifestRecord> outputList = new ArrayList<JsonTvinnSadManifestRecord>();
+		Collection<SadmotfRecord> outputList = new ArrayList<SadmotfRecord>();
 		Map model = new HashMap();
 		
 		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_edit_transport");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		
+		String etuuid = request.getParameter("etuuid");
 		
 		//check user (should be in session already)
 		if(appUser==null){
@@ -260,13 +263,13 @@ public class TvinnSadDigitollv2Controller {
             		searchFilter.setEtaDatum(dateMgr.getNewDateFromNow(DateTimeManager.NO_FORMAT, -1));
             	}
             }
-            
+            */
             //get BASE URL
-    		final String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_FETCH_MANIFEST_EXPRESS_URL;
+    		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TRANSPORT_URL;
     		//add URL-parameters
-    		String urlRequestParams = this.getRequestUrlKeyParameters(searchFilter, appUser);
+    		String urlRequestParams = "user=" + appUser.getUser() + "&etuuid=" + etuuid;
     		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-	    	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+	    	logger.warn("URL: " + BASE_URL);
 	    	logger.warn("URL PARAMS: " + urlRequestParams);
 	    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
 
@@ -275,28 +278,23 @@ public class TvinnSadDigitollv2Controller {
 	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 	    	if(jsonPayload!=null){
 	    		
-	    		JsonTvinnSadManifestContainer jsonTvinnSadManifestContainer = this.tvinnSadManifestListService.getListContainer(jsonPayload);
+	    		SadmotfContainer jsonContainer = this.sadmotfListService.getListContainer(jsonPayload);
 	    		//----------------------------------------------------------------
 				//now filter the topic list with the search filter (if applicable)
 				//----------------------------------------------------------------
-				outputList = jsonTvinnSadManifestContainer.getList();
-				if(outputList!=null && outputList.size() > JsonTvinnSadManifestContainer.LIMIT_SIZE_OF_MAIN_LIST_OF_MANIFESTS){
+	    		outputList = jsonContainer.getList();
+				if(outputList!=null && outputList.size() > SadmotfContainer.LIMIT_SIZE_OF_MAIN_LIST_OF_TRANSPORTS){
 					outputList = new ArrayList();
-					model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, "Too many lines. Narrow your search please ...");
+					model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, ".. No records ? ...");
 				}else{
-					for(JsonTvinnSadManifestRecord record: outputList){
-						//check if the manifest cargo lines are valid
-						if(!manifestExpressMgr.isValidManifest(appUser, record.getEfpro())){
-							record.setOwn_valid(-1);
-						}
-						//check it the manifest is editable
-						if(!manifestExpressMgr.isEditableManifest(appUser, record)){
-							record.setOwn_editable(-1);
-						}
-						//dates
-						this.adjustFieldsForFetch(record);
+					for(SadmotfRecord record: outputList){
+						//get all masters
+						this.getMasters(appUser, record);
+						//now we have all master consignments in this transport
+						model.put("record", record);
+						logger.info(record.toString());
 					}
-					logger.info(outputList.toString());
+					
 				}
 				
 	    	}	
@@ -304,24 +302,43 @@ public class TvinnSadDigitollv2Controller {
 			//Final successView with domain objects
 			//--------------------------------------
 			//drop downs
-			this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
-			this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
-			this.setCodeDropDownMgr(appUser, model);
+			//this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
+			//this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
+			//this.setCodeDropDownMgr(appUser, model);
 			
-			//domain and search filter
-			successView.addObject(TvinnSadConstants.DOMAIN_LIST,outputList);
-			successView.addObject(TvinnSadConstants.DOMAIN_LIST_SIZE, outputList.size());	
-			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			//master consignments' list
+			//successView.addObject(TvinnSadConstants.DOMAIN_LIST,outputList);
+			//successView.addObject(TvinnSadConstants.DOMAIN_LIST_SIZE, outputList.size());	
+			//successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
     		
-			if (session.getAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADMANIFEST) == null || session.getAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADMANIFEST).equals("")){
-				successView.addObject(TvinnSadConstants.DOMAIN_SEARCH_FILTER_SADMANIFEST, searchFilter);
-			}
-	    	*/
-			this.populateCustomsOfficeOfFirstEntryHtmlDropDown(model);
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 	    
 		}	
 		return successView;
+	}
+	
+	/**
+	 * 
+	 * @param appUser
+	 * @param tranportId
+	 */
+	private void getMasters(SystemaWebUser appUser, SadmotfRecord record) {
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_MASTERCONSIGNMENT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser() + "&emlnrt=" + record.getEtlnrt();
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadmomfContainer jsonContainer = this.sadmomfListService.getListContainer(jsonPayload);
+    		record.setListMasters(jsonContainer.getList());
+    	}
+    	
 	}
 	
 	/**
@@ -723,6 +740,8 @@ public class TvinnSadDigitollv2Controller {
 	
 	@Autowired
 	private SadmotfListService sadmotfListService;
+	@Autowired
+	private SadmomfListService sadmomfListService;
 	
 	@Autowired
 	private ManifestExpressMgr manifestExpressMgr;

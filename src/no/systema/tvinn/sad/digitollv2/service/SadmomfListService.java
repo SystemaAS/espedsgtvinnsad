@@ -3,6 +3,7 @@
  */
 package no.systema.tvinn.sad.digitollv2.service;
 
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestArchivedDocsContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
@@ -12,15 +13,10 @@ import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManif
 
 /**
  * @author oscardelatorre
- * @date Sep 2020
+ * @date Aug 2023
  *
  */
-public interface SadmotfListService {
-	public SadmotfContainer getListContainer(String utfPayload);
-	/*public SadmomfContainer getListCargolinesContainer(String utfPayload);
-	public JsonTvinnSadManifestContainer getListContainerDefaultValues(String utfPayload);
-	public JsonTvinnSadManifestRpgContainer getContainerRpgResult(String utfPayload);
-	public JsonTvinnSadManifestArchivedDocsContainer getArchiveDocsContainer(String utfPayload);
-	public JsonTvinnSadManifestLoggingContainer getLoggingContainer(String utfPayload);
-	*/
+public interface SadmomfListService {
+	public SadmomfContainer getListContainer(String utfPayload);
+	
 }

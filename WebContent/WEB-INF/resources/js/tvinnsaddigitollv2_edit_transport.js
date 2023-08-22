@@ -5,8 +5,8 @@
   
   //Overlay on tab (to mark visually a delay...)
   jq(function() {
-	/*
-	jq('#alinkManifestList').click(function() { 
+	
+	jq('#alinkTransportList').click(function() { 
     	setBlockUI();
     });
     jq('#alinkHeader').click(function() { 
@@ -15,7 +15,7 @@
     jq('#alinkItems').click(function() { 
     	setBlockUI();
     });
-    */
+    
 
     //General Header Menus
     jq('#alinkTopicListMenuImp').click(function() { 
@@ -270,7 +270,70 @@
 	  }
   
  
-  
+
+//Initialize <div> here for all clazz_dialog
+  jq(function() { 
+	  jq( ".clazz_dialog" ).each(function(){
+		jq(this).dialog({
+			autoOpen: false,
+			maxWidth:500,
+			maxHeight: 400,
+			width: 500,
+			height: 280,
+			modal: true
+		});
+	  });
+  });
+
+ jq(function() {
+	  jq(".uuidLink").click(function() {
+		  var id = this.id;
+		  jq("#"+id).attr(('target','_blank'));
+		  //default url
+		  var controllerUrl = "tvinnsaddigitollv2_childwindow_manifestinfo.do?id=" + id +"&level=m";
+
+		  if(id.length<35){ //meaning MRN and not LRN (only at Master Consignment level)
+			 controllerUrl = "tvinnsaddigitollv2_childwindow_masterdocs_rec.do?id=" + id; 
+		  }
+	      
+		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
+			
+	  });
+  });
+
+  //-------------------
+  //Datatables jquery
+  //-------------------
+  //private function
+  function filterGlobal () {
+    jq('#mainList').dataTable().search(
+    	jq('#mainList_filter').val()
+    ).draw();
+  }
+
+  jq(document).ready(function() {
+	//jq.fn.dataTable.moment( 'DDMMYY' );    
+    //init table (no ajax, no columns since the payload is already there by means of HTML produced on the back-end)
+    jq('#mainList').dataTable( {
+  	  //"dom": '<"top"f>t<"bottom"><"clear">',
+      "searchHighlight": true,
+  	  "dom": '<"top"f>rt<"bottom"lip><"clear">',
+  	  //"scrollY": "700px",
+  	  "scrollCollapse":  true,
+	  "tabIndex": -1,
+	  //"order": [[ 2, "desc" ]], //turnr
+	  "lengthMenu": [ 25, 50, 100],
+	  "fnDrawCallback": function( oSettings ) {
+    	jq('.dataTables_filter input').addClass("inputText12LightYellow");
+    	}
+    });
+    //event on input field for search
+    jq('input.mainList_filter').on( 'keyup click', function () {
+    		filterGlobal();
+    });
+   
+	
+  });
 
   
  
