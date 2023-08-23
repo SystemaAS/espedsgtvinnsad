@@ -231,7 +231,7 @@ public class TvinnSadDigitollv2Controller {
 		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_edit_transport");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		
-		String etuuid = request.getParameter("etuuid");
+		String etlnrt = request.getParameter("etlnrt");
 		
 		//check user (should be in session already)
 		if(appUser==null){
@@ -267,7 +267,7 @@ public class TvinnSadDigitollv2Controller {
             //get BASE URL
     		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TRANSPORT_URL;
     		//add URL-parameters
-    		String urlRequestParams = "user=" + appUser.getUser() + "&etuuid=" + etuuid;
+    		String urlRequestParams = "user=" + appUser.getUser() + "&etlnrt=" + etlnrt;
     		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
 	    	logger.warn("URL: " + BASE_URL);
 	    	logger.warn("URL PARAMS: " + urlRequestParams);

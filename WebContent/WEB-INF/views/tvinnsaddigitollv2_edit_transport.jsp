@@ -26,7 +26,7 @@
 			 		<%-- TEMP --%>
 			 
 			 		<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<a tabindex=-1 id="alinkTransportList" style="display:block;" href="tvinnsaddigitollv2.do?action=doFind&avd=${Xmodel.record.efavd}&sign=${Xmodel.record.efsg}">
+						<a tabindex=-1 id="alinkTransportList" style="display:block;" href="tvinnsaddigitollv2.do?action=doFind">
 							<font class="tabDisabledLink">&nbsp;Transportlist</font>
 							<img src="resources/images/list.gif" border="0" alt="general list">
 						</a>
@@ -37,7 +37,7 @@
 						<font class="tabLink">
 							&nbsp;Transport
 						</font>
-						<font class="text14MediumBlue">[${XXmodel.record.efpro}]</font>
+						<font class="text14MediumBlue">[${model.record.etlnrt}]</font>
 						<img src="resources/images/update.gif" border="0" alt="edit">
 						
 					</td>
@@ -248,8 +248,9 @@
 					 			<c:choose>
 						 			<c:when test="${not empty model.record.etuuid}">
 						 				<td class="text14White">
-						 						&nbsp;&nbsp;Turnr:&nbsp;${model.record.etpro}
-						 						&nbsp;&nbsp;Avd:&nbsp;${model.record.etavd}  
+						 						&nbsp;&nbsp;Løp.nr.&nbsp;${model.record.etlnrt}
+						 						&nbsp;&nbsp;Turnr&nbsp;${model.record.etpro}
+						 						&nbsp;&nbsp;Avd&nbsp;${model.record.etavd}  
 						 						
 						 				</td>
 						 				<td class="text14White" align="right">
@@ -289,10 +290,13 @@
 			 				<c:choose>
 					 			<c:when test="${not empty model.record.etuuid}">
 					 				<tr >
-										<td colspan="5" class="text14">
-										<img id="imgManifestIdInfo" style="vertical-align:middle;cursor:pointer;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
-											Id<a tabindex=-1 id="alinkManifestRawIdInfo">&nbsp;<font class="text14SkyBlue">${model.record.etuuid}</font>
-										</td>
+										
+										<td colspan="4" class="text12" ><span class="text14SkyBlue">
+						               		<a style="display: block; cursor:pointer" class="uuidLinkParent text12SkyBlue" id="${model.record.etuuid}">
+												Id&nbsp;${model.record.etuuid}
+											</a>
+						               </td>
+										
 					 				</tr>
 					 				<tr height="2"><td>&nbsp;</td></tr>
 			 					</c:when>
@@ -318,10 +322,17 @@
 							 				</c:choose>
 					 					</td>
 				 					</tr>
-				 					<tr height="2"><td>&nbsp;</td></tr>
+				 					<tr height="10"></tr>
 				 				</c:otherwise>
 			 				</c:choose>
-			 				
+			 					<tr >
+				 					<td class="text14">&nbsp;<span title="etdkm">Doknr.</span></td>
+				 					<td class="text14" colspan="4" >
+										<input readonly type="text" class="inputTextMediumBlue" name="etdkm" id="etdkm" size="30" maxlength="50" value="${model.record.etdkm}">
+										&nbsp;Type&nbsp;<input readonly type="text" class="inputTextMediumBlue" name="etdkmt" id="etdkmt" size="6" maxlength="4" value="${model.record.etdkmt}">
+									</td>
+				 				</tr>
+				 				<tr height="2"><td>&nbsp;</td></tr>	
 				 				<tr >
 				 					<td class="text14">&nbsp;<span title="etktkd">Mode of Transport</span></td>
 				 					<td class="text14">&nbsp;<span title="etktyp">Type of Identification</span></td>
@@ -530,61 +541,59 @@
 				 				<td>
 				 				<table>
 				 				<tr >
-									<td class="text14">&nbsp;<span title="efkmrk">Navn</span></td>
-									<td class="text14">&nbsp;<span title="efkmrk">ID-type</span></td>
+									<td class="text14">&nbsp;<span title="etnar">Navn</span></td>
+									<td class="text14">&nbsp;<span title="etrgr">Orgnr / EORI</span></td>
 									
 				 				</tr>
 				 				<tr >
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="25" maxlength="70" value="${Xmodel.record.efkmrk}"></td>
-									<td class="text14">
-										<select class="inputTextMediumBlue" name="todo" id="todo" style="width:100px;">
-					 						<option value="O">Org.nr</option>
-					 						<option value="E">EORI</option>
-					 						
-										</select>
-										&nbsp;<input readonly type="text" class="inputTextReadOnly" name="efrgd" id="efrgd" size="20" maxlength="35" value="">
-									</td>
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="etnar" id="etnar" size="25" maxlength="30" value="${model.record.etnar}"></td>
+									<td class="text14"><input readonly type="text" class="inputTextReadOnly" name="etrgr" id="etrgr" size="20" maxlength="17" value="${model.record.etrgr}"></td>
 				 				</tr>
 				 				
 				 				<tr >
-									<td class="text14">&nbsp;<span title="efkmrk">Sted</span></td>
-									<td class="text14">&nbsp;<span title="efkmrk">Landkode</span></td>
+									<td class="text14">&nbsp;<span title="etpsr">Sted</span></td>
+									<td class="text14">&nbsp;<span title="etlkr">Landkode</span></td>
 									
 				 				</tr>
 				 				<tr >
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="30" maxlength="35" value="${Xmodel.record.efkmrk}"></td>
 									<td class="text14">
-						 				<select required class="inputTextMediumBlue" name="efklk" id="efklk">
-					 						<option value="">-velg-</option>
-						 				  	<c:forEach var="country" items="${Xmodel.countryCodeList}" >
-						 				  		<option title="${country.ztxt}" value="${country.zkod}"<c:if test="${Xmodel.record.efklk == country.zkod}"> selected </c:if> >${country.zkod}</option>
-											</c:forEach>  
-										</select>
+										<input type="text" class="inputTextMediumBlue" name="etpsr" id="etpsr" size="25" maxlength="24" value="${model.record.etpsr}">
+									</td>
+									<td class="text14">
+						 				<input type="text" class="inputTextMediumBlue" name="etlkr" id="etlkr" size="4" maxlength="2" value="${model.record.etlkr}">
 						 			</td>
 				 				</tr>
 				 				
 				 				<tr >
-									<td class="text14">&nbsp;<span title="efkmrk">E-post</span></td>
-									<td class="text14">&nbsp;<span title="efkmrk">Telefon</span></td>
+									<td class="text14">&nbsp;<span title="etemr">E-post</span></td>
+									<td class="text14">&nbsp;<span title="etemr">Telefon</span></td>
 									
 				 				</tr>
 				 				<tr >
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="30" maxlength="35" value="${Xmodel.record.efkmrk}"></td>
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="30" maxlength="35" value="${Xmodel.record.efkmrk}"></td>
-									
+									<c:choose>
+				 					<c:when test="${model.record.etemrt == 'EM'}">
+				 						<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="etemr" id="etemr" size="35" maxlength="50" value="${model.record.etemr}"></td>
+				 						<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="empty" id="empty" size="35" maxlength="50" value=""></td>
+				 					</c:when>
+				 					<c:otherwise>
+				 						<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="empty" id="empty" size="35" maxlength="50" value=""></td>
+										<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="etemr" id="etemr" size="35" maxlength="50" value="${model.record.etemr}"></td>
+									</c:otherwise>
+									</c:choose>
 				 				</tr>
 				 				<tr height="2"><td>&nbsp;</td></tr>
 				 				
 				 				</table>
 				 				</td>
-				 				</tr>
-				 				</table>
+			 				</tr>
+		 				</table>
 			            </td>
 		            </tr>
 	            </table>
             </td>			 
 		</tr>
 		<tr height="10"><td></td></tr>
+		<%--
 		<c:if test="${Xmodel.record.efst != 'S'}">
 			<tr>
 				<td colspan="3" class="text14" valign="top">
@@ -593,7 +602,7 @@
 							<td align="right" >
 							<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
 							<c:if test="${not empty Xmodel.record.efuuid && empty Xmodel.invalidManifest}">
-								<%-- &nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'> --%>
+								<%-- &nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'> 
 							</c:if>
 							<%-- Due to emergencies ... we remove validations
 							<c:choose>
@@ -608,7 +617,7 @@
 									<input title="Status combination or date = blocked" class="inputFormSubmitStd isa_info" type="button" name="fakeButton" id="fakeButton" value='<spring:message code="systema.tvinn.sad.manifest.disabled.button"/>'>
 								</c:otherwise>
 							</c:choose>
-							 --%>
+							 
 							</td>
 						</tr>
 					</table>
@@ -616,7 +625,8 @@
 			</tr>
 		</c:if>
 		<tr height="20"><td colspan="2">&nbsp;</td></tr>
-	
+		 --%>
+		 
 	</table>
 	</td>
 	</tr>	
@@ -675,7 +685,7 @@
 		          	  </c:choose>	
 		          
 		          	   <td width="2%" class="tableCellFirst" align="center">
-		          	   		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_masterconsignment.do?action=doFind&etuuid=${record.etuuid}" onClick="setBlockUI();">
+		          	   		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_masterconsignment.do?action=doFind&emlnrt=${masterConsignmentRecord.emlnrt}&emlnrm=${masterConsignmentRecord.emlnrm}" onClick="setBlockUI();">
                					<c:choose>
 		               				<c:when test="${XmasterConsignmentRecord.own_editable > 0}">
 		               					<img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">

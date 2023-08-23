@@ -193,6 +193,7 @@
 					<thead>
 					<tr class="tableHeaderField" height="20" >
                     	<th width="2%" class="tableHeaderFieldFirst" ><img title="Update" style="vertical-align:middle;" src="resources/images/update.gif" border="0" alt="edit"></th>
+                    	<th width="2%" class="tableHeaderField" >Lnr</th>
                     	<th width="2%" class="tableHeaderField" >Avd</th>
                 		<th width="2%" class="tableHeaderField" >Turnr</th>
                 		<th width="2%" class="tableHeaderField" >Sig</th>
@@ -225,8 +226,8 @@
 			          	  </c:otherwise>
 		          	  </c:choose>	
 		          
-		          	   <td width="2%" class="tableCellFirst" align="center">
-		          	   		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_transport.do?action=doFind&etuuid=${record.etuuid}" onClick="setBlockUI();">
+		          	   <td nowrap width="2%" class="tableCellFirst" align="center">
+		          	   		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=${record.etlnrt}" onClick="setBlockUI();">
                					<c:choose>
 		               				<c:when test="${Xrecord.own_editable > 0}">
 		               					<img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">
@@ -238,7 +239,7 @@
                				</a>
                				
 	               	   </td>
-	               	   
+	               	   <td width="2%" align="center" class="tableCell" >${record.etlnrt}</td>
 		               <td width="2%" align="center" class="tableCell" >${record.etavd}</td>
 		               <td width="2%" align="center" class="tableCell" ><c:if test="${record.etpro > 0}">${record.etpro}</c:if></td>
 		               <td width="2%" align="center" class="tableCell" >${record.etsg}</td>
