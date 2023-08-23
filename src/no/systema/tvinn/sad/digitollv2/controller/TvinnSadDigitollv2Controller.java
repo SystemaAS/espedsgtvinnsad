@@ -51,10 +51,12 @@ import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignature
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureRecord;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
 import no.systema.tvinn.sad.digitollv2.filter.SearchFilterDigitollTransportList;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
+import no.systema.tvinn.sad.digitollv2.service.SadmohfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
@@ -321,7 +323,7 @@ public class TvinnSadDigitollv2Controller {
 	/**
 	 * 
 	 * @param appUser
-	 * @param tranportId
+	 * @param record
 	 */
 	private void getMasters(SystemaWebUser appUser, SadmotfRecord record) {
 		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_MASTERCONSIGNMENT_URL;
@@ -338,6 +340,29 @@ public class TvinnSadDigitollv2Controller {
     	if(jsonPayload!=null){
     		SadmomfContainer jsonContainer = this.sadmomfListService.getListContainer(jsonPayload);
     		record.setListMasters(jsonContainer.getList());
+    	}
+    	
+	}
+	/**
+	 * 
+	 * @param appUser
+	 * @param record
+	 */
+	private void getHouses(SystemaWebUser appUser, SadmomfRecord record) {
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_HOUSECONSIGNMENT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser() + "&ehlnrt=" + record.getEmlnrt() + "&ehlnrm=" + record.getEmlnrm();
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadmohfContainer jsonContainer = this.sadmohfListService.getListContainer(jsonPayload);
+    		record.setListHouses(jsonContainer.getList());
     	}
     	
 	}
@@ -396,7 +421,7 @@ public class TvinnSadDigitollv2Controller {
 				}else{
 					for(SadmomfRecord record: outputList){
 						//get all masters
-						//this.getHouses(appUser, record);
+						this.getHouses(appUser, record);
 						//now we have all master consignments in this transport
 						model.put("record", record);
 						logger.info(record.toString());
@@ -720,6 +745,8 @@ public class TvinnSadDigitollv2Controller {
 	private SadmotfListService sadmotfListService;
 	@Autowired
 	private SadmomfListService sadmomfListService;
+	@Autowired
+	private SadmohfListService sadmohfListService;
 	
 	@Autowired
 	private ManifestExpressMgr manifestExpressMgr;

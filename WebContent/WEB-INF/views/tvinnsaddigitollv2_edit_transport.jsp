@@ -41,19 +41,9 @@
 						<img src="resources/images/update.gif" border="0" alt="edit">
 						
 					</td>
-					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<a tabindex=-1 id="alinkItems" style="display:block;" href="tvinnsadmanifest_logging.do?efpro=${Xmodel.record.efpro}&efsg=${Xmodel.record.efsg}
-													&efavd=${Xmodel.record.efavd}&efuuid=${Xmodel.record.efuuid}">
-							<font class="tabDisabledLink">
-								&nbsp;<spring:message code="systema.tvinn.sad.manifest.created.header.logging.tab"/>
-							</font>
-							<img style="vertical-align: bottom" src="resources/images/log-icon.png" width="16" hight="16" border="0" alt="show log">
-						</a>
-					</td>
 					
 					<%-- <td width="50%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>  --%>
-			 		<td width="60%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
+			 		<td width="80%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
 						<img id="imgInfoRpgJarStart" style="cursor:pointer;" onClick="showPop('jarStartCmd');" src="resources/images/info4.png" width="12" height="12" border="0" alt="info">
 						<div class="text12" style="position: relative;display: inline;" align="left">
 						<span style="position:absolute; left:-580px; top:3px;" id="jarStartCmd" class="popupWithInputText"  >
