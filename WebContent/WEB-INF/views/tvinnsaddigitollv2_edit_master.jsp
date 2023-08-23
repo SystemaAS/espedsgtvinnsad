@@ -8,7 +8,7 @@
 	<%-- specific jQuery functions for this JSP (must reside under the resource map since this has been
 		specified in servlet.xml as static <mvc:resources mapping="/resources/**" location="WEB-INF/resources/" order="1"/> --%>
 	<SCRIPT type="text/javascript" src="resources/js/tvinnsadglobal_edit.js?ver=${user.versionEspedsg}"></SCRIPT>	
-	<SCRIPT type="text/javascript" src="resources/js/tvinnsaddigitollv2_edit_manifest.js?ver=${user.versionEspedsg}"></SCRIPT>
+	<SCRIPT type="text/javascript" src="resources/js/tvinnsaddigitollv2_edit_master.js?ver=${user.versionEspedsg}"></SCRIPT>
 	
 	<style type = "text/css">
 	.ui-datepicker { font-size:9pt;}
@@ -26,7 +26,7 @@
 			 		<%-- TEMP --%>
 			 
 			 		<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<a tabindex=-1 id="alinkManifestList" style="display:block;" href="tvinnsaddigitollv2.do?action=doFind&avd=${Xmodel.record.efavd}&sign=${Xmodel.record.efsg}">
+						<a tabindex=-1 id="alinkManifestList" style="display:block;" href="tvinnsaddigitollv2.do?action=doFind">
 							<font class="tabDisabledLink">&nbsp;Transportlist</font>
 							<img src="resources/images/list.gif" border="0" alt="general list">
 						</a>
@@ -34,20 +34,18 @@
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			
 					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<a tabindex=-1 id="alinkItems" style="display:block;" href="tvinnsaddigitollv2_edit_transport.do?action=doFetch&efpro=${Xmodel.record.efpro}&efsg=${Xmodel.record.efsg}
-													&efavd=${Xmodel.record.efavd}&efuuid=${Xmodel.record.efuuid}">
+						<a tabindex=-1 id="alinkItems" style="display:block;" href="tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=${model.record.emlnrt}">													
 							<font class="tabDisabledLink">
-								&nbsp;Transport
+								&nbsp;Transport&nbsp;[${model.record.emlnrt}]
 							</font>
-							
 						</a>
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td title="${Xmodel.record.efuuid}" width="15%" valign="bottom" class="tab" align="center" nowrap>
+					<td title="${model.record.emlnrm}" width="15%" valign="bottom" class="tab" align="center" nowrap>
 						<font class="tabLink">
-							&nbsp;Manifest
+							&nbsp;Master
 						</font>
-						<font class="text14MediumBlue">[${XXmodel.record.efpro}]</font>
+						<font class="text14MediumBlue">[${model.record.emlnrm}]</font>
 						<img src="resources/images/update.gif" border="0" alt="edit">
 						
 					</td>
@@ -257,62 +255,83 @@
 				<table style="width:60%" align="left" border="0" cellspacing="1" cellpadding="0">
 					<tr height="4"><td>&nbsp;</td></tr>
 					<tr>
-						<td class="text14">&nbsp;<span title="todo">Total Bruttovekt</span><font class="text16RedBold" >*</font></td>
-						<td class="text14">&nbsp;<span title="todo">Container</span><font class="text16RedBold" >*</font></td>
-						<td class="text14">&nbsp;<span title="todo">Transp.dok.type</span><font class="text16RedBold" >*</font></td>
-						<td class="text14">&nbsp;<span title="todo">Transp.dok.id</span><font class="text16RedBold" >*</font></td>
-						<td class="text14">&nbsp;<span title="efkmrk">Transportør ID-type</span><font class="text16RedBold" >*</font></td>
+						<td class="text14">&nbsp;<span title="emavd">Avd</span></td>
+						<td class="text14">&nbsp;<span title="empro">Tur</span></td>
+						<td class="text14">&nbsp;<span title="emvkb">Bruttovekt</span></td>
+						<td class="text14">&nbsp;<span title="emvkb">Container</span></td>
+						<td class="text14">&nbsp;<span title="emdkm">Dok.nr</span></td>
+						<td class="text14">&nbsp;<span title="emdkmt">Dok.type</span></td>
+						<td class="text14">&nbsp;<span title="emmid">MRN Api</span></td>
+						<td class="text14">&nbsp;<span title="emuuid">Request id</span></td>
+						<td class="text14">&nbsp;<span title="emst">St.</span></td>
+						<td class="text14">&nbsp;<span title="emst2">St.2</span></td>
+						<td class="text14">&nbsp;<span title="emst3">St.3</span></td>
+						<td class="text14">&nbsp;<span title="emst3">Reg.dato</span></td>
+						<td class="text14">&nbsp;<span title="emst3">Send.dato</span></td>
+						
 					</tr>
 					<tr>	
 						<td class="text14">
-							<input onKeyPress="return numberKey(event)" style="text-align: right" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efkmrk" id="efkmrk" size="17" maxlength="17" value="${Xmodel.record.efkmrk}">									
+							<input readonly type="text" class="inputTextMediumBlue" name="emavd" id="emavd" size="5" maxlength="4" value="${model.record.emavd}">									
 						</td>
 						<td class="text14">
-							<select required class="inputTextMediumBlueMandatoryField" name="todo" id="todo">
-		 						<option value="0"<c:if test="${Xmodel.record.efklk == 0}"> selected </c:if> >0</option>
-		 						<option value="1"<c:if test="${Xmodel.record.efklk == 1}"> selected </c:if> >1</option>
-								 
-							</select>										
+							<input readonly type="text" class="inputTextMediumBlue" name="empro" id="empro" size="10" maxlength="8" value="${model.record.empro}">									
 						</td>
 						<td class="text14">
-							<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efkmrk" id="efkmrk" size="5" maxlength="4" value="${Xmodel.record.efkmrk}">									
+							<input readonly type="text" class="inputTextMediumBlue" name="emvkb" id="emvkb" size="10" maxlength="9" value="${model.record.emvkb}">									
 						</td>
 						<td class="text14">
-							<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efkmrk" id="efkmrk" size="25" maxlength="70" value="${Xmodel.record.efkmrk}">									
+							<input readonly type="text" class="inputTextMediumBlue" name="emcn" id="emcn" size="2" maxlength="1" value="${model.record.emcn}">									
 						</td>
 						<td class="text14">
-							<select class="inputTextMediumBlueMandatoryField" name="todo" id="todo" style="width:100px;">
-		 						<option value="O">Org.nr</option>
-		 						<option value="E">EORI</option>
-		 						
-							</select>
-							&nbsp;<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="efrgd" id="efrgd" size="20" maxlength="35" value="">
+							<input readonly type="text" class="inputTextMediumBlue" name="emdkm" id="emdkm" size="25" maxlength="50" value="${model.record.emdkm}">		
 						</td>
+						<td class="text14">
+							<input readonly type="text" class="inputTextMediumBlue" name="emdkmt" id="emdkmt" size="5" maxlength="4" value="${model.record.emdkmt}">		
+						</td>
+						<td class="text14">
+							<input readonly type="text" class="inputTextMediumBlue" name="emmid" id="emmid" size="20" maxlength="18" value="${model.record.emmid}">		
+						</td>
+						<td class="text14">
+							<input readonly type="text" class="inputTextMediumBlue" name="emuuid" id="emuuid" size="38" maxlength="36" value="${model.record.emuuid}">		
+						</td>
+						<td class="text14">
+							<input readonly type="text" class="inputTextMediumBlue" name="emst" id="emst" size="2" maxlength="1" value="${model.record.emst}">		
+						</td>
+						<td class="text14">
+							<input readonly type="text" class="inputTextMediumBlue" name="emst2" id="emst2" size="2" maxlength="1" value="${model.record.emst2}">		
+						</td>
+						<td class="text14">
+							<input readonly type="text" class="inputTextMediumBlue" name="emst3" id="emst3" size="2" maxlength="1" value="${model.record.emst3}">		
+						</td>
+						<td class="text14">
+							<input readonly type="text" class="inputTextMediumBlue" name="emdtr" id="emdtr" size="10" maxlength="8" value="${model.record.emdtr}">		
+						</td>
+						<td class="text14">
+							<input readonly type="text" class="inputTextMediumBlue" name="emdtin" id="emdtin" size="10" maxlength="8" value="${model.record.emdtin}">		
+						</td>
+						
 					</tr>
 					<tr height="2"><td>&nbsp;</td></tr>
 					
 					<tr>
-						<td class="text14">&nbsp;<span title="todo">Lastested</span></td>
-						<td class="text14">&nbsp;<span title="todo">Landkode</span></td>
-						<td class="text14">&nbsp;<span title="todo">Lossested</span></td>
-						<td class="text14">&nbsp;<span title="todo">Landkode</span></td>
+						<td colspan="3" class="text14">&nbsp;<span title="emsdlt">Lastested</span></td>
+						<td class="text14">&nbsp;<span title="emlkl">Land</span></td>
+						<td colspan="2" class="text14">&nbsp;<span title="emsdut">Lossested</span></td>
+						<td class="text14">&nbsp;<span title="emlku">Land</span></td>
 					</tr>
 					<tr>	
-						<td class="text14">
-							<input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="17" maxlength="35" value="${Xmodel.record.efkmrk}">									
+						<td colspan="3" class="text14">
+							<input readonly type="text" class="inputTextMediumBlue" name="emsdlt" id="emsdlt" size="25" maxlength="30" value="${model.record.emsdlt}">								
 						</td>
 						<td class="text14">
-							<select required class="inputTextMediumBlue" name="todo" id="todo">
-		 						 
-							</select>										
+							<input readonly type="text" class="inputTextMediumBlue" name="emlkl" id="emlkl" size="4" maxlength="2" value="${model.record.emlkl}">												
+						</td>
+						<td colspan="2" class="text14">
+							<input readonly type="text" class="inputTextMediumBlue" name="emsdut" id="emsdut" size="25" maxlength="30" value="${model.record.emsdut}">											
 						</td>
 						<td class="text14">
-							<input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="17" maxlength="35" value="${Xmodel.record.efkmrk}">									
-						</td>
-						<td class="text14">
-							<select required class="inputTextMediumBlue" name="todo" id="todo">
-		 						
-							</select>										
+							<input readonly type="text" class="inputTextMediumBlue" name="emlku" id="emlku" size="4" maxlength="2" value="${model.record.emlku}">												
 						</td>
 						
 					</tr>		
@@ -340,48 +359,42 @@
 				 				<td>
 				 				<table>
 				 				<tr >
-									<td class="text14">&nbsp;<span title="efkmrk">Navn</span></td>
-									<td class="text14">&nbsp;<span title="efkmrk">ID-type</span></td>
+									<td class="text14">&nbsp;<span title="emnas">Navn</span></td>
+									<td class="text14">&nbsp;<span title="emrgs">Org.nr /EORI</span></td>
 									
 				 				</tr>
 				 				<tr >
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="25" maxlength="70" value="${Xmodel.record.efkmrk}"></td>
-									<td class="text14">
-										<select class="inputTextMediumBlue" name="todo" id="todo" style="width:100px;">
-					 						<option value="O">Org.nr</option>
-					 						<option value="E">EORI</option>
-					 						
-										</select>
-										&nbsp;<input readonly type="text" class="inputTextReadOnly" name="efrgd" id="efrgd" size="20" maxlength="35" value="">
-									</td>
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emnas" id="emnas" size="25" maxlength="30" value="${model.record.emnas}"></td>
+									<td class="text14"><input readonly type="text" class="inputTextReadOnly" name="emrgs" id="emrgs" size="20" maxlength="17" value="${model.record.emnas}"></td>
 				 				</tr>
 				 				
 				 				<tr >
-									<td class="text14">&nbsp;<span title="efkmrk">Sted</span></td>
-									<td class="text14">&nbsp;<span title="efkmrk">Landkode</span></td>
+									<td class="text14">&nbsp;<span title="empss">Sted</span></td>
+									<td class="text14">&nbsp;<span title="emlks">Landkode</span></td>
 									
 				 				</tr>
 				 				<tr >
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="30" maxlength="35" value="${Xmodel.record.efkmrk}"></td>
-									<td class="text14">
-						 				<select required class="inputTextMediumBlue" name="efklk" id="efklk">
-					 						<option value="">-velg-</option>
-						 				  	<c:forEach var="country" items="${Xmodel.countryCodeList}" >
-						 				  		<option title="${country.ztxt}" value="${country.zkod}"<c:if test="${Xmodel.record.efklk == country.zkod}"> selected </c:if> >${country.zkod}</option>
-											</c:forEach>  
-										</select>
-						 			</td>
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="empss" id="empss" size="25" maxlength="24" value="${model.record.empss}"></td>
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emlks" id="emlks" size="4" maxlength="2" value="${model.record.emlks}"></td>
+									
 				 				</tr>
 				 				
 				 				<tr >
-									<td class="text14">&nbsp;<span title="efkmrk">E-post</span></td>
-									<td class="text14">&nbsp;<span title="efkmrk">Telefon</span></td>
+									<td class="text14">&nbsp;<span title="emems">E-post</span></td>
+									<td class="text14">&nbsp;<span title="emems">Telefon</span></td>
 									
 				 				</tr>
 				 				<tr >
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="30" maxlength="35" value="${Xmodel.record.efkmrk}"></td>
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="30" maxlength="35" value="${Xmodel.record.efkmrk}"></td>
-									
+									<c:choose>
+				 					<c:when test="${model.record.ememst == 'EM'}">
+				 						<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="emems" id="emems" size="35" maxlength="50" value="${model.record.emems}"></td>
+				 						<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="empty" id="empty" size="35" maxlength="50" value=""></td>
+				 					</c:when>
+				 					<c:otherwise>
+				 						<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="empty" id="empty" size="35" maxlength="50" value=""></td>
+										<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="emems" id="emems" size="35" maxlength="50" value="${model.record.emems}"></td>
+									</c:otherwise>
+									</c:choose>
 				 				</tr>
 				 				<tr height="2"><td>&nbsp;</td></tr>
 				 				

@@ -43,16 +43,6 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<a tabindex=-1 id="alinkItems" style="display:block;" href="tvinnsaddigitollv2_edit_manifest.do?action=doFetch&efpro=${Xmodel.record.efpro}&efsg=${Xmodel.record.efsg}
-													&efavd=${Xmodel.record.efavd}&efuuid=${Xmodel.record.efuuid}">
-							<font class="tabDisabledLink">
-								&nbsp;Manifest
-							</font>
-							
-						</a>
-					</td>
-					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a tabindex=-1 id="alinkItems" style="display:block;" href="tvinnsadmanifest_logging.do?efpro=${Xmodel.record.efpro}&efsg=${Xmodel.record.efsg}
 													&efavd=${Xmodel.record.efavd}&efuuid=${Xmodel.record.efuuid}">
 							<font class="tabDisabledLink">
@@ -63,18 +53,20 @@
 					</td>
 					
 					<%-- <td width="50%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>  --%>
-			 		<td width="50%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
+			 		<td width="60%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
 						<img id="imgInfoRpgJarStart" style="cursor:pointer;" onClick="showPop('jarStartCmd');" src="resources/images/info4.png" width="12" height="12" border="0" alt="info">
 						<div class="text12" style="position: relative;display: inline;" align="left">
 						<span style="position:absolute; left:-580px; top:3px;" id="jarStartCmd" class="popupWithInputText"  >
 			           		<div class="text11" align="left">
-			           			<b>Communication API</b>&nbsp;upload-engine-expressmanif-client.jar<br/>
-			           			<p><b>Stop</b> go tvinmnu --> 2 ...</p>
-			           			<p><b>Start</b> SBMJOB CMD(CALL PGM(SADEMSNDC)) JOB(EXPMANSND) JOBQ(SYJOBQNMAX) USER(SY400USR)
-			           			</p>
 			           			<p>
-				           			<a class="text11" target="_blank" id="alinkHeader" style="display:block;" href="renderLocalLogsgExpft.do?user=${user.user}">
+				           			<a class="text11" target="_blank" id="alinkHeader" href="renderLocalLogsgExpft.do?user=${user.user}">
 				           				logsg_syjservicestn-expft.log
+				           			</a>
+			           			</p>
+			           			
+			           			<p>
+				           			<a class="text11" target="_blank" id="alinkHeader" href="renderLocalCatalina.do?user=${user.user}">
+				           				catalina.out
 				           			</a>
 			           			</p>
 			           			<br/>
@@ -685,7 +677,7 @@
 		          	  </c:choose>	
 		          
 		          	   <td width="2%" class="tableCellFirst" align="center">
-		          	   		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_masterconsignment.do?action=doFind&emlnrt=${masterConsignmentRecord.emlnrt}&emlnrm=${masterConsignmentRecord.emlnrm}" onClick="setBlockUI();">
+		          	   		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=${masterConsignmentRecord.emlnrt}&emlnrm=${masterConsignmentRecord.emlnrm}" onClick="setBlockUI();">
                					<c:choose>
 		               				<c:when test="${XmasterConsignmentRecord.own_editable > 0}">
 		               					<img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">
