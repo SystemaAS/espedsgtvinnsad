@@ -21,10 +21,11 @@
 		<tr height="2"><td></td></tr>
 		<tr height="25"> 
 			<td width="20%" valign="bottom" class="tab" align="center" nowrap>
-				<font class="tabLink">&nbsp;<spring:message code="systema.tvinn.sad.manifest.list.tab"/></font>
+				<font class="tabLink">&nbsp;Transportliste</font>
 				<img src="resources/images/list.gif" border="0" alt="general list">
 				&nbsp;&nbsp;${listSize}
 			</td>
+			<%--
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
 				<a id="alinkHeader" style="display:block;" href="tvinnsadmanifest_edit.do?user=${user.user}">
@@ -32,6 +33,7 @@
 					<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
 				</a>
 			</td>
+			 --%>
 			<td width="60%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
 				<img id="imgInfoRpgJarStart" style="cursor:pointer;" onClick="showPop('jarStartCmd');" src="resources/images/info4.png" width="12" height="12" border="0" alt="info">
 				<div class="text12" style="position: relative;display: inline;" align="left">

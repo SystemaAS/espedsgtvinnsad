@@ -12,9 +12,13 @@ public final class SadDigitollUrlDataStore {
 		//http://localhost:8080/syjservicestn/syjsSADMOMFR.do?user=OSCAR and/or user=OSCAR...
 		static public String SAD_FETCH_DIGITOLL_MASTERCONSIGNMENT_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOMF.do";
 
-		//FETCH Master Consignment list
+		//FETCH House Consignment list
 		//http://localhost:8080/syjservicestn/syjsSADMOHFR.do?user=OSCAR and/or user=OSCAR...
 		static public String SAD_FETCH_DIGITOLL_HOUSECONSIGNMENT_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOHF.do";
+		
+		//FETCH Item line list
+		//http://localhost:8080/syjservicestn/syjsSADMOIFR.do?user=OSCAR and/or user=OSCAR...
+		static public String SAD_FETCH_DIGITOLL_ITEMLINES_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOIF.do";
 				
 		
 		//Manifest info from toll.no (API)

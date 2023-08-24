@@ -27,7 +27,7 @@
 			 
 			 		<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a tabindex=-1 id="alinkManifestList" style="display:block;" href="tvinnsaddigitollv2.do?action=doFind">
-							<font class="tabDisabledLink">&nbsp;Transportlist</font>
+							<font class="tabDisabledLink">&nbsp;Transportliste</font>
 							<img src="resources/images/list.gif" border="0" alt="general list">
 						</a>
 					</td>
@@ -57,13 +57,15 @@
 						<div class="text12" style="position: relative;display: inline;" align="left">
 						<span style="position:absolute; left:-580px; top:3px;" id="jarStartCmd" class="popupWithInputText"  >
 			           		<div class="text11" align="left">
-			           			<b>Communication API</b>&nbsp;upload-engine-expressmanif-client.jar<br/>
-			           			<p><b>Stop</b> go tvinmnu --> 2 ...</p>
-			           			<p><b>Start</b> SBMJOB CMD(CALL PGM(SADEMSNDC)) JOB(EXPMANSND) JOBQ(SYJOBQNMAX) USER(SY400USR)
-			           			</p>
 			           			<p>
-				           			<a class="text11" target="_blank" id="alinkHeader" style="display:block;" href="renderLocalLogsgExpft.do?user=${user.user}">
+				           			<a class="text11" target="_blank" href="renderLocalLogsgExpft.do?user=${user.user}">
 				           				logsg_syjservicestn-expft.log
+				           			</a>
+			           			</p>
+			           			
+			           			<p>
+				           			<a class="text11" target="_blank" href="renderLocalCatalina.do?user=${user.user}">
+				           				catalina.out
 				           			</a>
 			           			</p>
 			           			<br/>
@@ -72,68 +74,7 @@
 			           	</span>
 			           	</div>
 					</td>
-			 
-			<%--
-				<c:choose> 
-			    <c:when test="${not empty model.record.efuuid}">
-		    	
-					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<a tabindex=-1 id="alinkManifestList" style="display:block;" href="tvinnsadmanifest.do?action=doFind&avd=${model.record.efavd}&sign=${model.record.efsg}">
-							<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.manifest.list.tab"/></font>
-							<img src="resources/images/list.gif" border="0" alt="general list">
-						</a>
-					</td>
-					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-			
-					<td title="${model.record.efuuid}" width="15%" valign="bottom" class="tab" align="center" nowrap>
-						<font class="tabLink">
-							&nbsp;<spring:message code="systema.tvinn.sad.manifest.created.header.tab"/>
-						</font>
-						<font class="text14MediumBlue">[${model.record.efpro}]</font>
-						<img src="resources/images/update.gif" border="0" alt="edit">
-						
-					</td>
-					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<a tabindex=-1 id="alinkItems" style="display:block;" href="tvinnsadmanifest_edit_cargolines.do?action=doFetch&efpro=${model.record.efpro}&efsg=${model.record.efsg}
-													&efavd=${model.record.efavd}&efuuid=${model.record.efuuid}">
-							<font class="tabDisabledLink">
-								&nbsp;<spring:message code="systema.tvinn.sad.manifest.createnew.last.tab"/>
-							</font>
-							<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
-							
-						</a>
-					</td>
-					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<a tabindex=-1 id="alinkItems" style="display:block;" href="tvinnsadmanifest_logging.do?efpro=${model.record.efpro}&efsg=${model.record.efsg}
-													&efavd=${model.record.efavd}&efuuid=${model.record.efuuid}">
-							<font class="tabDisabledLink">
-								&nbsp;<spring:message code="systema.tvinn.sad.manifest.created.header.logging.tab"/>
-							</font>
-							<img style="vertical-align: bottom" src="resources/images/log-icon.png" width="16" hight="16" border="0" alt="show log">
-						</a>
-					</td>
-					
-					<td width="50%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-				</c:when>
-				<c:otherwise>
-					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<a id="alinkManifestList" tabindex=-1 style="display:block;" href="tvinnsadmanifest.do?action=doFind&sign=${user.tvinnSadSign}">
-							<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.manifest.list.tab"/></font>
-							<img src="resources/images/list.gif" border="0" alt="general list">
-						</a>
-					</td>
-					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td width="15%" valign="bottom" class="tab" align="center" nowrap>
-						<font class="tabLink">&nbsp;<spring:message code="systema.tvinn.sad.createnew"/></font>
-						<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
-						
-					</td>
-					<td width="80%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-				</c:otherwise>
-				
-			</c:choose> --%>
+		
 		</tr>
 	</table>
 	</td>
@@ -393,6 +334,15 @@
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emlks" id="emlks" size="4" maxlength="2" value="${model.record.emlks}"></td>
 									
 				 				</tr>
+				 				<tr >
+									<td class="text14">&nbsp;<span title="emad1s">Adress</span></td>
+									<td class="text14">&nbsp;<span title="empns">Postnr</span></td>
+									
+				 				</tr>
+				 				<tr >
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emad1s" id="emad1s" size="25" maxlength="30" value="${model.record.emad1s}"></td>
+									<td class="text14"><input readonly type="text" class="inputTextReadOnly" name="empns" id="empns" size="12" maxlength="9" value="${model.record.empns}"></td>
+				 				</tr>
 				 				
 				 				<tr >
 									<td class="text14">&nbsp;<span title="emems">E-post</span></td>
@@ -461,6 +411,16 @@
 				 				</tr>
 				 				
 				 				<tr >
+									<td class="text14">&nbsp;<span title="emad1m">Adress</span></td>
+									<td class="text14">&nbsp;<span title="empnm">Postnr</span></td>
+									
+				 				</tr>
+				 				<tr >
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emad1m" id="emad1m" size="25" maxlength="30" value="${model.record.emad1m}"></td>
+									<td class="text14"><input readonly type="text" class="inputTextReadOnly" name="empnm" id="empnm" size="12" maxlength="9" value="${model.record.empnm}"></td>
+				 				</tr>
+				 				
+				 				<tr >
 									<td class="text14">&nbsp;<span title="ememm">E-post</span></td>
 									<td class="text14">&nbsp;<span title="ememm">Telefon</span></td>
 									
@@ -489,114 +449,10 @@
 	            </table>
             </td>	
             
-            <%--
-            <td style="width:33%" class="text14" valign="top">
-				<table style="width:95%" align="left" border="0" cellspacing="1" cellpadding="0">
-				 	<tr >
-					 	<td >
-						<table class="formFrameHeader" style="width:100%;" border="0" cellspacing="1" cellpadding="0">
-					 		<tr height="15">
-					 			<td class="text14White">&nbsp;&nbsp;Representant / Ombud&nbsp;</td>
-			 				</tr>
-			            </table>
-			            </td>
-		            </tr>
-		            <tr >
-					 	<td>
-						<table style="width:100%;" class="formFrame" border="0" cellspacing="1" cellpadding="0">
-					 		<tr>
-				 				<td>
-				 				<table>
-				 				<tr >
-									<td class="text14">&nbsp;<span title="efkmrk">Navn</span></td>
-									<td class="text14">&nbsp;<span title="efkmrk">ID-type</span></td>
-									
-				 				</tr>
-				 				<tr >
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="25" maxlength="70" value="${Xmodel.record.efkmrk}"></td>
-									<td class="text14">
-										<select class="inputTextMediumBlue" name="todo" id="todo" style="width:100px;">
-					 						<option value="O">Org.nr</option>
-					 						<option value="E">EORI</option>
-					 						
-										</select>
-										&nbsp;<input readonly type="text" class="inputTextReadOnly" name="efrgd" id="efrgd" size="20" maxlength="35" value="">
-									</td>
-				 				</tr>
-				 				
-				 				<tr >
-									<td class="text14">&nbsp;<span title="efkmrk">Sted</span></td>
-									<td class="text14">&nbsp;<span title="efkmrk">Landkode</span></td>
-									
-				 				</tr>
-				 				<tr >
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="30" maxlength="35" value="${Xmodel.record.efkmrk}"></td>
-									<td class="text14">
-						 				<select required class="inputTextMediumBlue" name="efklk" id="efklk">
-					 						<option value="">-velg-</option>
-						 				  	<c:forEach var="country" items="${Xmodel.countryCodeList}" >
-						 				  		<option title="${country.ztxt}" value="${country.zkod}"<c:if test="${Xmodel.record.efklk == country.zkod}"> selected </c:if> >${country.zkod}</option>
-											</c:forEach>  
-										</select>
-						 			</td>
-				 				</tr>
-				 				
-				 				<tr >
-									<td class="text14">&nbsp;<span title="efkmrk">E-post</span></td>
-									<td class="text14">&nbsp;<span title="efkmrk">Telefon</span></td>
-									
-				 				</tr>
-				 				<tr >
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="30" maxlength="35" value="${Xmodel.record.efkmrk}"></td>
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="efkmrk" id="efkmrk" size="30" maxlength="35" value="${Xmodel.record.efkmrk}"></td>
-									
-				 				</tr>
-				 				<tr height="2"><td>&nbsp;</td></tr>
-				 				
-				 				</table>
-				 				</td>
-				 				</tr>
-				 				</table>
-			            </td>
-		            </tr>
-	            </table>
-            </td>
-            --%>			 
+            
 		</tr>
 		<tr height="10"><td></td></tr>
-		<%--
-		<c:if test="${Xmodel.record.efst != 'S'}">
-			<tr>
-				<td colspan="3" class="text14" valign="top">
-					<table style="width:86%" border="0" cellspacing="1" cellpadding="0">
-						<tr>
-							<td align="right" >
-							<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
-							<c:if test="${not empty Xmodel.record.efuuid && empty Xmodel.invalidManifest}">
-								&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
-							</c:if>
-							<%-- Due to emergencies ... we remove validations
-							<c:choose>
-								<c:when test="${model.record.own_editable > 0}">
-									<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
-									<c:if test="${not empty model.record.efuuid && empty model.invalidManifest}">
-										&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
-										
-									</c:if>
-								</c:when>
-								<c:otherwise>
-									<input title="Status combination or date = blocked" class="inputFormSubmitStd isa_info" type="button" name="fakeButton" id="fakeButton" value='<spring:message code="systema.tvinn.sad.manifest.disabled.button"/>'>
-								</c:otherwise>
-							</c:choose>
-							 
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</c:if>
-		<tr height="20"><td colspan="2">&nbsp;</td></tr>
-		--%>
+		
 	</table>
 	</td>
 	</tr>	
@@ -615,7 +471,7 @@
 		<td>		
 		<table border="0" >
 	    	<%-- separator --%>
-	        <tr height="1"><td></td></tr> 
+	        <tr height="2"><td>&nbsp;</td></tr>  
 			<tr>
 				<td>
 				<table id="containerdatatableTable" cellspacing="2" align="left" >
@@ -660,7 +516,7 @@
 		          	  </c:choose>	
 		          
 		          	   <td width="2%" class="tableCellFirst" align="center">
-		          	   		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=${houseConsignmentRecord.ehlnrt}&emlnrm=${houseConsignmentRecord.ehlnrm}" onClick="setBlockUI();">
+		          	   		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_house.do?action=doFind&ehlnrt=${houseConsignmentRecord.ehlnrt}&ehlnrm=${houseConsignmentRecord.ehlnrm}&ehlnrh=${houseConsignmentRecord.ehlnrh}" onClick="setBlockUI();">
                					<c:choose>
 		               				<c:when test="${XhouseConsignmentRecord.own_editable > 0}">
 		               					<img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">

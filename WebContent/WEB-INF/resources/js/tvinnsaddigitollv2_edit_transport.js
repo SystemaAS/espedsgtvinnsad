@@ -330,9 +330,9 @@
 	//jq.fn.dataTable.moment( 'DDMMYY' );    
     //init table (no ajax, no columns since the payload is already there by means of HTML produced on the back-end)
     jq('#mainList').dataTable( {
-  	  //"dom": '<"top"f>t<"bottom"><"clear">',
+  	  "dom": 'f<"toolbar">rt<"bottom"ip><"clear">',
       "searchHighlight": true,
-  	  "dom": '<"top"f>rt<"bottom"lip><"clear">',
+  	  //"dom": '<"top"f>rt<"bottom"lip><"clear">',
   	  //"scrollY": "700px",
   	  "scrollCollapse":  true,
 	  "tabIndex": -1,
@@ -342,7 +342,9 @@
     	jq('.dataTables_filter input').addClass("inputText12LightYellow");
     	}
     });
-    //event on input field for search
+	jq("div.toolbar").html('<span class="text16">Master Consignments</span>');
+    
+//event on input field for search
     jq('input.mainList_filter').on( 'keyup click', function () {
     		filterGlobal();
     });

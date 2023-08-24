@@ -2,6 +2,7 @@ package no.systema.tvinn.sad.digitollv2.model.jsonjackson;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import lombok.Data;
@@ -73,6 +74,11 @@ public class SadmohfRecord extends JsonAbstractGrandFatherRecord   {
 	private String ehlkd = ""; //      tegn            2       2       896        begge    land of delivery     
 	private String ehsdd = ""; //      tegn            5       5       898        begge    place of delivery    
 	private String ehsddt = ""; //     tegn           30      30       903        begge    place of delivery
+	
+	
+	private Collection<SadmoifRecord> listItemLines = null;
+	public void setListItemLines (Collection<SadmoifRecord> value){ this.listItemLines = value;}
+	public Collection<SadmoifRecord> getListItemLines(){ return this.listItemLines; }
 	
 	/**
 	 * 
