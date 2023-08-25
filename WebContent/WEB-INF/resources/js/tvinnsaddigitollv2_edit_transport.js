@@ -69,17 +69,79 @@
 	  });
 	  
 	  //custom validity
-	    jq('#efeta').focus(function() {
-	    	if(jq('#efeta').val()!=''){
-	    		refreshCustomValidity(jq('#efeta')[0]);
+	    jq('#ettsd').focus(function() {
+	    	if(jq('#ettsd').val()!=''){
+	    		refreshCustomValidity(jq('#ettsd')[0]);
 	  		}
 	  	});
-	    jq('#efsjadt').focus(function() {
-	    	if(jq('#efsjadt').val()!=''){
-	    		refreshCustomValidity(jq('#efsjadt')[0]);
+	    jq('#etkmrk').focus(function() {
+	    	if(jq('#etkmrk').val()!=''){
+	    		refreshCustomValidity(jq('#etkmrk')[0]);
+	  		}
+	  	});
+		jq('#etnat').focus(function() {
+	    	if(jq('#etnat').val()!=''){
+	    		refreshCustomValidity(jq('#etnat')[0]);
+	  		}
+	  	});
+		jq('#etrgt').focus(function() {
+	    	if(jq('#etrgt').val()!=''){
+	    		refreshCustomValidity(jq('#etrgt')[0]);
+	  		}
+	  	});
+		jq('#etpst').focus(function() {
+	    	if(jq('#etpst').val()!=''){
+	    		refreshCustomValidity(jq('#etpst')[0]);
+	  		}
+	  	});
+		jq('#etlkt').focus(function() {
+	    	if(jq('#etlkt').val()!=''){
+	    		refreshCustomValidity(jq('#etlkt')[0]);
+	  		}
+	  	});
+		
+		jq('#etktkd').focus(function() {
+	    	if(jq('#etktkd').val()!=''){
+	    		refreshCustomValidity(jq('#etktkd')[0]);
+	  		}
+	  	});
+		jq('#etktyp').focus(function() {
+	    	if(jq('#etktyp').val()!=''){
+	    		refreshCustomValidity(jq('#etktyp')[0]);
+	  		}
+	  	});
+		jq('#etktm').focus(function() {
+	    	if(jq('#etktm').val()!=''){
+	    		refreshCustomValidity(jq('#etktm')[0]);
+	  		}
+	  	});
+		jq('#etklk').focus(function() {
+	    	if(jq('#etklk').val()!=''){
+	    		refreshCustomValidity(jq('#etklk')[0]);
+	  		}
+	  	});
+
+		jq('#etsjaf').focus(function() {
+	    	if(jq('#etsjaf').val()!=''){
+	    		refreshCustomValidity(jq('#etsjaf')[0]);
+	  		}
+	  	});
+		jq('#etems').focus(function() {
+	    	if(jq('#etems').val()!=''){
+	    		refreshCustomValidity(jq('#etems')[0]);
 	  		}
 	  	});
 	  
+		jq('#etdkm').focus(function() {
+	    	if(jq('#etdkm').val()!=''){
+	    		refreshCustomValidity(jq('#etdkm')[0]);
+	  		}
+	  	});
+		jq('#etdkmt').focus(function() {
+	    	if(jq('#etdkmt').val()!=''){
+	    		refreshCustomValidity(jq('#etdkmt')[0]);
+	  		}
+	  	});
 	  
 	  //CHILD-WINDOWS
 	  //Tollsted

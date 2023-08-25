@@ -14,12 +14,12 @@
 	.ui-datepicker { font-size:9pt;}
 	</style>
 	
-<table style="width:100%;" cellspacing="0" border="0" cellpadding="0">
+<table style="width:90%;" cellspacing="0" border="0" cellpadding="0">
 
  <tr>
  <td>	
 	<%-- tab container component --%>
-	<table style="width:100%;"  class="text11" cellspacing="0" border="0" cellpadding="0">
+	<table  style="width:100%;"  class="text11" cellspacing="0" border="0" cellpadding="0">
 		<tr height="2"><td></td></tr>
 		<tr height="25">
 			 
@@ -174,7 +174,7 @@
 			 
 		<tr>
 			<td colspan="3" style="width:100%" class="text14" valign="top">
-				<table style="width:85%" align="left" border="0" cellspacing="1" cellpadding="0">
+				<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">
 					<tr height="4"><td>&nbsp;</td></tr>
 					<tr>	
 						<td nowrap colspan="10" class="text14 formFrame" >
@@ -236,10 +236,6 @@
 						<td class="text14">
 							<input readonly type="text" class="inputTextMediumBlue" name="ehdts" id="ehdts" size="10" maxlength="8" value="${model.record.ehdts}">		
 						</td>
-						
-						
-						
-						
 						
 						
 						
@@ -484,7 +480,7 @@
 
 
 
-
+<c:if test="${not empty model.record.listItemLines}">
 <%-- list component --%>
 	<tr>
 		<td>		
@@ -534,7 +530,7 @@
 		</table>
 		</td>
 	</tr>
-
+</c:if>
 
 
 

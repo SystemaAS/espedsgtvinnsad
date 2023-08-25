@@ -14,12 +14,12 @@
 	.ui-datepicker { font-size:9pt;}
 	</style>
 	
-<table cellspacing="0" border="0" cellpadding="0">
+<table style="width:90%;" cellspacing="0" border="0" cellpadding="0">
 
  <tr>
  <td>	
 	<%-- tab container component --%>
-	<table class="text11" cellspacing="0" border="0" cellpadding="0">
+	<table style="width:90%;"  class="text11" cellspacing="0" border="0" cellpadding="0">
 		<tr height="2"><td></td></tr>
 		<tr height="25">
 			 
@@ -100,7 +100,7 @@
 			</c:if>
 			 --%>
 			 
-	<table style="width:60%" xclass="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
+	<table style="width:90%;" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
  		<tr height="10"><td colspan="10">&nbsp;</td></tr>
  		
 		<%-- --------------- --%>
@@ -172,7 +172,7 @@
 			 
 		<tr>
 			<td colspan="3" class="text14" valign="top">
-				<table style="width:85%" align="left" border="0" cellspacing="1" cellpadding="0">
+				<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">
 					<tr height="4"><td>&nbsp;</td></tr>
 					<tr>	
 						<td nowrap colspan="10" class="text14 formFrame" >
@@ -298,7 +298,7 @@
 		<tr height="4"><td>&nbsp;</td></tr> 
  		<tr>
 			<td style="width:33%" class="text14" valign="top">
-				<table style="width:85%" align="left" border="0" cellspacing="1" cellpadding="0">
+				<table style="width:70%" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
 						<table class="formFrameHeader" style="width:100%;" border="0" cellspacing="1" cellpadding="0">
@@ -373,7 +373,7 @@
             </td>	
             
            	<td style="width:33%" class="text14" valign="top">
-				<table style="width:85%" align="left" border="0" cellspacing="1" cellpadding="0">
+				<table style="width:70%" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
 						<table class="formFrameHeader" style="width:100%;" border="0" cellspacing="1" cellpadding="0">
@@ -464,37 +464,37 @@
 
 
 
-
+<c:if test="${not empty model.record.listHouses}">
 
 	<%-- list component --%>
 	<tr>
 		<td>		
-		<table border="0" >
+		<table style="width:90%" border="0" >
 	    	<%-- separator --%>
 	        <tr height="2"><td>&nbsp;</td></tr>  
 			<tr>
 				<td>
-				<table id="containerdatatableTable" cellspacing="2" align="left" >
+				<table style="width:100%" id="containerdatatableTable" cellspacing="2" align="left" >
 				<tr>
 				<td class="text11">
 							
-				<table style="width:85%" id="mainList" class="display compact cell-border" >
+				<table id="mainList" class="display compact cell-border" >
 					<thead>
 					<tr class="tableHeaderField" height="20" >
                     	<th width="2%" class="tableHeaderFieldFirst" ><img title="Update" style="vertical-align:middle;" src="resources/images/update.gif" border="0" alt="edit"></th>
                     	<th width="2%" class="tableHeaderField" >Lnr</th>
                     	<th title="S=SLETTET" width="2%" class="tableHeaderField" >St.</th>
                 		<th width="2%" class="tableHeaderField" >Br.vekt</th>
-                		<th width="2%" class="tableHeaderField" >Ant.kolli</th>
+                		<th width="2%" class="tableHeaderField" >Ant. kolli</th>
                 		<th width="2%" class="tableHeaderField" >Doknr.</th>
                 		<th width="2%" class="tableHeaderField" >Dokt.</th>
                 		<th width="2%" class="tableHeaderField" >Prosed.</th>
                 		<th width="2%" class="tableHeaderField" >Out Prosed.</th>
                 		<th width="2%" class="tableHeaderField" >Type</th>
                 		<th width="2%" class="tableHeaderField" >Eksp.id</th>
-                		<th width="2%" class="tableHeaderField" >Mottaker</th>
-                		<th width="2%" class="tableHeaderField" >Avsender</th>
-                		<th width="2%" class="tableHeaderField" >Sen.tid</th>
+                		<th width="2%" class="tableHeaderField" >Mott.</th>
+                		<th width="2%" class="tableHeaderField" >Avs.</th>
+                		<th width="2%" class="tableHeaderField" >Sen. tid</th>
                 		<th width="2%" class="tableHeaderField" >MRN-Api</th>
                 		<th width="2%" class="tableHeaderField" >Req.id</th>
                 		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED" width="2%" class="tableHeaderField" >Manif.st</th>
@@ -636,7 +636,7 @@
 		</td>
 	</tr>
 
-
+</c:if>
 
 
 

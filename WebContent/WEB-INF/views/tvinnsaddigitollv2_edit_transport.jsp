@@ -14,7 +14,7 @@
 	.ui-datepicker { font-size:9pt;}
 	</style>
 	
-<table style="width:100%;" cellspacing="0" border="0" cellpadding="0">
+<table style="width:90%;" cellspacing="0" border="0" cellpadding="0">
 
  <tr>
  <td>	
@@ -75,10 +75,10 @@
 	<%-- --------------------------- --%>	
  	<%-- tab area container PRIMARY  --%>
 	<%-- --------------------------- --%>
-	<form name="manifestForm" id="manifestForm" action="tvinnsadmanifest_edit.do" method="post">
+	<form name="manifestForm" id="manifestForm" action="tvinnsaddigitollv2_edit_transport.do" method="post">
 			<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
-			<input type="hidden" name="updateId" id="updateId" value=""> <%-- this value is set in AJAX in order to know if the SAVE = ADD or UPDATE --%>
-			<input type="hidden" name="actionU" id="actionU" value="doUpdate">
+			<input type="hidden" name="etlnrt" id="etlnrt" value="${model.record.etlnrt}"> 
+			<input type="hidden" name="action" id="action" value="doUpdate">
 			<%--
 			<c:if test="${not empty model.record.efuuid}">
 				<input type="hidden" name="efuuid" id=efuuid value="${model.record.efuuid}">
@@ -211,9 +211,9 @@
 					 			<c:when test="${not empty model.record.etuuid}">
 					 				<tr >
 										
-										<td colspan="4" class="text12" ><span class="text14SkyBlue">
-						               		<a style="display: block; cursor:pointer" class="uuidLinkParent text12SkyBlue" id="${model.record.etuuid}">
-												Id&nbsp;${model.record.etuuid}
+										<td align="right" colspan="4" class="text12" ><span class="text14SkyBlue">
+						               		<a tabindex=-1 style="display: block; cursor:pointer" class="uuidLinkParent text12SkyBlue" id="${model.record.etuuid}">
+												${model.record.etuuid}
 											</a>
 						               </td>
 										
@@ -229,15 +229,15 @@
 					 					
 				 					</tr>				 				
 				 					<tr>
-					 					<td><input type="text12" readonly class="inputTextReadOnly" name="etavd" id="etavd" size="5" maxlength="4" value="${model.record.etavd}"></td>
-					 					<td><input type="text12" readonly class="inputTextReadOnly" name="etsg" id="etsg" size="4" maxlength="3" value="${model.record.etsg}"></td>
+					 					<td><input type="text12"  class="inputTextMediumBlue" name="etavd" id="etavd" size="5" maxlength="4" value="${model.record.etavd}"></td>
+					 					<td><input type="text12"  class="inputTextMediumBlue" name="etsg" id="etsg" size="4" maxlength="3" value="${model.record.etsg}"></td>
 					 					<td>
 					 						<c:choose>
 							 				<c:when test="${model.record.etpro != '0'}">
-							 					<input type="text12" readonly class="inputTextReadOnly" name="etpro" id="etpro" size="9" maxlength="8" value="${model.record.etpro}">
+							 					<input type="text12"  class="inputTextMediumBlue" name="etpro" id="etpro" size="9" maxlength="8" value="${model.record.etpro}">
 							 				</c:when>	
 							 				<c:otherwise>
-							 					<input type="text12" readonly class="inputTextReadOnly" name="etpro" id="etpro" size="9" maxlength="8" value="">
+							 					<input type="text12"  class="inputTextMediumBlue" name="etpro" id="etpro" size="9" maxlength="8" value="">
 							 				</c:otherwise>
 							 				</c:choose>
 					 					</td>
@@ -246,88 +246,95 @@
 				 				</c:otherwise>
 			 				</c:choose>
 			 					<tr >
-				 					<td class="text14">&nbsp;<span title="etdkm">Doknr.</span></td>
-				 					<td class="text14" colspan="4" >
-										<input readonly type="text" class="inputTextMediumBlue" name="etdkm" id="etdkm" size="30" maxlength="50" value="${model.record.etdkm}">
-										&nbsp;Type&nbsp;<input readonly type="text" class="inputTextMediumBlue" name="etdkmt" id="etdkmt" size="6" maxlength="4" value="${model.record.etdkmt}">
-									</td>
-				 				</tr>
-				 				<tr height="2"><td>&nbsp;</td></tr>	
-				 				<tr >
-				 					<td class="text14">&nbsp;<span title="etktkd">Mode of Transport</span></td>
-				 					<td class="text14">&nbsp;<span title="etktyp">Type of Identification</span></td>
-									<td class="text14">&nbsp;<span title="etktm">Type of Means of Transport</span></td>
-									<td class="text14">&nbsp;<span title="etklk">Land code</span></td>
+				 					<td class="text14">&nbsp;<span title="etktkd Mode of Transport">ModeTr.</span><font class="text16RedBold" >*</font></td>
+				 					<td class="text14">&nbsp;<span title="etktyp Type of Identification">Kjør.Typ.</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="etktm Type of Means of Transport">Tr.midd.typ.</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="etklk Land code">Landkode</span><font class="text16RedBold" >*</font></td>
 				 				</tr>
 				 				<tr >
 				 					<td class="text14">
-										<input readonly type="text" class="inputTextMediumBlue" name="etktkd" id="etktkd" size="2" maxlength="1" value="${model.record.etktkd}">
+										<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"   type="text" class="inputTextMediumBlueMandatoryField" name="etktkd" id="etktkd" size="2" maxlength="1" value="${model.record.etktkd}">
 									</td>
 									<td>
-										<input readonly type="text" class="inputTextMediumBlue" name="etktyp" id="etktyp" size="9" maxlength="35" value="${model.record.etktyp}">
+										<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"   type="text" class="inputTextMediumBlueMandatoryField" name="etktyp" id="etktyp" size="9" maxlength="35" value="${model.record.etktyp}">
 									</td>
 									
 						 			<td class="text14">
-						 				<input readonly type="text" class="inputTextMediumBlue" name="etktm" id="etktm" size="5" maxlength="4" value="${model.record.etktm}">
+						 				<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"   type="text" class="inputTextMediumBlueMandatoryField" name="etktm" id="etktm" size="5" maxlength="4" value="${model.record.etktm}">
 										
 						 			</td>
 						 			<td class="text14">
-						 				<input readonly type="text" class="inputTextMediumBlue" name="etklk" id="etklk" size="5" maxlength="4" value="${model.record.etklk}">
+						 				<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"   type="text" class="inputTextMediumBlueMandatoryField" name="etklk" id="etklk" size="5" maxlength="4" value="${model.record.etklk}">
 						 				
 						 			</td>
 						 			
 				 				</tr>
 				 				
-			 				
-			 				<tr height="2"><td>&nbsp;</td></tr>
+			 				<tr >
+								<td colspan="3" class="text14">&nbsp;<span title="etkmrk">Kjøretøy kjennemerke</span><font class="text16RedBold" >*</font></td>
+				 			</tr>
+				 			<tr>
+			 					<td colspan="3" class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="efkmrk" id="efkmrk" size="25" maxlength="35" value="${model.record.etkmrk}"></td>
+								
+			 				</tr>
 			 				<tr>
-			 					<td colspan="2" class="text14">&nbsp;<span title="etsjaf">Fører-navn</span></td>
-								<td colspan="2" class="text14">&nbsp;<span title="etems">Fører-epost / Telefon</span></td>
+			 					<td colspan="2" class="text14">&nbsp;<span title="etsjaf">Fører-navn</span><font class="text16RedBold" >*</font></td>
+								<td colspan="2" class="text14">&nbsp;<span title="etems">Fører-epost / Telefon</span><font class="text16RedBold" >*</font></td>
 								
 			 				</tr>
 			 				<tr >
 					 			<td colspan="2" class="text14">
-					 				<input readonly type="text" class="inputTextMediumBlue" name="etsjaf" id="etsjaf" size="30" maxlength="50" value="${model.record.etsjaf}">
+					 				<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"   type="text" class="inputTextMediumBlueMandatoryField" name="etsjaf" id="etsjaf" size="30" maxlength="50" value="${model.record.etsjaf}">
 					 			</td>
 								<td colspan="2" class="text14">
-									<input readonly type="text" class="inputTextMediumBlue" name="etems" id="etems" size="30" maxlength="50" value="${model.record.etems}">
+									<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"   type="text" class="inputTextMediumBlueMandatoryField" name="etems" id="etems" size="30" maxlength="50" value="${model.record.etems}">
 								</td>
 			 				</tr>
-			 				
-			 				
-			 				
-			 				
+			 				<tr >
+			 					<td colspan="2" class="text14">&nbsp;<span title="etdkm">Doknr.</span><font class="text16RedBold" >*</font></td>
+			 					<td class="text14">&nbsp;<span title="etdkmt">Doktyp.</span><font class="text16RedBold" >*</font></td>
+			 				</tr>
+			 				<tr >	
+			 					<td colspan="2" class="text14" >
+									<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="etdkm" id="etdkm" size="30" maxlength="50" value="${model.record.etdkm}">
+								</td>
+								<td class="text14" >
+									<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="etdkmt" id="etdkmt" size="6" maxlength="4" value="${model.record.etdkmt}">
+								</td>
+			 				</tr>
+				 				
+			 				<tr height="2"><td>&nbsp;</td></tr>
 			 				<tr>
 			 					<td class="text14">&nbsp;<span title="etetad">ETA</span></td>
 								<td class="text14">&nbsp;<span title="etetat">ETA-Tid</span></td>
-								<td class="text14">&nbsp;<span title="ettsd">Pass.tollsted</span></td>
+								<td class="text14">&nbsp;<span title="ettsd">Pass.tollsted</span><font class="text16RedBold" >*</font></td>
 			 				</tr>
 			 				<tr >
 			 					
 					 			<td class="text14">
 					 				<c:choose>
 					 				<c:when test="${model.record.etetad != '0'}">
-					 					<input readonly type="text" class="inputTextMediumBlue" name="etetad" id="etetad" size="7" maxlength="6" value="${model.record.etetad}">
+					 					<input  type="text" class="inputTextMediumBlue" name="etetad" id="etetad" size="7" maxlength="6" value="${model.record.etetad}">
 					 				</c:when>	
 					 				<c:otherwise>
-					 					<input readonly type="text" class="inputTextMediumBlue" name="etetad" id="etetad" size="7" maxlength="6" value="">
+					 					<input  type="text" class="inputTextMediumBlue" name="etetad" id="etetad" size="7" maxlength="6" value="">
 					 				</c:otherwise>
 					 				</c:choose>
 					 			</td>
 								<td>
 									<c:choose>
 					 				<c:when test="${model.record.etetat != '0'}">
-					 					<input readonly type="text" class="inputTextMediumBlue" name="etetat" id="etetat" size="7" maxlength="6" value="${model.record.etetat}">
+					 					<input  type="text" class="inputTextMediumBlue" name="etetat" id="etetat" size="7" maxlength="6" value="${model.record.etetat}">
 					 				</c:when>
 					 				<c:otherwise>
-					 					<input readonly type="text" class="inputTextMediumBlue" name="etetat" id="etetat" size="7" maxlength="6" value="">
+					 					<input  type="text" class="inputTextMediumBlue" name="etetat" id="etetat" size="7" maxlength="6" value="">
 					 				</c:otherwise>
 					 				</c:choose>
 									
 								</td>
 			 					
 								<td>
-									<input readonly type="text" class="inputTextMediumBlue" name="ettsd" id="ettsd" size="9" maxlength="8" value="${model.record.ettsd}">
+									<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ettsd" id="ettsd" size="9" maxlength="8" value="${model.record.ettsd}">
 								</td>
 			 				</tr>
 			 				<tr height="2"><td>&nbsp;</td></tr>
@@ -358,24 +365,24 @@
 				 				<td>
 				 				<table>
 				 				<tr >
-									<td class="text14">&nbsp;<span title="etnat">Navn</span></td>
-									<td class="text14">&nbsp;<span title="efkmrk">Kjøretøy kjennemerke</span></td>
+									<td class="text14">&nbsp;<span title="etnat">Navn</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="etrgt">Orgnr / EORI</span><font class="text16RedBold" >*</font></td>
 									
 				 				</tr>
 				 				<tr >
-									<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="etnat" id="etnat" size="35" maxlength="30" value="${model.record.etnat}"></td>
-									<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="etkmrk" id="etkmrk" size="15" maxlength="17" value="${model.record.etkmrk}"></td>
+									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"   type="text" class="inputTextMediumBlueMandatoryField" name="etnat" id="etnat" size="35" maxlength="30" value="${model.record.etnat}"></td>
+									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"   type="text" class="inputTextMediumBlueMandatoryField" name="etrgt" id="etrgt" size="18" maxlength="17" value="${model.record.etrgt}"></td>
 									
 				 				</tr>
 				 				
 				 				<tr >
-									<td class="text14">&nbsp;<span title="etpst">Sted</span></td>
-									<td class="text14">&nbsp;<span title="etlkt">Landkode</span></td>
+									<td class="text14">&nbsp;<span title="etpst">Sted</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="etlkt">Landkode</span><font class="text16RedBold" >*</font></td>
 									
 				 				</tr>
 				 				<tr >
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="etpst" id="etpst" size="25" maxlength="24" value="${model.record.etpst}"></td>
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="etlkt" id="etlkt" size="4" maxlength="2" value="${model.record.etlkt}"></td>
+									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="etpst" id="etpst" size="25" maxlength="24" value="${model.record.etpst}"></td>
+									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="etlkt" id="etlkt" size="4" maxlength="2" value="${model.record.etlkt}"></td>
 									
 				 				</tr>
 				 				<tr >
@@ -385,7 +392,7 @@
 				 				</tr>
 				 				<tr >
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="etad1t" id="etad1t" size="25" maxlength="30" value="${model.record.etad1t}"></td>
-									<td class="text14"><input readonly type="text" class="inputTextReadOnly" name="etpnt" id="etpnt" size="12" maxlength="9" value="${model.record.etpnt}"></td>
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="etpnt" id="etpnt" size="12" maxlength="9" value="${model.record.etpnt}"></td>
 				 				</tr>
 				 				
 				 				<tr >
@@ -396,12 +403,12 @@
 				 				<tr >
 				 					<c:choose>
 				 					<c:when test="${model.record.etemtt == 'EM'}">
-				 						<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="etemt" id="etemt" size="35" maxlength="50" value="${model.record.etemt}"></td>
-				 						<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="empty" id="empty" size="35" maxlength="50" value=""></td>
+				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="etemt" id="etemt" size="35" maxlength="50" value="${model.record.etemt}"></td>
+				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="empty" id="empty" size="35" maxlength="50" value=""></td>
 				 					</c:when>
 				 					<c:otherwise>
-				 						<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="empty" id="empty" size="35" maxlength="50" value=""></td>
-										<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="etemt" id="etemt" size="35" maxlength="50" value="${model.record.etemt}"></td>
+				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="empty" id="empty" size="35" maxlength="50" value=""></td>
+										<td class="text14"><input  type="text" class="inputTextMediumBlue" name="etemt" id="etemt" size="35" maxlength="50" value="${model.record.etemt}"></td>
 									</c:otherwise>
 									</c:choose>
 				 				</tr>
@@ -441,7 +448,7 @@
 				 				</tr>
 				 				<tr >
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="etnar" id="etnar" size="25" maxlength="30" value="${model.record.etnar}"></td>
-									<td class="text14"><input readonly type="text" class="inputTextReadOnly" name="etrgr" id="etrgr" size="20" maxlength="17" value="${model.record.etrgr}"></td>
+									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="etrgr" id="etrgr" size="20" maxlength="17" value="${model.record.etrgr}"></td>
 				 				</tr>
 				 				
 				 				<tr >
@@ -465,7 +472,7 @@
 				 				</tr>
 				 				<tr >
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="etad1r" id="etad1r" size="25" maxlength="30" value="${model.record.etad1r}"></td>
-									<td class="text14"><input readonly type="text" class="inputTextReadOnly" name="etpnr" id="etpnr" size="12" maxlength="9" value="${model.record.etpnr}"></td>
+									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="etpnr" id="etpnr" size="12" maxlength="9" value="${model.record.etpnr}"></td>
 				 				</tr>
 				 				
 				 				<tr >
@@ -476,12 +483,12 @@
 				 				<tr >
 									<c:choose>
 				 					<c:when test="${model.record.etemrt == 'EM'}">
-				 						<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="etemr" id="etemr" size="35" maxlength="50" value="${model.record.etemr}"></td>
-				 						<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="empty" id="empty" size="35" maxlength="50" value=""></td>
+				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="etemr" id="etemr" size="35" maxlength="50" value="${model.record.etemr}"></td>
+				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="empty" id="empty" size="35" maxlength="50" value=""></td>
 				 					</c:when>
 				 					<c:otherwise>
-				 						<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="empty" id="empty" size="35" maxlength="50" value=""></td>
-										<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="etemr" id="etemr" size="35" maxlength="50" value="${model.record.etemr}"></td>
+				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="empty" id="empty" size="35" maxlength="50" value=""></td>
+										<td class="text14"><input  type="text" class="inputTextMediumBlue" name="etemr" id="etemr" size="35" maxlength="50" value="${model.record.etemr}"></td>
 									</c:otherwise>
 									</c:choose>
 				 				</tr>
@@ -497,7 +504,11 @@
             </td>			 
 		</tr>
 		<tr height="10"><td></td></tr>
-		 
+		<tr>
+			<td align="left" >
+			&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
+			</td>
+		</tr> 
 	</table>
 	</td>
 	</tr>	
@@ -506,7 +517,7 @@
 </td>
 </tr>
 
-
+<c:if test="${not empty model.record.listMasters}">
 	<%-- list component --%>
 	<tr>
 		<td>		
@@ -555,8 +566,8 @@
 			          	  </c:otherwise>
 		          	  </c:choose>	
 		          
-		          	   <td width="2%" class="tableCellFirst" align="center">
-		          	   		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=${masterConsignmentRecord.emlnrt}&emlnrm=${masterConsignmentRecord.emlnrm}" onClick="setBlockUI();">
+		          	   <td  width="2%" class="tableCellFirst" align="center">
+		          	   		<a tabindex=-1 style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=${masterConsignmentRecord.emlnrt}&emlnrm=${masterConsignmentRecord.emlnrm}" onClick="setBlockUI();">
                					<c:choose>
 		               				<c:when test="${XmasterConsignmentRecord.own_editable > 0}">
 		               					<img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">
@@ -634,7 +645,7 @@
 		               <td width="2%" class="tableCell" align="center"> 
 		               		  		
 				   				<c:if test="${XmasterConsignmentRecord.own_editable > 0}">
-		              				<a style="display: block; width: 100%; height: 100%;" class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
+		              				<a tabindex=-1 style="display: block; width: 100%; height: 100%;" class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
 										<img src="resources/images/delete.gif" border="0" alt="remove">
 									</a>
 									<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
@@ -651,7 +662,7 @@
 	               	   </td>
 	               	   <td width="2%" class="tableCell" align="center">
 	               	   		<c:if test="${XmasterConsignmentRecord.efst == 'M' || empty XmasterConsignmentRecord.efst}">   		
-				   				<a style="display: block; width: 100%; height: 100%;" class="cancelLink" id="cancelLink${counter.count}" runat="server" href="#">
+				   				<a tabindex=-1 style="display: block; width: 100%; height: 100%;" class="cancelLink" id="cancelLink${counter.count}" runat="server" href="#">
 									<img src="resources/images/remove.png" width="16" height="16" border="0" alt="remove">
 								</a> 
 								<div id="dialogUpdateInternalStatus${counter.count}" class="clazz_dialog" title="Dialog">
@@ -679,7 +690,7 @@
 		</td>
 	</tr>
 
-
+</c:if>
 
 
 
