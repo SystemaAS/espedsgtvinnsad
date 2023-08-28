@@ -16,12 +16,7 @@ import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManif
  * @date Sep 2020
  *
  */
-public interface SadmotfListService {
-	public SadmotfContainer getListContainer(String utfPayload);
-	/*public SadmomfContainer getListCargolinesContainer(String utfPayload);
-	public JsonTvinnSadManifestContainer getListContainerDefaultValues(String utfPayload);
-	public JsonTvinnSadManifestRpgContainer getContainerRpgResult(String utfPayload);
-	public JsonTvinnSadManifestArchivedDocsContainer getArchiveDocsContainer(String utfPayload);
-	public JsonTvinnSadManifestLoggingContainer getLoggingContainer(String utfPayload);
-	*/
+public interface GeneralUpdateService {
+	public GeneralUpdateContainer getListContainer(String utfPayload);
+	
 }

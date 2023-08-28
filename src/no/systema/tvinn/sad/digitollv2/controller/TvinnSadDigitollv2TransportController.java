@@ -51,6 +51,8 @@ import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignature
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureRecord;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
 import no.systema.tvinn.sad.digitollv2.filter.SearchFilterDigitollTransportList;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifContainer;
@@ -58,6 +60,7 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
+import no.systema.tvinn.sad.digitollv2.service.GeneralUpdateService;
 import no.systema.tvinn.sad.digitollv2.service.SadmohfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
@@ -67,6 +70,7 @@ import no.systema.tvinn.sad.manifest.express.filter.SearchFilterManifestList;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
 import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
+import no.systema.tvinn.sad.mapper.url.request.UrlRequestParameterMapper;
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
 import no.systema.tvinn.sad.manifest.express.util.manager.ManifestDateManager;
 import no.systema.tvinn.sad.manifest.express.util.manager.ManifestExpressMgr;
@@ -83,15 +87,21 @@ import no.systema.tvinn.sad.manifest.express.util.manager.CodeDropDownMgr;
  * 
  */
 @Controller
-public class TvinnSadDigitollv2Controller {
+public class TvinnSadDigitollv2TransportController {
 	private static final JsonDebugger jsonDebugger = new JsonDebugger();
-	private static final Logger logger = LoggerFactory.getLogger(TvinnSadDigitollv2Controller.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(TvinnSadDigitollv2TransportController.class.getName());
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	private ApplicationContext context;
 	private LoginValidator loginValidator = new LoginValidator();
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
 	DateTimeManager dateMgr = new DateTimeManager();
+	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
+	private final String MODE_UPDATE = "U";
+	private final String MODE_INSERT = "A";
+	private final String TYPE_EMAIL = "EM";
+	private final String TYPE_TELEPHONE = "TE";
+	
 	
 	@PostConstruct
 	public void initIt() throws Exception {
@@ -187,9 +197,10 @@ public class TvinnSadDigitollv2Controller {
 							if(!manifestExpressMgr.isEditableManifest(appUser, record)){
 								record.setOwn_editable(-1);
 							}
+							*/
 							//dates
 							this.adjustFieldsForFetch(record);
-							*/
+							
 						}
 						logger.info(outputList.toString());
 					}
@@ -229,7 +240,7 @@ public class TvinnSadDigitollv2Controller {
 	 * @return
 	 */
 	@RequestMapping(value="tvinnsaddigitollv2_edit_transport.do",  method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doEditTransport(@ModelAttribute ("record") SadmotfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+	public ModelAndView doEditTransport(SadmotfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		//this.context = TdsAppContext.getApplicationContext();
 		Collection<SadmotfRecord> outputList = new ArrayList<SadmotfRecord>();
 		Map model = new HashMap();
@@ -237,6 +248,9 @@ public class TvinnSadDigitollv2Controller {
 		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_edit_transport");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		
+		logger.info(recordToValidate.toString());
+		
+		String action = request.getParameter("action");
 		String etlnrt = request.getParameter("etlnrt");
 		
 		//check user (should be in session already)
@@ -247,38 +261,64 @@ public class TvinnSadDigitollv2Controller {
 			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_DIGITOLLV2);
 			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE); 
 			
+			//Submit button (Update/Insert)
+			if(StringUtils.isNotEmpty(action) && action.equals("doUpdate")) {
+				//adjust fields
+				this.adjustFieldsForUpdate(recordToValidate);
+				
+				String mode = "NA";
+				//Update
+				if(StringUtils.isNotEmpty(etlnrt) ){
+					mode = this.MODE_UPDATE;
+				}else {
+					mode = this.MODE_INSERT;
+				}
+				StringBuffer errMsg = new StringBuffer();
+				int dmlRetval = 0;
+				dmlRetval = this.updateTransportRecord(appUser.getUser(), recordToValidate, mode, errMsg);
+				//this step is required for the FETCH-step since we want to get the newly created record for upcomming updates...
+				if(mode.equals(this.MODE_INSERT)) {
+					etlnrt = String.valueOf(recordToValidate.getEtlnrt());
+				}
+			}
 			
-            //get BASE URL
-    		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TRANSPORT_URL;
-    		//add URL-parameters
-    		String urlRequestParams = "user=" + appUser.getUser() + "&etlnrt=" + etlnrt;
-    		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-	    	logger.warn("URL: " + BASE_URL);
-	    	logger.warn("URL PARAMS: " + urlRequestParams);
-	    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
-
-	    	//Debug --> 
-	    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
-	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-	    	if(jsonPayload!=null){
+			//FETCH when applicable
+			if(StringUtils.isNotEmpty(etlnrt) ){
+				//FETCH record
+	            //get BASE URL
+	    		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TRANSPORT_URL;
+	    		//add URL-parameters
+	    		String urlRequestParams = "user=" + appUser.getUser() + "&etlnrt=" + etlnrt;
 	    		
-	    		SadmotfContainer jsonContainer = this.sadmotfListService.getListContainer(jsonPayload);
-	    		//----------------------------------------------------------------
-				//now filter the topic list with the search filter (if applicable)
-				//----------------------------------------------------------------
-	    		outputList = jsonContainer.getList();
-				if(outputList!=null){
-					for(SadmotfRecord record: outputList){
-						//get all masters
-						this.getMasters(appUser, record);
-						//now we have all master consignments in this transport
-						model.put("record", record);
-						logger.info(record.toString());
+	    		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+		    	logger.warn("URL: " + BASE_URL);
+		    	logger.warn("URL PARAMS: " + urlRequestParams);
+		    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+	
+		    	//Debug --> 
+		    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+		    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+		    	if(jsonPayload!=null){
+		    		
+		    		SadmotfContainer jsonContainer = this.sadmotfListService.getListContainer(jsonPayload);
+		    		//----------------------------------------------------------------
+					//now filter the topic list with the search filter (if applicable)
+					//----------------------------------------------------------------
+		    		outputList = jsonContainer.getList();
+					if(outputList!=null){
+						for(SadmotfRecord record: outputList){
+							this.adjustFieldsForFetch(record);
+							//get all masters
+							this.getMasters(appUser, record);
+							//now we have all master consignments in this transport
+							model.put("record", record);
+							logger.info(record.toString());
+						}
+						
 					}
 					
-				}
-				
-	    	}	
+		    	}	
+			}
 			//--------------------------------------
 			//Final successView with domain objects
 			//--------------------------------------
@@ -293,162 +333,51 @@ public class TvinnSadDigitollv2Controller {
 		}	
 		return successView;
 	}
-	
-	
 	/**
 	 * 
+	 * @param applicationUser
 	 * @param recordToValidate
-	 * @param bindingResult
-	 * @param session
-	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="tvinnsaddigitollv2_edit_master.do",  method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doEditManifest(@ModelAttribute ("record") SadmomfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
-		//this.context = TdsAppContext.getApplicationContext();
-		Collection<SadmomfRecord> outputList = new ArrayList<SadmomfRecord>();
-		Map model = new HashMap();
-		
-		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_edit_master");
-		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
-		
-		String emlnrt = request.getParameter("emlnrt");
-		String emlnrm = request.getParameter("emlnrm");
+	private int updateTransportRecord(String applicationUser, SadmotfRecord recordToValidate, String mode, StringBuffer errMsg) {
+		int retval = -1;
 		
 		
-		//check user (should be in session already)
-		if(appUser==null){
-			return loginView;
-		}else{
-			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
-			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_DIGITOLLV2);
-			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE); 
-			
-			//get BASE URL
-    		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_MASTERCONSIGNMENT_URL;
-    		//add URL-parameters
-    		String urlRequestParams = "user=" + appUser.getUser() + "&emlnrt=" + emlnrt + "&emlnrm=" + emlnrm;
-    		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-	    	logger.warn("URL: " + BASE_URL);
-	    	logger.warn("URL PARAMS: " + urlRequestParams);
-	    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+		//get BASE URL
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_TRANSPORT_URL;
+		//add URL-parameters
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + applicationUser + "&mode=" + mode);
+		urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate)));
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
 
-	    	//Debug --> 
-	    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
-	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-	    	if(jsonPayload!=null){
-	    		
-	    		SadmomfContainer jsonContainer = this.sadmomfListService.getListContainer(jsonPayload);
-	    		//----------------------------------------------------------------
-				//now filter the topic list with the search filter (if applicable)
-				//----------------------------------------------------------------
-	    		outputList = jsonContainer.getList();
-				if(outputList!=null){
-					for(SadmomfRecord record: outputList){
-						//get all masters
-						this.getHouses(appUser, record);
-						//now we have all master consignments in this transport
-						model.put("record", record);
-						logger.info(record.toString());
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		GeneralUpdateContainer container = this.generalUpdateService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<GeneralUpdateRecord> outputList = container.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(GeneralUpdateRecord record : outputList ){
+					retval = 0;
+					logger.warn(record.toString());
+					if(mode.equals(this.MODE_INSERT)) {
+						recordToValidate.setEtlnrt(record.getId());
 					}
-					
 				}
-				
-	    	}	
-			//--------------------------------------
-			//Final successView with domain objects
-			//--------------------------------------
-			//drop downs
-	    	/*
-			this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
-			this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
-			this.setCodeDropDownMgr(appUser, model);
-			*/
-	    	
-			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
-	    
-		}	
-		return successView;
+			}
+    	}
+    	
+    	return retval;
 	}
-	
-	/**
-	 * 
-	 * @param recordToValidate
-	 * @param bindingResult
-	 * @param session
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping(value="tvinnsaddigitollv2_edit_house.do",  method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doEditHouse(@ModelAttribute ("record") SadmohfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
-		//this.context = TdsAppContext.getApplicationContext();
-		Collection<SadmohfRecord> outputList = new ArrayList<SadmohfRecord>();
-		Map model = new HashMap();
-		
-		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_edit_house");
-		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
-		
-		String ehlnrt = request.getParameter("ehlnrt");
-		String ehlnrm = request.getParameter("ehlnrm");
-		String ehlnrh = request.getParameter("ehlnrh");
-		
-		
-		//check user (should be in session already)
-		if(appUser==null){
-			return loginView;
-		}else{
-			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
-			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_DIGITOLLV2);
-			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE); 
-			
-			
-            //get BASE URL
-    		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_HOUSECONSIGNMENT_URL;
-    		//add URL-parameters
-    		String urlRequestParams = "user=" + appUser.getUser() + "&ehlnrt=" + ehlnrt + "&ehlnrm=" + ehlnrm + "&ehlnrh=" + ehlnrh;
-    		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-	    	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
-	    	logger.warn("URL PARAMS: " + urlRequestParams);
-	    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
-
-	    	//Debug --> 
-	    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
-	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-	    	if(jsonPayload!=null){
-	    		
-	    		SadmohfContainer jsonContainer = this.sadmohfListService.getListContainer(jsonPayload);
-	    		//----------------------------------------------------------------
-				//now filter the topic list with the search filter (if applicable)
-				//----------------------------------------------------------------
-				outputList = jsonContainer.getList();
-				if(outputList!=null){
-					for(SadmohfRecord record: outputList){
-						//get all masters
-						this.getItemLines(appUser, record);
-						//now we have all item lines in this house
-						model.put("record", record);
-						logger.info(record.toString());
-					}
-					logger.info(outputList.toString());
-				}
-				
-	    	}
-	    		
-			//--------------------------------------
-			//Final successView with domain objects
-			//--------------------------------------
-			//drop downs
-			/*this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
-			this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
-			this.setCodeDropDownMgr(appUser, model);
-			*/
-	    	
-			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
-	    
-		}	
-		return successView;
-	}
-	
 	
 	
 	/**
@@ -609,10 +538,61 @@ public class TvinnSadDigitollv2Controller {
 																	 model,appUser,CodeDropDownMgr.CODE_2_COUNTRY, null, null);
 	}
 	
-	private void adjustFieldsForFetch(JsonTvinnSadManifestRecord recordToValidate){
-		recordToValidate.setEfeta(new ManifestDateManager().convertToDate_NO(recordToValidate.getEfeta()));
-		recordToValidate.setEfdtr(new ManifestDateManager().convertToDate_NO(recordToValidate.getEfdtr()));
-		recordToValidate.setEfsjadt(new ManifestDateManager().convertToDate_NO(recordToValidate.getEfsjadt()));
+	private void adjustFieldsForFetch(SadmotfRecord recordToValidate){
+		//Register date
+		if(recordToValidate.getEtdtr() > 0) {
+			int isoEtdtr = Integer.parseInt(this.dateMgr.getDateFormatted_NO(String.valueOf(recordToValidate.getEtdtr()), DateTimeManager.ISO_FORMAT));
+			recordToValidate.setEtdtr(isoEtdtr);
+		}
+		//ETA date
+		if(recordToValidate.getEtetad() > 0) {
+			int isoEtetad = Integer.parseInt(this.dateMgr.getDateFormatted_NO(String.valueOf(recordToValidate.getEtetad()), DateTimeManager.ISO_FORMAT));
+			recordToValidate.setEtetad(isoEtetad);
+		}
+		
+	}
+	/**
+	 * 
+	 * @param recordToValidate
+	 */
+	private void adjustFieldsForUpdate(SadmotfRecord recordToValidate){
+		
+		//Driver - communication
+		if(StringUtils.isNotEmpty(recordToValidate.getEtems())){
+			if(recordToValidate.getEtems().contains("@")) {
+				recordToValidate.setEtemst(this.TYPE_EMAIL);
+			}else {
+				recordToValidate.setEtemst(this.TYPE_TELEPHONE);
+			}
+		}
+		//Representative - communication
+		if(StringUtils.isNotEmpty(recordToValidate.getOwn_etemr_email())){
+			recordToValidate.setEtemr(recordToValidate.getOwn_etemr_email());
+			recordToValidate.setEtemrt(this.TYPE_EMAIL);	
+		}else {
+			recordToValidate.setEtemr(recordToValidate.getOwn_etemr_telephone());
+			recordToValidate.setEtemrt(this.TYPE_TELEPHONE);
+		}
+		//Carrier - communication
+		if(StringUtils.isNotEmpty(recordToValidate.getOwn_etemt_email())){
+			recordToValidate.setEtemt(recordToValidate.getOwn_etemt_email());
+			recordToValidate.setEtemtt(this.TYPE_EMAIL);	
+		}else {
+			recordToValidate.setEtemt(recordToValidate.getOwn_etemt_telephone());
+			recordToValidate.setEtemtt(this.TYPE_TELEPHONE);
+		}
+		
+		//Register date
+		if(recordToValidate.getEtdtr() > 0) {
+			int regDate = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(String.valueOf(recordToValidate.getEtdtr()), DateTimeManager.NO_FORMAT));
+			recordToValidate.setEtdtr(regDate);
+		}
+		//ETA - date to ISO
+		if(recordToValidate.getEtetad() > 0) {
+			int isoEtetad = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(String.valueOf(recordToValidate.getEtetad()), DateTimeManager.NO_FORMAT));
+			recordToValidate.setEtetad(isoEtetad);
+		}
+		
 	}
 	
 	/**
@@ -638,48 +618,6 @@ public class TvinnSadDigitollv2Controller {
     	}
     	
 	}
-	/**
-	 * 
-	 * @param appUser
-	 * @param record
-	 */
-	private void getHouses(SystemaWebUser appUser, SadmomfRecord record) {
-		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_HOUSECONSIGNMENT_URL;
-		//add URL-parameters
-		String urlRequestParams = "user=" + appUser.getUser() + "&ehlnrt=" + record.getEmlnrt() + "&ehlnrm=" + record.getEmlnrm();
-		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-    	logger.warn("URL: " + BASE_URL);
-    	logger.warn("URL PARAMS: " + urlRequestParams);
-    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
-
-    	//Debug --> 
-    	logger.debug(jsonPayload);
-    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-    	if(jsonPayload!=null){
-    		SadmohfContainer jsonContainer = this.sadmohfListService.getListContainer(jsonPayload);
-    		record.setListHouses(jsonContainer.getList());
-    	}
-    	
-	}
-	
-	private void getItemLines(SystemaWebUser appUser, SadmohfRecord record) {
-		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_ITEMLINES_URL;
-		//add URL-parameters
-		String urlRequestParams = "user=" + appUser.getUser() + "&eilnrt=" + record.getEhlnrt() + "&eilnrm=" + record.getEhlnrm() + "&eilnrh=" + record.getEhlnrh();
-		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-    	logger.warn("URL: " + BASE_URL);
-    	logger.warn("URL PARAMS: " + urlRequestParams);
-    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
-
-    	//Debug --> 
-    	logger.debug(jsonPayload);
-    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-    	if(jsonPayload!=null){
-    		SadmoifContainer jsonContainer = this.sadmoifListService.getListContainer(jsonPayload);
-    		record.setListItemLines(jsonContainer.getList());
-    	}
-    	
-	}
 	
 	
 	//SERVICES
@@ -693,13 +631,10 @@ public class TvinnSadDigitollv2Controller {
 	private SadmotfListService sadmotfListService;
 	@Autowired
 	private SadmomfListService sadmomfListService;
-	@Autowired
-	private SadmohfListService sadmohfListService;
-	@Autowired
-	private SadmoifListService sadmoifListService;
 	
 	@Autowired
-	private ManifestExpressMgr manifestExpressMgr;
+	private GeneralUpdateService generalUpdateService;
+	
 	
 	@Autowired
 	private MaintMainKofastService maintMainKofastService;

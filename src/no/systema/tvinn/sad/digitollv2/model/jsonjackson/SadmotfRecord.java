@@ -20,14 +20,41 @@ public class SadmotfRecord extends JsonAbstractGrandFatherRecord  {
 	private Integer etpro = 0; // numeric(8) default 0, 
 	private Integer etlnrt = 0; // numeric(7) default 0, Løpenummer
 	private Integer etdtr = 0; // numeric(8) default 0, Reg.dato
+	private String etdtrStr = "";
+	public String getEtdtrStr() {
+		if(this.etdtr > 0 ){
+			String tmp = String.valueOf(this.etdtr);
+			if (tmp.length()< 6) {
+				this.etdtrStr = "0" + tmp;
+			}else {
+				this.etdtrStr = tmp;
+			}
+		}
+		return this.etdtrStr;
+	}
 	private String etsg = ""; // varchar(3)
 	private String etst2 = ""; // varchar(1) , Status om manifest
 	private String etuuid = ""; // varchar(36), LRN
 	private String etmid = ""; // varchar(18),  MRN
 	private String etst3 = ""; // varchar(1) , Status om inpassering
 	private Integer etdtin = 0; // numeric(8) , Innsendingsdato
-	
 	private Integer etetad = 0; // numeric(8) default 0, ETA date
+	
+	private String etetadStr = "";
+	public String getEtetadStr() {
+		if(this.etetad > 0 ){
+			String tmp = String.valueOf(this.etetad);
+			if (tmp.length()< 6) {
+				this.etetadStr = "0" + tmp;
+			}else {
+				this.etetadStr = tmp;
+			}
+		}
+		return this.etetadStr;
+	}
+	
+	
+	
 	private Integer etetat = 0; // numeric(6) default 0, ETA tid 
 	private Integer etshed = 0; // numeric(8) default 0, Sheduled avg-dt
 	private Integer etshet = 0; // numeric(6) default 0, Sheduled avg-tid
@@ -45,6 +72,8 @@ public class SadmotfRecord extends JsonAbstractGrandFatherRecord  {
 	
 	private String etemr = ""; // varchar(50), Epostadr/tlf  
 	private String etemrt = ""; // varchar(2),   Epostadr/tlf typ (TE-EM)
+	private String own_etemr_telephone = ""; // 
+	private String own_etemr_email = ""; // 
 	private String etkmrk = ""; // varchar(30), Kjennemerke (reg.nr)
 	private String etktm= ""; // varchar(4), Transportmiddel type (typeOfMeansOfTransport)
 	private String etktyp = ""; // varchar(2), Kjøretøy type (typeOfIdentification)
@@ -68,6 +97,8 @@ public class SadmotfRecord extends JsonAbstractGrandFatherRecord  {
 	private String etpbt = ""; // varchar(15) , Postbox
 	private String etemt = ""; // varchar(50), Epostadr/tlf 
 	private String etemtt = ""; // varchar(2), Epostadr/tlf typ (TE-EM)
+	private String own_etemt_telephone = ""; // 
+	private String own_etemt_email = ""; // 
 	
 	private String etdkm = ""; // varchar(50), Master Dokumentnr 
 	private String etdkmt = ""; // varchar(4), Master Dokumenttype

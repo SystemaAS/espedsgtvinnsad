@@ -142,6 +142,23 @@
 	    		refreshCustomValidity(jq('#etdkmt')[0]);
 	  		}
 	  	});
+
+		
+		jq('#etavd').focus(function() {
+	    	if(jq('#etavd').val()!=''){
+	    		refreshCustomValidity(jq('#etavd')[0]);
+	  		}
+	  	});
+		jq('#etsg').focus(function() {
+	    	if(jq('#etsg').val()!=''){
+	    		refreshCustomValidity(jq('#etsg')[0]);
+	  		}
+	  	});
+		jq('#etpro').focus(function() {
+	    	if(jq('#etpro').val()!=''){
+	    		refreshCustomValidity(jq('#etpro')[0]);
+	  		}
+	  	});
 	  
 	  //CHILD-WINDOWS
 	  //Tollsted

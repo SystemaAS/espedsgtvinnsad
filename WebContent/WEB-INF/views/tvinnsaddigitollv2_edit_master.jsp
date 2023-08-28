@@ -26,7 +26,7 @@
 			 		<%-- TEMP --%>
 			 
 			 		<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<a tabindex=-1 id="alinkManifestList" style="display:block;" href="tvinnsaddigitollv2.do?action=doFind">
+						<a tabindex=-1 id="alinkTransportList" style="display:block;" href="tvinnsaddigitollv2.do?action=doFind">
 							<font class="tabDisabledLink">&nbsp;Transportliste</font>
 							<img src="resources/images/list.gif" border="0" alt="general list">
 						</a>
@@ -34,7 +34,7 @@
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			
 					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<a tabindex=-1 id="alinkItems" style="display:block;" href="tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=${model.record.emlnrt}">													
+						<a tabindex=-1 id="alinkTransport" style="display:block;" href="tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=${model.record.emlnrt}">													
 							<font class="tabDisabledLink">
 								&nbsp;Transport&nbsp;[${model.record.emlnrt}]
 							</font>

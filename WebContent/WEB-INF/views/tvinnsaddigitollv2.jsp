@@ -13,28 +13,28 @@
 	.ui-datepicker { font-size:9pt;}
 	</style>
 	
-<table style="width:100%;"  class="text11" cellspacing="0" border="0" cellpadding="0">
+<table style="width:90%;"  class="text11" cellspacing="0" border="0" cellpadding="0">
 <tr>
 	<td>
 	<%-- tab container component --%>
 	<table style="width:100%;" class="text11" cellspacing="0" border="0" cellpadding="0">
 		<tr height="2"><td></td></tr>
 		<tr height="25"> 
-			<td width="20%" valign="bottom" class="tab" align="center" nowrap>
+			<td width="15%" valign="bottom" class="tab" align="center" nowrap>
 				<font class="tabLink">&nbsp;Transportliste</font>
 				<img src="resources/images/list.gif" border="0" alt="general list">
 				&nbsp;&nbsp;${listSize}
 			</td>
-			<%--
+			
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-			<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
-				<a id="alinkHeader" style="display:block;" href="tvinnsadmanifest_edit.do?user=${user.user}">
+			<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
+				<a id="alinkHeader" style="display:block;" href="tvinnsaddigitollv2_edit_transport.do?action=doCreate">
 					<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.createnew"/></font>
 					<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
 				</a>
 			</td>
-			 --%>
-			<td width="60%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
+			 
+			<td width="80%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
 				<img id="imgInfoRpgJarStart" style="cursor:pointer;" onClick="showPop('jarStartCmd');" src="resources/images/info4.png" width="12" height="12" border="0" alt="info">
 				<div class="text12" style="position: relative;display: inline;" align="left">
 				<span style="position:absolute; left:-580px; top:3px;" id="jarStartCmd" class="popupWithInputText"  >
@@ -255,14 +255,14 @@
 		               		</c:otherwise>
 		               	   </c:choose>
 		              	</td>
-		               <td class="tableCell" >${record.etetad}&nbsp;${record.etetat}</td>
+		               <td class="tableCell" >${record.etetadStr}&nbsp;${record.etetat}</td>
 		               <td align="center" class="tableCell" >${record.ettsd}</td>
 		               <td align="center" class="tableCell" >${record.etdkm}</td>
 		               <td align="center" class="tableCell" >${record.etdkmt}</td>
 		               <td class="tableCell" >${record.etkmrk}</td>
 		               <td class="tableCell" >${record.etnat}</td>
 		               <td class="tableCell" >${record.etsjaf}</td>
-		               <td class="tableCell" ><c:if test="${record.etdtr > 0}">${record.etdtr}</c:if></td>
+		               <td class="tableCell" ><c:if test="${record.etdtr > 0}">${record.etdtrStr}</c:if></td>
 		               <%--
 		               <td width="2%" class="tableCell" ><font style="font-size:11px;">${record.efuuid}</font></td>
 		                --%>
