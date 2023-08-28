@@ -66,6 +66,7 @@ import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
+import no.systema.tvinn.sad.digitollv2.validator.TransportValidator;
 import no.systema.tvinn.sad.manifest.express.filter.SearchFilterManifestList;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
@@ -170,12 +171,12 @@ public class TvinnSadDigitollv2TransportController {
 	    		//add URL-parameters
 	    		String urlRequestParams = this.getRequestUrlKeyParameters(searchFilter, appUser);
 	    		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-		    	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+		    	logger.warn("URL: " + BASE_URL);
 		    	logger.warn("URL PARAMS: " + urlRequestParams);
 		    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
 	
 		    	//Debug --> 
-		    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+		    	logger.info(jsonPayload);
 		    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 		    	if(jsonPayload!=null){
 		    		
@@ -240,7 +241,7 @@ public class TvinnSadDigitollv2TransportController {
 	 * @return
 	 */
 	@RequestMapping(value="tvinnsaddigitollv2_edit_transport.do",  method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doEditTransport(SadmotfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+	public ModelAndView doEditTransport(@ModelAttribute ("record") SadmotfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		//this.context = TdsAppContext.getApplicationContext();
 		Collection<SadmotfRecord> outputList = new ArrayList<SadmotfRecord>();
 		Map model = new HashMap();
@@ -252,6 +253,7 @@ public class TvinnSadDigitollv2TransportController {
 		
 		String action = request.getParameter("action");
 		String etlnrt = request.getParameter("etlnrt");
+		boolean isValid = true;
 		
 		//check user (should be in session already)
 		if(appUser==null){
@@ -263,27 +265,42 @@ public class TvinnSadDigitollv2TransportController {
 			
 			//Submit button (Update/Insert)
 			if(StringUtils.isNotEmpty(action) && action.equals("doUpdate")) {
-				//adjust fields
-				this.adjustFieldsForUpdate(recordToValidate);
-				
-				String mode = "NA";
-				//Update
-				if(StringUtils.isNotEmpty(etlnrt) ){
-					mode = this.MODE_UPDATE;
-				}else {
-					mode = this.MODE_INSERT;
-				}
-				StringBuffer errMsg = new StringBuffer();
-				int dmlRetval = 0;
-				dmlRetval = this.updateTransportRecord(appUser.getUser(), recordToValidate, mode, errMsg);
-				//this step is required for the FETCH-step since we want to get the newly created record for upcomming updates...
-				if(mode.equals(this.MODE_INSERT)) {
-					etlnrt = String.valueOf(recordToValidate.getEtlnrt());
-				}
+				//Validate
+				TransportValidator validator = new TransportValidator();
+				validator.validate(recordToValidate, bindingResult);
+			    //check for ERRORS
+				if(bindingResult.hasErrors()){
+		    		logger.error("[ERROR Validation] record does not validate)");
+		    		this.adjustFieldsForFetch(recordToValidate);
+					//get all masters
+					this.getMasters(appUser, recordToValidate);
+					//now we have all master consignments in this transport
+					model.put("record", recordToValidate);
+					isValid = false;
+		    		
+			    }else{
+			    	//adjust fields
+					this.adjustFieldsForUpdate(recordToValidate);
+					
+			    	String mode = "NA";
+					//Update
+					if(StringUtils.isNotEmpty(etlnrt) ){
+						mode = this.MODE_UPDATE;
+					}else {
+						mode = this.MODE_INSERT;
+					}
+					StringBuffer errMsg = new StringBuffer();
+					int dmlRetval = 0;
+					dmlRetval = this.updateTransportRecord(appUser.getUser(), recordToValidate, mode, errMsg);
+					//this step is required for the FETCH-step since we want to get the newly created record for upcomming updates...
+					if(mode.equals(this.MODE_INSERT)) {
+						etlnrt = String.valueOf(recordToValidate.getEtlnrt());
+					}
+			    }
 			}
 			
 			//FETCH when applicable
-			if(StringUtils.isNotEmpty(etlnrt) ){
+			if(StringUtils.isNotEmpty(etlnrt) && isValid ){
 				//FETCH record
 	            //get BASE URL
 	    		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TRANSPORT_URL;
@@ -496,35 +513,88 @@ public class TvinnSadDigitollv2TransportController {
 		//String action = request.getParameter("action");
 		
 		urlRequestParamsKeys.append("user=" + appUser.getUser());
-		if(searchFilter.getAvd()!=null && !"".equals(searchFilter.getAvd())){
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "etavd=" + searchFilter.getAvd());
+		if(allEmpty(searchFilter)) {
+			int DAYS_BACK = -3;
+			String tmpISO = this.dateMgr.getSpecificDayFrom_CurrentDate_ISO(DAYS_BACK);
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "etdtr=" + tmpISO );
+			//put the value now
+			searchFilter.setDatum(this.dateFormatter.convertToDate_NO(tmpISO));
+			
+		}else {
+			if(StringUtils.isNotEmpty(searchFilter.getAvd())){
+				urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "etavd=" + searchFilter.getAvd());
+			}
+			if(StringUtils.isNotEmpty(searchFilter.getTurnr())){
+				urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "etpro=" + searchFilter.getTurnr());
+			}
+			if(StringUtils.isNotEmpty(searchFilter.getSign())){
+				urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "etsg=" + searchFilter.getSign());
+			}
+			
+			//Reg date
+			if(StringUtils.isNotEmpty(searchFilter.getDatum())){
+				urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "etdtr=" + this.dateFormatter.convertToDate_ISO(searchFilter.getDatum()));
+			}
+			if(StringUtils.isNotEmpty(searchFilter.getDatumt())){
+				//fromDate must be in place for this to work
+				if(StringUtils.isNotEmpty(searchFilter.getDatum())){
+					urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "etdtr_to=" + this.dateFormatter.convertToDate_ISO(searchFilter.getDatumt()));
+				}else {
+					searchFilter.setDatumt("");
+				}
+			}
+			
+			//ETA date
+			if(StringUtils.isNotEmpty(searchFilter.getEtaDatum())){
+				urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "etetad=" + this.dateFormatter.convertToDate_ISO(searchFilter.getEtaDatum()));
+			}
+			
+			if(StringUtils.isNotEmpty(searchFilter.getEtaDatumt())){
+				//fromDate must be in place for this to work
+				if(StringUtils.isNotEmpty(searchFilter.getEtaDatum())){
+					urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "etetad_to=" + this.dateFormatter.convertToDate_ISO(searchFilter.getEtaDatumt()));
+				}else {
+					searchFilter.setEtaDatumt("");
+				}
+				
+			}
 		}
-		if(searchFilter.getTurnr()!=null && !"".equals(searchFilter.getTurnr())){
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "etpro=" + searchFilter.getTurnr());
-		}
-		if(searchFilter.getDatum()!=null && !"".equals(searchFilter.getSign())){
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "etsg=" + searchFilter.getSign());
-		}
-		if(searchFilter.getDatum()!=null && !"".equals(searchFilter.getDatum())){
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "etdtr=" + this.dateFormatter.convertToDate_ISO(searchFilter.getDatum()));
-		}
-		/*
-		if(searchFilter.getDatumt()!=null && !"".equals(searchFilter.getDatumt())){
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "own_efdtr=" + this.dateFormatter.convertToDate_ISO(searchFilter.getDatumt()));
-		}*/
-		if(searchFilter.getDatum()!=null && !"".equals(searchFilter.getEtaDatum())){
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "etetad=" + this.dateFormatter.convertToDate_ISO(searchFilter.getEtaDatum()));
-		}
-		/*
-		if(searchFilter.getEtaDatumt()!=null && !"".equals(searchFilter.getEtaDatumt())){
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "own_etetad=" + this.dateFormatter.convertToDate_ISO(searchFilter.getEtaDatumt()));
-		}*/
-		
 		
 		return urlRequestParamsKeys.toString();
 	}
-	
-	
+	/**
+	 * Limit the search in case of non-filter
+	 * @param searchFilter
+	 * @return
+	 */
+	private boolean allEmpty(SearchFilterDigitollTransportList searchFilter) {
+		boolean retval = false;
+		if(StringUtils.isEmpty(searchFilter.getAvd()) && StringUtils.isEmpty(searchFilter.getOpd()) && StringUtils.isEmpty(searchFilter.getSign()) && StringUtils.isEmpty(searchFilter.getTurnr()) &&
+		   StringUtils.isEmpty(searchFilter.getDatum()) && StringUtils.isEmpty(searchFilter.getDatumt()) && StringUtils.isEmpty(searchFilter.getEtaDatum()) && StringUtils.isEmpty(searchFilter.getEtaDatumt()) ){
+			   retval = true;
+		   } else if(StringUtils.isEmpty(searchFilter.getAvd()) && StringUtils.isEmpty(searchFilter.getOpd()) && StringUtils.isEmpty(searchFilter.getSign()) && StringUtils.isEmpty(searchFilter.getTurnr()) &&
+				   StringUtils.isEmpty(searchFilter.getDatum()) && StringUtils.isNotEmpty(searchFilter.getDatumt()) && StringUtils.isEmpty(searchFilter.getEtaDatum()) && StringUtils.isEmpty(searchFilter.getEtaDatumt())) {
+			   
+			   searchFilter.setDatumt("");
+			   retval = true;
+			   
+		   } else if(StringUtils.isEmpty(searchFilter.getAvd()) && StringUtils.isEmpty(searchFilter.getOpd()) && StringUtils.isEmpty(searchFilter.getSign()) && StringUtils.isEmpty(searchFilter.getTurnr()) &&
+				   StringUtils.isEmpty(searchFilter.getDatum()) && StringUtils.isEmpty(searchFilter.getDatumt()) && StringUtils.isEmpty(searchFilter.getEtaDatum()) && StringUtils.isNotEmpty(searchFilter.getEtaDatumt())) {
+			   
+			   searchFilter.setEtaDatumt("");
+			   retval = true;
+			   
+		   } else if(StringUtils.isEmpty(searchFilter.getAvd()) && StringUtils.isEmpty(searchFilter.getOpd()) && StringUtils.isEmpty(searchFilter.getSign()) && StringUtils.isEmpty(searchFilter.getTurnr()) &&
+				   StringUtils.isEmpty(searchFilter.getDatum()) && StringUtils.isNotEmpty(searchFilter.getDatumt()) && StringUtils.isEmpty(searchFilter.getEtaDatum()) && StringUtils.isNotEmpty(searchFilter.getEtaDatumt())) {
+			   
+			   searchFilter.setDatumt("");
+			   searchFilter.setEtaDatumt("");
+			   retval = true;
+			   
+		   }
+		return retval;
+		
+	}
 	
 	/**
 	 * 
@@ -541,13 +611,28 @@ public class TvinnSadDigitollv2TransportController {
 	private void adjustFieldsForFetch(SadmotfRecord recordToValidate){
 		//Register date
 		if(recordToValidate.getEtdtr() > 0) {
-			int isoEtdtr = Integer.parseInt(this.dateMgr.getDateFormatted_NO(String.valueOf(recordToValidate.getEtdtr()), DateTimeManager.ISO_FORMAT));
-			recordToValidate.setEtdtr(isoEtdtr);
+			String tmpEtdr = String.valueOf(recordToValidate.getEtdtr());
+			if (org.apache.commons.lang3.StringUtils.isNotEmpty(tmpEtdr) && tmpEtdr.length()==8) {
+				int isoEtdtr = Integer.parseInt(this.dateMgr.getDateFormatted_NO(tmpEtdr, DateTimeManager.ISO_FORMAT));
+				recordToValidate.setEtdtr(isoEtdtr);
+			}
 		}
 		//ETA date
 		if(recordToValidate.getEtetad() > 0) {
-			int isoEtetad = Integer.parseInt(this.dateMgr.getDateFormatted_NO(String.valueOf(recordToValidate.getEtetad()), DateTimeManager.ISO_FORMAT));
-			recordToValidate.setEtetad(isoEtetad);
+			String tmpEtetatd = String.valueOf(recordToValidate.getEtetad());
+			if (org.apache.commons.lang3.StringUtils.isNotEmpty(tmpEtetatd) && tmpEtetatd.length()==8) {
+				int isoEtetad = Integer.parseInt(this.dateMgr.getDateFormatted_NO(tmpEtetatd, DateTimeManager.ISO_FORMAT));
+				recordToValidate.setEtetad(isoEtetad);
+			}
+		}
+		//ETA time
+		if(recordToValidate.getEtetat() > 0) {
+			String tmpEtetat = String.valueOf(recordToValidate.getEtetat());
+			if(tmpEtetat.length()>4) {
+				tmpEtetat = tmpEtetat.substring(0,4);
+				recordToValidate.setEtetat(Integer.valueOf(tmpEtetat));
+			}
+			
 		}
 		
 	}
@@ -591,6 +676,21 @@ public class TvinnSadDigitollv2TransportController {
 		if(recordToValidate.getEtetad() > 0) {
 			int isoEtetad = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(String.valueOf(recordToValidate.getEtetad()), DateTimeManager.NO_FORMAT));
 			recordToValidate.setEtetad(isoEtetad);
+		}
+		//ETA - time to ISO
+		if(recordToValidate.getEtetat() > 0) {
+			String tmp = String.valueOf(recordToValidate.getEtetat());
+			String outStr = "";
+			if(tmp.length()==3) {
+				outStr = "0" + tmp;
+				
+			}else if(tmp.length()==4) {
+				outStr = tmp ;
+			}
+			
+			int okTimeDb = Integer.parseInt(outStr);
+			recordToValidate.setEtetat(okTimeDb);
+			
 		}
 		
 	}

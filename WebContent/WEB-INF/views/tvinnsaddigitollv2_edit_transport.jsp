@@ -160,7 +160,7 @@
 			</c:if>
 			 --%>
  		<tr>
-			<td style="width:33%" class="text14" valign="top">
+			<td style="width:30%" class="text14" valign="top">
 				<table style="width:95%" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
@@ -211,7 +211,7 @@
 			 				<c:choose>
 					 			<c:when test="${model.record.etlnrt > 0}">
 					 				<tr >
-										<td colspan="2" class="text12" title="etavd">&nbsp;Reg.dato&nbsp;
+										<td colspan="2" class="text12" title="etdtr">&nbsp;Reg.dato&nbsp;
 											<input readonly type="text12"  class="inputTextReadOnly" name="etdtr" id="etdtr" size="8" maxlength="6" value="${model.record.etdtrStr}"></td>
 										</td>
 										
@@ -310,7 +310,7 @@
 			 				<tr height="2"><td>&nbsp;</td></tr>
 			 				<tr>
 			 					<td class="text14">&nbsp;<span title="etetad">ETA</span></td>
-								<td class="text14">&nbsp;<span title="etetat">ETA-Tid</span></td>
+								<td class="text14">&nbsp;<span title="etetat">ETA-Tid (HHmm)</span></td>
 								<td class="text14">&nbsp;<span title="ettsd">Pass.tollsted</span><font class="text16RedBold" >*</font></td>
 			 				</tr>
 			 				<tr >
@@ -318,20 +318,20 @@
 					 			<td class="text14">
 					 				<c:choose>
 					 				<c:when test="${model.record.etetad > 0}">
-					 					<input  type="text" class="inputTextMediumBlue" name="etetad" id="etetad" size="8" maxlength="6" value="${model.record.etetadStr}">
+					 					<input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etetad" id="etetad" size="8" maxlength="6" value="${model.record.etetadStr}">
 					 				</c:when>	
 					 				<c:otherwise>
-					 					<input  type="text" class="inputTextMediumBlue" name="etetad" id="etetad" size="8" maxlength="6" value="">
+					 					<input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etetad" id="etetad" size="8" maxlength="6" value="">
 					 				</c:otherwise>
 					 				</c:choose>
 					 			</td>
 								<td>
 									<c:choose>
 					 				<c:when test="${model.record.etetat > 0}">
-					 					<input  type="text" class="inputTextMediumBlue" name="etetat" id="etetat" size="7" maxlength="6" value="${model.record.etetat}">
+					 					<input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etetat" id="etetat" size="6" maxlength="4" value="${model.record.etetatStr}">
 					 				</c:when>
 					 				<c:otherwise>
-					 					<input  type="text" class="inputTextMediumBlue" name="etetat" id="etetat" size="7" maxlength="6" value="">
+					 					<input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etetat" id="etetat" size="6" maxlength="4" value="">
 					 				</c:otherwise>
 					 				</c:choose>
 									
@@ -351,7 +351,7 @@
 	            </table>
             </td>
             
-           	<td style="width:33%;" class="text14" valign="top">
+           	<td style="width:30%;" class="text14" valign="top">
 				<table style="width:95%;" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
@@ -437,7 +437,7 @@
             </td>
             
             
-            <td style="width:33%" class="text14" valign="top">
+            <td style="width:30%" class="text14" valign="top">
 				<table style="width:95%" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
@@ -547,7 +547,7 @@
 	        <tr height="2"><td>&nbsp;</td></tr> 
 			<tr>
 				<td>
-				<table style="width:100%;" id="containerdatatableTable" cellspacing="2" align="left" >
+				<table id="containerdatatableTable" cellspacing="2" align="left" >
 				<tr>
 				<td class="text11">
 							

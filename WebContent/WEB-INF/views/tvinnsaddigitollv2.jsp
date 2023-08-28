@@ -255,7 +255,7 @@
 		               		</c:otherwise>
 		               	   </c:choose>
 		              	</td>
-		               <td class="tableCell" >${record.etetadStr}&nbsp;${record.etetat}</td>
+		               <td class="tableCell" >${record.etetadStr}&nbsp;${record.etetatStr}</td>
 		               <td align="center" class="tableCell" >${record.ettsd}</td>
 		               <td align="center" class="tableCell" >${record.etdkm}</td>
 		               <td align="center" class="tableCell" >${record.etdkmt}</td>

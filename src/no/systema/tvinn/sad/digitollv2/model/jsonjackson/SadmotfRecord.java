@@ -56,6 +56,19 @@ public class SadmotfRecord extends JsonAbstractGrandFatherRecord  {
 	
 	
 	private Integer etetat = 0; // numeric(6) default 0, ETA tid 
+	private String etetatStr = "";
+	public String getEtetatStr() {
+		if(this.etetat > 0 ){
+			String tmp = String.valueOf(this.etetat);
+			if (tmp.length()< 4) {
+				this.etetatStr = "0" + tmp;
+			}else {
+				this.etetatStr = tmp;
+			}
+		}
+		return this.etetatStr;
+	}
+	
 	private Integer etshed = 0; // numeric(8) default 0, Sheduled avg-dt
 	private Integer etshet = 0; // numeric(6) default 0, Sheduled avg-tid
 	

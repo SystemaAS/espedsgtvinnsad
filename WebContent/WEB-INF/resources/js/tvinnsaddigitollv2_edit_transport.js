@@ -61,10 +61,7 @@
   });
   
   jq(function() {
-	  jq("#efeta").datepicker({ 
-		  dateFormat: 'ddmmy' 	  
-	  });
-	  jq("#efsjadt").datepicker({ 
+	  jq("#etetad").datepicker({ 
 		  dateFormat: 'ddmmy' 	  
 	  });
 	  
