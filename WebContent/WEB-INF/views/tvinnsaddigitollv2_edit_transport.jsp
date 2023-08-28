@@ -310,7 +310,7 @@
 			 				<tr height="2"><td>&nbsp;</td></tr>
 			 				<tr>
 			 					<td class="text14">&nbsp;<span title="etetad">ETA</span></td>
-								<td class="text14">&nbsp;<span title="etetat">ETA-Tid (HHmm)</span></td>
+								<td class="text14">&nbsp;<span title="etetat-HHmm">ETA-Tid</span></td>
 								<td class="text14">&nbsp;<span title="ettsd">Pass.tollsted</span><font class="text16RedBold" >*</font></td>
 			 				</tr>
 			 				<tr >
@@ -318,20 +318,20 @@
 					 			<td class="text14">
 					 				<c:choose>
 					 				<c:when test="${model.record.etetad > 0}">
-					 					<input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etetad" id="etetad" size="8" maxlength="6" value="${model.record.etetadStr}">
+					 					<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etetad" id="etetad" size="8" maxlength="6" value="${model.record.etetadStr}">
 					 				</c:when>	
 					 				<c:otherwise>
-					 					<input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etetad" id="etetad" size="8" maxlength="6" value="">
+					 					<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etetad" id="etetad" size="8" maxlength="6" value="">
 					 				</c:otherwise>
 					 				</c:choose>
 					 			</td>
 								<td>
 									<c:choose>
 					 				<c:when test="${model.record.etetat > 0}">
-					 					<input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etetat" id="etetat" size="6" maxlength="4" value="${model.record.etetatStr}">
+					 					<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etetat" id="etetat" size="6" maxlength="4" value="${model.record.etetatStr}">
 					 				</c:when>
 					 				<c:otherwise>
-					 					<input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etetat" id="etetat" size="6" maxlength="4" value="">
+					 					<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etetat" id="etetat" size="6" maxlength="4" value="">
 					 				</c:otherwise>
 					 				</c:choose>
 									

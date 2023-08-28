@@ -156,6 +156,16 @@
 	    		refreshCustomValidity(jq('#etpro')[0]);
 	  		}
 	  	});
+		jq('#etetad').focus(function() {
+	    	if(jq('#etetad').val()!=''){
+	    		refreshCustomValidity(jq('#etetad')[0]);
+	  		}
+	  	});
+		jq('#etetat').focus(function() {
+	    	if(jq('#etetat').val()!=''){
+	    		refreshCustomValidity(jq('#etetat')[0]);
+	  		}
+	  	});
 	  
 	  //CHILD-WINDOWS
 	  //Tollsted

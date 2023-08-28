@@ -249,7 +249,7 @@ public class TvinnSadDigitollv2TransportController {
 		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_edit_transport");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		
-		logger.info(recordToValidate.toString());
+		//logger.debug(recordToValidate.toString());
 		
 		String action = request.getParameter("action");
 		String etlnrt = request.getParameter("etlnrt");
