@@ -53,7 +53,7 @@
 					
 					
 					<%-- <td width="50%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>  --%>
-			 		<td width="80%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
+			 		<td width="60%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
 						<img id="imgInfoRpgJarStart" style="cursor:pointer;" onClick="showPop('jarStartCmd');" src="resources/images/info4.png" width="12" height="12" border="0" alt="info">
 						<div class="text12" style="position: relative;display: inline;" align="left">
 						<span style="position:absolute; left:-580px; top:3px;" id="jarStartCmd" class="popupWithInputText"  >
@@ -170,8 +170,8 @@
 			</c:if>
 			 --%>
  		<tr>
-			<td style="width:30%" class="text14" valign="top">
-				<table style="width:95%" align="left" border="0" cellspacing="1" cellpadding="0">
+			<td class="text14" valign="top">
+				<table style="width:85%" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
 						<table class="formFrameHeader" style="width:100%;"  border="0" cellspacing="1" cellpadding="0">
@@ -361,8 +361,8 @@
 	            </table>
             </td>
             
-           	<td style="width:30%;" class="text14" valign="top">
-				<table style="width:95%;" align="left" border="0" cellspacing="1" cellpadding="0">
+           	<td class="text14" valign="top">
+				<table style="width:85%;" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
 						<table class="formFrameHeader" style="width:100%; border="0" cellspacing="1" cellpadding="0">
@@ -447,8 +447,8 @@
             </td>
             
             
-            <td style="width:30%" class="text14" valign="top">
-				<table style="width:95%" align="left" border="0" cellspacing="1" cellpadding="0">
+            <td class="text14" valign="top">
+				<table style="width:85%" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
 						<table class="formFrameHeader" style="width:100%;" border="0" cellspacing="1" cellpadding="0">
@@ -552,12 +552,12 @@
 	<%-- list component --%>
 	<tr>
 		<td>		
-		<table style="width:100%;" border="0" >
+		<table style="width:90%;" border="0" >
 	    	<%-- separator --%>
 	        <tr height="2"><td>&nbsp;</td></tr> 
 			<tr>
 				<td>
-				<table id="containerdatatableTable" cellspacing="2" align="left" >
+				<table style="width:90%;" id="containerdatatableTable" cellspacing="2" align="left" >
 				<tr>
 				<td class="text11">
 							
@@ -624,31 +624,31 @@
 		               		</c:otherwise>
 		               	   </c:choose>
 		              	</td>
-		               <td align="right" class="tableCell" >${masterConsignmentRecord.emvkb}</td>
-		               <td align="right" class="tableCell" >${masterConsignmentRecord.emdkm}</td>
-		               <td align="right" class="tableCell" >${masterConsignmentRecord.emdkmt}</td>
+		               <td width="2%" align="right" class="tableCell" >${masterConsignmentRecord.emvkb}</td>
+		               <td width="2%" align="right" class="tableCell" >${masterConsignmentRecord.emdkm}</td>
+		               <td width="2%" align="right" class="tableCell" >${masterConsignmentRecord.emdkmt}</td>
 		               
-		               <td align="center" class="tableCell" >${masterConsignmentRecord.emnam}&nbsp;-&nbsp;${masterConsignmentRecord.empsm}&nbsp;${masterConsignmentRecord.emlkm}</td>
-		               <td align="center" class="tableCell" >${masterConsignmentRecord.emnas}&nbsp;-&nbsp;${masterConsignmentRecord.empss}&nbsp;${masterConsignmentRecord.emlks}</td>
-		               <td class="tableCell" ><c:if test="${masterConsignmentRecord.emdtr > 0}">${masterConsignmentRecord.emdtr}</c:if></td>
-		               <td class="tableCell" ><c:if test="${masterConsignmentRecord.emdtin > 0}">${masterConsignmentRecord.emdtin}</c:if></td>
+		               <td width="2%" align="center" class="tableCell" >${masterConsignmentRecord.emnam}&nbsp;-&nbsp;${masterConsignmentRecord.empsm}&nbsp;${masterConsignmentRecord.emlkm}</td>
+		               <td width="2%" align="center" class="tableCell" >${masterConsignmentRecord.emnas}&nbsp;-&nbsp;${masterConsignmentRecord.empss}&nbsp;${masterConsignmentRecord.emlks}</td>
+		               <td width="2%" class="tableCell" ><c:if test="${masterConsignmentRecord.emdtr > 0}">${masterConsignmentRecord.emdtr}</c:if></td>
+		               <td width="2%" class="tableCell" ><c:if test="${masterConsignmentRecord.emdtin > 0}">${masterConsignmentRecord.emdtin}</c:if></td>
 		               
 		               <%--
 		               <td width="2%" class="tableCell" ><font style="font-size:11px;">${record.efuuid}</font></td>
 		                --%>
-		               <td class="tableCell" ><span class="text14SkyBlue">
+		               <td width="2%" class="tableCell" ><span class="text14SkyBlue">
 		               		<a style="display: block; width: 100%; height: 100%; cursor:pointer" class="uuidLink text12SkyBlue" id="${masterConsignmentRecord.emmid}">
 								${masterConsignmentRecord.emmid}
 							</a>
 		               </td>
 		               		
-		               <td class="tableCell" title="check status in toll.no">
+		               <td width="2%" class="tableCell" title="check status in toll.no">
 		               		<a style="display: block; width: 100%; height: 100%; cursor:pointer" class="uuidLink text12SkyBlue" id="${masterConsignmentRecord.emuuid}">
 								${masterConsignmentRecord.emuuid}
 							</a>  
 		               </td>
 		               
-		               <td align="center" class="tableCell" >
+		               <td width="2%" align="center" class="tableCell" >
 		               		<c:choose>
 		               		<c:when test="${masterConsignmentRecord.emst2 == 'S' || masterConsignmentRecord.emst2 == 'R' || masterConsignmentRecord.emst2 == 'D' || masterConsignmentRecord.emst2 == 'C'}">
 		               			<c:if test="${masterConsignmentRecord.emst2 == 'S'}">

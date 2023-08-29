@@ -58,22 +58,25 @@
   });
   
   jq(function() {
-	  jq("#efeta").datepicker({ 
-		  dateFormat: 'ddmmy' 	  
-	  });
-	  jq("#efsjadt").datepicker({ 
-		  dateFormat: 'ddmmy' 	  
-	  });
-	  
 	  //custom validity
-	    jq('#efeta').focus(function() {
-	    	if(jq('#efeta').val()!=''){
-	    		refreshCustomValidity(jq('#efeta')[0]);
+	    jq('#emvkb').focus(function() {
+	    	if(jq('#emvkb').val()!=''){
+	    		refreshCustomValidity(jq('#emvkb')[0]);
 	  		}
 	  	});
-	    jq('#efsjadt').focus(function() {
-	    	if(jq('#efsjadt').val()!=''){
-	    		refreshCustomValidity(jq('#efsjadt')[0]);
+	    jq('#emdkm').focus(function() {
+	    	if(jq('#emdkm').val()!=''){
+	    		refreshCustomValidity(jq('#emdkm')[0]);
+	  		}
+	  	});
+		jq('#emdkmt').focus(function() {
+	    	if(jq('#emdkmt').val()!=''){
+	    		refreshCustomValidity(jq('#emdkmt')[0]);
+	  		}
+	  	});
+		jq('#emrgt').focus(function() {
+	    	if(jq('#emrgt').val()!=''){
+	    		refreshCustomValidity(jq('#emrgt')[0]);
 	  		}
 	  	});
 	  

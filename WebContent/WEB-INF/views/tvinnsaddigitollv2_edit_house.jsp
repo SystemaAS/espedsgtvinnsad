@@ -36,22 +36,36 @@
 					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a tabindex=-1 id="alinkItems" style="display:block;" href="tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=${model.record.ehlnrt}">													
 							<font class="tabDisabledLink">
-								&nbsp;Transport&nbsp;[${model.record.ehlnrt}]
+								&nbsp;Transport&nbsp;
+								<c:if test="${model.record.ehlnrt > 0}">
+									<font class="text14MediumBlue">&nbsp;${model.record.ehlnrt}</font>
+								</c:if>
+								
 							</font>
 						</a>
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td title="${model.record.ehlnrm}" width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a tabindex=-1 id="alinkManifestList" style="display:block;" href="tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=${model.record.ehlnrt}&emlnrm=${model.record.ehlnrm}">
-							<font class="tabDisabledLink">&nbsp;Master&nbsp;[${model.record.ehlnrm}]</font>
+							<font class="tabDisabledLink">
+								&nbsp;Master
+							</font>
+							<img src="resources/images/update.gif" border="0" alt="edit">
+							<c:if test="${model.record.ehlnrm > 0}">
+								<font class="text14MediumBlue">&nbsp;${model.record.ehlnrm}</font>
+							</c:if>
 						</a>
 					</td>
 					
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td title="${model.record.ehlnrh}" width="15%" valign="bottom" class="tab" align="center" nowrap>
 						<font class="tabLink">
-							&nbsp;House&nbsp;[${model.record.ehlnrh}]
+							&nbsp;House
 						</font>
+						<img src="resources/images/update.gif" border="0" alt="edit">
+						<c:if test="${model.record.ehlnrh > 0}">
+							<font class="text14MediumBlue">&nbsp;${model.record.ehlnrh}</font>
+						</c:if>
 					</td>
 					
 					<td width="60%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
@@ -313,7 +327,7 @@
 		
 		<tr height="4"><td>&nbsp;</td></tr> 
  		<tr>
-			<td style="width:33%" class="text14" valign="top">
+			<td class="text14" valign="top">
 				<table style="width:85%" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
@@ -389,7 +403,7 @@
 	            </table>
             </td>	
             
-           	<td style="width:33%" class="text14" valign="top">
+           	<td class="text14" valign="top">
 				<table style="width:85%" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
@@ -478,18 +492,16 @@
 </tr>
 
 
-
-
 <c:if test="${not empty model.record.listItemLines}">
 <%-- list component --%>
 	<tr>
 		<td>		
-		<table style="width:100%;" border="0" >
+		<table style="width:90%;" border="0" >
 	    	<%-- separator --%>
 	        <tr height="2"><td>&nbsp;</td></tr> 
 			<tr>
 				<td>
-				<table style="width:100%;" id="containerdatatableTable" cellspacing="2" align="left" >
+				<table style="width:90%;" id="containerdatatableTable" cellspacing="2" align="left" >
 				<tr>
 				<td class="text11">
 							
