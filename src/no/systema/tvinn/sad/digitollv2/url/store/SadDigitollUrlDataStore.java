@@ -7,17 +7,24 @@ public final class SadDigitollUrlDataStore {
 		//FETCH Transport list
 		//http://localhost:8080/syjservicestn/syjsSADMOTF.do?user=OSCAR and/or user=OSCAR...
 		static public String SAD_FETCH_DIGITOLL_TRANSPORT_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOTF.do";
+		//UPDATE/INSERT/DELETE Transport
 		//http://localhost:8080/syjservicestn/syjsSADMOTF_U.do?user=OSCAR and/or user=OSCAR...
 		static public String SAD_UPDATE_DIGITOLL_TRANSPORT_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOTF_U.do";
 		
 		//FETCH Master Consignment list
 		//http://localhost:8080/syjservicestn/syjsSADMOMFR.do?user=OSCAR and/or user=OSCAR...
 		static public String SAD_FETCH_DIGITOLL_MASTERCONSIGNMENT_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOMF.do";
+		//UPDATE/INSERT/DELETE Master
+		//http://localhost:8080/syjservicestn/syjsSADMOMF_U.do?user=OSCAR and/or user=OSCAR...
+		static public String SAD_UPDATE_DIGITOLL_MASTERCONSIGNMENT_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOMF_U.do";
 
 		//FETCH House Consignment list
 		//http://localhost:8080/syjservicestn/syjsSADMOHFR.do?user=OSCAR and/or user=OSCAR...
 		static public String SAD_FETCH_DIGITOLL_HOUSECONSIGNMENT_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOHF.do";
-		
+		//UPDATE/INSERT/DELETE House
+		//http://localhost:8080/syjservicestn/syjsSADMOMF_U.do?user=OSCAR and/or user=OSCAR...
+		static public String SAD_UPDATE_DIGITOLL_HOUSECONSIGNMENT_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOHF_U.do";
+
 		//FETCH Item line list
 		//http://localhost:8080/syjservicestn/syjsSADMOIFR.do?user=OSCAR and/or user=OSCAR...
 		static public String SAD_FETCH_DIGITOLL_ITEMLINES_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOIF.do";

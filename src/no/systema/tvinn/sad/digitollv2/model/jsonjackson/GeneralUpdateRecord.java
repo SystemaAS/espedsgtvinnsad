@@ -17,6 +17,8 @@ public class GeneralUpdateRecord <T> {
 	
 	private String status = null;
 	private Integer id = null;
+	private Integer id2 = null;
+	private Integer id3 = null;
 	
 	
 	

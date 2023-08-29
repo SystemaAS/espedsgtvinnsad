@@ -47,7 +47,10 @@ public class SadmomfRecord extends JsonAbstractGrandFatherRecord   {
 	private String emlkm = "";    //tegn            2  l.kode mottaker  
 	private String empbm = "";    //tegn           15  postbox mottaker 
 	private String ememm = "";    //tegn           50  ep.adr/tlf mottaker  
-	private String ememmt = "";   //tegn            2  kodetype mottaker    
+	private String ememmt = "";   //tegn            2  kodetype mottaker 
+	private String own_ememm_telephone = ""; // 
+	private String own_ememm_email = ""; // 
+	
 	private Integer emkns = 0;   //sonet        8  0   avsender             
 	private String emrgs = "";   //tegn           17   org.nr avsender  
 	private Integer emtpps = 0;   //sonet           1   Type of person
@@ -61,6 +64,9 @@ public class SadmomfRecord extends JsonAbstractGrandFatherRecord   {
 	private String empbs = "";   //tegn           15   postbox avsender     
 	private String emems = "";   //tegn           50   epost/tlf avsender   
 	private String ememst = "";   //tegn           2  kodetype avsender  
+	private String own_emems_telephone = ""; // 
+	private String own_emems_email = ""; // 
+	
 	private String emdkm = "";   //tegn           50   master dokumentnr  
 	private String emdkmt = "";   //tegn           4  master dokumenttype
 	private String emc1ty = "";   //tegn           2  cont1.sizetype     

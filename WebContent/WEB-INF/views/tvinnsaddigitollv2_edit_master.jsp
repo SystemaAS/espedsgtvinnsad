@@ -90,20 +90,19 @@
 	<%-- --------------------------- --%>	
  	<%-- tab area container PRIMARY  --%>
 	<%-- --------------------------- --%>
-	<form name="manifestForm" id="manifestForm" action="tvinnsadmanifest_edit.do" method="post">
+	<form name="manifestForm" id="manifestForm" action="tvinnsaddigitollv2_edit_master.do" method="post">
 			<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
-			<input type="hidden" name="updateId" id="updateId" value=""> <%-- this value is set in AJAX in order to know if the SAVE = ADD or UPDATE --%>
-			<input type="hidden" name="actionU" id="actionU" value="doUpdate">
-			<%--
-			<c:if test="${not empty model.record.efuuid}">
-				<input type="hidden" name="efuuid" id=efuuid value="${model.record.efuuid}">
-				<input type="hidden" name="efavd" id=efavd value="${model.record.efavd}">
-				<input type="hidden" name="efsg" id=efsg value="${model.record.efsg}">
-				<input type="hidden" name="efpro" id=efpro value="${model.record.efpro}">
-				<input type="hidden" name="efst" id=efst value="${model.record.efst}">	
-				<input type="hidden" name="efst2" id=efst2 value="${model.record.efst2}">		
+			<input type="hidden" name="emuuid" id="emuuid" value="${model.record.emuuid}"> 
+			<input type="hidden" name="emmid" id="emmid" value="${model.record.emmid}">
+			<input type="hidden" name="emlnrt" id="emlnrt" value="${model.record.emlnrt}">
+			<input type="hidden" name="action" id="action" value="doUpdate">
+			
+			<c:if test="${model.record.emlnrm > 0}">
+				<input type="hidden" name="emsg" id="emsg" value="${model.record.emsg}">
+				<input type="hidden" name="emavd" id="emavd" value="${model.record.emavd}"> 
+				<input type="hidden" name="empro" id="empro" value="${model.record.empro}">
+				<input type="hidden" name="emlnrm" id="emlnrm" value="${model.record.emlnrm}"> 
 			</c:if>
-			 --%>
 			 
 	<table style="width:90%;" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
  		<tr height="10"><td colspan="10">&nbsp;</td></tr>
@@ -191,111 +190,149 @@
 						<td class="text14">&nbsp;<span title="emavd">Avd</span></td>
 						<td class="text14">&nbsp;<span title="empro">Tur</span></td>
 						<td class="text14">&nbsp;<span title="emvkb">Bruttovekt</span></td>
-						<td class="text14">&nbsp;<span title="emvkb">Container</span></td>
+						<td class="text14">&nbsp;<span title="emcn">Container</span></td>
 						<td class="text14">&nbsp;<span title="emdkm">Dok.nr</span></td>
 						<td class="text14">&nbsp;<span title="emdkmt">Dok.type</span></td>
 						<td class="text14">&nbsp;<span title="emst">St.</span></td>
 						<td class="text14">&nbsp;<span title="emst2">St.2</span></td>
 						<td class="text14">&nbsp;<span title="emst3">St.3</span></td>
-						<td class="text14">&nbsp;<span title="emst3">Reg.dato</span></td>
-						<td class="text14">&nbsp;<span title="emst3">Send.dato</span></td>
-						<td class="text14">&nbsp;<span >&nbsp;&nbsp;</span></td>
-						<td class="text14">&nbsp;<span title="emc1ty">Cont.1 size</span></td>
-						<td class="text14">&nbsp;<span title="emc1ps">Cont.1 pack.</span></td>
-						<td class="text14">&nbsp;<span title="emc1ss">Cont.1 supp.type</span></td>
-						<td class="text14">&nbsp;<span title="emc1id">Cont.1 id</span></td>
-						
-						<td class="text14">&nbsp;<span title="emc1ty">Cont.2 size</span></td>
-						<td class="text14">&nbsp;<span title="emc1ps">Cont.2 pack.</span></td>
-						<td class="text14">&nbsp;<span title="emc1ss">Cont.2 supp.type</span></td>
-						<td class="text14">&nbsp;<span title="emc1id">Cont.2 id</span></td>
-						
+						<td class="text14">&nbsp;<span title="emdtr">Reg.dato</span></td>
+						<td class="text14">&nbsp;<span title="emdtin">Send.dato</span></td>
+												
 					</tr>
 					<tr>	
 						<td class="text14">
-							<input readonly type="text" class="inputTextMediumBlue" name="emavd" id="emavd" size="5" maxlength="4" value="${model.record.emavd}">									
+							<input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="emavd" id="emavd" size="5" maxlength="4" value="${model.record.emavd}">									
 						</td>
 						<td class="text14">
-							<input readonly type="text" class="inputTextMediumBlue" name="empro" id="empro" size="10" maxlength="8" value="${model.record.empro}">									
+							<input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="empro" id="empro" size="10" maxlength="8" value="${model.record.empro}">									
 						</td>
 						<td class="text14">
-							<input readonly type="text" class="inputTextMediumBlue" name="emvkb" id="emvkb" size="10" maxlength="9" value="${model.record.emvkb}">									
+							<input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="emvkb" id="emvkb" size="10" maxlength="9" value="${model.record.emvkb}">									
 						</td>
 						<td class="text14">
-							<input readonly type="text" class="inputTextMediumBlue" name="emcn" id="emcn" size="2" maxlength="1" value="${model.record.emcn}">									
+							<input  type="text" class="inputTextMediumBlue" name="emcn" id="emcn" size="2" maxlength="1" value="${model.record.emcn}">									
 						</td>
 						<td class="text14">
-							<input readonly type="text" class="inputTextMediumBlue" name="emdkm" id="emdkm" size="25" maxlength="50" value="${model.record.emdkm}">		
+							<input  type="text" class="inputTextMediumBlue" name="emdkm" id="emdkm" size="25" maxlength="50" value="${model.record.emdkm}">		
 						</td>
 						<td class="text14">
-							<input readonly type="text" class="inputTextMediumBlue" name="emdkmt" id="emdkmt" size="5" maxlength="4" value="${model.record.emdkmt}">		
+							<input  type="text" class="inputTextMediumBlue" name="emdkmt" id="emdkmt" size="5" maxlength="4" value="${model.record.emdkmt}">		
 						</td>
 						<td class="text14">
-							<input readonly type="text" class="inputTextMediumBlue" name="emst" id="emst" size="2" maxlength="1" value="${model.record.emst}">		
+							<input  type="text" class="inputTextMediumBlue" name="emst" id="emst" size="2" maxlength="1" value="${model.record.emst}">		
 						</td>
 						<td class="text14">
-							<input readonly type="text" class="inputTextMediumBlue" name="emst2" id="emst2" size="2" maxlength="1" value="${model.record.emst2}">		
+							<input  type="text" class="inputTextMediumBlue" name="emst2" id="emst2" size="2" maxlength="1" value="${model.record.emst2}">		
 						</td>
 						<td class="text14">
-							<input readonly type="text" class="inputTextMediumBlue" name="emst3" id="emst3" size="2" maxlength="1" value="${model.record.emst3}">		
+							<input  type="text" class="inputTextMediumBlue" name="emst3" id="emst3" size="2" maxlength="1" value="${model.record.emst3}">		
 						</td>
 						<td class="text14">
-							<input readonly type="text" class="inputTextMediumBlue" name="emdtr" id="emdtr" size="10" maxlength="8" value="${model.record.emdtr}">		
+							<input readonly type="text" class="inputTextReadOnly" name="emdtr" id="emdtr" size="10" maxlength="8" value="${model.record.emdtr}">		
 						</td>
 						<td class="text14">
-							<input readonly type="text" class="inputTextMediumBlue" name="emdtin" id="emdtin" size="10" maxlength="8" value="${model.record.emdtin}">		
-						</td>
-						
-						<td class="text14">&nbsp;&nbsp;</td>
-						
-						<td class="text14">
-							<input readonly type="text" class="inputTextMediumBlue" name="emc1ty" id="emc1ty" size="3" maxlength="2" value="${model.record.emc1ty}">		
-						</td>
-						<td class="text14">
-							<input readonly type="text" class="inputTextMediumBlue" name="emc1ps" id="emc1ps" size="2" maxlength="1" value="${model.record.emc1ps}">		
-						</td>
-						<td class="text14">
-							<input readonly type="text" class="inputTextMediumBlue" name="emc1ss" id="emc1ss" size="2" maxlength="1" value="${model.record.emc1ss}">		
-						</td>
-						<td class="text14">
-							<input readonly type="text" class="inputTextMediumBlue" name="emc1id" id="emc1id" size="18" maxlength="17" value="${model.record.emc1id}">		
-						</td>
-						
-						<td class="text14">
-							<input readonly type="text" class="inputTextMediumBlue" name="emc2ty" id="emc2ty" size="3" maxlength="2" value="${model.record.emc2ty}">		
-						</td>
-						<td class="text14">
-							<input readonly type="text" class="inputTextMediumBlue" name="emc2ps" id="emc2ps" size="2" maxlength="1" value="${model.record.emc2ps}">		
-						</td>
-						<td class="text14">
-							<input readonly type="text" class="inputTextMediumBlue" name="emc2ss" id="emc2ss" size="2" maxlength="1" value="${model.record.emc2ss}">		
-						</td>
-						<td class="text14">
-							<input readonly type="text" class="inputTextMediumBlue" name="emc2id" id="emc2id" size="18" maxlength="17" value="${model.record.emc2id}">		
+							<input readonly type="text" class="inputTextReadOnly" name="emdtin" id="emdtin" size="10" maxlength="8" value="${model.record.emdtin}">		
 						</td>
 					</tr>
 					<tr height="2"><td>&nbsp;</td></tr>
 					<tr>
-						<td colspan="3" class="text14">&nbsp;<span title="emsdlt">Lastested</span></td>
+						<td colspan="2" class="text14">&nbsp;<span title="emsdlt">Lastested</span></td>
 						<td class="text14">&nbsp;<span title="emlkl">Land</span></td>
-						<td colspan="2" class="text14">&nbsp;<span title="emsdut">Lossested</span></td>
+						<td class="text14">&nbsp;<span title="emsdl">UN/LOCODE</span></td>
+						<td class="text14">&nbsp;<span title="emsdut">Lossested</span></td>
 						<td class="text14">&nbsp;<span title="emlku">Land</span></td>
+						<td colspan="2" class="text14">&nbsp;<span title="emsdu">UN/LOCODE</span></td>
 					</tr>
 					<tr>	
-						<td colspan="3" class="text14">
-							<input readonly type="text" class="inputTextMediumBlue" name="emsdlt" id="emsdlt" size="25" maxlength="30" value="${model.record.emsdlt}">								
+						<td colspan="2" class="text14">
+							<input  type="text" class="inputTextMediumBlue" name="emsdlt" id="emsdlt" size="25" maxlength="30" value="${model.record.emsdlt}">								
 						</td>
 						<td class="text14">
-							<input readonly type="text" class="inputTextMediumBlue" name="emlkl" id="emlkl" size="4" maxlength="2" value="${model.record.emlkl}">												
+							<input  type="text" class="inputTextMediumBlue" name="emlkl" id="emlkl" size="4" maxlength="2" value="${model.record.emlkl}">												
+						</td>
+						<td class="text14">
+							<input  type="text" class="inputTextMediumBlue" name="emsdl" id="emsdl" size="7" maxlength="5" value="${model.record.emsdl}">								
+						</td>
+						<td class="text14">
+							<input  type="text" class="inputTextMediumBlue" name="emsdut" id="emsdut" size="25" maxlength="30" value="${model.record.emsdut}">											
+						</td>
+						<td class="text14">
+							<input  type="text" class="inputTextMediumBlue" name="emlku" id="emlku" size="4" maxlength="2" value="${model.record.emlku}">												
 						</td>
 						<td colspan="2" class="text14">
-							<input readonly type="text" class="inputTextMediumBlue" name="emsdut" id="emsdut" size="25" maxlength="30" value="${model.record.emsdut}">											
+							<input  type="text" class="inputTextMediumBlue" name="emsdu" id="emsdu" size="7" maxlength="5" value="${model.record.emsdu}">											
 						</td>
-						<td class="text14">
-							<input readonly type="text" class="inputTextMediumBlue" name="emlku" id="emlku" size="4" maxlength="2" value="${model.record.emlku}">												
+					</tr>
+					<tr height="2"><td>&nbsp;</td></tr>
+					<tr>
+						<td colspan="15" class="text14" valign="top">
+						<table style="width:80%" align="left" border="0" cellspacing="1" cellpadding="1">
+							<tr>
+								<td colspan="4" class="text14"><b>&nbsp;Container.1</b></td>
+								<td colspan="4" class="text14"><b>&nbsp;Container.2</b></td>
+								<td colspan="4" class="text14"><b>&nbsp;Container.3</b></td>
+							</tr>
+							<tr>
+								<td class="text14">&nbsp;<span title="emc1ty">Size</span></td>
+								<td class="text14">&nbsp;<span title="emc1ps">Pack.</span></td>
+								<td class="text14">&nbsp;<span title="emc1ss">Supp.type</span></td>
+								<td class="text14">&nbsp;<span title="emc1id">Id</span></td>
+								
+								<td class="text14">&nbsp;<span title="emc2ty">Size</span></td>
+								<td class="text14">&nbsp;<span title="emc2ps">Pack.</span></td>
+								<td class="text14">&nbsp;<span title="emc2ss">Supp.type</span></td>
+								<td class="text14">&nbsp;<span title="emc2id">Id</span></td>	
+								
+								<td class="text14">&nbsp;<span title="emc3ty">Size</span></td>
+								<td class="text14">&nbsp;<span title="emc3ps">Pack.</span></td>
+								<td class="text14">&nbsp;<span title="emc3ss">Supp.type</span></td>
+								<td class="text14">&nbsp;<span title="emc3id">Id</span></td>	
+							</tr>
+							<tr>
+								<td class="text14">
+									<input  type="text" class="inputTextMediumBlue" name="emc1ty" id="emc1ty" size="3" maxlength="2" value="${model.record.emc1ty}">		
+								</td>
+								<td class="text14">
+									<input  type="text" class="inputTextMediumBlue" name="emc1ps" id="emc1ps" size="2" maxlength="1" value="${model.record.emc1ps}">		
+								</td>
+								<td class="text14">
+									<input  type="text" class="inputTextMediumBlue" name="emc1ss" id="emc1ss" size="2" maxlength="1" value="${model.record.emc1ss}">		
+								</td>
+								<td class="text14">
+									<input  type="text" class="inputTextMediumBlue" name="emc1id" id="emc1id" size="18" maxlength="17" value="${model.record.emc1id}">		
+								</td>
+								
+								<td class="text14">
+									<input  type="text" class="inputTextMediumBlue" name="emc2ty" id="emc2ty" size="3" maxlength="2" value="${model.record.emc2ty}">		
+								</td>
+								<td class="text14">
+									<input  type="text" class="inputTextMediumBlue" name="emc2ps" id="emc2ps" size="2" maxlength="1" value="${model.record.emc2ps}">		
+								</td>
+								<td class="text14">
+									<input  type="text" class="inputTextMediumBlue" name="emc2ss" id="emc2ss" size="2" maxlength="1" value="${model.record.emc2ss}">		
+								</td>
+								<td class="text14">
+									<input  type="text" class="inputTextMediumBlue" name="emc2id" id="emc2id" size="18" maxlength="17" value="${model.record.emc2id}">		
+								</td>
+								
+								<td class="text14">
+									<input  type="text" class="inputTextMediumBlue" name="emc3ty" id="emc3ty" size="3" maxlength="2" value="${model.record.emc3ty}">		
+								</td>
+								<td class="text14">
+									<input  type="text" class="inputTextMediumBlue" name="emc3ps" id="emc3ps" size="2" maxlength="1" value="${model.record.emc3ps}">		
+								</td>
+								<td class="text14">
+									<input  type="text" class="inputTextMediumBlue" name="emc3ss" id="emc3ss" size="2" maxlength="1" value="${model.record.emc3ss}">		
+								</td>
+								<td class="text14">
+									<input  type="text" class="inputTextMediumBlue" name="emc3id" id="emc3id" size="18" maxlength="17" value="${model.record.emc3id}">		
+								</td>
+							</tr>	
+						</table>
 						</td>
-						
-					</tr>		
+					</tr>
+					
 				</table>
 			</td>
 		</tr>
@@ -320,13 +357,22 @@
 				 				<td>
 				 				<table>
 				 				<tr >
+									<td class="text14">&nbsp;<span title="emkns">Kundnr</span></td>
+									<td class="text14">&nbsp;<span title="emtpps">Typ.person</span></td>
+									
+				 				</tr>
+				 				<tr >
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emkns" id="emkns" size="10" maxlength="8" value="${model.record.emkns}"></td>
+									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="emtpps" id="emtpps" size="2" maxlength="1" value="${model.record.emtpps}"></td>
+				 				</tr>
+				 				<tr >
 									<td class="text14">&nbsp;<span title="emnas">Navn</span></td>
 									<td class="text14">&nbsp;<span title="emrgs">Org.nr /EORI</span></td>
 									
 				 				</tr>
 				 				<tr >
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emnas" id="emnas" size="25" maxlength="30" value="${model.record.emnas}"></td>
-									<td class="text14"><input readonly type="text" class="inputTextReadOnly" name="emrgs" id="emrgs" size="20" maxlength="17" value="${model.record.emnas}"></td>
+									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="emrgs" id="emrgs" size="20" maxlength="17" value="${model.record.emnas}"></td>
 				 				</tr>
 				 				
 				 				<tr >
@@ -346,7 +392,7 @@
 				 				</tr>
 				 				<tr >
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emad1s" id="emad1s" size="25" maxlength="30" value="${model.record.emad1s}"></td>
-									<td class="text14"><input readonly type="text" class="inputTextReadOnly" name="empns" id="empns" size="12" maxlength="9" value="${model.record.empns}"></td>
+									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="empns" id="empns" size="12" maxlength="9" value="${model.record.empns}"></td>
 				 				</tr>
 				 				
 				 				<tr >
@@ -355,14 +401,23 @@
 									
 				 				</tr>
 				 				<tr >
+									
 									<c:choose>
 				 					<c:when test="${model.record.ememst == 'EM'}">
-				 						<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="emems" id="emems" size="35" maxlength="50" value="${model.record.emems}"></td>
-				 						<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="empty" id="empty" size="35" maxlength="50" value=""></td>
+				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_emems_email" id="own_emems_email" size="35" maxlength="50" value="${model.record.emems}"></td>
+				 						<td class="text14"><input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="own_emems_telephone" id="own_emems_telephone" size="35" maxlength="50" value=""></td>
 				 					</c:when>
 				 					<c:otherwise>
-				 						<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="empty" id="empty" size="35" maxlength="50" value=""></td>
-										<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="emems" id="emems" size="35" maxlength="50" value="${model.record.emems}"></td>
+				 						<c:choose>
+						 					<c:when test="${empty model.record.ememst}">
+						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_emems_email" id="own_emems_email" size="35" maxlength="50" value=""></td>
+						 						<td class="text14"><input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="own_emems_telephone" id="own_emems_telephone" size="35" maxlength="50" value=""></td>
+						 					</c:when>
+						 					<c:otherwise>
+						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_emems_email" id="own_emems_email" size="35" maxlength="50" value=""></td>
+												<td class="text14"><input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="own_emems_telephone" id="own_emems_telephone" size="35" maxlength="50" value="${model.record.emems}"></td>
+											</c:otherwise>
+										</c:choose>
 									</c:otherwise>
 									</c:choose>
 				 				</tr>
@@ -395,13 +450,22 @@
 				 				<td>
 				 				<table>
 				 				<tr >
+									<td class="text14">&nbsp;<span title="emknm">Kundnr</span></td>
+									<td class="text14">&nbsp;<span title="emtppm">Typ.person</span></td>
+									
+				 				</tr>
+				 				<tr >
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emknm" id="emknm" size="10" maxlength="8" value="${model.record.emknm}"></td>
+									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="emtppm" id="emtppm" size="2" maxlength="1" value="${model.record.emtppm}"></td>
+				 				</tr>
+				 				<tr >
 									<td class="text14">&nbsp;<span title="emnam">Navn</span></td>
 									<td class="text14">&nbsp;<span title="emrgm">Org.nr /EORI</span></td>
 									
 				 				</tr>
 				 				<tr >
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emnam" id="emnam" size="25" maxlength="30" value="${model.record.emnam}"></td>
-									<td class="text14"><input readonly type="text" class="inputTextReadOnly" name="emrgm" id="emrgm" size="20" maxlength="17" value="${model.record.emnam}"></td>
+									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="emrgm" id="emrgm" size="20" maxlength="17" value="${model.record.emnam}"></td>
 				 				</tr>
 				 				
 				 				<tr >
@@ -422,7 +486,7 @@
 				 				</tr>
 				 				<tr >
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emad1m" id="emad1m" size="25" maxlength="30" value="${model.record.emad1m}"></td>
-									<td class="text14"><input readonly type="text" class="inputTextReadOnly" name="empnm" id="empnm" size="12" maxlength="9" value="${model.record.empnm}"></td>
+									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="empnm" id="empnm" size="12" maxlength="9" value="${model.record.empnm}"></td>
 				 				</tr>
 				 				
 				 				<tr >
@@ -431,14 +495,23 @@
 									
 				 				</tr>
 				 				<tr >
+									
 									<c:choose>
 				 					<c:when test="${model.record.ememmt == 'EM'}">
-				 						<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="ememm" id="ememm" size="35" maxlength="50" value="${model.record.ememm}"></td>
-				 						<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="empty" id="empty" size="35" maxlength="50" value=""></td>
+				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_ememm_email" id="own_ememm_email" size="35" maxlength="50" value="${model.record.ememm}"></td>
+				 						<td class="text14"><input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="own_ememm_telephone" id="own_ememm_telephone" size="35" maxlength="50" value=""></td>
 				 					</c:when>
 				 					<c:otherwise>
-				 						<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="empty" id="empty" size="35" maxlength="50" value=""></td>
-										<td class="text14"><input readonly type="text" class="inputTextMediumBlue" name="ememm" id="ememm" size="35" maxlength="50" value="${model.record.ememm}"></td>
+				 						<c:choose>
+						 					<c:when test="${empty model.record.ememmt}">
+						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_ememm_email" id="own_ememm_email" size="35" maxlength="50" value=""></td>
+						 						<td class="text14"><input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="own_ememms_telephone" id="own_ememm_telephone" size="35" maxlength="50" value=""></td>
+						 					</c:when>
+						 					<c:otherwise>
+						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_ememm_email" id="own_ememm_email" size="35" maxlength="50" value=""></td>
+												<td class="text14"><input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="own_ememm_telephone" id="own_ememm_telephone" size="35" maxlength="50" value="${model.record.ememm}"></td>
+											</c:otherwise>
+										</c:choose>
 									</c:otherwise>
 									</c:choose>
 				 				</tr>
@@ -457,6 +530,11 @@
             
 		</tr>
 		<tr height="10"><td></td></tr>
+		<tr>
+			<td align="left" >
+			&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
+			</td>
+		</tr> 
 		
 	</table>
 	</td>

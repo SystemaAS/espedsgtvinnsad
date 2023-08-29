@@ -291,8 +291,8 @@ public class TvinnSadDigitollv2TransportController {
 					}
 					StringBuffer errMsg = new StringBuffer();
 					int dmlRetval = 0;
-					dmlRetval = this.updateTransportRecord(appUser.getUser(), recordToValidate, mode, errMsg);
-					//this step is required for the FETCH-step since we want to get the newly created record for upcomming updates...
+					dmlRetval = this.updateRecord(appUser.getUser(), recordToValidate, mode, errMsg);
+					//this step is required for the FETCH-step since we want to get the newly created record for upcoming updates...
 					if(mode.equals(this.MODE_INSERT)) {
 						etlnrt = String.valueOf(recordToValidate.getEtlnrt());
 					}
@@ -356,7 +356,7 @@ public class TvinnSadDigitollv2TransportController {
 	 * @param recordToValidate
 	 * @return
 	 */
-	private int updateTransportRecord(String applicationUser, SadmotfRecord recordToValidate, String mode, StringBuffer errMsg) {
+	private int updateRecord(String applicationUser, SadmotfRecord recordToValidate, String mode, StringBuffer errMsg) {
 		int retval = -1;
 		
 		
@@ -611,9 +611,9 @@ public class TvinnSadDigitollv2TransportController {
 	private void adjustFieldsForFetch(SadmotfRecord recordToValidate){
 		//Register date
 		if(recordToValidate.getEtdtr() > 0) {
-			String tmpEtdr = String.valueOf(recordToValidate.getEtdtr());
-			if (org.apache.commons.lang3.StringUtils.isNotEmpty(tmpEtdr) && tmpEtdr.length()==8) {
-				int isoEtdtr = Integer.parseInt(this.dateMgr.getDateFormatted_NO(tmpEtdr, DateTimeManager.ISO_FORMAT));
+			String tmpEtdtr = String.valueOf(recordToValidate.getEtdtr());
+			if (org.apache.commons.lang3.StringUtils.isNotEmpty(tmpEtdtr) && tmpEtdtr.length()==8) {
+				int isoEtdtr = Integer.parseInt(this.dateMgr.getDateFormatted_NO(tmpEtdtr, DateTimeManager.ISO_FORMAT));
 				recordToValidate.setEtdtr(isoEtdtr);
 			}
 		}
