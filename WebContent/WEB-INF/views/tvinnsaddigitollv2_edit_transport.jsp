@@ -33,12 +33,14 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			
-					<td title="${Xmodel.record.efuuid}" width="15%" valign="bottom" class="tab" align="center" nowrap>
+					<td width="15%" valign="bottom" class="tab" align="center" nowrap>
 						<font class="tabLink">
 							&nbsp;Transport
 						</font>
-						<font class="text14MediumBlue">[${model.record.etlnrt}]</font>
 						<img src="resources/images/update.gif" border="0" alt="edit">
+						<c:if test="${model.record.etlnrt > 0}">
+							<font class="text14MediumBlue">&nbsp;${model.record.etlnrt}</font>
+						</c:if>
 						
 					</td>
 					
@@ -167,7 +169,7 @@
 						<table class="formFrameHeader" style="width:100%;"  border="0" cellspacing="1" cellpadding="0">
 					 		<tr height="15">
 					 			<c:choose>
-						 			<c:when test="${not empty model.record.etuuid}">
+						 			<c:when test="${model.record.etlnrt > 0}">
 						 				<td class="text14White">
 						 						&nbsp;&nbsp;Løp.nr.&nbsp;${model.record.etlnrt}
 						 						&nbsp;&nbsp;Turnr&nbsp;${model.record.etpro}

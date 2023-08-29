@@ -36,7 +36,10 @@
 					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a tabindex=-1 id="alinkTransport" style="display:block;" href="tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=${model.record.emlnrt}">													
 							<font class="tabDisabledLink">
-								&nbsp;Transport&nbsp;[${model.record.emlnrt}]
+								&nbsp;Transport&nbsp;
+								<c:if test="${model.record.emlnrt > 0}">
+									<font class="text14MediumBlue">&nbsp;${model.record.emlnrt}</font>
+								</c:if>
 							</font>
 						</a>
 					</td>
@@ -45,8 +48,10 @@
 						<font class="tabLink">
 							&nbsp;Master
 						</font>
-						<font class="text14MediumBlue">[${model.record.emlnrm}]</font>
 						<img src="resources/images/update.gif" border="0" alt="edit">
+						<c:if test="${model.record.emlnrm > 0}">
+							<font class="text14MediumBlue">&nbsp;${model.record.emlnrm}</font>
+						</c:if>
 						
 					</td>
 					
