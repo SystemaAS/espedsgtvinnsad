@@ -552,12 +552,12 @@
 	<%-- list component --%>
 	<tr>
 		<td>		
-		<table style="width:90%;" border="0" >
+		<table style="width:100%;" border="0" >
 	    	<%-- separator --%>
 	        <tr height="2"><td>&nbsp;</td></tr> 
 			<tr>
 				<td>
-				<table style="width:90%;" id="containerdatatableTable" cellspacing="2" align="left" >
+				<table style="width:100%;" id="containerdatatableTable" cellspacing="2" align="left" >
 				<tr>
 				<td class="text11">
 							
@@ -587,17 +587,16 @@
                 	<tbody> 
                 	<c:forEach items="${model.record.listMasters}" var="masterConsignmentRecord" varStatus="counter">    
 		              <c:choose> 
-		              	  <%-- if the manifest is correct with all cargo lines OR the manifest has been SUBMITTED(S) or DELETED(D) don´t show it as a warning-line --%>	   
-			              <c:when test="${XmasterConsignmentRecord.own_valid > 0 || XmasterConsignmentRecord.efst2 == 'S' || XmasterConsignmentRecord.efst2 == 'D' }">
-			              	<tr class="tableRow" height="20" >
+		              	  <%-- if the manifest is DELETED from tollv. show it as red --%>	   
+			              <c:when test="${masterConsignmentRecord.emst2 == 'D'}">
+			              	<tr class="tableRow" style="background-color: #FEEFB3;color:#9F6000;" height="20" >
 			          	  </c:when>
 			          	  <c:otherwise>
-			          	  	<%-- <tr class="tableRow" style="background-color: #FEEFB3;color:#9F6000;" height="20" >  --%>
 			          	  	<tr class="tableRow" height="20" >
 			          	  </c:otherwise>
 		          	  </c:choose>	
 		          
-		          	   <td  width="2%" class="tableCellFirst" align="center">
+		          	   <td  width="2%" class="tableCellFirst" <c:if test="${masterConsignmentRecord.emst2 == 'D'}">style="background-color: #FEEFB3;color: #9F6000;" </c:if> align="center">
 		          	   		<a tabindex=-1 style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=${masterConsignmentRecord.emlnrt}&emlnrm=${masterConsignmentRecord.emlnrm}" onClick="setBlockUI();">
                					<c:choose>
 		               				<c:when test="${XmasterConsignmentRecord.own_editable > 0}">
@@ -610,9 +609,9 @@
                				</a>
                				
 	               	   </td>
-	               	   <td width="2%" align="center" class="tableCell" >${masterConsignmentRecord.emlnrm}</td>
-		               <td width="2%" align="center" class="tableCell" >${masterConsignmentRecord.emavd}</td>
-		               <td width="2%" align="center" class="tableCell" ><c:if test="${masterConsignmentRecord.empro > 0}">${masterConsignmentRecord.empro}</c:if></td>
+	               	   <td width="2%" align="center" class="tableCell" <c:if test="${masterConsignmentRecord.emst2 == 'D'}">style="color: #9F6000;" </c:if> >${masterConsignmentRecord.emlnrm}</td>
+		               <td width="2%" align="center" class="tableCell" <c:if test="${masterConsignmentRecord.emst2 == 'D'}">style="color: #9F6000;" </c:if> >${masterConsignmentRecord.emavd}</td>
+		               <td width="2%" align="center" class="tableCell" <c:if test="${masterConsignmentRecord.emst2 == 'D'}">style="color: #9F6000;" </c:if> ><c:if test="${masterConsignmentRecord.empro > 0}">${masterConsignmentRecord.empro}</c:if></td>
 		               <td width="2%" align="center" class="tableCell" >${masterConsignmentRecord.emsg}</td>
 		               <td width="2%" align="center" class="tableCell" >
 		               	  <c:choose>
@@ -625,8 +624,8 @@
 		               	   </c:choose>
 		              	</td>
 		               <td width="2%" align="right" class="tableCell" >${masterConsignmentRecord.emvkb}</td>
-		               <td width="2%" align="right" class="tableCell" >${masterConsignmentRecord.emdkm}</td>
-		               <td width="2%" align="right" class="tableCell" >${masterConsignmentRecord.emdkmt}</td>
+		               <td width="2%" align="right" class="tableCell" <c:if test="${masterConsignmentRecord.emst2 == 'D'}">style="color: #9F6000;" </c:if> >${masterConsignmentRecord.emdkm}</td>
+		               <td width="2%" align="right" class="tableCell" <c:if test="${masterConsignmentRecord.emst2 == 'D'}">style="color: #9F6000;" </c:if> >${masterConsignmentRecord.emdkmt}</td>
 		               
 		               <td width="2%" align="center" class="tableCell" >${masterConsignmentRecord.emnam}&nbsp;-&nbsp;${masterConsignmentRecord.empsm}&nbsp;${masterConsignmentRecord.emlkm}</td>
 		               <td width="2%" align="center" class="tableCell" >${masterConsignmentRecord.emnas}&nbsp;-&nbsp;${masterConsignmentRecord.empss}&nbsp;${masterConsignmentRecord.emlks}</td>
@@ -674,37 +673,60 @@
 		               </td>
 
 		               <td width="2%" class="tableCell" align="center"> 
-		               		  		
-				   				<c:if test="${XmasterConsignmentRecord.own_editable > 0}">
-		              				<a tabindex=-1 style="display: block; width: 100%; height: 100%;" class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
-										<img src="resources/images/delete.gif" border="0" alt="remove">
-									</a>
-									<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
-										<form action="tvinnsadmanifest_edit_delete.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
-										 	<input type="hidden" name="currentUuid${counter.count}" id="currentUuid${counter.count}" value="${XmasterConsignmentRecord.efuuid}">
-										 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="D">
-										 	<input type="hidden" name="selectedPro${counter.count}" id="selectedPro${counter.count}" value="${XmasterConsignmentRecord.efpro}">
-											<p class="text14" >Er du sikker på at du vil slette Turnr. <b>${Xrecord.efpro}</b> fra <b>Tollvesenet</b> ?</p>
-											
-										</form>
-									</div>
-	              				</c:if>
+		               		  	
+					   				<c:if test="${not empty masterConsignmentRecord.emuuid  && not empty masterConsignmentRecord.emmid}">
+					   					<c:if test="${not empty masterConsignmentRecord.emst2 && (masterConsignmentRecord.emst2 == 'S' || masterConsignmentRecord.emst2 == 'M') }">
+				              				<a tabindex=-1 class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
+												<img src="resources/images/delete.gif" border="0" alt="remove">
+											</a>
+											<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
+												<form action="tvinnsaddigitollv2_api_delete_master.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
+													<input type="hidden" name="current_id1${counter.count}" id="current_id1${counter.count}" value="${masterConsignmentRecord.emlnrt}">
+													<input type="hidden" name="current_id2${counter.count}" id="current_id2${counter.count}" value="${masterConsignmentRecord.emlnrm}">
+													<input type="hidden" name="current_mrn${counter.count}" id="current_mrn${counter.count}" value="${masterConsignmentRecord.emmid}">
+													<input type="hidden" name="action${counter.count}" id="action${counter.count}" value="doDelete">
+												 	<p class="text14" >Er du sikker på at du vil slette denne&nbsp;MRN&nbsp;<b>${masterConsignmentRecord.emmid}</b> fra <b>Tollvesenet</b> ?</p>
+													
+												</form>
+											</div>
+										</c:if>
+		              				</c:if>
+		              				<%--
+		              				<c:otherwise>
+		              					<a tabindex=-1 class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
+											<img src="resources/images/delete.gif" border="0" alt="remove">
+										</a>
+										<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
+											<form action="tvinnsaddigitollv2_delete_master.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
+												<input type="hidden" name="current_id1${counter.count}" id="current_id1${counter.count}" value="${masterConsignmentRecord.emlnrt}">
+											 	<input type="hidden" name="current_id2${counter.count}" id="current_id2${counter.count}" value="${masterConsignmentRecord.emlnrm}">
+											 	<input type="hidden" name="action${counter.count}" id="action${counter.count}" value="doDelete">
+											 	<p class="text14" >Er du sikker på at du vil slette denne&nbsp;Turnr/Lnr&nbsp;<b>${masterConsignmentRecord.empro}/${masterConsignmentRecord.emlnrm}</b> fra <b>SYSPED</b> ?</p>
+												
+											</form>
+										</div>
+		              				</c:otherwise>
+		              				 --%>
+	              				
               				
 	               	   </td>
 	               	   <td width="2%" class="tableCell" align="center">
-	               	   		<c:if test="${XmasterConsignmentRecord.efst == 'M' || empty XmasterConsignmentRecord.efst}">   		
-				   				<a tabindex=-1 style="display: block; width: 100%; height: 100%;" class="cancelLink" id="cancelLink${counter.count}" runat="server" href="#">
-									<img src="resources/images/remove.png" width="16" height="16" border="0" alt="remove">
-								</a> 
-								<div id="dialogUpdateInternalStatus${counter.count}" class="clazz_dialog" title="Dialog">
-									<form action="tvinnsadmanifest_updateInternalStatus.do" name="updateInternalStatusForm${counter.count}" id="updateInternalStatusForm${counter.count}" method="post">
-									 	<input type="hidden" name="currentUuid${counter.count}" id="currentUuid${counter.count}" value="${XmasterConsignmentRecord.efuuid}">
-									 	<input type="hidden" name="currentSign${counter.count}" id="currentSign${counter.count}" value="${XmasterConsignmentRecord.efsg}">
-									 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="S">
-									 	<p class="text14" >Er du sikker på at du vil kansellere Turnr. <b>${XmasterConsignmentRecord.efpro}</b> fra <b>SYSPED</b> ?</p>
-											
-									</form>
-								</div>
+	               	   		<c:if test="${masterConsignmentRecord.emst == 'M' || empty masterConsignmentRecord.emst}">
+	               	   			<%-- We can only CANCEL (S) internally if the emmid and emuuid are gone since we DELETED first from Tollv.(if we even got that far at some point...) --%>
+	               	   			<c:if test="${empty masterConsignmentRecord.emmid && empty masterConsignmentRecord.emuuid}">
+					   				<a tabindex=-1 style="display: block; width: 100%; height: 100%;" class="cancelLink" id="cancelLink${counter.count}" runat="server" href="#">
+										<img src="resources/images/remove.png" width="16" height="16" border="0" alt="remove">
+									</a> 
+									<div id="dialogUpdateInternalStatus${counter.count}" class="clazz_dialog" title="Dialog">
+										<form action="tvinnsaddigitollv2_updateInternalStatus_master.do" name="updateInternalStatusForm${counter.count}" id="updateInternalStatusForm${counter.count}" method="post">
+										 	<input type="hidden" name="current_id1${counter.count}" id="current_id1${counter.count}" value="${masterConsignmentRecord.emlnrt}">
+											<input type="hidden" name="current_id2${counter.count}" id="current_id2${counter.count}" value="${masterConsignmentRecord.emlnrm}">
+										 	<input type="hidden" name="current_status${counter.count}" id="current_status${counter.count}" value="S">
+										 	<p class="text14" >Er du sikker på at du vil kansellere Transport/Master <b>${masterConsignmentRecord.emlnrt}/${masterConsignmentRecord.emlnrm}</b> fra <b>SYSPED</b> ?</p>
+												
+										</form>
+									</div>
+								</c:if>
 							</c:if>
 						</td>	
 		            </tr> 

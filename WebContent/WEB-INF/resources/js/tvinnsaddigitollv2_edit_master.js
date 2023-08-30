@@ -35,10 +35,8 @@
     });
     
     jq('#sendButton').click(function() { 
-    	var status = "S";
-    	
     	setBlockUI();
-		window.location = 'tvinnsadmanifest_send.do?efuuid=' + jq('#efuuid').val() + '&efpro=' + jq('#efpro').val() + '&efst2=' + status;
+		window.location = 'tvinnsaddigitollv2_api_send_master.do?emlnrt=' + jq('#emlnrt').val() + '&emlnrm=' + jq('#emlnrm').val()+ '&emmid=' + jq('#emmid').val();
     });
     
     jq('#imgManifestIdInfo').click(function() { 
@@ -59,7 +57,17 @@
   
   jq(function() {
 	  //custom validity
-	    jq('#emvkb').focus(function() {
+	    jq('#emavd').focus(function() {
+	    	if(jq('#emavd').val()!=''){
+	    		refreshCustomValidity(jq('#emavd')[0]);
+	  		}
+	  	});
+	    jq('#empro').focus(function() {
+	    	if(jq('#empro').val()!=''){
+	    		refreshCustomValidity(jq('#empro')[0]);
+	  		}
+	  	});
+		jq('#emvkb').focus(function() {
 	    	if(jq('#emvkb').val()!=''){
 	    		refreshCustomValidity(jq('#emvkb')[0]);
 	  		}

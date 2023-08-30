@@ -253,7 +253,7 @@ public class TvinnSadDigitollv2TransportController {
 		
 		String action = request.getParameter("action");
 		String etlnrt = request.getParameter("etlnrt");
-		boolean isValid = true;
+		boolean isValidForFetch = true;
 		
 		//check user (should be in session already)
 		if(appUser==null){
@@ -271,12 +271,10 @@ public class TvinnSadDigitollv2TransportController {
 			    //check for ERRORS
 				if(bindingResult.hasErrors()){
 		    		logger.error("[ERROR Validation] record does not validate)");
-		    		this.adjustFieldsForFetch(recordToValidate);
-					//get all masters
-					this.getMasters(appUser, recordToValidate);
-					//now we have all master consignments in this transport
+		    		this.setRecordAspects(appUser, recordToValidate);
+					//now we have all aspects in this transport
 					model.put("record", recordToValidate);
-					isValid = false;
+					isValidForFetch = false;
 		    		
 			    }else{
 			    	//adjust fields
@@ -292,15 +290,26 @@ public class TvinnSadDigitollv2TransportController {
 					StringBuffer errMsg = new StringBuffer();
 					int dmlRetval = 0;
 					dmlRetval = this.updateRecord(appUser.getUser(), recordToValidate, mode, errMsg);
-					//this step is required for the FETCH-step since we want to get the newly created record for upcoming updates...
-					if(mode.equals(this.MODE_INSERT)) {
-						etlnrt = String.valueOf(recordToValidate.getEtlnrt());
+					if(dmlRetval < 0) {
+						//error on update
+						model.put("errorMessage", errMsg.toString());
+						//put all aspects (sub-lists) only with update (not insert) error
+						if(this.MODE_UPDATE.equals(mode)){
+							this.setRecordAspects(appUser, recordToValidate);
+						}
+						model.put("record", recordToValidate);
+						isValidForFetch = false;
+					}else {
+						//this step is required for the FETCH-step since we want to get the newly created record for upcoming updates...
+						if(mode.equals(this.MODE_INSERT)) {
+							etlnrt = String.valueOf(recordToValidate.getEtlnrt());
+						}
 					}
 			    }
 			}
 			
 			//FETCH when applicable
-			if(StringUtils.isNotEmpty(etlnrt) && isValid ){
+			if(StringUtils.isNotEmpty(etlnrt) && isValidForFetch ){
 				//FETCH record
 	            //get BASE URL
 	    		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TRANSPORT_URL;
@@ -313,7 +322,7 @@ public class TvinnSadDigitollv2TransportController {
 		    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
 	
 		    	//Debug --> 
-		    	logger.debug(jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+		    	logger.debug(jsonPayload);
 		    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 		    	if(jsonPayload!=null){
 		    		
@@ -324,10 +333,8 @@ public class TvinnSadDigitollv2TransportController {
 		    		outputList = jsonContainer.getList();
 					if(outputList!=null){
 						for(SadmotfRecord record: outputList){
-							this.adjustFieldsForFetch(record);
-							//get all masters
-							this.getMasters(appUser, record);
-							//now we have all master consignments in this transport
+							this.setRecordAspects(appUser, record);
+							//now we have all aspects in this record
 							model.put("record", record);
 							logger.info(record.toString());
 						}
@@ -352,12 +359,22 @@ public class TvinnSadDigitollv2TransportController {
 	}
 	/**
 	 * 
+	 * @param appUser
+	 * @param recordToValidate
+	 */
+	private void setRecordAspects(SystemaWebUser appUser, SadmotfRecord record) {
+		this.adjustFieldsForFetch(record);
+		//get all masters
+		this.getMasters(appUser, record);
+	}
+	/**
+	 * 
 	 * @param applicationUser
 	 * @param recordToValidate
 	 * @return
 	 */
 	private int updateRecord(String applicationUser, SadmotfRecord recordToValidate, String mode, StringBuffer errMsg) {
-		int retval = -1;
+		int retval = 0;
 		
 		
 		//get BASE URL
@@ -367,7 +384,7 @@ public class TvinnSadDigitollv2TransportController {
 		urlRequestParams.append("user=" + applicationUser + "&mode=" + mode);
 		urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate)));
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-    	logger.warn("URL: " + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+    	logger.warn("URL: " + BASE_URL);
     	logger.warn("URL PARAMS: " + urlRequestParams);
     	
     	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
@@ -384,10 +401,16 @@ public class TvinnSadDigitollv2TransportController {
     		Collection<GeneralUpdateRecord> outputList = container.getList();	
 			if(outputList!=null && outputList.size()>0){
 				for(GeneralUpdateRecord record : outputList ){
-					retval = 0;
 					logger.warn(record.toString());
-					if(mode.equals(this.MODE_INSERT)) {
-						recordToValidate.setEtlnrt(record.getId());
+					if(StringUtils.isNotEmpty(container.getErrMsg())){
+						errMsg.append(record.getStatus());
+						errMsg.append(" -->detail:" + container.getErrMsg());
+						retval = -1;
+						break;
+					}else {
+						if(mode.equals(this.MODE_INSERT)) {
+							recordToValidate.setEtlnrt(record.getId());
+						}
 					}
 				}
 			}
@@ -671,7 +694,11 @@ public class TvinnSadDigitollv2TransportController {
 		if(recordToValidate.getEtdtr() > 0) {
 			int regDate = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(String.valueOf(recordToValidate.getEtdtr()), DateTimeManager.NO_FORMAT));
 			recordToValidate.setEtdtr(regDate);
+		}else {
+			int regDate = Integer.valueOf(this.dateMgr.getCurrentDate_ISO());
+			recordToValidate.setEtdtr(regDate);
 		}
+		
 		//ETA - date to ISO
 		if(recordToValidate.getEtetad() > 0) {
 			int isoEtetad = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(String.valueOf(recordToValidate.getEtetad()), DateTimeManager.NO_FORMAT));

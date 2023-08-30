@@ -194,8 +194,8 @@
 					</tr>
 					<tr height="1"><td>&nbsp;</td></tr>
 					<tr>
-						<td class="text14">&nbsp;<span title="emavd">Avd</span></td>
-						<td class="text14">&nbsp;<span title="empro">Tur</span></td>
+						<td class="text14">&nbsp;<span title="emavd">Avd</span><font class="text16RedBold" >*</font></td>
+						<td class="text14">&nbsp;<span title="empro">Tur</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emvkb">Bruttovekt</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emcn">Container</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emdkm">Dok.nr</span><font class="text16RedBold" >*</font></td>
@@ -214,18 +214,18 @@
 						<c:choose>
 							<c:when test="${model.record.emlnrm > 0}">
 								<td class="text14">
-									<input  readonly type="text" class="inputTextReadOnly" name="emavd" id="emavd" size="5" maxlength="4" value="${model.record.emavd}">									
+									<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="emavd" id="emavd" size="5" maxlength="4" value="${model.record.emavd}">									
 								</td>
 								<td class="text14">
-									<input  readonly type="text" class="inputTextReadOnly" name="empro" id="empro" size="10" maxlength="8" value="${model.record.empro}">									
+									<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="empro" id="empro" size="10" maxlength="8" value="${model.record.empro}">									
 								</td>		
 							</c:when>
 							<c:otherwise>
 								<td class="text14">
-									<input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="emavd" id="emavd" size="5" maxlength="4" value="${model.record.emavd}">									
+									<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="emavd" id="emavd" size="5" maxlength="4" value="${model.record.emavd}">									
 								</td>
 								<td class="text14">
-									<input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="empro" id="empro" size="10" maxlength="8" value="${model.record.empro}">									
+									<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="empro" id="empro" size="10" maxlength="8" value="${model.record.empro}">									
 								</td>
 							</c:otherwise>
 						</c:choose>	
@@ -575,7 +575,19 @@
 		<tr height="10"><td></td></tr>
 		<tr>
 			<td align="left" >
-			&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
+			<c:if test="${model.record.emst != 'S'}"> <%-- CANCELED(S) --%>
+				&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
+				<c:if test="${model.record.emlnrm > 0}">
+					<c:choose>
+						<c:when test="${model.record.emst2 == 'C' || model.record.emst2 == 'D' }"> <%--COMPLETED(C) DELETED(D) --%>
+							<%-- not possible --%>
+						</c:when>
+						<c:otherwise>
+							&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</c:if>
 			</td>
 		</tr> 
 		
