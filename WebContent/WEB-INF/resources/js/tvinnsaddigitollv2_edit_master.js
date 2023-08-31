@@ -340,7 +340,7 @@ jq(function() {
   	  //"scrollY": "700px",
   	  "scrollCollapse":  true,
 	  "tabIndex": -1,
-	  //"order": [[ 2, "desc" ]], //turnr
+	  "order": [[ 1, "asc" ]], //Lnr
 	  "lengthMenu": [ 25, 50, 100],
 	  "fnDrawCallback": function( oSettings ) {
     	jq('.dataTables_filter input').addClass("inputText12LightYellow");

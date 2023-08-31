@@ -179,11 +179,18 @@
 	   		</tr>
 	  		<tr height="2"><td colspan="10">&nbsp;</td></tr>  
   		</c:if>
+  		<tr>	
+			<td nowrap colspan="10" class="text14 formFrame" >
+	    		MRN-Api:&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.etmid}">${model.record.etmid}</a>&nbsp;&nbsp;&nbsp;
+	    		Id:&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.etuuid}">${model.record.etuuid}</a>
+	   		</td>
+		</tr>
+		<tr height="5"><td></td></tr>
+	           		 
  		<tr>
 			<td class="text14" valign="top">
 				<table style="width:85%" align="left" border="0" cellspacing="1" cellpadding="0">
 					
-	           		 
 				 	<tr >
 					 	<td >
 						<table class="formFrameHeader" style="width:100%;"  border="0" cellspacing="1" cellpadding="0">
@@ -197,26 +204,37 @@
 						 						
 						 				</td>
 						 				<td class="text14White" align="right">
-						 						Stat<a tabindex=-1 id="updateInternalStatusLink" name="updateInternalStatusLink" runat="server" href="#"><font class="text14White">u</font></a>s:&nbsp;${model.record.etst2}
-						 						&nbsp;&nbsp;&nbsp;<b>Manif stat<a tabindex=-1 id="updateManifestStatusLink" name="updateManifestStatusLink" runat="server" href="#"><font class="text14White">u</font></a>s:&nbsp;</b>
-						 						<c:choose>
-						 						<c:when test="${model.record.etst2 == 'S' || model.record.etst2 == 'R' || model.record.etst2 == 'D'}">
-						 							<c:if test="${model.record.etst2 == 'S'}">
-						 								<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
-						 								<font style="color:#FFFFCC;">SUBMITTED</font>
-						 							</c:if>
-						 							<c:if test="${model.record.etst2 == 'D'}">
-						 								<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
-						 								<font style="color:red;">SLETTET</font>
-						 							</c:if>
-						 							<c:if test="${model.record.etst2 == 'R'}">
-						 								<font style="color:#FFFFFF;">REOPENED/DRAFT</font>
-						 							</c:if>
-						 						</c:when>
-						 						<c:otherwise>
-						 							<font style="color:#606060;">${model.record.etst2}</font>
-						 						</c:otherwise>
-						 						</c:choose>
+						 						Stat<a tabindex=-1 id="updateInternalStatusLink" name="updateInternalStatusLink" runat="server" href="#"><font class="text14White">u</font></a>s:&nbsp;${model.record.etst}
+						 						&nbsp;&nbsp;&nbsp;Manif.<a tabindex=-1 id="updateManifestStatusLink" name="updateManifestStatusLink" runat="server" href="#"><font class="text14White">st.</font></a>&nbsp;
+						 						<a cursor:pointer" title="lese logg" tabindex=-1 id="${model.record.etlnrt}" class="logLink" runat="server" href="#">
+						 	
+							 						<c:choose>
+							 						<c:when test="${model.record.etst2 == 'S' || model.record.etst2 == 'R' || model.record.etst2 == 'D'}">
+							 							<c:if test="${model.record.etst2 == 'S'}">
+							 								<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
+							 								<font style="color:#FFFFCC;">SUBMITTED</font>
+							 							</c:if>
+							 							<c:if test="${model.record.etst2 == 'D'}">
+							 								<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
+							 								<font style="color:red;">SLETTET</font>
+							 							</c:if>
+							 							<c:if test="${model.record.etst2 == 'R'}">
+							 								<font style="color:#FFFFFF;">REOPENED/DRAFT</font>
+							 							</c:if>
+							 						</c:when>
+							 						<c:otherwise>
+							 							<c:choose>
+							 							<c:when test="${model.record.etst2 == 'M'}">
+							 								<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
+							 								<font style="color:red">ERROR&nbsp;</font>
+							 							</c:when>
+							 							<c:otherwise>
+							 								<font style="color:#606060;">${model.record.etst2}&nbsp;</font>
+							 							</c:otherwise>
+							 							</c:choose>
+							 						</c:otherwise>
+							 						</c:choose>
+						 						</a>
 						 				</td>
 						 			</c:when>
 						 			<c:otherwise>
@@ -317,15 +335,15 @@
 								</td>
 			 				</tr>
 			 				<tr >
-			 					<td colspan="2" class="text14">&nbsp;<span title="etdkm">Doknr.</span><font class="text16RedBold" >*</font></td>
-			 					<td class="text14">&nbsp;<span title="etdkmt">Doktyp.</span><font class="text16RedBold" >*</font></td>
+			 					<td colspan="2" class="text14">&nbsp;<span title="etdkm-Ref.liste av masters">Doknr.</span></td>
+			 					<td class="text14">&nbsp;<span title="etdkmt-Ref.liste av masters">Doktyp.</span></td>
 			 				</tr>
 			 				<tr >	
 			 					<td colspan="2" class="text14" >
-									<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="etdkm" id="etdkm" size="30" maxlength="50" value="${model.record.etdkm}">
+									<input readonly type="text" class="inputTextReadOnly" style="color:#9F6000;" name="Xetdkm" id="Xetdkm" size="30" maxlength="50" value="Ref.liste">
 								</td>
 								<td class="text14" >
-									<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" type="text" class="inputTextMediumBlueMandatoryField" name="etdkmt" id="etdkmt" size="6" maxlength="4" value="${model.record.etdkmt}">
+									<input readonly type="text" class="inputTextReadOnly" style="color:#9F6000;" name="Xetdkmt" id="Xetdkmt" size="8" maxlength="50" value="Ref.liste">
 								</td>
 			 				</tr>
 				 				
@@ -549,7 +567,15 @@
 		<tr height="10"><td></td></tr>
 		<tr>
 			<td align="left" >
-			&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
+				<c:if test="${model.record.etst != 'S'}"> <%-- CANCELED(S) --%>
+					&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
+					<c:if test="${model.record.etlnrt > 0}">
+						<c:if test="${model.record.own_okToSend}">
+							&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
+						</c:if>
+					</c:if>
+				</c:if>
+					 
 			</td>
 		</tr> 
 	</table>
@@ -641,7 +667,7 @@
 										 	<input type="hidden" name="current_id1${counter.count}" id="current_id1${counter.count}" value="${masterConsignmentRecord.emlnrt}">
 											<input type="hidden" name="current_id2${counter.count}" id="current_id2${counter.count}" value="${masterConsignmentRecord.emlnrm}">
 										 	<input type="hidden" name="current_status${counter.count}" id="current_status${counter.count}" value="">
-										 	<p class="text14" >Er du sikker på at du vil gjøre tilgjengelig igjen Transport/Master <b>${masterConsignmentRecord.emlnrt}/${masterConsignmentRecord.emlnrm}</b> i <b>SYSPED</b> ?</p>
+										 	<p class="text14" >Er du sikker på at du vil gjøre tilgjengelig igjen Lnr <b>${masterConsignmentRecord.emlnrm}</b> i <b>SYSPED</b> ?</p>
 												
 										</form>
 									</div>
@@ -689,6 +715,9 @@
 
 		               			</c:if>
 		               			<c:if test="${masterConsignmentRecord.emst2 == 'D'}">
+									
+		               			</c:if>
+		               			<c:if test="${masterConsignmentRecord.emst2 == 'M'}">
 									<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
 		               			</c:if>
 		               			<c:if test="${masterConsignmentRecord.emst2 == 'C'}">
@@ -697,7 +726,9 @@
 		               			
 		               		</c:when>
 		               		<c:otherwise>
-		               			${masterConsignmentRecord.emst2}
+		               			<c:if test="${masterConsignmentRecord.emst != 'S'}">
+		               				<img src="resources/images/bulletYellow.png" width="10" height="10" border="0" >
+		               			</c:if>
 		               		</c:otherwise>
 		               		</c:choose>
 		               </td>
@@ -712,6 +743,9 @@
 		               			</c:if>
 		               			<c:if test="${masterConsignmentRecord.emst2 == 'D'}">
 		               				<font class="text12" title="D" color="red">SLETTET</font>
+		               			</c:if>
+		               			<c:if test="${masterConsignmentRecord.emst2 == 'M'}">
+		               				<font class="text12" title="M" color="red">ERROR</font>
 		               			</c:if>
 		               			<c:if test="${masterConsignmentRecord.emst2 == 'C'}">
 		               				<font class="text12" title="C" color="green">COMPLETED</font>
@@ -758,7 +792,7 @@
 										 	<input type="hidden" name="current_id1${counter.count}" id="current_id1${counter.count}" value="${masterConsignmentRecord.emlnrt}">
 											<input type="hidden" name="current_id2${counter.count}" id="current_id2${counter.count}" value="${masterConsignmentRecord.emlnrm}">
 										 	<input type="hidden" name="current_status${counter.count}" id="current_status${counter.count}" value="S">
-										 	<p class="text14" >Er du sikker på at du vil kansellere Transport/Master <b>${masterConsignmentRecord.emlnrt}/${masterConsignmentRecord.emlnrm}</b> fra <b>SYSPED</b> ?</p>
+										 	<p class="text14" >Er du sikker på at du vil kansellere Lnr <b>${masterConsignmentRecord.emlnrm}</b> i <b>SYSPED</b> ?</p>
 												
 										</form>
 									</div>

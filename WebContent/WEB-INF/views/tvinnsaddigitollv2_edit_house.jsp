@@ -505,7 +505,7 @@
 				<tr>
 				<td class="text11">
 							
-				<table id="mainList" class="display compact cell-border" >
+				<table id="mainList" class="compact" >
 					<thead>
 					<tr class="tableHeaderField" height="20" >
                     	<th width="2%" class="tableHeaderFieldFirst" >Lin</th>

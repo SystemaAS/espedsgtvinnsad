@@ -180,19 +180,17 @@
 			</c:if>
 			 --%>
 			 
-			 
+		<tr>	
+			<td colspan="10" class="text14 formFrame" >
+        		MRN-Api:&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.emmid}">${model.record.emmid}</a>&nbsp;&nbsp;&nbsp;
+        		Id:&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.emuuid}">${model.record.emuuid}</a>
+       		</td>
+		</tr>
 		<tr>
 			<td colspan="3" class="text14" valign="top">
 				<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">
-					<tr height="4"><td>&nbsp;</td></tr>
-					<tr>	
-						<td nowrap colspan="10" class="text14 formFrame" >
-		               		MRN-Api:&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.emmid}">${model.record.emmid}</a>&nbsp;&nbsp;&nbsp;
-		               		Id:&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.emuuid}">${model.record.emuuid}</a>
-	               		</td>
-	         
-					</tr>
-					<tr height="1"><td>&nbsp;</td></tr>
+					<tr height="5"><td></td></tr>
+					
 					<tr>
 						<td class="text14">&nbsp;<span title="emavd">Avd</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="empro">Tur</span><font class="text16RedBold" >*</font></td>
@@ -616,7 +614,7 @@
 				<tr>
 				<td class="text11">
 							
-				<table id="mainList" class="display compact cell-border" >
+				<table id="mainList" class="compact" >
 					<thead>
 					<tr class="tableHeaderField" height="20" >
                     	<th width="2%" class="tableHeaderFieldFirst" ><img title="Update" style="vertical-align:middle;" src="resources/images/update.gif" border="0" alt="edit"></th>

@@ -51,6 +51,7 @@ import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignature
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureRecord;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
 import no.systema.tvinn.sad.digitollv2.filter.SearchFilterDigitollTransportList;
+import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfContainer;
@@ -60,6 +61,7 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
+import no.systema.tvinn.sad.digitollv2.service.ApiGenericDtoResponseService;
 import no.systema.tvinn.sad.digitollv2.service.GeneralUpdateService;
 import no.systema.tvinn.sad.digitollv2.service.SadmohfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
@@ -357,6 +359,81 @@ public class TvinnSadDigitollv2TransportController {
 		}	
 		return successView;
 	}
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_api_send_transport.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doApiSendTransport(@ModelAttribute ("record") SadmotfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		logger.info("inside doApiSendTransport");
+		
+		Map model = new HashMap();
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		String redirect = "redirect:tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=" + recordToValidate.getEtlnrt();
+		ModelAndView successView = new ModelAndView(redirect);
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			
+			//=================
+			//SEND POST or PUT
+			//=================
+			if(recordToValidate.getEtlnrt() > 0 ) {
+		    	logger.info("Before send in Controller ...");
+				
+				StringBuilder url = new StringBuilder();
+				StringBuilder urlRequestParamsKeys = new StringBuilder();
+				urlRequestParamsKeys.append("user=" + appUser.getUser());
+				
+				url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
+				//check if POST-CREATE or PUT-UPDATE
+				if( StringUtils.isNotEmpty(recordToValidate.getEtmid()) ) {
+					url.append("putTransport.do");
+					urlRequestParamsKeys.append("&etlnrt=" + recordToValidate.getEtlnrt());
+					urlRequestParamsKeys.append("&mrn=" + recordToValidate.getEtmid());
+				}else {
+					
+					url.append("postTransport.do");
+					urlRequestParamsKeys.append("&etlnrt=" + recordToValidate.getEtlnrt());
+				}
+				
+				String BASE_URL = url.toString();
+	    		logger.info("URL: " + BASE_URL);
+	    		logger.info("PARAMS: " + urlRequestParamsKeys.toString());
+	    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+	    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
+	    		//Debug -->
+		    	logger.info(jsonPayload);
+	    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    		
+	    		ApiGenericDtoResponse apiDtoResponse = this.apiGenericDtoResponseService.getReponse(jsonPayload);
+	    		if(StringUtils.isNotEmpty(apiDtoResponse.getErrMsg())){
+	    			logger.error("ERROR:" + apiDtoResponse.toString());
+	    			model.put("errorMessage", apiDtoResponse.getErrMsg());	
+				}
+	    		successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+				
+			}else {
+				StringBuffer errMsg = new StringBuffer();
+				errMsg.append("ERROR on doSendMaster -->detail: null ids? ...");
+				model.put("errorMessage", errMsg.toString());
+
+			}
+		}
+		
+		return successView;
+		
+	}
+	
+	
 	/**
 	 * 
 	 * @param appUser
@@ -761,14 +838,14 @@ public class TvinnSadDigitollv2TransportController {
 	private boolean isValidForApiSendGui(SadmomfRecord record) {
 		boolean retval = true;
 		if(StringUtils.isEmpty(record.getEmmid()) || StringUtils.isEmpty(record.getEmuuid())){
-			if(record.getEmst() == "S") { //CANCELED on Db (KANSELLERT)
-				//nothing since this has been canceled
-			}else if(record.getEmst2() == "D") { //DELETED via API (SLETTET)
-				//nothing since this has been deleted
-			}else if(record.getEmst2() == "C") { //COMPLETED via API (already passed the border. This status must be sent by toll.no in v2)
-				//nothing since this has been deleted
-			}else {
-				retval = false;
+			if(record.getEmst().equals("S") ) { 
+				//OK since this has been canceled(S)
+			}else{
+				if(record.getEmst2().equals("D") || record.getEmst2().equals("C")) {
+					//OK since this has been deleted(D) or completed(C)
+				}else {
+					retval = false;
+				}
 			}
 		}
 		return retval;
@@ -788,6 +865,8 @@ public class TvinnSadDigitollv2TransportController {
 	
 	@Autowired
 	private GeneralUpdateService generalUpdateService;
+	@Autowired
+	private ApiGenericDtoResponseService apiGenericDtoResponseService;
 	
 	
 	@Autowired

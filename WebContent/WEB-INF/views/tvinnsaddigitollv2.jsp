@@ -202,8 +202,6 @@
                 		<th title="S=SLETTET" width="2%" class="tableHeaderField" >St.</th>
                 		<th width="2%" class="tableHeaderField" >Pass. ETA</th>
                 		<th width="2%" class="tableHeaderField" >Tollst.</th>
-                		<th width="2%" class="tableHeaderField" >Doknr.</th>
-                		<th width="2%" class="tableHeaderField" >Dokt.</th>
                 		<th width="2%" class="tableHeaderField" >Bilnr</th>
                 		<th width="2%" class="tableHeaderField" >Transp.</th>
                 		<th width="2%" class="tableHeaderField" >Sjåførs navn</th>
@@ -257,8 +255,6 @@
 		              	</td>
 		               <td class="tableCell" >${record.etetadStr}&nbsp;${record.etetatStr}</td>
 		               <td align="center" class="tableCell" >${record.ettsd}</td>
-		               <td align="center" class="tableCell" >${record.etdkm}</td>
-		               <td align="center" class="tableCell" >${record.etdkmt}</td>
 		               <td class="tableCell" >${record.etkmrk}</td>
 		               <td class="tableCell" >${record.etnat}</td>
 		               <td class="tableCell" >${record.etsjaf}</td>

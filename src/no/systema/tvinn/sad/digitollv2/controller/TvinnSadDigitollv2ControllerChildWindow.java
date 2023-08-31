@@ -143,6 +143,59 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	    	return successView;
 		}
 	}
+	/**
+	 * 
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_loginfo.do",  method={RequestMethod.GET} )
+	public ModelAndView doLogInfo(HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doManifestInfo");
+		Map model = new HashMap();
+		String id1 = request.getParameter("id1");
+		String id2 = request.getParameter("id2");
+		String id3 = request.getParameter("id3");
+		String level = request.getParameter("level");
+		
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_loginfo");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			StringBuilder url = new StringBuilder();
+			url.append(SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_LOG_URL);
+			StringBuilder urlRequestParamsKeys = new StringBuilder();
+			urlRequestParamsKeys.append("user=" + appUser.getUser());
+			urlRequestParamsKeys.append("&ellnrt=" + id1);
+			if(StringUtils.isNotEmpty(id2)) {
+				urlRequestParamsKeys.append("&ellnrm=" + id2);
+			}
+			if(StringUtils.isNotEmpty(id3)) {
+				urlRequestParamsKeys.append("&ellnrh=" + id3);
+			}
+			//if(StringUtils.isNotEmpty(level) && (level.equals("t")||level.equals("m")||level.equals("h"))) {
+				
+				String BASE_URL = url.toString();
+	    		logger.info("URL: " + BASE_URL);
+	    		logger.info("PARAMS: " + urlRequestParamsKeys.toString());
+	    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+	    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
+	    		//Debug -->
+		    	logger.debug(jsonPayload);
+	    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    		
+	    		model.put("content", jsonPayload);
+			//}
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
 	
 	/**
 	 * Runs the API method

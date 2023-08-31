@@ -38,10 +38,8 @@
     });
     
     jq('#sendButton').click(function() { 
-    	var status = "S";
-    	
     	setBlockUI();
-		window.location = 'tvinnsadmanifest_send.do?efuuid=' + jq('#efuuid').val() + '&efpro=' + jq('#efpro').val() + '&efst2=' + status;
+		window.location = 'tvinnsaddigitollv2_api_send_transport.do?etlnrt=' + jq('#etlnrt').val() + '&etmid=' + jq('#etmid').val();
     });
     
     jq('#imgManifestIdInfo').click(function() { 
@@ -129,17 +127,7 @@
 	  		}
 	  	});
 	  
-		jq('#etdkm').focus(function() {
-	    	if(jq('#etdkm').val()!=''){
-	    		refreshCustomValidity(jq('#etdkm')[0]);
-	  		}
-	  	});
-		jq('#etdkmt').focus(function() {
-	    	if(jq('#etdkmt').val()!=''){
-	    		refreshCustomValidity(jq('#etdkmt')[0]);
-	  		}
-	  	});
-
+		
 		
 		jq('#etavd').focus(function() {
 	    	if(jq('#etavd').val()!=''){
@@ -512,6 +500,16 @@
 			
 	  });
   });
+  jq(function() {
+	  jq(".logLink").click(function() {
+		  var id = this.id;
+		  jq("#"+id).attr(('target','_blank'));
+		  //default url
+		  var controllerUrl = "tvinnsaddigitollv2_childwindow_loginfo.do?id1=" + id +"&level=t";
+		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
+			
+	  });
+  });
 
   //-------------------
   //Datatables jquery
@@ -533,13 +531,13 @@
   	  //"scrollY": "700px",
   	  "scrollCollapse":  true,
 	  "tabIndex": -1,
-	  //"order": [[ 2, "desc" ]], //turnr
+	  "order": [[ 1, "asc" ]], //Lnr
 	  "lengthMenu": [ 25, 50, 100],
 	  "fnDrawCallback": function( oSettings ) {
     	jq('.dataTables_filter input').addClass("inputText12LightYellow");
     	}
     });
-	jq("div.toolbar").html('<span class="text16">Master Consignments</span>');
+	jq("div.toolbar").html('<span class="text16">Hovedforsendelser - Master Consignments</span>');
     
 //event on input field for search
     jq('input.mainList_filter').on( 'keyup click', function () {
