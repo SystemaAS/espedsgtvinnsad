@@ -185,6 +185,7 @@
         		MRN-Api:&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.emmid}">${model.record.emmid}</a>&nbsp;&nbsp;&nbsp;
         		Id:&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.emuuid}">${model.record.emuuid}</a>
        		</td>
+       		
 		</tr>
 		<tr>
 			<td colspan="3" class="text14" valign="top">

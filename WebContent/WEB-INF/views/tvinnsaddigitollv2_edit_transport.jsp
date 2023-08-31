@@ -179,11 +179,52 @@
 	   		</tr>
 	  		<tr height="2"><td colspan="10">&nbsp;</td></tr>  
   		</c:if>
-  		<tr>	
-			<td nowrap colspan="10" class="text14 formFrame" >
-	    		MRN-Api:&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.etmid}">${model.record.etmid}</a>&nbsp;&nbsp;&nbsp;
-	    		Id:&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.etuuid}">${model.record.etuuid}</a>
+  		<tr height="5">	
+  			<td  colspan="10" class="text14 formFrame" >
+			<table style="width:100%">
+			<tr >
+				<td class="text14" align="left" >
+		    		MRN-Api:&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.etmid}">${model.record.etmid}</a>&nbsp;&nbsp;&nbsp;
+		    		Id:&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.etuuid}">${model.record.etuuid}</a>&nbsp;&nbsp;&nbsp;
+		    	</td>
+		    	<td class="text14" align="right">
+		    		<a cursor:pointer" title="lese logg" tabindex=-1 id="${model.record.etlnrt}" class="logLink" runat="server" href="#">Manifest status - log&nbsp;
+						<c:choose>
+						<c:when test="${model.record.etst2 == 'S' || model.record.etst2 == 'R' || model.record.etst2 == 'D' || model.record.etst2 == 'C'}">
+							<c:if test="${model.record.etst2 == 'S'}">
+								<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
+								<font style="color:#FFFFCC;">SUBMITTED</font>
+							</c:if>
+							<c:if test="${model.record.etst2 == 'C'}">
+								<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
+								<font style="color:#FFFFCC;">COMPLETED</font>
+							</c:if>
+							<c:if test="${model.record.etst2 == 'D'}">
+								<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
+								<font style="color:red;">SLETTET</font>
+							</c:if>
+							<c:if test="${model.record.etst2 == 'R'}">
+								<font style="color:#FFFFFF;">REOPENED/DRAFT</font>
+							</c:if>
+						</c:when>
+						<c:otherwise>
+							<c:choose>
+							<c:when test="${model.record.etst2 == 'M'}">
+								<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
+								<font style="color:red">ERROR&nbsp;</font>
+							</c:when>
+							<c:otherwise>
+								<font style="color:#606060;">${model.record.etst2}&nbsp;</font>
+							</c:otherwise>
+							</c:choose>
+						</c:otherwise>
+						</c:choose>
+					</a>&nbsp;
+		   		</td>
+	   		</tr>
+	   		</table>
 	   		</td>
+	   		
 		</tr>
 		<tr height="5"><td></td></tr>
 	           		 
@@ -205,36 +246,7 @@
 						 				</td>
 						 				<td class="text14White" align="right">
 						 						Stat<a tabindex=-1 id="updateInternalStatusLink" name="updateInternalStatusLink" runat="server" href="#"><font class="text14White">u</font></a>s:&nbsp;${model.record.etst}
-						 						&nbsp;&nbsp;&nbsp;Manif.<a tabindex=-1 id="updateManifestStatusLink" name="updateManifestStatusLink" runat="server" href="#"><font class="text14White">st.</font></a>&nbsp;
-						 						<a cursor:pointer" title="lese logg" tabindex=-1 id="${model.record.etlnrt}" class="logLink" runat="server" href="#">
-						 	
-							 						<c:choose>
-							 						<c:when test="${model.record.etst2 == 'S' || model.record.etst2 == 'R' || model.record.etst2 == 'D'}">
-							 							<c:if test="${model.record.etst2 == 'S'}">
-							 								<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
-							 								<font style="color:#FFFFCC;">SUBMITTED</font>
-							 							</c:if>
-							 							<c:if test="${model.record.etst2 == 'D'}">
-							 								<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
-							 								<font style="color:red;">SLETTET</font>
-							 							</c:if>
-							 							<c:if test="${model.record.etst2 == 'R'}">
-							 								<font style="color:#FFFFFF;">REOPENED/DRAFT</font>
-							 							</c:if>
-							 						</c:when>
-							 						<c:otherwise>
-							 							<c:choose>
-							 							<c:when test="${model.record.etst2 == 'M'}">
-							 								<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
-							 								<font style="color:red">ERROR&nbsp;</font>
-							 							</c:when>
-							 							<c:otherwise>
-							 								<font style="color:#606060;">${model.record.etst2}&nbsp;</font>
-							 							</c:otherwise>
-							 							</c:choose>
-							 						</c:otherwise>
-							 						</c:choose>
-						 						</a>
+						 						&nbsp;&nbsp;
 						 				</td>
 						 			</c:when>
 						 			<c:otherwise>
