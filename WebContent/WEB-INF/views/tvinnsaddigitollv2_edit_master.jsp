@@ -579,7 +579,7 @@
 				&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
 				<c:if test="${model.record.emlnrm > 0}">
 					<c:choose>
-						<c:when test="${model.record.emst2 == 'C' || model.record.emst2 == 'D' }"> <%--COMPLETED(C) DELETED(D) --%>
+						<c:when test="${model.record.emst2 == 'C' }"> <%--COMPLETED(C) --%>
 							<%-- not possible --%>
 						</c:when>
 						<c:otherwise>

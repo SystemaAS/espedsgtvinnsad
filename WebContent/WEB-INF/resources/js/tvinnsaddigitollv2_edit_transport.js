@@ -410,13 +410,13 @@
 	  });
   });
 
-//Present dialog box onClick (href in parent JSP)
+  //Present dialog box onClick (href in parent JSP)
   jq(function() {
 	  jq(".cancelLink").click(function() {
 		  var id = this.id;
 		  counterIndex = id.replace("cancelLink","");
 		  
-		  jq('#dialogUpdateInternalStatus'+counterIndex).dialog( "option", "title", "Update Internal Status " );
+		  jq('#dialogUpdateInternalStatus'+counterIndex).dialog( "option", "title", "Kansellere i SYSPED " );
 		  //deal with buttons for this modal window
 		  jq('#dialogUpdateInternalStatus'+counterIndex).dialog({
 			 buttons: [ 
@@ -442,6 +442,42 @@
 		  jq("#dialogSaveSU"+counterIndex).button("option", "disabled", true);
 		  //open now
 		  jq('#dialogUpdateInternalStatus'+counterIndex).dialog('open');
+		 
+	  });
+  });
+
+  //Present dialog box onClick (href in parent JSP)
+  jq(function() {
+	  jq(".grantLink").click(function() {
+		  var id = this.id;
+		  counterIndex = id.replace("grantLink","");
+		  
+		  jq('#dialogUpdateInternalStatusGrant'+counterIndex).dialog( "option", "title", "Gjøre tilgjengelig igjen " );
+		  //deal with buttons for this modal window
+		  jq('#dialogUpdateInternalStatusGrant'+counterIndex).dialog({
+			 buttons: [ 
+	            {
+				 id: "dialogSaveTU"+counterIndex,	
+				 text: "Ok",
+				 click: function(){
+							setBlockUI();
+					 		jq('#updateInternalStatusGrantForm'+counterIndex).submit();
+				 		}
+			 	 },
+	 	 		{
+			 	 id: "dialogCancelTU"+counterIndex,
+			 	 text: "Cancel", 
+				 click: function(){
+					 		//back to initial state of form elements on modal dialog
+					 		jq("#dialogSaveSU"+counterIndex).button("option", "disabled", true);
+					 		jq( this ).dialog( "close" ); 
+				 		} 
+	 	 		 } ] 
+		  });
+		  //init values
+		  jq("#dialogSaveSU"+counterIndex).button("option", "disabled", true);
+		  //open now
+		  jq('#dialogUpdateInternalStatusGrant'+counterIndex).dialog('open');
 		 
 	  });
   });

@@ -742,10 +742,37 @@ public class TvinnSadDigitollv2TransportController {
     	if(jsonPayload!=null){
     		SadmomfContainer jsonContainer = this.sadmomfListService.getListContainer(jsonPayload);
     		record.setListMasters(jsonContainer.getList());
+    		//now check if the transport is valid to be send and populate the flag if needed
+    		List<SadmomfRecord> listChild = (List)jsonContainer.getList();
+    		for(SadmomfRecord child : listChild) {
+    			if(!this.isValidForApiSendGui(child)) {
+    				record.setOwn_okToSend(false);
+    				break;
+    			}
+    		}
     	}
     	
 	}
-	
+	/**
+	 * 
+	 * @param record
+	 * @return
+	 */
+	private boolean isValidForApiSendGui(SadmomfRecord record) {
+		boolean retval = true;
+		if(StringUtils.isEmpty(record.getEmmid()) || StringUtils.isEmpty(record.getEmuuid())){
+			if(record.getEmst() == "S") { //CANCELED on Db (KANSELLERT)
+				//nothing since this has been canceled
+			}else if(record.getEmst2() == "D") { //DELETED via API (SLETTET)
+				//nothing since this has been deleted
+			}else if(record.getEmst2() == "C") { //COMPLETED via API (already passed the border. This status must be sent by toll.no in v2)
+				//nothing since this has been deleted
+			}else {
+				retval = false;
+			}
+		}
+		return retval;
+	}
 	
 	//SERVICES
 	@Autowired

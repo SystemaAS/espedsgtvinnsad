@@ -169,9 +169,21 @@
 				</tr>
 			</c:if>
 			 --%>
+		<c:if test="${!model.record.own_okToSend}">	 
+			<tr >
+				<td colspan="10" class="text14  ">
+	    			<font class="inputText isa_warning" >
+	    				Lasten er ikke gyldig for sending via api. Alle master-consignments skal ha MRN-Api-nr. bortsett fra de som er KANSELLERT. Minst en linje må eksistere.
+	    			</font>
+	    		</td>
+	   		</tr>
+	  		<tr height="2"><td colspan="10">&nbsp;</td></tr>  
+  		</c:if>
  		<tr>
 			<td class="text14" valign="top">
 				<table style="width:85%" align="left" border="0" cellspacing="1" cellpadding="0">
+					
+	           		 
 				 	<tr >
 					 	<td >
 						<table class="formFrameHeader" style="width:100%;"  border="0" cellspacing="1" cellpadding="0">
@@ -418,17 +430,17 @@
 				 					<c:choose>
 				 					<c:when test="${model.record.etemtt == 'EM'}">
 				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemt_email" id="own_etemt_email" size="35" maxlength="50" value="${model.record.etemt}"></td>
-				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemt_telephone" id="own_etemt_telephone" size="35" maxlength="50" value=""></td>
+				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemt_telephone" id="own_etemt_telephone" size="15" maxlength="50" value=""></td>
 				 					</c:when>
 				 					<c:otherwise>
 				 						<c:choose>
 						 					<c:when test="${empty model.record.etemtt}">
 						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemt_email" id="own_etemt_email" size="35" maxlength="50" value=""></td>
-						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemt_telephone" id="own_etemt_telephone" size="35" maxlength="50" value=""></td>
+						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemt_telephone" id="own_etemt_telephone" size="15" maxlength="50" value=""></td>
 						 					</c:when>
 						 					<c:otherwise>
 						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemt_email" id="own_etemt_email" size="35" maxlength="50" value=""></td>
-												<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemt_telephone" id="own_etemt_telephone" size="35" maxlength="50" value="${model.record.etemt}"></td>
+												<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemt_telephone" id="own_etemt_telephone" size="15" maxlength="50" value="${model.record.etemt}"></td>
 											</c:otherwise>
 										</c:choose>
 									</c:otherwise>
@@ -507,17 +519,17 @@
 									<c:choose>
 				 					<c:when test="${empty model.record.etemrt}">
 				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_email" id="own_etemr_email" size="35" maxlength="50" value=""></td>
-				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_telephone" id="own_etemr_telephone" size="35" maxlength="50" value=""></td>
+				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_telephone" id="own_etemr_telephone" size="15" maxlength="50" value=""></td>
 				 					</c:when>
 		 							<c:otherwise>
 				 						<c:choose>
 				 							<c:when test="${model.record.etemrt == 'EM'}">
 						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_email" id="own_etemr_email" size="35" maxlength="50" value="${model.record.etemr}"></td>
-						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_telephone" id="own_etemr_telephone" size="35" maxlength="50" value=""></td>
+						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_telephone" id="own_etemr_telephone" size="15" maxlength="50" value=""></td>
 						 					</c:when>
 						 					<c:otherwise>
 						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_email" id="own_etemr_email" size="35" maxlength="50" value=""></td>
-												<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_telephone" id="own_etemr_telephone" size="35" maxlength="50" value="${model.record.etemr}"></td>
+												<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_telephone" id="own_etemr_telephone" size="15" maxlength="50" value="${model.record.etemr}"></td>
 											</c:otherwise>
 										</c:choose>
 									</c:otherwise>
@@ -561,7 +573,7 @@
 				<tr>
 				<td class="text11">
 							
-				<table id="mainList" class="display compact cell-border" >
+				<table id="mainList" class="compact" >
 					<thead>
 					<tr class="tableHeaderField" height="20" >
                     	<th width="2%" class="tableHeaderFieldFirst" ><img title="Update" style="vertical-align:middle;" src="resources/images/update.gif" border="0" alt="edit"></th>
@@ -579,6 +591,7 @@
                 		<th width="2%" class="tableHeaderField" >Sen.dato</th>
                 		<th width="2%" class="tableHeaderField" >MRN-Api</th>
                 		<th width="2%" class="tableHeaderField" >Req.id</th>
+                		<th title="Api-status" width="2%" class="tableHeaderField" ></th>
                 		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED" width="2%" class="tableHeaderField" >Manif.st</th>
                 		<th width="2%" class="tableHeaderField" title="Fjerner manifest fra Tollvesenet" >Slett</th>
                 		<th width="2%" class="tableHeaderField" title="Fjerner manifest lokalt (SYSPED)">Kans.</th>
@@ -599,11 +612,11 @@
 		          	   <td  width="2%" class="tableCellFirst" <c:if test="${masterConsignmentRecord.emst2 == 'D'}">style="background-color: #FEEFB3;color: #9F6000;" </c:if> align="center">
 		          	   		<a tabindex=-1 style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=${masterConsignmentRecord.emlnrt}&emlnrm=${masterConsignmentRecord.emlnrm}" onClick="setBlockUI();">
                					<c:choose>
-		               				<c:when test="${XmasterConsignmentRecord.own_editable > 0}">
-		               					<img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">
+		               				<c:when test="${masterConsignmentRecord.emst2 == 'C' || masterConsignmentRecord.emst == 'S'}">
+		               					<img title="Read" style="vertical-align:bottom;" src="resources/images/eye.png" height="18px" width="18px" border="0" alt="read">
 		               				</c:when>
 		               				<c:otherwise>
-		               					<img title="Read" style="vertical-align:bottom;" src="resources/images/eye.png" height="18px" width="18px" border="0" alt="read">
+		               					<img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">
 		               				</c:otherwise>
 	               				</c:choose>
                				</a>
@@ -613,10 +626,30 @@
 		               <td width="2%" align="center" class="tableCell" <c:if test="${masterConsignmentRecord.emst2 == 'D'}">style="color: #9F6000;" </c:if> >${masterConsignmentRecord.emavd}</td>
 		               <td width="2%" align="center" class="tableCell" <c:if test="${masterConsignmentRecord.emst2 == 'D'}">style="color: #9F6000;" </c:if> ><c:if test="${masterConsignmentRecord.empro > 0}">${masterConsignmentRecord.empro}</c:if></td>
 		               <td width="2%" align="center" class="tableCell" >${masterConsignmentRecord.emsg}</td>
-		               <td width="2%" align="center" class="tableCell" >
+		               <td nowrap width="2%" align="center" class="tableCell text12">
 		               	  <c:choose>
 		               		<c:when test="${masterConsignmentRecord.emst == 'S'}">
-		               			<font class="inputFormSubmit isa_error">KANSELLERT</font>
+		               			<font class="inputFormSubmit text12 isa_error">KANSELLERT</font>
+		               			
+	               	   			<%-- We can only CANCEL (S) internally if the emmid and emuuid are gone since we DELETED first from Tollv.(if we even got that far at some point...) --%>
+	               	   			<c:if test="${empty masterConsignmentRecord.emmid && empty masterConsignmentRecord.emuuid}">
+					   				<a tabindex=-1 class="grantLink" id="grantLink${counter.count}" runat="server" href="#">
+										<font title="Gjøre tilgjengelig igjen ved å klikke" class="inputFormSubmit text12 isa_success"><b>e</b></font>
+									</a> 
+									<div id="dialogUpdateInternalStatusGrant${counter.count}" class="clazz_dialog" title="Dialog">
+										<form action="tvinnsaddigitollv2_updateInternalStatus_master.do" name="updateInternalStatusGrantForm${counter.count}" id="updateInternalStatusGrantForm${counter.count}" method="post">
+										 	<input type="hidden" name="current_id1${counter.count}" id="current_id1${counter.count}" value="${masterConsignmentRecord.emlnrt}">
+											<input type="hidden" name="current_id2${counter.count}" id="current_id2${counter.count}" value="${masterConsignmentRecord.emlnrm}">
+										 	<input type="hidden" name="current_status${counter.count}" id="current_status${counter.count}" value="">
+										 	<p class="text14" >Er du sikker på at du vil gjøre tilgjengelig igjen Transport/Master <b>${masterConsignmentRecord.emlnrt}/${masterConsignmentRecord.emlnrm}</b> i <b>SYSPED</b> ?</p>
+												
+										</form>
+									</div>
+								</c:if>
+
+		               			
+		               			
+		               			
 		               		</c:when>
 		               		<c:otherwise>
 		               			${masterConsignmentRecord.emst}
@@ -646,23 +679,42 @@
 								${masterConsignmentRecord.emuuid}
 							</a>  
 		               </td>
-		               
 		               <td width="2%" align="center" class="tableCell" >
 		               		<c:choose>
 		               		<c:when test="${masterConsignmentRecord.emst2 == 'S' || masterConsignmentRecord.emst2 == 'R' || masterConsignmentRecord.emst2 == 'D' || masterConsignmentRecord.emst2 == 'C'}">
 		               			<c:if test="${masterConsignmentRecord.emst2 == 'S'}">
 		               				<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
-		               				<span title="S" >SUBMITTED</span>
 		               			</c:if>
 		               			<c:if test="${masterConsignmentRecord.emst2 == 'R'}">
-		               				<span title="R" >REOPENED/DRAFT</span>
+
 		               			</c:if>
 		               			<c:if test="${masterConsignmentRecord.emst2 == 'D'}">
-		               				<font title="D" color="red">SLETTET</font>
+									<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
 		               			</c:if>
 		               			<c:if test="${masterConsignmentRecord.emst2 == 'C'}">
 		               				<img style="vertical-align:middle;" title="Completed tolldekl at toll.no" src="resources/images/complete-icon.png" width="14px" height="12px" border="0" alt="completion">
-		               				<font title="C" color="green">COMPLETED</font>
+		               			</c:if>
+		               			
+		               		</c:when>
+		               		<c:otherwise>
+		               			${masterConsignmentRecord.emst2}
+		               		</c:otherwise>
+		               		</c:choose>
+		               </td>
+		               <td width="2%" align="center" class="tableCell" >
+		               		<c:choose>
+		               		<c:when test="${masterConsignmentRecord.emst2 == 'S' || masterConsignmentRecord.emst2 == 'R' || masterConsignmentRecord.emst2 == 'D' || masterConsignmentRecord.emst2 == 'C'}">
+		               			<c:if test="${masterConsignmentRecord.emst2 == 'S'}">
+		               				<span class="text12" title="S" >SUBMITTED</span>
+		               			</c:if>
+		               			<c:if test="${masterConsignmentRecord.emst2 == 'R'}">
+		               				<span class="text12" title="R" >REOPENED/DRAFT</span>
+		               			</c:if>
+		               			<c:if test="${masterConsignmentRecord.emst2 == 'D'}">
+		               				<font class="text12" title="D" color="red">SLETTET</font>
+		               			</c:if>
+		               			<c:if test="${masterConsignmentRecord.emst2 == 'C'}">
+		               				<font class="text12" title="C" color="green">COMPLETED</font>
 		               			</c:if>
 		               			
 		               		</c:when>
@@ -691,23 +743,7 @@
 											</div>
 										</c:if>
 		              				</c:if>
-		              				<%--
-		              				<c:otherwise>
-		              					<a tabindex=-1 class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
-											<img src="resources/images/delete.gif" border="0" alt="remove">
-										</a>
-										<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
-											<form action="tvinnsaddigitollv2_delete_master.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
-												<input type="hidden" name="current_id1${counter.count}" id="current_id1${counter.count}" value="${masterConsignmentRecord.emlnrt}">
-											 	<input type="hidden" name="current_id2${counter.count}" id="current_id2${counter.count}" value="${masterConsignmentRecord.emlnrm}">
-											 	<input type="hidden" name="action${counter.count}" id="action${counter.count}" value="doDelete">
-											 	<p class="text14" >Er du sikker på at du vil slette denne&nbsp;Turnr/Lnr&nbsp;<b>${masterConsignmentRecord.empro}/${masterConsignmentRecord.emlnrm}</b> fra <b>SYSPED</b> ?</p>
-												
-											</form>
-										</div>
-		              				</c:otherwise>
-		              				 --%>
-	              				
+		              				
               				
 	               	   </td>
 	               	   <td width="2%" class="tableCell" align="center">
