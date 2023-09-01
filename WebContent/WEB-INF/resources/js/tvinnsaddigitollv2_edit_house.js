@@ -57,11 +57,8 @@
   });
   
   jq(function() {
-	  jq("#efeta").datepicker({ 
-		  dateFormat: 'ddmmy' 	  
-	  });
-	  jq("#efsjadt").datepicker({ 
-		  dateFormat: 'ddmmy' 	  
+	  jq("#eh0068a").datepicker({ 
+		  dateFormat: 'yymmdd' 	  
 	  });
 	  
 	  //custom validity
@@ -127,8 +124,27 @@
 	    		refreshCustomValidity(jq('#ehnam')[0]);
 	  		}
 	  	});
+		jq('#ehdkht').focus(function() {
+	    	if(jq('#ehdkht').val()!=''){
+	    		refreshCustomValidity(jq('#ehdkht')[0]);
+	  		}
+	  	});
+		jq('#ehrg').focus(function() {
+	    	if(jq('#ehrg').val()!=''){
+	    		refreshCustomValidity(jq('#ehrg')[0]);
+	  		}
+	  	});
+		jq('#eh0068a').focus(function() {
+	    	if(jq('#eh0068a').val()!=''){
+	    		refreshCustomValidity(jq('#eh0068a')[0]);
+	  		}
+	  	});
 	    
-	  
+	  	jq('#eh0068b').focus(function() {
+	    	if(jq('#eh0068b').val()!=''){
+	    		refreshCustomValidity(jq('#eh0068b')[0]);
+	  		}
+	  	});
 	  
 	  //CHILD-WINDOWS
 	  //Tollsted

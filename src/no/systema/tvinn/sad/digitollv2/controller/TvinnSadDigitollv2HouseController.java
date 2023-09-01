@@ -525,6 +525,9 @@ public class TvinnSadDigitollv2HouseController {
 	}
 	
 	private void adjustFieldsForUpdate(SadmohfRecord recordToValidate){
+		String HYPHEN = "-";
+		//House Document number and type (under fraktbrev for house nr API)
+		recordToValidate.setEhdkh(recordToValidate.getEhrg() + HYPHEN + recordToValidate.getEh0068a() + HYPHEN + recordToValidate.getEh0068b());
 		
 		//Sender - communication
 		if(StringUtils.isNotEmpty(recordToValidate.getOwn_ehems_email())){

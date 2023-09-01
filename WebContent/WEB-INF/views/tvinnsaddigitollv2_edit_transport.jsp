@@ -181,7 +181,7 @@
 			<table style="width:100%">
 			<tr >
 				<td class="text14" align="left" >
-		    		MRN-Api&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.etmid}">${model.record.etmid}</a>
+		    		MRN-Api&nbsp;<span class="text14SkyBlue" id="${model.record.etmid}">${model.record.etmid}</span>
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
 		    		Id&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.etuuid}">${model.record.etuuid}</a>
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;

@@ -186,7 +186,7 @@
 			<table style="width:100%">
 			<tr >
 				<td class="text14" align="left" >
-		    		MRN-Api&nbsp;<a class="uuidLink text14SkyBlue" id="${model.record.ehmid}">${model.record.ehmid}</a>
+		    		MRN-Api&nbsp;<span class="text14SkyBlue" id="${model.record.ehmid}">${model.record.ehmid}</span>
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
 		    		Id&nbsp;<a class="uuidLink text14SkyBlue" id="${model.record.ehuuid}">${model.record.ehuuid}</a>
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
@@ -244,8 +244,8 @@
 						<td class="text14">&nbsp;<span title="ehntk">Ant.kolli</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="ehvt">Varebesk</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="ehcnin">Container</span><font class="text16RedBold" >*</font></td>
-						<td class="text14">&nbsp;<span title="ehdkh">Dok.nr</span></td>
-						<td class="text14">&nbsp;<span title="ehdkht">Dok.type</span></td>
+						<td class="text14">&nbsp;<span title="ehdkh">Dok.nr</span><font class="text16RedBold" >*</font></td>
+						<td class="text14">&nbsp;<span title="ehdkht">Dok.type</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="ehst">St.</span></td>
 						<td class="text14">&nbsp;<span title="ehst2">St.2</span></td>
 						<td class="text14">&nbsp;<span title="ehst3">St.3</span></td>
@@ -275,10 +275,10 @@
 							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="ehcnin" id="ehcnin" size="2" maxlength="1" value="${model.record.ehcnin}">									
 						</td>
 						<td class="text14">
-							<input  type="text" class="inputTextMediumBlue" name="ehdkh" id="ehdkh" size="25" maxlength="50" value="${model.record.ehdkh}">		
+							<input  type="text" class="inputTextReadOnly" name="ehdkh" id="ehdkh" size="25" maxlength="50" value="${model.record.ehdkh}">		
 						</td>
 						<td class="text14">
-							<input  type="text" class="inputTextMediumBlue" name="ehdkht" id="ehdkht" size="5" maxlength="4" value="${model.record.ehdkht}">		
+							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ehdkht" id="ehdkht" size="5" maxlength="4" value="${model.record.ehdkht}">		
 						</td>
 						<td class="text14">
 							<input readonly type="text" class="inputTextReadOnly" name="ehst" id="ehst" size="2" maxlength="1" value="${model.record.ehst}">		
@@ -299,23 +299,24 @@
 					
 					<tr height="2"><td>&nbsp;</td></tr>
 					<tr>
-						<td colspan="3" class="text14">&nbsp;<span title="ehrg">Orgnr</span></td>
-						<td class="text14">&nbsp;<span title="ehtrnr">Mrn-nr</span></td>
-						<td colspan="2" class="text14">&nbsp;<span title="ehtrty">Type - CUDE</span></td>
-						<td class="text14">&nbsp;<span title="eh0068a-eh0068b">S.dato-sekv.</span></td>
+						<td colspan="2" class="text14">&nbsp;<span title="ehrg">Orgnr</span><font class="text16RedBold" >*</font></td>
+						<td colspan="2" class="text14">&nbsp;<span title="ehtrnr">Mrn-nr</span></td>
+						<td class="text14">&nbsp;<span title="ehtrty">Type - CUDE</span></td>
+						<td class="text14">&nbsp;<span title="eh0068a-eh0068b">S.dato-sekv.</span><font class="text16RedBold" >*</font></td>
 					</tr>
 					<tr>
-						<td colspan="3" class="text14">
-							<input  type="text" class="inputTextMediumBlue" name="ehrg" id="ehrg" size="13" maxlength="11" value="${model.record.ehrg}">		
-						</td>
-						<td class="text14">
-							<input  type="text" class="inputTextMediumBlue" name="ehtrnr" id="ehtrnr" size="22" maxlength="18" value="${model.record.ehtrnr}">		
+						<td colspan="2" class="text14">
+							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ehrg" id="ehrg" size="13" maxlength="11" value="${model.record.ehrg}">		
 						</td>
 						<td colspan="2" class="text14">
+							<input  type="text" class="inputTextMediumBlue" name="ehtrnr" id="ehtrnr" size="22" maxlength="18" value="${model.record.ehtrnr}">		
+						</td>
+						<td class="text14">
 							<input  type="text" class="inputTextMediumBlue" name="ehtrty" id="ehtrty" size="6" maxlength="4" value="${model.record.ehtrty}">		
 						</td>
 						<td class="text14">
-							<input  type="text" class="inputTextMediumBlue" name="eh0068a-eh0068b" id="eh0068a-eh0068b" size="16" maxlength="15" value="${model.record.eh0068a}-${model.record.eh0068b}">		
+							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)"  type="text" class="inputTextMediumBlueMandatoryField" name="eh0068a" id="eh0068a" size="10" maxlength="8" value="${model.record.eh0068a}">-
+							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)"  type="text" class="inputTextMediumBlueMandatoryField" name="eh0068b" id="eh0068b" size="8" maxlength="6" value="${model.record.eh0068b}">		
 						</td>
 					</tr>
 				
@@ -324,11 +325,11 @@
 						<td colspan="3" class="text14">&nbsp;<span title="ehprt">Prosedyr</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="ehuprt">Out.prosedyr</span></td>
 						<td colspan="2" class="text14">&nbsp;<span title="ehetypt">Type</span></td>
-						<td class="text14">&nbsp;<span title="eheid">Eksport id</span></td>
+						<td colspan="2" class="text14">&nbsp;<span title="eheid">Eksport id</span></td>
 					</tr>
 					<tr>
 						<td colspan="3" class="text14">
-							<input  type="text" class="inputTextMediumBlue" name="ehprt" id="ehprt" size="30" maxlength="30" value="${model.record.ehprt}">		
+							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ehprt" id="ehprt" size="30" maxlength="30" value="${model.record.ehprt}">		
 						</td>
 						<td class="text14">
 							<input  type="text" class="inputTextMediumBlue" name="ehuprt" id="ehuprt" size="30" maxlength="30" value="${model.record.ehuprt}">		
@@ -336,7 +337,7 @@
 						<td colspan="2" class="text14">
 							<input  type="text" class="inputTextMediumBlue" name="ehetypt" id="ehetypt" size="30" maxlength="30" value="${model.record.ehetypt}">		
 						</td>
-						<td class="text14">
+						<td colspan="2" class="text14">
 							<input  type="text" class="inputTextMediumBlue" name="eheid" id="eheid" size="25" maxlength="18" value="${model.record.eheid}">		
 						</td>
 					</tr>
@@ -395,39 +396,51 @@
 				 				</tr>
 				 				<tr >
 				 					<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="ehkns" id="ehkns" size="10" maxlength="8" value="${model.record.ehkns}"></td>
-									<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="ehtpps" id="ehtpps" size="2" maxlength="1" value="${model.record.ehtpps}"></td>
+									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="ehtpps" id="ehtpps" size="2" maxlength="1" value="${model.record.ehtpps}"></td>
 									
 									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ehnas" id="ehnas" size="25" maxlength="30" value="${model.record.ehnas}"></td>
-									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="ehrgs" id="ehrgs" size="20" maxlength="17" value="${model.record.ehnas}"></td>
+									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="ehrgs" id="ehrgs" size="20" maxlength="17" value="${model.record.ehrgs}"></td>
 				 				</tr>
 				 				
 				 				
 				 				<tr >
+				 					<td class="text14">&nbsp;</td>
+				 					<td class="text14">&nbsp;</td>
 									<td class="text14">&nbsp;<span title="ehpss">Sted</span></td>
 									<td class="text14">&nbsp;<span title="ehlks">Landkode</span></td>
 									
 				 				</tr>
 				 				<tr >
+				 					<td class="text14">&nbsp;</td>
+				 					<td class="text14">&nbsp;</td>
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehpss" id="ehpss" size="25" maxlength="24" value="${model.record.ehpss}"></td>
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehlks" id="ehlks" size="4" maxlength="2" value="${model.record.ehlks}"></td>
 									
 				 				</tr>
 				 				<tr >
+				 					<td class="text14">&nbsp;</td>
+				 					<td class="text14">&nbsp;</td>
 									<td class="text14">&nbsp;<span title="ehad1s">Adress</span></td>
 									<td class="text14">&nbsp;<span title="ehpns">Postnr</span></td>
 									
 				 				</tr>
 				 				<tr >
+				 					<td class="text14">&nbsp;</td>
+				 					<td class="text14">&nbsp;</td>
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehad1s" id="ehad1s" size="25" maxlength="30" value="${model.record.ehad1s}"></td>
 									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="ehpns" id="ehpns" size="12" maxlength="9" value="${model.record.ehpns}"></td>
 				 				</tr>
 				 				
 				 				<tr >
+				 					<td class="text14">&nbsp;</td>
+				 					<td class="text14">&nbsp;</td>
 									<td class="text14">&nbsp;<span title="ehems">E-post</span></td>
 									<td class="text14">&nbsp;<span title="ehems">Telefon</span></td>
 									
 				 				</tr>
 				 				<tr >
+				 					<td class="text14">&nbsp;</td>
+				 					<td class="text14">&nbsp;</td>
 									<c:choose>
 				 					<c:when test="${model.record.ehemst == 'EM'}">
 				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_ehems_email" id="own_ehems_email" size="35" maxlength="50" value="${model.record.ehems}"></td>
@@ -484,38 +497,50 @@
 				 				</tr>
 				 				<tr >
 				 					<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="ehknm" id="ehknm" size="10" maxlength="8" value="${model.record.ehknm}"></td>
-									<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="ehtppm" id="ehtppm" size="2" maxlength="1" value="${model.record.ehtppm}"></td>
+									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="ehtppm" id="ehtppm" size="2" maxlength="1" value="${model.record.ehtppm}"></td>
 									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlue" name="ehnam" id="ehnam" size="25" maxlength="30" value="${model.record.ehnam}"></td>
-									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="ehrgm" id="ehrgm" size="20" maxlength="17" value="${model.record.ehnam}"></td>
+									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="ehrgm" id="ehrgm" size="20" maxlength="17" value="${model.record.ehrgm}"></td>
 				 				</tr>
 				 				
 				 				<tr >
+				 					<td class="text14">&nbsp;</td>
+				 					<td class="text14">&nbsp;</td>
 									<td class="text14">&nbsp;<span title="ehpsm">Sted</span></td>
 									<td class="text14">&nbsp;<span title="ehlkm">Landkode</span></td>
 									
 				 				</tr>
 				 				<tr >
+				 					<td class="text14">&nbsp;</td>
+				 					<td class="text14">&nbsp;</td>
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehpsm" id="ehpsm" size="25" maxlength="24" value="${model.record.ehpsm}"></td>
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehlkm" id="ehlkm" size="4" maxlength="2" value="${model.record.ehlkm}"></td>
 									
 				 				</tr>
 				 				
 				 				<tr >
+				 					<td class="text14">&nbsp;</td>
+				 					<td class="text14">&nbsp;</td>
 									<td class="text14">&nbsp;<span title="ehad1m">Adress</span></td>
 									<td class="text14">&nbsp;<span title="ehpnm">Postnr</span></td>
 									
 				 				</tr>
 				 				<tr >
+				 					<td class="text14">&nbsp;</td>
+				 					<td class="text14">&nbsp;</td>
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehad1m" id="ehad1m" size="25" maxlength="30" value="${model.record.ehad1m}"></td>
 									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="ehpnm" id="ehpnm" size="12" maxlength="9" value="${model.record.ehpnm}"></td>
 				 				</tr>
 				 				
 				 				<tr >
+				 					<td class="text14">&nbsp;</td>
+				 					<td class="text14">&nbsp;</td>
 									<td class="text14">&nbsp;<span title="ehemm">E-post</span></td>
 									<td class="text14">&nbsp;<span title="ehemm">Telefon</span></td>
 									
 				 				</tr>
 				 				<tr >
+				 					<td class="text14">&nbsp;</td>
+				 					<td class="text14">&nbsp;</td>
 									<c:choose>
 				 					<c:when test="${model.record.ehemmt == 'EM'}">
 				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_ehemm_email" id="own_ehemm_email" size="35" maxlength="50" value="${model.record.ehemm}"></td>
