@@ -69,6 +69,7 @@ import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
+import no.systema.tvinn.sad.digitollv2.util.SadDigitollConstants;
 import no.systema.tvinn.sad.digitollv2.validator.MasterValidator;
 import no.systema.tvinn.sad.manifest.express.filter.SearchFilterManifestList;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
@@ -102,10 +103,7 @@ public class TvinnSadDigitollv2MasterController {
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
 	DateTimeManager dateMgr = new DateTimeManager();
 	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
-	private final String MODE_UPDATE = "U";
-	private final String MODE_INSERT = "A";
-	private final String TYPE_EMAIL = "EM";
-	private final String TYPE_TELEPHONE = "TE";
+	
 	
 	
 	@PostConstruct
@@ -164,10 +162,10 @@ public class TvinnSadDigitollv2MasterController {
 			    	String mode = "NA";
 					//Update
 					if(StringUtils.isNotEmpty(emlnrt) && StringUtils.isNotEmpty(emlnrm) ){
-						mode = this.MODE_UPDATE;
+						mode = SadDigitollConstants.DB_MODE_UPDATE;
 						
 					}else {
-						mode = this.MODE_INSERT;
+						mode = SadDigitollConstants.DB_MODE_INSERT;
 					}
 					logger.info("MODE:" + mode + " before update in Controller ...");
 					StringBuffer errMsg = new StringBuffer();
@@ -177,14 +175,14 @@ public class TvinnSadDigitollv2MasterController {
 						//error on update
 						model.put("errorMessage", errMsg.toString());
 						//put all aspects (sub-lists) only with update (not insert) error
-						if(this.MODE_UPDATE.equals(mode)){
+						if(SadDigitollConstants.DB_MODE_UPDATE.equals(mode)){
 							this.setRecordAspects(appUser, recordToValidate);
 						}
 						model.put("record", recordToValidate);
 						isValidForFetch = false;
 					}else {
 						//this step is required for the FETCH-step since we want to get the newly created record for upcoming updates...
-						if(mode.equals(this.MODE_INSERT)) {
+						if(mode.equals(SadDigitollConstants.DB_MODE_INSERT)) {
 							emlnrt = String.valueOf(recordToValidate.getEmlnrt());
 							emlnrm = String.valueOf(recordToValidate.getEmlnrm());
 						}
@@ -608,7 +606,7 @@ public class TvinnSadDigitollv2MasterController {
 						retval = -1;
 						break;
 					}else {
-						if(mode.equals(this.MODE_INSERT)) {
+						if(mode.equals(SadDigitollConstants.DB_MODE_INSERT)) {
 							recordToValidate.setEmlnrt(record.getId());
 							recordToValidate.setEmlnrm(record.getId2());
 						}
@@ -831,18 +829,18 @@ public class TvinnSadDigitollv2MasterController {
 		//Sender - communication
 		if(StringUtils.isNotEmpty(recordToValidate.getOwn_emems_email())){
 			recordToValidate.setEmems(recordToValidate.getOwn_emems_email());
-			recordToValidate.setEmemst(this.TYPE_EMAIL);	
+			recordToValidate.setEmemst(SadDigitollConstants.API_TYPE_EMAIL);	
 		}else {
 			recordToValidate.setEmems(recordToValidate.getOwn_emems_telephone());
-			recordToValidate.setEmemst(this.TYPE_TELEPHONE);
+			recordToValidate.setEmemst(SadDigitollConstants.API_TYPE_TELEPHONE);
 		}
 		//Receiver - communication
 		if(StringUtils.isNotEmpty(recordToValidate.getOwn_ememm_email())){
 			recordToValidate.setEmemm(recordToValidate.getOwn_ememm_email());
-			recordToValidate.setEmemmt(this.TYPE_EMAIL);	
+			recordToValidate.setEmemmt(SadDigitollConstants.API_TYPE_EMAIL);	
 		}else {
 			recordToValidate.setEmemm(recordToValidate.getOwn_ememm_telephone());
-			recordToValidate.setEmemmt(this.TYPE_TELEPHONE);
+			recordToValidate.setEmemmt(SadDigitollConstants.API_TYPE_TELEPHONE);
 		}
 		
 		//Register date

@@ -68,6 +68,7 @@ import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
+import no.systema.tvinn.sad.digitollv2.util.SadDigitollConstants;
 import no.systema.tvinn.sad.digitollv2.validator.TransportValidator;
 import no.systema.tvinn.sad.manifest.express.filter.SearchFilterManifestList;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
@@ -100,10 +101,6 @@ public class TvinnSadDigitollv2TransportController {
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
 	DateTimeManager dateMgr = new DateTimeManager();
 	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
-	private final String MODE_UPDATE = "U";
-	private final String MODE_INSERT = "A";
-	private final String TYPE_EMAIL = "EM";
-	private final String TYPE_TELEPHONE = "TE";
 	
 	
 	@PostConstruct
@@ -285,9 +282,9 @@ public class TvinnSadDigitollv2TransportController {
 			    	String mode = "NA";
 					//Update
 					if(StringUtils.isNotEmpty(etlnrt) ){
-						mode = this.MODE_UPDATE;
+						mode = SadDigitollConstants.DB_MODE_UPDATE;
 					}else {
-						mode = this.MODE_INSERT;
+						mode = SadDigitollConstants.DB_MODE_INSERT;
 					}
 					StringBuffer errMsg = new StringBuffer();
 					int dmlRetval = 0;
@@ -296,14 +293,14 @@ public class TvinnSadDigitollv2TransportController {
 						//error on update
 						model.put("errorMessage", errMsg.toString());
 						//put all aspects (sub-lists) only with update (not insert) error
-						if(this.MODE_UPDATE.equals(mode)){
+						if(SadDigitollConstants.DB_MODE_UPDATE.equals(mode)){
 							this.setRecordAspects(appUser, recordToValidate);
 						}
 						model.put("record", recordToValidate);
 						isValidForFetch = false;
 					}else {
 						//this step is required for the FETCH-step since we want to get the newly created record for upcoming updates...
-						if(mode.equals(this.MODE_INSERT)) {
+						if(mode.equals(SadDigitollConstants.DB_MODE_INSERT)) {
 							etlnrt = String.valueOf(recordToValidate.getEtlnrt());
 						}
 					}
@@ -485,7 +482,7 @@ public class TvinnSadDigitollv2TransportController {
 						retval = -1;
 						break;
 					}else {
-						if(mode.equals(this.MODE_INSERT)) {
+						if(mode.equals(SadDigitollConstants.DB_MODE_INSERT)) {
 							recordToValidate.setEtlnrt(record.getId());
 						}
 					}
@@ -745,26 +742,26 @@ public class TvinnSadDigitollv2TransportController {
 		//Driver - communication
 		if(StringUtils.isNotEmpty(recordToValidate.getEtems())){
 			if(recordToValidate.getEtems().contains("@")) {
-				recordToValidate.setEtemst(this.TYPE_EMAIL);
+				recordToValidate.setEtemst(SadDigitollConstants.API_TYPE_EMAIL);
 			}else {
-				recordToValidate.setEtemst(this.TYPE_TELEPHONE);
+				recordToValidate.setEtemst(SadDigitollConstants.API_TYPE_TELEPHONE);
 			}
 		}
 		//Representative - communication
 		if(StringUtils.isNotEmpty(recordToValidate.getOwn_etemr_email())){
 			recordToValidate.setEtemr(recordToValidate.getOwn_etemr_email());
-			recordToValidate.setEtemrt(this.TYPE_EMAIL);	
+			recordToValidate.setEtemrt(SadDigitollConstants.API_TYPE_EMAIL);	
 		}else {
 			recordToValidate.setEtemr(recordToValidate.getOwn_etemr_telephone());
-			recordToValidate.setEtemrt(this.TYPE_TELEPHONE);
+			recordToValidate.setEtemrt(SadDigitollConstants.API_TYPE_TELEPHONE);
 		}
 		//Carrier - communication
 		if(StringUtils.isNotEmpty(recordToValidate.getOwn_etemt_email())){
 			recordToValidate.setEtemt(recordToValidate.getOwn_etemt_email());
-			recordToValidate.setEtemtt(this.TYPE_EMAIL);	
+			recordToValidate.setEtemtt(SadDigitollConstants.API_TYPE_EMAIL);	
 		}else {
 			recordToValidate.setEtemt(recordToValidate.getOwn_etemt_telephone());
-			recordToValidate.setEtemtt(this.TYPE_TELEPHONE);
+			recordToValidate.setEtemtt(SadDigitollConstants.API_TYPE_TELEPHONE);
 		}
 		
 		//Register date

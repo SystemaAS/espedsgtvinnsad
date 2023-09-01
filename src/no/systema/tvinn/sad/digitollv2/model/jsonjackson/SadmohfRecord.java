@@ -55,6 +55,9 @@ public class SadmohfRecord extends JsonAbstractGrandFatherRecord   {
 	private String ehpbs = ""; //      tegn           15      15       560        begge    postbox avsender   
 	private String ehems = ""; //      tegn           50      50       575        begge    epost/tlf avsender 
 	private String ehemst = ""; //     tegn            2       2       625        begge    kodetype mottaker  
+	private String own_ehems_telephone = ""; // 
+	private String own_ehems_email = ""; // 
+	
 	private Integer ehknm = 0; //      sonet        8  0       8       627        begge    mottaker           
 	private String ehrgm = ""; //      tegn           17      17       635        begge    org.nr mottaker
 	private Integer ehtppm = 0;   //sonet           1   Type of person
@@ -67,7 +70,10 @@ public class SadmohfRecord extends JsonAbstractGrandFatherRecord   {
 	private String ehlkm = ""; //      tegn            2       2       790        begge    l.kode mottaker     
 	private String ehpbm = ""; //      tegn           15      15       792        begge    postbox mottaker    
 	private String ehemm = ""; //      tegn           50      50       807        begge    ep.adr/tlf mottaker 
-	private String ehemmt = ""; //     tegn            2       2       857        begge    kodetype mottaker   
+	private String ehemmt = ""; //     tegn            2       2       857        begge    kodetype mottaker 
+	private String own_ehemm_telephone = ""; // 
+	private String own_ehemm_email = ""; // 
+	
 	private String ehlka = ""; //      tegn            2       2       859        begge    land of acceptance  
 	private String ehsda = ""; //      tegn            5       5       861        begge    place of acceptance 
 	private String ehsdat = ""; //     tegn           30      30       866        begge    place of delivery   

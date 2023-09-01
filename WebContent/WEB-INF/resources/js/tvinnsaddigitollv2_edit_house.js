@@ -36,10 +36,8 @@
     });
     
     jq('#sendButton').click(function() { 
-    	var status = "S";
-    	
     	setBlockUI();
-		window.location = 'tvinnsadmanifest_send.do?efuuid=' + jq('#efuuid').val() + '&efpro=' + jq('#efpro').val() + '&efst2=' + status;
+		window.location = 'tvinnsaddigitollv2_api_send_house.do?ehlnrt=' + jq('#ehlnrt').val() + '&ehlnrm=' + jq('#ehlnrm').val() + '&ehlnrh=' + jq('#ehlnrh').val()+ '&ehmid=' + jq('#ehmid').val();
     });
     
     jq('#imgManifestIdInfo').click(function() { 
@@ -67,16 +65,69 @@
 	  });
 	  
 	  //custom validity
-	    jq('#efeta').focus(function() {
-	    	if(jq('#efeta').val()!=''){
-	    		refreshCustomValidity(jq('#efeta')[0]);
+	    jq('#ehavd').focus(function() {
+	    	if(jq('#ehavd').val()!=''){
+	    		refreshCustomValidity(jq('#ehavd')[0]);
 	  		}
 	  	});
-	    jq('#efsjadt').focus(function() {
-	    	if(jq('#efsjadt').val()!=''){
-	    		refreshCustomValidity(jq('#efsjadt')[0]);
+	    jq('#ehpro').focus(function() {
+	    	if(jq('#ehpro').val()!=''){
+	    		refreshCustomValidity(jq('#ehpro')[0]);
 	  		}
 	  	});
+		jq('#ehtdn').focus(function() {
+	    	if(jq('#ehtdn').val()!=''){
+	    		refreshCustomValidity(jq('#ehtdn')[0]);
+	  		}
+	  	});
+		jq('#ehvkb').focus(function() {
+	    	if(jq('#ehvkb').val()!=''){
+	    		refreshCustomValidity(jq('#ehvkb')[0]);
+	  		}
+	  	});
+	    jq('#ehntk').focus(function() {
+	    	if(jq('#ehntk').val()!=''){
+	    		refreshCustomValidity(jq('#ehntk')[0]);
+	  		}
+	  	});
+
+		jq('#ehcnin').focus(function() {
+	    	if(jq('#ehcnin').val()!=''){
+	    		refreshCustomValidity(jq('#ehcnin')[0]);
+	  		}
+	  	});
+		jq('#ehvt').focus(function() {
+	    	if(jq('#ehvt').val()!=''){
+	    		refreshCustomValidity(jq('#ehvt')[0]);
+	  		}
+	  	});
+		jq('#ehprt').focus(function() {
+	    	if(jq('#ehprt').val()!=''){
+	    		refreshCustomValidity(jq('#ehprt')[0]);
+	  		}
+	  	});
+
+		jq('#ehtpps').focus(function() {
+	    	if(jq('#ehtpps').val()!=''){
+	    		refreshCustomValidity(jq('#ehtpps')[0]);
+	  		}
+	  	});
+		jq('#ehnas').focus(function() {
+	    	if(jq('#ehnas').val()!=''){
+	    		refreshCustomValidity(jq('#ehnas')[0]);
+	  		}
+	  	});
+		jq('#ehtppm').focus(function() {
+	    	if(jq('#ehtppm').val()!=''){
+	    		refreshCustomValidity(jq('#ehtppm')[0]);
+	  		}
+	  	});
+		jq('#ehnam').focus(function() {
+	    	if(jq('#ehnam').val()!=''){
+	    		refreshCustomValidity(jq('#ehnam')[0]);
+	  		}
+	  	});
+	    
 	  
 	  
 	  //CHILD-WINDOWS
@@ -274,6 +325,28 @@ jq(function() {
 		  jq("#"+id).attr(('target','_blank'));
 		  //default url
 		  var controllerUrl = "tvinnsaddigitollv2_childwindow_manifestinfo.do?id=" + id +"&level=h";
+		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
+			
+	  });
+  });
+
+
+  jq(function() {
+	  jq(".logLink").click(function() {
+		  var tmp = this.id;
+		  console.log(tmp);
+		  var idRecord = tmp.split('_');
+				  console.log(idRecord);
+		  var id = idRecord[0];
+		  console.log(id);
+		  var id2 = idRecord[1];
+		  console.log(id);
+		  var id3 = idRecord[2];
+		  console.log(id);
+
+		  jq("#"+id).attr(('target','_blank'));
+		  //default url
+		  var controllerUrl = "tvinnsaddigitollv2_childwindow_loginfo.do?id1=" + id + "&id2=" + id2 + "&id3=" + id3 + "&level=h";
 		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
 			
 	  });

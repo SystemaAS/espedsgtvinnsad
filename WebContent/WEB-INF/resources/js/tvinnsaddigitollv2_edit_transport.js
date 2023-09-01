@@ -537,7 +537,7 @@
     	jq('.dataTables_filter input').addClass("inputText12LightYellow");
     	}
     });
-	jq("div.toolbar").html('<span class="text16">Hovedforsendelser - Master Consignments</span>');
+	jq("div.toolbar").html('<span class="text16">Turer - Hovedforsendelser - Master Consignments</span>');
     
 //event on input field for search
     jq('input.mainList_filter').on( 'keyup click', function () {

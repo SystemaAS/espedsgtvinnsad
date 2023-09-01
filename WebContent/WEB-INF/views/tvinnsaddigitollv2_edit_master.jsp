@@ -46,7 +46,7 @@
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td title="${model.record.emlnrm}" width="15%" valign="bottom" class="tab" align="center" nowrap>
 						<font class="tabLink">
-							&nbsp;Master
+							&nbsp;<spring:message code="systema.tvinn.sad.digitoll.list.tab.master"/>
 						</font>
 						<img src="resources/images/update.gif" border="0" alt="edit">
 						<c:if test="${model.record.emlnrm > 0}">
@@ -54,14 +54,15 @@
 						</c:if>
 						
 					</td>
-					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<a id="alinkHeader" style="display:block;" href="tvinnsaddigitollv2_edit_house.do?action=doCreate&ehlnrt=${model.record.emlnrt}&ehlnrm=${model.record.emlnrm}">
-							<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.createnew"/>&nbsp;House</font>
-							<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
-						</a>
-					</td>
-					
+					<c:if test="${model.record.emlnrm > 0}">
+						<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
+						<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
+							<a id="alinkHeader" style="display:block;" href="tvinnsaddigitollv2_edit_house.do?action=doCreate&ehlnrt=${model.record.emlnrt}&ehlnrm=${model.record.emlnrm}">
+								<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.createnew"/>&nbsp;<spring:message code="systema.tvinn.sad.digitoll.list.tab.house"/></font>
+								<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
+							</a>
+						</td>
+					</c:if>
 					
 					<%-- <td width="50%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>  --%>
 			 		<td width="60%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
@@ -105,9 +106,6 @@
 			<input type="hidden" name="action" id="action" value="doUpdate">
 			
 			<c:if test="${model.record.emlnrm > 0}">
-				<input type="hidden" name="emsg" id="emsg" value="${model.record.emsg}">
-				<input type="hidden" name="emavd" id="emavd" value="${model.record.emavd}"> 
-				<input type="hidden" name="empro" id="empro" value="${model.record.empro}">
 				<input type="hidden" name="emlnrm" id="emlnrm" value="${model.record.emlnrm}"> 
 			</c:if>
 			 
@@ -179,20 +177,67 @@
 				</tr>
 			</c:if>
 			 --%>
-			 
-		<tr>	
-			<td colspan="10" class="text14 formFrame" >
-        		MRN-Api:&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.emmid}">${model.record.emmid}</a>&nbsp;&nbsp;&nbsp;
-        		Id:&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.emuuid}">${model.record.emuuid}</a>
-       		</td>
-       		
+		
+			<tr height="5">	
+  			<td  colspan="10" class="text14 formFrame" >
+			<table style="width:100%">
+			<tr >
+				<td class="text14" align="left" >
+		    		MRN-Api&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.emmid}">${model.record.emmid}</a>
+		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
+		    		Id&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.emuuid}">${model.record.emuuid}</a>
+		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
+		    		
+		    		<a title="lese logg" tabindex=-1 id="${model.record.emlnrt}_${model.record.emlnrm}" class="logLink" runat="server" href="#"><font class="text14 ">Master.st - log</font>&nbsp;
+						<c:choose>
+						<c:when test="${model.record.emst2 == 'S' || model.record.emst2 == 'R' || model.record.emst2 == 'D' || model.record.emst2 == 'C'}">
+							<c:if test="${model.record.emst2 == 'S'}">
+								<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
+								<font style="color:gray;">SUBMITTED</font>
+							</c:if>
+							<c:if test="${model.record.emst2 == 'C'}">
+								<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
+								<font style="color:gray;">COMPLETED</font>
+							</c:if>
+							<c:if test="${model.record.emst2 == 'D'}">
+								<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
+								<font style="color:red;">SLETTET</font>
+							</c:if>
+							<c:if test="${model.record.emst2 == 'R'}">
+								<font style="color:brown;">REOPENED/DRAFT</font>
+							</c:if>
+						</c:when>
+						<c:otherwise>
+							<c:choose>
+							<c:when test="${model.record.emst2 == 'M'}">
+								<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
+								<font style="color:red">ERROR&nbsp;</font>
+							</c:when>
+							<c:otherwise>
+								<font style="color:gray;">${model.record.emst2}&nbsp;</font>
+							</c:otherwise>
+							</c:choose>
+						</c:otherwise>
+						</c:choose>
+					</a>&nbsp;
+		   		</td>
+	   		</tr>
+	   		</table>
+	   		</td>
+	   		
 		</tr>
+		<tr height="5"><td></td></tr>
+		
+		
+		
+		
 		<tr>
 			<td colspan="3" class="text14" valign="top">
 				<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">
 					<tr height="5"><td></td></tr>
 					
 					<tr>
+						<td class="text14">&nbsp;<span title="emsg">Sign</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emavd">Avd</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="empro">Tur</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emvkb">Bruttovekt</span><font class="text16RedBold" >*</font></td>
@@ -210,24 +255,17 @@
 												
 					</tr>
 					<tr>
-						<c:choose>
-							<c:when test="${model.record.emlnrm > 0}">
-								<td class="text14">
-									<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="emavd" id="emavd" size="5" maxlength="4" value="${model.record.emavd}">									
-								</td>
-								<td class="text14">
-									<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="empro" id="empro" size="10" maxlength="8" value="${model.record.empro}">									
-								</td>		
-							</c:when>
-							<c:otherwise>
-								<td class="text14">
-									<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="emavd" id="emavd" size="5" maxlength="4" value="${model.record.emavd}">									
-								</td>
-								<td class="text14">
-									<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="empro" id="empro" size="10" maxlength="8" value="${model.record.empro}">									
-								</td>
-							</c:otherwise>
-						</c:choose>	
+						
+						<td class="text14">
+							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="emsg" id="emsg" size="5" maxlength="4" value="${model.record.emsg}">									
+						</td>
+						<td class="text14">
+							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="emavd" id="emavd" size="5" maxlength="4" value="${model.record.emavd}">									
+						</td>
+						<td class="text14">
+							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="empro" id="empro" size="10" maxlength="8" value="${model.record.empro}">									
+						</td>		
+							
 						<td class="text14">
 							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="emvkb" id="emvkb" size="11" maxlength="9" value="${model.record.emvkb}">									
 						</td>
@@ -444,17 +482,17 @@
 									<c:choose>
 				 					<c:when test="${model.record.ememst == 'EM'}">
 				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_emems_email" id="own_emems_email" size="35" maxlength="50" value="${model.record.emems}"></td>
-				 						<td class="text14"><input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="own_emems_telephone" id="own_emems_telephone" size="35" maxlength="50" value=""></td>
+				 						<td class="text14"><input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="own_emems_telephone" id="own_emems_telephone" size="15" maxlength="50" value=""></td>
 				 					</c:when>
 				 					<c:otherwise>
 				 						<c:choose>
 						 					<c:when test="${empty model.record.ememst}">
 						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_emems_email" id="own_emems_email" size="35" maxlength="50" value=""></td>
-						 						<td class="text14"><input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="own_emems_telephone" id="own_emems_telephone" size="35" maxlength="50" value=""></td>
+						 						<td class="text14"><input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="own_emems_telephone" id="own_emems_telephone" size="15" maxlength="50" value=""></td>
 						 					</c:when>
 						 					<c:otherwise>
 						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_emems_email" id="own_emems_email" size="35" maxlength="50" value=""></td>
-												<td class="text14"><input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="own_emems_telephone" id="own_emems_telephone" size="35" maxlength="50" value="${model.record.emems}"></td>
+												<td class="text14"><input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="own_emems_telephone" id="own_emems_telephone" size="15" maxlength="50" value="${model.record.emems}"></td>
 											</c:otherwise>
 										</c:choose>
 									</c:otherwise>
@@ -541,17 +579,17 @@
 									<c:choose>
 				 					<c:when test="${model.record.ememmt == 'EM'}">
 				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_ememm_email" id="own_ememm_email" size="35" maxlength="50" value="${model.record.ememm}"></td>
-				 						<td class="text14"><input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="own_ememm_telephone" id="own_ememm_telephone" size="35" maxlength="50" value=""></td>
+				 						<td class="text14"><input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="own_ememm_telephone" id="own_ememm_telephone" size="15" maxlength="50" value=""></td>
 				 					</c:when>
 				 					<c:otherwise>
 				 						<c:choose>
 						 					<c:when test="${empty model.record.ememmt}">
 						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_ememm_email" id="own_ememm_email" size="35" maxlength="50" value=""></td>
-						 						<td class="text14"><input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="own_ememms_telephone" id="own_ememm_telephone" size="35" maxlength="50" value=""></td>
+						 						<td class="text14"><input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="own_ememms_telephone" id="own_ememm_telephone" size="15" maxlength="50" value=""></td>
 						 					</c:when>
 						 					<c:otherwise>
 						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_ememm_email" id="own_ememm_email" size="35" maxlength="50" value=""></td>
-												<td class="text14"><input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="own_ememm_telephone" id="own_ememm_telephone" size="35" maxlength="50" value="${model.record.ememm}"></td>
+												<td class="text14"><input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="own_ememm_telephone" id="own_ememm_telephone" size="15" maxlength="50" value="${model.record.ememm}"></td>
 											</c:otherwise>
 										</c:choose>
 									</c:otherwise>
@@ -605,13 +643,13 @@
 
 	<%-- list component --%>
 	<tr>
-		<td>		
-		<table style="width:90%" border="0" >
+		<td >		
+		<table style="width:100%" border="0" >
 	    	<%-- separator --%>
 	        <tr height="2"><td>&nbsp;</td></tr>  
 			<tr>
 				<td>
-				<table style="width:90%;" id="containerdatatableTable" cellspacing="2" align="left" >
+				<table style="width:100%" id="containerdatatableTable" cellspacing="2" align="left" >
 				<tr>
 				<td class="text11">
 							

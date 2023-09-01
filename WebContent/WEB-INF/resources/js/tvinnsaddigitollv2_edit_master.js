@@ -318,7 +318,20 @@ jq(function() {
 			
 	  });
   });
+  jq(function() {
+	  jq(".logLink").click(function() {
+		  var tmp = this.id;
+		  var idRecord = tmp.split('_');		
+		  var id = idRecord[0];
+		  var id2 = idRecord[1];
 
+		  jq("#"+id).attr(('target','_blank'));
+		  //default url
+		  var controllerUrl = "tvinnsaddigitollv2_childwindow_loginfo.do?id1=" + id + "&id2=" + id2 + "&level=m";
+		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
+			
+	  });
+  });
 
 //-------------------
   //Datatables jquery
@@ -347,7 +360,7 @@ jq(function() {
     	}
     });
 
-	jq("div.toolbar").html('<span class="text16">House Consignments</span>');
+	jq("div.toolbar").html('<span class="text16">Oppdrag - House Consignments</span>');
     
 //event on input field for search
     jq('input.mainList_filter').on( 'keyup click', function () {

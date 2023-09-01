@@ -45,7 +45,7 @@
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a id="alinkHeader" style="display:block;" href="tvinnsaddigitollv2_edit_master.do?action=doCreate&emlnrt=${model.record.etlnrt}">
-							<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.createnew"/>&nbsp;Master</font>
+							<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.createnew"/>&nbsp;<spring:message code="systema.tvinn.sad.digitoll.list.tab.master"/></font>
 							<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
 						</a>
 					</td>
@@ -92,9 +92,6 @@
 			<input type="hidden" name="action" id="action" value="doUpdate">
 			
 			<c:if test="${model.record.etlnrt > 0}">
-				<input type="hidden" name="etsg" id="etsg" value="${model.record.etsg}">
-				<input type="hidden" name="etavd" id="etavd" value="${model.record.etavd}"> 
-				<input type="hidden" name="etpro" id="etpro" value="${model.record.etpro}">
 				<input type="hidden" name="etlnrt" id="etlnrt" value="${model.record.etlnrt}"> 
 			
 			</c:if>
@@ -184,27 +181,28 @@
 			<table style="width:100%">
 			<tr >
 				<td class="text14" align="left" >
-		    		MRN-Api:&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.etmid}">${model.record.etmid}</a>&nbsp;&nbsp;&nbsp;
-		    		Id:&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.etuuid}">${model.record.etuuid}</a>&nbsp;&nbsp;&nbsp;
-		    	</td>
-		    	<td class="text14" align="right">
-		    		<a cursor:pointer" title="lese logg" tabindex=-1 id="${model.record.etlnrt}" class="logLink" runat="server" href="#">Manifest status - log&nbsp;
+		    		MRN-Api&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.etmid}">${model.record.etmid}</a>
+		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
+		    		Id&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.etuuid}">${model.record.etuuid}</a>
+		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
+		    		
+		    		<a title="lese logg" tabindex=-1 id="${model.record.etlnrt}" class="logLink" runat="server" href="#"><font class="text14 ">Manif.st - log</font>&nbsp;
 						<c:choose>
 						<c:when test="${model.record.etst2 == 'S' || model.record.etst2 == 'R' || model.record.etst2 == 'D' || model.record.etst2 == 'C'}">
 							<c:if test="${model.record.etst2 == 'S'}">
 								<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
-								<font style="color:#FFFFCC;">SUBMITTED</font>
+								<font style="color:gray;">SUBMITTED</font>
 							</c:if>
 							<c:if test="${model.record.etst2 == 'C'}">
 								<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
-								<font style="color:#FFFFCC;">COMPLETED</font>
+								<font style="color:gray;">COMPLETED</font>
 							</c:if>
 							<c:if test="${model.record.etst2 == 'D'}">
 								<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
 								<font style="color:red;">SLETTET</font>
 							</c:if>
 							<c:if test="${model.record.etst2 == 'R'}">
-								<font style="color:#FFFFFF;">REOPENED/DRAFT</font>
+								<font style="color:brown;">REOPENED/DRAFT</font>
 							</c:if>
 						</c:when>
 						<c:otherwise>
@@ -214,7 +212,7 @@
 								<font style="color:red">ERROR&nbsp;</font>
 							</c:when>
 							<c:otherwise>
-								<font style="color:#606060;">${model.record.etst2}&nbsp;</font>
+								<font style="color:gray;">${model.record.etst2}&nbsp;</font>
 							</c:otherwise>
 							</c:choose>
 						</c:otherwise>
@@ -602,12 +600,12 @@
 	<%-- list component --%>
 	<tr>
 		<td>		
-		<table style="width:100%;" border="0" >
+		<table style="width:100%" border="0" >
 	    	<%-- separator --%>
 	        <tr height="2"><td>&nbsp;</td></tr> 
 			<tr>
 				<td>
-				<table style="width:100%;" id="containerdatatableTable" cellspacing="2" align="left" >
+				<table style="width:100%" id="containerdatatableTable" cellspacing="2" align="left" >
 				<tr>
 				<td class="text11">
 							

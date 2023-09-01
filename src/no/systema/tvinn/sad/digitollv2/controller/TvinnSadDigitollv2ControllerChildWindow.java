@@ -158,6 +158,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		String id2 = request.getParameter("id2");
 		String id3 = request.getParameter("id3");
 		String level = request.getParameter("level");
+		logger.info(id1 + id2 + id3 + level);
 		
 		
 		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_loginfo");
