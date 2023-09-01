@@ -524,10 +524,17 @@ public class TvinnSadDigitollv2HouseController {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param recordToValidate
+	 */
 	private void adjustFieldsForUpdate(SadmohfRecord recordToValidate){
 		String HYPHEN = "-";
 		//House Document number and type (under fraktbrev for house nr API)
-		recordToValidate.setEhdkh(recordToValidate.getEhrg() + HYPHEN + recordToValidate.getEh0068a() + HYPHEN + recordToValidate.getEh0068b());
+		String tmpEhrg = recordToValidate.getEhrg() + HYPHEN + StringUtils.leftPad(String.valueOf(recordToValidate.getEhavd()),4,"0") + 
+													  HYPHEN + StringUtils.leftPad(String.valueOf(recordToValidate.getEhtdn()),7,"0");
+		recordToValidate.setEhdkh(tmpEhrg);
+		
 		
 		//Sender - communication
 		if(StringUtils.isNotEmpty(recordToValidate.getOwn_ehems_email())){
@@ -548,9 +555,11 @@ public class TvinnSadDigitollv2HouseController {
 		
 	}
 	
-	
-	
-	
+	/**
+	 * 
+	 * @param appUser
+	 * @param record
+	 */
 	private void getItemLines(SystemaWebUser appUser, SadmohfRecord record) {
 		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_ITEMLINES_URL;
 		//add URL-parameters
