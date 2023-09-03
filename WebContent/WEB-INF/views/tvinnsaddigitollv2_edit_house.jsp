@@ -337,24 +337,33 @@
 					<td >
 					<table>
 					<tr>
-						<td width="50%" valign="top">
-						<table id="tblDirektfortolling" width="100%" class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="0">
+						<td style="width:80%" valign="top">
+						<table id="tblDirektfortolling" style="width:100%"  class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="0">
 			 			<tr >
 							<td class="text16"><b>&nbsp;Direktefortolling</b></td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td class="text16"><b>&nbsp;Transitering</b></td>
+							
 						<tr >
 			 			<tr>
 			 				<td class="text14">&nbsp;<span title="ehrg">Deklarantnr.<font class="text16RedBold" >*</font></span></td>
 							<td class="text14">&nbsp;<span title="eh0068a">Dato<font class="text16RedBold" >*</font></span></td>
 							<td class="text14">&nbsp;<span title="eh0068b">Sekvensnr.<font class="text16RedBold" >*</font></span></td>
+							<td class="text14">&nbsp;<span title="ehtrnr">MRNnr.<font class="text16RedBold" >*</font></span></td>
 						</tr>
 						<tr>
 							<td class="text14"><input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="ehrg" id="ehrg" size="12" maxlength="11" value="${model.record.ehrg}"></td>
 			 				<td class="text14"><input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="eh0068a" id="eh0068a" size="10" maxlength="8" value='<c:if test="${model.record.eh0068a!='0'}">${model.record.eh0068a}</c:if>'></td>
 			 				<td class="text14"><input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="eh0068b" id="eh0068b" size="8" maxlength="6" value='<c:if test="${model.record.eh0068b!='0'}">${model.record.eh0068b}</c:if>'></td>
+			 				<td class="text14"><input type="text" class="inputTextMediumBlue toggleTransit" name="ehtrnr" id="ehtrnr" size="20" maxlength="18" value="${model.record.ehtrnr}"></td>
 						</tr>
+						<tr height="5"><td></td></tr>
+						
 						<tr >
 							<td class="text14">&nbsp;<span title="ehetypt">Eksporttype<font class="text16RedBold" >*</font></span></td>
-							<td colspan="2" class="text14">&nbsp;<span title="eheid">Eksp.id<font class="text16RedBold" >*</font></span></td>							
+							<td class="text14">&nbsp;<span title="eheid">Eksp.id<font class="text16RedBold" >*</font></span></td>	
+							<td>&nbsp;</td>						
 						</tr>
 						
 						<tr>
@@ -366,39 +375,23 @@
 									</c:forEach>
 								</select>
 				 			</td>
-				 			<td colspan="2" class="text14"><input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="eheid" id="eheid" size="21" maxlength="18" value="${Xmodel.record.eheid}">
+				 			<td class="text14">
+				 					<input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="eheid" id="eheid" size="21" maxlength="18" value="${Xmodel.record.eheid}">
+				 			</td>
+				 			<td class="text14">		
 				 					<input class="inputFormSubmitStd" type="button" name="manyExpIdButton" id="manyExpIdButton" value='Lage flere Eksp.id'>
 				 					<img style="cursor:pointer;vertical-align: middle;" src="resources/images/add.png" width="12px" height="12px" border="0" alt="create new" >
 				 			</td>
 				 								 			
 						</tr>
 						<tr height="5"><td></td></tr>
+						
 						</table>
 						</td>
-						
-						<td width="50%" valign="top" >
-						<table id="tblTransit" width="100%" class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="0">
-			 			<tr >
-							<td class="text16"><b>&nbsp;Transitering</b></td>
-						<tr >
-			 			<tr >
-			 				<td class="text14">&nbsp;<span title="cltrnr">MRNnr.<font class="text16RedBold" >*</font></span></td>
-							<td class="text14">&nbsp;<span title="clnas">Avsender<font class="text16RedBold" >*</font></span></td>
-							<td class="text14">&nbsp;<span title="clnak">Mottaker<font class="text16RedBold" >*</font></span></td>
-				 		</tr>
-				 		<tr>
-							<td class="text14"><input type="text" class="inputTextMediumBlue toggleTransit" name="cltrnr" id="cltrnr" size="20" maxlength="18" value="${Xmodel.record.cltrnr}"></td>
-				 			<td class="text14"><input type="text" class="inputTextMediumBlue toggleTransit" name="clnas" id="clnas" size="20" maxlength="30" value="${Xmodel.record.clnas}"></td>
-				 			<td class="text14"><input type="text" class="inputTextMediumBlue toggleTransit" name="clnak" id="clnak" size="20" maxlength="30" value="${Xmodel.record.clnak}"></td>
-				 		</tr>
-				 		<tr height="51"><td></td></tr>
-			 			</table>
-			 			</td>	
 					</tr>
 					</table>
 					</td>
 					</tr>
-					
 					<tr height="2"><td>&nbsp;</td></tr>
 					
 					<tr>
