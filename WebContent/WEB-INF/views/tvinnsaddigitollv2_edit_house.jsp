@@ -310,23 +310,39 @@
 							<td class="text14">&nbsp;<span title="ehuprt">Eksp.prosedyr</span></td>
 						</tr>
 						<tr>
-						<td colspan="3" class="text14">
-							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ehprt" id="ehprt" size="30" maxlength="30" value="${model.record.ehprt}">
-							
-							<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="ehprt" id="ehprt" >
-		 						<option value="">-velg-</option>
-				 				  	<c:forEach var="record" items="${Xmodel.prTypeList}" >
-				 				  		<%--filter the goodsregistrering (03) so far --%>
-				 				  		<c:if test="${Xrecord.kfkod != '03'}">
-			                       	 		<option title="${Xrecord.kftxt}" value="${Xrecord.kfkod}" <c:if test="${Xmodel.record.ehprt == record.kfkod}"> selected </c:if> >${xrecord.kfkod}&nbsp;${xrecord.kftxt}</option>
-			                       	 	</c:if>
-									</c:forEach>
-							</select>
-									
-						</td>
-						<td class="text14">
-							<input  type="text" class="inputTextMediumBlue" name="ehuprt" id="ehuprt" size="30" maxlength="30" value="${model.record.ehuprt}">		
-						</td>
+							<td colspan="3" class="text14">
+								<select class="inputTextMediumBlueMandatoryField" id="ehprt" name="ehprt">
+								  	<option title="Overgang til fri disponering" value="IMMEDIATE_RELEASE_IMPORT" <c:if test="${model.record.ehprt == 'IMMEDIATE_RELEASE_IMPORT'}"> selected </c:if> >IMMEDIATE_RELEASE_IMPORT</option> 
+									<option title="Transittering" value="TRANSIT_IMPORT" <c:if test="${model.record.ehprt == 'TRANSIT_IMPORT'}"> selected </c:if> >TRANSIT_IMPORT</option> 
+									<option title="Oppstart transittering" value="TRANSIT_RELEASE" <c:if test="${model.record.ehprt == 'TRANSIT_RELEASE'}"> selected </c:if> >TRANSIT_RELEASE</option> 
+									<option title="Samlefortolling" value="WAREHOUSE_RELEASE" <c:if test="${model.record.ehprt == 'WAREHOUSE_RELEASE'}"> selected </c:if> >WAREHOUSE_RELEASE</option> 
+									<option title="Innlegg på tollager" value="WAREHOUSE_RELEASE_RELAXATIONS" <c:if test="${model.record.ehprt == 'WAREHOUSE_RELEASE_RELAXATIONS'}"> selected </c:if> >WAREHOUSE_RELEASE_RELAXATIONS</option>
+									<option title="VOEC-sendinger" value="IMMEDIATE_RELEASE_VOEC" <c:if test="${model.record.ehprt == 'IMMEDIATE_RELEASE_VOEC'}"> selected </c:if> >IMMEDIATE_RELEASE_VOEC</option> 
+								</select>
+								
+								<%--
+								<input size="30" maxlength="30" class="selectMediumBlueE2" list="ehprt_list" id="ehprt" name="ehprt" value="${model.record.ehprt}">
+								<datalist id="ehprt_list">
+								  	<option value="">-Välj-</option>
+				 				  	<option title="Overgang til fri disponering" value="IMMEDIATE_RELEASE_IMPORT" <c:if test="${model.record.ehprt == 'IMMEDIATE_RELEASE_IMPORT'}"> selected </c:if> >${model.record.ehprt}</option> 
+									<option title="Transittering" value="TRANSIT_IMPORT" <c:if test="${model.record.ehprt == 'TRANSIT_IMPORT'}"> selected </c:if> >${model.record.ehprt}</option> 
+									<option title="Oppstart transittering" value="TRANSIT_RELEASE" <c:if test="${model.record.ehprt == 'TRANSIT_RELEASE'}"> selected </c:if> >${model.record.ehprt}</option> 
+									<option title="VOEC-sendinger" value="IMMEDIATE_RELEASE_VOEC" <c:if test="${model.record.ehprt == 'IMMEDIATE_RELEASE_VOEC'}"> selected </c:if> >${model.record.ehprt}</option> 
+									<option title="Samlefortolling" value="WAREHOUSE_RELEASE" <c:if test="${model.record.ehprt == 'WAREHOUSE_RELEASE'}"> selected </c:if> >${model.record.ehprt}</option> 
+									<option title="Innlegg på tollager" value="WAREHOUSE_RELEASE_RELAXATIONS" <c:if test="${model.record.ehprt == 'WAREHOUSE_RELEASE_RELAXATIONS'}"> selected </c:if> >${model.record.ehprt}</option> 	
+								</datalist>
+								--%>	
+							</td>
+							<td class="text14">
+								<select class="inputTextMediumBlue" id="ehupr" name="ehupr">
+									<option value="">-Velg-</option>	
+								  	<option title="Direktefortolling - Eksport" value="EXP" <c:if test="${model.record.ehupr == 'EXP'}"> selected </c:if> >EXP</option>
+								  	<option title="Eksportene er avsluttet i avgangslandet. " value="FALSE" <c:if test="${model.record.ehupr == 'FALSE'}"> selected </c:if> >FALSE</option> 
+									<option title="Direktefortolling - Transittering" value="TRA" <c:if test="${model.record.ehupr == 'TRA'}"> selected </c:if> >TRA</option> 
+									<option title="Direktefortolling - Transittering og Eksport" value="TRE" <c:if test="${model.record.ehupr == 'TRE'}"> selected </c:if> >TRE</option> 
+									 	
+								</select>
+							</td>
 						</tr>
 						
 					</table>
@@ -340,19 +356,29 @@
 						<td style="width:80%" valign="top">
 						<table id="tblDirektfortolling" style="width:100%"  class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="0">
 			 			<tr >
-							<td class="text16"><b>&nbsp;Direktefortolling</b></td>
+							<td class="text16"><b>&nbsp;Tidligere dokumenter</b></td>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
-							<td class="text16"><b>&nbsp;Transitering</b></td>
+							<td>&nbsp;</td>
 							
 						<tr >
 			 			<tr>
-			 				<td class="text14">&nbsp;<span title="ehrg">Deklarantnr.<font class="text16RedBold" >*</font></span></td>
-							<td class="text14">&nbsp;<span title="eh0068a">Dato<font class="text16RedBold" >*</font></span></td>
-							<td class="text14">&nbsp;<span title="eh0068b">Sekvensnr.<font class="text16RedBold" >*</font></span></td>
-							<td class="text14">&nbsp;<span title="ehtrnr">MRNnr.<font class="text16RedBold" >*</font></span></td>
+			 				<td class="text14">&nbsp;<span title="ehtrty">Ref.type</span></td>
+			 				<td class="text14">&nbsp;<span title="ehrg">Deklarantnr.</span></td>
+							<td class="text14">&nbsp;<span title="eh0068a">Dato</span></td>
+							<td class="text14">&nbsp;<span title="eh0068b">Sekvensnr.</span></td>
+							<td class="text14">&nbsp;<span title="ehtrnr">MRN/LRN - Transitering</span></td>
+							
 						</tr>
 						<tr>
+							<td class="text14">
+			 					<select class="inputTextMediumBlue" id="ehtrty" name="ehtrty">
+									<option value="">-Velg-</option>	
+							  		<option title="Tolldeklarasjon" value="CUDE" <c:if test="${model.record.ehtrty == 'CUDE'}"> selected </c:if> >CUDE</option>
+							  		<option title="Transitteringsdeklarasjon" value="N820" <c:if test="${model.record.ehtrty == 'N820'}"> selected </c:if> >N820</option>
+							  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty == 'RETR'}"> selected </c:if> >RETR</option> 	
+								</select>
+		 					</td>
 							<td class="text14"><input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="ehrg" id="ehrg" size="12" maxlength="11" value="${model.record.ehrg}"></td>
 			 				<td class="text14"><input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="eh0068a" id="eh0068a" size="10" maxlength="8" value='<c:if test="${model.record.eh0068a!='0'}">${model.record.eh0068a}</c:if>'></td>
 			 				<td class="text14"><input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="eh0068b" id="eh0068b" size="8" maxlength="6" value='<c:if test="${model.record.eh0068b!='0'}">${model.record.eh0068b}</c:if>'></td>
@@ -361,22 +387,32 @@
 						<tr height="5"><td></td></tr>
 						
 						<tr >
-							<td class="text14">&nbsp;<span title="ehetypt">Eksporttype<font class="text16RedBold" >*</font></span></td>
-							<td class="text14">&nbsp;<span title="eheid">Eksp.id<font class="text16RedBold" >*</font></span></td>	
+							<td class="text14">&nbsp;<span title="ehetypt">Eksporttype</span></td>
+							<td class="text14">&nbsp;<span title="eheid">Eksp.id</span></td>	
 							<td>&nbsp;</td>						
 						</tr>
 						
 						<tr>
 							<td class="text14">
+								<select class="inputTextMediumBlue" id="ehetypt" name="ehetypt">
+									<option value="">-Velg-</option>	
+								  	<option title="Eksport fra Sverige som på forhånd er klarert" value="UGE_EXPORT" <c:if test="${model.record.ehetypt == 'UGE_EXPORT'}"> selected </c:if> >UGE_EXPORT</option>
+								  	<option title="Eksport fra Sverige. Ingen videre oppfølging for Tolletaten ifm ankomst og innpassering" value="EUEIR_EXPORT" <c:if test="${model.record.ehetypt == 'EUEIR_EXPORT'}"> selected </c:if> >EUEIR_EXPORT</option> 
+									<option title="Eksport fra Sverige. Ingen videre oppfølging for Tolletaten ifm ankomst og innpassering" <c:if test="${model.record.ehetypt == 'ALE_EXPORT'}"> selected </c:if> >ALE_EXPORT</option> 
+									<option title="Eksport fra Sverige. Medfører behov for manuell ekspedisjon på grensen." value="UNU_EXPORT" <c:if test="${model.record.ehetypt == 'UNU_EXPORT'}"> selected </c:if> >UNU_EXPORT</option> 
+									<option title="Eksport fra EU. Medfører behov for manuell ekspedisjon på grensen." value="ECS_EXPORT" <c:if test="${model.record.ehetypt == 'ECS_EXPORT'}"> selected </c:if> >ECS_EXPORT</option> 	
+								</select>
+								<%--
 				 				<select class="inputTextMediumBlue toggleDirektfortolling" name="ehetypt" id="ehetypt" >
 			 						<option value="">-velg-</option>
 				 				  	<c:forEach var="record" items="${Xmodelmodel.etTypeList}" >
 			                       	 	<option title="${Xrecord.kftxt}" value="${Xrecord.kfkod}" <c:if test="${Xmodelmodel.record.ehetypt == Xrecord.kfkod}"> selected </c:if> >${Xrecord.kfkod}&nbsp;${Xrecord.kftxt}</option>
 									</c:forEach>
 								</select>
+								 --%>
 				 			</td>
 				 			<td class="text14">
-				 					<input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="eheid" id="eheid" size="21" maxlength="18" value="${Xmodel.record.eheid}">
+				 					<input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="eheid" id="eheid" size="21" maxlength="18" value="${model.record.eheid}">
 				 			</td>
 				 			<td class="text14">		
 				 					<input class="inputFormSubmitStd" type="button" name="manyExpIdButton" id="manyExpIdButton" value='Lage flere Eksp.id'>

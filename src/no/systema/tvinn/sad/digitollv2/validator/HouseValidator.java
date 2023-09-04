@@ -8,6 +8,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import javawebparts.core.org.apache.commons.lang.StringUtils;
 import no.systema.main.util.*;
 import no.systema.main.validator.DateValidator;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
@@ -45,6 +46,23 @@ public class HouseValidator implements Validator {
 		//Logical (RULES) controls if we passed the NOT NULL errors
 		if(!errors.hasFieldErrors()){
 			if(record!=null){
+				if(StringUtils.isNotEmpty(record.getEhprt())){
+					if(record.getEhprt().startsWith("TRANSIT")){
+						if("CUDE".equals(record.getEhtrty())) {
+							errors.rejectValue("ehtrty", "systema.tvinn.sad.digitoll.house.error.rule.invalidReferenceType");
+						}
+						if(StringUtils.isNotEmpty(record.getEhrg()) || record.getEh0068a()>0 || record.getEh0068b()>0  ) {
+							errors.rejectValue("ehtrty", "systema.tvinn.sad.digitoll.house.error.rule.notrequired.deklDateSekv");
+						}
+					}else if (record.getEhprt().startsWith("IMMEDIATE")){
+						if(!"CUDE".equals(record.getEhtrty())) {
+							errors.rejectValue("ehtrty", "systema.tvinn.sad.digitoll.house.error.rule.invalidReferenceType");
+						}
+						if(StringUtils.isNotEmpty(record.getEhtrnr()) ) {
+							errors.rejectValue("ehtrty", "systema.tvinn.sad.digitoll.house.error.rule.notrequired.mrn");
+						}
+					}
+				}
 				//------
 				//dates 
 				//------
