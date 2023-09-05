@@ -289,10 +289,6 @@ public class TvinnSadDigitollv2MasterController {
 			return loginView;
 		
 		}else{
-			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
-			//appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_DIGITOLLV2);
-			//session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE);
-			
 			//==========
 			//Upd status
 			//==========
@@ -376,8 +372,6 @@ public class TvinnSadDigitollv2MasterController {
 		
 		}else{
 			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
-			//appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_DIGITOLLV2);
-			//session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE);
 			
 			//========
 			//DELETE

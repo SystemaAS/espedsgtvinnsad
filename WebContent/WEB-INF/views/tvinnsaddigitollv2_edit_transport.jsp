@@ -628,7 +628,7 @@
                 		<th width="2%" class="tableHeaderField" >MRN-Api</th>
                 		<th width="2%" class="tableHeaderField" >Req.id</th>
                 		<th title="Api-status" width="2%" class="tableHeaderField" ></th>
-                		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED" width="2%" class="tableHeaderField" >Manif.st</th>
+                		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED,M=ERROR" width="2%" class="tableHeaderField" >Manif.st</th>
                 		<th width="2%" class="tableHeaderField" title="Fjerner manifest fra Tollvesenet" >Slett</th>
                 		<th width="2%" class="tableHeaderField" title="Fjerner manifest lokalt (SYSPED)">Kans.</th>
                 		</tr>
@@ -682,16 +682,12 @@
 										</form>
 									</div>
 								</c:if>
-
-		               			
-		               			
-		               			
 		               		</c:when>
 		               		<c:otherwise>
 		               			${masterConsignmentRecord.emst}
 		               		</c:otherwise>
 		               	   </c:choose>
-		              	</td>
+		               </td>
 		               <td width="2%" align="right" class="tableCell" >${masterConsignmentRecord.emvkb}</td>
 		               <td width="2%" align="right" class="tableCell" <c:if test="${masterConsignmentRecord.emst2 == 'D'}">style="color: #9F6000;" </c:if> >${masterConsignmentRecord.emdkm}</td>
 		               <td width="2%" align="right" class="tableCell" <c:if test="${masterConsignmentRecord.emst2 == 'D'}">style="color: #9F6000;" </c:if> >${masterConsignmentRecord.emdkmt}</td>
@@ -717,7 +713,9 @@
 		               </td>
 		               <td width="2%" align="center" class="tableCell" >
 		               		<c:choose>
-		               		<c:when test="${masterConsignmentRecord.emst2 == 'S' || masterConsignmentRecord.emst2 == 'R' || masterConsignmentRecord.emst2 == 'D' || masterConsignmentRecord.emst2 == 'C'}">
+		               		<c:when test="${masterConsignmentRecord.emst2 == 'S' || masterConsignmentRecord.emst2 == 'R' || masterConsignmentRecord.emst2 == 'D' || 
+		               				masterConsignmentRecord.emst2 == 'M' || masterConsignmentRecord.emst2 == 'C'}">
+		               				
 		               			<c:if test="${masterConsignmentRecord.emst2 == 'S'}">
 		               				<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
 		               			</c:if>
@@ -744,7 +742,9 @@
 		               </td>
 		               <td width="2%" align="center" class="tableCell" >
 		               		<c:choose>
-		               		<c:when test="${masterConsignmentRecord.emst2 == 'S' || masterConsignmentRecord.emst2 == 'R' || masterConsignmentRecord.emst2 == 'D' || masterConsignmentRecord.emst2 == 'C'}">
+		               		<c:when test="${masterConsignmentRecord.emst2 == 'S' || masterConsignmentRecord.emst2 == 'R' || masterConsignmentRecord.emst2 == 'D' || 
+		               					masterConsignmentRecord.emst2 == 'M' || masterConsignmentRecord.emst2 == 'C'}">
+		               					
 		               			<c:if test="${masterConsignmentRecord.emst2 == 'S'}">
 		               				<span class="text12" title="S" >SUBMITTED</span>
 		               			</c:if>

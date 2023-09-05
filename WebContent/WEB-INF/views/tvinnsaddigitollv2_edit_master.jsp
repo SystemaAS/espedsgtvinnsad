@@ -658,6 +658,9 @@
 					<tr class="tableHeaderField" height="20" >
                     	<th width="2%" class="tableHeaderFieldFirst" ><img title="Update" style="vertical-align:middle;" src="resources/images/update.gif" border="0" alt="edit"></th>
                     	<th width="2%" class="tableHeaderField" >Lnr</th>
+                    	<th width="2%" class="tableHeaderField" >Avd</th>
+                		<th width="2%" class="tableHeaderField" >Turnr</th>
+                		<th width="2%" class="tableHeaderField" >Opd</th>
                     	<th title="S=SLETTET" width="2%" class="tableHeaderField" >St.</th>
                 		<th width="2%" class="tableHeaderField" >Br.vekt</th>
                 		<th width="2%" class="tableHeaderField" >Ant. kolli</th>
@@ -672,7 +675,8 @@
                 		<th width="2%" class="tableHeaderField" >Sen. tid</th>
                 		<th width="2%" class="tableHeaderField" >MRN-Api</th>
                 		<th width="2%" class="tableHeaderField" >Req.id</th>
-                		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED" width="2%" class="tableHeaderField" >Manif.st</th>
+                		<th title="Api-status" width="2%" class="tableHeaderField" ></th>
+                		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED,M=ERROR" width="2%" class="tableHeaderField" >Manif.st</th>
                 		<th width="2%" class="tableHeaderField" title="Fjerner manifest fra Tollvesenet" >Slett</th>
                 		<th width="2%" class="tableHeaderField" title="Fjerner manifest lokalt (SYSPED)">Kans.</th>
                 		</tr>
@@ -680,40 +684,59 @@
                 	<tbody> 
                 	<c:forEach items="${model.record.listHouses}" var="houseConsignmentRecord" varStatus="counter">    
 		              <c:choose> 
-		              	  <%-- if the manifest is correct with all cargo lines OR the manifest has been SUBMITTED(S) or DELETED(D) don´t show it as a warning-line --%>	   
-			              <c:when test="${XhouseConsignmentRecord.own_valid > 0 || XhouseConsignmentRecord.efst2 == 'S' || XhouseConsignmentRecord.efst2 == 'D' }">
-			              	<tr class="tableRow" height="20" >
+		              	  <%-- if the manifest is DELETED from tollv. show it as red --%>	   
+			              <c:when test="${houseConsignmentRecord.ehst2 == 'D'}">
+			              	<tr class="tableRow" style="background-color: #FEEFB3;color:#9F6000;" height="20" >
 			          	  </c:when>
 			          	  <c:otherwise>
-			          	  	<%-- <tr class="tableRow" style="background-color: #FEEFB3;color:#9F6000;" height="20" >  --%>
 			          	  	<tr class="tableRow" height="20" >
 			          	  </c:otherwise>
 		          	  </c:choose>	
 		          
-		          	   <td width="2%" class="tableCellFirst" align="center">
+		          	   <td width="2%" class="tableCellFirst" <c:if test="${houseConsignmentRecord.ehst2 == 'D'}">style="background-color: #FEEFB3;color: #9F6000;" </c:if> align="center">
 		          	   		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_house.do?action=doFind&ehlnrt=${houseConsignmentRecord.ehlnrt}&ehlnrm=${houseConsignmentRecord.ehlnrm}&ehlnrh=${houseConsignmentRecord.ehlnrh}" onClick="setBlockUI();">
                					<c:choose>
-		               				<c:when test="${XhouseConsignmentRecord.own_editable > 0}">
-		               					<img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">
+		               				<c:when test="${houseConsignmentRecord.ehst2 == 'C' || houseConsignmentRecord.ehst == 'S'}">
+		               					<img title="Read" style="vertical-align:bottom;" src="resources/images/eye.png" height="18px" width="18px" border="0" alt="read">
 		               				</c:when>
 		               				<c:otherwise>
-		               					<img title="Read" style="vertical-align:bottom;" src="resources/images/eye.png" height="18px" width="18px" border="0" alt="read">
+		               					<img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">
 		               				</c:otherwise>
 	               				</c:choose>
                				</a>
                				
 	               	   </td>
 	               	   <td width="2%" align="center" class="tableCell" >${houseConsignmentRecord.ehlnrh}</td>
-		               <td width="2%" align="center" class="tableCell" >
+	               	   <td width="2%" align="center" class="tableCell" >${houseConsignmentRecord.ehavd}</td>
+	               	   <td width="2%" align="center" class="tableCell" >${houseConsignmentRecord.ehpro}</td>
+	               	   <td width="2%" align="center" class="tableCell" >${houseConsignmentRecord.ehtdn}</td>
+		               <td nowrap width="2%" align="center" class="tableCell text12">
 		               	  <c:choose>
 		               		<c:when test="${houseConsignmentRecord.ehst == 'S'}">
-		               			<font class="inputFormSubmit isa_error">KANSELLERT</font>
+		               			<font class="inputFormSubmit text12 isa_error">KANSELLERT</font>
+		               			
+	               	   			<%-- We can only CANCEL (S) internally if the emmid and emuuid are gone since we DELETED first from Tollv.(if we even got that far at some point...) --%>
+	               	   			<c:if test="${empty houseConsignmentRecord.ehmid && empty houseConsignmentRecord.ehuuid}">
+					   				<a tabindex=-1 class="grantLink" id="grantLink${counter.count}" runat="server" href="#">
+										<font title="Gjøre tilgjengelig igjen ved å klikke" class="inputFormSubmit text12 isa_success"><b>e</b></font>
+									</a> 
+									<div id="dialogUpdateInternalStatusGrant${counter.count}" class="clazz_dialog" title="Dialog">
+										<form action="tvinnsaddigitollv2_updateInternalStatus_house.do" name="updateInternalStatusGrantForm${counter.count}" id="updateInternalStatusGrantForm${counter.count}" method="post">
+										 	<input type="hidden" name="current_id1${counter.count}" id="current_id1${counter.count}" value="${houseConsignmentRecord.ehlnrt}">
+											<input type="hidden" name="current_id2${counter.count}" id="current_id2${counter.count}" value="${houseConsignmentRecord.ehlnrm}">
+											<input type="hidden" name="current_id3${counter.count}" id="current_id3${counter.count}" value="${houseConsignmentRecord.ehlnrh}">
+										 	<input type="hidden" name="current_status${counter.count}" id="current_status${counter.count}" value="">
+										 	<p class="text14" >Er du sikker på at du vil gjøre tilgjengelig igjen Lnr <b>${houseConsignmentRecord.ehlnrh}</b> i <b>SYSPED</b> ?</p>
+												
+										</form>
+									</div>
+								</c:if>
 		               		</c:when>
 		               		<c:otherwise>
-		               			${houseConsignmentRecord.ehst}
+		               			${masterConsignmentRecord.emst}
 		               		</c:otherwise>
 		               	   </c:choose>
-		              	</td>
+		               </td>
 		               <td width="2%" align="right" class="tableCell" >${houseConsignmentRecord.ehvkb}</td>
 		               <td width="2%" align="right" class="tableCell" >${houseConsignmentRecord.ehntk}</td>
 		               <td width="2%" align="right" class="tableCell" >${houseConsignmentRecord.ehdkh}</td>
@@ -737,23 +760,54 @@
 								${houseConsignmentRecord.ehuuid}
 							</a>  
 		               </td>
-		               
 		               <td width="2%" align="center" class="tableCell" >
 		               		<c:choose>
-		               		<c:when test="${houseConsignmentRecord.ehst2 == 'S' || houseConsignmentRecord.ehst2 == 'R' || houseConsignmentRecord.ehst2 == 'D' || houseConsignmentRecord.ehst2 == 'C'}">
+		               		<c:when test="${houseConsignmentRecord.ehst2 == 'S' || houseConsignmentRecord.ehst2 == 'R' || houseConsignmentRecord.ehst2 == 'D' || 
+		               				houseConsignmentRecord.ehst2 == 'M' || houseConsignmentRecord.ehst2 == 'C'}">
+		               				
 		               			<c:if test="${houseConsignmentRecord.ehst2 == 'S'}">
 		               				<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
-		               				<span title="S" >SUBMITTED</span>
 		               			</c:if>
 		               			<c:if test="${houseConsignmentRecord.ehst2 == 'R'}">
-		               				<span title="R" >REOPENED/DRAFT</span>
+
 		               			</c:if>
 		               			<c:if test="${houseConsignmentRecord.ehst2 == 'D'}">
-		               				<font title="D" color="red">SLETTET</font>
+									
+		               			</c:if>
+		               			<c:if test="${houseConsignmentRecord.ehst2 == 'M'}">
+									<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
 		               			</c:if>
 		               			<c:if test="${houseConsignmentRecord.ehst2 == 'C'}">
 		               				<img style="vertical-align:middle;" title="Completed tolldekl at toll.no" src="resources/images/complete-icon.png" width="14px" height="12px" border="0" alt="completion">
-		               				<font title="C" color="green">COMPLETED</font>
+		               			</c:if>
+		               			
+		               		</c:when>
+		               		<c:otherwise>
+		               			<c:if test="${houseConsignmentRecord.ehst2 != 'S'}">
+		               				<img src="resources/images/bulletYellow.png" width="10" height="10" border="0" >
+		               			</c:if>
+		               		</c:otherwise>
+		               		</c:choose>
+		               </td>
+		               <td width="2%" align="center" class="tableCell" >
+		               		<c:choose>
+		               		<c:when test="${houseConsignmentRecord.ehst2 == 'S' || houseConsignmentRecord.ehst2 == 'R' || houseConsignmentRecord.ehst2 == 'D' || 
+		               				houseConsignmentRecord.ehst2 == 'M' || houseConsignmentRecord.ehst2 == 'C'}">
+		               				
+		               			<c:if test="${houseConsignmentRecord.ehst2 == 'S'}">
+		               				<span class="text12" title="S" >SUBMITTED</span>
+		               			</c:if>
+		               			<c:if test="${houseConsignmentRecord.ehst2 == 'R'}">
+		               				<span class="text12" title="R" >REOPENED/DRAFT</span>
+		               			</c:if>
+		               			<c:if test="${houseConsignmentRecord.ehst2 == 'D'}">
+		               				<font class="text12" title="D" color="red">SLETTET</font>
+		               			</c:if>
+		               			<c:if test="${houseConsignmentRecord.ehst2 == 'M'}">
+		               				<font class="text12" title="M" color="red">ERROR</font>
+		               			</c:if>
+		               			<c:if test="${houseConsignmentRecord.ehst2 == 'C'}">
+		               				<font class="text12" title="C" color="green">COMPLETED</font>
 		               			</c:if>
 		               			
 		               		</c:when>
@@ -764,37 +818,46 @@
 		               </td>
 
 		               <td width="2%" class="tableCell" align="center"> 
-		               		  		
-				   				<c:if test="${XhouseConsignmentRecord.own_editable > 0}">
-		              				<a style="display: block; width: 100%; height: 100%;" class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
-										<img src="resources/images/delete.gif" border="0" alt="remove">
-									</a>
-									<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
-										<form action="tvinnsadmanifest_edit_delete.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
-										 	<input type="hidden" name="currentUuid${counter.count}" id="currentUuid${counter.count}" value="${XhouseConsignmentRecord.efuuid}">
-										 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="D">
-										 	<input type="hidden" name="selectedPro${counter.count}" id="selectedPro${counter.count}" value="${XhouseConsignmentRecord.efpro}">
-											<p class="text14" >Er du sikker på at du vil slette Turnr. <b>${Xrecord.efpro}</b> fra <b>Tollvesenet</b> ?</p>
-											
-										</form>
-									</div>
-	              				</c:if>
+		               		  	
+					   				<c:if test="${not empty houseConsignmentRecord.ehuuid  && not empty houseConsignmentRecord.ehmid}">
+					   					<c:if test="${not empty houseConsignmentRecord.ehst2 && (houseConsignmentRecord.ehst2 == 'S' || houseConsignmentRecord.ehst2 == 'M') }">
+				              				<a tabindex=-1 class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
+												<img src="resources/images/delete.gif" border="0" alt="remove">
+											</a>
+											<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
+												<form action="tvinnsaddigitollv2_api_delete_house.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
+													<input type="hidden" name="current_id1${counter.count}" id="current_id1${counter.count}" value="${houseConsignmentRecord.ehlnrt}">
+													<input type="hidden" name="current_id2${counter.count}" id="current_id2${counter.count}" value="${houseConsignmentRecord.ehlnrm}">
+													<input type="hidden" name="current_id3${counter.count}" id="current_id3${counter.count}" value="${houseConsignmentRecord.ehlnrh}">
+													<input type="hidden" name="current_mrn${counter.count}" id="current_mrn${counter.count}" value="${houseConsignmentRecord.ehmid}">
+													<input type="hidden" name="action${counter.count}" id="action${counter.count}" value="doDelete">
+												 	<p class="text14" >Er du sikker på at du vil slette denne&nbsp;MRN&nbsp;<b>${houseConsignmentRecord.ehmid}</b> fra <b>Tollvesenet</b> ?</p>
+													
+												</form>
+											</div>
+										</c:if>
+		              				</c:if>
+		              				
               				
 	               	   </td>
 	               	   <td width="2%" class="tableCell" align="center">
-	               	   		<c:if test="${XhouseConsignmentRecord.efst == 'M' || empty XhouseConsignmentRecord.efst}">   		
-				   				<a style="display: block; width: 100%; height: 100%;" class="cancelLink" id="cancelLink${counter.count}" runat="server" href="#">
-									<img src="resources/images/remove.png" width="16" height="16" border="0" alt="remove">
-								</a> 
-								<div id="dialogUpdateInternalStatus${counter.count}" class="clazz_dialog" title="Dialog">
-									<form action="tvinnsadmanifest_updateInternalStatus.do" name="updateInternalStatusForm${counter.count}" id="updateInternalStatusForm${counter.count}" method="post">
-									 	<input type="hidden" name="currentUuid${counter.count}" id="currentUuid${counter.count}" value="${XhouseConsignmentRecord.efuuid}">
-									 	<input type="hidden" name="currentSign${counter.count}" id="currentSign${counter.count}" value="${XhouseConsignmentRecord.efsg}">
-									 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="S">
-									 	<p class="text14" >Er du sikker på at du vil kansellere Turnr. <b>${XhouseConsignmentRecord.efpro}</b> fra <b>SYSPED</b> ?</p>
-											
-									</form>
-								</div>
+	               	   		<c:if test="${houseConsignmentRecord.ehst == 'M' || empty houseConsignmentRecord.ehst}">
+	               	   			<%-- We can only CANCEL (S) internally if the emmid and emuuid are gone since we DELETED first from Tollv.(if we even got that far at some point...) --%>
+	               	   			<c:if test="${empty houseConsignmentRecord.ehmid && empty houseConsignmentRecord.ehuuid}">
+					   				<a tabindex=-1 style="display: block; width: 100%; height: 100%;" class="cancelLink" id="cancelLink${counter.count}" runat="server" href="#">
+										<img src="resources/images/remove.png" width="16" height="16" border="0" alt="remove">
+									</a> 
+									<div id="dialogUpdateInternalStatus${counter.count}" class="clazz_dialog" title="Dialog">
+										<form action="tvinnsaddigitollv2_updateInternalStatus_house.do" name="updateInternalStatusForm${counter.count}" id="updateInternalStatusForm${counter.count}" method="post">
+										 	<input type="hidden" name="current_id1${counter.count}" id="current_id1${counter.count}" value="${houseConsignmentRecord.ehlnrt}">
+											<input type="hidden" name="current_id2${counter.count}" id="current_id2${counter.count}" value="${houseConsignmentRecord.ehlnrm}">
+											<input type="hidden" name="current_id3${counter.count}" id="current_id3${counter.count}" value="${houseConsignmentRecord.ehlnrh}">
+										 	<input type="hidden" name="current_status${counter.count}" id="current_status${counter.count}" value="S">
+										 	<p class="text14" >Er du sikker på at du vil kansellere Lnr <b>${houseConsignmentRecord.ehlnrh}</b> i <b>SYSPED</b> ?</p>
+												
+										</form>
+									</div>
+								</c:if>
 							</c:if>
 						</td>	
 		            </tr> 

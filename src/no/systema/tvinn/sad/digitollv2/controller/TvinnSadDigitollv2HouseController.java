@@ -252,6 +252,181 @@ public class TvinnSadDigitollv2HouseController {
 	 * @param request
 	 * @return
 	 */
+	@RequestMapping(value="tvinnsaddigitollv2_updateInternalStatus_house.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doUpdateStatus(@ModelAttribute ("record") SadmohfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		Map model = new HashMap();
+		
+		String id1 = "";
+		String id2 = "";
+		String id3 = "";
+		String status = "";
+		
+		Enumeration requestParameters = request.getParameterNames();
+	    while (requestParameters.hasMoreElements()) {
+	        String element = (String) requestParameters.nextElement();
+	        String value = request.getParameter(element);
+	        if (element != null && value != null) {
+        		//logger.warn("####################################################");
+    			//logger.warn("param Name : " + element + " value: " + value);
+    			if(element.startsWith("current_id1")){
+    				id1 = value;
+    			}else if(element.startsWith("current_id2")){
+    				id2 = value;
+    			}else if(element.startsWith("current_id3")){
+    				id3 = value;
+    			}else if(element.startsWith("current_status")){
+    				status = value;
+    			}
+    		}
+    	}
+	    logger.info("Id1:" + id1); logger.info("Id2:" + id2); logger.info("Id3:" + id3); logger.info("status:" + status);
+	    
+		ModelAndView successView = new ModelAndView("redirect:tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=" + Integer.parseInt(id1) + "&emlnrm=" + Integer.parseInt(id2) );
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		
+		//START
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			//==========
+			//Upd status
+			//==========
+		
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_DIGITOLLV2);
+			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE); 
+			
+			//Update/Insert
+			if(StringUtils.isNotEmpty(id1) && StringUtils.isNotEmpty(id2) ) {
+				
+				recordToValidate.setEhlnrt(Integer.valueOf(id1));
+				recordToValidate.setEhlnrm(Integer.valueOf(id2));
+				recordToValidate.setEhlnrh(Integer.valueOf(id3));
+				recordToValidate.setEhst(status);
+				String mode = "US";
+				logger.info("MODE:" + mode + " before update in Controller ...");
+				
+				StringBuffer errMsg = new StringBuffer();
+				int dmlRetval = 0;
+				dmlRetval = this.updateStatusOnHouse(appUser.getUser(), recordToValidate, mode, errMsg);
+				if(dmlRetval < 0) {
+					//error on update
+					model.put("errorMessage", errMsg.toString());
+				}
+			}
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+	    
+		}	
+		return successView;
+	}
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_api_delete_house.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doApiDeleteMaster(@ModelAttribute ("record") SadmohfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		//this.context = TdsAppContext.getApplicationContext();
+		Collection<SadmohfRecord> outputList = new ArrayList<SadmohfRecord>();
+		Map model = new HashMap();
+		
+		String action = "";
+		String id1 = "";
+		String id2 = "";
+		String id3 = "";
+		String mrn = "";
+		
+		
+		Enumeration requestParameters = request.getParameterNames();
+	    while (requestParameters.hasMoreElements()) {
+	        String element = (String) requestParameters.nextElement();
+	        String value = request.getParameter(element);
+	        if (element != null && value != null) {
+        		//logger.warn("####################################################");
+    			//logger.warn("param Name : " + element + " value: " + value);
+    			if(element.startsWith("current_id1")){
+    				id1 = value;
+    			}else if(element.startsWith("current_id2")){
+    				id2 = value;
+    			}else if(element.startsWith("current_id3")){
+    				id3 = value;
+    			}else if(element.startsWith("current_mrn")){
+    				mrn = value;
+    			}else if(element.startsWith("action")){
+    				action = value;
+    			}
+    		}
+    	}
+	    logger.info("action:" + action);
+	    logger.info("Id1:" + id1); logger.info("Id2:" + id2); logger.info("Id3:" + id3); logger.info("mrn:" + mrn);
+	    
+		ModelAndView successView = new ModelAndView("redirect:tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=" + Integer.parseInt(id1) + "&emlnrm=" + Integer.parseInt(id2) );
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		
+		//START
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			
+			//========
+			//DELETE
+			//========
+			if(StringUtils.isNotEmpty(action) && action.equals("doDelete")) {
+		    	logger.info("Before delete in Controller ...");
+		    	//this.context = TdsAppContext.getApplicationContext();
+				logger.info("Inside: doApiDeleteMaster");
+				
+				StringBuilder url = new StringBuilder();
+				url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
+				url.append("deleteHouseConsignment.do");
+				
+				String BASE_URL = url.toString();
+	    		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&ehlnrt=" + id1 + "&ehlnrm=" + id2 + "&ehlnrh=" + id3 + "&mrn=" + mrn;
+	    		logger.info("URL: " + BASE_URL);
+	    		logger.info("PARAMS: " + urlRequestParamsKeys);
+	    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+	    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+	    		//Debug -->
+		    	logger.info(jsonPayload);
+	    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    		
+	    		ApiGenericDtoResponse apiDtoResponse = this.apiGenericDtoResponseService.getReponse(jsonPayload);
+	    		if(StringUtils.isNotEmpty(apiDtoResponse.getErrMsg())){
+	    			logger.error("ERROR:" + apiDtoResponse.toString());
+	    			model.put("errorMessage", apiDtoResponse.getErrMsg());	
+				}
+	    		successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+				
+			}else {
+				StringBuffer errMsg = new StringBuffer();
+				errMsg.append("ERROR on doDeleteHouse -->detail: action is null or other than doDelete...");
+				//error on update
+				model.put("errorMessage", errMsg.toString());
+				//put all aspects (sub-lists) only with update (not insert) error
+			}
+			
+		}
+		
+		return successView;
+		
+	}
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="tvinnsaddigitollv2_api_send_house.do",  method={RequestMethod.GET, RequestMethod.POST} )
 	public ModelAndView doApiSendMaster(@ModelAttribute ("record") SadmohfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		logger.info("inside doApiSendHouse");
@@ -334,6 +509,55 @@ public class TvinnSadDigitollv2HouseController {
 		this.adjustFieldsForFetch(record);
 		//get all items
 		this.getItemLines(appUser, record);
+	}
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param recordToValidate
+	 * @param mode
+	 * @param errMsg
+	 * @return
+	 */
+	private int updateStatusOnHouse(String applicationUser, SadmohfRecord recordToValidate, String mode, StringBuffer errMsg) {
+		int retval = 0;
+		
+		
+		//get BASE URL
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_HOUSECONSIGNMENT_URL;
+		//add URL-parameters
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + applicationUser + "&mode=" + mode);
+		urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate)));
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		GeneralUpdateContainer container = this.generalUpdateService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<GeneralUpdateRecord> outputList = container.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(GeneralUpdateRecord record : outputList ){
+					logger.info(record.toString());
+					if(StringUtils.isNotEmpty(container.getErrMsg())){
+						errMsg.append(record.getStatus());
+						errMsg.append(" -->detail:" + container.getErrMsg());
+						retval = -1;
+						break;
+					}
+				}
+			}
+    	}
+    	
+    	return retval;
 	}
 	/**
 	 * 
