@@ -373,8 +373,7 @@
 						<tr>
 							<td class="text14">
 			 					<select class="inputTextMediumBlue" id="ehtrty" name="ehtrty">
-									<option value="">-Velg-</option>	
-							  		<option title="Tolldeklarasjon" value="CUDE" <c:if test="${model.record.ehtrty == 'CUDE'}"> selected </c:if> >CUDE</option>
+									<option title="Tolldeklarasjon" value="CUDE" <c:if test="${model.record.ehtrty == 'CUDE'}"> selected </c:if> >CUDE</option>
 							  		<option title="Transitteringsdeklarasjon" value="N820" <c:if test="${model.record.ehtrty == 'N820'}"> selected </c:if> >N820</option>
 							  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty == 'RETR'}"> selected </c:if> >RETR</option> 	
 								</select>

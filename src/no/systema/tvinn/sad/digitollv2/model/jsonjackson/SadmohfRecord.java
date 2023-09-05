@@ -81,6 +81,9 @@ public class SadmohfRecord extends JsonAbstractGrandFatherRecord   {
 	private String ehsdd = ""; //      tegn            5       5       898        begge    place of delivery    
 	private String ehsddt = ""; //     tegn           30      30       903        begge    place of delivery
 	
+	private SadmotfRecord transportDto; //Dto for transport to get som fields
+	
+	
 	
 	private Collection<SadmoifRecord> listItemLines = null;
 	public void setListItemLines (Collection<SadmoifRecord> value){ this.listItemLines = value;}

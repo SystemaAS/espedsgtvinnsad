@@ -157,7 +157,7 @@ public class TvinnSadDigitollv2HouseController {
 				
 				}else{
 			    	//adjust fields
-					this.adjustFieldsForUpdate(recordToValidate);
+					this.adjustFieldsForUpdate(appUser.getUser(), recordToValidate);
 					
 			    	String mode = "NA";
 					//Update
@@ -209,6 +209,7 @@ public class TvinnSadDigitollv2HouseController {
 		    	if(jsonPayload!=null){
 		    		
 		    		SadmohfContainer jsonContainer = this.sadmohfListService.getListContainer(jsonPayload);
+		    		
 		    		//----------------------------------------------------------------
 					//now filter the topic list with the search filter (if applicable)
 					//----------------------------------------------------------------
@@ -750,15 +751,32 @@ public class TvinnSadDigitollv2HouseController {
 	
 	/**
 	 * 
+	 * @param user
 	 * @param recordToValidate
 	 */
-	private void adjustFieldsForUpdate(SadmohfRecord recordToValidate){
+	private void adjustFieldsForUpdate(String user, SadmohfRecord recordToValidate){
 		String HYPHEN = "-";
-		//House Document number and type (under fraktbrev for house nr API)
-		String tmpEhrg = recordToValidate.getEhrg() + HYPHEN + StringUtils.leftPad(String.valueOf(recordToValidate.getEhavd()),4,"0") + 
-													  HYPHEN + StringUtils.leftPad(String.valueOf(recordToValidate.getEhtdn()),7,"0");
-		recordToValidate.setEhdkh(tmpEhrg);
+		String dokumentId = recordToValidate.getEhdkh();
 		
+		if(StringUtils.isNotEmpty(dokumentId) && !dokumentId.startsWith(HYPHEN)){
+			//logger.info("##############" + dokumentId);
+			//do nothing (already in place)	as in: 123456789-0001-0000003
+		}else {
+			//House Document number and type (under fraktbrev for house nr API)
+			this.getTransportDto(user, recordToValidate);
+			logger.info("!!!!!!!! getting orgNr for EHDKH from Transport DTO:" + recordToValidate.getTransportDto().toString());
+			//get the first part of the string, namely the OrnNr from the representative
+			String orgNr = recordToValidate.getTransportDto().getEtrgr();
+			if(StringUtils.isEmpty(orgNr)) {
+				orgNr = recordToValidate.getTransportDto().getEtrgt(); //Carrier's OrgNr
+			}
+			dokumentId = orgNr + HYPHEN + StringUtils.leftPad(String.valueOf(recordToValidate.getEhavd()),4,"0") + 
+						 		 HYPHEN + StringUtils.leftPad(String.valueOf(recordToValidate.getEhtdn()),7,"0");
+			
+			recordToValidate.setEhdkh(dokumentId);
+			
+			
+		}
 		
 		//Sender - communication
 		if(StringUtils.isNotEmpty(recordToValidate.getOwn_ehems_email())){
@@ -777,6 +795,38 @@ public class TvinnSadDigitollv2HouseController {
 			recordToValidate.setEhemmt(SadDigitollConstants.API_TYPE_TELEPHONE);
 		}
 		
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	private void getTransportDto(String user, SadmohfRecord recordToValidate) {
+		//get BASE URL
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TRANSPORT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + user + "&etlnrt=" + recordToValidate.getEhlnrt();
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		SadmotfContainer jsonContainer = this.sadmotfListService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+			List<SadmotfRecord> outputList = (List)jsonContainer.getList();
+			if(outputList!=null && outputList.size() > 0){
+				for (SadmotfRecord record : outputList) {
+					recordToValidate.setTransportDto(record);
+				}
+			}
+			
+    	}	
 	}
 	
 	/**
@@ -819,7 +869,8 @@ public class TvinnSadDigitollv2HouseController {
 	private GeneralUpdateService generalUpdateService;
 	@Autowired
 	private ApiGenericDtoResponseService apiGenericDtoResponseService;
-	
+	@Autowired
+	private SadmotfListService sadmotfListService;
 	@Autowired
 	private MaintMainKofastService maintMainKofastService;
 
