@@ -53,6 +53,18 @@
 
     });
     
+	//--------------------
+  	//Tullkontor - ettsd
+  	//--------------------
+    jq('#ettsdIdLink').click(function() {
+    	jq('#ettsdIdLink').attr('target','_blank');
+    	window.open('tvinnsaddigitollv2_childwindow_tullkontor.do?action=doInit&tkkode=' + jq('#ettsd').val() + '&ctype=ettsd', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+    });
+    jq('#ettsdIdLink').keypress(function(e){ //extra feature for the end user
+		if(e.which == 13) {
+			jq('#ettsdIdLink').click();
+		}
+    });
     
     
     

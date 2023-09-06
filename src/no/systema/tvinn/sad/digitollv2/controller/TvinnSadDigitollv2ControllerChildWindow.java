@@ -43,6 +43,7 @@ import no.systema.tvinn.sad.util.TvinnSadConstants;
 import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
 import no.systema.z.main.maintenance.service.MaintMainKofastService;
 import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
+import no.systema.tvinn.sad.service.TvinnSadTullkontorService;
 import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService;
 import no.systema.tvinn.sad.nctsimport.util.RpgReturnResponseHandler;
 //Avd/Sign
@@ -51,6 +52,8 @@ import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelning
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureContainer;
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureRecord;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
+import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorContainer;
+import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorRecord;
 import no.systema.tvinn.sad.digitollv2.filter.SearchFilterDigitollTransportList;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
@@ -249,7 +252,106 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		}
 	}
 	
-	
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_tullkontor.do", params="action=doInit",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doInitTullkontor(@ModelAttribute ("record") JsonTvinnSadTullkontorRecord recordToValidate, HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doInitTullkontor");
+		Map model = new HashMap();
+		String callerType = request.getParameter("ctype");
+		String tullkontorCode = request.getParameter("tkkode");
+		String tullkontorName = request.getParameter("tktxtn");
+		String tullkontorType = request.getParameter("tktype");
+		
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_tullkontor");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			  
+			List list = this.getTullkontorList(appUser, tullkontorName, tullkontorCode, tullkontorType);
+			model.put("tullkontorList", list);
+			model.put("callerType", callerType);
+			model.put("tkkode", tullkontorCode);
+			model.put("tktxtn", tullkontorName);
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	/**
+	 * 
+	 * @param appUser
+	 * @param tullkontorName
+	 * @param tullkontorCode
+	 * @param tullkontorType
+	 * @return
+	 */
+	private List<JsonTvinnSadTullkontorRecord> getTullkontorList(SystemaWebUser appUser, String tullkontorName, String tullkontorCode, String tullkontorType){
+		  List<JsonTvinnSadTullkontorRecord> result = new ArrayList<JsonTvinnSadTullkontorRecord>();
+		
+		  //prepare the access CGI with RPG back-end
+		  String BASE_URL = TvinnSadUrlDataStore.TVINN_SAD_FETCH_UTFARTS_TULLKONTOR_URL;
+		  String urlRequestParamsKeys = this.getRequestUrlKeyParametersForSearchUtfartsTullkontor(appUser.getUser(), tullkontorName, tullkontorCode, tullkontorType);
+		  logger.info("URL: " + BASE_URL);
+		  logger.info("PARAMS: " + urlRequestParamsKeys);
+		  logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		  String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+		  //logger.info(jsonPayload);
+		  logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+		  if(jsonPayload!=null){
+			  JsonTvinnSadTullkontorContainer container = this.tvinnSadTullkontorService.getTvinnSadTullkontorContainer(jsonPayload);
+			  if(container!=null){
+				  for(JsonTvinnSadTullkontorRecord  record : container.getCustomslist()){
+					  //logger.info("Kontorsnamn via AJAX: " + record.getTktxtn() + " Code:" + record.getTkkode());
+					  result.add(record);
+				  }
+			  }
+		  }
+		  return result;
+	}
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param soName
+	 * @param code
+	 * @param tullkontorType
+	 * @return
+	 */
+	private String getRequestUrlKeyParametersForSearchUtfartsTullkontor(String applicationUser, String soName, String code, String tullkontorType){
+		  StringBuffer sb = new StringBuffer();
+		  sb.append("user=" + applicationUser);
+		  if(soName!=null && !"".equals(soName) && code!=null && !"".equals(code)){
+			  sb.append( TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "sonavn=" + soName );
+			  sb.append( TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "kod=" + code );
+		  }else if (soName!=null && !"".equals(soName)){
+			  sb.append( TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "sonavn=" + soName );
+		  }else if (code!=null && !"".equals(code)){
+			  sb.append( TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "kod=" + code );
+		  }
+		//append the type when applicable
+		  if (tullkontorType!=null && !"".equals(tullkontorType)){
+			  sb.append( TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST);
+			  if("avg".equals(tullkontorType)){
+				  sb.append("avg=J");
+			  }else if ("ank".equals(tullkontorType)){
+				  sb.append("ank=J");
+			  }else if ("trs".equals(tullkontorType)){
+				  sb.append("trs=J");
+			  }
+		  }
+		  return sb.toString();
+	  }
 	
 	
 	//SERVICES
@@ -268,5 +370,8 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	@Autowired
 	private MaintMainKofastService maintMainKofastService;
 
+	@Autowired
+	private TvinnSadTullkontorService tvinnSadTullkontorService;
+	
 }
 

@@ -409,6 +409,9 @@
 			 					
 								<td>
 									<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ettsd" id="ettsd" size="9" maxlength="8" value="${model.record.ettsd}">
+									<a tabindex="-1" id="ettsdIdLink">
+										<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
+									</a>
 								</td>
 			 				</tr>
 			 				<tr height="2"><td>&nbsp;</td></tr>
