@@ -1,0 +1,36 @@
+C512;SDE - Authorisation to use simplified declaration (Column 7a, Annex A of Delegated Regulation (EU) 2015/2446);SDE - Authorisation to use simplified declaration (Column 7a, Annex A of Delegated Regulation (EU) 2015/2446)
+C605;Information sheet INF3;Information sheet INF3
+C612;Internal Community transit Declaration — Article 227 of the Code;Internal Community transit Declaration — Article 227 of the Code
+C620;Proof of the customs status of Union goods T2LF;Proof of the customs status of Union goods T2LF
+C651;AAD - Administrative Accompanying Document (EMCS);AAD - Administrative Accompanying Document (EMCS)
+C658;FAD - Fallback e-AD (EMCS)	FAD - Fallback e-AD (EMCS)
+N235;Container list;Containerspesifikasjon
+N270;Delivery note;Følgeseddel
+N271;Packing list;Pakkliste
+N325;Proforma invoice;Proformafaktura
+N337;Temporary storage declaration;Summarisk deklarasjon for innlegg på tollager
+N355;Entry summary declaration;Summarisk innførselsdeklarasjon
+N380;Commercial invoice;Handelsfaktura
+N703;House waybill;Underfraktbrev (samlesending)
+N704;Master bill of lading;Hovedkonossement
+N705;Bill of lading;Konnossement
+N714;House bill of lading;Underkonnossement (samlesending)
+N720;Consignment note CIM;CIM-fraktbrev
+N722;Road list SMGS;Road list SMGS
+N730;Road consignment note;Vegfraktbrev
+N740;Air waybill;Flyfraktbrev
+N741;Master air waybill;Hovedflyfraktbrev
+N750;Movement by post including parcel post;Postforsendelse inkludert pakkepost
+N760;Multimodal/combined transport document;Dokument for kombinert transport
+N785;Cargo manifest;Lastemanifest
+N787;Bordereau (cargo load list);Bordereau (cargo load list)
+N820;Transit declaration;Transitteringsdeklarasjon
+N821;External Community transit declaration / common transit, T1;T1 dokument
+N822;Internal Community transit declaration T2;T2 dokument
+N825;T2L document;T2L dokument
+N830;Goods declaration for exportation;Utførselsdeklarasjon
+N952;TIR carnet;TIR carnet
+N955;ATA carnet;ATA carnet
+NCLE;Reference/date of entry in the declarant’s records;Reference/date of entry in the declarant’s records
+NMNS;Cargo manifest — simplified procedure;Cargo manifest — simplified procedure
+NMRN;Declaration / notification;MRN	Declaration / notification MRN

@@ -51,6 +51,7 @@ import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignature
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureRecord;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
 import no.systema.tvinn.sad.digitollv2.filter.SearchFilterDigitollTransportList;
+import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateRecord;
@@ -63,6 +64,7 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.service.ApiGenericDtoResponseService;
 import no.systema.tvinn.sad.digitollv2.service.GeneralUpdateService;
+import no.systema.tvinn.sad.digitollv2.service.SadDigitollDropDownListPopulationService;
 import no.systema.tvinn.sad.digitollv2.service.SadmohfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
@@ -207,6 +209,7 @@ public class TvinnSadDigitollv2TransportController {
 			this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
 			this.setCodeDropDownMgr(appUser, model);
 			
+			
 			//domain and search filter
 			successView.addObject(TvinnSadConstants.DOMAIN_LIST,outputList);
 			successView.addObject(TvinnSadConstants.DOMAIN_LIST_SIZE, outputList.size());	
@@ -341,6 +344,7 @@ public class TvinnSadDigitollv2TransportController {
 			//this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
 			//this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
 			//this.setCodeDropDownMgr(appUser, model);
+			this.setDropDownService(model);
 			
 			
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
@@ -818,6 +822,25 @@ public class TvinnSadDigitollv2TransportController {
 																	 model,appUser,CodeDropDownMgr.CODE_2_COUNTRY, null, null);
 	}
 	
+	/**
+	 * 
+	 * @param model
+	 */
+	private void setDropDownService(Map model) {
+		List<GenericDropDownDto> dto = this.digitollDropDownListPopulationService.getContainerSizeAndType();
+		model.put("containerSizeAndTypeDto", dto);
+		//country
+		dto = this.digitollDropDownListPopulationService.getCountryList(); model.put("countryDto", dto);
+		//mode of transport
+		dto = this.digitollDropDownListPopulationService.getModeOfTransportDto(); model.put("modeOfTransportDto", dto);
+		//means of transport
+		dto = this.digitollDropDownListPopulationService.getMeansOfTransportDto(); model.put("meansOfTransportDto", dto);
+		//type of identification
+		dto = this.digitollDropDownListPopulationService.getTypeOfIdentificationMeansOfTranportDto(); model.put("typeOfIdentificationMeansTransportDto", dto);
+		
+	}
+	
+	
 	private void adjustFieldsForFetch(SadmotfRecord recordToValidate){
 		//Register date
 		if(recordToValidate.getEtdtr() > 0) {
@@ -978,6 +1001,8 @@ public class TvinnSadDigitollv2TransportController {
 	@Autowired
 	private ApiGenericDtoResponseService apiGenericDtoResponseService;
 	
+	@Autowired
+	SadDigitollDropDownListPopulationService digitollDropDownListPopulationService;
 	
 	@Autowired
 	private MaintMainKofastService maintMainKofastService;

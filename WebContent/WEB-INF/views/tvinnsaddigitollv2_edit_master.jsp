@@ -244,7 +244,7 @@
 						<td class="text14">&nbsp;<span title="emcn">Container</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emdkm">Dok.nr</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emdkmt">Dok.type</span><font class="text16RedBold" >*</font></td>
-						<td class="text14">&nbsp;<span title="emknt">Transp.knr.</span><font class="text16RedBold" >*</font></td>
+						<td class="text14">&nbsp;<span title="emknt Transportør KundeNr.">Transp.knr.</span></td>
 						<td class="text14">&nbsp;<span title="emrgt - Transportør OrgNr. / EORI">Transp.Orgnr / EORI</span><font class="text16RedBold" >*</font></td>
 						
 						<td class="text14">&nbsp;<span title="emst">St.</span></td>
@@ -257,7 +257,7 @@
 					<tr>
 						
 						<td class="text14">
-							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="emsg" id="emsg" size="5" maxlength="4" value="${model.record.emsg}">									
+							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="emsg" id="emsg" size="5" maxlength="4" value="${model.record.emsg}">									
 						</td>
 						<td class="text14">
 							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="emavd" id="emavd" size="5" maxlength="4" value="${model.record.emavd}">									
@@ -271,7 +271,10 @@
 						</td>
 					
 						<td class="text14">
-							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="emcn" id="emcn" size="2" maxlength="1" value="${model.record.emcn}">									
+							<select class="inputTextMediumBlueMandatoryField" id="emcn" name="emcn">
+					  			<option title="Varer ikke transportert i beholder" value="0" <c:if test="${empty model.record.emcn || model.record.emcn == '0'}"> selected </c:if> >0</option>
+	 							<option title="Varer transportert i beholder" value="1" <c:if test="${model.record.emcn == '1'}"> selected </c:if> >1</option>
+							</select>									
 						</td>
 						<td class="text14">
 							<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="emdkm" id="emdkm" size="25" maxlength="50" value="${model.record.emdkm}">		
@@ -321,7 +324,13 @@
 							<input  type="text" class="inputTextMediumBlue" name="emsdlt" id="emsdlt" size="25" maxlength="30" value="${model.record.emsdlt}">								
 						</td>
 						<td class="text14">
-							<input  type="text" class="inputTextMediumBlue" name="emlkl" id="emlkl" size="4" maxlength="2" value="${model.record.emlkl}">												
+							<select class="inputTextMediumBlue" name="emlkl" id="emlkl" >
+		 						<option value="">-velg-</option>
+			 				  	<c:forEach var="dto" items="${model.countryDto}" >
+		                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.emlkl == dto.code}"> selected </c:if> >${dto.code}</option>
+								</c:forEach>
+							</select>
+																		
 						</td>
 						<td class="text14">
 							<input  type="text" class="inputTextMediumBlue" name="emsdl" id="emsdl" size="7" maxlength="5" value="${model.record.emsdl}">								
@@ -330,7 +339,12 @@
 							<input  type="text" class="inputTextMediumBlue" name="emsdut" id="emsdut" size="25" maxlength="30" value="${model.record.emsdut}">											
 						</td>
 						<td class="text14">
-							<input  type="text" class="inputTextMediumBlue" name="emlku" id="emlku" size="4" maxlength="2" value="${model.record.emlku}">												
+							<select class="inputTextMediumBlue" name="emlku" id="emlku" >
+		 						<option value="">-velg-</option>
+			 				  	<c:forEach var="dto" items="${model.countryDto}" >
+		                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.emlku == dto.code}"> selected </c:if> >${dto.code}</option>
+								</c:forEach>
+							</select>												
 						</td>
 						<td colspan="2" class="text14">
 							<input  type="text" class="inputTextMediumBlue" name="emsdu" id="emsdu" size="7" maxlength="5" value="${model.record.emsdu}">											
@@ -363,39 +377,83 @@
 							</tr>
 							<tr>
 								<td class="text14">
-									<input  type="text" class="inputTextMediumBlue" name="emc1ty" id="emc1ty" size="3" maxlength="2" value="${model.record.emc1ty}">		
+									<select class="inputTextMediumBlue" name="emc1ty" id="emc1ty" >
+				 						<option value="">-velg-</option>
+					 				  	<c:forEach var="dto" items="${model.containerSizeAndTypeDto}" >
+				                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.emc1ty == dto.code}"> selected </c:if> >${dto.code}</option>
+										</c:forEach>
+									</select>
+											
 								</td>
 								<td class="text14">
-									<input  type="text" class="inputTextMediumBlue" name="emc1ps" id="emc1ps" size="2" maxlength="1" value="${model.record.emc1ps}">		
+									<select class="inputTextMediumBlue" name="emc1ps" id="emc1ps" >
+				 						<option value="">-velg-</option>
+					 				  	<option title="Tom" value="A" <c:if test="${model.record.emc1ps == 'A'}"> selected </c:if> >Tom</option>
+					 				  	<option title="Ikke tom" value="B" <c:if test="${model.record.emc1ps == 'B'}"> selected </c:if> >Ikke tom</option>
+									</select>
+											
 								</td>
 								<td class="text14">
-									<input  type="text" class="inputTextMediumBlue" name="emc1ss" id="emc1ss" size="2" maxlength="1" value="${model.record.emc1ss}">		
+									<select class="inputTextMediumBlue" name="emc1ss" id="emc1ss" >
+				 						<option value="">-velg-</option>
+					 				  	<option title="Tom" value="1" <c:if test="${model.record.emc1ss == '1'}"> selected </c:if> >Lev.avs.</option>
+					 				  	<option title="Ikke tom" value="2" <c:if test="${model.record.emc1ss == '2'}"> selected </c:if> >Lev.transp.</option>
+									</select>		
 								</td>
 								<td class="text14">
 									<input  type="text" class="inputTextMediumBlue" name="emc1id" id="emc1id" size="18" maxlength="17" value="${model.record.emc1id}">		
 								</td>
 								
 								<td class="text14">
-									<input  type="text" class="inputTextMediumBlue" name="emc2ty" id="emc2ty" size="3" maxlength="2" value="${model.record.emc2ty}">		
+									<select class="inputTextMediumBlue" name="emc2ty" id="emc2ty" >
+				 						<option value="">-velg-</option>
+					 				  	<c:forEach var="dto" items="${model.containerSizeAndTypeDto}" >
+				                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.emc2ty == dto.code}"> selected </c:if> >${dto.code}</option>
+										</c:forEach>
+									</select>		
 								</td>
 								<td class="text14">
-									<input  type="text" class="inputTextMediumBlue" name="emc2ps" id="emc2ps" size="2" maxlength="1" value="${model.record.emc2ps}">		
+									<select class="inputTextMediumBlue" name="emc2ps" id="emc2ps" >
+				 						<option value="">-velg-</option>
+					 				  	<option title="Tom" value="A" <c:if test="${model.record.emc2ps == 'A'}"> selected </c:if> >Tom</option>
+					 				  	<option title="Ikke tom" value="B" <c:if test="${model.record.emc2ps == 'B'}"> selected </c:if> >Ikke tom</option>
+									</select>
+											
 								</td>
 								<td class="text14">
-									<input  type="text" class="inputTextMediumBlue" name="emc2ss" id="emc2ss" size="2" maxlength="1" value="${model.record.emc2ss}">		
+									
+									<select class="inputTextMediumBlue" name="emc2ss" id="emc2ss" >
+				 						<option value="">-velg-</option>
+					 				  	<option title="Tom" value="1" <c:if test="${model.record.emc2ss == '1'}"> selected </c:if> >Lev.avs.</option>
+					 				  	<option title="Ikke tom" value="2" <c:if test="${model.record.emc2ss == '2'}"> selected </c:if> >Lev.transp.</option>
+									</select>		
 								</td>
 								<td class="text14">
 									<input  type="text" class="inputTextMediumBlue" name="emc2id" id="emc2id" size="18" maxlength="17" value="${model.record.emc2id}">		
 								</td>
 								
 								<td class="text14">
-									<input  type="text" class="inputTextMediumBlue" name="emc3ty" id="emc3ty" size="3" maxlength="2" value="${model.record.emc3ty}">		
+									<select class="inputTextMediumBlue" name="emc3ty" id="emc3ty" >
+				 						<option value="">-velg-</option>
+					 				  	<c:forEach var="dto" items="${model.containerSizeAndTypeDto}" >
+				                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.emc3ty == dto.code}"> selected </c:if> >${dto.code}</option>
+										</c:forEach>
+									</select>		
 								</td>
 								<td class="text14">
-									<input  type="text" class="inputTextMediumBlue" name="emc3ps" id="emc3ps" size="2" maxlength="1" value="${model.record.emc3ps}">		
+									<select class="inputTextMediumBlue" name="emc3ps" id="emc3ps" >
+				 						<option value="">-velg-</option>
+					 				  	<option title="Tom" value="A" <c:if test="${model.record.emc3ps == 'A'}"> selected </c:if> >Tom</option>
+					 				  	<option title="Ikke tom" value="B" <c:if test="${model.record.emc3ps == 'B'}"> selected </c:if> >Ikke tom</option>
+									</select>
+											
 								</td>
 								<td class="text14">
-									<input  type="text" class="inputTextMediumBlue" name="emc3ss" id="emc3ss" size="2" maxlength="1" value="${model.record.emc3ss}">		
+									<select class="inputTextMediumBlue" name="emc3ss" id="emc3ss" >
+				 						<option value="">-velg-</option>
+					 				  	<option title="Tom" value="1" <c:if test="${model.record.emc3ss == '1'}"> selected </c:if> >Lev.avs.</option>
+					 				  	<option title="Ikke tom" value="2" <c:if test="${model.record.emc3ss == '2'}"> selected </c:if> >Lev.transp.</option>
+									</select>		
 								</td>
 								<td class="text14">
 									<input  type="text" class="inputTextMediumBlue" name="emc3id" id="emc3id" size="18" maxlength="17" value="${model.record.emc3id}">		
@@ -429,15 +487,23 @@
 				 				<td>
 				 				<table>
 				 				<tr >
+									<td class="text14">&nbsp;<span title="emtpps">Typ.person</span><font class="text16NavyBlueBold" >*</font></td>
 									<td class="text14">&nbsp;<span title="emkns">Kundnr</span></td>
-									<td class="text14">&nbsp;<span title="emtpps">Typ.person</span></td>
-									<td class="text14">&nbsp;<span title="emnas">Navn</span></td>
-									<td class="text14">&nbsp;<span title="emrgs">Org.nr /EORI</span></td>
+									<td class="text14">&nbsp;<span title="emnas">Navn</span><font class="text16NavyBlueBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="emrgs">Org.nr /EORI</span><font class="text16NavyBlueBold" >*</font></td>
 									
 				 				</tr>
 				 				<tr >
+									<td class="text14">
+										<select class="inputTextMediumBlue" id="emtpps" name="emtpps">
+											<option value="">-velg-</option>
+											<option title="En fysisk person" value="1" <c:if test="${model.record.emtpps == '1'}"> selected </c:if> >Fys.person</option>
+								  			<option title="En juridisk person, det vil si en bedrift" value="2" <c:if test="${model.record.emtpps == '2'}"> selected </c:if> >Bedrift</option>
+								  			<option title="En samling personer" value="3" <c:if test="${model.record.emtpps == '3'}"> selected </c:if> >Sam.pers.</option> 	
+										</select>
+									</td>
+									
 									<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="emkns" id="emkns" size="10" maxlength="8" value="${model.record.emkns}"></td>
-									<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="emtpps" id="emtpps" size="2" maxlength="1" value="${model.record.emtpps}"></td>
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emnas" id="emnas" size="25" maxlength="30" value="${model.record.emnas}"></td>
 									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="emrgs" id="emrgs" size="20" maxlength="17" value="${model.record.emrgs}"></td>
 				 				</tr>
@@ -452,8 +518,14 @@
 									<td class="text14">&nbsp;</td>
 				 					<td class="text14">&nbsp;</td>
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="empss" id="empss" size="25" maxlength="24" value="${model.record.empss}"></td>
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emlks" id="emlks" size="4" maxlength="2" value="${model.record.emlks}"></td>
-									
+									<td class="text14">
+										<select class="inputTextMediumBlue" name="emlks" id="emlks" >
+					 						<option value="">-velg-</option>
+						 				  	<c:forEach var="dto" items="${model.countryDto}" >
+					                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.emlks == dto.code}"> selected </c:if> >${dto.code}</option>
+											</c:forEach>
+										</select>
+									</td>
 				 				</tr>
 				 				<tr >
 				 					<td class="text14">&nbsp;</td>
@@ -527,14 +599,21 @@
 				 				<td>
 				 				<table>
 				 				<tr >
+									<td class="text14">&nbsp;<span title="emtppm">Typ.person</span><font class="text16NavyBlueBold" >*</font></td>
 									<td class="text14">&nbsp;<span title="emknm">Kundnr</span></td>
-									<td class="text14">&nbsp;<span title="emtppm">Typ.person</span></td>
-									<td class="text14">&nbsp;<span title="emnam">Navn</span></td>
-									<td class="text14">&nbsp;<span title="emrgm">Org.nr /EORI</span></td>
+									<td class="text14">&nbsp;<span title="emnam">Navn</span><font class="text16NavyBlueBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="emrgm">Org.nr /EORI</span><font class="text16NavyBlueBold" >*</font></td>
 				 				</tr>
 				 				<tr >
+									<td class="text14">
+										<select class="inputTextMediumBlue" id="emtppm" name="emtppm">
+											<option value="">-velg-</option>
+											<option title="En fysisk person" value="1" <c:if test="${model.record.emtppm == '1'}"> selected </c:if> >Fys.person</option>
+								  			<option title="En juridisk person, det vil si en bedrift" value="2" <c:if test="${model.record.emtppm == '2'}"> selected </c:if> >Bedrift</option>
+								  			<option title="En samling personer" value="3" <c:if test="${model.record.emtppm == '3'}"> selected </c:if> >Sam.pers.</option> 	
+										</select>
+									</td>
 									<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="emknm" id="emknm" size="10" maxlength="8" value="${model.record.emknm}"></td>
-									<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="emtppm" id="emtppm" size="2" maxlength="1" value="${model.record.emtppm}"></td>
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emnam" id="emnam" size="25" maxlength="30" value="${model.record.emnam}"></td>
 									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="emrgm" id="emrgm" size="20" maxlength="17" value="${model.record.emrgm}"></td>
 				 				
@@ -547,12 +626,18 @@
 									<td class="text14">&nbsp;<span title="emlkm">Landkode</span></td>
 									
 				 				</tr>
-				 				<tr >
+				 				<tr>
 									<td class="text14">&nbsp;</td>
 				 					<td class="text14">&nbsp;</td>
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="empsm" id="empsm" size="25" maxlength="24" value="${model.record.empsm}"></td>
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emlkm" id="emlkm" size="4" maxlength="2" value="${model.record.emlkm}"></td>
-									
+									<td class="text14">
+										<select class="inputTextMediumBlue" name="emlkm" id="emlkm" >
+					 						<option value="">-velg-</option>
+						 				  	<c:forEach var="dto" items="${model.countryDto}" >
+					                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.emlkm == dto.code}"> selected </c:if> >${dto.code}</option>
+											</c:forEach>
+										</select>
+									</td>
 				 				</tr>
 				 				<tr >
 									<td class="text14">&nbsp;</td>

@@ -275,13 +275,24 @@
 							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ehvt" id="ehvt" size="35" maxlength="50" value="${model.record.ehvt}">									
 						</td>
 						<td class="text14">
-							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="ehcnin" id="ehcnin" size="2" maxlength="1" value="${model.record.ehcnin}">									
+							<select class="inputTextMediumBlueMandatoryField" id="ehcnin" name="ehcnin">
+					  			<option title="Varer ikke transportert i beholder" value="0" <c:if test="${empty model.record.ehcnin || model.record.ehcnin == '0'}"> selected </c:if> >0</option>
+	 							<option title="Varer transportert i beholder" value="1" <c:if test="${model.record.ehcnin == '1'}"> selected </c:if> >1</option>
+							</select>																		
 						</td>
 						<td class="text14">
 							<input  type="text" class="inputTextReadOnly" name="ehdkh" id="ehdkh" size="25" maxlength="50" value="${model.record.ehdkh}">		
 						</td>
 						<td class="text14">
-							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ehdkht" id="ehdkht" size="5" maxlength="4" value="${model.record.ehdkht}">		
+							
+							<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="ehdkht" id="ehdkht" >
+		 						<option value="">-velg-</option>
+			 				  	<c:forEach var="dto" items="${model.previousDocumentsDto}" >
+		                       	 	<option title="${dto.txt1}&nbsp;-&nbsp;${dto.txt2}" value="${dto.code}" <c:if test="${model.record.ehdkht == dto.code}"> selected </c:if> >${dto.code}</option>
+								</c:forEach>
+							</select>
+							
+							
 						</td>
 						<td class="text14">
 							<input readonly type="text" class="inputTextReadOnly" name="ehst" id="ehst" size="2" maxlength="1" value="${model.record.ehst}">		
@@ -443,13 +454,24 @@
 								<input  type="text" class="inputTextMediumBlue" name="ehsda" id="ehsda" size="25" maxlength="30" value="${model.record.ehsda}">								
 							</td>
 							<td class="text14">
-								<input  type="text" class="inputTextMediumBlue" name="ehlka" id="ehlka" size="4" maxlength="2" value="${model.record.ehlka}">												
+								<select class="inputTextMediumBlue" name="ehlka" id="ehlka" >
+			 						<option value="">-velg-</option>
+				 				  	<c:forEach var="dto" items="${model.countryDto}" >
+			                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.ehlka == dto.code}"> selected </c:if> >${dto.code}</option>
+									</c:forEach>
+								</select>		
+																				
 							</td>
 							<td class="text14">
 								<input  type="text" class="inputTextMediumBlue" name="ehsddt" id="ehsddt" size="25" maxlength="30" value="${model.record.ehsddt}">											
 							</td>
 							<td class="text14">
-								<input  type="text" class="inputTextMediumBlue" name="ehlkd" id="ehlkd" size="4" maxlength="2" value="${model.record.ehlkd}">												
+								<select class="inputTextMediumBlue" name="ehlkd" id="ehlkd" >
+			 						<option value="">-velg-</option>
+				 				  	<c:forEach var="dto" items="${model.countryDto}" >
+			                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.ehlkd == dto.code}"> selected </c:if> >${dto.code}</option>
+									</c:forEach>
+								</select>													
 							</td>
 						</tr>
 					</table>
@@ -486,15 +508,21 @@
 			 				<td>
 			 				<table>
 			 				<tr >
-			 					<td class="text14">&nbsp;<span title="ehkns">Kundnr</span></td>
-								<td class="text14">&nbsp;<span title="ehtpps">Typ.person</span><font class="text16RedBold" >*</font></td>
+			 					<td class="text14">&nbsp;<span title="ehtpps">Typ.person</span><font class="text16RedBold" >*</font></td>
+								<td class="text14">&nbsp;<span title="ehkns">Kundnr</span></td>
 								<td class="text14">&nbsp;<span title="ehnas">Navn</span><font class="text16RedBold" >*</font></td>
 								<td class="text14">&nbsp;<span title="ehrgs">Org.nr /EORI</span></td>
 								
 			 				</tr>
 			 				<tr >
-			 					<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="ehkns" id="ehkns" size="10" maxlength="8" value="${model.record.ehkns}"></td>
-								<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="ehtpps" id="ehtpps" size="2" maxlength="1" value="${model.record.ehtpps}"></td>
+			 					<td class="text14">
+		 							<select class="inputTextMediumBlueMandatoryField" id="ehtpps" name="ehtpps">
+										<option title="En fysisk person" value="1" <c:if test="${model.record.ehtpps == '1'}"> selected </c:if> >Fys.person</option>
+								  		<option title="En juridisk person, det vil si en bedrift" value="2" <c:if test="${empty model.record.ehtpps || model.record.ehtpps == '2'}"> selected </c:if> >Bedrift</option>
+								  		<option title="En samling personer" value="3" <c:if test="${model.record.ehtpps == '3'}"> selected </c:if> >Sam.pers.</option> 	
+									</select>
+			 					</td>
+								<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="ehkns" id="ehkns" size="10" maxlength="8" value="${model.record.ehkns}"></td>
 								
 								<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ehnas" id="ehnas" size="25" maxlength="30" value="${model.record.ehnas}"></td>
 								<td class="text14"><input  type="text" class="inputTextMediumBlue" name="ehrgs" id="ehrgs" size="20" maxlength="17" value="${model.record.ehrgs}"></td>
@@ -512,7 +540,15 @@
 			 					<td class="text14">&nbsp;</td>
 			 					<td class="text14">&nbsp;</td>
 								<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehpss" id="ehpss" size="25" maxlength="24" value="${model.record.ehpss}"></td>
-								<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehlks" id="ehlks" size="4" maxlength="2" value="${model.record.ehlks}"></td>
+								<td class="text14">
+									<select class="inputTextMediumBlue" name="ehlks" id="ehlks" >
+				 						<option value="">-velg-</option>
+					 				  	<c:forEach var="dto" items="${model.countryDto}" >
+				                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.ehlks == dto.code}"> selected </c:if> >${dto.code}</option>
+										</c:forEach>
+									</select>	
+									
+								</td>
 								
 			 				</tr>
 			 				<tr >
@@ -587,16 +623,22 @@
 				 				<td>
 				 				<table>
 				 				<tr >
-				 					<td class="text14">&nbsp;<span title="ehknm">Kundnr</span></td>
-									<td class="text14">&nbsp;<span title="ehtppm">Typ.person</span><font class="text16RedBold" >*</font></td>
+				 					<td class="text14">&nbsp;<span title="ehtppm">Typ.person</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="ehknm">Kundnr</span></td>
 									<td class="text14">&nbsp;<span title="ehnam">Navn</span><font class="text16RedBold" >*</font></td>
 									<td class="text14">&nbsp;<span title="ehrgm">Org.nr /EORI</span></td>
 									
 				 				</tr>
 				 				<tr >
-				 					<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="ehknm" id="ehknm" size="10" maxlength="8" value="${model.record.ehknm}"></td>
-									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="ehtppm" id="ehtppm" size="2" maxlength="1" value="${model.record.ehtppm}"></td>
-									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlue" name="ehnam" id="ehnam" size="25" maxlength="30" value="${model.record.ehnam}"></td>
+				 					<td class="text14">
+				 						<select class="inputTextMediumBlueMandatoryField" id="ehtppm" name="ehtppm">
+				 							<option title="En fysisk person" value="1" <c:if test="${model.record.ehtppm == '1'}"> selected </c:if> >Fys.person</option>
+								  			<option title="En juridisk person, det vil si en bedrift" value="2" <c:if test="${empty model.record.ehtppm || model.record.ehtppm == '2'}"> selected </c:if> >Bedrift</option>
+								  			<option title="En samling personer" value="3" <c:if test="${model.record.ehtppm == '3'}"> selected </c:if> >Sam.pers.</option> 	
+										</select>
+				 					</td>
+									<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="ehknm" id="ehknm" size="10" maxlength="8" value="${model.record.ehknm}"></td>
+									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ehnam" id="ehnam" size="25" maxlength="30" value="${model.record.ehnam}"></td>
 									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="ehrgm" id="ehrgm" size="20" maxlength="17" value="${model.record.ehrgm}"></td>
 				 				</tr>
 				 				
@@ -611,7 +653,15 @@
 				 					<td class="text14">&nbsp;</td>
 				 					<td class="text14">&nbsp;</td>
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehpsm" id="ehpsm" size="25" maxlength="24" value="${model.record.ehpsm}"></td>
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehlkm" id="ehlkm" size="4" maxlength="2" value="${model.record.ehlkm}"></td>
+									<td class="text14">
+										<select class="inputTextMediumBlue" name="ehlkm" id="ehlkm" >
+					 						<option value="">-velg-</option>
+						 				  	<c:forEach var="dto" items="${model.countryDto}" >
+					                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.ehlkm == dto.code}"> selected </c:if> >${dto.code}</option>
+											</c:forEach>
+										</select>
+										
+									</td>
 									
 				 				</tr>
 				 				

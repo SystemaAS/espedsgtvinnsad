@@ -306,18 +306,38 @@
 				 				</tr>
 				 				<tr >
 				 					<td class="text14">
-										<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"   type="text" class="inputTextMediumBlueMandatoryField" name="etktkd" id="etktkd" size="2" maxlength="1" value="${model.record.etktkd}">
+				 						
+				 						<select class="inputTextMediumBlueMandatoryField" name="etktkd" id="etktkd" >
+					 						<option value="">-velg-</option>
+						 				  	<c:forEach var="dto" items="${model.modeOfTransportDto}" >
+					                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.etktkd == dto.code}"> selected </c:if> >${dto.code}</option>
+											</c:forEach>
+										</select>	
 									</td>
 									<td>
-										<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"   type="text" class="inputTextMediumBlueMandatoryField" name="etktyp" id="etktyp" size="9" maxlength="35" value="${model.record.etktyp}">
+										<select class="inputTextMediumBlueMandatoryField" name="etktyp" id="etktyp" >
+					 						<option value="">-velg-</option>
+						 				  	<c:forEach var="dto" items="${model.typeOfIdentificationMeansTransportDto}" >
+					                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.etktyp == dto.code}"> selected </c:if> >${dto.code}</option>
+											</c:forEach>
+										</select>
 									</td>
 									
 						 			<td class="text14">
-						 				<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"   type="text" class="inputTextMediumBlueMandatoryField" name="etktm" id="etktm" size="5" maxlength="4" value="${model.record.etktm}">
-										
+						 				<select class="inputTextMediumBlueMandatoryField" name="etktm" id="etktm" >
+					 						<option value="">-velg-</option>
+						 				  	<c:forEach var="dto" items="${model.meansOfTransportDto}" >
+					                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.etktm == dto.code}"> selected </c:if> >${dto.code}</option>
+											</c:forEach>
+										</select>
 						 			</td>
 						 			<td class="text14">
-						 				<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"   type="text" class="inputTextMediumBlueMandatoryField" name="etklk" id="etklk" size="5" maxlength="4" value="${model.record.etklk}">
+						 				<select class="inputTextMediumBlueMandatoryField" name="etklk" id="etklk" >
+					 						<option value="">-velg-</option>
+						 				  	<c:forEach var="dto" items="${model.countryDto}" >
+					                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.etklk == dto.code}"> selected </c:if> >${dto.code}</option>
+											</c:forEach>
+										</select>		
 						 				
 						 			</td>
 						 			
@@ -436,7 +456,14 @@
 				 				</tr>
 				 				<tr >
 									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="etpst" id="etpst" size="25" maxlength="24" value="${model.record.etpst}"></td>
-									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="etlkt" id="etlkt" size="4" maxlength="2" value="${model.record.etlkt}"></td>
+									<td class="text14">
+										<select class="inputTextMediumBlueMandatoryField" name="etlkt" id="etlkt" >
+					 						<option value="">-velg-</option>
+						 				  	<c:forEach var="dto" items="${model.countryDto}" >
+					                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.etlkt == dto.code}"> selected </c:if> >${dto.code}</option>
+											</c:forEach>
+										</select>
+									</td>
 									
 				 				</tr>
 				 				<tr >
@@ -524,7 +551,12 @@
 										<input type="text" class="inputTextMediumBlue" name="etpsr" id="etpsr" size="25" maxlength="24" value="${model.record.etpsr}">
 									</td>
 									<td class="text14">
-						 				<input type="text" class="inputTextMediumBlue" name="etlkr" id="etlkr" size="4" maxlength="2" value="${model.record.etlkr}">
+										<select class="inputTextMediumBlue" name="etlkr" id="etlkr" >
+					 						<option value="">-velg-</option>
+						 				  	<c:forEach var="dto" items="${model.countryDto}" >
+					                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.etlkr == dto.code}"> selected </c:if> >${dto.code}</option>
+											</c:forEach>
+										</select>
 						 			</td>
 				 				</tr>
 				 				

@@ -1,0 +1,40 @@
+1;Dimebelagt tank
+2;Epoksybelagt tank
+6;Trykksatt tank
+7;Kjøletank
+9;Tank i rustfritt stål
+10;Kjølecontainer 40 fot - ute av drift
+12;Europall
+13;Skandinavisk pall
+14;Tilhenger
+15;Kjølecontainer 20 fot - ute av drift
+16;Utskiftbar pall
+17;Semitrailer
+18;Tank container 20 fot
+19;Tank container 30 fot
+20;Tank container 40 fot
+21;Container IC 20 fot
+22;Container IC 30 fot
+23;Container IC 40 fot
+24;Kjøletank 20 fot
+25;Kjøletank 30 fot
+26;Kjøletank 40 fot
+27;Tank container IC 20 fot
+28;Tank container IC 30 fot
+29;Tank container IC 40 fot
+30;Kjøletank IC 20 fot
+31;Temperaturregulert container 30 fot
+32;Kjøletank IC 40 fot
+33;Flyttbar beholder mindre enn 6,15 meter
+34;Flyttbar beholder 6,15m - 7,82m
+35;Flyttbar beholder 7.82m - 9,15m
+36;Flyttbar beholder  9,15m - 10,9m
+37;Flyttbar beholder 10,9m - 13,75m
+38;Bokspall
+39;Temperaturkontrollert container 20 fot
+40;Temperaturkontrollert container 40 fot
+41;Kjølecontainer 30 fot - ute av drift
+42;Dobbel tilhenger
+43;20 fot IL container (åpent tak)
+44;20 fot IL container (lukket tak)
+45;40 fot IL container (åpent tak)

@@ -1,0 +1,8 @@
+1;Sjøtransport
+2;Jernbanetransport
+3;Vegtransport
+4;Lufttransport
+5;Post (aktivt transportmiddel ukjent)
+7;Faste transportinstallasjoner
+8;Transport på innenlandske vannveger
+9;Transportmiddel ukjent (feks. egen fremdrift)
