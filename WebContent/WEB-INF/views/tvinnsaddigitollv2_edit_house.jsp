@@ -58,7 +58,16 @@
 					</td>
 					
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td title="${model.record.ehlnrh}" width="15%" valign="bottom" class="tab" align="center" nowrap>
+						<c:choose>
+						<c:when test="${model.record.ehlnrh > 0}">
+							<td title="${model.record.ehlnrh}" width="15%" valign="bottom" class="tab" align="center" nowrap>
+						</c:when>
+						<c:otherwise>
+							<%-- Meaning CreateNew --%>
+							<td width="15%" valign="bottom" class="tab" style="background-color:lightyellow;" style="" align="center" nowrap>
+						</c:otherwise>
+						</c:choose>
+						
 						<font class="tabLink">
 							&nbsp;<spring:message code="systema.tvinn.sad.digitoll.list.tab.house"/>
 						</font>

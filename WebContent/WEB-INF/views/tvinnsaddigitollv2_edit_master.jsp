@@ -44,7 +44,15 @@
 						</a>
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td title="${model.record.emlnrm}" width="15%" valign="bottom" class="tab" align="center" nowrap>
+						<c:choose>
+						<c:when test="${model.record.emlnrm > 0}">
+							<td title="${model.record.emlnrm}" width="15%" valign="bottom" class="tab" align="center" nowrap>
+						</c:when>
+						<c:otherwise>
+							<%-- Meaning CreateNew --%>
+							<td width="15%" valign="bottom" class="tab" style="background-color:lightyellow;" style="" align="center" nowrap>
+						</c:otherwise>
+						</c:choose>
 						<font class="tabLink">
 							&nbsp;<spring:message code="systema.tvinn.sad.digitoll.list.tab.master"/>
 						</font>
@@ -56,7 +64,7 @@
 					</td>
 					<c:if test="${model.record.emlnrm > 0 && model.record.emst != 'S'}">
 						<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-						<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
+						<td width="15%" valign="bottom" class="tabDisabled" style="background-color:lightyellow;" align="center" nowrap>
 							<a id="alinkHeader" style="display:block;" href="tvinnsaddigitollv2_edit_house.do?action=doCreate&ehlnrt=${model.record.emlnrt}&ehlnrm=${model.record.emlnrm}">
 								<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.createnew"/>&nbsp;<spring:message code="systema.tvinn.sad.digitoll.list.tab.house"/></font>
 								<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">

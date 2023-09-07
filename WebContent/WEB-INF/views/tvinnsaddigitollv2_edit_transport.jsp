@@ -32,8 +32,16 @@
 						</a>
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-			
-					<td width="15%" valign="bottom" class="tab" align="center" nowrap>
+					
+						<c:choose>
+						<c:when test="${model.record.etlnrt > 0}">
+							<td title="${model.record.etlnrt}" width="15%" valign="bottom" class="tab" align="center" nowrap>
+						</c:when>
+						<c:otherwise>
+							<%-- Meaning CreateNew --%>
+							<td width="15%" valign="bottom" class="tab" style="background-color:lightyellow;" style="" align="center" nowrap>
+						</c:otherwise>
+						</c:choose>
 						<font class="tabLink">
 							&nbsp;Transport
 						</font>
@@ -42,9 +50,9 @@
 							<font class="text14MediumBlue">&nbsp;${model.record.etlnrt}</font>
 						</c:if>
 					</td>
-					<c:if test="${model.record.etst != 'S'}"> <%-- CANCELED(S) --%>
+					<c:if test="${model.record.etlnrt > 0 && model.record.etst != 'S'}"> <%-- CANCELED(S) --%>
 						<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-						<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
+						<td width="15%" valign="bottom" class="tabDisabled" style="background-color:lightyellow;"  align="center" nowrap>
 							<a id="alinkHeader" style="display:block;" href="tvinnsaddigitollv2_edit_master.do?action=doCreate&emlnrt=${model.record.etlnrt}">
 								<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.createnew"/>&nbsp;<spring:message code="systema.tvinn.sad.digitoll.list.tab.master"/></font>
 								<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">

@@ -27,7 +27,7 @@
 			</td>
 			
 			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-			<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
+			<td width="15%" valign="bottom" class="tabDisabled" style="background-color:lightyellow;" align="center" nowrap>
 				<a id="alinkHeader" style="display:block;" href="tvinnsaddigitollv2_edit_transport.do?action=doCreate">
 					<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.createnew"/></font>
 					<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
