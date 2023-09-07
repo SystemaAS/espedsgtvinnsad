@@ -443,6 +443,12 @@
 					 		<tr>
 				 				<td>
 				 				<table>
+				 				<tr>
+				 					<td class="text14">&nbsp;<span title="etknt">Knr</span>
+				 						&nbsp;<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etknt" id="etknt" size="10" maxlength="8" value="${model.record.etknt}">
+				 					</td>
+				 				</tr>
+				 				
 				 				<tr >
 									<td class="text14">&nbsp;<span title="etnat">Navn</span><font class="text16RedBold" >*</font></td>
 									<td class="text14">&nbsp;<span title="etrgt">Orgnr / EORI</span><font class="text16RedBold" >*</font></td>
@@ -536,6 +542,12 @@
 					 		<tr>
 				 				<td>
 				 				<table>
+				 				<tr>
+				 					<td class="text14">&nbsp;<span title="etknr">Knr</span>
+				 					&nbsp;<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etknr" id="etknr" size="10" maxlength="8" value="${model.record.etknr}">
+				 					</td>
+				 					
+				 				</tr>
 				 				<tr >
 									<td class="text14">&nbsp;<span title="etnar">Navn</span><font class="text16NavyBlueBold" >*</font></td>
 									<td class="text14">&nbsp;<span title="etrgr">Orgnr / EORI</span><font class="text16NavyBlueBold" >*</font></td>

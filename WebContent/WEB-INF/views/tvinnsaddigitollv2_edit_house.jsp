@@ -163,24 +163,7 @@
 				</td>
 			</tr>
 			</c:if>
-			<%--
-			<c:if test="${not empty model.invalidManifest}">
-				<tr>
-					<td colspan="10">
-		            	<table align="left" border="0" cellspacing="0" cellpadding="0">
-		            	<tr>
-					<td class="text14 tableCellGray" style="color: #9F6000;">
-	           			<font class="inputText" style="background-color: #FEEFB3;color: #9F6000;">
-	           				&nbsp;Lasten er ikke gyldig.&nbsp;&nbsp;Manifestet kan derfor ikke sendes.
-	           				&nbsp;&nbsp;Kontroller at alle linjene i manifestet har status=OK, og at det finnes minst en linje.
-	           			</font>
-	           		</td>           			
-	           		</tr>
-	           		</table>
-	           		</td>
-				</tr>
-			</c:if>
-			 --%>
+
 			<tr height="5">	
   			<td  colspan="10" class="text14 formFrame" >
 			<table style="width:100%">
@@ -229,13 +212,11 @@
 	   		</td>
 	   		
 		</tr>
-		<tr height="5"><td></td></tr>	 
+		<tr height="2"><td></td></tr>	 
 			 
 		<tr>
 			<td colspan="3" style="width:100%" class="text14" valign="top">
-				<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">
-					<tr height="5"><td>&nbsp;</td></tr>
-					
+				<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">					
 					<tr>
 					<td>
 					<table>
@@ -311,7 +292,7 @@
 					</td>
 					</tr>
 	
-					<tr height="2"><td>&nbsp;</td></tr>
+					<tr height="2"><td></td></tr>
 					
 					<tr>
 					<td>
@@ -606,16 +587,10 @@
 						
 						</table>
 						</td>
-					</tr>
-					</table>
-					</td>
-					</tr>
-					<tr height="2"><td>&nbsp;</td></tr>
-					
-					<tr>
-					<td>
-					<table>
-						<tr>
+						
+						<td  valign="top">
+						<table id="places" class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="0">
+			 			<tr>
 							<td class="text14">&nbsp;<span title="ehsda">Place of Acceptance</span></td>
 							<td class="text14">&nbsp;<span title="ehlka">Land</span></td>
 							<td class="text14">&nbsp;<span title="ehsddt">Place of Delivery</span></td>
@@ -646,27 +621,27 @@
 								</select>													
 							</td>
 						</tr>
+						<tr height="2"><td></td></tr>
+						</table>
+						</td>
+					</tr>
 					</table>
 					</td>
 					</tr>
-	
-		
 				</table>
 			</td>
-		</tr>
-		
-		<tr height="4"><td>&nbsp;</td></tr> 
-		
-		
+		</tr>		
+		<tr height="2"><td></td></tr> 
+
 		<tr>
 		<td>
-		<table style="width:85%;">
+		<table style="width:70%;">
  		<tr>
 			<td >
 			<table>
 			 	<tr >
 				 	<td >
-					<table class="formFrameHeader" style="width:100%;" border="0" cellspacing="1" cellpadding="0">
+					<table style="width:100%;" class="formFrameHeader" border="0" cellspacing="1" cellpadding="0">
 				 		<tr height="15">
 				 			<td class="text14White">&nbsp;&nbsp;Avsender&nbsp;</td>
 		 				</tr>
@@ -680,10 +655,25 @@
 			 				<td>
 			 				<table>
 			 				<tr >
-			 					<td class="text14">&nbsp;<span title="ehtpps">Typ.person</span><font class="text16RedBold" >*</font></td>
-								<td class="text14">&nbsp;<span title="ehkns">Kundnr</span></td>
+			 					<td class="text14">&nbsp;<span title="ehkns">Knr</span></td>
 								<td class="text14">&nbsp;<span title="ehnas">Navn</span><font class="text16RedBold" >*</font></td>
-								<td class="text14">&nbsp;<span title="ehrgs">Org.nr /EORI</span></td>
+								<td class="text14">&nbsp;<span title="ehrgs">Org.nr /EORI</span><font class="text16RedBold" >*</font></td>
+								
+			 				</tr>
+			 				<tr >
+			 					
+								<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="ehkns" id="ehkns" size="10" maxlength="8" value="${model.record.ehkns}"></td>
+								
+								<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ehnas" id="ehnas" size="25" maxlength="30" value="${model.record.ehnas}"></td>
+								<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ehrgs" id="ehrgs" size="20" maxlength="17" value="${model.record.ehrgs}"></td>
+			 				</tr>
+			 				
+			 				
+			 				<tr >
+			 					
+			 					<td class="text14">&nbsp;<span title="ehtpps">Typ.person</span><font class="text16RedBold" >*</font></td>
+								<td class="text14">&nbsp;<span title="ehpss">Sted</span></td>
+								<td class="text14">&nbsp;<span title="ehlks">Landkode</span></td>
 								
 			 				</tr>
 			 				<tr >
@@ -694,23 +684,6 @@
 								  		<option title="En samling personer" value="3" <c:if test="${model.record.ehtpps == '3'}"> selected </c:if> >Sam.pers.</option> 	
 									</select>
 			 					</td>
-								<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="ehkns" id="ehkns" size="10" maxlength="8" value="${model.record.ehkns}"></td>
-								
-								<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ehnas" id="ehnas" size="25" maxlength="30" value="${model.record.ehnas}"></td>
-								<td class="text14"><input  type="text" class="inputTextMediumBlue" name="ehrgs" id="ehrgs" size="20" maxlength="17" value="${model.record.ehrgs}"></td>
-			 				</tr>
-			 				
-			 				
-			 				<tr >
-			 					<td class="text14">&nbsp;</td>
-			 					<td class="text14">&nbsp;</td>
-								<td class="text14">&nbsp;<span title="ehpss">Sted</span></td>
-								<td class="text14">&nbsp;<span title="ehlks">Landkode</span></td>
-								
-			 				</tr>
-			 				<tr >
-			 					<td class="text14">&nbsp;</td>
-			 					<td class="text14">&nbsp;</td>
 								<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehpss" id="ehpss" size="25" maxlength="24" value="${model.record.ehpss}"></td>
 								<td class="text14">
 									<select class="inputTextMediumBlue" name="ehlks" id="ehlks" >
@@ -725,13 +698,11 @@
 			 				</tr>
 			 				<tr >
 			 					<td class="text14">&nbsp;</td>
-			 					<td class="text14">&nbsp;</td>
 								<td class="text14">&nbsp;<span title="ehad1s">Adress</span></td>
 								<td class="text14">&nbsp;<span title="ehpns">Postnr</span></td>
 								
 			 				</tr>
 			 				<tr >
-			 					<td class="text14">&nbsp;</td>
 			 					<td class="text14">&nbsp;</td>
 								<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehad1s" id="ehad1s" size="25" maxlength="30" value="${model.record.ehad1s}"></td>
 								<td class="text14"><input  type="text" class="inputTextMediumBlue" name="ehpns" id="ehpns" size="12" maxlength="9" value="${model.record.ehpns}"></td>
@@ -739,13 +710,11 @@
 			 				
 			 				<tr >
 			 					<td class="text14">&nbsp;</td>
-			 					<td class="text14">&nbsp;</td>
-								<td class="text14">&nbsp;<span title="ehems">E-post</span></td>
-								<td class="text14">&nbsp;<span title="ehems">Telefon</span></td>
+								<td class="text14">&nbsp;<span title="own_ehems_email">E-post</span></td>
+								<td class="text14">&nbsp;<span title="own_ehems_telephone">Telefon</span></td>
 								
 			 				</tr>
 			 				<tr >
-			 					<td class="text14">&nbsp;</td>
 			 					<td class="text14">&nbsp;</td>
 								<c:choose>
 			 					<c:when test="${model.record.ehemst == 'EM'}">
@@ -766,7 +735,7 @@
 								</c:otherwise>
 								</c:choose>
 			 				</tr>
-			 				<tr height="2"><td>&nbsp;</td></tr>
+			 				<tr height="2"><td></td></tr>
 			 				
 			 				</table>
 			 				</td>
@@ -795,10 +764,22 @@
 				 				<td>
 				 				<table>
 				 				<tr >
-				 					<td class="text14">&nbsp;<span title="ehtppm">Typ.person</span><font class="text16RedBold" >*</font></td>
-									<td class="text14">&nbsp;<span title="ehknm">Kundnr</span></td>
+				 					<td class="text14">&nbsp;<span title="ehknm">Knr</span></td>
 									<td class="text14">&nbsp;<span title="ehnam">Navn</span><font class="text16RedBold" >*</font></td>
-									<td class="text14">&nbsp;<span title="ehrgm">Org.nr /EORI</span></td>
+									<td class="text14">&nbsp;<span title="ehrgm">Org.nr /EORI</span><font class="text16RedBold" >*</font></td>
+									
+				 				</tr>
+				 				<tr >
+				 					
+									<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="ehknm" id="ehknm" size="10" maxlength="8" value="${model.record.ehknm}"></td>
+									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ehnam" id="ehnam" size="25" maxlength="30" value="${model.record.ehnam}"></td>
+									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ehrgm" id="ehrgm" size="20" maxlength="17" value="${model.record.ehrgm}"></td>
+				 				</tr>
+				 				
+				 				<tr >
+				 					<td class="text14">&nbsp;<span title="ehtppm">Typ.person</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="ehpsm">Sted</span></td>
+									<td class="text14">&nbsp;<span title="ehlkm">Landkode</span></td>
 									
 				 				</tr>
 				 				<tr >
@@ -809,21 +790,6 @@
 								  			<option title="En samling personer" value="3" <c:if test="${model.record.ehtppm == '3'}"> selected </c:if> >Sam.pers.</option> 	
 										</select>
 				 					</td>
-									<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="ehknm" id="ehknm" size="10" maxlength="8" value="${model.record.ehknm}"></td>
-									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ehnam" id="ehnam" size="25" maxlength="30" value="${model.record.ehnam}"></td>
-									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="ehrgm" id="ehrgm" size="20" maxlength="17" value="${model.record.ehrgm}"></td>
-				 				</tr>
-				 				
-				 				<tr >
-				 					<td class="text14">&nbsp;</td>
-				 					<td class="text14">&nbsp;</td>
-									<td class="text14">&nbsp;<span title="ehpsm">Sted</span></td>
-									<td class="text14">&nbsp;<span title="ehlkm">Landkode</span></td>
-									
-				 				</tr>
-				 				<tr >
-				 					<td class="text14">&nbsp;</td>
-				 					<td class="text14">&nbsp;</td>
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehpsm" id="ehpsm" size="25" maxlength="24" value="${model.record.ehpsm}"></td>
 									<td class="text14">
 										<select class="inputTextMediumBlue" name="ehlkm" id="ehlkm" >
@@ -838,28 +804,28 @@
 				 				</tr>
 				 				
 				 				<tr >
-				 					<td class="text14">&nbsp;</td>
+				 					
 				 					<td class="text14">&nbsp;</td>
 									<td class="text14">&nbsp;<span title="ehad1m">Adress</span></td>
 									<td class="text14">&nbsp;<span title="ehpnm">Postnr</span></td>
 									
 				 				</tr>
 				 				<tr >
-				 					<td class="text14">&nbsp;</td>
+				 					
 				 					<td class="text14">&nbsp;</td>
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehad1m" id="ehad1m" size="25" maxlength="30" value="${model.record.ehad1m}"></td>
 									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="ehpnm" id="ehpnm" size="12" maxlength="9" value="${model.record.ehpnm}"></td>
 				 				</tr>
 				 				
 				 				<tr >
+				 					
 				 					<td class="text14">&nbsp;</td>
-				 					<td class="text14">&nbsp;</td>
-									<td class="text14">&nbsp;<span title="ehemm">E-post</span></td>
-									<td class="text14">&nbsp;<span title="ehemm">Telefon</span></td>
+									<td class="text14">&nbsp;<span title="own_ehemm_email">E-post</span></td>
+									<td class="text14">&nbsp;<span title="own_ehemm_telephone">Telefon</span></td>
 									
 				 				</tr>
 				 				<tr >
-				 					<td class="text14">&nbsp;</td>
+				 					
 				 					<td class="text14">&nbsp;</td>
 									<c:choose>
 				 					<c:when test="${model.record.ehemmt == 'EM'}">
@@ -881,7 +847,7 @@
 									</c:choose>
 				 				</tr>
 				 				
-				 				<tr height="2"><td>&nbsp;</td></tr>
+				 				<tr height="2"><td></td></tr>
 				 				
 				 				</table>
 				 				</td>
@@ -896,7 +862,7 @@
             </td>	
             
 		</tr>
-		<tr height="10"><td></td></tr>
+		<tr height="3"><td></td></tr>
 		<tr>
 			<td align="left" >
 			<c:if test="${model.record.ehst != 'S'}"> <%-- CANCELED(S) --%>
@@ -929,7 +895,7 @@
 		<td>		
 		<table style="width:90%;" border="0" >
 	    	<%-- separator --%>
-	        <tr height="2"><td>&nbsp;</td></tr> 
+	        <tr height="2"><td></td></tr> 
 			<tr>
 				<td>
 				<table style="width:90%;" id="containerdatatableTable" cellspacing="2" align="left" >

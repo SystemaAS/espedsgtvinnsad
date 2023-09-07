@@ -224,18 +224,12 @@
 	   		</tr>
 	   		</table>
 	   		</td>
-	   		
 		</tr>
-		<tr height="5"><td></td></tr>
-		
-		
-		
+		<tr height="2"><td></td></tr>
 		
 		<tr>
 			<td colspan="3" class="text14" valign="top">
-				<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">
-					<tr height="5"><td></td></tr>
-					
+				<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">					
 					<tr>
 						<td class="text14">&nbsp;<span title="emsg">Sign</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emavd">Avd</span><font class="text16RedBold" >*</font></td>
@@ -310,11 +304,12 @@
 					</tr>
 					
 					
-					<tr height="2"><td>&nbsp;</td></tr>
+					<tr height="2"><td></td></tr>
 					<tr>
 						<td colspan="2" class="text14">&nbsp;<span title="emsdlt">Lastested</span></td>
 						<td class="text14">&nbsp;<span title="emlkl">Land</span></td>
 						<td class="text14">&nbsp;<span title="emsdl">UN/LOCODE</span></td>
+						<td>&nbsp;</td>
 						<td class="text14">&nbsp;<span title="emsdut">Lossested</span></td>
 						<td class="text14">&nbsp;<span title="emlku">Land</span></td>
 						<td colspan="2" class="text14">&nbsp;<span title="emsdu">UN/LOCODE</span></td>
@@ -335,6 +330,7 @@
 						<td class="text14">
 							<input  type="text" class="inputTextMediumBlue" name="emsdl" id="emsdl" size="7" maxlength="5" value="${model.record.emsdl}">								
 						</td>
+						<td>&nbsp;</td>
 						<td class="text14">
 							<input  type="text" class="inputTextMediumBlue" name="emsdut" id="emsdut" size="25" maxlength="30" value="${model.record.emsdut}">											
 						</td>
@@ -350,10 +346,10 @@
 							<input  type="text" class="inputTextMediumBlue" name="emsdu" id="emsdu" size="7" maxlength="5" value="${model.record.emsdu}">											
 						</td>
 					</tr>
-					<tr height="2"><td>&nbsp;</td></tr>
+					<tr height="2"><td></td></tr>
 					<tr>
 						<td colspan="15" class="text14" valign="top">
-						<table style="width:80%" align="left" border="0" cellspacing="1" cellpadding="1">
+						<table style="width:90%" align="left" class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="1">
 							<tr>
 								<td colspan="4" class="text14"><b>&nbsp;Container.1</b></td>
 								<td colspan="4" class="text14"><b>&nbsp;Container.2</b></td>
@@ -467,13 +463,17 @@
 			</td>
 		</tr>
 		
-		<tr height="4"><td>&nbsp;</td></tr> 
+		<tr height="2"><td></td></tr> 
+		
+		<tr>
+		<td>
+		<table style="width:65%;" border="0">
  		<tr>
 			<td class="text14" valign="top">
-				<table style="width:85%" align="left" border="0" cellspacing="1" cellpadding="0">
+				<table >
 				 	<tr >
 					 	<td >
-						<table class="formFrameHeader" style="width:100%;" border="0" cellspacing="1" cellpadding="0">
+						<table style="width:100%;" class="formFrameHeader" border="0" cellspacing="1" cellpadding="0">
 					 		<tr height="15">
 					 			<td class="text14White">&nbsp;&nbsp;Avsender&nbsp;</td>
 			 				</tr>
@@ -481,16 +481,27 @@
 			            </td>
 		            </tr>
 		            <tr >
-					 	<td>
+					 	<td valign="top">
 						<table style="width:100%;" class="formFrame" border="0" cellspacing="1" cellpadding="0">
 					 		<tr>
 				 				<td>
 				 				<table>
 				 				<tr >
-									<td class="text14">&nbsp;<span title="emtpps">Typ.person</span><font class="text16NavyBlueBold" >*</font></td>
-									<td class="text14">&nbsp;<span title="emkns">Kundnr</span></td>
+									<td class="text14">&nbsp;<span title="emkns">Knr</span></td>
 									<td class="text14">&nbsp;<span title="emnas">Navn</span><font class="text16NavyBlueBold" >*</font></td>
 									<td class="text14">&nbsp;<span title="emrgs">Org.nr /EORI</span><font class="text16NavyBlueBold" >*</font></td>
+									
+				 				</tr>
+				 				<tr >
+									
+									<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="emkns" id="emkns" size="10" maxlength="8" value="${model.record.emkns}"></td>
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emnas" id="emnas" size="25" maxlength="30" value="${model.record.emnas}"></td>
+									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="emrgs" id="emrgs" size="20" maxlength="17" value="${model.record.emrgs}"></td>
+				 				</tr>
+				 				<tr >
+				 					<td class="text14">&nbsp;<span title="emtpps">Typ.person</span><font class="text16NavyBlueBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="empss">Sted</span></td>
+									<td class="text14">&nbsp;<span title="emlks">Landkode</span></td>
 									
 				 				</tr>
 				 				<tr >
@@ -503,20 +514,6 @@
 										</select>
 									</td>
 									
-									<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="emkns" id="emkns" size="10" maxlength="8" value="${model.record.emkns}"></td>
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emnas" id="emnas" size="25" maxlength="30" value="${model.record.emnas}"></td>
-									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="emrgs" id="emrgs" size="20" maxlength="17" value="${model.record.emrgs}"></td>
-				 				</tr>
-				 				<tr >
-				 					<td class="text14">&nbsp;</td>
-				 					<td class="text14">&nbsp;</td>
-									<td class="text14">&nbsp;<span title="empss">Sted</span></td>
-									<td class="text14">&nbsp;<span title="emlks">Landkode</span></td>
-									
-				 				</tr>
-				 				<tr >
-									<td class="text14">&nbsp;</td>
-				 					<td class="text14">&nbsp;</td>
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="empss" id="empss" size="25" maxlength="24" value="${model.record.empss}"></td>
 									<td class="text14">
 										<select class="inputTextMediumBlue" name="emlks" id="emlks" >
@@ -529,28 +526,24 @@
 				 				</tr>
 				 				<tr >
 				 					<td class="text14">&nbsp;</td>
-				 					<td class="text14">&nbsp;</td>
 									<td class="text14">&nbsp;<span title="emad1s">Adress</span></td>
 									<td class="text14">&nbsp;<span title="empns">Postnr</span></td>
 									
 				 				</tr>
 				 				<tr >
 									<td class="text14">&nbsp;</td>
-				 					<td class="text14">&nbsp;</td>
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emad1s" id="emad1s" size="25" maxlength="30" value="${model.record.emad1s}"></td>
 									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="empns" id="empns" size="12" maxlength="9" value="${model.record.empns}"></td>
 				 				</tr>
 				 				
 				 				<tr >
 				 					<td class="text14">&nbsp;</td>
-				 					<td class="text14">&nbsp;</td>
-									<td class="text14">&nbsp;<span title="emems">E-post</span></td>
-									<td class="text14">&nbsp;<span title="emems">Telefon</span></td>
+									<td class="text14">&nbsp;<span title="own_emems_email">E-post</span></td>
+									<td class="text14">&nbsp;<span title="own_emems_telephone">Telefon</span></td>
 									
 				 				</tr>
 				 				<tr >
 									<td class="text14">&nbsp;</td>
-				 					<td class="text14">&nbsp;</td>
 									<c:choose>
 				 					<c:when test="${model.record.ememst == 'EM'}">
 				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_emems_email" id="own_emems_email" size="35" maxlength="50" value="${model.record.emems}"></td>
@@ -570,7 +563,7 @@
 									</c:otherwise>
 									</c:choose>
 				 				</tr>
-				 				<tr height="2"><td>&nbsp;</td></tr>
+				 				<tr height="2"><td></td></tr>
 				 				
 				 				</table>
 				 				</td>
@@ -582,10 +575,10 @@
             </td>	
             
            	<td class="text14" valign="top">
-				<table style="width:85%" align="left" border="0" cellspacing="1" cellpadding="0">
+				<table style="width:80%" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
-						<table class="formFrameHeader" style="width:100%;" border="0" cellspacing="1" cellpadding="0">
+						<table style="width:100%;" class="formFrameHeader" border="0" cellspacing="1" cellpadding="0">
 					 		<tr height="15">
 					 			<td class="text14White">&nbsp;&nbsp;Mottaker&nbsp;</td>
 			 				</tr>
@@ -593,18 +586,32 @@
 			            </td>
 		            </tr>
 		            <tr >
-					 	<td>
+					 	<td valign="top">
 						<table style="width:100%;" class="formFrame" border="0" cellspacing="1" cellpadding="0">
 					 		<tr>
 				 				<td>
 				 				<table>
 				 				<tr >
-									<td class="text14">&nbsp;<span title="emtppm">Typ.person</span><font class="text16NavyBlueBold" >*</font></td>
-									<td class="text14">&nbsp;<span title="emknm">Kundnr</span></td>
+									<td class="text14">&nbsp;<span title="emknm">Knr</span></td>
 									<td class="text14">&nbsp;<span title="emnam">Navn</span><font class="text16NavyBlueBold" >*</font></td>
 									<td class="text14">&nbsp;<span title="emrgm">Org.nr /EORI</span><font class="text16NavyBlueBold" >*</font></td>
 				 				</tr>
 				 				<tr >
+									
+									<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="emknm" id="emknm" size="10" maxlength="8" value="${model.record.emknm}"></td>
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emnam" id="emnam" size="25" maxlength="30" value="${model.record.emnam}"></td>
+									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="emrgm" id="emrgm" size="20" maxlength="17" value="${model.record.emrgm}"></td>
+				 				
+				 				</tr>
+				 				
+				 				<tr >
+									
+				 					<td class="text14">&nbsp;<span title="emtppm">Typ.person</span><font class="text16NavyBlueBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="empsm">Sted</span></td>
+									<td class="text14">&nbsp;<span title="emlkm">Landkode</span></td>
+									
+				 				</tr>
+				 				<tr>
 									<td class="text14">
 										<select class="inputTextMediumBlue" id="emtppm" name="emtppm">
 											<option value="">-velg-</option>
@@ -613,22 +620,6 @@
 								  			<option title="En samling personer" value="3" <c:if test="${model.record.emtppm == '3'}"> selected </c:if> >Sam.pers.</option> 	
 										</select>
 									</td>
-									<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="emknm" id="emknm" size="10" maxlength="8" value="${model.record.emknm}"></td>
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emnam" id="emnam" size="25" maxlength="30" value="${model.record.emnam}"></td>
-									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="emrgm" id="emrgm" size="20" maxlength="17" value="${model.record.emrgm}"></td>
-				 				
-				 				</tr>
-				 				
-				 				<tr >
-									<td class="text14">&nbsp;</td>
-				 					<td class="text14">&nbsp;</td>
-									<td class="text14">&nbsp;<span title="empsm">Sted</span></td>
-									<td class="text14">&nbsp;<span title="emlkm">Landkode</span></td>
-									
-				 				</tr>
-				 				<tr>
-									<td class="text14">&nbsp;</td>
-				 					<td class="text14">&nbsp;</td>
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="empsm" id="empsm" size="25" maxlength="24" value="${model.record.empsm}"></td>
 									<td class="text14">
 										<select class="inputTextMediumBlue" name="emlkm" id="emlkm" >
@@ -640,26 +631,26 @@
 									</td>
 				 				</tr>
 				 				<tr >
-									<td class="text14">&nbsp;</td>
+									
 				 					<td class="text14">&nbsp;</td>
 									<td class="text14">&nbsp;<span title="emad1m">Adress</span></td>
 									<td class="text14">&nbsp;<span title="empnm">Postnr</span></td>
 				 				</tr>
 				 				<tr >
-									<td class="text14">&nbsp;</td>
+									
 				 					<td class="text14">&nbsp;</td>
 				 					<td class="text14"><input type="text" class="inputTextMediumBlue" name="emad1m" id="emad1m" size="25" maxlength="30" value="${model.record.emad1m}"></td>
 									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="empnm" id="empnm" size="12" maxlength="9" value="${model.record.empnm}"></td>
 				 				</tr>
 				 				<tr >
+				 					
 				 					<td class="text14">&nbsp;</td>
-				 					<td class="text14">&nbsp;</td>
-									<td class="text14">&nbsp;<span title="ememm">E-post</span></td>
-									<td class="text14">&nbsp;<span title="ememm">Telefon</span></td>
+									<td class="text14">&nbsp;<span title="own_ememm_email">E-post</span></td>
+									<td class="text14">&nbsp;<span title="own_ememm_telephone">Telefon</span></td>
 									
 				 				</tr>
 				 				<tr >
-									<td class="text14">&nbsp;</td>
+									
 				 					<td class="text14">&nbsp;</td>
 									<c:choose>
 				 					<c:when test="${model.record.ememmt == 'EM'}">
@@ -681,7 +672,7 @@
 									</c:choose>
 				 				</tr>
 				 				
-				 				<tr height="2"><td>&nbsp;</td></tr>
+				 				<tr height="2"><td></td></tr>
 				 				
 				 				</table>
 				 				</td>
@@ -691,10 +682,12 @@
 		            </tr>
 	            </table>
             </td>	
-            
-            
 		</tr>
-		<tr height="10"><td></td></tr>
+		</table>
+		</td>
+		</tr>
+	
+		<tr height="3"><td></td></tr>
 		<tr>
 			<td align="left" >
 			<c:if test="${model.record.emst != 'S'}"> <%-- CANCELED(S) --%>
@@ -731,7 +724,7 @@
 		<td >		
 		<table style="width:100%" border="0" >
 	    	<%-- separator --%>
-	        <tr height="2"><td>&nbsp;</td></tr>  
+	        <tr height="2"><td></td></tr>  
 			<tr>
 				<td>
 				<table style="width:100%" id="containerdatatableTable" cellspacing="2" align="left" >

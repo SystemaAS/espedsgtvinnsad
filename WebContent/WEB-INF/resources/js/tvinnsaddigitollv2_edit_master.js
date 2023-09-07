@@ -113,29 +113,32 @@
 	  });
   });
   	//--------------------------------------------------------------------------------------
-	//Extra behavior for Customer number ( without using (choose from list) extra roundtrip)
+	//Extra behavior for Sender/Receiver ( without using (choose from list) extra roundtrip)
 	//--------------------------------------------------------------------------------------
 	jq(function() { 
-	    jq('#efknd').blur(function() {
-	    	fetchCustomer();	
+	    jq('#emknm').blur(function() {
+			if(jq('#emnam').val()==''){
+				fetchReceiver();	
+			}
+	    		
 		});
 	});
-	  
- 
-	jq(document).ready(function() {
-		  //in order to get the customer name and orgnr
-		  //fetchCustomer(); OBSOLETE ?
-	  });
-  
-	
-  function fetchCustomer(){
-	  var customerNr = jq.trim(jq('#efknd').val());
+	jq(function() { 
+	    jq('#emkns').blur(function() {
+			if(jq('#emnas').val()==''){
+				fetchSender();	
+			}
+	    		
+		});
+	});
+	function fetchReceiver(){
+	  var customerNr = jq.trim(jq('#emknm').val());
 		
 		if(customerNr!=""){
   		jq.getJSON('searchCustomer_TvinnSad.do', {
 			applicationUser : jq('#applicationUser').val(),
 			customerName : "",
-			customerNumber : jq('#efknd').val(),
+			customerNumber : jq('#emknm').val(),
 			ajax : 'true'
 		}, function(data) {
 			//alert("Hello");
@@ -150,7 +153,7 @@
 				customer.adr1 = data[i].adr1;
 				customer.adr2 = data[i].adr2;
 				customer.adr3 = data[i].adr3;
-				customer.postnr = data[i].sypoge;//data[i].postnr; DK=sypoge
+				customer.postnr = data[i].postnr;//data[i].postnr; DK=sypoge
 				customer.kpers = data[i].kpers;
 				customer.tlf = data[i].tlf;
 				customer.syland = data[i].syland;
@@ -158,20 +161,107 @@
 				map[customer.kundnr] = customer;
 			}
 			if(len > 0){
-				jq('#efknd').val(customer.kundnr);
-				jq('#own_efkndName').val(customer.knavn);
-				jq('#efrgd').val(customer.orgnr);
+				jq('#emknm').val(customer.kundnr);
+				jq('#emnam').val(customer.knavn);
+				jq('#emrgm').val(customer.orgnr);
+				jq('#empsm').val(customer.adr3);
+				jq('#emlkm').val(customer.syland);
+				jq('#empnm').val(customer.postnr);
+				jq('#emad1m').val(customer.adr1);
+				jq('#emtppm').val("2"); //bedrift
+				jq('#own_ememm_telephone').val(customer.tlf);
+				jq('#own_ememm_email').val("");
+				
 			}else{
 				//init fields
-				jq('#efknd').val("");
-				jq('#own_efkndName').val("");
+				jq('#emknm').val("");
+				jq('#emnam').val("");
+				jq('#emrgm').val("");
+				jq('#empsm').val("");
+				jq('#emlkm').val("");
+				jq('#empnm').val("");
+				jq('#emad1m').val("");
+				jq('#own_ememm_telephone').val("");
+				jq('#own_ememm_email').val("");
 			}
 		});
-  		
 		}else{
-			jq('#efknd').val("");
-			jq('#own_efkndName').val("");
-			jq('#efrgd').val("");
+			jq('#emknm').val("");
+			jq('#emnam').val("");
+			jq('#emrgm').val("");
+			jq('#empsm').val("");
+			jq('#emlkm').val("");
+			jq('#empnm').val("");
+			jq('#emad1m').val("");
+			jq('#own_ememm_telephone').val("");
+			jq('#own_ememm_email').val("");
+		}
+
+  }
+  function fetchSender(){
+	  var customerNr = jq.trim(jq('#emkns').val());
+		
+		if(customerNr!=""){
+  		jq.getJSON('searchCustomer_TvinnSad.do', {
+			applicationUser : jq('#applicationUser').val(),
+			customerName : "",
+			customerNumber : jq('#emkns').val(),
+			ajax : 'true'
+		}, function(data) {
+			//alert("Hello");
+			var len = data.length;
+			for ( var i = 0; i < len; i++) {
+				//html += '<option value="' + data[i].kundnr + '">' + data[i].knavn + '</option>';
+				customer = new Object();
+				customer.kundnr = data[i].kundnr;
+				customer.knavn = data[i].knavn;
+				customer.eori = data[i].eori;
+				customer.orgnr = data[i].syrg;
+				customer.adr1 = data[i].adr1;
+				customer.adr2 = data[i].adr2;
+				customer.adr3 = data[i].adr3;
+				customer.postnr = data[i].postnr;//data[i].postnr; DK=sypoge
+				customer.kpers = data[i].kpers;
+				customer.tlf = data[i].tlf;
+				customer.syland = data[i].syland;
+			  	//put the object in map now with customerNumber as key
+				map[customer.kundnr] = customer;
+			}
+			if(len > 0){
+				jq('#emkns').val(customer.kundnr);
+				jq('#emnas').val(customer.knavn);
+				jq('#emrgs').val(customer.orgnr);
+				jq('#empss').val(customer.adr3);
+				jq('#emlks').val(customer.syland);
+				jq('#empns').val(customer.postnr);
+				jq('#emad1s').val(customer.adr1);
+				jq('#emtpps').val("2"); //bedrift
+				jq('#own_emems_telephone').val(customer.tlf);
+				jq('#own_emems_email').val("");
+				
+			}else{
+				//init fields
+				jq('#emkns').val("");
+				jq('#emnas').val("");
+				jq('#emrgs').val("");
+				jq('#empss').val("");
+				jq('#emlks').val("");
+				jq('#empns').val("");
+				jq('#emad1s').val("");
+				jq('#own_emems_telephone').val("");
+				jq('#own_emems_email').val("");
+			}
+		});
+		}else{
+			jq('#emknm').val("");
+			jq('#emnam').val("");
+			jq('#emrgm').val("");
+			jq('#empsm').val("");
+			jq('#emlkm').val("");
+			jq('#empnm').val("");
+			jq('#emad1m').val("");
+			jq('#own_ememm_telephone').val("");
+			jq('#own_ememm_email').val("");
 		}
 
   }
