@@ -1,0 +1,5 @@
+UGE_EXPORT;Eksport fra Sverige som på forhånd er klarert
+EUEIR_EXPORT;Eksport fra Sverige. Ingen videre oppfølging for Tolletaten ifm ankomst og innpassering
+ALE_EXPORT;Eksport fra Sverige. Ingen videre oppfølging for Tolletaten ifm ankomst og innpassering
+UNU_EXPORT;Eksport fra Sverige. Medfører behov for manuell ekspedisjon på grensen
+ECS_EXPORT;Eksport fra EU. Medfører behov for manuell ekspedisjon på grensen

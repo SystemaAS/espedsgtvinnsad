@@ -42,18 +42,19 @@
 							<font class="text14MediumBlue">&nbsp;${model.record.etlnrt}</font>
 						</c:if>
 					</td>
-					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
-						<a id="alinkHeader" style="display:block;" href="tvinnsaddigitollv2_edit_master.do?action=doCreate&emlnrt=${model.record.etlnrt}">
-							<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.createnew"/>&nbsp;<spring:message code="systema.tvinn.sad.digitoll.list.tab.master"/></font>
-							<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
-						</a>
-					</td>
-					
+					<c:if test="${model.record.etst != 'S'}"> <%-- CANCELED(S) --%>
+						<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
+						<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
+							<a id="alinkHeader" style="display:block;" href="tvinnsaddigitollv2_edit_master.do?action=doCreate&emlnrt=${model.record.etlnrt}">
+								<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.createnew"/>&nbsp;<spring:message code="systema.tvinn.sad.digitoll.list.tab.master"/></font>
+								<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
+							</a>
+						</td>
+					</c:if>
 					
 					
 					<%-- <td width="50%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>  --%>
-			 		<td width="60%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
+			 		<td width="80%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
 						<img id="imgInfoRpgJarStart" style="cursor:pointer;" onClick="showPop('jarStartCmd');" src="resources/images/info4.png" width="12" height="12" border="0" alt="info">
 						<div class="text12" style="position: relative;display: inline;" align="left">
 						<span style="position:absolute; left:-580px; top:3px;" id="jarStartCmd" class="popupWithInputText"  >
@@ -93,7 +94,8 @@
 			
 			<c:if test="${model.record.etlnrt > 0}">
 				<input type="hidden" name="etlnrt" id="etlnrt" value="${model.record.etlnrt}"> 
-			
+				<input type="hidden" name="etst" id="etst" value="${model.record.etst}">
+				<input type="hidden" name="etst2" id="etst2" value="${model.record.etst2}">
 			</c:if>
 					 			  
 			
@@ -535,8 +537,8 @@
 				 				<td>
 				 				<table>
 				 				<tr >
-									<td class="text14">&nbsp;<span title="etnar">Navn</span></td>
-									<td class="text14">&nbsp;<span title="etrgr">Orgnr / EORI</span></td>
+									<td class="text14">&nbsp;<span title="etnar">Navn</span><font class="text16NavyBlueBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="etrgr">Orgnr / EORI</span><font class="text16NavyBlueBold" >*</font></td>
 									
 				 				</tr>
 				 				<tr >
@@ -545,8 +547,8 @@
 				 				</tr>
 				 				
 				 				<tr >
-									<td class="text14">&nbsp;<span title="etpsr">Sted</span></td>
-									<td class="text14">&nbsp;<span title="etlkr">Landkode</span></td>
+									<td class="text14">&nbsp;<span title="etpsr">Sted</span><font class="text16NavyBlueBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="etlkr">Landkode</span><font class="text16NavyBlueBold" >*</font></td>
 									
 				 				</tr>
 				 				<tr >
@@ -574,7 +576,7 @@
 				 				</tr>
 				 				
 				 				<tr >
-									<td class="text14">&nbsp;<span title="etemr">E-post</span></td>
+									<td class="text14">&nbsp;<span title="etemr">E-post</span><font class="text16NavyBlueBold" >*</font></td>
 									<td class="text14">&nbsp;<span title="etemr">Telefon</span></td>
 									
 				 				</tr>

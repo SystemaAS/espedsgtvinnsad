@@ -135,6 +135,27 @@ public class SadDigitollDropDownListPopulationService {
 		return dtoList;
 		
 	}
+	/**
+	 * 
+	 * @return
+	 */
+	public List<GenericDropDownDto> getExportTypesDto(){
+		String LIST_FILE = "_exportTypes.txt";
+		List<GenericDropDownDto> dtoList = new ArrayList<GenericDropDownDto>();
+		List<String> list = textFileReaderService.getFileLines(TdsServletContext.getTdsServletContext().getResourceAsStream(this.FILE_RESOURCE_PATH + "digitoll/" + LIST_FILE));
+		for (String record : list) {
+			String[] recordArray =  record.split(";");
+			if(record.length()>0) {
+				GenericDropDownDto dto = new GenericDropDownDto();
+				dto.setCode(recordArray[0]);
+				dto.setTxt1(recordArray[1]);
+				
+				dtoList.add(dto);
+			}
+		}
+		return dtoList;
+		
+	}
 	
 	
 	

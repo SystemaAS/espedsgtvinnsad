@@ -737,8 +737,9 @@ public class TvinnSadDigitollv2HouseController {
 		List<GenericDropDownDto> dto = this.digitollDropDownListPopulationService.getPreviousDocumentsList();
 		model.put("previousDocumentsDto", dto);
 		//country
-		dto = this.digitollDropDownListPopulationService.getCountryList();
-		model.put("countryDto", dto);
+		dto = this.digitollDropDownListPopulationService.getCountryList(); model.put("countryDto", dto);
+		//export types
+		dto = this.digitollDropDownListPopulationService.getExportTypesDto(); model.put("exportTypesDto", dto);
 	}
 	
 	private void adjustFieldsForFetch(SadmohfRecord recordToValidate){

@@ -384,7 +384,7 @@ public class TvinnSadDigitollv2TransportController {
     	}
 	    logger.info("Id1:" + id1); logger.info("status:" + status);
 	    
-		ModelAndView successView = new ModelAndView("redirect:tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=" + Integer.parseInt(id1) );
+		ModelAndView successView = new ModelAndView("redirect:tvinnsaddigitollv2.do?action=doFind");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		
 		//START
@@ -497,7 +497,89 @@ public class TvinnSadDigitollv2TransportController {
 		
 	}
 	
-	
+	@RequestMapping(value="tvinnsaddigitollv2_api_delete_transport.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doApiDeleteMaster(@ModelAttribute ("record") SadmotfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		//this.context = TdsAppContext.getApplicationContext();
+		Collection<SadmomfRecord> outputList = new ArrayList<SadmomfRecord>();
+		Map model = new HashMap();
+		
+		String action = "";
+		String id1 = "";
+		String mrn = "";
+		
+		
+		Enumeration requestParameters = request.getParameterNames();
+	    while (requestParameters.hasMoreElements()) {
+	        String element = (String) requestParameters.nextElement();
+	        String value = request.getParameter(element);
+	        if (element != null && value != null) {
+        		//logger.warn("####################################################");
+    			//logger.warn("param Name : " + element + " value: " + value);
+    			if(element.startsWith("current_id1")){
+    				id1 = value;
+    			}else if(element.startsWith("current_mrn")){
+    				mrn = value;
+    			}else if(element.startsWith("action")){
+    				action = value;
+    			}
+    		}
+    	}
+	    logger.info("action:" + action);
+	    logger.info("Id1:" + id1); logger.info("mrn:" + mrn);
+	    
+		ModelAndView successView = new ModelAndView("redirect:tvinnsaddigitollv2.do?action=doFind" );
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		
+		//START
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			
+			//========
+			//DELETE
+			//========
+			if(StringUtils.isNotEmpty(action) && action.equals("doDelete")) {
+		    	logger.info("Before delete in Controller ...");
+		    	//this.context = TdsAppContext.getApplicationContext();
+				logger.info("Inside: doApiDeleteMaster");
+				
+				StringBuilder url = new StringBuilder();
+				url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
+				url.append("deleteTransport.do");
+				
+				String BASE_URL = url.toString();
+	    		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&etlnrt=" + id1 + "&mrn=" + mrn;
+	    		logger.info("URL: " + BASE_URL);
+	    		logger.info("PARAMS: " + urlRequestParamsKeys);
+	    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+	    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+	    		//Debug -->
+		    	logger.info(jsonPayload);
+	    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    		
+	    		ApiGenericDtoResponse apiDtoResponse = this.apiGenericDtoResponseService.getReponse(jsonPayload);
+	    		if(StringUtils.isNotEmpty(apiDtoResponse.getErrMsg())){
+	    			logger.error("ERROR:" + apiDtoResponse.toString());
+	    			model.put("errorMessage", apiDtoResponse.getErrMsg());	
+				}
+	    		successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+				
+			}else {
+				StringBuffer errMsg = new StringBuffer();
+				errMsg.append("ERROR on doDeleteMaster -->detail: action is null or other than doDelete...");
+				//error on update
+				model.put("errorMessage", errMsg.toString());
+				//put all aspects (sub-lists) only with update (not insert) error
+			}
+			
+		}
+		
+		return successView;
+		
+	}
 	/**
 	 * 
 	 * @param appUser

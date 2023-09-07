@@ -149,7 +149,41 @@
 	  });
   });
   
-  
+  	//Present dialog box onClick (href in parent JSP)
+  	jq(function() {
+	  jq(".grantLink").click(function() {
+		  var id = this.id;
+		  counterIndex = id.replace("grantLink","");
+		  
+		  jq('#dialogUpdateInternalStatusGrant'+counterIndex).dialog( "option", "title", "Gjøre tilgjengelig igjen " );
+		  //deal with buttons for this modal window
+		  jq('#dialogUpdateInternalStatusGrant'+counterIndex).dialog({
+			 buttons: [ 
+	            {
+				 id: "dialogSaveTU"+counterIndex,	
+				 text: "Ok",
+				 click: function(){
+							setBlockUI();
+					 		jq('#updateInternalStatusGrantForm'+counterIndex).submit();
+				 		}
+			 	 },
+	 	 		{
+			 	 id: "dialogCancelTU"+counterIndex,
+			 	 text: "Cancel", 
+				 click: function(){
+					 		//back to initial state of form elements on modal dialog
+					 		jq("#dialogSaveSU"+counterIndex).button("option", "disabled", true);
+					 		jq( this ).dialog( "close" ); 
+				 		} 
+	 	 		 } ] 
+		  });
+		  //init values
+		  jq("#dialogSaveSU"+counterIndex).button("option", "disabled", true);
+		  //open now
+		  jq('#dialogUpdateInternalStatusGrant'+counterIndex).dialog('open');
+		 
+	  });
+  	});
   
   
   jq(function() {
@@ -175,19 +209,21 @@
 	//jq.fn.dataTable.moment( 'DDMMYY' );    
     //init table (no ajax, no columns since the payload is already there by means of HTML produced on the back-end)
     jq('#mainList').dataTable( {
-  	  //"dom": '<"top"f>t<"bottom"><"clear">',
+  	  "dom": 'f<"toolbar">rt<"bottom"ip><"clear">',
       "searchHighlight": true,
-  	  "dom": '<"top"f>rt<"bottom"lip><"clear">',
+  	  //"dom": '<"top"f>rt<"bottom"lip><"clear">',
   	  //"scrollY": "700px",
   	  "scrollCollapse":  true,
 	  "tabIndex": -1,
-	  //"order": [[ 2, "desc" ]], //turnr
+	  "order": [[ 1, "asc" ]], //etlnrt
 	  "lengthMenu": [ 25, 50, 100],
 	  "fnDrawCallback": function( oSettings ) {
     	jq('.dataTables_filter input').addClass("inputText12LightYellow");
     	}
     });
-    //event on input field for search
+	jq("div.toolbar").html('<span class="text16">Transportliste</span>');
+    
+//event on input field for search
     jq('input.mainList_filter').on( 'keyup click', function () {
     		filterGlobal();
     });

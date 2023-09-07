@@ -54,7 +54,7 @@
 						</c:if>
 						
 					</td>
-					<c:if test="${model.record.emlnrm > 0}">
+					<c:if test="${model.record.emlnrm > 0 && model.record.emst != 'S'}">
 						<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 						<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
 							<a id="alinkHeader" style="display:block;" href="tvinnsaddigitollv2_edit_house.do?action=doCreate&ehlnrt=${model.record.emlnrt}&ehlnrm=${model.record.emlnrm}">
@@ -818,7 +818,7 @@
 								</c:if>
 		               		</c:when>
 		               		<c:otherwise>
-		               			${masterConsignmentRecord.emst}
+		               			${houseConsignmentRecord.ehst}
 		               		</c:otherwise>
 		               	   </c:choose>
 		               </td>

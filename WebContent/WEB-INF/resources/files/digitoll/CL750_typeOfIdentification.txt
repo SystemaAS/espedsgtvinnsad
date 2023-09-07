@@ -1,7 +1,7 @@
 10;IMO skipsregistreringsnummer
 20;Vognnummer
 21;Tognummer
-30;Registreringsnummer for kjÃ¸retÃ¸y pÃ¥ vei
-31;Registreringsnummer for trailer pÃ¥ vei
-41;Registreringsnummer for luftfartÃ¸y
+30;Registreringsnummer for kjøretøy på vei
+31;Registreringsnummer for trailer på vei
+41;Registreringsnummer for luftfartøy
 80;Europeisk skipsidentifikasjonsnummer

@@ -404,30 +404,202 @@
 						
 						<tr>
 							<td class="text14">
-								<select class="inputTextMediumBlue" id="ehetypt" name="ehetypt">
-									<option value="">-Velg-</option>	
-								  	<option title="Eksport fra Sverige som på forhånd er klarert" value="UGE_EXPORT" <c:if test="${model.record.ehetypt == 'UGE_EXPORT'}"> selected </c:if> >UGE_EXPORT</option>
-								  	<option title="Eksport fra Sverige. Ingen videre oppfølging for Tolletaten ifm ankomst og innpassering" value="EUEIR_EXPORT" <c:if test="${model.record.ehetypt == 'EUEIR_EXPORT'}"> selected </c:if> >EUEIR_EXPORT</option> 
-									<option title="Eksport fra Sverige. Ingen videre oppfølging for Tolletaten ifm ankomst og innpassering" <c:if test="${model.record.ehetypt == 'ALE_EXPORT'}"> selected </c:if> >ALE_EXPORT</option> 
-									<option title="Eksport fra Sverige. Medfører behov for manuell ekspedisjon på grensen." value="UNU_EXPORT" <c:if test="${model.record.ehetypt == 'UNU_EXPORT'}"> selected </c:if> >UNU_EXPORT</option> 
-									<option title="Eksport fra EU. Medfører behov for manuell ekspedisjon på grensen." value="ECS_EXPORT" <c:if test="${model.record.ehetypt == 'ECS_EXPORT'}"> selected </c:if> >ECS_EXPORT</option> 	
-								</select>
-								<%--
-				 				<select class="inputTextMediumBlue toggleDirektfortolling" name="ehetypt" id="ehetypt" >
+								<select class="inputTextMediumBlue" name="ehetypt" id="ehetypt" >
 			 						<option value="">-velg-</option>
-				 				  	<c:forEach var="record" items="${Xmodelmodel.etTypeList}" >
-			                       	 	<option title="${Xrecord.kftxt}" value="${Xrecord.kfkod}" <c:if test="${Xmodelmodel.record.ehetypt == Xrecord.kfkod}"> selected </c:if> >${Xrecord.kfkod}&nbsp;${Xrecord.kftxt}</option>
+				 				  	<c:forEach var="dto" items="${model.exportTypesDto}" >
+			                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.ehetypt == dto.code}"> selected </c:if> >${dto.code}</option>
 									</c:forEach>
 								</select>
-								 --%>
+								 
 				 			</td>
 				 			<td class="text14">
-				 					<input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="eheid" id="eheid" size="21" maxlength="18" value="${model.record.eheid}">
+				 				<input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="eheid" id="eheid" size="21" maxlength="18" value="${model.record.eheid}">
 				 			</td>
 				 			<td class="text14">		
-				 					<input class="inputFormSubmitStd" type="button" name="manyExpIdButton" id="manyExpIdButton" value='Lage flere Eksp.id'>
-				 					<img style="cursor:pointer;vertical-align: middle;" src="resources/images/add.png" width="12px" height="12px" border="0" alt="create new" >
-				 			</td>
+				 				<input class="inputFormSubmitStd" type="button" name="manyExpIdButton" id="manyExpIdButton" onClick="showPop('more_exports');" value='Lage flere Eksp.id'>
+				 				<img style="cursor:pointer;vertical-align: middle;" src="resources/images/add.png" width="12px" height="12px" border="0" alt="create new" >
+				 					<div class="text14" style="position: relative;" align="right" >
+			 						<span style="position:absolute;top:-200px; width:700px;" id="more_exports" class="popupWithInputText"  >
+							           		<div class="text10" align="left">
+							           			<table border="0" cellspacing="1" cellpadding="0">
+							           			<tr>
+							           			<td>
+							           				<table class="lightGrayBg" >
+							           				<tr>
+									           			<td class="text14" colspan="2">
+									           				<b>Flere Eksp.id</b>
+									           			</td>
+								        			</tr>
+													<tr>
+														<td class="text14">&nbsp;<span title="ehetypt2" >2.Eksporttype</span></td>
+									           			<td class="text14">&nbsp;<span title="eheid2" >2.Eksp.id</span></td>
+									           			<td class="text14">&nbsp;<span title="ehetypt3" >3.Eksporttype</span></td>
+									           			<td class="text14">&nbsp;<span title="eheid3" >3.Eksp.id</span></td>
+									           			
+													</tr>
+								           			<tr>
+									           			<td class="text14" nowrap >&nbsp;
+									            			<select class="inputTextMediumBlue" name="ehetypt2" id="ehetypt2" >
+										 						<option value="">-velg-</option>
+											 				  	<c:forEach var="dto" items="${model.exportTypesDto}" >
+										                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.ehetypt2 == dto.code}"> selected </c:if> >${dto.code}</option>
+																</c:forEach>
+															</select>
+										            		
+									           			</td>
+									           			<td class="text14" nowrap >
+									           				&nbsp;<input type="text" class="inputTextMediumBlue" name="eheid2" id="eheid2" size="21" maxlength="18" value="${model.record.eheid2}">										           			
+									           			</td>
+									           			<td class="text14" nowrap >&nbsp;
+									            			<select class="inputTextMediumBlue" name="ehetypt3" id="ehetypt3" >
+										 						<option value="">-velg-</option>
+											 				  	<c:forEach var="dto" items="${model.exportTypesDto}" >
+										                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.ehetypt3 == dto.code}"> selected </c:if> >${dto.code}</option>
+																</c:forEach>
+															</select>
+										            		
+									           			</td>
+									           			<td class="text14" nowrap >
+									           				&nbsp;<input type="text" class="inputTextMediumBlue" name="eheid3" id="eheid3" size="21" maxlength="18" value="${model.record.eheid3}">										           			
+									           			</td>
+									           			
+				           							</tr>
+				           							<tr>
+														<td class="text14">&nbsp;<span title="ehetypt4" >4.Eksporttype</span></td>
+									           			<td class="text14">&nbsp;<span title="eheid4" >4.Eksp.id</span></td>
+									           			<td class="text14">&nbsp;<span title="ehetypt5" >5.Eksporttype</span></td>
+									           			<td class="text14">&nbsp;<span title="eheid5" >5.Eksp.id</span></td>
+									           			
+													</tr>
+								           			<tr>
+									           			<td class="text14" nowrap >&nbsp;
+									            			<select class="inputTextMediumBlue" name="ehetypt4" id="ehetypt4" >
+										 						<option value="">-velg-</option>
+											 				  	<c:forEach var="dto" items="${model.exportTypesDto}" >
+										                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.ehetypt4 == dto.code}"> selected </c:if> >${dto.code}</option>
+																</c:forEach>
+															</select>
+										            		
+									           			</td>
+									           			<td class="text14" nowrap >
+									           				&nbsp;<input type="text" class="inputTextMediumBlue" name="eheid4" id="eheid4" size="21" maxlength="18" value="${model.record.eheid4}">										           			
+									           			</td>
+									           			<td class="text14" nowrap >&nbsp;
+									            			<select class="inputTextMediumBlue" name="ehetypt5" id="ehetypt5" >
+										 						<option value="">-velg-</option>
+											 				  	<c:forEach var="dto" items="${model.exportTypesDto}" >
+										                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.ehetypt5 == dto.code}"> selected </c:if> >${dto.code}</option>
+																</c:forEach>
+															</select>
+										            		
+									           			</td>
+									           			<td class="text14" nowrap >
+									           				&nbsp;<input type="text" class="inputTextMediumBlue" name="eheid5" id="eheid5" size="21" maxlength="18" value="${model.record.eheid5}">										           			
+									           			</td>
+				           							</tr>
+				           							<tr>
+														<td class="text14">&nbsp;<span title="ehetypt6" >6.Eksporttype</span></td>
+									           			<td class="text14">&nbsp;<span title="eheid6" >6.Eksp.id</span></td>
+									           			<td class="text14">&nbsp;<span title="ehetypt7" >7.Eksporttype</span></td>
+									           			<td class="text14">&nbsp;<span title="eheid7" >7.Eksp.id</span></td>
+									           			
+													</tr>
+								           			<tr>
+									           			<td class="text14" nowrap >&nbsp;
+									            			<select class="inputTextMediumBlue" name="ehetypt6" id="ehetypt6" >
+										 						<option value="">-velg-</option>
+											 				  	<c:forEach var="dto" items="${model.exportTypesDto}" >
+										                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.ehetypt6 == dto.code}"> selected </c:if> >${dto.code}</option>
+																</c:forEach>
+															</select>
+										            		
+									           			</td>
+									           			<td class="text14" nowrap >
+									           				&nbsp;<input type="text" class="inputTextMediumBlue" name="eheid6" id="eheid6" size="21" maxlength="18" value="${model.record.eheid6}">										           			
+									           			</td>
+									           			<td class="text14" nowrap >&nbsp;
+									            			<select class="inputTextMediumBlue" name="ehetypt7" id="ehetypt7" >
+										 						<option value="">-velg-</option>
+											 				  	<c:forEach var="dto" items="${model.exportTypesDto}" >
+										                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.ehetypt7 == dto.code}"> selected </c:if> >${dto.code}</option>
+																</c:forEach>
+															</select>
+										            		
+									           			</td>
+									           			<td class="text14" nowrap >
+									           				&nbsp;<input type="text" class="inputTextMediumBlue" name="eheid7" id="eheid7" size="21" maxlength="18" value="${model.record.eheid7}">										           			
+									           			</td>
+				           							</tr>
+				           							<tr>
+														<td class="text14">&nbsp;<span title="ehetypt8" >8.Eksporttype</span></td>
+									           			<td class="text14">&nbsp;<span title="eheid8" >8.Eksp.id</span></td>
+									           			<td class="text14">&nbsp;<span title="ehetypt9" >9.Eksporttype</span></td>
+									           			<td class="text14">&nbsp;<span title="eheid9" >9.Eksp.id</span></td>
+									           			
+													</tr>
+								           			<tr>
+									           			<td class="text14" nowrap >&nbsp;
+									            			<select class="inputTextMediumBlue" name="ehetypt8" id="ehetypt8" >
+										 						<option value="">-velg-</option>
+											 				  	<c:forEach var="dto" items="${model.exportTypesDto}" >
+										                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.ehetypt8 == dto.code}"> selected </c:if> >${dto.code}</option>
+																</c:forEach>
+															</select>
+										            		
+									           			</td>
+									           			<td class="text14" nowrap >
+									           				&nbsp;<input type="text" class="inputTextMediumBlue" name="eheid8" id="eheid8" size="21" maxlength="18" value="${model.record.eheid8}">										           			
+									           			</td>
+									           			<td class="text14" nowrap >&nbsp;
+									            			<select class="inputTextMediumBlue" name="ehetypt9" id="ehetypt9" >
+										 						<option value="">-velg-</option>
+											 				  	<c:forEach var="dto" items="${model.exportTypesDto}" >
+										                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.ehetypt9 == dto.code}"> selected </c:if> >${dto.code}</option>
+																</c:forEach>
+															</select>
+										            		
+									           			</td>
+									           			<td class="text14" nowrap >
+									           				&nbsp;<input type="text" class="inputTextMediumBlue" name="eheid9" id="eheid9" size="21" maxlength="18" value="${model.record.eheid9}">										           			
+									           			</td>
+				           							</tr>
+				           							
+				           							<tr>
+														<td class="text14">&nbsp;<span title="ehetypt10" >10.Eksporttype</span></td>
+									           			<td class="text14">&nbsp;<span title="eheid10" >10.Eksp.id</span></td>
+									           			
+													</tr>
+								           			<tr>
+									           			<td class="text14" nowrap >&nbsp;
+									            			<select class="inputTextMediumBlue" name="ehetypt10" id="ehetypt10" >
+										 						<option value="">-velg-</option>
+											 				  	<c:forEach var="dto" items="${model.exportTypesDto}" >
+										                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.ehetypt10 == dto.code}"> selected </c:if> >${dto.code}</option>
+																</c:forEach>
+															</select>
+										            		
+									           			</td>
+									           			<td class="text14" nowrap >
+									           				&nbsp;<input type="text" class="inputTextMediumBlue" name="eheid10" id="eheid10" size="21" maxlength="18" value="${model.record.eheid10}">										           			
+									           			</td>
+	
+				           							</tr>
+				           										           															           			
+				           							</table>
+				           						</td>
+				           						</tr>
+				           						
+				           						<tr height="4"><td class="text" align="left"></td></tr>
+				           						</table>
+												<table width="100%" align="left" border="0">
+													<tr align="left" >
+														<td class="text14"><button name="more_exports" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('more_exports');">&nbsp;Ok</button> 
+														</td>
+													</tr>
+												</table>
+											</div>
+									</span>
+				 				</td>
 				 								 			
 						</tr>
 						<tr height="5"><td></td></tr>
