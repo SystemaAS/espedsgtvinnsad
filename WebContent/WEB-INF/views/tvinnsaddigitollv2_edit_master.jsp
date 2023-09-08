@@ -239,8 +239,8 @@
 			<td colspan="3" class="text14" valign="top">
 				<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">					
 					<tr>
-						<td class="text14">&nbsp;<span title="emsg">Sign</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emavd">Avd</span><font class="text16RedBold" >*</font></td>
+						<td class="text14">&nbsp;<span title="emsg">Sign</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="empro">Tur</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emvkb">Bruttovekt</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emcn">Container</span><font class="text16RedBold" >*</font></td>
@@ -258,12 +258,25 @@
 					</tr>
 					<tr>
 						
-						<td class="text14">
-							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="emsg" id="emsg" size="5" maxlength="4" value="${model.record.emsg}">									
-						</td>
-						<td class="text14">
-							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="emavd" id="emavd" size="5" maxlength="4" value="${model.record.emavd}">									
-						</td>
+						<td>
+	 						<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  size="7" maxlength="4" class="inputTextMediumBlueMandatoryField" list="emavd_list" id="emavd" name="emavd" value="${model.record.emavd}">
+							<datalist id="emavd_list">
+							  <option value="">-Välj-</option>
+			 				  	<c:forEach var="record" items="${model.avdList}" >
+			 				  		<option value="${record.avd}"<c:if test="${model.record.emavd == record.avd}"> selected </c:if> >${record.avd}</option> 
+								</c:forEach>  
+							</datalist>
+	 					</td>
+	 					<td>
+	 						<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  size="6" maxlength="3" class="inputTextMediumBlueMandatoryField" list="emsg_list" id="emsg" name="emsg" value="${model.record.emsg}">
+							<datalist id="emsg_list">
+							  <option value="">-Välj-</option>
+			 				  	<c:forEach var="record" items="${model.signList}" >
+			 				  		<option value="${record.sign}"<c:if test="${model.record.emsg == record.sign}"> selected </c:if> >${record.sign}</option> 
+								</c:forEach>  
+							</datalist>	
+	 					</td>
+						
 						<td class="text14">
 							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="empro" id="empro" size="10" maxlength="8" value="${model.record.empro}">									
 						</td>		
@@ -282,10 +295,13 @@
 							<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="emdkm" id="emdkm" size="25" maxlength="50" value="${model.record.emdkm}">		
 						</td>
 						<td class="text14">
-							<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="emdkmt" id="emdkmt" size="5" maxlength="4" value="${model.record.emdkmt}">		
+							<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="emdkmt" id="emdkmt" >
+		 						<option value="">-velg-</option>
+			 				  	<c:forEach var="dto" items="${model.previousDocumentsDto}" >
+		                       	 	<option title="${dto.txt1}&nbsp;-&nbsp;${dto.txt2}" value="${dto.code}" <c:if test="${model.record.emdkmt == dto.code}"> selected </c:if> >${dto.code}</option>
+								</c:forEach>
+							</select>		
 						</td>
-						
-						
 						
 						<td class="text14">
 							<input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="emknt" id="emknt" size="10" maxlength="8" value="${model.record.emknt}">								
@@ -304,7 +320,7 @@
 							<input readonly type="text" class="inputTextReadOnly" name="emst3" id="emst3" size="2" maxlength="1" value="${model.record.emst3}">		
 						</td>
 						<td class="text14">
-							<input readonly type="text" class="inputTextReadOnly" name="emdtr" id="emdtr" size="10" maxlength="8" value="${model.record.emdtr}">		
+							<input readonly type="text" class="inputTextReadOnly" name="emdtr" id="emdtr" size="10" maxlength="8" value="${model.record.emdtrStr}">		
 						</td>
 						<td class="text14">
 							<input readonly type="text" class="inputTextReadOnly" name="emdtin" id="emdtin" size="10" maxlength="8" value="${model.record.emdtin}">		

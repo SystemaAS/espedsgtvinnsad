@@ -132,15 +132,69 @@
 			}
 	    		
 		});
-	});
-	jq(function() { 
-	    jq('#emkns').blur(function() {
+		jq('#emkns').blur(function() {
 			if(jq('#emnas').val()==''){
 				fetchSender();	
 			}
 	    		
 		});
+		jq('#emknt').blur(function() {
+			if(jq('#emrgt').val()==''){
+				fetchCarrier();	
+			}
+	    		
+		});
 	});
+	function fetchCarrier(){
+	  var customerNr = jq.trim(jq('#emknt').val());
+		
+		if(customerNr!=""){
+  		jq.getJSON('searchCustomer_TvinnSad.do', {
+			applicationUser : jq('#applicationUser').val(),
+			customerName : "",
+			customerNumber : jq('#emknt').val(),
+			ajax : 'true'
+		}, function(data) {
+			//alert("Hello");
+			var len = data.length;
+			for ( var i = 0; i < len; i++) {
+				//html += '<option value="' + data[i].kundnr + '">' + data[i].knavn + '</option>';
+				customer = new Object();
+				customer.kundnr = data[i].kundnr;
+				customer.knavn = data[i].knavn;
+				customer.eori = data[i].eori;
+				customer.orgnr = data[i].syrg;
+				customer.adr1 = data[i].adr1;
+				customer.adr2 = data[i].adr2;
+				customer.adr3 = data[i].adr3;
+				customer.postnr = data[i].postnr;//data[i].postnr; DK=sypoge
+				customer.kpers = data[i].kpers;
+				customer.tlf = data[i].tlf;
+				customer.syland = data[i].syland;
+			  	//put the object in map now with customerNumber as key
+				map[customer.kundnr] = customer;
+			}
+			if(len > 0){
+				jq('#emknt').val(customer.kundnr);
+				if('' != customer.orgnr){
+					jq('#emrgt').val(customer.orgnr);
+				}else{
+					jq('#emrgt').val(customer.eori);
+				}
+			}else{
+				//init fields
+				jq('#emknt').val("");
+				jq('#emrgt').val("");
+				
+			}
+		});
+		}else{
+			//init fields
+			jq('#emknt').val("");
+			jq('#emrgt').val("");
+		}
+
+  }
 	function fetchReceiver(){
 	  var customerNr = jq.trim(jq('#emknm').val());
 		

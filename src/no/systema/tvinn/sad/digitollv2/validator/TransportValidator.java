@@ -47,7 +47,7 @@ public class TransportValidator implements Validator {
 				//------
 				//dates 
 				//------
-				String strEtetad = String.valueOf(record.getEtetad());
+				String strEtetad = record.getEtetadStr();
 				if(strMgr.isNotNull(strEtetad)  && !"999999".equals(strEtetad)){
 					if(strEtetad.length()>6){
 						logger.warn("A");

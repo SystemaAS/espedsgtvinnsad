@@ -104,6 +104,9 @@
 				<input type="hidden" name="etlnrt" id="etlnrt" value="${model.record.etlnrt}"> 
 				<input type="hidden" name="etst" id="etst" value="${model.record.etst}">
 				<input type="hidden" name="etst2" id="etst2" value="${model.record.etst2}">
+				<input type="hidden" name="etsg" id="etsg" value="${model.record.etsg}">
+				<input type="hidden" name="etavd" id="etavd" value="${model.record.etavd}">
+				<input type="hidden" name="etpro" id="etpro" value="${model.record.etpro}">
 			</c:if>
 					 			  
 			
@@ -180,7 +183,7 @@
 			<tr >
 				<td colspan="10" class="text14  ">
 	    			<font class="inputText isa_warning" >
-	    				Lasten er ikke gyldig for sending via api. Alle master-consignments skal ha MRN-Api-nr. bortsett fra de som er KANSELLERT. Minst en linje må eksistere.
+	    				Lasten er ikke gyldig for sending via api. Alle master-consignments skal ha MRN-Api-nr. bortsett fra de som er KANSELLERT. Minst en master-consignment må eksistere.
 	    			</font>
 	    		</td>
 	   		</tr>
@@ -248,8 +251,10 @@
 						 			<c:when test="${model.record.etlnrt > 0}">
 						 				<td class="text14White">
 						 						&nbsp;&nbsp;Løp.nr.&nbsp;${model.record.etlnrt}
+						 						&nbsp;&nbsp;Avd&nbsp;${model.record.etavd}
+						 						&nbsp;&nbsp;Sign&nbsp;${model.record.etsg}
 						 						&nbsp;&nbsp;Turnr&nbsp;${model.record.etpro}
-						 						&nbsp;&nbsp;Avd&nbsp;${model.record.etavd}  
+						 						  
 						 						
 						 				</td>
 						 				<td class="text14White" align="right">
@@ -275,25 +280,35 @@
 											<input readonly type="text12"  class="inputTextReadOnly" name="etdtr" id="etdtr" size="8" maxlength="6" value="${model.record.etdtrStr}"></td>
 										</td>
 										
-										<td align="right" colspan="2" class="text12" ><span class="text14SkyBlue">
-						               		<a tabindex=-1 style="display: block; cursor:pointer" class="uuidLinkParent text12SkyBlue" id="${model.record.etuuid}">
-												${model.record.etuuid}
-											</a>
-						               </td>
-										
 					 				</tr>
 					 				<tr height="2"><td>&nbsp;</td></tr>
 			 					</c:when>
 				 				<c:otherwise>
 									
 									<tr>
-					 					<td class="text12" title="etsg">&nbsp;Sign<font class="text16RedBold" >*</font></td>
 					 					<td class="text12" title="etavd">&nbsp;Avd<font class="text16RedBold" >*</font></td>
+					 					<td class="text12" title="etsg">&nbsp;Sign<font class="text16RedBold" >*</font></td>
 					 					<td class="text12" title="etpro">&nbsp;Tur<font class="text16RedBold" >*</font></td>
 				 					</tr>				 				
 				 					<tr>
-					 					<td><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text12"  class="inputTextMediumBlueMandatoryField" name="etsg" id="etsg" size="4" maxlength="3" value="${model.record.etsg}"></td>
-					 					<td><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text12"  class="inputTextMediumBlueMandatoryField" name="etavd" id="etavd" size="5" maxlength="4" value="${model.record.etavd}"></td>
+					 					<td>
+					 						<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  size="7" maxlength="4" class="inputTextMediumBlueMandatoryField" list="etavd_list" id="etavd" name="etavd" value="${model.record.etavd}">
+											<datalist id="etavd_list">
+											  <option value="">-Välj-</option>
+							 				  	<c:forEach var="record" items="${model.avdList}" >
+							 				  		<option value="${record.avd}"<c:if test="${model.record.etavd == record.avd}"> selected </c:if> >${record.avd}</option> 
+												</c:forEach>  
+											</datalist>
+					 					</td>
+					 					<td>
+					 						<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  size="6" maxlength="3" class="inputTextMediumBlueMandatoryField" list="etsg_list" id="etsg" name="etsg" value="${model.record.etsg}">
+											<datalist id="etsg_list">
+											  <option value="">-Välj-</option>
+							 				  	<c:forEach var="record" items="${model.signList}" >
+							 				  		<option value="${record.sign}"<c:if test="${model.record.etsg == record.sign}"> selected </c:if> >${record.sign}</option> 
+												</c:forEach>  
+											</datalist>	
+					 					</td>
 					 					<td>
 					 						<c:choose>
 							 				<c:when test="${model.record.etpro > 0}">
@@ -317,7 +332,7 @@
 				 				<tr >
 				 					<td class="text14">
 				 						
-				 						<select class="inputTextMediumBlueMandatoryField" name="etktkd" id="etktkd" >
+				 						<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="etktkd" id="etktkd" >
 					 						<option value="">-velg-</option>
 						 				  	<c:forEach var="dto" items="${model.modeOfTransportDto}" >
 					                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.etktkd == dto.code}"> selected </c:if> >${dto.code}</option>
@@ -325,7 +340,7 @@
 										</select>	
 									</td>
 									<td>
-										<select class="inputTextMediumBlueMandatoryField" name="etktyp" id="etktyp" >
+										<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="etktyp" id="etktyp" >
 					 						<option value="">-velg-</option>
 						 				  	<c:forEach var="dto" items="${model.typeOfIdentificationMeansTransportDto}" >
 					                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.etktyp == dto.code}"> selected </c:if> >${dto.code}</option>
@@ -334,7 +349,7 @@
 									</td>
 									
 						 			<td class="text14">
-						 				<select class="inputTextMediumBlueMandatoryField" name="etktm" id="etktm" >
+						 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="etktm" id="etktm" >
 					 						<option value="">-velg-</option>
 						 				  	<c:forEach var="dto" items="${model.meansOfTransportDto}" >
 					                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.etktm == dto.code}"> selected </c:if> >${dto.code}</option>
@@ -342,7 +357,7 @@
 										</select>
 						 			</td>
 						 			<td class="text14">
-						 				<select class="inputTextMediumBlueMandatoryField" name="etklk" id="etklk" >
+						 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="etklk" id="etklk" >
 					 						<option value="">-velg-</option>
 						 				  	<c:forEach var="dto" items="${model.countryDto}" >
 					                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.etklk == dto.code}"> selected </c:if> >${dto.code}</option>
@@ -681,8 +696,8 @@
                     	<th width="2%" class="tableHeaderFieldFirst" ><img title="Update" style="vertical-align:middle;" src="resources/images/update.gif" border="0" alt="edit"></th>
                     	<th width="2%" class="tableHeaderField" >Lnr</th>
                     	<th width="2%" class="tableHeaderField" >Avd</th>
+                		<th width="2%" class="tableHeaderField" >Sign</th>
                 		<th width="2%" class="tableHeaderField" >Turnr</th>
-                		<th width="2%" class="tableHeaderField" >Sig</th>
                 		<th title="S=SLETTET" width="2%" class="tableHeaderField" >St.</th>
                 		<th width="2%" class="tableHeaderField" >Br.vekt</th>
                 		<th width="2%" class="tableHeaderField" >Doknr.</th>
@@ -726,8 +741,8 @@
 	               	   </td>
 	               	   <td width="2%" align="center" class="tableCell" <c:if test="${masterConsignmentRecord.emst2 == 'D'}">style="color: #9F6000;" </c:if> >${masterConsignmentRecord.emlnrm}</td>
 		               <td width="2%" align="center" class="tableCell" <c:if test="${masterConsignmentRecord.emst2 == 'D'}">style="color: #9F6000;" </c:if> >${masterConsignmentRecord.emavd}</td>
-		               <td width="2%" align="center" class="tableCell" <c:if test="${masterConsignmentRecord.emst2 == 'D'}">style="color: #9F6000;" </c:if> ><c:if test="${masterConsignmentRecord.empro > 0}">${masterConsignmentRecord.empro}</c:if></td>
 		               <td width="2%" align="center" class="tableCell" >${masterConsignmentRecord.emsg}</td>
+		               <td width="2%" align="center" class="tableCell" <c:if test="${masterConsignmentRecord.emst2 == 'D'}">style="color: #9F6000;" </c:if> ><c:if test="${masterConsignmentRecord.empro > 0}">${masterConsignmentRecord.empro}</c:if></td>
 		               <td nowrap width="2%" align="center" class="tableCell text12">
 		               	  <c:choose>
 		               		<c:when test="${masterConsignmentRecord.emst == 'S'}">

@@ -247,7 +247,13 @@
 					</tr>
 					<tr>	
 						<td class="text14">
-							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="ehavd" id="ehavd" size="5" maxlength="4" value="${model.record.ehavd}">									
+							<input size="8" maxlength="4" class="selectMediumBlueE2" list="ehavd_list" id="ehavd" name="ehavd" value="${model.record.ehavd}">
+							<datalist id="ehavd_list">
+							  <option value="">-Välj-</option>
+			 				  	<c:forEach var="record" items="${model.avdList}" >
+			 				  		<option value="${record.avd}"<c:if test="${model.record.ehavd == record.avd}"> selected </c:if> >${record.avd}</option> 
+								</c:forEach>  
+							</datalist>					
 						</td>
 						<td class="text14">
 							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="ehpro" id="ehpro" size="10" maxlength="8" value="${model.record.ehpro}">									

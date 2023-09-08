@@ -734,8 +734,8 @@ public class TvinnSadDigitollv2HouseController {
 	 * @param model
 	 */
 	private void setDropDownService(Map model) {
-		List<GenericDropDownDto> dto = this.digitollDropDownListPopulationService.getPreviousDocumentsList();
-		model.put("previousDocumentsDto", dto);
+		//previous docs
+		List<GenericDropDownDto> dto = this.digitollDropDownListPopulationService.getPreviousDocumentsList(); model.put("previousDocumentsDto", dto);
 		//country
 		dto = this.digitollDropDownListPopulationService.getCountryList(); model.put("countryDto", dto);
 		//export types

@@ -341,8 +341,8 @@ public class TvinnSadDigitollv2TransportController {
 			//Final successView with domain objects
 			//--------------------------------------
 			//drop downs
-			//this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
-			//this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
+			this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
+			this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
 			//this.setCodeDropDownMgr(appUser, model);
 			this.setDropDownService(model);
 			
@@ -984,8 +984,10 @@ public class TvinnSadDigitollv2TransportController {
 		
 		//Register date
 		if(recordToValidate.getEtdtr() > 0) {
-			int regDate = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(String.valueOf(recordToValidate.getEtdtr()), DateTimeManager.NO_FORMAT));
+			int regDate = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(recordToValidate.getEtdtrStr(), DateTimeManager.NO_FORMAT));
+			//logger.info("BBBB:" + regDate);
 			recordToValidate.setEtdtr(regDate);
+			
 		}else {
 			int regDate = Integer.valueOf(this.dateMgr.getCurrentDate_ISO());
 			recordToValidate.setEtdtr(regDate);
@@ -993,7 +995,7 @@ public class TvinnSadDigitollv2TransportController {
 		
 		//ETA - date to ISO
 		if(recordToValidate.getEtetad() > 0) {
-			int isoEtetad = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(String.valueOf(recordToValidate.getEtetad()), DateTimeManager.NO_FORMAT));
+			int isoEtetad = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(recordToValidate.getEtetadStr(), DateTimeManager.NO_FORMAT));
 			recordToValidate.setEtetad(isoEtetad);
 		}
 		//ETA - time to ISO
@@ -1036,11 +1038,17 @@ public class TvinnSadDigitollv2TransportController {
     		record.setListMasters(jsonContainer.getList());
     		//now check if the transport is valid to be send and populate the flag if needed
     		List<SadmomfRecord> listChild = (List)jsonContainer.getList();
-    		for(SadmomfRecord child : listChild) {
-    			if(!this.isValidForApiSendGui(child)) {
-    				record.setOwn_okToSend(false);
-    				break;
-    			}
+    		if(listChild!=null && listChild.isEmpty()) {
+    			//We have the requirement of at least one master since we must send the transport with all master refs. before the carrier arrives to the border.
+    			//the api allows for sending of the transport without masters but the final transport MUST have all the master references thus SYSPED demands the masters!
+    			record.setOwn_okToSend(false);
+    		}else {
+	    		for(SadmomfRecord child : listChild) {
+	    			if(!this.isValidForApiSendGui(child)) {
+	    				record.setOwn_okToSend(false);
+	    				break;
+	    			}
+	    		}
     		}
     	}
     	

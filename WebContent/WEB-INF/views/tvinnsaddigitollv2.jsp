@@ -103,23 +103,13 @@
 					
 				</td>
 				<td align="left" >
-           			<%-- 
-           			<select class="selectMediumBlueE2" name="sign" id="sign">
-	            		<option value="">-velg-</option>
-	 				  	<c:forEach var="record" items="${model.signList}" >
-                             	 	<option value="${record.sign}"<c:if test="${searchFilterSadDigitollTransportList.sign == record.sign}"> selected </c:if> >${record.sign}</option>
-						</c:forEach> 
-					</select>
-					--%>
-					<input size="8" maxlength="4" class="selectMediumBlueE2" list="sign_list" id="sign" name="sign" value="${PRODsearchFilterSadDigitollTransportList.sign}">
+           			<input size="8" maxlength="4" class="selectMediumBlueE2" list="sign_list" id="sign" name="sign" value="${PRODsearchFilterSadDigitollTransportList.sign}">
 					<datalist id="sign_list">
 					  <option value="">-Välj-</option>
 	 				  	<c:forEach var="record" items="${model.signList}" >
 	 				  		<option value="${record.sign}"<c:if test="${searchFilterSadDigitollTransportList.sign == record.sign}"> selected </c:if> >${record.sign}</option> 
 						</c:forEach>  
 					</datalist>
-					
-					
 				</td>
 				<td align="left" ><input type="text" class="inputText" name="turnr" id="turnr" size="10" maxlength="8" value="${searchFilterSadDigitollTransportList.turnr}">&nbsp;</td>
 				<%-- PROD <td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="etaDatum" id="etaDatum" size="6" maxlength="6" value="${searchFilterSadDigitollTransportList.etaDatum}">&nbsp;</td> --%>
@@ -198,8 +188,8 @@
                     	<th width="2%" class="tableHeaderFieldFirst" ><img title="Update" style="vertical-align:middle;" src="resources/images/update.gif" border="0" alt="edit"></th>
                     	<th width="2%" class="tableHeaderField" >Lnr</th>
                     	<th width="2%" class="tableHeaderField" >Avd</th>
+                		<th width="2%" class="tableHeaderField" >Sign</th>
                 		<th width="2%" class="tableHeaderField" >Turnr</th>
-                		<th width="2%" class="tableHeaderField" >Sig</th>
                 		<th title="S=SLETTET" width="2%" class="tableHeaderField" >St.</th>
                 		<th width="2%" class="tableHeaderField" >Pass. ETA</th>
                 		<th width="2%" class="tableHeaderField" >Tollst.</th>
@@ -242,8 +232,8 @@
 	               	   </td>
 	               	   <td width="2%" align="center" class="tableCell" >${record.etlnrt}</td>
 		               <td width="2%" align="center" class="tableCell" >${record.etavd}</td>
-		               <td width="2%" align="center" class="tableCell" ><c:if test="${record.etpro > 0}">${record.etpro}</c:if></td>
 		               <td width="2%" align="center" class="tableCell" >${record.etsg}</td>
+		               <td width="2%" align="center" class="tableCell" ><c:if test="${record.etpro > 0}">${record.etpro}</c:if></td>
 		               <td nowrap width="2%" align="center" class="tableCell" >
 		               	  <c:choose>
 		               		<c:when test="${record.etst == 'S'}">

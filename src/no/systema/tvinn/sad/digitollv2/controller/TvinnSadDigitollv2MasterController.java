@@ -234,11 +234,9 @@ public class TvinnSadDigitollv2MasterController {
 			//Final successView with domain objects
 			//--------------------------------------
 			//drop downs
-	    	/*
-			this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
+	    	this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
 			this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
-			this.setCodeDropDownMgr(appUser, model);
-			*/
+			//this.setCodeDropDownMgr(appUser, model);
 			this.setDropDownService(model);
 			
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
@@ -779,11 +777,12 @@ public class TvinnSadDigitollv2MasterController {
 	 * @param model
 	 */
 	private void setDropDownService(Map model) {
-		List<GenericDropDownDto> dto = this.digitollDropDownListPopulationService.getContainerSizeAndType();
-		model.put("containerSizeAndTypeDto", dto);
+		//previous docs
+		List<GenericDropDownDto> dto = this.digitollDropDownListPopulationService.getPreviousDocumentsList(); model.put("previousDocumentsDto", dto);
+		//container sizeAnd type
+		dto = this.digitollDropDownListPopulationService.getContainerSizeAndType(); model.put("containerSizeAndTypeDto", dto);
 		//country
-		dto = this.digitollDropDownListPopulationService.getCountryList();
-		model.put("countryDto", dto);
+		dto = this.digitollDropDownListPopulationService.getCountryList(); model.put("countryDto", dto);
 		
 	}
 	/**
@@ -841,7 +840,7 @@ public class TvinnSadDigitollv2MasterController {
 		
 		//Register date
 		if(recordToValidate.getEmdtr() > 0) {
-			int regDate = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(String.valueOf(recordToValidate.getEmdtr()), DateTimeManager.NO_FORMAT));
+			int regDate = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(recordToValidate.getEmdtrStr(), DateTimeManager.NO_FORMAT));
 			recordToValidate.setEmdtr(regDate);
 		}else {
 			int regDate = Integer.valueOf(this.dateMgr.getCurrentDate_ISO());

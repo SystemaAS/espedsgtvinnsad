@@ -22,7 +22,20 @@ public class SadmomfRecord extends JsonAbstractGrandFatherRecord   {
 	private Integer empro= 0;  //sonet        8  0     turnummer    
 	private Integer emlnrt= 0;  //sonet        7  0    løpenummer             
 	private Integer emlnrm= 0;  //sonet        4  0    m-lnr innen transp     
-	private Integer emdtr= 0;  //sonet        8  0     registreringsdato      
+	private Integer emdtr= 0;  //sonet        8  0     registreringsdato 
+	private String emdtrStr = "";
+	public String getEmdtrStr() {
+		if(this.emdtr > 0 ){
+			String tmp = String.valueOf(this.emdtr);
+			if (tmp.length()< 6) {
+				this.emdtrStr = "0" + tmp;
+			}else {
+				this.emdtrStr = tmp;
+			}
+		}
+		return this.emdtrStr;
+	}
+
 	private String emsg = "";    //tegn            3   signatur               
 	private String emst2 = "";   //tegn            1   status om manifest 
 	private String emst3 = "";   //tegn            1   status om innpass. 
