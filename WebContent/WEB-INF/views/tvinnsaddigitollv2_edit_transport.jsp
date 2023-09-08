@@ -458,7 +458,12 @@
 				 				</tr>
 				 				
 				 				<tr >
-									<td class="text14">&nbsp;<span title="etnat">Navn</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="etnat">Navn</span><font class="text16RedBold" >*</font>
+										<a tabindex="-1" id="etnatIdLink">
+											<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
+										</a>
+									
+									</td>
 									<td class="text14">&nbsp;<span title="etrgt">Orgnr / EORI</span><font class="text16RedBold" >*</font></td>
 									
 				 				</tr>
@@ -496,8 +501,8 @@
 				 				</tr>
 				 				
 				 				<tr >
-									<td class="text14">&nbsp;<span title="etemt">E-post</span></td>
-									<td class="text14">&nbsp;<span title="etemt">Telefon</span></td>
+									<td class="text14">&nbsp;<span title="own_etemt_email">E-post</span></td>
+									<td class="text14">&nbsp;<span title="own_etemt_telephone">Telefon</span></td>
 									
 				 				</tr>
 				 				<tr >
@@ -557,7 +562,11 @@
 				 					
 				 				</tr>
 				 				<tr >
-									<td class="text14">&nbsp;<span title="etnar">Navn</span><font class="text16NavyBlueBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="etnar">Navn</span><font class="text16NavyBlueBold" >*</font>
+										<a tabindex="-1" id="etnarIdLink">
+											<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
+										</a>
+									</td>
 									<td class="text14">&nbsp;<span title="etrgr">Orgnr / EORI</span><font class="text16NavyBlueBold" >*</font></td>
 									
 				 				</tr>
@@ -596,8 +605,8 @@
 				 				</tr>
 				 				
 				 				<tr >
-									<td class="text14">&nbsp;<span title="etemr">E-post</span><font class="text16NavyBlueBold" >*</font></td>
-									<td class="text14">&nbsp;<span title="etemr">Telefon</span></td>
+									<td class="text14">&nbsp;<span title="own_etemr_email">E-post</span><font class="text16NavyBlueBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="own_etemr_telephone">Telefon</span></td>
 									
 				 				</tr>
 				 				<tr >

@@ -88,7 +88,7 @@
 	  		}
 	  	});
 	  
-	  
+	  /*
 	  //CHILD-WINDOWS
 	  //Tollsted
 	  jq('#eftsdIdLink').click(function() {
@@ -99,16 +99,26 @@
 			if(e.which == 13) {
 				jq('#eftsdIdLink').click();
 			}
-	  });
+	  });*/
 	  
-	  //Customer
-      jq('#efkndIdLink').click(function() {
-		jq('#efkndIdLink').attr('target','_blank');
-	    window.open('tvinnsad_childwindow_customer.do?action=doFind&sonavn=' + jq('#own_efkndName').val() + '&ctype=efknd', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
-	  });
-	  jq('#efkndIdLink').keypress(function(e){ //extra feature for the end user
+	  //Avsender
+      jq('#emnasIdLink').click(function() {
+	    	jq('#emnasIdLink').attr('target','_blank');
+	    	window.open('tvinnsadncts_childwindow_customer.do?action=doFind&sonavn=' + jq('#emnas').val() + '&ctype=emnas', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+	    });
+	  jq('#emnasIdLink').keypress(function(e){ //extra feature for the end user
 		if(e.which == 13) {
-			jq('#efkndIdLink').click();
+			jq('#emnasIdLink').click();
+		}
+	  });
+	  //Mottaker
+      jq('#emnamIdLink').click(function() {
+	    	jq('#emnamIdLink').attr('target','_blank');
+	    	window.open('tvinnsadncts_childwindow_customer.do?action=doFind&sonavn=' + jq('#emnam').val() + '&ctype=emnam', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+	    });
+	  jq('#emnamIdLink').keypress(function(e){ //extra feature for the end user
+		if(e.which == 13) {
+			jq('#emnamIdLink').click();
 		}
 	  });
   });
@@ -163,7 +173,11 @@
 			if(len > 0){
 				jq('#emknm').val(customer.kundnr);
 				jq('#emnam').val(customer.knavn);
-				jq('#emrgm').val(customer.orgnr);
+				if('' != customer.orgnr){
+					jq('#emrgm').val(customer.orgnr);
+				}else{
+					jq('#emrgm').val(customer.eori);
+				}
 				jq('#empsm').val(customer.adr3);
 				jq('#emlkm').val(customer.syland);
 				jq('#empnm').val(customer.postnr);
@@ -230,7 +244,11 @@
 			if(len > 0){
 				jq('#emkns').val(customer.kundnr);
 				jq('#emnas').val(customer.knavn);
-				jq('#emrgs').val(customer.orgnr);
+				if('' != customer.orgnr){
+					jq('#emrgs').val(customer.orgnr);
+				}else{
+					jq('#emrgs').val(customer.eori);
+				}
 				jq('#empss').val(customer.adr3);
 				jq('#emlks').val(customer.syland);
 				jq('#empns').val(customer.postnr);

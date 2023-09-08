@@ -159,6 +159,7 @@
 	  
 	  //CHILD-WINDOWS
 	  //Tollsted
+	  /*
 	  jq('#eftsdIdLink').click(function() {
 	  	jq('#eftsdIdLink').attr('target','_blank');
 	  	window.open('tvinnsadmanifest_childwindow_tollstedcodes.do?action=doInit&type=2&ctype=silka', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
@@ -168,15 +169,25 @@
 				jq('#eftsdIdLink').click();
 			}
 	  });
-	  
-	  //Customer
-      jq('#efkndIdLink').click(function() {
-		jq('#efkndIdLink').attr('target','_blank');
-	    window.open('tvinnsad_childwindow_customer.do?action=doFind&sonavn=' + jq('#own_efkndName').val() + '&ctype=efknd', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
-	  });
-	  jq('#efkndIdLink').keypress(function(e){ //extra feature for the end user
+	  */
+	  //Avsender
+      jq('#ehnasIdLink').click(function() {
+	    	jq('#ehnasIdLink').attr('target','_blank');
+	    	window.open('tvinnsadncts_childwindow_customer.do?action=doFind&sonavn=' + jq('#ehnas').val() + '&ctype=ehnas', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+	    });
+	  jq('#ehnasIdLink').keypress(function(e){ //extra feature for the end user
 		if(e.which == 13) {
-			jq('#efkndIdLink').click();
+			jq('#ehnasIdLink').click();
+		}
+	  });
+	  //Mottaker
+      jq('#ehnamIdLink').click(function() {
+	    	jq('#ehnamIdLink').attr('target','_blank');
+	    	window.open('tvinnsadncts_childwindow_customer.do?action=doFind&sonavn=' + jq('#ehnam').val() + '&ctype=ehnam', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+	    });
+	  jq('#ehnamIdLink').keypress(function(e){ //extra feature for the end user
+		if(e.which == 13) {
+			jq('#ehnamIdLink').click();
 		}
 	  });
   });
@@ -218,7 +229,7 @@
 				customer.adr1 = data[i].adr1;
 				customer.adr2 = data[i].adr2;
 				customer.adr3 = data[i].adr3;
-				customer.postnr = data[i].sypoge;//data[i].postnr; DK=sypoge
+				customer.postnr = data[i].postnr;//data[i].postnr; DK=sypoge
 				customer.kpers = data[i].kpers;
 				customer.tlf = data[i].tlf;
 				customer.syland = data[i].syland;
@@ -228,7 +239,12 @@
 			if(len > 0){
 				jq('#ehknm').val(customer.kundnr);
 				jq('#ehnam').val(customer.knavn);
-				jq('#ehrgm').val(customer.orgnr);
+				if('' != customer.orgnr){
+					jq('#ehrgm').val(customer.orgnr);
+				}else{
+					jq('#ehrgm').val(customer.eori);
+				}
+				
 				jq('#ehpsm').val(customer.adr3);
 				jq('#ehlkm').val(customer.syland);
 				jq('#ehpnm').val(customer.postnr);
@@ -285,7 +301,7 @@
 				customer.adr1 = data[i].adr1;
 				customer.adr2 = data[i].adr2;
 				customer.adr3 = data[i].adr3;
-				customer.postnr = data[i].sypoge;//data[i].postnr; DK=sypoge
+				customer.postnr = data[i].postnr;//data[i].postnr; DK=sypoge
 				customer.kpers = data[i].kpers;
 				customer.tlf = data[i].tlf;
 				customer.syland = data[i].syland;
@@ -295,7 +311,11 @@
 			if(len > 0){
 				jq('#ehkns').val(customer.kundnr);
 				jq('#ehnas').val(customer.knavn);
-				jq('#ehrgs').val(customer.orgnr);
+				if('' != customer.orgnr){
+					jq('#ehrgs').val(customer.orgnr);
+				}else{
+					jq('#ehrgs').val(customer.eori);
+				}
 				jq('#ehpss').val(customer.adr3);
 				jq('#ehlks').val(customer.syland);
 				jq('#ehpns').val(customer.postnr);

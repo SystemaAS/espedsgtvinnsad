@@ -496,7 +496,11 @@
 				 				<table>
 				 				<tr >
 									<td class="text14">&nbsp;<span title="emkns">Knr</span></td>
-									<td class="text14">&nbsp;<span title="emnas">Navn</span><font class="text16NavyBlueBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="emnas">Navn</span><font class="text16NavyBlueBold" >*</font>
+										<a tabindex="-1" id="emnasIdLink">
+											<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
+										</a>
+									</td>
 									<td class="text14">&nbsp;<span title="emrgs">Org.nr /EORI</span><font class="text16NavyBlueBold" >*</font></td>
 									
 				 				</tr>
@@ -601,7 +605,11 @@
 				 				<table>
 				 				<tr >
 									<td class="text14">&nbsp;<span title="emknm">Knr</span></td>
-									<td class="text14">&nbsp;<span title="emnam">Navn</span><font class="text16NavyBlueBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="emnam">Navn</span><font class="text16NavyBlueBold" >*</font>
+										<a tabindex="-1" id="emnamIdLink">
+											<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
+										</a>
+									</td>
 									<td class="text14">&nbsp;<span title="emrgm">Org.nr /EORI</span><font class="text16NavyBlueBold" >*</font></td>
 				 				</tr>
 				 				<tr >

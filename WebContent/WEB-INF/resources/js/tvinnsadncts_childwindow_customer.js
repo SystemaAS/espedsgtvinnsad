@@ -138,8 +138,74 @@
 				  opener.jq('#tipn').val(postnr);
 				  opener.jq('#tilk').val(land);
 				  opener.jq('#tina').focus();
+		
+			  //=========================
+			  //DIGITOLL -- TRANSPORT
+			  //=========================  
+			  }else if(callerType == 'etnat'){
+				  opener.jq('#etknt').val(knr);
+				  opener.jq('#etnat').val(knavn);
+				  opener.jq('#etrgt').val(syrg);
+				  opener.jq('#etad1t').val(adr1);
+				  opener.jq('#etpst').val(adr3);
+				  opener.jq('#etpnt').val(postnr);
+				  opener.jq('#etlkt').val(land);
+				  opener.jq('#etnat').focus();	
+			  }else if(callerType == 'etnar'){
+				  opener.jq('#etknr').val(knr);
+				  opener.jq('#etnar').val(knavn);
+				  opener.jq('#etrgr').val(syrg);
+				  opener.jq('#etad1r').val(adr1);
+				  opener.jq('#etpsr').val(adr3);
+				  opener.jq('#etpnr').val(postnr);
+				  opener.jq('#etlkr').val(land);
+				  opener.jq('#etnar').focus();
+			  //=========================
+			  //DIGITOLL -- MASTER
+			  //=========================  
+			  }else if(callerType == 'emnas'){
+				  opener.jq('#emkns').val(knr);
+				  opener.jq('#emnas').val(knavn);
+				  opener.jq('#emrgs').val(syrg);
+				  opener.jq('#emad1s').val(adr1);
+				  opener.jq('#empss').val(adr3);
+				  opener.jq('#empns').val(postnr);
+				  opener.jq('#emlks').val(land);
+				  opener.jq('#emnas').focus();	
+			  }else if(callerType == 'emnam'){
+				  opener.jq('#emknm').val(knr);
+				  opener.jq('#emnam').val(knavn);
+				  opener.jq('#emrgm').val(syrg);
+				  opener.jq('#emad1m').val(adr1);
+				  opener.jq('#empsm').val(adr3);
+				  opener.jq('#empnm').val(postnr);
+				  opener.jq('#emlkm').val(land);
+				  opener.jq('#emnar').focus();	
+			  //=========================
+			  //DIGITOLL -- HOUSE
+			  //=========================  
+			  }else if(callerType == 'ehnas'){
+				  opener.jq('#ehkns').val(knr);
+				  opener.jq('#ehnas').val(knavn);
+				  opener.jq('#ehrgs').val(syrg);
+				  opener.jq('#ehad1s').val(adr1);
+				  opener.jq('#ehpss').val(adr3);
+				  opener.jq('#ehpns').val(postnr);
+				  opener.jq('#ehlks').val(land);
+				  opener.jq('#ehnas').focus();	
+			  }else if(callerType == 'ehnam'){
+				  opener.jq('#ehknm').val(knr);
+				  opener.jq('#ehnam').val(knavn);
+				  opener.jq('#ehrgm').val(syrg);
+				  opener.jq('#ehad1m').val(adr1);
+				  opener.jq('#ehpsm').val(adr3);
+				  opener.jq('#ehpnm').val(postnr);
+				  opener.jq('#ehlkm').val(land);
+				  opener.jq('#ehnar').focus();	
 			  }
-			  
+	
+	
+	
 			  //close child window
 			  window.close();
 		  });
