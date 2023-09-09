@@ -14,7 +14,7 @@
 	.ui-datepicker { font-size:9pt;}
 	</style>
 	
-<table style="width:90%;" cellspacing="0" border="0" cellpadding="0">
+<table style="width:80%;" cellspacing="0" border="0" cellpadding="0">
 
  <tr>
  <td>	
@@ -64,7 +64,7 @@
 						</c:when>
 						<c:otherwise>
 							<%-- Meaning CreateNew --%>
-							<td width="15%" valign="bottom" class="tab" style="background-color:lightyellow;" style="" align="center" nowrap>
+							<td width="15%" valign="bottom" class="tab" style="background-color:lightyellow;" align="center" nowrap>
 						</c:otherwise>
 						</c:choose>
 						
@@ -360,7 +360,7 @@
 					<td >
 					<table>
 					<tr>
-						<td style="width:80%" valign="top">
+						<td style="width:65%" valign="top">
 						<table id="tblDirektfortolling" style="width:100%"  class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="0">
 			 			<tr >
 							<td class="text16"><b>&nbsp;Tidligere dokumenter</b></td>
@@ -603,13 +603,12 @@
 						</table>
 						</td>
 						
-						<td  valign="top">
-						<table id="places" class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="0">
+						<td valign="top">
+						<table style="width:100%" id="places" class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="0">
 			 			<tr>
-							<td class="text14">&nbsp;<span title="ehsda">Place of Acceptance</span></td>
+							<td class="text14">&nbsp;<span title="ehsdat">Place of Acceptance</span></td>
 							<td class="text14">&nbsp;<span title="ehlka">Land</span></td>
-							<td class="text14">&nbsp;<span title="ehsddt">Place of Delivery</span></td>
-							<td class="text14">&nbsp;<span title="ehlkd">Land</span></td>
+							<td class="text14">&nbsp;<span title="ehsda">UN/LOCODE</span></td>
 						</tr>
 						<tr>	
 							<td class="text14">
@@ -625,6 +624,17 @@
 																				
 							</td>
 							<td class="text14">
+								<input  type="text" class="inputTextMediumBlue" name="ehsda" id="ehsda" size="7" maxlength="5" value="${model.record.ehsda}">								
+							</td>
+						</tr>
+						<tr height="2"><td></td></tr>	
+						<tr>	
+							<td class="text14">&nbsp;<span title="ehsddt">Place of Delivery</span></td>
+							<td class="text14">&nbsp;<span title="ehlkd">Land</span></td>
+							<td class="text14">&nbsp;<span title="ehsdd">UN/LOCODE</span></td>
+						</tr>
+						<tr>
+							<td class="text14">
 								<input  type="text" class="inputTextMediumBlue" name="ehsddt" id="ehsddt" size="25" maxlength="30" value="${model.record.ehsddt}">											
 							</td>
 							<td class="text14">
@@ -635,8 +645,12 @@
 									</c:forEach>
 								</select>													
 							</td>
+							<td class="text14">
+								<input  type="text" class="inputTextMediumBlue" name="ehsdd" id="ehsdd" size="7" maxlength="5" value="${model.record.ehsdd}">								
+							</td>
 						</tr>
-						<tr height="2"><td></td></tr>
+						
+						<tr height="5"><td>&nbsp;</td></tr>
 						</table>
 						</td>
 					</tr>
@@ -928,12 +942,13 @@
 				<table id="mainList" class="compact" >
 					<thead>
 					<tr class="tableHeaderField" height="20" >
-                    	<th width="2%" class="tableHeaderFieldFirst" >Lin</th>
+						<th width="2%" class="tableHeaderFieldFirst" >Endre</th>
+                    	<th width="2%" class="tableHeaderField" >Lin</th>
                     	<th width="2%" class="tableHeaderField" >Status</th>
                     	<th width="2%" class="tableHeaderField" >Stk</th>
                 		<th width="2%" class="tableHeaderField" >Vrd</th>
                 		<th width="2%" class="tableHeaderField" >Tariffnr</th>
-                		<th width="2%" class="tableHeaderField" >Selger id (VOEC)</th>
+                		<th width="2%" class="tableHeaderField" >Selger id - VOEC</th>
                 		<th width="2%" class="tableHeaderField" >Role</th>
                 		
                 		</tr>
@@ -941,8 +956,8 @@
                 	<tbody> 
                 	<c:forEach items="${model.record.listItemLines}" var="itemLinesRecord" varStatus="counter">    
 		             <tr class="tableRow" height="20" >
-			          
-		          	   <td width="2%" class="tableCellFirst" align="center">${itemLinesRecord.eili}</td>
+			           <td width="2%" align="center" class="tableCellFirst"><img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit"></td>	
+		          	   <td width="2%" align="center"class="tableCell" >${itemLinesRecord.eili}</td>
 		          	   <td width="2%" align="center" class="tableCell" >${itemLinesRecord.eist}</td>
 	               	   <td width="2%" align="right" class="tableCell" >${itemLinesRecord.eistk}&nbsp;</td>
 		               <td width="2%" align="right" class="tableCell" >${itemLinesRecord.eibl}&nbsp;</td>
@@ -959,6 +974,28 @@
 	            
 			</td>	
 			</tr>
+			<tr height="2"><td></td></tr> 
+			<tr>
+				<td>
+				<table class="text14 formFrame" style="width:60%; background-color:lightyellow;" cellspacing="2" align="left" >
+				<tr>
+					<td class="text14"><span title="eili">Lin</span></td>
+					<td class="text14"><span title="eibl">Stk</span></td>
+					<td class="text14"><span title="eistk">Vrd</span></td>
+					<td class="text14"><span title="eivnt">Tariffnr</span></td>
+					<td class="text14"><span title="eirge">SelgerId - VOEC</span></td>
+				</tr>
+				<tr>
+					<td class="text14"><input readonly type="text" class="inputTextReadOnly" name="eili" id="eili" size="6" maxlength="5" value=""></td>
+					<td class="text14"><input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlue" name="eibl" id="eibl" size="17" maxlength="15" value=""></td>
+					<td class="text14"><input onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlue" name="eistk" id="eistk" size="9" maxlength="7" value=""></td>
+					<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="eivnt" id="eivnt" size="8" maxlength="6" value=""></td>
+					<td class="text14"><input type="text" class="inputTextMediumBlue" name="eirge" id="eirge" size="19" maxlength="17" value=""></td>
+					<td class="text14">
+						<input class="inputFormSubmit" type="button" name="itemLineButton" id="itemLineButton" value='Lagre'>
+					</td>
+				</tr>
+			
 		</table>
 		</td>
 	</tr>

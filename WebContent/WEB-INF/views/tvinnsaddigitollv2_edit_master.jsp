@@ -330,44 +330,69 @@
 					
 					<tr height="2"><td></td></tr>
 					<tr>
-						<td colspan="2" class="text14">&nbsp;<span title="emsdlt">Lastested</span></td>
-						<td class="text14">&nbsp;<span title="emlkl">Land</span></td>
-						<td class="text14">&nbsp;<span title="emsdl">UN/LOCODE</span></td>
-						<td>&nbsp;</td>
-						<td class="text14">&nbsp;<span title="emsdut">Lossested</span></td>
-						<td class="text14">&nbsp;<span title="emlku">Land</span></td>
-						<td colspan="2" class="text14">&nbsp;<span title="emsdu">UN/LOCODE</span></td>
-					</tr>
-					<tr>	
-						<td colspan="2" class="text14">
-							<input  type="text" class="inputTextMediumBlue" name="emsdlt" id="emsdlt" size="25" maxlength="30" value="${model.record.emsdlt}">								
-						</td>
-						<td class="text14">
-							<select class="inputTextMediumBlue" name="emlkl" id="emlkl" >
-		 						<option value="">-velg-</option>
-			 				  	<c:forEach var="dto" items="${model.countryDto}" >
-		                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.emlkl == dto.code}"> selected </c:if> >${dto.code}</option>
-								</c:forEach>
-							</select>
-																		
-						</td>
-						<td class="text14">
-							<input  type="text" class="inputTextMediumBlue" name="emsdl" id="emsdl" size="7" maxlength="5" value="${model.record.emsdl}">								
-						</td>
-						<td>&nbsp;</td>
-						<td class="text14">
-							<input  type="text" class="inputTextMediumBlue" name="emsdut" id="emsdut" size="25" maxlength="30" value="${model.record.emsdut}">											
-						</td>
-						<td class="text14">
-							<select class="inputTextMediumBlue" name="emlku" id="emlku" >
-		 						<option value="">-velg-</option>
-			 				  	<c:forEach var="dto" items="${model.countryDto}" >
-		                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.emlku == dto.code}"> selected </c:if> >${dto.code}</option>
-								</c:forEach>
-							</select>												
-						</td>
-						<td colspan="2" class="text14">
-							<input  type="text" class="inputTextMediumBlue" name="emsdu" id="emsdu" size="7" maxlength="5" value="${model.record.emsdu}">											
+						<td colspan="15" class="text14" valign="top">
+						<table style="width:90%" align="left" class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="1">
+						<tr>
+							<td class="text14">&nbsp;<span title="emsdlt">Lastested</span></td>
+							<td class="text14">&nbsp;<span title="emlkl">Land</span></td>
+							<td class="text14">&nbsp;<span title="emsdl">UN/LOCODE</span></td>
+							<td>&nbsp;&nbsp;&nbsp;</td>
+							<td class="text14">&nbsp;<span title="emsdut">Lossested</span></td>
+							<td class="text14">&nbsp;<span title="emlku">Land</span></td>
+							<td class="text14">&nbsp;<span title="emsdu">UN/LOCODE</span></td>
+							<td>&nbsp;&nbsp;&nbsp;</td>
+							<td class="text14">&nbsp;<span title="emsddt">Leveringssted</span></td>
+							<td class="text14">&nbsp;<span title="emlkd">Land</span></td>
+							<td class="text14">&nbsp;<span title="emsdd">UN/LOCODE</span></td>
+						</tr>
+						<tr>	
+							<td class="text14">
+								<input  type="text" class="inputTextMediumBlue" name="emsdlt" id="emsdlt" size="25" maxlength="30" value="${model.record.emsdlt}">								
+							</td>
+							<td class="text14">
+								<select class="inputTextMediumBlue" name="emlkl" id="emlkl" >
+			 						<option value="">-velg-</option>
+				 				  	<c:forEach var="dto" items="${model.countryDto}" >
+			                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.emlkl == dto.code}"> selected </c:if> >${dto.code}</option>
+									</c:forEach>
+								</select>
+																			
+							</td>
+							<td class="text14">
+								<input  type="text" class="inputTextMediumBlue" name="emsdl" id="emsdl" size="7" maxlength="5" value="${model.record.emsdl}">								
+							</td>
+							<td>&nbsp;&nbsp;&nbsp;</td>
+							<td class="text14">
+								<input  type="text" class="inputTextMediumBlue" name="emsdut" id="emsdut" size="25" maxlength="30" value="${model.record.emsdut}">											
+							</td>
+							<td class="text14">
+								<select class="inputTextMediumBlue" name="emlku" id="emlku" >
+			 						<option value="">-velg-</option>
+				 				  	<c:forEach var="dto" items="${model.countryDto}" >
+			                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.emlku == dto.code}"> selected </c:if> >${dto.code}</option>
+									</c:forEach>
+								</select>												
+							</td>
+							<td class="text14">
+								<input  type="text" class="inputTextMediumBlue" name="emsdu" id="emsdu" size="7" maxlength="5" value="${model.record.emsdu}">											
+							</td>
+							<td>&nbsp;&nbsp;&nbsp;</td>
+							<td class="text14">
+								<input  type="text" class="inputTextMediumBlue" name="emsddt" id="emsddt" size="25" maxlength="30" value="${model.record.emsddt}">											
+							</td>
+							<td class="text14">
+								<select class="inputTextMediumBlue" name="emlkd" id="emlkd" >
+			 						<option value="">-velg-</option>
+				 				  	<c:forEach var="dto" items="${model.countryDto}" >
+			                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.emlkd == dto.code}"> selected </c:if> >${dto.code}</option>
+									</c:forEach>
+								</select>												
+							</td>
+							<td class="text14">
+								<input  type="text" class="inputTextMediumBlue" name="emsdd" id="emsdd" size="7" maxlength="5" value="${model.record.emsdd}">											
+							</td>
+						</tr>
+						</table>
 						</td>
 					</tr>
 					<tr height="2"><td></td></tr>
