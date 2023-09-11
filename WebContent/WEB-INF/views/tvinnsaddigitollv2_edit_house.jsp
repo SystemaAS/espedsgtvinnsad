@@ -913,9 +913,9 @@
 							&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
 						</c:otherwise>
 					</c:choose>
+					&nbsp;&nbsp;<input class="inputFormSubmitBlue" type="button" name="buttonInitVoec" id="buttonInitVoec" value='Varelinjer - VOEC'>	
 				</c:if>
 			</c:if>
-			</td>
 		</tr> 
 	</table>
 	</td>
@@ -925,13 +925,12 @@
 </td>
 </tr>
 
-
+<%-- list component - changed to own child window ...
 <c:if test="${not empty model.record.listItemLines}">
-<%-- list component --%>
 	<tr>
 		<td>		
 		<table style="width:90%;" border="0" >
-	    	<%-- separator --%>
+	    	<%-- separator 
 	        <tr height="2"><td></td></tr> 
 			<tr>
 				<td>
@@ -950,8 +949,7 @@
                 		<th width="2%" class="tableHeaderField" >Tariffnr</th>
                 		<th width="2%" class="tableHeaderField" >Selger id - VOEC</th>
                 		<th width="2%" class="tableHeaderField" >Role</th>
-                		
-                		</tr>
+                	</tr>
                 	</thead>
                 	<tbody> 
                 	<c:forEach items="${model.record.listItemLines}" var="itemLinesRecord" varStatus="counter">    
@@ -995,13 +993,15 @@
 						<input class="inputFormSubmit" type="button" name="itemLineButton" id="itemLineButton" value='Lagre'>
 					</td>
 				</tr>
-			
+				</table>
+				</td>
+			</tr>
 		</table>
 		</td>
 	</tr>
 </c:if>
 
-
+--%>
 
 
 

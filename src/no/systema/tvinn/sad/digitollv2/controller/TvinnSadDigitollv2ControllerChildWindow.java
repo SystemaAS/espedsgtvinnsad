@@ -55,8 +55,11 @@ import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
 import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorContainer;
 import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorRecord;
 import no.systema.tvinn.sad.digitollv2.filter.SearchFilterDigitollTransportList;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
+import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
 import no.systema.tvinn.sad.manifest.express.filter.SearchFilterManifestList;
@@ -291,6 +294,59 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	}
 	/**
 	 * 
+	 * @param houseRecord
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_goodsitem.do", method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doGoodsItem(@ModelAttribute ("record") SadmohfRecord houseRecord, HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doGoodsItem");
+		Map model = new HashMap();
+		
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_goodsitem");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			//get all masters
+			this.getItemLines(appUser, houseRecord);  
+			model.put("record", houseRecord);
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	/**
+	 * 
+	 * @param appUser
+	 * @param record
+	 */
+	private void getItemLines(SystemaWebUser appUser, SadmohfRecord record) {
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_ITEMLINES_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser() + "&eilnrt=" + record.getEhlnrt() + "&eilnrm=" + record.getEhlnrm() + "&eilnrh=" + record.getEhlnrh();
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadmoifContainer jsonContainer = this.sadmoifListService.getListContainer(jsonPayload);
+    		record.setListItemLines(jsonContainer.getList());
+    	}
+    	
+	}
+	
+	/**
+	 * 
 	 * @param appUser
 	 * @param tullkontorName
 	 * @param tullkontorCode
@@ -357,19 +413,16 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	//SERVICES
 	@Autowired
 	private UrlCgiProxyService urlCgiProxyService;
-	
 	@Autowired
 	private TvinnSadDropDownListPopulationService tvinnSadDropDownListPopulationService;
-	
 	@Autowired
 	private SadmotfListService sadmotfListService;
-	
+	@Autowired
+	private SadmoifListService sadmoifListService;
 	@Autowired
 	private ManifestExpressMgr manifestExpressMgr;
-	
 	@Autowired
 	private MaintMainKofastService maintMainKofastService;
-
 	@Autowired
 	private TvinnSadTullkontorService tvinnSadTullkontorService;
 	

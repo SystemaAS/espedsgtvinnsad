@@ -50,9 +50,12 @@
 	  	window.open('tvinnsadmanifest_childwindow_manifestinfo.do?id=' + jq('#efuuid').val() + "&raw=1", "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");
 
     });
-    
-    
-    
+	jq('#buttonInitVoec').click(function() { 
+		jq('#buttonInitVoec').attr('target','_blank');
+		window.open('tvinnsaddigitollv2_childwindow_goodsitem.do?action=doInit&ehlnrt=' + jq('#ehlnrt').val() + '&ehlnrm=' + jq('#ehlnrm').val() + 
+						'&ehlnrh=' + jq('#ehlnrh').val() + '&ehavd=' + jq('#ehavd').val() + '&ehpro=' + jq('#ehpro').val() + '&ehtdn=' + jq('#ehtdn').val() , 
+						"voecWin", "top=300px,left=500px,height=500px,width=800px,scrollbars=yes,location=no");
+    });
     
   });
   

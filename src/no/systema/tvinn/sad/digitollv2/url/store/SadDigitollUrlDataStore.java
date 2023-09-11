@@ -28,7 +28,10 @@ public final class SadDigitollUrlDataStore {
 		//FETCH Item line list
 		//http://localhost:8080/syjservicestn/syjsSADMOIFR.do?user=OSCAR and/or user=OSCAR...
 		static public String SAD_FETCH_DIGITOLL_ITEMLINES_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOIF.do";
-		
+		//UPDATE/INSERT/DELETE House
+		//http://localhost:8080/syjservicestn/syjsSADMOIF_U.do?user=OSCAR and/or user=OSCAR...
+		static public String SAD_UPDATE_DIGITOLL_ITEMLINES_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOIF_U.do";
+
 		//FETCH LOG 
 		static public String SAD_FETCH_DIGITOLL_LOG_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOLOG.do";
 				

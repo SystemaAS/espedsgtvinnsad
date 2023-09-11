@@ -19,7 +19,7 @@ public class GeneralUpdateRecord <T> {
 	private Integer id = null;
 	private Integer id2 = null;
 	private Integer id3 = null;
-	
+	private Integer id4 = null;
 	
 	
 	
