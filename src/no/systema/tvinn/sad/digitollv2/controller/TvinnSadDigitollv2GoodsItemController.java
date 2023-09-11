@@ -3,6 +3,7 @@ package no.systema.tvinn.sad.digitollv2.controller;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,7 +63,7 @@ public class TvinnSadDigitollv2GoodsItemController {
 	 * @return
 	 */
 	@RequestMapping(value="tvinnsaddigitollv2_edit_goodsitem.do",  method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doEditHouse(@ModelAttribute ("record") SadmoifRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+	public ModelAndView doEditItem(@ModelAttribute ("record") SadmoifRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		
 		
 		Collection<SadmoifRecord> outputList = new ArrayList<SadmoifRecord>();
@@ -122,6 +123,91 @@ public class TvinnSadDigitollv2GoodsItemController {
 	   	
 			return successView;
 	}
+	
+	
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_delete_goodsitem.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doDeleteItem(@ModelAttribute ("record") SadmoifRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		
+		Map model = new HashMap();
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		
+		String id1 = "";
+		String id2 = "";
+		String id3 = "";
+		String id4 = "";
+		String avd = "";
+		String pro = "";
+		String tdn = "";
+		
+		Enumeration requestParameters = request.getParameterNames();
+	    while (requestParameters.hasMoreElements()) {
+	        String element = (String) requestParameters.nextElement();
+	        String value = request.getParameter(element);
+	        if (element != null && value != null) {
+        		//logger.warn("####################################################");
+    			//logger.warn("param Name : " + element + " value: " + value);
+    			if(element.startsWith("current_id1")){
+    				id1 = value;
+    			}else if(element.startsWith("current_id2")){
+    				id2 = value;
+    			}else if(element.startsWith("current_id3")){
+    				id3 = value;
+    			}else if(element.startsWith("current_id4")){
+    				id4 = value;
+    			}else if(element.startsWith("current_avd")){
+    				avd = value;
+    			}else if(element.startsWith("current_pro")){
+    				pro = value;
+    			}else if(element.startsWith("current_tdn")){
+    				tdn = value;
+    			}
+    		}
+    	}
+	    
+	    logger.info("Id1:" + id1); logger.info("Id2:" + id2); logger.info("Id3:" + id3); logger.info("id4:" + id4);
+	    ModelAndView successView = new ModelAndView("redirect:tvinnsaddigitollv2_childwindow_goodsitem.do?action=doInit" + "&ehlnrt=" + id1 + "&ehlnrm=" + id2 + "&ehlnrh=" + id3
+																											+ "&ehavd=" + avd + "&ehpro=" + pro + "&ehtdn=" + tdn);
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+		}else{
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_DIGITOLLV2);
+			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE); 
+			
+			
+			String mode = SadDigitollConstants.DB_MODE_DELETE;
+			logger.info("MODE:" + mode + " before update in Controller ...");
+			StringBuffer errMsg = new StringBuffer();
+			int dmlRetval = 0;
+			//Populate the record for delete
+			recordToValidate.setEilnrt(Integer.valueOf(id1)); recordToValidate.setEilnrm(Integer.valueOf(id2)); recordToValidate.setEilnrh(Integer.valueOf(id3));recordToValidate.setEili(Integer.valueOf(id4));
+			recordToValidate.setEiavd(Integer.valueOf(avd)); recordToValidate.setEipro(Integer.valueOf(pro)); recordToValidate.setEitdn(Integer.valueOf(tdn));
+			
+			dmlRetval = this.deleteRecord(appUser.getUser(), recordToValidate, mode, errMsg);
+			if(dmlRetval < 0) {
+				//error on delete
+				model.put("errorMessage", errMsg.toString());
+				//put all aspects (sub-lists) only with update (not insert) error
+				if(SadDigitollConstants.DB_MODE_UPDATE.equals(mode)){
+				}
+				
+			}else {
+				logger.info("OK after delete item line!");
+			}
+		}
+		
+		return successView;
+	}
+	
 	
 	/**
 	 * 
@@ -197,6 +283,57 @@ public class TvinnSadDigitollv2GoodsItemController {
 							recordToValidate.setEilnrh(record.getId3());
 							recordToValidate.setEili(record.getId4());
 						}
+					}
+				}
+			}
+    	}
+    	
+    	return retval;
+	}
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param recordToValidate
+	 * @param mode
+	 * @param errMsg
+	 * @return
+	 */
+	private int deleteRecord(String applicationUser, SadmoifRecord recordToValidate, String mode, StringBuffer errMsg) {
+		int retval = 0;
+		
+		
+		//get BASE URL
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_ITEMLINES_URL;
+		//add URL-parameters
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + applicationUser + "&mode=" + mode);
+		urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate)));
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		GeneralUpdateContainer container = this.generalUpdateService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<GeneralUpdateRecord> outputList = container.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(GeneralUpdateRecord record : outputList ){
+					logger.info(record.toString());
+					if(StringUtils.isNotEmpty(container.getErrMsg())){
+						errMsg.append(record.getStatus());
+						errMsg.append(" -->detail:" + container.getErrMsg());
+						retval = -1;
+						break;
+					}else {
+						break;
 					}
 				}
 			}

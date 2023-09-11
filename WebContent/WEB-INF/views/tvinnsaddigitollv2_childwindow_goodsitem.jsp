@@ -64,8 +64,10 @@
 											<input type="hidden" name="current_id2${counter.count}" id="current_id2${counter.count}" value="${itemLinesRecord.eilnrm}">
 											<input type="hidden" name="current_id3${counter.count}" id="current_id3${counter.count}" value="${itemLinesRecord.eilnrh}">
 											<input type="hidden" name="current_id4${counter.count}" id="current_id4${counter.count}" value="${itemLinesRecord.eili}">
-											<input type="hidden" name="action${counter.count}" id="action${counter.count}" value="doDelete">
-										 	<p class="text14" >Er du sikker på at du vil slette denne&nbsp;Lin&nbsp;<b>${itemLinesRecord.eili}</b> fra <b>House</b> ?</p>
+											<input type="hidden" name="current_avd${counter.count}" id="current_avd${counter.count}" value="${itemLinesRecord.eiavd}">
+											<input type="hidden" name="current_pro${counter.count}" id="current_pro${counter.count}" value="${itemLinesRecord.eipro}">
+											<input type="hidden" name="current_tdn${counter.count}" id="current_tdn${counter.count}" value="${itemLinesRecord.eitdn}">
+											<p class="text14" >Er du sikker på at du vil slette denne&nbsp;Lin&nbsp;<b>${itemLinesRecord.eili}</b> fra <b>House</b> ?</p>
 											
 										</form>
 									</div>
