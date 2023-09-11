@@ -1,5 +1,7 @@
 package no.systema.tvinn.sad.digitollv2.controller;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -102,6 +104,8 @@ public class TvinnSadDigitollv2GoodsItemController {
 					logger.info("MODE:" + mode + " before update in Controller ...");
 					StringBuffer errMsg = new StringBuffer();
 					int dmlRetval = 0;
+					//adjust some fields before update
+					this.adjustFieldsForUpdate(recordToValidate);
 					
 					dmlRetval = this.updateRecord(appUser.getUser(), recordToValidate, mode, errMsg);
 					if(dmlRetval < 0) {
@@ -207,8 +211,28 @@ public class TvinnSadDigitollv2GoodsItemController {
 		
 		return successView;
 	}
-	
-	
+	/**
+	 * 
+	 * @param user
+	 * @param recordToValidate
+	 */
+	private void adjustFieldsForUpdate(SadmoifRecord recordToValidate){
+		
+		//adjust BigDecimal eibl (sonet 13,2)
+		if(StringUtils.isNotEmpty(recordToValidate.getEibl())){
+			String tmp = recordToValidate.getEibl().replace(",", ".");
+			BigDecimal bd = new BigDecimal(tmp).setScale(2, RoundingMode.HALF_UP);
+			recordToValidate.setEibl(bd.toString());	
+		}
+		//adjust BigDecimal eistk (sonet 5,2)
+		if(StringUtils.isNotEmpty(recordToValidate.getEistk())){
+			String tmp = recordToValidate.getEistk().replace(",", ".");
+			BigDecimal bd = new BigDecimal(tmp).setScale(2, RoundingMode.HALF_UP);
+			recordToValidate.setEistk(bd.toString());	
+		}
+		
+	}
+
 	/**
 	 * 
 	 * @param appUser

@@ -53,6 +53,48 @@ jq(function() {
 });	
 
 
+	function getItemData(record) {
+	  	var id = record.id;
+		var eili = id.replace("recordUpdate_", "");
+	  	
+		var ids = jq("#"+record.id).attr("title");
+	  	var record = ids.split("_");
+		//console.log = record;
+	  	var applicationUserParam = jq('#applicationUser').val();
+	  	var eilnrt = record[0];
+	  	var eilnrm = record[1];
+	  	var eilnrh = record[2];
+	  	
+	  	jq.ajax({
+	  	  type: 'GET',
+	  	  url: 'getSpecificGoodsItemVoec_Digitoll.do',
+	  	  data: { applicationUser : applicationUserParam,
+				  eili : eili,	 
+	  		  	  eilnrt : eilnrt, 
+	  		  	  eilnrm : eilnrm, 
+	  		  	  eilnrh : eilnrh },
+	  	  dataType: 'json',
+	  	  cache: false,
+	  	  contentType: 'application/json',
+	  	  success: function(data) {
+	  		
+	  		var len = data.length;
+			for ( var i = 0; i < len; i++) {
+				jq('#eili').val(""); jq('#eili').val(data[i].eili);
+				jq('#eibl').val(""); jq('#eibl').val(data[i].eibl);
+				jq('#eistk').val(""); jq('#eistk').val(data[i].eistk);
+				jq('#eivnt').val(""); jq('#eivnt').val(data[i].eivnt);
+				jq('#eirge').val(""); jq('#eirge').val(data[i].eirge);
+						
+			}
+	  	  },
+	  	  error: function() {
+			
+	  	    alert('Error loading ...');
+	  	  }
+	  	});
+  	}
+
 
 //Initialize <div> here for all clazz_dialog
   jq(function() { 

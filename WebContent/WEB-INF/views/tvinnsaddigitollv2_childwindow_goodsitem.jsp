@@ -35,8 +35,8 @@
 								<th width="2%" class="tableHeaderFieldFirst12"  >Endre</th>
 		                    	<th width="2%" class="tableHeaderField12" >Lin</th>
 		                    	<th width="2%" class="tableHeaderField12" >Status</th>
-		                    	<th width="2%" class="tableHeaderField12" >Stk</th>
-		                		<th width="2%" class="tableHeaderField12" >Vrd</th>
+		                    	<th width="2%" class="tableHeaderField12" title="eibl">Vrd</th>
+		                		<th width="2%" class="tableHeaderField12" title="eistk">Ant</th>
 		                		<th width="2%" class="tableHeaderField12" >Tariffnr</th>
 		                		<th nowrap width="2%" class="tableHeaderField12" >SelgId VOEC</th>
 		                		<th width="2%" class="tableHeaderField12" >Role</th>
@@ -46,11 +46,16 @@
 		                	<tbody> 
 		                	<c:forEach items="${model.record.listItemLines}" var="itemLinesRecord" varStatus="counter">    
 				             <tr class="tableRow" height="20" >
-					           <td width="2%" align="center" class="tableCellFirst12"><img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit"></td>	
+					           <td width="2%" align="center" class="tableCellFirst12">
+					           		<a tabindex=-1 title="${itemLinesRecord.eilnrt}_${itemLinesRecord.eilnrm}_${itemLinesRecord.eilnrh}" id="recordUpdate_${itemLinesRecord.eili}" href="#" onClick="getItemData(this);">
+				               			<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;
+				               		</a>
+		
+					           	</td>	
 				          	   <td width="2%" align="center"class="tableCell12" >${itemLinesRecord.eili}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${itemLinesRecord.eist}</td>
-			               	   <td width="2%" align="right" class="tableCell12" >${itemLinesRecord.eistk}&nbsp;</td>
-				               <td width="2%" align="right" class="tableCell12" >${itemLinesRecord.eibl}&nbsp;</td>
+			               	   <td width="2%" align="right" class="tableCell12" >${itemLinesRecord.eibl}&nbsp;</td>
+				               <td width="2%" align="right" class="tableCell12" >${itemLinesRecord.eistk}&nbsp;</td>
 				               <td width="2%" align="center" class="tableCell12" >${itemLinesRecord.eivnt}</td>
 				               <td width="2%" align="center" class="tableCell12" >${itemLinesRecord.eirge}</td>
 				               <td width="2%" align="center" class="tableCell12" >${itemLinesRecord.eiroe}</td> 
@@ -87,6 +92,7 @@
 					<tr>
 						<td>
 						<form name="itemLinesForm" id="itemLinesForm" action="tvinnsaddigitollv2_edit_goodsitem.do" method="post">
+							<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
 							<input type="hidden" name="action" id="action" value="doUpdate">
 							<input type="hidden" name="eilnrt" id="eilnrt" value="${model.record.ehlnrt}">
 							<input type="hidden" name="eilnrm" id="eilnrm" value="${model.record.ehlnrm}">
@@ -101,8 +107,8 @@
 						<table class="text14 formFrame" style="width:60%; background-color:lightyellow;" cellspacing="2" align="left" >
 						<tr>
 							<td class="text14"><span title="eili">Lin</span></td>
-							<td class="text14"><span title="eibl">Stk</span></td>
-							<td class="text14"><span title="eistk">Vrd</span></td>
+							<td class="text14"><span title="eibl">Vrd</span></td>
+							<td class="text14"><span title="eistk">Ant</span></td>
 							<td class="text14"><span title="eivnt">Tariffnr</span></td>
 							<td class="text14"><span title="eirge">SelgerId - VOEC</span></td>
 						</tr>
