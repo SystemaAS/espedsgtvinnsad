@@ -752,7 +752,61 @@
 			            </td>
 		            </tr>
 	            </table>
-            </td>	
+            </td>
+            
+            <td class="text14" valign="top">
+				<table style="width:60%" align="left" border="0" cellspacing="1" cellpadding="0">
+				 	<tr >
+					 	<td >
+						<table class="formFrameHeader" style="width:100%;" border="0" cellspacing="1" cellpadding="0">
+					 		<tr height="15">
+					 			<td class="text14White">&nbsp;&nbsp;Representat / Ombud&nbsp;</td>
+			 				</tr>
+			            </table>
+			            </td>
+		            </tr>
+		            <tr >
+					 	<td>
+						<table style="width:100%;" class="formFrame" border="0" cellspacing="1" cellpadding="0">
+					 		<tr>
+				 				<td>
+				 				<table>
+				 				<tr >
+				 					<td class="text14">&nbsp;<span title="emrcem1">E-post (1) <font style="font-size:11px;">bekreft. for fristilling/innpass.</font></span></td>
+				 				</tr>
+				 				<tr >
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emrcem1" id="emrcem1" size="35" maxlength="50" value="${model.record.emrcem1}"></td>									
+				 				</tr>
+				 				<tr height="2"><td></td></tr>
+				 				<tr >
+				 					<td class="text14">&nbsp;<span title="emrcem2">E-post (2) <font style="font-size:11px;">bekreft. for fristilling/innpass.</font></span></td>
+				 				</tr>
+				 				<tr >
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emrcem2" id="emrcem2" size="35" maxlength="50" value="${model.record.emrcem2}"></td>									
+				 				</tr>
+				 				<tr height="2"><td></td></tr>
+				 				<tr >
+				 					<td class="text14">&nbsp;<span title="emrcem3">E-post (3) <font style="font-size:11px;">bekreft. for fristilling/innpass.</font></span></td>
+				 				</tr>
+				 				<tr >
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emrcem3" id="emrcem3" size="35" maxlength="50" value="${model.record.emrcem3}"></td>									
+				 				</tr>
+				 				
+				 				<tr height="2"><td></td></tr>
+				 				
+				 				</table>
+				 				</td>
+				 				</tr>
+				 				</table>
+			            </td>
+		            </tr>
+	            </table>
+            </td>
+            
+            
+            
+            
+            	
 		</tr>
 		</table>
 		</td>
