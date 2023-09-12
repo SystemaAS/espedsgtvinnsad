@@ -839,7 +839,7 @@ public class TvinnSadDigitollv2MasterController {
 		}
 		
 		//Register date
-		if(recordToValidate.getEmdtr() > 0) {
+		if(recordToValidate.getEmdtr()!=null && recordToValidate.getEmdtr() > 0) {
 			int regDate = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(recordToValidate.getEmdtrStr(), DateTimeManager.NO_FORMAT));
 			recordToValidate.setEmdtr(regDate);
 		}else {
