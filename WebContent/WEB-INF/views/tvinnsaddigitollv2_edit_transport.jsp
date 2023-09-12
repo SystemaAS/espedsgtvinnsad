@@ -183,7 +183,7 @@
 			<tr >
 				<td colspan="10" class="text14  ">
 	    			<font class="inputText isa_warning" >
-	    				Lasten er ikke gyldig for sending via api. Alle master-consignments skal ha MRN-Api-nr. bortsett fra de som er KANSELLERT. Minst en master-consignment må eksistere.
+	    				Lasten er ikke gyldig for sending via api. Alle master-consignments skal ha MRN-Api-nr. bortsett fra de som er KANSELLERT eller SLETTET. Minst en master-consignment må eksistere.
 	    			</font>
 	    		</td>
 	   		</tr>

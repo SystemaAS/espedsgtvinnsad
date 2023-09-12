@@ -1,5 +1,7 @@
 package no.systema.tvinn.sad.digitollv2.controller;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
  
@@ -237,8 +239,8 @@ public class TvinnSadDigitollv2HouseController {
 			//Final successView with domain objects
 			//--------------------------------------
 			//drop downs
-			/*this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
-			this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
+			this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
+			/*this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
 			this.setCodeDropDownMgr(appUser, model);
 			*/
 			this.setDropDownService(model);
@@ -797,6 +799,14 @@ public class TvinnSadDigitollv2HouseController {
 		}else {
 			recordToValidate.setEhemm(recordToValidate.getOwn_ehemm_telephone());
 			recordToValidate.setEhemmt(SadDigitollConstants.API_TYPE_TELEPHONE);
+		}
+		
+		//Bruttovikt
+		//adjust BigDecimal eibl (sonet 13,2)
+		if(StringUtils.isNotEmpty(recordToValidate.getEhvkb())){
+			String tmp = recordToValidate.getEhvkb().replace(",", ".");
+			BigDecimal bd = new BigDecimal(tmp).setScale(2, RoundingMode.HALF_UP);
+			recordToValidate.setEhvkb(bd.toString());	
 		}
 		
 	}

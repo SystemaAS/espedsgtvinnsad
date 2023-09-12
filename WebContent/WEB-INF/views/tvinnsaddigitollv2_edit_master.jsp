@@ -259,8 +259,15 @@
 					<tr>
 						
 						<td>
-	 						<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  size="7" maxlength="4" class="inputTextMediumBlueMandatoryField" list="emavd_list" id="emavd" name="emavd" value="${model.record.emavd}">
-							<datalist id="emavd_list">
+							<c:choose>
+								<c:when test="${model.record.emavd > 0}">
+									<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  size="7" maxlength="4" class="inputTextMediumBlueMandatoryField" list="emavd_list" id="emavd" name="emavd" value="${model.record.emavd}">	
+								</c:when>
+								<c:otherwise>
+									<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  size="7" maxlength="4" class="inputTextMediumBlueMandatoryField" list="emavd_list" id="emavd" name="emavd" value="">								
+								</c:otherwise>
+							</c:choose>	
+	 						<datalist id="emavd_list">
 							  <option value="">-Välj-</option>
 			 				  	<c:forEach var="record" items="${model.avdList}" >
 			 				  		<option value="${record.avd}"<c:if test="${model.record.emavd == record.avd}"> selected </c:if> >${record.avd}</option> 
@@ -278,7 +285,14 @@
 	 					</td>
 						
 						<td class="text14">
-							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="empro" id="empro" size="10" maxlength="8" value="${model.record.empro}">									
+							<c:choose>
+								<c:when test="${model.record.empro > 0}">
+									<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="empro" id="empro" size="10" maxlength="8" value="${model.record.empro}">	
+								</c:when>
+								<c:otherwise>
+									<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="empro" id="empro" size="10" maxlength="8" value="">								
+								</c:otherwise>
+							</c:choose>					
 						</td>		
 							
 						<td class="text14">

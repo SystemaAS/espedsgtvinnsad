@@ -247,7 +247,14 @@
 					</tr>
 					<tr>	
 						<td class="text14">
-							<input size="8" maxlength="4" class="selectMediumBlueE2" list="ehavd_list" id="ehavd" name="ehavd" value="${model.record.ehavd}">
+							<c:choose>
+								<c:when test="${model.record.ehavd > 0}">
+									<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" size="8" maxlength="4" class="inputTextMediumBlueMandatoryField" list="ehavd_list" id="ehavd" name="ehavd" value="${model.record.ehavd}">	
+								</c:when>
+								<c:otherwise>
+									<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" size="8" maxlength="4" class="inputTextMediumBlueMandatoryField" list="ehavd_list" id="ehavd" name="ehavd" value="">								
+								</c:otherwise>
+							</c:choose>
 							<datalist id="ehavd_list">
 							  <option value="">-Välj-</option>
 			 				  	<c:forEach var="record" items="${model.avdList}" >
@@ -256,16 +263,37 @@
 							</datalist>					
 						</td>
 						<td class="text14">
-							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="ehpro" id="ehpro" size="10" maxlength="8" value="${model.record.ehpro}">									
+							<c:choose>
+								<c:when test="${model.record.ehpro > 0}">
+									<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="ehpro" id="ehpro" size="10" maxlength="8" value="${model.record.ehpro}">	
+								</c:when>
+								<c:otherwise>
+									<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="ehpro" id="ehpro" size="10" maxlength="8" value="">								
+								</c:otherwise>
+							</c:choose>									
 						</td>
 						<td class="text14">
-							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="ehtdn" id="ehtdn" size="10" maxlength="7" value="${model.record.ehtdn}">									
+							<c:choose>
+								<c:when test="${model.record.ehtdn > 0}">
+									<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="ehtdn" id="ehtdn" size="10" maxlength="7" value="${model.record.ehtdn}">	
+								</c:when>
+								<c:otherwise>
+									<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="ehtdn" id="ehtdn" size="10" maxlength="7" value="">								
+								</c:otherwise>
+							</c:choose>								
 						</td>
 						<td class="text14">
 							<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="ehvkb" id="ehvkb" size="10" maxlength="9" value="${model.record.ehvkb}">									
 						</td>
 						<td class="text14">
-							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="ehntk" id="ehntk" size="10" maxlength="7" value="${model.record.ehntk}">									
+							<c:choose>
+								<c:when test="${model.record.ehntk > 0}">
+									<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="ehntk" id="ehntk" size="10" maxlength="7" value="${model.record.ehntk}">	
+								</c:when>
+								<c:otherwise>
+									<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="ehntk" id="ehntk" size="10" maxlength="7" value="">								
+								</c:otherwise>
+							</c:choose>						
 						</td>
 						<td class="text14">
 							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ehvt" id="ehvt" size="35" maxlength="50" value="${model.record.ehvt}">									
@@ -280,15 +308,12 @@
 							<input  type="text" class="inputTextReadOnly" name="ehdkh" id="ehdkh" size="25" maxlength="50" value="${model.record.ehdkh}">		
 						</td>
 						<td class="text14">
-							
 							<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="ehdkht" id="ehdkht" >
 		 						<option value="">-velg-</option>
 			 				  	<c:forEach var="dto" items="${model.previousDocumentsDto}" >
 		                       	 	<option title="${dto.txt1}&nbsp;-&nbsp;${dto.txt2}" value="${dto.code}" <c:if test="${model.record.ehdkht == dto.code}"> selected </c:if> >${dto.code}</option>
 								</c:forEach>
 							</select>
-							
-							
 						</td>
 						<td class="text14">
 							<input readonly type="text" class="inputTextReadOnly" name="ehst" id="ehst" size="2" maxlength="1" value="${model.record.ehst}">		
@@ -612,7 +637,7 @@
 						</tr>
 						<tr>	
 							<td class="text14">
-								<input  type="text" class="inputTextMediumBlue" name="ehsda" id="ehsda" size="25" maxlength="30" value="${model.record.ehsda}">								
+								<input  type="text" class="inputTextMediumBlue" name="ehsdat" id="ehsdat" size="25" maxlength="30" value="${model.record.ehsdat}">								
 							</td>
 							<td class="text14">
 								<select class="inputTextMediumBlue" name="ehlka" id="ehlka" >
@@ -911,6 +936,9 @@
 						</c:when>
 						<c:otherwise>
 							&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
+							<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
+								 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
+							</div>
 						</c:otherwise>
 					</c:choose>
 					&nbsp;&nbsp;<input class="inputFormSubmitBlue" type="button" name="buttonInitVoec" id="buttonInitVoec" value='Varelinjer - VOEC'>	

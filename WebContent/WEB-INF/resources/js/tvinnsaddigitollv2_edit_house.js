@@ -36,8 +36,36 @@
     });
     
     jq('#sendButton').click(function() { 
-    	setBlockUI();
-		window.location = 'tvinnsaddigitollv2_api_send_house.do?ehlnrt=' + jq('#ehlnrt').val() + '&ehlnrm=' + jq('#ehlnrm').val() + '&ehlnrh=' + jq('#ehlnrh').val()+ '&ehmid=' + jq('#ehmid').val();
+    	//setBlockUI();
+		//window.location = 'tvinnsaddigitollv2_api_send_house.do?ehlnrt=' + jq('#ehlnrt').val() + '&ehlnrm=' + jq('#ehlnrm').val() + '&ehlnrh=' + jq('#ehlnrh').val()+ '&ehmid=' + jq('#ehmid').val();
+		//setters (add more if needed)
+		  jq('#dialogSend').dialog( "option", "title", "Send til toll.no" );
+		  //deal with buttons for this modal window
+		  jq('#dialogSend').dialog({
+			 buttons: [ 
+	            {
+				 id: "dialogSaveTU",	
+				 text: "Ok",
+				 click: function(){
+					 		setBlockUI();
+							window.location = 'tvinnsaddigitollv2_api_send_house.do?ehlnrt=' + jq('#ehlnrt').val() + '&ehlnrm=' + jq('#ehlnrm').val() + '&ehlnrh=' + jq('#ehlnrh').val()+ '&ehmid=' + jq('#ehmid').val();
+				 		}
+			 	 },
+	 	 		{
+			 	 id: "dialogCancelTU",
+			 	 text: "Cancel", 
+				 click: function(){
+					 		//back to initial state of form elements on modal dialog
+					 		jq("#dialogSaveSU").button("option", "disabled", true);
+					 		jq( this ).dialog( "close" ); 
+				 		} 
+	 	 		 } ] 
+		  });
+		  //init values
+		  jq("#dialogSaveSU").button("option", "disabled", true);
+		  //open now
+		  jq('#dialogSend').dialog('open');
+		
     });
     
     jq('#imgManifestIdInfo').click(function() { 
@@ -380,6 +408,21 @@
 		  modal: true
 	  });
   });
+
+  //Initialize <div> here for all clazz_dialog
+  jq(function() { 
+	  jq( ".clazz_dialog" ).each(function(){
+		jq(this).dialog({
+			autoOpen: false,
+			maxWidth:500,
+			maxHeight: 400,
+			width: 300,
+			height: 180,
+			modal: true
+		});
+	  });
+  });
+  
   //----------------------------
   //Present dialog box onClick 
   //----------------------------
@@ -456,7 +499,7 @@
 	  }
   
  
-jq(function() {
+	jq(function() {
 	  jq(".uuidLink").click(function() {
 		  var id = this.id;
 		  jq("#"+id).attr(('target','_blank'));
@@ -488,6 +531,8 @@ jq(function() {
 			
 	  });
   });
+
+
 
 //-------------------
   //Datatables jquery
