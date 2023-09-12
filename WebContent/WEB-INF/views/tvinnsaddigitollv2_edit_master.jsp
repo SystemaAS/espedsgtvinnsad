@@ -575,9 +575,9 @@
 									<td class="text14">
 										<select class="inputTextMediumBlue" id="emtpps" name="emtpps">
 											<option value="">-velg-</option>
-											<option title="En fysisk person" value="1" <c:if test="${model.record.emtpps == '1'}"> selected </c:if> >Fys.person</option>
-								  			<option title="En juridisk person, det vil si en bedrift" value="2" <c:if test="${model.record.emtpps == '2'}"> selected </c:if> >Bedrift</option>
-								  			<option title="En samling personer" value="3" <c:if test="${model.record.emtpps == '3'}"> selected </c:if> >Sam.pers.</option> 	
+											<option title="En fysisk person" value="1" <c:if test="${model.record.emtpps == 1}"> selected </c:if> >Fys.person</option>
+								  			<option title="En juridisk person, det vil si en bedrift" value="2" <c:if test="${model.record.emtpps == 2}"> selected </c:if> >Bedrift</option>
+								  			<option title="En samling personer" value="3" <c:if test="${model.record.emtpps == 3}"> selected </c:if> >Sam.pers.</option> 	
 										</select>
 									</td>
 									
@@ -686,9 +686,9 @@
 									<td class="text14">
 										<select class="inputTextMediumBlue" id="emtppm" name="emtppm">
 											<option value="">-velg-</option>
-											<option title="En fysisk person" value="1" <c:if test="${model.record.emtppm == '1'}"> selected </c:if> >Fys.person</option>
-								  			<option title="En juridisk person, det vil si en bedrift" value="2" <c:if test="${model.record.emtppm == '2'}"> selected </c:if> >Bedrift</option>
-								  			<option title="En samling personer" value="3" <c:if test="${model.record.emtppm == '3'}"> selected </c:if> >Sam.pers.</option> 	
+											<option title="En fysisk person" value="1" <c:if test="${model.record.emtppm == 1}"> selected </c:if> >Fys.person</option>
+								  			<option title="En juridisk person, det vil si en bedrift" value="2" <c:if test="${model.record.emtppm == 2}"> selected </c:if> >Bedrift</option>
+								  			<option title="En samling personer" value="3" <c:if test="${model.record.emtppm == 3}"> selected </c:if> >Sam.pers.</option> 	
 										</select>
 									</td>
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="empsm" id="empsm" size="25" maxlength="24" value="${model.record.empsm}"></td>

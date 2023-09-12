@@ -737,9 +737,9 @@
 			 				<tr >
 			 					<td class="text14">
 		 							<select class="inputTextMediumBlueMandatoryField" id="ehtpps" name="ehtpps">
-										<option title="En fysisk person" value="1" <c:if test="${model.record.ehtpps == '1'}"> selected </c:if> >Fys.person</option>
-								  		<option title="En juridisk person, det vil si en bedrift" value="2" <c:if test="${empty model.record.ehtpps || model.record.ehtpps == '2'}"> selected </c:if> >Bedrift</option>
-								  		<option title="En samling personer" value="3" <c:if test="${model.record.ehtpps == '3'}"> selected </c:if> >Sam.pers.</option> 	
+										<option title="En fysisk person" value="1" <c:if test="${model.record.ehtpps == 1}"> selected </c:if> >Fys.person</option>
+								  		<option title="En juridisk person, det vil si en bedrift" value="2" <c:if test="${model.record.ehtpps == 0 || model.record.ehtpps == 2}"> selected </c:if> >Bedrift</option>
+								  		<option title="En samling personer" value="3" <c:if test="${model.record.ehtpps == 3}"> selected </c:if> >Sam.pers.</option> 	
 									</select>
 			 					</td>
 								<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehpss" id="ehpss" size="25" maxlength="24" value="${model.record.ehpss}"></td>
@@ -847,9 +847,9 @@
 				 				<tr >
 				 					<td class="text14">
 				 						<select class="inputTextMediumBlueMandatoryField" id="ehtppm" name="ehtppm">
-				 							<option title="En fysisk person" value="1" <c:if test="${model.record.ehtppm == '1'}"> selected </c:if> >Fys.person</option>
-								  			<option title="En juridisk person, det vil si en bedrift" value="2" <c:if test="${empty model.record.ehtppm || model.record.ehtppm == '2'}"> selected </c:if> >Bedrift</option>
-								  			<option title="En samling personer" value="3" <c:if test="${model.record.ehtppm == '3'}"> selected </c:if> >Sam.pers.</option> 	
+				 							<option title="En fysisk person" value="1" <c:if test="${model.record.ehtppm == 1}"> selected </c:if> >Fys.person</option>
+								  			<option title="En juridisk person, det vil si en bedrift" value="2" <c:if test="${model.record.ehtppm == 0 || model.record.ehtppm == 2}"> selected </c:if> >Bedrift</option>
+								  			<option title="En samling personer" value="3" <c:if test="${model.record.ehtppm == 3}"> selected </c:if> >Sam.pers.</option> 	
 										</select>
 				 					</td>
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehpsm" id="ehpsm" size="25" maxlength="24" value="${model.record.ehpsm}"></td>
