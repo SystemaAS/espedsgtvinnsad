@@ -530,7 +530,7 @@
 		
 		<tr>
 		<td>
-		<table style="width:65%;" border="0">
+		<table style="width:70%;" border="0">
  		<tr>
 			<td class="text14" valign="top">
 				<table >
@@ -753,7 +753,6 @@
 		            </tr>
 	            </table>
             </td>
-            
             <td class="text14" valign="top">
 				<table style="width:60%" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >

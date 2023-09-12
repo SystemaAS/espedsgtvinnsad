@@ -325,7 +325,7 @@
 							<input readonly type="text" class="inputTextReadOnly" name="ehst3" id="ehst3" size="2" maxlength="1" value="${model.record.ehst3}">		
 						</td>
 						<td class="text14">
-							<input readonly type="text" class="inputTextReadOnly" name="ehdts" id="ehdts" size="10" maxlength="8" value="${model.record.ehdts}">		
+							<input readonly type="text" class="inputTextReadOnly" name="ehdts" id="ehdts" size="10" maxlength="8" value="${model.record.ehdtsStr}">		
 						</td>
 					</tr>
 					</table>

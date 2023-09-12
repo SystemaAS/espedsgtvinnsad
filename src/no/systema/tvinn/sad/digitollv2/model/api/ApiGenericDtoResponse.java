@@ -1,6 +1,7 @@
 package no.systema.tvinn.sad.digitollv2.model.api;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -33,6 +34,7 @@ public class ApiGenericDtoResponse {
 	private String db_st3 = "";
 	private String timestamp = "";
 	private String errMsg = "";
+	private String errMsgClean = "";
 	//transport
 	private String etlnrt = "";
 	//master

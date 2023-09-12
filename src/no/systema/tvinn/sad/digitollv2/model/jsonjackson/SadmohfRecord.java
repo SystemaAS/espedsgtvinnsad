@@ -17,6 +17,19 @@ public class SadmohfRecord extends JsonAbstractGrandFatherRecord   {
 	private String ehuuid = ""; //     tegn           36      36         4        begge    lrn         
 	private String ehmid = ""; //      tegn           18      18        40        begge    mrn           
 	private Integer ehdts = 0; //      sonet        8  0       8        58        begge    sendingsdato  
+	private String ehdtsStr = "";
+	public String getEhdtsStr() {
+		if(this.ehdts > 0 ){
+			String tmp = String.valueOf(this.ehdts);
+			if (tmp.length()< 6) {
+				this.ehdtsStr = "0" + tmp;
+			}else {
+				this.ehdtsStr = tmp;
+			}
+		}
+		return this.ehdtsStr;
+	}
+	
 	private Integer ehtms = 0; //      sonet        6  0       6        66        begge    sendingstid   
 	private Integer ehpro = 0; //      sonet        8  0       8        72        begge    turnummer     
 	private Integer ehavd = 0; //      sonet        4  0       4        80        begge    avdeling      
