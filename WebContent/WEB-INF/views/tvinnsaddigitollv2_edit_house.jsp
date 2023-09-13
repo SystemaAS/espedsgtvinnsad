@@ -388,7 +388,12 @@
 						<td style="width:65%" valign="top">
 						<table id="tblDirektfortolling" style="width:100%"  class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="0">
 			 			<tr >
-							<td class="text16"><b>&nbsp;Tidligere dokumenter</b></td>
+							<td class="text16"><b>&nbsp;Tidligere dokumenter</b>
+							&nbsp;
+							<a target="_blank" href="https://toll.github.io/api/mo-eksempler">
+								<img src="resources/images/info4.png" width="12" height="12" border="0" alt="info">
+							</a>
+							</td>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
