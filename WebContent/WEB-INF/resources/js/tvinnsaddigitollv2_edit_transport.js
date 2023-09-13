@@ -38,8 +38,33 @@
     });
     
     jq('#sendButton').click(function() { 
-    	setBlockUI();
-		window.location = 'tvinnsaddigitollv2_api_send_transport.do?etlnrt=' + jq('#etlnrt').val() + '&etmid=' + jq('#etmid').val();
+    	
+		jq('#dialogSend').dialog( "option", "title", "Send til toll.no" );
+		  //deal with buttons for this modal window
+		  jq('#dialogSend').dialog({
+			 buttons: [ 
+	            {
+				 id: "dialogSaveTU",	
+				 text: "Ok",
+				 click: function(){
+					 		setBlockUI();
+							window.location = window.location = 'tvinnsaddigitollv2_api_send_transport.do?etlnrt=' + jq('#etlnrt').val() + '&etmid=' + jq('#etmid').val();
+				 		}
+			 	 },
+	 	 		{
+			 	 id: "dialogCancelTU",
+			 	 text: "Cancel", 
+				 click: function(){
+					 		//back to initial state of form elements on modal dialog
+					 		jq("#dialogSaveSU").button("option", "disabled", true);
+					 		jq( this ).dialog( "close" ); 
+				 		} 
+	 	 		 } ] 
+		  });
+		  //init values
+		  jq("#dialogSaveSU").button("option", "disabled", true);
+		  //open now
+		  jq('#dialogSend').dialog('open');
     });
     
     jq('#imgManifestIdInfo').click(function() { 

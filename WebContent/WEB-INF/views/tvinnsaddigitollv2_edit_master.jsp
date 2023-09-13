@@ -76,7 +76,7 @@
 			 		<td width="60%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
 						<img id="imgInfoRpgJarStart" style="cursor:pointer;" onClick="showPop('jarStartCmd');" src="resources/images/info4.png" width="12" height="12" border="0" alt="info">
 						<div class="text12" style="position: relative;display: inline;" align="left">
-						<span style="position:absolute; left:-580px; top:3px;" id="jarStartCmd" class="popupWithInputText"  >
+						<span style="position:absolute; left:-100px; top:15px;"  id="jarStartCmd" class="popupWithInputText"  >
 			           		<div class="text11" align="left">
 			           			<p>
 				           			<a class="text11" target="_blank" href="renderLocalLogsgExpft.do?user=${user.user}">
@@ -823,6 +823,9 @@
 						</c:when>
 						<c:otherwise>
 							&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
+							<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
+								 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
+							</div>
 						</c:otherwise>
 					</c:choose>
 				</c:if>

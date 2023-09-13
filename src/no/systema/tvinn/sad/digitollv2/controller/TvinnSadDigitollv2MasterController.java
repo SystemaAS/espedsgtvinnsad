@@ -71,6 +71,7 @@ import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
+import no.systema.tvinn.sad.digitollv2.util.RedirectCleaner;
 import no.systema.tvinn.sad.digitollv2.util.SadDigitollConstants;
 import no.systema.tvinn.sad.digitollv2.validator.MasterValidator;
 import no.systema.tvinn.sad.manifest.express.filter.SearchFilterManifestList;
@@ -135,6 +136,12 @@ public class TvinnSadDigitollv2MasterController {
 		String action = request.getParameter("action");
 		String emlnrt = request.getParameter("emlnrt");
 		String emlnrm = request.getParameter("emlnrm");
+		
+		//in case the call comes from a redirect view (typically sending to the api digitoll and redirect to here) ...
+		String redirect_errMsg = request.getParameter(SadDigitollConstants.REDIRECT_ERRMSG);
+		if(StringUtils.isNotEmpty(redirect_errMsg)) {
+			model.put("errorMessage", redirect_errMsg);
+		}
 		boolean isValidForFetch = true;
 		
 		//check user (should be in session already)
@@ -427,11 +434,14 @@ public class TvinnSadDigitollv2MasterController {
 	@RequestMapping(value="tvinnsaddigitollv2_api_send_master.do",  method={RequestMethod.GET, RequestMethod.POST} )
 	public ModelAndView doApiSendMaster(@ModelAttribute ("record") SadmomfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		logger.info("inside doApiSendMaster");
+		ModelAndView successView = null;;
 		
 		Map model = new HashMap();
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
-		String redirect = "redirect:tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=" + recordToValidate.getEmlnrt() + "&emlnrm=" + recordToValidate.getEmlnrm();
-		ModelAndView successView = new ModelAndView(redirect);
+		StringBuilder redirect = new StringBuilder();
+		redirect.append("redirect:tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=" + recordToValidate.getEmlnrt() + "&emlnrm=" + recordToValidate.getEmlnrm());
+		
+		
 		//check user (should be in session already)
 		if(appUser==null){
 			return loginView;
@@ -474,14 +484,25 @@ public class TvinnSadDigitollv2MasterController {
 		    	logger.info(jsonPayload);
 	    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 	    		
-	    		ApiGenericDtoResponse apiDtoResponse = this.apiGenericDtoResponseService.getReponse(jsonPayload);
-	    		if(StringUtils.isNotEmpty(apiDtoResponse.getErrMsg())){
-	    			logger.error("ERROR:" + apiDtoResponse.toString());
-	    			model.put("errorMessage", apiDtoResponse.getErrMsg());	
-				}
-	    		successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+	    		try {
+		    		ApiGenericDtoResponse apiDtoResponse = this.apiGenericDtoResponseService.getReponse(jsonPayload);
+		    		if(StringUtils.isNotEmpty(apiDtoResponse.getErrMsg())){
+		    			new RedirectCleaner().doIt(apiDtoResponse);
+		    			//in order to catch it after the redirect as a parameter...if applicable
+		    			if(StringUtils.isNotEmpty(apiDtoResponse.getErrMsgClean())) {
+		    				redirect.append("&" + SadDigitollConstants.REDIRECT_ERRMSG + "=" + apiDtoResponse.getErrMsgClean());
+		    			}
+		    		}
+				}catch(Exception e) {
+	    			e.printStackTrace();
+	    			
+	    		}finally {
+	    			successView = new ModelAndView(redirect.toString());
+	    		}
+	    		
 				
 			}else {
+				//this will never populate a redirect but sheet the same ...:-(
 				StringBuffer errMsg = new StringBuffer();
 				errMsg.append("ERROR on doSendMaster -->detail: null ids? ...");
 				model.put("errorMessage", errMsg.toString());

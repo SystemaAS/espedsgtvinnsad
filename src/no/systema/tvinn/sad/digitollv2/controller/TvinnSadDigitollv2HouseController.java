@@ -72,6 +72,7 @@ import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
+import no.systema.tvinn.sad.digitollv2.util.RedirectCleaner;
 import no.systema.tvinn.sad.digitollv2.util.SadDigitollConstants;
 import no.systema.tvinn.sad.digitollv2.validator.HouseValidator;
 import no.systema.tvinn.sad.digitollv2.validator.MasterValidator;
@@ -137,6 +138,12 @@ public class TvinnSadDigitollv2HouseController {
 		String ehlnrt = request.getParameter("ehlnrt");
 		String ehlnrm = request.getParameter("ehlnrm");
 		String ehlnrh = request.getParameter("ehlnrh");
+		//in case the call comes from a redirect view (typically sending to the api digitoll and redirect to here) ...
+		String redirect_errMsg = request.getParameter(SadDigitollConstants.REDIRECT_ERRMSG);
+		if(StringUtils.isNotEmpty(redirect_errMsg)) {
+			model.put("errorMessage", redirect_errMsg);
+		}
+		
 		boolean isValidForFetch = true;
 		
 		//check user (should be in session already)
@@ -222,6 +229,7 @@ public class TvinnSadDigitollv2HouseController {
 						for(SadmohfRecord record: outputList){
 							//get all masters
 							this.getItemLines(appUser, record);
+							this.setRecordAspects(appUser, record);
 							//now we have all item lines in this house
 							model.put("record", record);
 							logger.info(record.toString());
@@ -436,11 +444,13 @@ public class TvinnSadDigitollv2HouseController {
 	@RequestMapping(value="tvinnsaddigitollv2_api_send_house.do",  method={RequestMethod.GET, RequestMethod.POST} )
 	public ModelAndView doApiSendMaster(@ModelAttribute ("record") SadmohfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		logger.info("inside doApiSendHouse");
+		ModelAndView successView = null;
 		
 		Map model = new HashMap();
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
-		String redirect = "redirect:tvinnsaddigitollv2_edit_house.do?action=doFind&ehlnrt=" + recordToValidate.getEhlnrt() + "&ehlnrm=" + recordToValidate.getEhlnrm()+ "&ehlnrh=" + recordToValidate.getEhlnrh();
-		ModelAndView successView = new ModelAndView(redirect);
+		StringBuilder redirect = new StringBuilder();
+		redirect.append("redirect:tvinnsaddigitollv2_edit_house.do?action=doFind&ehlnrt=" + recordToValidate.getEhlnrt() + "&ehlnrm=" + recordToValidate.getEhlnrm()+ "&ehlnrh=" + recordToValidate.getEhlnrh());
+		
 		//check user (should be in session already)
 		logger.info(recordToValidate.toString());
 		
@@ -481,20 +491,28 @@ public class TvinnSadDigitollv2HouseController {
 				String BASE_URL = url.toString();
 	    		logger.info("URL: " + BASE_URL);
 	    		logger.info("PARAMS: " + urlRequestParamsKeys.toString());
-	    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
 	    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
 	    		//Debug -->
 		    	logger.info(jsonPayload);
-	    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-	    		
-	    		ApiGenericDtoResponse apiDtoResponse = this.apiGenericDtoResponseService.getReponse(jsonPayload);
-	    		if(StringUtils.isNotEmpty(apiDtoResponse.getErrMsg())){
-	    			logger.error("ERROR:" + apiDtoResponse.toString());
-	    			model.put("errorMessage", apiDtoResponse.getErrMsg());	
-				}
-	    		successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+		    	
+	    		try {
+		    		ApiGenericDtoResponse apiDtoResponse = this.apiGenericDtoResponseService.getReponse(jsonPayload);
+		    		if(StringUtils.isNotEmpty(apiDtoResponse.getErrMsg())){
+		    			new RedirectCleaner().doIt(apiDtoResponse);
+		    			//in order to catch it after the redirect as a parameter...if applicable
+		    			if(StringUtils.isNotEmpty(apiDtoResponse.getErrMsgClean())) {
+		    				redirect.append("&" + SadDigitollConstants.REDIRECT_ERRMSG + "=" + apiDtoResponse.getErrMsgClean());
+		    			}
+					}
+	    		}catch(Exception e) {
+	    			e.printStackTrace();
+	    			
+	    		}finally {
+	    			successView = new ModelAndView(redirect.toString());
+	    		}
 				
 			}else {
+				//this will never populate a redirect but sheet the same ...:-(
 				StringBuffer errMsg = new StringBuffer();
 				errMsg.append("ERROR on doSendHouse -->detail: null ids? ...");
 				model.put("errorMessage", errMsg.toString());
@@ -808,6 +826,12 @@ public class TvinnSadDigitollv2HouseController {
 			BigDecimal bd = new BigDecimal(tmp).setScale(2, RoundingMode.HALF_UP);
 			recordToValidate.setEhvkb(bd.toString());	
 		}
+		//Sent date
+		if(recordToValidate.getEhdts() > 0) {
+			int sentDate = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(String.valueOf(recordToValidate.getEhdts()), DateTimeManager.NO_FORMAT));
+			recordToValidate.setEhdts(sentDate);
+		}
+		
 		
 	}
 	/**
