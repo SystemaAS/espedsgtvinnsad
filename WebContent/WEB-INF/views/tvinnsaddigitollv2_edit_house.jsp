@@ -390,7 +390,7 @@
 			 			<tr >
 							<td class="text16"><b>&nbsp;Tidligere dokumenter</b>
 							&nbsp;
-							<a target="_blank" href="https://toll.github.io/api/mo-eksempler">
+							<a title="Aktuelle eksempler..." target="_blank" href="https://toll.github.io/api/mo-eksempler">
 								<img src="resources/images/info4.png" width="12" height="12" border="0" alt="info">
 							</a>
 							</td>

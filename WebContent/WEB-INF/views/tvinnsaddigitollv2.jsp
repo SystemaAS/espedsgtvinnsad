@@ -103,7 +103,7 @@
 					
 				</td>
 				<td align="left" >
-           			<input size="8" maxlength="4" class="selectMediumBlueE2" list="sign_list" id="sign" name="sign" value="${PRODsearchFilterSadDigitollTransportList.sign}">
+           			<input size="8" maxlength="4" class="selectMediumBlueE2" list="sign_list" id="sign" name="sign" value="${searchFilterSadDigitollTransportList.sign}">
 					<datalist id="sign_list">
 					  <option value="">-Välj-</option>
 	 				  	<c:forEach var="record" items="${model.signList}" >
@@ -112,8 +112,8 @@
 					</datalist>
 				</td>
 				<td align="left" ><input type="text" class="inputText" name="turnr" id="turnr" size="10" maxlength="8" value="${searchFilterSadDigitollTransportList.turnr}">&nbsp;</td>
-				<%-- PROD <td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="etaDatum" id="etaDatum" size="6" maxlength="6" value="${searchFilterSadDigitollTransportList.etaDatum}">&nbsp;</td> --%>
-				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="etaDatum" id="etaDatum" size="6" maxlength="6" value="010823">&nbsp;</td>
+				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="etaDatum" id="etaDatum" size="6" maxlength="6" value="${searchFilterSadDigitollTransportList.etaDatum}">&nbsp;</td> 
+				<%-- TEST <td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="etaDatum" id="etaDatum" size="6" maxlength="6" value="010823">&nbsp;</td> --%>
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="etaDatumt" id="etaDatumt" size="6" maxlength="6" value="${searchFilterSadDigitollTransportList.etaDatumt}">&nbsp;</td>
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="datum" id="datum" size="6" maxlength="6" value="${searchFilterSadDigitollTransportList.datum}">&nbsp;</td>
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="datumt" id="datumt" size="6" maxlength="6" value="${searchFilterSadDigitollTransportList.datumt}">&nbsp;</td>
