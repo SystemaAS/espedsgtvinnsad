@@ -968,6 +968,24 @@ public class TvinnSadDigitollv2TransportController {
 			
 		}
 		
+		//STA date
+		if(recordToValidate.getEtshed()!=null && recordToValidate.getEtshed() > 0) {
+			String tmpEtshed = String.valueOf(recordToValidate.getEtshed());
+			if (org.apache.commons.lang3.StringUtils.isNotEmpty(tmpEtshed) && tmpEtshed.length()==8) {
+				int isoEtshed = Integer.parseInt(this.dateMgr.getDateFormatted_NO(tmpEtshed, DateTimeManager.ISO_FORMAT));
+				recordToValidate.setEtshed(isoEtshed);
+			}
+		}
+		//STA time
+		if(recordToValidate.getEtshet()!=null && recordToValidate.getEtshet() > 0) {
+			String tmpEtshet = String.valueOf(recordToValidate.getEtshet());
+			if(tmpEtshet.length()>4) {
+				tmpEtshet = tmpEtshet.substring(0,4);
+				recordToValidate.setEtetat(Integer.valueOf(tmpEtshet));
+			}
+			
+		}
+		
 	}
 	/**
 	 * 
@@ -1012,12 +1030,14 @@ public class TvinnSadDigitollv2TransportController {
 		}
 		
 		//ETA - date to ISO
-		if(recordToValidate.getEtetad() > 0) {
+		if(recordToValidate.getEtetad()!=null && recordToValidate.getEtetad() > 0) {
 			int isoEtetad = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(recordToValidate.getEtetadStr(), DateTimeManager.NO_FORMAT));
 			recordToValidate.setEtetad(isoEtetad);
+		}else {
+			recordToValidate.setEtetad(0);
 		}
 		//ETA - time to ISO
-		if(recordToValidate.getEtetat() > 0) {
+		if(recordToValidate.getEtetat()!=null && recordToValidate.getEtetat() > 0) {
 			String tmp = String.valueOf(recordToValidate.getEtetat());
 			String outStr = "";
 			if(tmp.length()==3) {
@@ -1030,6 +1050,34 @@ public class TvinnSadDigitollv2TransportController {
 			int okTimeDb = Integer.parseInt(outStr);
 			recordToValidate.setEtetat(okTimeDb);
 			
+		}else {
+			recordToValidate.setEtetat(0);
+		}
+		
+		
+		//STA - date to ISO
+		if(recordToValidate.getEtshed()!=null && recordToValidate.getEtshed() > 0) {
+			int isoEtshed = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(recordToValidate.getEtshedStr(), DateTimeManager.NO_FORMAT));
+			recordToValidate.setEtshed(isoEtshed);
+		}else {
+			recordToValidate.setEtshed(0);
+		}
+		//STA - time to ISO
+		if(recordToValidate.getEtshet() !=null && recordToValidate.getEtshet() > 0) {
+			String tmp = String.valueOf(recordToValidate.getEtshet());
+			String outStr = "";
+			if(tmp.length()==3) {
+				outStr = "0" + tmp;
+				
+			}else if(tmp.length()==4) {
+				outStr = tmp ;
+			}
+			
+			int okTimeDb = Integer.parseInt(outStr);
+			recordToValidate.setEtshet(okTimeDb);
+			
+		}else {
+			recordToValidate.setEtshet(0);
 		}
 		
 	}

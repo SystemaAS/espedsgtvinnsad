@@ -99,6 +99,9 @@
 	  jq("#etetad").datepicker({ 
 		  dateFormat: 'ddmmy' 	  
 	  });
+	  jq("#etshed").datepicker({ 
+		  dateFormat: 'ddmmy' 	  
+	  });
 	  
 	  //custom validity
 	    jq('#ettsd').focus(function() {
@@ -191,19 +194,6 @@
 	    		refreshCustomValidity(jq('#etetat')[0]);
 	  		}
 	  	});
-	  
-	  //CHILD-WINDOWS
-	  //Tollsted
-	  /*	
-	  jq('#eftsdIdLink').click(function() {
-	  	jq('#eftsdIdLink').attr('target','_blank');
-	  	window.open('tvinnsadmanifest_childwindow_tollstedcodes.do?action=doInit&type=2&ctype=silka', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
-	  });
-	  jq('#eftsdIdLink').keypress(function(e){ //extra feature for the end user
-			if(e.which == 13) {
-				jq('#eftsdIdLink').click();
-			}
-	  });*/
 	  
 	  //Carrier
       jq('#etnatIdLink').click(function() {

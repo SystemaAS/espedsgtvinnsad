@@ -53,8 +53,6 @@ public class SadmotfRecord extends JsonAbstractGrandFatherRecord  {
 		return this.etetadStr;
 	}
 	
-	
-	
 	private Integer etetat = 0; // numeric(6) default 0, ETA tid 
 	private String etetatStr = "";
 	public String getEtetatStr() {
@@ -70,7 +68,35 @@ public class SadmotfRecord extends JsonAbstractGrandFatherRecord  {
 	}
 	
 	private Integer etshed = 0; // numeric(8) default 0, Sheduled avg-dt
+	private String etshedStr = "";
+	public String getEtshedStr() {
+		if(this.etshed!=null && this.etshed > 0 ){
+			String tmp = String.valueOf(this.etshed);
+			if (tmp.length()< 6) {
+				this.etshedStr = "0" + tmp;
+			}else {
+				this.etshedStr = tmp;
+			}
+		}
+		return this.etshedStr;
+	}
+	
+
 	private Integer etshet = 0; // numeric(6) default 0, Sheduled avg-tid
+	private String etshetStr = "";
+	public String getEtshetStr() {
+		if(this.etshet!=null && this.etshet > 0 ){
+			String tmp = String.valueOf(this.etshet);
+			if (tmp.length()< 4) {
+				this.etshetStr = "0" + tmp;
+			}else {
+				this.etshetStr = tmp;
+			}
+		}
+		return this.etshetStr;
+	}
+	
+	
 	
 	private Integer etknr = 0; // numeric(8),  Representative
 	private String etrgr = ""; // varchar(17), Orgnr Repres.

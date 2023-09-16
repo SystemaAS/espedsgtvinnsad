@@ -369,10 +369,12 @@
 				 				</tr>
 				 				
 			 				<tr >
-								<td colspan="3" class="text14">&nbsp;<span title="etkmrk">Kjøretøy kjennemerke</span><font class="text16RedBold" >*</font></td>
+								<td colspan="2" class="text14">&nbsp;<span title="etkmrk">Kjøretøy kjennemerke</span><font class="text16RedBold" >*</font></td>
+								<td colspan="2" class="text14">&nbsp;<span title="etcref">Turref.nr (IATA flight, other)</span></td>
 				 			</tr>
 				 			<tr>
-			 					<td colspan="3" class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="etkmrk" id="etkmrk" size="25" maxlength="35" value="${model.record.etkmrk}"></td>
+			 					<td colspan="2" class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="etkmrk" id="etkmrk" size="25" maxlength="35" value="${model.record.etkmrk}"></td>
+			 					<td colspan="2" class="text14"><input type="text" class="inputTextMediumBlue" name="etcref" id="etcref" size="19" maxlength="17" value="${model.record.etcref}"></td>
 								
 			 				</tr>
 			 				<tr>
@@ -404,8 +406,8 @@
 				 				
 			 				<tr height="2"><td>&nbsp;</td></tr>
 			 				<tr>
-			 					<td class="text14">&nbsp;<span title="etetad">ETA</span></td>
-								<td class="text14">&nbsp;<span title="etetat-HHmm">ETA-Tid</span></td>
+			 					<td class="text14">&nbsp;<span title="etetad - Estimated date of arrival">ETA</span><font class="text16NavyBlueBold" >*</font></td>
+								<td class="text14">&nbsp;<span title="etetat-HHmm Estimated time of arrival">ETA-Tid</span><font class="text16NavyBlueBold" >*</font></td>
 								<td class="text14">&nbsp;<span title="ettsd">Pass.tollsted</span><font class="text16RedBold" >*</font></td>
 			 				</tr>
 			 				<tr >
@@ -439,8 +441,36 @@
 									</a>
 								</td>
 			 				</tr>
-			 				<tr height="2"><td>&nbsp;</td></tr>
 			 				
+			 				<tr>
+			 					<td class="text14">&nbsp;<span title="etshed - Scheduled date of arrival ">STA</span></td>
+								<td class="text14">&nbsp;<span title="etshet-HHmm Scheduled time of arrival">STA-Tid</span></td>
+			 				</tr>
+			 				<tr >
+			 					
+					 			<td class="text14">
+					 				<c:choose>
+					 				<c:when test="${model.record.etshed > 0}">
+					 					<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etshed" id="etshed" size="8" maxlength="6" value="${model.record.etshedStr}">
+					 				</c:when>	
+					 				<c:otherwise>
+					 					<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etshed" id="etshed" size="8" maxlength="6" value="">
+					 				</c:otherwise>
+					 				</c:choose>
+					 			</td>
+								<td>
+									<c:choose>
+					 				<c:when test="${model.record.etshet > 0}">
+					 					<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etshet" id="etshet" size="6" maxlength="4" value="${model.record.etshetStr}">
+					 				</c:when>
+					 				<c:otherwise>
+					 					<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etshet" id="etshet" size="6" maxlength="4" value="">
+					 				</c:otherwise>
+					 				</c:choose>
+									
+								</td>
+			 				</tr>
+			 				<tr height="2"><td>&nbsp;</td></tr>
 			 				
 			            </table>
 			            </td>

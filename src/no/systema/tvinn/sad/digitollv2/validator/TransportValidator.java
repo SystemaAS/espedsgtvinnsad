@@ -3,6 +3,7 @@ package no.systema.tvinn.sad.digitollv2.validator;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.*;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -79,10 +80,44 @@ public class TransportValidator implements Validator {
 					}
 				}
 				
+				String strEtshed = record.getEtshedStr();
+				if(strMgr.isNotNull(strEtshed)  && !"999999".equals(strEtshed)){
+					if(strEtshed.length()>6){
+						logger.warn("A");
+						errors.rejectValue("etshed", "systema.tvinn.sad.manifest.express.header.error.rule.invalidStaDate");
+					}else{
+						if(!dateValidator.validateDate(strEtshed, DateValidator.DATE_MASK_NO)){
+							logger.warn("B");
+							errors.rejectValue("etshed", "systema.tvinn.sad.manifest.express.header.error.rule.invalidStaDate"); 	
+						}else{
+							//logical check. ETA must be at least 2 hours ahead from now
+							DateTimeManager dateTimeMgr = new DateTimeManager();
+							boolean isValidDate = dateTimeMgr.isValidCurrentAndForwardDateNO(strEtshed);
+							if(!isValidDate){
+								logger.warn("C");
+								errors.rejectValue("etshed", "systema.tvinn.sad.manifest.express.header.error.rule.invalidStaDateForward"); 
+							}else{
+								if(dateTimeMgr.isToday(strEtshed, DateTimeManager.NO_FORMAT)){
+									String strEtshet = String.valueOf(record.getEtshet());
+									strEtshet = dateTimeMgr.adjustUserTimeToHHmm(strEtshet);
+									//check the hour. At least 2 hour ahead
+									if(!dateTimeMgr.isValidTime(strEtshet, JsonTvinnSadManifestRecord.MANIFEST_AT_LEAST_HOURS_AHEAD_VALID)){
+										logger.warn("D");
+										errors.rejectValue("etshed", "systema.tvinn.sad.manifest.express.header.error.rule.invalidStaTimeForward");
+									}
+								}
+							}
+							
+						}
+					}
+				}
+				
+				
+				
 				//------
 				//times
 				//------
-				//String strEtetat = String.valueOf(record.getEtetatStr());
+				//ETA
 				if(strMgr.isNotNull(record.getEtetatStr())){
 					if(record.getEtetatStr().length() < 4){ //HHmm
 						errors.rejectValue("etetat", "systema.tvinn.sad.manifest.express.header.error.rule.invalidEtaTime");
@@ -92,6 +127,39 @@ public class TransportValidator implements Validator {
 						}
 					}
 				}
+				//STA
+				if(strMgr.isNotNull(record.getEtshetStr())){
+					if(record.getEtshetStr().length() < 4){ //HHmm
+						errors.rejectValue("etetat", "systema.tvinn.sad.manifest.express.header.error.rule.invalidStaTime");
+					}else{
+						if(!dateValidator.validateTime24Hours(record.getEtshetStr())){
+							errors.rejectValue("etetat", "systema.tvinn.sad.manifest.express.header.error.rule.invalidStaTimeRegEx"); 	
+						}
+					}
+				}
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				//IATA number (air)
+				if(StringUtils.isNotEmpty(record.getEtcref())) {
+					if(record.getEtshed()==null || record.getEtshet()==null  ) {
+						errors.rejectValue("etshed", "systema.tvinn.sad.digitoll.transport.error.rule.required.ScheduleDates");
+					}else {
+						if(record.getEtshed()==0 || record.getEtshet()==0  ) {
+							errors.rejectValue("etshed", "systema.tvinn.sad.digitoll.transport.error.rule.required.ScheduleDates");
+						}
+					}
+					
+				}
+				
 			}
 		}
 	}
