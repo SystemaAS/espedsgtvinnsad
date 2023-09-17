@@ -194,11 +194,18 @@
 			<table style="width:100%">
 			<tr >
 				<td class="text14" align="left" >
-		    		MRN-Api&nbsp;<span class="text14SkyBlue" id="${model.record.etmid}">${model.record.etmid}</span>
+					<c:choose>
+               		<c:when test="${ not empty model.record.etktyp && fn:startsWith(model.record.etktyp,'4') }">
+						<img style="vertical-align:middle;" id="airplaneImg" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
+					</c:when>
+					<c:otherwise>
+						<img style="vertical-align:middle;" id="lorryImg" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;
+					</c:otherwise>
+					</c:choose>
+					MRN-Api&nbsp;<span class="text14SkyBlue" id="${model.record.etmid}">${model.record.etmid}</span>
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
 		    		Id&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.etuuid}">${model.record.etuuid}</a>
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
-		    		
 		    		<a title="lese logg" tabindex=-1 id="${model.record.etlnrt}" class="logLink" runat="server" href="#"><font class="text14 ">Manif.st - log</font>&nbsp;
 						<c:choose>
 						<c:when test="${model.record.etst2 == 'S' || model.record.etst2 == 'R' || model.record.etst2 == 'D' || model.record.etst2 == 'C'}">
@@ -230,7 +237,8 @@
 							</c:choose>
 						</c:otherwise>
 						</c:choose>
-					</a>&nbsp;
+					</a>&nbsp;&nbsp;
+					
 		   		</td>
 	   		</tr>
 	   		</table>
@@ -323,50 +331,96 @@
 				 					<tr height="10"></tr>
 				 				</c:otherwise>
 			 				</c:choose>
-			 					<tr >
-				 					<td class="text14">&nbsp;<span title="etktkd Mode of Transport">ModeTr.</span><font class="text16RedBold" >*</font></td>
-				 					<td class="text14">&nbsp;<span title="etktyp Type of Identification">Kjør.Typ.</span><font class="text16RedBold" >*</font></td>
-									<td class="text14">&nbsp;<span title="etktm Type of Means of Transport">Tr.midd.typ.</span><font class="text16RedBold" >*</font></td>
-									<td class="text14">&nbsp;<span title="etklk Land code">Landkode</span><font class="text16RedBold" >*</font></td>
-				 				</tr>
-				 				<tr >
-				 					<td class="text14">
-				 						
-				 						<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="etktkd" id="etktkd" >
-					 						<option value="">-velg-</option>
-						 				  	<c:forEach var="dto" items="${model.modeOfTransportDto}" >
-					                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.etktkd == dto.code}"> selected </c:if> >${dto.code}</option>
-											</c:forEach>
-										</select>	
-									</td>
-									<td>
-										<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="etktyp" id="etktyp" >
-					 						<option value="">-velg-</option>
-						 				  	<c:forEach var="dto" items="${model.typeOfIdentificationMeansTransportDto}" >
-					                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.etktyp == dto.code}"> selected </c:if> >${dto.code}</option>
-											</c:forEach>
-										</select>
-									</td>
-									
-						 			<td class="text14">
-						 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="etktm" id="etktm" >
-					 						<option value="">-velg-</option>
-						 				  	<c:forEach var="dto" items="${model.meansOfTransportDto}" >
-					                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.etktm == dto.code}"> selected </c:if> >${dto.code}</option>
-											</c:forEach>
-										</select>
-						 			</td>
-						 			<td class="text14">
-						 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="etklk" id="etklk" >
-					 						<option value="">-velg-</option>
-						 				  	<c:forEach var="dto" items="${model.countryDto}" >
-					                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.etklk == dto.code}"> selected </c:if> >${dto.code}</option>
-											</c:forEach>
-										</select>		
-						 				
-						 			</td>
+			 				<tr >
+			 					<td class="text14">
+			 						<img style="cursor:pointer;" onMouseOver="showPop('etktkd_info');" onMouseOut="hidePop('etktkd_info');" style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+				            		<span title="etktkd Mode of Transport">ModeTr.</span><font class="text16RedBold" >*</font>
+			                		<div class="text11" style="position: relative;" align="left">
+				                	<span style="position:absolute;top:2px; width:250px;" id="etktkd_info" class="popupWithInputText text11"  >
+					           		<ul>
+					           			<c:forEach var="dto" items="${model.modeOfTransportDto}" >
+				           				<li><b>${dto.code}</b>&nbsp;${dto.txt1}</li>
+				           				</c:forEach>
+				           			</ul>
+									</span>	
+									</div>
+
+			 					</td>
+			 					
+			 					<td class="text14">
+				 					<img style="cursor:pointer;" onMouseOver="showPop('etktd_info');" onMouseOut="hidePop('etktd_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+					            	<span title="etktyp Type of Identification">Kjør.Typ.</span><font class="text16RedBold" >*</font>
+			                		<div class="text11" style="position: relative;" align="left">
+				                	<span style="position:absolute;top:2px; width:250px;" id="etktd_info" class="popupWithInputText text11"  >
+					           		<ul>
+					           			<c:forEach var="dto" items="${model.typeOfIdentificationMeansTransportDto}" >
+				           				<li><b>${dto.code}</b>&nbsp;${dto.txt1}</li>
+				           				</c:forEach>
+				           			</ul>
+									</span>	
+									</div>
+		 						</td>
+								<td class="text14">
+									<img title="Click!" style="cursor:pointer;" onClick="showPop('etktm_info');" style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+					            	<span title="etktm Type of Means of Transport">Tr.midd.typ.</span><font class="text16RedBold" >*</font>
+			                		<div class="text11" style="position: relative;" align="left">
+				                	<span style="position:absolute;top:2px; width:250px;" id="etktm_info" class="popupWithInputText text11"  >
+				                	<button name="_ButtonCloseEtktm" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('etktm_info');">Close</button> 
+					           		<ul>
+					           			<c:forEach var="dto" items="${model.meansOfTransportDto}" >
+				           				<li><b>${dto.code}</b>&nbsp;${dto.txt1}</li>
+				           				</c:forEach>
+				           			</ul>
+									</span>	
+									</div>
+								</td>
+								<td class="text14">&nbsp;<span title="etklk Land code">Landkode</span><font class="text16RedBold" >*</font></td>
+				 			</tr>
+				 				
+				 			<tr >
+			 					<td class="text14">
+			 						
+			 						<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="etktkd" id="etktkd" >
+				 						<option value="">-velg-</option>
+					 				  	<c:forEach var="dto" items="${model.modeOfTransportDto}" >
+				                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.etktkd == dto.code}"> selected </c:if> >${dto.code}</option>
+										</c:forEach>
+									</select>	
+								</td>
+								<td>
+									<c:choose>
+										<c:when test="${ not empty model.record.etktyp && not empty model.record.etmid }">
+											<input readonly type="text" class="inputTextReadOnly" name="etktyp" id="etktyp" size="3" maxlength="2" value="${model.record.etktyp}">
+										</c:when>
+										<c:otherwise>
+											<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="etktyp" id="etktyp" >
+						 						<option value="">-velg-</option>
+							 				  	<c:forEach var="dto" items="${model.typeOfIdentificationMeansTransportDto}" >
+						                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.etktyp == dto.code}"> selected </c:if> >${dto.code}</option>
+												</c:forEach>
+											</select>	
+										</c:otherwise>
+									</c:choose>
+								</td>
+					 			<td class="text14">
+					 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="etktm" id="etktm" >
+				 						<option value="">-velg-</option>
+					 				  	<c:forEach var="dto" items="${model.meansOfTransportDto}" >
+				                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${model.record.etktm == dto.code}"> selected </c:if> >${dto.code}</option>
+										</c:forEach>
+									</select>
+					 			</td>
+					 			<td class="text14">
+					 				<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="etklk" id="etklk" >
+				 						<option value="">-velg-</option>
+					 				  	<c:forEach var="dto" items="${model.countryDto}" >
+				                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.etklk == dto.code}"> selected </c:if> >${dto.code}</option>
+										</c:forEach>
+									</select>		
+					 				
+					 			</td>
 						 			
-				 				</tr>
+				 			</tr>
 				 				
 			 				<tr >
 								<td colspan="2" class="text14">&nbsp;<span title="etkmrk">Kjøretøy kjennemerke</span><font class="text16RedBold" >*</font></td>
@@ -739,6 +793,7 @@
                 		<th width="2%" class="tableHeaderField" >Avsender</th>
                 		<th width="2%" class="tableHeaderField" >Reg.dato</th>
                 		<th width="2%" class="tableHeaderField" >Sen.dato</th>
+                		<th width="2%" class="tableHeaderField" >Api</th>
                 		<th width="2%" class="tableHeaderField" >MRN-Api</th>
                 		<th width="2%" class="tableHeaderField" >Req.id</th>
                 		<th title="Api-status" width="2%" class="tableHeaderField" ></th>
@@ -810,10 +865,17 @@
 		               <td width="2%" align="center" class="tableCell" >${masterConsignmentRecord.emnas}&nbsp;-&nbsp;${masterConsignmentRecord.empss}&nbsp;${masterConsignmentRecord.emlks}</td>
 		               <td width="2%" class="tableCell" ><c:if test="${masterConsignmentRecord.emdtr > 0}">${masterConsignmentRecord.emdtr}</c:if></td>
 		               <td width="2%" class="tableCell" ><c:if test="${masterConsignmentRecord.emdtin > 0}">${masterConsignmentRecord.emdtin}</c:if></td>
+		               <td width="2%" class="tableCell" >
+		               		<c:choose>
+		               		<c:when test="${ not empty model.record.etktyp && fn:startsWith(model.record.etktyp,'4') }">
+								<img style="vertical-align:middle;" id="airplaneImg${masterConsignmentRecord.emuuid}" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
+							</c:when>
+							<c:otherwise>
+								<img style="vertical-align:middle;" id="lorryImg${masterConsignmentRecord.emuuid}" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;
+							</c:otherwise>
+							</c:choose>
+		               </td>
 		               
-		               <%--
-		               <td width="2%" class="tableCell" ><font style="font-size:11px;">${record.efuuid}</font></td>
-		                --%>
 		               <td width="2%" class="tableCell" ><span class="text14SkyBlue">
 		               		<a style="display: block; width: 100%; height: 100%; cursor:pointer" class="uuidLink text12SkyBlue" id="${masterConsignmentRecord.emmid}">
 								${masterConsignmentRecord.emmid}

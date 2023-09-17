@@ -224,7 +224,8 @@ public class TvinnSadDigitollv2MasterController {
 					if(outputList!=null){
 						for(SadmomfRecord record: outputList){
 							this.setRecordAspects(appUser, record);
-							//now we have all aspects in this record
+							this.setTransportDto(appUser.getUser(), record);
+							//put it on GUI
 							model.put("record", record);
 							logger.info(record.toString());
 						}
@@ -234,6 +235,7 @@ public class TvinnSadDigitollv2MasterController {
 		    	}
 			}
 			if("doCreate".equals(action)) {
+				this.setTransportDto(appUser.getUser(), recordToValidate);
 				//in order to grab emlnrt-parent
 				model.put("record", recordToValidate);
 			}
@@ -516,6 +518,39 @@ public class TvinnSadDigitollv2MasterController {
 		
 	}
 	
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param masterRecord
+	 */
+	private void setTransportDto(String applicationUser, SadmomfRecord masterRecord) {
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TRANSPORT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + applicationUser + "&etlnrt=" + masterRecord.getEmlnrt();
+		
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		SadmotfContainer jsonContainer = this.sadmotfListService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		List<SadmotfRecord> outputList = (List)jsonContainer.getList();
+			if(outputList!=null){
+				for(SadmotfRecord record: outputList){
+					masterRecord.setTransportDto(record);
+				}
+			}
+			
+    	}	
+	}
 	
 	
 	/**
@@ -936,6 +971,8 @@ public class TvinnSadDigitollv2MasterController {
 	@Autowired
 	private TvinnSadDropDownListPopulationService tvinnSadDropDownListPopulationService;
 	
+	@Autowired
+	private SadmotfListService sadmotfListService;
 	@Autowired
 	private SadmomfListService sadmomfListService;
 	@Autowired

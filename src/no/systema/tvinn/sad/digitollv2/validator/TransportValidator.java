@@ -49,6 +49,7 @@ public class TransportValidator implements Validator {
 				//dates 
 				//------
 				String strEtetad = record.getEtetadStr();
+				logger.warn(strEtetad);
 				if(strMgr.isNotNull(strEtetad)  && !"999999".equals(strEtetad)){
 					if(strEtetad.length()>6){
 						logger.warn("A");
@@ -83,18 +84,18 @@ public class TransportValidator implements Validator {
 				String strEtshed = record.getEtshedStr();
 				if(strMgr.isNotNull(strEtshed)  && !"999999".equals(strEtshed)){
 					if(strEtshed.length()>6){
-						logger.warn("A");
+						logger.warn("AA");
 						errors.rejectValue("etshed", "systema.tvinn.sad.manifest.express.header.error.rule.invalidStaDate");
 					}else{
 						if(!dateValidator.validateDate(strEtshed, DateValidator.DATE_MASK_NO)){
-							logger.warn("B");
+							logger.warn("BB");
 							errors.rejectValue("etshed", "systema.tvinn.sad.manifest.express.header.error.rule.invalidStaDate"); 	
 						}else{
 							//logical check. ETA must be at least 2 hours ahead from now
 							DateTimeManager dateTimeMgr = new DateTimeManager();
 							boolean isValidDate = dateTimeMgr.isValidCurrentAndForwardDateNO(strEtshed);
 							if(!isValidDate){
-								logger.warn("C");
+								logger.warn("CC");
 								errors.rejectValue("etshed", "systema.tvinn.sad.manifest.express.header.error.rule.invalidStaDateForward"); 
 							}else{
 								if(dateTimeMgr.isToday(strEtshed, DateTimeManager.NO_FORMAT)){
@@ -102,7 +103,7 @@ public class TransportValidator implements Validator {
 									strEtshet = dateTimeMgr.adjustUserTimeToHHmm(strEtshet);
 									//check the hour. At least 2 hour ahead
 									if(!dateTimeMgr.isValidTime(strEtshet, JsonTvinnSadManifestRecord.MANIFEST_AT_LEAST_HOURS_AHEAD_VALID)){
-										logger.warn("D");
+										logger.warn("DD");
 										errors.rejectValue("etshed", "systema.tvinn.sad.manifest.express.header.error.rule.invalidStaTimeForward");
 									}
 								}
@@ -138,14 +139,7 @@ public class TransportValidator implements Validator {
 					}
 				}
 				
-				
-				
-				
-				
-				
-				
-				
-				
+		
 				
 				
 				//IATA number (air)
@@ -158,6 +152,12 @@ public class TransportValidator implements Validator {
 						}
 					}
 					
+				}
+				
+				if(StringUtils.isNotEmpty(record.getEttsd())) {
+					if(record.getEttsd().length()>8){
+						errors.rejectValue("ettsd", "systema.tvinn.sad.digitoll.transport.error.rule.invalid.length.tollsted");
+					}
 				}
 				
 			}

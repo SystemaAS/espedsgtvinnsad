@@ -606,8 +606,13 @@
 	  jq(".uuidLinkParent").click(function() {
 		  var id = this.id;
 		  jq("#"+id).attr(('target','_blank'));
+		  var apiType = "";
+		  //check if this is an AIR api record
+		  if(jq("#airplaneImg").length > 0) { 
+			apiType = "air";	
+		  }	
 		  //default url
-		  var controllerUrl = "tvinnsaddigitollv2_childwindow_manifestinfo.do?id=" + id +"&level=m";
+		  var controllerUrl = "tvinnsaddigitollv2_childwindow_manifestinfo.do?id=" + id +"&level=m" + "&apiType=" + apiType;
 
 		  if(id.length<35){ //meaning MRN and not LRN (only at Master Consignment level)
 			 controllerUrl = "tvinnsaddigitollv2_childwindow_masterdocs_rec.do?id=" + id; 

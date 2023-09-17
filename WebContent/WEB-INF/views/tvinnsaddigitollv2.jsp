@@ -193,10 +193,11 @@
                 		<th title="S=SLETTET" width="2%" class="tableHeaderField" >St.</th>
                 		<th width="2%" class="tableHeaderField" >Pass. ETA</th>
                 		<th width="2%" class="tableHeaderField" >Tollst.</th>
-                		<th width="2%" class="tableHeaderField" >Bilnr</th>
+                		<th width="2%" class="tableHeaderField" >Bilnr/Fly</th>
                 		<th width="2%" class="tableHeaderField" >Transp.</th>
                 		<th width="2%" class="tableHeaderField" >Sjåførs navn</th>
                 		<th width="2%" class="tableHeaderField" >Reg.dato</th>
+                		<th width="2%" class="tableHeaderField" >Api</th>
                 		<th width="2%" class="tableHeaderField" >MRN-Api</th>
                 		<th width="2%" class="tableHeaderField" >Req.id</th>
                 		<th title="Api-status" width="2%" class="tableHeaderField" ></th>
@@ -265,9 +266,16 @@
 		               <td class="tableCell" >${record.etnat}</td>
 		               <td class="tableCell" >${record.etsjaf}</td>
 		               <td class="tableCell" ><c:if test="${record.etdtr > 0}">${record.etdtrStr}</c:if></td>
-		               <%--
-		               <td width="2%" class="tableCell" ><font style="font-size:11px;">${record.efuuid}</font></td>
-		                --%>
+		               <td width="2%" class="tableCell" >
+		               		<c:choose>
+		               		<c:when test="${ not empty record.etktyp && fn:startsWith(record.etktyp,'4') }">
+								<img style="vertical-align:middle;" id="airplaneImg${record.etuuid}" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
+							</c:when>
+							<c:otherwise>
+								<img style="vertical-align:middle;" id="lorryImg${record.etuuid}" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;
+							</c:otherwise>
+							</c:choose>
+		               </td>
 		               <td class="tableCell" ><span class="text14SkyBlue">${record.etmid}</span></td>
 		               <td class="tableCell" title="check status in toll.no">
 		               		<a style="display: block; width: 100%; height: 100%; cursor:pointer" class="uuidLink text12SkyBlue" id="${record.etuuid}">

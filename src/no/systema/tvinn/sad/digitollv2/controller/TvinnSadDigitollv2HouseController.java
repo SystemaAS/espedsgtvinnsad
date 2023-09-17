@@ -230,6 +230,7 @@ public class TvinnSadDigitollv2HouseController {
 							//get all masters
 							this.getItemLines(appUser, record);
 							this.setRecordAspects(appUser, record);
+							this.setTransportDto(appUser.getUser(), record);
 							//now we have all item lines in this house
 							model.put("record", record);
 							logger.info(record.toString());
@@ -241,6 +242,7 @@ public class TvinnSadDigitollv2HouseController {
 			}
 			if("doCreate".equals(action)) {
 				//in order to grab ehlnrt-parent
+				this.setTransportDto(appUser.getUser(), recordToValidate);
 				model.put("record", recordToValidate);
 			}	
 			//--------------------------------------
@@ -522,6 +524,36 @@ public class TvinnSadDigitollv2HouseController {
 		
 		return successView;
 		
+	}
+	
+	
+	private void setTransportDto(String applicationUser, SadmohfRecord houseRecord) {
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TRANSPORT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + applicationUser + "&etlnrt=" + houseRecord.getEhlnrt();
+		
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		SadmotfContainer jsonContainer = this.sadmotfListService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		List<SadmotfRecord> outputList = (List)jsonContainer.getList();
+			if(outputList!=null){
+				for(SadmotfRecord record: outputList){
+					houseRecord.setTransportDto(record);
+				}
+			}
+			
+    	}	
 	}
 	
 	/**

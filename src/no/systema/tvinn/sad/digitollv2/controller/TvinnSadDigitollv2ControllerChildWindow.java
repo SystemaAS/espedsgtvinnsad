@@ -111,7 +111,9 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		Map model = new HashMap();
 		String id = request.getParameter("id");
 		String level = request.getParameter("level");
-		//String raw = request.getParameter("raw");
+		String apiType = request.getParameter("apiType");
+		logger.info("#########:" + apiType);
+		if(apiType==null) { apiType = ""; }
 		
 		
 		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_manifestinfo");
@@ -133,7 +135,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 					url.append("getHouseConsignment.do");
 				}
 				String BASE_URL = url.toString();
-	    		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&lrn=" + id;
+	    		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&lrn=" + id + "&apiType=" + apiType;
 	    		logger.info("URL: " + BASE_URL);
 	    		logger.info("PARAMS: " + urlRequestParamsKeys);
 	    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");

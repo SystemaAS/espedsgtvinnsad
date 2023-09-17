@@ -190,7 +190,12 @@
 	  jq(".uuidLink").click(function() {
 		  var id = this.id;
 		  jq("#"+id).attr(('target','_blank'));
-		  window.open('tvinnsaddigitollv2_childwindow_manifestinfo.do?id=' + id +'&level=t', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");
+		  var apiType = "";
+		  //check if this is an AIR api record
+		  if(jq("#airplaneImg" + id).length > 0) { 
+			apiType = "air";	
+		  }		
+		  window.open('tvinnsaddigitollv2_childwindow_manifestinfo.do?id=' + id +'&level=t' + '&apiType=' + apiType, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");
 	  });
   });
   
