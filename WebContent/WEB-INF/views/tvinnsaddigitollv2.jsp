@@ -287,7 +287,7 @@
 		               		<c:choose>
 		               		<c:when test="${record.etst2 == 'S' || record.etst2 == 'R' || record.etst2 == 'D' || record.etst2 == 'M' || record.etst2 == 'C'}">
 		               			<c:if test="${record.etst2 == 'S'}">
-		               				<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
+		               				<img title="Submitted" src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'R'}">
 
@@ -296,16 +296,16 @@
 									
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'M'}">
-									<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
+									<img title="Error" src="resources/images/bulletRed.png" width="10" height="10" border="0" >
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'C'}">
-		               				<img style="vertical-align:middle;" title="Completed tolldekl at toll.no" src="resources/images/complete-icon.png" width="14px" height="12px" border="0" alt="completion">
+		               				<img title="Completed" style="vertical-align:middle;" title="Completed tolldekl at toll.no" src="resources/images/complete-icon.png" width="14px" height="12px" border="0" alt="completion">
 		               			</c:if>
 		               			
 		               		</c:when>
 		               		<c:otherwise>
 		               			<c:if test="${record.etst2 != 'S'}">
-		               				<img src="resources/images/bulletYellow.png" width="10" height="10" border="0" >
+		               				<img title="To be send?" src="resources/images/bulletYellow.png" width="10" height="10" border="0" >
 		               			</c:if>
 		               		</c:otherwise>
 		               		</c:choose>
@@ -345,7 +345,7 @@
 		               		  		
 				   				<c:if test="${not empty record.etuuid  && not empty record.etmid}">
 					   					<c:if test="${not empty record.etst2 && (record.etst2 == 'S' || record.etst2 == 'M') }">
-				              				<a tabindex=-1 class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
+				   							<a tabindex=-1 class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
 												<img src="resources/images/delete.gif" border="0" alt="remove">
 											</a>
 											<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">

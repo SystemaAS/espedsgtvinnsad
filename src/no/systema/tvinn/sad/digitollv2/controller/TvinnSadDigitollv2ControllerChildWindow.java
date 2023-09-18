@@ -62,6 +62,7 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
+import no.systema.tvinn.sad.digitollv2.util.SadDigitollConstants;
 import no.systema.tvinn.sad.manifest.express.filter.SearchFilterManifestList;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
@@ -323,6 +324,98 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	    	return successView;
 		}
 	}
+	
+	/**
+	 * 
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_transports.do", method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doShowTransport(HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doShowTransport");
+		Map model = new HashMap();
+		
+		String id = request.getParameter("id");
+		String[] idRec = id.split("_"); 
+		Integer emlnrt = Integer.valueOf(idRec[0].replace("emlnrt", ""));
+		Integer emlnrm = Integer.valueOf(idRec[1].replace("emlnrm", ""));
+		String etktyp = idRec[2].replace("etktyp", "");
+		logger.info("emlnrt:" + emlnrt + " emlnrm:" + emlnrm + " etktyp:" + etktyp);
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_transports");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			//get all masters
+			List list = this.getTransports(appUser, emlnrt, emlnrm, etktyp);  
+			model.put("list", list);
+			model.put("sourceEmlnrt", emlnrt);
+			model.put("sourceEmlnrm", emlnrm);
+			model.put("sourceEtktyp", etktyp);
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	
+	/**
+	 * 
+	 * @param appUser
+	 * @param etktyp
+	 * @return
+	 */
+	private List<SadmotfRecord> getTransports(SystemaWebUser appUser, Integer emlnrt, Integer emlnrm, String etktyp) {
+		
+		List<SadmotfRecord> result = new ArrayList<SadmotfRecord>();
+		
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TRANSPORT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser();
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		SadmotfContainer jsonContainer = this.sadmotfListService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		List<SadmotfRecord> outputList = (List)jsonContainer.getList();
+			for(SadmotfRecord record : outputList) {
+				//check if it is a transport with the same api (road or air)
+				if(etktyp.startsWith(SadDigitollConstants.API_AIR_INDICATOR)) {
+					if(record.getEtktyp().startsWith(SadDigitollConstants.API_AIR_INDICATOR)) {
+						//Eliminate one-self
+						if( record.getEtlnrt() != emlnrt) {
+							result.add(record);
+						}
+					}
+				}else {
+					if(!record.getEtktyp().startsWith(SadDigitollConstants.API_AIR_INDICATOR)) {
+						//Eliminate one-self
+						if(record.getEtlnrt() != emlnrt) {
+							result.add(record);
+						}
+					}
+				}
+				
+			}
+			
+    	}
+    	
+    	return result;
+	}
+	
 	/**
 	 * 
 	 * @param appUser

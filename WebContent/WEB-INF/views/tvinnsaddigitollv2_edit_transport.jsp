@@ -51,13 +51,17 @@
 						</c:if>
 					</td>
 					<c:if test="${model.record.etlnrt > 0 && model.record.etst != 'S'}"> <%-- CANCELED(S) --%>
-						<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-						<td width="15%" valign="bottom" class="tabDisabled" style="background-color:lightyellow;"  align="center" nowrap>
-							<a id="alinkHeader" style="display:block;" href="tvinnsaddigitollv2_edit_master.do?action=doCreate&emlnrt=${model.record.etlnrt}">
-								<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.createnew"/>&nbsp;<spring:message code="systema.tvinn.sad.digitoll.list.tab.master"/></font>
-								<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
-							</a>
-						</td>
+						<%-- Only if we have sent a POST = OK to toll.no should be allow for creating masters. This because we must lock which api to use (road or air) 
+						The only way to unlock this feature is to DELETE at toll.no in order to start fresh again from the GUI (road or air)--%>
+						<c:if test="${not empty model.record.etmid }"> 
+							<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
+							<td width="15%" valign="bottom" class="tabDisabled" style="background-color:lightyellow;"  align="center" nowrap>
+								<a id="alinkHeader" style="display:block;" href="tvinnsaddigitollv2_edit_master.do?action=doCreate&emlnrt=${model.record.etlnrt}">
+									<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.createnew"/>&nbsp;<spring:message code="systema.tvinn.sad.digitoll.list.tab.master"/></font>
+									<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
+								</a>
+							</td>
+						</c:if>
 					</c:if>
 					
 					
@@ -161,24 +165,8 @@
 				</td>
 			</tr>
 			</c:if>
-			<%--
-			<c:if test="${not empty model.invalidManifest}">
-				<tr>
-					<td colspan="10">
-		            	<table align="left" border="0" cellspacing="0" cellpadding="0">
-		            	<tr>
-					<td class="text14 tableCellGray" style="color: #9F6000;">
-	           			<font class="inputText" style="background-color: #FEEFB3;color: #9F6000;">
-	           				&nbsp;Lasten er ikke gyldig.&nbsp;&nbsp;Manifestet kan derfor ikke sendes.
-	           				&nbsp;&nbsp;Kontroller at alle linjene i manifestet har status=OK, og at det finnes minst en linje.
-	           			</font>
-	           		</td>           			
-	           		</tr>
-	           		</table>
-	           		</td>
-				</tr>
-			</c:if>
-			 --%>
+			
+		<%-- OBSOLETE 	
 		<c:if test="${!model.record.own_okToSend}">	 
 			<tr >
 				<td colspan="10" class="text14  ">
@@ -189,6 +177,8 @@
 	   		</tr>
 	  		<tr height="2"><td colspan="10">&nbsp;</td></tr>  
   		</c:if>
+  		--%>
+  		
   		<tr height="5">	
   			<td  colspan="10" class="text14 formFrame" >
 			<table style="width:100%">
@@ -745,12 +735,10 @@
 				<c:if test="${model.record.etst != 'S'}"> <%-- CANCELED(S) --%>
 					&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
 					<c:if test="${model.record.etlnrt > 0}">
-						<c:if test="${model.record.own_okToSend}">
-							&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
-							<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
-								 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
-							</div>
-						</c:if>
+						&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
+						<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
+							 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
+						</div>
 					</c:if>
 				</c:if>
 					 
@@ -800,6 +788,7 @@
                 		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED,M=ERROR" width="2%" class="tableHeaderField" >Manif.st</th>
                 		<th width="2%" class="tableHeaderField" title="Fjerner manifest fra Tollvesenet" >Slett</th>
                 		<th width="2%" class="tableHeaderField" title="Fjerner manifest lokalt (SYSPED)">Kans.</th>
+                		<th width="2%" class="tableHeaderField" title="Endre transport">EndrTransp</th>
                 		</tr>
                 	</thead>
                 	<tbody> 
@@ -893,7 +882,7 @@
 		               				masterConsignmentRecord.emst2 == 'M' || masterConsignmentRecord.emst2 == 'C'}">
 		               				
 		               			<c:if test="${masterConsignmentRecord.emst2 == 'S'}">
-		               				<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
+		               				<img title="Submitted" src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
 		               			</c:if>
 		               			<c:if test="${masterConsignmentRecord.emst2 == 'R'}">
 
@@ -902,16 +891,16 @@
 									
 		               			</c:if>
 		               			<c:if test="${masterConsignmentRecord.emst2 == 'M'}">
-									<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
+									<img title="Error" src="resources/images/bulletRed.png" width="10" height="10" border="0" >
 		               			</c:if>
 		               			<c:if test="${masterConsignmentRecord.emst2 == 'C'}">
-		               				<img style="vertical-align:middle;" title="Completed tolldekl at toll.no" src="resources/images/complete-icon.png" width="14px" height="12px" border="0" alt="completion">
+		               				<img title="Completed" style="vertical-align:middle;" title="Completed tolldekl at toll.no" src="resources/images/complete-icon.png" width="14px" height="12px" border="0" alt="completion">
 		               			</c:if>
 		               			
 		               		</c:when>
 		               		<c:otherwise>
 		               			<c:if test="${masterConsignmentRecord.emst != 'S'}">
-		               				<img src="resources/images/bulletYellow.png" width="10" height="10" border="0" >
+		               				<img title="To be send?" src="resources/images/bulletYellow.png" width="10" height="10" border="0" >
 		               			</c:if>
 		               		</c:otherwise>
 		               		</c:choose>
@@ -948,7 +937,7 @@
 		               		  	
 					   				<c:if test="${not empty masterConsignmentRecord.emuuid  && not empty masterConsignmentRecord.emmid}">
 					   					<c:if test="${not empty masterConsignmentRecord.emst2 && (masterConsignmentRecord.emst2 == 'S' || masterConsignmentRecord.emst2 == 'M') }">
-				              				<a tabindex=-1 class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
+					   						<a tabindex=-1 class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
 												<img src="resources/images/delete.gif" border="0" alt="remove">
 											</a>
 											<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
@@ -958,7 +947,6 @@
 													<input type="hidden" name="current_mrn${counter.count}" id="current_mrn${counter.count}" value="${masterConsignmentRecord.emmid}">
 													<input type="hidden" name="action${counter.count}" id="action${counter.count}" value="doDelete">
 												 	<p class="text14" >Er du sikker på at du vil slette denne&nbsp;MRN&nbsp;<b>${masterConsignmentRecord.emmid}</b> fra <b>Tollvesenet</b> ?</p>
-													
 												</form>
 											</div>
 										</c:if>
@@ -985,6 +973,11 @@
 								</c:if>
 							</c:if>
 						</td>	
+						<td width="2%" class="tableCell" align="center">
+	               	   		<a tabindex=-1 style="display: block; width: 100%; height: 100%;" class="transformLink" id="emlnrt${masterConsignmentRecord.emlnrt}_emlnrm${masterConsignmentRecord.emlnrm}_etktyp${model.record.etktyp}" runat="server" href="#">
+								<img title="Endre transport..." src="resources/images/transform.png" width="20" height="20" border="0" alt="endre transport">
+							</a> 		
+						</td>
 		            </tr> 
 		            </c:forEach>
 		            </tbody>

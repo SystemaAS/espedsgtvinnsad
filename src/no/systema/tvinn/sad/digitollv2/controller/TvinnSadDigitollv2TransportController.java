@@ -192,10 +192,7 @@ public class TvinnSadDigitollv2TransportController {
 						model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, "Too many lines. Narrow your search please ...");
 					}else{
 						for(SadmotfRecord record: outputList){
-							
-							//dates
-							this.adjustFieldsForFetch(record);
-							
+							this.setRecordAspects(appUser, record);
 						}
 						logger.info(outputList.toString());
 					}
@@ -1102,23 +1099,63 @@ public class TvinnSadDigitollv2TransportController {
     	if(jsonPayload!=null){
     		SadmomfContainer jsonContainer = this.sadmomfListService.getListContainer(jsonPayload);
     		record.setListMasters(jsonContainer.getList());
-    		//now check if the transport is valid to be send and populate the flag if needed
+    		//now check if the transport is valid to be deleted or not.
+    		//To be valid for deletion it is required to have masters and houses all deleted as well = without MRN att toll.no
+    		//You are allow to delete a transport if and only if all children have been deleted from toll.no previously ... It has to do with the API since we must know which api (air or road)
+    		//we are using...
     		List<SadmomfRecord> listChild = (List)jsonContainer.getList();
-    		if(listChild!=null && listChild.isEmpty()) {
-    			//We have the requirement of at least one master since we must send the transport with all master refs. before the carrier arrives to the border.
-    			//the api allows for sending of the transport without masters but the final transport MUST have all the master references thus SYSPED demands the masters!
-    			record.setOwn_okToSend(false);
-    		}else {
-	    		for(SadmomfRecord child : listChild) {
-	    			if(!this.isValidForApiSendGui(child)) {
-	    				record.setOwn_okToSend(false);
+    		if(listChild!=null && !listChild.isEmpty()) {
+    			for(SadmomfRecord child : listChild) {
+	    			if(StringUtils.isNotEmpty(child.getEmmid())) {
+	    				record.setOwn_okToDelete(false);
 	    				break;
 	    			}
 	    		}
+    		}else {
+    			//OK
     		}
     	}
     	
 	}
+	/**
+	 * 
+	 * @param appUser
+	 * @param record
+	 */
+	private void getHouses(SystemaWebUser appUser, SadmomfRecord record) {
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_HOUSECONSIGNMENT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser() + "&ehlnrt=" + record.getEmlnrt() + "&ehlnrm=" + record.getEmlnrm();
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadmohfContainer jsonContainer = this.sadmohfListService.getListContainer(jsonPayload);
+    		record.setListHouses(jsonContainer.getList());
+    		//now check if the master is valid to be deleted or not.
+    		//To be valid for deletion it is required to have all houses deleted as well = without MRN att toll.no
+    		//You are allow to delete a master if and only if all children have been deleted from toll.no previously ... It has to do with the API since we must know which api (air or road)
+    		//we are using...
+    		/*List<SadmohfRecord> listChild = (List)jsonContainer.getList();
+    		if(listChild!=null && !listChild.isEmpty()) {
+    			for(SadmohfRecord child : listChild) {
+	    			if(StringUtils.isNotEmpty(child.getEhmid())) {
+	    				record.setOwn_okToDelete(false);
+	    				break;
+	    			}
+	    		}
+    		}else {
+    			//OK
+    		}*/
+    	}
+    	
+	}
+	
 	/**
 	 * 
 	 * @param record
@@ -1151,6 +1188,8 @@ public class TvinnSadDigitollv2TransportController {
 	private SadmotfListService sadmotfListService;
 	@Autowired
 	private SadmomfListService sadmomfListService;
+	@Autowired
+	private SadmohfListService sadmohfListService;
 	
 	@Autowired
 	private GeneralUpdateService generalUpdateService;

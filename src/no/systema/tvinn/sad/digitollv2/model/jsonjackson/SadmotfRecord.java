@@ -146,6 +146,7 @@ public class SadmotfRecord extends JsonAbstractGrandFatherRecord  {
 	private String emerr = ""; // varchar(50), Feilmelding ved SND
 	
 	private Boolean own_okToSend = true;
+	private Boolean own_okToDelete = true;
 	
 	private Collection<SadmomfRecord> listMasters = null;
 	public void setListMasters(Collection<SadmomfRecord> value){ this.listMasters = value;}

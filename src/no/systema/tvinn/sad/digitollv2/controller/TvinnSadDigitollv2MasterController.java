@@ -560,7 +560,7 @@ public class TvinnSadDigitollv2MasterController {
 	 */
 	private void setRecordAspects(SystemaWebUser appUser, SadmomfRecord record) {
 		this.adjustFieldsForFetch(record);
-		//get all masters
+		//get all houses
 		this.getHouses(appUser, record);
 	}
 	
@@ -958,6 +958,21 @@ public class TvinnSadDigitollv2MasterController {
     	if(jsonPayload!=null){
     		SadmohfContainer jsonContainer = this.sadmohfListService.getListContainer(jsonPayload);
     		record.setListHouses(jsonContainer.getList());
+    		//now check if the master is valid to be deleted or not.
+    		//To be valid for deletion it is required to have all houses deleted as well = without MRN att toll.no
+    		//You are allow to delete a master if and only if all children have been deleted from toll.no previously ... It has to do with the API since we must know which api (air or road)
+    		//we are using...
+    		/*List<SadmohfRecord> listChild = (List)jsonContainer.getList();
+    		if(listChild!=null && !listChild.isEmpty()) {
+    			for(SadmohfRecord child : listChild) {
+	    			if(StringUtils.isNotEmpty(child.getEhmid())) {
+	    				record.setOwn_okToDelete(false);
+	    				break;
+	    			}
+	    		}
+    		}else {
+    			//OK
+    		}*/
     	}
     	
 	}
