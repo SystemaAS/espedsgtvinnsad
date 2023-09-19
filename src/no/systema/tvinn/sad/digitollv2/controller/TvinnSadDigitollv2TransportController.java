@@ -130,6 +130,7 @@ public class TvinnSadDigitollv2TransportController {
 		
 		String gate = request.getParameter("gate");
 		
+		
 		//check user (should be in session already)
 		if(appUser==null){
 			return loginView;
@@ -172,6 +173,7 @@ public class TvinnSadDigitollv2TransportController {
 	    		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TRANSPORT_URL;
 	    		//add URL-parameters
 	    		String urlRequestParams = this.getRequestUrlKeyParameters(searchFilter, appUser);
+	    		
 	    		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
 		    	logger.warn("URL: " + BASE_URL);
 		    	logger.warn("URL PARAMS: " + urlRequestParams);
@@ -824,7 +826,7 @@ public class TvinnSadDigitollv2TransportController {
 		//String action = request.getParameter("action");
 		
 		urlRequestParamsKeys.append("user=" + appUser.getUser());
-		if(allEmpty(searchFilter)) {
+		if(allEmpty(searchFilter))  {
 			int DAYS_BACK = -3;
 			String tmpISO = this.dateMgr.getSpecificDayFrom_CurrentDate_ISO(DAYS_BACK);
 			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "etdtr=" + tmpISO );
@@ -832,6 +834,7 @@ public class TvinnSadDigitollv2TransportController {
 			searchFilter.setDatum(this.dateFormatter.convertToDate_NO(tmpISO));
 			
 		}else {
+			
 			if(StringUtils.isNotEmpty(searchFilter.getAvd())){
 				urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "etavd=" + searchFilter.getAvd());
 			}

@@ -354,9 +354,9 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			//get all masters
 			List list = this.getTransports(appUser, emlnrt, emlnrm, etktyp);  
 			model.put("list", list);
-			model.put("sourceEmlnrt", emlnrt);
-			model.put("sourceEmlnrm", emlnrm);
-			model.put("sourceEtktyp", etktyp);
+			model.put("fromEmlnrt", emlnrt);
+			model.put("fromEmlnrm", emlnrm);
+			model.put("fromEtktyp", etktyp);
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 			
 	    	return successView;

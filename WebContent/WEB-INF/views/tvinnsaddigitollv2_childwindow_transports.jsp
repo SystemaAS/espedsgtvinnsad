@@ -16,8 +16,12 @@
 		  		<%-- this container table is necessary in order to separate the datatables element and the frame above, otherwise
 			 	the cosmetic frame will not follow the whole datatable grid including the search field... --%>
 				<table id="containerdatatableTable" cellspacing="2" align="left" width="100%" >
-					
-													           		
+				<form>
+					<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
+					<input type="hidden" name="fromEmlnrt" id="fromEmlnrt" value="${model.fromEmlnrt}">
+					<input type="hidden" name="fromEmlnrm" id="fromEmlnrm" value="${model.fromEmlnrm}">
+					<input type="hidden" name="fromEtktyp" id="fromEtktyp" value="${model.fromEtktyp}">
+				</form>									           		
 			    <tr>
 				<td>		
 				<table style="width:90%;" border="0" >
@@ -42,7 +46,7 @@
 		                	<c:forEach items="${model.list}" var="itemLinesRecord" varStatus="counter">    
 				             <tr class="tableRow" height="20" >
 					           <td width="2%" align="center" class="tableCellFirst12">
-					           		<a tabindex=-1 title="${itemLinesRecord.etlnrt}}" id="recordUpdate_${itemLinesRecord.etlnrt}" href="#" onClick="getItemData(this);">
+					           		<a tabindex=-1 title="${itemLinesRecord.etlnrt}}" id="recordUpdate_${itemLinesRecord.etlnrt}" href="#" onClick="changeTransport(this);">
 				               			<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;
 				               		</a>
 		

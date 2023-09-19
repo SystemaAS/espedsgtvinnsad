@@ -29,7 +29,7 @@
 	});
 	
 	
-jq(function() {
+	jq(function() {
 	    jq('#eibl').focus(function() {
 	    	if(jq('#eibl').val()!=''){
 	    		refreshCustomValidity(jq('#eibl')[0]);
@@ -50,49 +50,50 @@ jq(function() {
 	    		refreshCustomValidity(jq('#eirge')[0]);
 	  		}
 	  	});
-});	
+	});	
 
 
-	function getItemData(record) {
+	function changeTransport(record) {
 	  	var id = record.id;
-		var eili = id.replace("recordUpdate_", "");
-	  	
-		var ids = jq("#"+record.id).attr("title");
-	  	var record = ids.split("_");
-		//console.log = record;
-	  	var applicationUserParam = jq('#applicationUser').val();
-	  	var eilnrt = record[0];
-	  	var eilnrm = record[1];
-	  	var eilnrh = record[2];
+		
+		var targetTransportId = id.replace("recordUpdate_", "");
+		//DEBUG-->alert(targetTransportId + " sources:" + jq('#applicationUser').val() + "-->" + jq('#fromEmlnrt').val() + "-" + jq('#fromEmlnrm').val() + "-" + jq('#fromEtktyp').val())
+	  			
+	  	var applicationUser = jq('#applicationUser').val();
+		var fromEmlnrt = jq('#fromEmlnrt').val();
+	  	var fromEmlnrm = jq('#fromEmlnrm').val();
+	  	var fromEtktyp = jq('#fromEtktyp').val();
 	  	
 	  	jq.ajax({
 	  	  type: 'GET',
-	  	  url: 'getSpecificGoodsItemVoec_Digitoll.do',
-	  	  data: { applicationUser : applicationUserParam,
-				  eili : eili,	 
-	  		  	  eilnrt : eilnrt, 
-	  		  	  eilnrm : eilnrm, 
-	  		  	  eilnrh : eilnrh },
+	  	  url: 'changeTransport_Digitoll.do',
+	  	  data: { applicationUser : applicationUser,
+				  targetTransportId : targetTransportId,	 
+	  		  	  fromEmlnrt : fromEmlnrt, 
+	  		  	  fromEmlnrm : fromEmlnrm, 
+	  		  	  fromEtktyp : fromEtktyp },
+		  beforeSend : function() {
+               jq.blockUI({ message: 'Wait' });
+          }, 
 	  	  dataType: 'json',
 	  	  cache: false,
 	  	  contentType: 'application/json',
 	  	  success: function(data) {
-	  		
+	  		jq.unblockUI();
 	  		var len = data.length;
 			for ( var i = 0; i < len; i++) {
-				jq('#eili').val(""); jq('#eili').val(data[i].eili);
-				jq('#eibl').val(""); jq('#eibl').val(data[i].eibl);
-				jq('#eistk').val(""); jq('#eistk').val(data[i].eistk);
-				jq('#eivnt').val(""); jq('#eivnt').val(data[i].eivnt);
-				jq('#eirge').val(""); jq('#eirge').val(data[i].eirge);
-						
+				console.log("result:" + data[i])
 			}
+			//finish with child window now
+			opener.callParent(targetTransportId);
+			window.close();
+			
 	  	  },
 	  	  error: function() {
-			
 	  	    alert('Error loading ...');
 	  	  }
 	  	});
+		
   	}
 
 

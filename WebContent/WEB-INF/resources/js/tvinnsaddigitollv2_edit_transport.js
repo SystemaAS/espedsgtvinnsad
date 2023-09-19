@@ -662,6 +662,17 @@
 	  });
   });
 
+  //refresh Transport with the newly updated (changed Masters/Houses)
+  function refreshTransport(id){
+	  setBlockUI();
+	  window.location = "tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=" + id;
+  }
+  
+  //used and called only from a childwindow in order to reload this page with BlockUI() ...
+  function callParent(id){
+	  refreshTransport(id);
+  }
+
   //-------------------
   //Datatables jquery
   //-------------------
@@ -688,7 +699,7 @@
     	jq('.dataTables_filter input').addClass("inputText12LightYellow");
     	}
     });
-	jq("div.toolbar").html('<span class="text16">Turer - Hovedforsendelser - Master Consignments</span>');
+	jq("div.toolbar").html('<span class="text16">Hovedforsendelser - Master Consignments</span>');
     
 //event on input field for search
     jq('input.mainList_filter').on( 'keyup click', function () {

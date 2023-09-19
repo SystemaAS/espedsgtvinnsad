@@ -14,10 +14,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javawebparts.core.org.apache.commons.lang.StringUtils;
 import no.systema.main.service.UrlCgiProxyService;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
+import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
 import no.systema.tvinn.sad.sadimport.controller.ajax.SadImportAjaxHandlerController;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportTopicFinansOpplysningerContainer;
@@ -67,8 +72,43 @@ public class TvinnSadDigitollAjaxController {
 		 return result;
 	 }
 	
+	@RequestMapping(value = "changeTransport_Digitoll.do", method = RequestMethod.GET)
+	public @ResponseBody Set<SadmotfRecord> changeTransport_Digitoll
+	  						(@RequestParam String applicationUser, @RequestParam String targetTransportId, 
+	  						 @RequestParam String fromEmlnrt, @RequestParam String fromEmlnrm , @RequestParam String fromEtktyp) {
+		 
+		 final String METHOD = "[DEBUG] changeTransport_Digitoll ";
+		 logger.info(METHOD + "Inside");
+		 Set result = new HashSet();
+		 //prepare the access CGI with RPG back-end
+		 final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_CHANGE_TRANSPORT_URL;
+		 String urlRequestParams = "user=" + applicationUser + "&mode=U" + "&emlnrt=" + fromEmlnrt + "&emlnrm=" + fromEmlnrm + "&toEmlnrt=" + targetTransportId;
+			logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+	    	logger.warn("URL: " + BASE_URL);
+	    	logger.warn("URL PARAMS: " + urlRequestParams);
+	    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+	
+	    	//Debug --> 
+	    	logger.debug(jsonPayload);
+	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    	if(jsonPayload!=null){
+	    		SadmotfContainer jsonContainer = this.sadmotfListService.getListContainer(jsonPayload);
+	    		result.add(jsonContainer);
+	    		/*List<SadmotfRecord> list = (List)jsonContainer.getList();
+	    		for(SadmotfRecord fakeRecord : list) {
+	    			result.add(fakeRecord);
+	    		}*/
+	    		logger.info("result Set:" + result.toString());
+	    		
+	    	}
+		 
+		 return result;
+	 }
+	
 	@Autowired
 	private UrlCgiProxyService urlCgiProxyService;
 	@Autowired
 	private SadmoifListService sadmoifListService;
+	@Autowired
+	private SadmotfListService sadmotfListService;
 }
