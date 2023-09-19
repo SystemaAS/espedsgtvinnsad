@@ -697,6 +697,7 @@
 	  "lengthMenu": [ 25, 50, 100],
 	  "fnDrawCallback": function( oSettings ) {
     	jq('.dataTables_filter input').addClass("inputText12LightYellow");
+		
     	}
     });
 	jq("div.toolbar").html('<span class="text16">Hovedforsendelser - Master Consignments</span>');

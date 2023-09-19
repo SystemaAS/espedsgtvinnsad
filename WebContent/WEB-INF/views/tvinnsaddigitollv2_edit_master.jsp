@@ -74,7 +74,7 @@
 					
 					<%-- <td width="50%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>  --%>
 			 		<td width="60%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
-						<img id="imgInfoRpgJarStart" style="cursor:pointer;" onClick="showPop('jarStartCmd');" src="resources/images/info4.png" width="12" height="12" border="0" alt="info">
+						<img id="imgInfoRpgJarStart" style="cursor:pointer;" onClick="showPop('jarStartCmd');" src="resources/images/log-iconLOG.png" width="22" height="22" border="0" alt="info">
 						<div class="text12" style="position: relative;display: inline;" align="left">
 						<span style="position:absolute; left:-100px; top:15px;"  id="jarStartCmd" class="popupWithInputText"  >
 			           		<div class="text11" align="left">
@@ -879,6 +879,7 @@
                 		<th width="2%" class="tableHeaderField" >Ant. kolli</th>
                 		<th width="2%" class="tableHeaderField" >Doknr.</th>
                 		<th width="2%" class="tableHeaderField" >Dokt.</th>
+                		<th width="2%" class="tableHeaderField" >Tidl. doks</th>
                 		<th width="2%" class="tableHeaderField" >Prosed.</th>
                 		<th width="2%" class="tableHeaderField" >Out Prosed.</th>
                 		<th width="2%" class="tableHeaderField" >Type</th>
@@ -952,13 +953,14 @@
 		               </td>
 		               <td width="2%" align="right" class="tableCell" >${houseConsignmentRecord.ehvkb}</td>
 		               <td width="2%" align="right" class="tableCell" >${houseConsignmentRecord.ehntk}</td>
-		               <td width="2%" align="right" class="tableCell" >${houseConsignmentRecord.ehdkh}</td>
-		               <td width="2%" align="right" class="tableCell" >${houseConsignmentRecord.ehdkht}</td>
-		               <td width="2%" align="right" class="tableCell" >${houseConsignmentRecord.ehprt}</td>
-		               <td width="2%" align="right" class="tableCell" >${houseConsignmentRecord.ehuprt}</td>
+		               <td width="2%" align="left" class="tableCell" >${houseConsignmentRecord.ehdkh}</td>
+		               <td width="2%" align="left" class="tableCell" >${houseConsignmentRecord.ehdkht}</td>
+		               <td width="2%" align="left" class="tableCell" >${houseConsignmentRecord.ehrg}&nbsp;${houseConsignmentRecord.eh0068a}&nbsp;${houseConsignmentRecord.eh0068b}&nbsp;${houseConsignmentRecord.ehtrnr}</td>
+		               <td width="2%" align="left" class="tableCell" >${houseConsignmentRecord.ehprt}</td>
+		               <td width="2%" align="left" class="tableCell" >${houseConsignmentRecord.ehuprt}</td>
 		               
-		               <td width="2%" align="right" class="tableCell" >${houseConsignmentRecord.ehetypt}</td>
-		               <td width="2%" align="right" class="tableCell" >${houseConsignmentRecord.eheid}</td>
+		               <td width="2%" align="left" class="tableCell" >${houseConsignmentRecord.ehetypt}</td>
+		               <td width="2%" align="left" class="tableCell" >${houseConsignmentRecord.eheid}</td>
 		               
 		               
 		               <td width="2%" align="center" class="tableCell" >${houseConsignmentRecord.ehnam}&nbsp;-&nbsp;${houseConsignmentRecord.ehpsm}&nbsp;${houseConsignmentRecord.ehlkm}</td>

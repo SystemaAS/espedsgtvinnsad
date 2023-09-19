@@ -57,9 +57,12 @@ import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorR
 import no.systema.tvinn.sad.digitollv2.filter.SearchFilterDigitollTransportList;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
+import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
 import no.systema.tvinn.sad.digitollv2.util.SadDigitollConstants;
@@ -392,6 +395,9 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			//----------------------------------------------------------------
     		List<SadmotfRecord> outputList = (List)jsonContainer.getList();
 			for(SadmotfRecord record : outputList) {
+				//get masters to know in the GUI ... (only transports without masters are allow to change to)
+				this.getMasters(appUser, record);
+				
 				//check if it is a transport with the same api (road or air)
 				if(etktyp.startsWith(SadDigitollConstants.API_AIR_INDICATOR)) {
 					if(record.getEtktyp().startsWith(SadDigitollConstants.API_AIR_INDICATOR)) {
@@ -415,7 +421,30 @@ public class TvinnSadDigitollv2ControllerChildWindow {
     	
     	return result;
 	}
-	
+	/**
+	 * 
+	 * @param appUser
+	 * @param record
+	 */
+	private void getMasters(SystemaWebUser appUser, SadmotfRecord record) {
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_MASTERCONSIGNMENT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser() + "&emlnrt=" + record.getEtlnrt();
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadmomfContainer jsonContainer = this.sadmomfListService.getListContainer(jsonPayload);
+    		record.setListMasters(jsonContainer.getList());
+    		
+    	}
+    	
+	}
 	/**
 	 * 
 	 * @param appUser
@@ -513,11 +542,9 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	@Autowired
 	private SadmotfListService sadmotfListService;
 	@Autowired
+	private SadmomfListService sadmomfListService;
+	@Autowired
 	private SadmoifListService sadmoifListService;
-	@Autowired
-	private ManifestExpressMgr manifestExpressMgr;
-	@Autowired
-	private MaintMainKofastService maintMainKofastService;
 	@Autowired
 	private TvinnSadTullkontorService tvinnSadTullkontorService;
 	
