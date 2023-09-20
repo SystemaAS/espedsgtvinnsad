@@ -55,12 +55,15 @@ import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
 import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorContainer;
 import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorRecord;
 import no.systema.tvinn.sad.digitollv2.filter.SearchFilterDigitollTransportList;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
+import no.systema.tvinn.sad.digitollv2.service.SadOppdragService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
@@ -368,6 +371,68 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	
 	/**
 	 * 
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_oppdrag.do", method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doShowOppdrag(HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doShowOppdrag");
+		Map model = new HashMap();
+		
+		String tur = request.getParameter("tur");
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_oppdrag");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			//get all masters
+			List list = this.getOppdrag(appUser, tur);  
+			model.put("list", list);
+			model.put("tur", tur);
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	/**
+	 * 
+	 * @param appUser
+	 * @param tur
+	 * @return
+	 */
+	private List<SadOppdragRecord> getOppdrag(SystemaWebUser appUser, String tur) {
+		List<SadOppdragRecord> resultList = new ArrayList();
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_OPPDRAG_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser() + "&tur=" + tur;
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadOppdragContainer container = this.sadOppdragService.getListContainer(jsonPayload);
+    		if(container!=null && !container.getOrderList().isEmpty()) {
+    			for(SadOppdragRecord record: container.getOrderList()) {
+    				resultList.add(record);
+    			}
+    		}
+    		
+    	}
+    	
+    	return resultList;
+	}
+
+	/**
+	 * 
 	 * @param appUser
 	 * @param etktyp
 	 * @return
@@ -545,6 +610,8 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	private SadmomfListService sadmomfListService;
 	@Autowired
 	private SadmoifListService sadmoifListService;
+	@Autowired
+	private SadOppdragService sadOppdragService;
 	@Autowired
 	private TvinnSadTullkontorService tvinnSadTullkontorService;
 	

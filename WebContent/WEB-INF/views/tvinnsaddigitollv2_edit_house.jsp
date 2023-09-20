@@ -240,7 +240,11 @@
 					<tr>
 						<td class="text14">&nbsp;<span title="ehavd">Avd</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="ehpro">Tur</span><font class="text16RedBold" >*</font></td>
-						<td class="text14">&nbsp;<span title="ehtdn">Opd</span><font class="text16RedBold" >*</font></td>
+						<td class="text14">&nbsp;<span title="ehtdn">Opd</span><font class="text16RedBold" >*</font>
+							<a tabindex="-1" id="ehtdnIdLink">
+								<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
+							</a>
+						</td>
 						<td class="text14">&nbsp;<span title="ehvkb">Bruttovekt</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="ehntk">Ant.kolli</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="ehvt">Varebesk</span><font class="text16RedBold" >*</font></td>

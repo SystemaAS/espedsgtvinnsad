@@ -1,5 +1,6 @@
 package no.systema.tvinn.sad.digitollv2.controller;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
@@ -17,10 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 import javawebparts.core.org.apache.commons.lang.StringUtils;
 import no.systema.main.service.UrlCgiProxyService;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
+import no.systema.tvinn.sad.digitollv2.service.SadOppdragService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
@@ -104,6 +108,50 @@ public class TvinnSadDigitollAjaxController {
 		 
 		 return result;
 	 }
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param tur
+	 * @param avd
+	 * @param opd
+	 * @return
+	 */
+	@RequestMapping(value = "getSpecificOppdrag_Digitoll.do", method = RequestMethod.GET)
+	public @ResponseBody Set<SadOppdragRecord> getSpecificOppdrag_Digitoll
+	  						(@RequestParam String applicationUser, @RequestParam String tur, 
+	  						 @RequestParam String avd, @RequestParam String opd) {
+		 
+		 final String METHOD = "[DEBUG] getSpecificOppdrag_Digitoll ";
+		 logger.info(METHOD + "Inside");
+		 Set result = new HashSet();
+		 List<SadOppdragRecord> resultList = new ArrayList();
+			final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_OPPDRAG_URL;
+			//add URL-parameters
+			String urlRequestParams = "user=" + applicationUser + "&tur=" + tur;
+			logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+	    	logger.warn("URL: " + BASE_URL);
+	    	logger.warn("URL PARAMS: " + urlRequestParams);
+	    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+	    	//Debug --> 
+	    	logger.info(jsonPayload);
+	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    	if(jsonPayload!=null){
+	    		SadOppdragContainer container = this.sadOppdragService.getListContainer(jsonPayload);
+	    		if(container!=null && !container.getOrderList().isEmpty()) {
+	    			for(SadOppdragRecord record: container.getOrderList()) {
+	    				if(record.getSitdn().equals(opd)) {
+	    					result.add(record);
+	    					break;
+	    				}
+	    			}
+	    		}
+	    		
+	    	}
+		 return result;
+	 }
+	
+		
 	
 	@Autowired
 	private UrlCgiProxyService urlCgiProxyService;
@@ -111,4 +159,6 @@ public class TvinnSadDigitollAjaxController {
 	private SadmoifListService sadmoifListService;
 	@Autowired
 	private SadmotfListService sadmotfListService;
+	@Autowired
+	private SadOppdragService sadOppdragService;
 }

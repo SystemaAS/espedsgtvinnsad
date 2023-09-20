@@ -189,18 +189,16 @@
 	  	});
 	  
 	  //CHILD-WINDOWS
-	  //Tollsted
-	  /*
-	  jq('#eftsdIdLink').click(function() {
-	  	jq('#eftsdIdLink').attr('target','_blank');
-	  	window.open('tvinnsadmanifest_childwindow_tollstedcodes.do?action=doInit&type=2&ctype=silka', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+	  //
+	  jq('#ehtdnIdLink').click(function() {
+	    	jq('#ehtdnIdLink').attr('target','_blank');
+	    	window.open('tvinnsaddigitollv2_childwindow_oppdrag.do?action=doFind&tur=' + jq('#ehpro').val() + '&ctype=ehtdn', "oppdWin", "top=300px,left=500px,height=500px,width=800px,scrollbars=yes,location=no");
+	    });
+	  jq('#ehtdnIdLink').keypress(function(e){ //extra feature for the end user
+		if(e.which == 13) {
+			jq('#ehtdnIdLink').click();
+		}
 	  });
-	  jq('#eftsdIdLink').keypress(function(e){ //extra feature for the end user
-			if(e.which == 13) {
-				jq('#eftsdIdLink').click();
-			}
-	  });
-	  */
 	  //Avsender
       jq('#ehnasIdLink').click(function() {
 	    	jq('#ehnasIdLink').attr('target','_blank');
