@@ -192,7 +192,7 @@
 	  //
 	  jq('#ehtdnIdLink').click(function() {
 	    	jq('#ehtdnIdLink').attr('target','_blank');
-	    	window.open('tvinnsaddigitollv2_childwindow_oppdrag.do?action=doFind&tur=' + jq('#ehpro').val() + '&ctype=ehtdn', "oppdWin", "top=300px,left=500px,height=500px,width=800px,scrollbars=yes,location=no");
+	    	window.open('tvinnsaddigitollv2_childwindow_oppdrag.do?action=doFind&tur=' + jq('#ehpro').val() + '&ctype=ehtdn', "oppdWin", "top=300px,left=600px,height=600px,width=1000px,scrollbars=yes,location=no");
 	    });
 	  jq('#ehtdnIdLink').keypress(function(e){ //extra feature for the end user
 		if(e.which == 13) {

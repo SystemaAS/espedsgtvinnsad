@@ -22,12 +22,12 @@
 													           		
 			    <tr>
 				<td>		
-				<table style="width:90%;" border="0" >
+				<table style="width:100%;" border="0" >
 			    	<%-- separator --%>
 			        <tr height="2"><td></td></tr> 
 					<tr>
 						<td>
-						<table style="width:90%;" id="containerdatatableTable" cellspacing="2" align="left" >
+						<table id="containerdatatableTable" cellspacing="2" align="left" >
 						
 						<tr >
 							<td class="text14  ">
@@ -72,9 +72,9 @@
 				          	   <td width="2%" align="center" class="tableCell12" >${record.sintk}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.wehrg}&nbsp;${record.weh0068a}&nbsp;${record.weh0068b}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.sinas}</td> 
-				          	   <td width="2%" align="center" class="tableCell12" >${record.siads1}&nbsp;${record.siads2}&nbsp;${record.siads3}</td>
+				          	   <td width="2%" align="center" class="tableCell12" ><span style="font-size: 10px;">${record.siads1}&nbsp;${record.siads2}&nbsp;${record.siads3}</span></td>
 			               	   <td width="2%" align="center" class="tableCell12" >${record.sinak}</td>
-			               	   <td width="2%" align="center" class="tableCell12" >${record.siadk1}&nbsp;${record.siadk2}&nbsp;${record.siadk3}</td>
+			               	   <td width="2%" align="center" class="tableCell12" ><span style="font-size: 10px;">${record.siadk1}&nbsp;${record.siadk2}&nbsp;${record.siadk3}</span></td>
 			               	   <td width="2%" align="center" class="tableCell12" >${record.sidt}</td>		               	
 				            </tr> 
 				            </c:forEach>
