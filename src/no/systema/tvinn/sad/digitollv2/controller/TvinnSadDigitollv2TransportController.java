@@ -272,6 +272,7 @@ public class TvinnSadDigitollv2TransportController {
 				if(bindingResult.hasErrors()){
 		    		logger.error("[ERROR Validation] record does not validate)");
 		    		this.setRecordAspects(appUser, recordToValidate);
+		    		this.adjustOmbudCommunication(recordToValidate);
 					//now we have all aspects in this transport
 					model.put("record", recordToValidate);
 					isValidForFetch = false;
@@ -939,8 +940,23 @@ public class TvinnSadDigitollv2TransportController {
 		dto = this.digitollDropDownListPopulationService.getTypeOfIdentificationMeansOfTranportDto(); model.put("typeOfIdentificationMeansTransportDto", dto);
 		
 	}
-	
-	
+	/**
+	 * Special only for invalidation errors
+	 * @param recordToValidate
+	 */
+	private void adjustOmbudCommunication(SadmotfRecord recordToValidate) {
+		if(StringUtils.isNotEmpty(recordToValidate.getOwn_etemr_email())){
+			recordToValidate.setEtemr(recordToValidate.getOwn_etemr_email());
+			recordToValidate.setEtemrt(SadDigitollConstants.API_TYPE_EMAIL);	
+		}else {
+			recordToValidate.setEtemr(recordToValidate.getOwn_etemr_telephone());
+			recordToValidate.setEtemrt(SadDigitollConstants.API_TYPE_TELEPHONE);
+		}
+	}
+	/**
+	 * 
+	 * @param recordToValidate
+	 */
 	private void adjustFieldsForFetch(SadmotfRecord recordToValidate){
 		//Register date
 		if(recordToValidate.getEtdtr() > 0) {
@@ -985,6 +1001,7 @@ public class TvinnSadDigitollv2TransportController {
 			}
 			
 		}
+		
 		
 	}
 	/**

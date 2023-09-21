@@ -94,29 +94,42 @@
 				//Sender
 				opener.jq('#ehkns').val("");opener.jq('#ehkns').val(data[i].sikns); //Kundnr
 				opener.jq('#ehnas').val("");opener.jq('#ehnas').val(data[i].sinas); //Namn
+				opener.jq('#ehrgs').val("");opener.jq('#ehrgs').val(data[i].ehrgs); //Orgnr
 				opener.jq('#ehad1s').val("");opener.jq('#ehad1s').val(data[i].siads1); //Adress
+				var ad2Avs = data[i].siads2 + " " + data[i].siads3; 
+				opener.jq('#ehpbs').val("");opener.jq('#ehpbs').val(ad2Avs); //Adress2+3
+				if(data[i].ehems != ""){ opener.jq('#own_ehems_email').val(data[i].ehems) } //email
 				//Postnr and City
-				/*TODO opener.jq('#ehpss').val("");opener.jq('#ehpns').val("");
-				var record = data[i].siads2.split(" ");	
-				var postnrAvs = "";
+				var postnrAvs = ""; 
 				var cityAvs = "";
-				if(record.length>=2){
-					postnrAvs = record[0];
-					cityAvs = record[1];
-				}
+				var landAvs = "";
+				if(data[i].ehpns != ""){ postnrAvs = data[i].ehpns;}
+				if(data[i].ehpss != ""){ cityAvs = data[i].ehpss;}
+				if(data[i].ehlks != ""){ landAvs = data[i].ehlks;}
 				opener.jq('#ehpns').val(postnrAvs);
 				opener.jq('#ehpss').val(cityAvs);
-				opener.jq('#ehlks').val("");opener.jq('#ehlks').val(data[i].siads3).change(); //Land
-				*/
+				opener.jq('#ehlks').val(landAvs);
+				
 				
 				//Receiver
 				opener.jq('#ehknm').val("");opener.jq('#ehknm').val(data[i].siknk); //Kundnr
 				opener.jq('#ehnam').val("");opener.jq('#ehnam').val(data[i].sinak); //Namn
-				opener.jq('#ehrgm').val("");opener.jq('#ehrgm').val(data[i].sirg); //Orgnr
+				opener.jq('#ehrgm').val("");opener.jq('#ehrgm').val(data[i].ehrgm); //Orgnr
 				opener.jq('#ehad1m').val("");opener.jq('#ehad1m').val(data[i].siadk1); //Adress
-				opener.jq('#ehlkm').val("");opener.jq('#ehlkm').val(data[i].silka).change(); //landkod
-				opener.jq('#own_ehemm_telephone').val("");opener.jq('#own_ehemm_telephone').val(data[i].sitlf); //Telefon
-				//TODO Postnr and City
+				var ad2Mot = data[i].siadk2 + " " + data[i].siadk3; 
+				opener.jq('#ehpbm').val("");opener.jq('#ehpbm').val(ad2Mot); //Adress2+3
+				if(data[i].ehemm != ""){ opener.jq('#own_ehemm_email').val(data[i].ehemm) } //email
+				//Postnr and City
+				var postnrMot = ""; 
+				var cityMot = "";
+				var landMot = "";
+				if(data[i].ehpnm != ""){ postnrMot = data[i].ehpnm;}
+				if(data[i].ehpsm != ""){ cityMot = data[i].ehpsm;}
+				if(data[i].ehlkm != ""){ landMot = data[i].ehlkm;}
+				opener.jq('#ehpnm').val(postnrMot);
+				opener.jq('#ehpsm').val(cityMot);
+				opener.jq('#ehlkm').val(landMot);
+				
 				
 				//finish with child window now
 				//opener.callParent(targetTransportId);

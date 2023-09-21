@@ -114,6 +114,7 @@
 	    		refreshCustomValidity(jq('#etkmrk')[0]);
 	  		}
 	  	});
+		//Transportør
 		jq('#etnat').focus(function() {
 	    	if(jq('#etnat').val()!=''){
 	    		refreshCustomValidity(jq('#etnat')[0]);
@@ -134,7 +135,34 @@
 	    		refreshCustomValidity(jq('#etlkt')[0]);
 	  		}
 	  	});
-		
+		//Represent./Ombud
+		jq('#etnar').focus(function() {
+	    	if(jq('#etnar').val()!=''){
+	    		refreshCustomValidity(jq('#etnar')[0]);
+	  		}
+	  	});
+		jq('#etrgr').focus(function() {
+	    	if(jq('#etrgr').val()!=''){
+	    		refreshCustomValidity(jq('#etrgr')[0]);
+	  		}
+	  	});
+		jq('#etpsr').focus(function() {
+	    	if(jq('#etpsr').val()!=''){
+	    		refreshCustomValidity(jq('#etpsr')[0]);
+	  		}
+	  	});
+		jq('#etlkr').focus(function() {
+	    	if(jq('#etlkr').val()!=''){
+	    		refreshCustomValidity(jq('#etlkr')[0]);
+	  		}
+	  	});
+		jq('#own_etemr_email').focus(function() {
+	    	if(jq('#own_etemr_email').val()!=''){
+	    		refreshCustomValidity(jq('#own_etemr_email')[0]);
+	  		}
+	  	});
+
+		//		
 		jq('#etktkd').focus(function() {
 	    	if(jq('#etktkd').val()!=''){
 	    		refreshCustomValidity(jq('#etktkd')[0]);

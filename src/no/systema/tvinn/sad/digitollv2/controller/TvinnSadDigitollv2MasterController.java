@@ -904,12 +904,12 @@ public class TvinnSadDigitollv2MasterController {
 		}
 		
 		//Sent date
-		if(recordToValidate.getEmdtin() > 0) {
+		if(recordToValidate.getEmdtin()!=null && recordToValidate.getEmdtin() > 0) {
 			int sentDate = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(String.valueOf(recordToValidate.getEmdtin()), DateTimeManager.NO_FORMAT));
 			recordToValidate.setEmdtin(sentDate);
 		}
 		//Date
-		if(recordToValidate.getEmatdd() > 0) {
+		if(recordToValidate.getEmatdd()!=null && recordToValidate.getEmatdd() > 0) {
 			int date = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(String.valueOf(recordToValidate.getEmatdd()), DateTimeManager.NO_FORMAT));
 			recordToValidate.setEmdtin(date);
 		}

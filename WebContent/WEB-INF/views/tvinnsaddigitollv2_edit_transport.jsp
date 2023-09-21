@@ -651,30 +651,30 @@
 				 					
 				 				</tr>
 				 				<tr >
-									<td class="text14">&nbsp;<span title="etnar">Navn</span><font class="text16NavyBlueBold" >*</font>
+									<td class="text14">&nbsp;<span title="etnar">Navn</span><font class="text16RedBold" >*</font>
 										<a tabindex="-1" id="etnarIdLink">
 											<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
 										</a>
 									</td>
-									<td class="text14">&nbsp;<span title="etrgr">Orgnr / EORI</span><font class="text16NavyBlueBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="etrgr">Orgnr / EORI</span><font class="text16RedBold" >*</font></td>
 									
 				 				</tr>
 				 				<tr >
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="etnar" id="etnar" size="25" maxlength="30" value="${model.record.etnar}"></td>
-									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="etrgr" id="etrgr" size="20" maxlength="17" value="${model.record.etrgr}"></td>
+									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="etnar" id="etnar" size="25" maxlength="30" value="${model.record.etnar}"></td>
+									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="etrgr" id="etrgr" size="20" maxlength="17" value="${model.record.etrgr}"></td>
 				 				</tr>
 				 				
 				 				<tr >
-									<td class="text14">&nbsp;<span title="etpsr">Sted</span><font class="text16NavyBlueBold" >*</font></td>
-									<td class="text14">&nbsp;<span title="etlkr">Landkode</span><font class="text16NavyBlueBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="etpsr">Sted</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="etlkr">Landkode</span><font class="text16RedBold" >*</font></td>
 									
 				 				</tr>
 				 				<tr >
 									<td class="text14">
-										<input type="text" class="inputTextMediumBlue" name="etpsr" id="etpsr" size="25" maxlength="24" value="${model.record.etpsr}">
+										<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="etpsr" id="etpsr" size="25" maxlength="24" value="${model.record.etpsr}">
 									</td>
 									<td class="text14">
-										<select class="inputTextMediumBlue" name="etlkr" id="etlkr" >
+										<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="etlkr" id="etlkr" >
 					 						<option value="">-velg-</option>
 						 				  	<c:forEach var="dto" items="${model.countryDto}" >
 					                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.etlkr == dto.code}"> selected </c:if> >${dto.code}</option>
@@ -694,24 +694,24 @@
 				 				</tr>
 				 				
 				 				<tr >
-									<td class="text14">&nbsp;<span title="own_etemr_email">E-post</span><font class="text16NavyBlueBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="own_etemr_email">E-post</span><font class="text16RedBold" >*</font></td>
 									<td class="text14">&nbsp;<span title="own_etemr_telephone">Telefon</span></td>
 									
 				 				</tr>
 				 				<tr >
 									<c:choose>
 				 					<c:when test="${empty model.record.etemrt}">
-				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_email" id="own_etemr_email" size="35" maxlength="50" value=""></td>
+				 						<td class="text14"><input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="own_etemr_email" id="own_etemr_email" size="35" maxlength="50" value=""></td>
 				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_telephone" id="own_etemr_telephone" size="15" maxlength="50" value=""></td>
 				 					</c:when>
 		 							<c:otherwise>
 				 						<c:choose>
 				 							<c:when test="${model.record.etemrt == 'EM'}">
-						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_email" id="own_etemr_email" size="35" maxlength="50" value="${model.record.etemr}"></td>
+						 						<td class="text14"><input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="own_etemr_email" id="own_etemr_email" size="35" maxlength="50" value="${model.record.etemr}"></td>
 						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_telephone" id="own_etemr_telephone" size="15" maxlength="50" value=""></td>
 						 					</c:when>
 						 					<c:otherwise>
-						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_email" id="own_etemr_email" size="35" maxlength="50" value=""></td>
+						 						<td class="text14"><input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="own_etemr_email" id="own_etemr_email" size="35" maxlength="50" value=""></td>
 												<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_telephone" id="own_etemr_telephone" size="15" maxlength="50" value="${model.record.etemr}"></td>
 											</c:otherwise>
 										</c:choose>

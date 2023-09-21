@@ -2,10 +2,15 @@ package no.systema.tvinn.sad.digitollv2.controller;
 
 import java.util.*;
 
- 
+import org.apache.http.util.TextUtils;
 import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import javawebparts.core.org.apache.commons.lang.StringUtils;
 
@@ -204,8 +209,16 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	    		//Debug -->
 		    	logger.debug(jsonPayload);
 	    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-	    		
 	    		model.put("content", jsonPayload);
+	    		
+	    		//show pretty (does not work in html)
+	    		/*Gson prettyGsonObject = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
+	    		JsonElement jsonElement = new JsonParser().parse(jsonPayload);
+	    	    String prettyJsonString = prettyGsonObject.toJson(jsonElement);
+	    	    model.put("content", prettyJsonString);
+	    	    logger.info(prettyJsonString);
+	    	    */
+	    	    
 			//}
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 			

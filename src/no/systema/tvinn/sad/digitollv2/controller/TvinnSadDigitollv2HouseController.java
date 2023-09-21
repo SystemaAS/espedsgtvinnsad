@@ -859,7 +859,7 @@ public class TvinnSadDigitollv2HouseController {
 			recordToValidate.setEhvkb(bd.toString());	
 		}
 		//Sent date
-		if(recordToValidate.getEhdts() > 0) {
+		if(recordToValidate.getEhdts()!=null && recordToValidate.getEhdts() > 0) {
 			int sentDate = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(String.valueOf(recordToValidate.getEhdts()), DateTimeManager.NO_FORMAT));
 			recordToValidate.setEhdts(sentDate);
 		}

@@ -767,7 +767,17 @@
 					 	<td >
 						<table class="formFrameHeader" style="width:100%;" border="0" cellspacing="1" cellpadding="0">
 					 		<tr height="15">
-					 			<td class="text14White">&nbsp;&nbsp;Representat / Ombud&nbsp;</td>
+					 			<td class="text14White">
+						 			&nbsp;
+						 			<img style="cursor:pointer;" onMouseOver="showPop('ombud_info');" onMouseOut="hidePop('ombud_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+					            	<span title="Representant...">Representat / Ombud</span>
+			                		<div class="text11" style="position: relative;" align="left">
+				                	<span style="position:absolute;top:2px; width:250px;" id="ombud_info" class="popupWithInputText text11"  >
+					           		<b>Representant</b>
+					           		<p>Fyller du inn e-postadressene, sendes også hele Representantinformasjonen fra Transportinformasjonen</p>
+									</span>	
+									</div>
+					 			</td>
 			 				</tr>
 			            </table>
 			            </td>

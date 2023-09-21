@@ -51,7 +51,9 @@
 		                    	<th width="2%" class="tableHeaderField12" >Kolli</th>
 		                    	<th width="2%" class="tableHeaderField12" >Tidl.doks</th>
 		                    	<th width="2%" class="tableHeaderField12" >Avs</th>
+		                    	<th width="2%" class="tableHeaderField12" ></th>
 		                    	<th width="2%" class="tableHeaderField12" >Mott</th>
+		                    	<th width="2%" class="tableHeaderField12" ></th>
 		                    	<th width="2%" class="tableHeaderField12" >Reg.dato</th>
 		                	</tr>
 		                	</thead>
@@ -70,7 +72,9 @@
 				          	   <td width="2%" align="center" class="tableCell12" >${record.sintk}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.wehrg}&nbsp;${record.weh0068a}&nbsp;${record.weh0068b}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.sinas}</td> 
+				          	   <td width="2%" align="center" class="tableCell12" >${record.siads1}&nbsp;${record.siads2}&nbsp;${record.siads3}</td>
 			               	   <td width="2%" align="center" class="tableCell12" >${record.sinak}</td>
+			               	   <td width="2%" align="center" class="tableCell12" >${record.siadk1}&nbsp;${record.siadk2}&nbsp;${record.siadk3}</td>
 			               	   <td width="2%" align="center" class="tableCell12" >${record.sidt}</td>		               	
 				            </tr> 
 				            </c:forEach>

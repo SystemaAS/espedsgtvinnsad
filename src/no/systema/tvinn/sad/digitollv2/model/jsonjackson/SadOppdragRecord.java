@@ -43,6 +43,24 @@ public class SadOppdragRecord extends JsonAbstractGrandFatherRecord  {
     private String wehrg;
     private String weh0068a;
     private String weh0068b;
+    //Cundf
+    private String ehrgs;  //": "SE789431221123333",
+    private String ehnas;  //": "TRUCKING INTERNATIONAL CORP.",
+    private String ehad1s; //": "EGENSEVEI 24 - 32",
+    private String ehpns;  //": "2270",
+    private String ehpss;  //": "Kastrup",
+    private String ehlks;  //": "DK",
+    private String ehems;  //": "efraim.barkbit@skogen.se",
+    private String ehemst; //": "EM",
+    private String ehrgm;  //": "10067911119",
+    private String ehnam;  //": "SYSTEMA A/S TEST",
+    private String ehad1m; //": "St. Halvardsgt. 33 A",
+    private String ehpnm;  //": "0193",
+    private String ehpsm;  //": "OSLO",
+    private String ehlkm;  //": "NO",
+    private String ehemm;  //": "trond@systema.no",
+    private String ehemmt; //": "EM",
+    
     private String stiarf;
 	
 	/**
@@ -96,6 +114,22 @@ public class SadOppdragRecord extends JsonAbstractGrandFatherRecord  {
       "wehrg": "936809219",
       "weh0068a": "20230920",
       "weh0068b": "3",
+      "ehrgs": "SE789431221123333",
+      "ehnas": "TRUCKING INTERNATIONAL CORP.",
+      "ehad1s": "EGENSEVEI 24 - 32",
+      "ehpns": "2270",
+      "ehpss": "Kastrup",
+      "ehlks": "DK",
+      "ehems": "efraim.barkbit@skogen.se",
+      "ehemst": "EM",
+      "ehrgm": "10067911119",
+      "ehnam": "SYSTEMA A/S TEST",
+      "ehad1m": "St. Halvardsgt. 33 A",
+      "ehpnm": "0193",
+      "ehpsm": "OSLO",
+      "ehlkm": "NO",
+      "ehemm": "trond@systema.no",
+      "ehemmt": "EM",
       "sitarf": "TROND HYTTAN"
     }
 */

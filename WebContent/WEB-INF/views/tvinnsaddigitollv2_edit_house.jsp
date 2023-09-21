@@ -785,6 +785,17 @@
 			 				
 			 				<tr >
 			 					<td class="text14">&nbsp;</td>
+								<td colspan="2" class="text14">&nbsp;<span title="ehpbs">Adress-2</span></td>
+								
+			 				</tr>
+			 				<tr >
+			 					<td class="text14">&nbsp;</td>
+								<td colspan="2" class="text14"><input type="text" class="inputTextMediumBlue" name="ehpbs" id="ehpbs" size="50" maxlength="70" value="${model.record.ehpbs}"></td>
+								
+			 				</tr>
+			 				
+			 				<tr >
+			 					<td class="text14">&nbsp;</td>
 								<td class="text14">&nbsp;<span title="own_ehems_email">E-post</span></td>
 								<td class="text14">&nbsp;<span title="own_ehems_telephone">Telefon</span></td>
 								
@@ -883,21 +894,29 @@
 				 				</tr>
 				 				
 				 				<tr >
-				 					
 				 					<td class="text14">&nbsp;</td>
-									<td class="text14">&nbsp;<span title="ehad1m">Adress</span></td>
+				 					<td class="text14">&nbsp;<span title="ehad1m">Adress</span></td>
 									<td class="text14">&nbsp;<span title="ehpnm">Postnr</span></td>
 									
 				 				</tr>
 				 				<tr >
-				 					
 				 					<td class="text14">&nbsp;</td>
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehad1m" id="ehad1m" size="25" maxlength="30" value="${model.record.ehad1m}"></td>
+				 					<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehad1m" id="ehad1m" size="25" maxlength="30" value="${model.record.ehad1m}"></td>
 									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="ehpnm" id="ehpnm" size="12" maxlength="9" value="${model.record.ehpnm}"></td>
 				 				</tr>
 				 				
 				 				<tr >
-				 					
+				 					<td class="text14">&nbsp;</td>
+				 					<td colspan="2" class="text14">&nbsp;<span title="ehpbm">Adress-2</span></td>
+									
+				 				</tr>
+				 				<tr >
+				 					<td class="text14">&nbsp;</td>
+									<td colspan="2" class="text14"><input type="text" class="inputTextMediumBlue" name="ehpbm" id="ehpbm" size="50" maxlength="70" value="${model.record.ehpbm}"></td>
+									
+				 				</tr>
+				 				
+				 				<tr >
 				 					<td class="text14">&nbsp;</td>
 									<td class="text14">&nbsp;<span title="own_ehemm_email">E-post</span></td>
 									<td class="text14">&nbsp;<span title="own_ehemm_telephone">Telefon</span></td>
