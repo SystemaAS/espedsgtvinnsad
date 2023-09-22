@@ -58,10 +58,10 @@ public class HouseValidator implements Validator {
 						if(!"CUDE".equals(record.getEhtrty())) {
 							errors.rejectValue("ehtrty", "systema.tvinn.sad.digitoll.house.error.rule.invalidReferenceType");
 						}
-						
+						/* removed for TEST CASE 2 (toll.no)
 						if(StringUtils.isNotEmpty(record.getEhtrnr()) ) {
 							errors.rejectValue("ehtrty", "systema.tvinn.sad.digitoll.house.error.rule.notrequired.mrn");
-						}
+						}*/
 					}
 				}
 				//------

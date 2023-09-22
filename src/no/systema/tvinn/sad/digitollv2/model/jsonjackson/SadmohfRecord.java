@@ -19,7 +19,7 @@ public class SadmohfRecord extends JsonAbstractGrandFatherRecord   {
 	private Integer ehdts = 0; //      sonet        8  0       8        58        begge    sendingsdato  
 	private String ehdtsStr = "";
 	public String getEhdtsStr() {
-		if(this.ehdts > 0 ){
+		if(this.ehdts!=null && this.ehdts > 0 ){
 			String tmp = String.valueOf(this.ehdts);
 			if (tmp.length()< 6) {
 				this.ehdtsStr = "0" + tmp;

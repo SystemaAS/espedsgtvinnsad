@@ -35,6 +35,10 @@
 			</td>
 			 
 			<td width="80%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
+				<a tabindex=-1 href="renderLocalPdf.do?fn=DigitollV2-Doc.pdf" target="_blank">
+ 					<img title="Documentation..." style="vertical-align:top;" width="22px" height="22px" src="resources/images/pdf2.png" border="0" alt="pdf">
+ 				</a>
+				&nbsp;&nbsp;
 				<img id="imgInfoRpgJarStart" style="cursor:pointer;" onClick="showPop('jarStartCmd');" src="resources/images/log-iconLOG.png" width="22" height="22" border="0" alt="info">
 				<div class="text12" style="position: relative;display: inline;" align="left">
 				<span style="position:absolute; left:-100px; top:15px;" id="jarStartCmd" class="popupWithInputText"  >
@@ -55,6 +59,8 @@
 	           		</div>
 	           	</span>
 	           	</div>
+	           	
+	           	
 			</td>
 		</tr>
 	</table>

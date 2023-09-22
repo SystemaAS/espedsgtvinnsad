@@ -22,7 +22,7 @@ public class SadmotfRecord extends JsonAbstractGrandFatherRecord  {
 	private Integer etdtr = 0; // numeric(8) default 0, Reg.dato
 	private String etdtrStr = "";
 	public String getEtdtrStr() {
-		if(this.etdtr > 0 ){
+		if(this.etdtr!=null && this.etdtr > 0 ){
 			String tmp = String.valueOf(this.etdtr);
 			if (tmp.length()< 6) {
 				this.etdtrStr = "0" + tmp;

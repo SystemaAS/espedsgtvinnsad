@@ -25,7 +25,7 @@ public class SadmomfRecord extends JsonAbstractGrandFatherRecord   {
 	private Integer emdtr= 0;  //sonet        8  0     registreringsdato 
 	private String emdtrStr = "";
 	public String getEmdtrStr() {
-		if(this.emdtr > 0 ){
+		if(this.emdtr!=null && this.emdtr > 0 ){
 			String tmp = String.valueOf(this.emdtr);
 			if (tmp.length()< 6) {
 				this.emdtrStr = "0" + tmp;
