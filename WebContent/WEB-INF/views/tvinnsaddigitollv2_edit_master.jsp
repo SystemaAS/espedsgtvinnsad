@@ -842,7 +842,7 @@
 						<c:otherwise>
 							&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
 							<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
-								 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
+								 <p class="text14" >Er du sikker på at du vil sende till toll.no ? Det tar ca 10 sekunder</p>
 							</div>
 						</c:otherwise>
 					</c:choose>
@@ -965,7 +965,7 @@
 		               <td width="2%" align="right" class="tableCell" >${houseConsignmentRecord.ehntk}</td>
 		               <td width="2%" align="left" class="tableCell" >${houseConsignmentRecord.ehdkh}</td>
 		               <td width="2%" align="left" class="tableCell" >${houseConsignmentRecord.ehdkht}</td>
-		               <td width="2%" align="left" class="tableCell" >${houseConsignmentRecord.ehrg}&nbsp;${houseConsignmentRecord.eh0068a}&nbsp;${houseConsignmentRecord.eh0068b}&nbsp;${houseConsignmentRecord.ehtrnr}</td>
+		               <td width="2%" align="left" class="tableCell" >${houseConsignmentRecord.ehrg} ${houseConsignmentRecord.eh0068a} ${houseConsignmentRecord.eh0068b} ${houseConsignmentRecord.ehtrnr}</td>
 		               <td width="2%" align="left" class="tableCell" >${houseConsignmentRecord.ehprt}</td>
 		               <td width="2%" align="left" class="tableCell" >${houseConsignmentRecord.ehuprt}</td>
 		               

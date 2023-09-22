@@ -351,7 +351,24 @@
 					<table>
 						<tr>
 							<td colspan="3" class="text14">&nbsp;<span title="ehprt">Prosedyr</span><font class="text16RedBold" >*</font></td>
-							<td class="text14">&nbsp;<span title="ehuprt">Eksp.prosedyr</span></td>
+							<td class="text14">
+								<img style="cursor:pointer;" onMouseOver="showPop('ehuprt_info');" onMouseOut="hidePop('ehuprt_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+				            	<span title="ehuprt">Eksp.prosedyr</span>
+		                		<div class="text11" style="position: relative;" align="left">
+			                	<span style="position:absolute;top:2px; width:250px;" id="ehuprt_info" class="popupWithInputText text11"  >
+				           		<b>Eksp.prosedyr - Outgoing Procedure</b>
+				           		<ul>
+				           			<li><b>TRA</b> Transittering. Kode som brukes når valgt Tollprosedyre er Direktefortolling for å angi om prosedyren fram til grensen er transittering</li>
+									<li><b>EXP</b> Eksport. Kode som brukes når valgt Tollprosedyre er Direktefortolling for å angi om prosedyren fram til grensen er eksport</li>
+									<li><b>TRE</b> Transittering og Eksport. Kode som brukes når valgt Tollprosedyre er Direktefortolling for å angi om prosedyren fram til grensen er transittering OG eksport</li>
+									<li><b>FALSE</b> Tolldeklarasjon der eksportene er avsluttet i avgangslandet. Eksempel: når sendingen <b>ikke kommer på landevei via Sverige</b>, men for eksempel med fly fra Tyskland eller med båt fra Nederland. Da forutsettes det at eksportene blir utførselsbekreftet/ekspedert av tollmyndigheten i avgangslandet.
+													<b/><b>IMMEDIATE_RELEASE_VOEC</b> har nesten alltid <b>FALSE</b>
+				           		</ul>
+								</span>	
+								</div>
+							
+							
+							</td>
 						</tr>
 						<tr>
 							<td colspan="3" class="text14">
@@ -412,7 +429,21 @@
 							
 						<tr >
 			 			<tr>
-			 				<td class="text14">&nbsp;<span title="ehtrty">Ref.type</span></td>
+			 				<td class="text14">&nbsp;
+								<img style="cursor:pointer;" onMouseOver="showPop('ehtrty_info');" onMouseOut="hidePop('ehtrty_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+				            	<span title="ehtrty">Ref.type</span>
+		                		<div class="text11" style="position: relative;" align="left">
+			                	<span style="position:absolute;top:2px; width:250px;" id="ehtrty_info" class="popupWithInputText text11"  >
+				           		<b>Ref.type - Additional Previous Document Type</b>
+				           		<ul>
+				           			<li><b>CUDE</b> Tolldeklarasjon. Kode som skal brukes dersom det er deklarasjonsID og ikke typeOfReference som skal fylles ut på previousDocuments-objektet</li>
+									<li><b>RETR</b> Oppstart transittering. Kode som skal brukes dersom det er en LRN til transitteringsdeklarasjonen som fylles ut i referenceNumber på previousDocuments-objektet</li>
+									<li><b>N820</b> Transittering. Transittering som er startet opp utenfor Norge og som bare skal grensepasseres ved ankomst til grensen eller Transittering som skal fullføres mot tolldeklarasjon ved grensepassering
+				           		</ul>
+								</span>	
+								</div>
+
+							</td>
 			 				<td class="text14">&nbsp;<span title="ehrg">Deklarantnr.</span></td>
 							<td class="text14">&nbsp;<span title="eh0068a">Dato</span></td>
 							<td class="text14">&nbsp;<span title="eh0068b">Sekvensnr.</span></td>
@@ -435,8 +466,42 @@
 						<tr height="5"><td></td></tr>
 						
 						<tr >
-							<td class="text14">&nbsp;<span title="ehetypt">Eksporttype</span></td>
-							<td class="text14">&nbsp;<span title="eheid">Eksp.id</span></td>	
+							<td class="text14">
+								<img style="cursor:pointer;" onMouseOver="showPop('ehetypt_info');" onMouseOut="hidePop('ehetypt_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+				            	<span title="ehetypt">Eksporttype</span>
+		                		<div class="text11" style="position: relative;" align="left">
+			                	<span style="position:absolute;top:2px; width:500px;" id="ehetypt_info" class="popupWithInputText text11"  >
+				           		<b>Eksporttype</b>
+				           		<ul>
+				           			<li><b>UGE_EXPORT</b> UGE Eksport fra Sverige som på forhånd er klarert for utførsel av det svenske Tullverket. Ifm med ankomst til grensen sendes det automatisk en ankomst- og utførselsbekreftelse til Tullverket. Medfører ikke behov for manuell ekspedisjon på grensen.	
+										18 tegn. de to første tegnene skal være siffer.de tre neste skal være bokstavene SEE. <br/>Eksempel: 23SEE0123456789QWE</li>
+									<li><b>EUEIR_EXPORT</b>	EUEIR Eksport fra Sverige. Ingen videre oppfølging for Tolletaten ifm ankomst og innpassering. Medfører ikke behov for manuell ekspedisjon på grensen.	
+										inntil 35 tegn. <br/>Eksempel: SE009251-20230602-24</li>
+									<li><b>ALE_EXPORT</b> ALE Eksport fra Sverige. Ingen videre oppfølging for Tolletaten ifm ankomst og innpassering. Medfører ikke behov for manuell ekspedisjon på grensen.	
+										18 tegn. <br/>Eksempel:23SEALEATD3OAW6MG1</li>
+									<li><b>UNU_EXPORT</b> UNU Eksport fra Sverige. Dette er det Tullverket kaller en "Standardtulldeklaration" og den må alltid ekspederes av et "Exporttullkontor" før varen kan føres ut av Sverige. Pga grensetollsamarbeidet er det f.eks No SVD/No Ørje som fungerer som nettopp dette Exporttullkontoret når eksporten skal til Norge. Dette innebærer at den norske tolleren må ekspedere eksportdeklarasjonen i det svenske systemet. Ekspedisjon kan også innebære manuell behandling tilsvarende maskebehandling i Tvinn. Etter av deklarasjonen er ekspedert, må den utførselsbekreftes på samme måte som en UGE. Medfører behov for manuell ekspedisjon på grensen.	
+										10 tegn. <br/>Eksempel:FKR0116862</li>
+									<li><b>ECS_EXPORT</b> ECS Eksport fra EU. Ekspedisjonsprosessen innebærer at toller utførselsbekrefter eksporten i eksportkontrollsystemet (ECS). Medfører behov for manuell ekspedisjon på grensen.	
+										18 tegn <br/>Eksempel:23FIMHFG8987345TY7</li>
+								</ul>		
+				           		</span>	
+								</div>
+							
+							
+							
+							</td>
+							<td class="text14">
+								<img style="cursor:pointer;" onMouseOver="showPop('eheid_info');" onMouseOut="hidePop('eheid_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+				            	<span title="eheid">Eksp.id</span>
+		                		<div class="text11" style="position: relative;" align="left">
+			                	<span style="position:absolute;top:2px; width:250px;" id="eheid_info" class="popupWithInputText text11"  >
+				           		<b>Eksp.id</b>
+				           		<p>Unik referanse til eksportdeklarasjonen fra Sverige. Dette kan være den MRN (Master Record Number) som EU utsteder for eksportdeklarasjonen. Hva slags eksportreferanse som oppgis angis i eksporttype-feltet</p>
+								</span>	
+								</div>
+							
+							
+							</td>	
 							<td>&nbsp;</td>						
 						</tr>
 						
@@ -974,7 +1039,7 @@
 						<c:otherwise>
 							&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
 							<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
-								 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
+								 <p class="text14" >Er du sikker på at du vil sende till toll.no ? Det tar ca 10 sekunder</p>
 							</div>
 						</c:otherwise>
 					</c:choose>

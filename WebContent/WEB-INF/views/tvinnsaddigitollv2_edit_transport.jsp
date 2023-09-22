@@ -737,7 +737,7 @@
 					<c:if test="${model.record.etlnrt > 0}">
 						&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
 						<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
-							 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
+							 <p class="text14" >Er du sikker på at du vil sende till toll.no ? Det tar ca 10 sekunder</p>
 						</div>
 					</c:if>
 				</c:if>
