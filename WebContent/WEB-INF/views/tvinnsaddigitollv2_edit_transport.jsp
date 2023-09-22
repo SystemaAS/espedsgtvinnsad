@@ -166,18 +166,18 @@
 			</tr>
 			</c:if>
 			
-		<%-- OBSOLETE 	
-		<c:if test="${!model.record.own_okToSend}">	 
+		<%-- WARNING 	--%>
+		<c:if test="${empty model.record.etmid && model.record.etlnrt > 0}">	 
 			<tr >
 				<td colspan="10" class="text14  ">
 	    			<font class="inputText isa_warning" >
-	    				Lasten er ikke gyldig for sending via api. Alle master-consignments skal ha MRN-Api-nr. bortsett fra de som er KANSELLERT eller SLETTET. Minst en master-consignment må eksistere.
+	    				For å opprette en ny Master må du ha sendt Transporten (Send-knappen) og fått et MRN-Api-nummer. Dette for å kunne låse hvilken Api som skal brukes: Road eller Air
 	    			</font>
 	    		</td>
 	   		</tr>
 	  		<tr height="2"><td colspan="10">&nbsp;</td></tr>  
   		</c:if>
-  		--%>
+  		
   		
   		<tr height="5">	
   			<td  colspan="10" class="text14 formFrame" >

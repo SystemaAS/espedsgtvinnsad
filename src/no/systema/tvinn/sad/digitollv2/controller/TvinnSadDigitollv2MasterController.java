@@ -847,7 +847,7 @@ public class TvinnSadDigitollv2MasterController {
 	 */
 	private void adjustFieldsForFetch(SadmomfRecord recordToValidate){
 		//Registered date
-		if(recordToValidate.getEmdtr() > 0) {
+		if(recordToValidate.getEmdtr()!=null && recordToValidate.getEmdtr() > 0) {
 			String tmpEmdtr = String.valueOf(recordToValidate.getEmdtr());
 			if (org.apache.commons.lang3.StringUtils.isNotEmpty(tmpEmdtr) && tmpEmdtr.length()==8) {
 				int isoEmdtr = Integer.parseInt(this.dateMgr.getDateFormatted_NO(tmpEmdtr, DateTimeManager.ISO_FORMAT));
@@ -855,7 +855,7 @@ public class TvinnSadDigitollv2MasterController {
 			}
 		}
 		//Sent date
-		if(recordToValidate.getEmdtin() > 0) {
+		if(recordToValidate.getEmdtin()!=null && recordToValidate.getEmdtin() > 0) {
 			String tmpEmdtin = String.valueOf(recordToValidate.getEmdtin());
 			if (org.apache.commons.lang3.StringUtils.isNotEmpty(tmpEmdtin) && tmpEmdtin.length()==8) {
 				int isoEmdtin = Integer.parseInt(this.dateMgr.getDateFormatted_NO(tmpEmdtin, DateTimeManager.ISO_FORMAT));
@@ -863,7 +863,7 @@ public class TvinnSadDigitollv2MasterController {
 			}
 		}
 		//Date
-		if(recordToValidate.getEmatdd() > 0) {
+		if(recordToValidate.getEmatdd()!=null && recordToValidate.getEmatdd() > 0) {
 			String tmpEmatdd = String.valueOf(recordToValidate.getEmatdd());
 			if (org.apache.commons.lang3.StringUtils.isNotEmpty(tmpEmatdd) && tmpEmatdd.length()==8) {
 				int isoEmatdd = Integer.parseInt(this.dateMgr.getDateFormatted_NO(tmpEmatdd, DateTimeManager.ISO_FORMAT));

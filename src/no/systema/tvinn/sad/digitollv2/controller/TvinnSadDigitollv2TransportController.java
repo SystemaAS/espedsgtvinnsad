@@ -959,7 +959,7 @@ public class TvinnSadDigitollv2TransportController {
 	 */
 	private void adjustFieldsForFetch(SadmotfRecord recordToValidate){
 		//Register date
-		if(recordToValidate.getEtdtr() > 0) {
+		if(recordToValidate.getEtdtr()!=null && recordToValidate.getEtdtr() > 0) {
 			String tmpEtdtr = String.valueOf(recordToValidate.getEtdtr());
 			if (org.apache.commons.lang3.StringUtils.isNotEmpty(tmpEtdtr) && tmpEtdtr.length()==8) {
 				int isoEtdtr = Integer.parseInt(this.dateMgr.getDateFormatted_NO(tmpEtdtr, DateTimeManager.ISO_FORMAT));
@@ -967,7 +967,7 @@ public class TvinnSadDigitollv2TransportController {
 			}
 		}
 		//ETA date
-		if(recordToValidate.getEtetad() > 0) {
+		if(recordToValidate.getEtetad()!=null && recordToValidate.getEtetad() > 0) {
 			String tmpEtetatd = String.valueOf(recordToValidate.getEtetad());
 			if (org.apache.commons.lang3.StringUtils.isNotEmpty(tmpEtetatd) && tmpEtetatd.length()==8) {
 				int isoEtetad = Integer.parseInt(this.dateMgr.getDateFormatted_NO(tmpEtetatd, DateTimeManager.ISO_FORMAT));
@@ -975,7 +975,7 @@ public class TvinnSadDigitollv2TransportController {
 			}
 		}
 		//ETA time
-		if(recordToValidate.getEtetat() > 0) {
+		if(recordToValidate.getEtetat()!=null && recordToValidate.getEtetat() > 0) {
 			String tmpEtetat = String.valueOf(recordToValidate.getEtetat());
 			if(tmpEtetat.length()>4) {
 				tmpEtetat = tmpEtetat.substring(0,4);
@@ -1036,7 +1036,7 @@ public class TvinnSadDigitollv2TransportController {
 		}
 		
 		//Register date
-		if(recordToValidate.getEtdtr() > 0) {
+		if(recordToValidate.getEtdtr()!=null && recordToValidate.getEtdtr() > 0) {
 			int regDate = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(recordToValidate.getEtdtrStr(), DateTimeManager.NO_FORMAT));
 			//logger.info("BBBB:" + regDate);
 			recordToValidate.setEtdtr(regDate);

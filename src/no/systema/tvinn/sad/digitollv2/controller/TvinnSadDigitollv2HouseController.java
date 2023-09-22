@@ -796,7 +796,7 @@ public class TvinnSadDigitollv2HouseController {
 	
 	private void adjustFieldsForFetch(SadmohfRecord recordToValidate){
 		//Sent date
-		if(recordToValidate.getEhdts() > 0) {
+		if(recordToValidate.getEhdts()!=null && recordToValidate.getEhdts() > 0) {
 			String tmpEmdtin = String.valueOf(recordToValidate.getEhdts());
 			if (org.apache.commons.lang3.StringUtils.isNotEmpty(tmpEmdtin) && tmpEmdtin.length()==8) {
 				int isoEhdts = Integer.parseInt(this.dateMgr.getDateFormatted_NO(tmpEmdtin, DateTimeManager.ISO_FORMAT));

@@ -170,7 +170,7 @@
 			    			
 			    			<%-- -------------------------- --%>
 			    			<%-- TVINN-SAD NCTS-5 EXPORT MENU --%>
-			    			<%-- -------------------------- --%>
+			    			<%-- -------------------------- 
 			    			<a id="alinkTopicListMenuNctsExp" tabindex=-1 href="tvinnsadncts5export.do?action=doFind&sign=${user.tvinnSadSign}">
 			    				&nbsp;<font
 			    				<c:choose>           
@@ -190,7 +190,7 @@
 			    			 
 			    			<%-- --------------------- --%>
 			    			<%-- TVINN-SAD NCTS-5 IMPORT MENU --%>
-			    			<%-- --------------------- --%>
+			    			<%-- --------------------- 
 			    			<a id="alinkTopicListMenuNctsImp" tabindex=-1 href="tvinnsadncts5import.do?action=doFind&sign=${user.tvinnSadSign}">
 			    				&nbsp;<font
 			    				<c:choose>           
@@ -204,11 +204,11 @@
 			    				>&nbsp;<spring:message code="systema.tvinn.sad.ncts5.import.label"/>&nbsp;</font>
 			    			</a>
 			    			&nbsp;<font color="#FFFFFF" style="font-weight: bold;">|</font>
-			    			
+			    			--%>
 			    			
 			    			<%-- --------------------- --%>
 			    			<%-- TVINN-SAD MANIFEST    --%>
-			    			<%-- --------------------- --%>
+			    			<%-- --------------------- 
 			    			<a id="alinkTopicListMenuManifest" tabindex=-1 href="tvinnsadmanifest.do?action=doFind&sign=${user.tvinnSadSign}">
 			    				&nbsp;<font
 			    				<c:choose>           
@@ -242,7 +242,7 @@
 			    			
 			    			<%-- -------------------------- --%>
 			    			<%-- TVINN-SAD NCTS EXPORT MENU --%>
-			    			<%-- -------------------------- --%>
+			    			<%-- -------------------------- 
 			    			<a id="alinkTopicListMenuNctsExp" tabindex=-1 href="tvinnsadnctsexport.do?action=doFind&sign=${user.tvinnSadSign}">
 			    				&nbsp;<font
 			    				<c:choose>           
@@ -262,7 +262,7 @@
 			    			 
 			    			<%-- --------------------- --%>
 			    			<%-- TVINN-SAD NCTS IMPORT MENU --%>
-			    			<%-- --------------------- --%>
+			    			<%-- --------------------- 
 			    			<a id="alinkTopicListMenuNctsImp" tabindex=-1 href="tvinnsadnctsimport.do?action=doFind&sign=${user.tvinnSadSign}">
 			    				&nbsp;<font
 			    				<c:choose>           
@@ -276,12 +276,10 @@
 			    				>&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.label"/>&nbsp;</font>
 			    			</a>
 			    			&nbsp;<font color="#FFFFFF" style="font-weight: bold;">|</font>
-			    			
-			    			
-			    			
+			    		
 			    			<%-- -------------- --%>
 			    			<%-- ADMIN  MENU    --%>
-			    			<%-- -------------- --%>
+			    			<%-- -------------- 
 			    			<a tabindex=-1 href="tvinnsadadmin_avggrunnlag.do">
 			    				&nbsp;<font
 			    				<c:choose>           
