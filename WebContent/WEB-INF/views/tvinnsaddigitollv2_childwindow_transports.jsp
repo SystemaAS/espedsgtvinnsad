@@ -73,10 +73,10 @@
 			               	   <td width="2%" align="center" class="tableCell" >
 				               		<c:choose>
 				               		<c:when test="${ not empty itemLinesRecord.etktyp && fn:startsWith(itemLinesRecord.etktyp,'4') }">
-										<img style="vertical-align:middle;" id="airplaneImg${itemLinesRecord.etlnrt}" src="resources/images/airplaneBlue.png" width="18" height="18"border="0" >&nbsp;
+										<img title="api:air" style="vertical-align:middle;" id="airplaneImg${itemLinesRecord.etlnrt}" src="resources/images/airplaneBlue.png" width="18" height="18"border="0" >&nbsp;
 									</c:when>
 									<c:otherwise>
-										<img style="vertical-align:middle;" id="lorryImg${itemLinesRecord.etlnrt}" src="resources/images/lorry_green.png" width="16" height="16"border="0" >&nbsp;
+										<img title="api:road" style="vertical-align:middle;" id="lorryImg${itemLinesRecord.etlnrt}" src="resources/images/lorry_green.png" width="16" height="16"border="0" >&nbsp;
 									</c:otherwise>
 									</c:choose>
 				               </td>
