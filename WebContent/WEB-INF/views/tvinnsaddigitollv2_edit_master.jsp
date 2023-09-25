@@ -314,15 +314,8 @@
 							</select>									
 						</td>
 						<td class="text14">
-							<c:choose>
-							<c:when test="${not empty model.record.emdkm}">
-								<input readonly type="text" class="inputTextReadOnly" name="emdkm" id="emdkm" size="25" maxlength="50" value="${model.record.emdkm}">
-							</c:when>
-							<c:otherwise>
-								<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="emdkm" id="emdkm" size="25" maxlength="50" value="${model.record.emdkm}">	
-							</c:otherwise>
-							</c:choose>
-									
+							<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="emdkm" id="emdkm" size="25" maxlength="50" value="${model.record.emdkm}">	
+							
 						</td>
 						<td class="text14">
 							<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="emdkmt" id="emdkmt" >
