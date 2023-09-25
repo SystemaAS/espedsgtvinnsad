@@ -974,9 +974,12 @@
 							</c:if>
 						</td>	
 						<td width="2%" class="tableCell" align="center">
-	               	   		<a tabindex=-1 style="display: block; width: 100%; height: 100%;" class="transformLink" id="emlnrt${masterConsignmentRecord.emlnrt}_emlnrm${masterConsignmentRecord.emlnrm}_etktyp${model.record.etktyp}" runat="server" href="#">
-								<img title="Endre transport..." src="resources/images/transform.png" width="20" height="20" border="0" alt="endre transport">
-							</a> 		
+							<%-- Either tansport-not sent or transport-DELETED --%>
+							<c:if test="${empty model.record.etmid}">
+		               	   		<a tabindex=-1 style="display: block; width: 100%; height: 100%;" class="transformLink" id="emlnrt${masterConsignmentRecord.emlnrt}_emlnrm${masterConsignmentRecord.emlnrm}_etktyp${model.record.etktyp}" runat="server" href="#">
+									<img title="Endre transport..." src="resources/images/transform.png" width="20" height="20" border="0" alt="endre transport">
+								</a>
+							</c:if> 		
 						</td>
 		            </tr> 
 		            </c:forEach>
