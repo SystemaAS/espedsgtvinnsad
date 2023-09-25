@@ -48,7 +48,7 @@
 				 text: "Ok",
 				 click: function(){
 					 		setBlockUI();
-							window.location = window.location = 'tvinnsaddigitollv2_api_send_transport.do?etlnrt=' + jq('#etlnrt').val() + '&etmid=' + jq('#etmid').val();
+							window.location = 'tvinnsaddigitollv2_api_send_transport.do?etlnrt=' + jq('#etlnrt').val() + '&etmid=' + jq('#etmid').val();
 				 		}
 			 	 },
 	 	 		{
