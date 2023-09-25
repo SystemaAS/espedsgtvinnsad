@@ -249,7 +249,15 @@
 						<td class="text14">&nbsp;<span title="ehntk">Ant.kolli</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="ehvt">Varebesk</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="ehcnin">Container</span><font class="text16RedBold" >*</font></td>
-						<td class="text14">&nbsp;<span title="ehdkh">Dok.nr</span><font class="text16RedBold" >*</font></td>
+						<td class="text14">&nbsp;<span title="ehdkh">Dok.nr</span><font class="text16RedBold" >*</font>
+							<%-- Kan inte ändras tyvärr (Api error)
+							<c:if test="${not empty model.record.ehdkh}">
+								<a title="Oppdater Dok.nr hvis ønskelig. Du må lagre posten selv for å bevare endringen" tabindex="-1" id="${model.record.ehlnrt}_${model.record.ehdkh}" OnClick="getDocNumber(this)">
+									<img style="cursor:pointer;vertical-align: middle;" src="resources/images/update.gif" border="0" alt="update" >
+								</a>
+							</c:if>
+							 --%>
+						</td>
 						<td class="text14">&nbsp;<span title="ehdkht">Dok.type</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="ehst">St.</span></td>
 						<td class="text14">&nbsp;<span title="ehst2">St.2</span></td>

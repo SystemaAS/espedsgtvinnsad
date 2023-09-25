@@ -151,6 +151,43 @@ public class TvinnSadDigitollAjaxController {
 		 return result;
 	 }
 	
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param ehlnrt
+	 * @param ehlnrm
+	 * @param ehlnrh
+	 * @return
+	 */
+	@RequestMapping(value = "getDocumentNrHouse_Digitoll.do", method = RequestMethod.GET)
+	public @ResponseBody Set<SadmotfRecord> updateDocumentNrHouse_Digitoll
+	  						(@RequestParam String applicationUser, @RequestParam String etlnrt) {
+		 
+		 final String METHOD = "[DEBUG] updateDocumentNrHouse_Digitoll ";
+		 logger.info(METHOD + "Inside");
+		 Set result = new HashSet();
+		 //prepare the access CGI with RPG back-end
+		 final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TRANSPORT_URL;
+		 String urlRequestParams = "user=" + applicationUser + "&etlnrt=" + etlnrt;
+			logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+	    	logger.warn("URL: " + BASE_URL);
+	    	logger.warn("URL PARAMS: " + urlRequestParams);
+	    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+	
+	    	//Debug --> 
+	    	logger.debug(jsonPayload);
+	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    	if(jsonPayload!=null){
+	    		SadmotfContainer jsonContainer = this.sadmotfListService.getListContainer(jsonPayload);
+	    		List<SadmotfRecord> list = (List)jsonContainer.getList();
+	    		for(SadmotfRecord record : list) {
+	    			result.add(record);
+	    		}
+	    		
+	    	}
+		 
+		 return result;
+	 }
 		
 	
 	@Autowired

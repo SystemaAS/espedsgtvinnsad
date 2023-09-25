@@ -380,6 +380,47 @@
 
   	}
   
+	/** OBSOLETE
+		This is an update in case the EORI nr of the transport is changed
+		The user can save this new number if he/she wants. This is just a user help...
+		
+		Api error when changing an already send DocNr. you need to DELETE the House and send again with the updated DocNr if any
+	*/
+	function getDocNumber(thisRecord) {
+	  	var rawId = thisRecord.id;
+		var record = rawId.split("_");
+		//console.log(id);
+		var etlnrt = record[0];
+	  	var applicationUser = jq('#applicationUser').val();
+	  	//get the original docNr
+		var originalDocRecord = record[1].split("-");
+		var docSuffix = originalDocRecord[1] + "-" + originalDocRecord[2];
+		console.log(docSuffix);
+		
+	  	jq.ajax({
+	  	  type: 'GET',
+	  	  url: 'getDocumentNrHouse_Digitoll.do',
+	  	  data: { applicationUser : applicationUser,
+				  etlnrt : etlnrt},
+	  	  dataType: 'json',
+	  	  cache: false,
+	  	  contentType: 'application/json',
+	  	  success: function(data) {
+	  		
+	  		var len = data.length;
+			for ( var i = 0; i < len; i++) {
+				//console.log(data[i].etrgr)
+				jq('#ehdkh').val("");jq('#ehdkh').val(data[i].etrgr + "-" + docSuffix); //OrgNr/Eori Ombud from Transport + origianal docNrSuffix (avd + opd))
+					
+			}
+	  	  },
+	  	  error: function() {
+			alert('Error loading ...');
+	  	  }
+	  	});
+		
+  	}
+
   
 //-------------------------------------------
   //START Model dialog ADMIN: "Update status"
