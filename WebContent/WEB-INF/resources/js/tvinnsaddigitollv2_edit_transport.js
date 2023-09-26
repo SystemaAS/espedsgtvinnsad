@@ -291,14 +291,14 @@
 			}
 			if(len > 0){
 				jq('#etknt').val(customer.kundnr);
-				jq('#etnat').val(customer.knavn);
+				jq('#etnat').val(customer.knavn); refreshCustomValidity(jq('#etnat')[0]);
 				if('' != customer.orgnr){
-					jq('#etrgt').val(customer.orgnr);
+					jq('#etrgt').val(customer.orgnr);refreshCustomValidity(jq('#etrgt')[0]);
 				}else{
-					jq('#etrgt').val(customer.eori);
+					jq('#etrgt').val(customer.eori);refreshCustomValidity(jq('#etrgt')[0]);
 				}
-				jq('#etpst').val(customer.adr3);
-				jq('#etlkt').val(customer.syland);
+				jq('#etpst').val(customer.adr3);refreshCustomValidity(jq('#etpst')[0]);
+				jq('#etlkt').val(customer.syland);refreshCustomValidity(jq('#etlkt')[0]);
 				jq('#etpnt').val(customer.postnr);
 				jq('#etad1t').val(customer.adr1);
 				jq('#ettppt').val("2"); //bedrift
@@ -361,15 +361,15 @@
 			}
 			if(len > 0){
 				jq('#etknr').val(customer.kundnr);
-				jq('#etnar').val(customer.knavn);
+				jq('#etnar').val(customer.knavn); refreshCustomValidity(jq('#etnar')[0]);
 				if('' != customer.orgnr){
-					jq('#etrgr').val(customer.orgnr);
+					jq('#etrgr').val(customer.orgnr);refreshCustomValidity(jq('#etrgr')[0]);
 				}else{
-					jq('#etrgr').val(customer.eori);
+					jq('#etrgr').val(customer.eori);refreshCustomValidity(jq('#etrgr')[0]);
 				}
 				
-				jq('#etpsr').val(customer.adr3);
-				jq('#etlkr').val(customer.syland);
+				jq('#etpsr').val(customer.adr3);refreshCustomValidity(jq('#etpsr')[0]);
+				jq('#etlkr').val(customer.syland);refreshCustomValidity(jq('#etlkr')[0]);
 				jq('#etpnr').val(customer.postnr);
 				jq('#etad1r').val(customer.adr1);
 				jq('#ettppr').val("2"); //bedrift

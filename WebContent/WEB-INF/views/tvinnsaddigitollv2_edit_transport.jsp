@@ -171,7 +171,7 @@
 			<tr >
 				<td colspan="10" class="text14  ">
 	    			<font class="inputText isa_warning" >
-	    				For å opprette en ny Master må du ha sendt Transporten (Send-knappen) og fått et MRN-Api-nummer. Dette for å kunne låse hvilken Api som skal brukes: Road eller Air
+	    				For å opprette en ny Master må du ha sendt Transporten (Send-knappen) og fått et MRN-Api-nummer. Dette for å kunne låse hvilken Api(road eller air) som skal brukes på Master/House 
 	    			</font>
 	    		</td>
 	   		</tr>

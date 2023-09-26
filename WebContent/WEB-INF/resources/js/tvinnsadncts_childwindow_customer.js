@@ -144,21 +144,21 @@
 			  //=========================  
 			  }else if(callerType == 'etnat'){
 				  opener.jq('#etknt').val(knr);
-				  opener.jq('#etnat').val(knavn);
-				  opener.jq('#etrgt').val(syrg);
+				  opener.jq('#etnat').val(knavn);refreshCustomValidity(opener.jq('#etnat')[0]);
+				  opener.jq('#etrgt').val(syrg);refreshCustomValidity(opener.jq('#etrgt')[0]);
 				  opener.jq('#etad1t').val(adr1);
-				  opener.jq('#etpst').val(adr3);
+				  opener.jq('#etpst').val(adr3);refreshCustomValidity(opener.jq('#etpst')[0]);
 				  opener.jq('#etpnt').val(postnr);
-				  opener.jq('#etlkt').val(land);
+				  opener.jq('#etlkt').val(land);refreshCustomValidity(opener.jq('#etlkt')[0]);
 				  opener.jq('#etnat').focus();	
 			  }else if(callerType == 'etnar'){
 				  opener.jq('#etknr').val(knr);
-				  opener.jq('#etnar').val(knavn);
-				  opener.jq('#etrgr').val(syrg);
+				  opener.jq('#etnar').val(knavn);refreshCustomValidity(opener.jq('#etnar')[0]);
+				  opener.jq('#etrgr').val(syrg);refreshCustomValidity(opener.jq('#etrgr')[0]);
 				  opener.jq('#etad1r').val(adr1);
-				  opener.jq('#etpsr').val(adr3);
+				  opener.jq('#etpsr').val(adr3);refreshCustomValidity(opener.jq('#etpsr')[0]);
 				  opener.jq('#etpnr').val(postnr);
-				  opener.jq('#etlkr').val(land);
+				  opener.jq('#etlkr').val(land);refreshCustomValidity(opener.jq('#etlkr')[0]);
 				  opener.jq('#etnar').focus();
 			  //=========================
 			  //DIGITOLL -- MASTER
@@ -186,8 +186,8 @@
 			  //=========================  
 			  }else if(callerType == 'ehnas'){
 				  opener.jq('#ehkns').val(knr);
-				  opener.jq('#ehnas').val(knavn);
-				  opener.jq('#ehrgs').val(syrg);
+				  opener.jq('#ehnas').val(knavn);refreshCustomValidity(opener.jq('#ehnas')[0]);
+				  opener.jq('#ehrgs').val(syrg);refreshCustomValidity(opener.jq('#ehrgs')[0]);
 				  opener.jq('#ehad1s').val(adr1);
 				  opener.jq('#ehpss').val(adr3);
 				  opener.jq('#ehpns').val(postnr);
@@ -195,8 +195,8 @@
 				  opener.jq('#ehnas').focus();	
 			  }else if(callerType == 'ehnam'){
 				  opener.jq('#ehknm').val(knr);
-				  opener.jq('#ehnam').val(knavn);
-				  opener.jq('#ehrgm').val(syrg);
+				  opener.jq('#ehnam').val(knavn);refreshCustomValidity(opener.jq('#ehnam')[0]);
+				  opener.jq('#ehrgm').val(syrg);refreshCustomValidity(opener.jq('#ehrgm')[0]);
 				  opener.jq('#ehad1m').val(adr1);
 				  opener.jq('#ehpsm').val(adr3);
 				  opener.jq('#ehpnm').val(postnr);
