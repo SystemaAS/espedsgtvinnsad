@@ -658,8 +658,12 @@ public class TvinnSadDigitollv2MasterController {
 						break;
 					}else {
 						if(mode.equals(SadDigitollConstants.DB_MODE_INSERT)) {
-							recordToValidate.setEmlnrt(record.getId());
-							recordToValidate.setEmlnrm(record.getId2());
+							if(recordToValidate.getEmlnrt()==null || recordToValidate.getEmlnrt()==0){
+								recordToValidate.setEmlnrt(record.getId());
+							}
+							if(recordToValidate.getEmlnrm()==null || recordToValidate.getEmlnrm()==0){
+								recordToValidate.setEmlnrm(record.getId2());
+							}
 						}
 					}
 				}

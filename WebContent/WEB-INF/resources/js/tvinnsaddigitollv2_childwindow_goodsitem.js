@@ -29,7 +29,7 @@
 	});
 	
 	
-jq(function() {
+	jq(function() {
 	    jq('#eibl').focus(function() {
 	    	if(jq('#eibl').val()!=''){
 	    		refreshCustomValidity(jq('#eibl')[0]);
@@ -50,7 +50,18 @@ jq(function() {
 	    		refreshCustomValidity(jq('#eirge')[0]);
 	  		}
 	  	});
-});	
+
+		//Varukod
+	    jq('#eivntIdLink').click(function() {
+	    	jq('#eivntIdLink').attr('target','_blank');
+	    	window.open('tvinnsaddigitollv2_childwindow_tolltariff.do?action=doInit&vkod=' + jq('#eivnt').val(), "codeWin", "top=350px,left=850px,height=400px,width=800px,scrollbars=no,status=no,location=no");
+	    });
+	    jq('#svvntIdLink').keypress(function(e){ //extra feature for the end user
+			if(e.which == 13) {
+				jq('#eivntIdLink').click();
+			}
+	    });
+	});	
 
 
 	function getItemData(record) {

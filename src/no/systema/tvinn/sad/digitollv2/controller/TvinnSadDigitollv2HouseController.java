@@ -194,6 +194,7 @@ public class TvinnSadDigitollv2HouseController {
 					}else {
 						//this step is required for the FETCH-step since we want to get the newly created record for upcoming updates...
 						if(mode.equals(SadDigitollConstants.DB_MODE_INSERT)) {
+							
 							ehlnrt = String.valueOf(recordToValidate.getEhlnrt());
 							ehlnrm = String.valueOf(recordToValidate.getEhlnrm());
 							ehlnrh = String.valueOf(recordToValidate.getEhlnrh());
@@ -659,9 +660,15 @@ public class TvinnSadDigitollv2HouseController {
 						break;
 					}else {
 						if(mode.equals(SadDigitollConstants.DB_MODE_INSERT)) {
-							recordToValidate.setEhlnrt(record.getId());
-							recordToValidate.setEhlnrm(record.getId2());
-							recordToValidate.setEhlnrh(record.getId3());
+							if(recordToValidate.getEhlnrt()==null || recordToValidate.getEhlnrt()==0){
+								recordToValidate.setEhlnrt(record.getId());
+							}
+							if(recordToValidate.getEhlnrm()==null || recordToValidate.getEhlnrm()==0){
+								recordToValidate.setEhlnrm(record.getId2());
+							}
+							if(recordToValidate.getEhlnrh()==null || recordToValidate.getEhlnrh()==0){
+								recordToValidate.setEhlnrh(record.getId3());
+							}
 						}
 					}
 				}

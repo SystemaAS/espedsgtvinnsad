@@ -16,50 +16,40 @@ import javawebparts.core.org.apache.commons.lang.StringUtils;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.ApplicationContext;
 
-import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.web.bind.ServletRequestDataBinder;
 
 
 //application imports
 import no.systema.main.service.UrlCgiProxyService;
+import no.systema.main.service.UrlCgiProxyServiceImpl;
 import no.systema.main.validator.LoginValidator;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.DateTimeManager;
 import no.systema.main.util.JsonDebugger;
-import no.systema.jservices.common.values.FasteKoder;
 import no.systema.main.context.TdsAppContext;
 import no.systema.main.model.SystemaWebUser;
 
 //tvinn
 import no.systema.tvinn.sad.util.TvinnSadConstants;
 import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
-import no.systema.z.main.maintenance.service.MaintMainKofastService;
 import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
+import no.systema.tvinn.sad.service.TvinnSadTolltariffVarukodService;
 import no.systema.tvinn.sad.service.TvinnSadTullkontorService;
 import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService;
-import no.systema.tvinn.sad.nctsimport.util.RpgReturnResponseHandler;
-//Avd/Sign
-import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelningContainer;
-import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelningRecord;
-import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureContainer;
-import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureRecord;
-import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
+
+import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadTolltariffVarukodContainer;
+import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadTolltariffVarukodRecord;
 import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorContainer;
 import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorRecord;
-import no.systema.tvinn.sad.digitollv2.filter.SearchFilterDigitollTransportList;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
@@ -74,13 +64,6 @@ import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
 import no.systema.tvinn.sad.digitollv2.util.SadDigitollConstants;
-import no.systema.tvinn.sad.manifest.express.filter.SearchFilterManifestList;
-import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
-import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
-import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
-import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
-import no.systema.tvinn.sad.manifest.express.util.manager.ManifestDateManager;
-import no.systema.tvinn.sad.manifest.express.util.manager.ManifestExpressMgr;
 import no.systema.tvinn.sad.manifest.express.util.manager.CodeDropDownMgr;
 
 
@@ -412,6 +395,105 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	    	return successView;
 		}
 	}
+	
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_tolltariff.do", params="action=doInit",  method={RequestMethod.GET, RequestMethod.POST } )
+	public ModelAndView doInitTolltariff(@ModelAttribute ("record") JsonTvinnSadTolltariffVarukodContainer recordToValidate, HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doInitTolltariff");
+		Map model = new HashMap();
+		String varuKod = request.getParameter("vkod");
+		String text = request.getParameter("tekst");
+		String ieMode = "I";
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_tolltariff");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			  
+			List<JsonTvinnSadTolltariffVarukodRecord> list = new ArrayList();
+			if(text!=null && !"".equals(text)){
+				list = this.getTulltaxaListFromDesc(appUser, text, ieMode);
+				model.put("tekst", text);
+			}else{
+				list = this.getTolltariffList(appUser, varuKod, ieMode);
+				model.put("vkod", varuKod);
+			}
+			model.put("tolltariffList", list);
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	/**
+	 * 
+	 * @param appUser
+	 * @param description
+	 * @param ieMode
+	 * @return
+	 */
+	private List<JsonTvinnSadTolltariffVarukodRecord> getTulltaxaListFromDesc(SystemaWebUser appUser, String description, String ieMode){
+		List<JsonTvinnSadTolltariffVarukodRecord> list = new ArrayList<JsonTvinnSadTolltariffVarukodRecord>();
+		
+		logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+		String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_TOLLTARIFF_VARUKODER_ITEMS_FROM_DESC_URL;
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + appUser.getUser() + "&ie=" + ieMode);
+		urlRequestParams.append("&sok=" + description);
+		
+		logger.info(BASE_URL);
+		logger.info(urlRequestParams.toString());
+		
+		UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
+		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+		logger.info(jsonPayload);
+		JsonTvinnSadTolltariffVarukodContainer container = null;
+		try{
+			if(jsonPayload!=null){
+				container = this.tvinnSadTolltariffVarukodService.getContainer(jsonPayload);
+				if(container!=null){
+					for(JsonTvinnSadTolltariffVarukodRecord  record : container.getTariclist()){
+						list.add(record);
+					}
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return list;
+	}
+	private List<JsonTvinnSadTolltariffVarukodRecord> getTolltariffList(SystemaWebUser appUser, String tolltariffVarekod, String ieMode){
+		List<JsonTvinnSadTolltariffVarukodRecord> list = new ArrayList<JsonTvinnSadTolltariffVarukodRecord>();
+		
+		logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+		String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_TOLLTARIFF_VARUKODER_ITEMS_URL;
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + appUser.getUser() + "&ie=" + ieMode);
+		urlRequestParams.append("&kod=" + tolltariffVarekod);
+		
+		logger.info(BASE_URL);
+		logger.info(urlRequestParams.toString());
+		
+		UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
+		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+		logger.info(this.jsonDebugger.debugJsonPayloadWithLog4J(jsonPayload));
+		JsonTvinnSadTolltariffVarukodContainer container = null;
+		try{
+			if(jsonPayload!=null){
+				container = this.tvinnSadTolltariffVarukodService.getContainer(jsonPayload);
+				if(container!=null){
+					for(JsonTvinnSadTolltariffVarukodRecord  record : container.getTariclist()){
+						list.add(record);
+					}
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return list;
+	}
 	/**
 	 * 
 	 * @param appUser
@@ -627,6 +709,9 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	private SadOppdragService sadOppdragService;
 	@Autowired
 	private TvinnSadTullkontorService tvinnSadTullkontorService;
+	
+	@Autowired
+	private TvinnSadTolltariffVarukodService tvinnSadTolltariffVarukodService;
 	
 }
 

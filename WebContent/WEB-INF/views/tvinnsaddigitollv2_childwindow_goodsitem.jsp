@@ -109,7 +109,11 @@
 							<td class="text14"><span title="eili">Lin</span></td>
 							<td class="text14"><span title="eibl">Vrd</span></td>
 							<td class="text14"><span title="eistk">Ant</span></td>
-							<td class="text14"><span title="eivnt">Tariffnr</span></td>
+							<td class="text14"><span title="eivnt">Tariffnr</span>
+								<a tabindex="-1" id="eivntIdLink">
+									<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
+								</a>
+							</td>
 							<td class="text14"><span title="eirge">SelgerId - VOEC</span></td>
 						</tr>
 						<tr>
