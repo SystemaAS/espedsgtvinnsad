@@ -125,6 +125,7 @@ public class SadmohfRecord extends JsonAbstractGrandFatherRecord   {
 	private String ehsddt = ""; //     tegn           30      30       903        begge    place of delivery
 	
 	private SadmotfRecord transportDto; //Dto for transport to get som fields
+	private SadmomfRecord masterDto; //Dto for master to get som fields
 	
 	
 	

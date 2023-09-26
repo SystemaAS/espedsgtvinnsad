@@ -545,12 +545,23 @@ public class TvinnSadDigitollv2MasterController {
     		List<SadmotfRecord> outputList = (List)jsonContainer.getList();
 			if(outputList!=null){
 				for(SadmotfRecord record: outputList){
+					//ETA datein NO-format
+					if(record.getEtetad()!=null && record.getEtetad() > 0) {
+						String tmpEtetatd = String.valueOf(record.getEtetad());
+						if (org.apache.commons.lang3.StringUtils.isNotEmpty(tmpEtetatd) && tmpEtetatd.length()==8) {
+							int isoEtetad = Integer.parseInt(this.dateMgr.getDateFormatted_NO(tmpEtetatd, DateTimeManager.ISO_FORMAT));
+							record.setEtetad(isoEtetad);
+						}
+					}
 					masterRecord.setTransportDto(record);
 				}
 			}
 			
     	}	
 	}
+	
+	
+	
 	
 	
 	/**

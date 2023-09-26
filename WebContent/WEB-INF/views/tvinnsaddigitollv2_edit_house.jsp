@@ -14,7 +14,7 @@
 	.ui-datepicker { font-size:9pt;}
 	</style>
 	
-<table style="width:80%;" cellspacing="0" border="0" cellpadding="0">
+<table style="width:90%;" cellspacing="0" border="0" cellpadding="0">
 
  <tr>
  <td>	
@@ -45,7 +45,7 @@
 						</a>
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-					<td title="${model.record.ehlnrm}" width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
+					<td title="Master-Doknr:${model.record.masterDto.emdkm}" width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a tabindex=-1 id="alinkManifestList" style="display:block;" href="tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=${model.record.ehlnrt}&emlnrm=${model.record.ehlnrm}">
 							<font class="tabDisabledLink">
 								&nbsp;<spring:message code="systema.tvinn.sad.digitoll.list.tab.master"/>
@@ -222,7 +222,14 @@
 							</c:choose>
 						</c:otherwise>
 						</c:choose>
-					</a>&nbsp;
+					</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<font class="inputFormSubmit text12 isa_success">Transportør&nbsp;<b>${model.record.transportDto.etnat}</b>
+																&nbsp;&nbsp;Kjøretøy k.merke&nbsp;<b>${model.record.transportDto.etkmrk}</b>
+																&nbsp;&nbsp;ETA&nbsp;<b>${model.record.transportDto.etetadStr}</b>&nbsp;&nbsp;ETA-tid&nbsp;<b>${model.record.transportDto.etetatStr}</b>
+																
+					</font>
+					
+					
 		   		</td>
 	   		</tr>
 	   		</table>
@@ -263,6 +270,7 @@
 						<td class="text14">&nbsp;<span title="ehst2">St.2</span></td>
 						<td class="text14">&nbsp;<span title="ehst3">St.3</span></td>
 						<td class="text14">&nbsp;<span title="ehdts">Send.dato</span></td>
+						<td class="text14">&nbsp;<span title="ehdts">Master Doknr</span></td>
 						
 					</tr>
 					<tr>	
@@ -346,6 +354,9 @@
 						</td>
 						<td class="text14">
 							<input readonly type="text" class="inputTextReadOnly" name="ehdts" id="ehdts" size="10" maxlength="8" value="${model.record.ehdtsStr}">		
+						</td>
+						<td class="text14">
+							<input readonly type="text" class="inputTextReadOnly" name="master_emdkm" id="master_emdkm" size="20" maxlength="50" value="${model.record.masterDto.emdkm}">		
 						</td>
 					</tr>
 					</table>

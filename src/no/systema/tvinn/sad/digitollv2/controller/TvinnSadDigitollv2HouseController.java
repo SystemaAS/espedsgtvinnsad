@@ -13,21 +13,14 @@ import javawebparts.core.org.apache.commons.lang.StringUtils;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.ApplicationContext;
-
-import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import org.springframework.web.bind.ServletRequestDataBinder;
 
 
 //application imports
@@ -36,9 +29,7 @@ import no.systema.main.validator.LoginValidator;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.DateTimeManager;
 import no.systema.main.util.JsonDebugger;
-import no.systema.jservices.common.values.FasteKoder;
 import no.systema.main.model.SystemaWebUser;
-
 //tvinn
 import no.systema.tvinn.sad.util.TvinnSadConstants;
 import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
@@ -52,7 +43,6 @@ import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelning
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureContainer;
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureRecord;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
-import no.systema.tvinn.sad.digitollv2.filter.SearchFilterDigitollTransportList;
 import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateContainer;
@@ -75,18 +65,8 @@ import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
 import no.systema.tvinn.sad.digitollv2.util.RedirectCleaner;
 import no.systema.tvinn.sad.digitollv2.util.SadDigitollConstants;
 import no.systema.tvinn.sad.digitollv2.validator.HouseValidator;
-import no.systema.tvinn.sad.digitollv2.validator.MasterValidator;
-import no.systema.tvinn.sad.manifest.express.filter.SearchFilterManifestList;
-import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
-import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
-import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 import no.systema.tvinn.sad.mapper.url.request.UrlRequestParameterMapper;
-import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
-import no.systema.tvinn.sad.manifest.express.util.manager.ManifestDateManager;
-import no.systema.tvinn.sad.manifest.express.util.manager.ManifestExpressMgr;
 import no.systema.tvinn.sad.manifest.express.util.manager.CodeDropDownMgr;
-
-
 
 
 /**
@@ -228,10 +208,11 @@ public class TvinnSadDigitollv2HouseController {
 					outputList = jsonContainer.getList();
 					if(outputList!=null){
 						for(SadmohfRecord record: outputList){
-							//get all masters
+							//get
 							this.getItemLines(appUser, record);
 							this.setRecordAspects(appUser, record);
 							this.setTransportDto(appUser.getUser(), record);
+							this.setMasterDto(appUser.getUser(), record);
 							//now we have all item lines in this house
 							model.put("record", record);
 							logger.info(record.toString());
@@ -244,6 +225,7 @@ public class TvinnSadDigitollv2HouseController {
 			if("doCreate".equals(action)) {
 				//in order to grab ehlnrt-parent
 				this.setTransportDto(appUser.getUser(), recordToValidate);
+				this.setMasterDto(appUser.getUser(), recordToValidate);
 				model.put("record", recordToValidate);
 			}	
 			//--------------------------------------
@@ -348,7 +330,7 @@ public class TvinnSadDigitollv2HouseController {
 	 * @return
 	 */
 	@RequestMapping(value="tvinnsaddigitollv2_api_delete_house.do",  method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doApiDeleteMaster(@ModelAttribute ("record") SadmohfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+	public ModelAndView doApiDeleteHouse(@ModelAttribute ("record") SadmohfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		//this.context = TdsAppContext.getApplicationContext();
 		Collection<SadmohfRecord> outputList = new ArrayList<SadmohfRecord>();
 		Map model = new HashMap();
@@ -400,7 +382,7 @@ public class TvinnSadDigitollv2HouseController {
 			if(StringUtils.isNotEmpty(action) && action.equals("doDelete")) {
 		    	logger.info("Before delete in Controller ...");
 		    	//this.context = TdsAppContext.getApplicationContext();
-				logger.info("Inside: doApiDeleteMaster");
+				logger.info("Inside: doApiDeleteHouse");
 				
 				StringBuilder url = new StringBuilder();
 				url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
@@ -445,7 +427,7 @@ public class TvinnSadDigitollv2HouseController {
 	 * @return
 	 */
 	@RequestMapping(value="tvinnsaddigitollv2_api_send_house.do",  method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doApiSendMaster(@ModelAttribute ("record") SadmohfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+	public ModelAndView doApiSendHouse(@ModelAttribute ("record") SadmohfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		logger.info("inside doApiSendHouse");
 		ModelAndView successView = null;
 		
@@ -550,7 +532,44 @@ public class TvinnSadDigitollv2HouseController {
     		List<SadmotfRecord> outputList = (List)jsonContainer.getList();
 			if(outputList!=null){
 				for(SadmotfRecord record: outputList){
+					//ETA datein NO-format
+					if(record.getEtetad()!=null && record.getEtetad() > 0) {
+						String tmpEtetatd = String.valueOf(record.getEtetad());
+						if (org.apache.commons.lang3.StringUtils.isNotEmpty(tmpEtetatd) && tmpEtetatd.length()==8) {
+							int isoEtetad = Integer.parseInt(this.dateMgr.getDateFormatted_NO(tmpEtetatd, DateTimeManager.ISO_FORMAT));
+							record.setEtetad(isoEtetad);
+						}
+					}
 					houseRecord.setTransportDto(record);
+				}
+			}
+			
+    	}	
+	}
+	
+	private void setMasterDto(String applicationUser, SadmohfRecord houseRecord) {
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_MASTERCONSIGNMENT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + applicationUser + "&emlnrt=" + houseRecord.getEhlnrt() + "&emlnrm=" + houseRecord.getEhlnrm();
+		
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		SadmomfContainer jsonContainer = this.sadmomfListService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		List<SadmomfRecord> outputList = (List)jsonContainer.getList();
+			if(outputList!=null){
+				for(SadmomfRecord record: outputList){
+					houseRecord.setMasterDto(record);
 				}
 			}
 			
@@ -948,6 +967,8 @@ public class TvinnSadDigitollv2HouseController {
 	private ApiGenericDtoResponseService apiGenericDtoResponseService;
 	@Autowired
 	private SadmotfListService sadmotfListService;
+	@Autowired
+	private SadmomfListService sadmomfListService;
 	@Autowired
 	private MaintMainKofastService maintMainKofastService;
 

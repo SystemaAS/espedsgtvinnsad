@@ -235,8 +235,13 @@
 							</c:choose>
 						</c:otherwise>
 						</c:choose>
-					</a>&nbsp;
+					</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<font class="inputFormSubmit text12 isa_success">Transportør&nbsp;<b>${model.record.transportDto.etnat}</b>
+																&nbsp;&nbsp;Kjøretøy k.merke&nbsp;<b>${model.record.transportDto.etkmrk}</b>
+																&nbsp;&nbsp;ETA&nbsp;<b>${model.record.transportDto.etetadStr}</b>&nbsp;&nbsp;ETA-tid&nbsp;<b>${model.record.transportDto.etetatStr}</b>
+					</font>
 		   		</td>
+		   		
 	   		</tr>
 	   		</table>
 	   		</td>
