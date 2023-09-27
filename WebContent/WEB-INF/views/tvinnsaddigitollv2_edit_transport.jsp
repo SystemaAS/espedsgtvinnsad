@@ -339,9 +339,10 @@
 			 					
 			 					<td class="text14">
 				 					<img style="cursor:pointer;" onMouseOver="showPop('etktd_info');" onMouseOut="hidePop('etktd_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
-					            	<span title="etktyp Type of Identification">Kjør.Typ.</span><font class="text16RedBold" >*</font>
+					            	<span title="etktyp Type of Identification"><font color="green">Kjør.Typ.</font></span><font class="text16RedBold" >*</font>
 			                		<div class="text11" style="position: relative;" align="left">
 				                	<span style="position:absolute;top:2px; width:250px;" id="etktd_info" class="popupWithInputText text11"  >
+				                	<p><b>Kjør.Typ.</b>&nbsp;Bestemmer hvilket API som brukes...(f.eks: 41 = luftfartøy = api-air)</p>
 					           		<ul>
 					           			<c:forEach var="dto" items="${model.typeOfIdentificationMeansTransportDto}" >
 				           				<li><b>${dto.code}</b>&nbsp;${dto.txt1}</li>
