@@ -168,38 +168,41 @@ public class TvinnSadDigitollv2TransportController {
             	//with no gate as parameter will be normal-behavior in the search GUI (with filter)
             	
             }else {
-            	
-	            //get BASE URL
-	    		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TRANSPORT_URL;
-	    		//add URL-parameters
-	    		String urlRequestParams = this.getRequestUrlKeyParameters(searchFilter, appUser);
-	    		
-	    		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-		    	logger.warn("URL: " + BASE_URL);
-		    	logger.warn("URL PARAMS: " + urlRequestParams);
-		    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
-	
-		    	//Debug --> 
-		    	//logger.debug(jsonPayload);
-		    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-		    	if(jsonPayload!=null){
+            	if(StringUtils.isNotEmpty(searchFilter.getOpd()) && searchFilter.getOpd().length()<4){
+            		model.put("errorMessage", "Opd må være minst 4 sifre...");
+            	}else {
+		            //get BASE URL
+		    		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TRANSPORT_URL;
+		    		//add URL-parameters
+		    		String urlRequestParams = this.getRequestUrlKeyParameters(searchFilter, appUser);
 		    		
-		    		SadmotfContainer jsonContainer = this.sadmotfListService.getListContainer(jsonPayload);
-		    		//----------------------------------------------------------------
-					//now filter the topic list with the search filter (if applicable)
-					//----------------------------------------------------------------
-					outputList = jsonContainer.getList();
-					if(outputList!=null && outputList.size() > SadmotfContainer.LIMIT_SIZE_OF_MAIN_LIST_OF_TRANSPORTS){
-						outputList = new ArrayList();
-						model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, "Too many lines. Narrow your search please ...");
-					}else{
-						for(SadmotfRecord record: outputList){
-							this.adjustFieldsForFetch(record);
+		    		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+			    	logger.warn("URL: " + BASE_URL);
+			    	logger.warn("URL PARAMS: " + urlRequestParams);
+			    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+		
+			    	//Debug --> 
+			    	//logger.debug(jsonPayload);
+			    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+			    	if(jsonPayload!=null){
+			    		
+			    		SadmotfContainer jsonContainer = this.sadmotfListService.getListContainer(jsonPayload);
+			    		//----------------------------------------------------------------
+						//now filter the topic list with the search filter (if applicable)
+						//----------------------------------------------------------------
+						outputList = jsonContainer.getList();
+						if(outputList!=null && outputList.size() > SadmotfContainer.LIMIT_SIZE_OF_MAIN_LIST_OF_TRANSPORTS){
+							outputList = new ArrayList();
+							model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, "Too many lines. Narrow your search please ...");
+						}else{
+							for(SadmotfRecord record: outputList){
+								this.adjustFieldsForFetch(record);
+							}
+							//logger.debug(outputList.toString());
 						}
-						//logger.debug(outputList.toString());
-					}
-					
-		    	}	
+						
+			    	}
+            	}
             }
 			//--------------------------------------
 			//Final successView with domain objects

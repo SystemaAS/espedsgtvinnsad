@@ -18,7 +18,7 @@ import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManif
 /**
  * 
  * @author oscardelatorre
- * @date Sep 2020
+ * @date Sep 2023
  *
  */
 public class TransportValidator implements Validator {

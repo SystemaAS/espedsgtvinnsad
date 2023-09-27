@@ -95,9 +95,11 @@
                 	Søker alle houses (med opd.nr som id) som finnes per transport uavhengig av hvilke Master de tilhører.
                 	</p>
                 	<p>
-                 	Søket kan gjøres med en del av strengen eller hele strengen...
+                 	Søket kan gjøres med en <b>del av strengen: minst 4 sifre</b> eller hele strengen
                 	</p>
-	           		
+	           		<p>
+                 	Parameteren søker ikke i kombinasjon med andre søkeparameter. Den <b>søker</b> ubetinget i <b>hele databasen!</b>
+                	</p>
 					</span>	
 					</div>
                 
