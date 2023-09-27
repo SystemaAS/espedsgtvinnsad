@@ -873,6 +873,11 @@ public class TvinnSadDigitollv2TransportController {
 				}
 				
 			}
+			//Special (Opd from house) Deep search
+			if(StringUtils.isNotEmpty(searchFilter.getOpd())){
+				urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "opd=" + searchFilter.getOpd());
+			}
+			
 		}
 		
 		return urlRequestParamsKeys.toString();

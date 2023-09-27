@@ -82,10 +82,26 @@
                 <td class="text14" align="left" title="sign" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.manifest.list.search.label.signatur"/></td>
                 
                 <td class="text14" align="left" ><span title="turnr"><spring:message code="systema.tvinn.sad.manifest.list.search.label.turnr"/></span></td>
-                <td class="text14" align="left" ><span title="datum"><spring:message code="systema.tvinn.sad.manifest.list.search.label.etafdatum"/></span></td>
-                <td class="text14" align="left" ><span title="datumt"><spring:message code="systema.tvinn.sad.manifest.list.search.label.etatdatum"/></span></td>
+                <td class="text14" align="left" ><span title="etafdatum"><spring:message code="systema.tvinn.sad.manifest.list.search.label.etafdatum"/></span></td>
+                <td class="text14" align="left" ><span title="etatdatum"><spring:message code="systema.tvinn.sad.manifest.list.search.label.etatdatum"/></span></td>
                 <td class="text14" align="left" ><span title="datum"><spring:message code="systema.tvinn.sad.manifest.list.search.label.fdatum"/></span></td>
                 <td class="text14" align="left" ><span title="datumt"><spring:message code="systema.tvinn.sad.manifest.list.search.label.tdatum"/></span></td>
+                <td class="text14" align="left" >
+                	<img style="cursor:pointer;" onMouseOver="showPop('opd_info');" onMouseOut="hidePop('opd_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+	            	<span title="opd - house"><font color="green">Opd - House</font></span>
+               		<div class="text11" style="position: relative;" align="left">
+                	<span style="position:absolute;top:2px; width:250px;" id="opd_info" class="popupWithInputText text11"  >
+                	<p><b>Opd - House</b><br/>
+                	Søker alle houses (med opd.nr som id) som finnes per transport uavhengig av hvilke Master de tilhører.
+                	</p>
+                	<p>
+                 	Søket kan gjøres med en del av strengen eller hele strengen...
+                	</p>
+	           		
+					</span>	
+					</div>
+                
+                </td>
                 
 			</tr>
  	        <tr>
@@ -123,6 +139,7 @@
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="etaDatumt" id="etaDatumt" size="6" maxlength="6" value="${searchFilterSadDigitollTransportList.etaDatumt}">&nbsp;</td>
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="datum" id="datum" size="6" maxlength="6" value="${searchFilterSadDigitollTransportList.datum}">&nbsp;</td>
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="datumt" id="datumt" size="6" maxlength="6" value="${searchFilterSadDigitollTransportList.datumt}">&nbsp;</td>
+				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="opd" id="opd" size="8" maxlength="7" value="${searchFilterSadDigitollTransportList.opd}">&nbsp;</td>
 				<td valign="top" align="left" >
                    <input class="inputFormSubmit" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.search"/>'>
                 </td>
