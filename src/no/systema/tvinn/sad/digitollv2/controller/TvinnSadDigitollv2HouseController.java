@@ -209,15 +209,14 @@ public class TvinnSadDigitollv2HouseController {
 					if(outputList!=null){
 						for(SadmohfRecord record: outputList){
 							//get
-							this.getItemLines(appUser, record);
 							this.setRecordAspects(appUser, record);
 							this.setTransportDto(appUser.getUser(), record);
 							this.setMasterDto(appUser.getUser(), record);
 							//now we have all item lines in this house
 							model.put("record", record);
-							logger.info(record.toString());
+							//logger.debug(record.toString());
 						}
-						logger.info(outputList.toString());
+						//logger.debug(outputList.toString());
 					}
 					
 		    	}
@@ -934,9 +933,9 @@ public class TvinnSadDigitollv2HouseController {
 		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_ITEMLINES_URL;
 		//add URL-parameters
 		String urlRequestParams = "user=" + appUser.getUser() + "&eilnrt=" + record.getEhlnrt() + "&eilnrm=" + record.getEhlnrm() + "&eilnrh=" + record.getEhlnrh();
-		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-    	logger.warn("URL: " + BASE_URL);
-    	logger.warn("URL PARAMS: " + urlRequestParams);
+		logger.info("getItemLines --->" + Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.info("URL: " + BASE_URL);
+    	logger.info("URL PARAMS: " + urlRequestParams);
     	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
 
     	//Debug --> 

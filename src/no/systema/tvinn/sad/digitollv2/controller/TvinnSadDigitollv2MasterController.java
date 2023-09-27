@@ -212,7 +212,7 @@ public class TvinnSadDigitollv2MasterController {
 		    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
 	
 		    	//Debug --> 
-		    	logger.info(jsonPayload);
+		    	//	logger.debug(jsonPayload);
 		    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 		    	if(jsonPayload!=null){
 		    		
@@ -227,7 +227,7 @@ public class TvinnSadDigitollv2MasterController {
 							this.setTransportDto(appUser.getUser(), record);
 							//put it on GUI
 							model.put("record", record);
-							logger.info(record.toString());
+							//logger.debug(record.toString());
 						}
 						
 					}

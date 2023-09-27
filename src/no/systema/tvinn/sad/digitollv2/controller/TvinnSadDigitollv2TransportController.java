@@ -180,7 +180,7 @@ public class TvinnSadDigitollv2TransportController {
 		    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
 	
 		    	//Debug --> 
-		    	logger.info(jsonPayload);
+		    	//logger.debug(jsonPayload);
 		    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 		    	if(jsonPayload!=null){
 		    		
@@ -194,9 +194,9 @@ public class TvinnSadDigitollv2TransportController {
 						model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, "Too many lines. Narrow your search please ...");
 					}else{
 						for(SadmotfRecord record: outputList){
-							this.setRecordAspects(appUser, record);
+							this.adjustFieldsForFetch(record);
 						}
-						logger.info(outputList.toString());
+						//logger.debug(outputList.toString());
 					}
 					
 		    	}	
@@ -337,7 +337,7 @@ public class TvinnSadDigitollv2TransportController {
 							this.setRecordAspects(appUser, record);
 							//now we have all aspects in this record
 							model.put("record", record);
-							logger.info(record.toString());
+							//logger.debug(record.toString());
 						}
 						
 					}
@@ -1135,7 +1135,7 @@ public class TvinnSadDigitollv2TransportController {
 	    				record.setOwn_okToDelete(false);
 	    				break;
 	    			}else {
-	    				this.getHouses(appUser, child);
+	    				//to heavy?: -->this.getHouses(appUser, child);
 	    			}
 	    		}
     		}else {
