@@ -437,22 +437,35 @@
 								</td>
 			 				</tr>
 			 				<tr >
-			 					<td colspan="2" class="text14">&nbsp;<span title="etdkm-Ref.liste av masters">Doknr.</span></td>
-			 					<td class="text14">&nbsp;<span title="etdkmt-Ref.liste av masters">Doktyp.</span></td>
+			 					<td colspan="2" class="text14">
+			 					<img style="cursor:pointer;" onMouseOver="showPop('etdkm_info');" onMouseOut="hidePop('etdkm_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+				            	<span title="etdkm - Ref.liste av masters">Doknr.&nbsp;</span>
+		                		<div class="text11" style="position: relative;" align="left">
+			                	<span style="position:absolute;top:2px; width:250px;" id="etdkm_info" class="popupWithInputText text11"  >
+			                	<p><b>Dok.nr</b>&nbsp;
+			                			Liste over hovedforsendelser (Masters) som skal transporteres til grensen med denne transporten.<br/>
+			                			Identifisererer at dette er fraktbrevet til en hovedforsendelse.
+			                			Ref. master-lista nedenfor (Doknr/Dokt)	</p>
+			                			<p><b>KANSELLERTE</b> Masters vil ikke bli inkludert</p>
+				           		</span>	
+								</div>
+
+			 					</td>
+			 					<td class="text14">&nbsp;<span title="etdkmt - Ref.liste av masters">Doktyp.</span></td>
 			 				</tr>
 			 				<tr >	
 			 					<td colspan="2" class="text14" >
-									<input readonly type="text" class="inputTextReadOnly" style="color:#9F6000;" name="Xetdkm" id="Xetdkm" size="30" maxlength="50" value="Ref.liste">
+									<input readonly type="text" class="inputTextReadOnly" style="color:#9F6000;" name="Xetdkm" id="Xetdkm" size="30" maxlength="50" value="Ref.liste nedenfor">
 								</td>
 								<td class="text14" >
-									<input readonly type="text" class="inputTextReadOnly" style="color:#9F6000;" name="Xetdkmt" id="Xetdkmt" size="8" maxlength="50" value="Ref.liste">
+									<input readonly type="text" class="inputTextReadOnly" style="color:#9F6000;" name="Xetdkmt" id="Xetdkmt" size="20" maxlength="50" value="Ref.liste nedenfor">
 								</td>
 			 				</tr>
 				 				
 			 				<tr height="2"><td>&nbsp;</td></tr>
 			 				<tr>
 			 					<td class="text14">&nbsp;<span title="etetad - Estimated date of arrival">ETA</span><font class="text16NavyBlueBold" >*</font></td>
-								<td class="text14">&nbsp;<span title="etetat-HHmm Estimated time of arrival">ETA-Tid</span><font class="text16NavyBlueBold" >*</font></td>
+								<td class="text14">&nbsp;<span title="etetat-HHmm Estimated time of arrival">ETA-Tid<font class="text16NavyBlueBold" >*</font>&nbsp;<font class="text10">(HHmm)</font></span></td>
 								<td class="text14">&nbsp;<span title="ettsd">Pass.tollsted</span><font class="text16RedBold" >*</font></td>
 			 				</tr>
 			 				<tr >
@@ -488,8 +501,8 @@
 			 				</tr>
 			 				
 			 				<tr>
-			 					<td class="text14">&nbsp;<span title="etshed - Scheduled date of arrival ">STA</span></td>
-								<td class="text14">&nbsp;<span title="etshet-HHmm Scheduled time of arrival">STA-Tid</span></td>
+			 					<td class="text14">&nbsp;<span title="etshed - Scheduled date of arrival - Flight ">STA</span></td>
+								<td class="text14">&nbsp;<span title="etshet-HHmm Scheduled time of arrival - Flight">STA-Tid&nbsp;<font class="text10">(HHmm)</font></span></td>
 			 				</tr>
 			 				<tr >
 			 					
@@ -530,7 +543,19 @@
 					 	<td >
 						<table class="formFrameHeader" style="width:100%; border="0" cellspacing="1" cellpadding="0">
 					 		<tr height="15">
-					 			<td class="text14White">&nbsp;&nbsp;Transportør&nbsp;</td>
+					 			<td class="text14White">
+					 			
+					 			<img style="cursor:pointer;" onMouseOver="showPop('transp_info');" onMouseOut="hidePop('transp_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+				            	<span title="Tollrepresentant">Transportør&nbsp;</span><font class="text16RedBold" >*</font>
+		                		<div class="text11" style="position: relative;" align="left">
+			                	<span style="position:absolute;top:2px; width:250px;" id="transp_info" class="popupWithInputText text11"  >
+			                	<p><b>Transportør</b>&nbsp;
+			                			Transportør for transport. Organisasjonen/bedriften som opererer transporten
+			                	</p>
+				           		</span>	
+								</div>
+					 			
+					 			</td>
 			 				</tr>
 			            </table>
 			            </td>
@@ -554,7 +579,22 @@
 										</a>
 									
 									</td>
-									<td class="text14">&nbsp;<span title="etrgt">Orgnr / EORI</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">
+									
+									<img style="cursor:pointer;" onMouseOver="showPop('etrgt_info');" onMouseOut="hidePop('etrgt_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+					            	<span title="etrgt">Orgnr / EORI&nbsp;</span><font class="text16RedBold" >*</font>
+			                		<div class="text11" style="position: relative;" align="left">
+				                	<span style="position:absolute;top:2px; width:250px;" id="etrgt_info" class="popupWithInputText text11"  >
+				                	<p><b>Orgnr / EORI</b>&nbsp;
+				                		Transportørens identifikasjonsnummer.På norske transportør forventes norsk organisasjonsnummer. 
+				                		På utenlandske transportør som har EORI-nummer, forventes EORI-nummer. 
+				                		På utenlandske transportør som ikke har EORI-nummer, forventes deres nasjonale organisasjonsnummer.<br/>
+										Eksempel: 961510740 = SAS Norge	
+				                	</p>
+					           		</span>	
+									</div>
+									
+									</td>
 									
 				 				</tr>
 				 				<tr >
@@ -634,7 +674,22 @@
 					 	<td >
 						<table class="formFrameHeader" style="width:100%;" border="0" cellspacing="1" cellpadding="0">
 					 		<tr height="15">
-					 			<td class="text14White">&nbsp;&nbsp;Representant / Ombud&nbsp;</td>
+					 			<td class="text14White">
+					 			
+					 			<img style="cursor:pointer;" onMouseOver="showPop('ombud_info');" onMouseOut="hidePop('ombud_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+				            	<span title="Tollrepresentant">Representant / Ombud&nbsp;</span><font class="text16RedBold" >*</font>
+		                		<div class="text11" style="position: relative;" align="left">
+			                	<span style="position:absolute;top:2px; width:250px;" id="ombud_info" class="popupWithInputText text11"  >
+			                	<p><b>Tollrepresentant</b>&nbsp;
+			                			Den som leverer opplysninger på vegne av føreren av transportmiddelet og i dennes navn, jf. vareførselsloven § 7-21.
+										Merk at innsender (submitter) og tollrepresentant (representative) kan være samme organisasjon
+			                	</p>
+				           		</span>	
+								</div>
+					 			
+					 			
+					 			
+					 			</td>
 			 				</tr>
 			            </table>
 			            </td>
@@ -657,7 +712,23 @@
 											<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
 										</a>
 									</td>
-									<td class="text14">&nbsp;<span title="etrgr">Orgnr / EORI</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">
+									
+										<img style="cursor:pointer;" onMouseOver="showPop('etrgr_info');" onMouseOut="hidePop('etrgr_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+						            	<span title="etrgr">Orgnr / EORI&nbsp;</span><font class="text16RedBold" >*</font>
+				                		<div class="text11" style="position: relative;" align="left">
+					                	<span style="position:absolute;top:2px; width:250px;" id="etrgr_info" class="popupWithInputText text11"  >
+					                	<p><b>Orgnr / EORI</b>&nbsp;
+					                		Tollrepresentantens identifikasjonsnummer.På norske representanter forventes norsk organisasjonsnummer. 
+					                		På utenlandske representant som har EORI-nummer, forventes EORI-nummer. 
+					                		På utenlandske representant som ikke har EORI-nummer, forventes deres nasjonale organisasjonsnummer.<br/>
+											Eksempel: 984661185 = Posten Norge	
+					                	</p>
+						           		</span>	
+										</div>
+									
+									
+									</td>
 									
 				 				</tr>
 				 				<tr >
@@ -774,7 +845,7 @@
                     	<th width="2%" class="tableHeaderField" >Avd</th>
                 		<th width="2%" class="tableHeaderField" >Sign</th>
                 		<th width="2%" class="tableHeaderField" >Turnr</th>
-                		<th title="S=SLETTET" width="2%" class="tableHeaderField" >St.</th>
+                		<th title="S=SLETTET" width="2%" class="tableHeaderField" >Sysp.st</th>
                 		<th width="2%" class="tableHeaderField" >Br.vekt</th>
                 		<th width="2%" class="tableHeaderField" >Doknr.</th>
                 		<th width="2%" class="tableHeaderField" >Dokt.</th>
@@ -786,7 +857,7 @@
                 		<th width="2%" class="tableHeaderField" >MRN-Api</th>
                 		<th width="2%" class="tableHeaderField" >Req.id</th>
                 		<th title="Api-status" width="2%" class="tableHeaderField" ></th>
-                		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED,M=ERROR" width="2%" class="tableHeaderField" >Manif.st</th>
+                		<th title="Api-status S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED,M=ERROR" width="2%" class="tableHeaderField" >Api st</th>
                 		<th width="2%" class="tableHeaderField" title="Fjerner manifest fra Tollvesenet" >Slett</th>
                 		<th width="2%" class="tableHeaderField" title="Fjerner manifest lokalt (SYSPED)">Kans.</th>
                 		<th width="2%" class="tableHeaderField" title="Endre transport">EndrTransp</th>
@@ -820,7 +891,28 @@
 	               	   <td width="2%" align="center" class="tableCell" <c:if test="${masterConsignmentRecord.emst2 == 'D'}">style="color: #9F6000;" </c:if> >${masterConsignmentRecord.emlnrm}</td>
 		               <td width="2%" align="center" class="tableCell" <c:if test="${masterConsignmentRecord.emst2 == 'D'}">style="color: #9F6000;" </c:if> >${masterConsignmentRecord.emavd}</td>
 		               <td width="2%" align="center" class="tableCell" >${masterConsignmentRecord.emsg}</td>
-		               <td width="2%" align="center" class="tableCell" <c:if test="${masterConsignmentRecord.emst2 == 'D'}">style="color: #9F6000;" </c:if> ><c:if test="${masterConsignmentRecord.empro > 0}">${masterConsignmentRecord.empro}</c:if></td>
+		               <td width="2%" align="center" class="tableCell" <c:if test="${masterConsignmentRecord.emst2 == 'D'}">style="color: #9F6000;" </c:if> >
+		               
+		               		<c:if test="${masterConsignmentRecord.empro > 0}">
+		               			<span title="..." onClick="showPop('h_info${counter.count}');" <c:if test="${not empty masterConsignmentRecord.listHouses}">style="cursor:pointer;color:green;" </c:if> >
+		               				${masterConsignmentRecord.empro}
+		               			</span>
+		               			<c:if test="${not empty masterConsignmentRecord.listHouses}">
+			               			<div class="text11" style="position: relative;" align="left">
+				                	<span style="position:absolute;top:2px; width:250px;" id="h_info${counter.count}" class="popupWithInputText text11"  >
+				                	<button name="_ButtonCloseEtktm" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('h_info${counter.count}');">Close</button> 
+					           			<font style="color:royalblue">Antal opd(houses) <b>${masterConsignmentRecord.listHouses.size()}</b></font>
+				           				<ul>
+				           				<c:forEach items="${masterConsignmentRecord.listHouses}" var="houseRecord" varStatus="h_counter">  
+				           					<li><font style="color:royalblue">Opd <b>${houseRecord.ehtdn}</b> Brut.vekt <b>${houseRecord.ehvkb}</b></font></li>
+				           				</c:forEach>
+				           				</ul>
+									</span>	
+									</div>
+								</c:if>
+		               		</c:if>
+		             
+		               </td>
 		               <td nowrap width="2%" align="center" class="tableCell text12">
 		               	  <c:choose>
 		               		<c:when test="${masterConsignmentRecord.emst == 'S'}">

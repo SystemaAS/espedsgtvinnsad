@@ -252,9 +252,56 @@
 								<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
 							</a>
 						</td>
-						<td class="text14">&nbsp;<span title="ehvkb">Bruttovekt</span><font class="text16RedBold" >*</font></td>
-						<td class="text14">&nbsp;<span title="ehntk">Ant.kolli</span><font class="text16RedBold" >*</font></td>
-						<td class="text14">&nbsp;<span title="ehvt">Varebesk</span><font class="text16RedBold" >*</font></td>
+						<td class="text14">
+							<img style="cursor:pointer;" onMouseOver="showPop('ehvkb_info');" onMouseOut="hidePop('ehvkb_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+			            	<span title="ehvkb">Bruttovekt</span><font class="text16RedBold" >*</font>
+	                		<div class="text11" style="position: relative;" align="left">
+		                	<span style="position:absolute;top:2px; width:250px;" id="ehvkb_info" class="popupWithInputText text11"  >
+		                	<p><b>Bruttovekt</b>&nbsp;
+		                			Total bruttovekt for forsendelsen (denne House Consignment) inkludert emballasje. Angis i kilo. 
+		                			The total gross mass is the weight of goods of the whole consignment including packaging, but excluding the carrier's equipment for the declaration. 
+		                			Skal alltid sendes inn.</p>
+			           		</span>	
+							</div>
+						
+						
+						</td>
+						<td class="text14">&nbsp;
+							<img style="cursor:pointer;" onMouseOver="showPop('ehntk_info');" onMouseOut="hidePop('ehntk_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+			            	<span title="ehntk">Ant.kolli</span><font class="text16RedBold" >*</font>
+	                		<div class="text11" style="position: relative;" align="left">
+		                	<span style="position:absolute;top:2px; width:250px;" id="ehntk_info" class="popupWithInputText text11"  >
+		                	<p><b>Ant.kolli</b>&nbsp;
+		                			Antall kolli som denne forsendelsen består av.</p>
+			           		</span>	
+							</div>
+						
+						
+						
+						</td>
+						<td class="text14">&nbsp;
+							<img style="cursor:pointer;" onMouseOver="showPop('ehvt_info');" onMouseOut="hidePop('ehvt_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+			            	<span title="ehvt">Varebeskrivelse</span><font class="text16RedBold" >*</font>
+	                		<div class="text11" style="position: relative;" align="left">
+		                	<span style="position:absolute;top:2px; width:250px;" id="ehvt_info" class="popupWithInputText text11"  >
+		                	<p><b>Varebeskrivelse</b><br/>
+		                		<b>Krav til varebeskrivelse</b><br/>
+		                		Oppsummert beskrivelse av varene som denne forsendelsen består av. Beskrivelsen skal være så spesifikk som mulig.
+		                		Beskrivelsen av varen skal være i tekstlig format og den skal være på varelinjenivå, slik at hver unike vare blir beskrevet. 
+		                		Beskrivelsen skal være presis nok til at både fører av transportmiddelet og Tolletaten enkelt kan identifisere varene, og beskrivelsene skal omfatte alle de ulike vareslagene som faktisk befinner seg i lasten. 
+		                		Å identifisere varene betyr i denne sammenhengen at de ulike varene kan gjenfinnes og skilles fra hverandre på lasten.
+		                	</p>
+		                	<p>	
+								Generelle beskrivelser som ikke sier noe om en vares beskaffenhet eller art, som for eksempel «deler», «stykkgods», «consolidated», «diverse varer» og lignende skal ikke benyttes. 
+								Heller ikke beskrivelser av varegrupper som «bildeler», «landbruksprodukter», «hvitevarer», «frukt og grønt», «husholdningsprodukter», «klær», «sommerklær», mv. vil være en tilstrekkelig varebeskrivelse.
+								Eksempler på tilstrekkelig detaljerte varebeskrivelser av varegruppene «bildeler», «landbruksprodukter», «hvitevarer» kan være henholdsvis «bremseskive», «felg», «vindusvisker», «appelsin», «tomat», «hvetemel», «kjøleskap», «kjøkkenmaskin» og «avtrekksvifte».
+								Varebeskrivelse kan formuleres på norsk eller engelsk.	
+		                	</p>
+			           		</span>	
+							</div>
+						
+						
+						</td>
 						<td class="text14">&nbsp;<span title="ehcnin">Container</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="ehdkh">Dok.nr</span><font class="text16RedBold" >*</font>
 							<%-- Kan inte ändras tyvärr (Api error)
@@ -436,12 +483,25 @@
 						<td style="width:65%" valign="top">
 						<table id="tblDirektfortolling" style="width:100%"  class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="0">
 			 			<tr >
-							<td class="text16"><b>&nbsp;Tidligere dokumenter</b>
-							&nbsp;
-							<a title="Aktuelle eksempler..." target="_blank" href="https://toll.github.io/api/mo-eksempler">
-								<img src="resources/images/info4.png" width="12" height="12" border="0" alt="info">
-							</a>
+							<td  class="text16">
+								<a title="Aktuelle eksempler..." target="_blank" href="https://toll.github.io/api/mo-eksempler">
+									<font title="Aktuelle eksempler" class="inputFormSubmit text10 isa_info"><b>Eksempler</b></font>
+								</a>
+								<img style="cursor:pointer;" onMouseOver="showPop('prevDocs_info');" onMouseOut="hidePop('prevDocs_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+				            	<b>Tidligere dokumenter</b>
+								
+								<div class="text11" style="position: relative;" align="left">
+			                	<span style="position:absolute;top:2px; width:250px;" id="prevDocs_info" class="popupWithInputText text11"  >
+			                	<p><b>Tidligere dokumenter</b><br/>
+			                		Informasjon som angir referanser til de relaterte dokumentene for denne forsendelsen. 
+			                		Det gjelder både dokumentene for tidligere prosedyrer, som for eksempel transittering, og for påfølgende prosedyrer, som tolldeklarasjon. 
+			                		Relevant dokument inneholder referansenummer til annen melding allerede avgitt på en annen plikt eller prosedyre som omhandler den samme forsendelsen, f.eks. MRN fra Transittering eller Tolldeklarasjonsid.
+			                	</p>
+			                	
+				           		</span>	
+								</div>
 							</td>
+							
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
