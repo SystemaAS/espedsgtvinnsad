@@ -30,11 +30,21 @@
 						<table id="containerdatatableTable" cellspacing="2" align="left" >
 						
 						<tr >
-							<td class="text14  ">
-				    			<font class="inputText isa_warning" >
-				    				Tur&nbsp;${model.tur}
-				    			</font>
+							<td>
+							<table id="old" >
+								<tr>
+								<td class="text14  ">
+					    			<font class="inputText isa_warning" >
+					    				Tur&nbsp;${model.tur}
+					    			</font>
+					    		</td>
+					    		<td width="20px">&nbsp;</td>
+					    		<td nowrap align="right" class="text16" style="color: gray;"  >
+					    			Liste av oppdrag med godkjente deklarasjoner
+					    		</td>
+					    		</tr>
 				    		</td>
+				    		</table>
 				   		</tr>
 						<tr height="5"><td></td></tr> 
 						
