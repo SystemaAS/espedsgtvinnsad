@@ -51,17 +51,13 @@
 						</c:if>
 					</td>
 					<c:if test="${model.record.etlnrt > 0 && model.record.etst != 'S'}"> <%-- CANCELED(S) --%>
-						<%-- Only if we have sent a POST = OK to toll.no should be allow for creating masters. This because we must lock which api to use (road or air) 
-						The only way to unlock this feature is to DELETE at toll.no in order to start fresh again from the GUI (road or air)--%>
-						<c:if test="${not empty model.record.etmid }"> 
-							<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-							<td width="15%" valign="bottom" class="tabDisabled" style="background-color:lightyellow;"  align="center" nowrap>
-								<a id="alinkHeader" style="display:block;" href="tvinnsaddigitollv2_edit_master.do?action=doCreate&emlnrt=${model.record.etlnrt}&emlnrt=${model.record.etlnrt}&emavd=${model.record.etavd}&emsg=${model.record.etsg}&empro=${model.record.etpro}">
-									<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.createnew"/>&nbsp;<spring:message code="systema.tvinn.sad.digitoll.list.tab.master"/></font>
-									<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
-								</a>
-							</td>
-						</c:if>
+						<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
+						<td width="15%" valign="bottom" class="tabDisabled" style="background-color:lightyellow;"  align="center" nowrap>
+							<a id="alinkHeader" style="display:block;" href="tvinnsaddigitollv2_edit_master.do?action=doCreate&emlnrt=${model.record.etlnrt}&emlnrt=${model.record.etlnrt}&emavd=${model.record.etavd}&emsg=${model.record.etsg}&empro=${model.record.etpro}">
+								<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.createnew"/>&nbsp;<spring:message code="systema.tvinn.sad.digitoll.list.tab.master"/></font>
+								<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
+							</a>
+						</td>
 					</c:if>
 					
 					
@@ -166,7 +162,7 @@
 			</tr>
 			</c:if>
 			
-		<%-- WARNING 	--%>
+		<%-- WARNING - OBSOLETE ?. It will be the END-USER responsibility	
 		<c:if test="${empty model.record.etmid && model.record.etlnrt > 0}">	 
 			<tr >
 				<td colspan="10" class="text14  ">
@@ -177,7 +173,7 @@
 	   		</tr>
 	  		<tr height="2"><td colspan="10">&nbsp;</td></tr>  
   		</c:if>
-  		
+  		--%>
   		
   		<tr height="5">	
   			<td  colspan="10" class="text14 formFrame" >
