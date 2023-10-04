@@ -126,7 +126,7 @@
 		  var id = this.id;
 		  counterIndex = id.replace("removeLink","");
 		  
-		  jq('#dialogDeleteItem'+counterIndex).dialog( "option", "title", "Slette Varelinje " + jq('#current_id4'+counterIndex).val());
+		  jq('#dialogDeleteItem'+counterIndex).dialog( "option", "title", "Slett Varelinje " + jq('#current_id4'+counterIndex).val());
 		  //deal with buttons for this modal window
 		  jq('#dialogDeleteItem'+counterIndex).dialog({
 			 buttons: [ 

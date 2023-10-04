@@ -67,6 +67,36 @@
 		  jq('#dialogSend').dialog('open');
 		
     });
+
+	//Real delete to Api (DELETE)
+ 	jq('#deleteButton').click(function() { 
+    	  jq('#dialogDelete').dialog( "option", "title", "Slett fra toll.no" );
+		  //deal with buttons for this modal window
+		  jq('#dialogDelete').dialog({
+			 buttons: [ 
+	            {
+				 id: "dialogSaveTU",	
+				 text: "Ok",
+				 click: function(){
+					 		setBlockUI();
+							window.location = 'tvinnsaddigitollv2_api_delete_house.do?current_id1=' + jq('#ehlnrt').val() + '&current_id2=' + jq('#ehlnrm').val() + '&current_id3=' + jq('#ehlnrh').val() + '&current_mrn=' + jq('#ehmid').val() + '&action=doDelete' ;
+				 		}
+			 	 },
+	 	 		{
+			 	 id: "dialogCancelTU",
+			 	 text: "Cancel", 
+				 click: function(){
+					 		//back to initial state of form elements on modal dialog
+					 		jq("#dialogSaveSU").button("option", "disabled", true);
+					 		jq( this ).dialog( "close" ); 
+				 		} 
+	 	 		 } ] 
+		  });
+		  //init values
+		  jq("#dialogSaveSU").button("option", "disabled", true);
+		  //open now
+		  jq('#dialogDelete').dialog('open');
+    });
     
     jq('#imgManifestIdInfo').click(function() { 
     	jq('#imgManifestIdInfo').attr('target','_blank');

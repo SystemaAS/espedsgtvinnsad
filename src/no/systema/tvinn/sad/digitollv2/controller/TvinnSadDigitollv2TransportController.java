@@ -1137,9 +1137,11 @@ public class TvinnSadDigitollv2TransportController {
 	    			if(StringUtils.isNotEmpty(child.getEmmid())) {
 	    				record.setOwn_okToDelete(false);
 	    				break;
-	    			}else {
-	    				//to heavy?: -->this.getHouses(appUser, child);
 	    			}
+	    		}
+    			for(SadmomfRecord child : listChild) {
+	    			//to heavy?: --> this is for GUI info
+	    			this.getHouses(appUser, child);
 	    		}
     		}else {
     			//OK

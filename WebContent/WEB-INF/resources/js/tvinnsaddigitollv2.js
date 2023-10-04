@@ -79,7 +79,7 @@
 		  var id = this.id;
 		  counterIndex = id.replace("removeLink","");
 		  
-		  jq('#dialogUpdateStatus'+counterIndex).dialog( "option", "title", "Slette Manifest " + jq('#currentUuid'+counterIndex).val() );
+		  jq('#dialogUpdateStatus'+counterIndex).dialog( "option", "title", "Slett Transport " );
 		  //deal with buttons for this modal window
 		  jq('#dialogUpdateStatus'+counterIndex).dialog({
 			 buttons: [ 

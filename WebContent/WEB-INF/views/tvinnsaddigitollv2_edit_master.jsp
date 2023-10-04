@@ -199,12 +199,21 @@
 						<img title="api:road" style="vertical-align:middle;" id="lorryImg" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;
 					</c:otherwise>
 					</c:choose>
-		    		MRN-Api&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.emmid}">${model.record.emmid}</a>
+					<%-- MRN-Api&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.emmid}">${model.record.emmid}</a> --%>
+		    		MRN-Api&nbsp;<font class="text14SkyBlue">${model.record.emmid}</font>
+		    		<c:if test="${not empty model.record.emmid}">
+						&nbsp;
+						<input title="Slett fra toll.no" class="inputFormSubmitStd" type="button" name="deleteButton" id="deleteButton" value='Slett'>
+						<div style="display: none;" class="clazz_dialog" id="dialogDelete" title="Dialog">
+							 <p class="text14" >Er du sikker på at du ønsker å slette fra toll.no?</p>
+						</div>
+					</c:if>		
+		    		
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
-		    		Id&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.emuuid}">${model.record.emuuid}</a>
+		    		Id&nbsp;<a title="les status på toll.no" class="uuidLinkParent text14SkyBlue" id="${model.record.emuuid}">${model.record.emuuid}</a>
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
 		    		
-		    		<a title="lese logg" tabindex=-1 id="${model.record.emlnrt}_${model.record.emlnrm}" class="logLink" runat="server" href="#"><font class="text14 ">Master.st - log</font>&nbsp;
+		    		<a title="lese logg" tabindex=-1 id="${model.record.emlnrt}_${model.record.emlnrm}" class="logLink" runat="server" href="#"><font class="text14 ">Api.st - log</font>&nbsp;
 						<c:choose>
 						<c:when test="${model.record.emst2 == 'S' || model.record.emst2 == 'R' || model.record.emst2 == 'D' || model.record.emst2 == 'C'}">
 							<c:if test="${model.record.emst2 == 'S'}">
@@ -984,9 +993,9 @@
 		               <td width="2%" class="tableCell" ><c:if test="${houseConsignmentRecord.ehdts > 0}">${houseConsignmentRecord.ehdts}-${houseConsignmentRecord.ehtms}</c:if></td>
 		               
 		               
-		               <td width="2%" class="tableCell" ><font style="font-size:11px;">${houseConsignmentRecord.ehmid}</font></td>
+		               <td width="2%" class="tableCell" ><font class="text12SkyBlue">${houseConsignmentRecord.ehmid}</font></td>
 		               		
-		               <td width="2%" class="tableCell" title="check status in toll.no">
+		               <td width="2%" class="tableCell" title="les status på toll.no">
 		               		<a style="display: block; width: 100%; height: 100%; cursor:pointer" class="uuidLink text12SkyBlue" id="${houseConsignmentRecord.ehuuid}">
 								${houseConsignmentRecord.ehuuid}
 							</a>  

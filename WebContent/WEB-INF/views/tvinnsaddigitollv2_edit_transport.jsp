@@ -189,10 +189,17 @@
 					</c:otherwise>
 					</c:choose>
 					MRN-Api&nbsp;<span class="text14SkyBlue" id="${model.record.etmid}">${model.record.etmid}</span>
+					<c:if test="${not empty model.record.etmid}">
+						&nbsp;
+						<input title="Slett fra toll.no" class="inputFormSubmitStd" type="button" name="deleteButton" id="deleteButton" value='Slett'>
+						<div style="display: none;" class="clazz_dialog" id="dialogDelete" title="Dialog">
+							 <p class="text14" >Er du sikker på at du ønsker å slette fra toll.no?</p>
+						</div>
+					</c:if>		
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
-		    		Id&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.etuuid}">${model.record.etuuid}</a>
+		    		Id&nbsp;<a title="les status på toll.no" class="uuidLinkParent text14SkyBlue" id="${model.record.etuuid}">${model.record.etuuid}</a>
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
-		    		<a title="lese logg" tabindex=-1 id="${model.record.etlnrt}" class="logLink" runat="server" href="#"><font class="text14 ">Manif.st - log</font>&nbsp;
+		    		<a title="lese logg" tabindex=-1 id="${model.record.etlnrt}" class="logLink" runat="server" href="#"><font class="text14 ">Api.st - log</font>&nbsp;
 						<c:choose>
 						<c:when test="${model.record.etst2 == 'S' || model.record.etst2 == 'R' || model.record.etst2 == 'D' || model.record.etst2 == 'C'}">
 							<c:if test="${model.record.etst2 == 'S'}">
@@ -841,6 +848,7 @@
                     	<th width="2%" class="tableHeaderField" >Avd</th>
                 		<th width="2%" class="tableHeaderField" >Sign</th>
                 		<th width="2%" class="tableHeaderField" >Turnr</th>
+                		<th width="2%" class="tableHeaderField" ></th>
                 		<th title="S=SLETTET" width="2%" class="tableHeaderField" >Sysp.st</th>
                 		<th width="2%" class="tableHeaderField" >Br.vekt</th>
                 		<th width="2%" class="tableHeaderField" >Doknr.</th>
@@ -888,13 +896,12 @@
 		               <td width="2%" align="center" class="tableCell" <c:if test="${masterConsignmentRecord.emst2 == 'D'}">style="color: #9F6000;" </c:if> >${masterConsignmentRecord.emavd}</td>
 		               <td width="2%" align="center" class="tableCell" >${masterConsignmentRecord.emsg}</td>
 		               <td width="2%" align="center" class="tableCell" <c:if test="${masterConsignmentRecord.emst2 == 'D'}">style="color: #9F6000;" </c:if> >
-		               
 		               		<c:if test="${masterConsignmentRecord.empro > 0}">
 		               			<span title="..." onClick="showPop('h_info${counter.count}');" <c:if test="${not empty masterConsignmentRecord.listHouses}">style="cursor:pointer;color:green;" </c:if> >
 		               				${masterConsignmentRecord.empro}
 		               			</span>
 		               			<c:if test="${not empty masterConsignmentRecord.listHouses}">
-			               			<div class="text11" style="position: relative;" align="left">
+		               				<span class="text11" style="position: relative;" align="left">
 				                	<span style="position:absolute;top:2px; width:250px;" id="h_info${counter.count}" class="popupWithInputText text11"  >
 				                	<button name="_ButtonCloseEtktm" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('h_info${counter.count}');">Close</button> 
 					           			<font style="color:royalblue">Antal opd(houses) <b>${masterConsignmentRecord.listHouses.size()}</b></font>
@@ -904,10 +911,30 @@
 				           				</c:forEach>
 				           				</ul>
 									</span>	
-									</div>
+									</span>
+									
 								</c:if>
 		               		</c:if>
-		             
+		               </td>
+		               <td width="2%" align="center" class="tableCell" <c:if test="${masterConsignmentRecord.emst2 == 'D'}">style="color: #9F6000;" </c:if> >
+		               		<c:if test="${masterConsignmentRecord.empro > 0}">
+		               			<c:if test="${not empty masterConsignmentRecord.listHouses}">
+		               				<font onClick="showPop('h_info2${counter.count}');" title="Houses..." class="inputFormSubmit11 text10 isa_warning"><b>${masterConsignmentRecord.listHouses.size()}</b></font>
+			               			<span class="text11" style="position: relative;" align="left">
+				                	<span style="position:absolute;top:2px; width:250px;" id="h_info2${counter.count}" class="popupWithInputText text11"  >
+				                	<button name="_ButtonCloseEtktm" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('h_info2${counter.count}');">Close</button> 
+					           			<font style="color:royalblue">Antal opd(houses) <b>${masterConsignmentRecord.listHouses.size()}</b></font>
+				           				<ul>
+				           				<c:forEach items="${masterConsignmentRecord.listHouses}" var="houseRecord" varStatus="h_counter">  
+				           					<li><font style="color:royalblue">Opd <b>${houseRecord.ehtdn}</b> Brut.vekt <b>${houseRecord.ehvkb}</b></font></li>
+				           				</c:forEach>
+				           				</ul>
+									</span>	
+									</span>
+									
+								</c:if>
+								
+		               		</c:if>
 		               </td>
 		               <td nowrap width="2%" align="center" class="tableCell text12">
 		               	  <c:choose>
@@ -955,12 +982,16 @@
 		               </td>
 		               
 		               <td width="2%" class="tableCell" ><span class="text14SkyBlue">
+		               		<%--
 		               		<a style="display: block; width: 100%; height: 100%; cursor:pointer" class="uuidLink text12SkyBlue" id="${masterConsignmentRecord.emmid}">
 								${masterConsignmentRecord.emmid}
 							</a>
+							 --%>
+							<font class="text12SkyBlue">${masterConsignmentRecord.emmid}</font> 
+							 
 		               </td>
 		               		
-		               <td width="2%" class="tableCell" title="check status in toll.no">
+		               <td width="2%" class="tableCell" title="les status på toll.no">
 		               		<a style="display: block; width: 100%; height: 100%; cursor:pointer" class="uuidLink text12SkyBlue" id="${masterConsignmentRecord.emuuid}">
 								${masterConsignmentRecord.emuuid}
 							</a>  

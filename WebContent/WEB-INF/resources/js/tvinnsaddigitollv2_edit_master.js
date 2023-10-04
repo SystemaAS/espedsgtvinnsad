@@ -33,7 +33,7 @@
     jq('#manifestForm').submit(function() { 
     	setBlockUI();
     });
-    
+    //Real Send to Api (POST or PUT)
     jq('#sendButton').click(function() { 
     	  jq('#dialogSend').dialog( "option", "title", "Send til toll.no" );
 		  //deal with buttons for this modal window
@@ -61,6 +61,36 @@
 		  jq("#dialogSaveSU").button("option", "disabled", true);
 		  //open now
 		  jq('#dialogSend').dialog('open');
+    });
+
+	//Real delete to Api (DELETE)
+ 	jq('#deleteButton').click(function() { 
+    	  jq('#dialogDelete').dialog( "option", "title", "Slett fra toll.no" );
+		  //deal with buttons for this modal window
+		  jq('#dialogDelete').dialog({
+			 buttons: [ 
+	            {
+				 id: "dialogSaveTU",	
+				 text: "Ok",
+				 click: function(){
+					 		setBlockUI();
+							window.location = 'tvinnsaddigitollv2_api_delete_master.do?current_id1=' + jq('#emlnrt').val() + '&current_id2=' + jq('#emlnrm').val()+ '&current_mrn=' + jq('#emmid').val() + '&action=doDelete' ;
+				 		}
+			 	 },
+	 	 		{
+			 	 id: "dialogCancelTU",
+			 	 text: "Cancel", 
+				 click: function(){
+					 		//back to initial state of form elements on modal dialog
+					 		jq("#dialogSaveSU").button("option", "disabled", true);
+					 		jq( this ).dialog( "close" ); 
+				 		} 
+	 	 		 } ] 
+		  });
+		  //init values
+		  jq("#dialogSaveSU").button("option", "disabled", true);
+		  //open now
+		  jq('#dialogDelete').dialog('open');
     });
 
     
@@ -488,7 +518,7 @@
 		  var id = this.id;
 		  counterIndex = id.replace("removeLink","");
 		  
-		  jq('#dialogUpdateStatus'+counterIndex).dialog( "option", "title", "Slette House Consignment " + jq('#current_id1'+counterIndex).val() + "/" + jq('#current_id2'+counterIndex).val() + "/" + jq('#current_id3'+counterIndex).val() );
+		  jq('#dialogUpdateStatus'+counterIndex).dialog( "option", "title", "Slett House Consignment " + jq('#current_id1'+counterIndex).val() + "/" + jq('#current_id2'+counterIndex).val() + "/" + jq('#current_id3'+counterIndex).val() );
 		  //deal with buttons for this modal window
 		  jq('#dialogUpdateStatus'+counterIndex).dialog({
 			 buttons: [ 
@@ -614,12 +644,15 @@
 		  //default url
 		  var controllerUrl = "tvinnsaddigitollv2_childwindow_manifestinfo.do?id=" + id +"&level=m" + "&apiType=" + apiType;
 
+		 /** Has been removed at toll.no in V2 ...	
 		  if(id.length<35){ //meaning MRN and not LRN (only at Master Consignment level)
 			 controllerUrl = "tvinnsaddigitollv2_childwindow_masterdocs_rec.do?id=" + id; 
 		  }
+		 */	
 		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
 			
 	  });
+	  	
   });
   jq(function() {
 	  jq(".logLink").click(function() {

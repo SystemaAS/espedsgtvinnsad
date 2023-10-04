@@ -66,7 +66,38 @@
 		  //open now
 		  jq('#dialogSend').dialog('open');
     });
+
+	//Real delete to Api (DELETE)
+ 	jq('#deleteButton').click(function() { 
+    	  jq('#dialogDelete').dialog( "option", "title", "Slett fra toll.no" );
+		  //deal with buttons for this modal window
+		  jq('#dialogDelete').dialog({
+			 buttons: [ 
+	            {
+				 id: "dialogSaveTU",	
+				 text: "Ok",
+				 click: function(){
+					 		setBlockUI();
+							window.location = 'tvinnsaddigitollv2_api_delete_transport.do?current_id1=' + jq('#etlnrt').val() + '&current_mrn=' + jq('#etmid').val() + '&action=doDelete' ;
+				 		}
+			 	 },
+	 	 		{
+			 	 id: "dialogCancelTU",
+			 	 text: "Cancel", 
+				 click: function(){
+					 		//back to initial state of form elements on modal dialog
+					 		jq("#dialogSaveSU").button("option", "disabled", true);
+					 		jq( this ).dialog( "close" ); 
+				 		} 
+	 	 		 } ] 
+		  });
+		  //init values
+		  jq("#dialogSaveSU").button("option", "disabled", true);
+		  //open now
+		  jq('#dialogDelete').dialog('open');
+    });
     
+
     jq('#imgManifestIdInfo').click(function() { 
     	jq('#imgManifestIdInfo').attr('target','_blank');
 	  	window.open('tvinnsadmanifest_childwindow_manifestinfo.do?id=' + jq('#efuuid').val(), "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");
@@ -527,7 +558,7 @@
 		  var id = this.id;
 		  counterIndex = id.replace("removeLink","");
 		  
-		  jq('#dialogUpdateStatus'+counterIndex).dialog( "option", "title", "Slette Master Consignment " + jq('#current_id1'+counterIndex).val() + "/" + jq('#current_id2'+counterIndex).val() );
+		  jq('#dialogUpdateStatus'+counterIndex).dialog( "option", "title", "Slett Master Consignment " + jq('#current_id1'+counterIndex).val() + "/" + jq('#current_id2'+counterIndex).val() );
 		  //deal with buttons for this modal window
 		  jq('#dialogUpdateStatus'+counterIndex).dialog({
 			 buttons: [ 

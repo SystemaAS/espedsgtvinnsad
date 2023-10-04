@@ -301,8 +301,8 @@
 							</c:otherwise>
 							</c:choose>
 		               </td>
-		               <td class="tableCell" ><span class="text14SkyBlue">${record.etmid}</span></td>
-		               <td class="tableCell" title="check status in toll.no">
+		               <td class="tableCell" ><span class="text12SkyBlue">${record.etmid}</span></td>
+		               <td class="tableCell" title="les status på toll.no">
 		               		<a style="display: block; width: 100%; height: 100%; cursor:pointer" class="uuidLink text12SkyBlue" id="${record.etuuid}">
 								${record.etuuid}
 							</a>  
