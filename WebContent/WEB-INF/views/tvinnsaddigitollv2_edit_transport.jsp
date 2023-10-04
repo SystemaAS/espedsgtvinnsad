@@ -549,7 +549,7 @@
 					 			<td class="text14White">
 					 			
 					 			<img style="cursor:pointer;" onMouseOver="showPop('transp_info');" onMouseOut="hidePop('transp_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
-				            	<span title="Tollrepresentant">Transportør&nbsp;</span><font class="text16RedBold" >*</font>
+				            	<span title="Transportør">Transportør&nbsp;</span><font class="text16RedBold" >*</font>
 		                		<div class="text11" style="position: relative;" align="left">
 			                	<span style="position:absolute;top:2px; width:250px;" id="transp_info" class="popupWithInputText text11"  >
 			                	<p><b>Transportør</b>&nbsp;
