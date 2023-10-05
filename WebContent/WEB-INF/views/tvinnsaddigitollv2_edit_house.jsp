@@ -310,7 +310,7 @@
 						
 						</td>
 						<td class="text14">&nbsp;<span title="ehcnin">Container</span><font class="text16RedBold" >*</font></td>
-						<td class="text14">&nbsp;<span title="ehdkh">Dok.nr</span><font class="text16RedBold" >*</font>
+						<td class="text14">
 							<%-- Kan inte ändras tyvärr (Api error)
 							<c:if test="${not empty model.record.ehdkh}">
 								<a title="Oppdater Dok.nr hvis ønskelig. Du må lagre posten selv for å bevare endringen" tabindex="-1" id="${model.record.ehlnrt}_${model.record.ehdkh}" OnClick="getDocNumber(this)">
@@ -318,6 +318,20 @@
 								</a>
 							</c:if>
 							 --%>
+							<img style="cursor:pointer;" onMouseOver="showPop('ehdkh_info');" onMouseOut="hidePop('ehdkh_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+			            	<span title="ehdkh">Dok.nr</span><font class="text16RedBold" >*</font>
+	                		<div class="text11" style="position: relative;" align="left">
+		                	<span style="position:absolute;top:2px; width:250px;" id="ehdkh_info" class="popupWithInputText text11"  >
+		                	<p><b>Dok.nr</b><br/>
+		                		Identifisererer at dette er fraktbrevet til en hovedforsendelse	
+		                	</p>
+		                	<p>
+		                		Det settes automatisk med: representantens organisasjonsnummer + avdeling + oppdragsnummer + random seed (0-100)
+		                	</p>
+			           		</span>	
+							</div> 
+							 
+							 
 						</td>
 						<td class="text14">&nbsp;<span title="ehdkht">Dok.type</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="ehst">St.</span></td>
@@ -387,7 +401,7 @@
 							</select>																		
 						</td>
 						<td class="text14">
-							<input  type="text" class="inputTextReadOnly" name="ehdkh" id="ehdkh" size="25" maxlength="50" value="${model.record.ehdkh}">		
+							<input  type="text" class="inputTextReadOnly" name="ehdkh" id="ehdkh" size="28" maxlength="50" value="${model.record.ehdkh}">		
 						</td>
 						<td class="text14">
 							<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="ehdkht" id="ehdkht" >
@@ -407,10 +421,10 @@
 							<input readonly type="text" class="inputTextReadOnly" name="ehst3" id="ehst3" size="2" maxlength="1" value="${model.record.ehst3}">		
 						</td>
 						<td class="text14">
-							<input readonly type="text" class="inputTextReadOnly" name="ehdts" id="ehdts" size="10" maxlength="8" value="${model.record.ehdtsStr}">		
+							<input readonly type="text" class="inputTextReadOnly" name="ehdts" id="ehdts" size="12" maxlength="8" value="${model.record.ehdtsStr}">		
 						</td>
 						<td class="text14">
-							<input readonly type="text" class="inputTextReadOnly" name="master_emdkm" id="master_emdkm" size="20" maxlength="50" value="${model.record.masterDto.emdkm}">		
+							<input readonly type="text" class="inputTextReadOnly" name="master_emdkm" id="master_emdkm" size="25" maxlength="50" value="${model.record.masterDto.emdkm}">		
 						</td>
 					</tr>
 					</table>
@@ -442,6 +456,24 @@
 							
 							
 							</td>
+							<td class="text14" width="20px"></td>
+					
+							<td class="text14">
+								<img style="cursor:pointer;" onMouseOver="showPop('ehrecid_info');" onMouseOut="hidePop('ehrecid_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+				            	<span title="ehrecid">Postsekk identifikator</span>
+		                		<div class="text11" style="position: relative;" align="left">
+			                	<span style="position:absolute;top:2px; width:250px;" id="ehrecid_info" class="popupWithInputText text11"  >
+				           		<b>Postsekk identifikator - Receptacle Identification Number</b>
+				           		<p>
+				           			Identifikasjonsnummer til postsekken som denne forsendelsen er fraktet i. Skal kun brukes for post. maxlenght=35
+				           		</p>
+				           		<p>
+				           			Når Postsekk identifikator er fylt ut, sendes ikke ref til masterdokumentet. Enten har du en Postsekk eller Master-dokref når du sender inn. <b>Systemet tar seg av det selv hvis begge finnes</b>
+				           		</p>
+								</span>	
+								</div>
+							</td>
+							
 						</tr>
 						<tr>
 							<td colspan="3" class="text14">
@@ -477,6 +509,9 @@
 									 	
 								</select>
 							</td>
+							<td class="text14" width="20px"></td>
+							<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehrecid" id="ehrecid" size="30" maxlength="35" value="${model.record.ehrecid}"></td>
+							
 						</tr>
 						
 					</table>
@@ -602,7 +637,7 @@
 								 
 				 			</td>
 				 			<td class="text14">
-				 				<input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="eheid" id="eheid" size="21" maxlength="18" value="${model.record.eheid}">
+				 				<input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="eheid" id="eheid" size="22" maxlength="18" value="${model.record.eheid}">
 				 			</td>
 				 			<td class="text14">		
 				 				<input class="inputFormSubmitStd" type="button" name="manyExpIdButton" id="manyExpIdButton" onClick="showPop('more_exports');" value='Lage flere Eksp.id'>

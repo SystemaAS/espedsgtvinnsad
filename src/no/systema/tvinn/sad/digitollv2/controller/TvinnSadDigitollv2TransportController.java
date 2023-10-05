@@ -527,7 +527,7 @@ public class TvinnSadDigitollv2TransportController {
 		String action = "";
 		String id1 = "";
 		String mrn = "";
-		
+		String layer = request.getParameter("layer");
 		
 		Enumeration requestParameters = request.getParameterNames();
 	    while (requestParameters.hasMoreElements()) {
@@ -549,6 +549,10 @@ public class TvinnSadDigitollv2TransportController {
 	    logger.info("Id1:" + id1); logger.info("mrn:" + mrn);
 	    
 		ModelAndView successView = new ModelAndView("redirect:tvinnsaddigitollv2.do?action=doFind" );
+		if(StringUtils.isNotEmpty(layer)) {
+			//when delete is triggered within the layer (transport)
+			successView = new ModelAndView("redirect:tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=" + Integer.parseInt(id1));
+		}
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		
 		//START

@@ -79,7 +79,7 @@
 				 text: "Ok",
 				 click: function(){
 					 		setBlockUI();
-							window.location = 'tvinnsaddigitollv2_api_delete_house.do?current_id1=' + jq('#ehlnrt').val() + '&current_id2=' + jq('#ehlnrm').val() + '&current_id3=' + jq('#ehlnrh').val() + '&current_mrn=' + jq('#ehmid').val() + '&action=doDelete' ;
+							window.location = 'tvinnsaddigitollv2_api_delete_house.do?layer=1&current_id1=' + jq('#ehlnrt').val() + '&current_id2=' + jq('#ehlnrm').val() + '&current_id3=' + jq('#ehlnrh').val() + '&current_mrn=' + jq('#ehmid').val() + '&action=doDelete' ;
 				 		}
 			 	 },
 	 	 		{

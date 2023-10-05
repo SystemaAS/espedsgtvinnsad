@@ -36,7 +36,8 @@ public class SadmohfRecord extends JsonAbstractGrandFatherRecord   {
 	private Integer ehtdn = 0; //      sonet        7  0       7        84        begge    oppdragsnr     
 	private Integer ehlnrt = 0; //     sonet        7  0       7        91        begge    løpenummer     
 	private Integer ehlnrm = 0; //     sonet        4  0       4        98        begge    m-lnr innen transp  
-	private Integer ehlnrh = 0; //     sonet        4  0       4       102        begge    h-lnr innen master  
+	private Integer ehlnrh = 0; //     sonet        4  0       4       102        begge    h-lnr innen master 
+	private String ehrecid = ""; //    tegn           35						  begge    ReceptacleId_No
 	private Integer ehcnin = 0; //     sonet        1  0       1       106        begge    container indikator 
 	private String ehvkb = ""; //      sonet       13  3      13       107        begge    total vekt          
 	private Integer ehntk = 0; //      sonet        7  0       7       120        begge    total kolli         

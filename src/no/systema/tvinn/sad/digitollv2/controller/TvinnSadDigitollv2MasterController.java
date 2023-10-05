@@ -349,6 +349,7 @@ public class TvinnSadDigitollv2MasterController {
 		String id1 = "";
 		String id2 = "";
 		String mrn = "";
+		String layer = request.getParameter("layer");
 		
 		
 		Enumeration requestParameters = request.getParameterNames();
@@ -371,8 +372,12 @@ public class TvinnSadDigitollv2MasterController {
     	}
 	    logger.info("action:" + action);
 	    logger.info("Id1:" + id1); logger.info("Id2:" + id2); logger.info("mrn:" + mrn);
-	    
+	    //when delete is triggered from a list (transport list of masters)
 		ModelAndView successView = new ModelAndView("redirect:tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=" + Integer.parseInt(id1) );
+		if(StringUtils.isNotEmpty(layer)) {
+			//when delete is triggered within the layer (master)
+			successView = new ModelAndView("redirect:tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=" + Integer.parseInt(id1) + "&emlnrm=" + Integer.parseInt(id2) );
+		}
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		
 		//START

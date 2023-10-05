@@ -339,7 +339,7 @@ public class TvinnSadDigitollv2HouseController {
 		String id2 = "";
 		String id3 = "";
 		String mrn = "";
-		
+		String layer = request.getParameter("layer");
 		
 		Enumeration requestParameters = request.getParameterNames();
 	    while (requestParameters.hasMoreElements()) {
@@ -363,8 +363,12 @@ public class TvinnSadDigitollv2HouseController {
     	}
 	    logger.info("action:" + action);
 	    logger.info("Id1:" + id1); logger.info("Id2:" + id2); logger.info("Id3:" + id3); logger.info("mrn:" + mrn);
-	    
+	    //when delete is triggered from a list (master list of houses)
 		ModelAndView successView = new ModelAndView("redirect:tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=" + Integer.parseInt(id1) + "&emlnrm=" + Integer.parseInt(id2) );
+		if(StringUtils.isNotEmpty(layer)) {
+			//when delete is triggered within the layer (house)
+			successView = new ModelAndView("redirect:tvinnsaddigitollv2_edit_house.do?action=doFind&ehlnrt=" + Integer.parseInt(id1) + "&ehlnrm=" + Integer.parseInt(id2) + "&ehlnrh=" + Integer.parseInt(id3) );
+		}
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		
 		//START
@@ -841,7 +845,7 @@ public class TvinnSadDigitollv2HouseController {
 		
 		if(StringUtils.isNotEmpty(dokumentId) && !dokumentId.startsWith(HYPHEN)){
 			//logger.info("##############" + dokumentId);
-			//do nothing (already in place)	as in: 123456789-0001-0000003
+			//do nothing (already in place)	as in: 123456789-0001-0000003-099
 		}else {
 			//House Document number and type (under fraktbrev for house nr API)
 			this.getTransportDto(user, recordToValidate);
@@ -851,8 +855,13 @@ public class TvinnSadDigitollv2HouseController {
 			if(StringUtils.isEmpty(orgNr)) {
 				orgNr = recordToValidate.getTransportDto().getEtrgt(); //Carrier's OrgNr
 			}
+			//an extra random number som extra unique flag
+			Random rand = new Random(); 
+			int randomValue = rand.nextInt(100); 
+			
 			dokumentId = orgNr + HYPHEN + StringUtils.leftPad(String.valueOf(recordToValidate.getEhavd()),4,"0") + 
-						 		 HYPHEN + StringUtils.leftPad(String.valueOf(recordToValidate.getEhtdn()),7,"0");
+						 		 HYPHEN + StringUtils.leftPad(String.valueOf(recordToValidate.getEhtdn()),7,"0") + 
+								 HYPHEN + StringUtils.leftPad(String.valueOf(randomValue),3,"0"); 
 			
 			recordToValidate.setEhdkh(dokumentId);
 			

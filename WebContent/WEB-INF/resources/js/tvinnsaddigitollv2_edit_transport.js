@@ -78,7 +78,7 @@
 				 text: "Ok",
 				 click: function(){
 					 		setBlockUI();
-							window.location = 'tvinnsaddigitollv2_api_delete_transport.do?current_id1=' + jq('#etlnrt').val() + '&current_mrn=' + jq('#etmid').val() + '&action=doDelete' ;
+							window.location = 'tvinnsaddigitollv2_api_delete_transport.do?layer=1&current_id1=' + jq('#etlnrt').val() + '&current_mrn=' + jq('#etmid').val() + '&action=doDelete' ;
 				 		}
 			 	 },
 	 	 		{
