@@ -849,7 +849,7 @@
                 		<th width="2%" class="tableHeaderField" >Sign</th>
                 		<th width="2%" class="tableHeaderField" >Turnr</th>
                 		<th width="2%" class="tableHeaderField" ></th>
-                		<th title="S=SLETTET" width="2%" class="tableHeaderField" >Sysp.st</th>
+                		<th title="S=SLETTET" width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.sysped.status"/></th>
                 		<th width="2%" class="tableHeaderField" >Br.vekt</th>
                 		<th width="2%" class="tableHeaderField" >Doknr.</th>
                 		<th width="2%" class="tableHeaderField" >Dokt.</th>
@@ -857,11 +857,11 @@
                 		<th width="2%" class="tableHeaderField" >Avsender</th>
                 		<th width="2%" class="tableHeaderField" >Reg.dato</th>
                 		<th width="2%" class="tableHeaderField" >Sen.dato</th>
-                		<th width="2%" class="tableHeaderField" >Api</th>
-                		<th width="2%" class="tableHeaderField" >MRN-Api</th>
-                		<th width="2%" class="tableHeaderField" >Req.id</th>
+                		<th width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api"/></th>
+                		<th width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.mrn"/></th>
+                		<th width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.request"/></th>
                 		<th title="Api-status" width="2%" class="tableHeaderField" ></th>
-                		<th title="Api-status S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED,M=ERROR" width="2%" class="tableHeaderField" >Api st</th>
+                		<th title="Api-status S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED,M=ERROR" width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.status"/></th>
                 		<th width="2%" class="tableHeaderField" title="Fjerner manifest fra Tollvesenet" >Slett</th>
                 		<th width="2%" class="tableHeaderField" title="Fjerner manifest lokalt (SYSPED)">Kans.</th>
                 		<th width="2%" class="tableHeaderField" title="Endre transport">EndrTransp</th>

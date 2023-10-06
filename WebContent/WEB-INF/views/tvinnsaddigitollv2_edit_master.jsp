@@ -899,7 +899,7 @@
                     	<th width="2%" class="tableHeaderField" >Avd</th>
                 		<th width="2%" class="tableHeaderField" >Turnr</th>
                 		<th width="2%" class="tableHeaderField" >Opd</th>
-                    	<th title="S=SLETTET" width="2%" class="tableHeaderField" >St.</th>
+                    	<th title="S=SLETTET" width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.sysped.status"/></th>
                 		<th width="2%" class="tableHeaderField" >Br.vekt</th>
                 		<th width="2%" class="tableHeaderField" >Ant. kolli</th>
                 		<th width="2%" class="tableHeaderField" >Doknr.</th>
@@ -912,10 +912,11 @@
                 		<th width="2%" class="tableHeaderField" >Mott.</th>
                 		<th width="2%" class="tableHeaderField" >Avs.</th>
                 		<th width="2%" class="tableHeaderField" >Sen. tid</th>
-                		<th width="2%" class="tableHeaderField" >MRN-Api</th>
-                		<th width="2%" class="tableHeaderField" >Req.id</th>
+                		<th width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api"/></th>
+                		<th width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.mrn"/></th>
+                		<th width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.request"/></th>
                 		<th title="Api-status" width="2%" class="tableHeaderField" ></th>
-                		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED,M=ERROR" width="2%" class="tableHeaderField" >Manif.st</th>
+                		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED,M=ERROR" width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.status"/></th>
                 		<th width="2%" class="tableHeaderField" title="Fjerner manifest fra Tollvesenet" >Slett</th>
                 		<th width="2%" class="tableHeaderField" title="Fjerner manifest lokalt (SYSPED)">Kans.</th>
                 		</tr>
@@ -992,6 +993,16 @@
 		               <td width="2%" align="center" class="tableCell" >${houseConsignmentRecord.ehnas}&nbsp;-&nbsp;${houseConsignmentRecord.ehpss}&nbsp;${houseConsignmentRecord.ehlks}</td>
 		               <td width="2%" class="tableCell" ><c:if test="${houseConsignmentRecord.ehdts > 0}">${houseConsignmentRecord.ehdts}-${houseConsignmentRecord.ehtms}</c:if></td>
 		               
+		               <td width="2%" class="tableCell" >
+		               		<c:choose>
+		               		<c:when test="${ not empty model.record.transportDto.etktyp && fn:startsWith(model.record.transportDto.etktyp,'4') }">
+								<img title="api:air" style="vertical-align:middle;" id="airplaneImg${houseConsignmentRecord.ehuuid}" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
+							</c:when>
+							<c:otherwise>
+								<img title="api:road" style="vertical-align:middle;" id="lorryImg${houseConsignmentRecord.ehuuid}" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;
+							</c:otherwise>
+							</c:choose>
+		               </td>
 		               
 		               <td width="2%" class="tableCell" ><font class="text12SkyBlue">${houseConsignmentRecord.ehmid}</font></td>
 		               		

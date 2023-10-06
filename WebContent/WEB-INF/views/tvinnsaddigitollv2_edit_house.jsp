@@ -180,7 +180,7 @@
 				<td class="text14" align="left" >
 					<c:choose>
                		<c:when test="${ not empty model.record.transportDto.etktyp && fn:startsWith(model.record.transportDto.etktyp,'4') }">
-						<img title="api:air" style="vertical-align:middle;" id="airplaneImg" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
+						<img title="api:air" style="vertical-align:middle; cursor:pointer;" id="airplaneImg" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
 					</c:when>
 					<c:otherwise>
 						<img title="api:road" style="vertical-align:middle;" id="lorryImg" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;
@@ -481,23 +481,12 @@
 								  	<option title="Overgang til fri disponering" value="IMMEDIATE_RELEASE_IMPORT" <c:if test="${model.record.ehprt == 'IMMEDIATE_RELEASE_IMPORT'}"> selected </c:if> >IMMEDIATE_RELEASE_IMPORT</option> 
 									<option title="Transittering" value="TRANSIT_IMPORT" <c:if test="${model.record.ehprt == 'TRANSIT_IMPORT'}"> selected </c:if> >TRANSIT_IMPORT</option> 
 									<option title="Oppstart transittering" value="TRANSIT_RELEASE" <c:if test="${model.record.ehprt == 'TRANSIT_RELEASE'}"> selected </c:if> >TRANSIT_RELEASE</option> 
-									<option title="Samlefortolling" value="WAREHOUSE_RELEASE" <c:if test="${model.record.ehprt == 'WAREHOUSE_RELEASE'}"> selected </c:if> >WAREHOUSE_RELEASE</option> 
-									<option title="Innlegg på tollager" value="WAREHOUSE_RELEASE_RELAXATIONS" <c:if test="${model.record.ehprt == 'WAREHOUSE_RELEASE_RELAXATIONS'}"> selected </c:if> >WAREHOUSE_RELEASE_RELAXATIONS</option>
-									<option title="VOEC-sendinger" value="IMMEDIATE_RELEASE_VOEC" <c:if test="${model.record.ehprt == 'IMMEDIATE_RELEASE_VOEC'}"> selected </c:if> >IMMEDIATE_RELEASE_VOEC</option> 
+									<option title="VOEC-sendinger" value="IMMEDIATE_RELEASE_VOEC" <c:if test="${model.record.ehprt == 'IMMEDIATE_RELEASE_VOEC'}"> selected </c:if> >IMMEDIATE_RELEASE_VOEC</option>
+									<option title="Samlefortolling" value="COLLECTIVE_RELEASE" <c:if test="${model.record.ehprt == 'COLLECTIVE_RELEASE'}"> selected </c:if> >COLLECTIVE_RELEASE</option>
+									<option title="Innlegg på tollager" value="WAREHOUSE_RELEASE" <c:if test="${model.record.ehprt == 'WAREHOUSE_RELEASE'}"> selected </c:if> >WAREHOUSE_RELEASE</option> 
+									 
 								</select>
-								
-								<%--
-								<input size="30" maxlength="30" class="selectMediumBlueE2" list="ehprt_list" id="ehprt" name="ehprt" value="${model.record.ehprt}">
-								<datalist id="ehprt_list">
-								  	<option value="">-Välj-</option>
-				 				  	<option title="Overgang til fri disponering" value="IMMEDIATE_RELEASE_IMPORT" <c:if test="${model.record.ehprt == 'IMMEDIATE_RELEASE_IMPORT'}"> selected </c:if> >${model.record.ehprt}</option> 
-									<option title="Transittering" value="TRANSIT_IMPORT" <c:if test="${model.record.ehprt == 'TRANSIT_IMPORT'}"> selected </c:if> >${model.record.ehprt}</option> 
-									<option title="Oppstart transittering" value="TRANSIT_RELEASE" <c:if test="${model.record.ehprt == 'TRANSIT_RELEASE'}"> selected </c:if> >${model.record.ehprt}</option> 
-									<option title="VOEC-sendinger" value="IMMEDIATE_RELEASE_VOEC" <c:if test="${model.record.ehprt == 'IMMEDIATE_RELEASE_VOEC'}"> selected </c:if> >${model.record.ehprt}</option> 
-									<option title="Samlefortolling" value="WAREHOUSE_RELEASE" <c:if test="${model.record.ehprt == 'WAREHOUSE_RELEASE'}"> selected </c:if> >${model.record.ehprt}</option> 
-									<option title="Innlegg på tollager" value="WAREHOUSE_RELEASE_RELAXATIONS" <c:if test="${model.record.ehprt == 'WAREHOUSE_RELEASE_RELAXATIONS'}"> selected </c:if> >${model.record.ehprt}</option> 	
-								</datalist>
-								--%>	
+				
 							</td>
 							<td class="text14">
 								<select class="inputTextMediumBlue" id="ehupr" name="ehupr">

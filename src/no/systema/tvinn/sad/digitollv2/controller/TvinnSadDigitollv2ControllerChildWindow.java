@@ -152,6 +152,53 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	 * @param request
 	 * @return
 	 */
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_routinginfo.do",  method={RequestMethod.GET} )
+	public ModelAndView doRoutingInfo(HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doRoutingInfo");
+		Map model = new HashMap();
+		String level = request.getParameter("level");
+		
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_manifestinfo");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			StringBuilder url = new StringBuilder();
+			url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
+			
+			if(StringUtils.isNotEmpty(level) && (level.equals("t")||level.equals("m")||level.equals("h"))) {
+				if(level.equals("t")) {
+					url.append("TODO.do");
+				}else if (level.equals("h")) {
+					url.append("getRoutingHouseConsignment.do");
+				}
+				String BASE_URL = url.toString();
+	    		String urlRequestParamsKeys = "user=" + appUser.getUser();
+	    		logger.info("URL: " + BASE_URL);
+	    		logger.info("PARAMS: " + urlRequestParamsKeys);
+	    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+	    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+	    		//Debug -->
+		    	logger.debug(jsonPayload);
+	    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    		
+	    		model.put("content", jsonPayload);
+			}
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	/**
+	 * 
+	 * @param session
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="tvinnsaddigitollv2_childwindow_loginfo.do",  method={RequestMethod.GET} )
 	public ModelAndView doLogInfo(HttpSession session, HttpServletRequest request){
 		this.context = TdsAppContext.getApplicationContext();
