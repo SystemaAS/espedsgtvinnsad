@@ -555,7 +555,7 @@
 
 							</td>
 			 				<td class="text14">&nbsp;<span title="ehrg">Deklarantnr.</span></td>
-							<td class="text14">&nbsp;<span title="eh0068a - format:yyyymmdd">Dato</span></td>
+							<td class="text14">&nbsp;<span title="eh0068a">Dato</span></td>
 							<td class="text14">&nbsp;<span title="eh0068b">Sekvensnr.</span></td>
 							<td class="text14">&nbsp;<span title="ehtrnr">MRN/LRN - Transitering</span></td>
 							
