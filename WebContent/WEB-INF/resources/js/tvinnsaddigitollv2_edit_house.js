@@ -119,7 +119,8 @@
   
   jq(function() {
 	  jq("#eh0068a").datepicker({ 
-		  dateFormat: 'yymmdd' 	  
+		  //dateFormat: 'yymmdd' 	
+		  dateFormat: 'ddmmy' 	  
 	  });
 	  
 	  //custom validity
@@ -587,8 +588,6 @@
 			
 	  });	
 
-
-
   	});
 
 
@@ -613,6 +612,19 @@
 	  });
   });
 
+
+jq(function() {
+		jq('#sttButton').click(function() { 
+			if(jq('#ehavd').val()!='' && jq('#ehtdn').val()!=''){
+				if(jq('#ehrg').val()!='' && jq('#eh0068a').val()!='' && jq('#eh0068b').val()!=''){
+					openUploadFileToToll();
+				}
+			}
+	    });
+  });
+  function openUploadFileToToll(){
+	  window.open('tvinnsadmanifest_childwindow_uploadfile_to_toll.do?action=doInit&wsavd=' + jq('#ehavd').val() + '&wsopd=' + jq('#ehtdn').val() + '&clrg=' + jq('#ehrg').val() + '&cl0068a=' + jq('#eh0068a').val() + '&cl0068b=' + jq('#eh0068b').val(), "releasedCargolinesWin", "top=300px,left=450px,height=450px,width=1000px,scrollbars=yes,status=no,location=no");
+  }
 
 
 //-------------------

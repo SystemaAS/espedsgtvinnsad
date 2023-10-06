@@ -555,7 +555,7 @@
 
 							</td>
 			 				<td class="text14">&nbsp;<span title="ehrg">Deklarantnr.</span></td>
-							<td class="text14">&nbsp;<span title="eh0068a">Dato</span></td>
+							<td class="text14">&nbsp;<span title="eh0068a - format:yyyymmdd">Dato</span></td>
 							<td class="text14">&nbsp;<span title="eh0068b">Sekvensnr.</span></td>
 							<td class="text14">&nbsp;<span title="ehtrnr">MRN/LRN - Transitering</span></td>
 							
@@ -1153,7 +1153,11 @@
 							</div>
 						</c:otherwise>
 					</c:choose>
-					&nbsp;&nbsp;<input class="inputFormSubmitBlue" type="button" name="buttonInitVoec" id="buttonInitVoec" value='Varelinjer - VOEC'>	
+					&nbsp;&nbsp;<input class="inputFormSubmitBlue" type="button" name="buttonInitVoec" id="buttonInitVoec" value='Varelinjer - VOEC'>
+					&nbsp;&nbsp;&nbsp;&nbsp;<input class="inputFormSubmitStd" type="button" value="Laste opp til arkivet" name="uplButton" onClick="window.open('tvinnsadmanifest_childwindow_uploadFile.do?action=doInit&wsavd=${model.record.ehavd}&wsopd=${model.record.ehtdn}','archiveFromHouseFileUpload','top=300px,left=800px,height=250px,width=330px,scrollbars=no,status=no,location=no')">
+					<c:if test="${not empty model.record.ehrg && not empty model.record.eh0068a && not empty model.record.eh0068b }">
+						&nbsp;<input title="" class="inputFormSubmitStd" type="button" name="sttButton" id="sttButton" value='Send doks. til toll.no'>
+					</c:if>
 				</c:if>
 			</c:if>
 		</tr> 

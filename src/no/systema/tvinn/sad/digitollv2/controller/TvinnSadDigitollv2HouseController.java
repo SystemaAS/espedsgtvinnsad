@@ -832,6 +832,14 @@ public class TvinnSadDigitollv2HouseController {
 				recordToValidate.setEhdts(isoEhdts);
 			}
 		}
+		//Decl.date
+		if(recordToValidate.getEh0068a()!=null && recordToValidate.getEh0068a() > 0) {
+			String isoDeclDate = String.valueOf(recordToValidate.getEh0068a());
+			if (org.apache.commons.lang3.StringUtils.isNotEmpty(isoDeclDate) && isoDeclDate.length()==8) {
+				int declDate = Integer.parseInt(this.dateMgr.getDateFormatted_NO(isoDeclDate, DateTimeManager.ISO_FORMAT));
+				recordToValidate.setEh0068a(declDate);
+			}
+		}
 	}
 	
 	/**
@@ -896,6 +904,12 @@ public class TvinnSadDigitollv2HouseController {
 		if(recordToValidate.getEhdts()!=null && recordToValidate.getEhdts() > 0) {
 			int sentDate = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(String.valueOf(recordToValidate.getEhdts()), DateTimeManager.NO_FORMAT));
 			recordToValidate.setEhdts(sentDate);
+		}
+		
+		//Decl.date on eh0068a
+		if(recordToValidate.getEh0068a()!=null && recordToValidate.getEh0068a() > 0) {
+			int declDate = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(String.valueOf(recordToValidate.getEh0068a()), DateTimeManager.NO_FORMAT));
+			recordToValidate.setEh0068a(declDate);
 		}
 		
 		
