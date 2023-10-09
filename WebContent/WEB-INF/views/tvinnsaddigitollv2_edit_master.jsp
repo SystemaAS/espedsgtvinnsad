@@ -74,7 +74,11 @@
 					
 					<%-- <td width="50%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>  --%>
 			 		<td width="60%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
-						<img id="imgInfoRpgJarStart" style="cursor:pointer;" onClick="showPop('jarStartCmd');" src="resources/images/log-iconLOG.png" width="22" height="22" border="0" alt="info">
+			 			<a style="vertical-align:super;" title="Kodeverk toll.no" target="_blank" href="https://toll.github.io/api/mo-kodeverk.html">
+							<font title="Kodeverk toll.no" class="inputFormSubmit text10 isa_warning" ><b>Kodeverk</b></font>
+						</a>
+					
+						<img style="vertical-align:bottom;" id="imgInfoRpgJarStart" style="cursor:pointer;" onClick="showPop('jarStartCmd');" src="resources/images/log-iconLOG.png" width="22" height="22" border="0" alt="info">
 						<div class="text12" style="position: relative;display: inline;" align="left">
 						<span style="position:absolute; left:-100px; top:15px;"  id="jarStartCmd" class="popupWithInputText"  >
 			           		<div class="text11" align="left">
@@ -245,7 +249,7 @@
 						</c:otherwise>
 						</c:choose>
 					</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<font class="inputFormSubmit text12 isa_success">Transportør&nbsp;<b>${model.record.transportDto.etnat}</b>
+					<font class="inputFormSubmit text12 isa_success" style="cursor: not-allowed">Transportør&nbsp;<b>${model.record.transportDto.etnat}</b>
 																&nbsp;&nbsp;Kjøretøy k.merke&nbsp;<b>${model.record.transportDto.etkmrk}</b>
 																&nbsp;&nbsp;ETA&nbsp;<b>${model.record.transportDto.etetadStr}</b>&nbsp;&nbsp;ETA-tid&nbsp;<b>${model.record.transportDto.etetatStr}</b>
 					</font>

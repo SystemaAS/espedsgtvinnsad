@@ -225,6 +225,8 @@ public class TvinnSadDigitollv2HouseController {
 				//in order to grab ehlnrt-parent
 				this.setTransportDto(appUser.getUser(), recordToValidate);
 				this.setMasterDto(appUser.getUser(), recordToValidate);
+				//some default values
+				recordToValidate.setEhdkht("N730");
 				model.put("record", recordToValidate);
 			}	
 			//--------------------------------------

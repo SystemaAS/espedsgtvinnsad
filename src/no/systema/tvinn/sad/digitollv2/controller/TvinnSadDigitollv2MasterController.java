@@ -236,7 +236,10 @@ public class TvinnSadDigitollv2MasterController {
 			}
 			if("doCreate".equals(action)) {
 				this.setTransportDto(appUser.getUser(), recordToValidate);
-				//in order to grab emlnrt-parent
+				//some default values
+				recordToValidate.setEmdkmt("N730");
+				recordToValidate.setEmrgt(recordToValidate.getTransportDto().getEtrgt());
+				//
 				model.put("record", recordToValidate);
 			}
 			//--------------------------------------

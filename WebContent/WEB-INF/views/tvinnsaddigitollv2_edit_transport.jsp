@@ -63,7 +63,11 @@
 					
 					<%-- <td width="50%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>  --%>
 			 		<td width="80%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
-						<img id="imgInfoRpgJarStart" style="cursor:pointer;" onClick="showPop('jarStartCmd');" src="resources/images/log-iconLOG.png" width="22" height="22" border="0" alt="info">
+						<a style="vertical-align:super;" title="Kodeverk toll.no" target="_blank" href="https://toll.github.io/api/mo-kodeverk.html">
+							<font title="Kodeverk toll.no" class="inputFormSubmit text10 isa_warning"><b>Kodeverk</b></font>
+						</a>
+					
+						<img style="vertical-align:bottom;" id="imgInfoRpgJarStart" style="cursor:pointer;" onClick="showPop('jarStartCmd');" src="resources/images/log-iconLOG.png" width="22" height="22" border="0" alt="info">
 						<div class="text12" style="position: relative;display: inline;" align="left">
 						<span style="position:absolute; left:-100px; top:15px;" id="jarStartCmd" class="popupWithInputText"  >
 			           		<div class="text11" align="left">
