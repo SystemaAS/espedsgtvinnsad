@@ -417,8 +417,39 @@
 				 			</tr>
 				 				
 			 				<tr >
-								<td colspan="2" class="text14">&nbsp;<span title="etkmrk">Kjøretøy kjennemerke</span><font class="text16RedBold" >*</font></td>
-								<td colspan="2" class="text14">&nbsp;<span title="etcref">Turref.nr (IATA flight, other)</span></td>
+								<td colspan="2" class="text14">
+									<img style="cursor:pointer;" onMouseOver="showPop('etkmrk_info');" onMouseOut="hidePop('etkmrk_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+					            	<span title="etkmrk">Kjøretøy kjennemerke</span><font class="text16RedBold" >*</font>
+			                		<div class="text11" style="position: relative;" align="left">
+				                	<span style="position:absolute;top:2px; width:250px;" id="etkmrk_info" class="popupWithInputText text11"  >
+				                	<p><b>Kjøretøy kjennemerke</b>&nbsp;
+					           			Identifikasjonummer brukt for å unikt identifiserer transporten. (maxLength: 35-chars)
+					           		</p>
+					           		
+					           		<p>
+					           			For en bil på landevei er dette registreringsnummert for bilen. I typeOfIdentification angis kode 30 → Registration Number of the Road Vehicle
+					           		</p>
+					           		<p>
+					           			For fly er dette halenummeret. I typeOfIdentification angis kode 41 → Registration Number of the Aircraft
+					           		</p>
+					           		<p>
+					           			For tog angis toget nummer. I typeOfIdentification angis kode 21 → Train number For sjø angis IMO skipsregistreringsnummer. I typeOfIdentification angis kode 10 → IMO Ship Identification Number
+					           		</p>
+					           		
+									</span>	
+									</div>
+								</td>
+								<td colspan="2" class="text14">
+									<img style="cursor:pointer;" onMouseOver="showPop('etcref_info');" onMouseOut="hidePop('etcref_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+					            	<span title="etcref">Turref.nr (IATA flight, other)</span>
+			                		<div class="text11" style="position: relative;" align="left">
+				                	<span style="position:absolute;top:2px; width:250px;" id="etcref_info" class="popupWithInputText text11"  >
+				                	<p><b>Turref.nr - IATA flight</b>&nbsp;
+					           			Identifikasjon av reisen for transportmiddelet. For flytransport er dette IATA flight number. (maxLength: 17-chars)
+					           		</p>
+									</span>	
+									</div>
+								</td>
 				 			</tr>
 				 			<tr>
 			 					<td colspan="2" class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="etkmrk" id="etkmrk" size="25" maxlength="35" value="${model.record.etkmrk}"></td>

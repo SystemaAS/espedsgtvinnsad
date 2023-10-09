@@ -893,32 +893,32 @@
 							
 				<table id="mainList" class="compact" >
 					<thead>
-					<tr class="tableHeaderField" height="20" >
-                    	<th width="2%" class="tableHeaderFieldFirst" ><img title="Update" style="vertical-align:middle;" src="resources/images/update.gif" border="0" alt="edit"></th>
-                    	<th width="2%" class="tableHeaderField" >Lnr</th>
-                    	<th width="2%" class="tableHeaderField" >Avd</th>
-                		<th width="2%" class="tableHeaderField" >Turnr</th>
-                		<th width="2%" class="tableHeaderField" >Opd</th>
-                    	<th title="S=SLETTET" width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.sysped.status"/></th>
-                		<th width="2%" class="tableHeaderField" >Br.vekt</th>
-                		<th width="2%" class="tableHeaderField" >Ant. kolli</th>
-                		<th width="2%" class="tableHeaderField" >Doknr.</th>
-                		<th width="2%" class="tableHeaderField" >Dokt.</th>
-                		<th width="2%" class="tableHeaderField" >Tidl. doks</th>
-                		<th width="2%" class="tableHeaderField" >Prosed.</th>
-                		<th width="2%" class="tableHeaderField" >Out Prosed.</th>
-                		<th width="2%" class="tableHeaderField" >Type</th>
-                		<th width="2%" class="tableHeaderField" >Eksp.id</th>
-                		<th width="2%" class="tableHeaderField" >Mott.</th>
-                		<th width="2%" class="tableHeaderField" >Avs.</th>
-                		<th width="2%" class="tableHeaderField" >Sen. tid</th>
-                		<th width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api"/></th>
-                		<th width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.mrn"/></th>
-                		<th width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.request"/></th>
-                		<th title="Api-status" width="2%" class="tableHeaderField" ></th>
-                		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED,M=ERROR" width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.status"/></th>
-                		<th width="2%" class="tableHeaderField" title="Fjerner manifest fra Tollvesenet" >Slett</th>
-                		<th width="2%" class="tableHeaderField" title="Fjerner manifest lokalt (SYSPED)">Kans.</th>
+					<tr class="tableHeaderField12" height="20" >
+                    	<th width="2%" class="tableHeaderFieldFirst12" ><img title="Update" style="vertical-align:middle;" src="resources/images/update.gif" border="0" alt="edit"></th>
+                    	<th width="2%" class="tableHeaderField12" >Lnr</th>
+                    	<th width="2%" class="tableHeaderField12" >Avd</th>
+                		<th width="2%" class="tableHeaderField12" >Turnr</th>
+                		<th width="2%" class="tableHeaderField12" >Opd</th>
+                    	<th title="S=SLETTET" width="2%" class="tableHeaderField12" ><spring:message code="systema.tvinn.sad.digitoll.list.column.sysped.status"/></th>
+                		<th width="2%" class="tableHeaderField12" >Br.vekt</th>
+                		<th width="2%" class="tableHeaderField12" >Ant. kolli</th>
+                		<th width="2%" class="tableHeaderField12" >Doknr.</th>
+                		<th width="2%" class="tableHeaderField12" >Dokt.</th>
+                		<th width="2%" class="tableHeaderField12" >Tidl. doks</th>
+                		<th width="2%" class="tableHeaderField12" >Prosed.</th>
+                		<th width="2%" class="tableHeaderField12" >Out Prosed.</th>
+                		<th width="2%" class="tableHeaderField12" >Type</th>
+                		<th width="2%" class="tableHeaderField12" >Eksp.id</th>
+                		<th width="2%" class="tableHeaderField12" >Mott.</th>
+                		<th width="2%" class="tableHeaderField12" >Avs.</th>
+                		<th width="2%" class="tableHeaderField12" >Sen. tid</th>
+                		<th width="2%" class="tableHeaderField12" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api"/></th>
+                		<th width="2%" class="tableHeaderField12" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.mrn"/></th>
+                		<th width="2%" class="tableHeaderField12" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.request"/></th>
+                		<th title="Api-status" width="2%" class="tableHeaderField12" ></th>
+                		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED,M=ERROR" width="2%" class="tableHeaderField12" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.status"/></th>
+                		<th width="2%" class="tableHeaderField12" title="Fjerner manifest fra Tollvesenet" >Slett</th>
+                		<th width="2%" class="tableHeaderField12" title="Fjerner manifest lokalt (SYSPED)">Kans.</th>
                 		</tr>
                 	</thead>
                 	<tbody> 
@@ -933,7 +933,7 @@
 			          	  </c:otherwise>
 		          	  </c:choose>	
 		          
-		          	   <td width="2%" class="tableCellFirst" <c:if test="${houseConsignmentRecord.ehst2 == 'D'}">style="background-color: #FEEFB3;color: #9F6000;" </c:if> align="center">
+		          	   <td width="2%" class="tableCellFirst12" <c:if test="${houseConsignmentRecord.ehst2 == 'D'}">style="background-color: #FEEFB3;color: #9F6000;" </c:if> align="center">
 		          	   		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_house.do?action=doFind&ehlnrt=${houseConsignmentRecord.ehlnrt}&ehlnrm=${houseConsignmentRecord.ehlnrm}&ehlnrh=${houseConsignmentRecord.ehlnrh}" onClick="setBlockUI();">
                					<c:choose>
 		               				<c:when test="${houseConsignmentRecord.ehst2 == 'C' || houseConsignmentRecord.ehst == 'S'}">
@@ -946,11 +946,11 @@
                				</a>
                				
 	               	   </td>
-	               	   <td width="2%" align="center" class="tableCell" >${houseConsignmentRecord.ehlnrh}</td>
-	               	   <td width="2%" align="center" class="tableCell" >${houseConsignmentRecord.ehavd}</td>
-	               	   <td width="2%" align="center" class="tableCell" >${houseConsignmentRecord.ehpro}</td>
-	               	   <td width="2%" align="center" class="tableCell" >${houseConsignmentRecord.ehtdn}</td>
-		               <td nowrap width="2%" align="center" class="tableCell text12">
+	               	   <td width="2%" align="center" class="tableCell12" >${houseConsignmentRecord.ehlnrh}</td>
+	               	   <td width="2%" align="center" class="tableCell12" >${houseConsignmentRecord.ehavd}</td>
+	               	   <td width="2%" align="center" class="tableCell12" >${houseConsignmentRecord.ehpro}</td>
+	               	   <td width="2%" align="center" class="tableCell12" >${houseConsignmentRecord.ehtdn}</td>
+		               <td nowrap width="2%" align="center" class="tableCell12 text12">
 		               	  <c:choose>
 		               		<c:when test="${houseConsignmentRecord.ehst == 'S'}">
 		               			<font class="inputFormSubmit text12 isa_error">KANSELLERT</font>
@@ -977,23 +977,23 @@
 		               		</c:otherwise>
 		               	   </c:choose>
 		               </td>
-		               <td width="2%" align="right" class="tableCell" >${houseConsignmentRecord.ehvkb}</td>
-		               <td width="2%" align="right" class="tableCell" >${houseConsignmentRecord.ehntk}</td>
-		               <td width="2%" align="left" class="tableCell" >${houseConsignmentRecord.ehdkh}</td>
-		               <td width="2%" align="left" class="tableCell" >${houseConsignmentRecord.ehdkht}</td>
-		               <td width="2%" align="left" class="tableCell" >${houseConsignmentRecord.ehrg} ${houseConsignmentRecord.eh0068a} ${houseConsignmentRecord.eh0068b} ${houseConsignmentRecord.ehtrnr}</td>
-		               <td width="2%" align="left" class="tableCell" >${houseConsignmentRecord.ehprt}</td>
-		               <td width="2%" align="left" class="tableCell" >${houseConsignmentRecord.ehuprt}</td>
+		               <td width="2%" align="right" class="tableCell12" >${houseConsignmentRecord.ehvkb}</td>
+		               <td width="2%" align="right" class="tableCell12" >${houseConsignmentRecord.ehntk}</td>
+		               <td width="2%" align="left" class="tableCell12" >${houseConsignmentRecord.ehdkh}</td>
+		               <td width="2%" align="left" class="tableCell12" >${houseConsignmentRecord.ehdkht}</td>
+		               <td width="2%" align="left" class="tableCell12" >${houseConsignmentRecord.ehrg} ${houseConsignmentRecord.eh0068a} ${houseConsignmentRecord.eh0068b} ${houseConsignmentRecord.ehtrnr}</td>
+		               <td width="2%" align="left" class="tableCell12" >${houseConsignmentRecord.ehprt}</td>
+		               <td width="2%" align="left" class="tableCell12" >${houseConsignmentRecord.ehuprt}</td>
 		               
-		               <td width="2%" align="left" class="tableCell" >${houseConsignmentRecord.ehetypt}</td>
-		               <td width="2%" align="left" class="tableCell" >${houseConsignmentRecord.eheid}</td>
+		               <td width="2%" align="left" class="tableCell12" >${houseConsignmentRecord.ehetypt}</td>
+		               <td width="2%" align="left" class="tableCell12" >${houseConsignmentRecord.eheid}</td>
 		               
 		               
-		               <td width="2%" align="center" class="tableCell" >${houseConsignmentRecord.ehnam}&nbsp;-&nbsp;${houseConsignmentRecord.ehpsm}&nbsp;${houseConsignmentRecord.ehlkm}</td>
-		               <td width="2%" align="center" class="tableCell" >${houseConsignmentRecord.ehnas}&nbsp;-&nbsp;${houseConsignmentRecord.ehpss}&nbsp;${houseConsignmentRecord.ehlks}</td>
-		               <td width="2%" class="tableCell" ><c:if test="${houseConsignmentRecord.ehdts > 0}">${houseConsignmentRecord.ehdts}-${houseConsignmentRecord.ehtms}</c:if></td>
+		               <td width="2%" align="center" class="tableCell12" >${houseConsignmentRecord.ehnam}&nbsp;-&nbsp;${houseConsignmentRecord.ehpsm}&nbsp;${houseConsignmentRecord.ehlkm}</td>
+		               <td width="2%" align="center" class="tableCell12" >${houseConsignmentRecord.ehnas}&nbsp;-&nbsp;${houseConsignmentRecord.ehpss}&nbsp;${houseConsignmentRecord.ehlks}</td>
+		               <td width="2%" class="tableCell12" ><c:if test="${houseConsignmentRecord.ehdts > 0}">${houseConsignmentRecord.ehdts}-${houseConsignmentRecord.ehtms}</c:if></td>
 		               
-		               <td width="2%" class="tableCell" >
+		               <td width="2%" class="tableCell12" >
 		               		<c:choose>
 		               		<c:when test="${ not empty model.record.transportDto.etktyp && fn:startsWith(model.record.transportDto.etktyp,'4') }">
 								<img title="api:air" style="vertical-align:middle;" id="airplaneImg${houseConsignmentRecord.ehuuid}" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
@@ -1004,14 +1004,14 @@
 							</c:choose>
 		               </td>
 		               
-		               <td width="2%" class="tableCell" ><font class="text12SkyBlue">${houseConsignmentRecord.ehmid}</font></td>
+		               <td width="2%" class="tableCell12" ><font class="text12SkyBlue">${houseConsignmentRecord.ehmid}</font></td>
 		               		
-		               <td width="2%" class="tableCell" title="les status på toll.no">
+		               <td width="2%" class="tableCell12" title="les status på toll.no">
 		               		<a style="display: block; width: 100%; height: 100%; cursor:pointer" class="uuidLink text12SkyBlue" id="${houseConsignmentRecord.ehuuid}">
 								${houseConsignmentRecord.ehuuid}
 							</a>  
 		               </td>
-		               <td width="2%" align="center" class="tableCell" >
+		               <td width="2%" align="center" class="tableCell12" >
 		               		<c:choose>
 		               		<c:when test="${houseConsignmentRecord.ehst2 == 'S' || houseConsignmentRecord.ehst2 == 'R' || houseConsignmentRecord.ehst2 == 'D' || 
 		               				houseConsignmentRecord.ehst2 == 'M' || houseConsignmentRecord.ehst2 == 'C'}">
@@ -1040,7 +1040,7 @@
 		               		</c:otherwise>
 		               		</c:choose>
 		               </td>
-		               <td width="2%" align="center" class="tableCell" >
+		               <td width="2%" align="center" class="tableCell12" >
 		               		<c:choose>
 		               		<c:when test="${houseConsignmentRecord.ehst2 == 'S' || houseConsignmentRecord.ehst2 == 'R' || houseConsignmentRecord.ehst2 == 'D' || 
 		               				houseConsignmentRecord.ehst2 == 'M' || houseConsignmentRecord.ehst2 == 'C'}">
@@ -1068,7 +1068,7 @@
 		               		</c:choose>
 		               </td>
 
-		               <td width="2%" class="tableCell" align="center"> 
+		               <td width="2%" class="tableCell12" align="center"> 
 		               		  	
 					   				<c:if test="${not empty houseConsignmentRecord.ehuuid  && not empty houseConsignmentRecord.ehmid}">
 					   					<c:if test="${not empty houseConsignmentRecord.ehst2 && (houseConsignmentRecord.ehst2 == 'S' || houseConsignmentRecord.ehst2 == 'M') }">
@@ -1091,7 +1091,7 @@
 		              				
               				
 	               	   </td>
-	               	   <td width="2%" class="tableCell" align="center">
+	               	   <td width="2%" class="tableCell12" align="center">
 	               	   		<c:if test="${houseConsignmentRecord.ehst == 'M' || empty houseConsignmentRecord.ehst}">
 	               	   			<%-- We can only CANCEL (S) internally if the emmid and emuuid are gone since we DELETED first from Tollv.(if we even got that far at some point...) --%>
 	               	   			<c:if test="${empty houseConsignmentRecord.ehmid && empty houseConsignmentRecord.ehuuid}">

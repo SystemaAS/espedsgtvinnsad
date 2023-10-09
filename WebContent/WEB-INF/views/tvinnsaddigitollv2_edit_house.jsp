@@ -183,7 +183,7 @@
 						<img title="api:air:entry" style="vertical-align:middle; cursor:pointer;" id="airplaneImg" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
 					</c:when>
 					<c:otherwise>
-						<img title="api:road" style="vertical-align:middle;" id="lorryImg" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;
+						<img title="api:road:entry" style="vertical-align:middle;cursor:pointer;" id="lorryImg" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;
 					</c:otherwise>
 					</c:choose>
 		    		MRN-Api&nbsp;<span class="text14SkyBlue" id="${model.record.ehmid}">${model.record.ehmid}</span>
