@@ -63,6 +63,10 @@
 					
 					<%-- <td width="50%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>  --%>
 			 		<td width="80%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
+			 			<c:if test="${not empty model.record.etmid_own}">
+				 			<span class="inputTextReadOnly text11" style="vertical-align:super;">MRN:&nbsp;${model.record.etmid_own}</span>
+				 			&nbsp;&nbsp;
+			 			</c:if>
 						<a style="vertical-align:super;" title="Kodeverk toll.no" target="_blank" href="https://toll.github.io/api/mo-kodeverk.html">
 							<font title="Kodeverk toll.no" class="inputFormSubmit text10 isa_warning"><b>Kodeverk</b></font>
 						</a>
@@ -235,6 +239,7 @@
 						</c:otherwise>
 						</c:choose>
 					</a>&nbsp;&nbsp;
+					
 					
 		   		</td>
 	   		</tr>

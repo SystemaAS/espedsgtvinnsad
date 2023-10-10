@@ -36,6 +36,7 @@ public class SadmotfRecord extends JsonAbstractGrandFatherRecord  {
 	private String etst2 = ""; // varchar(1) , Status om manifest
 	private String etuuid = ""; // varchar(36), LRN
 	private String etmid = ""; // varchar(18),  MRN
+	private String etmid_own = ""; // varchar(18),  MRN back up
 	private String etst3 = ""; // varchar(1) , Status om inpassering
 	private Integer etdtin = 0; // numeric(8) , Innsendingsdato
 	private Integer etetad = 0; // numeric(8) default 0, ETA date
