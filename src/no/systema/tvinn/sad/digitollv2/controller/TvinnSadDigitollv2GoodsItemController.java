@@ -221,12 +221,24 @@ public class TvinnSadDigitollv2GoodsItemController {
 		//adjust BigDecimal eibl (sonet 13,2)
 		if(StringUtils.isNotEmpty(recordToValidate.getEibl())){
 			String tmp = recordToValidate.getEibl().replace(",", ".");
+			//AS400 typiskt för minus. We must invert so that the minus char is in the beginning
+			if(tmp.endsWith("-")) {
+				tmp =  tmp.replace("-", "");
+				tmp = "-" + tmp;
+				
+			}
 			BigDecimal bd = new BigDecimal(tmp).setScale(2, RoundingMode.HALF_UP);
 			recordToValidate.setEibl(bd.toString());	
 		}
 		//adjust BigDecimal eistk (sonet 5,2)
 		if(StringUtils.isNotEmpty(recordToValidate.getEistk())){
 			String tmp = recordToValidate.getEistk().replace(",", ".");
+			//AS400 typiskt för minus. We must invert so that the minus char is in the beginning
+			if(tmp.endsWith("-")) {
+				tmp =  tmp.replace("-", "");
+				tmp = "-" + tmp;
+				
+			}
 			BigDecimal bd = new BigDecimal(tmp).setScale(2, RoundingMode.HALF_UP);
 			recordToValidate.setEistk(bd.toString());	
 		}

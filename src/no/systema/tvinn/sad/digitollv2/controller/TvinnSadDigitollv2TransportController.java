@@ -1013,6 +1013,18 @@ public class TvinnSadDigitollv2TransportController {
 			}
 			
 		}
+		//postnr norsk alltid 4-siffror
+		if(StringUtils.isNotEmpty(recordToValidate.getEtpnt())) {
+			if("NO".equals(recordToValidate.getEtlkt())) {
+				recordToValidate.setEtpnt(StringUtils.leftPad(String.valueOf(recordToValidate.getEtpnt()),4,"0"));
+			}
+		}
+		//postnr norsk alltid 4-siffror
+		if(StringUtils.isNotEmpty(recordToValidate.getEtpnr())) {
+			if("NO".equals(recordToValidate.getEtlkr())) {
+				recordToValidate.setEtpnr(StringUtils.leftPad(String.valueOf(recordToValidate.getEtpnr()),4,"0"));
+			}
+		}
 		
 		
 	}
@@ -1107,6 +1119,19 @@ public class TvinnSadDigitollv2TransportController {
 			
 		}else {
 			recordToValidate.setEtshet(0);
+		}
+		
+		//postnr norsk alltid 4-siffror
+		if(StringUtils.isNotEmpty(recordToValidate.getEtpnt())) {
+			if("NO".equals(recordToValidate.getEtlkt())) {
+				recordToValidate.setEtpnt(StringUtils.leftPad(String.valueOf(recordToValidate.getEtpnt()),4,"0"));
+			}
+		}
+		//postnr norsk alltid 4-siffror
+		if(StringUtils.isNotEmpty(recordToValidate.getEtpnr())) {
+			if("NO".equals(recordToValidate.getEtlkr())) {
+				recordToValidate.setEtpnr(StringUtils.leftPad(String.valueOf(recordToValidate.getEtpnr()),4,"0"));
+			}
 		}
 		
 	}

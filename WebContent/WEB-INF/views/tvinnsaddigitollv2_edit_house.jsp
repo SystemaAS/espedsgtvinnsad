@@ -78,6 +78,10 @@
 					</td>
 					
 					<td width="60%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
+						<c:if test="${not empty model.record.ehmid_own}">
+				 			<span title="Sist godkjente MRN" class="inputTextReadOnly text11" style="vertical-align:super;">MRN:&nbsp;${model.record.ehmid_own}</span>
+				 			&nbsp;&nbsp;
+			 			</c:if>
 						<a style="vertical-align:super;" title="Kodeverk toll.no" target="_blank" href="https://toll.github.io/api/mo-kodeverk.html">
 							<font title="Kodeverk toll.no" class="inputFormSubmit text10 isa_warning"><b>Kodeverk</b></font>
 						</a>
@@ -191,7 +195,7 @@
 						<img title="api:road:entry" style="vertical-align:middle;cursor:pointer;" id="lorryImg" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;
 					</c:otherwise>
 					</c:choose>
-		    		MRN-Api&nbsp;<span class="text14SkyBlue" id="${model.record.ehmid}">${model.record.ehmid}</span>
+		    		<span title="MRN nr. hos toll.no - per House" >MRN-Api&nbsp;</span><span class="text14SkyBlue" id="${model.record.ehmid}">${model.record.ehmid}</span>
 		    		<c:if test="${not empty model.record.ehmid}">
 						&nbsp;
 						<input title="Slett fra toll.no" class="inputFormSubmitStd" type="button" name="deleteButton" id="deleteButton" value='Slett'>
@@ -200,7 +204,7 @@
 						</div>
 					</c:if>	
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
-		    		Id&nbsp;<a title="les status på toll.no" class="uuidLink text14SkyBlue" id="${model.record.ehuuid}">${model.record.ehuuid}</a>
+		    		<span title="Transaktionsid hos toll.no - per request" >Trans.id&nbsp;</span><a title="les status på toll.no" class="uuidLink text14SkyBlue" id="${model.record.ehuuid}">${model.record.ehuuid}</a>
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
 		    		
 		    		<a title="lese logg" tabindex=-1 id="${model.record.ehlnrt}_${model.record.ehlnrm}_${model.record.ehlnrh}" class="logLink" runat="server" href="#"><font class="text14 ">Api.st - log</font>&nbsp;

@@ -171,7 +171,7 @@
 						<tr>
 							<td class="text14"><input readonly type="text" class="inputTextReadOnly" name="eili" id="eili" size="6" maxlength="5" value=""></td>
 							<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="eibl" id="eibl" size="17" maxlength="15" value=""></td>
-							<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return amountKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="eistk" id="eistk" size="9" maxlength="7" value=""></td>
+							<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="eistk" id="eistk" size="9" maxlength="7" value=""></td>
 							<td nowrap class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="eivnt" id="eivnt" size="8" maxlength="6" value="">
 								<a tabindex="-1" id="eivntIdLink">
 									<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >

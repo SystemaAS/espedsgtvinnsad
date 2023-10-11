@@ -64,7 +64,7 @@
 					<%-- <td width="50%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>  --%>
 			 		<td width="80%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
 			 			<c:if test="${not empty model.record.etmid_own}">
-				 			<span class="inputTextReadOnly text11" style="vertical-align:super;">MRN:&nbsp;${model.record.etmid_own}</span>
+				 			<span title="Sist godkjente MRN" class="inputTextReadOnly text11" style="vertical-align:super;">MRN:&nbsp;${model.record.etmid_own}</span>
 				 			&nbsp;&nbsp;
 			 			</c:if>
 						<a style="vertical-align:super;" title="Kodeverk toll.no" target="_blank" href="https://toll.github.io/api/mo-kodeverk.html">
@@ -196,7 +196,7 @@
 						<img title="api:road" style="vertical-align:middle;" id="lorryImg" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;
 					</c:otherwise>
 					</c:choose>
-					MRN-Api&nbsp;<span class="text14SkyBlue" id="${model.record.etmid}">${model.record.etmid}</span>
+					<span title="MRN nr. hos toll.no - per transport" >MRN-Api&nbsp;</span><span class="text14SkyBlue" id="${model.record.etmid}">${model.record.etmid}</span>
 					<c:if test="${not empty model.record.etmid}">
 						&nbsp;
 						<input title="Slett fra toll.no" class="inputFormSubmitStd" type="button" name="deleteButton" id="deleteButton" value='Slett'>
@@ -205,7 +205,7 @@
 						</div>
 					</c:if>		
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
-		    		Id&nbsp;<a title="les status på toll.no" class="uuidLinkParent text14SkyBlue" id="${model.record.etuuid}">${model.record.etuuid}</a>
+		    		<span title="Transaktionsid hos toll.no - per request" >Trans.id&nbsp;</span><a title="les status på toll.no" class="uuidLinkParent text14SkyBlue" id="${model.record.etuuid}">${model.record.etuuid}</a>
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
 		    		<a title="lese logg" tabindex=-1 id="${model.record.etlnrt}" class="logLink" runat="server" href="#"><font class="text14 ">Api.st - log</font>&nbsp;
 						<c:choose>
@@ -654,7 +654,7 @@
 				 				<tr >
 									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="etpst" id="etpst" size="25" maxlength="24" value="${model.record.etpst}"></td>
 									<td class="text14">
-										<select class="inputTextMediumBlueMandatoryField" name="etlkt" id="etlkt" >
+										<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="etlkt" id="etlkt" >
 					 						<option value="">-velg-</option>
 						 				  	<c:forEach var="dto" items="${model.countryDto}" >
 					                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.etlkt == dto.code}"> selected </c:if> >${dto.code}</option>

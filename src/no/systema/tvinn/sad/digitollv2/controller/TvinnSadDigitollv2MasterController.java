@@ -893,6 +893,19 @@ public class TvinnSadDigitollv2MasterController {
 				recordToValidate.setEmatdd(isoEmatdd);
 			}
 		}
+		
+		//postnr norsk alltid 4-siffror
+		if(StringUtils.isNotEmpty(recordToValidate.getEmpns())) {
+			if("NO".equals(recordToValidate.getEmlks())) {
+				recordToValidate.setEmpns(StringUtils.leftPad(String.valueOf(recordToValidate.getEmpns()),4,"0"));
+			}
+		}
+		//postnr norsk alltid 4-siffror
+		if(StringUtils.isNotEmpty(recordToValidate.getEmpnm())) {
+			if("NO".equals(recordToValidate.getEmlkm())) {
+				recordToValidate.setEmpnm(StringUtils.leftPad(String.valueOf(recordToValidate.getEmpnm()),4,"0"));
+			}
+		}
 	}
 	/**
 	 * 
@@ -935,6 +948,19 @@ public class TvinnSadDigitollv2MasterController {
 		if(recordToValidate.getEmatdd()!=null && recordToValidate.getEmatdd() > 0) {
 			int date = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(String.valueOf(recordToValidate.getEmatdd()), DateTimeManager.NO_FORMAT));
 			recordToValidate.setEmdtin(date);
+		}
+		
+		//postnr norsk alltid 4-siffror
+		if(StringUtils.isNotEmpty(recordToValidate.getEmpns())) {
+			if("NO".equals(recordToValidate.getEmlks())) {
+				recordToValidate.setEmpns(StringUtils.leftPad(String.valueOf(recordToValidate.getEmpns()),4,"0"));
+			}
+		}
+		//postnr norsk alltid 4-siffror
+		if(StringUtils.isNotEmpty(recordToValidate.getEmpnm())) {
+			if("NO".equals(recordToValidate.getEmlkm())) {
+				recordToValidate.setEmpnm(StringUtils.leftPad(String.valueOf(recordToValidate.getEmpnm()),4,"0"));
+			}
 		}
 	}
 	

@@ -842,6 +842,18 @@ public class TvinnSadDigitollv2HouseController {
 				recordToValidate.setEh0068a(declDate);
 			}
 		}
+		//postnr norsk alltid 4-siffror
+		if(StringUtils.isNotEmpty(recordToValidate.getEhpns())) {
+			if("NO".equals(recordToValidate.getEhlks())) {
+				recordToValidate.setEhpns(StringUtils.leftPad(String.valueOf(recordToValidate.getEhpns()),4,"0"));
+			}
+		}
+		//postnr norsk alltid 4-siffror
+		if(StringUtils.isNotEmpty(recordToValidate.getEhpnm())) {
+			if("NO".equals(recordToValidate.getEhlkm())) {
+				recordToValidate.setEhpnm(StringUtils.leftPad(String.valueOf(recordToValidate.getEhpnm()),4,"0"));
+			}
+		}
 	}
 	
 	/**
@@ -899,6 +911,12 @@ public class TvinnSadDigitollv2HouseController {
 		//adjust BigDecimal eibl (sonet 13,2)
 		if(StringUtils.isNotEmpty(recordToValidate.getEhvkb())){
 			String tmp = recordToValidate.getEhvkb().replace(",", ".");
+			//AS400 typiskt för minus. We must invert so that the minus char is in the beginning
+			if(tmp.endsWith("-")) {
+				tmp =  tmp.replace("-", "");
+				tmp = "-" + tmp;
+				
+			}
 			BigDecimal bd = new BigDecimal(tmp).setScale(2, RoundingMode.HALF_UP);
 			recordToValidate.setEhvkb(bd.toString());	
 		}
@@ -912,6 +930,19 @@ public class TvinnSadDigitollv2HouseController {
 		if(recordToValidate.getEh0068a()!=null && recordToValidate.getEh0068a() > 0) {
 			int declDate = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(String.valueOf(recordToValidate.getEh0068a()), DateTimeManager.NO_FORMAT));
 			recordToValidate.setEh0068a(declDate);
+		}
+		
+		//postnr norsk alltid 4-siffror
+		if(StringUtils.isNotEmpty(recordToValidate.getEhpns())) {
+			if("NO".equals(recordToValidate.getEhlks())) {
+				recordToValidate.setEhpns(StringUtils.leftPad(String.valueOf(recordToValidate.getEhpns()),4,"0"));
+			}
+		}
+		//postnr norsk alltid 4-siffror
+		if(StringUtils.isNotEmpty(recordToValidate.getEhpnm())) {
+			if("NO".equals(recordToValidate.getEhlkm())) {
+				recordToValidate.setEhpnm(StringUtils.leftPad(String.valueOf(recordToValidate.getEhpnm()),4,"0"));
+			}
 		}
 		
 		
