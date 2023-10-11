@@ -816,17 +816,17 @@
 				 				<tr >
 									<c:choose>
 				 					<c:when test="${empty model.record.etemrt}">
-				 						<td class="text14"><input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="own_etemr_email" id="own_etemr_email" size="35" maxlength="50" value=""></td>
+				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_email" id="own_etemr_email" size="35" maxlength="50" value=""></td>
 				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_telephone" id="own_etemr_telephone" size="15" maxlength="50" value=""></td>
 				 					</c:when>
 		 							<c:otherwise>
 				 						<c:choose>
 				 							<c:when test="${model.record.etemrt == 'EM'}">
-						 						<td class="text14"><input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="own_etemr_email" id="own_etemr_email" size="35" maxlength="50" value="${model.record.etemr}"></td>
+						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_email" id="own_etemr_email" size="35" maxlength="50" value="${model.record.etemr}"></td>
 						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_telephone" id="own_etemr_telephone" size="15" maxlength="50" value=""></td>
 						 					</c:when>
 						 					<c:otherwise>
-						 						<td class="text14"><input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="own_etemr_email" id="own_etemr_email" size="35" maxlength="50" value=""></td>
+						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_email" id="own_etemr_email" size="35" maxlength="50" value=""></td>
 												<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_telephone" id="own_etemr_telephone" size="15" maxlength="50" value="${model.record.etemr}"></td>
 											</c:otherwise>
 										</c:choose>
@@ -852,7 +852,7 @@
 					<c:if test="${model.record.etlnrt > 0}">
 						&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
 						<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
-							 <p class="text14" >Er du sikker på at du vil sende till toll.no ? Det tar ca 10 sekunder</p>
+							 <p class="text14" >Er du sikker på at du vil sende till toll.no ? Det tar 5-6 sekunder</p>
 						</div>
 					</c:if>
 				</c:if>

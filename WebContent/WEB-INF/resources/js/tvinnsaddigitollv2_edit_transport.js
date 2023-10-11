@@ -187,11 +187,6 @@
 	    		refreshCustomValidity(jq('#etlkr')[0]);
 	  		}
 	  	});
-		jq('#own_etemr_email').focus(function() {
-	    	if(jq('#own_etemr_email').val()!=''){
-	    		refreshCustomValidity(jq('#own_etemr_email')[0]);
-	  		}
-	  	});
 
 		//		
 		jq('#etktkd').focus(function() {
@@ -275,6 +270,35 @@
 		}
 	  });	
   });
+
+	//TUR
+	jq(function() { 
+	    jq('#etpro').blur(function() {
+			if(jq('#etpro').val() != ""){
+				if(jq('#etkmrk').val() == ""){
+					
+					jq.getJSON('searchTur_Digitoll.do', {
+						applicationUser : jq('#applicationUser').val(),
+						turNr : jq('#etpro').val(),
+						fromDate : "20200101",
+						ajax : 'true'
+						}, function(data) {
+							//alert("Hello");
+							var len = data.length;
+							for ( var i = 0; i < len; i++) {
+								//html += '<option value="' + data[i].kundnr + '">' + data[i].knavn + '</option>';
+								customer = new Object();
+								jq('#etkmrk').val(data[i].tubiln);
+								
+							}
+							
+						});
+				}
+			}
+		});		
+	});
+	
+
   	//--------------------------------------------------------------------------------------
 	//Extra behavior for Customer number ( without using (choose from list) extra roundtrip)
 	//--------------------------------------------------------------------------------------

@@ -54,7 +54,9 @@ public final class SadDigitollUrlDataStore {
 		static public String SAD_FETCH_TOLLTARIFF_VARUKODER_ITEMS_FROM_DESC_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOG023R.pgm";
 		//http://gw.systema.no/sycgip/TNOG006R.pgm?user=OSCAR&ie=I&kod=8514 (alt. ie=E)
 		static public String SAD_FETCH_TOLLTARIFF_VARUKODER_ITEMS_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOG006R.pgm";
-		
+		//FETCH Tur
+		//http://10.11.47.61/sycgip/TDIG001R.pgm?user=OSCAR&wsstur=81000009&wtudt=20200101
+		static public String SAD_FETCH_DIGITOLL_TUR_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TDIG001R.pgm";
 		
 		
 }
