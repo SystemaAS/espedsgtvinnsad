@@ -582,17 +582,19 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	private List<SadmotfRecord> getTransports(SystemaWebUser appUser, Integer emlnrt, Integer emlnrm, String etktyp) {
 		
 		List<SadmotfRecord> result = new ArrayList<SadmotfRecord>();
-		
+		int DAYS_BACK_FROM_NOW = -10;
 		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TRANSPORT_URL;
-		//add URL-parameters
-		String urlRequestParams = "user=" + appUser.getUser();
+		//add from date in order to limit the list
+		String fromRegDate = this.dateMgr.getSpecificDayFrom_CurrentDate_ISO(DAYS_BACK_FROM_NOW);
+		String urlRequestParams = "user=" + appUser.getUser() + "&etdtr=" + fromRegDate;
+		
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
     	logger.warn("URL: " + BASE_URL);
     	logger.warn("URL PARAMS: " + urlRequestParams);
     	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
 
     	//Debug --> 
-    	logger.info(jsonPayload);
+    	//logger.debug(jsonPayload);
     	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
     	if(jsonPayload!=null){
     		
@@ -643,7 +645,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
     	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
 
     	//Debug --> 
-    	logger.debug(jsonPayload);
+    	//logger.debug(jsonPayload);
     	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
     	if(jsonPayload!=null){
     		SadmomfContainer jsonContainer = this.sadmomfListService.getListContainer(jsonPayload);

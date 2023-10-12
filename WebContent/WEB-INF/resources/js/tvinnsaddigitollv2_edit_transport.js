@@ -286,9 +286,10 @@
 							//alert("Hello");
 							var len = data.length;
 							for ( var i = 0; i < len; i++) {
-								//html += '<option value="' + data[i].kundnr + '">' + data[i].knavn + '</option>';
-								customer = new Object();
-								jq('#etkmrk').val(data[i].tubiln);
+								jq('#etkmrk').val(data[i].tubiln);//Bilnr.
+								jq('#etsjaf').val(data[i].tusjn1);//Fører-navn
+								jq('#ettsd').val(data[i].tuto1a); //tollsted a
+								//
 								
 							}
 							

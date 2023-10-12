@@ -232,6 +232,8 @@ public class TvinnSadDigitollAjaxController {
 	    		if(container!=null){
 	    			for(SadTurRecord  record : container.getWrktriplist()){
 	    				logger.info("Bilnr: " + record.getTubiln());
+	    				logger.info("Tollsted(a): " + record.getTuto1a());
+	    				logger.info("Fører: " + record.getTusjn1());
 	    				result.add(record);
 	    			}
 	    		}

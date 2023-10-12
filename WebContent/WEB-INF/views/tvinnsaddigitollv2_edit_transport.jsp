@@ -809,7 +809,7 @@
 				 				</tr>
 				 				
 				 				<tr >
-									<td class="text14">&nbsp;<span title="own_etemr_email">E-post</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="own_etemr_email">E-post</span></td>
 									<td class="text14">&nbsp;<span title="own_etemr_telephone">Telefon</span></td>
 									
 				 				</tr>
