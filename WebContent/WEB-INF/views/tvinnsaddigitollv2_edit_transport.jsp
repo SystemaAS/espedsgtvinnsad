@@ -238,8 +238,19 @@
 							</c:choose>
 						</c:otherwise>
 						</c:choose>
-					</a>&nbsp;&nbsp;
+					</a>&nbsp;
+					<c:if test="${model.record.etst2 == 'M'}">
+						<span title="last error text..." onClick="showPop('logErrorText_info');" class="inputFormSubmit text11 isa_error" style="cursor:pointer;"><b>mer info ...</b></span>
+						<span class="text11" style="position: relative;" align="left">
+	                	<span style="position:absolute;top:2px; " id="logErrorText_info" class="popupWithInputText text11"  >
+	                	<button name="_ButtonCloseErrorTextLog" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('logErrorText_info');">Close</button> 
+		           			<p>
+		           				${model.logErrorText}
+		           			</p>
+						</span>	
+						</span>
 					
+					</c:if>
 					
 		   		</td>
 	   		</tr>
@@ -852,7 +863,7 @@
 					<c:if test="${model.record.etlnrt > 0}">
 						&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
 						<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
-							 <p class="text14" >Er du sikker på at du vil sende till toll.no ? Det tar 5-6 sekunder</p>
+							 <p class="text14" >Er du sikker på at du vil sende till toll.no ? Det tar ca 5 sekunder</p>
 						</div>
 					</c:if>
 				</c:if>

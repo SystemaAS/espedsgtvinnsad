@@ -7,6 +7,8 @@ import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javawebparts.core.org.apache.commons.lang.StringUtils;
 
 import org.springframework.stereotype.Controller;
@@ -59,6 +61,8 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmologContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmologRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
@@ -228,6 +232,10 @@ public class TvinnSadDigitollv2MasterController {
 							//put it on GUI
 							model.put("record", record);
 							//logger.debug(record.toString());
+							//Only if ERROR
+							if("M".equals(record.getEmst2())) {
+								this.setLastErrorText(appUser, emlnrt, emlnrm, model);
+							}
 						}
 						
 					}
@@ -525,7 +533,44 @@ public class TvinnSadDigitollv2MasterController {
 		return successView;
 		
 	}
-	
+	/**
+	 * This method is the same that in the childWindow but refined by showing ONLY the last ERROR (if any)
+	 * 
+	 * @param appUser
+	 * @param etlnrt
+	 * @param model
+	 */
+	private void setLastErrorText(SystemaWebUser appUser, String emlnrt, String emlnrm, Map model) {
+		//fetch from error log 
+    	StringBuilder url = new StringBuilder();
+		url.append(SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_LOG_URL);
+		StringBuilder urlRequestParamsKeys = new StringBuilder();
+		urlRequestParamsKeys.append("user=" + appUser.getUser());
+		urlRequestParamsKeys.append("&ellnrt=" + emlnrt);
+		urlRequestParamsKeys.append("&ellnrm=" + emlnrm);
+		
+		String BASE_URL_LOG = url.toString();
+    	logger.info("URL: " + BASE_URL_LOG);
+    	logger.info("PARAMS: " + urlRequestParamsKeys.toString());
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL_LOG, urlRequestParamsKeys.toString());
+    	String washed = jsonPayload.replaceAll("'", "");
+    	washed = washed.replaceAll("\t", "");
+    	//logger.info(washed);
+    	try {
+    		SadmologContainer logContainer = new ObjectMapper().readValue(washed, SadmologContainer.class);
+    		for (SadmologRecord record : logContainer.getList()) {
+    			//always to the last element in the list which is the most recent
+    			if("ERROR".equals(record.getEltyp())) {
+    				model.put("logErrorText", "Dato:" + record.getEldate() + " " + "tid:" + record.getEltime() + " " + record.getElltxt());
+    				//logger.info(record.getEltyp());
+    				//logger.info(record.getElltxt());
+    			}
+    		}
+    	}catch (Exception e) {
+    		logger.error(e.toString());
+    		e.printStackTrace();
+    	}
+	}
 	/**
 	 * 
 	 * @param applicationUser

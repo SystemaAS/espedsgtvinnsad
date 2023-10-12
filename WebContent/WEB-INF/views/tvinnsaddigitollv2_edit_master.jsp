@@ -252,7 +252,21 @@
 							</c:choose>
 						</c:otherwise>
 						</c:choose>
-					</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</a>
+					<c:if test="${model.record.emst2 == 'M'}">
+						<span title="last error text..." onClick="showPop('logErrorText_info');" class="inputFormSubmit text11 isa_error" style="cursor:pointer;"><b>mer info ...</b></span>
+						<span class="text11" style="position: relative;" align="left">
+	                	<span style="position:absolute;top:2px; " id="logErrorText_info" class="popupWithInputText text11"  >
+	                	<button name="_ButtonCloseErrorTextLog" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('logErrorText_info');">Close</button> 
+		           			<p>
+		           				${model.logErrorText}
+		           			</p>
+						</span>	
+						</span>
+					
+					</c:if>
+					
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<font class="inputFormSubmit text12 isa_success" style="cursor: not-allowed">Transportør&nbsp;<b>${model.record.transportDto.etnat}</b>
 																&nbsp;&nbsp;Kjøretøy k.merke&nbsp;<b>${model.record.transportDto.etkmrk}</b>
 																&nbsp;&nbsp;ETA&nbsp;<b>${model.record.transportDto.etetadStr}</b>&nbsp;&nbsp;ETA-tid&nbsp;<b>${model.record.transportDto.etetatStr}</b>
@@ -865,7 +879,7 @@
 						<c:otherwise>
 							&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
 							<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
-								 <p class="text14" >Er du sikker på at du vil sende till toll.no ? Det tar 5-6 sekunder</p>
+								 <p class="text14" >Er du sikker på at du vil sende till toll.no ? Det tar ca 5 sekunder</p>
 							</div>
 						</c:otherwise>
 					</c:choose>
