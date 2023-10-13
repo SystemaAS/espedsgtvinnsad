@@ -209,7 +209,7 @@ public class TvinnSadDigitollAjaxController {
 	  public @ResponseBody Set<JsonTvinnSadCustomerRecord> searchTur(HttpServletRequest request, @RequestParam String applicationUser, @RequestParam(value = "turNr", required = false) String turNr, 
 			  																							   @RequestParam(value = "fromDate", required = true) String fromDate) {
 
-		  logger.info("Inside searchCustomer");
+		  logger.info("Inside searchTur");
 		  Set result = new HashSet();
 		  //prepare the access CGI with RPG back-end
 		  String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TUR_URL;

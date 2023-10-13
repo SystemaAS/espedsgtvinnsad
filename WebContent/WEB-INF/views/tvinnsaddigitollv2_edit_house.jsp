@@ -1172,7 +1172,7 @@
 						<c:otherwise>
 							&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
 							<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
-								 <p class="text14" >Er du sikker på at du vil sende till toll.no ? Det tar ca 5 sekunder</p>
+								 <p class="text14" >Er du sikker på at du vil sende till toll.no ? Det tar ca 4-sekunder</p>
 							</div>
 						</c:otherwise>
 					</c:choose>
