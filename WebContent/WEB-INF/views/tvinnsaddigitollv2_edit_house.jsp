@@ -1170,16 +1170,19 @@
 							<%-- not possible --%>
 						</c:when>
 						<c:otherwise>
-							&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
+							<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
 							<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
-								 <p class="text14" >Er du sikker på at du vil sende till toll.no ? Det tar ca 4-sekunder</p>
+								 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
 							</div>
+							<a id="alinkCreateNewButton" href="tvinnsaddigitollv2_edit_house.do?action=doCreate&ehlnrt=${model.record.ehlnrt}&ehlnrm=${model.record.masterDto.emlnrm}&ehavd=${model.record.masterDto.emavd}&ehpro=${model.record.masterDto.empro}">
+								<input class="inputFormSubmitStd" type="button" name="createNewButton" id="createNewButton" value='Lage ny'>
+							</a>
 						</c:otherwise>
 					</c:choose>
-					&nbsp;&nbsp;<input class="inputFormSubmitBlue" type="button" name="buttonInitVoec" id="buttonInitVoec" value='Varelinjer - VOEC'>
-					&nbsp;&nbsp;&nbsp;&nbsp;<input class="inputFormSubmitStd" type="button" value="Laste opp til arkivet" name="uplButton" onClick="window.open('tvinnsadmanifest_childwindow_uploadFile.do?action=doInit&wsavd=${model.record.ehavd}&wsopd=${model.record.ehtdn}','archiveFromHouseFileUpload','top=300px,left=800px,height=250px,width=330px,scrollbars=no,status=no,location=no')">
+					&nbsp;&nbsp;&nbsp;&nbsp;<input class="inputFormSubmitBlue" type="button" name="buttonInitVoec" id="buttonInitVoec" value='Varelinjer - VOEC'>
+					<input class="inputFormSubmitStd" type="button" value="Laste opp til arkivet" name="uplButton" onClick="window.open('tvinnsadmanifest_childwindow_uploadFile.do?action=doInit&wsavd=${model.record.ehavd}&wsopd=${model.record.ehtdn}','archiveFromHouseFileUpload','top=300px,left=800px,height=250px,width=330px,scrollbars=no,status=no,location=no')">
 					<c:if test="${not empty model.record.ehrg && not empty model.record.eh0068a && not empty model.record.eh0068b }">
-						&nbsp;<input title="" class="inputFormSubmitStd" type="button" name="sttButton" id="sttButton" value='Send doks. til toll.no'>
+						<input title="" class="inputFormSubmitStd" type="button" name="sttButton" id="sttButton" value='Send doks. til toll.no'>
 					</c:if>
 				</c:if>
 			</c:if>

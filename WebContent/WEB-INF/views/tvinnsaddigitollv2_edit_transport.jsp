@@ -53,7 +53,7 @@
 					<c:if test="${model.record.etlnrt > 0 && model.record.etst != 'S'}"> <%-- CANCELED(S) --%>
 						<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 						<td width="15%" valign="bottom" class="tabDisabled" style="background-color:lightyellow;"  align="center" nowrap>
-							<a id="alinkHeader" style="display:block;" href="tvinnsaddigitollv2_edit_master.do?action=doCreate&emlnrt=${model.record.etlnrt}&emlnrt=${model.record.etlnrt}&emavd=${model.record.etavd}&emsg=${model.record.etsg}&empro=${model.record.etpro}">
+							<a id="alinkHeader" style="display:block;" href="tvinnsaddigitollv2_edit_master.do?action=doCreate&emlnrt=${model.record.etlnrt}&emavd=${model.record.etavd}&emsg=${model.record.etsg}&empro=${model.record.etpro}">
 								<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.createnew"/>&nbsp;<spring:message code="systema.tvinn.sad.digitoll.list.tab.master"/></font>
 								<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
 							</a>
@@ -861,10 +861,13 @@
 				<c:if test="${model.record.etst != 'S'}"> <%-- CANCELED(S) --%>
 					&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
 					<c:if test="${model.record.etlnrt > 0}">
-						&nbsp;<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
+						<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
 						<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
-							 <p class="text14" >Er du sikker på at du vil sende till toll.no ? Det tar ca 4-sekunder</p>
+							 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
 						</div>
+						<a id="alinkCreateNewButton" href="tvinnsaddigitollv2_edit_transport.do?action=doCreate">
+							<input class="inputFormSubmitStd" type="button" name="createNewButton" id="createNewButton" value='Lage ny'>
+						</a>
 					</c:if>
 				</c:if>
 					 
@@ -900,6 +903,7 @@
                 		<th width="2%" class="tableHeaderField" >Sign</th>
                 		<th width="2%" class="tableHeaderField" >Turnr</th>
                 		<th width="2%" class="tableHeaderField" ></th>
+                		<th width="2%" class="tableHeaderField10" >Flagg</th>
                 		<th title="S=SLETTET" width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.sysped.status"/></th>
                 		<th width="2%" class="tableHeaderField" >Br.vekt</th>
                 		<th width="2%" class="tableHeaderField" >Doknr.</th>
@@ -972,21 +976,36 @@
 		               			<c:if test="${not empty masterConsignmentRecord.listHouses}">
 		               				<font onClick="showPop('h_info2${counter.count}');" title="Houses..." class="inputFormSubmit11 text10 isa_warning"><b>${masterConsignmentRecord.listHouses.size()}</b></font>
 			               			<span class="text11" style="position: relative;" align="left">
-				                	<span style="position:absolute;top:2px; width:250px;" id="h_info2${counter.count}" class="popupWithInputText text11"  >
+				                	<span style="position:absolute;top:2px; width:280px;" id="h_info2${counter.count}" class="popupWithInputText text11"  >
 				                	<button name="_ButtonCloseEtktm" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('h_info2${counter.count}');">Close</button> 
 					           			<font style="color:royalblue">Antal opd(houses) <b>${masterConsignmentRecord.listHouses.size()}</b></font>
 				           				<ul>
 				           				<c:forEach items="${masterConsignmentRecord.listHouses}" var="houseRecord" varStatus="h_counter">  
-				           					<li><font style="color:royalblue">Opd <b>${houseRecord.ehtdn}</b> Brut.vekt <b>${houseRecord.ehvkb}</b></font></li>
+				           					<li>
+				           						<font style="color:royalblue">Opd <b>${houseRecord.ehtdn}</b> Brut.vekt <b>${houseRecord.ehvkb}</b></font>
+				           						<c:choose>
+				           							<c:when test="${houseRecord.ehst2 =='M'}">
+				           								<font style="color:red">Api&nbsp;<b>ERROR</b> </font>
+				           							</c:when>
+				           							<c:otherwise>
+				           								<font style="color:royalblue">Api&nbsp;<b>${houseRecord.ehst2}</b> </font>
+				           							</c:otherwise>
+				           						</c:choose>
+				           					</li>
 				           				</c:forEach>
 				           				</ul>
 									</span>	
 									</span>
-									
+
 								</c:if>
 								
 		               		</c:if>
 		               </td>
+		               <td width="2%" align="center" class="tableCell text12">
+		               		<c:if test="${masterConsignmentRecord.own_invalidHousesExist}">
+	           					<img onClick="showPop('h_info2${counter.count}');" title="Houses..." style="cursor:pointer;" title="ERROR on house/opp:${houseRecord.ehpro}" src="resources/images/redFlag.png" width="18" height="18" border="0">
+	           				</c:if>
+				       </td>    			
 		               <td nowrap width="2%" align="center" class="tableCell text12">
 		               	  <c:choose>
 		               		<c:when test="${masterConsignmentRecord.emst == 'S'}">

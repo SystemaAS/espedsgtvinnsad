@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -67,6 +68,7 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.service.ApiGenericDtoResponseService;
+import no.systema.tvinn.sad.digitollv2.service.AsynchTransportService;
 import no.systema.tvinn.sad.digitollv2.service.GeneralUpdateService;
 import no.systema.tvinn.sad.digitollv2.service.SadDigitollDropDownListPopulationService;
 import no.systema.tvinn.sad.digitollv2.service.SadmohfListService;
@@ -454,8 +456,46 @@ public class TvinnSadDigitollv2TransportController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="tvinnsaddigitollv2_api_send_transport.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	@RequestMapping(value="tvinnsaddigitollv2_api_send_transportAsyncTest.do",  method={RequestMethod.GET, RequestMethod.POST} )
 	public ModelAndView doApiSendTransport(@ModelAttribute ("record") SadmotfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		logger.info("inside doApiSendTransport");
+		
+		Map model = new HashMap();
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		ModelAndView successView = null;;
+		StringBuilder redirect = new StringBuilder();
+		redirect.append("redirect:tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=" + recordToValidate.getEtlnrt());
+		
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			
+			//=================
+			//SEND POST or PUT
+			//=================
+			if(recordToValidate.getEtlnrt() > 0 ) {
+				asynchTransportService.xxxTest(appUser.getUser(), recordToValidate.getEtlnrt(), recordToValidate.getEtmid());
+	    		successView = new ModelAndView(redirect.toString());
+	    		
+			}else {
+				StringBuffer errMsg = new StringBuffer();
+				errMsg.append("ERROR on doSendMaster -->detail: null ids? ...");
+				model.put("errorMessage", errMsg.toString());
+
+			}
+		}
+		
+		return successView;
+		
+	}
+	
+	
+	@RequestMapping(value="tvinnsaddigitollv2_api_send_transport.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doApiSendTransportOrig(@ModelAttribute ("record") SadmotfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		logger.info("inside doApiSendTransport");
 		
 		Map model = new HashMap();
@@ -1249,6 +1289,15 @@ public class TvinnSadDigitollv2TransportController {
     	if(jsonPayload!=null){
     		SadmohfContainer jsonContainer = this.sadmohfListService.getListContainer(jsonPayload);
     		record.setListHouses(jsonContainer.getList());
+    		//this is in order to rise "red flag" on GUI 
+    		List<SadmohfRecord>tmpList = (List)jsonContainer.getList();
+    		for(SadmohfRecord house : tmpList) {
+    			//to heavy?: --> this is for GUI info
+    			if(house.getEhst2().equals("M")) {
+    				record.setOwn_invalidHousesExist(true);
+    				break;
+    			}
+    		}
     	}
     	
 	}
@@ -1294,7 +1343,11 @@ public class TvinnSadDigitollv2TransportController {
 	private ApiGenericDtoResponseService apiGenericDtoResponseService;
 	
 	@Autowired
-	SadDigitollDropDownListPopulationService digitollDropDownListPopulationService;
+	private SadDigitollDropDownListPopulationService digitollDropDownListPopulationService;
+	
+	@Autowired
+	private AsynchTransportService asynchTransportService;
+	
 	
 	@Autowired
 	private MaintMainKofastService maintMainKofastService;

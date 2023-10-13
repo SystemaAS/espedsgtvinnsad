@@ -107,6 +107,7 @@ public class SadmomfRecord extends JsonAbstractGrandFatherRecord   {
 	private String emerr = "";  //tegn           50    feilmelding ved snd  
 	
 	private Boolean own_okToDelete = true;
+	private Boolean own_invalidHousesExist = false;
 	
 	private Collection<SadmohfRecord> listHouses = null;
 	public void setListHouses(Collection<SadmohfRecord> value){ this.listHouses = value;}

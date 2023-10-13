@@ -15,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -53,11 +55,14 @@ import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelning
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureContainer;
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureRecord;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
+import no.systema.tvinn.sad.model.jsonjackson.customer.JsonTvinnSadCustomerRecord;
 import no.systema.tvinn.sad.digitollv2.filter.SearchFilterDigitollTransportList;
 import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifContainer;
@@ -70,6 +75,7 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.service.ApiGenericDtoResponseService;
 import no.systema.tvinn.sad.digitollv2.service.GeneralUpdateService;
 import no.systema.tvinn.sad.digitollv2.service.SadDigitollDropDownListPopulationService;
+import no.systema.tvinn.sad.digitollv2.service.SadTurService;
 import no.systema.tvinn.sad.digitollv2.service.SadmohfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
@@ -247,6 +253,8 @@ public class TvinnSadDigitollv2MasterController {
 				//some default values
 				recordToValidate.setEmdkmt("N730");
 				recordToValidate.setEmrgt(recordToValidate.getTransportDto().getEtrgt());
+				//get std values from tur
+				this.setTurStdValues(appUser, recordToValidate);
 				//
 				model.put("record", recordToValidate);
 			}
@@ -571,6 +579,43 @@ public class TvinnSadDigitollv2MasterController {
     		e.printStackTrace();
     	}
 	}
+	
+	private void setTurStdValues(SystemaWebUser appUser, SadmomfRecord recordToValidate) {
+		  logger.info("Inside setTurStdValues");
+		  Set result = new HashSet();
+		  //prepare the access CGI with RPG back-end
+		  String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TUR_URL;
+		  StringBuffer urlRequestParamsKeys = new StringBuffer();
+		  urlRequestParamsKeys.append("user=" + appUser.getUser());
+		  //urlRequestParamsKeys.append("&wtudt=" + fromDate);
+		  urlRequestParamsKeys.append("&wsstur=" + recordToValidate.getTransportDto().getEtpro());
+
+		  		  
+		  logger.info("URL: " + BASE_URL);
+		  logger.info("PARAMS: " + urlRequestParamsKeys);
+		  logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		  String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
+
+		  logger.info(jsonPayload);
+		  logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    	if(jsonPayload!=null){
+	    		SadTurContainer container = this.sadTurService.getListContainer(jsonPayload);
+	    		if(container!=null){
+	    			for(SadTurRecord  record : container.getWrktriplist()){
+	    				logger.info("Lastested: " + record.getTusdf());
+	    				recordToValidate.setEmsdlt(record.getTusdf());
+	    				logger.info("Lossested: " + record.getTusdt());
+	    				recordToValidate.setEmsdut(record.getTusdt());
+	    				if(StringUtils.isNotEmpty(record.getTutvkt())) {
+	    					logger.info("Vekt: " + record.getTutvkt());
+	    					recordToValidate.setEmvkb(Integer.valueOf(record.getTutvkt()));
+	    				}
+	    				
+	    			}
+	    		}
+	    	}
+		  
+	  }
 	/**
 	 * 
 	 * @param applicationUser
@@ -1093,7 +1138,8 @@ public class TvinnSadDigitollv2MasterController {
 	
 	@Autowired
 	SadDigitollDropDownListPopulationService digitollDropDownListPopulationService;
-	
+	@Autowired
+	private SadTurService sadTurService;
 	@Autowired
 	private MaintMainKofastService maintMainKofastService;
 
