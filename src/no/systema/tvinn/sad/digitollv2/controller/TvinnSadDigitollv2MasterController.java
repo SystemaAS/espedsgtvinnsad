@@ -56,6 +56,9 @@ import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignature
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureRecord;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
 import no.systema.tvinn.sad.model.jsonjackson.customer.JsonTvinnSadCustomerRecord;
+import no.systema.tvinn.sad.digitollv2.controller.service.ApiAsyncFacadeSendService;
+import no.systema.tvinn.sad.digitollv2.controller.service.ApiHouseSendService;
+import no.systema.tvinn.sad.digitollv2.controller.service.ApiMasterSendService;
 import no.systema.tvinn.sad.digitollv2.filter.SearchFilterDigitollTransportList;
 import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
@@ -460,13 +463,14 @@ public class TvinnSadDigitollv2MasterController {
 	@RequestMapping(value="tvinnsaddigitollv2_api_send_master.do",  method={RequestMethod.GET, RequestMethod.POST} )
 	public ModelAndView doApiSendMaster(@ModelAttribute ("record") SadmomfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		logger.info("inside doApiSendMaster");
-		ModelAndView successView = null;;
+		
+		String async = request.getParameter("async");
 		
 		Map model = new HashMap();
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		ModelAndView successView = null;;
 		StringBuilder redirect = new StringBuilder();
 		redirect.append("redirect:tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=" + recordToValidate.getEmlnrt() + "&emlnrm=" + recordToValidate.getEmlnrm());
-		
 		
 		//check user (should be in session already)
 		if(appUser==null){
@@ -480,53 +484,18 @@ public class TvinnSadDigitollv2MasterController {
 			//SEND POST or PUT
 			//=================
 			if(recordToValidate.getEmlnrt() > 0 && recordToValidate.getEmlnrm() > 0) {
-		    	logger.info("Before send in Controller ...");
-				logger.info("Inside: doApiSendMaster");
-				
-				StringBuilder url = new StringBuilder();
-				StringBuilder urlRequestParamsKeys = new StringBuilder();
-				urlRequestParamsKeys.append("user=" + appUser.getUser());
-				
-				url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
-				//check if POST-CREATE or PUT-UPDATE
-				if( StringUtils.isNotEmpty(recordToValidate.getEmmid()) ) {
-					url.append("putMasterConsignment.do");
-					urlRequestParamsKeys.append("&emlnrt=" + recordToValidate.getEmlnrt());
-					urlRequestParamsKeys.append("&emlnrm=" + recordToValidate.getEmlnrm());
-					urlRequestParamsKeys.append("&mrn=" + recordToValidate.getEmmid());
+				if(StringUtils.isNotEmpty(async)) {
+					//async if applicable
+					this.apiAsynchFacadeSendService.sendMaster(appUser.getUser(), recordToValidate.getEmlnrt(),recordToValidate.getEmlnrm(), recordToValidate.getEmmid());
 				}else {
-					
-					url.append("postMasterConsignment.do");
-					urlRequestParamsKeys.append("&emlnrt=" + recordToValidate.getEmlnrt());
-					urlRequestParamsKeys.append("&emlnrm=" + recordToValidate.getEmlnrm());					
+					//normal synchronous default as a normal controller
+					String redirectSuffix = apiMasterSendService.send(appUser.getUser(), recordToValidate.getEmlnrt(),recordToValidate.getEmlnrm(), recordToValidate.getEmmid());
+					if(StringUtils.isNotEmpty(redirectSuffix)) {
+						redirect.append(redirectSuffix);
+					}
 				}
-				
-				String BASE_URL = url.toString();
-	    		logger.info("URL: " + BASE_URL);
-	    		logger.info("PARAMS: " + urlRequestParamsKeys.toString());
-	    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
-	    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
-	    		//Debug -->
-		    	logger.info(jsonPayload);
-	    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    		successView = new ModelAndView(redirect.toString());
 	    		
-	    		try {
-		    		ApiGenericDtoResponse apiDtoResponse = this.apiGenericDtoResponseService.getReponse(jsonPayload);
-		    		if(StringUtils.isNotEmpty(apiDtoResponse.getErrMsg())){
-		    			new RedirectCleaner().doIt(apiDtoResponse);
-		    			//in order to catch it after the redirect as a parameter...if applicable
-		    			if(StringUtils.isNotEmpty(apiDtoResponse.getErrMsgClean())) {
-		    				redirect.append("&" + SadDigitollConstants.REDIRECT_ERRMSG + "=" + apiDtoResponse.getErrMsgClean());
-		    			}
-		    		}
-				}catch(Exception e) {
-	    			e.printStackTrace();
-	    			
-	    		}finally {
-	    			successView = new ModelAndView(redirect.toString());
-	    		}
-	    		
-				
 			}else {
 				//this will never populate a redirect but sheet the same ...:-(
 				StringBuffer errMsg = new StringBuffer();
@@ -1143,5 +1112,10 @@ public class TvinnSadDigitollv2MasterController {
 	@Autowired
 	private MaintMainKofastService maintMainKofastService;
 
+	@Autowired
+	private ApiMasterSendService apiMasterSendService;
+	@Autowired
+	private ApiAsyncFacadeSendService apiAsynchFacadeSendService;
+	
 }
 

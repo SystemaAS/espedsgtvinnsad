@@ -43,10 +43,23 @@ public class ApiAsyncFacadeSendService {
 		this.apiTransportSendService.send(applicationUser, etlnrt, etmid);
 	}
 	
+	@Async
+	public void sendMaster (String applicationUser, Integer emlnrt, Integer emlnrm, String emmid) {	
+		this.apiMasterSendService.send(applicationUser, emlnrt, emlnrm, emmid);
+	}
+	
+	@Async
+	public void sendHouse (String applicationUser, Integer ehlnrt, Integer ehlnrm, Integer ehlnrh, String ehmid) {	
+		this.apiHouseSendService.send(applicationUser, ehlnrt, ehlnrm, ehlnrh, ehmid);
+	}
 	
 	
 	
 	@Autowired
 	private ApiTransportSendService apiTransportSendService;
+	@Autowired
+	private ApiMasterSendService apiMasterSendService;
+	@Autowired
+	private ApiHouseSendService apiHouseSendService;
 	
 }

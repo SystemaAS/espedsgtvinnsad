@@ -45,6 +45,9 @@ import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelning
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureContainer;
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureRecord;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
+import no.systema.tvinn.sad.digitollv2.controller.service.ApiAsyncFacadeSendService;
+import no.systema.tvinn.sad.digitollv2.controller.service.ApiHouseSendService;
+import no.systema.tvinn.sad.digitollv2.controller.service.ApiTransportSendService;
 import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateContainer;
@@ -442,6 +445,56 @@ public class TvinnSadDigitollv2HouseController {
 	@RequestMapping(value="tvinnsaddigitollv2_api_send_house.do",  method={RequestMethod.GET, RequestMethod.POST} )
 	public ModelAndView doApiSendHouse(@ModelAttribute ("record") SadmohfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		logger.info("inside doApiSendHouse");
+		
+		String async = request.getParameter("async");
+		
+		Map model = new HashMap();
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		ModelAndView successView = null;
+		StringBuilder redirect = new StringBuilder();
+		redirect.append("redirect:tvinnsaddigitollv2_edit_house.do?action=doFind&ehlnrt=" + recordToValidate.getEhlnrt() + "&ehlnrm=" + recordToValidate.getEhlnrm()+ "&ehlnrh=" + recordToValidate.getEhlnrh());
+		
+		//check user (should be in session already)
+		logger.info(recordToValidate.toString());
+		
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			
+			//=================
+			//SEND POST or PUT
+			//=================
+			if(recordToValidate.getEhlnrt() > 0 && recordToValidate.getEhlnrm() > 0 && recordToValidate.getEhlnrh() > 0) {
+				if(StringUtils.isNotEmpty(async)) {
+					//async if applicable
+					this.apiAsynchFacadeSendService.sendHouse(appUser.getUser(), recordToValidate.getEhlnrt(),recordToValidate.getEhlnrm(), recordToValidate.getEhlnrh(), recordToValidate.getEhmid());
+				}else {
+					//normal synchronous default as a normal controller
+					String redirectSuffix = apiHouseSendService.send(appUser.getUser(), recordToValidate.getEhlnrt(),recordToValidate.getEhlnrm(), recordToValidate.getEhlnrh(), recordToValidate.getEhmid());
+					if(StringUtils.isNotEmpty(redirectSuffix)) {
+						redirect.append(redirectSuffix);
+					}
+				}
+	    		successView = new ModelAndView(redirect.toString());
+			}else {
+				//this will never populate a redirect but sheet the same ...:-(
+				StringBuffer errMsg = new StringBuffer();
+				errMsg.append("ERROR on doSendHouse -->detail: null ids? ...");
+				model.put("errorMessage", errMsg.toString());
+
+			}
+		}
+		
+		return successView;
+		
+	}
+	/*OBSOLETE ... replaced with the above
+	@RequestMapping(value="tvinnsaddigitollv2_api_send_houseOrig.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doApiSendHouseOrig(@ModelAttribute ("record") SadmohfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		logger.info("inside doApiSendHouse");
 		ModelAndView successView = null;
 		
 		Map model = new HashMap();
@@ -521,6 +574,7 @@ public class TvinnSadDigitollv2HouseController {
 		return successView;
 		
 	}
+	*/
 	/**
 	 * 
 	 * @param appUser
@@ -1074,7 +1128,12 @@ public class TvinnSadDigitollv2HouseController {
 	private SadmomfListService sadmomfListService;
 	@Autowired
 	private MaintMainKofastService maintMainKofastService;
-
+	
+	@Autowired
+	private ApiHouseSendService apiHouseSendService;
+	@Autowired
+	private ApiAsyncFacadeSendService apiAsynchFacadeSendService;
+	
 	@Autowired
 	SadDigitollDropDownListPopulationService digitollDropDownListPopulationService;
 }
