@@ -333,6 +333,212 @@ public class TvinnSadDigitollv2HouseController {
 		}	
 		return successView;
 	}
+	
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_api_send_house.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doApiSendHouse(@ModelAttribute ("record") SadmohfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		logger.info("inside doApiSendHouse");
+		
+		String async = request.getParameter("async");
+		
+		Map model = new HashMap();
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		ModelAndView successView = null;
+		StringBuilder redirect = new StringBuilder();
+		redirect.append("redirect:tvinnsaddigitollv2_edit_house.do?action=doFind&ehlnrt=" + recordToValidate.getEhlnrt() + "&ehlnrm=" + recordToValidate.getEhlnrm()+ "&ehlnrh=" + recordToValidate.getEhlnrh());
+		
+		//check user (should be in session already)
+		logger.info(recordToValidate.toString());
+		
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			
+			//=================
+			//SEND POST or PUT
+			//=================
+			if(recordToValidate.getEhlnrt() > 0 && recordToValidate.getEhlnrm() > 0 && recordToValidate.getEhlnrh() > 0) {
+				if(StringUtils.isNotEmpty(async)) {
+					//async if applicable
+					this.apiAsynchFacadeSendService.sendHouse(appUser.getUser(), recordToValidate.getEhlnrt(),recordToValidate.getEhlnrm(), recordToValidate.getEhlnrh(), recordToValidate.getEhmid());
+				}else {
+					//normal synchronous default as a normal controller
+					String redirectSuffix = apiHouseSendService.send(appUser.getUser(), recordToValidate.getEhlnrt(),recordToValidate.getEhlnrm(), recordToValidate.getEhlnrh(), recordToValidate.getEhmid());
+					if(StringUtils.isNotEmpty(redirectSuffix)) {
+						redirect.append(redirectSuffix);
+					}
+				}
+	    		
+			}else {
+				//this will never populate a redirect but sheet the same ...:-(
+				StringBuffer errMsg = new StringBuffer();
+				errMsg.append("ERROR on doSendHouse -->detail: null ids? ...");
+				model.put("errorMessage", errMsg.toString());
+
+			}
+			successView = new ModelAndView(redirect.toString());
+		}
+		
+		return successView;
+		
+	}
+	/**
+	 * Always async
+	 * 
+	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_api_send_allHouses.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doApiSendAllHouses(HttpSession session, HttpServletRequest request){
+		logger.info("inside doApiSendAllHouses");
+		
+		String lnrtStr = request.getParameter("lnrt");
+		String lnrmStr = request.getParameter("lnrm");
+		String level = request.getParameter("level");
+		
+		Integer lnrt = 0;
+		Integer lnrm = 0;
+		if(StringUtils.isNotEmpty(lnrtStr)) { lnrt = Integer.valueOf(lnrtStr); }
+		if(StringUtils.isNotEmpty(lnrtStr)) { lnrm = Integer.valueOf(lnrmStr); }
+		
+		Map model = new HashMap();
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		ModelAndView successView = null;
+		StringBuilder redirect = new StringBuilder();
+		
+		//if it triggered from master level
+		if(StringUtils.isNotEmpty(level) && level.equals("m")) {
+			redirect.append("redirect:tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=" + lnrtStr + "&emlnrm=" + lnrmStr);
+		}else {
+			redirect.append("redirect:tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=" + lnrtStr );
+		}
+		logger.info(redirect.toString());
+		
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			
+			//=================
+			//SEND POST or PUT
+			//=================
+			if(lnrt > 0 && lnrm > 0 ) {
+				this.apiAsynchFacadeSendService.sendAllHouses(appUser.getUser(), lnrt, lnrm );
+	    		
+			}else {
+				//this will never populate a redirect but sheet the same ...:-(
+				StringBuffer errMsg = new StringBuffer();
+				errMsg.append("ERROR on doSendHouse -->detail: null ids? ...");
+				model.put("errorMessage", errMsg.toString());
+
+			}
+			successView = new ModelAndView(redirect.toString());
+			
+		}
+		
+		return successView;
+		
+	}
+	/*OBSOLETE ... replaced with the above
+	@RequestMapping(value="tvinnsaddigitollv2_api_send_houseOrig.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doApiSendHouseOrig(@ModelAttribute ("record") SadmohfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		logger.info("inside doApiSendHouse");
+		ModelAndView successView = null;
+		
+		Map model = new HashMap();
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		StringBuilder redirect = new StringBuilder();
+		redirect.append("redirect:tvinnsaddigitollv2_edit_house.do?action=doFind&ehlnrt=" + recordToValidate.getEhlnrt() + "&ehlnrm=" + recordToValidate.getEhlnrm()+ "&ehlnrh=" + recordToValidate.getEhlnrh());
+		
+		//check user (should be in session already)
+		logger.info(recordToValidate.toString());
+		
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			
+			//=================
+			//SEND POST or PUT
+			//=================
+			if(recordToValidate.getEhlnrt() > 0 && recordToValidate.getEhlnrm() > 0 && recordToValidate.getEhlnrh() > 0) {
+		    	logger.info("Before send in Controller ...");
+				logger.info("Inside: doApiSendHouse");
+				
+				StringBuilder url = new StringBuilder();
+				StringBuilder urlRequestParamsKeys = new StringBuilder();
+				urlRequestParamsKeys.append("user=" + appUser.getUser());
+				
+				url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
+				//check if POST-CREATE or PUT-UPDATE
+				if( StringUtils.isNotEmpty(recordToValidate.getEhmid()) ) {
+					url.append("putHouseConsignment.do");
+					urlRequestParamsKeys.append("&ehlnrt=" + recordToValidate.getEhlnrt());
+					urlRequestParamsKeys.append("&ehlnrm=" + recordToValidate.getEhlnrm());
+					urlRequestParamsKeys.append("&ehlnrh=" + recordToValidate.getEhlnrh());
+					urlRequestParamsKeys.append("&mrn=" + recordToValidate.getEhmid());
+				}else {
+					
+					url.append("postHouseConsignment.do");
+					urlRequestParamsKeys.append("&ehlnrt=" + recordToValidate.getEhlnrt());
+					urlRequestParamsKeys.append("&ehlnrm=" + recordToValidate.getEhlnrm());	
+					urlRequestParamsKeys.append("&ehlnrh=" + recordToValidate.getEhlnrh());
+				}
+				
+				String BASE_URL = url.toString();
+	    		logger.info("URL: " + BASE_URL);
+	    		logger.info("PARAMS: " + urlRequestParamsKeys.toString());
+	    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
+	    		//Debug -->
+		    	logger.info(jsonPayload);
+		    	
+	    		try {
+		    		ApiGenericDtoResponse apiDtoResponse = this.apiGenericDtoResponseService.getReponse(jsonPayload);
+		    		if(StringUtils.isNotEmpty(apiDtoResponse.getErrMsg())){
+		    			new RedirectCleaner().doIt(apiDtoResponse);
+		    			//in order to catch it after the redirect as a parameter...if applicable
+		    			if(StringUtils.isNotEmpty(apiDtoResponse.getErrMsgClean())) {
+		    				redirect.append("&" + SadDigitollConstants.REDIRECT_ERRMSG + "=" + apiDtoResponse.getErrMsgClean());
+		    			}
+					}
+	    		}catch(Exception e) {
+	    			e.printStackTrace();
+	    			
+	    		}finally {
+	    			successView = new ModelAndView(redirect.toString());
+	    		}
+				
+			}else {
+				//this will never populate a redirect but sheet the same ...:-(
+				StringBuffer errMsg = new StringBuffer();
+				errMsg.append("ERROR on doSendHouse -->detail: null ids? ...");
+				model.put("errorMessage", errMsg.toString());
+
+			}
+		}
+		
+		return successView;
+		
+	}
+	*/
+	
 	/**
 	 * 
 	 * @param recordToValidate
@@ -434,147 +640,6 @@ public class TvinnSadDigitollv2HouseController {
 		return successView;
 		
 	}
-	/**
-	 * 
-	 * @param recordToValidate
-	 * @param bindingResult
-	 * @param session
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping(value="tvinnsaddigitollv2_api_send_house.do",  method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doApiSendHouse(@ModelAttribute ("record") SadmohfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
-		logger.info("inside doApiSendHouse");
-		
-		String async = request.getParameter("async");
-		
-		Map model = new HashMap();
-		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
-		ModelAndView successView = null;
-		StringBuilder redirect = new StringBuilder();
-		redirect.append("redirect:tvinnsaddigitollv2_edit_house.do?action=doFind&ehlnrt=" + recordToValidate.getEhlnrt() + "&ehlnrm=" + recordToValidate.getEhlnrm()+ "&ehlnrh=" + recordToValidate.getEhlnrh());
-		
-		//check user (should be in session already)
-		logger.info(recordToValidate.toString());
-		
-		if(appUser==null){
-			return loginView;
-		
-		}else{
-			
-			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
-			
-			//=================
-			//SEND POST or PUT
-			//=================
-			if(recordToValidate.getEhlnrt() > 0 && recordToValidate.getEhlnrm() > 0 && recordToValidate.getEhlnrh() > 0) {
-				if(StringUtils.isNotEmpty(async)) {
-					//async if applicable
-					this.apiAsynchFacadeSendService.sendHouse(appUser.getUser(), recordToValidate.getEhlnrt(),recordToValidate.getEhlnrm(), recordToValidate.getEhlnrh(), recordToValidate.getEhmid());
-				}else {
-					//normal synchronous default as a normal controller
-					String redirectSuffix = apiHouseSendService.send(appUser.getUser(), recordToValidate.getEhlnrt(),recordToValidate.getEhlnrm(), recordToValidate.getEhlnrh(), recordToValidate.getEhmid());
-					if(StringUtils.isNotEmpty(redirectSuffix)) {
-						redirect.append(redirectSuffix);
-					}
-				}
-	    		successView = new ModelAndView(redirect.toString());
-			}else {
-				//this will never populate a redirect but sheet the same ...:-(
-				StringBuffer errMsg = new StringBuffer();
-				errMsg.append("ERROR on doSendHouse -->detail: null ids? ...");
-				model.put("errorMessage", errMsg.toString());
-
-			}
-		}
-		
-		return successView;
-		
-	}
-	/*OBSOLETE ... replaced with the above
-	@RequestMapping(value="tvinnsaddigitollv2_api_send_houseOrig.do",  method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doApiSendHouseOrig(@ModelAttribute ("record") SadmohfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
-		logger.info("inside doApiSendHouse");
-		ModelAndView successView = null;
-		
-		Map model = new HashMap();
-		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
-		StringBuilder redirect = new StringBuilder();
-		redirect.append("redirect:tvinnsaddigitollv2_edit_house.do?action=doFind&ehlnrt=" + recordToValidate.getEhlnrt() + "&ehlnrm=" + recordToValidate.getEhlnrm()+ "&ehlnrh=" + recordToValidate.getEhlnrh());
-		
-		//check user (should be in session already)
-		logger.info(recordToValidate.toString());
-		
-		if(appUser==null){
-			return loginView;
-		
-		}else{
-			
-			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
-			
-			//=================
-			//SEND POST or PUT
-			//=================
-			if(recordToValidate.getEhlnrt() > 0 && recordToValidate.getEhlnrm() > 0 && recordToValidate.getEhlnrh() > 0) {
-		    	logger.info("Before send in Controller ...");
-				logger.info("Inside: doApiSendHouse");
-				
-				StringBuilder url = new StringBuilder();
-				StringBuilder urlRequestParamsKeys = new StringBuilder();
-				urlRequestParamsKeys.append("user=" + appUser.getUser());
-				
-				url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
-				//check if POST-CREATE or PUT-UPDATE
-				if( StringUtils.isNotEmpty(recordToValidate.getEhmid()) ) {
-					url.append("putHouseConsignment.do");
-					urlRequestParamsKeys.append("&ehlnrt=" + recordToValidate.getEhlnrt());
-					urlRequestParamsKeys.append("&ehlnrm=" + recordToValidate.getEhlnrm());
-					urlRequestParamsKeys.append("&ehlnrh=" + recordToValidate.getEhlnrh());
-					urlRequestParamsKeys.append("&mrn=" + recordToValidate.getEhmid());
-				}else {
-					
-					url.append("postHouseConsignment.do");
-					urlRequestParamsKeys.append("&ehlnrt=" + recordToValidate.getEhlnrt());
-					urlRequestParamsKeys.append("&ehlnrm=" + recordToValidate.getEhlnrm());	
-					urlRequestParamsKeys.append("&ehlnrh=" + recordToValidate.getEhlnrh());
-				}
-				
-				String BASE_URL = url.toString();
-	    		logger.info("URL: " + BASE_URL);
-	    		logger.info("PARAMS: " + urlRequestParamsKeys.toString());
-	    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
-	    		//Debug -->
-		    	logger.info(jsonPayload);
-		    	
-	    		try {
-		    		ApiGenericDtoResponse apiDtoResponse = this.apiGenericDtoResponseService.getReponse(jsonPayload);
-		    		if(StringUtils.isNotEmpty(apiDtoResponse.getErrMsg())){
-		    			new RedirectCleaner().doIt(apiDtoResponse);
-		    			//in order to catch it after the redirect as a parameter...if applicable
-		    			if(StringUtils.isNotEmpty(apiDtoResponse.getErrMsgClean())) {
-		    				redirect.append("&" + SadDigitollConstants.REDIRECT_ERRMSG + "=" + apiDtoResponse.getErrMsgClean());
-		    			}
-					}
-	    		}catch(Exception e) {
-	    			e.printStackTrace();
-	    			
-	    		}finally {
-	    			successView = new ModelAndView(redirect.toString());
-	    		}
-				
-			}else {
-				//this will never populate a redirect but sheet the same ...:-(
-				StringBuffer errMsg = new StringBuffer();
-				errMsg.append("ERROR on doSendHouse -->detail: null ids? ...");
-				model.put("errorMessage", errMsg.toString());
-
-			}
-		}
-		
-		return successView;
-		
-	}
-	*/
 	/**
 	 * 
 	 * @param appUser

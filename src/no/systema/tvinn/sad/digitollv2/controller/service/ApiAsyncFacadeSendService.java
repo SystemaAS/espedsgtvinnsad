@@ -53,6 +53,11 @@ public class ApiAsyncFacadeSendService {
 		this.apiHouseSendService.send(applicationUser, ehlnrt, ehlnrm, ehlnrh, ehmid);
 	}
 	
+	@Async
+	public void sendAllHouses (String applicationUser, Integer lnrt, Integer lnrm) {	
+		this.apiHouseSendService.sendAll(applicationUser, lnrt, lnrm );
+	}
+	
 	
 	
 	@Autowired

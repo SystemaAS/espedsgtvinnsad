@@ -8,14 +8,24 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import javawebparts.core.org.apache.commons.lang.StringUtils;
+import no.systema.main.model.SystemaWebUser;
 import no.systema.main.service.UrlCgiProxyService;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.service.ApiGenericDtoResponseService;
+import no.systema.tvinn.sad.digitollv2.service.SadmohfListService;
+import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
 import no.systema.tvinn.sad.digitollv2.util.RedirectCleaner;
 import no.systema.tvinn.sad.digitollv2.util.SadDigitollConstants;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import org.slf4j.Logger;
 
@@ -47,9 +57,7 @@ public class ApiHouseSendService {
 		//SEND POST or PUT
 		//=================
 		if(ehlnrt > 0 && ehlnrm > 0 && ehlnrh > 0) {
-	    	logger.info("Before send in Controller ...");
-			logger.info("Inside: doApiSendHouse");
-			
+	    	
 			StringBuilder url = new StringBuilder();
 			StringBuilder urlRequestParamsKeys = new StringBuilder();
 			urlRequestParamsKeys.append("user=" + applicationUser);
@@ -96,10 +104,101 @@ public class ApiHouseSendService {
 		return retval;
 		
 	}
+	/**
+	 * Send all houses as a batch
+	 * 
+	 * @param applicationUser
+	 * @param transportId
+	 * @param masterId
+	 * @return
+	 */
+	
+	public String sendAll(String applicationUser, Integer lnrt, Integer lnrm) {
+		String retval = "";
+		logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+		
+		//=================
+		//SEND POST or PUT
+		//=================
+		if(lnrt > 0 && lnrm > 0) {
+			List<SadmohfRecord> listOfHouses = this.getHouses(applicationUser, String.valueOf(lnrt), String.valueOf(lnrm));
+			for(SadmohfRecord record: listOfHouses) {
+				this.send(applicationUser, record.getEhlnrt(), record.getEhlnrm(), record.getEhlnrh(), record.getEhmid());
+			}
+		}else if(lnrt > 0 ) {
+			List<SadmomfRecord> listOfMasters = this.getMasters(applicationUser, String.valueOf(lnrt));
+			for(SadmomfRecord masterRecord: listOfMasters) {
+				List<SadmohfRecord> listOfHouses = this.getHouses(applicationUser, String.valueOf(masterRecord.getEmlnrt()), String.valueOf(masterRecord.getEmlnrm()));
+				for(SadmohfRecord houseRecord: listOfHouses) {
+					this.send(applicationUser, houseRecord.getEhlnrt(), houseRecord.getEhlnrm(), houseRecord.getEhlnrh(), houseRecord.getEhmid());
+				}
+			}
+		}
+		
+		return retval;
+		
+	}
+	
+	/**
+	 * 
+	 * @param appUser
+	 * @param emlnrt
+	 * @param emlnrm
+	 */
+	private List<SadmohfRecord> getHouses(String applicationName, String emlnrt, String emlnrm) {
+		List <SadmohfRecord> resultList = new ArrayList<SadmohfRecord>();
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_HOUSECONSIGNMENT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + applicationName + "&ehlnrt=" + emlnrt + "&ehlnrm=" + emlnrm;
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadmohfContainer jsonContainer = this.sadmohfListService.getListContainer(jsonPayload);
+    		if(jsonContainer!=null && !jsonContainer.getList().isEmpty()) {
+    			resultList = (List)jsonContainer.getList();
+    		}
+    	}
+    	return resultList;
+	}
+	
+	
+	private List<SadmomfRecord> getMasters(String applicationName, String lnrt) {
+		List <SadmomfRecord> resultList = new ArrayList<SadmomfRecord>();
+		
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_MASTERCONSIGNMENT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + applicationName + "&emlnrt=" + lnrt;
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadmomfContainer jsonContainer = this.sadmomfListService.getListContainer(jsonPayload);
+    		if(jsonContainer!=null && !jsonContainer.getList().isEmpty()) {
+    			resultList = (List)jsonContainer.getList();
+    		}
+    	}
+    	return resultList;
+	}
 	
 	@Autowired
 	private UrlCgiProxyService urlCgiProxyService;
 	@Autowired
 	private ApiGenericDtoResponseService apiGenericDtoResponseService;
+	@Autowired
+	private SadmohfListService sadmohfListService;
+	@Autowired
+	private SadmomfListService sadmomfListService;
+	
 	
 }

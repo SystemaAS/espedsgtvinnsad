@@ -882,13 +882,18 @@
 							<%-- not possible --%>
 						</c:when>
 						<c:otherwise>
-							<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
+							<input title="Send" class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
 							<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
 								 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
 							</div>
-							<a id="alinkCreateNewButton" href="tvinnsaddigitollv2_edit_master.do?action=doCreate&emlnrt=${model.record.emlnrt}&emavd=${model.record.transportDto.etavd}&emsg=${model.record.transportDto.etsg}&empro=${model.record.transportDto.etpro}">
+							<input title="Send alle underliggende houses..." class="buttonGrayWithGreenFrame" type="button" name="sendButtonAllHouses" id="sendButtonAllHouses" value='Send alle houses'>
+							<div style="display: none;" class="clazz_dialog" id="dialogSendAllHouses" title="Dialog">
+								 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
+							</div>
+							&nbsp;&nbsp;<a id="alinkCreateNewButton" href="tvinnsaddigitollv2_edit_master.do?action=doCreate&emlnrt=${model.record.emlnrt}&emavd=${model.record.transportDto.etavd}&emsg=${model.record.transportDto.etsg}&empro=${model.record.transportDto.etpro}">
 								<input class="inputFormSubmitStd" type="button" name="createNewButton" id="createNewButton" value='Lage ny'>
 							</a>
+							
 						</c:otherwise>
 					</c:choose>
 				</c:if>

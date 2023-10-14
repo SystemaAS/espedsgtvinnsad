@@ -489,14 +489,14 @@ public class TvinnSadDigitollv2TransportController {
 						redirect.append(redirectSuffix);
 					}
 				}
-	    		successView = new ModelAndView(redirect.toString());
-	    		
+	    	
 			}else {
 				StringBuffer errMsg = new StringBuffer();
 				errMsg.append("ERROR on doSendMaster -->detail: null ids? ...");
 				model.put("errorMessage", errMsg.toString());
 
 			}
+			successView = new ModelAndView(redirect.toString());
 		}
 		
 		return successView;

@@ -494,8 +494,6 @@ public class TvinnSadDigitollv2MasterController {
 						redirect.append(redirectSuffix);
 					}
 				}
-	    		successView = new ModelAndView(redirect.toString());
-	    		
 			}else {
 				//this will never populate a redirect but sheet the same ...:-(
 				StringBuffer errMsg = new StringBuffer();
@@ -503,7 +501,7 @@ public class TvinnSadDigitollv2MasterController {
 				model.put("errorMessage", errMsg.toString());
 
 			}
-			
+			successView = new ModelAndView(redirect.toString());
 			
 		}
 		
