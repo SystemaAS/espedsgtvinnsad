@@ -190,21 +190,26 @@
 				<td class="text14" align="left" >
 					<c:choose>
                		<c:when test="${ not empty model.record.etktyp && fn:startsWith(model.record.etktyp,'4') }">
-						<img title="api:air" style="vertical-align:middle;" id="airplaneImg" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
+						<img title="api:air" style="vertical-align:middle;" id="airplaneImg" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >
 					</c:when>
 					<c:otherwise>
-						<img title="api:road" style="vertical-align:middle;" id="lorryImg" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;
+						<img title="api:road" style="vertical-align:middle;" id="lorryImg" src="resources/images/lorry_green.png" width="20" height="20"border="0" >
 					</c:otherwise>
 					</c:choose>
-					<span title="MRN nr. hos toll.no - per transport" >MRN-Api&nbsp;</span><span class="text14SkyBlue" id="${model.record.etmid}">${model.record.etmid}</span>
+					
 					<c:if test="${not empty model.record.etmid}">
-						&nbsp;
 						<input title="Slett fra toll.no" class="inputFormSubmitStd" type="button" name="deleteButton" id="deleteButton" value='Slett'>
 						<div style="display: none;" class="clazz_dialog" id="dialogDelete" title="Dialog">
 							 <p class="text14" >Er du sikker på at du ønsker å slette fra toll.no?</p>
 						</div>
-					</c:if>		
-		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
+					</c:if>
+					<c:if test="${model.record.etlnrt > 0}">
+			    		<a id="alinkRefreshButton" href="tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=${model.record.etlnrt}">
+			    			&nbsp;<input title="Refresh all status..." class="inputFormSubmitStd" type="button" name="refreshButton" id="refreshButton" value='Refresh'>
+			    		</a>
+		    		</c:if>
+					<span title="MRN nr. hos toll.no - per transport" >MRN-Api&nbsp;</span><span class="text14SkyBlue" id="${model.record.etmid}">${model.record.etmid}</span>
+					&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
 		    		<span title="Transaktionsid hos toll.no - per request" >Trans.id&nbsp;</span><a title="les status på toll.no" class="uuidLinkParent text14SkyBlue" id="${model.record.etuuid}">${model.record.etuuid}</a>
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
 		    		<a title="lese logg" tabindex=-1 id="${model.record.etlnrt}" class="logLink" runat="server" href="#"><font class="text14 ">Api.st - log</font>&nbsp;

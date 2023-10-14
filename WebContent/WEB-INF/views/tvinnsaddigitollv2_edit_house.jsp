@@ -189,20 +189,26 @@
 				<td class="text14" align="left" >
 					<c:choose>
                		<c:when test="${ not empty model.record.transportDto.etktyp && fn:startsWith(model.record.transportDto.etktyp,'4') }">
-						<img title="api:air:entry" style="vertical-align:middle; cursor:pointer;" id="airplaneImg" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
+						<img title="api:air:entry" style="vertical-align:middle; cursor:pointer;" id="airplaneImg" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >
 					</c:when>
 					<c:otherwise>
-						<img title="api:road:entry" style="vertical-align:middle;cursor:pointer;" id="lorryImg" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;
+						<img title="api:road:entry" style="vertical-align:middle;cursor:pointer;" id="lorryImg" src="resources/images/lorry_green.png" width="20" height="20"border="0" >
 					</c:otherwise>
 					</c:choose>
-		    		<span title="MRN nr. hos toll.no - per House" >MRN-Api&nbsp;</span><span class="text14SkyBlue" id="${model.record.ehmid}">${model.record.ehmid}</span>
-		    		<c:if test="${not empty model.record.ehmid}">
+					<c:if test="${not empty model.record.ehmid}">
 						&nbsp;
 						<input title="Slett fra toll.no" class="inputFormSubmitStd" type="button" name="deleteButton" id="deleteButton" value='Slett'>
 						<div style="display: none;" class="clazz_dialog" id="dialogDelete" title="Dialog">
 							 <p class="text14" >Er du sikker på at du ønsker å slette fra toll.no?</p>
 						</div>
 					</c:if>	
+		    		<c:if test="${model.record.ehlnrh > 0}">
+			    		<a id="alinkRefreshButton" href="tvinnsaddigitollv2_edit_house.do?action=doFind&ehlnrt=${model.record.ehlnrt}&ehlnrm=${model.record.ehlnrm}&ehlnrh=${model.record.ehlnrh}">
+			    			&nbsp;<input title="Refresh all status..." class="inputFormSubmitStd" type="button" name="refreshButton" id="refreshButton" value='Refresh'>
+			    		</a>
+		    		</c:if>
+		    		
+		    		<span title="MRN nr. hos toll.no - per House" >MRN-Api&nbsp;</span><span class="text14SkyBlue" id="${model.record.ehmid}">${model.record.ehmid}</span>
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
 		    		<span title="Transaktionsid hos toll.no - per request" >Trans.id&nbsp;</span><a title="les status på toll.no" class="uuidLink text14SkyBlue" id="${model.record.ehuuid}">${model.record.ehuuid}</a>
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;

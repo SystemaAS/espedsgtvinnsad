@@ -97,6 +97,12 @@
 		  jq('#dialogDelete').dialog('open');
     });
     
+	//Refresh
+    jq('#alinkRefreshButton').click(function() { 
+    	setBlockUI();
+    });
+
+
 
     jq('#imgManifestIdInfo').click(function() { 
     	jq('#imgManifestIdInfo').attr('target','_blank');

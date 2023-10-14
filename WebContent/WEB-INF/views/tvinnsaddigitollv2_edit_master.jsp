@@ -201,22 +201,27 @@
 				<td class="text14" align="left" >
 					<c:choose>
                		<c:when test="${ not empty model.record.transportDto.etktyp && fn:startsWith(model.record.transportDto.etktyp,'4') }">
-						<img title="api:air" style="vertical-align:middle;" id="airplaneImg" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
+						<img title="api:air" style="vertical-align:middle;" id="airplaneImg" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >
 					</c:when>
 					<c:otherwise>
-						<img title="api:road" style="vertical-align:middle;" id="lorryImg" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;
+						<img title="api:road" style="vertical-align:middle;" id="lorryImg" src="resources/images/lorry_green.png" width="20" height="20"border="0" >
 					</c:otherwise>
 					</c:choose>
-					<%-- MRN-Api&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.emmid}">${model.record.emmid}</a> --%>
-		    		<span title="MRN nr. hos toll.no - per Master" >MRN-Api&nbsp;</span><font class="text14SkyBlue">${model.record.emmid}</font>
-		    		<c:if test="${not empty model.record.emmid}">
+					<c:if test="${not empty model.record.emmid}">
 						&nbsp;
 						<input title="Slett fra toll.no" class="inputFormSubmitStd" type="button" name="deleteButton" id="deleteButton" value='Slett'>
 						<div style="display: none;" class="clazz_dialog" id="dialogDelete" title="Dialog">
 							 <p class="text14" >Er du sikker på at du ønsker å slette fra toll.no?</p>
 						</div>
 					</c:if>		
+		    		<c:if test="${model.record.emlnrm > 0}">
+			    		<a id="alinkRefreshButton" href="tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=${model.record.emlnrt}&emlnrm=${model.record.emlnrm}">
+			    			&nbsp;<input title="Refresh all status..." class="inputFormSubmitStd" type="button" name="refreshButton" id="refreshButton" value='Refresh'>
+			    		</a>
+		    		</c:if>
 		    		
+					<%-- MRN-Api&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.emmid}">${model.record.emmid}</a> --%>
+		    		<span title="MRN nr. hos toll.no - per Master" >MRN-Api&nbsp;</span><font class="text14SkyBlue">${model.record.emmid}</font>
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
 		    		<span title="Transaktionsid hos toll.no - per request" >Trans.id&nbsp;</span><a title="les status på toll.no" class="uuidLinkParent text14SkyBlue" id="${model.record.emuuid}">${model.record.emuuid}</a>
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;

@@ -98,6 +98,11 @@
 		  jq('#dialogDelete').dialog('open');
     });
     
+	//Refresh
+    jq('#alinkRefreshButton').click(function() { 
+    	setBlockUI();
+    });
+
     jq('#imgManifestIdInfo').click(function() { 
     	jq('#imgManifestIdInfo').attr('target','_blank');
 	  	window.open('tvinnsadmanifest_childwindow_manifestinfo.do?id=' + jq('#efuuid').val(), "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");
