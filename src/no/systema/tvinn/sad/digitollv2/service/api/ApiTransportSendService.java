@@ -1,4 +1,4 @@
-package no.systema.tvinn.sad.digitollv2.service;
+package no.systema.tvinn.sad.digitollv2.service.api;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javawebparts.core.org.apache.commons.lang.StringUtils;
 import no.systema.main.service.UrlCgiProxyService;
+import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
+import no.systema.tvinn.sad.digitollv2.service.ApiGenericDtoResponseService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
+import no.systema.tvinn.sad.digitollv2.util.RedirectCleaner;
+import no.systema.tvinn.sad.digitollv2.util.SadDigitollConstants;
 
 import java.util.Calendar;
 
@@ -18,13 +22,18 @@ import org.slf4j.Logger;
 
 
 @Service
-@EnableAsync
-public class AsynchTransportService {
-	private static final Logger logger = LoggerFactory.getLogger(AsynchTransportService.class);
+public class ApiTransportSendService {
+	private static final Logger logger = LoggerFactory.getLogger(ApiTransportSendService.class);
 	
-	@Async
-	public void xxxTest (String applicationUser, Integer etlnrt, String etmid) {
-		
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param etlnrt
+	 * @param etmid
+	 * @return
+	 */
+	public String send (String applicationUser, Integer etlnrt, String etmid) {
+		String retval = "";
 		logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
 		
 		//=================
@@ -57,30 +66,30 @@ public class AsynchTransportService {
     		//Debug -->
 	    	logger.info(jsonPayload);
     		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-    		/*
+    		
     		try {
 	    		ApiGenericDtoResponse apiDtoResponse = this.apiGenericDtoResponseService.getReponse(jsonPayload);
 	    		if(StringUtils.isNotEmpty(apiDtoResponse.getErrMsg())){
 	    			new RedirectCleaner().doIt(apiDtoResponse);
 	    			//in order to catch it after the redirect as a parameter...if applicable
 	    			if(StringUtils.isNotEmpty(apiDtoResponse.getErrMsgClean())) {
-	    				redirect.append("&" + SadDigitollConstants.REDIRECT_ERRMSG + "=" + apiDtoResponse.getErrMsgClean());
+	    				retval = "&" + SadDigitollConstants.REDIRECT_ERRMSG + "=" + apiDtoResponse.getErrMsgClean();
 	    			}
 				}
     		}catch(Exception e) {
     			e.printStackTrace();
     			
-    		}finally {
-    			successView = new ModelAndView(redirect.toString());
     		}
-			*/
-    		//successView = new ModelAndView(redirect.toString());
-    		
+			
 		}
+		
+		return retval;
 		
 	}
 	
 	@Autowired
 	private UrlCgiProxyService urlCgiProxyService;
+	@Autowired
+	private ApiGenericDtoResponseService apiGenericDtoResponseService;
 	
 }

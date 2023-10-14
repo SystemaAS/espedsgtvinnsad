@@ -68,13 +68,14 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.service.ApiGenericDtoResponseService;
-import no.systema.tvinn.sad.digitollv2.service.AsynchTransportService;
 import no.systema.tvinn.sad.digitollv2.service.GeneralUpdateService;
 import no.systema.tvinn.sad.digitollv2.service.SadDigitollDropDownListPopulationService;
 import no.systema.tvinn.sad.digitollv2.service.SadmohfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
+import no.systema.tvinn.sad.digitollv2.service.api.ApiAsyncFacadeSendService;
+import no.systema.tvinn.sad.digitollv2.service.api.ApiTransportSendService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
 import no.systema.tvinn.sad.digitollv2.util.RedirectCleaner;
 import no.systema.tvinn.sad.digitollv2.util.SadDigitollConstants;
@@ -456,9 +457,11 @@ public class TvinnSadDigitollv2TransportController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="tvinnsaddigitollv2_api_send_transportAsyncTest.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	@RequestMapping(value="tvinnsaddigitollv2_api_send_transport.do",  method={RequestMethod.GET, RequestMethod.POST} )
 	public ModelAndView doApiSendTransport(@ModelAttribute ("record") SadmotfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		logger.info("inside doApiSendTransport");
+		
+		String async = request.getParameter("async");
 		
 		Map model = new HashMap();
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
@@ -471,14 +474,21 @@ public class TvinnSadDigitollv2TransportController {
 			return loginView;
 		
 		}else{
-			
 			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
-			
 			//=================
 			//SEND POST or PUT
 			//=================
 			if(recordToValidate.getEtlnrt() > 0 ) {
-				asynchTransportService.xxxTest(appUser.getUser(), recordToValidate.getEtlnrt(), recordToValidate.getEtmid());
+				if(StringUtils.isNotEmpty(async)) {
+					//async if applicable
+					this.apiAsynchFacadeSendService.sendTransport(appUser.getUser(), recordToValidate.getEtlnrt(), recordToValidate.getEtmid());
+				}else {
+					//normal synchronous
+					String redirectSuffix = apiTransportSendService.send(appUser.getUser(), recordToValidate.getEtlnrt(), recordToValidate.getEtmid());
+					if(StringUtils.isNotEmpty(redirectSuffix)) {
+						redirect.append(redirectSuffix);
+					}
+				}
 	    		successView = new ModelAndView(redirect.toString());
 	    		
 			}else {
@@ -493,8 +503,8 @@ public class TvinnSadDigitollv2TransportController {
 		
 	}
 	
-	
-	@RequestMapping(value="tvinnsaddigitollv2_api_send_transport.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	/* OBSOLETE ... replaced with the above
+	@RequestMapping(value="tvinnsaddigitollv2_api_send_transportOrig.do",  method={RequestMethod.GET, RequestMethod.POST} )
 	public ModelAndView doApiSendTransportOrig(@ModelAttribute ("record") SadmotfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		logger.info("inside doApiSendTransport");
 		
@@ -570,6 +580,8 @@ public class TvinnSadDigitollv2TransportController {
 		return successView;
 		
 	}
+	*/
+	
 	
 	@RequestMapping(value="tvinnsaddigitollv2_api_delete_transport.do",  method={RequestMethod.GET, RequestMethod.POST} )
 	public ModelAndView doApiDeleteMaster(@ModelAttribute ("record") SadmotfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
@@ -1346,7 +1358,9 @@ public class TvinnSadDigitollv2TransportController {
 	private SadDigitollDropDownListPopulationService digitollDropDownListPopulationService;
 	
 	@Autowired
-	private AsynchTransportService asynchTransportService;
+	private ApiTransportSendService apiTransportSendService;
+	@Autowired
+	private ApiAsyncFacadeSendService apiAsynchFacadeSendService;
 	
 	
 	@Autowired
