@@ -53,6 +53,8 @@ import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelning
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureContainer;
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureRecord;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
+import no.systema.tvinn.sad.digitollv2.controller.service.ApiAsyncFacadeSendService;
+import no.systema.tvinn.sad.digitollv2.controller.service.ApiTransportSendService;
 import no.systema.tvinn.sad.digitollv2.filter.SearchFilterDigitollTransportList;
 import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
@@ -74,8 +76,6 @@ import no.systema.tvinn.sad.digitollv2.service.SadmohfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
-import no.systema.tvinn.sad.digitollv2.service.api.ApiAsyncFacadeSendService;
-import no.systema.tvinn.sad.digitollv2.service.api.ApiTransportSendService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
 import no.systema.tvinn.sad.digitollv2.util.RedirectCleaner;
 import no.systema.tvinn.sad.digitollv2.util.SadDigitollConstants;
@@ -483,7 +483,7 @@ public class TvinnSadDigitollv2TransportController {
 					//async if applicable
 					this.apiAsynchFacadeSendService.sendTransport(appUser.getUser(), recordToValidate.getEtlnrt(), recordToValidate.getEtmid());
 				}else {
-					//normal synchronous
+					//normal synchronous default as a normal controller
 					String redirectSuffix = apiTransportSendService.send(appUser.getUser(), recordToValidate.getEtlnrt(), recordToValidate.getEtmid());
 					if(StringUtils.isNotEmpty(redirectSuffix)) {
 						redirect.append(redirectSuffix);

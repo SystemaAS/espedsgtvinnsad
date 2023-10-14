@@ -1,4 +1,4 @@
-package no.systema.tvinn.sad.digitollv2.service.api;
+package no.systema.tvinn.sad.digitollv2.controller.service;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
