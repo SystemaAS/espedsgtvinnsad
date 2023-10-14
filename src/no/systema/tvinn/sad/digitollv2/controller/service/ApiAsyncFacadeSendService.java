@@ -32,10 +32,19 @@ import org.slf4j.Logger;
 public class ApiAsyncFacadeSendService {
 	private static final Logger logger = LoggerFactory.getLogger(ApiAsyncFacadeSendService.class);
 	
+	/**
+	 * Must be exaclty the same params as in the Controller
+	 * @param applicationUser
+	 * @param etlnrt
+	 * @param etmid
+	 */
 	@Async
 	public void sendTransport (String applicationUser, Integer etlnrt, String etmid) {	
 		this.apiTransportSendService.send(applicationUser, etlnrt, etmid);
 	}
+	
+	
+	
 	
 	@Autowired
 	private ApiTransportSendService apiTransportSendService;

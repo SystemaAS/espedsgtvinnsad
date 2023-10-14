@@ -20,13 +20,20 @@ import java.util.Calendar;
 import org.slf4j.Logger;
 
 
-
+/**
+ * This class executes all the logic that usually resides in the Controller directly
+ * The reason is to decouple it from the controller in order to implement either the normal synchronous behavior of a response OR an asynchronous behavior
+ * 
+ * @author oscardelatorre
+ * Oct 2023
+ * 
+ */
 @Service
 public class ApiTransportSendService {
 	private static final Logger logger = LoggerFactory.getLogger(ApiTransportSendService.class);
 	
 	/**
-	 * 
+	 * Must be exaclty the same params as in the Controller
 	 * @param applicationUser
 	 * @param etlnrt
 	 * @param etmid
