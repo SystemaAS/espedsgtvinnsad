@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javawebparts.core.org.apache.commons.lang.StringUtils;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.service.UrlCgiProxyService;
+import no.systema.tvinn.sad.digitollv2.enums.EnumSadmomfStatus3;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
@@ -105,7 +106,7 @@ public class ApiHouseSendService {
 		
 	}
 	/**
-	 * Send all houses as a batch
+	 * Send all houses as a batch (call by either master or transport
 	 * 
 	 * @param applicationUser
 	 * @param transportId
@@ -125,7 +126,11 @@ public class ApiHouseSendService {
 			for(SadmohfRecord record: listOfHouses) {
 				this.send(applicationUser, record.getEhlnrt(), record.getEhlnrm(), record.getEhlnrh(), record.getEhmid());
 			}
+			//remove the (P)ENDING status that was set by the caller before the async call
+			this.setSt3_MasterToPending(applicationUser, lnrt, lnrm, EnumSadmomfStatus3.EMPTY.toString());
+			
 		}else if(lnrt > 0 ) {
+			/* not implemented in the caller...
 			List<SadmomfRecord> listOfMasters = this.getMasters(applicationUser, String.valueOf(lnrt));
 			for(SadmomfRecord masterRecord: listOfMasters) {
 				List<SadmohfRecord> listOfHouses = this.getHouses(applicationUser, String.valueOf(masterRecord.getEmlnrt()), String.valueOf(masterRecord.getEmlnrm()));
@@ -133,6 +138,9 @@ public class ApiHouseSendService {
 					this.send(applicationUser, houseRecord.getEhlnrt(), houseRecord.getEhlnrm(), houseRecord.getEhlnrh(), houseRecord.getEhmid());
 				}
 			}
+			//remove the (P)ENDING status that was set by the caller before the async call
+			this.setSt3_TransportToPending(applicationUser, lnrt, lnrm, EnumSadmomfStatus3.EMPTY.toString());
+			*/
 		}
 		
 		return retval;
@@ -145,11 +153,11 @@ public class ApiHouseSendService {
 	 * @param emlnrt
 	 * @param emlnrm
 	 */
-	private List<SadmohfRecord> getHouses(String applicationName, String emlnrt, String emlnrm) {
+	private List<SadmohfRecord> getHouses(String applicationUser, String emlnrt, String emlnrm) {
 		List <SadmohfRecord> resultList = new ArrayList<SadmohfRecord>();
 		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_HOUSECONSIGNMENT_URL;
 		//add URL-parameters
-		String urlRequestParams = "user=" + applicationName + "&ehlnrt=" + emlnrt + "&ehlnrm=" + emlnrm;
+		String urlRequestParams = "user=" + applicationUser + "&ehlnrt=" + emlnrt + "&ehlnrm=" + emlnrm;
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
     	logger.warn("URL: " + BASE_URL);
     	logger.warn("URL PARAMS: " + urlRequestParams);
@@ -168,12 +176,12 @@ public class ApiHouseSendService {
 	}
 	
 	
-	private List<SadmomfRecord> getMasters(String applicationName, String lnrt) {
+	private List<SadmomfRecord> getMasters(String applicationUser, String lnrt) {
 		List <SadmomfRecord> resultList = new ArrayList<SadmomfRecord>();
 		
 		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_MASTERCONSIGNMENT_URL;
 		//add URL-parameters
-		String urlRequestParams = "user=" + applicationName + "&emlnrt=" + lnrt;
+		String urlRequestParams = "user=" + applicationUser + "&emlnrt=" + lnrt;
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
     	logger.warn("URL: " + BASE_URL);
     	logger.warn("URL PARAMS: " + urlRequestParams);
@@ -189,6 +197,41 @@ public class ApiHouseSendService {
     		}
     	}
     	return resultList;
+	}
+	
+	/**
+	 * The method changes the parent-caller st3 in order to block GUI elements until the st3 is empty (set by the async. process elsewhere...)
+	 * @param applicationUser
+	 * @param lnrt
+	 * @param lnrm
+	 */
+	public void setSt3_MasterToPending(String applicationUser, Integer lnrt, Integer lnrm, String st3) {
+		
+		try {
+			final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_MASTERCONSIGNMENT_URL;
+			//add URL-parameters
+			String urlRequestParams = "user=" + applicationUser + "&emlnrt=" + lnrt + "&emlnrm=" + lnrm + "&emst3=" + st3 + "&mode=US3" ;
+			logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+	    	logger.warn("URL: " + BASE_URL);
+	    	logger.warn("URL PARAMS: " + urlRequestParams);
+	    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+	
+	    	//Debug --> 
+	    	logger.debug(jsonPayload);
+	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    	if(jsonPayload!=null){
+	    		SadmomfContainer jsonContainer = this.sadmomfListService.getListContainer(jsonPayload);
+	    		if(jsonContainer!=null && !jsonContainer.getList().isEmpty()) {
+	    			if(StringUtils.isNotEmpty(jsonContainer.getErrMsg())) {
+	    				logger.error("ERROR on update st3 for SADMOMF:" + jsonContainer.getErrMsg());
+	    			}
+	    		}
+	    	}
+		}catch(Exception e) {
+			logger.error(e.toString());
+		}
+    
+		
 	}
 	
 	@Autowired

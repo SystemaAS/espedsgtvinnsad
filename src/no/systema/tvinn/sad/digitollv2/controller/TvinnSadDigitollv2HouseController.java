@@ -48,6 +48,7 @@ import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
 import no.systema.tvinn.sad.digitollv2.controller.service.ApiAsyncFacadeSendService;
 import no.systema.tvinn.sad.digitollv2.controller.service.ApiHouseSendService;
 import no.systema.tvinn.sad.digitollv2.controller.service.ApiTransportSendService;
+import no.systema.tvinn.sad.digitollv2.enums.EnumSadmomfStatus3;
 import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateContainer;
@@ -437,7 +438,11 @@ public class TvinnSadDigitollv2HouseController {
 			//=================
 			//SEND POST or PUT
 			//=================
+			//send from master GUI implementation
 			if(lnrt > 0 && lnrm > 0 ) {
+				//set st3 as pending in master to block the Send all houses- button until finished
+				this.apiHouseSendService.setSt3_MasterToPending(appUser.getUser(), lnrt, lnrm, EnumSadmomfStatus3.PENDING.toString());
+				//always async
 				this.apiAsynchFacadeSendService.sendAllHouses(appUser.getUser(), lnrt, lnrm );
 	    		
 			}else {
@@ -454,6 +459,8 @@ public class TvinnSadDigitollv2HouseController {
 		return successView;
 		
 	}
+	
+	
 	/*OBSOLETE ... replaced with the above
 	@RequestMapping(value="tvinnsaddigitollv2_api_send_houseOrig.do",  method={RequestMethod.GET, RequestMethod.POST} )
 	public ModelAndView doApiSendHouseOrig(@ModelAttribute ("record") SadmohfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){

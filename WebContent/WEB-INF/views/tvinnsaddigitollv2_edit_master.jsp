@@ -886,11 +886,21 @@
 							<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
 								 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
 							</div>
-							<input title="Send alle underliggende houses..." class="buttonGrayWithGreenFrame" type="button" name="sendButtonAllHouses" id="sendButtonAllHouses" value='Send alle houses'>
-							<div style="display: none;" class="clazz_dialog" id="dialogSendAllHouses" title="Dialog">
-								 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
-							</div>
-							&nbsp;&nbsp;<a id="alinkCreateNewButton" href="tvinnsaddigitollv2_edit_master.do?action=doCreate&emlnrt=${model.record.emlnrt}&emavd=${model.record.transportDto.etavd}&emsg=${model.record.transportDto.etsg}&empro=${model.record.transportDto.etpro}">
+							<c:choose>
+							
+							<%-- st3 on the level that trigger the async-Send until the async-process is finnished --%>
+							<c:when test="${model.record.emst3 == 'P' }"> <%--PENDING(P) on async triggered --%>
+								<input title="Pending status ..." class="buttonGrayInsideDivPopup" style="cursor:not-allowed;" type="button" name="sendButtonAllHousesBlocked" id="sendButtonAllHousesBlocked" value='Send alle houses'>
+							</c:when>
+							<c:otherwise>
+								<input title="Send alle underliggende houses..." class="buttonGrayWithGreenFrame" type="button" name="sendButtonAllHouses" id="sendButtonAllHouses" value='Send alle houses'>
+								<div style="display: none;" class="clazz_dialog" id="dialogSendAllHouses" title="Dialog">
+									 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
+								</div>
+							</c:otherwise>
+							</c:choose>
+							
+							<a id="alinkCreateNewButton" href="tvinnsaddigitollv2_edit_master.do?action=doCreate&emlnrt=${model.record.emlnrt}&emavd=${model.record.transportDto.etavd}&emsg=${model.record.transportDto.etsg}&empro=${model.record.transportDto.etpro}">
 								<input class="inputFormSubmitStd" type="button" name="createNewButton" id="createNewButton" value='Lage ny'>
 							</a>
 							
