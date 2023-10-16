@@ -148,6 +148,8 @@ public class SadmotfRecord extends JsonAbstractGrandFatherRecord  {
 	
 	private Boolean own_okToSend = true;
 	private Boolean own_okToDelete = true;
+	private Boolean own_invalidMastersExist = false;
+	private Boolean own_invalidHousesExist = false;
 	
 	private Collection<SadmomfRecord> listMasters = null;
 	public void setListMasters(Collection<SadmomfRecord> value){ this.listMasters = value;}

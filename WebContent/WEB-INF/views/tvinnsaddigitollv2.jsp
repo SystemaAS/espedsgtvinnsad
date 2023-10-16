@@ -105,6 +105,7 @@
                 
                 </td>
                 
+                
 			</tr>
  	        <tr>
 				<td align="left" >&nbsp;
@@ -142,9 +143,16 @@
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="datum" id="datum" size="6" maxlength="6" value="${searchFilterSadDigitollTransportList.datum}">&nbsp;</td>
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="datumt" id="datumt" size="6" maxlength="6" value="${searchFilterSadDigitollTransportList.datumt}">&nbsp;</td>
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="opd" id="opd" size="8" maxlength="7" value="${searchFilterSadDigitollTransportList.opd}">&nbsp;</td>
+				
 				<td valign="top" align="left" >
                    <input class="inputFormSubmit" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.search"/>'>
                 </td>
+                
+                <td align="left" class="inputText">
+                	<input type="checkbox" id="showErrorLayers" name="showErrorLayers" value="1">
+                	<span style="cursor:help;" title="Dette fungerer kun med maks 35 linjer i bildet..." > Vis error-flagg (M/H nivå)</span>
+                </td>
+
 			</tr>
 			<tr height="10"><td></td></tr>
 			</form>
@@ -215,6 +223,7 @@
                     	<th width="2%" class="tableHeaderField" >Avd</th>
                 		<th width="2%" class="tableHeaderField" >Sign</th>
                 		<th width="2%" class="tableHeaderField" >Turnr</th>
+                		<th title="Viser om det er feil på transp-master-house-nivå" width="2%" class="tableHeaderField10" >T/M/H Flagg</th>
                 		<th title="S=SLETTET" width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.sysped.status"/></th>
                 		<th width="2%" class="tableHeaderField" >Pass. ETA</th>
                 		<th width="2%" class="tableHeaderField" >Tollst.</th>
@@ -260,6 +269,27 @@
 		               <td width="2%" align="center" class="tableCell" >${record.etavd}</td>
 		               <td width="2%" align="center" class="tableCell" >${record.etsg}</td>
 		               <td width="2%" align="center" class="tableCell" ><c:if test="${record.etpro > 0}">${record.etpro}</c:if></td>
+		            
+		               <td width="2%" align="center" class="tableCell text12">
+		               		<c:if test="${record.own_invalidMastersExist || record.own_invalidHousesExist || record.etst2 == 'M'}">
+		               			<c:choose>
+		               			<c:when test="${record.etst2 == 'M'}">
+		               				<img style="cursor:help;" title="Error on transport..." src="resources/images/redFlag.png" width="18" height="18" border="0"><font class="text10" style="color:red;">T</font>
+		               			</c:when>
+		               			<c:otherwise>
+		               				
+			               				<c:if test="${record.own_invalidMastersExist}">
+		           							<img style="cursor:help;" title="Error on master..." src="resources/images/redFlag.png" width="18" height="18" border="0"><font class="text10" style="color:red;">M</font>
+		           						</c:if>
+		           						<c:if test="${record.own_invalidHousesExist}">
+		           							<img style="cursor:help;" title="Error on house..." src="resources/images/redFlag.png" width="18" height="18" border="0"><font class="text10" style="color:red;">H</font>
+		           						</c:if>
+	           						
+	           					</c:otherwise>
+	           					</c:choose>
+	           				</c:if>
+				       </td>
+				      
 		               <td nowrap width="2%" align="center" class="tableCell" >
 		               	  <c:choose>
 		               		<c:when test="${record.etst == 'S'}">

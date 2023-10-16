@@ -55,6 +55,8 @@ import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignature
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
 import no.systema.tvinn.sad.digitollv2.controller.service.ApiAsyncFacadeSendService;
 import no.systema.tvinn.sad.digitollv2.controller.service.ApiTransportSendService;
+import no.systema.tvinn.sad.digitollv2.enums.EnumSadmohfStatus2;
+import no.systema.tvinn.sad.digitollv2.enums.EnumSadmomfStatus2;
 import no.systema.tvinn.sad.digitollv2.filter.SearchFilterDigitollTransportList;
 import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
@@ -198,15 +200,28 @@ public class TvinnSadDigitollv2TransportController {
 						//now filter the topic list with the search filter (if applicable)
 						//----------------------------------------------------------------
 						outputList = jsonContainer.getList();
+						Collection<SadmotfRecord> outputListWithRedFlags = jsonContainer.getList();
 						if(outputList!=null && outputList.size() > SadmotfContainer.LIMIT_SIZE_OF_MAIN_LIST_OF_TRANSPORTS){
 							outputList = new ArrayList();
 							model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, "Too many lines. Narrow your search please ...");
 						}else{
 							for(SadmotfRecord record: outputList){
 								this.adjustFieldsForFetch(record);
+								
+								//Special search for red flags
+								//this in order to get a redFlag (defect masters or houses)
+								if(StringUtils.isNotEmpty(request.getParameter("showErrorLayers"))) {
+									if(outputList.size() < SadDigitollConstants.MAX_NUMBER_OF_LINES_FOR_DEEPSEARCH_REDFLAG_ON_TRANSPORT_MAINLIST) { //temporarily to test and avoid hang-ups
+										this.getMasterHouseRedFlagMainList(appUser, record);
+									}else {
+										model.put("errorMessage", "For mange linjer for dyptsøk på -Vis error-flagg M/H nivå-");
+									}
+								}
 							}
 							//logger.debug(outputList.toString());
 						}
+						
+						
 						
 			    	}
             	}
@@ -1238,6 +1253,46 @@ public class TvinnSadDigitollv2TransportController {
 		}
 		
 	}
+	/**
+	 * 
+	 * @param appUser
+	 * @param record
+	 */
+	private void getMasterHouseRedFlagMainList(SystemaWebUser appUser, SadmotfRecord record) {
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_MASTERCONSIGNMENT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser() + "&emlnrt=" + record.getEtlnrt();
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadmomfContainer jsonContainer = this.sadmomfListService.getListContainer(jsonPayload);
+    		record.setListMasters(jsonContainer.getList());
+    		//now check if the transport has errors on all layers below (master-layer and house-layer)
+    		List<SadmomfRecord> listChild = (List)jsonContainer.getList();
+    		if(listChild!=null && !listChild.isEmpty()) {
+    			for(SadmomfRecord child : listChild) {
+	    			if(child.getEmst2().equals(EnumSadmomfStatus2.M.toString())) {
+	    				record.setOwn_invalidMastersExist(true);
+	    				break;
+	    			}else {
+	    				//this is in order to rise "red flag" on GUI
+	    				this.getHouses(appUser, child, record);
+	    			}
+	    		}
+    			
+    		}else {
+    			//OK
+    		}
+    	}
+    	
+	}
+	
 	
 	/**
 	 * 
@@ -1273,8 +1328,17 @@ public class TvinnSadDigitollv2TransportController {
 	    		}
     			for(SadmomfRecord child : listChild) {
 	    			//to heavy?: --> this is for GUI info
-	    			this.getHouses(appUser, child);
+	    			this.getHouses(appUser, child, record);
 	    		}
+    			//this is in order to rise "red flag" on GUI 
+        		List<SadmomfRecord>tmpList = listChild;
+        		for(SadmomfRecord master : tmpList) {
+        			//this is for GUI info
+        			if(master.getEmst2().equals(EnumSadmomfStatus2.M.toString())) {
+        				record.setOwn_invalidMastersExist(true);
+        				break;
+        			}
+        		}
     		}else {
     			//OK
     		}
@@ -1286,7 +1350,7 @@ public class TvinnSadDigitollv2TransportController {
 	 * @param appUser
 	 * @param record
 	 */
-	private void getHouses(SystemaWebUser appUser, SadmomfRecord record) {
+	private void getHouses(SystemaWebUser appUser, SadmomfRecord record, SadmotfRecord parent) {
 		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_HOUSECONSIGNMENT_URL;
 		//add URL-parameters
 		String urlRequestParams = "user=" + appUser.getUser() + "&ehlnrt=" + record.getEmlnrt() + "&ehlnrm=" + record.getEmlnrm();
@@ -1305,8 +1369,9 @@ public class TvinnSadDigitollv2TransportController {
     		List<SadmohfRecord>tmpList = (List)jsonContainer.getList();
     		for(SadmohfRecord house : tmpList) {
     			//to heavy?: --> this is for GUI info
-    			if(house.getEhst2().equals("M")) {
+    			if(house.getEhst2().equals(EnumSadmohfStatus2.M.toString())) {
     				record.setOwn_invalidHousesExist(true);
+    				parent.setOwn_invalidHousesExist(true);
     				break;
     			}
     		}

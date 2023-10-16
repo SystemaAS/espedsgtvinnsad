@@ -184,7 +184,7 @@
   		--%>
   		
   		<tr height="5">	
-  			<td  colspan="10" class="text14 formFrame" >
+  			<td  colspan="10" class="text14 formFrame">
 			<table style="width:100%">
 			<tr >
 				<td class="text14" align="left" >
@@ -255,6 +255,16 @@
 						</span>	
 						</span>
 					
+					</c:if>
+					&nbsp;&nbsp;&nbsp;
+					<c:if test="${model.record.etst2 == 'M'}">
+						<img style="cursor:help" title="API-ERROR på denne transporten. Ref. ERROR-tekst (click)" src="resources/images/redFlag.png" width="25" height="25" border="0">
+					</c:if>
+					<c:if test="${model.record.own_invalidMastersExist}">
+						<img style="cursor:help" title="API-ERROR på noen av master. Ref. master liste under..." src="resources/images/redFlag.png" width="25" height="25" border="0">
+					</c:if>
+					<c:if test="${model.record.own_invalidHousesExist}">
+						<img style="cursor:help" title="API-ERROR on på noen av houses. Ref. house flagg i master-liste under..." src="resources/images/redFlag.png" width="25" height="25" border="0">
 					</c:if>
 					
 		   		</td>
@@ -908,7 +918,7 @@
                 		<th width="2%" class="tableHeaderField" >Sign</th>
                 		<th width="2%" class="tableHeaderField" >Turnr</th>
                 		<th width="2%" class="tableHeaderField" ></th>
-                		<th width="2%" class="tableHeaderField10" >Flagg</th>
+                		<th title="Viser om det er feil på house-nivå" width="2%" class="tableHeaderField10" >H Flagg</th>
                 		<th title="S=SLETTET" width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.sysped.status"/></th>
                 		<th width="2%" class="tableHeaderField" >Br.vekt</th>
                 		<th width="2%" class="tableHeaderField" >Doknr.</th>
