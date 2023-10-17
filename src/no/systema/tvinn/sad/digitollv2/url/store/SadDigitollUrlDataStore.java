@@ -36,6 +36,9 @@ public final class SadDigitollUrlDataStore {
 
 		//FETCH LOG 
 		static public String SAD_FETCH_DIGITOLL_LOG_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOLOG.do";
+		
+		//FETCH DEFAULT VALUES SADMOAF 
+		static public String SAD_FETCH_DIGITOLL_DEFAULT_VALUES_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOAF.do";
 				
 		
 		//Manifest info from toll.no (API)

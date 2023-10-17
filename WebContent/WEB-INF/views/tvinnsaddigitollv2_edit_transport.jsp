@@ -104,6 +104,7 @@
 	<%-- --------------------------- --%>
 	<form name="manifestForm" id="manifestForm" action="tvinnsaddigitollv2_edit_transport.do" method="post">
 			<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
+			<input type="hidden" name="applicationUserSign" id="applicationUserSign" value="${user.tvinnSadSign}">
 			<input type="hidden" name="etuuid" id="etuuid" value="${model.record.etuuid}"> 
 			<input type="hidden" name="etmid" id="etmid" value="${model.record.etmid}">
 			<input type="hidden" name="action" id="action" value="doUpdate">

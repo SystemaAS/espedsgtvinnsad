@@ -19,17 +19,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javawebparts.core.org.apache.commons.lang.StringUtils;
 import no.systema.main.service.UrlCgiProxyService;
+import no.systema.main.util.DateTimeManager;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.service.SadOppdragService;
 import no.systema.tvinn.sad.digitollv2.service.SadTurService;
+import no.systema.tvinn.sad.digitollv2.service.SadmoafListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
@@ -44,6 +48,7 @@ import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
 @RestController
 public class TvinnSadDigitollAjaxController {
 	private static final Logger logger = LoggerFactory.getLogger(TvinnSadDigitollAjaxController.class.getName());
+	private DateTimeManager dateMgr = new DateTimeManager();
 	
 	/**
 	 * 
@@ -206,7 +211,7 @@ public class TvinnSadDigitollAjaxController {
 	 * @return
 	 */
 	@RequestMapping(value = "searchTur_Digitoll.do", method = RequestMethod.GET)
-	  public @ResponseBody Set<JsonTvinnSadCustomerRecord> searchTur(HttpServletRequest request, @RequestParam String applicationUser, @RequestParam(value = "turNr", required = false) String turNr, 
+	  public @ResponseBody Set<SadTurRecord> searchTur(HttpServletRequest request, @RequestParam String applicationUser, @RequestParam(value = "turNr", required = false) String turNr, 
 			  																							   @RequestParam(value = "fromDate", required = true) String fromDate) {
 
 		  logger.info("Inside searchTur");
@@ -234,6 +239,13 @@ public class TvinnSadDigitollAjaxController {
 	    				logger.info("Bilnr: " + record.getTubiln());
 	    				logger.info("Tollsted(a): " + record.getTuto1a());
 	    				logger.info("Fører: " + record.getTusjn1());
+	    				//transport måte
+	    				if(StringUtils.isNotEmpty(record.getTutrma())) { this.washTranspMate(record); }
+	    				//eta (NO format)
+	    				if(StringUtils.isNotEmpty(record.getTueta()) && record.getTueta().equals("0") && record.getTueta().length()==8 ){
+	    					record.setTueta(this.dateMgr.getDateFormatted_NO(record.getTueta(), DateTimeManager.ISO_FORMAT));
+	    				}
+	    				//
 	    				result.add(record);
 	    			}
 	    		}
@@ -241,6 +253,55 @@ public class TvinnSadDigitollAjaxController {
 		  return result;
 		  
 	  }
+	/**
+	 * fetch default values from SADMOAF
+	 * @param request
+	 * @param applicationUser
+	 * @return
+	 */
+	@RequestMapping(value = "searchDefaultValues_Digitoll.do", method = RequestMethod.GET)
+	  public @ResponseBody Set<SadmoafRecord> searchDefaultValues(HttpServletRequest request, @RequestParam String applicationUser) {
+
+		  logger.info("Inside searchDefaultValues (SADMOAF)");
+		  Set result = new HashSet();
+		  //prepare the access CGI with RPG back-end
+		  String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_DEFAULT_VALUES_URL;
+		  StringBuffer urlRequestParamsKeys = new StringBuffer();
+		  urlRequestParamsKeys.append("user=" + applicationUser);
+		  
+		  		  
+		  logger.info("URL: " + BASE_URL);
+		  logger.info("PARAMS: " + urlRequestParamsKeys);
+		  logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		  String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
+
+		  logger.info(jsonPayload);
+		  logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    	if(jsonPayload!=null){
+	    		SadmoafContainer container = this.sadmoafListService.getListContainer(jsonPayload);
+	    		if(container!=null){
+	    			for(SadmoafRecord  record : container.getList()){
+	    				logger.info("Ombud navn:" + record.getEtnar());
+	    				//
+	    				result.add(record);
+	    			}
+	    		}
+	    	}
+		  return result;
+		  
+	  }
+	/**
+	 * 
+	 * @param record
+	 */
+	private void washTranspMate(SadTurRecord record) {
+		//supported by Digitoll
+		if(record.getTutrma().equals("10") || record.getTutrma().equals("20") || record.getTutrma().equals("21") || record.getTutrma().equals("30") ||
+				record.getTutrma().equals("31") || record.getTutrma().equals("41") || record.getTutrma().equals("80") ){
+		}else {
+			record.setTutrma("");
+		}
+	}
 	
 	@Autowired
 	private UrlCgiProxyService urlCgiProxyService;
@@ -248,6 +309,8 @@ public class TvinnSadDigitollAjaxController {
 	private SadmoifListService sadmoifListService;
 	@Autowired
 	private SadmotfListService sadmotfListService;
+	@Autowired
+	private SadmoafListService sadmoafListService;
 	@Autowired
 	private SadOppdragService sadOppdragService;
 	@Autowired

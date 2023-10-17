@@ -106,6 +106,7 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 	<bean id="sadmomfListService" class="no.systema.tvinn.sad.digitollv2.service.SadmomfListServiceImpl"/>
 	<bean id="sadmohfListService" class="no.systema.tvinn.sad.digitollv2.service.SadmohfListServiceImpl"/>
 	<bean id="sadmoifListService" class="no.systema.tvinn.sad.digitollv2.service.SadmoifListServiceImpl"/>
+	<bean id="sadmoafListService" class="no.systema.tvinn.sad.digitollv2.service.SadmoafListServiceImpl"/>
 	<bean id="generalUpdateService" class="no.systema.tvinn.sad.digitollv2.service.GeneralUpdateServiceImpl"/>
 	<bean id="sadOppdragService" class="no.systema.tvinn.sad.digitollv2.service.SadOppdragServiceImpl"/>
 	<bean id="sadTurService" class="no.systema.tvinn.sad.digitollv2.service.SadTurServiceImpl"/>

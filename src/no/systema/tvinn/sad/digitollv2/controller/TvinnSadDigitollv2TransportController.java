@@ -111,7 +111,7 @@ public class TvinnSadDigitollv2TransportController {
 	private LoginValidator loginValidator = new LoginValidator();
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
-	DateTimeManager dateMgr = new DateTimeManager();
+	private DateTimeManager dateMgr = new DateTimeManager();
 	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
 	
 	
