@@ -88,6 +88,7 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 	<bean id="tvinnSadManifestChildwindowService" class="no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestChildwindowServiceImpl"/>
 	
 	
+	
 	<!-- ============================  -->
 	<!-- TROR - Oppdragsregistrering   -->
 	<!-- ============================  -->
