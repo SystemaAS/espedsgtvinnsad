@@ -703,6 +703,114 @@
 	  });
   });
 
+
+  	//TUR get std. info
+	jq(function() { 
+	    jq('#turFetchButton').click(function() {
+			
+			//==================================
+			//(1) Tur values from TDIG001R.pgm
+			//==================================
+			jq.ajax({
+		  	  type: 'GET',
+		  	  url: 'searchTur_Digitoll.do',
+		  	  data: { applicationUser : jq('#applicationUser').val(), 
+		  		  	  turNr : jq('#empro').val(), 
+		  		  	  fromDate : "20200101"}, 
+		  	  dataType: 'json',
+		  	  cache: false,
+		  	  contentType: 'application/json',
+		  	  success: function(data) {
+				//alert("Hello");
+				var len = data.length;
+				if(len>0){
+					  for ( var i = 0; i < len; i++) {
+						jq('#emavd').val(data[i].tuavd);//avd.
+						if(data[i].tusg != ''){
+							jq('#emsg').val(data[i].tusg);//signatur
+						}else{
+							jq('#emsg').val(jq('#applicationUserSign').val());//signatur from login
+						}
+						//Bruttovekt
+						jq('#emvkb').val(data[i].tutvkt);//brutto-vekt
+					
+						
+					  }
+				 }else{
+					jq('#emvkb').val("");//brutto-vekt
+						
+				 }	
+				
+				},
+			  	  error: function() {
+			  	    alert('Error loading ...');
+			  	  }
+				});	
+				//================================= 
+				//(2() default-values from SADMOAF
+				//================================= 
+				jq.ajax({
+			  	  type: 'GET',
+			  	  url: 'searchDefaultValues_Digitoll.do',
+			  	  data: { applicationUser : jq('#applicationUser').val() }, 
+	
+			  	  dataType: 'json',
+			  	  cache: false,
+			  	  contentType: 'application/json',
+			  	  success: function(data) {
+					//alert("Hello");
+					var len = data.length;
+					if(len>0){
+						for ( var i = 0; i < len; i++) {
+							//Ombud epost feedback
+							jq('#emrcem1').val(data[i].emrcem1);//email 1
+							jq('#emrcem2').val(data[i].emrcem2);//email 2
+							jq('#emrcem3').val(data[i].emrcem3);//email 3
+							//doktype (default is already N730 so ONLY if it is not empty... will then override the default)
+							if(data[i].emdkmt != ''){
+								jq('#emdkmt').val(data[i].emdkmt);
+							}
+							//container
+							if(data[i].emcn != ''){
+								jq('#emcn').val(data[i].emcn);
+							}
+							//Laste / losse /delivery 
+							jq('#emsdlt').val(data[i].emsdlt);
+							jq('#emlkl').val(data[i].emlkl);
+							jq('#emsdl').val(data[i].emsdl);
+							jq('#emsdut').val(data[i].emsdut);
+							jq('#emlku').val(data[i].emlku);
+							jq('#emsdu').val(data[i].emsdu);
+							jq('#emsddt').val(data[i].emsddt);
+							jq('#emlkd').val(data[i].emlkd);
+							jq('#emsdd').val(data[i].emsdd);
+							
+					 	}
+					}else{
+						jq('#emrcem1').val("");//email
+						jq('#emrcem2').val("");//email
+						jq('#emrcem3').val("");//email
+						//Laste / losse /delivery 
+						jq('#emsdlt').val("");
+						jq('#emlkl').val("");
+						jq('#emsdl').val("");
+						jq('#emsdut').val("");
+						jq('#emlku').val("");
+						jq('#emsdu').val("");
+						jq('#emsddt').val("");
+						jq('#emlkd').val("");
+						jq('#emsdd').val("");
+					}
+					},
+				  	  error: function() {
+				  	    alert('Error loading ...');
+				  	}
+					
+				 });
+							
+		});		
+	});
+
 //-------------------
   //Datatables jquery
   //-------------------
@@ -736,6 +844,8 @@
     jq('input.mainList_filter').on( 'keyup click', function () {
     		filterGlobal();
     });
+
+	jq('#empro').focus();
    
 	
   });

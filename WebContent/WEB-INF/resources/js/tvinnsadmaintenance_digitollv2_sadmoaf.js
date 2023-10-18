@@ -35,120 +35,20 @@
     	setBlockUI();
     });
     
-    
-    
-    
-    
   });
-  
   jq(function() {
-	  jq("#efeta").datepicker({ 
+	  	jq("#etetad").datepicker({ 
 		  dateFormat: 'ddmmy' 	  
-	  });
-	  jq("#efsjadt").datepicker({ 
+	  	});
+	 	jq("#etshed").datepicker({ 
 		  dateFormat: 'ddmmy' 	  
-	  });
-	  
-	  //custom validity
-	    jq('#efeta').focus(function() {
-	    	if(jq('#efeta').val()!=''){
-	    		refreshCustomValidity(jq('#efeta')[0]);
+	  	});
+    	jq('#etavd').focus(function() {
+			if(jq('#etavd').val()!=''){
+	    		refreshCustomValidity(jq('#etavd')[0]);
 	  		}
 	  	});
-	    jq('#efsjadt').focus(function() {
-	    	if(jq('#efsjadt').val()!=''){
-	    		refreshCustomValidity(jq('#efsjadt')[0]);
-	  		}
-	  	});
-	  
-	  
-	  //CHILD-WINDOWS
-	  //Tollsted
-	  jq('#eftsdIdLink').click(function() {
-	  	jq('#eftsdIdLink').attr('target','_blank');
-	  	window.open('tvinnsadmanifest_childwindow_tollstedcodes.do?action=doInit&type=2&ctype=silka', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
-	  });
-	  jq('#eftsdIdLink').keypress(function(e){ //extra feature for the end user
-			if(e.which == 13) {
-				jq('#eftsdIdLink').click();
-			}
-	  });
-	  
-	  //Customer
-      jq('#efkndIdLink').click(function() {
-		jq('#efkndIdLink').attr('target','_blank');
-	    window.open('tvinnsad_childwindow_customer.do?action=doFind&sonavn=' + jq('#own_efkndName').val() + '&ctype=efknd', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
-	  });
-	  jq('#efkndIdLink').keypress(function(e){ //extra feature for the end user
-		if(e.which == 13) {
-			jq('#efkndIdLink').click();
-		}
-	  });
   });
-  	//--------------------------------------------------------------------------------------
-	//Extra behavior for Customer number ( without using (choose from list) extra roundtrip)
-	//--------------------------------------------------------------------------------------
-	jq(function() { 
-	    jq('#efknd').blur(function() {
-	    	fetchCustomer();	
-		});
-	});
-	  
- 
-	jq(document).ready(function() {
-		  //in order to get the customer name and orgnr
-		  //fetchCustomer(); OBSOLETE ?
-	  });
-  
-	
-  function fetchCustomer(){
-	  var customerNr = jq.trim(jq('#efknd').val());
-		
-		if(customerNr!=""){
-  		jq.getJSON('searchCustomer_TvinnSad.do', {
-			applicationUser : jq('#applicationUser').val(),
-			customerName : "",
-			customerNumber : jq('#efknd').val(),
-			ajax : 'true'
-		}, function(data) {
-			//alert("Hello");
-			var len = data.length;
-			for ( var i = 0; i < len; i++) {
-				//html += '<option value="' + data[i].kundnr + '">' + data[i].knavn + '</option>';
-				customer = new Object();
-				customer.kundnr = data[i].kundnr;
-				customer.knavn = data[i].knavn;
-				customer.eori = data[i].eori;
-				customer.orgnr = data[i].syrg;
-				customer.adr1 = data[i].adr1;
-				customer.adr2 = data[i].adr2;
-				customer.adr3 = data[i].adr3;
-				customer.postnr = data[i].sypoge;//data[i].postnr; DK=sypoge
-				customer.kpers = data[i].kpers;
-				customer.tlf = data[i].tlf;
-				customer.syland = data[i].syland;
-			  	//put the object in map now with customerNumber as key
-				map[customer.kundnr] = customer;
-			}
-			if(len > 0){
-				jq('#efknd').val(customer.kundnr);
-				jq('#own_efkndName').val(customer.knavn);
-				jq('#efrgd').val(customer.orgnr);
-			}else{
-				//init fields
-				jq('#efknd').val("");
-				jq('#own_efkndName').val("");
-			}
-		});
-  		
-		}else{
-			jq('#efknd').val("");
-			jq('#own_efkndName').val("");
-			jq('#efrgd').val("");
-		}
-
-  }
-  
 
 //Initialize <div> here for all clazz_dialog
   jq(function() { 
@@ -163,47 +63,6 @@
 		});
 	  });
   });
-  //------------------------------------
-  //START Model dialog: "Delete record" 
-  //------------------------------------
-  //Present dialog box onClick (href in parent JSP)
-  jq(function() {
-	  jq(".removeLink").click(function() {
-		  var id = this.id;
-		  counterIndex = id.replace("removeLink","");
-		  
-		  jq('#dialogDelete'+counterIndex).dialog( "option", "title", "Slette Avd " + jq('#currentEfavd'+counterIndex).val() );
-		  //deal with buttons for this modal window
-		  jq('#dialogDelete'+counterIndex).dialog({
-			 buttons: [ 
-	            {
-				 id: "dialogSaveTU"+counterIndex,	
-				 text: "Ok",
-				 click: function(){
-					 		jq('#deleteForm'+counterIndex).submit();
-					 		jq( this ).dialog( "close" );
-					 		jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
-				 		}
-			 	 },
-	 	 		{
-			 	 id: "dialogCancelTU"+counterIndex,
-			 	 text: "Cancel", 
-				 click: function(){
-					 		//back to initial state of form elements on modal dialog
-					 		//jq("#dialogSaveSU"+counterIndex).button("option", "disabled", true);
-					 		jq( this ).dialog( "close" ); 
-				 		} 
-	 	 		 } ] 
-		  });
-		  //init values
-		  //jq("#dialogSaveSU"+counterIndex).button("option", "disabled", true);
-		  //open now
-		  jq('#dialogDelete'+counterIndex).dialog('open');
-		 
-	  });
-  });
-  
-  
 
   
 //-------------------

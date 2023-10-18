@@ -25,9 +25,12 @@ import org.springframework.web.bind.WebDataBinder;
 import no.systema.main.service.UrlCgiProxyService;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.DateTimeManager;
+import no.systema.jservices.common.values.FasteKoder;
 import no.systema.main.model.SystemaWebUser;
+import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafRecord;
+import no.systema.tvinn.sad.digitollv2.service.SadDigitollDropDownListPopulationService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoafListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
@@ -35,12 +38,20 @@ import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManif
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
 import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
 import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
+import no.systema.tvinn.sad.manifest.express.util.manager.CodeDropDownMgr;
 import no.systema.tvinn.sad.manifest.express.util.manager.ManifestDateManager;
 import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 import no.systema.tvinn.sad.mapper.url.request.UrlRequestParameterMapper;
+import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelningContainer;
+import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelningRecord;
+import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureContainer;
+import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureRecord;
+import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService;
+import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
 import no.systema.tvinn.sad.util.TvinnSadConstants;
 import no.systema.tvinn.sad.z.maintenance.main.model.MaintenanceMainListObject;
 import no.systema.tvinn.sad.z.maintenance.main.util.TvinnSadMaintenanceConstants;
+import no.systema.z.main.maintenance.service.MaintMainKofastService;
 
 /**
  * TVINN Maintenance DigitollV2 Controller SADMOAF
@@ -57,6 +68,7 @@ public class MaintSadDigitollv2SadmoafController {
 	private static final Logger logger = LoggerFactory.getLogger(MaintSadDigitollv2SadmoafController.class.getName());
 	private ModelAndView loginView = new ModelAndView("redirect:logout.do");
 	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
+	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	
 	/**
 	 * 
@@ -71,13 +83,25 @@ public class MaintSadDigitollv2SadmoafController {
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
 		logger.info("Inside doSadmoaf...");
 		Map model = new HashMap();
+		String action = request.getParameter("action");
 		if(appUser==null){
 			return this.loginView;
 		}else{
 			
 			//lists
-			//Collection list = this.populateList(appUser);
-			//model.put("list", list);
+			Collection list = this.populateList(appUser);
+			model.put("list", list);
+			if(StringUtils.isNotEmpty(action)) {
+				if(action.equals("doFind")) {
+					model.put("record", this.getRecord(appUser, action));
+				}
+			}
+			//drop downs
+			this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
+			this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
+			//this.setCodeDropDownMgr(appUser, model);
+			this.setDropDownService(model);
+			
 			successView.addObject(TvinnSadMaintenanceConstants.DOMAIN_MODEL , model);
 			
 	    	return successView;
@@ -166,52 +190,54 @@ public class MaintSadDigitollv2SadmoafController {
 		ModelAndView successView = new ModelAndView("tvinnsadmaintenance_digitollv2_sadmoaf");
 		
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
-		
-		String mode = request.getParameter("updateId");
-		if(StringUtils.isEmpty(mode)){ mode = "A"; }
+		String mode = "U";
 		
 		Map model = new HashMap();
-		boolean validRecord = true;
+		boolean validUpdate = true;
 		
 		if(appUser==null){
 			return this.loginView;
 		}else{
 			
-			if("A".equals(mode)){
-				if(this.avdExists(appUser, String.valueOf(recordToValidate.getEtavd())) ){
-				   validRecord = false;	
-				}
+			if(!this.avdExists(appUser, String.valueOf(recordToValidate.getEtavd())) ){
+				mode = "A";	
 			}
+			
+			 this.adjustFieldsForUpdate(recordToValidate);
+			 //prepare the access CGI with RPG back-end
+			 String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_DEFAULT_VALUES_URL;
+			 StringBuffer urlRequestParams = new StringBuffer();
+			 urlRequestParams.append("user=" + appUser.getUser() + "&mode=" + mode );
+			 urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate)));
+			 
+			 logger.warn("URL: " + BASE_URL);
+			 logger.warn("URL PARAMS: " + urlRequestParams);
+			
+			 /*
+			 String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+			 if(jsonPayload!=null){
 				
-			if(validRecord){	
-				 this.adjustFieldsForUpdate(recordToValidate);
-				 //prepare the access CGI with RPG back-end
-				 String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_DEFAULT_VALUES_URL;
-				 StringBuffer urlRequestParams = new StringBuffer();
-				 urlRequestParams.append("user=" + appUser.getUser() + "&mode=" + mode );
-				 urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate)));
-				 
-				 logger.warn("URL: " + BASE_URL);
-				 logger.warn("URL PARAMS: " + urlRequestParams);
-				
-				 
-				 String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
-				 if(jsonPayload!=null){
-					
-					 SadmoafContainer container = this.sadmoafListService.getListContainer(jsonPayload);
-					//----------------------------------------------------------------
-					//now filter the topic list with the search filter (if applicable)
-					//----------------------------------------------------------------
-					if(container!=null){
-						if(StringUtils.isNotEmpty(container.getErrMsg())){
-							model.put(TvinnSadMaintenanceConstants.ASPECT_ERROR_MESSAGE, container.getErrMsg());
-						}
+				 SadmoafContainer container = this.sadmoafListService.getListContainer(jsonPayload);
+				//----------------------------------------------------------------
+				//now filter the topic list with the search filter (if applicable)
+				//----------------------------------------------------------------
+				if(container!=null){
+					if(StringUtils.isNotEmpty(container.getErrMsg())){
+						model.put(TvinnSadMaintenanceConstants.ASPECT_ERROR_MESSAGE, container.getErrMsg());
 					}
-				 }
-			} 
+				}
+			 }
+			*/
 			//lists
 			Collection list = this.populateList(appUser);
 			model.put("list", list);
+			
+			//drop downs
+			this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
+			this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
+			//this.setCodeDropDownMgr(appUser, model);
+			this.setDropDownService(model);
+			
 			successView.addObject(TvinnSadMaintenanceConstants.DOMAIN_MODEL , model);
 			
 	    	return successView;
@@ -247,6 +273,43 @@ public class MaintSadDigitollv2SadmoafController {
     		Collection<SadmoafRecord> outputList = container.getList();	
 			if(outputList!=null && outputList.size()>0){
 				retval = outputList;
+			}
+    	}
+    	return retval;
+	}
+	/**
+	 * 
+	 * @param appUser
+	 * @param etavd
+	 * @return
+	 */
+	private SadmoafRecord getRecord(SystemaWebUser appUser, String etavd){
+		SadmoafRecord retval = null;
+		
+		//get BASE URL
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_DEFAULT_VALUES_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser() + "&etavd=" + etavd;
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		SadmoafContainer container = this.sadmoafListService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<SadmoafRecord> outputList = container.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(SadmoafRecord record: outputList) {
+					retval = record;
+				}
 			}
     	}
     	return retval;
@@ -315,12 +378,98 @@ public class MaintSadDigitollv2SadmoafController {
 		}*/
 	}
 	
+	private void populateAvdelningHtmlDropDownsFromJsonString(Map model, SystemaWebUser appUser, HttpSession session){
+		//fill in html lists here
+		String NCTS_IMPORT_IE = "N"; //Import
+		try{
+			String BASE_URL = TvinnSadUrlDataStore.TVINN_SAD_FETCH_AVDELNINGAR_NCTS_URL;
+			StringBuffer urlRequestParamsKeys = new StringBuffer();
+			urlRequestParamsKeys.append("user=" + appUser.getUser());
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "ie=" + NCTS_IMPORT_IE);
+			//Now build the URL and send to the back end via the drop down service
+			String url = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
+			logger.info("AVD BASE_URL:" + BASE_URL);
+			logger.info("AVD BASE_PARAMS:" + urlRequestParamsKeys.toString());
+			
+			JsonTvinnSadAvdelningContainer container = this.tvinnSadDropDownListPopulationService.getAvdelningContainer(url);
+			List<JsonTvinnSadAvdelningRecord> list = new ArrayList();
+			for(JsonTvinnSadAvdelningRecord record: container.getAvdelningar()){
+				list.add(record);
+				//logger.info("Avd-tst:" + record.getAvd() + "XX" + record.getTst());
+			}
+			model.put(TvinnSadConstants.RESOURCE_MODEL_KEY_AVD_LIST, list);
+			session.setAttribute(TvinnSadConstants.RESOURCE_MODEL_KEY_AVD_LIST_SESSION_TEST_FLAG, list);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private void populateSignatureHtmlDropDownsFromJsonString(Map model, SystemaWebUser appUser){
+		//fill in html lists here
+		String NCTS_IMPORT_IE = "N"; //NCTS import: ie=N 
+		
+		try{
+			String BASE_URL = TvinnSadUrlDataStore.TVINN_SAD_FETCH_SIGNATURE_NCTS_URL;
+			StringBuffer urlRequestParamsKeys = new StringBuffer();
+			urlRequestParamsKeys.append("user=" + appUser.getUser());
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "ie=" + NCTS_IMPORT_IE);
+			//Now build the URL and send to the back end via the drop down service
+			String url = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
+			logger.info("SIGN BASE_URL:"  + BASE_URL);
+			logger.info("SIGN BASE_PARAMS:" + urlRequestParamsKeys.toString());
+			
+			JsonTvinnSadSignatureContainer container = this.tvinnSadDropDownListPopulationService.getSignatureContainer(url);
+			List<JsonTvinnSadSignatureRecord> list = new ArrayList();
+			for(JsonTvinnSadSignatureRecord record: container.getSignaturer()){
+				list.add(record);
+				//logger.info("Sign-tst:" + record.getSign());
+			}
+			model.put(TvinnSadConstants.RESOURCE_MODEL_KEY_SIGN_LIST, list);
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}	
+	
+	private void setDropDownService(Map model) {
+		List<GenericDropDownDto> dto = this.digitollDropDownListPopulationService.getContainerSizeAndType();
+		model.put("containerSizeAndTypeDto", dto);
+		//country
+		dto = this.digitollDropDownListPopulationService.getCountryList(); model.put("countryDto", dto);
+		//mode of transport
+		dto = this.digitollDropDownListPopulationService.getModeOfTransportDto(); model.put("modeOfTransportDto", dto);
+		//means of transport
+		dto = this.digitollDropDownListPopulationService.getMeansOfTransportDto(); model.put("meansOfTransportDto", dto);
+		//type of identification
+		dto = this.digitollDropDownListPopulationService.getTypeOfIdentificationMeansOfTranportDto(); model.put("typeOfIdentificationMeansTransportDto", dto);
+		
+	}
+	
+	private void setCodeDropDownMgr(SystemaWebUser appUser, Map model){
+		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(appUser, FasteKoder.SADEFETYPE.toString(), model, urlCgiProxyService, maintMainKofastService);
+		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(appUser, FasteKoder.SADEFPR.toString(), model, urlCgiProxyService, maintMainKofastService);
+		this.codeDropDownMgr.populateCodesHtmlDropDownsFromJsonString(this.urlCgiProxyService, this.tvinnSadDropDownListPopulationService, 
+																	 model,appUser,CodeDropDownMgr.CODE_2_COUNTRY, null, null);
+	}
+	
 	//SERVICES
 	@Autowired
 	private UrlCgiProxyService urlCgiProxyService;
 
 	@Autowired
 	private SadmoafListService sadmoafListService;
+	
+	@Autowired
+	private TvinnSadDropDownListPopulationService tvinnSadDropDownListPopulationService;
+	@Autowired
+	private MaintMainKofastService maintMainKofastService;
+	@Autowired
+	private SadDigitollDropDownListPopulationService digitollDropDownListPopulationService;
+	
 
 
 }

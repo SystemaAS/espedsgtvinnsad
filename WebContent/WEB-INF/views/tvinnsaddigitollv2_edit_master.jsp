@@ -290,7 +290,9 @@
 					<tr>
 						<td class="text14">&nbsp;<span title="emavd">Avd</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emsg">Sign</span><font class="text16RedBold" >*</font></td>
-						<td class="text14">&nbsp;<span title="empro">Tur</span><font class="text16RedBold" >*</font></td>
+						<td class="text14">&nbsp;<span title="empro">Tur</span><font class="text16RedBold" >*</font>
+							
+						</td>
 						<td class="text14">&nbsp;<span title="emvkb">Bruttovekt</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emcn">Container</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emdkm">Dok.nr</span><font class="text16RedBold" >*</font></td>
@@ -341,7 +343,8 @@
 								<c:otherwise>
 									<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="empro" id="empro" size="10" maxlength="8" value="">								
 								</c:otherwise>
-							</c:choose>					
+							</c:choose>
+							<input title="Hente all tilgjengelig informasjon fra turen" class="text11" type="button" name="turFetchButton" id="turFetchButton" value='Hent'>					
 						</td>		
 							
 						<td class="text14">

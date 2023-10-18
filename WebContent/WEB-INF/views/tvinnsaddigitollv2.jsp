@@ -74,7 +74,7 @@
  		<table style="width:100%;" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
  		<tr>
  		<td>
- 		<table style="width:70%;">
+ 		<table style="width:85%;">
  	        <form name="searchForm" id="searchForm" action="tvinnsaddigitollv2.do?action=doFind" method="post" >
  	        <tr height="3"><td></td></tr>
  	        <tr>	
@@ -150,7 +150,7 @@
                 
                 <td align="left" class="inputText">
                 	<input type="checkbox" id="showErrorLayers" name="showErrorLayers" value="1">
-                	<span style="cursor:help;" title="Dette fungerer kun med maks 35 linjer i bildet..." > Vis error-flagg (M/H nivå)</span>
+                	<span style="cursor:help;font-size: 12px;" title="Vis error-flagg (M/H nivå)-Dette fungerer kun med maks 35 linjer i bildet..." >Vis M/H nivå errors</span>
                 </td>
 
 			</tr>
