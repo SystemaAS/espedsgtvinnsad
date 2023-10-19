@@ -28,10 +28,10 @@
 				<img src="resources/images/update.gif" border="0" alt="edit">
 						
 			</td>
-			<c:if test="${model.record.etavd > 0}">
+			<c:if test="${model.record.etavd > -1}">
 				<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 				<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
-					<a tabindex=-1 id="alinkMaster" style="display:block;" href="tvinnsadmaintenance_digitollv2_sadmoaf_master.do?">
+					<a tabindex=-1 id="alinkMaster" style="display:block;" href="tvinnsadmaintenance_digitollv2_sadmoaf_master.do?etavd=${model.record.etavd}">
 						<font class="tabDisabledLink">&nbsp;Master</font>
 					</a>
 				</td>
@@ -57,10 +57,10 @@
                     <th class="tableHeaderField" >&nbsp;Avd&nbsp;</th>
                     <th class="tableHeaderField" >&nbsp;Sign&nbsp;</th>
                     <th class="tableHeaderField" >&nbsp;Turnr.&nbsp;</th>
-                    <th class="tableHeaderField" >&nbsp;Orgnr.&nbsp;</th>
-                    <th class="tableHeaderField" >&nbsp;Transportmåte&nbsp;</th>
+                    <th class="tableHeaderField" >&nbsp;Transp.&nbsp;</th>
+                    <th class="tableHeaderField" >&nbsp;Ombud&nbsp;</th>
                     <th class="tableHeaderField" >&nbsp;Pass.tollsted&nbsp;</th>
-                    <th class="tableHeaderField" >&nbsp;Eksped.enhet&nbsp;</th>
+                    <th class="tableHeaderField" >&nbsp;Kjør.Typ.&nbsp;</th>
                     <th class="tableHeaderField" >&nbsp;Slett&nbsp;</th>
                 </tr>  
                 </thead> 
@@ -69,7 +69,7 @@
 	               <tr class="tableRow" height="20" >
 	              
 	               <td align="center" width="2%" class="tableCell" style="border-style:solid; border-width:0px 1px 1px 0px; border-color:#FAEBD7;" >
-	        	       	<a style="display:block;width:100%; height:100%;" id="efavd_${record.etavd}" href="tvinnsadmaintenance_digitollv2_sadmoaf.do?action=doFind&etavd=${record.etavd}">
+	        	       	<a onClick="setBlockUI(this)" style="display:block;width:100%; height:100%;" id="efavd_${record.etavd}" href="tvinnsadmaintenance_digitollv2_sadmoaf.do?action=doFind&etavd=${record.etavd}">
   							<img src="resources/images/update.gif" border="0" alt="edit">
                			</a>
 	               </td>
@@ -83,22 +83,23 @@
 	               		${record.etpro}
 	               </td>
 	               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >
-	               		${Xrecord.efrgd}
+	               		${record.etnat}
 	               </td>
 	               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >
-	               		${Xrecord.eftm}
+	               		${record.etnar}
 	               </td>
 	               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >
-	               		${Xrecord.eftsd}
+	               		${record.ettsd}
 	               </td>
 	               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >
-	               		${Xrecord.ef3039e}
+	               		${record.etktyp}
 	               </td>
 	               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >   		
 			   				
-              				<a style="display:block;" class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
+              				<a onClick="setBlockUI(this)" style="display:block;width:100%; height:100%;" id="etavdLink_${record.etavd}" href="tvinnsadmaintenance_digitollv2_sadmoaf_delete.do?etavd=${record.etavd}">
 								<img src="resources/images/delete.gif" border="0" alt="remove">
 							</a>
+							<%--
 							<div style="display: none;" class="clazz_dialog" id="dialogDelete${counter.count}" title="Dialog">
 								<form action="tvinnsadmaintenance_digitollv2_sadmoaf_delete.do" name="deleteForm${counter.count}" id="deleteForm${counter.count}" method="post">
 								 	<input type="hidden" name="currentEfavd${counter.count}" id="currentEfavd${counter.count}" value="${record.etavd}">
@@ -106,7 +107,8 @@
 								 	<p class="text14" >Er du sikker på at du vil slette Avd&nbsp;<b>${record.etavd}</b></p>
 									
 								</form>
-							</div>	
+							</div>
+							 --%>	
 	               	   </td> 
 	            </tr> 
 	            </c:forEach>

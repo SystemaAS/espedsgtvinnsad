@@ -267,9 +267,28 @@ public class TvinnSadDigitollAjaxController {
 	 */
 	@RequestMapping(value = "searchDefaultValues_Digitoll.do", method = RequestMethod.GET)
 	  public @ResponseBody Set<SadmoafRecord> searchDefaultValues(HttpServletRequest request, @RequestParam String applicationUser, @RequestParam String etavd) {
-
+		  String DEFAULT_AVD = "0";
+		  
 		  logger.info("Inside searchDefaultValues (SADMOAF)");
 		  Set result = new HashSet();
+		  //with some etavd
+		  SadmoafRecord record = this.getDefaultValues(applicationUser, etavd);
+		  if(record!=null) {
+			  result.add(record);
+		  }else {
+			  //if the avd above does not exist take the default etavd = 0
+			  record = this.getDefaultValues(applicationUser, DEFAULT_AVD);
+			  if(record!=null) {
+				  result.add(record);
+			  }
+		  }
+	    	
+		  return result;
+		  
+	  }
+	
+	private SadmoafRecord getDefaultValues(String applicationUser, String etavd) {
+		  SadmoafRecord result = null;
 		  //prepare the access CGI with RPG back-end
 		  String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_DEFAULT_VALUES_URL;
 		  StringBuffer urlRequestParamsKeys = new StringBuffer();
@@ -280,22 +299,21 @@ public class TvinnSadDigitollAjaxController {
 		  logger.info("PARAMS: " + urlRequestParamsKeys);
 		  logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
 		  String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
-
+		
 		  logger.info(jsonPayload);
 		  logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-	    	if(jsonPayload!=null){
-	    		SadmoafContainer container = this.sadmoafListService.getListContainer(jsonPayload);
-	    		if(container!=null){
-	    			for(SadmoafRecord  record : container.getList()){
-	    				logger.info("Ombud navn:" + record.getEtnar());
-	    				//
-	    				result.add(record);
-	    			}
-	    		}
-	    	}
-		  return result;
-		  
-	  }
+		  if(jsonPayload!=null){
+			SadmoafContainer container = this.sadmoafListService.getListContainer(jsonPayload);
+			if(container!=null){
+				for(SadmoafRecord  record : container.getList()){
+					logger.info("Ombud navn:" + record.getEtnar());
+					result = record;
+				}
+			}
+		  }
+	    	
+		  return result ;
+	}
 	/**
 	 * 
 	 * @param record

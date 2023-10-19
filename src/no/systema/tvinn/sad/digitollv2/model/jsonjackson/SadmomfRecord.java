@@ -7,12 +7,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 import no.systema.main.model.jsonjackson.general.JsonAbstractGrandFatherRecord;
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SadmomfRecord extends JsonAbstractGrandFatherRecord   {
 	
 	private String emst  = "";  //tegn            1    status    
@@ -120,6 +122,7 @@ public class SadmomfRecord extends JsonAbstractGrandFatherRecord   {
 	 * @return
 	 * @throws Exception
 	 */
+	@JsonIgnore
 	public List<Field> getFields() throws Exception{
 		Class cl = Class.forName(this.getClass().getCanonicalName());
 		Field[] fields = cl.getDeclaredFields();

@@ -2,8 +2,12 @@ package no.systema.tvinn.sad.z.maintenance.digitollv2.controller;
 
 import java.util.*;
 
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.slf4j.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javawebparts.core.org.apache.commons.lang.StringUtils;
 
@@ -29,7 +33,9 @@ import no.systema.jservices.common.values.FasteKoder;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafOnlyTransportRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.service.SadDigitollDropDownListPopulationService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoafListService;
@@ -97,7 +103,7 @@ public class MaintSadDigitollv2SadmoafController {
 			model.put("list", list);
 			if(StringUtils.isNotEmpty(action)) {
 				if(action.equals("doFind")) {
-					model.put("record", this.getRecord(appUser, etavd));
+					model.put("record", this.getRecord(appUser, etavd, true));
 				}
 			}
 			//drop downs
@@ -114,7 +120,6 @@ public class MaintSadDigitollv2SadmoafController {
 	    	return successView;
 		}
 	}
-	
 	
 	/**
 	 * 
@@ -183,28 +188,14 @@ public class MaintSadDigitollv2SadmoafController {
 	 * @return
 	 */
 	@RequestMapping(value="tvinnsadmaintenance_digitollv2_sadmoaf_delete.do", method={ RequestMethod.POST, RequestMethod.GET })
-	public ModelAndView doDeleteSadefdef(@ModelAttribute ("record") JsonTvinnSadManifestRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
-		ModelAndView successView = new ModelAndView("tvinnsadmaintenance_digitollv2_sadmoaf");
+	public ModelAndView doDeleteSadmoaf(@ModelAttribute ("record") SadmoafRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
+		StringBuilder redirect =  new StringBuilder();
+		redirect.append("redirect:tvinnsadmaintenance_digitollv2_sadmoaf.do");
 		
-		String efavd = null;
-		String mode = null;
-		
-		Enumeration requestParameters = request.getParameterNames();
-	    while (requestParameters.hasMoreElements()) {
-	        String element = (String) requestParameters.nextElement();
-	        String value = request.getParameter(element);
-	        if (element != null && value != null) {
-        		logger.warn("####################################################");
-    			logger.warn("param Name : " + element + " value: " + value);
-    			if(element.startsWith("currentEfavd")){
-    				efavd = value;
-    			}else if(element.startsWith("selectedStatus")){
-    				mode = value;
-    			}
-    			
-    		}
-    	}
+		String etavd = request.getParameter("etavd");
+		String mode = "D";
 		
 		Map model = new HashMap();
 		if(appUser==null){
@@ -212,14 +203,13 @@ public class MaintSadDigitollv2SadmoafController {
 		}else{
 			
 			//prepare the access CGI with RPG back-end
-			 String BASE_URL = TvinnSadManifestUrlDataStore.TVINN_SAD_UPDATE_MANIFEST_EXPRESS_SADEFDEF_URL;
+			 String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_DEFAULT_VALUES_URL;
 			 StringBuffer urlRequestParams = new StringBuffer();
-			 urlRequestParams.append("user=" + appUser.getUser() + "&mode=" + mode + "&efavd=" + efavd );
+			 urlRequestParams.append("user=" + appUser.getUser() + "&mode=" + mode + "&etavd=" + etavd );
 			 
 			 logger.warn("URL: " + BASE_URL);
 			 logger.warn("URL PARAMS: " + urlRequestParams);
 			
-			 
 			 String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
 			 if(jsonPayload!=null){
 				
@@ -230,20 +220,132 @@ public class MaintSadDigitollv2SadmoafController {
 				if(container!=null){
 					if(StringUtils.isNotEmpty(container.getErrMsg())){
 						model.put(TvinnSadMaintenanceConstants.ASPECT_ERROR_MESSAGE, container.getErrMsg());
+						redirect.append("&errorMessage=" + container.getErrMsg()); 
 					}
 				}
 			 }
 			
+			ModelAndView successView = new ModelAndView(redirect.toString());
 			
-			//lists
-			Collection list = this.populateList(appUser);
-			model.put("list", list);
+			
+	    	return successView;
+	    	
+		}
+	}
+	
+	@RequestMapping(value="tvinnsadmaintenance_digitollv2_sadmoaf_master.do", method=RequestMethod.GET)
+	public ModelAndView doSadmoafMaster(HttpSession session, HttpServletRequest request){
+		ModelAndView successView = new ModelAndView("tvinnsadmaintenance_digitollv2_sadmoaf_master");
+		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
+		logger.info("Inside doSadmoafMaster...");
+		Map model = new HashMap();
+		String action = request.getParameter("action");
+		String etavd = request.getParameter("etavd");
+		if(appUser==null){
+			return this.loginView;
+		}else{
+			
+			//drop downs
+			this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
+			this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
+			//this.setCodeDropDownMgr(appUser, model);
+			this.setDropDownServiceMaster(model);
+			//errorMessage from a redirect...
+			if(StringUtils.isNotEmpty(request.getParameter("errorMessage"))) {
+				model.put("errorMessage", request.getParameter("errorMessage"));
+			}
+			//get record
+			model.put("record", this.getRecord(appUser, etavd, true));
+			
+			
 			successView.addObject(TvinnSadMaintenanceConstants.DOMAIN_MODEL , model);
 			
 	    	return successView;
 		}
 	}
-	
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsadmaintenance_digitollv2_sadmoaf_edit_master.do", method=RequestMethod.POST)
+	public ModelAndView doEditSadmoafMaster(@ModelAttribute ("record") SadmoafRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		logger.info(String.valueOf(recordToValidate.getEtavd()));
+		String etavd = request.getParameter("etavd");
+		
+		StringBuilder redirect =  new StringBuilder();
+		redirect.append("redirect:tvinnsadmaintenance_digitollv2_sadmoaf_master.do?&etavd=" + recordToValidate.getEtavd());
+		
+		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
+		String mode = "U";
+		
+		Map model = new HashMap();
+		
+		if(appUser==null){
+			return this.loginView;
+		}else{
+
+			 //get all transport attributes since the target db-table is only one (SASDMOAF)
+			 SadmoafRecord recordSamoaf = this.getRecord(appUser, etavd, false);
+			 this.adjustRecordToValidateWithTranportAttributes(recordSamoaf, recordToValidate);
+			 logger.info(recordToValidate.toString());
+			 
+			//adjust all master records first
+			 this.adjustFieldsForUpdate(recordToValidate);			 
+			 this.adjustFieldsForUpdateMaster(recordToValidate);
+
+			 //shoot
+			 String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_DEFAULT_VALUES_URL;
+			 StringBuffer urlRequestParams = new StringBuffer();
+			 urlRequestParams.append("user=" + appUser.getUser() + "&mode=" + mode );
+			 urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate)));
+			 logger.warn("URL: " + BASE_URL);
+			 logger.warn("URL PARAMS: " + urlRequestParams);
+		
+			 String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+			 if(jsonPayload!=null){
+				
+				 SadmoafContainer container = this.sadmoafListService.getListContainer(jsonPayload);
+				//----------------------------------------------------------------
+				//now filter the topic list with the search filter (if applicable)
+				//----------------------------------------------------------------
+				if(container!=null){
+					if(StringUtils.isNotEmpty(container.getErrMsg())){
+						model.put(TvinnSadMaintenanceConstants.ASPECT_ERROR_MESSAGE, container.getErrMsg());
+						redirect.append("&errorMessage=" + container.getErrMsg()); 
+					}
+				}
+			 }
+			 
+			//redirect
+			ModelAndView successView = new ModelAndView(redirect.toString());
+			successView.addObject(TvinnSadMaintenanceConstants.DOMAIN_MODEL , model);
+			
+			
+	    	return successView;
+		}
+	}
+	/**
+	 * 
+	 * @param source
+	 * @param recordToValidate
+	 */
+	private void adjustRecordToValidateWithTranportAttributes(SadmoafRecord source, SadmoafRecord recordToValidate) {
+		SadmoafOnlyTransportRecord tmpBeanTransport = new SadmoafOnlyTransportRecord();
+		try {
+			//Now lend only those transport attributes to the recordToValidate GUI (only master attributes) to make the com
+			BeanUtils.copyProperties(tmpBeanTransport, source);
+			//This will only add the transport props and leave the master properties untouched
+			 BeanUtils.copyProperties(recordToValidate, tmpBeanTransport);
+			 
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 	/**
 	 * 
 	 * @param appUser
@@ -284,7 +386,7 @@ public class MaintSadDigitollv2SadmoafController {
 	 * @param etavd
 	 * @return
 	 */
-	private SadmoafRecord getRecord(SystemaWebUser appUser, String etavd){
+	private SadmoafRecord getRecord(SystemaWebUser appUser, String etavd, boolean adjust){
 		SadmoafRecord retval = null;
 		
 		//get BASE URL
@@ -309,7 +411,9 @@ public class MaintSadDigitollv2SadmoafController {
     		Collection<SadmoafRecord> outputList = container.getList();	
 			if(outputList!=null && outputList.size()>0){
 				for(SadmoafRecord record: outputList) {
-					this.adjustFieldsForFetch(record);
+					if(adjust) {
+						this.adjustFieldsForFetch(record);
+					}
 					retval = record;
 				}
 			}
@@ -600,6 +704,77 @@ public class MaintSadDigitollv2SadmoafController {
 				recordToValidate.setEtpnr(StringUtils.leftPad(String.valueOf(recordToValidate.getEtpnr()),4,"0"));
 			}
 		}
+		
+	}
+	
+	/**
+	 * Adjust for master fields
+	 * @param recordToValidate
+	 */
+	private void adjustFieldsForUpdateMaster(SadmoafRecord recordToValidate){
+		
+		//Sender - communication
+		if(StringUtils.isNotEmpty(recordToValidate.getOwn_emems_email())){
+			recordToValidate.setEmems(recordToValidate.getOwn_emems_email());
+			recordToValidate.setEmemst(SadDigitollConstants.API_TYPE_EMAIL);	
+		}else {
+			recordToValidate.setEmems(recordToValidate.getOwn_emems_telephone());
+			recordToValidate.setEmemst(SadDigitollConstants.API_TYPE_TELEPHONE);
+		}
+		//Receiver - communication
+		if(StringUtils.isNotEmpty(recordToValidate.getOwn_ememm_email())){
+			recordToValidate.setEmemm(recordToValidate.getOwn_ememm_email());
+			recordToValidate.setEmemmt(SadDigitollConstants.API_TYPE_EMAIL);	
+		}else {
+			recordToValidate.setEmemm(recordToValidate.getOwn_ememm_telephone());
+			recordToValidate.setEmemmt(SadDigitollConstants.API_TYPE_TELEPHONE);
+		}
+		
+		//Register date
+		if(recordToValidate.getEmdtr()!=null && recordToValidate.getEmdtr() > 0) {
+			int regDate = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(recordToValidate.getEmdtrStr(), DateTimeManager.NO_FORMAT));
+			recordToValidate.setEmdtr(regDate);
+		}else {
+			int regDate = Integer.valueOf(this.dateMgr.getCurrentDate_ISO());
+			recordToValidate.setEmdtr(regDate);
+		}
+		
+		//Sent date
+		if(recordToValidate.getEmdtin()!=null && recordToValidate.getEmdtin() > 0) {
+			int sentDate = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(String.valueOf(recordToValidate.getEmdtin()), DateTimeManager.NO_FORMAT));
+			recordToValidate.setEmdtin(sentDate);
+		}
+		//Date
+		if(recordToValidate.getEmatdd()!=null && recordToValidate.getEmatdd() > 0) {
+			int date = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(String.valueOf(recordToValidate.getEmatdd()), DateTimeManager.NO_FORMAT));
+			recordToValidate.setEmdtin(date);
+		}
+		
+		//postnr norsk alltid 4-siffror
+		if(StringUtils.isNotEmpty(recordToValidate.getEmpns())) {
+			if("NO".equals(recordToValidate.getEmlks())) {
+				recordToValidate.setEmpns(StringUtils.leftPad(String.valueOf(recordToValidate.getEmpns()),4,"0"));
+			}
+		}
+		//postnr norsk alltid 4-siffror
+		if(StringUtils.isNotEmpty(recordToValidate.getEmpnm())) {
+			if("NO".equals(recordToValidate.getEmlkm())) {
+				recordToValidate.setEmpnm(StringUtils.leftPad(String.valueOf(recordToValidate.getEmpnm()),4,"0"));
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 * @param model
+	 */
+	private void setDropDownServiceMaster(Map model) {
+		//previous docs
+		List<GenericDropDownDto> dto = this.digitollDropDownListPopulationService.getPreviousDocumentsList(); model.put("previousDocumentsDto", dto);
+		//container sizeAnd type
+		dto = this.digitollDropDownListPopulationService.getContainerSizeAndType(); model.put("containerSizeAndTypeDto", dto);
+		//country
+		dto = this.digitollDropDownListPopulationService.getCountryList(); model.put("countryDto", dto);
 		
 	}
 	

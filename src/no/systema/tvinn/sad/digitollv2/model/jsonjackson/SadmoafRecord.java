@@ -4,15 +4,19 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 import no.systema.jservices.model.dao.entities.IDao;
 import no.systema.main.model.jsonjackson.general.JsonAbstractGrandFatherRecord;
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SadmoafRecord extends JsonAbstractGrandFatherRecord  {
 	
 	private String etst =""; //       status                                   1    1     1         a  
-	private Integer etavd = 0; //       avdeling                                 2    5     4   4   0 s  
+	private Integer etavd = -1; //       avdeling                                 2    5     4   4   0 s  
 	private Integer etpro = 0; //       turnummer                                6   13     8   8   0 s  
 	private Integer etlnrt  = 0; //    løpenummer                              14   20     7   7   0 s  
 	private Integer etdtr = 0; //     registreringsdato                       21   28     8   8   0 s  
@@ -125,6 +129,18 @@ public class SadmoafRecord extends JsonAbstractGrandFatherRecord  {
 	private Integer emlnrt = 0; //     løpenummer                             961  967     7   7   0 s  
 	private Integer emlnrm = 0; //     m-lnr innen transp                     968  971     4   4   0 s  
 	private Integer emdtr = 0; //      registreringsdato                      972  979     8   8   0 s  
+	private String emdtrStr = "";
+	public String getEmdtrStr() {
+		if(this.emdtr!=null && this.emdtr > 0 ){
+			String tmp = String.valueOf(this.emdtr);
+			if (tmp.length()< 6) {
+				this.emdtrStr = "0" + tmp;
+			}else {
+				this.emdtrStr = tmp;
+			}
+		}
+		return this.emdtrStr;
+	}
 	private String emsg =""; //        signatur                               980  982     3         a  
 	private String emst2 =""; //       status om manifest                     983  983     1         a  
 	private String emst3 =""; //       status om innpass.                     984  984     1         a  
@@ -150,6 +166,9 @@ public class SadmoafRecord extends JsonAbstractGrandFatherRecord  {
 	private String empbm =""; //       postbox mottaker                      1352 1366    15         a
 	private String ememm =""; //       ep.adr/tlf mottaker                   1367 1416    50         a
 	private String ememmt =""; //      kodetype mottaker                     1417 1418     2         a
+	private String own_ememm_telephone = ""; // 
+	private String own_ememm_email = ""; // 
+	
 	private Integer emkns = 0; //      avsender                              1419 1426     8   8   0 s
 	private String emrgs =""; //       org.nr avsender                       1427 1443    17         a
 	private Integer emtpps = 0; //     type of person avs.                   1444 1444     1   1   0 s
@@ -163,6 +182,9 @@ public class SadmoafRecord extends JsonAbstractGrandFatherRecord  {
 	private String empbs =""; //       postbox avsender                      1585 1599    15         a
 	private String emems =""; //       epost/tlf avsender                    1600 1649    50         a
 	private String ememst =""; //      kodetype avsender                     1650 1651     2         a
+	private String own_emems_telephone = ""; // 
+	private String own_emems_email = ""; // 
+	
 	private String emdkm =""; //       master dokumentnr                     1652 1701    50         a
 	private String emdkmt =""; //      master dokumenttype                   1702 1705     4         a
 	private String emc1ty =""; //      cont1.sizetype                        1706 1707     2         a
@@ -193,6 +215,7 @@ public class SadmoafRecord extends JsonAbstractGrandFatherRecord  {
 	 * @return
 	 * @throws Exception
 	 */
+	@JsonIgnore
 	public List<Field> getFields() throws Exception{
 		Class cl = Class.forName(this.getClass().getCanonicalName());
 		Field[] fields = cl.getDeclaredFields();

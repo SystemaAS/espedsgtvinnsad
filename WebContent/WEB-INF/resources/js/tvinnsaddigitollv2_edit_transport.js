@@ -380,6 +380,7 @@
 							jq('#etktm').val(data[i].etktm);//Tr.midd.typ.
 							jq('#etklk').val(data[i].etklk);//Land
 							jq('#ettsd').val(data[i].ettsd);//pass.tollstedettsd
+							jq('#etsjaf').val(data[i].etsjaf);//Fører-navn
 							
 							jq('#etnar').val(data[i].etnar);//Ombud navn
 							jq('#etrgr').val(data[i].etrgr);//Ombud Orgnr
