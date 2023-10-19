@@ -109,7 +109,8 @@ public class SadTurRecord extends JsonAbstractGrandFatherRecord  {
 	private String tustn7 = ""; //      status ny 7                            637  637     1         a
 	private String tustn8 = ""; //      status ny 8                            638  638     1         a
 	private String tustn9 = ""; //      status ny 9                            639  639     1         a
-
+	//
+	private String own_ErrMsg = ""; // in order to catch the error at Container-level for Ajax call 
 	
 	/**
 	 * 

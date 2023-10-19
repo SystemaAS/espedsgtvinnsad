@@ -62,6 +62,8 @@ import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifContainer;
@@ -74,6 +76,7 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.service.ApiGenericDtoResponseService;
 import no.systema.tvinn.sad.digitollv2.service.GeneralUpdateService;
 import no.systema.tvinn.sad.digitollv2.service.SadDigitollDropDownListPopulationService;
+import no.systema.tvinn.sad.digitollv2.service.SadmoafListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmohfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
@@ -373,10 +376,8 @@ public class TvinnSadDigitollv2TransportController {
 					}
 					
 		    	}
-		    	
-		    	
-		    	
 			}
+			
 			//--------------------------------------
 			//Final successView with domain objects
 			//--------------------------------------
@@ -1413,6 +1414,8 @@ public class TvinnSadDigitollv2TransportController {
 	private SadmomfListService sadmomfListService;
 	@Autowired
 	private SadmohfListService sadmohfListService;
+	@Autowired
+	private SadmoafListService sadmoafListService;
 	
 	@Autowired
 	private GeneralUpdateService generalUpdateService;

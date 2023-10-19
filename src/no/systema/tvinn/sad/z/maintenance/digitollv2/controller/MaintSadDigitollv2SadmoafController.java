@@ -87,6 +87,7 @@ public class MaintSadDigitollv2SadmoafController {
 		logger.info("Inside doSadmoaf...");
 		Map model = new HashMap();
 		String action = request.getParameter("action");
+		String etavd = request.getParameter("etavd");
 		if(appUser==null){
 			return this.loginView;
 		}else{
@@ -96,7 +97,7 @@ public class MaintSadDigitollv2SadmoafController {
 			model.put("list", list);
 			if(StringUtils.isNotEmpty(action)) {
 				if(action.equals("doFind")) {
-					model.put("record", this.getRecord(appUser, action));
+					model.put("record", this.getRecord(appUser, etavd));
 				}
 			}
 			//drop downs
@@ -104,7 +105,10 @@ public class MaintSadDigitollv2SadmoafController {
 			this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
 			//this.setCodeDropDownMgr(appUser, model);
 			this.setDropDownService(model);
-			
+			//errorMessage from a redirect...
+			if(StringUtils.isNotEmpty(request.getParameter("errorMessage"))) {
+				model.put("errorMessage", request.getParameter("errorMessage"));
+			}
 			successView.addObject(TvinnSadMaintenanceConstants.DOMAIN_MODEL , model);
 			
 	    	return successView;
@@ -122,8 +126,9 @@ public class MaintSadDigitollv2SadmoafController {
 	 */
 	@RequestMapping(value="tvinnsadmaintenance_digitollv2_sadmoaf_edit.do", method=RequestMethod.POST)
 	public ModelAndView doEditSadefdef(@ModelAttribute ("record") SadmoafRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
-		
-		ModelAndView successView = new ModelAndView("tvinnsadmaintenance_digitollv2_sadmoaf");
+		logger.info(String.valueOf(recordToValidate.getEtavd()));
+		StringBuilder redirect =  new StringBuilder();
+		redirect.append("redirect:tvinnsadmaintenance_digitollv2_sadmoaf.do?action=doFind&etavd=" + recordToValidate.getEtavd());
 		
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
 		String mode = "U";
@@ -158,20 +163,12 @@ public class MaintSadDigitollv2SadmoafController {
 				if(container!=null){
 					if(StringUtils.isNotEmpty(container.getErrMsg())){
 						model.put(TvinnSadMaintenanceConstants.ASPECT_ERROR_MESSAGE, container.getErrMsg());
+						redirect.append("&errorMessage=" + container.getErrMsg()); 
 					}
 				}
 			 }
-			
-			//lists
-			Collection list = this.populateList(appUser);
-			model.put("list", list);
-			
-			//drop downs
-			this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
-			this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
-			//this.setCodeDropDownMgr(appUser, model);
-			this.setDropDownService(model);
-			
+			//redirect
+			ModelAndView successView = new ModelAndView(redirect.toString());
 			successView.addObject(TvinnSadMaintenanceConstants.DOMAIN_MODEL , model);
 			
 			

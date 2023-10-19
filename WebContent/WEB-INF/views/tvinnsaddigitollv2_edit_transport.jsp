@@ -289,9 +289,8 @@
 						 				<td class="text14White">
 						 						&nbsp;&nbsp;Løp.nr.&nbsp;${model.record.etlnrt}
 						 						&nbsp;&nbsp;Avd&nbsp;${model.record.etavd}
-						 						&nbsp;&nbsp;Sign&nbsp;${model.record.etsg}
 						 						&nbsp;&nbsp;Turnr&nbsp;${model.record.etpro}
-						 						  
+						 						&nbsp;&nbsp;Sign&nbsp;${model.record.etsg}
 						 						
 						 				</td>
 						 				<td class="text14White" align="right">
@@ -324,8 +323,9 @@
 									
 									<tr>
 					 					<td class="text12" title="etavd">&nbsp;Avd<font class="text16RedBold" >*</font></td>
-					 					<td class="text12" title="etsg">&nbsp;Sign<font class="text16RedBold" >*</font></td>
 					 					<td class="text12" title="etpro">&nbsp;Tur<font class="text16RedBold" >*</font></td>
+					 					<td class="text12" title="etsg">&nbsp;Sign<font class="text16RedBold" >*</font></td>
+					 					
 				 					</tr>				 				
 				 					<tr>
 					 					<td>
@@ -338,15 +338,6 @@
 											</datalist>
 					 					</td>
 					 					<td>
-					 						<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  size="6" maxlength="3" class="inputTextMediumBlueMandatoryField" list="etsg_list" id="etsg" name="etsg" value="${model.record.etsg}">
-											<datalist id="etsg_list">
-											  <option value="">-Välj-</option>
-							 				  	<c:forEach var="record" items="${model.signList}" >
-							 				  		<option value="${record.sign}"<c:if test="${model.record.etsg == record.sign}"> selected </c:if> >${record.sign}</option> 
-												</c:forEach>  
-											</datalist>	
-					 					</td>
-					 					<td>
 					 						<c:choose>
 							 				<c:when test="${model.record.etpro > 0}">
 							 					<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text12"  class="inputTextMediumBlueMandatoryField" name="etpro" id="etpro" size="9" maxlength="8" value="${model.record.etpro}">
@@ -355,6 +346,15 @@
 							 					<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"   type="text12"  class="inputTextMediumBlueMandatoryField" name="etpro" id="etpro" size="9" maxlength="8" value="">
 							 				</c:otherwise>
 							 				</c:choose>
+					 					</td>
+					 					<td>
+					 						<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  size="6" maxlength="3" class="inputTextMediumBlueMandatoryField" list="etsg_list" id="etsg" name="etsg" value="${model.record.etsg}">
+											<datalist id="etsg_list">
+											  <option value="">-Välj-</option>
+							 				  	<c:forEach var="record" items="${model.signList}" >
+							 				  		<option value="${record.sign}"<c:if test="${model.record.etsg == record.sign}"> selected </c:if> >${record.sign}</option> 
+												</c:forEach>  
+											</datalist>	
 					 					</td>
 				 					</tr>
 				 					<tr height="10"></tr>

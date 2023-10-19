@@ -235,17 +235,23 @@ public class TvinnSadDigitollAjaxController {
 	    	if(jsonPayload!=null){
 	    		SadTurContainer container = this.sadTurService.getListContainer(jsonPayload);
 	    		if(container!=null){
-	    			for(SadTurRecord  record : container.getWrktriplist()){
-	    				logger.info("Bilnr: " + record.getTubiln());
-	    				logger.info("Tollsted(a): " + record.getTuto1a());
-	    				logger.info("Fører: " + record.getTusjn1());
-	    				//transport måte
-	    				if(StringUtils.isNotEmpty(record.getTutrma())) { this.washTranspMate(record); }
-	    				//eta (NO format)
-	    				if(StringUtils.isNotEmpty(record.getTueta()) && record.getTueta().equals("0") && record.getTueta().length()==8 ){
-	    					record.setTueta(this.dateMgr.getDateFormatted_NO(record.getTueta(), DateTimeManager.ISO_FORMAT));
-	    				}
-	    				//
+	    			if(StringUtils.isEmpty(container.getErrMsg())){
+		    			for(SadTurRecord  record : container.getWrktriplist()){
+		    				logger.info("Bilnr: " + record.getTubiln());
+		    				logger.info("Tollsted(a): " + record.getTuto1a());
+		    				logger.info("Fører: " + record.getTusjn1());
+		    				//transport måte
+		    				if(StringUtils.isNotEmpty(record.getTutrma())) { this.washTranspMate(record); }
+		    				//eta (NO format)
+		    				if(StringUtils.isNotEmpty(record.getTueta()) && record.getTueta().equals("0") && record.getTueta().length()==8 ){
+		    					record.setTueta(this.dateMgr.getDateFormatted_NO(record.getTueta(), DateTimeManager.ISO_FORMAT));
+		    				}
+		    				//
+		    				result.add(record);
+		    			}
+	    			}else {
+	    				SadTurRecord record = new SadTurRecord();
+	    				record.setOwn_ErrMsg(container.getErrMsg());
 	    				result.add(record);
 	    			}
 	    		}
@@ -260,14 +266,14 @@ public class TvinnSadDigitollAjaxController {
 	 * @return
 	 */
 	@RequestMapping(value = "searchDefaultValues_Digitoll.do", method = RequestMethod.GET)
-	  public @ResponseBody Set<SadmoafRecord> searchDefaultValues(HttpServletRequest request, @RequestParam String applicationUser) {
+	  public @ResponseBody Set<SadmoafRecord> searchDefaultValues(HttpServletRequest request, @RequestParam String applicationUser, @RequestParam String etavd) {
 
 		  logger.info("Inside searchDefaultValues (SADMOAF)");
 		  Set result = new HashSet();
 		  //prepare the access CGI with RPG back-end
 		  String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_DEFAULT_VALUES_URL;
 		  StringBuffer urlRequestParamsKeys = new StringBuffer();
-		  urlRequestParamsKeys.append("user=" + applicationUser);
+		  urlRequestParamsKeys.append("user=" + applicationUser + "&etavd=" + etavd);
 		  
 		  		  
 		  logger.info("URL: " + BASE_URL);

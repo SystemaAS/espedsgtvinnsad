@@ -7,12 +7,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 import no.systema.main.model.jsonjackson.general.JsonAbstractGrandFatherRecord;
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SadmotfRecord extends JsonAbstractGrandFatherRecord  {
 	
 	private String etst = ""; // varchar(1) , 
@@ -159,6 +161,7 @@ public class SadmotfRecord extends JsonAbstractGrandFatherRecord  {
 	 * @return
 	 * @throws Exception
 	 */
+	@JsonIgnore
 	public List<Field> getFields() throws Exception{
 		Class cl = Class.forName(this.getClass().getCanonicalName());
 		Field[] fields = cl.getDeclaredFields();

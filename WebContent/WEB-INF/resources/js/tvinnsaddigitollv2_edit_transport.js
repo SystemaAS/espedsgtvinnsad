@@ -277,139 +277,164 @@
 	  });	
   });
 
-	//TUR get std. info
+
+	//==================================
+	//(1) Tur values from TDIG001R.pgm
+	//==================================
 	jq(function() { 
 	    jq('#etpro').blur(function() {
 			if(jq('#etpro').val() != ""){
-				if(jq('#etkmrk').val() == ""){
-					//==================================
-					//(1) Tur values from TDIG001R.pgm
-					//==================================
-					jq.ajax({
-				  	  type: 'GET',
-				  	  url: 'searchTur_Digitoll.do',
-				  	  data: { applicationUser : jq('#applicationUser').val(), 
-				  		  	  turNr : jq('#etpro').val(), 
-				  		  	  fromDate : "20200101"}, 
-				  	  dataType: 'json',
-				  	  cache: false,
-				  	  contentType: 'application/json',
-				  	  success: function(data) {
-						//alert("Hello");
-						var len = data.length;
-						if(len>0){
-							  for ( var i = 0; i < len; i++) {
+				
+					
+			jq.ajax({
+		  	  type: 'GET',
+		  	  url: 'searchTur_Digitoll.do',
+		  	  data: { applicationUser : jq('#applicationUser').val(), 
+		  		  	  turNr : jq('#etpro').val(), 
+		  		  	  fromDate : "20200101"}, 
+		  	  dataType: 'json',
+		  	  cache: false,
+		  	  contentType: 'application/json',
+		  	  success: function(data) {
+				//alert("Hello");
+				var len = data.length;
+				if(len>0){
+					  for ( var i = 0; i < len; i++) {
+						if(data[i].own_ErrMsg != ''){
+							jq('#etpro').addClass("isa_error");
+							initTurFields();	
+						}else{
+							jq('#etpro').removeClass("isa_error");
+							if(data[i].tuavd != '' && data[i].tuavd > 0){
 								jq('#etavd').val(data[i].tuavd);//avd.
-								if(data[i].tusg != ''){
-									jq('#etsg').val(data[i].tusg);//signatur
-								}else{
-									jq('#etsg').val(jq('#applicationUserSign').val());//signatur from login
-								}
-								jq('#etkmrk').val(data[i].tubiln);//Bilnr.
-								jq('#etsjaf').val(data[i].tusjn1);//Fører-navn
-								jq('#ettsd').val(data[i].tuto1a); //tollsted a
-								jq('#etktyp').val(data[i].tutrma); //transportmåte
-								jq('#etklk').val(data[i].tulk); //Landkode bil
-								jq('#etetad').val(data[i].tueta); //eta
-								jq('#ettsd').val(data[i].tuto1a); //pass.tollsted
-								//hårdkodad
-								jq('#etktm').val("31"); //lastebil on Tr.midd.typ.
-								
-								//CARRIER (either from HEADf (customer) or from tur-pgm)
-								if(data[i].tuknt != ''){
-									jq('#etknt').val(data[i].tuknt);//cust.nr.
-									fetchCarrier();
-								}else{
-									jq('#etnat').val(data[i].tunat);//transp. navn
-									if(data[i].tuad1t != ''){	
-										jq('#etad1t').val(data[i].tuad1t);//transp.adress
-									}else{
-										jq('#etad1t').val(data[i].tuad2t);//transp.adress
-									}
-									//Sted transp.
-									jq('#etpst').val(data[i].tuad3t);//varies depending on customer. We just print out what comes inside tuad3t...
-									//Landkode transp.
-									jq('#etlkt').val(data[i].tulk);
-									
-								}
-							  }
-						 }else{
-							jq('#etavd').val("");//avd.
-							jq('#etsg').val("");//signatur
-							jq('#etkmrk').val("");//Bilnr.
-							jq('#etsjaf').val("");//Fører-navn
-							jq('#ettsd').val(""); //tollsted a
-							jq('#etktyp').val(""); //transportmåte
-							jq('#etklk').val(""); //Landkode bil
-							jq('#etetad').val(""); //eta
-							jq('#ettsd').val(""); //pass.tollsted
-							//hårdkodad
-							jq('#etktm').val(""); //lastebil on Tr.midd.typ.
-							
-							//CARRIER (either from HEADf (customer) or from tur-pgm)
-							jq('#etknt').val("");//cust.nr.
-							jq('#etnat').val("");//transp. navn
-							jq('#etad1t').val("");//transp.adress
-							//Sted transp.
-							jq('#etpst').val("");//varies depending on customer. We just print out what comes inside tuad3t...
-							//Landkode transp.
-							jq('#etlkt').val("");
-								
-						 }	
-						
-						},
-					  	  error: function() {
-					  	    alert('Error loading ...');
-					  	  }
-						});	
-						//================================= 
-						//(2() default-values from SADMOAF
-						//================================= 
-						jq.ajax({
-					  	  type: 'GET',
-					  	  url: 'searchDefaultValues_Digitoll.do',
-					  	  data: { applicationUser : jq('#applicationUser').val() }, 
-
-					  	  dataType: 'json',
-					  	  cache: false,
-					  	  contentType: 'application/json',
-					  	  success: function(data) {
-							//alert("Hello");
-							var len = data.length;
-							if(len>0){
-								for ( var i = 0; i < len; i++) {
-									jq('#etnar').val(data[i].etnar);//Ombud navn
-									jq('#etrgr').val(data[i].etrgr);//Ombud Orgnr
-									jq('#etpsr').val(data[i].etpsr);//Ombud Sted
-									jq('#etlkr').val(data[i].etlkr);//Ombud landkod
-									jq('#etad1r').val(data[i].etad1r);//Ombud adress
-									jq('#etpnr').val(data[i].etpnr);//Ombud Postnr
-									jq('#own_etemr_email').val("todo");//Ombud epost
-									jq('#own_etemr_telephone').val("todo");//Ombud telephone
-								
-							 	}
-							}else{
-								jq('#etnar').val("");//Ombud navn
-								jq('#etrgr').val("");//Ombud Orgnr
-								jq('#etpsr').val("");//Ombud Sted
-								jq('#etlkr').val("");//Ombud landkod
-								jq('#etad1r').val("");//Ombud adress
-								jq('#etpnr').val("");//Ombud Postnr
-								jq('#own_etemr_email').val("todo");//Ombud epost
-								jq('#own_etemr_telephone').val("todo");//Ombud telephone
 							}
-							},
-						  	  error: function() {
-						  	    alert('Error loading ...');
-						  	}
-							
-						 });	
-							
-				}
+							if(data[i].tusg != ''){
+								jq('#etsg').val(data[i].tusg);//signatur
+							}else{
+								jq('#etsg').val(jq('#applicationUserSign').val());//signatur from login
+							}
+							//From Tur
+							jq('#etkmrk').val(data[i].tubiln);//Bilnr.
+							jq('#etsjaf').val(data[i].tusjn1);//Fører-navn
+							jq('#etktyp').val(data[i].tutrma); //transportmåte
+							jq('#etklk').val(data[i].tulk); //Landkode bil
+							jq('#etetad').val(data[i].tueta); //eta
+							if(data[i].tuto1a != ''){
+								jq('#ettsd').val(data[i].tuto1a); //pass.tollsted
+							}
+							//CARRIER (either from HEADf (customer) or from tur-pgm)
+							if(data[i].tuknt != ''){
+								jq('#etknt').val(data[i].tuknt);//cust.nr.
+								fetchCarrier();
+							}else{
+								jq('#etknt').val("");//cust.nr.
+								jq('#etnat').val(data[i].tunat);//transp. navn
+								if(data[i].tuad1t != ''){	
+									jq('#etad1t').val(data[i].tuad1t);//transp.adress
+								}else{
+									jq('#etad1t').val(data[i].tuad2t);//transp.adress
+								}
+								//Sted transp.
+								jq('#etpst').val(data[i].tuad3t);//varies depending on customer. We just print out what comes inside tuad3t...
+								//Landkode transp.
+								jq('#etlkt').val(data[i].tulk);
+								
+							}
+						}
+					  }
+				 }else{
+					jq('#etpro').removeClass("isa_error");
+					initTurFields();	
+				 }	
+				
+				},
+			  	  error: function() {
+			  	    alert('Error loading ...');
+			  	  }
+				});	
+
 			}
-		});		
+		});	
+		//================================= 
+		//default-values from SADMOAF
+		//================================= 
+		jq('#etavd').blur(function() {
+			if(jq('#etavd').val() != ""){
+				jq.ajax({
+			  	  type: 'GET',
+			  	  url: 'searchDefaultValues_Digitoll.do',
+			  	  data: { applicationUser : jq('#applicationUser').val(),
+						  etavd : jq('#etavd').val()}, 
+
+			  	  dataType: 'json',
+			  	  cache: false,
+			  	  contentType: 'application/json',
+			  	  success: function(data) {
+					//alert("Hello");
+					var len = data.length;
+					if(len>0){
+						for ( var i = 0; i < len; i++) {
+							//From default values: etktkd etktyp etktm etklk
+							jq('#etktkd').val(data[i].etktkd);//Mode.Tr
+							jq('#etktyp').val(data[i].etktyp);//Kjør.Typ.
+							jq('#etktm').val(data[i].etktm);//Tr.midd.typ.
+							jq('#etklk').val(data[i].etklk);//Land
+							jq('#ettsd').val(data[i].ettsd);//pass.tollstedettsd
+							
+							jq('#etnar').val(data[i].etnar);//Ombud navn
+							jq('#etrgr').val(data[i].etrgr);//Ombud Orgnr
+							jq('#etpsr').val(data[i].etpsr);//Ombud Sted
+							jq('#etlkr').val(data[i].etlkr);//Ombud landkod
+							jq('#etad1r').val(data[i].etad1r);//Ombud adress
+							jq('#etpnr').val(data[i].etpnr);//Ombud Postnr
+							//alert(data[i].etemrt + data[i].etemr);
+							if(data[i].etemrt == 'TE'){
+								jq('#own_etemr_telephone').val(data[i].etemr);//Ombud telephone
+							}else if(data[i].etemrt == 'EM'){
+								jq('#own_etemr_email').val(data[i].etemr);//Ombud epost
+							}
+					 	}
+					}else{
+						jq('#etnar').val("");//Ombud navn
+						jq('#etrgr').val("");//Ombud Orgnr
+						jq('#etpsr').val("");//Ombud Sted
+						jq('#etlkr').val("");//Ombud landkod
+						jq('#etad1r').val("");//Ombud adress
+						jq('#etpnr').val("");//Ombud Postnr
+						jq('#own_etemr_email').val("");//Ombud epost
+						jq('#own_etemr_telephone').val("");//Ombud telephone
+					}
+					},
+				  	  error: function() {
+				  	    alert('Error loading ...');
+				  	}
+					
+				 });		
+			}
+		});	
+			
 	});
 	
+function initTurFields(){
+	jq(function() { 
+		//jq('#etavd').val("");//avd.
+		jq('#etsg').val("");//signatur
+		jq('#etkmrk').val("");//Bilnr.
+		jq('#etsjaf').val("");//Fører-navn
+		jq('#etetad').val(""); //eta
+		jq('#ettsd').val(""); //pass.tollsted
+		
+		//CARRIER (either from HEADf (customer) or from tur-pgm)
+		jq('#etknt').val("");//cust.nr.
+		jq('#etnat').val("");//transp. navn
+		jq('#etad1t').val("");//transp.adress
+		//Sted transp.
+		jq('#etpst').val("");//varies depending on customer. We just print out what comes inside tuad3t...
+		//Landkode transp.
+		jq('#etlkt').val("");
+					
+	});
+}
 
   	//--------------------------------------------------------------------------------------
 	//Extra behavior for Customer number ( without using (choose from list) extra roundtrip)
