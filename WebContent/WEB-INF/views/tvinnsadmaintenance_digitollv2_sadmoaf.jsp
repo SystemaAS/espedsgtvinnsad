@@ -391,10 +391,10 @@
 			 				<tr >
 			 					
 					 			<td class="text14">
-					 				<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etetad" id="etetad" size="8" maxlength="6" value="${model.record.etetad}">
+					 				<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etetad" id="etetad" size="8" maxlength="6" value="${model.record.etetadStr}">
 					 			</td>
 								<td>
-									<input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etetat" id="etetat" size="6" maxlength="4" value="${model.record.etetat}">
+									<input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etetat" id="etetat" size="6" maxlength="4" value="${model.record.etetatStr}">
 					 				
 								</td>
 			 					
@@ -413,11 +413,11 @@
 			 				<tr >
 			 					
 					 			<td class="text14">
-					 				<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etshed" id="etshed" size="8" maxlength="6" value="${model.record.etshed}">
+					 				<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etshed" id="etshed" size="8" maxlength="6" value="${model.record.etshedStr}">
 					 				
 					 			</td>
 								<td>
-									<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etshet" id="etshet" size="6" maxlength="4" value="${model.record.etshet}">
+									<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etshet" id="etshet" size="6" maxlength="4" value="${model.record.etshetStr}">
 									
 								</td>
 			 				</tr>

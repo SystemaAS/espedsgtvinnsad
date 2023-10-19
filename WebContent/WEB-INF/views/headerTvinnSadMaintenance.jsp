@@ -118,9 +118,12 @@
 		    				>&nbsp;<spring:message code="systema.tvinn.sad.import.label"/>&nbsp;</font>
 			    			</a>
 			    			&nbsp;<font color="#FF6600"; style="font-weight: bold;">|</font>
+			    			
+			    			<%--
+			    			
 			    			<%-- -------------------------- --%>
 			    			<%-- TVINN-SAD NCTS EXPORT MENU --%>
-			    			<%-- -------------------------- --%>
+			    			<%-- -------------------------- 
 			    			<a id="alinkTopicListMenuNctsExp" tabindex=-1 href="tvinnsadmaintenance_nctsexport.do?">
 			    				&nbsp;<font
 			    				<c:choose>           
@@ -137,7 +140,7 @@
 			    			
 			    			<%-- --------------------- --%>
 			    			<%-- TVINN-SAD NCTS IMPORT MENU --%>
-			    			<%-- --------------------- --%>
+			    			<%-- --------------------- 
 			    			<a id="alinkTopicListMenuNctsImp" tabindex=-1 href="tvinnsadmaintenance_nctsimport.do?">
 			    				&nbsp;<font
 			    				<c:choose>           
@@ -151,7 +154,7 @@
 			    				>&nbsp;<spring:message code="systema.tvinn.sad.ncts.import.label"/>&nbsp;</font>
 			    			</a>
 			    			&nbsp;<font color="#FF6600"; style="font-weight: bold;">|</font>
-			    			
+			    			 --%>
 			    			
 			    			<%-- --------------------------------- --%>
 			    			<%-- TVINN-SAD EKSPRESSFORTOLLING MENU --%>

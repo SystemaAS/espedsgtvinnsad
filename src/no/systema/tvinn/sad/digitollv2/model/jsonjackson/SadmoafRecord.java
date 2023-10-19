@@ -24,9 +24,57 @@ public class SadmoafRecord extends JsonAbstractGrandFatherRecord  {
 	private String etst3 =""; //       status om innpass.                     105  105     1         a  
 	private Integer etdtin = 0; //     innsendingsdato                        106  113     8   8   0 s  
 	private Integer etetad = 0; //     estimert ank. eta                      114  121     8   8   0 s  
+	private String etetadStr = "";
+	public String getEtetadStr() {
+		if(this.etetad > 0 ){
+			String tmp = String.valueOf(this.etetad);
+			if (tmp.length()< 6) {
+				this.etetadStr = "0" + tmp;
+			}else {
+				this.etetadStr = tmp;
+			}
+		}
+		return this.etetadStr;
+	}
 	private Integer etetat = 0; //     eta tid                                122  127     6   6   0 s  
+	private String etetatStr = "";
+	public String getEtetatStr() {
+		if(this.etetat > 0 ){
+			String tmp = String.valueOf(this.etetat);
+			if (tmp.length()< 4) {
+				this.etetatStr = "0" + tmp;
+			}else {
+				this.etetatStr = tmp;
+			}
+		}
+		return this.etetatStr;
+	}
 	private Integer etshed = 0; //     sheduled avg-dt                        128  135     8   8   0 s
+	private String etshedStr = "";
+	public String getEtshedStr() {
+		if(this.etshed!=null && this.etshed > 0 ){
+			String tmp = String.valueOf(this.etshed);
+			if (tmp.length()< 6) {
+				this.etshedStr = "0" + tmp;
+			}else {
+				this.etshedStr = tmp;
+			}
+		}
+		return this.etshedStr;
+	}
 	private Integer etshet = 0; //     sheduled avg-tid                       136  141     6   6   0 s
+	private String etshetStr = "";
+	public String getEtshetStr() {
+		if(this.etshet!=null && this.etshet > 0 ){
+			String tmp = String.valueOf(this.etshet);
+			if (tmp.length()< 4) {
+				this.etshetStr = "0" + tmp;
+			}else {
+				this.etshetStr = tmp;
+			}
+		}
+		return this.etshetStr;
+	}
 	private Integer etknr = 0; //      representative                         142  149     8   8   0 s
 	private String etrgr =""; //       org.nr representativ                   150  166    17         a
 	private String etnar =""; //       navn representative                    167  196    30         a
@@ -39,6 +87,8 @@ public class SadmoafRecord extends JsonAbstractGrandFatherRecord  {
 	private String etpbr =""; //       postbox repre.                         307  321    15         a
 	private String etemr =""; //       epostadr/tlf repre.                    322  371    50         a
 	private String etemrt =""; //      kodetype repre.                        372  373     2         a
+	private String own_etemr_telephone = ""; // 
+	private String own_etemr_email = ""; // 
 	private String etkmrk =""; //      kjennemerke                            374  403    30         a
 	private String etktyp =""; //      kjøretøy type                          404  405     2         a
 	private String etktm =""; //       transportmiddel type                   406  409     4         a
@@ -60,6 +110,8 @@ public class SadmoafRecord extends JsonAbstractGrandFatherRecord  {
 	private String etpbt =""; //       postbox trans.                         697  711    15         a
 	private String etemt =""; //       epostadr/tlf trans.                    712  761    50         a
 	private String etemtt =""; //      kodetype trans.                        762  763     2         a
+	private String own_etemt_telephone = ""; // 
+	private String own_etemt_email = ""; // 
 	private String etdkm =""; //       master dokumentnr                      764  813    50         a
 	private String etdkmt =""; //      master dokumenttype                    814  817     4         a
 	private String ettsd =""; //       passeringstollsted                     818  825     8         a
