@@ -52,6 +52,8 @@ import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorC
 import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
@@ -59,6 +61,7 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.service.SadOppdragService;
+import no.systema.tvinn.sad.digitollv2.service.SadTurService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
@@ -338,6 +341,44 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			model.put("callerType", callerType);
 			model.put("tkkode", tullkontorCode);
 			model.put("tktxtn", tullkontorName);
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_tur.do", params="action=doInit",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doInitTur(@ModelAttribute ("record") SadTurRecord recordToValidate, HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doInitTur");
+		Map model = new HashMap();
+		String callerType = request.getParameter("ctype");
+		String tudt = recordToValidate.getTudt();
+		String tupro = recordToValidate.getTupro();
+		logger.info("caller:" + callerType);
+		logger.info("tudt (fromDate):" + tudt);
+		logger.info("tupro:" + tupro);
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_tur");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			  
+			List list = this.getTurList(appUser, recordToValidate);
+			model.put("turList", list);
+			model.put("callerType", callerType);
+			//model.put("tkkode", tullkontorCode);
+			//model.put("tktxtn", tullkontorName);
 			
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 			
@@ -711,6 +752,57 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	}
 	/**
 	 * 
+	 * @param appUser
+	 * @param fromDate
+	 * @param turNr
+	 * @return
+	 */
+	private List<SadTurRecord> getTurList(SystemaWebUser appUser, SadTurRecord recordToValidate){
+		  List<SadTurRecord> result = new ArrayList<SadTurRecord>();
+		
+		  logger.info("Inside getTurList");
+		  //prepare the access CGI with RPG back-end
+		  String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TUR_URL;
+		  StringBuffer urlRequestParamsKeys = new StringBuffer();
+		  urlRequestParamsKeys.append("user=" + appUser.getUser());
+		  urlRequestParamsKeys.append("&wtudt=" + recordToValidate.getTudt()); //fromDate);
+		  if(StringUtils.isNotEmpty(recordToValidate.getTupro())) {
+			  urlRequestParamsKeys.append("&wsstur=" + recordToValidate.getTupro());
+		  }
+		  		  
+		  logger.info("URL: " + BASE_URL);
+		  logger.info("PARAMS: " + urlRequestParamsKeys);
+		  logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		  String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
+
+		  logger.info(jsonPayload);
+		  logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    	if(jsonPayload!=null){
+	    		SadTurContainer container = this.sadTurService.getListContainer(jsonPayload);
+	    		if(container!=null){
+	    			if(StringUtils.isEmpty(container.getErrMsg())){
+	    				result = (List)container.getWrktriplist();
+		    			/*for(SadTurRecord  record : container.getWrktriplist()){
+		    				logger.info("Bilnr: " + record.getTubiln());
+		    				logger.info("Tollsted(a): " + record.getTuto1a());
+		    				logger.info("Fører: " + record.getTusjn1());
+		    				//transport måte
+		    				if(StringUtils.isNotEmpty(record.getTutrma())) { this.washTranspMate(record); }
+		    				//eta (NO format)
+		    				if(StringUtils.isNotEmpty(record.getTueta()) && record.getTueta().equals("0") && record.getTueta().length()==8 ){
+		    					record.setTueta(this.dateMgr.getDateFormatted_NO(record.getTueta(), DateTimeManager.ISO_FORMAT));
+		    				}
+		    				//
+		    				result.add(record);
+		    			}*/
+	    				
+	    			}
+	    		}
+	    	}
+		  return result;
+	}
+	/**
+	 * 
 	 * @param applicationUser
 	 * @param soName
 	 * @param code
@@ -758,6 +850,8 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	private SadOppdragService sadOppdragService;
 	@Autowired
 	private TvinnSadTullkontorService tvinnSadTullkontorService;
+	@Autowired
+	private SadTurService sadTurService;
 	
 	@Autowired
 	private TvinnSadTolltariffVarukodService tvinnSadTolltariffVarukodService;

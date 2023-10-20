@@ -127,6 +127,19 @@
 			jq('#ettsdIdLink').click();
 		}
     });
+
+	//--------------------
+  	//Tur - etpro
+  	//--------------------
+    jq('#etproIdLink').click(function() {
+    	jq('#etproIdLink').attr('target','_blank');
+    	window.open('tvinnsaddigitollv2_childwindow_tur.do?action=doInit&tudt=20200101' + '&tupro=' + jq('#etpro').val()  + '&ctype=etpro', "turWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+    });
+    jq('#etproIdLink').keypress(function(e){ //extra feature for the end user
+		if(e.which == 13) {
+			jq('#etproIdLink').click();
+		}
+    });
     
     
     
