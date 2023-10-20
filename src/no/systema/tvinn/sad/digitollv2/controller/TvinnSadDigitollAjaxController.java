@@ -266,13 +266,14 @@ public class TvinnSadDigitollAjaxController {
 	 * @return
 	 */
 	@RequestMapping(value = "searchDefaultValues_Digitoll.do", method = RequestMethod.GET)
-	  public @ResponseBody Set<SadmoafRecord> searchDefaultValues(HttpServletRequest request, @RequestParam String applicationUser, @RequestParam String etavd) {
+	  public @ResponseBody Set<SadmoafRecord> searchDefaultValues(HttpServletRequest request, @RequestParam String applicationUser, @RequestParam String avd) {
 		  String DEFAULT_AVD = "0";
 		  
 		  logger.info("Inside searchDefaultValues (SADMOAF)");
+		  logger.info("avd:" + avd);
 		  Set result = new HashSet();
 		  //with some etavd
-		  SadmoafRecord record = this.getDefaultValues(applicationUser, etavd);
+		  SadmoafRecord record = this.getDefaultValues(applicationUser, avd);
 		  if(record!=null) {
 			  result.add(record);
 		  }else {

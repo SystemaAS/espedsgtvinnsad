@@ -138,12 +138,9 @@
 	  	window.open('tvinnsadmanifest_childwindow_manifestinfo.do?id=' + jq('#efuuid').val() + "&raw=1", "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");
 
     });
-    
-    
-    
-    
   });
   
+
   jq(function() {
 	  //custom validity
 	    jq('#emavd').focus(function() {
@@ -177,18 +174,19 @@
 	  		}
 	  	});
 	  
-	  /*
-	  //CHILD-WINDOWS
-	  //Tollsted
-	  jq('#eftsdIdLink').click(function() {
-	  	jq('#eftsdIdLink').attr('target','_blank');
-	  	window.open('tvinnsadmanifest_childwindow_tollstedcodes.do?action=doInit&type=2&ctype=silka', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
-	  });
-	  jq('#eftsdIdLink').keypress(function(e){ //extra feature for the end user
+	  	//CHILD-WINDOWS
+	 	//--------------------
+  	  	//Tur - empro
+  		//--------------------
+	    jq('#emproIdLink').click(function() {
+	    	jq('#emproIdLink').attr('target','_blank');
+	    	window.open('tvinnsaddigitollv2_childwindow_tur.do?action=doInit&tudt=20200101' + '&tupro=' + jq('#empro').val()  + '&ctype=empro', "turWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+	    });
+	    jq('#emproIdLink').keypress(function(e){ //extra feature for the end user
 			if(e.which == 13) {
-				jq('#eftsdIdLink').click();
+				jq('#emproIdLink').click();
 			}
-	  });*/
+	    });
 	  
 	  //Avsender
       jq('#emnasIdLink').click(function() {
@@ -704,10 +702,9 @@
   });
 
 
-  	//TUR get std. info
+  	//TUR get std. info and/or default values
 	jq(function() { 
 	    jq('#turFetchButton').click(function() {
-			
 			//==================================
 			//(1) Tur values from TDIG001R.pgm
 			//==================================
@@ -725,7 +722,7 @@
 				var len = data.length;
 				if(len>0){
 					  for ( var i = 0; i < len; i++) {
-						jq('#emavd').val(data[i].tuavd);//avd.
+						
 						if(data[i].tusg != ''){
 							jq('#emsg').val(data[i].tusg);//signatur
 						}else{
@@ -740,78 +737,125 @@
 					jq('#emvkb').val("");//brutto-vekt
 						
 				 }	
+				//get defaults
+				getDefaultValuesFromSadmoaf();
 				
 				},
 			  	  error: function() {
 			  	    alert('Error loading ...');
 			  	  }
-				});	
-				//================================= 
-				//(2() default-values from SADMOAF
-				//================================= 
-				jq.ajax({
-			  	  type: 'GET',
-			  	  url: 'searchDefaultValues_Digitoll.do',
-			  	  data: { applicationUser : jq('#applicationUser').val() }, 
-	
-			  	  dataType: 'json',
-			  	  cache: false,
-			  	  contentType: 'application/json',
-			  	  success: function(data) {
-					//alert("Hello");
-					var len = data.length;
-					if(len>0){
-						for ( var i = 0; i < len; i++) {
-							//Ombud epost feedback
-							jq('#emrcem1').val(data[i].emrcem1);//email 1
-							jq('#emrcem2').val(data[i].emrcem2);//email 2
-							jq('#emrcem3').val(data[i].emrcem3);//email 3
-							//doktype (default is already N730 so ONLY if it is not empty... will then override the default)
-							if(data[i].emdkmt != ''){
-								jq('#emdkmt').val(data[i].emdkmt);
-							}
-							//container
-							if(data[i].emcn != ''){
-								jq('#emcn').val(data[i].emcn);
-							}
-							//Laste / losse /delivery 
-							jq('#emsdlt').val(data[i].emsdlt);
-							jq('#emlkl').val(data[i].emlkl);
-							jq('#emsdl').val(data[i].emsdl);
-							jq('#emsdut').val(data[i].emsdut);
-							jq('#emlku').val(data[i].emlku);
-							jq('#emsdu').val(data[i].emsdu);
-							jq('#emsddt').val(data[i].emsddt);
-							jq('#emlkd').val(data[i].emlkd);
-							jq('#emsdd').val(data[i].emsdd);
-							
-					 	}
-					}else{
-						jq('#emrcem1').val("");//email
-						jq('#emrcem2').val("");//email
-						jq('#emrcem3').val("");//email
-						//Laste / losse /delivery 
-						jq('#emsdlt').val("");
-						jq('#emlkl').val("");
-						jq('#emsdl').val("");
-						jq('#emsdut').val("");
-						jq('#emlku').val("");
-						jq('#emsdu').val("");
-						jq('#emsddt').val("");
-						jq('#emlkd').val("");
-						jq('#emsdd').val("");
-					}
-					},
-				  	  error: function() {
-				  	    alert('Error loading ...');
-				  	}
-					
-				 });
-							
+				});				
 		});		
 	});
+	
+	//================================= 
+	//default-values from SADMOAF
+	//================================= 
+	function getDefaultValuesFromSadmoaf(){
+		jq(function() {
+			
+			var _avd = "0";
+			if(jq('#emavd').val()!=''){
+				_avd = jq('#emavd').val();
+			}
+			jq.ajax({
+		  	  type: 'GET',
+		  	  url: 'searchDefaultValues_Digitoll.do',
+		  	  data: { applicationUser : jq('#applicationUser').val(),
+					  avd : _avd}, 
+		  	  dataType: 'json',
+		  	  cache: false,
+		  	  contentType: 'application/json',
+		  	  success: function(data) {
+				//alert("Hello");
+				var len = data.length;
+				if(len>0){
+					for ( var i = 0; i < len; i++) {
+						//Ombud epost feedback
+						jq('#emrcem1').val(data[i].emrcem1);//email 1
+						jq('#emrcem2').val(data[i].emrcem2);//email 2
+						jq('#emrcem3').val(data[i].emrcem3);//email 3
+						//doktype (default is already N730 so ONLY if it is not empty... will then override the default)
+						if(data[i].emdkmt != ''){
+							jq('#emdkmt').val(data[i].emdkmt);
+						}
+						//container
+						if(data[i].emcn != ''){
+							jq('#emcn').val(data[i].emcn);
+						}
+						//Laste / losse /delivery 
+						jq('#emsdlt').val(data[i].emsdlt);
+						jq('#emlkl').val(data[i].emlkl);
+						jq('#emsdl').val(data[i].emsdl);
+						jq('#emsdut').val(data[i].emsdut);
+						jq('#emlku').val(data[i].emlku);
+						jq('#emsdu').val(data[i].emsdu);
+						jq('#emsddt').val(data[i].emsddt);
+						jq('#emlkd').val(data[i].emlkd);
+						jq('#emsdd').val(data[i].emsdd);
+						
+						//Avsender
+						jq('#emnas').val(data[i].emnas);
+						jq('#emrgs').val(data[i].emrgs);
+						jq('#emtpps').val(data[i].emtpps);
+						jq('#empss').val(data[i].empss);
+						jq('#emlks').val(data[i].emlks);
+						jq('#emad1s').val(data[i].emad1s);
+						jq('#empns').val(data[i].empns);
+						if(data[i].ememst == 'TE'){
+							jq('#own_emems_telephone').val(data[i].emems);//telephone
+						}else if(data[i].ememst == 'EM'){
+							jq('#own_emems_email').val(data[i].emems);//email
+						}else{
+							jq('#own_emems_telephone').val("");
+							jq('#own_emems_email').val("");
+						}
+						//Mottaker
+						jq('#emnam').val(data[i].emnam);
+						jq('#emrgm').val(data[i].emrgm);
+						jq('#emtppm').val(data[i].emtppm);
+						jq('#empsm').val(data[i].empsm);
+						jq('#emlkm').val(data[i].emlkm);
+						jq('#emad1m').val(data[i].emad1m);
+						jq('#empnm').val(data[i].empnm);
+						if(data[i].ememmt == 'TE'){
+							jq('#own_ememm_telephone').val(data[i].ememm);//telephone
+						}else if(data[i].ememmt == 'EM'){
+							jq('#own_ememm_email').val(data[i].ememm);//email
+						}else{
+							jq('#own_ememm_telephone').val("");
+							jq('#own_ememm_email').val("");
+						}
+				 	}
+				}else{
+					jq('#emrcem1').val("");//email
+					jq('#emrcem2').val("");//email
+					jq('#emrcem3').val("");//email
+					//Laste / losse /delivery 
+					jq('#emsdlt').val("");
+					jq('#emlkl').val("");
+					jq('#emsdl').val("");
+					jq('#emsdut').val("");
+					jq('#emlku').val("");
+					jq('#emsdu').val("");
+					jq('#emsddt').val("");
+					jq('#emlkd').val("");
+					jq('#emsdd').val("");
+				}
+				},
+			  	  error: function() {
+			  	    alert('Error loading ...');
+			  	}
+				
+			 });
+		 });
+	}
 
-//-------------------
+
+
+
+
+  //-------------------
   //Datatables jquery
   //-------------------
   //private function

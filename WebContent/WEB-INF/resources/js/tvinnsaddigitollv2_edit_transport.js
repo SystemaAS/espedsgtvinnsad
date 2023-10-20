@@ -298,86 +298,94 @@
 	    jq('#etpro').blur(function() {
 			if(jq('#etpro').val() != ""){
 				
-					
-			jq.ajax({
-		  	  type: 'GET',
-		  	  url: 'searchTur_Digitoll.do',
-		  	  data: { applicationUser : jq('#applicationUser').val(), 
-		  		  	  turNr : jq('#etpro').val(), 
-		  		  	  fromDate : "20200101"}, 
-		  	  dataType: 'json',
-		  	  cache: false,
-		  	  contentType: 'application/json',
-		  	  success: function(data) {
-				//alert("Hello");
-				var len = data.length;
-				if(len>0){
-					  for ( var i = 0; i < len; i++) {
-						if(data[i].own_ErrMsg != ''){
-							jq('#etpro').addClass("isa_error");
-							initTurFields();	
-						}else{
-							jq('#etpro').removeClass("isa_error");
-							if(data[i].tuavd != '' && data[i].tuavd > 0){
-								jq('#etavd').val(data[i].tuavd);//avd.
-							}
-							if(data[i].tusg != ''){
-								jq('#etsg').val(data[i].tusg);//signatur
+				jq.ajax({
+			  	  type: 'GET',
+			  	  url: 'searchTur_Digitoll.do',
+			  	  data: { applicationUser : jq('#applicationUser').val(), 
+			  		  	  turNr : jq('#etpro').val(), 
+			  		  	  fromDate : "20200101"}, 
+			  	  dataType: 'json',
+			  	  cache: false,
+			  	  contentType: 'application/json',
+			  	  success: function(data) {
+					//alert("Hello");
+					var len = data.length;
+					if(len>0){
+						  for ( var i = 0; i < len; i++) {
+							if(data[i].own_ErrMsg != ''){
+								jq('#etpro').addClass("isa_error");
+								initTurFields();	
 							}else{
-								jq('#etsg').val(jq('#applicationUserSign').val());//signatur from login
-							}
-							//From Tur
-							jq('#etkmrk').val(data[i].tubiln);//Bilnr.
-							jq('#etsjaf').val(data[i].tusjn1);//Fører-navn
-							jq('#etktyp').val(data[i].tutrma); //transportmåte
-							jq('#etklk').val(data[i].tulk); //Landkode bil
-							jq('#etetad').val(data[i].tueta); //eta
-							if(data[i].tuto1a != ''){
-								jq('#ettsd').val(data[i].tuto1a); //pass.tollsted
-							}
-							//CARRIER (either from HEADf (customer) or from tur-pgm)
-							if(data[i].tuknt != ''){
-								jq('#etknt').val(data[i].tuknt);//cust.nr.
-								fetchCarrier();
-							}else{
-								jq('#etknt').val("");//cust.nr.
-								jq('#etnat').val(data[i].tunat);//transp. navn
-								if(data[i].tuad1t != ''){	
-									jq('#etad1t').val(data[i].tuad1t);//transp.adress
-								}else{
-									jq('#etad1t').val(data[i].tuad2t);//transp.adress
-								}
-								//Sted transp.
-								jq('#etpst').val(data[i].tuad3t);//varies depending on customer. We just print out what comes inside tuad3t...
-								//Landkode transp.
-								jq('#etlkt').val(data[i].tulk);
+								jq('#etpro').removeClass("isa_error");
 								
+								if(data[i].tusg != ''){
+									jq('#etsg').val(data[i].tusg);//signatur
+								}else{
+									jq('#etsg').val(jq('#applicationUserSign').val());//signatur from login
+								}
+								//From Tur
+								jq('#etkmrk').val(data[i].tubiln);//Bilnr.
+								jq('#etsjaf').val(data[i].tusjn1);//Fører-navn
+								jq('#etktyp').val(data[i].tutrma); //transportmåte
+								jq('#etklk').val(data[i].tulk); //Landkode bil
+								jq('#etetad').val(data[i].tueta); //eta
+								if(data[i].tuto1a != ''){
+									jq('#ettsd').val(data[i].tuto1a); //pass.tollsted
+								}
+								//CARRIER (either from HEADf (customer) or from tur-pgm)
+								if(data[i].tuknt != ''){
+									jq('#etknt').val(data[i].tuknt);//cust.nr.
+									fetchCarrier();
+								}else{
+									jq('#etknt').val("");//cust.nr.
+									jq('#etnat').val(data[i].tunat);//transp. navn
+									if(data[i].tuad1t != ''){	
+										jq('#etad1t').val(data[i].tuad1t);//transp.adress
+									}else{
+										jq('#etad1t').val(data[i].tuad2t);//transp.adress
+									}
+									//Sted transp.
+									jq('#etpst').val(data[i].tuad3t);//varies depending on customer. We just print out what comes inside tuad3t...
+									//Landkode transp.
+									jq('#etlkt').val(data[i].tulk);
+									
+								}
 							}
-						}
-					  }
-				 }else{
-					jq('#etpro').removeClass("isa_error");
-					initTurFields();	
-				 }	
+						  }
+					 }else{
+						jq('#etpro').removeClass("isa_error");
+						initTurFields();	
+					 }	
+					 //get defaults
+					 getDefaultValuesFromSadmoaf();
 				
-				},
-			  	  error: function() {
-			  	    alert('Error loading ...');
-			  	  }
-				});	
+					},
+				  	  error: function() {
+				  	    alert('Error loading ...');
+				  	  }
+					});	
 
-			}
+				}
 		});	
-		//================================= 
-		//default-values from SADMOAF
-		//================================= 
-		jq('#etavd').blur(function() {
-			if(jq('#etavd').val() != ""){
+		
+			
+	});
+	
+	//================================= 
+	//default-values from SADMOAF
+	//================================= 
+  	function getDefaultValuesFromSadmoaf(){
+		jq(function() {
+			
+				var _avd = "0";
+				if(jq('#etavd').val()!=''){
+					_avd = jq('#etavd').val();
+				}
 				jq.ajax({
 			  	  type: 'GET',
 			  	  url: 'searchDefaultValues_Digitoll.do',
 			  	  data: { applicationUser : jq('#applicationUser').val(),
-						  etavd : jq('#etavd').val()}, 
+						  avd : _avd}, 
 
 			  	  dataType: 'json',
 			  	  cache: false,
@@ -421,15 +429,12 @@
 					},
 				  	  error: function() {
 				  	    alert('Error loading ...');
-				  	}
-					
-				 });		
-			}
-		});	
-			
-	});
+				  	}			
+			});	
+		});
+	}
 	
-function initTurFields(){
+ function initTurFields(){
 	jq(function() { 
 		//jq('#etavd').val("");//avd.
 		jq('#etsg').val("");//signatur

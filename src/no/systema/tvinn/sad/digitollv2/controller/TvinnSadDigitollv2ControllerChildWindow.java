@@ -365,6 +365,9 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		logger.info("caller:" + callerType);
 		logger.info("tudt (fromDate):" + tudt);
 		logger.info("tupro:" + tupro);
+		//
+		model.put("tudt", tudt);
+		model.put("tupro", tupro);
 		
 		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_tur");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);

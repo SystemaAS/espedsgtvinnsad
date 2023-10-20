@@ -9,6 +9,11 @@
 	specified in servlet.xml as static <mvc:resources mapping="/resources/**" location="WEB-INF/resources/" order="1"/> --%>
 	<SCRIPT type="text/javascript" src="resources/js/tvinnsaddigitollv2_childwindow_tur.js?ver=${user.versionEspedsg}"></SCRIPT>
 	
+	<style type = "text/css">
+	.ui-datepicker { font-size:9pt;}
+	</style>
+	
+	
 	<table width="90%" height="500px" class="tableBorderWithRoundCorners3D_RoundOnlyOnBottom" cellspacing="0" border="0" cellpadding="0">
 		<tr>
 			<td colspan="3" class="text14Bold">&nbsp;&nbsp;&nbsp;
@@ -21,27 +26,27 @@
 		  		<%-- this container table is necessary in order to separate the datatables element and the frame above, otherwise
 			 	the cosmetic frame will not follow the whole datatable grid including the search field... --%>
 				<table id="containerdatatableTable" cellspacing="2" align="left" width="100%" >
-					<%--
+					
 					<tr>
 					<td>
 						<table>
-						<form name="tvinnsadImportTullkontorForm" id="tvinnsadImportTullkontorForm" action="tvinnsadnctsexport_edit_childwindow_tullkontor.do?action=doInit" method="post">
+						<form name="tvinnsadImportTullkontorForm" id="tvinnsadImportTullkontorForm" action="tvinnsaddigitollv2_childwindow_tur.do?action=doInit" method="post">
 							<input type="hidden" name="ctype" id="ctype" value="${model.callerType}">
 						<tr>
-							<td class="text14">&nbsp;Kode</td>
-							<td class="text14">&nbsp;<input type="text" class="inputText" name="tkkode" id="tkkode" size="10" maxlength="10" value="${model.tkkode}"></td>
+							<td class="text14">&nbsp;Tur</td>
+							<td class="text14">&nbsp;<input type="text" class="inputText" onKeyPress="return numberKey(event)" name="tupro" id="tupro" size="10" maxlength="8" value="${model.tupro}"></td>
 						
-							<td class="text14">&nbsp;Tollsted</td>
-							<td class="text14">&nbsp;<input type="text" class="inputText" name="tktxtn" id="tktxtn" size="30" maxlength="50" value="${model.tktxtn}"></td>
+							<td class="text14">&nbsp;Dato fra</td>
+							<td class="text14">&nbsp;<input type="text" class="inputText" onKeyPress="return numberKey(event)" name="tudt" id="tudt" size="10" maxlength="8" value="${model.tudt}"></td>
 							
 							<td class="text14">&nbsp;</td>
-	           				<td align="right">&nbsp;<input class="inputFormSubmit" type="submit" name="submit" value='<spring:message code="search.label"/>'>
+	           				<td align="right">&nbsp;<input class="inputFormSubmit" onClick="setBlockUI(this)" type="submit" name="submit" value='<spring:message code="search.label"/>'>
 		           		</tr>
 		           		
 		           		</table>
 					</td>
 					</tr>
-					--%> 
+					-
 													           		
 	           		<tr height="10"><td></td></tr>
 					
@@ -53,6 +58,7 @@
 						<tr class="tableHeaderField" >
 							<th class="text14" title="tupro">&nbsp;Turnr&nbsp;</th>
 							<th class="text14" title="tuavd">&nbsp;Avd&nbsp;</th>
+							<th class="text14" title="tuavd">&nbsp;Dato fra&nbsp;</th>
 							<th class="text14" title="tubiln">&nbsp;Kjøretøy kjennemerke&nbsp;</th>
 		                    <th class="text14" title="tulk">&nbsp;Land&nbsp;</th>
 		                    <th class="text14" title="tusjn1">&nbsp;Fører-navn&nbsp;</th>
@@ -73,6 +79,7 @@
 		               			<img title="select" valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;${record.tupro}
 			               </td>
 		               	   <td class="text14">&nbsp;${record.tuavd}</td>
+		               	   <td class="text14">&nbsp;${record.tudt}</td>
 		               	   <td class="text14">&nbsp;${record.tubiln}</td>
 		               	   <td class="text14">&nbsp;${record.tulk}</td>
 		               	   <td class="text14">&nbsp;${record.tusjn1}</td>

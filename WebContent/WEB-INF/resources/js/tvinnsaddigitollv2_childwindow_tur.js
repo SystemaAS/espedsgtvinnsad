@@ -31,6 +31,11 @@
 	});
 	
 	
+	jq(function() {
+	  jq("#tudt").datepicker({ 
+		  dateFormat: 'yymmdd' 	  
+	  });
+	});
 	
 	//======================
     //Datatables jquery 
@@ -46,10 +51,17 @@
   	  //-----------------------
       //table [General Code List]
   	  //-----------------------
-    	  jq('#turList').dataTable( {
-    		  "dom": '<"top"fli>rt<"bottom"p><"clear">',
-    		  "lengthMenu": [ 75, 100, 200, 500]
-    	  });
+	  jq('#turList').dataTable( {
+		  "dom": '<"top"fli>rt<"bottom"p><"clear">',               
+		  "searchHighlight": true,
+		  "tabIndex": -1,
+	  	  "order": [[ 0, "asc" ]], //Tur
+		  "lengthMenu": [ 50, 100, 200, 500],
+		  "fnDrawCallback": function( oSettings ) {
+	    	jq('.dataTables_filter input').addClass("inputText12LightYellow");
+			
+	    	}
+	  });
       //event on input field for search
       jq('input.turList_filter').on( 'keyup click', function () {
       		filterTur();
