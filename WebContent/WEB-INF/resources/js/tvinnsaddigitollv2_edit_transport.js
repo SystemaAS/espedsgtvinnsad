@@ -140,7 +140,11 @@
 			jq('#etproIdLink').click();
 		}
     });
-    
+    //Fejk for looking
+	jq('#etproIdLinkFejk').click(function() {
+    	jq('#etproIdLinkFejk').attr('target','_blank');
+    	window.open('tvinnsaddigitollv2_childwindow_tur.do?action=doInit&tudt=20200101' + '&tupro=' + jq('#etpro').val()  + '&ctype=etproFEJK', "turWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+    });
     
     
   });
@@ -290,9 +294,71 @@
 	  });	
   });
 
+	//================================= 
+	//Default-values from SADMOAF
+	//================================= 
+	jq(function() {
+		jq('#etavd').blur(function() {
+			
+			if(jq('#etavd').val() != ""){
+				var	_avd = jq('#etavd').val();
+				
+				jq.ajax({
+			  	  type: 'GET',
+			  	  url: 'searchDefaultValuesTransport_Digitoll.do',
+			  	  data: { applicationUser : jq('#applicationUser').val(),
+						  avd : _avd}, 
+			  	  dataType: 'json',
+			  	  cache: false,
+			  	  contentType: 'application/json',
+			  	  success: function(data) {
+					//alert("Hello");
+					var len = data.length;
+					if(len>0){
+						for ( var i = 0; i < len; i++) {
+							//From default values: etktkd etktyp etktm etklk
+							jq('#etktkd').val(data[i].etktkd);//Mode.Tr
+							jq('#etktyp').val(data[i].etktyp);//Kjør.Typ.
+							jq('#etktm').val(data[i].etktm);//Tr.midd.typ.
+							jq('#etklk').val(data[i].etklk);//Land
+							jq('#ettsd').val(data[i].ettsd);//pass.tollstedettsd
+							jq('#etsjaf').val(data[i].etsjaf);//Fører-navn
+							
+							jq('#etnar').val(data[i].etnar);//Ombud navn
+							jq('#etrgr').val(data[i].etrgr);//Ombud Orgnr
+							jq('#etpsr').val(data[i].etpsr);//Ombud Sted
+							jq('#etlkr').val(data[i].etlkr);//Ombud landkod
+							jq('#etad1r').val(data[i].etad1r);//Ombud adress
+							jq('#etpnr').val(data[i].etpnr);//Ombud Postnr
+							//alert(data[i].etemrt + data[i].etemr);
+							if(data[i].etemrt == 'TE'){
+								jq('#own_etemr_telephone').val(data[i].etemr);//Ombud telephone
+							}else if(data[i].etemrt == 'EM'){
+								jq('#own_etemr_email').val(data[i].etemr);//Ombud epost
+							}
+					 	}
+					}else{
+						jq('#etnar').val("");//Ombud navn
+						jq('#etrgr').val("");//Ombud Orgnr
+						jq('#etpsr').val("");//Ombud Sted
+						jq('#etlkr').val("");//Ombud landkod
+						jq('#etad1r').val("");//Ombud adress
+						jq('#etpnr').val("");//Ombud Postnr
+						jq('#own_etemr_email').val("");//Ombud epost
+						jq('#own_etemr_telephone').val("");//Ombud telephone
+					}
+					},
+				  	  error: function() {
+				  	    alert('Error loading ...');
+				  	}			
+				});	
+			}
+		});
+	});
+
 
 	//==================================
-	//(1) Tur values from TDIG001R.pgm
+	//Tur values from TDIG001R.pgm
 	//==================================
 	jq(function() { 
 	    jq('#etpro').blur(function() {
@@ -356,9 +422,7 @@
 						jq('#etpro').removeClass("isa_error");
 						initTurFields();	
 					 }	
-					 //get defaults
-					 getDefaultValuesFromSadmoaf();
-				
+					 
 					},
 				  	  error: function() {
 				  	    alert('Error loading ...');
@@ -370,69 +434,6 @@
 		
 			
 	});
-	
-	//================================= 
-	//default-values from SADMOAF
-	//================================= 
-  	function getDefaultValuesFromSadmoaf(){
-		jq(function() {
-			
-				var _avd = "0";
-				if(jq('#etavd').val()!=''){
-					_avd = jq('#etavd').val();
-				}
-				jq.ajax({
-			  	  type: 'GET',
-			  	  url: 'searchDefaultValues_Digitoll.do',
-			  	  data: { applicationUser : jq('#applicationUser').val(),
-						  avd : _avd}, 
-
-			  	  dataType: 'json',
-			  	  cache: false,
-			  	  contentType: 'application/json',
-			  	  success: function(data) {
-					//alert("Hello");
-					var len = data.length;
-					if(len>0){
-						for ( var i = 0; i < len; i++) {
-							//From default values: etktkd etktyp etktm etklk
-							jq('#etktkd').val(data[i].etktkd);//Mode.Tr
-							jq('#etktyp').val(data[i].etktyp);//Kjør.Typ.
-							jq('#etktm').val(data[i].etktm);//Tr.midd.typ.
-							jq('#etklk').val(data[i].etklk);//Land
-							jq('#ettsd').val(data[i].ettsd);//pass.tollstedettsd
-							jq('#etsjaf').val(data[i].etsjaf);//Fører-navn
-							
-							jq('#etnar').val(data[i].etnar);//Ombud navn
-							jq('#etrgr').val(data[i].etrgr);//Ombud Orgnr
-							jq('#etpsr').val(data[i].etpsr);//Ombud Sted
-							jq('#etlkr').val(data[i].etlkr);//Ombud landkod
-							jq('#etad1r').val(data[i].etad1r);//Ombud adress
-							jq('#etpnr').val(data[i].etpnr);//Ombud Postnr
-							//alert(data[i].etemrt + data[i].etemr);
-							if(data[i].etemrt == 'TE'){
-								jq('#own_etemr_telephone').val(data[i].etemr);//Ombud telephone
-							}else if(data[i].etemrt == 'EM'){
-								jq('#own_etemr_email').val(data[i].etemr);//Ombud epost
-							}
-					 	}
-					}else{
-						jq('#etnar').val("");//Ombud navn
-						jq('#etrgr').val("");//Ombud Orgnr
-						jq('#etpsr').val("");//Ombud Sted
-						jq('#etlkr').val("");//Ombud landkod
-						jq('#etad1r').val("");//Ombud adress
-						jq('#etpnr').val("");//Ombud Postnr
-						jq('#own_etemr_email').val("");//Ombud epost
-						jq('#own_etemr_telephone').val("");//Ombud telephone
-					}
-					},
-				  	  error: function() {
-				  	    alert('Error loading ...');
-				  	}			
-			});	
-		});
-	}
 	
  function initTurFields(){
 	jq(function() { 

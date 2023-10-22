@@ -299,7 +299,9 @@ public class TvinnSadDigitollv2TransportController {
 			    //check for ERRORS
 				if(bindingResult.hasErrors()){
 		    		logger.error("[ERROR Validation] record does not validate)");
-		    		this.setRecordAspects(appUser, recordToValidate);
+		    		if(recordToValidate.getEtlnrt()>0) {
+		    			this.setRecordAspects(appUser, recordToValidate);
+		    		}
 		    		this.adjustOmbudCommunication(recordToValidate);
 					//now we have all aspects in this transport
 					model.put("record", recordToValidate);

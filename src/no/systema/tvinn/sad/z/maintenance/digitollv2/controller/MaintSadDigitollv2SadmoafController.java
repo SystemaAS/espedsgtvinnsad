@@ -3,11 +3,8 @@ package no.systema.tvinn.sad.z.maintenance.digitollv2.controller;
 import java.util.*;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.slf4j.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javawebparts.core.org.apache.commons.lang.StringUtils;
 
@@ -18,12 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.bind.WebDataBinder;
 
 //application imports
 import no.systema.main.service.UrlCgiProxyService;
@@ -35,20 +28,11 @@ import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafOnlyTransportRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafRecord;
-import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfRecord;
-import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.service.SadDigitollDropDownListPopulationService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoafListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
 import no.systema.tvinn.sad.digitollv2.util.SadDigitollConstants;
-import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesContainer;
-import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestCargoLinesRecord;
-import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
-import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
-import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
 import no.systema.tvinn.sad.manifest.express.util.manager.CodeDropDownMgr;
-import no.systema.tvinn.sad.manifest.express.util.manager.ManifestDateManager;
-import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 import no.systema.tvinn.sad.mapper.url.request.UrlRequestParameterMapper;
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelningContainer;
 import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelningRecord;
@@ -57,7 +41,6 @@ import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignature
 import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService;
 import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
 import no.systema.tvinn.sad.util.TvinnSadConstants;
-import no.systema.tvinn.sad.z.maintenance.main.model.MaintenanceMainListObject;
 import no.systema.tvinn.sad.z.maintenance.main.util.TvinnSadMaintenanceConstants;
 import no.systema.z.main.maintenance.service.MaintMainKofastService;
 
@@ -339,7 +322,7 @@ public class MaintSadDigitollv2SadmoafController {
 			//Now lend only those transport attributes to the recordToValidate GUI (only master attributes) to make the com
 			BeanUtils.copyProperties(tmpBeanTransport, source);
 			//This will only add the transport props and leave the master properties untouched
-			 BeanUtils.copyProperties(recordToValidate, tmpBeanTransport);
+			BeanUtils.copyProperties(recordToValidate, tmpBeanTransport);
 			 
 		}catch(Exception e) {
 			e.printStackTrace();

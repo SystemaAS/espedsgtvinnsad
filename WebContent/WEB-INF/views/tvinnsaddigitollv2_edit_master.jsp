@@ -289,12 +289,14 @@
 				<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">					
 					<tr>
 						<td class="text14">&nbsp;<span title="emavd">Avd</span><font class="text16RedBold" >*</font></td>
-						<td class="text14">&nbsp;<span title="emsg">Sign</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="empro">Tur</span><font class="text16RedBold" >*</font>
+							
 							<a tabindex="-1" id="emproIdLink">
 								<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 							</a>
+							
 						</td>
+						<td class="text14">&nbsp;<span title="emsg">Sign</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emvkb">Bruttovekt</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emcn">Container</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emdkm">Dok.nr</span><font class="text16RedBold" >*</font></td>
@@ -312,6 +314,7 @@
 					<tr>
 						
 						<td>
+							<%--
 							<c:choose>
 								<c:when test="${model.record.emavd > 0}">
 									<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  size="7" maxlength="4" class="inputTextMediumBlueMandatoryField" list="emavd_list" id="emavd" name="emavd" value="${model.record.emavd}">	
@@ -326,18 +329,11 @@
 			 				  		<option value="${record.avd}"<c:if test="${model.record.emavd == record.avd}"> selected </c:if> >${record.avd}</option> 
 								</c:forEach>  
 							</datalist>
+							 --%>
+							<input readonly size="7" maxlength="4" class="inputTextReadOnly" id="emavd" name="emavd" value="${model.record.emavd}">							 
 	 					</td>
-	 					<td>
-	 						<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  size="6" maxlength="3" class="inputTextMediumBlueMandatoryField" list="emsg_list" id="emsg" name="emsg" value="${model.record.emsg}">
-							<datalist id="emsg_list">
-							  <option value="">-Välj-</option>
-			 				  	<c:forEach var="record" items="${model.signList}" >
-			 				  		<option value="${record.sign}"<c:if test="${model.record.emsg == record.sign}"> selected </c:if> >${record.sign}</option> 
-								</c:forEach>  
-							</datalist>	
-	 					</td>
-						
-						<td class="text14">
+	 					<td class="text14">
+							<%--
 							<c:choose>
 								<c:when test="${model.record.empro > 0}">
 									<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="empro" id="empro" size="10" maxlength="8" value="${model.record.empro}">	
@@ -346,9 +342,20 @@
 									<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="empro" id="empro" size="10" maxlength="8" value="">								
 								</c:otherwise>
 							</c:choose>
-							<input title="Hente all tilgjengelig informasjon fra turen" class="text11" type="button" name="turFetchButton" id="turFetchButton" value='Hent'>					
+							<input title="Hente all tilgjengelig informasjon fra turen" class="text11" type="button" name="turFetchButton" id="turFetchButton" value='Hent'>
+							 --%>
+							<input  readonly type="text" class="inputTextReadOnly" name="empro" id="empro" size="10" maxlength="8" value="${model.record.empro}"> 					
 						</td>		
-							
+						<td>
+	 						<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  size="6" maxlength="3" class="inputTextMediumBlueMandatoryField" list="emsg_list" id="emsg" name="emsg" value="${model.record.emsg}">
+							<datalist id="emsg_list">
+							  <option value="">-Välj-</option>
+			 				  	<c:forEach var="record" items="${model.signList}" >
+			 				  		<option value="${record.sign}"<c:if test="${model.record.emsg == record.sign}"> selected </c:if> >${record.sign}</option> 
+								</c:forEach>  
+							</datalist>	
+	 					</td>
+					
 						<td class="text14">
 							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="emvkb" id="emvkb" size="11" maxlength="9" value="${model.record.emvkb}">									
 						</td>

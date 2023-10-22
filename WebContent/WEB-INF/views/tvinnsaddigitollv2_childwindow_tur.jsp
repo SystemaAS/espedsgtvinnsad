@@ -62,6 +62,13 @@
 							<th class="text14" title="tubiln">&nbsp;Kjøretøy kjennemerke&nbsp;</th>
 		                    <th class="text14" title="tulk">&nbsp;Land&nbsp;</th>
 		                    <th class="text14" title="tusjn1">&nbsp;Fører-navn&nbsp;</th>
+		                    
+		                    <th class="text14" title="tutvkt">&nbsp;Vekt&nbsp;</th>
+		                    <th class="text14" title="tusdf">&nbsp;Las.sted&nbsp;</th>
+		                    <th class="text14" title="tusdt">&nbsp;Loss.sted&nbsp;</th>
+		                    <th class="text14" title="tueta">&nbsp;ETA&nbsp;</th>
+		                    
+		                    
 		                </tr> 
 		                </thead>
 		                
@@ -83,6 +90,12 @@
 		               	   <td class="text14">&nbsp;${record.tubiln}</td>
 		               	   <td class="text14">&nbsp;${record.tulk}</td>
 		               	   <td class="text14">&nbsp;${record.tusjn1}</td>
+		               	   
+		               	   <td class="text14">&nbsp;${record.tutvkt}</td>
+		               	   <td class="text14">&nbsp;${record.tusdf}</td>
+		               	   <td class="text14">&nbsp;${record.tusdt}</td>
+		               	   <td class="text14">&nbsp;${record.tueta}</td>
+		               	   
 			            </tr> 
 			            </c:forEach>
 			            </tbody>

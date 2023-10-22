@@ -2,7 +2,7 @@ package no.systema.tvinn.sad.digitollv2.controller;
 
 import java.util.*;
 
- 
+import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
@@ -66,6 +66,8 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifContainer;
@@ -79,6 +81,7 @@ import no.systema.tvinn.sad.digitollv2.service.ApiGenericDtoResponseService;
 import no.systema.tvinn.sad.digitollv2.service.GeneralUpdateService;
 import no.systema.tvinn.sad.digitollv2.service.SadDigitollDropDownListPopulationService;
 import no.systema.tvinn.sad.digitollv2.service.SadTurService;
+import no.systema.tvinn.sad.digitollv2.service.SadmoafListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmohfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
@@ -253,11 +256,17 @@ public class TvinnSadDigitollv2MasterController {
 			}
 			if("doCreate".equals(action)) {
 				this.setTransportDto(appUser.getUser(), recordToValidate);
-				//some default values
-				recordToValidate.setEmdkmt("N730");
-				recordToValidate.setEmrgt(recordToValidate.getTransportDto().getEtrgt());
-				//get std values from tur
-				this.setTurStdValues(appUser, recordToValidate);
+				//(1)get default values from sadmoaf
+				this.setDefaultValues(appUser, recordToValidate);
+				//(2)get default values from tur to complete
+				this.setDefaultValuesTur(appUser, recordToValidate);
+				//(3)extra
+				if(StringUtils.isEmpty(recordToValidate.getEmrgt())){
+					if(recordToValidate.getTransportDto()!=null) {
+						//logger.debug("setting carrier orgnr from TransportDto:" + recordToValidate.getTransportDto().getEtrgt());
+						recordToValidate.setEmrgt(recordToValidate.getTransportDto().getEtrgt());
+					}
+				}
 				//
 				model.put("record", recordToValidate);
 			}
@@ -546,8 +555,12 @@ public class TvinnSadDigitollv2MasterController {
     		e.printStackTrace();
     	}
 	}
-	
-	private void setTurStdValues(SystemaWebUser appUser, SadmomfRecord recordToValidate) {
+	/**
+	 * 
+	 * @param appUser
+	 * @param recordToValidate
+	 */
+	private void setDefaultValuesTur(SystemaWebUser appUser, SadmomfRecord recordToValidate) {
 		  logger.info("Inside setTurStdValues");
 		  Set result = new HashSet();
 		  //prepare the access CGI with RPG back-end
@@ -569,60 +582,169 @@ public class TvinnSadDigitollv2MasterController {
 	    		SadTurContainer container = this.sadTurService.getListContainer(jsonPayload);
 	    		if(container!=null){
 	    			for(SadTurRecord  record : container.getWrktriplist()){
-	    				logger.info("Lastested: " + record.getTusdf());
-	    				recordToValidate.setEmsdlt(record.getTusdf());
-	    				logger.info("Lossested: " + record.getTusdt());
-	    				recordToValidate.setEmsdut(record.getTusdt());
-	    				if(StringUtils.isNotEmpty(record.getTutvkt())) {
-	    					logger.info("Vekt: " + record.getTutvkt());
-	    					recordToValidate.setEmvkb(Integer.valueOf(record.getTutvkt()));
-	    				}
-	    				
+	    				//change only given attributes...
+	    				this.overrideDefaultValuesWithTurValue(record, recordToValidate);
 	    			}
 	    		}
 	    	}
 		  
-	  }
+	}
+	/**
+	 * 
+	 * @param record
+	 * @param recordToValidate
+	 */
+	private void overrideDefaultValuesWithTurValue(SadTurRecord record, SadmomfRecord recordToValidate) {
+		if(StringUtils.isNotEmpty(record.getTutvkt())) {
+			logger.info("Brutto-Vekt: " + record.getTutvkt());
+			recordToValidate.setEmvkb(Integer.valueOf(record.getTutvkt()));
+		}
+		if(StringUtils.isNotEmpty(record.getTusdf())) {
+			logger.info("Lastested: " + record.getTusdf());
+			recordToValidate.setEmsdlt(record.getTusdf());
+			recordToValidate.setEmlkl(record.getTulk());
+		}
+		if(StringUtils.isNotEmpty(record.getTusdt())) {
+			logger.info("Lossested: " + record.getTusdt());
+			recordToValidate.setEmsdut(record.getTusdt());
+		}
+		//Container code 1
+		if(StringUtils.isNotEmpty(record.getTuckd1())) {
+			logger.info("Container code 1: " + record.getTuckd1());
+			recordToValidate.setEmc1id(record.getTuckd1());	
+		}
+		//Container code 2
+		if(StringUtils.isNotEmpty(record.getTuckd2())) {
+			logger.info("Container code 2: " + record.getTuckd2());
+			recordToValidate.setEmc2id(record.getTuckd2());
+			
+		}
+		
+	}
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param etavd
+	 * @param recordToValidate
+	 */
+	private void setDefaultValues(SystemaWebUser appUser, SadmomfRecord recordToValidate) {
+		Integer ZERO_AVD = 0;
+		 Integer originalEmlnrt = recordToValidate.getEmlnrt();
+		 String originalSign = recordToValidate.getEmsg();
+		 Integer originalAvd = recordToValidate.getEmavd();
+		 Integer originalPro = recordToValidate.getEmpro();
+		 try {
+			  	List<SadmoafRecord> tmpList = this.getListWithDefaultValues(appUser, recordToValidate.getEmavd());
+				if(tmpList!=null && tmpList.size()>0) {
+					for(SadmoafRecord  record : tmpList){
+						logger.info("Ombud navn:" + record.getEtnar());
+						logger.info("Mottaker master navn:" + record.getEmnam());
+						//hand over
+						//Now lend only those transport attributes to the recordToValidate GUI (only master attributes) to make the com
+						BeanUtils.copyProperties(recordToValidate, record);
+					}
+				}else {
+					//check with the lowest-hierarchy default value set (avd = 0)
+					tmpList = this.getListWithDefaultValues(appUser, ZERO_AVD);
+					if(tmpList!=null && tmpList.size()>0) {
+						for(SadmoafRecord  record : tmpList){
+							logger.info("Ombud navn:" + record.getEtnar());
+							logger.info("Mottaker master navn:" + record.getEmnam());
+							//hand over
+							//Now lend only those transport attributes to the recordToValidate GUI (only master attributes) to make the com
+							BeanUtils.copyProperties(recordToValidate, record);
+						}
+					}
+				}
+				//restore original ids
+				recordToValidate.setEmlnrt(originalEmlnrt);
+				recordToValidate.setEmavd(originalAvd);
+				recordToValidate.setEmpro(originalPro);
+				recordToValidate.setEmsg(originalSign);
+				
+		 }catch(Exception e) {
+			 logger.error(e.toString());
+		 }
+	    	
+	}
+	/**
+	 * 
+	 * @param appUser
+	 * @param avd
+	 * @return
+	 */
+	private List getListWithDefaultValues(SystemaWebUser appUser, Integer avd) {
+		List result = new ArrayList();
+		try {
+			  String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_DEFAULT_VALUES_URL;
+			  StringBuffer urlRequestParamsKeys = new StringBuffer();
+			  urlRequestParamsKeys.append("user=" + appUser.getUser() + "&etavd=" + avd);
+			    
+			  logger.info("URL: " + BASE_URL);
+			  logger.info("PARAMS: " + urlRequestParamsKeys);
+			  logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+			  String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
+			
+			  logger.info(jsonPayload);
+			  logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+			  if(jsonPayload!=null){
+				SadmoafContainer container = this.sadmoafListService.getListContainer(jsonPayload);
+				if(container!=null){
+					if(container.getList()!=null && container.getList().size()>0) {
+						result = (List)container.getList();
+					}
+				}
+			  }
+		 }catch(Exception e) {
+			 logger.error(e.toString());
+		 }
+		
+		return result;
+	}
 	/**
 	 * 
 	 * @param applicationUser
 	 * @param masterRecord
 	 */
 	private void setTransportDto(String applicationUser, SadmomfRecord masterRecord) {
-		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TRANSPORT_URL;
-		//add URL-parameters
-		String urlRequestParams = "user=" + applicationUser + "&etlnrt=" + masterRecord.getEmlnrt();
-		
-		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-    	logger.warn("URL: " + BASE_URL);
-    	logger.warn("URL PARAMS: " + urlRequestParams);
-    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
-
-    	//Debug --> 
-    	logger.debug(jsonPayload);
-    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-    	if(jsonPayload!=null){
-    		
-    		SadmotfContainer jsonContainer = this.sadmotfListService.getListContainer(jsonPayload);
-    		//----------------------------------------------------------------
-			//now filter the topic list with the search filter (if applicable)
-			//----------------------------------------------------------------
-    		List<SadmotfRecord> outputList = (List)jsonContainer.getList();
-			if(outputList!=null){
-				for(SadmotfRecord record: outputList){
-					//ETA datein NO-format
-					if(record.getEtetad()!=null && record.getEtetad() > 0) {
-						String tmpEtetatd = String.valueOf(record.getEtetad());
-						if (org.apache.commons.lang3.StringUtils.isNotEmpty(tmpEtetatd) && tmpEtetatd.length()==8) {
-							int isoEtetad = Integer.parseInt(this.dateMgr.getDateFormatted_NO(tmpEtetatd, DateTimeManager.ISO_FORMAT));
-							record.setEtetad(isoEtetad);
-						}
-					}
-					masterRecord.setTransportDto(record);
-				}
-			}
+		try {
+			final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TRANSPORT_URL;
+			//add URL-parameters
+			String urlRequestParams = "user=" + applicationUser + "&etlnrt=" + masterRecord.getEmlnrt();
 			
-    	}	
+			logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+	    	logger.warn("URL: " + BASE_URL);
+	    	logger.warn("URL PARAMS: " + urlRequestParams);
+	    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+	
+	    	//Debug --> 
+	    	logger.debug(jsonPayload);
+	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    	if(jsonPayload!=null){
+	    		
+	    		SadmotfContainer jsonContainer = this.sadmotfListService.getListContainer(jsonPayload);
+	    		//----------------------------------------------------------------
+				//now filter the topic list with the search filter (if applicable)
+				//----------------------------------------------------------------
+	    		List<SadmotfRecord> outputList = (List)jsonContainer.getList();
+				if(outputList!=null){
+					for(SadmotfRecord record: outputList){
+						//ETA datein NO-format
+						if(record.getEtetad()!=null && record.getEtetad() > 0) {
+							String tmpEtetatd = String.valueOf(record.getEtetad());
+							if (org.apache.commons.lang3.StringUtils.isNotEmpty(tmpEtetatd) && tmpEtetatd.length()==8) {
+								int isoEtetad = Integer.parseInt(this.dateMgr.getDateFormatted_NO(tmpEtetatd, DateTimeManager.ISO_FORMAT));
+								record.setEtetad(isoEtetad);
+							}
+						}
+						masterRecord.setTransportDto(record);
+					}
+				}
+				
+	    	}
+		}catch(Exception e) {
+			 logger.error(e.toString());
+		}
 	}
 	
 	
@@ -1098,6 +1220,9 @@ public class TvinnSadDigitollv2MasterController {
 	private SadmomfListService sadmomfListService;
 	@Autowired
 	private SadmohfListService sadmohfListService;
+	@Autowired
+	private SadmoafListService sadmoafListService;
+	
 	@Autowired
 	private GeneralUpdateService generalUpdateService;
 	@Autowired

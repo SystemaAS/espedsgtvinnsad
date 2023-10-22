@@ -139,10 +139,10 @@
 						<td>
 							<c:choose>
 								<c:when test="${model.record.emavd > 0}">
-									<input     size="7" maxlength="4" class="inputTextMediumBlue" list="emavd_list" id="emavd" name="emavd" value="${model.record.emavd}">	
+									<input  onKeyPress="return numberKey(event)" size="7" maxlength="4" class="inputTextMediumBlue" list="emavd_list" id="emavd" name="emavd" value="${model.record.emavd}">	
 								</c:when>
 								<c:otherwise>
-									<input     size="7" maxlength="4" class="inputTextMediumBlue" list="emavd_list" id="emavd" name="emavd" value="">								
+									<input  onKeyPress="return numberKey(event)" size="7" maxlength="4" class="inputTextMediumBlue" list="emavd_list" id="emavd" name="emavd" value="">								
 								</c:otherwise>
 							</c:choose>	
 	 						<datalist id="emavd_list">

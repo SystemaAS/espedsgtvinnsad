@@ -290,7 +290,11 @@
 						 						&nbsp;&nbsp;Løp.nr.&nbsp;${model.record.etlnrt}
 						 						&nbsp;&nbsp;Avd&nbsp;${model.record.etavd}
 						 						&nbsp;&nbsp;Turnr&nbsp;${model.record.etpro}
-						 						&nbsp;&nbsp;Sign&nbsp;${model.record.etsg}
+						 						<a tabindex="-1" id="etproIdLinkFejk">
+													<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
+												</a>
+												
+						 						&nbsp;&nbsp;&nbsp;&nbsp;Sign&nbsp;${model.record.etsg}
 						 						
 						 				</td>
 						 				<td class="text14White" align="right">

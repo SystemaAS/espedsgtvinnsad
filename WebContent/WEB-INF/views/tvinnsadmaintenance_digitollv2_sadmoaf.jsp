@@ -210,7 +210,7 @@
 				 						<input readonly size="7" maxlength="4" class="inputTextReadOnly" id="etavd" name="etavd" value="${model.record.etavd}">
 									</c:when>
 									<c:otherwise>
-										<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  size="7" maxlength="4" class="inputTextMediumBlueMandatoryField" list="etavd_list" id="etavd" name="etavd" value="${model.record.etavd}">
+										<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" size="7" maxlength="4" class="inputTextMediumBlueMandatoryField" list="etavd_list" id="etavd" name="etavd" value="${model.record.etavd}">
 										<datalist id="etavd_list">
 										  <option value="">-Välj-</option>
 						 				  	<c:forEach var="record" items="${model.avdList}" >
@@ -232,10 +232,10 @@
 			 					<td>
 			 						<c:choose>
 					 				<c:when test="${model.record.etpro > 0}">
-					 					<input type="text12"  class="inputTextMediumBlue" name="etpro" id="etpro" size="9" maxlength="8" value="${model.record.etpro}">
+					 					<input type="text12"  class="inputTextMediumBlue" onKeyPress="return numberKey(event)" name="etpro" id="etpro" size="9" maxlength="8" value="${model.record.etpro}">
 					 				</c:when>	
 					 				<c:otherwise>
-					 					<input type="text12"  class="inputTextMediumBlue" name="etpro" id="etpro" size="9" maxlength="8" value="">
+					 					<input type="text12"  class="inputTextMediumBlue" onKeyPress="return numberKey(event)" name="etpro" id="etpro" size="9" maxlength="8" value="">
 					 				</c:otherwise>
 					 				</c:choose>
 			 					</td>

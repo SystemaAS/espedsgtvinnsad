@@ -265,7 +265,7 @@ public class TvinnSadDigitollAjaxController {
 	 * @param applicationUser
 	 * @return
 	 */
-	@RequestMapping(value = "searchDefaultValues_Digitoll.do", method = RequestMethod.GET)
+	@RequestMapping(value = "searchDefaultValuesTransport_Digitoll.do", method = RequestMethod.GET)
 	  public @ResponseBody Set<SadmoafRecord> searchDefaultValues(HttpServletRequest request, @RequestParam String applicationUser, @RequestParam String avd) {
 		  String DEFAULT_AVD = "0";
 		  
