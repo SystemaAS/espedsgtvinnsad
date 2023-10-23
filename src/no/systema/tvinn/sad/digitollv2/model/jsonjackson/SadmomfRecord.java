@@ -108,6 +108,7 @@ public class SadmomfRecord extends JsonAbstractGrandFatherRecord   {
 	private String emsddt = "";   //tegn           30  place of deliv text  
 	private String emerr = "";  //tegn           50    feilmelding ved snd  
 	
+	private String own_emdkmUnique = "";  
 	private Boolean own_okToDelete = true;
 	private Boolean own_invalidHousesExist = false;
 	

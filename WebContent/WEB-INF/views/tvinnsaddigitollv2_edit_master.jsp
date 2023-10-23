@@ -367,7 +367,8 @@
 							</select>									
 						</td>
 						<td class="text14">
-							<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="emdkm" id="emdkm" size="25" maxlength="50" value="${model.record.emdkm}">	
+							<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="emdkm" id="emdkm" size="25" maxlength="40" value="${model.record.emdkm}">
+							<input title="unik nøkkel" readonly type="text" class="inputTextReadOnly" style="color:yellow;" name="own_emdkmUnique" id="own_emdkmUnique" size="8" maxlength="6" value="${model.record.own_emdkmUnique}">	
 							
 						</td>
 						<td class="text14">

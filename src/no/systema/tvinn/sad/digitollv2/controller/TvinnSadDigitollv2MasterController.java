@@ -1085,6 +1085,17 @@ public class TvinnSadDigitollv2MasterController {
 				recordToValidate.setEmpnm(StringUtils.leftPad(String.valueOf(recordToValidate.getEmpnm()),4,"0"));
 			}
 		}
+		//doknr
+		if(StringUtils.isNotEmpty(recordToValidate.getEmdkm())) {
+			int index = recordToValidate.getEmdkm().lastIndexOf("-");
+			if (index > -1) {
+				String uniqueKey = recordToValidate.getEmdkm().substring(index);
+				recordToValidate.setEmdkm(recordToValidate.getEmdkm().substring(0, index));
+				recordToValidate.setOwn_emdkmUnique(uniqueKey);
+			}
+		}
+		
+		
 	}
 	/**
 	 * 
@@ -1140,6 +1151,23 @@ public class TvinnSadDigitollv2MasterController {
 			if("NO".equals(recordToValidate.getEmlkm())) {
 				recordToValidate.setEmpnm(StringUtils.leftPad(String.valueOf(recordToValidate.getEmpnm()),4,"0"));
 			}
+		}
+		//doknr
+		if(StringUtils.isNotEmpty(recordToValidate.getEmdkm())) {
+			String HYPHEN = "-";
+			if(recordToValidate.getEmlnrm()>0) {
+				//only if this exists from before
+				if(StringUtils.isNotEmpty(recordToValidate.getOwn_emdkmUnique())){
+					String documentId = recordToValidate.getEmdkm() + recordToValidate.getOwn_emdkmUnique();
+					recordToValidate.setEmdkm(documentId);
+				}
+			}else {
+				
+				int randomValue = new Random().nextInt(100000);
+				String documentId = recordToValidate.getEmdkm() + HYPHEN + StringUtils.leftPad(String.valueOf(randomValue),6,"0");
+				recordToValidate.setEmdkm(documentId);
+			}
+			
 		}
 	}
 	

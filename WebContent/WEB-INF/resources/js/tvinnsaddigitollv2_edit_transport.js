@@ -317,13 +317,24 @@
 					if(len>0){
 						for ( var i = 0; i < len; i++) {
 							//From default values: etktkd etktyp etktm etklk
-							jq('#etktkd').val(data[i].etktkd);//Mode.Tr
-							jq('#etktyp').val(data[i].etktyp);//Kjør.Typ.
-							jq('#etktm').val(data[i].etktm);//Tr.midd.typ.
-							jq('#etklk').val(data[i].etklk);//Land
-							jq('#ettsd').val(data[i].ettsd);//pass.tollstedettsd
-							jq('#etsjaf').val(data[i].etsjaf);//Fører-navn
-							
+							if(data[i].etktkd != ''){
+								jq('#etktkd').val(data[i].etktkd);//Mode.Tr
+							}
+							if(data[i].etktyp != ''){
+								jq('#etktyp').val(data[i].etktyp);//Kjør.Typ.
+							}
+							if(data[i].etktm != ''){
+								jq('#etktm').val(data[i].etktm);//Tr.midd.typ.
+							}
+							if(data[i].etklk != ''){
+								jq('#etklk').val(data[i].etklk);//Land
+							}
+							if(data[i].ettsd != ''){
+								jq('#ettsd').val(data[i].ettsd);//pass.tollstedettsd
+							}
+							if(data[i].etsjaf != ''){
+								jq('#etsjaf').val(data[i].etsjaf);//Fører-navn
+							}
 							jq('#etnar').val(data[i].etnar);//Ombud navn
 							jq('#etrgr').val(data[i].etrgr);//Ombud Orgnr
 							jq('#etpsr').val(data[i].etpsr);//Ombud Sted
@@ -391,10 +402,18 @@
 								}
 								//From Tur
 								jq('#etkmrk').val(data[i].tubiln);//Bilnr.
-								jq('#etsjaf').val(data[i].tusjn1);//Fører-navn
-								jq('#etktyp').val(data[i].tutrma); //transportmåte
-								jq('#etklk').val(data[i].tulk); //Landkode bil
-								jq('#etetad').val(data[i].tueta); //eta
+								if(data[i].tusjn1 != ''){
+									jq('#etsjaf').val(data[i].tusjn1);//Fører-navn
+								}
+								if(data[i].tutrma != ''){
+									jq('#etktyp').val(data[i].tutrma); //transportmåte
+								}
+								if(data[i].tulk != ''){
+									jq('#etklk').val(data[i].tulk); //Landkode bil
+								}
+								if(data[i].tueta != ''){
+									jq('#etetad').val(data[i].tueta); //eta
+								}
 								if(data[i].tuto1a != ''){
 									jq('#ettsd').val(data[i].tuto1a); //pass.tollsted
 								}
