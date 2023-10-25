@@ -35,7 +35,7 @@
 			</td>
 			 
 			<td width="80%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
-				<a tabindex=-1 href="renderLocalPdf.do?fn=DigitollV2-Doc.pdf" target="_blank">
+				<a tabindex=-1 href="renderLocalPdf.do?fn=Digitoll-MOv2.pdf" target="_blank">
  					<img title="Documentation..." style="vertical-align:top;" width="22px" height="22px" src="resources/images/pdf2.png" border="0" alt="pdf">
  				</a>
 				&nbsp;&nbsp;
