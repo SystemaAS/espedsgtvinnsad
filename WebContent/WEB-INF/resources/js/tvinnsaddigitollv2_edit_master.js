@@ -180,7 +180,7 @@
   		//--------------------
 	    jq('#emproIdLink').click(function() {
 	    	jq('#emproIdLink').attr('target','_blank');
-	    	window.open('tvinnsaddigitollv2_childwindow_tur.do?action=doInit&tudt=20200101' + '&tupro=' + jq('#empro').val()  + '&ctype=emproFEJK', "turWin", "top=300px,left=500px,height=600px,width=1000px,scrollbars=no,status=no,location=no");
+	    	window.open('tvinnsaddigitollv2_childwindow_tur.do?action=doInit&tudt=20200101' + '&tupro=' + jq('#empro').val()  + '&ctype=empro', "turWin", "top=300px,left=500px,height=600px,width=1000px,scrollbars=no,status=no,location=no");
 	    });
 	    jq('#emproIdLink').keypress(function(e){ //extra feature for the end user
 			if(e.which == 13) {
