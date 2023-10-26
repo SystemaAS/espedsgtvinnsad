@@ -1,4 +1,4 @@
-  //this variable is a global jQuery var instead of using "$" all the time. Very handy
+id="alinkTransport"  //this variable is a global jQuery var instead of using "$" all the time. Very handy
   var jq = jQuery.noConflict();
   var counterIndex = 0;
   var BLOCKUI_OVERLAY_MESSAGE_DEFAULT = "Please wait...";
@@ -15,12 +15,15 @@
     jq('#alinkItems').click(function() { 
     	setBlockUI();
     });
-    
-
-    //General Header Menus
-    jq('#alinkTopicListMenuImp').click(function() { 
+	jq('#alinkTransportList').click(function() { 
     	setBlockUI();
     });
+    jq('.clazz_gotoHouse').click(function() { 
+    	setBlockUI();
+    });
+
+    //General Header Menus
+    
     jq('#alinkTopicListMenuExp').click(function() { 
     	setBlockUI();
     });

@@ -109,14 +109,14 @@
 			</tr>
  	        <tr>
 				<td align="left" >&nbsp;
-           			<%--<select class="selectMediumBlueE2" name="avd" id="avd">
+           			<select class="selectMediumBlueE2" name="avd" id="avd">
 	            		<option value="">-velg-</option>
 	 				  	<c:forEach var="record" items="${model.avdList}" >
                         	 	<option value="${record.avd}"<c:if test="${searchFilterSadDigitollTransportList.avd == record.avd}"> selected </c:if> >${record.avd}</option>                       	 	
 						</c:forEach> 
 					</select>
-					 --%>
 					 
+					<%--
 					<input size="8" maxlength="4" class="selectMediumBlueE2" list="avd_list" id="avd" name="avd" value="${searchFilterSadDigitollTransportList.avd}">
 					<datalist id="avd_list">
 					  <option value="">-Välj-</option>
@@ -124,17 +124,16 @@
 	 				  		<option value="${record.avd}"<c:if test="${searchFilterSadDigitollTransportList.avd == record.avd}"> selected </c:if> >${record.avd}</option> 
 						</c:forEach>  
 					</datalist>
-					
+					--%>
 					
 				</td>
 				<td align="left" >
-           			<input size="8" maxlength="4" class="selectMediumBlueE2" list="sign_list" id="sign" name="sign" value="${searchFilterSadDigitollTransportList.sign}">
-					<datalist id="sign_list">
+					<select class="selectMediumBlueE2" name="sign" id="sign">
 					  <option value="">-Välj-</option>
 	 				  	<c:forEach var="record" items="${model.signList}" >
 	 				  		<option value="${record.sign}"<c:if test="${searchFilterSadDigitollTransportList.sign == record.sign}"> selected </c:if> >${record.sign}</option> 
 						</c:forEach>  
-					</datalist>
+					</select>
 				</td>
 				<td align="left" ><input type="text" class="inputText" name="turnr" id="turnr" size="10" maxlength="8" value="${searchFilterSadDigitollTransportList.turnr}">&nbsp;</td>
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="etaDatum" id="etaDatum" size="6" maxlength="6" value="${searchFilterSadDigitollTransportList.etaDatum}">&nbsp;</td> 

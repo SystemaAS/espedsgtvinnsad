@@ -67,26 +67,47 @@
 				 			<span title="Sist godkjente MRN" class="inputTextReadOnly text11" style="vertical-align:super;">MRN:&nbsp;${model.record.etmid_own}</span>
 				 			&nbsp;&nbsp;
 			 			</c:if>
+			 			
 						<a style="vertical-align:super;" title="Kodeverk toll.no" target="_blank" href="https://toll.github.io/api/mo-kodeverk.html">
 							<font title="Kodeverk toll.no" class="inputFormSubmit text10 isa_warning"><b>Kodeverk</b></font>
 						</a>
 					
-						<img style="vertical-align:bottom;" id="imgInfoRpgJarStart" style="cursor:pointer;" onClick="showPop('jarStartCmd');" src="resources/images/log-iconLOG.png" width="22" height="22" border="0" alt="info">
+			 			<font style="vertical-align:super; cursor:pointer;" onClick="showPop('api-spec');" title="api-spesifikasjon toll.no" class="inputFormSubmit text10 isa_warning"><b>Api-spec.</b></font>
+						<div class="text12" style="position: relative;display: inline;" align="left">
+						<span style="position:absolute; left:-100px; top:15px;" id="api-spec" class="popupWithInputText"  >
+			           		<div class="text11" align="left">
+			           			<a class="text11" target="_blank" href="https://api-test.toll.no/api/movement/road/v2/swagger-ui/index.html">
+				           				1. Road
+				           		</a>
+				           		<br/>
+			           			<a class="text11" target="_blank" href="https://api-test.toll.no/api/movement/air/v1/swagger-ui/index.html">
+			           					2. Air
+			           			</a>
+			           			<br/>
+			           			<a class="text11" target="_blank" href="https://toll.github.io/">
+			           					3. Digitoll - Teknisk informasjon
+			           			</a>
+			           			<br/>
+			           			<br/>
+			           			<button name="_ButtonCloseApi" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('api-spec');">Close</button> 
+			           		</div>
+			           	</span>
+			           	</div>	
+						
+						<img style="vertical-align:bottom;cursor:pointer;" id="imgInfoRpgJarStart" onClick="showPop('jarStartCmd');" src="resources/images/log-iconLOG.png" width="22" height="22" border="0" alt="info">
 						<div class="text12" style="position: relative;display: inline;" align="left">
 						<span style="position:absolute; left:-100px; top:15px;" id="jarStartCmd" class="popupWithInputText"  >
 			           		<div class="text11" align="left">
-			           			<p>
-				           			<a class="text11" target="_blank" href="renderLocalLogsgExpft.do?user=${user.user}">
-				           				logsg_syjservicestn-expft.log
-				           			</a>
-			           			</p>
 			           			
-			           			<p>
-				           			<a class="text11" target="_blank" href="renderLocalCatalina.do?user=${user.user}">
-				           				catalina.out
-				           			</a>
-			           			</p>
+			           			<a class="text11" target="_blank" href="renderLocalLogsgExpft.do?user=${user.user}">
+			           				1. logsg_syjservicestn-expft.log
+			           			</a>
 			           			<br/>
+			           			<a class="text11" target="_blank" href="renderLocalCatalina.do?user=${user.user}">
+			           				2. catalina.out
+			           			</a>
+			           			
+			           			<br/><br/>
 			           			<button name="_ButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('jarStartCmd');">Close</button> 
 			           		</div>
 			           	</span>
@@ -338,6 +359,7 @@
 				 					</tr>				 				
 				 					<tr>
 					 					<td>
+					 						<%--
 					 						<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" size="7" maxlength="4" class="inputTextMediumBlueMandatoryField" list="etavd_list" id="etavd" name="etavd" value="${model.record.etavd}">
 											<datalist id="etavd_list">
 											  <option value="">-Välj-</option>
@@ -345,6 +367,13 @@
 							 				  		<option value="${record.avd}"<c:if test="${model.record.etavd == record.avd}"> selected </c:if> >${record.avd}</option> 
 												</c:forEach>  
 											</datalist>
+											 --%>
+											<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" id="etavd" name="etavd">
+											  <option value="">-Välj-</option>
+							 				  	<c:forEach var="record" items="${model.avdList}" >
+							 				  		<option value="${record.avd}"<c:if test="${model.record.etavd == record.avd}"> selected </c:if> >${record.avd}</option> 
+												</c:forEach>  
+											</select> 
 					 					</td>
 					 					<td>
 					 						<c:choose>
@@ -357,13 +386,21 @@
 							 				</c:choose>
 					 					</td>
 					 					<td>
+					 						<%--
 					 						<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  size="6" maxlength="3" class="inputTextMediumBlueMandatoryField" list="etsg_list" id="etsg" name="etsg" value="${model.record.etsg}">
 											<datalist id="etsg_list">
 											  <option value="">-Välj-</option>
 							 				  	<c:forEach var="record" items="${model.signList}" >
 							 				  		<option value="${record.sign}"<c:if test="${model.record.etsg == record.sign}"> selected </c:if> >${record.sign}</option> 
 												</c:forEach>  
-											</datalist>	
+											</datalist>
+											 --%>
+											<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" id="etsg" name="etsg">
+											<option value="">-Välj-</option>
+							 				  	<c:forEach var="record" items="${model.signList}" >
+							 				  		<option value="${record.sign}"<c:if test="${model.record.etsg == record.sign}"> selected </c:if> >${record.sign}</option> 
+												</c:forEach>  
+											</select> 	
 					 					</td>
 				 					</tr>
 				 					<tr height="10"></tr>
@@ -1002,11 +1039,12 @@
 		               				<font onClick="showPop('h_info2${counter.count}');" title="Houses..." class="inputFormSubmit11 text10 isa_warning"><b>${masterConsignmentRecord.listHouses.size()}</b></font>
 			               			<span class="text11" style="position: relative;" align="left">
 				                	<span style="position:absolute;top:2px; width:280px;" id="h_info2${counter.count}" class="popupWithInputText text11"  >
-				                	<button name="_ButtonCloseEtktm" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('h_info2${counter.count}');">Close</button> 
+				                	<button name="_ButtonCloseEtktm" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('h_info2${counter.count}');">Close</button><br/>
 					           			<font style="color:royalblue">Antal opd(houses) <b>${masterConsignmentRecord.listHouses.size()}</b></font>
 				           				<ul>
 				           				<c:forEach items="${masterConsignmentRecord.listHouses}" var="houseRecord" varStatus="h_counter">  
 				           					<li>
+				           						<a class="clazz_gotoHouse" title="goto house..." href="tvinnsaddigitollv2_edit_house.do?action=doFind&ehlnrt=${houseRecord.ehlnrt}&ehlnrm=${houseRecord.ehlnrm}&ehlnrh=${houseRecord.ehlnrh}">
 				           						<font style="color:royalblue">Opd <b>${houseRecord.ehtdn}</b> Brut.vekt <b>${houseRecord.ehvkb}</b></font>
 				           						<c:choose>
 				           							<c:when test="${houseRecord.ehst2 =='M'}">
@@ -1016,6 +1054,7 @@
 				           								<font style="color:royalblue">Api&nbsp;<b>${houseRecord.ehst2}</b> </font>
 				           							</c:otherwise>
 				           						</c:choose>
+				           						</a>
 				           					</li>
 				           				</c:forEach>
 				           				</ul>

@@ -82,22 +82,41 @@
 							<font title="Kodeverk toll.no" class="inputFormSubmit text10 isa_warning" ><b>Kodeverk</b></font>
 						</a>
 					
-						<img style="vertical-align:bottom;" id="imgInfoRpgJarStart" style="cursor:pointer;" onClick="showPop('jarStartCmd');" src="resources/images/log-iconLOG.png" width="22" height="22" border="0" alt="info">
+			 			<font style="vertical-align:super; cursor:pointer;" onClick="showPop('api-spec');" title="api-spesifikasjon toll.no" class="inputFormSubmit text10 isa_warning"><b>Api-spec.</b></font>
+						<div class="text12" style="position: relative;display: inline;" align="left">
+						<span style="position:absolute; left:-100px; top:15px;" id="api-spec" class="popupWithInputText"  >
+			           		<div class="text11" align="left">
+			           			<a class="text11" target="_blank" href="https://api-test.toll.no/api/movement/road/v2/swagger-ui/index.html">
+				           				1. Road
+				           		</a>
+				           		<br/>
+			           			<a class="text11" target="_blank" href="https://api-test.toll.no/api/movement/air/v1/swagger-ui/index.html">
+			           					2. Air
+			           			</a>
+			           			<br/>
+			           			<a class="text11" target="_blank" href="https://toll.github.io/">
+			           					3. Digitoll - Teknisk informasjon
+			           			</a>
+			           			<br/>
+			           			<br/>
+			           			<button name="_ButtonCloseApi" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('api-spec');">Close</button> 
+			           		</div>
+			           	</span>
+			           	</div>	
+			 			
+						<img style="vertical-align:bottom;cursor:pointer;" id="imgInfoRpgJarStart" onClick="showPop('jarStartCmd');" src="resources/images/log-iconLOG.png" width="22" height="22" border="0" alt="info">
 						<div class="text12" style="position: relative;display: inline;" align="left">
 						<span style="position:absolute; left:-100px; top:15px;"  id="jarStartCmd" class="popupWithInputText"  >
 			           		<div class="text11" align="left">
-			           			<p>
-				           			<a class="text11" target="_blank" href="renderLocalLogsgExpft.do?user=${user.user}">
-				           				logsg_syjservicestn-expft.log
-				           			</a>
-			           			</p>
 			           			
-			           			<p>
-				           			<a class="text11" target="_blank" href="renderLocalCatalina.do?user=${user.user}">
-				           				catalina.out
-				           			</a>
-			           			</p>
+			           			<a class="text11" target="_blank" href="renderLocalLogsgExpft.do?user=${user.user}">
+			           				1. logsg_syjservicestn-expft.log
+			           			</a>
 			           			<br/>
+		           				<a class="text11" target="_blank" href="renderLocalCatalina.do?user=${user.user}">
+			           				2. catalina.out
+			           			</a>
+			           			<br/><br/>
 			           			<button name="_ButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('jarStartCmd');">Close</button> 
 			           		</div>
 			           	</span>
@@ -290,11 +309,9 @@
 					<tr>
 						<td class="text14">&nbsp;<span title="emavd">Avd</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="empro">Tur</span><font class="text16RedBold" >*</font>
-							
 							<a tabindex="-1" id="emproIdLink">
 								<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 							</a>
-							
 						</td>
 						<td class="text14">&nbsp;<span title="emsg">Sign</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emvkb">Bruttovekt</span><font class="text16RedBold" >*</font></td>
@@ -314,26 +331,14 @@
 					<tr>
 						
 						<td>
-							<%--
-							<c:choose>
-								<c:when test="${model.record.emavd > 0}">
-									<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  size="7" maxlength="4" class="inputTextMediumBlueMandatoryField" list="emavd_list" id="emavd" name="emavd" value="${model.record.emavd}">	
-								</c:when>
-								<c:otherwise>
-									<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  size="7" maxlength="4" class="inputTextMediumBlueMandatoryField" list="emavd_list" id="emavd" name="emavd" value="">								
-								</c:otherwise>
-							</c:choose>	
-	 						<datalist id="emavd_list">
+							<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" id="emavd" name="emavd">
 							  <option value="">-Välj-</option>
 			 				  	<c:forEach var="record" items="${model.avdList}" >
 			 				  		<option value="${record.avd}"<c:if test="${model.record.emavd == record.avd}"> selected </c:if> >${record.avd}</option> 
 								</c:forEach>  
-							</datalist>
-							 --%>
-							<input readonly size="7" maxlength="4" class="inputTextReadOnly" id="emavd" name="emavd" value="${model.record.emavd}">							 
+							</select>						 
 	 					</td>
 	 					<td class="text14">
-							<%--
 							<c:choose>
 								<c:when test="${model.record.empro > 0}">
 									<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="empro" id="empro" size="10" maxlength="8" value="${model.record.empro}">	
@@ -343,17 +348,26 @@
 								</c:otherwise>
 							</c:choose>
 							<input title="Hente all tilgjengelig informasjon fra turen" class="text11" type="button" name="turFetchButton" id="turFetchButton" value='Hent'>
-							 --%>
-							<input  readonly type="text" class="inputTextReadOnly" name="empro" id="empro" size="10" maxlength="8" value="${model.record.empro}"> 					
+							<%-- 
+							<input  readonly type="text" class="inputTextReadOnly" name="empro" id="empro" size="10" maxlength="8" value="${model.record.empro}">
+							 --%> 					
 						</td>		
 						<td>
+							<%--
 	 						<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  size="6" maxlength="3" class="inputTextMediumBlueMandatoryField" list="emsg_list" id="emsg" name="emsg" value="${model.record.emsg}">
 							<datalist id="emsg_list">
 							  <option value="">-Välj-</option>
 			 				  	<c:forEach var="record" items="${model.signList}" >
 			 				  		<option value="${record.sign}"<c:if test="${model.record.emsg == record.sign}"> selected </c:if> >${record.sign}</option> 
 								</c:forEach>  
-							</datalist>	
+							</datalist>
+							 --%>
+							<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" id="emsg" name="emsg">
+							<option value="">-Välj-</option>
+			 				  	<c:forEach var="record" items="${model.signList}" >
+			 				  		<option value="${record.sign}"<c:if test="${model.record.emsg == record.sign}"> selected </c:if> >${record.sign}</option> 
+								</c:forEach>  
+							</select> 		
 	 					</td>
 					
 						<td class="text14">
@@ -368,7 +382,7 @@
 						</td>
 						<td class="text14">
 							<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="emdkm" id="emdkm" size="25" maxlength="40" value="${model.record.emdkm}">
-							<input title="unik nøkkel" readonly type="text" class="inputTextReadOnly" style="color:yellow;" name="own_emdkmUnique" id="own_emdkmUnique" size="8" maxlength="6" value="${model.record.own_emdkmUnique}">	
+							<input title="unik nøkkel" readonly type="text" class="inputTextReadOnly" name="own_emdkmUnique" id="own_emdkmUnique" size="12" style="color: brown;" value="${model.record.own_emdkmUnique}">	
 							
 						</td>
 						<td class="text14">

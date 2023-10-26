@@ -154,6 +154,13 @@ public class TvinnSadDigitollAjaxController {
 	    		if(container!=null && !container.getOrderList().isEmpty()) {
 	    			for(SadOppdragRecord record: container.getOrderList()) {
 	    				if(record.getSitdn().equals(opd)) {
+	    					//Dekl.dato format to NO
+	    					if(StringUtils.isNotEmpty(record.getWeh0068a())) {
+								if (record.getWeh0068a().length()==8) {
+									record.setWeh0068a(this.dateMgr.getDateFormatted_NO(record.getWeh0068a(), DateTimeManager.ISO_FORMAT));
+								}
+							}
+	    					logger.info(record.getWeh0068a());
 	    					result.add(record);
 	    					break;
 	    				}

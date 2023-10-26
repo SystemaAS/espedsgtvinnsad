@@ -1154,7 +1154,7 @@ public class TvinnSadDigitollv2MasterController {
 		}
 		//doknr
 		if(StringUtils.isNotEmpty(recordToValidate.getEmdkm())) {
-			String HYPHEN = "-";
+			String HYPHEN_SYS = "-SYS";
 			if(recordToValidate.getEmlnrm()>0) {
 				//only if this exists from before
 				if(StringUtils.isNotEmpty(recordToValidate.getOwn_emdkmUnique())){
@@ -1164,7 +1164,7 @@ public class TvinnSadDigitollv2MasterController {
 			}else {
 				
 				int randomValue = new Random().nextInt(100000);
-				String documentId = recordToValidate.getEmdkm() + HYPHEN + StringUtils.leftPad(String.valueOf(randomValue),6,"0");
+				String documentId = recordToValidate.getEmdkm() + HYPHEN_SYS + StringUtils.leftPad(String.valueOf(randomValue),6,"0");
 				recordToValidate.setEmdkm(documentId);
 			}
 			

@@ -82,27 +82,45 @@
 				 			<span title="Sist godkjente MRN" class="inputTextReadOnly text11" style="vertical-align:super;">MRN:&nbsp;${model.record.ehmid_own}</span>
 				 			&nbsp;&nbsp;
 			 			</c:if>
-						<a style="vertical-align:super;" title="Kodeverk toll.no" target="_blank" href="https://toll.github.io/api/mo-kodeverk.html">
+			 			<a style="vertical-align:super;" title="Kodeverk toll.no" target="_blank" href="https://toll.github.io/api/mo-kodeverk.html">
 							<font title="Kodeverk toll.no" class="inputFormSubmit text10 isa_warning"><b>Kodeverk</b></font>
 						</a>
 					
-					
-						<img style="vertical-align:bottom;" id="imgInfoRpgJarStart" style="cursor:pointer;" onClick="showPop('jarStartCmd');" src="resources/images/log-iconLOG.png" width="22" height="22" border="0" alt="info">
+			 			<font style="vertical-align:super; cursor:pointer;" onClick="showPop('api-spec');" title="api-spesifikasjon toll.no" class="inputFormSubmit text10 isa_warning"><b>Api-spec.</b></font>
+						<div class="text12" style="position: relative;display: inline;" align="left">
+						<span style="position:absolute; left:-100px; top:15px;" id="api-spec" class="popupWithInputText"  >
+			           		<div class="text11" align="left">
+			           			<a class="text11" target="_blank" href="https://api-test.toll.no/api/movement/road/v2/swagger-ui/index.html">
+				           				1. Road
+				           		</a>
+				           		<br/>
+			           			<a class="text11" target="_blank" href="https://api-test.toll.no/api/movement/air/v1/swagger-ui/index.html">
+			           					2. Air
+			           			</a>
+			           			<br/>
+			           			<a class="text11" target="_blank" href="https://toll.github.io/">
+			           					3. Digitoll - Teknisk informasjon
+			           			</a>
+			           			<br/>
+			           			<br/>
+			           			<button name="_ButtonCloseApi" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('api-spec');">Close</button> 
+			           		</div>
+			           	</span>
+			           	</div>	
+						
+						<img style="vertical-align:bottom;cursor:pointer;" id="imgInfoRpgJarStart" onClick="showPop('jarStartCmd');" src="resources/images/log-iconLOG.png" width="22" height="22" border="0" alt="info">
 						<div class="text12" style="position: relative;display: inline;" align="left">
 						<span style="position:absolute; left:-100px; top:15px;" id="jarStartCmd" class="popupWithInputText"  >
 			           		<div class="text11" align="left">
-			           			<p>
-				           			<a class="text11" target="_blank" href="renderLocalLogsgExpft.do?user=${user.user}">
-				           				logsg_syjservicestn-expft.log
-				           			</a>
-			           			</p>
 			           			
-			           			<p>
-				           			<a class="text11" target="_blank" href="renderLocalCatalina.do?user=${user.user}">
-				           				catalina.out
-				           			</a>
-			           			</p>
-			           			<br/>
+			           			<a class="text11" target="_blank" href="renderLocalLogsgExpft.do?user=${user.user}">
+			           				1. logsg_syjservicestn-expft.log
+			           			</a>
+		     					<br/>
+			           			<a class="text11" target="_blank" href="renderLocalCatalina.do?user=${user.user}">
+			           				2. catalina.out
+			           			</a>			       
+			           			<br/><br/>
 			           			<button name="_ButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('jarStartCmd');">Close</button> 
 			           		</div>
 			           	</span>
@@ -282,7 +300,11 @@
 					<table>
 					<tr>
 						<td class="text14">&nbsp;<span title="ehavd">Avd</span><font class="text16RedBold" >*</font></td>
-						<td class="text14">&nbsp;<span title="ehpro">Tur</span><font class="text16RedBold" >*</font></td>
+						<td class="text14">&nbsp;<span title="ehpro">Tur</span><font class="text16RedBold" >*</font>
+							<a tabindex="-1" id="ehproIdLink">
+								<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
+							</a>
+						</td>
 						<td class="text14">&nbsp;<span title="ehtdn">Opd</span><font class="text16RedBold" >*</font>
 							<a tabindex="-1" id="ehtdnIdLink">
 								<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
@@ -372,6 +394,7 @@
 					</tr>
 					<tr>	
 						<td class="text14">
+							<%--
 							<c:choose>
 								<c:when test="${model.record.ehavd > 0}">
 									<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" size="8" maxlength="4" class="inputTextMediumBlueMandatoryField" list="ehavd_list" id="ehavd" name="ehavd" value="${model.record.ehavd}">	
@@ -385,7 +408,15 @@
 			 				  	<c:forEach var="record" items="${model.avdList}" >
 			 				  		<option value="${record.avd}"<c:if test="${model.record.ehavd == record.avd}"> selected </c:if> >${record.avd}</option> 
 								</c:forEach>  
-							</datalist>					
+							</datalist>
+							 --%>
+							<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" id="ehavd" name="ehavd">
+							  <option value="">-Välj-</option>
+			 				  	<c:forEach var="record" items="${model.avdList}" >
+			 				  		<option value="${record.avd}"<c:if test="${model.record.ehavd == record.avd}"> selected </c:if> >${record.avd}</option> 
+								</c:forEach>  
+							</select>	
+												
 						</td>
 						<td class="text14">
 							<c:choose>
@@ -598,7 +629,7 @@
 								</select>
 		 					</td>
 							<td class="text14"><input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="ehrg" id="ehrg" size="12" maxlength="11" value="${model.record.ehrg}"></td>
-			 				<td class="text14"><input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="eh0068a" id="eh0068a" size="10" maxlength="8" value='<c:if test="${model.record.eh0068a!='0'}">${model.record.eh0068a}</c:if>'></td>
+			 				<td class="text14"><input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="eh0068a" id="eh0068a" size="8" maxlength="6" value='<c:if test="${model.record.eh0068a!='0'}">${model.record.eh0068a}</c:if>'></td>
 			 				<td class="text14"><input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="eh0068b" id="eh0068b" size="8" maxlength="6" value='<c:if test="${model.record.eh0068b!='0'}">${model.record.eh0068b}</c:if>'></td>
 			 				<td class="text14"><input type="text" class="inputTextMediumBlue toggleTransit" name="ehtrnr" id="ehtrnr" size="20" maxlength="18" value="${model.record.ehtrnr}"></td>
 						</tr>

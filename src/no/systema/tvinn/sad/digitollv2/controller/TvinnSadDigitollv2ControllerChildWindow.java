@@ -608,6 +608,11 @@ public class TvinnSadDigitollv2ControllerChildWindow {
     		SadOppdragContainer container = this.sadOppdragService.getListContainer(jsonPayload);
     		if(container!=null && !container.getOrderList().isEmpty()) {
     			for(SadOppdragRecord record: container.getOrderList()) {
+    				if(StringUtils.isNotEmpty(record.getSidt())) {
+						if (record.getSidt().length()==8) {
+							record.setSidt(this.dateMgr.getDateFormatted_NO(record.getSidt(), DateTimeManager.ISO_FORMAT));
+						}
+					}
     				resultList.add(record);
     			}
     		}

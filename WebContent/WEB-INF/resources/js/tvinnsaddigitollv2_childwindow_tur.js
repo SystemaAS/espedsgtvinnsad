@@ -12,18 +12,23 @@
 			  var tuavd = record[1].replace("tuavd", "");
 			  var callerType = record[2].replace("ctype", "");
 			  
-			  //tur - etpro (transport)
-			  if(callerType == 'etpro'){ 
+			  	//tur - etpro (transport)
+			  	if(callerType == 'etpro'){ 
 				 //console.log("Bingo!!") 
 				  opener.jq('#etpro').val(tupro);
 				  opener.jq('#etpro').focus();
 				
-			  //tur - empro (master)	  
-			  }else if (callerType == 'empro'){  
+			  	//tur - empro (master)	  
+			  	}else if (callerType == 'empro'){  
 				  opener.jq('#empro').val(tupro);
 				  opener.jq('#empro').focus();
 				  
-			  }
+			  	//tur - ehpro (house)	
+			  	}else if (callerType == 'ehpro'){
+		  		  opener.jq('#ehpro').val(tupro);
+				  opener.jq('#ehpro').focus();
+				  
+			  	}
 			  //close child window
 			  window.close();
 			  
