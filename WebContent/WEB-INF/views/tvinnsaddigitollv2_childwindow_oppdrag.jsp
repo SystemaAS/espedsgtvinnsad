@@ -18,6 +18,8 @@
 				<table id="containerdatatableTable" cellspacing="2" align="left" width="100%" >
 				<form>
 					<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
+					<input type="hidden" name="lnrt" id="lnrt" value="${model.lnrt}">
+					<input type="hidden" name="lnrm" id="lnrm" value="${model.lnrm}">
 				</form>	
 													           		
 			    <tr>
@@ -51,7 +53,9 @@
 						<tr height="5"><td></td></tr> 
 						<tr>
 			               <td align="left">
-			               		&nbsp;<input class="inputFormSubmit" type="button" name="buttonCreateHousesOk" id="buttonCreateHousesOk" value='Ok'>
+			               		<c:if test="${not empty model.list}">
+			               			&nbsp;<input class="inputFormSubmit" type="button" name="buttonCreateHousesOk" id="buttonCreateHousesOk" value='Ok'>
+			               		</c:if>
 			               		&nbsp;<input class="inputFormSubmit" type="button" name="buttonCancel" id="buttonCancel" value='Avbryt'>
 			               </td>
 		               </tr>
@@ -79,7 +83,7 @@
 		                	<c:forEach items="${model.list}" var="record" varStatus="counter">    
 				             <tr class="tableRow" height="20" >
 					           <td width="2%" align="center" class="tableCellFirst12">
-					           		<input class="clazzCreateHouseAware" type="checkbox" value="J" id="avd${record.siavd}_opd${record.sitdn}" name="avd${record.siavd}_opd${record.sitdn}" >
+					           		<input class="clazzCreateHouseAware" type="checkbox" value="J" id="avd${record.siavd}_opd${record.sitdn}_tur${model.tur}" name="avd${record.siavd}_opd${record.sitdn}_tur${model.tur}" >
 					           </td>	
 				          	   <td width="2%" align="center"class="tableCell12" >${record.siavd}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >

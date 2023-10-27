@@ -48,6 +48,7 @@ import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
 import no.systema.tvinn.sad.digitollv2.controller.service.ApiAsyncFacadeSendService;
 import no.systema.tvinn.sad.digitollv2.controller.service.ApiHouseSendService;
 import no.systema.tvinn.sad.digitollv2.controller.service.ApiTransportSendService;
+import no.systema.tvinn.sad.digitollv2.controller.service.HouseControllerService;
 import no.systema.tvinn.sad.digitollv2.enums.EnumSadmomfStatus3;
 import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
@@ -172,7 +173,7 @@ public class TvinnSadDigitollv2HouseController {
 					logger.info("MODE:" + mode + " before update in Controller ...");
 					StringBuffer errMsg = new StringBuffer();
 					int dmlRetval = 0;
-					dmlRetval = this.updateRecord(appUser.getUser(), recordToValidate, mode, errMsg);
+					dmlRetval = this.houseControllerService.updateRecord(appUser.getUser(), recordToValidate, mode, errMsg);
 					if(dmlRetval < 0) {
 						//error on update
 						model.put("errorMessage", errMsg.toString());
@@ -237,6 +238,7 @@ public class TvinnSadDigitollv2HouseController {
 		    	}
 			}
 			if("doCreate".equals(action)) {
+				logger.info("Inside doCreate...");
 				//in order to grab ehlnrt-parent
 				this.setTransportDto(appUser.getUser(), recordToValidate);
 				this.setMasterDto(appUser.getUser(), recordToValidate);
@@ -823,6 +825,7 @@ public class TvinnSadDigitollv2HouseController {
 	 * @param errMsg
 	 * @return
 	 */
+	/*
 	private int updateRecord(String applicationUser, SadmohfRecord recordToValidate, String mode, StringBuffer errMsg) {
 		int retval = 0;
 		
@@ -876,7 +879,7 @@ public class TvinnSadDigitollv2HouseController {
     	
     	return retval;
 	}
-	
+	*/
 	
 	
 	/**
@@ -1207,6 +1210,9 @@ public class TvinnSadDigitollv2HouseController {
 	private ApiAsyncFacadeSendService apiAsynchFacadeSendService;
 	
 	@Autowired
-	SadDigitollDropDownListPopulationService digitollDropDownListPopulationService;
+	private SadDigitollDropDownListPopulationService digitollDropDownListPopulationService;
+	
+	@Autowired
+	private HouseControllerService houseControllerService;
 }
 

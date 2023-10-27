@@ -481,6 +481,9 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		String tur = request.getParameter("tur");
 		String lnrt = request.getParameter("lnrt");
 		String lnrm = request.getParameter("lnrm");
+		model.put("tur", tur);
+		model.put("lnrt", lnrt);
+		model.put("lnrm", lnrm);
 		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_oppdrag");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		//check user (should be in session already)
@@ -491,7 +494,8 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			//get all masters
 			List list = this.getOppdrag(appUser, tur, lnrt, lnrm);  
 			model.put("list", list);
-			model.put("tur", tur);
+			
+			
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 			
 	    	return successView;

@@ -12,7 +12,9 @@
     jq('#alinkTransport').click(function() { 
     	setBlockUI();
     });
-    
+    jq('#alinkHouse').click(function() { 
+    	setBlockUI();
+    });
 
     //General Header Menus
     jq('#alinkTopicListMenuImp').click(function() { 

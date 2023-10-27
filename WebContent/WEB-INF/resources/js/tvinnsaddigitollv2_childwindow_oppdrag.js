@@ -38,10 +38,11 @@
 				  var record = id.split('_');
 				  var avd = record[0].replace("avd", "");
 				  var opd = record[1].replace("opd", "");
+				  var tur = record[2].replace("tur", "");
 				  //var counter = i + 1;
 				  //alert(avd + "-" + opd);
-				
-				  if(jq('#avd' + avd + '_' + 'opd' + opd).prop('checked')){
+				  
+				  if(jq('#avd' + avd + '_opd' + opd + '_tur' + tur).prop('checked')){
 					  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
 					  jq.ajax({
 				  	  	  type: 'GET',
@@ -49,6 +50,9 @@
 				  	  	  data: { applicationUser : jq('#applicationUser').val(),
 									avd : avd,
 									opd : opd,
+									tur : tur,
+									lnrt : jq('#lnrt').val(),
+									lnrm : jq('#lnrm').val(),
 									mode : 'A'},
 									
 				  	  	  dataType: 'json',
@@ -66,18 +70,20 @@
 				  	  	  },
 					  	  error: function() {
 							jq.unblockUI();
-				  	  	    alert('Error loading ...');
+				  	  	    //alert('Error loading ...');
 				  	  	  }
 				  	  });
 					  
 				   }
-				 
+				  
 			});
-			//jq.unblockUI();
+			window.setTimeout(function(){
+                 //we must reload the parent master window since the use case updates the invoice list (if the end-user has selected some invoices to import)
+				  window.opener.setBlockUI();
+				  window.opener.location.href="tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=" + jq('#lnrt').val() + "&emlnrm=" + jq('#lnrm').val();
+				  window.close();     
+             }, 800); //milliseconds: in order to avoid a refresh in master due to the above Ajax create house. It could take more time to be finished on the background...
 			
-			//we must reload the parent window since the use case updates the invoice list (if the end-user has selected some invoices to import)
-			//window.opener.location.reload();
-			//window.close();
 		});
 		//abort
 		jq('#buttonCancel').click(function(){

@@ -5,13 +5,13 @@
   
   //Overlay on tab (to mark visually a delay...)
   jq(function() {
-	jq('#alinkManifestList').click(function() { 
+	jq('#alinkTransportList').click(function() { 
     	setBlockUI();
     });
-    jq('#alinkHeader').click(function() { 
+    jq('#alinkTransport').click(function() { 
     	setBlockUI();
     });
-    jq('#alinkItems').click(function() { 
+    jq('#alinkMaster').click(function() { 
     	setBlockUI();
     });
     
