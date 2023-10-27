@@ -53,6 +53,8 @@ import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadAvdSignContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadAvdSignRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifContainer;
@@ -64,6 +66,7 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.service.ApiGenericDtoResponseService;
 import no.systema.tvinn.sad.digitollv2.service.GeneralUpdateService;
+import no.systema.tvinn.sad.digitollv2.service.SadAvdSignService;
 import no.systema.tvinn.sad.digitollv2.service.SadDigitollDropDownListPopulationService;
 import no.systema.tvinn.sad.digitollv2.service.SadmohfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
@@ -246,9 +249,7 @@ public class TvinnSadDigitollv2HouseController {
 			//--------------------------------------
 			//drop downs
 			this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
-			/*this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
-			this.setCodeDropDownMgr(appUser, model);
-			*/
+			
 			this.setDropDownService(model);
 	    	
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
@@ -912,20 +913,17 @@ public class TvinnSadDigitollv2HouseController {
 	 */
 	private void populateAvdelningHtmlDropDownsFromJsonString(Map model, SystemaWebUser appUser, HttpSession session){
 		//fill in html lists here
-		String NCTS_IMPORT_IE = "N"; //Import
 		try{
-			String BASE_URL = TvinnSadUrlDataStore.TVINN_SAD_FETCH_AVDELNINGAR_NCTS_URL;
+			String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_AVD_URL;
 			StringBuffer urlRequestParamsKeys = new StringBuffer();
 			urlRequestParamsKeys.append("user=" + appUser.getUser());
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "ie=" + NCTS_IMPORT_IE);
-			//Now build the URL and send to the back end via the drop down service
 			String url = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
-			logger.info("AVD BASE_URL:" + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+			logger.info("AVD BASE_URL:" + BASE_URL);
 			logger.info("AVD BASE_PARAMS:" + urlRequestParamsKeys.toString());
 			
-			JsonTvinnSadAvdelningContainer container = this.tvinnSadDropDownListPopulationService.getAvdelningContainer(url);
-			List<JsonTvinnSadAvdelningRecord> list = new ArrayList();
-			for(JsonTvinnSadAvdelningRecord record: container.getAvdelningar()){
+			SadAvdSignContainer container = this.sadAvdSignService.getListContainer(url);
+			List<SadAvdSignRecord> list = new ArrayList();
+			for(SadAvdSignRecord record: container.getAvdelningar()){
 				list.add(record);
 				//logger.info("Avd-tst:" + record.getAvd() + "XX" + record.getTst());
 			}
@@ -1200,6 +1198,8 @@ public class TvinnSadDigitollv2HouseController {
 	private SadmomfListService sadmomfListService;
 	@Autowired
 	private MaintMainKofastService maintMainKofastService;
+	@Autowired
+	private SadAvdSignService sadAvdSignService;
 	
 	@Autowired
 	private ApiHouseSendService apiHouseSendService;

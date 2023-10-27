@@ -112,7 +112,7 @@
            			<select class="selectMediumBlueE2" name="avd" id="avd">
 	            		<option value="">-velg-</option>
 	 				  	<c:forEach var="record" items="${model.avdList}" >
-                        	 	<option value="${record.avd}"<c:if test="${searchFilterSadDigitollTransportList.avd == record.avd}"> selected </c:if> >${record.avd}</option>                       	 	
+                        	 	<option title="${record.namn}" value="${record.avd}"<c:if test="${searchFilterSadDigitollTransportList.avd == record.avd}"> selected </c:if> >${record.avd}</option>                       	 	
 						</c:forEach> 
 					</select>
 					 
@@ -131,7 +131,7 @@
 					<select class="selectMediumBlueE2" name="sign" id="sign">
 					  <option value="">-Välj-</option>
 	 				  	<c:forEach var="record" items="${model.signList}" >
-	 				  		<option value="${record.sign}"<c:if test="${searchFilterSadDigitollTransportList.sign == record.sign}"> selected </c:if> >${record.sign}</option> 
+	 				  		<option title="${record.namn}" value="${record.sign}"<c:if test="${searchFilterSadDigitollTransportList.sign == record.sign}"> selected </c:if> >${record.sign}</option> 
 						</c:forEach>  
 					</select>
 				</td>

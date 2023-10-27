@@ -334,7 +334,7 @@
 							<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" id="emavd" name="emavd">
 							  <option value="">-Välj-</option>
 			 				  	<c:forEach var="record" items="${model.avdList}" >
-			 				  		<option value="${record.avd}"<c:if test="${model.record.emavd == record.avd}"> selected </c:if> >${record.avd}</option> 
+			 				  		<option title="${record.namn}" value="${record.avd}"<c:if test="${model.record.emavd == record.avd}"> selected </c:if> >${record.avd}</option> 
 								</c:forEach>  
 							</select>						 
 	 					</td>
@@ -364,7 +364,7 @@
 							<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" id="emsg" name="emsg">
 							<option value="">-Välj-</option>
 			 				  	<c:forEach var="record" items="${model.signList}" >
-			 				  		<option value="${record.sign}"<c:if test="${model.record.emsg == record.sign}"> selected </c:if> >${record.sign}</option> 
+			 				  		<option title="${record.namn}" value="${record.sign}"<c:if test="${model.record.emsg == record.sign}"> selected </c:if> >${record.sign}</option> 
 								</c:forEach>  
 							</select> 		
 	 					</td>

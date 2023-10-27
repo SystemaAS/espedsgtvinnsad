@@ -62,11 +62,10 @@ import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateRecord;
-import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafContainer;
-import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadAvdSignContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadAvdSignRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
-import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmologContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmologRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
@@ -75,24 +74,17 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.service.ApiGenericDtoResponseService;
 import no.systema.tvinn.sad.digitollv2.service.GeneralUpdateService;
+import no.systema.tvinn.sad.digitollv2.service.SadAvdSignService;
 import no.systema.tvinn.sad.digitollv2.service.SadDigitollDropDownListPopulationService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoafListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmohfListService;
-import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
-import no.systema.tvinn.sad.digitollv2.util.RedirectCleaner;
 import no.systema.tvinn.sad.digitollv2.util.SadDigitollConstants;
 import no.systema.tvinn.sad.digitollv2.validator.TransportValidator;
-import no.systema.tvinn.sad.manifest.express.filter.SearchFilterManifestList;
-import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
-import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
-import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 import no.systema.tvinn.sad.mapper.url.request.UrlRequestParameterMapper;
-import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
-import no.systema.tvinn.sad.manifest.express.util.manager.ManifestDateManager;
-import no.systema.tvinn.sad.manifest.express.util.manager.ManifestExpressMgr;
+
 import no.systema.tvinn.sad.manifest.express.util.manager.CodeDropDownMgr;
 
 
@@ -873,20 +865,17 @@ public class TvinnSadDigitollv2TransportController {
 	 */
 	private void populateAvdelningHtmlDropDownsFromJsonString(Map model, SystemaWebUser appUser, HttpSession session){
 		//fill in html lists here
-		String NCTS_IMPORT_IE = "N"; //Import
 		try{
-			String BASE_URL = TvinnSadUrlDataStore.TVINN_SAD_FETCH_AVDELNINGAR_NCTS_URL;
+			String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_AVD_URL;
 			StringBuffer urlRequestParamsKeys = new StringBuffer();
 			urlRequestParamsKeys.append("user=" + appUser.getUser());
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "ie=" + NCTS_IMPORT_IE);
-			//Now build the URL and send to the back end via the drop down service
 			String url = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
-			logger.info("AVD BASE_URL:" + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
+			logger.info("AVD BASE_URL:" + BASE_URL);
 			logger.info("AVD BASE_PARAMS:" + urlRequestParamsKeys.toString());
 			
-			JsonTvinnSadAvdelningContainer container = this.tvinnSadDropDownListPopulationService.getAvdelningContainer(url);
-			List<JsonTvinnSadAvdelningRecord> list = new ArrayList();
-			for(JsonTvinnSadAvdelningRecord record: container.getAvdelningar()){
+			SadAvdSignContainer container = this.sadAvdSignService.getListContainer(url);
+			List<SadAvdSignRecord> list = new ArrayList();
+			for(SadAvdSignRecord record: container.getAvdelningar()){
 				list.add(record);
 				//logger.info("Avd-tst:" + record.getAvd() + "XX" + record.getTst());
 			}
@@ -917,23 +906,19 @@ public class TvinnSadDigitollv2TransportController {
 	 */
 	private void populateSignatureHtmlDropDownsFromJsonString(Map model, SystemaWebUser appUser){
 		//fill in html lists here
-		String NCTS_IMPORT_IE = "N"; //NCTS import: ie=N 
-		
 		try{
-			String BASE_URL = TvinnSadUrlDataStore.TVINN_SAD_FETCH_SIGNATURE_NCTS_URL;
+			String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_SIGN_URL;
 			StringBuffer urlRequestParamsKeys = new StringBuffer();
 			urlRequestParamsKeys.append("user=" + appUser.getUser());
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "ie=" + NCTS_IMPORT_IE);
-			//Now build the URL and send to the back end via the drop down service
 			String url = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
-			logger.info("SIGN BASE_URL:"  + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
-			logger.info("SIGN BASE_PARAMS:" + urlRequestParamsKeys.toString());
+			logger.info("AVD BASE_URL:" + BASE_URL);
+			logger.info("AVD BASE_PARAMS:" + urlRequestParamsKeys.toString());
 			
-			JsonTvinnSadSignatureContainer container = this.tvinnSadDropDownListPopulationService.getSignatureContainer(url);
-			List<JsonTvinnSadSignatureRecord> list = new ArrayList();
-			for(JsonTvinnSadSignatureRecord record: container.getSignaturer()){
+			SadAvdSignContainer container = this.sadAvdSignService.getListContainer(url);
+			List<SadAvdSignRecord> list = new ArrayList();
+			for(SadAvdSignRecord record: container.getSignaturer()){
 				list.add(record);
-				//logger.info("Sign-tst:" + record.getSign());
+				//logger.info("Avd-tst:" + record.getAvd() + "XX" + record.getTst());
 			}
 			model.put(TvinnSadConstants.RESOURCE_MODEL_KEY_SIGN_LIST, list);
 			
@@ -1421,6 +1406,8 @@ public class TvinnSadDigitollv2TransportController {
 	
 	@Autowired
 	private GeneralUpdateService generalUpdateService;
+	@Autowired
+	private SadAvdSignService sadAvdSignService;
 	@Autowired
 	private ApiGenericDtoResponseService apiGenericDtoResponseService;
 	

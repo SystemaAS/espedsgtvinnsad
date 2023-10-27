@@ -63,5 +63,14 @@ public final class SadDigitollUrlDataStore {
 		//http://10.11.47.61/sycgip/TDIG001R.pgm?user=OSCAR&wsstur=81000009&wtudt=20200101
 		static public String SAD_FETCH_DIGITOLL_TUR_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TDIG001R.pgm";
 		
+		//AVD 
+		//..."avdelningar":[ { "avd":"1", "namn":"AIRFREIGHT/IMPORT DEPARTMENTSSø'" } ....
+		//http://10.11.47.61/sycgip/TDIG002R.pgm?user=OSCAR
+		static public String SAD_FETCH_DIGITOLL_AVD_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TDIG002R.pgm";
+		//SIGN 
+		//..."signaturer": { "sign":"A01", "namn":"A2001" 
+		//http://10.11.47.61/sycgip/TDIG003R.pgm?user=OSCAR
+		static public String SAD_FETCH_DIGITOLL_SIGN_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TDIG003R.pgm";
+		
 		
 }
