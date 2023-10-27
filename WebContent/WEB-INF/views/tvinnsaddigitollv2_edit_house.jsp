@@ -144,6 +144,9 @@
 			<input type="hidden" name="ehlnrt" id="ehlnrt" value="${model.record.ehlnrt}">
 			<input type="hidden" name="ehlnrm" id="ehlnrm" value="${model.record.ehlnrm}">
 			<input type="hidden" name="action" id="action" value="doUpdate">
+			<%-- extras for some child windows i.e Oppdrag childwindow --%>
+			<input type="hidden" name="emlnrt" id="emlnrt" value="${model.record.masterDto.emlnrt}">
+			<input type="hidden" name="emlnrm" id="emlnrm" value="${model.record.masterDto.emlnrm}">
 			
 			<c:if test="${model.record.ehlnrh > 0}">
 				<input type="hidden" name="ehlnrh" id="ehlnrh" value="${model.record.ehlnrh}"> 

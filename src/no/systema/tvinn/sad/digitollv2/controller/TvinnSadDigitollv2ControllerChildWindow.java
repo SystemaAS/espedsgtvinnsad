@@ -54,6 +54,7 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
@@ -62,6 +63,7 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.service.SadOppdragService;
 import no.systema.tvinn.sad.digitollv2.service.SadTurService;
+import no.systema.tvinn.sad.digitollv2.service.SadmohfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
@@ -477,7 +479,8 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		Map model = new HashMap();
 		
 		String tur = request.getParameter("tur");
-		
+		String lnrt = request.getParameter("lnrt");
+		String lnrm = request.getParameter("lnrm");
 		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_oppdrag");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		//check user (should be in session already)
@@ -486,7 +489,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			
 		}else{
 			//get all masters
-			List list = this.getOppdrag(appUser, tur);  
+			List list = this.getOppdrag(appUser, tur, lnrt, lnrm);  
 			model.put("list", list);
 			model.put("tur", tur);
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
@@ -597,9 +600,11 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	 * 
 	 * @param appUser
 	 * @param tur
+	 * @param lnrt
+	 * @param lnrm
 	 * @return
 	 */
-	private List<SadOppdragRecord> getOppdrag(SystemaWebUser appUser, String tur) {
+	private List<SadOppdragRecord> getOppdrag(SystemaWebUser appUser, String tur, String lnrt, String lnrm) {
 		List<SadOppdragRecord> resultList = new ArrayList();
 		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_OPPDRAG_URL;
 		//add URL-parameters
@@ -621,7 +626,10 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 							record.setSidt(this.dateMgr.getDateFormatted_NO(record.getSidt(), DateTimeManager.ISO_FORMAT));
 						}
 					}
-    				resultList.add(record);
+    				//Only those that have not been chosen in this same master
+    				if(!this.houseExists(appUser, record.getSitdn(), lnrt , lnrm )) {
+    					resultList.add(record);
+    				}
     			}
     		}
     		
@@ -710,6 +718,37 @@ public class TvinnSadDigitollv2ControllerChildWindow {
     		
     	}
     	
+	}
+	/**
+	 * 
+	 * @param appUser
+	 * @param tdn
+	 * @param lnrt
+	 * @param lnrm
+	 * @return
+	 */
+	private boolean houseExists(SystemaWebUser appUser, String tdn, String lnrt, String lnrm ) {
+		boolean retval = false;
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_HOUSECONSIGNMENT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser() + "&ehlnrt=" + lnrt + "&ehlnrm=" + lnrm + "&ehtdn=" + tdn;
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadmohfContainer jsonContainer = this.sadmohfListService.getListContainer(jsonPayload);
+    		//record.setListHouses(jsonContainer.getList());
+    		if(jsonContainer!=null && !jsonContainer.getList().isEmpty()) {
+    			retval = true;
+    		}
+    		
+    	}
+    	return retval;
 	}
 	/**
 	 * 
@@ -863,6 +902,8 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	private SadmotfListService sadmotfListService;
 	@Autowired
 	private SadmomfListService sadmomfListService;
+	@Autowired
+	private SadmohfListService sadmohfListService;
 	@Autowired
 	private SadmoifListService sadmoifListService;
 	@Autowired

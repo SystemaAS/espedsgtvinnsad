@@ -227,8 +227,10 @@
 	  	//CHILD-WINDOWS
 		//Oppdrag
 	  	jq('#ehtdnIdLink').click(function() {
-	    	jq('#ehtdnIdLink').attr('target','_blank');
-	    	window.open('tvinnsaddigitollv2_childwindow_oppdrag.do?action=doFind&tur=' + jq('#ehpro').val() + '&ctype=ehtdn', "oppdWin", "top=300px,left=600px,height=600px,width=1000px,scrollbars=yes,location=no");
+			if(jq('#ehpro').val()!=''){
+	    		jq('#ehtdnIdLink').attr('target','_blank');
+	    		window.open('tvinnsaddigitollv2_childwindow_oppdrag.do?action=doFind&tur=' + jq('#ehpro').val() + '&lnrt=' + jq('#emlnrt').val() + '&lnrm=' + jq('#emlnrm').val() + '&ctype=ehtdn', "oppdWin", "top=300px,left=600px,height=600px,width=1000px,scrollbars=yes,location=no");
+			}
 	    });
 	  	jq('#ehtdnIdLink').keypress(function(e){ //extra feature for the end user
 			if(e.which == 13) {
