@@ -10,7 +10,8 @@
 			  var record = id.split('@');
 			  var tupro = record[0].replace("tupro", "");
 			  var tuavd = record[1].replace("tuavd", "");
-			  var callerType = record[2].replace("ctype", "");
+		  	  var tutvkt = record[2].replace("tutvkt", "");	
+			  var callerType = record[3].replace("ctype", "");
 			  
 			  	//tur - etpro (transport)
 			  	if(callerType == 'etpro'){ 
@@ -21,7 +22,10 @@
 			  	//tur - empro (master)	  
 			  	}else if (callerType == 'empro'){  
 				  opener.jq('#empro').val(tupro);
-				  opener.jq('#empro').focus();
+				  if(tutvkt != ''){
+				  	opener.jq('#emvkb').val(tutvkt);
+				  }	
+				  opener.jq('#emvkb').focus();
 				  
 			  	//tur - ehpro (house)	
 			  	}else if (callerType == 'ehpro'){

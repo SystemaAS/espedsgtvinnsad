@@ -240,7 +240,7 @@
   		//--------------------
 	    jq('#ehproIdLink').click(function() {
 	    	jq('#ehproIdLink').attr('target','_blank');
-	    	window.open('tvinnsaddigitollv2_childwindow_tur.do?action=doInit&tudt=20200101' + '&tupro=' + jq('#ehpro').val()  + '&ctype=ehpro', "turWin", "top=300px,left=500px,height=600px,width=1000px,scrollbars=no,status=no,location=no");
+	    	window.open('tvinnsaddigitollv2_childwindow_tur.do?action=doInit&tudt=20200101' + '&tupro=' + jq('#ehpro').val() + '&tuavd=' + jq('#ehavd').val() + '&ctype=ehpro', "turWin", "top=300px,left=500px,height=600px,width=1000px,scrollbars=no,status=no,location=no");
 	    });
 	    jq('#ehproIdLink').keypress(function(e){ //extra feature for the end user
 			if(e.which == 13) {

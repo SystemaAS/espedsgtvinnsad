@@ -136,7 +136,7 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
   	//--------------------
     jq('#etproIdLink').click(function() {
     	jq('#etproIdLink').attr('target','_blank');
-    	window.open('tvinnsaddigitollv2_childwindow_tur.do?action=doInit&tudt=20200101' + '&tupro=' + jq('#etpro').val()  + '&ctype=etpro', "turWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+    	window.open('tvinnsaddigitollv2_childwindow_tur.do?action=doInit&tudt=20200101' + '&tupro=' + jq('#etpro').val() + '&tuavd=' + jq('#etavd').val()  + '&ctype=etpro', "turWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
     });
     jq('#etproIdLink').keypress(function(e){ //extra feature for the end user
 		if(e.which == 13) {
@@ -146,7 +146,7 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
     //Fejk for looking
 	jq('#etproIdLinkFejk').click(function() {
     	jq('#etproIdLinkFejk').attr('target','_blank');
-    	window.open('tvinnsaddigitollv2_childwindow_tur.do?action=doInit&tudt=20200101' + '&tupro=' + jq('#etpro').val()  + '&ctype=etproFEJK', "turWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+    	window.open('tvinnsaddigitollv2_childwindow_tur.do?action=doInit&tudt=20200101' + '&tupro=' + jq('#etpro').val() + '&tuavd=' + jq('#etavd').val()  + '&ctype=etproFEJK', "turWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
     });
     
     
@@ -381,7 +381,8 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 				jq.ajax({
 			  	  type: 'GET',
 			  	  url: 'searchTur_Digitoll.do',
-			  	  data: { applicationUser : jq('#applicationUser').val(), 
+			  	  data: { applicationUser : jq('#applicationUser').val(),
+ 						  avd : jq('#etavd').val(),
 			  		  	  turNr : jq('#etpro').val(), 
 			  		  	  fromDate : "20200101"}, 
 			  	  dataType: 'json',

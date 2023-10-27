@@ -180,7 +180,7 @@
   		//--------------------
 	    jq('#emproIdLink').click(function() {
 	    	jq('#emproIdLink').attr('target','_blank');
-	    	window.open('tvinnsaddigitollv2_childwindow_tur.do?action=doInit&tudt=20200101' + '&tupro=' + jq('#empro').val()  + '&ctype=empro', "turWin", "top=300px,left=500px,height=600px,width=1000px,scrollbars=no,status=no,location=no");
+	    	window.open('tvinnsaddigitollv2_childwindow_tur.do?action=doInit&tudt=20200101' + '&tupro=' + jq('#empro').val() + '&tuavd=' + jq('#emavd').val()  + '&ctype=empro', "turWin", "top=300px,left=500px,height=600px,width=1000px,scrollbars=no,status=no,location=no");
 	    });
 	    jq('#emproIdLink').keypress(function(e){ //extra feature for the end user
 			if(e.which == 13) {
@@ -704,7 +704,7 @@
 
   	//TUR get std. info and/or default values (in case we restore the turFetchButton... 
 	// ...it is done at the Controller since the avd/pro where make read-only)
-	jq(function() { 
+	/*jq(function() { 
 	    jq('#turFetchButton').click(function() {
 			//==================================
 			//(1) Tur values from TDIG001R.pgm
@@ -713,6 +713,7 @@
 		  	  type: 'GET',
 		  	  url: 'searchTur_Digitoll.do',
 		  	  data: { applicationUser : jq('#applicationUser').val(), 
+					  avd : jq('#emavd').val(),	
 		  		  	  turNr : jq('#empro').val(), 
 		  		  	  fromDate : "20200101"}, 
 		  	  dataType: 'json',
@@ -723,23 +724,23 @@
 				var len = data.length;
 				if(len>0){
 					  for ( var i = 0; i < len; i++) {
+						//Bruttovekt
+						jq('#emvkb').val(data[i].tutvkt);//brutto-vekt
+						//kanske några till men helst inte ...
 						
-						if(data[i].tusg != ''){
+						//signatur
+						/*if(data[i].tusg != ''){
 							jq('#emsg').val(data[i].tusg);//signatur
 						}else{
 							jq('#emsg').val(jq('#applicationUserSign').val());//signatur from login
 						}
-						//Bruttovekt
-						jq('#emvkb').val(data[i].tutvkt);//brutto-vekt
-					
-						
 					  }
 				 }else{
-					jq('#emvkb').val("");//brutto-vekt
+					//jq('#emvkb').val("");//brutto-vekt
 						
 				 }	
 				//get defaults
-				getDefaultValuesFromSadmoaf();
+				//getDefaultValuesFromSadmoaf();
 				
 				},
 			  	  error: function() {
@@ -852,7 +853,7 @@
 			 });
 		 });
 	}
-
+*/
 
 
 

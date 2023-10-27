@@ -361,13 +361,21 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		Map model = new HashMap();
 		String callerType = request.getParameter("ctype");
 		String tudt = recordToValidate.getTudt();
+		String tuavd = recordToValidate.getTuavd();
 		String tupro = recordToValidate.getTupro();
 		logger.info("caller:" + callerType);
 		logger.info("tudt (fromDate):" + tudt);
+		logger.info("tuavd:" + tuavd);
 		logger.info("tupro:" + tupro);
 		//
 		model.put("tudt", tudt);
-		model.put("tupro", tupro);
+		//antingen eller och inte båda 2...Turen overrides avd if it exists
+		if(StringUtils.isNotEmpty(tupro)) {
+			model.put("tupro", tupro);
+		}else {
+			model.put("tuavd", tuavd);
+		}
+		
 		
 		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_tur");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
@@ -776,6 +784,9 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		  urlRequestParamsKeys.append("&wtudt=" + recordToValidate.getTudt()); //fromDate);
 		  if(StringUtils.isNotEmpty(recordToValidate.getTupro())) {
 			  urlRequestParamsKeys.append("&wsstur=" + recordToValidate.getTupro());
+		  }
+		  if(StringUtils.isNotEmpty(recordToValidate.getTuavd())) {
+			  urlRequestParamsKeys.append("&wssavd=" + recordToValidate.getTuavd());
 		  }
 		  		  
 		  logger.info("URL: " + BASE_URL);

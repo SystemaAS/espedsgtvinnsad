@@ -33,6 +33,9 @@
 						<form name="tvinnsadImportTullkontorForm" id="tvinnsadImportTullkontorForm" action="tvinnsaddigitollv2_childwindow_tur.do?action=doInit" method="post">
 							<input type="hidden" name="ctype" id="ctype" value="${model.callerType}">
 						<tr>
+							<td class="text14">&nbsp;Avd</td>
+							<td class="text14">&nbsp;<input type="text" class="inputText" onKeyPress="return numberKey(event)" name="tuavd" id="tuavd" size="10" maxlength="8" value="${model.tuavd}"></td>
+						
 							<td class="text14">&nbsp;Tur</td>
 							<td class="text14">&nbsp;<input type="text" class="inputText" onKeyPress="return numberKey(event)" name="tupro" id="tupro" size="10" maxlength="8" value="${model.tupro}"></td>
 						
@@ -82,9 +85,9 @@
 			                       <tr class="text14">
 			                   </c:otherwise>
 			               </c:choose>
-			               <td nowrap style="cursor:pointer;" class="text14MediumBlue" id="tupro${record.tupro}@tuavd${record.tuavd}@ctype${model.callerType}" >
+			               <td nowrap style="cursor:pointer;" class="text14MediumBlue" id="tupro${record.tupro}@tuavd${record.tuavd}@tutvkt${record.tutvkt}@ctype${model.callerType}" >
 		               			<img title="select" valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;${record.tupro}
-			               </td>
+			                </td>
 		               	   <td class="text14">&nbsp;${record.tuavd}</td>
 		               	   <td class="text14">&nbsp;${record.tudt}</td>
 		               	   <td class="text14">&nbsp;${record.tusdf}</td>

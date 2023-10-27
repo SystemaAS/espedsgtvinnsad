@@ -347,9 +347,8 @@
 									<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlueMandatoryField" name="empro" id="empro" size="10" maxlength="8" value="">								
 								</c:otherwise>
 							</c:choose>
-							<input title="Hente all tilgjengelig informasjon fra turen" class="text11" type="button" name="turFetchButton" id="turFetchButton" value='Hent'>
-							<%-- 
-							<input  readonly type="text" class="inputTextReadOnly" name="empro" id="empro" size="10" maxlength="8" value="${model.record.empro}">
+							<%--
+							<input title="Hent informasjon fra turen ..." class="text11" type="button" name="turFetchButton" id="turFetchButton" value='O'>
 							 --%> 					
 						</td>		
 						<td>

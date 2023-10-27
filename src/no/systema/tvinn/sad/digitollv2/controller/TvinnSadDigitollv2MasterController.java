@@ -569,6 +569,7 @@ public class TvinnSadDigitollv2MasterController {
 		  urlRequestParamsKeys.append("user=" + appUser.getUser());
 		  //urlRequestParamsKeys.append("&wtudt=" + fromDate);
 		  urlRequestParamsKeys.append("&wsstur=" + recordToValidate.getTransportDto().getEtpro());
+		  urlRequestParamsKeys.append("&wssavd=" + recordToValidate.getTransportDto().getEtavd());
 
 		  		  
 		  logger.info("URL: " + BASE_URL);

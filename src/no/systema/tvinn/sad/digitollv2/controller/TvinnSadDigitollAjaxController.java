@@ -218,8 +218,9 @@ public class TvinnSadDigitollAjaxController {
 	 * @return
 	 */
 	@RequestMapping(value = "searchTur_Digitoll.do", method = RequestMethod.GET)
-	  public @ResponseBody Set<SadTurRecord> searchTur(HttpServletRequest request, @RequestParam String applicationUser, @RequestParam(value = "turNr", required = false) String turNr, 
-			  																							   @RequestParam(value = "fromDate", required = true) String fromDate) {
+	  public @ResponseBody Set<SadTurRecord> searchTur(HttpServletRequest request, 	@RequestParam String applicationUser, @RequestParam(value = "avd", required = true) String avd, 
+			  																	   	@RequestParam(value = "turNr", required = true) String turNr, 
+			  																		@RequestParam(value = "fromDate", required = true) String fromDate) {
 
 		  logger.info("Inside searchTur");
 		  Set result = new HashSet();
@@ -230,6 +231,9 @@ public class TvinnSadDigitollAjaxController {
 		  urlRequestParamsKeys.append("&wtudt=" + fromDate);
 		  if(StringUtils.isNotEmpty(turNr)) {
 			  urlRequestParamsKeys.append("&wsstur=" + turNr);
+		  }
+		  if(StringUtils.isNotEmpty(avd)) {
+			  urlRequestParamsKeys.append("&wssavd=" + avd);
 		  }
 		  		  
 		  logger.info("URL: " + BASE_URL);
