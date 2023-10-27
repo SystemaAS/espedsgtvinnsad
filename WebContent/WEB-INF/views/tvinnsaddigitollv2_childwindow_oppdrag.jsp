@@ -25,6 +25,7 @@
 				<table style="width:100%;" border="0" >
 			    	<%-- separator --%>
 			        <tr height="2"><td></td></tr> 
+			        
 					<tr>
 						<td>
 						<table id="containerdatatableTable" cellspacing="2" align="left" >
@@ -40,14 +41,21 @@
 					    		</td>
 					    		<td width="20px">&nbsp;</td>
 					    		<td nowrap align="right" class="text16" style="color: gray;"  >
-					    			Liste av oppdrag med godkjente deklarasjoner
+					    			<%--Liste av oppdrag med godkjente deklarasjoner --%>
+					    			
 					    		</td>
 					    		</tr>
 				    		</td>
 				    		</table>
 				   		</tr>
 						<tr height="5"><td></td></tr> 
-						
+						<tr>
+			               <td align="left">
+			               		&nbsp;<input class="inputFormSubmit" type="button" name="buttonCreateHousesOk" id="buttonCreateHousesOk" value='Ok'>
+			               		&nbsp;<input class="inputFormSubmit" type="button" name="buttonCancel" id="buttonCancel" value='Avbryt'>
+			               </td>
+		               </tr>
+		               	
 						<tr>
 						<td class="text11">
 									
@@ -71,13 +79,14 @@
 		                	<c:forEach items="${model.list}" var="record" varStatus="counter">    
 				             <tr class="tableRow" height="20" >
 					           <td width="2%" align="center" class="tableCellFirst12">
-					           		<a tabindex=-1 title="${model.tur}_${record.siavd}_${record.sitdn}" id="recordUpdate_${record.sitdn}" href="#" onClick="getItemData(this);">
-				               			<img valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;
-				               		</a>
-		
-					           	</td>	
+					           		<input class="clazzCreateHouseAware" type="checkbox" value="J" id="avd${record.siavd}_opd${record.sitdn}" name="avd${record.siavd}_opd${record.sitdn}" >
+					           </td>	
 				          	   <td width="2%" align="center"class="tableCell12" >${record.siavd}</td>
-				          	   <td width="2%" align="center" class="tableCell12" >${record.sitdn}</td>
+				          	   <td width="2%" align="center" class="tableCell12" >
+				          	   		<a tabindex=-1 title="${model.tur}_${record.siavd}_${record.sitdn}" id="recordUpdate_${record.sitdn}" href="#" onClick="getItemData(this);">
+				          	   			${record.sitdn}
+				          	   		</a>
+				          	   </td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.sivkb}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.sintk}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.wehrg}&nbsp;${record.weh0068a}&nbsp;${record.weh0068b}</td>

@@ -29,6 +29,7 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.service.SadOppdragService;
@@ -88,7 +89,15 @@ public class TvinnSadDigitollAjaxController {
 		 
 		 return result;
 	 }
-	
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param targetTransportId
+	 * @param fromEmlnrt
+	 * @param fromEmlnrm
+	 * @param fromEtktyp
+	 * @return
+	 */
 	@RequestMapping(value = "changeTransport_Digitoll.do", method = RequestMethod.GET)
 	public @ResponseBody Set<SadmotfRecord> changeTransport_Digitoll
 	  						(@RequestParam String applicationUser, @RequestParam String targetTransportId, 
@@ -134,40 +143,131 @@ public class TvinnSadDigitollAjaxController {
 	  						(@RequestParam String applicationUser, @RequestParam String tur, 
 	  						 @RequestParam String avd, @RequestParam String opd) {
 		 
-		 final String METHOD = "[DEBUG] getSpecificOppdrag_Digitoll ";
-		 logger.info(METHOD + "Inside");
+		final String METHOD = "[DEBUG] getSpecificOppdrag_Digitoll ";
+		logger.info(METHOD + "Inside");
+		Set result = new HashSet();
+		SadOppdragRecord tmp = this.getOppdrag(applicationUser, tur, opd);
+		if(tmp!=null) {
+			result.add(tmp);
+		}
+		/*final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_OPPDRAG_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + applicationUser + "&tur=" + tur;
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadOppdragContainer container = this.sadOppdragService.getListContainer(jsonPayload);
+    		if(container!=null && !container.getOrderList().isEmpty()) {
+    			for(SadOppdragRecord record: container.getOrderList()) {
+    				if(record.getSitdn().equals(opd)) {
+    					//Dekl.dato format to NO
+    					if(StringUtils.isNotEmpty(record.getWeh0068a())) {
+							if (record.getWeh0068a().length()==8) {
+								record.setWeh0068a(this.dateMgr.getDateFormatted_NO(record.getWeh0068a(), DateTimeManager.ISO_FORMAT));
+							}
+						}
+    					logger.info(record.getWeh0068a());
+    					result.add(record);
+    					break;
+    				}
+    			}
+    		}
+    		
+		}
+		*/
+    	return result;
+    	
+	 }
+	
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param tur
+	 * @param opd
+	 */
+	private SadOppdragRecord getOppdrag(String applicationUser, String tur, String opd) {
+		SadOppdragRecord retval = null;
+		
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_OPPDRAG_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + applicationUser + "&tur=" + tur;
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadOppdragContainer container = this.sadOppdragService.getListContainer(jsonPayload);
+    		if(container!=null && !container.getOrderList().isEmpty()) {
+    			for(SadOppdragRecord record: container.getOrderList()) {
+    				if(record.getSitdn().equals(opd)) {
+    					//Dekl.dato format to NO
+    					if(StringUtils.isNotEmpty(record.getWeh0068a())) {
+							if (record.getWeh0068a().length()==8) {
+								record.setWeh0068a(this.dateMgr.getDateFormatted_NO(record.getWeh0068a(), DateTimeManager.ISO_FORMAT));
+							}
+						}
+    					logger.info(record.getWeh0068a());
+    					retval = record;
+    					break;
+    				}
+    			}
+    		}
+    		
+		}
+    	
+    	return retval;
+    	
+	}
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param etlnrt
+	 * @return
+	 */
+	@RequestMapping(value = "createHousesFromOppdrag_Digitoll.do", method = RequestMethod.GET)
+	public @ResponseBody Set<SadmomfRecord> createHousesFromOppdrag_Digitoll
+	  						(@RequestParam String applicationUser, @RequestParam String avd, @RequestParam String opd, @RequestParam String mode ) {
+		 
+		 logger.info("avd:" + avd);
+		 logger.info("opd:" + opd);
+		 logger.info("mode:" + mode);
+		 
 		 Set result = new HashSet();
-		 List<SadOppdragRecord> resultList = new ArrayList();
-			final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_OPPDRAG_URL;
-			//add URL-parameters
-			String urlRequestParams = "user=" + applicationUser + "&tur=" + tur;
+		 SadmomfRecord fejk = new SadmomfRecord();
+		 fejk.setEmavd(Integer.valueOf(avd));
+		 result.add(fejk);
+		 
+		 //prepare the access CGI with RPG back-end
+		 /*
+		 final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TRANSPORT_URL;
+		 String urlRequestParams = "user=" + applicationUser + "&etlnrt=" + etlnrt;
 			logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
 	    	logger.warn("URL: " + BASE_URL);
 	    	logger.warn("URL PARAMS: " + urlRequestParams);
 	    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
-
+	
 	    	//Debug --> 
-	    	logger.info(jsonPayload);
+	    	logger.debug(jsonPayload);
 	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 	    	if(jsonPayload!=null){
-	    		SadOppdragContainer container = this.sadOppdragService.getListContainer(jsonPayload);
-	    		if(container!=null && !container.getOrderList().isEmpty()) {
-	    			for(SadOppdragRecord record: container.getOrderList()) {
-	    				if(record.getSitdn().equals(opd)) {
-	    					//Dekl.dato format to NO
-	    					if(StringUtils.isNotEmpty(record.getWeh0068a())) {
-								if (record.getWeh0068a().length()==8) {
-									record.setWeh0068a(this.dateMgr.getDateFormatted_NO(record.getWeh0068a(), DateTimeManager.ISO_FORMAT));
-								}
-							}
-	    					logger.info(record.getWeh0068a());
-	    					result.add(record);
-	    					break;
-	    				}
-	    			}
+	    		SadmotfContainer jsonContainer = this.sadmotfListService.getListContainer(jsonPayload);
+	    		List<SadmotfRecord> list = (List)jsonContainer.getList();
+	    		for(SadmotfRecord record : list) {
+	    			result.add(record);
 	    		}
 	    		
 	    	}
+		 */
 		 return result;
 	 }
 	

@@ -1,5 +1,6 @@
 	//this variable is a global jQuery var instead of using "$" all the time. Very handy
   	var jq = jQuery.noConflict();
+	var BLOCKUI_OVERLAY_MESSAGE_DEFAULT = "Please wait...";
   	//-----------
   	// Tullkontor
   	//-----------
@@ -27,6 +28,64 @@
 			  
 	    });
 	});
+	
+	jq(function() {
+		jq('#buttonCreateHousesOk').click(function(){
+				  
+			jq( ".clazzCreateHouseAware" ).each(function(  ) {
+				
+				  var id = this.id;
+				  var record = id.split('_');
+				  var avd = record[0].replace("avd", "");
+				  var opd = record[1].replace("opd", "");
+				  //var counter = i + 1;
+				  //alert(avd + "-" + opd);
+				
+				  if(jq('#avd' + avd + '_' + 'opd' + opd).prop('checked')){
+					  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+					  jq.ajax({
+				  	  	  type: 'GET',
+				  	  	  url: 'createHousesFromOppdrag_Digitoll.do',
+				  	  	  data: { applicationUser : jq('#applicationUser').val(),
+									avd : avd,
+									opd : opd,
+									mode : 'A'},
+									
+				  	  	  dataType: 'json',
+				  	  	  cache: false,
+				  	  	  //async: false,
+				  	  	  contentType: 'application/json',
+				  	  	  success: function(data) {
+							jq.unblockUI(); //must have async: true (default) to work
+				  	  		var len = data.length;
+				  	  		for ( var i = 0; i < len; i++) {
+				  	  			//Update has been done successfully
+						        
+				  	  		}
+							
+				  	  	  },
+					  	  error: function() {
+							jq.unblockUI();
+				  	  	    alert('Error loading ...');
+				  	  	  }
+				  	  });
+					  
+				   }
+				 
+			});
+			//jq.unblockUI();
+			
+			//we must reload the parent window since the use case updates the invoice list (if the end-user has selected some invoices to import)
+			//window.opener.location.reload();
+			//window.close();
+		});
+		//abort
+		jq('#buttonCancel').click(function(){
+			window.close();
+		});
+		
+	});
+	
 	
 	
 	jq(function() {
@@ -224,7 +283,7 @@
 
 	jq("div.toolbar").html('<span class="text16">Oppdrag</span>');
     
-//event on input field for search
+	//event on input field for search
     jq('input.mainList_filter').on( 'keyup click', function () {
     		filterGlobal();
     });
