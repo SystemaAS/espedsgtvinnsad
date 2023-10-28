@@ -173,7 +173,23 @@
 			    			</a>
 			    			&nbsp;<font color="#FF6600"; style="font-weight: bold;">|</font>
 			    			--%>
-			    			
+			    			<%-- ----------------------- --%>
+			    			<%-- VEDLIKEHOLD FELLES      --%>
+			    			<%-- ----------------------- --%>
+			    			<a id="alinkTopicListMenuMaintFelles" tabindex=-1 href="tvinnsadmaintenancefelles.do?">
+			    				&nbsp;<font
+			    				<c:choose>           
+		                   			<c:when test="${user.activeMenu=='TVINN_SAD_MAINTENANCE_FELLES'}">
+		                       			class="headerMenuOrange"
+		                   			</c:when>
+		                   			<c:otherwise>   
+		                       			class="headerMenuWhite"
+		                   			</c:otherwise>
+		               			</c:choose>
+			    				>&nbsp;<spring:message code="systema.tvinn.sad.maintenance.felles.label"/>&nbsp;</font>
+			    			</a>
+			    			&nbsp;<font color="#FF6600"; style="font-weight: bold;">|</font>
+			    		
 			    			<%-- --------------------------------- --%>
 			    			<%-- TVINN-SAD DIGITOLLV2 MENU --%>
 			    			<%-- --------------------------------- --%>
@@ -191,23 +207,7 @@
 			    			</a>
 			    			&nbsp;<font color="#FF6600"; style="font-weight: bold;">|</font>
 			    			
-			    			<%-- ----------------------- --%>
-			    			<%-- VEDLIKEHOLD FELLES      --%>
-			    			<%-- ----------------------- --%>
-			    			<a id="alinkTopicListMenuMaintFelles" tabindex=-1 href="tvinnsadmaintenancefelles.do?">
-			    				&nbsp;<font
-			    				<c:choose>           
-		                   			<c:when test="${user.activeMenu=='TVINN_SAD_MAINTENANCE_FELLES'}">
-		                       			class="headerMenuOrange"
-		                   			</c:when>
-		                   			<c:otherwise>   
-		                       			class="headerMenuWhite"
-		                   			</c:otherwise>
-		               			</c:choose>
-			    				>&nbsp;<spring:message code="systema.tvinn.sad.maintenance.felles.label"/>&nbsp;</font>
-			    			</a>
-			    			&nbsp;<font color="#FF6600"; style="font-weight: bold;">|</font>
-			    			
+			    				
 		    			 	<%-- ------------------- --%>
 			    			<%-- Maintenance  MENU    --%>
 			    			<%-- -------------------- --%>

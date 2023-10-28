@@ -24,6 +24,7 @@ import no.systema.main.util.AppConstants;
 import no.systema.main.util.DateTimeManager;
 import no.systema.jservices.common.values.FasteKoder;
 import no.systema.main.model.SystemaWebUser;
+import no.systema.tvinn.sad.digitollv2.controller.service.AvdSignControllerService;
 import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafOnlyTransportRecord;
@@ -90,8 +91,8 @@ public class MaintSadDigitollv2SadmoafController {
 				}
 			}
 			//drop downs
-			this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
-			this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
+			this.avdSignControllerService.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
+			this.avdSignControllerService.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
 			//this.setCodeDropDownMgr(appUser, model);
 			this.setDropDownService(model);
 			//errorMessage from a redirect...
@@ -229,8 +230,8 @@ public class MaintSadDigitollv2SadmoafController {
 		}else{
 			
 			//drop downs
-			this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
-			this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
+			this.avdSignControllerService.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
+			this.avdSignControllerService.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
 			//this.setCodeDropDownMgr(appUser, model);
 			this.setDropDownServiceMaster(model);
 			//errorMessage from a redirect...
@@ -441,62 +442,6 @@ public class MaintSadDigitollv2SadmoafController {
 	
 	
 	
-	private void populateAvdelningHtmlDropDownsFromJsonString(Map model, SystemaWebUser appUser, HttpSession session){
-		//fill in html lists here
-		String NCTS_IMPORT_IE = "N"; //Import
-		try{
-			String BASE_URL = TvinnSadUrlDataStore.TVINN_SAD_FETCH_AVDELNINGAR_NCTS_URL;
-			StringBuffer urlRequestParamsKeys = new StringBuffer();
-			urlRequestParamsKeys.append("user=" + appUser.getUser());
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "ie=" + NCTS_IMPORT_IE);
-			//Now build the URL and send to the back end via the drop down service
-			String url = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
-			logger.info("AVD BASE_URL:" + BASE_URL);
-			logger.info("AVD BASE_PARAMS:" + urlRequestParamsKeys.toString());
-			
-			JsonTvinnSadAvdelningContainer container = this.tvinnSadDropDownListPopulationService.getAvdelningContainer(url);
-			List<JsonTvinnSadAvdelningRecord> list = new ArrayList();
-			for(JsonTvinnSadAvdelningRecord record: container.getAvdelningar()){
-				list.add(record);
-				//logger.info("Avd-tst:" + record.getAvd() + "XX" + record.getTst());
-			}
-			model.put(TvinnSadConstants.RESOURCE_MODEL_KEY_AVD_LIST, list);
-			session.setAttribute(TvinnSadConstants.RESOURCE_MODEL_KEY_AVD_LIST_SESSION_TEST_FLAG, list);
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-	}
-	
-	private void populateSignatureHtmlDropDownsFromJsonString(Map model, SystemaWebUser appUser){
-		//fill in html lists here
-		String NCTS_IMPORT_IE = "N"; //NCTS import: ie=N 
-		
-		try{
-			String BASE_URL = TvinnSadUrlDataStore.TVINN_SAD_FETCH_SIGNATURE_NCTS_URL;
-			StringBuffer urlRequestParamsKeys = new StringBuffer();
-			urlRequestParamsKeys.append("user=" + appUser.getUser());
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "ie=" + NCTS_IMPORT_IE);
-			//Now build the URL and send to the back end via the drop down service
-			String url = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
-			logger.info("SIGN BASE_URL:"  + BASE_URL);
-			logger.info("SIGN BASE_PARAMS:" + urlRequestParamsKeys.toString());
-			
-			JsonTvinnSadSignatureContainer container = this.tvinnSadDropDownListPopulationService.getSignatureContainer(url);
-			List<JsonTvinnSadSignatureRecord> list = new ArrayList();
-			for(JsonTvinnSadSignatureRecord record: container.getSignaturer()){
-				list.add(record);
-				//logger.info("Sign-tst:" + record.getSign());
-			}
-			model.put(TvinnSadConstants.RESOURCE_MODEL_KEY_SIGN_LIST, list);
-			
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-	}	
 	
 	private void setDropDownService(Map model) {
 		List<GenericDropDownDto> dto = this.digitollDropDownListPopulationService.getContainerSizeAndType();
@@ -767,6 +712,8 @@ public class MaintSadDigitollv2SadmoafController {
 
 	@Autowired
 	private SadmoafListService sadmoafListService;
+	@Autowired
+	private AvdSignControllerService avdSignControllerService;
 	
 	@Autowired
 	private TvinnSadDropDownListPopulationService tvinnSadDropDownListPopulationService;

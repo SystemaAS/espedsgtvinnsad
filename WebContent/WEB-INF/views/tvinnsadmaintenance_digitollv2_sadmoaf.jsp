@@ -43,6 +43,7 @@
 	</td>
  </tr>
  
+ <%--
  <tr>
  	<td>
 	<table style="width:100%;" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
@@ -108,7 +109,7 @@
 									
 								</form>
 							</div>
-							 --%>	
+							 
 	               	   </td> 
 	            </tr> 
 	            </c:forEach>
@@ -116,7 +117,8 @@
             </table>
 	</td>	
 </tr>
-	
+ --%>
+ 
 <tr height="5"><td colspan="10">&nbsp;</td></tr>
  
  <tr>
@@ -199,7 +201,7 @@
 						<table class="formFrame" style="width:100%;" border="0" cellspacing="1" cellpadding="0">
 			 				
 							<tr>
-			 					<td class="text12" title="etavd">&nbsp;Avd<font class="text16RedBold" >*</font></td>
+			 					<td class="text12" title="etavd">&nbsp;Avd</td>
 			 					<td class="text12" title="etsg">&nbsp;Sign</td>
 			 					<td class="text12" title="etpro">&nbsp;Tur</td>
 		 					</tr>				 				
@@ -210,24 +212,22 @@
 				 						<input readonly size="7" maxlength="4" class="inputTextReadOnly" id="etavd" name="etavd" value="${model.record.etavd}">
 									</c:when>
 									<c:otherwise>
-										<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" onKeyPress="return numberKey(event)" size="7" maxlength="4" class="inputTextMediumBlueMandatoryField" list="etavd_list" id="etavd" name="etavd" value="${model.record.etavd}">
-										<datalist id="etavd_list">
+										<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" id="etavd" name="etavd" >
 										  <option value="">-Välj-</option>
 						 				  	<c:forEach var="record" items="${model.avdList}" >
-						 				  		<option value="${record.avd}"<c:if test="${model.record.etavd == record.avd}"> selected </c:if> >${record.avd}</option> 
+						 				  		<option title="${record.namn}" value="${record.avd}"<c:if test="${model.record.etavd == record.avd}"> selected </c:if> >${record.avd}</option> 
 											</c:forEach>  
-										</datalist>
+										</select>
 									</c:otherwise>
 									</c:choose>
 			 					</td>
 			 					<td>
-			 						<input size="6" maxlength="3" class="inputTextMediumBlue" list="etsg_list" id="etsg" name="etsg" value="${model.record.etsg}">
-									<datalist id="etsg_list">
+			 						<select select class="inputTextMediumBlue" id="etsg" name="etsg" >
 									  <option value="">-Välj-</option>
 					 				  	<c:forEach var="record" items="${model.signList}" >
-					 				  		<option value="${record.sign}"<c:if test="${model.record.etsg == record.sign}"> selected </c:if> >${record.sign}</option> 
+					 				  		<option title="${record.namn}" value="${record.sign}"<c:if test="${model.record.etsg == record.sign}"> selected </c:if> >${record.sign}</option> 
 										</c:forEach>  
-									</datalist>	
+									</select>	
 			 					</td>
 			 					<td>
 			 						<c:choose>
@@ -245,7 +245,7 @@
 			 				<tr >
 			 					<td class="text14">
 			 						<img style="cursor:pointer;" onMouseOver="showPop('etktkd_info');" onMouseOut="hidePop('etktkd_info');" style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
-				            		<span title="etktkd Mode of Transport">ModeTr.</span><font class="text16RedBold" >*</font>
+				            		<span title="etktkd Mode of Transport">ModeTr.</span>
 			                		<div class="text11" style="position: relative;" align="left">
 				                	<span style="position:absolute;top:2px; width:250px;" id="etktkd_info" class="popupWithInputText text11"  >
 					           		<ul>
@@ -260,7 +260,7 @@
 			 					
 			 					<td class="text14">
 				 					<img style="cursor:pointer;" onMouseOver="showPop('etktd_info');" onMouseOut="hidePop('etktd_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
-					            	<span title="etktyp Type of Identification"><font color="green">Kjør.Typ.</font></span><font class="text16RedBold" >*</font>
+					            	<span title="etktyp Type of Identification"><font color="green">Kjør.Typ.</font></span>
 			                		<div class="text11" style="position: relative;" align="left">
 				                	<span style="position:absolute;top:2px; width:250px;" id="etktd_info" class="popupWithInputText text11"  >
 				                	<p><b>Kjør.Typ.</b>&nbsp;Bestemmer hvilket API som brukes...(f.eks: 41 = luftfartøy = api-air)</p>
@@ -274,7 +274,7 @@
 		 						</td>
 								<td class="text14">
 									<img title="Click!" style="cursor:pointer;" onClick="showPop('etktm_info');" style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
-					            	<span title="etktm Type of Means of Transport">Tr.midd.typ.</span><font class="text16RedBold" >*</font>
+					            	<span title="etktm Type of Means of Transport">Tr.midd.typ.</span>
 			                		<div class="text11" style="position: relative;" align="left">
 				                	<span style="position:absolute;top:2px; width:250px;" id="etktm_info" class="popupWithInputText text11"  >
 				                	<button name="_ButtonCloseEtktm" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('etktm_info');">Close</button> 
@@ -286,7 +286,7 @@
 									</span>	
 									</div>
 								</td>
-								<td class="text14">&nbsp;<span title="etklk Land code">Landkode</span><font class="text16RedBold" >*</font></td>
+								<td class="text14">&nbsp;<span title="etklk Land code">Landkode</span></td>
 				 			</tr>
 				 				
 				 			<tr >
@@ -441,7 +441,7 @@
 					 			<td class="text14White">
 					 			
 					 			<img style="cursor:pointer;" onMouseOver="showPop('transp_info');" onMouseOut="hidePop('transp_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
-				            	<span title="Transportør">Transportør&nbsp;</span><font class="text16RedBold" >*</font>
+				            	<span title="Transportør">Transportør&nbsp;</span>
 		                		<div class="text11" style="position: relative;" align="left">
 			                	<span style="position:absolute;top:2px; width:250px;" id="transp_info" class="popupWithInputText text11"  >
 			                	<p><b>Transportør</b>&nbsp;
@@ -708,11 +708,90 @@
 	</table>
 	</td>
 	</tr>	
+	
+	
+	<tr>
+ 	<td>
+	<table style="width:100%;" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
+ 		<tr height="5"><td colspan="10">&nbsp;</td></tr>
+ 		
+ 		<tr>
+			<td class="text14">
+			<table id="mainList" class="display compact cell-border" >
+				<thead>
+				<tr>
+					<th class="tableHeaderFieldFirst" >&nbsp;Endre</th>
+                    <th class="tableHeaderField" >&nbsp;Avd&nbsp;</th>
+                    <th class="tableHeaderField" >&nbsp;Sign&nbsp;</th>
+                    <th class="tableHeaderField" >&nbsp;Turnr.&nbsp;</th>
+                    <th class="tableHeaderField" >&nbsp;Transp.&nbsp;</th>
+                    <th class="tableHeaderField" >&nbsp;Ombud&nbsp;</th>
+                    <th class="tableHeaderField" >&nbsp;Pass.tollsted&nbsp;</th>
+                    <th class="tableHeaderField" >&nbsp;Kjør.Typ.&nbsp;</th>
+                    <th class="tableHeaderField" >&nbsp;Slett&nbsp;</th>
+                </tr>  
+                </thead> 
+                <tbody >  
+	            <c:forEach var="record" items="${model.list}" varStatus="counter">   
+	               <tr class="tableRow" height="20" >
+	              
+	               <td align="center" width="2%" class="tableCell" style="border-style:solid; border-width:0px 1px 1px 0px; border-color:#FAEBD7;" >
+	        	       	<a onClick="setBlockUI(this)" style="display:block;width:100%; height:100%;" id="efavd_${record.etavd}" href="tvinnsadmaintenance_digitollv2_sadmoaf.do?action=doFind&etavd=${record.etavd}">
+  							<img src="resources/images/update.gif" border="0" alt="edit">
+               			</a>
+	               </td>
+	               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >
+	               		${record.etavd}
+	               </td>
+	               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >
+	               		${record.etsg}
+	               </td>
+	               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >
+	               		${record.etpro}
+	               </td>
+	               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >
+	               		${record.etnat}
+	               </td>
+	               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >
+	               		${record.etnar}
+	               </td>
+	               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >
+	               		${record.ettsd}
+	               </td>
+	               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >
+	               		${record.etktyp}
+	               </td>
+	               <td align="center" width="2%" class="tableCell" style="border-style: solid;border-width: 0px 1px 1px 0px;border-color:#FAEBD7;" >   		
+			   				
+              				<a onClick="setBlockUI(this)" style="display:block;width:100%; height:100%;" id="etavdLink_${record.etavd}" href="tvinnsadmaintenance_digitollv2_sadmoaf_delete.do?etavd=${record.etavd}">
+								<img src="resources/images/delete.gif" border="0" alt="remove">
+							</a>
+							<%--
+							<div style="display: none;" class="clazz_dialog" id="dialogDelete${counter.count}" title="Dialog">
+								<form action="tvinnsadmaintenance_digitollv2_sadmoaf_delete.do" name="deleteForm${counter.count}" id="deleteForm${counter.count}" method="post">
+								 	<input type="hidden" name="currentEfavd${counter.count}" id="currentEfavd${counter.count}" value="${record.etavd}">
+								 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="D">
+								 	<p class="text14" >Er du sikker på at du vil slette Avd&nbsp;<b>${record.etavd}</b></p>
+									
+								</form>
+							</div>
+							 --%>	
+	               	   </td> 
+	            </tr> 
+	            </c:forEach>
+	            </tbody>
+            </table>
+	</td>	
+</tr>
+	
+	
+	
 	</table> 
 	</form>
 </td>
 </tr>
 
+ 
 
 
 

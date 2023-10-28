@@ -52,7 +52,7 @@ public final class SadDigitollUrlDataStore {
 		
 		//AS400 services CGI
 		//FETCH Oppdrag list
-		//http://10.11.47.61//sycgip/TDIG000R.pgm?user=OSCAR&tur=501954
+		//http://10.11.47.61/sycgip/TDIG000R.pgm?user=OSCAR&tur=501954
 		static public String SAD_FETCH_DIGITOLL_OPPDRAG_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TDIG000R.pgm";
 		//FETCH tolltariff
 		//http://gw.systema.no/sycgip/TNOG023R.pgm?user=OSCAR&ie=I&sok=Beskrivelse (alt. ie=E)

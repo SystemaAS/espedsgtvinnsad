@@ -59,6 +59,7 @@ import no.systema.tvinn.sad.model.jsonjackson.customer.JsonTvinnSadCustomerRecor
 import no.systema.tvinn.sad.digitollv2.controller.service.ApiAsyncFacadeSendService;
 import no.systema.tvinn.sad.digitollv2.controller.service.ApiHouseSendService;
 import no.systema.tvinn.sad.digitollv2.controller.service.ApiMasterSendService;
+import no.systema.tvinn.sad.digitollv2.controller.service.AvdSignControllerService;
 import no.systema.tvinn.sad.digitollv2.filter.SearchFilterDigitollTransportList;
 import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
@@ -277,8 +278,8 @@ public class TvinnSadDigitollv2MasterController {
 			//Final successView with domain objects
 			//--------------------------------------
 			//drop downs
-	    	this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
-			this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
+	    	this.avdSignControllerService.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
+			this.avdSignControllerService.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
 			//this.setCodeDropDownMgr(appUser, model);
 			this.setDropDownService(model);
 			
@@ -957,35 +958,6 @@ public class TvinnSadDigitollv2MasterController {
 		model.put(TvinnSadConstants.ASPECT_ERROR_META_INFO, errorMetaInformation);
 	}
 			
-	/**
-	 * 
-	 * @param model
-	 * @param appUser
-	 */
-	private void populateAvdelningHtmlDropDownsFromJsonString(Map model, SystemaWebUser appUser, HttpSession session){
-		//fill in html lists here
-		try{
-			String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_AVD_URL;
-			StringBuffer urlRequestParamsKeys = new StringBuffer();
-			urlRequestParamsKeys.append("user=" + appUser.getUser());
-			String url = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
-			logger.info("AVD BASE_URL:" + BASE_URL);
-			logger.info("AVD BASE_PARAMS:" + urlRequestParamsKeys.toString());
-			
-			SadAvdSignContainer container = this.sadAvdSignService.getListContainer(url);
-			List<SadAvdSignRecord> list = new ArrayList();
-			for(SadAvdSignRecord record: container.getAvdelningar()){
-				list.add(record);
-				//logger.info("Avd-tst:" + record.getAvd() + "XX" + record.getTst());
-			}
-			model.put(TvinnSadConstants.RESOURCE_MODEL_KEY_AVD_LIST, list);
-			session.setAttribute(TvinnSadConstants.RESOURCE_MODEL_KEY_AVD_LIST_SESSION_TEST_FLAG, list);
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-	}
 	
 	private void populateCustomsOfficeOfFirstEntryHtmlDropDown(Map model) {
 		List<JsonTvinnSadCodeRecord> list = new ArrayList();
@@ -998,35 +970,6 @@ public class TvinnSadDigitollv2MasterController {
 		record.setZkod(code); record.setZtxt(text);
 		return record;
 	}
-	/**
-	 * 
-	 * @param model
-	 * @param appUser
-	 */
-	private void populateSignatureHtmlDropDownsFromJsonString(Map model, SystemaWebUser appUser){
-		//fill in html lists here
-		try{
-			String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_SIGN_URL;
-			StringBuffer urlRequestParamsKeys = new StringBuffer();
-			urlRequestParamsKeys.append("user=" + appUser.getUser());
-			String url = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
-			logger.info("AVD BASE_URL:" + BASE_URL);
-			logger.info("AVD BASE_PARAMS:" + urlRequestParamsKeys.toString());
-			
-			SadAvdSignContainer container = this.sadAvdSignService.getListContainer(url);
-			List<SadAvdSignRecord> list = new ArrayList();
-			for(SadAvdSignRecord record: container.getSignaturer()){
-				list.add(record);
-				//logger.info("Avd-tst:" + record.getAvd() + "XX" + record.getTst());
-			}
-			model.put(TvinnSadConstants.RESOURCE_MODEL_KEY_SIGN_LIST, list);
-			
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-	}	
 	
 	/**
 	 * 
@@ -1261,7 +1204,7 @@ public class TvinnSadDigitollv2MasterController {
 	@Autowired
 	private MaintMainKofastService maintMainKofastService;
 	@Autowired
-	private SadAvdSignService sadAvdSignService;
+	private AvdSignControllerService avdSignControllerService;
 	
 	@Autowired
 	private ApiMasterSendService apiMasterSendService;

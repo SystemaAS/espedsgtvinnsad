@@ -48,6 +48,7 @@ import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
 import no.systema.tvinn.sad.digitollv2.controller.service.ApiAsyncFacadeSendService;
 import no.systema.tvinn.sad.digitollv2.controller.service.ApiHouseSendService;
 import no.systema.tvinn.sad.digitollv2.controller.service.ApiTransportSendService;
+import no.systema.tvinn.sad.digitollv2.controller.service.AvdSignControllerService;
 import no.systema.tvinn.sad.digitollv2.controller.service.HouseControllerService;
 import no.systema.tvinn.sad.digitollv2.enums.EnumSadmomfStatus3;
 import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
@@ -250,7 +251,7 @@ public class TvinnSadDigitollv2HouseController {
 			//Final successView with domain objects
 			//--------------------------------------
 			//drop downs
-			this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
+			this.avdSignControllerService.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
 			
 			this.setDropDownService(model);
 	    	
@@ -817,69 +818,6 @@ public class TvinnSadDigitollv2HouseController {
     	
     	return retval;
 	}
-	/**
-	 * 
-	 * @param applicationUser
-	 * @param recordToValidate
-	 * @param mode
-	 * @param errMsg
-	 * @return
-	 */
-	/*
-	private int updateRecord(String applicationUser, SadmohfRecord recordToValidate, String mode, StringBuffer errMsg) {
-		int retval = 0;
-		
-		
-		//get BASE URL
-		final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_HOUSECONSIGNMENT_URL;
-		//add URL-parameters
-		StringBuffer urlRequestParams = new StringBuffer();
-		urlRequestParams.append("user=" + applicationUser + "&mode=" + mode);
-		urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate)));
-		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-    	logger.warn("URL: " + BASE_URL);
-    	logger.warn("URL PARAMS: " + urlRequestParams);
-    	
-    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
-
-    	//Debug --> 
-    	logger.info(jsonPayload);
-    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-    	if(jsonPayload!=null){
-    		
-    		GeneralUpdateContainer container = this.generalUpdateService.getListContainer(jsonPayload);
-    		//----------------------------------------------------------------
-			//now filter the topic list with the search filter (if applicable)
-			//----------------------------------------------------------------
-    		Collection<GeneralUpdateRecord> outputList = container.getList();	
-			if(outputList!=null && outputList.size()>0){
-				for(GeneralUpdateRecord record : outputList ){
-					logger.info(record.toString());
-					if(StringUtils.isNotEmpty(container.getErrMsg())){
-						errMsg.append(record.getStatus());
-						errMsg.append(" -->detail:" + container.getErrMsg());
-						retval = -1;
-						break;
-					}else {
-						if(mode.equals(SadDigitollConstants.DB_MODE_INSERT)) {
-							if(recordToValidate.getEhlnrt()==null || recordToValidate.getEhlnrt()==0){
-								recordToValidate.setEhlnrt(record.getId());
-							}
-							if(recordToValidate.getEhlnrm()==null || recordToValidate.getEhlnrm()==0){
-								recordToValidate.setEhlnrm(record.getId2());
-							}
-							if(recordToValidate.getEhlnrh()==null || recordToValidate.getEhlnrh()==0){
-								recordToValidate.setEhlnrh(record.getId3());
-							}
-						}
-					}
-				}
-			}
-    	}
-    	
-    	return retval;
-	}
-	*/
 	
 	
 	/**
@@ -908,36 +846,6 @@ public class TvinnSadDigitollv2HouseController {
 		errorMetaInformation.append(rpgReturnResponseHandler.getTitdn());
 		model.put(TvinnSadConstants.ASPECT_ERROR_META_INFO, errorMetaInformation);
 	}
-			
-	/**
-	 * 
-	 * @param model
-	 * @param appUser
-	 */
-	private void populateAvdelningHtmlDropDownsFromJsonString(Map model, SystemaWebUser appUser, HttpSession session){
-		//fill in html lists here
-		try{
-			String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_AVD_URL;
-			StringBuffer urlRequestParamsKeys = new StringBuffer();
-			urlRequestParamsKeys.append("user=" + appUser.getUser());
-			String url = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
-			logger.info("AVD BASE_URL:" + BASE_URL);
-			logger.info("AVD BASE_PARAMS:" + urlRequestParamsKeys.toString());
-			
-			SadAvdSignContainer container = this.sadAvdSignService.getListContainer(url);
-			List<SadAvdSignRecord> list = new ArrayList();
-			for(SadAvdSignRecord record: container.getAvdelningar()){
-				list.add(record);
-				//logger.info("Avd-tst:" + record.getAvd() + "XX" + record.getTst());
-			}
-			model.put(TvinnSadConstants.RESOURCE_MODEL_KEY_AVD_LIST, list);
-			session.setAttribute(TvinnSadConstants.RESOURCE_MODEL_KEY_AVD_LIST_SESSION_TEST_FLAG, list);
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-	}
 	
 	private void populateCustomsOfficeOfFirstEntryHtmlDropDown(Map model) {
 		List<JsonTvinnSadCodeRecord> list = new ArrayList();
@@ -950,41 +858,6 @@ public class TvinnSadDigitollv2HouseController {
 		record.setZkod(code); record.setZtxt(text);
 		return record;
 	}
-	/**
-	 * 
-	 * @param model
-	 * @param appUser
-	 */
-	private void populateSignatureHtmlDropDownsFromJsonString(Map model, SystemaWebUser appUser){
-		//fill in html lists here
-		String NCTS_IMPORT_IE = "N"; //NCTS import: ie=N 
-		
-		try{
-			String BASE_URL = TvinnSadUrlDataStore.TVINN_SAD_FETCH_SIGNATURE_NCTS_URL;
-			StringBuffer urlRequestParamsKeys = new StringBuffer();
-			urlRequestParamsKeys.append("user=" + appUser.getUser());
-			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "ie=" + NCTS_IMPORT_IE);
-			//Now build the URL and send to the back end via the drop down service
-			String url = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
-			logger.info("SIGN BASE_URL:"  + jsonDebugger.getBASE_URL_NoHostName(BASE_URL));
-			logger.info("SIGN BASE_PARAMS:" + urlRequestParamsKeys.toString());
-			
-			JsonTvinnSadSignatureContainer container = this.tvinnSadDropDownListPopulationService.getSignatureContainer(url);
-			List<JsonTvinnSadSignatureRecord> list = new ArrayList();
-			for(JsonTvinnSadSignatureRecord record: container.getSignaturer()){
-				list.add(record);
-				//logger.info("Sign-tst:" + record.getSign());
-			}
-			model.put(TvinnSadConstants.RESOURCE_MODEL_KEY_SIGN_LIST, list);
-			
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-	}	
-	
-	
 	
 	
 	/**
@@ -1202,7 +1075,7 @@ public class TvinnSadDigitollv2HouseController {
 	@Autowired
 	private MaintMainKofastService maintMainKofastService;
 	@Autowired
-	private SadAvdSignService sadAvdSignService;
+	private AvdSignControllerService avdSignControllerService;
 	
 	@Autowired
 	private ApiHouseSendService apiHouseSendService;

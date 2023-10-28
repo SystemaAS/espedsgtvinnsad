@@ -115,17 +115,17 @@
 			<td colspan="3" class="text14" valign="top">
 				<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">					
 					<tr>
-						<td class="text14">&nbsp;<span title="emavd">Avd</span><font class="text16RedBold" >*</font></td>
-						<td class="text14">&nbsp;<span title="emsg">Sign</span><font class="text16RedBold" >*</font></td>
-						<td class="text14">&nbsp;<span title="empro">Tur</span><font class="text16RedBold" >*</font>
+						<td class="text14">&nbsp;<span title="emavd">Avd</span></td>
+						<td class="text14">&nbsp;<span title="emsg">Sign</span></td>
+						<td class="text14">&nbsp;<span title="empro">Tur</span>
 							
 						</td>
-						<td class="text14">&nbsp;<span title="emvkb">Bruttovekt</span><font class="text16RedBold" >*</font></td>
-						<td class="text14">&nbsp;<span title="emcn">Container</span><font class="text16RedBold" >*</font></td>
-						<td class="text14">&nbsp;<span title="emdkm">Dok.nr</span><font class="text16RedBold" >*</font></td>
-						<td class="text14">&nbsp;<span title="emdkmt">Dok.type</span><font class="text16RedBold" >*</font></td>
+						<td class="text14">&nbsp;<span title="emvkb">Bruttovekt</span></td>
+						<td class="text14">&nbsp;<span title="emcn">Container</span></td>
+						<td class="text14">&nbsp;<span title="emdkm">Dok.nr</span></td>
+						<td class="text14">&nbsp;<span title="emdkmt">Dok.type</span></td>
 						<td class="text14">&nbsp;<span title="emknt Transportør KundeNr.">Transp.knr.</span></td>
-						<td class="text14">&nbsp;<span title="emrgt - Transportør OrgNr. / EORI">Transp.Orgnr / EORI</span><font class="text16RedBold" >*</font></td>
+						<td class="text14">&nbsp;<span title="emrgt - Transportør OrgNr. / EORI">Transp.Orgnr / EORI</span></td>
 						
 						<td class="text14">&nbsp;<span title="emst">St.</span></td>
 						<td class="text14">&nbsp;<span title="emst2">St.2</span></td>
@@ -137,29 +137,20 @@
 					<tr>
 						
 						<td>
-							<c:choose>
-								<c:when test="${model.record.emavd > 0}">
-									<input  onKeyPress="return numberKey(event)" size="7" maxlength="4" class="inputTextMediumBlue" list="emavd_list" id="emavd" name="emavd" value="${model.record.emavd}">	
-								</c:when>
-								<c:otherwise>
-									<input  onKeyPress="return numberKey(event)" size="7" maxlength="4" class="inputTextMediumBlue" list="emavd_list" id="emavd" name="emavd" value="">								
-								</c:otherwise>
-							</c:choose>	
-	 						<datalist id="emavd_list">
+	 						<select class="inputTextMediumBlue" id="emavd" name="emavd" >
 							  <option value="">-Välj-</option>
 			 				  	<c:forEach var="record" items="${model.avdList}" >
-			 				  		<option value="${record.avd}"<c:if test="${model.record.emavd == record.avd}"> selected </c:if> >${record.avd}</option> 
+			 				  		<option title="${record.namn}" value="${record.avd}"<c:if test="${model.record.emavd == record.avd}"> selected </c:if> >${record.avd}</option> 
 								</c:forEach>  
-							</datalist>
+							</select>
 	 					</td>
 	 					<td>
-	 						<input     size="6" maxlength="3" class="inputTextMediumBlue" list="emsg_list" id="emsg" name="emsg" value="${model.record.emsg}">
-							<datalist id="emsg_list">
+	 						<select class="inputTextMediumBlue" id="emsg" name="emsg">
 							  <option value="">-Välj-</option>
 			 				  	<c:forEach var="record" items="${model.signList}" >
-			 				  		<option value="${record.sign}"<c:if test="${model.record.emsg == record.sign}"> selected </c:if> >${record.sign}</option> 
+			 				  		<option title="${record.namn}" value="${record.sign}"<c:if test="${model.record.emsg == record.sign}"> selected </c:if> >${record.sign}</option> 
 								</c:forEach>  
-							</datalist>	
+							</select>	
 	 					</td>
 						
 						<td class="text14">
