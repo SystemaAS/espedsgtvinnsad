@@ -237,6 +237,15 @@
 				jq('#ehtdnIdLink').click();
 			}
 	  	});
+		//OppdragRawJson (for support purposes...)
+	  	jq('#ehtdnIdSpan').click(function() {
+			if(jq('#ehpro').val()!=''){									
+	    		jq('#ehtdnIdSpan').attr('target','_blank');
+	    		window.open('tvinnsaddigitollv2_childwindow_oppdragJson.do?action=doFind&tur=' + jq('#ehpro').val() + '&lnrt=' + jq('#emlnrt').val() + '&lnrm=' + jq('#emlnrm').val() + '&ctype=ehtdnJson' + '&opd=' + jq('#ehtdn').val(), "oppdWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");
+			}
+	    });
+
+
 	 	//--------------------
   	  	//Tur - ehpro
   		//--------------------

@@ -501,6 +501,38 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	    	return successView;
 		}
 	}
+	/**
+	 * 
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_oppdragJson.do",  method={RequestMethod.GET} )
+	public ModelAndView doShowOppdragJson(HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doOpdJson");
+		Map model = new HashMap();
+		String tur = request.getParameter("tur");
+		String lnrt = request.getParameter("lnrt");
+		String lnrm = request.getParameter("lnrm");
+		String opd = request.getParameter("opd");
+		
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_loginfo");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			
+			model.put("content", this.getOppdragRawJson(appUser, tur, lnrt, lnrm, opd));
+	    	
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
 	
 	@RequestMapping(value="tvinnsaddigitollv2_childwindow_tolltariff.do", params="action=doInit",  method={RequestMethod.GET, RequestMethod.POST } )
 	public ModelAndView doInitTolltariff(@ModelAttribute ("record") JsonTvinnSadTolltariffVarukodContainer recordToValidate, HttpSession session, HttpServletRequest request){
@@ -533,6 +565,8 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	    	return successView;
 		}
 	}
+	
+	
 	/**
 	 * 
 	 * @param appUser
@@ -640,6 +674,25 @@ public class TvinnSadDigitollv2ControllerChildWindow {
     	}
     	
     	return resultList;
+	}
+	private String getOppdragRawJson(SystemaWebUser appUser, String tur, String lnrt, String lnrm, String opd) {
+		String result = "...";
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_OPPDRAG_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser() + "&tur=" + tur + "&opd=" + opd;
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		result = jsonPayload;
+    	}
+    	
+    	return result;
 	}
 
 	/**
