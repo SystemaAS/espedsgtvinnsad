@@ -112,15 +112,11 @@
 						<div class="text12" style="position: relative;display: inline;" align="left">
 						<span style="position:absolute; left:-100px; top:15px;" id="jarStartCmd" class="popupWithInputText"  >
 			           		<div class="text11" align="left">
+			           			<a id="alinkLogsgLoggerApi" ><span class="text12" style="cursor:pointer;color:green;">1. Api-log</span></a><br/><br/>
+			           			<a id="alinkLogsgLoggerSadService" ><span class="text12" style="cursor:pointer;color:green;">2. Sad-service-log</span></a><br/>
+			           			<a id="alinkLogsgLoggerCatalina" ><span class="text12" style="cursor:pointer;color:green;">3. Catalina-log</span></a><br/>
 			           			
-			           			<a class="text11" target="_blank" href="renderLocalLogsgExpft.do?user=${user.user}">
-			           				1. logsg_syjservicestn-expft.log
-			           			</a>
-		     					<br/>
-			           			<a class="text11" target="_blank" href="renderLocalCatalina.do?user=${user.user}">
-			           				2. catalina.out
-			           			</a>			       
-			           			<br/><br/>
+			           			<br/>
 			           			<button name="_ButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('jarStartCmd');">Close</button> 
 			           		</div>
 			           	</span>
@@ -1375,6 +1371,42 @@
 	</td>
 </tr> 
 
+
+<%-- ------------------------- --%>
+<%-- DIALOG render logsg   --%>
+<%-- ------------------------- --%>
+<tr>
+<td>
+	<div id="dialogLoggerLocal" title="Dialog" style="display:none">
+		<form>
+	 	<table>
+	 		<tr>
+				<td colspan="3" class="text14" align="left" >Password</td>
+			</tr>
+			<tr >
+				<td>
+					<input type="password" class="inputText" id="pwdLocal" name="pwdLocal" size="15" maxlength="15" value=''>
+				</td>
+			</tr>
+			
+			<tr height="5"><td></td></tr>
+			<tr >
+				<td>
+					<input type="text" class="inputText" id="logLevelLocal" name="logLevelLocal" size="8" maxlength="8" value='INFO'>
+				</td>
+			</tr>
+			<tr height="10"><td></td></tr>
+			<tr>
+				<td colspan="3" class="text14MediumBlue" align="left">
+					<label id="loggerStatusLocal"></label>
+				</td>
+			</tr>
+			
+		</table>
+		</form>
+	</div>
+</td>
+</tr>
 
 </table>
  
