@@ -258,6 +258,46 @@ public class TvinnSadDigitollAjaxController {
 			if(StringUtils.isNotEmpty(record.getWeh0068b())) {
 				sadmohfRecord.setEh0068b(Integer.valueOf(record.getWeh0068b()));//Dekl.sekv
 			}
+			//Sender
+			if(StringUtils.isNotEmpty(record.getSikns())) { sadmohfRecord.setEhkns(Integer.valueOf(record.getSikns())); } //Kundnr
+			sadmohfRecord.setEhnas(record.getSinas());//Namn
+			sadmohfRecord.setEhrgs(record.getEhrgs());//Orgnr
+			sadmohfRecord.setEhad1s(record.getSiads1());//Adress
+			String ad2Avs = record.getSiads2() + " " + record.getSiads3(); 
+			sadmohfRecord.setEhpbs(ad2Avs);//
+			if(record.getEhems() != ""){ 
+				sadmohfRecord.setOwn_ehems_email(record.getEhems());//email
+			}
+			//Sender Postnr and City
+			String postnrAvs = ""; String cityAvs = ""; String landAvs = "";
+			if(record.getEhpns() != ""){ postnrAvs = record.getEhpns();}
+			if(record.getEhpss() != ""){ cityAvs = record.getEhpss();}
+			if(record.getEhlks() != ""){ landAvs = record.getEhlks();}
+			sadmohfRecord.setEhpns(postnrAvs);
+			sadmohfRecord.setEhpss(cityAvs);
+			sadmohfRecord.setEhlks(landAvs);
+			
+			//Receiver
+			if(StringUtils.isNotEmpty(record.getSiknk())) { sadmohfRecord.setEhknm(Integer.valueOf(record.getSiknk())); } //Kundnr
+			sadmohfRecord.setEhnam(record.getSinak());//Namn
+			sadmohfRecord.setEhrgm(record.getEhrgm());//Orgnr
+			sadmohfRecord.setEhad1m(record.getSiadk1());//Adress
+			String ad2Mot = record.getSiadk2() + " " + record.getSiadk3(); 
+			sadmohfRecord.setEhpbm(ad2Mot);//
+			if(record.getEhemm() != ""){ 
+				sadmohfRecord.setOwn_ehemm_email(record.getEhemm());//email
+			}
+			//Sender Postnr and City
+			String postnrMot = ""; String cityMot = ""; String landMot = "";
+			if(record.getEhpnm() != ""){ postnrMot = record.getEhpns();}
+			if(record.getEhpsm() != ""){ cityMot = record.getEhpsm();}
+			if(record.getEhlkm() != ""){ landMot = record.getEhlkm();}
+			sadmohfRecord.setEhpnm(postnrMot);
+			sadmohfRecord.setEhpsm(cityMot);
+			sadmohfRecord.setEhlkm(landMot);
+			
+			
+			
 			//create new
 			StringBuffer errMsg = new StringBuffer();
 			int dmlRetval = 0;

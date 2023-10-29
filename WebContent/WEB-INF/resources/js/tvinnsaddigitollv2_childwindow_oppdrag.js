@@ -1,34 +1,7 @@
 	//this variable is a global jQuery var instead of using "$" all the time. Very handy
   	var jq = jQuery.noConflict();
 	var BLOCKUI_OVERLAY_MESSAGE_DEFAULT = "Please wait...";
-  	//-----------
-  	// Tullkontor
-  	//-----------
-	jq(function() {
-		jq('#tullkontorList').on('click', 'td', function(){
-			  var id = this.id;
-			  var record = id.split('@');
-			  var tkkode = record[0].replace("tkkode", "");
-			  var tktxtn = record[1].replace("tktxtn", "");
-			  var callerType = record[2].replace("ctype", "");
-			  
-			  //Tullkontor - ettsd
-			  if(callerType == 'ettsd'){ 
-				console.log("Bingo!!") 
-				  opener.jq('#ettsd').val(tkkode);
-				  opener.jq('#ettsd').focus();
-				  
-			  }else if (callerType == 'xxxx'){  
-				  opener.jq('#xxxx').val(tkkode);
-				  opener.jq('#xxxx').focus();
-				  
-			  }
-			  //close child window
-			  window.close();
-			  
-	    });
-	});
-	
+  	
 	jq(function() {
 		jq('#buttonCreateHousesOk').click(function(){
 				  
@@ -92,31 +65,6 @@
 		
 	});
 	
-	
-	
-	jq(function() {
-	    jq('#eibl').focus(function() {
-	    	if(jq('#eibl').val()!=''){
-	    		refreshCustomValidity(jq('#eibl')[0]);
-	  		}
-	  	});
-	    jq('#eistk').focus(function() {
-	    	if(jq('#eistk').val()!=''){
-	    		refreshCustomValidity(jq('#eistk')[0]);
-	  		}
-	  	});
-		jq('#eivnt').focus(function() {
-	    	if(jq('#eivnt').val()!=''){
-	    		refreshCustomValidity(jq('#eivnt')[0]);
-	  		}
-	  	});
-	    jq('#eirge').focus(function() {
-	    	if(jq('#eirge').val()!=''){
-	    		refreshCustomValidity(jq('#eirge')[0]);
-	  		}
-	  	});
-	});	
-
 
 	function getItemData(record) {
 	  	var id = record.id;
@@ -199,7 +147,7 @@
 				//finish with child window now
 				//opener.callParent(targetTransportId);
 				opener.jq('#ehvt').focus();
-				//window.close();		
+				window.close();		
 			}
 	  	  },
 	  	  error: function() {
