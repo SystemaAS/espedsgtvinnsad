@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.ApplicationContext;
 
 import org.springframework.context.annotation.Scope;
@@ -38,42 +37,27 @@ import no.systema.main.validator.LoginValidator;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.DateTimeManager;
 import no.systema.main.util.JsonDebugger;
-import no.systema.jservices.common.values.FasteKoder;
-import no.systema.main.context.TdsAppContext;
 import no.systema.main.model.SystemaWebUser;
 
 //tvinn
 import no.systema.tvinn.sad.util.TvinnSadConstants;
 import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
 import no.systema.z.main.maintenance.service.MaintMainKofastService;
-import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
-import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService;
 import no.systema.tvinn.sad.nctsimport.util.RpgReturnResponseHandler;
 //Avd/Sign
-import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelningContainer;
-import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadAvdelningRecord;
-import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureContainer;
-import no.systema.tvinn.sad.model.jsonjackson.avdsignature.JsonTvinnSadSignatureRecord;
 import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
-import no.systema.tvinn.sad.model.jsonjackson.customer.JsonTvinnSadCustomerRecord;
 import no.systema.tvinn.sad.digitollv2.controller.service.ApiAsyncFacadeSendService;
-import no.systema.tvinn.sad.digitollv2.controller.service.ApiHouseSendService;
 import no.systema.tvinn.sad.digitollv2.controller.service.ApiMasterSendService;
 import no.systema.tvinn.sad.digitollv2.controller.service.AvdSignControllerService;
-import no.systema.tvinn.sad.digitollv2.filter.SearchFilterDigitollTransportList;
 import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateRecord;
-import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadAvdSignContainer;
-import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadAvdSignRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfContainer;
-import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
-import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmologContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmologRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
@@ -82,27 +66,17 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.service.ApiGenericDtoResponseService;
 import no.systema.tvinn.sad.digitollv2.service.GeneralUpdateService;
-import no.systema.tvinn.sad.digitollv2.service.SadAvdSignService;
 import no.systema.tvinn.sad.digitollv2.service.SadDigitollDropDownListPopulationService;
 import no.systema.tvinn.sad.digitollv2.service.SadTurService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoafListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmohfListService;
-import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
-import no.systema.tvinn.sad.digitollv2.util.RedirectCleaner;
 import no.systema.tvinn.sad.digitollv2.util.SadDigitollConstants;
 import no.systema.tvinn.sad.digitollv2.validator.MasterValidator;
-import no.systema.tvinn.sad.manifest.express.filter.SearchFilterManifestList;
-import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestContainer;
-import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRecord;
-import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestRpgContainer;
-import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 import no.systema.tvinn.sad.mapper.url.request.UrlRequestParameterMapper;
-import no.systema.tvinn.sad.manifest.express.service.TvinnSadManifestListService;
-import no.systema.tvinn.sad.manifest.express.util.manager.ManifestDateManager;
-import no.systema.tvinn.sad.manifest.express.util.manager.ManifestExpressMgr;
+
 import no.systema.tvinn.sad.manifest.express.util.manager.CodeDropDownMgr;
 
 
@@ -280,7 +254,7 @@ public class TvinnSadDigitollv2MasterController {
 			//drop downs
 	    	this.avdSignControllerService.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
 			this.avdSignControllerService.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
-			//this.setCodeDropDownMgr(appUser, model);
+			
 			this.setDropDownService(model);
 			
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
@@ -1179,9 +1153,6 @@ public class TvinnSadDigitollv2MasterController {
 	//SERVICES
 	@Autowired
 	private UrlCgiProxyService urlCgiProxyService;
-	
-	@Autowired
-	private TvinnSadDropDownListPopulationService tvinnSadDropDownListPopulationService;
 	
 	@Autowired
 	private SadmotfListService sadmotfListService;

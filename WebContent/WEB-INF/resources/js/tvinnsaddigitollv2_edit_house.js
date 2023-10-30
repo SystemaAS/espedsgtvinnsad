@@ -261,7 +261,7 @@
 	  //Avsender
       jq('#ehnasIdLink').click(function() {
 	    	jq('#ehnasIdLink').attr('target','_blank');
-	    	window.open('tvinnsadncts_childwindow_customer.do?action=doFind&sonavn=' + jq('#ehnas').val() + '&ctype=ehnas', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+	    	window.open('tvinnsaddigitollv2_childwindow_customer.do?action=doFind&sonavn=' + jq('#ehnas').val() + '&ctype=ehnas', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
 	    });
 	  jq('#ehnasIdLink').keypress(function(e){ //extra feature for the end user
 		if(e.which == 13) {
@@ -271,7 +271,7 @@
 	  //Mottaker
       jq('#ehnamIdLink').click(function() {
 	    	jq('#ehnamIdLink').attr('target','_blank');
-	    	window.open('tvinnsadncts_childwindow_customer.do?action=doFind&sonavn=' + jq('#ehnam').val() + '&ctype=ehnam', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+	    	window.open('tvinnsaddigitollv2_childwindow_customer.do?action=doFind&sonavn=' + jq('#ehnam').val() + '&ctype=ehnam', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
 	    });
 	  jq('#ehnamIdLink').keypress(function(e){ //extra feature for the end user
 		if(e.which == 13) {
@@ -299,7 +299,7 @@
 	  var customerNr = jq.trim(jq('#ehknm').val());
 		
 		if(customerNr!=""){
-  		jq.getJSON('searchCustomer_TvinnSad.do', {
+  		jq.getJSON('searchCustomer_Digitoll.do', {
 			applicationUser : jq('#applicationUser').val(),
 			customerName : "",
 			customerNumber : jq('#ehknm').val(),
@@ -371,7 +371,7 @@
 	  var customerNr = jq.trim(jq('#ehkns').val());
 		
 		if(customerNr!=""){
-  		jq.getJSON('searchCustomer_TvinnSad.do', {
+  		jq.getJSON('searchCustomer_Digitoll.do', {
 			applicationUser : jq('#applicationUser').val(),
 			customerName : "",
 			customerNumber : jq('#ehkns').val(),

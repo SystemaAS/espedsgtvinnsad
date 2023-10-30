@@ -21,7 +21,6 @@ import javawebparts.core.org.apache.commons.lang.StringUtils;
 import no.systema.main.service.UrlCgiProxyService;
 import no.systema.main.util.DateTimeManager;
 import no.systema.tvinn.sad.digitollv2.controller.service.HouseControllerService;
-import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurContainer;
@@ -31,7 +30,6 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifRecord;
-import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.service.SadOppdragService;
@@ -42,17 +40,53 @@ import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
 import no.systema.tvinn.sad.model.jsonjackson.customer.JsonTvinnSadCustomerContainer;
 import no.systema.tvinn.sad.model.jsonjackson.customer.JsonTvinnSadCustomerRecord;
-import no.systema.tvinn.sad.sadimport.controller.ajax.SadImportAjaxHandlerController;
-import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportTopicFinansOpplysningerContainer;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportTopicFinansOpplysningerRecord;
-import no.systema.tvinn.sad.sadimport.url.store.SadImportUrlDataStore;
-import no.systema.tvinn.sad.url.store.TvinnSadUrlDataStore;
+import no.systema.tvinn.sad.service.TvinnSadCustomerService;
+import no.systema.tvinn.sad.util.TvinnSadConstants;
+
 
 @RestController
 public class TvinnSadDigitollAjaxController {
 	private static final Logger logger = LoggerFactory.getLogger(TvinnSadDigitollAjaxController.class.getName());
 	private DateTimeManager dateMgr = new DateTimeManager();
 	
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param eili
+	 * @param eilnrt
+	 * @param eilnrm
+	 * @param eilnrh
+	 * @return
+	 */
+	@RequestMapping(value = "searchCustomer_Digitoll.do", method = RequestMethod.GET)
+	public @ResponseBody Set<JsonTvinnSadCustomerRecord> searchCustomer(@RequestParam String applicationUser, @RequestParam String customerName, @RequestParam String customerNumber) {
+		  logger.info("Inside searchCustomer");
+		  Set result = new HashSet();
+		  //prepare the access CGI with RPG back-end
+		  String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_CUSTOMER_URL;
+		  String urlRequestParamsKeys = this.getRequestUrlKeyParametersForSearchCustomer(applicationUser, customerName, customerNumber);
+		  logger.info("URL: " + BASE_URL);
+		  logger.info("PARAMS: " + urlRequestParamsKeys);
+		  logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		  String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+		  //Should be removed as soon as RPG return the correct container name = customerlist (not capitalized in the first letter)
+		  logger.info(jsonPayload);
+		  logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    	if(jsonPayload!=null){
+	    		jsonPayload = jsonPayload.replaceFirst("Customerlist", "customerlist");
+	    		JsonTvinnSadCustomerContainer container = this.tvinnSadCustomerService.getTvinnSadCustomerContainer(jsonPayload);
+	    		if(container!=null){
+	    			for(JsonTvinnSadCustomerRecord  record : container.getCustomerlist()){
+	    				logger.info("CUSTOMER via AJAX: " + record.getKnavn() + " NUMBER:" + record.getKundnr());
+	    				logger.info("KPERS: " + record.getKpers() + " TLF:" + record.getTlf());
+	    				result.add(record);
+	    			}
+	    		}
+	    	}
+		  return result;
+		  
+	  }
 	/**
 	 * 
 	 * @param applicationUser
@@ -527,6 +561,27 @@ public class TvinnSadDigitollAjaxController {
 			record.setTutrma("");
 		}
 	}
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param customerName
+	 * @param customerNumber
+	 * @return
+	 */
+	private String getRequestUrlKeyParametersForSearchCustomer(String applicationUser, String customerName, String customerNumber){
+		  StringBuffer sb = new StringBuffer();
+		  sb.append("user=" + applicationUser);
+		  if(customerName!=null && !"".equals(customerName) && customerNumber!=null && !"".equals(customerNumber)){
+			  sb.append( TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "sonavn=" + customerName );
+			  sb.append( TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "knr=" + customerNumber );
+		  }else if (customerName!=null && !"".equals(customerName)){
+			  sb.append( TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "sonavn=" + customerName );
+		  }else if (customerNumber!=null && !"".equals(customerNumber)){
+			  sb.append( TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "knr=" + customerNumber );
+		  }
+		  
+		  return sb.toString();
+	  }
 	
 	@Autowired
 	private UrlCgiProxyService urlCgiProxyService;
@@ -543,5 +598,6 @@ public class TvinnSadDigitollAjaxController {
 	
 	@Autowired
 	private HouseControllerService houseControllerService;
-	
+	@Autowired
+	private TvinnSadCustomerService tvinnSadCustomerService;
 }

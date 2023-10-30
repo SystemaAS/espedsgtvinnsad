@@ -132,7 +132,8 @@
 			    			<%-- --------------------- --%>
 			    			<%-- TVINN-SAD EXPORT MENU --%>
 			    			<%-- --------------------- --%>
-			    			<a id="alinkTopicListMenuExp" tabindex=-1 href="tvinnsadexport.do?action=doFind&sg=${user.tvinnSadSign}">
+			    			<%--Requires Norskimport alla AS400-pgm<a id="alinkTopicListMenuExp" tabindex=-1 href="tvinnsadexport.do?action=doFind&sg=${user.tvinnSadSign}">--%>
+			    			<a id="alinkTopicListMenuExp" tabindex=-1 href="tvinnsadgate.do">
 			    				&nbsp;<font 
 			    				<c:choose>           
 		                   			<c:when test="${user.activeMenu=='TVINN_SAD_EXPORT'}">
@@ -153,7 +154,8 @@
 			    			<%-- --------------------- --%>
 			    			<%-- TVINN-SAD IMPORT MENU --%>
 			    			<%-- --------------------- --%>
-			    			<a id="alinkTopicListMenuImp" tabindex=-1 href="tvinnsadimport.do?action=doFind&sg=${user.tvinnSadSign}">
+			    			<%-- Requires Norskimport alla AS400-pgm <a id="alinkTopicListMenuImp" tabindex=-1 href="tvinnsadimport.do?action=doFind&sg=${user.tvinnSadSign}"> --%>
+			    			<a id="alinkTopicListMenuExp" tabindex=-1 href="tvinnsadgate.do">
 			    				&nbsp;<font 
 			    				<c:choose>           
 	                   			<c:when test="${user.activeMenu=='TVINN_SAD_IMPORT'}">

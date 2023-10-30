@@ -193,7 +193,7 @@
 	  //Avsender
       jq('#emnasIdLink').click(function() {
 	    	jq('#emnasIdLink').attr('target','_blank');
-	    	window.open('tvinnsadncts_childwindow_customer.do?action=doFind&sonavn=' + jq('#emnas').val() + '&ctype=emnas', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+	    	window.open('tvinnsaddigitollv2_childwindow_customer.do?action=doFind&sonavn=' + jq('#emnas').val() + '&ctype=emnas', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
 	    });
 	  jq('#emnasIdLink').keypress(function(e){ //extra feature for the end user
 		if(e.which == 13) {
@@ -203,7 +203,7 @@
 	  //Mottaker
       jq('#emnamIdLink').click(function() {
 	    	jq('#emnamIdLink').attr('target','_blank');
-	    	window.open('tvinnsadncts_childwindow_customer.do?action=doFind&sonavn=' + jq('#emnam').val() + '&ctype=emnam', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+	    	window.open('tvinnsaddigitollv2_childwindow_customer.do?action=doFind&sonavn=' + jq('#emnam').val() + '&ctype=emnam', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
 	    });
 	  jq('#emnamIdLink').keypress(function(e){ //extra feature for the end user
 		if(e.which == 13) {
@@ -238,7 +238,7 @@
 	  var customerNr = jq.trim(jq('#emknt').val());
 		
 		if(customerNr!=""){
-  		jq.getJSON('searchCustomer_TvinnSad.do', {
+  		jq.getJSON('searchCustomer_Digitoll.do', {
 			applicationUser : jq('#applicationUser').val(),
 			customerName : "",
 			customerNumber : jq('#emknt').val(),
@@ -288,7 +288,7 @@
 	  var customerNr = jq.trim(jq('#emknm').val());
 		
 		if(customerNr!=""){
-  		jq.getJSON('searchCustomer_TvinnSad.do', {
+  		jq.getJSON('searchCustomer_Digitoll.do', {
 			applicationUser : jq('#applicationUser').val(),
 			customerName : "",
 			customerNumber : jq('#emknm').val(),
@@ -359,7 +359,7 @@
 	  var customerNr = jq.trim(jq('#emkns').val());
 		
 		if(customerNr!=""){
-  		jq.getJSON('searchCustomer_TvinnSad.do', {
+  		jq.getJSON('searchCustomer_Digitoll.do', {
 			applicationUser : jq('#applicationUser').val(),
 			customerName : "",
 			customerNumber : jq('#emkns').val(),

@@ -278,7 +278,7 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 	  //Carrier
       jq('#etnatIdLink').click(function() {
 	    	jq('#etnatIdLink').attr('target','_blank');
-	    	window.open('tvinnsadncts_childwindow_customer.do?action=doFind&sonavn=' + jq('#etnat').val() + '&ctype=etnat', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+	    	window.open('tvinnsaddigitollv2_childwindow_customer.do?action=doFind&sonavn=' + jq('#etnat').val() + '&ctype=etnat', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
 	    });
 	  jq('#etnatIdLink').keypress(function(e){ //extra feature for the end user
 		if(e.which == 13) {
@@ -288,7 +288,7 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 	  //Representative
       jq('#etnarIdLink').click(function() {
 	    	jq('#etnarIdLink').attr('target','_blank');
-	    	window.open('tvinnsadncts_childwindow_customer.do?action=doFind&sonavn=' + jq('#etnar').val() + '&ctype=etnar', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+	    	window.open('tvinnsaddigitollv2_childwindow_customer.do?action=doFind&sonavn=' + jq('#etnar').val() + '&ctype=etnar', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
 	    });
 	  jq('#etnarIdLink').keypress(function(e){ //extra feature for the end user
 		if(e.which == 13) {
@@ -499,7 +499,7 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 	  var customerNr = jq.trim(jq('#etknt').val());
 		
 		if(customerNr!=""){
-  		jq.getJSON('searchCustomer_TvinnSad.do', {
+  		jq.getJSON('searchCustomer_Digitoll.do', {
 			applicationUser : jq('#applicationUser').val(),
 			customerName : "",
 			customerNumber : jq('#etknt').val(),
@@ -569,7 +569,7 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 	  var customerNr = jq.trim(jq('#etknr').val());
 		
 		if(customerNr!=""){
-  		jq.getJSON('searchCustomer_TvinnSad.do', {
+  		jq.getJSON('searchCustomer_Digitoll.do', {
 			applicationUser : jq('#applicationUser').val(),
 			customerName : "",
 			customerNumber : jq('#etknr').val(),
