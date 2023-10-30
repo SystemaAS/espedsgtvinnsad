@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,7 +50,7 @@ import no.systema.tvinn.sad.util.TvinnSadConstants;
 public class TvinnSadDigitollAjaxController {
 	private static final Logger logger = LoggerFactory.getLogger(TvinnSadDigitollAjaxController.class.getName());
 	private DateTimeManager dateMgr = new DateTimeManager();
-	
+	private String HYPHEN = "-";
 	/**
 	 * 
 	 * @param applicationUser
@@ -253,7 +254,7 @@ public class TvinnSadDigitollAjaxController {
 	public @ResponseBody Set<SadOppdragRecord> createHousesFromOppdrag_Digitoll
 	  						(@RequestParam String applicationUser, @RequestParam String avd, @RequestParam String opd,@RequestParam String tur,  
 	  						 @RequestParam Integer lnrt, @RequestParam Integer lnrm,  @RequestParam String mode ) {
-		 
+
 		 logger.info("avd:" + avd);
 		 logger.info("tur:" + tur);
 		 logger.info("opd:" + opd);
@@ -278,6 +279,8 @@ public class TvinnSadDigitollAjaxController {
 			sadmohfRecord.setEhpro(Integer.valueOf(tur));
 			sadmohfRecord.setEhtdn(Integer.valueOf(opd));
 			sadmohfRecord.setEhvkb(record.getSivkb()); //bruttovikt
+			sadmohfRecord.setEhdkht("N730");
+			
 			if(StringUtils.isNotEmpty(record.getWeh0068a())) {
 				sadmohfRecord.setEhntk(Integer.valueOf(record.getSintk())); //Kolli
 			}
@@ -330,6 +333,8 @@ public class TvinnSadDigitollAjaxController {
 			sadmohfRecord.setEhpsm(cityMot);
 			sadmohfRecord.setEhlkm(landMot);
 			
+			//adjust other fields
+			this.adjustFieldsForUpdate(applicationUser, sadmohfRecord);
 			
 			
 			//create new
@@ -582,6 +587,61 @@ public class TvinnSadDigitollAjaxController {
 		  
 		  return sb.toString();
 	  }
+	/**
+	 * 
+	 * @param user
+	 * @param recordToValidate
+	 */
+	private void getTransportDto(String user, SadmohfRecord recordToValidate) {
+		//get BASE URL
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TRANSPORT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + user + "&etlnrt=" + recordToValidate.getEhlnrt();
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		SadmotfContainer jsonContainer = this.sadmotfListService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+			List<SadmotfRecord> outputList = (List)jsonContainer.getList();
+			if(outputList!=null && outputList.size() > 0){
+				for (SadmotfRecord record : outputList) {
+					recordToValidate.setTransportDto(record);
+				}
+			}
+			
+    	}	
+	}
+	private void adjustFieldsForUpdate(String user, SadmohfRecord sadmohfRecord){
+		
+		this.getTransportDto(user, sadmohfRecord);
+		logger.info("!!!!!!!! getting orgNr for EHDKH from Transport DTO:" + sadmohfRecord.getTransportDto().toString());
+		//get the first part of the string, namely the OrnNr from the representative
+		String orgNr = sadmohfRecord.getTransportDto().getEtrgr();
+		if(StringUtils.isEmpty(orgNr)) {
+			orgNr = sadmohfRecord.getTransportDto().getEtrgt(); //Carrier's OrgNr
+		}
+		//an extra random number som extra unique flag
+		Random rand = new Random(); 
+		int randomValue = rand.nextInt(100); 
+		
+		String dokumentId = orgNr + HYPHEN + StringUtils.leftPad(String.valueOf(sadmohfRecord.getEhavd()),4,"0") + 
+					 		 HYPHEN + StringUtils.leftPad(String.valueOf(sadmohfRecord.getEhtdn()),7,"0") + 
+							 HYPHEN + StringUtils.leftPad(String.valueOf(randomValue),3,"0"); 
+		
+		sadmohfRecord.setEhdkh(dokumentId);
+		
+		
+		
+	}
 	
 	@Autowired
 	private UrlCgiProxyService urlCgiProxyService;
