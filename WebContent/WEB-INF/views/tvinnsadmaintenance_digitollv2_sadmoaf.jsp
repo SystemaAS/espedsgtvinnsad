@@ -214,6 +214,7 @@
 									<c:otherwise>
 										<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" id="etavd" name="etavd" >
 										  <option value="">-Välj-</option>
+										  	<option title="0=default" value="0"<c:if test="${model.record.etavd == 0}"> selected </c:if> >0</option>
 						 				  	<c:forEach var="record" items="${model.avdList}" >
 						 				  		<option title="${record.namn}" value="${record.avd}"<c:if test="${model.record.etavd == record.avd}"> selected </c:if> >${record.avd}</option> 
 											</c:forEach>  

@@ -398,9 +398,12 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			return this.loginView;
 			
 		}else{
-			  
+			if(StringUtils.isEmpty(tullkontorName) && StringUtils.isEmpty(tullkontorCode)) {
+				tullkontorCode = "NO"; //to avoid big list on all the planet ...
+			}	
 			List list = this.getTullkontorList(appUser, tullkontorName, tullkontorCode, tullkontorType);
 			model.put("tullkontorList", list);
+			
 			model.put("callerType", callerType);
 			model.put("tkkode", tullkontorCode);
 			model.put("tktxtn", tullkontorName);

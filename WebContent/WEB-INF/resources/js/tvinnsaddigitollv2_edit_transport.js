@@ -1032,7 +1032,7 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
       "searchHighlight": true,
   	  //"dom": '<"top"f>rt<"bottom"lip><"clear">',
   	  //"scrollY": "700px",
-  	  "scrollCollapse":  true,
+  	  //"scrollCollapse":  true,
 	  "tabIndex": -1,
 	  "order": [[ 1, "asc" ]], //Lnr
 	  "lengthMenu": [ 25, 50, 100],

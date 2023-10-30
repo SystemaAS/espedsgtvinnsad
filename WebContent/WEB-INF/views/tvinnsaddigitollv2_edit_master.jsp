@@ -33,6 +33,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 			
+					
 					<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a tabindex=-1 id="alinkTransport" style="display:block;" href="tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=${model.record.emlnrt}">													
 							<font class="tabDisabledLink">
@@ -286,11 +287,6 @@
 					
 					</c:if>
 					
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<font class="inputFormSubmit text12 isa_success" style="cursor: not-allowed">Transportør&nbsp;<b>${model.record.transportDto.etnat}</b>
-																&nbsp;&nbsp;Kjøretøy k.merke&nbsp;<b>${model.record.transportDto.etkmrk}</b>
-																&nbsp;&nbsp;ETA&nbsp;<b>${model.record.transportDto.etetadStr}</b>&nbsp;&nbsp;ETA-tid&nbsp;<b>${model.record.transportDto.etetatStr}</b>
-					</font>
 		   		</td>
 		   		
 	   		</tr>
@@ -300,7 +296,7 @@
 		<tr height="2"><td></td></tr>
 		
 		<tr>
-			<td colspan="3" class="text14" valign="top">
+			<td colspan="3" style="width:100%" class="text14" valign="top">
 				<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">					
 					<tr>
 						<td class="text14">&nbsp;<span title="emavd">Avd</span><font class="text16RedBold" >*</font></td>
@@ -314,8 +310,6 @@
 						<td class="text14">&nbsp;<span title="emcn">Container</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emdkm">Dok.nr</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emdkmt">Dok.type</span><font class="text16RedBold" >*</font></td>
-						<td class="text14">&nbsp;<span title="emknt Transportør KundeNr.">Transp.knr.</span></td>
-						<td class="text14">&nbsp;<span title="emrgt - Transportør OrgNr. / EORI">Transp.Orgnr / EORI</span><font class="text16RedBold" >*</font></td>
 						
 						<td class="text14">&nbsp;<span title="emst">St.</span></td>
 						<td class="text14">&nbsp;<span title="emst2">St.2</span></td>
@@ -389,13 +383,7 @@
 							</select>		
 						</td>
 						
-						<td class="text14">
-							<input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="emknt" id="emknt" size="10" maxlength="8" value="${model.record.emknt}">								
-						</td>
-						<td class="text14">
-							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="emrgt" id="emrgt" size="19" maxlength="17" value="${model.record.emrgt}">												
-						</td>
-					
+						
 						<td class="text14">
 							<input readonly type="text" class="inputTextReadOnly" name="emst" id="emst" size="2" maxlength="1" value="${model.record.emst}">		
 						</td>
@@ -413,6 +401,29 @@
 						</td>
 					</tr>
 					
+					<tr>
+						<td class="text14">&nbsp;<span title="emknt Transportør KundeNr.">Transp.knr.</span></td>
+						<td colspan="2" class="text14">&nbsp;<span title="emrgt - Transportør OrgNr. / EORI">Transp.Orgnr / EORI</span><font class="text16RedBold" >*</font></td>
+					</tr>
+					<tr>
+						<td class="text14">
+							<input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="emknt" id="emknt" size="10" maxlength="8" value="${model.record.emknt}">								
+						</td>
+						<td colspan="2" class="text14">
+							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="emrgt" id="emrgt" size="19" maxlength="17" value="${model.record.emrgt}">												
+						</td>
+						<td colspan="12">
+							<table>
+							<tr>
+								<td class="inputFormSubmit text12 isa_success" style="cursor: not-allowed">Transportør&nbsp;<b>${model.record.transportDto.etnat}</b>
+										&nbsp;&nbsp;Kjøretøy k.merke&nbsp;<b>${model.record.transportDto.etkmrk}</b>
+										&nbsp;&nbsp;ETA&nbsp;<b>${model.record.transportDto.etetadStr}</b>&nbsp;&nbsp;ETA-tid&nbsp;<b>${model.record.transportDto.etetatStr}</b>
+								</td>
+							</tr>
+							</table>
+						</td>
+					
+					</tr>
 					
 					<tr height="2"><td></td></tr>
 					<tr>
@@ -1293,7 +1304,7 @@
 </tr>
 
 </table>
- 
- 	
- 
-	
+
+<!-- ======================= footer ===========================-->
+<jsp:include page="/WEB-INF/views/footer.jsp" />
+<!-- =====================end footer ==========================-->

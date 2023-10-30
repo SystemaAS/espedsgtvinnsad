@@ -21,11 +21,11 @@
 		  		<%-- this container table is necessary in order to separate the datatables element and the frame above, otherwise
 			 	the cosmetic frame will not follow the whole datatable grid including the search field... --%>
 				<table id="containerdatatableTable" cellspacing="2" align="left" width="100%" >
-					<%--
+					
 					<tr>
 					<td>
 						<table>
-						<form name="tvinnsadImportTullkontorForm" id="tvinnsadImportTullkontorForm" action="tvinnsadnctsexport_edit_childwindow_tullkontor.do?action=doInit" method="post">
+						<form name="tvinnsadImportTullkontorForm" id="tvinnsadImportTullkontorForm" action="tvinnsaddigitollv2_childwindow_tullkontor.do?action=doInit" method="post">
 							<input type="hidden" name="ctype" id="ctype" value="${model.callerType}">
 						<tr>
 							<td class="text14">&nbsp;Kode</td>
@@ -41,7 +41,7 @@
 		           		</table>
 					</td>
 					</tr>
-					--%> 
+					
 													           		
 	           		<tr height="10"><td></td></tr>
 					

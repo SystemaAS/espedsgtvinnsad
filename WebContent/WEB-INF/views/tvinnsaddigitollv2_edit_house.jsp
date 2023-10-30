@@ -275,13 +275,6 @@
 					
 					</c:if>
 					
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<font class="inputFormSubmit text12 isa_success" style="cursor: not-allowed">Transportør&nbsp;<b>${model.record.transportDto.etnat}</b>
-																&nbsp;&nbsp;Kjøretøy k.merke&nbsp;<b>${model.record.transportDto.etkmrk}</b>
-																&nbsp;&nbsp;ETA&nbsp;<b>${model.record.transportDto.etetadStr}</b>&nbsp;&nbsp;ETA-tid&nbsp;<b>${model.record.transportDto.etetatStr}</b>
-																
-					</font>
-					
 					
 		   		</td>
 	   		</tr>
@@ -559,6 +552,18 @@
 							</td>
 							<td class="text14" width="20px"></td>
 							<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehrecid" id="ehrecid" size="30" maxlength="35" value="${model.record.ehrecid}"></td>
+							<td colspan="12">
+								<table>
+								<tr>
+									<td class="inputFormSubmit text12 isa_success" style="cursor: not-allowed">Transportør&nbsp;<b>${model.record.transportDto.etnat}</b>
+											&nbsp;&nbsp;Kjøretøy k.merke&nbsp;<b>${model.record.transportDto.etkmrk}</b>
+											&nbsp;&nbsp;ETA&nbsp;<b>${model.record.transportDto.etetadStr}</b>&nbsp;&nbsp;ETA-tid&nbsp;<b>${model.record.transportDto.etetatStr}</b>
+																	
+									</td>
+								</tr>
+								</table>
+							</td>
+							
 							
 						</tr>
 						
@@ -1409,6 +1414,10 @@
 </tr>
 
 </table>
+
+<!-- ======================= footer ===========================-->
+<jsp:include page="/WEB-INF/views/footer.jsp" />
+<!-- =====================end footer ==========================-->
  
  	
  
