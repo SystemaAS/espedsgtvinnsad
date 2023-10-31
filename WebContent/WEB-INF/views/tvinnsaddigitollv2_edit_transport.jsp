@@ -323,6 +323,10 @@
 						 						Stat<a tabindex=-1 id="updateInternalStatusLink" name="updateInternalStatusLink" runat="server" href="#"><font class="text14White">u</font></a>s:&nbsp;${model.record.etst}
 						 						&nbsp;&nbsp;
 						 				</td>
+						 				<td class="text14White" align="right">
+						 						St<a tabindex=-1 id="updateInternalStatus2Link" name="updateInternalStatus2Link" runat="server" href="#"><font class="text14White">.</font></a>2:&nbsp;${model.record.etst2}
+						 						&nbsp;&nbsp;
+						 				</td>
 						 			</c:when>
 						 			<c:otherwise>
 						 				<td class="text14White">&nbsp;&nbsp;Transportinfo.</td>
@@ -1318,22 +1322,48 @@
 	<td>
 		<div id="dialogUpdateInternalStatus" title="Dialog">
 			
-			<form action="tvinnsadmanifest_updateInternalStatus.do" name="updateInternalStatusForm" id="updateInternalStatusForm" method="post">
-			 	<input type="hidden" name="efuuid" id="efuuid" value="${Xmodel.record.efuuid}">
+			<form action="tvinnsaddigitollv2_updateInternalStatus_transport.do" name="updateInternalStatusForm" id="updateInternalStatusForm" method="post">
+			 	<input type="hidden" name="etlnrt" id="etlnrt" value="${model.record.etlnrt}">
 			 	<p class="text14" >Change Internal status as needed.</p>
 				<table>
 					<tr>
 						<td class="text14" align="left" >&nbsp;Status</td>
 						<td class="text14MediumBlue">
-							<select class="selectMediumBlueE2" name="efst" id="efst">
-			            		  	<option value=" ">-velg-</option>
-			            		  	<option value="B">B</option>
-		            		  		<option value="C">C</option>
-		            		  		<option value="M">M</option>
-		            		  		<option value="S">SLETTET</option>
-							  	<option value="X">X</option>
-							  	<option value="Z">Z</option>
+							<select class="selectMediumBlueE2" name="etst" id="etst">
+		            		  	<option title="EMPTY" value=" ">-velg-</option>
+			            		<option title="ERROR" value="M">M</option>
+	            		  		<option title="KANSELLERE" value="S">KANSELLERE</option>
+							  	<option title="..." value="X">X</option>
+							  	<option title="COMPLETED" value="Z">Z</option>
 							  	
+							  	
+							</select>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</td>
+</tr> 
+
+<%-- Dialog update status 2 --%>		
+<tr>
+	<td>
+		<div id="dialogUpdateInternalStatus2" title="Dialog">
+			
+			<form action="tvinnsaddigitollv2_updateInternalStatus2_transport.do" name="updateInternalStatusForm2" id="updateInternalStatusForm2" method="post">
+			 	<input type="hidden" name="etlnrt" id="etlnrt" value="${model.record.etlnrt}">
+			 	<p class="text14" >Change Internal status 2 as needed.</p>
+				<table>
+					<tr>
+						<td class="text14" align="left" >&nbsp;Status</td>
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="etst2" id="etst2">
+		            		  	<option title="EMPTY" value=" ">-velg-</option>
+			            		<option title="ERROR(M)" value="M">ERROR</option>
+	            		  		<option title="SLETTET(D)" value="D">SLETTET</option>
+							  	<option title="SUBMITTED(S)" value="S">SUBMITTED</option>
+							  	<option title="COMPLETED(C)" value="C">COMPLETED</option>
 							  	
 							</select>
 						</td>

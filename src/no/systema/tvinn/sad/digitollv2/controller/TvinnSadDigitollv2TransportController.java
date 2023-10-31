@@ -395,7 +395,8 @@ public class TvinnSadDigitollv2TransportController {
 		
 		String id1 = "";
 		String status = "";
-		
+		boolean calledFromList = true; 
+		//(1) call coming from the transport list
 		Enumeration requestParameters = request.getParameterNames();
 	    while (requestParameters.hasMoreElements()) {
 	        String element = (String) requestParameters.nextElement();
@@ -410,9 +411,20 @@ public class TvinnSadDigitollv2TransportController {
     			}
     		}
     	}
-	    logger.info("Id1:" + id1); logger.info("status:" + status);
+	    if(StringUtils.isEmpty(id1)) {
+	    	//(2) this means that the call is not coming from the list of transport and instead coming from the transport-form
+	    	id1= String.valueOf(recordToValidate.getEtlnrt());
+	    	status = recordToValidate.getEtst();
+	    	calledFromList = false;
+	    }
 	    
-		ModelAndView successView = new ModelAndView("redirect:tvinnsaddigitollv2.do?action=doFind");
+	    logger.info("Id1:" + id1); logger.info("status:" + status);
+	    String url = "redirect:tvinnsaddigitollv2.do?action=doFind";
+	    if(!calledFromList) {
+	    	url = "redirect:tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=" + id1;
+	    }
+	   
+		ModelAndView successView = new ModelAndView(url);
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		
 		//START
@@ -439,6 +451,60 @@ public class TvinnSadDigitollv2TransportController {
 				StringBuffer errMsg = new StringBuffer();
 				int dmlRetval = 0;
 				dmlRetval = this.updateStatusOnTransport(appUser.getUser(), recordToValidate, mode, errMsg);
+				if(dmlRetval < 0) {
+					//error on update
+					model.put("errorMessage", errMsg.toString());
+				}
+			}
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+	    
+		}	
+		return successView;
+	}	
+	
+	@RequestMapping(value="tvinnsaddigitollv2_updateInternalStatus2_transport.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doUpdateStatus2(@ModelAttribute ("record") SadmotfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		Map model = new HashMap();
+		
+		String id1 = "";
+		String status2 = "";
+		//from form
+		id1= String.valueOf(recordToValidate.getEtlnrt());
+    	status2 = recordToValidate.getEtst2();
+    	
+	    
+	    logger.info("Id1:" + id1); logger.info("status2:" + status2);
+	    String url = "redirect:tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=" + id1;
+	    
+	   
+		ModelAndView successView = new ModelAndView(url);
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		
+		//START
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			//==========
+			//Upd status
+			//==========
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_DIGITOLLV2);
+			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE); 
+			
+			//Update/Insert
+			if(StringUtils.isNotEmpty(id1) ) {
+				
+				recordToValidate.setEtlnrt(Integer.valueOf(id1));
+				recordToValidate.setEtst2(status2);
+				String mode = "US2";
+				logger.info("MODE:" + mode + " before update in Controller ...");
+				
+				StringBuffer errMsg = new StringBuffer();
+				int dmlRetval = 0;
+				dmlRetval = this.updateStatus2OnTransport(appUser.getUser(), recordToValidate, mode, errMsg);
 				if(dmlRetval < 0) {
 					//error on update
 					model.put("errorMessage", errMsg.toString());
@@ -760,6 +826,55 @@ public class TvinnSadDigitollv2TransportController {
 					logger.info(record.toString());
 					if(StringUtils.isNotEmpty(container.getErrMsg())){
 						errMsg.append(record.getStatus());
+						errMsg.append(" -->detail:" + container.getErrMsg());
+						retval = -1;
+						break;
+					}
+				}
+			}
+    	}
+    	
+    	return retval;
+	}
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param recordToValidate
+	 * @param mode
+	 * @param errMsg
+	 * @return
+	 */
+	private int updateStatus2OnTransport(String applicationUser, SadmotfRecord recordToValidate, String mode, StringBuffer errMsg) {
+		int retval = 0;
+		
+		
+		//get BASE URL
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_TRANSPORT_URL;
+		//add URL-parameters
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + applicationUser + "&mode=" + mode);
+		urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate)));
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		GeneralUpdateContainer container = this.generalUpdateService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<GeneralUpdateRecord> outputList = container.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(GeneralUpdateRecord record : outputList ){
+					logger.info(record.toString());
+					if(StringUtils.isNotEmpty(container.getErrMsg())){
+						errMsg.append(record.getStatus2());
 						errMsg.append(" -->detail:" + container.getErrMsg());
 						retval = -1;
 						break;

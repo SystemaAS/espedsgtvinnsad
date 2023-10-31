@@ -312,7 +312,12 @@
 						<td class="text14">&nbsp;<span title="emdkmt">Dok.type</span><font class="text16RedBold" >*</font></td>
 						
 						<td class="text14">&nbsp;<span title="emst">St.</span></td>
-						<td class="text14">&nbsp;<span title="emst2">St.2</span></td>
+						<td class="text14">&nbsp;<span title="emst2">
+								St<a tabindex=-1 id="updateInternalStatus2Link" name="updateInternalStatus2Link" runat="server" href="#">.</a>2
+						 </span>						
+						
+						
+						</td>
 						<td class="text14">&nbsp;<span title="emst3">St.3</span></td>
 						<td class="text14">&nbsp;<span title="emdtr">Reg.dato</span></td>
 						<td class="text14">&nbsp;<span title="emdtin">Send.dato</span></td>
@@ -1207,23 +1212,25 @@
 
 
 
-<%-- Dialog update manifest status --%>		
+<%-- Dialog update status 2 --%>		
 <tr>
 	<td>
-		<div id="dialogUpdateManifestStatus" title="Dialog">
+		<div id="dialogUpdateInternalStatus2" title="Dialog">
 			
-			<form action="tvinnsadmanifest_updateManifestStatus.do" name="updateManifestStatusForm" id="updateManifestStatusForm" method="post">
-			 	<input type="hidden" name="efuuid" id="efuuid" value="${Xmodel.record.efuuid}">
-			 	<p class="text14" >Change Manifest status as needed.</p>
+			<form action="tvinnsaddigitollv2_updateInternalStatus2_master.do" name="updateInternalStatusForm2" id="updateInternalStatusForm2" method="post">
+			 	<input type="hidden" name="emlnrt" id="emlnrt" value="${model.record.emlnrt}">
+			 	<input type="hidden" name="emlnrm" id="emlnrm" value="${model.record.emlnrm}">
+			 	<p class="text14" >Change Internal status2 as needed.</p>
 				<table>
 					<tr>
 						<td class="text14" align="left" >&nbsp;Status</td>
 						<td class="text14MediumBlue">
-							<select class="selectMediumBlueE2" name="efst2" id="efst2">
-			            		  	<option value=" ">-velg-</option>
-		            		  		<option value="R">REOPENED/DRAFT</option>
-							  	<option value="D">SLETTET</option>
-							  	<option value="S">SUBMITTED</option>
+							<select class="selectMediumBlueE2" name="emst2" id="emst2">
+		            		  	<option title="EMPTY" value=" ">-velg-</option>
+			            		<option title="ERROR(M)" value="M">ERROR</option>
+	            		  		<option title="SLETTET(D)" value="D">SLETTET</option>
+							  	<option title="SUBMITTED(S)" value="S">SUBMITTED</option>
+							  	<option title="COMPLETED(C)" value="C">COMPLETED</option>
 							  	
 							</select>
 						</td>
