@@ -279,11 +279,14 @@
 			                		<div class="text11" style="position: relative;" align="left">
 				                	<span style="position:absolute;top:2px; width:250px;" id="etktm_info" class="popupWithInputText text11"  >
 				                	<button name="_ButtonCloseEtktm" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('etktm_info');">Close</button> 
+					           		<p>Ref.kodeverk or MouseOver(value) in this same list...</p><br/>
+					           		<%-- this causes the Y-scroll go all the way down as the list content (when the list is not visible...) to be substituted
 					           		<ul>
 					           			<c:forEach var="dto" items="${model.meansOfTransportDto}" >
 				           				<li><b>${dto.code}</b>&nbsp;${dto.txt1}</li>
 				           				</c:forEach>
 				           			</ul>
+				           			 --%>
 									</span>	
 									</div>
 								</td>

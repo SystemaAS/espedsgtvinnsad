@@ -61,7 +61,8 @@
 						<tr class="tableHeaderField" >
 							<th class="text14" title="tupro">&nbsp;Turnr&nbsp;</th>
 							<th class="text14" title="tuavd">&nbsp;Avd&nbsp;</th>
-							<th class="text14" title="tuavd">&nbsp;Dato fra&nbsp;</th>
+							<th class="text14" title="tutarf - agentens ref.">&nbsp;Ag.ref.&nbsp;</th>
+							<th class="text14" title="tudt">&nbsp;Dato fra&nbsp;</th>
 							<th class="text14" title="tusdf">&nbsp;Las.sted&nbsp;</th>
 		                    <th class="text14" title="tusdt">&nbsp;Loss.sted&nbsp;</th>
 		                    <th class="text14" title="tubiln">&nbsp;Kjøretøy kjennemerke&nbsp;</th>
@@ -89,6 +90,7 @@
 		               			<img title="select" valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;${record.tupro}
 			                </td>
 		               	   <td class="text14">&nbsp;${record.tuavd}</td>
+		               	   <td class="text14">&nbsp;${record.tutarf}</td>
 		               	   <td class="text14">&nbsp;${record.tudt}</td>
 		               	   <td class="text14">&nbsp;${record.tusdf}</td>
 		               	   <td class="text14">&nbsp;${record.tusdt}</td>
