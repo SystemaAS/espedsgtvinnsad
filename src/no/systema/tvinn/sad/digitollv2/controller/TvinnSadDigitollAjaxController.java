@@ -334,7 +334,7 @@ public class TvinnSadDigitollAjaxController {
 			sadmohfRecord.setEhlkm(landMot);
 			
 			//adjust other fields
-			this.adjustFieldsForUpdate(applicationUser, sadmohfRecord);
+			this.adjustFieldsForUpdateHouse(applicationUser, sadmohfRecord);
 			
 			
 			//create new
@@ -620,7 +620,12 @@ public class TvinnSadDigitollAjaxController {
 			
     	}	
 	}
-	private void adjustFieldsForUpdate(String user, SadmohfRecord sadmohfRecord){
+	/**
+	 * 
+	 * @param user
+	 * @param sadmohfRecord
+	 */
+	private void adjustFieldsForUpdateHouse(String user, SadmohfRecord sadmohfRecord){
 		
 		this.getTransportDto(user, sadmohfRecord);
 		logger.info("!!!!!!!! getting orgNr for EHDKH from Transport DTO:" + sadmohfRecord.getTransportDto().toString());
@@ -629,15 +634,7 @@ public class TvinnSadDigitollAjaxController {
 		if(StringUtils.isEmpty(orgNr)) {
 			orgNr = sadmohfRecord.getTransportDto().getEtrgt(); //Carrier's OrgNr
 		}
-		//an extra random number som extra unique flag
-		Random rand = new Random(); 
-		int randomValue = rand.nextInt(100); 
-		
-		String dokumentId = orgNr + HYPHEN + StringUtils.leftPad(String.valueOf(sadmohfRecord.getEhavd()),4,"0") + 
-					 		 HYPHEN + StringUtils.leftPad(String.valueOf(sadmohfRecord.getEhtdn()),7,"0") + 
-							 HYPHEN + StringUtils.leftPad(String.valueOf(randomValue),3,"0"); 
-		
-		sadmohfRecord.setEhdkh(dokumentId);
+		sadmohfRecord.setEhdkh(this.houseControllerService.getRandomDocumentId(orgNr, sadmohfRecord));
 		
 		
 		

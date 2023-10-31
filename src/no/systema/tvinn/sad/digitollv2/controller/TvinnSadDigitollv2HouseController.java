@@ -915,15 +915,7 @@ public class TvinnSadDigitollv2HouseController {
 			if(StringUtils.isEmpty(orgNr)) {
 				orgNr = recordToValidate.getTransportDto().getEtrgt(); //Carrier's OrgNr
 			}
-			//an extra random number som extra unique flag
-			Random rand = new Random(); 
-			int randomValue = rand.nextInt(100); 
-			
-			dokumentId = orgNr + HYPHEN + StringUtils.leftPad(String.valueOf(recordToValidate.getEhavd()),4,"0") + 
-						 		 HYPHEN + StringUtils.leftPad(String.valueOf(recordToValidate.getEhtdn()),7,"0") + 
-								 HYPHEN + StringUtils.leftPad(String.valueOf(randomValue),3,"0"); 
-			
-			recordToValidate.setEhdkh(dokumentId);
+			recordToValidate.setEhdkh(this.houseControllerService.getRandomDocumentId(orgNr, recordToValidate));
 			
 			
 		}
@@ -982,6 +974,9 @@ public class TvinnSadDigitollv2HouseController {
 				recordToValidate.setEhpnm(StringUtils.leftPad(String.valueOf(recordToValidate.getEhpnm()),4,"0"));
 			}
 		}
+		
+		
+		
 		
 		
 	}

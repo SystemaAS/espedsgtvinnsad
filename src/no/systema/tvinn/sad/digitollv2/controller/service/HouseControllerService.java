@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 import org.slf4j.Logger;
 
@@ -126,7 +127,14 @@ public class HouseControllerService {
 			
     	}	
 	}
-	
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param recordToValidate
+	 * @param mode
+	 * @param errMsg
+	 * @return
+	 */
 	public int updateRecord(String applicationUser, SadmohfRecord recordToValidate, String mode, StringBuffer errMsg) {
 		int retval = 0;
 		
@@ -180,8 +188,29 @@ public class HouseControllerService {
     	
     	return retval;
 	}
-	
-	
+	/**
+	 * 
+	 * @param orgNr
+	 * @param sadmohfRecord
+	 * @return
+	 */
+	public String getRandomDocumentId(String orgNr, SadmohfRecord sadmohfRecord) {
+		final String HYPHEN = "-";
+		String dokumentId = "";
+		
+		if(sadmohfRecord!=null) {
+			//an extra random number som extra unique flag
+			Random rand = new Random(); 
+			int randomValue = rand.nextInt(100); 
+			
+			dokumentId = orgNr + HYPHEN + StringUtils.leftPad(String.valueOf(sadmohfRecord.getEhavd()),4,"0") + 
+						 		 HYPHEN + StringUtils.leftPad(String.valueOf(sadmohfRecord.getEhtdn()),7,"0") + 
+								 HYPHEN + StringUtils.leftPad(String.valueOf(randomValue),3,"0");
+		}
+		
+		return dokumentId;
+		
+	}
 	
 	
 	@Autowired
