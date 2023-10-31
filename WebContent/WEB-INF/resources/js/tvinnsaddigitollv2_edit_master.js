@@ -431,10 +431,9 @@
 //-------------------------------------------
   //START Model dialog ADMIN: "Update status"
   //-------------------------------------------
-  //Initialize <div> here
    //Initialize <div> here
   jq(function() { 
-	  jq("#dialogUpdateInternalStatus").dialog({
+	  jq("#dialogStatus2").dialog({
 		  autoOpen: false,
 		  maxWidth:500,
           maxHeight: 400,
@@ -443,27 +442,18 @@
 		  modal: true
 	  });
   });
-//Initialize <div> here
-  jq(function() { 
-	  jq("#dialogUpdateInternalStatus2").dialog({
-		  autoOpen: false,
-		  maxWidth:500,
-          maxHeight: 400,
-          width: 280,
-          height: 220,
-		  modal: true
-	  });
-  });
+
   //----------------------------
   //Present dialog box onClick 
   //----------------------------
   jq(function() {
 	  jq("#updateInternalStatus2Link").click(function() {
-		  presentChangeInternalStatus2Dialog();
+		 presentChangeInternalStatus2Dialog();
 	  });
+		/* NOT implemented on Controller
 	  jq("#updateInternalStatusLink").click(function() {
 		  presentChangeInternalStatusDialog();
-	  });
+	  });*/
 	  
   });
   
@@ -500,9 +490,9 @@
   
 	function presentChangeInternalStatus2Dialog(){
 		//setters (add more if needed)
-		  jq('#dialogUpdateInternalStatus2').dialog( "option", "title", "Update Internal Status 2" );
+		  jq('#dialogStatus2').dialog( "option", "title", "Update Internal Status 2" );
 		  //deal with buttons for this modal window
-		  jq('#dialogUpdateInternalStatus2').dialog({
+		  jq('#dialogStatus2').dialog({
 			 buttons: [ 
 	            {
 				 id: "dialogSaveTU",	
@@ -526,7 +516,7 @@
 		  //init values
 		  jq("#dialogSaveSU").button("option", "disabled", true);
 		  //open now
-		  jq('#dialogUpdateInternalStatus2').dialog('open');
+		  jq('#dialogStatus2').dialog('open');
 	  }
   
  

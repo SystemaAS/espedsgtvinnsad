@@ -1284,37 +1284,7 @@
 
 </c:if>
 
- 
- 
- 
- 
- 
- <%-- Dialog update manifest status --%>		
-<tr>
-	<td>
-		<div id="dialogUpdateManifestStatus" title="Dialog">
-			
-			<form action="tvinnsadmanifest_updateManifestStatus.do" name="updateManifestStatusForm" id="updateManifestStatusForm" method="post">
-			 	<input type="hidden" name="efuuid" id="efuuid" value="${Xmodel.record.efuuid}">
-			 	<p class="text14" >Change Manifest status as needed.</p>
-				<table>
-					<tr>
-						<td class="text14" align="left" >&nbsp;Status</td>
-						<td class="text14MediumBlue">
-							<select class="selectMediumBlueE2" name="efst2" id="efst2">
-			            		  	<option value=" ">-velg-</option>
-		            		  		<option value="R">REOPENED/DRAFT</option>
-							  	<option value="D">SLETTET</option>
-							  	<option value="S">SUBMITTED</option>
-							  	
-							</select>
-						</td>
-					</tr>
-				</table>
-			</form>
-		</div>
-	</td>
-</tr> 
+
 
 
 <%-- Dialog update manifest status --%>		

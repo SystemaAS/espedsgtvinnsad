@@ -328,6 +328,71 @@ public class TvinnSadDigitollv2HouseController {
 		}	
 		return successView;
 	}
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_updateInternalStatus2_house.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doUpdateStatus2(@ModelAttribute ("record") SadmohfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		Map model = new HashMap();
+		
+		String id1 = "";
+		String id2 = "";
+		String id3 = "";
+		String status2 = "";
+		//from form
+		id1= String.valueOf(recordToValidate.getEhlnrt());
+		id2= String.valueOf(recordToValidate.getEhlnrm());
+		id3= String.valueOf(recordToValidate.getEhlnrh());
+    	status2 = recordToValidate.getEhst2();
+		
+	    logger.info("Id1:" + id1); logger.info("Id2:" + id2); logger.info("Id3:" + id3); logger.info("status2:" + status2);
+	    
+		ModelAndView successView = new ModelAndView("redirect:tvinnsaddigitollv2_edit_house.do?action=doFind&ehlnrt=" + Integer.parseInt(id1) + "&ehlnrm=" + Integer.parseInt(id2)  + "&ehlnrh=" + Integer.parseInt(id3) );
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		
+		//START
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			//==========
+			//Upd status
+			//==========
+		
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_DIGITOLLV2);
+			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE); 
+			
+			//Update/Insert
+			if(StringUtils.isNotEmpty(id1) && StringUtils.isNotEmpty(id2) ) {
+				
+				recordToValidate.setEhlnrt(Integer.valueOf(id1));
+				recordToValidate.setEhlnrm(Integer.valueOf(id2));
+				recordToValidate.setEhlnrh(Integer.valueOf(id3));
+				recordToValidate.setEhst2(status2);
+				String mode = "US2";
+				logger.info("MODE:" + mode + " before update in Controller ...");
+				
+				StringBuffer errMsg = new StringBuffer();
+				int dmlRetval = 0;
+				dmlRetval = this.updateStatus2OnHouse(appUser.getUser(), recordToValidate, mode, errMsg);
+				if(dmlRetval < 0) {
+					//error on update
+					model.put("errorMessage", errMsg.toString());
+				}
+			}
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+	    
+		}	
+		return successView;
+	}
 	
 	/**
 	 * 
@@ -798,6 +863,48 @@ public class TvinnSadDigitollv2HouseController {
 					logger.info(record.toString());
 					if(StringUtils.isNotEmpty(container.getErrMsg())){
 						errMsg.append(record.getStatus());
+						errMsg.append(" -->detail:" + container.getErrMsg());
+						retval = -1;
+						break;
+					}
+				}
+			}
+    	}
+    	
+    	return retval;
+	}
+	
+	private int updateStatus2OnHouse(String applicationUser, SadmohfRecord recordToValidate, String mode, StringBuffer errMsg) {
+		int retval = 0;
+		
+		
+		//get BASE URL
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_HOUSECONSIGNMENT_URL;
+		//add URL-parameters
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + applicationUser + "&mode=" + mode);
+		urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate)));
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		GeneralUpdateContainer container = this.generalUpdateService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<GeneralUpdateRecord> outputList = container.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(GeneralUpdateRecord record : outputList ){
+					logger.info(record.toString());
+					if(StringUtils.isNotEmpty(container.getErrMsg())){
+						errMsg.append(record.getStatus2());
 						errMsg.append(" -->detail:" + container.getErrMsg());
 						retval = -1;
 						break;

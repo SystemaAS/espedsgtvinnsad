@@ -378,7 +378,10 @@
 						</td>
 						<td class="text14">&nbsp;<span title="ehdkht">Dok.type</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="ehst">St.</span></td>
-						<td class="text14">&nbsp;<span title="ehst2">St.2</span></td>
+						<td class="text14">&nbsp;<span title="ehst2">
+								St<a tabindex=-1 id="updateInternalStatus2Link" name="updateInternalStatus2Link" runat="server" href="#">.</a>2
+								</span>
+						</td>
 						<td class="text14">&nbsp;<span title="ehst3">St.3</span></td>
 						<td class="text14">&nbsp;<span title="ehdts">Send.dato</span></td>
 						<td class="text14">&nbsp;<span title="ehdts">Master Doknr</span></td>
@@ -1317,23 +1320,26 @@
 
 
 
-<%-- Dialog update manifest status --%>		
+<%-- Dialog update status 2 --%>		
 <tr>
 	<td>
-		<div id="dialogUpdateManifestStatus" title="Dialog">
+		<div id="dialogUpdateInternalStatus2" title="Dialog">
 			
-			<form action="tvinnsadmanifest_updateManifestStatus.do" name="updateManifestStatusForm" id="updateManifestStatusForm" method="post">
-			 	<input type="hidden" name="efuuid" id="efuuid" value="${Xmodel.record.efuuid}">
-			 	<p class="text14" >Change Manifest status as needed.</p>
+			<form action="tvinnsaddigitollv2_updateInternalStatus2_house.do" name="updateInternalStatusForm2" id="updateInternalStatusForm2" method="post">
+			 	<input type="hidden" name="ehlnrt" id="ehlnrt" value="${model.record.ehlnrt}">
+			 	<input type="hidden" name="ehlnrm" id="ehlnrm" value="${model.record.ehlnrm}">
+			 	<input type="hidden" name="ehlnrh" id="ehlnrh" value="${model.record.ehlnrh}">
+			 	<p class="text14" >Change Internal status2 as needed.</p>
 				<table>
 					<tr>
 						<td class="text14" align="left" >&nbsp;Status</td>
 						<td class="text14MediumBlue">
-							<select class="selectMediumBlueE2" name="efst2" id="efst2">
-			            		  	<option value=" ">-velg-</option>
-		            		  		<option value="R">REOPENED/DRAFT</option>
-							  	<option value="D">SLETTET</option>
-							  	<option value="S">SUBMITTED</option>
+							<select class="selectMediumBlueE2" name="ehst2" id="ehst2">
+		            		  	<option title="EMPTY" value=" ">-velg-</option>
+			            		<option title="ERROR(M)" value="M">ERROR</option>
+	            		  		<option title="SLETTET(D)" value="D">SLETTET</option>
+							  	<option title="SUBMITTED(S)" value="S">SUBMITTED</option>
+							  	<option title="COMPLETED(C)" value="C">COMPLETED</option>
 							  	
 							</select>
 						</td>
@@ -1345,36 +1351,6 @@
 </tr> 
 
 
-<%-- Dialog update manifest status --%>		
-<tr>
-	<td>
-		<div id="dialogUpdateInternalStatus" title="Dialog">
-			
-			<form action="tvinnsadmanifest_updateInternalStatus.do" name="updateInternalStatusForm" id="updateInternalStatusForm" method="post">
-			 	<input type="hidden" name="efuuid" id="efuuid" value="${Xmodel.record.efuuid}">
-			 	<p class="text14" >Change Internal status as needed.</p>
-				<table>
-					<tr>
-						<td class="text14" align="left" >&nbsp;Status</td>
-						<td class="text14MediumBlue">
-							<select class="selectMediumBlueE2" name="efst" id="efst">
-			            		  	<option value=" ">-velg-</option>
-			            		  	<option value="B">B</option>
-		            		  		<option value="C">C</option>
-		            		  		<option value="M">M</option>
-		            		  		<option value="S">SLETTET</option>
-							  	<option value="X">X</option>
-							  	<option value="Z">Z</option>
-							  	
-							  	
-							</select>
-						</td>
-					</tr>
-				</table>
-			</form>
-		</div>
-	</td>
-</tr> 
 
 
 <%-- ------------------------- --%>

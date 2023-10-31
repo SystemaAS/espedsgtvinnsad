@@ -484,9 +484,9 @@
 //-------------------------------------------
   //START Model dialog ADMIN: "Update status"
   //-------------------------------------------
-  //Initialize <div> here
+ //Initialize <div> here
   jq(function() { 
-	  jq("#dialogUpdateManifestStatus").dialog({
+	  jq("#dialogUpdateInternalStatus2").dialog({
 		  autoOpen: false,
 		  maxWidth:500,
           maxHeight: 400,
@@ -525,45 +525,14 @@
   //Present dialog box onClick 
   //----------------------------
   jq(function() {
-	  jq("#updateManifestStatusLink").click(function() {
-		  presentChangeManifestStatusDialog();
+	  jq("#updateInternalStatus2Link").click(function() {
+		  presentChangeInternalStatus2Dialog();
 	  });
 	  jq("#updateInternalStatusLink").click(function() {
 		  presentChangeInternalStatusDialog();
 	  });
 	  
-  });
-  function presentChangeManifestStatusDialog(){
-	//setters (add more if needed)
-	  jq('#dialogUpdateManifestStatus').dialog( "option", "title", "Update Manifest Status" );
-	  //deal with buttons for this modal window
-	  jq('#dialogUpdateManifestStatus').dialog({
-		 buttons: [ 
-            {
-			 id: "dialogSaveTU",	
-			 text: "Ok",
-			 click: function(){
-				 		jq('#updateManifestStatusForm').submit();
-				 		setBlockUI();
-			 		}
-		 	 },
- 	 		{
-		 	 id: "dialogCancelTU",
-		 	 text: "Cancel", 
-			 click: function(){
-				 		//back to initial state of form elements on modal dialog
-				 		jq("#dialogSaveSU").button("option", "disabled", true);
-				 		jq("#selectedStatus").val("");
-				 		jq( this ).dialog( "close" ); 
-			 		} 
- 	 		 } ] 
-	  });
-	  //init values
-	  jq("#dialogSaveSU").button("option", "disabled", true);
-	  //open now
-	  jq('#dialogUpdateManifestStatus').dialog('open');
-  }
-  
+  }); 
   
   function presentChangeInternalStatusDialog(){
 		//setters (add more if needed)
@@ -596,6 +565,38 @@
 		  jq('#dialogUpdateInternalStatus').dialog('open');
 	  }
   
+	function presentChangeInternalStatus2Dialog(){
+		//setters (add more if needed)
+		  jq('#dialogUpdateInternalStatus2').dialog( "option", "title", "Update Internal Status 2" );
+		  //deal with buttons for this modal window
+		  jq('#dialogUpdateInternalStatus2').dialog({
+			 buttons: [ 
+	            {
+				 id: "dialogSaveTU",	
+				 text: "Ok",
+				 click: function(){
+					 		jq('#updateInternalStatusForm2').submit();
+					 		setBlockUI();
+				 		}
+			 	 },
+	 	 		{
+			 	 id: "dialogCancelTU",
+			 	 text: "Cancel", 
+				 click: function(){
+					 		//back to initial state of form elements on modal dialog
+					 		jq("#dialogSaveSU").button("option", "disabled", true);
+					 		jq("#selectedStatus").val("");
+					 		jq( this ).dialog( "close" ); 
+				 		} 
+	 	 		 } ] 
+		  });
+		  //init values
+		  jq("#dialogSaveSU").button("option", "disabled", true);
+		  //open now
+		  jq('#dialogUpdateInternalStatus2').dialog('open');
+	  }
+  
+ 
  
 	jq(function() {
 	  jq(".uuidLink").click(function() {

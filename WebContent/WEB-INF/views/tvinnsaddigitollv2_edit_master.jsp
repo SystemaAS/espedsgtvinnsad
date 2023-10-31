@@ -1215,7 +1215,7 @@
 <%-- Dialog update status 2 --%>		
 <tr>
 	<td>
-		<div id="dialogUpdateInternalStatus2" title="Dialog">
+		<div id="dialogStatus2" title="Dialog">
 			
 			<form action="tvinnsaddigitollv2_updateInternalStatus2_master.do" name="updateInternalStatusForm2" id="updateInternalStatusForm2" method="post">
 			 	<input type="hidden" name="emlnrt" id="emlnrt" value="${model.record.emlnrt}">
@@ -1231,38 +1231,6 @@
 	            		  		<option title="SLETTET(D)" value="D">SLETTET</option>
 							  	<option title="SUBMITTED(S)" value="S">SUBMITTED</option>
 							  	<option title="COMPLETED(C)" value="C">COMPLETED</option>
-							  	
-							</select>
-						</td>
-					</tr>
-				</table>
-			</form>
-		</div>
-	</td>
-</tr> 
-
-
-<%-- Dialog update manifest status --%>		
-<tr>
-	<td>
-		<div id="dialogUpdateInternalStatus" title="Dialog">
-			
-			<form action="tvinnsadmanifest_updateInternalStatus.do" name="updateInternalStatusForm" id="updateInternalStatusForm" method="post">
-			 	<input type="hidden" name="efuuid" id="efuuid" value="${Xmodel.record.efuuid}">
-			 	<p class="text14" >Change Internal status as needed.</p>
-				<table>
-					<tr>
-						<td class="text14" align="left" >&nbsp;Status</td>
-						<td class="text14MediumBlue">
-							<select class="selectMediumBlueE2" name="efst" id="efst">
-			            		  	<option value=" ">-velg-</option>
-			            		  	<option value="B">B</option>
-		            		  		<option value="C">C</option>
-		            		  		<option value="M">M</option>
-		            		  		<option value="S">SLETTET</option>
-							  	<option value="X">X</option>
-							  	<option value="Z">Z</option>
-							  	
 							  	
 							</select>
 						</td>
