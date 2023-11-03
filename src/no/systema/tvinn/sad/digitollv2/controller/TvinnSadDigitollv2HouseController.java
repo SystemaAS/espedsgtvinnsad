@@ -44,6 +44,7 @@ import no.systema.tvinn.sad.digitollv2.controller.service.ApiAsyncFacadeSendServ
 import no.systema.tvinn.sad.digitollv2.controller.service.ApiHouseSendService;
 import no.systema.tvinn.sad.digitollv2.controller.service.AvdSignControllerService;
 import no.systema.tvinn.sad.digitollv2.controller.service.HouseControllerService;
+import no.systema.tvinn.sad.digitollv2.enums.EnumSadmohfStatus3;
 import no.systema.tvinn.sad.digitollv2.enums.EnumSadmomfStatus3;
 import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
@@ -429,6 +430,8 @@ public class TvinnSadDigitollv2HouseController {
 			//=================
 			if(recordToValidate.getEhlnrt() > 0 && recordToValidate.getEhlnrm() > 0 && recordToValidate.getEhlnrh() > 0) {
 				if(StringUtils.isNotEmpty(async)) {
+					//set st3 as pending in house to block the Send button until finished
+					this.apiHouseSendService.setSt3_House(appUser.getUser(), recordToValidate.getEhlnrt(),recordToValidate.getEhlnrm(), recordToValidate.getEhlnrh(), EnumSadmohfStatus3.PENDING.toString());
 					//async if applicable
 					this.apiAsynchFacadeSendService.sendHouse(appUser.getUser(), recordToValidate.getEhlnrt(),recordToValidate.getEhlnrm(), recordToValidate.getEhlnrh(), recordToValidate.getEhmid());
 				}else {
@@ -500,7 +503,7 @@ public class TvinnSadDigitollv2HouseController {
 			//send from master GUI implementation
 			if(lnrt > 0 && lnrm > 0 ) {
 				//set st3 as pending in master to block the Send all houses- button until finished
-				this.apiHouseSendService.setSt3_MasterToPending(appUser.getUser(), lnrt, lnrm, EnumSadmomfStatus3.PENDING.toString());
+				this.apiHouseSendService.setSt3_Master(appUser.getUser(), lnrt, lnrm, EnumSadmomfStatus3.PENDING.toString());
 				//always async
 				this.apiAsynchFacadeSendService.sendAllHouses(appUser.getUser(), lnrt, lnrm );
 	    		

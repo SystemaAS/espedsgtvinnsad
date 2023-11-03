@@ -10,10 +10,15 @@ import org.springframework.web.servlet.ModelAndView;
 import javawebparts.core.org.apache.commons.lang.StringUtils;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.service.UrlCgiProxyService;
+import no.systema.tvinn.sad.digitollv2.enums.EnumSadmomfStatus3;
+import no.systema.tvinn.sad.digitollv2.enums.EnumSadmotfStatus3;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.service.ApiGenericDtoResponseService;
+import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
+import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
 import no.systema.tvinn.sad.digitollv2.util.RedirectCleaner;
 import no.systema.tvinn.sad.digitollv2.util.SadDigitollConstants;
@@ -112,53 +117,49 @@ public class ApiTransportSendService {
     			e.printStackTrace();
     			
     		}
-			
+    		//remove the (P)ENDING status that was set by the caller before the async call
+			this.setSt3_Transport(applicationUser, etlnrt, EnumSadmotfStatus3.EMPTY.toString());
 		}
 		
 		return retval;
 		
 	}
-	/**
-	 * 
-	 * @param applicationUser
-	 * @param id
-	 * @param level
-	 * @param apiType
-	 * @return
-	 */
-	private String getMrnFromApi(String applicationUser, String id , String level, String apiType ) {
-		String result = null;
-		StringBuilder url = new StringBuilder();
-		url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
+	
+	
+	public void setSt3_Transport(String applicationUser, Integer lnrt, String st3) {
 		
-		if(StringUtils.isNotEmpty(level) && (level.equals("t")||level.equals("m")||level.equals("h"))) {
-			if(level.equals("t")) {
-				url.append("getTransport.do");
-			}else if (level.equals("m")) {
-				url.append("getMasterConsignment.do");
-			}else if (level.equals("h")) {
-				url.append("getHouseConsignment.do");
-			}
-			String BASE_URL = url.toString();
-			String urlRequestParamsKeys = "user=" + applicationUser + "&lrn=" + id + "&apiType=" + apiType;
-			logger.info("URL: " + BASE_URL);
-			logger.info("PARAMS: " + urlRequestParamsKeys);
-			logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
-			String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
-			//Debug -->
+		try {
+			final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_TRANSPORT_URL;
+			//add URL-parameters
+			String urlRequestParams = "user=" + applicationUser + "&ehlnrt=" + lnrt + "&ehlnrt=" + lnrt  + "&etst3=" + st3 + "&mode=US3" ;
+			logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+	    	logger.warn("URL: " + BASE_URL);
+	    	logger.warn("URL PARAMS: " + urlRequestParams);
+	    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+	
+	    	//Debug --> 
 	    	logger.debug(jsonPayload);
-			logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-			
-			ApiGenericDtoResponse apiDtoResponse = this.apiGenericDtoResponseService.getReponse(jsonPayload);
-			if(StringUtils.isEmpty(apiDtoResponse.getErrMsg())){
-				result = apiDtoResponse.getMrn();
-			}
+	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    	if(jsonPayload!=null){
+	    		SadmotfContainer jsonContainer = this.sadmotfListService.getListContainer(jsonPayload);
+	    		if(jsonContainer!=null && !jsonContainer.getList().isEmpty()) {
+	    			if(StringUtils.isNotEmpty(jsonContainer.getErrMsg())) {
+	    				logger.error("ERROR on update st3 for SADMOMF:" + jsonContainer.getErrMsg());
+	    			}
+	    		}
+	    	}
+		}catch(Exception e) {
+			logger.error(e.toString());
 		}
-		return result;
+    
+		
 	}
+	
+	
 	@Autowired
 	private UrlCgiProxyService urlCgiProxyService;
 	@Autowired
 	private ApiGenericDtoResponseService apiGenericDtoResponseService;
-	
+	@Autowired
+	private SadmotfListService sadmotfListService;
 }

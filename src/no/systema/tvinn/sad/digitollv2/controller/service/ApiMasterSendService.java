@@ -9,8 +9,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javawebparts.core.org.apache.commons.lang.StringUtils;
 import no.systema.main.service.UrlCgiProxyService;
+import no.systema.tvinn.sad.digitollv2.enums.EnumSadmotfStatus3;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
 import no.systema.tvinn.sad.digitollv2.service.ApiGenericDtoResponseService;
+import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
 import no.systema.tvinn.sad.digitollv2.util.RedirectCleaner;
 import no.systema.tvinn.sad.digitollv2.util.SadDigitollConstants;
@@ -91,10 +94,46 @@ public class ApiMasterSendService {
 			}catch(Exception e) {
     			e.printStackTrace();
     		}
-
+    		//remove the (P)ENDING status that was set by the caller before the async call
+			this.setSt3_Master(applicationUser, emlnrt, emlnrm, EnumSadmotfStatus3.EMPTY.toString());
 		}
 		
 		return retval;
+		
+	}
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param lnrt
+	 * @param lnrm
+	 * @param st3
+	 */
+	public void setSt3_Master(String applicationUser, Integer lnrt, Integer lnrm, String st3) {
+		
+		try {
+			final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_MASTERCONSIGNMENT_URL;
+			//add URL-parameters
+			String urlRequestParams = "user=" + applicationUser + "&emlnrt=" + lnrt + "&emlnrm=" + lnrm + "&emst3=" + st3 + "&mode=US3" ;
+			logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+	    	logger.warn("URL: " + BASE_URL);
+	    	logger.warn("URL PARAMS: " + urlRequestParams);
+	    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+	
+	    	//Debug --> 
+	    	logger.debug(jsonPayload);
+	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    	if(jsonPayload!=null){
+	    		SadmomfContainer jsonContainer = this.sadmomfListService.getListContainer(jsonPayload);
+	    		if(jsonContainer!=null && !jsonContainer.getList().isEmpty()) {
+	    			if(StringUtils.isNotEmpty(jsonContainer.getErrMsg())) {
+	    				logger.error("ERROR on update st3 for SADMOMF:" + jsonContainer.getErrMsg());
+	    			}
+	    		}
+	    	}
+		}catch(Exception e) {
+			logger.error(e.toString());
+		}
+    
 		
 	}
 	
@@ -102,5 +141,6 @@ public class ApiMasterSendService {
 	private UrlCgiProxyService urlCgiProxyService;
 	@Autowired
 	private ApiGenericDtoResponseService apiGenericDtoResponseService;
-	
+	@Autowired
+	private SadmomfListService sadmomfListService;
 }

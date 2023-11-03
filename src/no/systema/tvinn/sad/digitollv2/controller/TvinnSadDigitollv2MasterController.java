@@ -49,6 +49,8 @@ import no.systema.tvinn.sad.model.jsonjackson.codes.JsonTvinnSadCodeRecord;
 import no.systema.tvinn.sad.digitollv2.controller.service.ApiAsyncFacadeSendService;
 import no.systema.tvinn.sad.digitollv2.controller.service.ApiMasterSendService;
 import no.systema.tvinn.sad.digitollv2.controller.service.AvdSignControllerService;
+import no.systema.tvinn.sad.digitollv2.enums.EnumSadmohfStatus3;
+import no.systema.tvinn.sad.digitollv2.enums.EnumSadmomfStatus3;
 import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateContainer;
@@ -533,6 +535,8 @@ public class TvinnSadDigitollv2MasterController {
 			//=================
 			if(recordToValidate.getEmlnrt() > 0 && recordToValidate.getEmlnrm() > 0) {
 				if(StringUtils.isNotEmpty(async)) {
+					//set st3 as pending in house to block the Send button until finished
+					this.apiMasterSendService.setSt3_Master(appUser.getUser(), recordToValidate.getEmlnrt(),recordToValidate.getEmlnrm(),  EnumSadmomfStatus3.PENDING.toString());
 					//async if applicable
 					this.apiAsynchFacadeSendService.sendMaster(appUser.getUser(), recordToValidate.getEmlnrt(),recordToValidate.getEmlnrm(), recordToValidate.getEmmid());
 				}else {

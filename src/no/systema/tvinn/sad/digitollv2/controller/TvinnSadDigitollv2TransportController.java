@@ -52,7 +52,9 @@ import no.systema.tvinn.sad.digitollv2.controller.service.ApiAsyncFacadeSendServ
 import no.systema.tvinn.sad.digitollv2.controller.service.ApiTransportSendService;
 import no.systema.tvinn.sad.digitollv2.controller.service.AvdSignControllerService;
 import no.systema.tvinn.sad.digitollv2.enums.EnumSadmohfStatus2;
+import no.systema.tvinn.sad.digitollv2.enums.EnumSadmohfStatus3;
 import no.systema.tvinn.sad.digitollv2.enums.EnumSadmomfStatus2;
+import no.systema.tvinn.sad.digitollv2.enums.EnumSadmotfStatus3;
 import no.systema.tvinn.sad.digitollv2.filter.SearchFilterDigitollTransportList;
 import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
@@ -548,6 +550,8 @@ public class TvinnSadDigitollv2TransportController {
 			//=================
 			if(recordToValidate.getEtlnrt() > 0 ) {
 				if(StringUtils.isNotEmpty(async)) {
+					//set st3 as pending in house to block the Send button until finished
+					this.apiTransportSendService.setSt3_Transport(appUser.getUser(), recordToValidate.getEtlnrt(), EnumSadmotfStatus3.PENDING.toString());
 					//async if applicable
 					this.apiAsynchFacadeSendService.sendTransport(appUser.getUser(), recordToValidate.getEtlnrt(), recordToValidate.getEtmid());
 				}else {

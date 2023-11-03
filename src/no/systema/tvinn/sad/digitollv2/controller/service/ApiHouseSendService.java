@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javawebparts.core.org.apache.commons.lang.StringUtils;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.service.UrlCgiProxyService;
+import no.systema.tvinn.sad.digitollv2.enums.EnumSadmohfStatus3;
 import no.systema.tvinn.sad.digitollv2.enums.EnumSadmomfStatus3;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfContainer;
@@ -99,14 +100,14 @@ public class ApiHouseSendService {
     			e.printStackTrace();
     			
     		}
-			
+    		this.setSt3_House(applicationUser, ehlnrt, ehlnrm, ehlnrh, EnumSadmohfStatus3.EMPTY.toString());
 		}
 		
 		return retval;
 		
 	}
 	/**
-	 * Send all houses as a batch (call by either master or transport
+	 * Send all houses as a batch (call by either master or transport)
 	 * 
 	 * @param applicationUser
 	 * @param transportId
@@ -127,7 +128,7 @@ public class ApiHouseSendService {
 				this.send(applicationUser, record.getEhlnrt(), record.getEhlnrm(), record.getEhlnrh(), record.getEhmid());
 			}
 			//remove the (P)ENDING status that was set by the caller before the async call
-			this.setSt3_MasterToPending(applicationUser, lnrt, lnrm, EnumSadmomfStatus3.EMPTY.toString());
+			this.setSt3_Master(applicationUser, lnrt, lnrm, EnumSadmomfStatus3.EMPTY.toString());
 			
 		}else if(lnrt > 0 ) {
 			/* not implemented in the caller...
@@ -205,7 +206,7 @@ public class ApiHouseSendService {
 	 * @param lnrt
 	 * @param lnrm
 	 */
-	public void setSt3_MasterToPending(String applicationUser, Integer lnrt, Integer lnrm, String st3) {
+	public void setSt3_Master(String applicationUser, Integer lnrt, Integer lnrm, String st3) {
 		
 		try {
 			final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_MASTERCONSIGNMENT_URL;
@@ -221,6 +222,42 @@ public class ApiHouseSendService {
 	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 	    	if(jsonPayload!=null){
 	    		SadmomfContainer jsonContainer = this.sadmomfListService.getListContainer(jsonPayload);
+	    		if(jsonContainer!=null && !jsonContainer.getList().isEmpty()) {
+	    			if(StringUtils.isNotEmpty(jsonContainer.getErrMsg())) {
+	    				logger.error("ERROR on update st3 for SADMOMF:" + jsonContainer.getErrMsg());
+	    			}
+	    		}
+	    	}
+		}catch(Exception e) {
+			logger.error(e.toString());
+		}
+    
+		
+	}
+	/**
+	 * Apply to the SEND house button 
+	 * @param applicationUser
+	 * @param lnrt
+	 * @param lnrm
+	 * @param lnrh
+	 * @param st3
+	 */
+	public void setSt3_House(String applicationUser, Integer lnrt, Integer lnrm, Integer lnrh, String st3) {
+		
+		try {
+			final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_HOUSECONSIGNMENT_URL;
+			//add URL-parameters
+			String urlRequestParams = "user=" + applicationUser + "&ehlnrt=" + lnrt + "&ehlnrm=" + lnrm + "&ehlnrh=" + lnrh + "&ehst3=" + st3 + "&mode=US3" ;
+			logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+	    	logger.warn("URL: " + BASE_URL);
+	    	logger.warn("URL PARAMS: " + urlRequestParams);
+	    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+	
+	    	//Debug --> 
+	    	logger.debug(jsonPayload);
+	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    	if(jsonPayload!=null){
+	    		SadmohfContainer jsonContainer = this.sadmohfListService.getListContainer(jsonPayload);
 	    		if(jsonContainer!=null && !jsonContainer.getList().isEmpty()) {
 	    			if(StringUtils.isNotEmpty(jsonContainer.getErrMsg())) {
 	    				logger.error("ERROR on update st3 for SADMOMF:" + jsonContainer.getErrMsg());
