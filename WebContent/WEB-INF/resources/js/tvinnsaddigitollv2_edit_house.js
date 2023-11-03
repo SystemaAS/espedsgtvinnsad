@@ -186,9 +186,20 @@
 	    		refreshCustomValidity(jq('#ehtppm')[0]);
 	  		}
 	  	});
+		jq('#ehlks').focus(function() {
+	    	if(jq('#ehlks').val()!=''){
+	    		refreshCustomValidity(jq('#ehlks')[0]);
+	  		}
+	  	});
+
 		jq('#ehnam').focus(function() {
 	    	if(jq('#ehnam').val()!=''){
 	    		refreshCustomValidity(jq('#ehnam')[0]);
+	  		}
+	  	});
+		jq('#ehlkm').focus(function() {
+	    	if(jq('#ehlkm').val()!=''){
+	    		refreshCustomValidity(jq('#ehlkm')[0]);
 	  		}
 	  	});
 		jq('#ehdkht').focus(function() {

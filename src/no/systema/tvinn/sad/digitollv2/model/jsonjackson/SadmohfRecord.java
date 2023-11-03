@@ -50,7 +50,19 @@ public class SadmohfRecord extends JsonAbstractGrandFatherRecord   {
 	private String ehupr = ""; //      tegn            5       5       263        begge    outgoingprosedyre    
 	private String ehuprt = ""; //     tegn           30      30       268        begge    outgoingpros. tekst  
 	private String ehrg = ""; //       tegn           11      11       298        begge    org.nr               
-	private Integer eh0068a = 0; //    sonet        8  0       8       309        begge    sendingsdato         
+	private Integer eh0068a = 0; //    sonet        8  0       8       309        begge    sendingsdato
+	private String eh0068aStr = "";
+	public String getEh0068aStr() {
+		if(this.eh0068a > 0 ){
+			String tmp = String.valueOf(this.eh0068a);
+			if (tmp.length()< 6) {
+				this.eh0068aStr = "0" + tmp;
+			}else {
+				this.eh0068aStr = tmp;
+			}
+		}
+		return this.eh0068aStr;
+	}
 	private Integer eh0068b = 0; //    sonet        6  0       6       317        begge    sendingssekv         
 	private String ehtrnr = ""; //     tegn           18      18       323        begge    mrn-nr          
 	private String ehtrty = ""; //     tegn            4       4       341        begge    ref.type cude   

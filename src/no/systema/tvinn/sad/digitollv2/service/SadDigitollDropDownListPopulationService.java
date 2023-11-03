@@ -4,6 +4,7 @@
 package no.systema.tvinn.sad.digitollv2.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.servlet.ServletContext;
 
@@ -170,6 +171,7 @@ public class SadDigitollDropDownListPopulationService {
 			
 			dtoList.add(dto);
 		}
+		Collections.sort(dtoList, new GenericDropDownDto.OrderByCode());
 		return dtoList;
 		
 	}

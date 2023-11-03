@@ -636,7 +636,17 @@
 								</select>
 		 					</td>
 							<td class="text14"><input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="ehrg" id="ehrg" size="12" maxlength="11" value="${model.record.ehrg}"></td>
-			 				<td class="text14"><input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="eh0068a" id="eh0068a" size="8" maxlength="6" value='<c:if test="${model.record.eh0068a!='0'}">${model.record.eh0068a}</c:if>'></td>
+			 				<td class="text14">
+			 					<c:choose>
+					 				<c:when test="${model.record.eh0068a > 0}">
+					 					<input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="eh0068a" id="eh0068a" size="10" maxlength="8" value="${model.record.eh0068aStr}">
+					 				</c:when>	
+					 				<c:otherwise>
+					 					<input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="eh0068a" id="eh0068a" size="10" maxlength="8" value="">
+					 				</c:otherwise>
+				 				</c:choose>
+			 					
+			 				</td>
 			 				<td class="text14"><input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="eh0068b" id="eh0068b" size="8" maxlength="6" value='<c:if test="${model.record.eh0068b!='0'}">${model.record.eh0068b}</c:if>'></td>
 			 				<td class="text14"><input type="text" class="inputTextMediumBlue toggleTransit" name="ehtrnr" id="ehtrnr" size="20" maxlength="18" value="${model.record.ehtrnr}"></td>
 						</tr>
@@ -990,7 +1000,7 @@
 			 					
 			 					<td class="text14">&nbsp;<span title="ehtpps">Typ.person</span><font class="text16RedBold" >*</font></td>
 								<td class="text14">&nbsp;<span title="ehpss">Sted</span></td>
-								<td class="text14">&nbsp;<span title="ehlks">Landkode</span></td>
+								<td class="text14">&nbsp;<span title="ehlks">Landkode</span><font class="text16RedBold" >*</font></td>
 								
 			 				</tr>
 			 				<tr >
@@ -1003,7 +1013,7 @@
 			 					</td>
 								<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehpss" id="ehpss" size="25" maxlength="24" value="${model.record.ehpss}"></td>
 								<td class="text14">
-									<select class="inputTextMediumBlue" name="ehlks" id="ehlks" >
+									<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="ehlks" id="ehlks" >
 				 						<option value="">-velg-</option>
 					 				  	<c:forEach var="dto" items="${model.countryDto}" >
 				                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.ehlks == dto.code}"> selected </c:if> >${dto.code}</option>
@@ -1111,7 +1121,7 @@
 				 				<tr >
 				 					<td class="text14">&nbsp;<span title="ehtppm">Typ.person</span><font class="text16RedBold" >*</font></td>
 									<td class="text14">&nbsp;<span title="ehpsm">Sted</span></td>
-									<td class="text14">&nbsp;<span title="ehlkm">Landkode</span></td>
+									<td class="text14">&nbsp;<span title="ehlkm">Landkode</span><font class="text16RedBold" >*</font></td>
 									
 				 				</tr>
 				 				<tr >
@@ -1124,7 +1134,7 @@
 				 					</td>
 									<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehpsm" id="ehpsm" size="25" maxlength="24" value="${model.record.ehpsm}"></td>
 									<td class="text14">
-										<select class="inputTextMediumBlue" name="ehlkm" id="ehlkm" >
+										<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="ehlkm" id="ehlkm" >
 					 						<option value="">-velg-</option>
 						 				  	<c:forEach var="dto" items="${model.countryDto}" >
 					                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.ehlkm == dto.code}"> selected </c:if> >${dto.code}</option>

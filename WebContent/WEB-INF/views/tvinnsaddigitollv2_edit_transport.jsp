@@ -53,7 +53,7 @@
 					<c:if test="${model.record.etlnrt > 0 && model.record.etst != 'S'}"> <%-- CANCELED(S) --%>
 						<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 						<td width="15%" valign="bottom" class="tabDisabled" style="background-color:lightyellow;"  align="center" nowrap>
-							<a id="alinkHeader" style="display:block;" href="tvinnsaddigitollv2_edit_master.do?action=doCreate&emlnrt=${model.record.etlnrt}&emavd=${model.record.etavd}&emsg=${model.record.etsg}&empro=${model.record.etpro}">
+							<a id="alinkMaster" style="display:block;" href="tvinnsaddigitollv2_edit_master.do?action=doCreate&emlnrt=${model.record.etlnrt}&emavd=${model.record.etavd}&emsg=${model.record.etsg}&empro=${model.record.etpro}">
 								<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.createnew"/>&nbsp;<spring:message code="systema.tvinn.sad.digitoll.list.tab.master"/></font>
 								<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
 							</a>
@@ -120,7 +120,7 @@
 	<%-- --------------------------- --%>	
  	<%-- tab area container PRIMARY  --%>
 	<%-- --------------------------- --%>
-	<form name="manifestForm" id="manifestForm" action="tvinnsaddigitollv2_edit_transport.do" method="post">
+	<form name="transportForm" id="transportForm" action="tvinnsaddigitollv2_edit_transport.do" method="post">
 			<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
 			<input type="hidden" name="applicationUserSign" id="applicationUserSign" value="${user.tvinnSadSign}">
 			<input type="hidden" name="etuuid" id="etuuid" value="${model.record.etuuid}"> 
@@ -381,7 +381,7 @@
 											</datalist>
 											 --%>
 											<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" id="etavd" name="etavd">
-											  <option value="">-Välj-</option>
+											  <option value="">-velg-</option>
 							 				  	<c:forEach var="record" items="${model.avdList}" >
 							 				  		<option title="${record.namn}" value="${record.avd}"<c:if test="${model.record.etavd == record.avd}"> selected </c:if> >${record.avd}</option> 
 												</c:forEach>  
@@ -409,7 +409,7 @@
 											</datalist>
 											 --%>
 											<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" id="etsg" name="etsg">
-											<option value="">-Välj-</option>
+											<option value="">-velg-</option>
 							 				  	<c:forEach var="record" items="${model.signList}" >
 							 				  		<option title="${record.namn}" value="${record.sign}"<c:if test="${model.record.etsg == record.sign}"> selected </c:if> >${record.sign}</option> 
 												</c:forEach>  

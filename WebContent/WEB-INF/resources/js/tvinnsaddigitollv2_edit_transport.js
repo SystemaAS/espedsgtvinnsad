@@ -9,10 +9,7 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 	jq('#alinkTransportList').click(function() { 
     	setBlockUI();
     });
-    jq('#alinkHeader').click(function() { 
-    	setBlockUI();
-    });
-    jq('#alinkItems').click(function() { 
+    jq('#alinkMaster').click(function() { 
     	setBlockUI();
     });
 	jq('#alinkTransportList').click(function() { 
@@ -22,21 +19,8 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
     	setBlockUI();
     });
 
-    //General Header Menus
     
-    jq('#alinkTopicListMenuExp').click(function() { 
-    	setBlockUI();
-    });
-    jq('#alinkTopicListMenuNctsExp').click(function() { 
-    	setBlockUI();
-    });
-    jq('#alinkTopicListMenuNctsImp').click(function() { 
-    	setBlockUI();
-    });
-    jq('#alinkTopicListMenuManifest').click(function() { 
-    	setBlockUI();
-    });
-    jq('#manifestForm').submit(function() { 
+    jq('#transportForm').submit(function() { 
     	setBlockUI();
     });
     

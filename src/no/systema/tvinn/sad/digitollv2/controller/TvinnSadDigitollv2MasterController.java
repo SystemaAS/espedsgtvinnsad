@@ -639,6 +639,11 @@ public class TvinnSadDigitollv2MasterController {
 			logger.info("Brutto-Vekt: " + record.getTutvkt());
 			recordToValidate.setEmvkb(Integer.valueOf(record.getTutvkt()));
 		}
+		if(StringUtils.isNotEmpty(record.getTutarf())) {
+			logger.info("Ag-ref(tutarf-tariffør): " + record.getTutarf());
+			recordToValidate.setEmdkm(record.getTutarf());
+		}
+		
 		if(StringUtils.isNotEmpty(record.getTusdf())) {
 			logger.info("Lastested: " + record.getTusdf());
 			recordToValidate.setEmsdlt(record.getTusdf());

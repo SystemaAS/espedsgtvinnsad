@@ -981,6 +981,7 @@ public class TvinnSadDigitollv2HouseController {
 		}
 		//Decl.date
 		if(recordToValidate.getEh0068a()!=null && recordToValidate.getEh0068a() > 0) {
+			
 			String isoDeclDate = String.valueOf(recordToValidate.getEh0068a());
 			if (org.apache.commons.lang3.StringUtils.isNotEmpty(isoDeclDate) && isoDeclDate.length()==8) {
 				int declDate = Integer.parseInt(this.dateMgr.getDateFormatted_NO(isoDeclDate, DateTimeManager.ISO_FORMAT));
@@ -1065,8 +1066,11 @@ public class TvinnSadDigitollv2HouseController {
 		
 		//Decl.date on eh0068a
 		if(recordToValidate.getEh0068a()!=null && recordToValidate.getEh0068a() > 0) {
-			int declDate = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(String.valueOf(recordToValidate.getEh0068a()), DateTimeManager.NO_FORMAT));
+			
+			int declDate = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(recordToValidate.getEh0068aStr(), DateTimeManager.NO_FORMAT));
+			logger.info("#############" + declDate);
 			recordToValidate.setEh0068a(declDate);
+			
 		}
 		
 		//postnr norsk alltid 4-siffror

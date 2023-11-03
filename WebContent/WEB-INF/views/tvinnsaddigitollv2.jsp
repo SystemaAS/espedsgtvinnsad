@@ -122,7 +122,7 @@
 				</td>
 				<td align="left" >
 					<select class="selectMediumBlueE2" name="sign" id="sign">
-					  <option value="">-Välj-</option>
+					  <option value="">-velg-</option>
 	 				  	<c:forEach var="record" items="${model.signList}" >
 	 				  		<option title="${record.namn}" value="${record.sign}"<c:if test="${searchFilterSadDigitollTransportList.sign == record.sign}"> selected </c:if> >${record.sign}</option> 
 						</c:forEach>  

@@ -186,29 +186,29 @@ public class TvinnSadDigitollv2TransportController {
 			    		//----------------------------------------------------------------
 						//now filter the topic list with the search filter (if applicable)
 						//----------------------------------------------------------------
-						outputList = jsonContainer.getList();
-						Collection<SadmotfRecord> outputListWithRedFlags = jsonContainer.getList();
-						if(outputList!=null && outputList.size() > SadmotfContainer.LIMIT_SIZE_OF_MAIN_LIST_OF_TRANSPORTS){
-							outputList = new ArrayList();
-							model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, "Too many lines. Narrow your search please ...");
-						}else{
-							for(SadmotfRecord record: outputList){
-								this.adjustFieldsForFetch(record);
-								
-								//Special search for red flags
-								//this in order to get a redFlag (defect masters or houses)
-								if(StringUtils.isNotEmpty(request.getParameter("showErrorLayers"))) {
-									if(outputList.size() < SadDigitollConstants.MAX_NUMBER_OF_LINES_FOR_DEEPSEARCH_REDFLAG_ON_TRANSPORT_MAINLIST) { //temporarily to test and avoid hang-ups
-										this.getMasterHouseRedFlagMainList(appUser, record);
-									}else {
-										model.put("errorMessage", "For mange linjer for dyptsøk på -Vis error-flagg M/H nivå-");
+						if(jsonContainer!=null) {
+				    		outputList = jsonContainer.getList();
+							Collection<SadmotfRecord> outputListWithRedFlags = jsonContainer.getList();
+							if(outputList!=null && outputList.size() > SadmotfContainer.LIMIT_SIZE_OF_MAIN_LIST_OF_TRANSPORTS){
+								outputList = new ArrayList();
+								model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, "Too many lines. Narrow your search please ...");
+							}else{
+								for(SadmotfRecord record: outputList){
+									this.adjustFieldsForFetch(record);
+									
+									//Special search for red flags
+									//this in order to get a redFlag (defect masters or houses)
+									if(StringUtils.isNotEmpty(request.getParameter("showErrorLayers"))) {
+										if(outputList.size() < SadDigitollConstants.MAX_NUMBER_OF_LINES_FOR_DEEPSEARCH_REDFLAG_ON_TRANSPORT_MAINLIST) { //temporarily to test and avoid hang-ups
+											this.getMasterHouseRedFlagMainList(appUser, record);
+										}else {
+											model.put("errorMessage", "For mange linjer for dyptsøk på -Vis error-flagg M/H nivå-");
+										}
 									}
 								}
+								//logger.debug(outputList.toString());
 							}
-							//logger.debug(outputList.toString());
 						}
-						
-						
 						
 			    	}
             	}
