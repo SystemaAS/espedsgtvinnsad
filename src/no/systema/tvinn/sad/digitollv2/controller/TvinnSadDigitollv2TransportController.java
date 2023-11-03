@@ -552,6 +552,7 @@ public class TvinnSadDigitollv2TransportController {
 					this.apiAsynchFacadeSendService.sendTransport(appUser.getUser(), recordToValidate.getEtlnrt(), recordToValidate.getEtmid());
 				}else {
 					//normal synchronous default as a normal controller
+					//String redirectSuffix = apiTransportSendService.send(appUser.getUser(), recordToValidate.getEtlnrt(), recordToValidate.getEtmid(), recordToValidate.getEtuuid(), apiType);
 					String redirectSuffix = apiTransportSendService.send(appUser.getUser(), recordToValidate.getEtlnrt(), recordToValidate.getEtmid());
 					if(StringUtils.isNotEmpty(redirectSuffix)) {
 						redirect.append(redirectSuffix);
@@ -652,7 +653,7 @@ public class TvinnSadDigitollv2TransportController {
 	
 	
 	@RequestMapping(value="tvinnsaddigitollv2_api_delete_transport.do",  method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doApiDeleteMaster(@ModelAttribute ("record") SadmotfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+	public ModelAndView doApiDeleteTransport(@ModelAttribute ("record") SadmotfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		//this.context = TdsAppContext.getApplicationContext();
 		Collection<SadmomfRecord> outputList = new ArrayList<SadmomfRecord>();
 		Map model = new HashMap();

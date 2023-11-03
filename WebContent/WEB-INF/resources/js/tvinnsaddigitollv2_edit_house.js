@@ -36,9 +36,7 @@
     });
     
     jq('#sendButton').click(function() { 
-    	//setBlockUI();
-		//window.location = 'tvinnsaddigitollv2_api_send_house.do?ehlnrt=' + jq('#ehlnrt').val() + '&ehlnrm=' + jq('#ehlnrm').val() + '&ehlnrh=' + jq('#ehlnrh').val()+ '&ehmid=' + jq('#ehmid').val();
-		//setters (add more if needed)
+    	
 		  jq('#dialogSend').dialog( "option", "title", "Send til toll.no" );
 		  //deal with buttons for this modal window
 		  jq('#dialogSend').dialog({
@@ -48,7 +46,7 @@
 				 text: "Ok",
 				 click: function(){
 					 		setBlockUI();
-							window.location = 'tvinnsaddigitollv2_api_send_house.do?ehlnrt=' + jq('#ehlnrt').val() + '&ehlnrm=' + jq('#ehlnrm').val() + '&ehlnrh=' + jq('#ehlnrh').val()+ '&ehmid=' + jq('#ehmid').val();
+							window.location = 'tvinnsaddigitollv2_api_send_house.do?ehlnrt=' + jq('#ehlnrt').val() + '&ehlnrm=' + jq('#ehlnrm').val() + '&ehlnrh=' + jq('#ehlnrh').val()+ '&ehmid=' + jq('#ehmid').val()  + '&async=1';
 				 		}
 			 	 },
 	 	 		{

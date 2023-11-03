@@ -312,7 +312,7 @@
 					 		<tr height="15">
 					 			<c:choose>
 						 			<c:when test="${model.record.etlnrt > 0}">
-						 				<td class="text14White">
+						 				<td nowrap class="text12White">
 						 						&nbsp;&nbsp;Løp.nr.&nbsp;${model.record.etlnrt}
 						 						&nbsp;&nbsp;Avd&nbsp;${model.record.etavd}
 						 						&nbsp;&nbsp;Turnr&nbsp;${model.record.etpro}
@@ -320,17 +320,16 @@
 													<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 												</a>
 												
-						 						&nbsp;&nbsp;&nbsp;&nbsp;Sign&nbsp;${model.record.etsg}
+						 						&nbsp;&nbsp;Sign&nbsp;${model.record.etsg}
 						 						
 						 				</td>
-						 				<td class="text14White" align="right">
+						 				<td class="text12White" align="right">
 						 						Stat<a tabindex=-1 id="updateInternalStatusLink" name="updateInternalStatusLink" runat="server" href="#"><font class="text14White">u</font></a>s:&nbsp;${model.record.etst}
 						 						&nbsp;&nbsp;
-						 				</td>
-						 				<td class="text14White" align="right">
 						 						St<a tabindex=-1 id="updateInternalStatus2Link" name="updateInternalStatus2Link" runat="server" href="#"><font class="text14White">.</font></a>2:&nbsp;${model.record.etst2}
-						 						&nbsp;&nbsp;
+						 						&nbsp;
 						 				</td>
+						 				
 						 			</c:when>
 						 			<c:otherwise>
 						 				<td class="text14White">&nbsp;&nbsp;Transportinfo.</td>

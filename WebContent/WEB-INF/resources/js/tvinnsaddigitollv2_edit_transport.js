@@ -24,8 +24,8 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
     	setBlockUI();
     });
     
-    jq('#sendButton').click(function() { 
-    	
+    jq('#sendButton').click(function() {
+		
 		jq('#dialogSend').dialog( "option", "title", "Send til toll.no" );
 		  //deal with buttons for this modal window
 		  jq('#dialogSend').dialog({
@@ -35,7 +35,7 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 				 text: "Ok",
 				 click: function(){
 					 		setBlockUI();
-							window.location = 'tvinnsaddigitollv2_api_send_transport.do?etlnrt=' + jq('#etlnrt').val() + '&etmid=' + jq('#etmid').val();
+							window.location = 'tvinnsaddigitollv2_api_send_transport.do?etlnrt=' + jq('#etlnrt').val() + '&etmid=' + jq('#etmid').val() + '&async=1';
 				 		}
 			 	 },
 	 	 		{
