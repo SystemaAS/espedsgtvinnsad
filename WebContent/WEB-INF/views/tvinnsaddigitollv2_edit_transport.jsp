@@ -189,18 +189,22 @@
 			</tr>
 			</c:if>
 			
-		<%-- WARNING - OBSOLETE ?. It will be the END-USER responsibility	
-		<c:if test="${empty model.record.etmid && model.record.etlnrt > 0}">	 
-			<tr >
-				<td colspan="10" class="text14  ">
-	    			<font class="inputText isa_warning" >
-	    				For å opprette en ny Master må du ha sendt Transporten (Send-knappen) og fått et MRN-Api-nummer. Dette for å kunne låse hvilken Api(road eller air) som skal brukes på Master/House 
-	    			</font>
-	    		</td>
-	   		</tr>
-	  		<tr height="2"><td colspan="10">&nbsp;</td></tr>  
+		<%-- WARNING - OBSOLETE ?. It will be the END-USER responsibility --%>	
+		<c:if test="${empty model.record.etmid && model.record.etlnrt > 0}">
+			<c:if test="${empty model.record.listMasters}">	 
+				<tr >
+					<td colspan="10" class="text14  ">
+		    			<font class="inputText isa_warning" >
+		    				For å unngå ufullstendige transportsendinger må master-listen være fullstendig før du kan sende denne transporten. 
+		    				Master-referansene må være til stede før bilen når grensen.
+		    			</font>
+		    		</td>
+		   		</tr>
+		  		<tr height="2"><td colspan="10">&nbsp;</td></tr>  
+	  		</c:if>
   		</c:if>
-  		--%>
+  		
+  		
   		
   		<tr height="5">	
   			<td  colspan="10" class="text14 formFrame">
@@ -953,10 +957,12 @@
 				<c:if test="${model.record.etst != 'S'}"> <%-- CANCELED(S) --%>
 					&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
 					<c:if test="${model.record.etlnrt > 0}">
-						<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
-						<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
-							 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
-						</div>
+						<c:if test="${not empty model.record.listMasters}">
+							<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
+							<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
+								 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
+							</div>
+						</c:if>
 						<a id="alinkCreateNewButton" href="tvinnsaddigitollv2_edit_transport.do?action=doCreate">
 							<input class="inputFormSubmitStd" type="button" name="createNewButton" id="createNewButton" value='Lage ny'>
 						</a>

@@ -235,8 +235,9 @@
                 	<tbody> 
                 	<c:forEach items="${list}" var="record" varStatus="counter">    
 		              <c:choose> 
-		              	  <%-- if the manifest is DELETED from tollv. show it as red --%>	   
-			              <c:when test="${record.etst2 == 'D'}">
+		              	  <%-- if the manifest is DELETED from tollv. show it as red 	   
+			              <c:when test="${record.etst2 == 'D'}"> --%>
+			              <c:when test="${empty record.etmid && empty record.etuuid && record.etst2 != 'D' }"> 
 			              	<tr class="tableRow" style="background-color: #FEEFB3;color:#9F6000;" height="20" >
 			          	  </c:when>
 			          	  <c:otherwise>
@@ -244,7 +245,8 @@
 			          	  </c:otherwise>
 		          	  </c:choose>	
 		          
-		          	   <td width="2%" class="tableCellFirst" <c:if test="${record.etst2 == 'D'}">style="background-color: #FEEFB3;color: #9F6000;" </c:if> align="center">
+		          		<td width="2%" class="tableCellFirst" align="center">	
+		          	   	<%-- <td width="2%" class="tableCellFirst" <c:if test="${record.etst2 == 'D'}">style="background-color: #FEEFB3;color: #9F6000;" </c:if> align="center">  --%>
 		          	   		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=${record.etlnrt}" onClick="setBlockUI();">
                					<c:choose>
 		               				<c:when test="${record.etst == 'C' || record.etst == 'S'}">
@@ -316,10 +318,10 @@
 		               <td width="2%" class="tableCell" >
 		               		<c:choose>
 		               		<c:when test="${ not empty record.etktyp && fn:startsWith(record.etktyp,'4') }">
-								<img title="api:air" style="vertical-align:middle;" id="airplaneImg${record.etuuid}" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
+								<img style="cursor:help;" title="api:air" style="vertical-align:middle;" id="airplaneImg${record.etuuid}" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
 							</c:when>
 							<c:otherwise>
-								<img title="api:road" style="vertical-align:middle;" id="lorryImg${record.etuuid}" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;
+								<img style="cursor:help;" title="api:road" style="vertical-align:middle;" id="lorryImg${record.etuuid}" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;
 							</c:otherwise>
 							</c:choose>
 		               </td>
@@ -334,7 +336,7 @@
 		               		<c:choose>
 		               		<c:when test="${record.etst2 == 'S' || record.etst2 == 'R' || record.etst2 == 'D' || record.etst2 == 'M' || record.etst2 == 'C'}">
 		               			<c:if test="${record.etst2 == 'S'}">
-		               				<img title="Submitted" src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
+		               				<img style="cursor:help;" title="Submitted" src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'R'}">
 
@@ -343,16 +345,16 @@
 									
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'M'}">
-									<img title="Error" src="resources/images/bulletRed.png" width="10" height="10" border="0" >
+									<img style="cursor:help;" title="Error" src="resources/images/bulletRed.png" width="10" height="10" border="0" >
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'C'}">
-		               				<img title="Completed" style="vertical-align:middle;" title="Completed tolldekl at toll.no" src="resources/images/complete-icon.png" width="14px" height="12px" border="0" alt="completion">
+		               				<img title="Completed" style="vertical-align:middle;cursor:help;" title="Completed tolldekl at toll.no" src="resources/images/complete-icon.png" width="14px" height="12px" border="0" alt="completion">
 		               			</c:if>
 		               			
 		               		</c:when>
 		               		<c:otherwise>
 		               			<c:if test="${record.etst2 != 'S'}">
-		               				<img title="To be send?" src="resources/images/bulletYellow.png" width="10" height="10" border="0" >
+		               				<img style="cursor:help;" title="To be send?" src="resources/images/bulletYellow.png" width="10" height="10" border="0" >
 		               			</c:if>
 		               		</c:otherwise>
 		               		</c:choose>
