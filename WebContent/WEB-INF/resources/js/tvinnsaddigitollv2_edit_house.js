@@ -495,6 +495,16 @@
   //-------------------------------------------
  //Initialize <div> here
   jq(function() { 
+	  jq("#dialogUpdateInternalStatus3").dialog({
+		  autoOpen: false,
+		  maxWidth:500,
+          maxHeight: 400,
+          width: 280,
+          height: 220,
+		  modal: true
+	  });
+  });	
+  jq(function() { 
 	  jq("#dialogUpdateInternalStatus2").dialog({
 		  autoOpen: false,
 		  maxWidth:500,
@@ -534,6 +544,9 @@
   //Present dialog box onClick 
   //----------------------------
   jq(function() {
+	  jq("#updateInternalStatus3Link").click(function() {
+		  presentChangeInternalStatus3Dialog();
+	  });
 	  jq("#updateInternalStatus2Link").click(function() {
 		  presentChangeInternalStatus2Dialog();
 	  });
@@ -603,6 +616,37 @@
 		  jq("#dialogSaveSU").button("option", "disabled", true);
 		  //open now
 		  jq('#dialogUpdateInternalStatus2').dialog('open');
+	  }
+   
+     function presentChangeInternalStatus3Dialog(){
+		//setters (add more if needed)
+		  jq('#dialogUpdateInternalStatus3').dialog( "option", "title", "Update Internal Status 3" );
+		  //deal with buttons for this modal window
+		  jq('#dialogUpdateInternalStatus3').dialog({
+			 buttons: [ 
+	            {
+				 id: "dialogSaveTU",	
+				 text: "Ok",
+				 click: function(){
+					 		jq('#updateInternalStatusForm3').submit();
+					 		setBlockUI();
+				 		}
+			 	 },
+	 	 		{
+			 	 id: "dialogCancelTU",
+			 	 text: "Cancel", 
+				 click: function(){
+					 		//back to initial state of form elements on modal dialog
+					 		jq("#dialogSaveSU").button("option", "disabled", true);
+					 		jq("#selectedStatus").val("");
+					 		jq( this ).dialog( "close" ); 
+				 		} 
+	 	 		 } ] 
+		  });
+		  //init values
+		  jq("#dialogSaveSU").button("option", "disabled", true);
+		  //open now
+		  jq('#dialogUpdateInternalStatus3').dialog('open');
 	  }
   
  

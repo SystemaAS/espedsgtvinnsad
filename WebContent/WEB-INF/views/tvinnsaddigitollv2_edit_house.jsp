@@ -382,7 +382,7 @@
 								St<a tabindex=-1 id="updateInternalStatus2Link" name="updateInternalStatus2Link" runat="server" href="#">.</a>2
 								</span>
 						</td>
-						<td class="text14">&nbsp;<span title="ehst3">St.3</span></td>
+						<td class="text14">&nbsp;<span title="ehst3"><a tabindex=-1 id="updateInternalStatus3Link" name="updateInternalStatus3Link" runat="server" href="#"><span class="text14">St.3</span></a></span></td>
 						<td class="text14">&nbsp;<span title="ehdts">Send.dato</span></td>
 						<td class="text14">&nbsp;<span title="ehdts">Master Doknr</span></td>
 						
@@ -1354,6 +1354,32 @@
 							  	<option title="SUBMITTED(S)" value="S">SUBMITTED</option>
 							  	<option title="COMPLETED(C)" value="C">COMPLETED</option>
 							  	
+							</select>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</td>
+</tr> 
+
+<%-- Dialog update status 3 --%>		
+<tr>
+	<td>
+		<div id="dialogUpdateInternalStatus3" title="Dialog">
+			
+			<form action="tvinnsaddigitollv2_updateInternalStatus3_house.do" name="updateInternalStatusForm3" id="updateInternalStatusForm3" method="post">
+			 	<input type="hidden" name="ehlnrt" id="ehlnrt" value="${model.record.ehlnrt}">
+			 	<input type="hidden" name="ehlnrm" id="ehlnrm" value="${model.record.ehlnrm}">
+			 	<input type="hidden" name="ehlnrh" id="ehlnrh" value="${model.record.ehlnrh}">
+			 	<p class="text14" >Change Internal status3 as needed.</p>
+				<table>
+					<tr>
+						<td class="text14" align="left" >&nbsp;Status</td>
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="ehst3" id="ehst3">
+		            		  	<option title="EMPTY" value=" ">BLANK</option>
+			            		<option title="X-TEST" value="X">X</option>
 							</select>
 						</td>
 					</tr>
