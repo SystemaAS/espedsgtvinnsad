@@ -53,4 +53,7 @@ public class ApiGenericDtoResponse {
 	
 	private List<Object> list = new ArrayList<Object>();
 	
+	//for routing - entry
+	private List<EntryDto> entryList = new ArrayList<EntryDto>();
+	
 }

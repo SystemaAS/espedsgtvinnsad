@@ -7,6 +7,7 @@ import org.slf4j.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -51,6 +52,8 @@ import no.systema.tvinn.sad.model.jsonjackson.customer.JsonTvinnSadCustomerConta
 import no.systema.tvinn.sad.model.jsonjackson.customer.JsonTvinnSadCustomerRecord;
 import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorContainer;
 import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorRecord;
+import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
+import no.systema.tvinn.sad.digitollv2.model.api.EntryDto;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurContainer;
@@ -253,6 +256,25 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 	    		
 	    		model.put("content", jsonPayload);
+	    		
+	    		try {
+	    			ApiGenericDtoResponse obj = new ObjectMapper().readValue(jsonPayload, ApiGenericDtoResponse.class);
+	    			if(obj!=null) {
+						//DEBUG
+						for (EntryDto dto: obj.getEntryList()) {
+							logger.warn("#entrySummaryDeclarationMRN#:" + dto.getEntrySummaryDeclarationMRN());
+							logger.warn("#transportDocumentHouseLevel#");
+							logger.warn("referenceNumber:" + dto.getTransportDocumentHouseLevel().getReferenceNumber());
+							logger.warn("type:" + dto.getTransportDocumentHouseLevel().getType());
+							logger.warn("#routingResult#");
+							logger.warn("id:" + dto.getRoutingResult().getId());
+							logger.warn("routing:" + dto.getRoutingResult().getRouting());
+						}
+						//dtoResponse.setEntryList(Arrays.asList(obj));
+	    			}
+	    		}catch(Exception e) {
+	    			e.toString();
+	    		}
 			}
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 			
