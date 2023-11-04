@@ -1220,8 +1220,11 @@
 				&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
 				<c:if test="${model.record.ehlnrh > 0}">
 					<c:choose>
-						<c:when test="${model.record.ehst2 == 'C' }"> <%--COMPLETED(C) --%>
-							<%-- not possible --%>
+						<c:when test="${model.record.ehst2 == 'C' || model.record.ehst3 == 'P' }"> <%--COMPLETED(C) PENDING(P)--%>
+							<%-- C == not possible --%>
+							<c:if test="${model.record.ehst3 == 'P' }"> <%-- PENDING(P) --%>
+								<input title="Pending status ..." class="buttonGrayInsideDivPopup" style="cursor:not-allowed;color:brown;" type="button" name="sendButton" id="sendButton" value='Send'>
+							</c:if>
 						</c:when>
 						<c:otherwise>
 							<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>

@@ -99,8 +99,9 @@ public class ApiHouseSendService {
     		}catch(Exception e) {
     			e.printStackTrace();
     			
+    		}finally {
+    			this.setSt3_House(applicationUser, ehlnrt, ehlnrm, ehlnrh, EnumSadmohfStatus3.EMPTY.toString());
     		}
-    		this.setSt3_House(applicationUser, ehlnrt, ehlnrm, ehlnrh, EnumSadmohfStatus3.EMPTY.toString());
 		}
 		
 		return retval;

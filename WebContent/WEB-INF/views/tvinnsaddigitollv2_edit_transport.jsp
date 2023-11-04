@@ -324,9 +324,11 @@
 						 						
 						 				</td>
 						 				<td class="text12White" align="right">
-						 						Stat<a tabindex=-1 id="updateInternalStatusLink" name="updateInternalStatusLink" runat="server" href="#"><font class="text14White">u</font></a>s:&nbsp;${model.record.etst}
+						 						Stat<a tabindex=-1 id="updateInternalStatusLink" name="updateInternalStatusLink" runat="server" href="#"><font class="text12White">u</font></a>s:&nbsp;${model.record.etst}
 						 						&nbsp;&nbsp;
-						 						St<a tabindex=-1 id="updateInternalStatus2Link" name="updateInternalStatus2Link" runat="server" href="#"><font class="text14White">.</font></a>2:&nbsp;${model.record.etst2}
+						 						St<a tabindex=-1 id="updateInternalStatus2Link" name="updateInternalStatus2Link" runat="server" href="#"><font class="text12White">.</font></a>2:&nbsp;${model.record.etst2}
+						 						&nbsp;
+						 						<a tabindex=-1 id="updateInternalStatus3Link" name="updateInternalStatus3Link" runat="server" href="#"><font class="text12White">St.3:&nbsp;${model.record.etst3}</a>
 						 						&nbsp;
 						 				</td>
 						 				
@@ -957,10 +959,17 @@
 					&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
 					<c:if test="${model.record.etlnrt > 0}">
 						<c:if test="${not empty model.record.listMasters}">
-							<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
-							<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
-								 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
-							</div>
+							<c:choose>
+							<c:when test="${model.record.etst3 == 'P' }"> <%--PENDING(P) on async triggered --%>
+								<input title="Pending status ..." class="buttonGrayInsideDivPopup" style="cursor:not-allowed;color:brown;" type="button" name="sendButton" id="sendButton" value='Send'>
+							</c:when>
+							<c:otherwise>
+								<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
+								<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
+									 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
+								</div>
+							</c:otherwise>
+							</c:choose>
 						</c:if>
 						<a id="alinkCreateNewButton" href="tvinnsaddigitollv2_edit_transport.do?action=doCreate">
 							<input class="inputFormSubmitStd" type="button" name="createNewButton" id="createNewButton" value='Lage ny'>
@@ -1340,6 +1349,30 @@
 							  	<option title="SUBMITTED(S)" value="S">SUBMITTED</option>
 							  	<option title="COMPLETED(C)" value="C">COMPLETED</option>
 							  	
+							</select>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</td>
+</tr> 
+
+<%-- Dialog update status 3 --%>		
+<tr>
+	<td>
+		<div id="dialogUpdateInternalStatus3" title="Dialog">
+			
+			<form action="tvinnsaddigitollv2_updateInternalStatus3_transport.do" name="updateInternalStatusForm3" id="updateInternalStatusForm3" method="post">
+			 	<input type="hidden" name="etlnrt" id="etlnrt" value="${model.record.etlnrt}">
+			 	<p class="text14" >Change Internal status 3 as needed.</p>
+				<table>
+					<tr>
+						<td class="text14" align="left" >&nbsp;Status</td>
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="etst3" id="etst3">
+		            		  	<option title="EMPTY" value=" ">BLANK</option>
+		            		  	<option title="X-TEST" value="X">X</option>
 							</select>
 						</td>
 					</tr>

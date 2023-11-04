@@ -318,7 +318,7 @@
 						
 						
 						</td>
-						<td class="text14">&nbsp;<span title="emst3">St.3</span></td>
+						<td class="text14">&nbsp;<span title="emst3"><a tabindex=-1 id="updateInternalStatus3Link" name="updateInternalStatus3Link" runat="server" href="#"><span class="text14">St.3</span></a></span></td>
 						<td class="text14">&nbsp;<span title="emdtr">Reg.dato</span></td>
 						<td class="text14">&nbsp;<span title="emdtin">Send.dato</span></td>
 												
@@ -920,12 +920,20 @@
 							<%-- not possible --%>
 						</c:when>
 						<c:otherwise>
-							<input title="Send" class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
-							<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
-								 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
-							</div>
 							<c:choose>
+							<c:when test="${model.record.emst3 == 'P' }"> <%--PENDING(P) on async triggered --%>
+								<input title="Pending status ..." class="buttonGrayInsideDivPopup" style="cursor:not-allowed;color:brown;" type="button" name="sendButton" id="sendButton" value='Send'>
+							</c:when>
+							<c:otherwise>
+								<input title="Send" class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
+								<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
+									 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
+								</div>
+							</c:otherwise>
+							</c:choose>
 							
+							
+							<c:choose>
 							<%-- st3 on the level that trigger the async-Send until the async-process is finnished --%>
 							<c:when test="${model.record.emst3 == 'P' }"> <%--PENDING(P) on async triggered --%>
 								<input title="Pending status ..." class="buttonGrayInsideDivPopup" style="cursor:not-allowed;" type="button" name="sendButtonAllHousesBlocked" id="sendButtonAllHousesBlocked" value='Send alle houses'>
@@ -1232,6 +1240,31 @@
 							  	<option title="SUBMITTED(S)" value="S">SUBMITTED</option>
 							  	<option title="COMPLETED(C)" value="C">COMPLETED</option>
 							  	
+							</select>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</td>
+</tr> 
+
+<%-- Dialog update status 2 --%>		
+<tr>
+	<td>
+		<div id="dialogStatus3" title="Dialog">
+			
+			<form action="tvinnsaddigitollv2_updateInternalStatus3_master.do" name="updateInternalStatusForm3" id="updateInternalStatusForm3" method="post">
+			 	<input type="hidden" name="emlnrt" id="emlnrt" value="${model.record.emlnrt}">
+			 	<input type="hidden" name="emlnrm" id="emlnrm" value="${model.record.emlnrm}">
+			 	<p class="text14" >Change Internal status3 as needed.</p>
+				<table>
+					<tr>
+						<td class="text14" align="left" >&nbsp;Status</td>
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="emst3" id="emst3">
+		            		  	<option title="EMPTY" value=" ">BLANK</option>
+			            		<option title="X-TEST" value="X">X</option>
 							</select>
 						</td>
 					</tr>

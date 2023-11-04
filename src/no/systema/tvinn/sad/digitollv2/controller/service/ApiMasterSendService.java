@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javawebparts.core.org.apache.commons.lang.StringUtils;
 import no.systema.main.service.UrlCgiProxyService;
+import no.systema.tvinn.sad.digitollv2.enums.EnumSadmomfStatus3;
 import no.systema.tvinn.sad.digitollv2.enums.EnumSadmotfStatus3;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
@@ -93,9 +94,11 @@ public class ApiMasterSendService {
 	    		}
 			}catch(Exception e) {
     			e.printStackTrace();
+    		
+			}finally {
+				//remove the (P)ENDING status that was set by the caller before the async call
+				this.setSt3_Master(applicationUser, emlnrt, emlnrm, EnumSadmomfStatus3.EMPTY.toString());
     		}
-    		//remove the (P)ENDING status that was set by the caller before the async call
-			this.setSt3_Master(applicationUser, emlnrt, emlnrm, EnumSadmotfStatus3.EMPTY.toString());
 		}
 		
 		return retval;

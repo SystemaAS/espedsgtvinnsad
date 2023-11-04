@@ -116,22 +116,28 @@ public class ApiTransportSendService {
     		}catch(Exception e) {
     			e.printStackTrace();
     			
+    		}finally {
+    			//remove the (P)ENDING status that was set by the caller before the async call
+    			this.setSt3_Transport(applicationUser, etlnrt, EnumSadmotfStatus3.EMPTY.toString());
     		}
-    		//remove the (P)ENDING status that was set by the caller before the async call
-			this.setSt3_Transport(applicationUser, etlnrt, EnumSadmotfStatus3.EMPTY.toString());
 		}
 		
 		return retval;
 		
 	}
 	
-	
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param lnrt
+	 * @param st3
+	 */
 	public void setSt3_Transport(String applicationUser, Integer lnrt, String st3) {
 		
 		try {
 			final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_TRANSPORT_URL;
 			//add URL-parameters
-			String urlRequestParams = "user=" + applicationUser + "&ehlnrt=" + lnrt + "&ehlnrt=" + lnrt  + "&etst3=" + st3 + "&mode=US3" ;
+			String urlRequestParams = "user=" + applicationUser + "&etlnrt=" + lnrt + "&etst3=" + st3 + "&mode=US3" ;
 			logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
 	    	logger.warn("URL: " + BASE_URL);
 	    	logger.warn("URL PARAMS: " + urlRequestParams);
