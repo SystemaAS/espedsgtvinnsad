@@ -260,17 +260,18 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	    		try {
 	    			ApiGenericDtoResponse obj = new ObjectMapper().readValue(jsonPayload, ApiGenericDtoResponse.class);
 	    			if(obj!=null) {
-						//DEBUG
+						
 						for (EntryDto dto: obj.getEntryList()) {
-							logger.warn("#entrySummaryDeclarationMRN#:" + dto.getEntrySummaryDeclarationMRN());
-							logger.warn("#transportDocumentHouseLevel#");
-							logger.warn("referenceNumber:" + dto.getTransportDocumentHouseLevel().getReferenceNumber());
-							logger.warn("type:" + dto.getTransportDocumentHouseLevel().getType());
-							logger.warn("#routingResult#");
-							logger.warn("id:" + dto.getRoutingResult().getId());
-							logger.warn("routing:" + dto.getRoutingResult().getRouting());
+							//DEBUG
+							logger.debug("#entrySummaryDeclarationMRN#:" + dto.getEntrySummaryDeclarationMRN());
+							logger.debug("#transportDocumentHouseLevel#");
+							logger.debug("referenceNumber:" + dto.getTransportDocumentHouseLevel().getReferenceNumber());
+							logger.debug("type:" + dto.getTransportDocumentHouseLevel().getType());
+							logger.debug("#routingResult#");
+							logger.debug("id:" + dto.getRoutingResult().getId());
+							logger.debug("routing:" + dto.getRoutingResult().getRouting());
 						}
-						//dtoResponse.setEntryList(Arrays.asList(obj));
+						
 	    			}
 	    		}catch(Exception e) {
 	    			e.toString();

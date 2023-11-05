@@ -9,6 +9,7 @@
 		specified in servlet.xml as static <mvc:resources mapping="/resources/**" location="WEB-INF/resources/" order="1"/> --%>
 	<SCRIPT type="text/javascript" src="resources/js/tvinnsadglobal_edit.js?ver=${user.versionEspedsg}"></SCRIPT>	
 	<SCRIPT type="text/javascript" src="resources/js/tvinnsaddigitollv2_edit_house.js?ver=${user.versionEspedsg}"></SCRIPT>
+	<SCRIPT type="text/javascript" src="resources/js/tvinnsaddigitollv2_logger.js?ver=${user.versionEspedsg}"></SCRIPT>
 	
 	<style type = "text/css">
 	.ui-datepicker { font-size:9pt;}
@@ -1392,32 +1393,36 @@
 
 
 
-<%-- ------------------------- --%>
-<%-- DIALOG render logsg   --%>
-<%-- ------------------------- --%>
 <tr>
 <td>
 	<div id="dialogLoggerLocal" title="Dialog" style="display:none">
 		<form>
 	 	<table>
 	 		<tr>
-				<td colspan="3" class="text14" align="left" >Password</td>
+				<td class="text14" align="left" >Password</td>
 			</tr>
 			<tr >
 				<td>
 					<input type="password" class="inputText" id="pwdLocal" name="pwdLocal" size="15" maxlength="15" value=''>
 				</td>
 			</tr>
-			
-			<tr height="5"><td></td></tr>
 			<tr >
 				<td>
 					<input type="text" class="inputText" id="logLevelLocal" name="logLevelLocal" size="8" maxlength="8" value='INFO'>
 				</td>
 			</tr>
+			<tr height="5"><td></td></tr>
+			<tr>
+				<td class="text14" align="left" >Date</td>
+			</tr>
+			<tr >
+				<td>
+					<input type="text" class="inputText" id="dateLocal" name="dateLocal" size="15" maxlength="10" value=''>
+				</td>
+			</tr>
 			<tr height="10"><td></td></tr>
 			<tr>
-				<td colspan="3" class="text14MediumBlue" align="left">
+				<td class="text14MediumBlue" align="left">
 					<label id="loggerStatusLocal"></label>
 				</td>
 			</tr>
