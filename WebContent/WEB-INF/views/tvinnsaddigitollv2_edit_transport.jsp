@@ -1,4 +1,4 @@
-<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+*<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp" %>
 
 <!-- ======================= header ===========================-->
@@ -214,10 +214,10 @@
 				<td class="text14" align="left" >
 					<c:choose>
                		<c:when test="${ not empty model.record.etktyp && fn:startsWith(model.record.etktyp,'4') }">
-						<img title="api:air" style="vertical-align:middle;" id="airplaneImg" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >
+						<img title="api:air" style="vertical-align:middle;cursor:pointer;" id="airplaneImg" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >
 					</c:when>
 					<c:otherwise>
-						<img title="api:road" style="vertical-align:middle;" id="lorryImg" src="resources/images/lorry_green.png" width="20" height="20"border="0" >
+						<img title="api:road" style="vertical-align:middle;cursor:pointer;" id="lorryImg" src="resources/images/lorry_green.png" width="20" height="20"border="0" >
 					</c:otherwise>
 					</c:choose>
 					
@@ -959,22 +959,29 @@
 				<c:if test="${model.record.etst != 'S'}"> <%-- CANCELED(S) --%>
 					&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
 					<c:if test="${model.record.etlnrt > 0}">
-						<c:if test="${not empty model.record.listMasters}">
-							<c:choose>
-							<c:when test="${model.record.etst3 == 'P' }"> <%--PENDING(P) on async triggered --%>
-								<input title="Pending status ..." class="buttonGrayInsideDivPopup" style="cursor:not-allowed;color:brown;" type="button" name="sendButton" id="sendButton" value='Send'>
-							</c:when>
-							<c:otherwise>
-								<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
-								<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
-									 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
-								</div>
-							</c:otherwise>
-							</c:choose>
-						</c:if>
-						<a id="alinkCreateNewButton" href="tvinnsaddigitollv2_edit_transport.do?action=doCreate">
-							<input class="inputFormSubmitStd" type="button" name="createNewButton" id="createNewButton" value='Lage ny'>
-						</a>
+						<c:choose>
+						<c:when test="${model.record.etst2 == 'C' }"> <%--COMPLETED(C) --%>
+							<%-- not possible --%>
+						</c:when>
+						<c:otherwise>
+							<c:if test="${not empty model.record.listMasters}">
+								<c:choose>
+								<c:when test="${model.record.etst3 == 'P' }"> <%--PENDING(P) on async triggered --%>
+									<input title="Pending status ..." class="buttonGrayInsideDivPopup" style="cursor:not-allowed;color:brown;" type="button" name="sendButton" id="sendButton" value='Send'>
+								</c:when>
+								<c:otherwise>
+									<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
+									<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
+										 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
+									</div>
+								</c:otherwise>
+								</c:choose>
+							</c:if>
+							<a id="alinkCreateNewButton" href="tvinnsaddigitollv2_edit_transport.do?action=doCreate">
+								<input class="inputFormSubmitStd" type="button" name="createNewButton" id="createNewButton" value='Lage ny'>
+							</a>
+						</c:otherwise>
+						</c:choose>
 					</c:if>
 				</c:if>
 					 

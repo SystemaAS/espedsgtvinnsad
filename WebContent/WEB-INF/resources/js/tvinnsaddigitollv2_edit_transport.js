@@ -931,7 +931,27 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
 			
 	  });
+
+	 jq("#airplaneImg").click(function() {
+		  var id = this.id;
+		  jq("#"+id).attr(('target','_blank'));
+		  //default url
+		  var controllerUrl = "tvinnsaddigitollv2_childwindow_routinginfo.do?level=t";
+		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
+			
+	  });	
+	 jq("#lorryImg").click(function() {
+		  var id = this.id;
+		  jq("#"+id).attr(('target','_blank'));
+		  //default url
+		  var controllerUrl = "tvinnsaddigitollv2_childwindow_routinginfo.do?level=t";
+		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
+			
+	  });	
+
   });
+
+
   jq(function() {
 	  jq(".logLink").click(function() {
 		  var id = this.id;

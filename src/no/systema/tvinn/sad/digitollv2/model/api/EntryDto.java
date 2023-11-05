@@ -10,6 +10,8 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EntryDto {
 	private String entrySummaryDeclarationMRN;
+	private String estimatedTimeOfArrival;
 	private EntryTranspDocDto transportDocumentHouseLevel;
+	private EntryActiveTransportMeansDto activeBorderTransportMeans;
 	private EntryRoutingResultDto routingResult;
 }

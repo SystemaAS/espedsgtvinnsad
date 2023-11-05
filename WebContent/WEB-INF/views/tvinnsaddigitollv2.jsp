@@ -250,7 +250,7 @@
 		          	   	<%-- <td width="2%" class="tableCellFirst" <c:if test="${record.etst2 == 'D'}">style="background-color: #FEEFB3;color: #9F6000;" </c:if> align="center">  --%>
 		          	   		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=${record.etlnrt}" onClick="setBlockUI();">
                					<c:choose>
-		               				<c:when test="${record.etst == 'C' || record.etst == 'S'}">
+		               				<c:when test="${record.etst2 == 'C' || record.etst == 'S'}">
 		               					<img title="Read" style="vertical-align:bottom;" src="resources/images/eye.png" height="18px" width="18px" border="0" alt="read">
 		               				</c:when>
 		               				<c:otherwise>

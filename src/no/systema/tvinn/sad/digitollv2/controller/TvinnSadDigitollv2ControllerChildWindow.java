@@ -241,7 +241,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			
 			if(StringUtils.isNotEmpty(level) && (level.equals("t")||level.equals("m")||level.equals("h"))) {
 				if(level.equals("t")) {
-					url.append("TODO.do");
+					url.append("getRoutingTransport.do");
 				}else if (level.equals("h")) {
 					url.append("getRoutingHouseConsignment.do");
 				}
