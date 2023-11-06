@@ -599,18 +599,21 @@ public class TvinnSadDigitollv2TransportController {
 		
 		}else{
 			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			logger.info("ASYNC:" + async);
 			//=================
 			//SEND POST or PUT
 			//=================
 			if(recordToValidate.getEtlnrt() > 0 ) {
 				if(StringUtils.isNotEmpty(async)) {
-					//set st3 as pending in house to block the Send button until finished
+					//set st3 as pending in transport to block the Send button until finished
 					this.apiTransportSendService.setSt3_Transport(appUser.getUser(), recordToValidate.getEtlnrt(), EnumSadmotfStatus3.PENDING.toString());
 					//async if applicable
 					this.apiAsynchFacadeSendService.sendTransport(appUser.getUser(), recordToValidate.getEtlnrt(), recordToValidate.getEtmid());
 				}else {
 					//normal synchronous default as a normal controller
-					//String redirectSuffix = apiTransportSendService.send(appUser.getUser(), recordToValidate.getEtlnrt(), recordToValidate.getEtmid(), recordToValidate.getEtuuid(), apiType);
+					//set st3 as pending in transport to block the Send button until finished
+					this.apiTransportSendService.setSt3_Transport(appUser.getUser(), recordToValidate.getEtlnrt(), EnumSadmotfStatus3.PENDING.toString());
+					//sync
 					String redirectSuffix = apiTransportSendService.send(appUser.getUser(), recordToValidate.getEtlnrt(), recordToValidate.getEtmid());
 					if(StringUtils.isNotEmpty(redirectSuffix)) {
 						redirect.append(redirectSuffix);

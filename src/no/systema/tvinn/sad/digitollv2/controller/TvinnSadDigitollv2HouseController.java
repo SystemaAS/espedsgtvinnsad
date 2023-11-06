@@ -487,9 +487,10 @@ public class TvinnSadDigitollv2HouseController {
 			//SEND POST or PUT
 			//=================
 			if(recordToValidate.getEhlnrt() > 0 && recordToValidate.getEhlnrm() > 0 && recordToValidate.getEhlnrh() > 0) {
+				//set st3 as pending in house to block the Send button until finished
+				this.apiHouseSendService.setSt3_House(appUser.getUser(), recordToValidate.getEhlnrt(),recordToValidate.getEhlnrm(), recordToValidate.getEhlnrh(), EnumSadmohfStatus3.PENDING.toString());
+				//check send behaviour (async or sync)
 				if(StringUtils.isNotEmpty(async)) {
-					//set st3 as pending in house to block the Send button until finished
-					this.apiHouseSendService.setSt3_House(appUser.getUser(), recordToValidate.getEhlnrt(),recordToValidate.getEhlnrm(), recordToValidate.getEhlnrh(), EnumSadmohfStatus3.PENDING.toString());
 					//async if applicable
 					this.apiAsynchFacadeSendService.sendHouse(appUser.getUser(), recordToValidate.getEhlnrt(),recordToValidate.getEhlnrm(), recordToValidate.getEhlnrh(), recordToValidate.getEhmid());
 				}else {
@@ -499,7 +500,7 @@ public class TvinnSadDigitollv2HouseController {
 						redirect.append(redirectSuffix);
 					}
 				}
-	    		
+				
 			}else {
 				//this will never populate a redirect but sheet the same ...:-(
 				StringBuffer errMsg = new StringBuffer();
@@ -564,7 +565,9 @@ public class TvinnSadDigitollv2HouseController {
 				this.apiHouseSendService.setSt3_Master(appUser.getUser(), lnrt, lnrm, EnumSadmomfStatus3.PENDING.toString());
 				//always async
 				this.apiAsynchFacadeSendService.sendAllHouses(appUser.getUser(), lnrt, lnrm );
-	    		
+				
+				//remove the (P)ENDING status that was set by the caller before the async call
+				//this.apiHouseSendService.setSt3_Master(appUser.getUser(), lnrt, lnrm, EnumSadmomfStatus3.EMPTY.toString());
 			}else {
 				//this will never populate a redirect but sheet the same ...:-(
 				StringBuffer errMsg = new StringBuffer();

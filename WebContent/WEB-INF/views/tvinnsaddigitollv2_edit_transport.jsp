@@ -64,9 +64,18 @@
 					
 					<%-- <td width="50%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>  --%>
 			 		<td width="80%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
-			 			<c:if test="${not empty model.record.etmid_own}">
-				 			<span title="Sist godkjente MRN" class="inputTextReadOnly text11" style="vertical-align:super;">MRN:&nbsp;${model.record.etmid_own}</span>
+			 			<c:if test="${not empty model.record.etuuid}">
+				 			<span cursor:pointer;" onClick="showPop('requestIdBup');" title="Sist godkjente MRN" class="inputTextReadOnly text11" style="vertical-align:super;">MRN:&nbsp;${model.record.etmid_own}</span>
 				 			&nbsp;&nbsp;
+				 			<div class="text12" style="position: relative;display: inline;" align="left">
+							<span style="position:absolute; left:-200px; top:15px; width:280px;" id="requestIdBup" class="popupWithInputText"  >
+								<div class="text12" align="left">
+				           			<span class="uuidLinkParent" style="color:green;cursor:pointer;" id="${model.record.etuuid_own}">${model.record.etuuid_own}</span>
+					           		<br/>
+				           			<button name="_ButtonCloseApi" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('requestIdBup');">Close</button> 
+				           		</div>
+				           	</span>
+				           	</div>	
 			 			</c:if>
 			 			
 						<a style="vertical-align:super;" title="Kodeverk toll.no" target="_blank" href="https://toll.github.io/api/mo-kodeverk.html">
@@ -968,6 +977,7 @@
 								<c:choose>
 								<c:when test="${model.record.etst3 == 'P' }"> <%--PENDING(P) on async triggered --%>
 									<input title="Pending status ..." class="buttonGrayInsideDivPopup" style="cursor:not-allowed;color:brown;" type="button" name="sendButton" id="sendButton" value='Send'>
+									
 								</c:when>
 								<c:otherwise>
 									<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
@@ -980,6 +990,13 @@
 							<a id="alinkCreateNewButton" href="tvinnsaddigitollv2_edit_transport.do?action=doCreate">
 								<input class="inputFormSubmitStd" type="button" name="createNewButton" id="createNewButton" value='Lage ny'>
 							</a>
+							
+							&nbsp;
+							<span align="left" class="inputText">
+			                	<input style="cursor:pointer;vertical-align:middle;" type="checkbox" id="async" name="async" value="1">
+			                	<span style="cursor:help;vertical-align:middle;font-size: 12px;" title="Vis du ønsker sende til en kø..." >Send til kø</span>
+			                </span>
+			                 
 						</c:otherwise>
 						</c:choose>
 					</c:if>

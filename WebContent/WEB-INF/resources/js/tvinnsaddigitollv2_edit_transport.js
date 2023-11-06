@@ -25,6 +25,10 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
     });
     
     jq('#sendButton').click(function() {
+		var async_own = "";
+		if (jq('#async').is(':checked')) {
+			async_own = jq('#async').val();
+		}
 		
 		jq('#dialogSend').dialog( "option", "title", "Send til toll.no" );
 		  //deal with buttons for this modal window
@@ -35,7 +39,7 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 				 text: "Ok",
 				 click: function(){
 					 		setBlockUI();
-							window.location = 'tvinnsaddigitollv2_api_send_transport.do?etlnrt=' + jq('#etlnrt').val() + '&etmid=' + jq('#etmid').val() + '&async=1';
+							window.location = 'tvinnsaddigitollv2_api_send_transport.do?etlnrt=' + jq('#etlnrt').val() + '&etmid=' + jq('#etmid').val() + '&async=' + async_own;
 				 		}
 			 	 },
 	 	 		{
@@ -52,6 +56,7 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 		  jq("#dialogSaveSU").button("option", "disabled", true);
 		  //open now
 		  jq('#dialogSend').dialog('open');
+		  	
     });
 
 	//Real delete to Api (DELETE)

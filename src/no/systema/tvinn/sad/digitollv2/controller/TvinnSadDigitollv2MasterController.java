@@ -589,6 +589,7 @@ public class TvinnSadDigitollv2MasterController {
 			//SEND POST or PUT
 			//=================
 			if(recordToValidate.getEmlnrt() > 0 && recordToValidate.getEmlnrm() > 0) {
+				//check send behaviour (async or sync)
 				if(StringUtils.isNotEmpty(async)) {
 					//set st3 as pending in house to block the Send button until finished
 					this.apiMasterSendService.setSt3_Master(appUser.getUser(), recordToValidate.getEmlnrt(),recordToValidate.getEmlnrm(),  EnumSadmomfStatus3.PENDING.toString());
@@ -596,6 +597,9 @@ public class TvinnSadDigitollv2MasterController {
 					this.apiAsynchFacadeSendService.sendMaster(appUser.getUser(), recordToValidate.getEmlnrt(),recordToValidate.getEmlnrm(), recordToValidate.getEmmid());
 				}else {
 					//normal synchronous default as a normal controller
+					//set st3 as pending in house to block the Send button until finished
+					this.apiMasterSendService.setSt3_Master(appUser.getUser(), recordToValidate.getEmlnrt(),recordToValidate.getEmlnrm(),  EnumSadmomfStatus3.PENDING.toString());
+					//sync
 					String redirectSuffix = apiMasterSendService.send(appUser.getUser(), recordToValidate.getEmlnrt(),recordToValidate.getEmlnrm(), recordToValidate.getEmmid());
 					if(StringUtils.isNotEmpty(redirectSuffix)) {
 						redirect.append(redirectSuffix);

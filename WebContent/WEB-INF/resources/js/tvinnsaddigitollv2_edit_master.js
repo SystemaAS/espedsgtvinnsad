@@ -37,6 +37,10 @@
     });
     //Real Send to Api (POST or PUT)
     jq('#sendButton').click(function() { 
+		 var async_own = "";
+		if (jq('#async').is(':checked')) {
+			async_own = jq('#async').val();
+		}
     	  jq('#dialogSend').dialog( "option", "title", "Send til toll.no" );
 		  //deal with buttons for this modal window
 		  jq('#dialogSend').dialog({
@@ -46,7 +50,7 @@
 				 text: "Ok",
 				 click: function(){
 					 		setBlockUI();
-							window.location = 'tvinnsaddigitollv2_api_send_master.do?emlnrt=' + jq('#emlnrt').val() + '&emlnrm=' + jq('#emlnrm').val()+ '&emmid=' + jq('#emmid').val()  + '&async=1';
+							window.location = 'tvinnsaddigitollv2_api_send_master.do?emlnrt=' + jq('#emlnrt').val() + '&emlnrm=' + jq('#emlnrm').val()+ '&emmid=' + jq('#emmid').val()  + '&async=' + async_own;
 				 		}
 			 	 },
 	 	 		{

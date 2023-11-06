@@ -76,10 +76,20 @@
 					
 					<%-- <td width="50%" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>  --%>
 			 		<td width="60%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
-			 			<c:if test="${not empty model.record.emmid_own}">
-				 			<span title="Sist godkjente MRN" class="inputTextReadOnly text11" style="vertical-align:super;">MRN:&nbsp;${model.record.emmid_own}</span>
+				 		<c:if test="${not empty model.record.emuuid}">
+				 			<span cursor:pointer;" onClick="showPop('requestIdBup');" title="Sist godkjente MRN" class="inputTextReadOnly text11" style="vertical-align:super;">MRN:&nbsp;${model.record.emmid_own}</span>
 				 			&nbsp;&nbsp;
+				 			<div class="text12" style="position: relative;display: inline;" align="left">
+							<span style="position:absolute; left:-200px; top:15px; width:280px;" id="requestIdBup" class="popupWithInputText"  >
+								<div class="text12" align="left">
+				           			<span class="uuidLinkParent" style="color:green;cursor:pointer;" id="${model.record.emuuid_own}">${model.record.emuuid_own}</span>
+					           		<br/>
+				           			<button name="_ButtonCloseApi" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('requestIdBup');">Close</button> 
+				           		</div>
+				           	</span>
+				           	</div>	
 			 			</c:if>
+			 			
 			 			<a style="vertical-align:super;" title="Kodeverk toll.no" target="_blank" href="https://toll.github.io/api/mo-kodeverk.html">
 							<font title="Kodeverk toll.no" class="inputFormSubmit text10 isa_warning" ><b>Kodeverk</b></font>
 						</a>
@@ -950,6 +960,11 @@
 							<a id="alinkCreateNewButton" href="tvinnsaddigitollv2_edit_master.do?action=doCreate&emlnrt=${model.record.emlnrt}&emavd=${model.record.transportDto.etavd}&emsg=${model.record.transportDto.etsg}&empro=${model.record.transportDto.etpro}">
 								<input class="inputFormSubmitStd" type="button" name="createNewButton" id="createNewButton" value='Lage ny'>
 							</a>
+							&nbsp;
+							<span align="left" class="inputText">
+			                	<input style="cursor:pointer;vertical-align:middle;" type="checkbox" id="async" name="async" value="1">
+			                	<span style="cursor:help;vertical-align:middle;font-size: 12px;" title="Vis du ønsker sende til en kø..." >Send til kø</span>
+			                </span>
 							
 						</c:otherwise>
 					</c:choose>
