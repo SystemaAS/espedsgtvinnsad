@@ -1246,7 +1246,7 @@
 							</a>
 							&nbsp;
 							<span align="left" class="inputText">
-			                	<input style="cursor:pointer;vertical-align:middle;" type="checkbox" id="async" name="async" value="1">
+			                	<input style="cursor:pointer;vertical-align:middle;" type="checkbox" id="async" name="async" value="1" checked>
 			                	<span style="cursor:help;vertical-align:middle;font-size: 12px;" title="Vis du ønsker sende til en kø..." >Send til kø</span>
 			                </span>
 						</c:otherwise>
