@@ -146,6 +146,7 @@ public class TvinnSadDigitollv2HouseController {
 				if(bindingResult.hasErrors()){
 		    		logger.error("[ERROR Validation] record does not validate)");
 		    		this.setRecordAspects(appUser, recordToValidate);
+		    		this.adjustSenderReceiverCommunication(recordToValidate);
 		    		//now we have all aspects in record
 					model.put("record", recordToValidate);
 					isValidForFetch = false;
@@ -250,6 +251,28 @@ public class TvinnSadDigitollv2HouseController {
 	    
 		}	
 		return successView;
+	}
+	
+	/**
+	 * Special only for invalidation errors
+	 * @param recordToValidate
+	 */
+	private void adjustSenderReceiverCommunication(SadmohfRecord recordToValidate) {
+		if(StringUtils.isNotEmpty(recordToValidate.getOwn_ehems_email())){
+			recordToValidate.setEhems(recordToValidate.getOwn_ehems_email());
+			recordToValidate.setEhemst(SadDigitollConstants.API_TYPE_EMAIL);	
+		}else {
+			recordToValidate.setEhems(recordToValidate.getOwn_ehems_telephone());
+			recordToValidate.setEhemst(SadDigitollConstants.API_TYPE_TELEPHONE);
+		}
+		//Receiver
+		if(StringUtils.isNotEmpty(recordToValidate.getOwn_ehemm_email())){
+			recordToValidate.setEhemm(recordToValidate.getOwn_ehemm_email());
+			recordToValidate.setEhemmt(SadDigitollConstants.API_TYPE_EMAIL);	
+		}else {
+			recordToValidate.setEhemm(recordToValidate.getOwn_ehemm_telephone());
+			recordToValidate.setEhemmt(SadDigitollConstants.API_TYPE_TELEPHONE);
+		}
 	}
 	/**
 	 * 

@@ -711,14 +711,14 @@
 				 				<tr >
 									<td class="text14">&nbsp;</td>
 									<c:choose>
-				 					<c:when test="${model.record.ememst == 'EM'}">
-				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_emems_email" id="own_emems_email" size="35" maxlength="50" value="${model.record.emems}"></td>
+				 					<c:when test="${empty model.record.ememst}">
+				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_emems_email" id="own_emems_email" size="35" maxlength="50" value=""></td>
 				 						<td class="text14"><input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="own_emems_telephone" id="own_emems_telephone" size="15" maxlength="50" value=""></td>
 				 					</c:when>
 				 					<c:otherwise>
 				 						<c:choose>
-						 					<c:when test="${empty model.record.ememst}">
-						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_emems_email" id="own_emems_email" size="35" maxlength="50" value=""></td>
+						 					<c:when test="${model.record.ememst == 'EM'}">
+						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_emems_email" id="own_emems_email" size="35" maxlength="50" value="${model.record.emems}"></td>
 						 						<td class="text14"><input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="own_emems_telephone" id="own_emems_telephone" size="15" maxlength="50" value=""></td>
 						 					</c:when>
 						 					<c:otherwise>
@@ -822,15 +822,16 @@
 				 				<tr >
 									
 				 					<td class="text14">&nbsp;</td>
+				 					
 									<c:choose>
-				 					<c:when test="${model.record.ememmt == 'EM'}">
-				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_ememm_email" id="own_ememm_email" size="35" maxlength="50" value="${model.record.ememm}"></td>
+				 					<c:when test="${empty model.record.ememmt}">
+				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_ememm_email" id="own_ememm_email" size="35" maxlength="50" value=""></td>
 				 						<td class="text14"><input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="own_ememm_telephone" id="own_ememm_telephone" size="15" maxlength="50" value=""></td>
 				 					</c:when>
 				 					<c:otherwise>
 				 						<c:choose>
-						 					<c:when test="${empty model.record.ememmt}">
-						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_ememm_email" id="own_ememm_email" size="35" maxlength="50" value=""></td>
+						 					<c:when test="${model.record.ememmt == 'EM'}">
+						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_ememm_email" id="own_ememm_email" size="35" maxlength="50" value="${model.record.ememm}"></td>
 						 						<td class="text14"><input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="own_ememms_telephone" id="own_ememm_telephone" size="15" maxlength="50" value=""></td>
 						 					</c:when>
 						 					<c:otherwise>

@@ -9,6 +9,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import no.systema.jservices.common.util.EmailValidator;
 import no.systema.main.util.*;
 import no.systema.main.validator.DateValidator;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
@@ -25,7 +26,7 @@ public class TransportValidator implements Validator {
 	private static final Logger logger = LoggerFactory.getLogger(TransportValidator.class.getName());
 	private StringManager strMgr = new StringManager();
 	private DateValidator dateValidator = new DateValidator();
-	
+	private EmailValidator emailValidator = new EmailValidator();
 	/**
 	 * 
 	 */
@@ -84,18 +85,18 @@ public class TransportValidator implements Validator {
 				String strEtshed = record.getEtshedStr();
 				if(strMgr.isNotNull(strEtshed)  && !"999999".equals(strEtshed)){
 					if(strEtshed.length()>6){
-						logger.warn("AA");
+						
 						errors.rejectValue("etshed", "systema.tvinn.sad.manifest.express.header.error.rule.invalidStaDate");
 					}else{
 						if(!dateValidator.validateDate(strEtshed, DateValidator.DATE_MASK_NO)){
-							logger.warn("BB");
+							
 							errors.rejectValue("etshed", "systema.tvinn.sad.manifest.express.header.error.rule.invalidStaDate"); 	
 						}else{
 							//logical check. ETA must be at least 2 hours ahead from now
 							DateTimeManager dateTimeMgr = new DateTimeManager();
 							boolean isValidDate = dateTimeMgr.isValidCurrentAndForwardDateNO(strEtshed);
 							if(!isValidDate){
-								logger.warn("CC");
+								
 								errors.rejectValue("etshed", "systema.tvinn.sad.manifest.express.header.error.rule.invalidStaDateForward"); 
 							}else{
 								if(dateTimeMgr.isToday(strEtshed, DateTimeManager.NO_FORMAT)){
@@ -159,6 +160,33 @@ public class TransportValidator implements Validator {
 						errors.rejectValue("ettsd", "systema.tvinn.sad.digitoll.transport.error.rule.invalid.length.tollsted");
 					}
 				}
+				
+				//email/telephone Representative
+				if(StringUtils.isEmpty(record.getOwn_etemr_email()) && StringUtils.isEmpty(record.getOwn_etemr_telephone())) {
+					errors.rejectValue("own_etemr_email", "systema.tvinn.sad.digitoll.transport.error.rule.required.ombud.emailOrTelephone");
+					
+				}else {
+					if(StringUtils.isNotEmpty(record.getOwn_etemr_email())) {
+						if(!emailValidator.validateEmail(record.getOwn_etemr_email())){
+							errors.rejectValue("own_etemr_email", "systema.tvinn.sad.digitoll.transport.error.rule.invalid.email.ombud");
+						}
+					}
+				}
+				
+				//email/telephone Carrier
+				if(StringUtils.isNotEmpty(record.getOwn_etemt_email())) {
+					if(!emailValidator.validateEmail(record.getOwn_etemt_email())){
+						errors.rejectValue("own_etemt_email", "systema.tvinn.sad.digitoll.transport.error.rule.invalid.email.carrier");
+					}
+				}
+				
+				//email/telephone driver 
+				if(StringUtils.isNotEmpty(record.getEtems()) && record.getEtems().contains("@")) {
+					if(!emailValidator.validateEmail(record.getEtems())){
+						errors.rejectValue("etems", "systema.tvinn.sad.digitoll.transport.error.rule.invalid.email.driver");
+					}
+				}
+				
 				
 			}
 		}

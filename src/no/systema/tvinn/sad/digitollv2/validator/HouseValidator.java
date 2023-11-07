@@ -9,6 +9,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import javawebparts.core.org.apache.commons.lang.StringUtils;
+import no.systema.jservices.common.util.EmailValidator;
 import no.systema.main.util.*;
 import no.systema.main.validator.DateValidator;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
@@ -26,7 +27,7 @@ public class HouseValidator implements Validator {
 	private static final Logger logger = LoggerFactory.getLogger(HouseValidator.class.getName());
 	private StringManager strMgr = new StringManager();
 	private DateValidator dateValidator = new DateValidator();
-	
+	private EmailValidator emailValidator = new EmailValidator();
 	/**
 	 * 
 	 */
@@ -64,6 +65,20 @@ public class HouseValidator implements Validator {
 						}*/
 					}
 				}
+				
+				//email sender 
+				if(StringUtils.isNotEmpty(record.getOwn_ehems_email()) ) {
+					if(!emailValidator.validateEmail(record.getOwn_ehems_email())){
+						errors.rejectValue("own_ehems_email", "systema.tvinn.sad.digitoll.house.error.rule.invalid.email.sender");
+					}
+				}
+				//email receiver 
+				if(StringUtils.isNotEmpty(record.getOwn_ehemm_email()) ) {
+					if(!emailValidator.validateEmail(record.getOwn_ehemm_email())){
+						errors.rejectValue("own_ehemm_email", "systema.tvinn.sad.digitoll.house.error.rule.invalid.email.receiver");
+					}
+				}
+
 				//------
 				//dates 
 				//------

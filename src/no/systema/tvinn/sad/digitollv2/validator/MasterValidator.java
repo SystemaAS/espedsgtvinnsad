@@ -3,11 +3,13 @@ package no.systema.tvinn.sad.digitollv2.validator;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.*;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import no.systema.jservices.common.util.EmailValidator;
 import no.systema.main.util.*;
 import no.systema.main.validator.DateValidator;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfRecord;
@@ -24,6 +26,7 @@ public class MasterValidator implements Validator {
 	private static final Logger logger = LoggerFactory.getLogger(MasterValidator.class.getName());
 	private StringManager strMgr = new StringManager();
 	private DateValidator dateValidator = new DateValidator();
+	private EmailValidator emailValidator = new EmailValidator();
 	
 	/**
 	 * 
@@ -44,6 +47,42 @@ public class MasterValidator implements Validator {
 		//Logical (RULES) controls if we passed the NOT NULL errors
 		if(!errors.hasFieldErrors()){
 			if(record!=null){
+				
+				//confirmation email-1 ombud 
+				if(StringUtils.isNotEmpty(record.getEmrcem1()) ) {
+					if(!emailValidator.validateEmail(record.getEmrcem1())){
+						errors.rejectValue("emrcem1", "systema.tvinn.sad.digitoll.master.error.rule.invalid.email1.ombud");
+					}
+				}
+
+				//confirmation email-2 ombud 
+				if(StringUtils.isNotEmpty(record.getEmrcem2()) ) {
+					if(!emailValidator.validateEmail(record.getEmrcem2())){
+						errors.rejectValue("emrcem2", "systema.tvinn.sad.digitoll.master.error.rule.invalid.email2.ombud");
+					}
+				}
+				
+				//confirmation email-3 ombud 
+				if(StringUtils.isNotEmpty(record.getEmrcem3()) ) {
+					if(!emailValidator.validateEmail(record.getEmrcem3())){
+						errors.rejectValue("emrcem3", "systema.tvinn.sad.digitoll.master.error.rule.invalid.email3.ombud");
+					}
+				}
+				
+				
+				//email sender 
+				if(StringUtils.isNotEmpty(record.getOwn_emems_email()) ) {
+					if(!emailValidator.validateEmail(record.getOwn_emems_email())){
+						errors.rejectValue("own_emems_email", "systema.tvinn.sad.digitoll.master.error.rule.invalid.email.sender");
+					}
+				}
+				//email receiver 
+				if(StringUtils.isNotEmpty(record.getOwn_ememm_email()) ) {
+					if(!emailValidator.validateEmail(record.getOwn_ememm_email())){
+						errors.rejectValue("own_ememm_email", "systema.tvinn.sad.digitoll.master.error.rule.invalid.email.receiver");
+					}
+				}
+
 				//------
 				//dates 
 				//------
