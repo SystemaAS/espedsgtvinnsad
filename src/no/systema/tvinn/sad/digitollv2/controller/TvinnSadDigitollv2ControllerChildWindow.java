@@ -282,6 +282,71 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	    	return successView;
 		}
 	}
+	
+	/**
+	 * 
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_entryinfo.do",  method={RequestMethod.GET} )
+	public ModelAndView doEntryInfo(HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doEntryInfo");
+		Map model = new HashMap();
+		String mrn = request.getParameter("mrn");
+		
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_manifestinfo");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			StringBuilder url = new StringBuilder();
+			url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
+			
+			if(StringUtils.isNotEmpty(mrn)) {
+				url.append("getEntryComplete.do");
+				
+				String BASE_URL = url.toString();
+	    		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&mrn=" + mrn;
+	    		logger.info("URL: " + BASE_URL);
+	    		logger.info("PARAMS: " + urlRequestParamsKeys);
+	    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+	    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+	    		//Debug -->
+		    	logger.debug(jsonPayload);
+	    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    		
+	    		model.put("content", jsonPayload);
+	    		
+	    		try {
+	    			ApiGenericDtoResponse obj = new ObjectMapper().readValue(jsonPayload, ApiGenericDtoResponse.class);
+	    			if(obj!=null) {
+						
+						for (EntryDto dto: obj.getEntryList()) {
+							//DEBUG
+							logger.debug("#entrySummaryDeclarationMRN#:" + dto.getEntrySummaryDeclarationMRN());
+							logger.debug("#transportDocumentHouseLevel#");
+							logger.debug("referenceNumber:" + dto.getTransportDocumentHouseLevel().getReferenceNumber());
+							logger.debug("type:" + dto.getTransportDocumentHouseLevel().getType());
+							logger.debug("#routingResult#");
+							logger.debug("id:" + dto.getRoutingResult().getId());
+							logger.debug("routing:" + dto.getRoutingResult().getRouting());
+						}
+						
+	    			}
+	    		}catch(Exception e) {
+	    			e.toString();
+	    		}
+			}
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
 	/**
 	 * 
 	 * @param session

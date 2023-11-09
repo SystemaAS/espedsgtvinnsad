@@ -68,7 +68,7 @@
  		<table style="width:100%;" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
  		<tr>
  		<td>
- 		<table style="width:85%;">
+ 		<table style="width:95%;">
  	        <form name="searchForm" id="searchForm" action="tvinnsaddigitollv2.do?action=doFind" method="post" >
  	        <tr height="3"><td></td></tr>
  	        <tr>	
@@ -80,6 +80,7 @@
                 <td class="text14" align="left" ><span title="etatdatum"><spring:message code="systema.tvinn.sad.manifest.list.search.label.etatdatum"/></span></td>
                 <td class="text14" align="left" ><span title="datum"><spring:message code="systema.tvinn.sad.manifest.list.search.label.fdatum"/></span></td>
                 <td class="text14" align="left" ><span title="datumt"><spring:message code="systema.tvinn.sad.manifest.list.search.label.tdatum"/></span></td>
+                <td class="text14" align="left" ><span title="status">Status</span></td>
                 <td class="text14" align="left" >
                 	<img style="cursor:pointer;" onMouseOver="showPop('opd_info');" onMouseOut="hidePop('opd_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
 	            	<span title="opd - house"><font color="green">Opd - House</font></span>
@@ -135,6 +136,16 @@
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="etaDatumt" id="etaDatumt" size="6" maxlength="6" value="${searchFilterSadDigitollTransportList.etaDatumt}">&nbsp;</td>
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="datum" id="datum" size="6" maxlength="6" value="${searchFilterSadDigitollTransportList.datum}">&nbsp;</td>
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="datumt" id="datumt" size="6" maxlength="6" value="${searchFilterSadDigitollTransportList.datumt}">&nbsp;</td>
+				<td align="left" >
+					<select class="selectMediumBlueE2" name="status" id="status">
+					  <option value="">-velg-</option>
+	 				  	<option title="C" value="C"<c:if test="${searchFilterSadDigitollTransportList.status == 'C'}"> selected </c:if> >COMPLETED</option> 
+						<option title="M" value="M"<c:if test="${searchFilterSadDigitollTransportList.status == 'M'}"> selected </c:if> >ERROR</option> 
+						<option title="K" value="K"<c:if test="${searchFilterSadDigitollTransportList.status == 'K'}"> selected </c:if> >KANSELLERT</option> 
+						<option title="D" value="D"<c:if test="${searchFilterSadDigitollTransportList.status == 'D'}"> selected </c:if> >SLETTET</option> 
+						<option title="S" value="S"<c:if test="${searchFilterSadDigitollTransportList.status == 'S'}"> selected </c:if> >SUBMITTED</option> 
+					</select>
+				</td>
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="opd" id="opd" size="8" maxlength="7" value="${searchFilterSadDigitollTransportList.opd}">&nbsp;</td>
 				
 				<td valign="top" align="left" >

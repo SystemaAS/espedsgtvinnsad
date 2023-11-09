@@ -26,10 +26,11 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
     
     jq('#sendButton').click(function() {
 		var async_own = "";
-		if (jq('#async').is(':checked')) {
-			async_own = jq('#async').val();
+		if (jq("#async").length){ //check if it exists 
+			if (jq('#async').is(':checked')) {
+				async_own = jq('#async').val();
+			}
 		}
-		
 		jq('#dialogSend').dialog( "option", "title", "Send til toll.no" );
 		  //deal with buttons for this modal window
 		  jq('#dialogSend').dialog({

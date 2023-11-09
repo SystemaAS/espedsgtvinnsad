@@ -961,6 +961,7 @@
 							<a id="alinkCreateNewButton" href="tvinnsaddigitollv2_edit_master.do?action=doCreate&emlnrt=${model.record.emlnrt}&emavd=${model.record.transportDto.etavd}&emsg=${model.record.transportDto.etsg}&empro=${model.record.transportDto.etpro}">
 								<input class="inputFormSubmitStd" type="button" name="createNewButton" id="createNewButton" value='Lage ny'>
 							</a>
+							
 							&nbsp;
 							<span align="left" class="inputText">
 			                	<input style="cursor:pointer;vertical-align:middle;" type="checkbox" id="async" name="async" value="1" checked>

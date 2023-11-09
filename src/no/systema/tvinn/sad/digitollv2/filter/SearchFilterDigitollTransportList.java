@@ -25,6 +25,7 @@ public class SearchFilterDigitollTransportList {
 	private String etaDatumt = null;
 	private String datum = null;
 	private String datumt = null;
+	private String status = null;
 	
 	
 	
