@@ -933,8 +933,10 @@
 						</c:when>
 						<c:otherwise>
 							<c:choose>
-							<c:when test="${model.record.emst3 == 'P' }"> <%--PENDING(P) on async triggered --%>
-								<input title="Pending status ..." class="buttonGrayInsideDivPopup" style="cursor:not-allowed;color:brown;" type="button" name="sendButton" id="sendButton" value='Send'>
+							<%--E(X)ECUTING on async triggered. emst3:PENDING is reserved to sendAllHouses at a master level 
+							    This in order not to block the master SEND while sendAllHouses is still running in the background --%>
+							<c:when test="${model.record.emst == 'X' }"> 
+								<input title="Executing status ..." class="buttonGrayInsideDivPopup" style="cursor:not-allowed;color:brown;" type="button" name="sendButton" id="sendButton" value='Send'>
 							</c:when>
 							<c:otherwise>
 								<input title="Send" class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>

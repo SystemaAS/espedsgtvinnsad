@@ -298,7 +298,8 @@
   	  //"scrollCollapse":  true,
 	  "tabIndex": -1,
 	  "order": [[ 1, "asc" ]], //etlnrt
-	  "lengthMenu": [ 25, 50, 100],
+	  "lengthMenu": [ 30, 50, 100, 100],
+	  //"lengthMenu": [ 30,  ],
 	  "fnDrawCallback": function( oSettings ) {
     	jq('.dataTables_filter input').addClass("inputText12LightYellow");
     	}

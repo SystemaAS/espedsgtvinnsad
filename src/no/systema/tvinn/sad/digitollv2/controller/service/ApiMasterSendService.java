@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javawebparts.core.org.apache.commons.lang.StringUtils;
 import no.systema.main.service.UrlCgiProxyService;
+import no.systema.tvinn.sad.digitollv2.enums.EnumSadmomfStatus;
 import no.systema.tvinn.sad.digitollv2.enums.EnumSadmomfStatus3;
 import no.systema.tvinn.sad.digitollv2.enums.EnumSadmotfStatus3;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
@@ -97,7 +98,9 @@ public class ApiMasterSendService {
     		
 			}finally {
 				//remove the (P)ENDING status that was set by the caller before the async call
-				this.setSt3_Master(applicationUser, emlnrt, emlnrm, EnumSadmomfStatus3.EMPTY.toString());
+				//this.setSt3_Master(applicationUser, emlnrt, emlnrm, EnumSadmomfStatus3.EMPTY.toString());
+				//remove the e(X)ecuting status that was set by the caller before the async call
+				this.setSt_Master(applicationUser, emlnrt, emlnrm, EnumSadmomfStatus.EMPTY.toString());
     		}
 		}
 		
@@ -130,6 +133,41 @@ public class ApiMasterSendService {
 	    		if(jsonContainer!=null && !jsonContainer.getList().isEmpty()) {
 	    			if(StringUtils.isNotEmpty(jsonContainer.getErrMsg())) {
 	    				logger.error("ERROR on update st3 for SADMOMF:" + jsonContainer.getErrMsg());
+	    			}
+	    		}
+	    	}
+		}catch(Exception e) {
+			logger.error(e.toString());
+		}
+    
+		
+	}
+  /**
+   * Special case to handle send and sendAllHouses at a master level	 
+   * @param applicationUser
+   * @param lnrt
+   * @param lnrm
+   * @param st
+   */
+  public void setSt_Master(String applicationUser, Integer lnrt, Integer lnrm, String st) {
+		
+		try {
+			final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_MASTERCONSIGNMENT_URL;
+			//add URL-parameters
+			String urlRequestParams = "user=" + applicationUser + "&emlnrt=" + lnrt + "&emlnrm=" + lnrm + "&emst=" + st + "&mode=US" ;
+			logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+	    	logger.warn("URL: " + BASE_URL);
+	    	logger.warn("URL PARAMS: " + urlRequestParams);
+	    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+	
+	    	//Debug --> 
+	    	logger.debug(jsonPayload);
+	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    	if(jsonPayload!=null){
+	    		SadmomfContainer jsonContainer = this.sadmomfListService.getListContainer(jsonPayload);
+	    		if(jsonContainer!=null && !jsonContainer.getList().isEmpty()) {
+	    			if(StringUtils.isNotEmpty(jsonContainer.getErrMsg())) {
+	    				logger.error("ERROR on update st for SADMOMF:" + jsonContainer.getErrMsg());
 	    			}
 	    		}
 	    	}

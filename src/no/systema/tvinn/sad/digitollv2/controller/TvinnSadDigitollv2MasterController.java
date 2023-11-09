@@ -50,6 +50,7 @@ import no.systema.tvinn.sad.digitollv2.controller.service.ApiAsyncFacadeSendServ
 import no.systema.tvinn.sad.digitollv2.controller.service.ApiMasterSendService;
 import no.systema.tvinn.sad.digitollv2.controller.service.AvdSignControllerService;
 import no.systema.tvinn.sad.digitollv2.enums.EnumSadmohfStatus3;
+import no.systema.tvinn.sad.digitollv2.enums.EnumSadmomfStatus;
 import no.systema.tvinn.sad.digitollv2.enums.EnumSadmomfStatus3;
 import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
@@ -613,8 +614,9 @@ public class TvinnSadDigitollv2MasterController {
 			if(recordToValidate.getEmlnrt() > 0 && recordToValidate.getEmlnrm() > 0) {
 				//check send behaviour (async or sync)
 				if(StringUtils.isNotEmpty(async)) {
+					this.apiMasterSendService.setSt_Master(appUser.getUser(), recordToValidate.getEmlnrt(),recordToValidate.getEmlnrm(),  EnumSadmomfStatus.EXECUTING.toString());
 					//set st3 as pending in house to block the Send button until finished
-					this.apiMasterSendService.setSt3_Master(appUser.getUser(), recordToValidate.getEmlnrt(),recordToValidate.getEmlnrm(),  EnumSadmomfStatus3.PENDING.toString());
+					//this.apiMasterSendService.setSt3_Master(appUser.getUser(), recordToValidate.getEmlnrt(),recordToValidate.getEmlnrm(),  EnumSadmomfStatus3.PENDING.toString());
 					//async if applicable
 					this.apiAsynchFacadeSendService.sendMaster(appUser.getUser(), recordToValidate.getEmlnrt(),recordToValidate.getEmlnrm(), recordToValidate.getEmmid());
 				}else {
