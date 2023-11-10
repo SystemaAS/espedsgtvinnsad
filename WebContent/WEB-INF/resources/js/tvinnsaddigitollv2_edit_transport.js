@@ -954,6 +954,14 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
 			
 	  });	
+	  jq(".entryLink").click(function() {
+		  var id = this.id;
+		  jq("#"+id).attr(('target','_blank'));
+		  //default url
+		  var controllerUrl = "tvinnsaddigitollv2_childwindow_movroad_entryinfo.do?mrn=" + id;
+		  window.open(controllerUrl, "codeWin", "top=300px,left=700px,height=150px,width=800px,scrollbars=yes,status=no,location=no");	
+			
+	  });	
 
   });
 

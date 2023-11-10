@@ -53,6 +53,7 @@ import no.systema.tvinn.sad.model.jsonjackson.customer.JsonTvinnSadCustomerRecor
 import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorContainer;
 import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorRecord;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
+import no.systema.tvinn.sad.digitollv2.model.api.entrymovementroad.EntryMovRoadDto;
 import no.systema.tvinn.sad.digitollv2.model.api.routing.EntryRoutingDto;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragRecord;
@@ -289,7 +290,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="tvinnsaddigitollv2_childwindow_entryinfo.do",  method={RequestMethod.GET} )
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_movroad_entryinfo.do",  method={RequestMethod.GET} )
 	public ModelAndView doEntryInfo(HttpSession session, HttpServletRequest request){
 		this.context = TdsAppContext.getApplicationContext();
 		logger.info("Inside: doEntryInfo");
@@ -308,7 +309,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
 			
 			if(StringUtils.isNotEmpty(mrn)) {
-				url.append("getEntryComplete.do");
+				url.append("getMovementRoadEntry.do");
 				
 				String BASE_URL = url.toString();
 	    		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&mrn=" + mrn;
@@ -325,17 +326,8 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	    		try {
 	    			ApiGenericDtoResponse obj = new ObjectMapper().readValue(jsonPayload, ApiGenericDtoResponse.class);
 	    			if(obj!=null) {
-						
-						for (EntryRoutingDto dto: obj.getEntryList()) {
-							//DEBUG
-							logger.debug("#entrySummaryDeclarationMRN#:" + dto.getEntrySummaryDeclarationMRN());
-							logger.debug("#transportDocumentHouseLevel#");
-							logger.debug("referenceNumber:" + dto.getTransportDocumentHouseLevel().getReferenceNumber());
-							logger.debug("type:" + dto.getTransportDocumentHouseLevel().getType());
-							logger.debug("#routingResult#");
-							logger.debug("id:" + dto.getRoutingResult().getId());
-							logger.debug("routing:" + dto.getRoutingResult().getRouting());
-						}
+	    				EntryMovRoadDto dto = obj.getEntryMovementRoad();
+						logger.debug(dto.toString());
 						
 	    			}
 	    		}catch(Exception e) {

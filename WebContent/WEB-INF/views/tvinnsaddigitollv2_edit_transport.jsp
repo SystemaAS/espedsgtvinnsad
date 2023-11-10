@@ -301,6 +301,13 @@
 					</c:if>
 					
 		   		</td>
+		   		<td class="text14" align="right">
+			   		<table>
+			   			<tr>
+			   				<td class="text14" ><a title="lese entry" tabindex=-1 id="${model.record.etmid}" class="entryLink" style="color:gray;" href="#">ENTRY</a></td>
+			   			</tr>
+			   		</table>
+		   		</td>
 	   		</tr>
 	   		</table>
 	   		</td>
