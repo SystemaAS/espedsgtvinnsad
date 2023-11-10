@@ -53,7 +53,7 @@ import no.systema.tvinn.sad.model.jsonjackson.customer.JsonTvinnSadCustomerRecor
 import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorContainer;
 import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorRecord;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
-import no.systema.tvinn.sad.digitollv2.model.api.EntryDto;
+import no.systema.tvinn.sad.digitollv2.model.api.routing.EntryRoutingDto;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurContainer;
@@ -261,7 +261,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	    			ApiGenericDtoResponse obj = new ObjectMapper().readValue(jsonPayload, ApiGenericDtoResponse.class);
 	    			if(obj!=null) {
 						
-						for (EntryDto dto: obj.getEntryList()) {
+						for (EntryRoutingDto dto: obj.getEntryList()) {
 							//DEBUG
 							logger.debug("#entrySummaryDeclarationMRN#:" + dto.getEntrySummaryDeclarationMRN());
 							logger.debug("#transportDocumentHouseLevel#");
@@ -326,7 +326,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	    			ApiGenericDtoResponse obj = new ObjectMapper().readValue(jsonPayload, ApiGenericDtoResponse.class);
 	    			if(obj!=null) {
 						
-						for (EntryDto dto: obj.getEntryList()) {
+						for (EntryRoutingDto dto: obj.getEntryList()) {
 							//DEBUG
 							logger.debug("#entrySummaryDeclarationMRN#:" + dto.getEntrySummaryDeclarationMRN());
 							logger.debug("#transportDocumentHouseLevel#");

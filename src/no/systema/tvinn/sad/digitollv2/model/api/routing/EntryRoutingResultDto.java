@@ -1,4 +1,4 @@
-package no.systema.tvinn.sad.digitollv2.model.api;
+package no.systema.tvinn.sad.digitollv2.model.api.routing;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class EntryTranspDocDto {
-	private String referenceNumber;
-	private String type;
+public class EntryRoutingResultDto {
+	private String id;
+	private String routing;
 	
 }

@@ -1,4 +1,4 @@
-package no.systema.tvinn.sad.digitollv2.model.api;
+package no.systema.tvinn.sad.digitollv2.model.api.routing;
 
 import java.util.List;
 

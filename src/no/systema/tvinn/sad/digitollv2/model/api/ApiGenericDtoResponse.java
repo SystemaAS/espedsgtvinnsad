@@ -6,6 +6,8 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
+import no.systema.tvinn.sad.digitollv2.model.api.entrymovementroad.EntryMovRoadDto;
+import no.systema.tvinn.sad.digitollv2.model.api.routing.EntryRoutingDto;
 
 @Data
 /**
@@ -53,7 +55,10 @@ public class ApiGenericDtoResponse {
 	
 	private List<Object> list = new ArrayList<Object>();
 	
+	//for entry movement road
+	private EntryMovRoadDto entryMovementRoad = new EntryMovRoadDto();
+	
 	//for routing - entry
-	private List<EntryDto> entryList = new ArrayList<EntryDto>();
+	private List<EntryRoutingDto> entryList = new ArrayList<EntryRoutingDto>();
 	
 }
