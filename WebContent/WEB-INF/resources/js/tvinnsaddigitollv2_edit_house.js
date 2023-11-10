@@ -531,6 +531,17 @@
 		  modal: true
 	  });
   });
+//Initialize <div> here
+  jq(function() { 
+	  jq("#dialogDeleteHouse").dialog({ 
+		  autoOpen: false,
+		  maxWidth:500,
+          maxHeight: 400,
+          width: 280,
+          height: 220,
+		  modal: true
+	  });
+  });
 
   //Initialize <div> here for all clazz_dialog
   jq(function() { 
@@ -655,7 +666,37 @@
 		  jq('#dialogUpdateInternalStatus3').dialog('open');
 	  }
   
- 
+	jq(function() {
+	  	//Real delete to Api (DELETE)
+ 		jq('#deleteHouseButton').click(function() { 
+    	  jq('#dialogDeleteHouse').dialog( "option", "title", "Fjerne fra Sysped " );
+		  //deal with buttons for this modal window
+		  jq('#dialogDeleteHouse').dialog({
+			 buttons: [ 
+	            {
+				 id: "dialogSaveTU",	
+				 text: "Ok",
+				 click: function(){
+					 		setBlockUI();
+							window.location = 'tvinnsaddigitollv2_delete_house.do?current_id1=' + jq('#ehlnrt').val() + '&current_id2=' + jq('#ehlnrm').val() + '&current_id3=' + jq('#ehlnrh').val();
+				 		}
+			 	 },
+	 	 		{
+			 	 id: "dialogCancelTU",
+			 	 text: "Cancel", 
+				 click: function(){
+					 		//back to initial state of form elements on modal dialog
+					 		jq("#dialogSaveSU").button("option", "disabled", true);
+					 		jq( this ).dialog( "close" ); 
+				 		} 
+	 	 		 } ] 
+		  });
+		  //init values
+		  jq("#dialogSaveSU").button("option", "disabled", true);
+		  //open now
+		  jq('#dialogDeleteHouse').dialog('open');
+    	});
+	});
  
 	jq(function() {
 	  jq(".uuidLink").click(function() {
@@ -708,34 +749,36 @@
 	  });
   });
 
-
-jq(function() {
-		jq('#sttButton').click(function() { 
-			if(jq('#ehavd').val()!='' && jq('#ehtdn').val()!=''){
-				if(jq('#ehrg').val()!='' && jq('#eh0068a').val()!='' && jq('#eh0068b').val()!=''){
-					openUploadFileToToll();
+	jq(function() {
+			jq('#sttButton').click(function() { 
+				if(jq('#ehavd').val()!='' && jq('#ehtdn').val()!=''){
+					if(jq('#ehrg').val()!='' && jq('#eh0068a').val()!='' && jq('#eh0068b').val()!=''){
+						openUploadFileToToll();
+					}
 				}
-			}
-	    });
-  });
-  function openUploadFileToToll(){
+		    });
+	  });
+  	
+	function openUploadFileToToll(){
 	  window.open('tvinnsadmanifest_childwindow_uploadfile_to_toll.do?action=doInit&wsavd=' + jq('#ehavd').val() + '&wsopd=' + jq('#ehtdn').val() + '&clrg=' + jq('#ehrg').val() + '&cl0068a=' + jq('#eh0068a').val() + '&cl0068b=' + jq('#eh0068b').val(), "releasedCargolinesWin", "top=300px,left=450px,height=450px,width=1000px,scrollbars=yes,status=no,location=no");
-  }
+  	}
 
-//---------------------------------
+
+	//---------------------------------
   	//START Model dialog: "Logger"
   	//------------------------------
-  	  //Initialize <div> here
-  	  jq(function() { 
-  		  jq("#dialogLoggerLocal").dialog({
-  			  autoOpen: false,
-  			  maxWidth:500,
-  	          maxHeight: 400,
-  	          width: 230,
-  	          height: 250,
-  			  modal: true
-  		  });
-  	  });
+  	 //Initialize <div> here
+  	 jq(function() { 
+		  jq("#dialogLoggerLocal").dialog({
+			  autoOpen: false,
+			  maxWidth:500,
+	          maxHeight: 400,
+	          width: 230,
+	          height: 250,
+			  modal: true
+		  });
+  	 });
+
 	 jq(function() {
   		  jq("#alinkLogsgLoggerApi").click(function() {
 			  var url = "renderLocalLogsgExpft.do?user=" + jq('#applicationUser').val() + "&logLevel=" + jq("#logLevel").val();

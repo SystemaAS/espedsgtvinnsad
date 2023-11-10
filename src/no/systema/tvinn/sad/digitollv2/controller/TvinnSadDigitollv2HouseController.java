@@ -253,27 +253,84 @@ public class TvinnSadDigitollv2HouseController {
 		return successView;
 	}
 	
+	
 	/**
-	 * Special only for invalidation errors
+	 * 
 	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
 	 */
-	private void adjustSenderReceiverCommunication(SadmohfRecord recordToValidate) {
-		if(StringUtils.isNotEmpty(recordToValidate.getOwn_ehems_email())){
-			recordToValidate.setEhems(recordToValidate.getOwn_ehems_email());
-			recordToValidate.setEhemst(SadDigitollConstants.API_TYPE_EMAIL);	
-		}else {
-			recordToValidate.setEhems(recordToValidate.getOwn_ehems_telephone());
-			recordToValidate.setEhemst(SadDigitollConstants.API_TYPE_TELEPHONE);
+	@RequestMapping(value="tvinnsaddigitollv2_delete_house.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doDelete(@ModelAttribute ("record") SadmohfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		Map model = new HashMap();
+		String id1 = "";
+		String id2 = "";
+		String id3 = "";
+		
+		Enumeration requestParameters = request.getParameterNames();
+	    while (requestParameters.hasMoreElements()) {
+	        String element = (String) requestParameters.nextElement();
+	        String value = request.getParameter(element);
+	        if (element != null && value != null) {
+        		//logger.warn("####################################################");
+    			//logger.warn("param Name : " + element + " value: " + value);
+    			if(element.startsWith("current_id1")){
+    				id1 = value;
+    			}else if(element.startsWith("current_id2")){
+    				id2 = value;
+    			}else if(element.startsWith("current_id3")){
+    				id3 = value;
+    			}
+    		}
+    	}
+	    logger.info("Id1:" + id1); logger.info("Id2:" + id2); logger.info("Id3:" + id3);
+	    ModelAndView successView = new ModelAndView("redirect:tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=" + Integer.parseInt(id1) + "&emlnrm=" + Integer.parseInt(id2) );
+	    
+	    
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//START
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			//==========
+			//Upd status
+			//==========
+		
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_DIGITOLLV2);
+			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE); 
+			
+			//Update/Insert
+			if(StringUtils.isNotEmpty(id1) && StringUtils.isNotEmpty(id2) ) {
+				
+				recordToValidate.setEhlnrt(Integer.valueOf(id1));
+				recordToValidate.setEhlnrm(Integer.valueOf(id2));
+				recordToValidate.setEhlnrh(Integer.valueOf(id3));
+				String mode = "D";
+				logger.info("MODE:" + mode + " before update in Controller ...");
+				
+				StringBuffer errMsg = new StringBuffer();
+				int dmlRetval = 0;
+				dmlRetval = this.deleteHouse(appUser.getUser(), recordToValidate, mode, errMsg);
+				
+				if(dmlRetval < 0) {
+					//error on update
+					model.put("errorMessage", errMsg.toString());
+				}
+			}
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+	    
 		}
-		//Receiver
-		if(StringUtils.isNotEmpty(recordToValidate.getOwn_ehemm_email())){
-			recordToValidate.setEhemm(recordToValidate.getOwn_ehemm_email());
-			recordToValidate.setEhemmt(SadDigitollConstants.API_TYPE_EMAIL);	
-		}else {
-			recordToValidate.setEhemm(recordToValidate.getOwn_ehemm_telephone());
-			recordToValidate.setEhemmt(SadDigitollConstants.API_TYPE_TELEPHONE);
-		}
+		
+		return successView;
+		
 	}
+	
 	/**
 	 * 
 	 * @param recordToValidate
@@ -607,91 +664,6 @@ public class TvinnSadDigitollv2HouseController {
 	}
 	
 	
-	/*OBSOLETE ... replaced with the above
-	@RequestMapping(value="tvinnsaddigitollv2_api_send_houseOrig.do",  method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doApiSendHouseOrig(@ModelAttribute ("record") SadmohfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
-		logger.info("inside doApiSendHouse");
-		ModelAndView successView = null;
-		
-		Map model = new HashMap();
-		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
-		StringBuilder redirect = new StringBuilder();
-		redirect.append("redirect:tvinnsaddigitollv2_edit_house.do?action=doFind&ehlnrt=" + recordToValidate.getEhlnrt() + "&ehlnrm=" + recordToValidate.getEhlnrm()+ "&ehlnrh=" + recordToValidate.getEhlnrh());
-		
-		//check user (should be in session already)
-		logger.info(recordToValidate.toString());
-		
-		if(appUser==null){
-			return loginView;
-		
-		}else{
-			
-			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
-			
-			//=================
-			//SEND POST or PUT
-			//=================
-			if(recordToValidate.getEhlnrt() > 0 && recordToValidate.getEhlnrm() > 0 && recordToValidate.getEhlnrh() > 0) {
-		    	logger.info("Before send in Controller ...");
-				logger.info("Inside: doApiSendHouse");
-				
-				StringBuilder url = new StringBuilder();
-				StringBuilder urlRequestParamsKeys = new StringBuilder();
-				urlRequestParamsKeys.append("user=" + appUser.getUser());
-				
-				url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
-				//check if POST-CREATE or PUT-UPDATE
-				if( StringUtils.isNotEmpty(recordToValidate.getEhmid()) ) {
-					url.append("putHouseConsignment.do");
-					urlRequestParamsKeys.append("&ehlnrt=" + recordToValidate.getEhlnrt());
-					urlRequestParamsKeys.append("&ehlnrm=" + recordToValidate.getEhlnrm());
-					urlRequestParamsKeys.append("&ehlnrh=" + recordToValidate.getEhlnrh());
-					urlRequestParamsKeys.append("&mrn=" + recordToValidate.getEhmid());
-				}else {
-					
-					url.append("postHouseConsignment.do");
-					urlRequestParamsKeys.append("&ehlnrt=" + recordToValidate.getEhlnrt());
-					urlRequestParamsKeys.append("&ehlnrm=" + recordToValidate.getEhlnrm());	
-					urlRequestParamsKeys.append("&ehlnrh=" + recordToValidate.getEhlnrh());
-				}
-				
-				String BASE_URL = url.toString();
-	    		logger.info("URL: " + BASE_URL);
-	    		logger.info("PARAMS: " + urlRequestParamsKeys.toString());
-	    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
-	    		//Debug -->
-		    	logger.info(jsonPayload);
-		    	
-	    		try {
-		    		ApiGenericDtoResponse apiDtoResponse = this.apiGenericDtoResponseService.getReponse(jsonPayload);
-		    		if(StringUtils.isNotEmpty(apiDtoResponse.getErrMsg())){
-		    			new RedirectCleaner().doIt(apiDtoResponse);
-		    			//in order to catch it after the redirect as a parameter...if applicable
-		    			if(StringUtils.isNotEmpty(apiDtoResponse.getErrMsgClean())) {
-		    				redirect.append("&" + SadDigitollConstants.REDIRECT_ERRMSG + "=" + apiDtoResponse.getErrMsgClean());
-		    			}
-					}
-	    		}catch(Exception e) {
-	    			e.printStackTrace();
-	    			
-	    		}finally {
-	    			successView = new ModelAndView(redirect.toString());
-	    		}
-				
-			}else {
-				//this will never populate a redirect but sheet the same ...:-(
-				StringBuffer errMsg = new StringBuffer();
-				errMsg.append("ERROR on doSendHouse -->detail: null ids? ...");
-				model.put("errorMessage", errMsg.toString());
-
-			}
-		}
-		
-		return successView;
-		
-	}
-	*/
-	
 	/**
 	 * 
 	 * @param recordToValidate
@@ -792,6 +764,28 @@ public class TvinnSadDigitollv2HouseController {
 		
 		return successView;
 		
+	}
+	
+	/**
+	 * Special only for invalidation errors
+	 * @param recordToValidate
+	 */
+	private void adjustSenderReceiverCommunication(SadmohfRecord recordToValidate) {
+		if(StringUtils.isNotEmpty(recordToValidate.getOwn_ehems_email())){
+			recordToValidate.setEhems(recordToValidate.getOwn_ehems_email());
+			recordToValidate.setEhemst(SadDigitollConstants.API_TYPE_EMAIL);	
+		}else {
+			recordToValidate.setEhems(recordToValidate.getOwn_ehems_telephone());
+			recordToValidate.setEhemst(SadDigitollConstants.API_TYPE_TELEPHONE);
+		}
+		//Receiver
+		if(StringUtils.isNotEmpty(recordToValidate.getOwn_ehemm_email())){
+			recordToValidate.setEhemm(recordToValidate.getOwn_ehemm_email());
+			recordToValidate.setEhemmt(SadDigitollConstants.API_TYPE_EMAIL);	
+		}else {
+			recordToValidate.setEhemm(recordToValidate.getOwn_ehemm_telephone());
+			recordToValidate.setEhemmt(SadDigitollConstants.API_TYPE_TELEPHONE);
+		}
 	}
 	/**
 	 * 
@@ -1045,6 +1039,55 @@ public class TvinnSadDigitollv2HouseController {
     	return retval;
 	}
 	
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param recordToValidate
+	 * @param mode
+	 * @param errMsg
+	 * @return
+	 */
+	private int deleteHouse(String applicationUser, SadmohfRecord recordToValidate, String mode, StringBuffer errMsg) {
+		int retval = 0;
+		
+		
+		//get BASE URL
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_HOUSECONSIGNMENT_URL;
+		//add URL-parameters
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + applicationUser + "&mode=" + mode);
+		urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate)));
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		GeneralUpdateContainer container = this.generalUpdateService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<GeneralUpdateRecord> outputList = container.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(GeneralUpdateRecord record : outputList ){
+					logger.info(record.toString());
+					if(StringUtils.isNotEmpty(container.getErrMsg())){
+						errMsg.append(record.getStatus());
+						errMsg.append(" -->detail:" + container.getErrMsg());
+						retval = -1;
+						break;
+					}
+				}
+			}
+    	}
+    	
+    	return retval;
+	}
 	
 	/**
 	 * log Errors in Aspects and Domain objects in order to render on GUI
