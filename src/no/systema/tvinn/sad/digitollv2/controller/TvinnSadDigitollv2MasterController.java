@@ -61,6 +61,7 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmologContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmologRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
@@ -267,28 +268,83 @@ public class TvinnSadDigitollv2MasterController {
 		return successView;
 	}
 	
-	
 	/**
-	 * Special only for invalidation errors
+	 * 
 	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
 	 */
-	private void adjustSenderReceiverCommunication(SadmomfRecord recordToValidate) {
-		if(StringUtils.isNotEmpty(recordToValidate.getOwn_emems_email())){
-			recordToValidate.setEmems(recordToValidate.getOwn_emems_email());
-			recordToValidate.setEmemst(SadDigitollConstants.API_TYPE_EMAIL);	
-		}else {
-			recordToValidate.setEmems(recordToValidate.getOwn_emems_telephone());
-			recordToValidate.setEmemst(SadDigitollConstants.API_TYPE_TELEPHONE);
+	@RequestMapping(value="tvinnsaddigitollv2_delete_master.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doDelete(@ModelAttribute ("record") SadmomfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		Map model = new HashMap();
+		String id1 = "";
+		String id2 = "";
+		String id3 = "";
+		
+		Enumeration requestParameters = request.getParameterNames();
+	    while (requestParameters.hasMoreElements()) {
+	        String element = (String) requestParameters.nextElement();
+	        String value = request.getParameter(element);
+	        if (element != null && value != null) {
+        		//logger.warn("####################################################");
+    			//logger.warn("param Name : " + element + " value: " + value);
+    			if(element.startsWith("current_id1")){
+    				id1 = value;
+    			}else if(element.startsWith("current_id2")){
+    				id2 = value;
+    			}else if(element.startsWith("current_id3")){
+    				id3 = value;
+    			}
+    		}
+    	}
+	    logger.info("Id1:" + id1);
+	    ModelAndView successView = new ModelAndView("redirect:tvinnsaddigitollv2_edit_transport.do?action=doFind&ehlnrt=" + Integer.parseInt(id1) );
+	    
+	    
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//START
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			//==========
+			//Upd status
+			//==========
+		
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_DIGITOLLV2);
+			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE); 
+			
+			//Update/Insert
+			if(StringUtils.isNotEmpty(id1) && StringUtils.isNotEmpty(id2) ) {
+				
+				recordToValidate.setEmlnrt(Integer.valueOf(id1));
+				recordToValidate.setEmlnrm(Integer.valueOf(id2));
+				
+				String mode = "D";
+				logger.info("MODE:" + mode + " before update in Controller ...");
+				
+				StringBuffer errMsg = new StringBuffer();
+				int dmlRetval = 0;
+				dmlRetval = this.deleteMaster(appUser.getUser(), recordToValidate, mode, errMsg);
+				
+				if(dmlRetval < 0) {
+					//error on update
+					model.put("errorMessage", errMsg.toString());
+				}
+			}
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+	    
 		}
-		//Receiver
-		if(StringUtils.isNotEmpty(recordToValidate.getOwn_ememm_email())){
-			recordToValidate.setEmemm(recordToValidate.getOwn_ememm_email());
-			recordToValidate.setEmemmt(SadDigitollConstants.API_TYPE_EMAIL);	
-		}else {
-			recordToValidate.setEmemm(recordToValidate.getOwn_ememm_telephone());
-			recordToValidate.setEmemmt(SadDigitollConstants.API_TYPE_TELEPHONE);
-		}
+		
+		return successView;
+		
 	}
+	
 	
 	/**
 	 * 
@@ -645,6 +701,57 @@ public class TvinnSadDigitollv2MasterController {
 		return successView;
 		
 	}
+	
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param recordToValidate
+	 * @param mode
+	 * @param errMsg
+	 * @return
+	 */
+	private int deleteMaster(String applicationUser, SadmomfRecord recordToValidate, String mode, StringBuffer errMsg) {
+		int retval = 0;
+		
+		
+		//get BASE URL
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_MASTERCONSIGNMENT_URL;
+		//add URL-parameters
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + applicationUser + "&mode=" + mode);
+		urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate)));
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		GeneralUpdateContainer container = this.generalUpdateService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<GeneralUpdateRecord> outputList = container.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(GeneralUpdateRecord record : outputList ){
+					logger.info(record.toString());
+					if(StringUtils.isNotEmpty(container.getErrMsg())){
+						errMsg.append(record.getStatus());
+						errMsg.append(" -->detail:" + container.getErrMsg());
+						retval = -1;
+						break;
+					}
+				}
+			}
+    	}
+    	
+    	return retval;
+	}
+	
 	/**
 	 * This method is the same that in the childWindow but refined by showing ONLY the last ERROR (if any)
 	 * 
@@ -1399,6 +1506,28 @@ public class TvinnSadDigitollv2MasterController {
     		}*/
     	}
     	
+	}
+	
+	/**
+	 * Special only for invalidation errors
+	 * @param recordToValidate
+	 */
+	private void adjustSenderReceiverCommunication(SadmomfRecord recordToValidate) {
+		if(StringUtils.isNotEmpty(recordToValidate.getOwn_emems_email())){
+			recordToValidate.setEmems(recordToValidate.getOwn_emems_email());
+			recordToValidate.setEmemst(SadDigitollConstants.API_TYPE_EMAIL);	
+		}else {
+			recordToValidate.setEmems(recordToValidate.getOwn_emems_telephone());
+			recordToValidate.setEmemst(SadDigitollConstants.API_TYPE_TELEPHONE);
+		}
+		//Receiver
+		if(StringUtils.isNotEmpty(recordToValidate.getOwn_ememm_email())){
+			recordToValidate.setEmemm(recordToValidate.getOwn_ememm_email());
+			recordToValidate.setEmemmt(SadDigitollConstants.API_TYPE_EMAIL);	
+		}else {
+			recordToValidate.setEmemm(recordToValidate.getOwn_ememm_telephone());
+			recordToValidate.setEmemmt(SadDigitollConstants.API_TYPE_TELEPHONE);
+		}
 	}
 	
 	

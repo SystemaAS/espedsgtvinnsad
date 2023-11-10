@@ -1244,12 +1244,12 @@
 							<a id="alinkCreateNewButton" href="tvinnsaddigitollv2_edit_house.do?action=doCreate&ehlnrt=${model.record.ehlnrt}&ehlnrm=${model.record.masterDto.emlnrm}&ehavd=${model.record.masterDto.emavd}&ehpro=${model.record.masterDto.empro}">
 								<input class="inputFormSubmitStd" type="button" name="createNewButton" id="createNewButton" value='Lage ny'>
 							</a>
-							
-							<input title="Fjerne fra SYSPED" class="inputFormSubmitStd" type="button" name="deleteHouseButton" id="deleteHouseButton" value='Fjerne'>
-							<div id="dialogDeleteHouse" class="clazz_dialog" title="Dialog">
-								 <p class="text14" >Er du sikker på at du vil fjerne House-Lnr <b>${model.record.ehlnrh}</b> i <b>SYSPED</b> ?</p>
-							</div>
-							
+							<c:if test="${empty model.record.ehmid }">
+								<input title="Fjerne fra SYSPED" class="inputFormSubmitStd" type="button" name="deleteHouseButton" id="deleteHouseButton" value='Fjerne'>
+								<div id="dialogDeleteHouse" class="clazz_dialog" title="Dialog">
+									 <p class="text14" >Er du sikker på at du vil fjerne House - Lnr <b>${model.record.ehlnrh}</b> i <b>SYSPED</b> ?</p>
+								</div>
+							</c:if>
 							&nbsp;
 							<span align="left" class="inputText">
 			                	<input style="cursor:pointer;vertical-align:middle;" type="checkbox" id="async" name="async" value="1" checked>

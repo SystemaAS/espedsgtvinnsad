@@ -963,7 +963,13 @@
 							<a id="alinkCreateNewButton" href="tvinnsaddigitollv2_edit_master.do?action=doCreate&emlnrt=${model.record.emlnrt}&emavd=${model.record.transportDto.etavd}&emsg=${model.record.transportDto.etsg}&empro=${model.record.transportDto.etpro}">
 								<input class="inputFormSubmitStd" type="button" name="createNewButton" id="createNewButton" value='Lage ny'>
 							</a>
-							
+							<%-- For the moment the user should be responsible for deleting all houses prior to deleting the Master. All houses must have been DELETED from the API (no MRN) --%>
+							<c:if test="${empty model.record.emmid && empty model.record.listHouses}">
+								<input title="Fjerne fra SYSPED" class="inputFormSubmitStd" type="button" name="deleteMasterButton" id="deleteMasterButton" value='Fjerne'>
+								<div id="dialogDeleteMaster" class="clazz_dialog" title="Dialog">
+									 <p class="text14" >Er du sikker på at du vil fjerne Master - Lnr <b>${model.record.emlnrm}</b> i <b>SYSPED</b> ?</p>
+								</div>
+							</c:if>
 							&nbsp;
 							<span align="left" class="inputText">
 			                	<input style="cursor:pointer;vertical-align:middle;" type="checkbox" id="async" name="async" value="1" checked>
@@ -1029,7 +1035,7 @@
                 		<th title="Api-status" width="2%" class="tableHeaderField12" ></th>
                 		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED,M=ERROR" width="2%" class="tableHeaderField12" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.status"/></th>
                 		<th width="2%" class="tableHeaderField12" title="Fjerner manifest fra Tollvesenet" >Slett</th>
-                		<th width="2%" class="tableHeaderField12" title="Fjerner manifest lokalt (SYSPED)">Kans.</th>
+                		<th width="2%" class="tableHeaderField12" title="Fjerner manifest lokalt (SYSPED)">Fjerne-sysped</th>
                 		</tr>
                 	</thead>
                 	<tbody> 
@@ -1206,6 +1212,7 @@
 	               	   		<c:if test="${houseConsignmentRecord.ehst == 'M' || empty houseConsignmentRecord.ehst}">
 	               	   			<%-- We can only CANCEL (S) internally if the emmid and emuuid are gone since we DELETED first from Tollv.(if we even got that far at some point...) --%>
 	               	   			<c:if test="${empty houseConsignmentRecord.ehmid && empty houseConsignmentRecord.ehuuid}">
+					   				<%-- REPLACED with DELETE but we can get back to this. Let it stay until we are certain 
 					   				<a tabindex=-1 style="display: block; width: 100%; height: 100%;" class="cancelLink" id="cancelLink${counter.count}" runat="server" href="#">
 										<img src="resources/images/remove.png" width="16" height="16" border="0" alt="remove">
 									</a> 
@@ -1217,6 +1224,18 @@
 										 	<input type="hidden" name="current_status${counter.count}" id="current_status${counter.count}" value="S">
 										 	<p class="text14" >Er du sikker på at du vil kansellere Lnr <b>${houseConsignmentRecord.ehlnrh}</b> i <b>SYSPED</b> ?</p>
 												
+										</form>
+									</div>
+									--%>
+									<a tabindex=-1 style="display: block; width: 100%; height: 100%;" class="deleteHouseLink" id="deleteLink${counter.count}" runat="server" href="#">
+										<img src="resources/images/remove.png" width="16" height="16" border="0" alt="remove">
+									</a> 
+									<div id="dialogDeleteHouse${counter.count}" class="clazz_dialog" title="Dialog">
+										<form action="tvinnsaddigitollv2_delete_house.do" name="deleteHouseForm${counter.count}" id="deleteHouseForm${counter.count}" method="post">
+										 	<input type="hidden" name="current_id1${counter.count}" id="current_id1${counter.count}" value="${houseConsignmentRecord.ehlnrt}">
+											<input type="hidden" name="current_id2${counter.count}" id="current_id2${counter.count}" value="${houseConsignmentRecord.ehlnrm}">
+											<input type="hidden" name="current_id3${counter.count}" id="current_id3${counter.count}" value="${houseConsignmentRecord.ehlnrh}">
+										 	<p class="text14" >Er du sikker på at du vil fjerne House-Lnr <b>${houseConsignmentRecord.ehlnrh}</b> i <b>SYSPED</b> ?</p>
 										</form>
 									</div>
 								</c:if>

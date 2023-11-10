@@ -568,7 +568,18 @@
 		  //open now
 		  jq('#dialogStatus3').dialog('open');
 	  }
-  
+
+  //Initialize <div> here
+  jq(function() { 
+	  jq("#dialogMasterHouse").dialog({ 
+		  autoOpen: false,
+		  maxWidth:500,
+          maxHeight: 400,
+          width: 280,
+          height: 220,
+		  modal: true
+	  });
+  });
 
  //Initialize <div> here for all clazz_dialog
   jq(function() { 
@@ -695,6 +706,76 @@
 		 
 	  });
   	});
+
+	//Present dialog box onClick (href in parent JSP)
+  	jq(function() {
+	  jq(".deleteHouseLink").click(function() {
+		  var id = this.id;
+		  counterIndex = id.replace("deleteLink","");
+		  
+		  jq('#dialogDeleteHouse'+counterIndex).dialog( "option", "title", "Fjerne i SYSPED " );
+		  //deal with buttons for this modal window
+		  jq('#dialogDeleteHouse'+counterIndex).dialog({
+			 buttons: [ 
+	            {
+				 id: "dialogSaveTU"+counterIndex,	
+				 text: "Ok",
+				 click: function(){
+							setBlockUI();
+					 		jq('#deleteHouseForm'+counterIndex).submit();
+				 		}
+			 	 },
+	 	 		{
+			 	 id: "dialogCancelTU"+counterIndex,
+			 	 text: "Cancel", 
+				 click: function(){
+					 		//back to initial state of form elements on modal dialog
+					 		jq("#dialogSaveSU"+counterIndex).button("option", "disabled", true);
+					 		jq( this ).dialog( "close" ); 
+				 		} 
+	 	 		 } ] 
+		  });
+		  //init values
+		  jq("#dialogSaveSU"+counterIndex).button("option", "disabled", true);
+		  //open now
+		  jq('#dialogDeleteHouse'+counterIndex).dialog('open');
+		 
+	  });
+  	});
+
+	jq(function() {
+	  	//Real delete to Api (DELETE)
+ 		jq('#deleteMasterButton').click(function() { 
+    	  jq('#dialogDeleteMaster').dialog( "option", "title", "Fjerne fra Sysped " );
+		  //deal with buttons for this modal window
+		  jq('#dialogDeleteMaster').dialog({
+			 buttons: [ 
+	            {
+				 id: "dialogSaveTU",	
+				 text: "Ok",
+				 click: function(){
+					 		setBlockUI();
+							window.location = 'tvinnsaddigitollv2_delete_master.do?current_id1=' + jq('#emlnrt').val() + '&current_id2=' + jq('#emlnrm').val();
+				 		}
+			 	 },
+	 	 		{
+			 	 id: "dialogCancelTU",
+			 	 text: "Cancel", 
+				 click: function(){
+					 		//back to initial state of form elements on modal dialog
+					 		jq("#dialogSaveSU").button("option", "disabled", true);
+					 		jq( this ).dialog( "close" ); 
+				 		} 
+	 	 		 } ] 
+		  });
+		  //init values
+		  jq("#dialogSaveSU").button("option", "disabled", true);
+		  //open now
+		  jq('#dialogDeleteMaster').dialog('open');
+    	});
+	});
+ 
+
 
 	jq(function() {
 	  jq(".uuidLink").click(function() {
