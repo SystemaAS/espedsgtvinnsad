@@ -300,7 +300,7 @@ public class TvinnSadDigitollv2MasterController {
     		}
     	}
 	    logger.info("Id1:" + id1);
-	    ModelAndView successView = new ModelAndView("redirect:tvinnsaddigitollv2_edit_transport.do?action=doFind&ehlnrt=" + Integer.parseInt(id1) );
+	    ModelAndView successView = new ModelAndView("redirect:tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=" + Integer.parseInt(id1) );
 	    
 	    
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
