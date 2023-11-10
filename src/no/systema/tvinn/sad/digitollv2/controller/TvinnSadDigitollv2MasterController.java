@@ -614,6 +614,8 @@ public class TvinnSadDigitollv2MasterController {
 			if(recordToValidate.getEmlnrt() > 0 && recordToValidate.getEmlnrm() > 0) {
 				//check send behaviour (async or sync)
 				if(StringUtils.isNotEmpty(async)) {
+					//Master level is the only using EXECUTING status in status 1 instead for PENDING in status 3. The reason is the collision with SendAllHouses wich puts PENDING
+					//look at sendAllHouses on House Controller
 					this.apiMasterSendService.setSt_Master(appUser.getUser(), recordToValidate.getEmlnrt(),recordToValidate.getEmlnrm(),  EnumSadmomfStatus.EXECUTING.toString());
 					//set st3 as pending in house to block the Send button until finished
 					//this.apiMasterSendService.setSt3_Master(appUser.getUser(), recordToValidate.getEmlnrt(),recordToValidate.getEmlnrm(),  EnumSadmomfStatus3.PENDING.toString());
@@ -622,7 +624,7 @@ public class TvinnSadDigitollv2MasterController {
 				}else {
 					//normal synchronous default as a normal controller
 					//set st3 as pending in house to block the Send button until finished
-					this.apiMasterSendService.setSt3_Master(appUser.getUser(), recordToValidate.getEmlnrt(),recordToValidate.getEmlnrm(),  EnumSadmomfStatus3.PENDING.toString());
+					this.apiMasterSendService.setSt_Master(appUser.getUser(), recordToValidate.getEmlnrt(),recordToValidate.getEmlnrm(),  EnumSadmomfStatus.EXECUTING.toString());
 					//sync
 					String redirectSuffix = apiMasterSendService.send(appUser.getUser(), recordToValidate.getEmlnrt(),recordToValidate.getEmlnrm(), recordToValidate.getEmmid());
 					if(StringUtils.isNotEmpty(redirectSuffix)) {
