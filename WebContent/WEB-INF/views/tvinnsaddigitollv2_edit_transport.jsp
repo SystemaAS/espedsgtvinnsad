@@ -1059,7 +1059,7 @@
                 		<th title="Api-status" width="2%" class="tableHeaderField" ></th>
                 		<th title="Api-status S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED,M=ERROR" width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.status"/></th>
                 		<th width="2%" class="tableHeaderField" title="Fjerner manifest fra Tollvesenet" >Slett</th>
-                		<th width="2%" class="tableHeaderField" title="Fjerner manifest lokalt (SYSPED)">Kans.</th>
+                		<%--<th width="2%" class="tableHeaderField" title="Fjerner manifest lokalt (SYSPED)">Kans.</th> --%>
                 		<th width="2%" class="tableHeaderField" title="Endre transport">EndrTransp</th>
                 		</tr>
                 	</thead>
@@ -1287,9 +1287,10 @@
 		              				
               				
 	               	   </td>
+	               	   <%--
 	               	   <td width="2%" class="tableCell" align="center">
 	               	   		<c:if test="${masterConsignmentRecord.emst == 'M' || empty masterConsignmentRecord.emst}">
-	               	   			<%-- We can only CANCEL (S) internally if the emmid and emuuid are gone since we DELETED first from Tollv.(if we even got that far at some point...) --%>
+	               	   			<%-- We can only CANCEL (S) internally if the emmid and emuuid are gone since we DELETED first from Tollv.(if we even got that far at some point...)
 	               	   			<c:if test="${empty masterConsignmentRecord.emmid && empty masterConsignmentRecord.emuuid}">
 					   				<a tabindex=-1 style="display: block; width: 100%; height: 100%;" class="cancelLink" id="cancelLink${counter.count}" runat="server" href="#">
 										<img src="resources/images/remove.png" width="16" height="16" border="0" alt="remove">
@@ -1305,7 +1306,8 @@
 									</div>
 								</c:if>
 							</c:if>
-						</td>	
+						</td>
+						 --%>	
 						<td width="2%" class="tableCell" align="center">
 							<%-- Either tansport-not sent or transport-DELETED --%>
 							<c:if test="${empty model.record.etmid}">

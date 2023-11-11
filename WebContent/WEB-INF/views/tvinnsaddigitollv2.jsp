@@ -241,7 +241,7 @@
                 		<th title="Api-status" width="2%" class="tableHeaderField" ></th>
                 		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED,M=ERROR" width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.status"/></th>
                 		<th width="2%" class="tableHeaderField" title="Fjerner manifest fra Tollvesenet" >Slett</th>
-                		<th width="2%" class="tableHeaderField" title="Fjerner manifest lokalt (SYSPED)">Kans.</th>
+                		<%--<th width="2%" class="tableHeaderField" title="Fjerner manifest lokalt (SYSPED)">Kans.</th> --%>
                 		</tr>
                 	</thead>
                 	<tbody> 
@@ -422,9 +422,10 @@
 		              				</c:if>
               				
 	               	   </td>
+	               	   <%--
 	               	   <td width="2%" class="tableCell" align="center">
 	               	   		<c:if test="${record.etst == 'M' || empty record.etst}">
-	               	   			<%-- We can only CANCEL (S) internally if the emmid and emuuid are gone since we DELETED first from Tollv.(if we even got that far at some point...) --%>
+	               	   			<%-- We can only CANCEL (S) internally if the emmid and emuuid are gone since we DELETED first from Tollv.(if we even got that far at some point...) 
 	               	   			<c:if test="${empty record.etmid && empty record.etuuid}">
 					   				<a tabindex=-1 style="display: block; width: 100%; height: 100%;" class="cancelLink" id="cancelLink${counter.count}" runat="server" href="#">
 										<img src="resources/images/remove.png" width="16" height="16" border="0" alt="remove">
@@ -439,7 +440,8 @@
 									</div>
 								</c:if>
 							</c:if>
-						</td>	
+						</td>
+						 --%>	
 		            </tr> 
 		            </c:forEach>
 		            </tbody>
