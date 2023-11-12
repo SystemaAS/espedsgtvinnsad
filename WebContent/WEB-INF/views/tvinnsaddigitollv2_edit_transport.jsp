@@ -1,4 +1,4 @@
-*<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp" %>
 
 <!-- ======================= header ===========================-->
@@ -231,10 +231,12 @@
 					</c:choose>
 					
 					<c:if test="${not empty model.record.etmid}">
-						<input title="Slett fra toll.no" class="inputFormSubmitStd" type="button" name="deleteButton" id="deleteButton" value='Slett'>
-						<div style="display: none;" class="clazz_dialog" id="dialogDelete" title="Dialog">
-							 <p class="text14" >Er du sikker på at du ønsker å slette fra toll.no?</p>
-						</div>
+						<c:if test="${model.record.etst2 != 'C'}">
+							<input title="Slett fra toll.no" class="inputFormSubmitStd" type="button" name="deleteButton" id="deleteButton" value='Slett'>
+							<div style="display: none;" class="clazz_dialog" id="dialogDelete" title="Dialog">
+								 <p class="text14" >Er du sikker på at du ønsker å slette fra toll.no?</p>
+							</div>
+						</c:if>
 					</c:if>
 					<c:if test="${model.record.etlnrt > 0}">
 			    		<a id="alinkRefreshButton" href="tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=${model.record.etlnrt}">
@@ -972,7 +974,7 @@
 		<tr height="10"><td></td></tr>
 		<tr>
 			<td align="left" >
-				<c:if test="${model.record.etst != 'S'}"> <%-- CANCELED(S) --%>
+				<c:if test="${model.record.etst != 'S' && model.record.etst2 != 'C' }"> <%-- CANCELED(S) AND COMPLETED(C) --%>
 					&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
 					<c:if test="${model.record.etlnrt > 0}">
 						<c:choose>

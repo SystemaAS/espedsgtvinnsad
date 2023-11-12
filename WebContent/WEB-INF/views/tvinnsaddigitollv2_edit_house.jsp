@@ -223,11 +223,13 @@
 					</c:otherwise>
 					</c:choose>
 					<c:if test="${not empty model.record.ehmid}">
-						&nbsp;
-						<input title="Slett fra toll.no" class="inputFormSubmitStd" type="button" name="deleteButton" id="deleteButton" value='Slett'>
-						<div style="display: none;" class="clazz_dialog" id="dialogDelete" title="Dialog">
-							 <p class="text14" >Er du sikker på at du ønsker å slette fra toll.no?</p>
-						</div>
+						<c:if test="${model.record.ehst2 != 'C'}">
+							&nbsp;
+							<input title="Slett fra toll.no" class="inputFormSubmitStd" type="button" name="deleteButton" id="deleteButton" value='Slett'>
+							<div style="display: none;" class="clazz_dialog" id="dialogDelete" title="Dialog">
+								 <p class="text14" >Er du sikker på at du ønsker å slette fra toll.no?</p>
+							</div>
+						</c:if>
 					</c:if>	
 		    		<c:if test="${model.record.ehlnrh > 0}">
 			    		<a id="alinkRefreshButton" href="tvinnsaddigitollv2_edit_house.do?action=doFind&ehlnrt=${model.record.ehlnrt}&ehlnrm=${model.record.ehlnrm}&ehlnrh=${model.record.ehlnrh}">
@@ -1226,7 +1228,7 @@
 		<tr height="3"><td></td></tr>
 		<tr>
 			<td align="left" >
-			<c:if test="${model.record.ehst != 'S'}"> <%-- CANCELED(S) --%>
+			<c:if test="${model.record.ehst != 'S' && model.record.ehst2 != 'C' }"> <%-- CANCELED(S) && COMPLETED --%>
 				&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
 				<c:if test="${model.record.ehlnrh > 0}">
 					<c:choose>

@@ -235,11 +235,13 @@
 					</c:otherwise>
 					</c:choose>
 					<c:if test="${not empty model.record.emmid}">
-						&nbsp;
-						<input title="Slett fra toll.no" class="inputFormSubmitStd" type="button" name="deleteButton" id="deleteButton" value='Slett'>
-						<div style="display: none;" class="clazz_dialog" id="dialogDelete" title="Dialog">
-							 <p class="text14" >Er du sikker på at du ønsker å slette fra toll.no?</p>
-						</div>
+						<c:if test="${model.record.emst2 != 'C'}">
+							&nbsp;
+							<input title="Slett fra toll.no" class="inputFormSubmitStd" type="button" name="deleteButton" id="deleteButton" value='Slett'>
+							<div style="display: none;" class="clazz_dialog" id="dialogDelete" title="Dialog">
+								 <p class="text14" >Er du sikker på at du ønsker å slette fra toll.no?</p>
+							</div>
+						</c:if>
 					</c:if>		
 		    		<c:if test="${model.record.emlnrm > 0}">
 			    		<a id="alinkRefreshButton" href="tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=${model.record.emlnrt}&emlnrm=${model.record.emlnrm}">
@@ -924,7 +926,7 @@
 		<tr height="3"><td></td></tr>
 		<tr>
 			<td align="left" >
-			<c:if test="${model.record.emst != 'S'}"> <%-- CANCELED(S) --%>
+			<c:if test="${model.record.emst != 'S' && model.record.emst2 != 'C'}"> <%-- CANCELED(S) and COMPLETED(C) --%>
 				&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
 				<c:if test="${model.record.emlnrm > 0}">
 					<c:choose>
