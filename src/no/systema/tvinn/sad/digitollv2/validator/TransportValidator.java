@@ -70,12 +70,11 @@ public class TransportValidator implements Validator {
 								if(dateTimeMgr.isToday(strEtetad, DateTimeManager.NO_FORMAT)){
 									String strEtetat = String.valueOf(record.getEtetat());
 									strEtetat = dateTimeMgr.adjustUserTimeToHHmm(strEtetat);
-									//THIS is OBSOLETE now - NO NEED. Is alright now
-									//check the hour. At least 2 hour ahead since it is a bug
-									/*   if(!dateTimeMgr.isValidTime(strEtetat, JsonTvinnSadManifestRecord.MANIFEST_AT_LEAST_HOURS_AHEAD_VALID)){
+									//check the hour. 
+									if(!dateTimeMgr.isValidTime(strEtetat, JsonTvinnSadManifestRecord.MANIFEST_AT_LEAST_HOURS_AHEAD_VALID)){
 										logger.warn("D");
 										errors.rejectValue("etetad", "systema.tvinn.sad.manifest.express.header.error.rule.invalidEtaTimeForward");
-									}*/
+									}
 								}
 							}
 							

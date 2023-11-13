@@ -25,7 +25,7 @@ public class JsonTvinnSadManifestRecord extends JsonAbstractGrandFatherRecord {
 	public static final String MANIFEST_INTERNAL_STATUS_DELETED = "S";
 	public static final String MANIFEST_INTERNAL_STATUS_FINISHED_Z = "Z";
 	
-	public static final int MANIFEST_AT_LEAST_HOURS_AHEAD_VALID = 2;
+	public static final int MANIFEST_AT_LEAST_HOURS_AHEAD_VALID = 0;
 	
 	
 	
