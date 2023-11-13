@@ -899,6 +899,40 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 	  });
   });
 
+
+	jq(function() {
+	  	//delete to SYSPED
+ 		jq('#deleteTransportButton').click(function() { 
+    	  jq('#dialogDeleteTransport').dialog( "option", "title", "Fjerne fra Sysped " );
+		  //deal with buttons for this modal window
+		  jq('#dialogDeleteTransport').dialog({
+			 buttons: [ 
+	            {
+				 id: "dialogSaveTU",	
+				 text: "Ok",
+				 click: function(){
+					 		setBlockUI();
+							window.location = 'tvinnsaddigitollv2_delete_transport.do?current_id1=' + jq('#etlnrt').val();
+				 		}
+			 	 },
+	 	 		{
+			 	 id: "dialogCancelTU",
+			 	 text: "Cancel", 
+				 click: function(){
+					 		//back to initial state of form elements on modal dialog
+					 		jq("#dialogSaveSU").button("option", "disabled", true);
+					 		jq( this ).dialog( "close" ); 
+				 		} 
+	 	 		 } ] 
+		  });
+		  //init values
+		  jq("#dialogSaveSU").button("option", "disabled", true);
+		  //open now
+		  jq('#dialogDeleteTransport').dialog('open');
+    	});
+	});
+ 
+
  jq(function() {
 	  jq(".uuidLink").click(function() {
 		  var id = this.id;

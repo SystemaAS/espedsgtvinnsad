@@ -744,7 +744,7 @@
   	});
 
 	jq(function() {
-	  	//Real delete to Api (DELETE)
+	  	//delete to SYSPED
  		jq('#deleteMasterButton').click(function() { 
     	  jq('#dialogDeleteMaster').dialog( "option", "title", "Fjerne fra Sysped " );
 		  //deal with buttons for this modal window

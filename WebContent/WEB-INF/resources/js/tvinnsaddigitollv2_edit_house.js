@@ -667,7 +667,7 @@
 	  }
   
 	jq(function() {
-	  	//Real delete to Api (DELETE)
+	  	//delete to SYSPED
  		jq('#deleteHouseButton').click(function() { 
     	  jq('#dialogDeleteHouse').dialog( "option", "title", "Fjerne fra Sysped " );
 		  //deal with buttons for this modal window

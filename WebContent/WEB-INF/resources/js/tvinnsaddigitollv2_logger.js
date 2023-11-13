@@ -32,6 +32,10 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 			  var url = "renderLocalLogsgService.do?user=" + jq('#applicationUser').val() + "&logLevel=" + jq("#logLevelLocal").val();
   			  presentPwdDialogLocal(url);
   		  });
+		  jq("#alinkLogsgLoggerRoadEntry").click(function() {
+			  var url = "renderLocalLogsgRoadEntry.do?user=" + jq('#applicationUser').val() + "&logLevel=" + jq("#logLevelLocal").val();
+  			  presentPwdDialogLocal(url);
+  		  });
 		  jq("#alinkLogsgLoggerCatalina").click(function() {
 			  var url = "renderLocalCatalina.do?user=" + jq('#applicationUser').val();
   			  presentPwdDialogLocal(url);

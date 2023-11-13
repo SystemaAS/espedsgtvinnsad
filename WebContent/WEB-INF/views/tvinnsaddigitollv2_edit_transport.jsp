@@ -110,7 +110,8 @@
 			           		<div class="text11" align="left">
 			           			<a id="alinkLogsgLoggerApi" ><span class="text12" style="cursor:pointer;color:green;">1. Api-log</span></a><br/><br/>
 			           			<a id="alinkLogsgLoggerSadService" ><span class="text12" style="cursor:pointer;color:green;">2. Sad-service-log</span></a><br/>
-			           			<a id="alinkLogsgLoggerCatalina" ><span class="text12" style="cursor:pointer;color:green;">3. Catalina-log</span></a><br/>
+			           			<a id="alinkLogsgLoggerRoadEntry" ><span class="text12" style="cursor:pointer;color:green;">3. Road-Enry-log</span></a><br/>
+			           			<a id="alinkLogsgLoggerCatalina" ><span class="text12" style="cursor:pointer;color:green;">4. Catalina-log</span></a><br/>
 			           			
 			           			<br/>
 			           			<button name="_ButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('jarStartCmd');">Close</button> 
@@ -999,6 +1000,14 @@
 							<a id="alinkCreateNewButton" href="tvinnsaddigitollv2_edit_transport.do?action=doCreate">
 								<input class="inputFormSubmitStd" type="button" name="createNewButton" id="createNewButton" value='Lage ny'>
 							</a>
+							
+							<%-- For the moment the user should be responsible for deleting all masters prior to deleting the Transport. All masters must have been DELETED from the API (no MRN) --%>
+							<c:if test="${empty model.record.etmid && empty model.record.listMasters}">
+								<input title="Fjerne fra SYSPED" class="inputFormSubmitStd" type="button" name="deleteTransportButton" id="deleteTransportButton" value='Fjerne'>
+								<div id="dialogDeleteTransport" class="clazz_dialog" title="Dialog">
+									 <p class="text14" >Er du sikker på at du vil fjerne Transport - Lnr <b>${model.record.etlnrt}</b> i <b>SYSPED</b> ?</p>
+								</div>
+							</c:if>
 							
 							&nbsp;
 							<span align="left" class="inputText">

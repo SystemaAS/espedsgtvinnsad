@@ -382,6 +382,67 @@ public class TvinnSadDigitollv2TransportController {
 		return successView;
 	}
 	
+	@RequestMapping(value="tvinnsaddigitollv2_delete_transport.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doDelete(@ModelAttribute ("record") SadmotfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		Map model = new HashMap();
+		String id1 = "";
+		
+		Enumeration requestParameters = request.getParameterNames();
+	    while (requestParameters.hasMoreElements()) {
+	        String element = (String) requestParameters.nextElement();
+	        String value = request.getParameter(element);
+	        if (element != null && value != null) {
+        		//logger.warn("####################################################");
+    			//logger.warn("param Name : " + element + " value: " + value);
+    			if(element.startsWith("current_id1")){
+    				id1 = value;
+    			}
+    		}
+    	}
+	    logger.info("Id1:" + id1);
+	    ModelAndView successView = new ModelAndView("redirect:tvinnsaddigitollv2.do?action=doFind");
+	    
+	    
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//START
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			//==========
+			//Upd status
+			//==========
+		
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_DIGITOLLV2);
+			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE); 
+			
+			//Update/Insert
+			if(StringUtils.isNotEmpty(id1)) {
+				
+				recordToValidate.setEtlnrt(Integer.valueOf(id1));
+				
+				String mode = "D";
+				logger.info("MODE:" + mode + " before update in Controller ...");
+				
+				StringBuffer errMsg = new StringBuffer();
+				int dmlRetval = 0;
+				dmlRetval = this.deleteTransport(appUser.getUser(), recordToValidate, mode, errMsg);
+				
+				if(dmlRetval < 0) {
+					//error on update
+					model.put("errorMessage", errMsg.toString());
+				}
+			}
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+	    
+		}
+		
+		return successView;
+		
+	}
 	
 	/**
 	 * 
@@ -633,86 +694,14 @@ public class TvinnSadDigitollv2TransportController {
 		
 	}
 	
-	/* OBSOLETE ... replaced with the above
-	@RequestMapping(value="tvinnsaddigitollv2_api_send_transportOrig.do",  method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doApiSendTransportOrig(@ModelAttribute ("record") SadmotfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
-		logger.info("inside doApiSendTransport");
-		
-		Map model = new HashMap();
-		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
-		ModelAndView successView = null;;
-		StringBuilder redirect = new StringBuilder();
-		redirect.append("redirect:tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=" + recordToValidate.getEtlnrt());
-		
-		//check user (should be in session already)
-		if(appUser==null){
-			return loginView;
-		
-		}else{
-			
-			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
-			
-			//=================
-			//SEND POST or PUT
-			//=================
-			if(recordToValidate.getEtlnrt() > 0 ) {
-		    	logger.info("Before send in Controller ...");
-				
-				StringBuilder url = new StringBuilder();
-				StringBuilder urlRequestParamsKeys = new StringBuilder();
-				urlRequestParamsKeys.append("user=" + appUser.getUser());
-				
-				url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
-				//check if POST-CREATE or PUT-UPDATE
-				if( StringUtils.isNotEmpty(recordToValidate.getEtmid()) ) {
-					url.append("putTransport.do");
-					urlRequestParamsKeys.append("&etlnrt=" + recordToValidate.getEtlnrt());
-					urlRequestParamsKeys.append("&mrn=" + recordToValidate.getEtmid());
-				}else {
-					
-					url.append("postTransport.do");
-					urlRequestParamsKeys.append("&etlnrt=" + recordToValidate.getEtlnrt());
-				}
-				
-				String BASE_URL = url.toString();
-	    		logger.info("URL: " + BASE_URL);
-	    		logger.info("PARAMS: " + urlRequestParamsKeys.toString());
-	    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
-	    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
-	    		//Debug -->
-		    	logger.info(jsonPayload);
-	    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-	    		
-	    		try {
-		    		ApiGenericDtoResponse apiDtoResponse = this.apiGenericDtoResponseService.getReponse(jsonPayload);
-		    		if(StringUtils.isNotEmpty(apiDtoResponse.getErrMsg())){
-		    			new RedirectCleaner().doIt(apiDtoResponse);
-		    			//in order to catch it after the redirect as a parameter...if applicable
-		    			if(StringUtils.isNotEmpty(apiDtoResponse.getErrMsgClean())) {
-		    				redirect.append("&" + SadDigitollConstants.REDIRECT_ERRMSG + "=" + apiDtoResponse.getErrMsgClean());
-		    			}
-					}
-	    		}catch(Exception e) {
-	    			e.printStackTrace();
-	    			
-	    		}finally {
-	    			successView = new ModelAndView(redirect.toString());
-	    		}
-				
-			}else {
-				StringBuffer errMsg = new StringBuffer();
-				errMsg.append("ERROR on doSendMaster -->detail: null ids? ...");
-				model.put("errorMessage", errMsg.toString());
-
-			}
-		}
-		
-		return successView;
-		
-	}
-	*/
-	
-	
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="tvinnsaddigitollv2_api_delete_transport.do",  method={RequestMethod.GET, RequestMethod.POST} )
 	public ModelAndView doApiDeleteTransport(@ModelAttribute ("record") SadmotfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		//this.context = TdsAppContext.getApplicationContext();
@@ -801,6 +790,48 @@ public class TvinnSadDigitollv2TransportController {
 		
 	}
 	
+	
+	private int deleteTransport(String applicationUser, SadmotfRecord recordToValidate, String mode, StringBuffer errMsg) {
+		int retval = 0;
+		
+		
+		//get BASE URL
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_TRANSPORT_URL;
+		//add URL-parameters
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + applicationUser + "&mode=" + mode);
+		urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate)));
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		GeneralUpdateContainer container = this.generalUpdateService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<GeneralUpdateRecord> outputList = container.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(GeneralUpdateRecord record : outputList ){
+					logger.info(record.toString());
+					if(StringUtils.isNotEmpty(container.getErrMsg())){
+						errMsg.append(record.getStatus());
+						errMsg.append(" -->detail:" + container.getErrMsg());
+						retval = -1;
+						break;
+					}
+				}
+			}
+    	}
+    	
+    	return retval;
+	}
 	/**
 	 * This method is the same that in the childWindow but refined by showing ONLY the last ERROR (if any)
 	 * 

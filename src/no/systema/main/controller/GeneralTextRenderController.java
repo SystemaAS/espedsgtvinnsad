@@ -46,6 +46,7 @@ public class GeneralTextRenderController {
 	private final String RELATIVE_LOGFILE_PATH = "logs/" + ApplicationPropertiesUtil.getProperty("logsg.logger.file");   //OBSOLETE: resources.getString("log4j.logger.file");
 	private final String RELATIVE_LOGFILE_EXPRESS_FORTOLLING_SERVICE_PATH = "logs/logsg_syjservicestn-expft.log";
 	private final String RELATIVE_LOGFILE_SADTVINN_SERVICE_PATH = "logs/logsg_syjservicestn.log";
+	private final String RELATIVE_LOGFILE_ROAD_ENTRY_PATH = "logs/logsg_digitoll-roadentry.log";
 	private final String RELATIVE_LOGFILE_SADTVINN_PATH = "logs/logsg_espedtvinnsad.log";
 	private final String RELATIVE_LOGFILE_CATALINA_OUT = "logs/catalina.out";
 	
@@ -237,7 +238,65 @@ public class GeneralTextRenderController {
 			
 		}
 			
-	}	
+	}
+	
+	@RequestMapping(value="renderLocalLogsgRoadEntry.do", method={ RequestMethod.GET })
+	public ModelAndView doRenderLocalRoadEntry(HttpSession session, HttpServletRequest request, HttpServletResponse response){
+		logger.info("Inside doRenderLocalLogsgExpFt...");
+		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
+		
+		String date = request.getParameter("date");
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			
+			try{
+				//log4jMgr.doLevelUpdate(request, response);
+			}catch(Exception e){
+				e.toString();
+			}
+			
+			String path = TdsServletContext.getTdsServletContext().getRealPath("/");
+			//logger.info("ServletContext:" + path);
+			int pathRootIndex = path.indexOf(SERVLET_CONTEXT_WEBAPPS_ROOT);
+			StringBuilder logFile = new StringBuilder();
+			if(pathRootIndex!=-1){
+				logFile.append(path.substring(0,pathRootIndex) + RELATIVE_LOGFILE_ROAD_ENTRY_PATH);
+				if(StringUtils.isNotEmpty(date)) {
+					if(new DateValidator().validateDateIso203_YYYY_MM_DD(date)) {
+						logFile.append("." + date);
+					}
+				}
+				logger.info("logFile:" + logFile.toString());
+			}
+			
+			if(logFile!=null ){
+				//must know the file type in order to put the correct content type on the Servlet response.
+                String fileType = this.payloadContentFlusher.getFileType(logFile.toString());
+                if(AppConstants.DOCUMENTTYPE_LOG.equals(fileType)){
+                		response.setContentType(AppConstants.HTML_CONTENTTYPE_TEXTHTML);
+                }else if(AppConstants.DOCUMENTTYPE_TXT.equals(fileType)){
+            			response.setContentType(AppConstants.HTML_CONTENTTYPE_TEXTHTML);
+                }//--> with browser dialogbox: response.setHeader ("Content-disposition", "attachment; filename=\"edifactPayload.txt\"");
+                response.setHeader ("Content-disposition", "filename=\"logsgDigitollRoadEntryLogger.txt" + fileType + "\"");
+                
+                logger.info("Start flushing file payload...");
+                //send the file output to the ServletOutputStream
+                try{
+                		//InputStream inputStream = session.getServletContext().getResourceAsStream(logFile);
+                		this.payloadContentFlusher.flushServletOutput(response, logFile.toString());
+                	
+                }catch (Exception e){
+                		e.printStackTrace();
+                }
+            }
+			//this to present the output in an independent window
+            return(null);
+			
+		}
+			
+	}
 	
 	@RequestMapping(value="renderLocalCatalina.do", method={ RequestMethod.GET })
 	public ModelAndView doRenderCatalina(HttpSession session, HttpServletRequest request, HttpServletResponse response){
