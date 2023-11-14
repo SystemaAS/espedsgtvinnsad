@@ -55,6 +55,8 @@ import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorR
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
 import no.systema.tvinn.sad.digitollv2.model.api.entrymovementroad.EntryMovRoadDto;
 import no.systema.tvinn.sad.digitollv2.model.api.routing.EntryRoutingDto;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ApiMasterRefsContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ApiMasterRefsRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurContainer;
@@ -216,6 +218,8 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	    	return successView;
 		}
 	}
+	
+	
 	/**
 	 * 
 	 * @param session
@@ -417,15 +421,15 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	 */
 	@RequestMapping(value="tvinnsaddigitollv2_childwindow_masterdocs_rec.do",  method={RequestMethod.GET} )
 	public ModelAndView doMasterDocsReceived(HttpSession session, HttpServletRequest request){
+		
 		this.context = TdsAppContext.getApplicationContext();
 		logger.info("Inside: doMasterDocsReceived");
 		Map model = new HashMap();
 		String id = request.getParameter("id");
 		
-		
-		
-		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_manifestinfo");
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_masterdocrefs_api");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		
 		//check user (should be in session already)
 		if(appUser==null){
 			return this.loginView;
@@ -443,14 +447,21 @@ public class TvinnSadDigitollv2ControllerChildWindow {
     		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
     		//Debug -->
 	    	logger.debug(jsonPayload);
-    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-    		
-    		model.put("content", jsonPayload);
-
+    		if(StringUtils.isNotEmpty(jsonPayload)) {
+    			try {
+    			ApiMasterRefsContainer container = new ObjectMapper().readValue(jsonPayload, ApiMasterRefsContainer.class);
+    			if(container!=null) {
+    				model.put("mrn", container.getMrn());
+    				model.put("list", container.getList());
+    			}
+    			}catch(Exception e) {
+    				logger.info(e.toString());
+    			}
+    		}
     		successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
-			
-	    	return successView;
 		}
+		
+		return successView;
 	}
 	
 	@RequestMapping(value="tvinnsaddigitollv2_childwindow_housedocs_rec.do",  method={RequestMethod.GET} )
@@ -1044,6 +1055,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		  }
 		  return result;
 	}
+	
 	/**
 	 * 
 	 * @param appUser
