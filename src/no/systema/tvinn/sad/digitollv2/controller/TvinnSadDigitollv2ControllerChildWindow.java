@@ -453,6 +453,44 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		}
 	}
 	
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_housedocs_rec.do",  method={RequestMethod.GET} )
+	public ModelAndView doHouseDocsReceived(HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doHouseDocsReceived");
+		Map model = new HashMap();
+		String id = request.getParameter("id");
+		
+		
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_manifestinfo");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			StringBuilder url = new StringBuilder();
+			url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
+			url.append("getDocsRecHouseConsignment.do");
+			
+			String BASE_URL = url.toString();
+    		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&mrn=" + id;
+    		logger.info("URL: " + BASE_URL);
+    		logger.info("PARAMS: " + urlRequestParamsKeys);
+    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+    		//Debug -->
+	    	logger.debug(jsonPayload);
+    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    		
+    		model.put("content", jsonPayload);
+
+    		successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	
 	/**
 	 * 
 	 * @param recordToValidate

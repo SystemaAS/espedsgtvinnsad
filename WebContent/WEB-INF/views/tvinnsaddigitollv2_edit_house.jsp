@@ -237,8 +237,8 @@
 			    			&nbsp;<input title="Refresh all status..." class="inputFormSubmitStd" type="button" name="refreshButton" id="refreshButton" value='Refresh'>
 			    		</a>
 		    		</c:if>
-		    		
-		    		<span title="MRN nr. hos toll.no - per House" >MRN-Api&nbsp;</span><span class="text14SkyBlue" id="${model.record.ehmid}">${model.record.ehmid}</span>
+		    		<span title="MRN nr. hos toll.no - per Master" >MRN-Api&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.ehmid}">${model.record.ehmid}</a></span>
+		    		<%-- <span title="MRN nr. hos toll.no - per House" >MRN-Api&nbsp;</span><span class="text14SkyBlue" id="${model.record.ehmid}">${model.record.ehmid}</span> --%>
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
 		    		<span title="Transaktionsid hos toll.no - per request" >Trans.id&nbsp;</span><a title="les status på toll.no" class="uuidLink text14SkyBlue" id="${model.record.ehuuid}">${model.record.ehuuid}</a>
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;

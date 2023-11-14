@@ -251,7 +251,7 @@
 		    		</c:if>
 		    		
 					<%-- <span title="MRN nr. hos toll.no - per Master" >MRN-Api&nbsp;</span><font class="text14SkyBlue">${model.record.emmid}</font> --%>
-		    		<span title="MRN nr. hos toll.no - per Master" >MRN-Api&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.emmid}">${model.record.emmid}</a>
+		    		<span title="MRN nr. hos toll.no - per Master" >MRN-Api&nbsp;<a class="uuidLinkParent text14SkyBlue" id="${model.record.emmid}">${model.record.emmid}</a></span>
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
 		    		<span title="Transaktionsid hos toll.no - per request" >Trans.id&nbsp;</span><a title="les status på toll.no" class="uuidLinkParent text14SkyBlue" id="${model.record.emuuid}">${model.record.emuuid}</a>
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
