@@ -379,19 +379,19 @@
 		               				record.etst2 == 'M' || record.etst2 == 'C'}">
 		               				
 		               			<c:if test="${record.etst2 == 'S'}">
-		               				<span class="text12" title="S" >SUBMITTED</span>
+		               				<span class="text12" style="cursor:help;" title="S" >SUBMITTED</span>
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'R'}">
-		               				<span class="text12" title="R" >REOPENED/DRAFT</span>
+		               				<span class="text12" style="cursor:help;" title="R" >REOPENED/DRAFT</span>
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'D'}">
-		               				<font class="text12" title="D" color="red">SLETTET</font>
+		               				<font class="text12" style="cursor:help;" title="D" color="red">SLETTET</font>
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'M'}">
-		               				<font class="text12" title="M" color="red">ERROR</font>
+		               				<font class="text12" style="cursor:help;" title="M" color="red">ERROR</font>
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'C'}">
-		               				<font class="text12" title="C" color="green">COMPLETED</font>
+		               				<font class="text12" style="cursor:help;" title="UTC-tid:${record.etenttim} Valid:${record.etentval} Tollst:${record.etentoff}" color="green">COMPLETED</font>
 		               			</c:if>
 		               			
 		               		</c:when>

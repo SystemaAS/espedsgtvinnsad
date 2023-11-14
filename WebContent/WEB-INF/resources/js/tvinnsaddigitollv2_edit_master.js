@@ -800,11 +800,11 @@
 		  //default url
 		  var controllerUrl = "tvinnsaddigitollv2_childwindow_manifestinfo.do?id=" + id +"&level=m" + "&apiType=" + apiType;
 
-		 /** Has been removed at toll.no in V2 ...	
+		 // Has been removed at toll.no in V2 ...	
 		  if(id.length<35){ //meaning MRN and not LRN (only at Master Consignment level)
 			 controllerUrl = "tvinnsaddigitollv2_childwindow_masterdocs_rec.do?id=" + id; 
 		  }
-		 */	
+		 
 		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
 			
 	  });
