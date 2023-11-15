@@ -71,7 +71,9 @@ public class TransportValidator implements Validator {
 									String strEtetat = String.valueOf(record.getEtetat());
 									strEtetat = dateTimeMgr.adjustUserTimeToHHmm(strEtetat);
 									//check the hour. 
-									if(!dateTimeMgr.isValidTime(strEtetat, JsonTvinnSadManifestRecord.MANIFEST_AT_LEAST_HOURS_AHEAD_VALID)){
+									if(dateTimeMgr.isValidTime(strEtetat)){
+										//OK
+									}else {
 										logger.warn("D");
 										errors.rejectValue("etetad", "systema.tvinn.sad.manifest.express.header.error.rule.invalidEtaTimeForward");
 									}
