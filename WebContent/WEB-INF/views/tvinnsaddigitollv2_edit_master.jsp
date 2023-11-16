@@ -236,7 +236,7 @@
 					</c:otherwise>
 					</c:choose>
 					<c:if test="${not empty model.record.emmid}">
-						<c:if test="${model.record.emst2 != 'C'}">
+						<c:if test="${model.record.emst2 != 'C' && model.record.emst2 != 'N' }">
 							&nbsp;
 							<input title="Slett fra toll.no" class="inputFormSubmitStd" type="button" name="deleteButton" id="deleteButton" value='Slett'>
 							<div style="display: none;" class="clazz_dialog" id="dialogDelete" title="Dialog">
@@ -258,7 +258,7 @@
 		    		
 		    		<a title="lese logg" tabindex=-1 id="${model.record.emlnrt}_${model.record.emlnrm}" class="logLink" runat="server" href="#"><font class="text14 ">Api.st - log</font>&nbsp;
 						<c:choose>
-						<c:when test="${model.record.emst2 == 'S' || model.record.emst2 == 'R' || model.record.emst2 == 'D' || model.record.emst2 == 'C'}">
+						<c:when test="${model.record.emst2 == 'S' || model.record.emst2 == 'R' || model.record.emst2 == 'D' || model.record.emst2 == 'C' || model.record.emst2 == 'N'}">
 							<c:if test="${model.record.emst2 == 'S'}">
 								<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
 								<font style="color:gray;">SUBMITTED</font>
@@ -271,8 +271,8 @@
 								<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
 								<font style="color:red;">SLETTET</font>
 							</c:if>
-							<c:if test="${model.record.emst2 == 'R'}">
-								<font style="color:brown;">REOPENED/DRAFT</font>
+							<c:if test="${model.record.emst2 == 'N'}">
+								<font style="color:brown;">DENIED</font>
 							</c:if>
 						</c:when>
 						<c:otherwise>
@@ -927,11 +927,11 @@
 		<tr height="3"><td></td></tr>
 		<tr>
 			<td align="left" >
-			<c:if test="${model.record.emst != 'S' && model.record.emst2 != 'C'}"> <%-- CANCELED(S) and COMPLETED(C) --%>
+			<c:if test="${model.record.emst != 'S' && model.record.emst2 != 'C' && model.record.emst2 != 'N'}"> <%-- CANCELED(S) and COMPLETED(C) --%>
 				&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
 				<c:if test="${model.record.emlnrm > 0}">
 					<c:choose>
-						<c:when test="${model.record.emst2 == 'C' }"> <%--COMPLETED(C) --%>
+						<c:when test="${model.record.emst2 == 'C' || model.record.emst2 == 'N' }"> <%--COMPLETED(C) --%>
 							<%-- not possible --%>
 						</c:when>
 						<c:otherwise>
@@ -1036,7 +1036,7 @@
                 		<th width="2%" class="tableHeaderField12" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.mrn"/></th>
                 		<th width="2%" class="tableHeaderField12" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.request"/></th>
                 		<th title="Api-status" width="2%" class="tableHeaderField12" ></th>
-                		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED,M=ERROR" width="2%" class="tableHeaderField12" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.status"/></th>
+                		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED,N=DENIED,M=ERROR" width="2%" class="tableHeaderField12" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.status"/></th>
                 		<th width="2%" class="tableHeaderField12" title="Fjerner manifest fra Tollvesenet" >Slett</th>
                 		<th width="2%" class="tableHeaderField12" title="Fjerner manifest lokalt (SYSPED)">Fjerne-sysped</th>
                 		</tr>
@@ -1056,7 +1056,7 @@
 		          	   <td width="2%" class="tableCellFirst12" <c:if test="${houseConsignmentRecord.ehst2 == 'D'}">style="background-color: #FEEFB3;color: #9F6000;" </c:if> align="center">
 		          	   		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_house.do?action=doFind&ehlnrt=${houseConsignmentRecord.ehlnrt}&ehlnrm=${houseConsignmentRecord.ehlnrm}&ehlnrh=${houseConsignmentRecord.ehlnrh}" onClick="setBlockUI();">
                					<c:choose>
-		               				<c:when test="${houseConsignmentRecord.ehst2 == 'C' || houseConsignmentRecord.ehst == 'S'}">
+		               				<c:when test="${houseConsignmentRecord.ehst2 == 'C' || houseConsignmentRecord.ehst2 == 'N' || houseConsignmentRecord.ehst == 'S'}">
 		               					<img title="Read" style="vertical-align:bottom;" src="resources/images/eye.png" height="18px" width="18px" border="0" alt="read">
 		               				</c:when>
 		               				<c:otherwise>
@@ -1151,7 +1151,9 @@
 		               			<c:if test="${houseConsignmentRecord.ehst2 == 'C'}">
 		               				<img style="vertical-align:middle;" title="Completed tolldekl at toll.no" src="resources/images/complete-icon.png" width="14px" height="12px" border="0" alt="completion">
 		               			</c:if>
-		               			
+		               			<c:if test="${houseConsignmentRecord.ehst2 == 'N'}">
+		               				<img title="Denied" style="vertical-align:middle;" title="Denied digitoll-pass at toll.no" src="resources/images/warning.png" width="14px" height="12px" border="0" alt="denied">
+		               			</c:if>
 		               		</c:when>
 		               		<c:otherwise>
 		               			<c:if test="${houseConsignmentRecord.ehst2 != 'S'}">
@@ -1163,7 +1165,7 @@
 		               <td width="2%" align="center" class="tableCell12" >
 		               		<c:choose>
 		               		<c:when test="${houseConsignmentRecord.ehst2 == 'S' || houseConsignmentRecord.ehst2 == 'R' || houseConsignmentRecord.ehst2 == 'D' || 
-		               				houseConsignmentRecord.ehst2 == 'M' || houseConsignmentRecord.ehst2 == 'C'}">
+		               				houseConsignmentRecord.ehst2 == 'M' || houseConsignmentRecord.ehst2 == 'C' || houseConsignmentRecord.ehst2 == 'N'}">
 		               				
 		               			<c:if test="${houseConsignmentRecord.ehst2 == 'S'}">
 		               				<span class="text12" title="S" >SUBMITTED</span>
@@ -1179,6 +1181,9 @@
 		               			</c:if>
 		               			<c:if test="${houseConsignmentRecord.ehst2 == 'C'}">
 		               				<font class="text12" title="C" color="green">COMPLETED</font>
+		               			</c:if>
+		               			<c:if test="${houseConsignmentRecord.ehst2 == 'N'}">
+		               				<font class="text12" title="C" color="green">DENIED</font>
 		               			</c:if>
 		               			
 		               		</c:when>
@@ -1277,10 +1282,11 @@
 						<td class="text14MediumBlue">
 							<select class="selectMediumBlueE2" name="emst2" id="emst2">
 		            		  	<option title="EMPTY" value=" ">-velg-</option>
-			            		<option title="ERROR(M)" value="M">ERROR</option>
+			            		<option title="COMPLETED(C)" value="C">COMPLETED</option>
+							  	<option title="DENIED(N)" value="N">DENIED</option>
+							  	<option title="ERROR(M)" value="M">ERROR</option>
 	            		  		<option title="SLETTET(D)" value="D">SLETTET</option>
 							  	<option title="SUBMITTED(S)" value="S">SUBMITTED</option>
-							  	<option title="COMPLETED(C)" value="C">COMPLETED</option>
 							  	
 							</select>
 						</td>

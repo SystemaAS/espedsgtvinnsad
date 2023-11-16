@@ -16,5 +16,5 @@ public enum EnumSadmomfStatus2 {
 	S,
 	D,
 	C,
-	
+	N,
 }

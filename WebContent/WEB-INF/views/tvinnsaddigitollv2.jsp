@@ -140,7 +140,8 @@
 				<td align="left" >
 					<select class="selectMediumBlueE2" name="status" id="status">
 					  <option value="">-velg-</option>
-	 				  	<option title="C" value="C"<c:if test="${searchFilterSadDigitollTransportList.status == 'C'}"> selected </c:if> >COMPLETED</option> 
+	 				  	<option title="C" value="C"<c:if test="${searchFilterSadDigitollTransportList.status == 'C'}"> selected </c:if> >COMPLETED</option>
+	 				  	<option title="N" value="N"<c:if test="${searchFilterSadDigitollTransportList.status == 'N'}"> selected </c:if> >DENIED</option> 
 						<option title="M" value="M"<c:if test="${searchFilterSadDigitollTransportList.status == 'M'}"> selected </c:if> >ERROR</option> 
 						<option title="K" value="K"<c:if test="${searchFilterSadDigitollTransportList.status == 'K'}"> selected </c:if> >KANSELLERT</option> 
 						<option title="D" value="D"<c:if test="${searchFilterSadDigitollTransportList.status == 'D'}"> selected </c:if> >SLETTET</option> 
@@ -240,7 +241,7 @@
                 		<th width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.mrn"/></th>
                 		<th width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.request"/></th>
                 		<th title="Api-status" width="2%" class="tableHeaderField" ></th>
-                		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED,M=ERROR" width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.status"/></th>
+                		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED, N=DENIED,M=ERROR" width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.status"/></th>
                 		<th width="2%" class="tableHeaderField" title="Fjerner manifest fra Tollvesenet" >Slett</th>
                 		<%--<th width="2%" class="tableHeaderField" title="Fjerner manifest lokalt (SYSPED)">Kans.</th> --%>
                 		</tr>
@@ -262,7 +263,7 @@
 		          	   	<%-- <td width="2%" class="tableCellFirst" <c:if test="${record.etst2 == 'D'}">style="background-color: #FEEFB3;color: #9F6000;" </c:if> align="center">  --%>
 		          	   		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=${record.etlnrt}" onClick="setBlockUI();">
                					<c:choose>
-		               				<c:when test="${record.etst2 == 'C' || record.etst == 'S'}">
+		               				<c:when test="${record.etst2 == 'C' || record.etst2 == 'N' || record.etst == 'S'}">
 		               					<img title="Read" style="vertical-align:bottom;" src="resources/images/eye.png" height="18px" width="18px" border="0" alt="read">
 		               				</c:when>
 		               				<c:otherwise>
@@ -361,7 +362,10 @@
 									<img style="cursor:help;" title="Error" src="resources/images/bulletRed.png" width="10" height="10" border="0" >
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'C'}">
-		               				<img title="Completed" style="vertical-align:middle;cursor:help;" title="Completed tolldekl at toll.no" src="resources/images/complete-icon.png" width="14px" height="12px" border="0" alt="completion">
+		               				<img title="Completed" style="vertical-align:middle;cursor:help;" title="Completed digitoll-pass at toll.no" src="resources/images/complete-icon.png" width="14px" height="12px" border="0" alt="completion">
+		               			</c:if>
+		               			<c:if test="${record.etst2 == 'N'}">
+		               				<img title="Denied" style="vertical-align:middle;" title="Denied digitoll-pass at toll.no" src="resources/images/warning.png" width="14px" height="12px" border="0" alt="denied">
 		               			</c:if>
 		               			
 		               		</c:when>
@@ -376,7 +380,7 @@
 		               <td width="2%" align="center" class="tableCell" >
 		               		<c:choose>
 		               		<c:when test="${record.etst2 == 'S' || record.etst2 == 'R' || record.etst2 == 'D' || 
-		               				record.etst2 == 'M' || record.etst2 == 'C'}">
+		               				record.etst2 == 'M' || record.etst2 == 'C' || record.etst2 == 'N'}">
 		               				
 		               			<c:if test="${record.etst2 == 'S'}">
 		               				<span class="text12" style="cursor:help;" title="S" >SUBMITTED</span>
@@ -392,6 +396,9 @@
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'C'}">
 		               				<font class="text12" style="cursor:help;" title="UTC-tid:${record.etenttim} Valid:${record.etentval} Tollst:${record.etentoff}" color="green">COMPLETED</font>
+		               			</c:if>
+		               			<c:if test="${record.etst2 == 'N'}">
+		               				<font class="text12" style="cursor:help;" title="UTC-tid:${record.etenttim} Valid:${record.etentval} Tollst:${record.etentoff}" color="green">DENIED</font>
 		               			</c:if>
 		               			
 		               		</c:when>

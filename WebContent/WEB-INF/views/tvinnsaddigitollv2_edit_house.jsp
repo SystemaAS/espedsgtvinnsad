@@ -224,7 +224,7 @@
 					</c:otherwise>
 					</c:choose>
 					<c:if test="${not empty model.record.ehmid}">
-						<c:if test="${model.record.ehst2 != 'C'}">
+						<c:if test="${model.record.ehst2 != 'C' && model.record.ehst2 != 'N'}">
 							&nbsp;
 							<input title="Slett fra toll.no" class="inputFormSubmitStd" type="button" name="deleteButton" id="deleteButton" value='Slett'>
 							<div style="display: none;" class="clazz_dialog" id="dialogDelete" title="Dialog">
@@ -245,7 +245,7 @@
 		    		
 		    		<a title="lese logg" tabindex=-1 id="${model.record.ehlnrt}_${model.record.ehlnrm}_${model.record.ehlnrh}" class="logLink" runat="server" href="#"><font class="text14 ">Api.st - log</font>&nbsp;
 						<c:choose>
-						<c:when test="${model.record.ehst2 == 'S' || model.record.ehst2 == 'R' || model.record.ehst2 == 'D' || model.record.ehst2 == 'C'}">
+						<c:when test="${model.record.ehst2 == 'S' || model.record.ehst2 == 'D' || model.record.ehst2 == 'C' || model.record.ehst2 == 'N'}">
 							<c:if test="${model.record.ehst2 == 'S'}">
 								<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
 								<font style="color:gray;">SUBMITTED</font>
@@ -258,8 +258,8 @@
 								<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
 								<font style="color:red;">SLETTET</font>
 							</c:if>
-							<c:if test="${model.record.ehst2 == 'R'}">
-								<font style="color:brown;">REOPENED/DRAFT</font>
+							<c:if test="${model.record.ehst2 == 'N'}">
+								<font style="color:brown;">DENIED</font>
 							</c:if>
 						</c:when>
 						<c:otherwise>
@@ -1229,11 +1229,11 @@
 		<tr height="3"><td></td></tr>
 		<tr>
 			<td align="left" >
-			<c:if test="${model.record.ehst != 'S' && model.record.ehst2 != 'C' }"> <%-- CANCELED(S) && COMPLETED --%>
+			<c:if test="${model.record.ehst != 'S' && model.record.ehst2 != 'C' && model.record.ehst2 != 'N' }"> <%-- CANCELED(S) && COMPLETED && DENIED --%>
 				&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
 				<c:if test="${model.record.ehlnrh > 0}">
 					<c:choose>
-						<c:when test="${model.record.ehst2 == 'C' || model.record.ehst3 == 'P' }"> <%--COMPLETED(C) PENDING(P)--%>
+						<c:when test="${(model.record.ehst2 == 'C' || model.record.ehst2 == 'N') || model.record.ehst3 == 'P' }"> <%--COMPLETED(C) PENDING(P)--%>
 							<%-- C == not possible --%>
 							<c:if test="${model.record.ehst3 == 'P' }"> <%-- PENDING(P) --%>
 								<input title="Pending status ..." class="buttonGrayInsideDivPopup" style="cursor:not-allowed;color:brown;" type="button" name="sendButton" id="sendButton" value='Send'>
@@ -1374,10 +1374,12 @@
 						<td class="text14MediumBlue">
 							<select class="selectMediumBlueE2" name="ehst2" id="ehst2">
 		            		  	<option title="EMPTY" value=" ">-velg-</option>
-			            		<option title="ERROR(M)" value="M">ERROR</option>
+			            		<option title="COMPLETED(C)" value="C">COMPLETED</option>
+							  	<option title="DENIED(N)" value="N">DENIED</option>
+							  	<option title="ERROR(M)" value="M">ERROR</option>
 	            		  		<option title="SLETTET(D)" value="D">SLETTET</option>
 							  	<option title="SUBMITTED(S)" value="S">SUBMITTED</option>
-							  	<option title="COMPLETED(C)" value="C">COMPLETED</option>
+							  	
 							  	
 							</select>
 						</td>

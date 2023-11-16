@@ -232,7 +232,7 @@
 					</c:choose>
 					
 					<c:if test="${not empty model.record.etmid}">
-						<c:if test="${model.record.etst2 != 'C'}">
+						<c:if test="${model.record.etst2 != 'C' && model.record.etst2 != 'N' }">
 							<input title="Slett fra toll.no" class="inputFormSubmitStd" type="button" name="deleteButton" id="deleteButton" value='Slett'>
 							<div style="display: none;" class="clazz_dialog" id="dialogDelete" title="Dialog">
 								 <p class="text14" >Er du sikker på at du ønsker å slette fra toll.no?</p>
@@ -249,8 +249,7 @@
 		    		<span title="Transaktionsid hos toll.no - per request" >Trans.id&nbsp;</span><a title="les status på toll.no" class="uuidLinkParent text14SkyBlue" id="${model.record.etuuid}">${model.record.etuuid}</a>
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
 		    		<a title="lese logg" tabindex=-1 id="${model.record.etlnrt}" class="logLink" runat="server" href="#"><font class="text14 ">Api.st - log</font>&nbsp;
-						<c:choose>
-						<c:when test="${model.record.etst2 == 'S' || model.record.etst2 == 'R' || model.record.etst2 == 'D' || model.record.etst2 == 'C'}">
+						
 							<c:if test="${model.record.etst2 == 'S'}">
 								<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
 								<font style="color:gray;">SUBMITTED</font>
@@ -263,23 +262,15 @@
 								<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
 								<font style="color:red;">SLETTET</font>
 							</c:if>
-							<c:if test="${model.record.etst2 == 'R'}">
-								<font style="color:brown;">REOPENED/DRAFT</font>
+							<c:if test="${model.record.etst2 == 'N'}">
+								<font style="color:brown;">DENIED</font>
 							</c:if>
-						</c:when>
-						<c:otherwise>
-							<c:choose>
-							<c:when test="${model.record.etst2 == 'M'}">
+							<c:if test="${model.record.etst2 == 'M'}">
 								<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
 								<font style="color:red">ERROR&nbsp;</font>
-							</c:when>
-							<c:otherwise>
-								<font style="color:gray;">${model.record.etst2}&nbsp;</font>
-							</c:otherwise>
-							</c:choose>
-						</c:otherwise>
-						</c:choose>
+							</c:if>
 					</a>&nbsp;
+					
 					<c:if test="${model.record.etst2 == 'M'}">
 						<span title="last error text..." onClick="showPop('logErrorText_info');" class="inputFormSubmit text11 isa_error" style="cursor:pointer;"><b>mer info ...</b></span>
 						<span class="text11" style="position: relative;" align="left">
@@ -975,11 +966,11 @@
 		<tr height="10"><td></td></tr>
 		<tr>
 			<td align="left" >
-				<c:if test="${model.record.etst != 'S' && model.record.etst2 != 'C' }"> <%-- CANCELED(S) AND COMPLETED(C) --%>
+				<c:if test="${model.record.etst != 'S' && model.record.etst2 != 'C' && model.record.etst2 != 'N' }"> <%-- CANCELED(S) AND COMPLETED(C) --%>
 					&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
 					<c:if test="${model.record.etlnrt > 0}">
 						<c:choose>
-						<c:when test="${model.record.etst2 == 'C' }"> <%--COMPLETED(C) --%>
+						<c:when test="${model.record.etst2 == 'C' ||model.record.etst2 == 'N' }"> <%--COMPLETED(C) --%>
 							<%-- not possible --%>
 						</c:when>
 						<c:otherwise>
@@ -1068,7 +1059,7 @@
                 		<th width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.mrn"/></th>
                 		<th width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.request"/></th>
                 		<th title="Api-status" width="2%" class="tableHeaderField" ></th>
-                		<th title="Api-status S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED,M=ERROR" width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.status"/></th>
+                		<th title="Api-status S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED, N=DENIED,M=ERROR" width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.status"/></th>
                 		<th width="2%" class="tableHeaderField" title="Fjerner manifest fra Tollvesenet" >Slett</th>
                 		<%--<th width="2%" class="tableHeaderField" title="Fjerner manifest lokalt (SYSPED)">Kans.</th> --%>
                 		<th width="2%" class="tableHeaderField" title="Endre transport">EndrTransp</th>
@@ -1089,7 +1080,7 @@
 		          	   <td  width="2%" class="tableCellFirst" <c:if test="${masterConsignmentRecord.emst2 == 'D'}">style="background-color: #FEEFB3;color: #9F6000;" </c:if> align="center">
 		          	   		<a tabindex=-1 style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=${masterConsignmentRecord.emlnrt}&emlnrm=${masterConsignmentRecord.emlnrm}" onClick="setBlockUI();">
                					<c:choose>
-		               				<c:when test="${masterConsignmentRecord.emst2 == 'C' || masterConsignmentRecord.emst == 'S'}">
+		               				<c:when test="${masterConsignmentRecord.emst2 == 'C' || masterConsignmentRecord.emst2 == 'N' ||masterConsignmentRecord.emst == 'S'}">
 		               					<img title="Read" style="vertical-align:bottom;" src="resources/images/eye.png" height="18px" width="18px" border="0" alt="read">
 		               				</c:when>
 		               				<c:otherwise>
@@ -1240,7 +1231,9 @@
 		               			<c:if test="${masterConsignmentRecord.emst2 == 'C'}">
 		               				<img title="Completed" style="vertical-align:middle;" title="Completed tolldekl at toll.no" src="resources/images/complete-icon.png" width="14px" height="12px" border="0" alt="completion">
 		               			</c:if>
-		               			
+		               			<c:if test="${houseConsignmentRecord.ehst2 == 'N'}">
+		               				<img title="Denied" style="vertical-align:middle;" title="Denied digitoll-pass at toll.no" src="resources/images/warning.png" width="14px" height="12px" border="0" alt="denied">
+		               			</c:if>
 		               		</c:when>
 		               		<c:otherwise>
 		               			<c:if test="${masterConsignmentRecord.emst != 'S'}">
@@ -1251,14 +1244,11 @@
 		               </td>
 		               <td width="2%" align="center" class="tableCell" >
 		               		<c:choose>
-		               		<c:when test="${masterConsignmentRecord.emst2 == 'S' || masterConsignmentRecord.emst2 == 'R' || masterConsignmentRecord.emst2 == 'D' || 
+		               		<c:when test="${masterConsignmentRecord.emst2 == 'S' || masterConsignmentRecord.emst2 == 'N' || masterConsignmentRecord.emst2 == 'D' || 
 		               					masterConsignmentRecord.emst2 == 'M' || masterConsignmentRecord.emst2 == 'C'}">
 		               					
 		               			<c:if test="${masterConsignmentRecord.emst2 == 'S'}">
 		               				<span class="text12" title="S" >SUBMITTED</span>
-		               			</c:if>
-		               			<c:if test="${masterConsignmentRecord.emst2 == 'R'}">
-		               				<span class="text12" title="R" >REOPENED/DRAFT</span>
 		               			</c:if>
 		               			<c:if test="${masterConsignmentRecord.emst2 == 'D'}">
 		               				<font class="text12" title="D" color="red">SLETTET</font>
@@ -1269,7 +1259,10 @@
 		               			<c:if test="${masterConsignmentRecord.emst2 == 'C'}">
 		               				<font class="text12" title="C" color="green">COMPLETED</font>
 		               			</c:if>
-		               			
+								<c:if test="${masterConsignmentRecord.emst2 == 'N'}">
+		               				<font class="text12" title="N" color="green">DENIED</font>
+		               			</c:if>
+										               			
 		               		</c:when>
 		               		<c:otherwise>
 		               			${masterConsignmentRecord.emst2}
@@ -1389,10 +1382,11 @@
 						<td class="text14MediumBlue">
 							<select class="selectMediumBlueE2" name="etst2" id="etst2">
 		            		  	<option title="EMPTY" value=" ">-velg-</option>
-			            		<option title="ERROR(M)" value="M">ERROR</option>
+			            		<option title="COMPLETED(C)" value="C">COMPLETED</option>
+							  	<option title="DENIED(N)" value="N">DENIED</option>
+							  	<option title="ERROR(M)" value="M">ERROR</option>
 	            		  		<option title="SLETTET(D)" value="D">SLETTET</option>
 							  	<option title="SUBMITTED(S)" value="S">SUBMITTED</option>
-							  	<option title="COMPLETED(C)" value="C">COMPLETED</option>
 							  	
 							</select>
 						</td>

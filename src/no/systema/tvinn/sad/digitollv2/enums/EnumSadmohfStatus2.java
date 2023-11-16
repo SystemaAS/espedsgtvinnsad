@@ -15,5 +15,6 @@ public enum EnumSadmohfStatus2 {
 	M,
 	S,
 	D,
-	C
+	C,
+	N,
 }
