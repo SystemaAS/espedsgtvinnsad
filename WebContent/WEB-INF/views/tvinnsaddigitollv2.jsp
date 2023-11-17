@@ -156,7 +156,7 @@
                 
                 <td align="left" class="inputText">
                 	<input type="checkbox" id="showErrorLayers" name="showErrorLayers" value="1">
-                	<span style="cursor:help;font-size: 12px;" title="Vis error-flagg (M/H nivå)-Dette fungerer kun med maks 35 linjer i bildet..." >Vis M/H nivå errors</span>
+                	<span style="cursor:help;font-size: 12px;" title="Vis info om error-flagg (M/H nivå) eller master info-Dette fungerer kun med maks 35 linjer i bildet..." >Dypt søk</span>
                 </td>
 
 			</tr>
@@ -230,6 +230,7 @@
                 		<th width="2%" class="tableHeaderField" >Sign</th>
                 		<th width="2%" class="tableHeaderField" >Turnr</th>
                 		<th title="Viser om det er feil på transp-master-house-nivå" width="2%" class="tableHeaderField10" >T/M/H Flagg</th>
+                		<th width="2%" class="tableHeaderField10" >Master info</th>
                 		<th title="S=SLETTET" width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.sysped.status"/></th>
                 		<th width="2%" class="tableHeaderField" >Pass. ETA</th>
                 		<th width="2%" class="tableHeaderField" >Tollst.</th>
@@ -297,7 +298,12 @@
 	           					</c:choose>
 	           				</c:if>
 				       </td>
-				      
+				       <td class="tableCell text12" >
+		               		<c:if test="${not empty record.listMasters}">
+		               			<span class="text12SkyBlue">${ record.listMasters[0].emmid}</span>
+		               		</c:if>
+		               
+		               </td>
 		               <td nowrap width="2%" align="center" class="tableCell" >
 		               	  <c:choose>
 		               		<c:when test="${record.etst == 'S'}">
@@ -328,6 +334,7 @@
 		               <td class="tableCell" >${record.etkmrk}</td>
 		               <td class="tableCell" >${record.etnat}</td>
 		               <td class="tableCell" >${record.etsjaf}</td>
+		               
 		               <td class="tableCell" ><c:if test="${record.etdtr > 0}">${record.etdtrStr}</c:if></td>
 		               <td width="2%" class="tableCell" >
 		               		<c:choose>

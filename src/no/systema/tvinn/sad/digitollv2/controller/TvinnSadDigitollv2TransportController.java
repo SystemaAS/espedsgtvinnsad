@@ -206,6 +206,9 @@ public class TvinnSadDigitollv2TransportController {
 										}else {
 											model.put("errorMessage", "For mange linjer for dyptsøk på -Vis error-flagg M/H nivå-");
 										}
+									}else {
+										//for presentation purposes (master info as e.g MRN)
+										//this.getMastersLightList(appUser, record);
 									}
 								}
 								//logger.debug(outputList.toString());
@@ -1473,6 +1476,30 @@ public class TvinnSadDigitollv2TransportController {
     	
 	}
 	
+	/**
+	 * This is in order to present handy master information at the highest level. E.g MRN in order to search in Transport main list
+	 * 
+	 * @param appUser
+	 * @param record
+	 */
+	private void getMastersLightList(SystemaWebUser appUser, SadmotfRecord record) {
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_MASTERCONSIGNMENT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser() + "&emlnrt=" + record.getEtlnrt();
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadmomfContainer jsonContainer = this.sadmomfListService.getListContainer(jsonPayload);
+    		record.setListMasters(jsonContainer.getList());
+    	}
+    	
+	}
 	
 	/**
 	 * 
