@@ -72,6 +72,7 @@
 								<th width="2%" title="Velg automatisk generere house(s)..." class="tableHeaderField12" >Velg auto.</th>
 		                    	<th width="2%" class="tableHeaderField12" >Avd</th>
 		                    	<th width="2%" class="tableHeaderField12" >Opd</th>
+		                    	<th width="2%" class="tableHeaderField12" >Ekst.ref.</th>
 		                    	<th width="2%" class="tableHeaderField12" >Br.vekt</th>
 		                    	<th width="2%" class="tableHeaderField12" >Kolli</th>
 		                    	<th width="2%" class="tableHeaderField12" >Tidl.doks</th>
@@ -95,6 +96,7 @@
 					           </td>	
 				          	   <td width="2%" align="center"class="tableCell12" >${record.siavd}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.sitdn}</td>
+				          	   <td width="2%" align="center" class="tableCell12" >${record.fssok}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.sivkb}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.sintk}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.wehrg}&nbsp;${record.weh0068a}&nbsp;${record.weh0068b}</td>

@@ -51,7 +51,7 @@
 		                	<tbody> 
 		                	<c:forEach items="${model.list}" var="record" varStatus="counter">    
 				             <tr class="tableRow" height="20" >
-				          	   <td width="2%" align="center"class="tableCell12" >${record.documentNumber}</td>
+				          	   <td width="2%" align="center"class="tableCellFirst12" >${record.documentNumber}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.type}</td>
 			               	   <td width="2%" align="center" class="tableCell12" >${record.documentStatus}</td>
 				            </tr> 

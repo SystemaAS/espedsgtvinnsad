@@ -508,7 +508,7 @@
 							<td colspan="3" class="text14">&nbsp;<span title="ehprt">Prosedyr</span><font class="text16RedBold" >*</font></td>
 							<td class="text14">
 								<img style="cursor:pointer;" onMouseOver="showPop('ehuprt_info');" onMouseOut="hidePop('ehuprt_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
-				            	<span title="ehuprt">Eksp.prosedyr</span>
+				            	<span title="ehuprt">Eksp.pros.</span>
 		                		<div class="text11" style="position: relative;" align="left">
 			                	<span style="position:absolute;top:2px; width:250px;" id="ehuprt_info" class="popupWithInputText text11"  >
 				           		<b>Eksp.prosedyr - Outgoing Procedure</b>
@@ -524,6 +524,7 @@
 							
 							
 							</td>
+							<td class="text14">&nbsp;<span title="ehextref">Ekst.ref.</span></td>
 							<td class="text14" width="20px"></td>
 					
 							<td class="text14">
@@ -566,8 +567,9 @@
 									 	
 								</select>
 							</td>
+							<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehextref" id="ehextref" size="20" maxlength="35" value="${model.record.ehextref}"></td>
 							<td class="text14" width="20px"></td>
-							<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehrecid" id="ehrecid" size="30" maxlength="35" value="${model.record.ehrecid}"></td>
+							<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehrecid" id="ehrecid" size="20" maxlength="35" value="${model.record.ehrecid}"></td>
 							<td colspan="12">
 								<table>
 								<tr>

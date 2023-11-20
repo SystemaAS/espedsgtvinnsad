@@ -26,6 +26,7 @@ public class SearchFilterDigitollTransportList {
 	private String datum = null;
 	private String datumt = null;
 	private String status = null;
+	private String extref = null;
 	
 	
 	

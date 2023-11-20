@@ -62,6 +62,7 @@ public class SadOppdragRecord extends JsonAbstractGrandFatherRecord  {
     private String ehemmt; //": "EM",
     
     private String stiarf;
+    private String fssok;
 	
 	/**
 	 * 

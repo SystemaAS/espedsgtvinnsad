@@ -1019,6 +1019,7 @@
                     	<th width="2%" class="tableHeaderField12" >Avd</th>
                 		<th width="2%" class="tableHeaderField12" >Turnr</th>
                 		<th width="2%" class="tableHeaderField12" >Opd</th>
+                		<th width="2%" class="tableHeaderField12" >Ekst.ref</th>
                     	<th title="S=SLETTET" width="2%" class="tableHeaderField12" ><spring:message code="systema.tvinn.sad.digitoll.list.column.sysped.status"/></th>
                 		<th width="2%" class="tableHeaderField12" >Br.vekt</th>
                 		<th width="2%" class="tableHeaderField12" >Ant. kolli</th>
@@ -1070,6 +1071,7 @@
 	               	   <td width="2%" align="center" class="tableCell12" >${houseConsignmentRecord.ehavd}</td>
 	               	   <td width="2%" align="center" class="tableCell12" >${houseConsignmentRecord.ehpro}</td>
 	               	   <td width="2%" align="center" class="tableCell12" >${houseConsignmentRecord.ehtdn}</td>
+	               	   <td width="2%" align="center" class="tableCell12" >${houseConsignmentRecord.ehextref}</td>
 		               <td nowrap width="2%" align="center" class="tableCell12 text12">
 		               	  <c:choose>
 		               		<c:when test="${houseConsignmentRecord.ehst == 'S'}">

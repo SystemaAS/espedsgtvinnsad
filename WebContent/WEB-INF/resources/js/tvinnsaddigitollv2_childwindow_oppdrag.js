@@ -97,6 +97,7 @@
 				console.log(data[i].sitlf)
 				opener.jq('#ehavd').val("");opener.jq('#ehavd').val(data[i].siavd); //Avd
 				opener.jq('#ehtdn').val("");opener.jq('#ehtdn').val(data[i].sitdn); //Opp
+				opener.jq('#ehextref').val("");opener.jq('#ehextref').val(data[i].fssok); //ExtRef
 				opener.jq('#ehvkb').val("");opener.jq('#ehvkb').val(data[i].sivkb); //bruttovikt
 				opener.jq('#ehntk').val("");opener.jq('#ehntk').val(data[i].sintk); //Kolli
 				opener.jq('#ehcnin').val("");opener.jq('#ehcnin').val(data[i].sikdc); //Container

@@ -83,6 +83,21 @@
                 <td class="text14" align="left" ><span title="datumt"><spring:message code="systema.tvinn.sad.manifest.list.search.label.tdatum"/></span></td>
                 <td class="text14" align="left" ><span title="status">Status</span></td>
                 <td class="text14" align="left" >
+                	<img style="cursor:pointer;" onMouseOver="showPop('extref_info');" onMouseOut="hidePop('extref_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+	            	<span title="opd - house"><font color="green">Ekst.ref - House</font></span>
+               		<div class="text11" style="position: relative;" align="left">
+                	<span style="position:absolute;top:2px; width:250px;" id="extref_info" class="popupWithInputText text11"  >
+                	<p><b>Ekstern ref. - House</b><br/>
+                	Søker alle houses (med ekst.ref som id) som finnes per transport uavhengig av hvilke Master de tilhører.
+                	</p>
+                	<p>
+                 	Parameteren søker ikke i kombinasjon med andre søkeparameter. Den <b>søker</b> ubetinget i <b>hele databasen!</b>
+                	</p>
+					</span>	
+					</div>
+                
+                </td>
+                <td class="text14" align="left" >
                 	<img style="cursor:pointer;" onMouseOver="showPop('opd_info');" onMouseOut="hidePop('opd_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
 	            	<span title="opd - house"><font color="green">Opd - House</font></span>
                		<div class="text11" style="position: relative;" align="left">
@@ -100,6 +115,7 @@
 					</div>
                 
                 </td>
+                
                 
                 
 			</tr>
@@ -148,6 +164,7 @@
 						<option title="S" value="S"<c:if test="${searchFilterSadDigitollTransportList.status == 'S'}"> selected </c:if> >SUBMITTED</option> 
 					</select>
 				</td>
+				<td align="left" ><input type="text" class="inputText" name="extref" id="extref" size="15" maxlength="35" value="${searchFilterSadDigitollTransportList.extref}">&nbsp;</td>
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="opd" id="opd" size="8" maxlength="7" value="${searchFilterSadDigitollTransportList.opd}">&nbsp;</td>
 				
 				<td valign="top" align="left" >
@@ -339,10 +356,16 @@
 		               <td width="2%" class="tableCell" >
 		               		<c:choose>
 		               		<c:when test="${ not empty record.etktyp && fn:startsWith(record.etktyp,'4') }">
-								<img style="cursor:help;" title="api:air" style="vertical-align:middle;" id="airplaneImg${record.etuuid}" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
+								<img style="cursor:help;vertical-align:middle;" title="api:air" id="airplaneImg${record.etuuid}" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
 							</c:when>
 							<c:otherwise>
-								<img style="cursor:help;" title="api:road" style="vertical-align:middle;" id="lorryImg${record.etuuid}" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;
+								<c:if test="${record.etst2 == 'C'}">							
+									<img style="cursor:help;vertical-align:middle;" title="api:road" id="lorryImg${record.etuuid}" src="resources/images/delivery-truck.png" width="30" height="30"border="0" >&nbsp;
+								</c:if>
+								<c:if test="${record.etst2 != 'C'}">							
+									<img style="cursor:help;vertical-align:middle;" title="api:road" id="lorryImg${record.etuuid}" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;
+								</c:if>
+								
 							</c:otherwise>
 							</c:choose>
 		               </td>
