@@ -360,7 +360,7 @@
 							</c:when>
 							<c:otherwise>
 								<c:if test="${record.etst2 == 'C'}">							
-									<img style="cursor:help;vertical-align:middle;" title="api:road" id="lorryImg${record.etuuid}" src="resources/images/delivery-truck.png" width="30" height="30"border="0" >&nbsp;
+									<img style="cursor:help;vertical-align:middle;" title="api:road" id="lorryImg${record.etuuid}" src="resources/images/delivery-truck.png" width="25" height="25"border="0" >&nbsp;
 								</c:if>
 								<c:if test="${record.etst2 != 'C'}">							
 									<img style="cursor:help;vertical-align:middle;" title="api:road" id="lorryImg${record.etuuid}" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;
