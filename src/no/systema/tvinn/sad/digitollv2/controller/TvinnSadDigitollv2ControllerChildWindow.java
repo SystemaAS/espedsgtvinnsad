@@ -115,7 +115,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	public ModelAndView searchCustomer(HttpSession session, HttpServletRequest request){
 		logger.info("Inside searchCustomer");
 		
-		ModelAndView successView = new ModelAndView("tvinnsadncts_childwindow_customer");
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_customer");
 		Map model = new HashMap();
 		String callerType = request.getParameter("ctype");
 		logger.info(callerType);

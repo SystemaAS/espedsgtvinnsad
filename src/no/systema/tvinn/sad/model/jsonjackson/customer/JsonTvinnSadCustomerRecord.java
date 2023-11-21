@@ -46,6 +46,10 @@ public class JsonTvinnSadCustomerRecord {
 	public void setTlf(String value){ this.tlf = value;}
 	public String getTlf(){ return this.tlf; }
 	
+	private String syepos = null;
+	public void setSyepos(String value){ this.syepos = value;}
+	public String getSyepos(){ return this.syepos; }
+	
 	private String sonavn = null;
 	public void setSonavn(String value){ this.sonavn = value;}
 	public String getSonavn(){ return this.sonavn; }

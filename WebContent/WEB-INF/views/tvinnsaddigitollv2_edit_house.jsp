@@ -596,7 +596,7 @@
 						<td style="width:65%" valign="top">
 						<table id="tblDirektfortolling" style="width:100%"  class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="0">
 			 			<tr >
-							<td  class="text16">
+							<td  colspan="2" class="text16">
 								<a title="Aktuelle eksempler..." target="_blank" href="https://toll.github.io/api/mo-eksempler">
 									<font title="Aktuelle eksempler" class="inputFormSubmit text10 isa_info"><b>Eksempler</b></font>
 								</a>
@@ -664,11 +664,183 @@
 			 				</td>
 			 				<td class="text14"><input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="eh0068b" id="eh0068b" size="8" maxlength="6" value='<c:if test="${model.record.eh0068b!='0'}">${model.record.eh0068b}</c:if>'></td>
 			 				<td class="text14"><input type="text" class="inputTextMediumBlue toggleTransit" name="ehtrnr" id="ehtrnr" size="20" maxlength="18" value="${model.record.ehtrnr}"></td>
+			 				
+			 				<td class="text14">		
+				 				<input class="inputFormSubmitStd" type="button" name="manyTransIdButton" id="manyTransIdButton" onClick="showPop('more_transits');" value='Lage flere Transit.'>
+				 				<img style="cursor:pointer;vertical-align: middle;" src="resources/images/add.png" width="12px" height="12px" border="0" alt="create new" >
+				 					<div class="text14" style="position: relative;" align="right" >
+			 						<span style="position:absolute;top:-200px; width:550px;" id="more_transits" class="popupWithInputText"  >
+							           		<div class="text10" align="left">
+							           			<table border="0" cellspacing="1" cellpadding="0">
+							           			<tr>
+							           			<td>
+							           				<table class="lightGrayBg" >
+							           				<tr>
+									           			<td class="text14" colspan="2">
+									           				<b>Flere Transiteringer</b>
+									           			</td>
+								        			</tr>
+													<tr>
+														<td class="text14">&nbsp;<span title="ehtrty2" >2.Ref.type</span></td>
+									           			<td class="text14">&nbsp;<span title="ehtrnr2" >2.MRN/LRN - Transitering</span></td>
+									           			<td class="text14">&nbsp;<span title="ehtrty3" >3.Eksporttype</span></td>
+									           			<td class="text14">&nbsp;<span title="ehtrnr3" >3.MRN/LRN - Transitering</span></td>
+									           			
+													</tr>
+								           			<tr>
+									           			<td class="text14" nowrap >&nbsp;
+									            			<select class="inputTextMediumBlue" id="ehtrty2" name="ehtrty2">
+																<option title="Transitteringsdeklarasjon" value="N820" <c:if test="${model.record.ehtrty2 == 'N820'}"> selected </c:if> >N820</option>
+														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty2 == 'RETR'}"> selected </c:if> >RETR</option> 	
+															</select>
+										            		
+									           			</td>
+									           			<td class="text14" nowrap >
+									           				&nbsp;<input type="text" class="inputTextMediumBlue" name="ehtrnr2" id="ehtrnr2" size="20" maxlength="18" value="${model.record.ehtrnr2}">										           			
+									           			</td>
+									           			<td class="text14" nowrap >&nbsp;
+									            			<select class="inputTextMediumBlue" id="ehtrty3" name="ehtrty3">
+																<option title="Transitteringsdeklarasjon" value="N820" <c:if test="${model.record.ehtrty3 == 'N820'}"> selected </c:if> >N820</option>
+														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty3 == 'RETR'}"> selected </c:if> >RETR</option> 	
+															</select>
+										            		
+									           			</td>
+									           			<td class="text14" nowrap >
+									           				&nbsp;<input type="text" class="inputTextMediumBlue" name="ehtrnr3" id="ehtrnr3" size="20" maxlength="18" value="${model.record.ehtrnr3}">											           			
+									           			</td>
+									           			
+				           							</tr>
+				           							<tr>
+														<td class="text14">&nbsp;<span title="ehtrty4" >4.Ref.type</span></td>
+									           			<td class="text14">&nbsp;<span title="ehtrnr4" >4.MRN/LRN - Transitering</span></td>
+									           			<td class="text14">&nbsp;<span title="ehtrty5" >5.Ref.type</span></td>
+									           			<td class="text14">&nbsp;<span title="ehtrnr5" >5.MRN/LRN - Transitering</span></td>
+									           			
+													</tr>
+								           			<tr>
+									           			<td class="text14" nowrap >&nbsp;
+									            			<select class="inputTextMediumBlue" id="ehtrty4" name="ehtrty4">
+																<option title="Transitteringsdeklarasjon" value="N820" <c:if test="${model.record.ehtrty4 == 'N820'}"> selected </c:if> >N820</option>
+														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty4 == 'RETR'}"> selected </c:if> >RETR</option> 	
+															</select>
+										            		
+									           			</td>
+									           			<td class="text14" nowrap >
+									           				&nbsp;<input type="text" class="inputTextMediumBlue" name="ehtrnr4" id="ehtrnr4" size="20" maxlength="18" value="${model.record.ehtrnr4}">											           			
+									           			</td>
+									           			<td class="text14" nowrap >&nbsp;
+									            			<select class="inputTextMediumBlue" id="ehtrty5" name="ehtrty5">
+																<option title="Transitteringsdeklarasjon" value="N820" <c:if test="${model.record.ehtrty5 == 'N820'}"> selected </c:if> >N820</option>
+														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty5 == 'RETR'}"> selected </c:if> >RETR</option> 	
+															</select>
+										            		
+									           			</td>
+									           			<td class="text14" nowrap >
+									           				&nbsp;<input type="text" class="inputTextMediumBlue" name="ehtrnr5" id="ehtrnr5" size="20" maxlength="18" value="${model.record.ehtrnr5}">									           			
+									           			</td>
+				           							</tr>
+				           							<tr>
+														<td class="text14">&nbsp;<span title="ehtrty6" >6.Ref.type</span></td>
+									           			<td class="text14">&nbsp;<span title="ehtrnr6" >6.MRN/LRN - Transitering</span></td>
+									           			<td class="text14">&nbsp;<span title="ehtrty7" >7.Ref.type</span></td>
+									           			<td class="text14">&nbsp;<span title="ehtrnr7" >7.MRN/LRN - Transitering</span></td>
+									           			
+													</tr>
+								           			<tr>
+									           			<td class="text14" nowrap >&nbsp;
+									            			<select class="inputTextMediumBlue" id="ehtrty6" name="ehtrty6">
+																<option title="Transitteringsdeklarasjon" value="N820" <c:if test="${model.record.ehtrty6 == 'N820'}"> selected </c:if> >N820</option>
+														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty6 == 'RETR'}"> selected </c:if> >RETR</option> 	
+															</select>
+										            		
+									           			</td>
+									           			<td class="text14" nowrap >
+									           				&nbsp;<input type="text" class="inputTextMediumBlue" name="ehtrnr6" id="ehtrnr6" size="20" maxlength="18" value="${model.record.ehtrnr6}">										           			
+									           			</td>
+									           			<td class="text14" nowrap >&nbsp;
+									            			<select class="inputTextMediumBlue" id="ehtrty7" name="ehtrty7">
+																<option title="Transitteringsdeklarasjon" value="N820" <c:if test="${model.record.ehtrty7 == 'N820'}"> selected </c:if> >N820</option>
+														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty7 == 'RETR'}"> selected </c:if> >RETR</option> 	
+															</select>
+										            		
+									           			</td>
+									           			<td class="text14" nowrap >
+									           				&nbsp;<input type="text" class="inputTextMediumBlue" name="ehtrnr7" id="ehtrnr7" size="20" maxlength="18" value="${model.record.ehtrnr7}">										           			
+									           			</td>
+				           							</tr>
+				           							<tr>
+														<td class="text14">&nbsp;<span title="ehtrty8" >8.Ref.type</span></td>
+									           			<td class="text14">&nbsp;<span title="ehtrnr8" >8.MRN/LRN - Transitering</span></td>
+									           			<td class="text14">&nbsp;<span title="ehtrty9" >9.Ref.type</span></td>
+									           			<td class="text14">&nbsp;<span title="ehtrnr9" >9.MRN/LRN - Transitering</span></td>
+									           			
+													</tr>
+								           			<tr>
+									           			<td class="text14" nowrap >&nbsp;
+									            			<select class="inputTextMediumBlue" id="ehtrty8" name="ehtrty8">
+																<option title="Transitteringsdeklarasjon" value="N820" <c:if test="${model.record.ehtrty8 == 'N820'}"> selected </c:if> >N820</option>
+														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty8 == 'RETR'}"> selected </c:if> >RETR</option> 	
+															</select>
+										            		
+									           			</td>
+									           			<td class="text14" nowrap >
+									           				&nbsp;<input type="text" class="inputTextMediumBlue" name="ehtrnr8" id="ehtrnr8" size="20" maxlength="18" value="${model.record.ehtrnr8}">										           			
+									           			</td>
+									           			<td class="text14" nowrap >&nbsp;
+									            			<select class="inputTextMediumBlue" id="ehtrty9" name="ehtrty9">
+																<option title="Transitteringsdeklarasjon" value="N820" <c:if test="${model.record.ehtrty9 == 'N820'}"> selected </c:if> >N820</option>
+														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty9 == 'RETR'}"> selected </c:if> >RETR</option> 	
+															</select>
+										            		
+									           			</td>
+									           			<td class="text14" nowrap >
+									           				&nbsp;<input type="text" class="inputTextMediumBlue" name="ehtrnr9" id="ehtrnr9" size="20" maxlength="18" value="${model.record.ehtrnr9}">										           			
+									           			</td>
+				           							</tr>
+				           							
+				           							<tr>
+														<td class="text14">&nbsp;<span title="ehtrty10" >10.Ref.type</span></td>
+									           			<td class="text14">&nbsp;<span title="ehtrnr10" >10.MRN/LRN - Transitering</span></td>
+									           			
+													</tr>
+								           			<tr>
+									           			<td class="text14" nowrap >&nbsp;
+									            			<select class="inputTextMediumBlue" id="ehtrty10" name="ehtrty10">
+																<option title="Transitteringsdeklarasjon" value="N820" <c:if test="${model.record.ehtrty10 == 'N820'}"> selected </c:if> >N820</option>
+														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty10 == 'RETR'}"> selected </c:if> >RETR</option> 	
+															</select>
+										            		
+									           			</td>
+									           			<td class="text14" nowrap >
+									           				&nbsp;<input type="text" class="inputTextMediumBlue" name="ehtrnr10" id="ehtrnr10" size="20" maxlength="18" value="${model.record.ehtrnr10}">										           			
+									           			</td>
+	
+				           							</tr>
+				           										           															           			
+				           							</table>
+				           						</td>
+				           						</tr>
+				           						
+				           						<tr height="4"><td class="text" align="left"></td></tr>
+				           						</table>
+												<table width="100%" align="left" border="0">
+													<tr align="left" >
+														<td class="text14"><button name="more_transits" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('more_transits');">&nbsp;Ok</button> 
+														</td>
+													</tr>
+												</table>
+											</div>
+									</span>
+				 				</td>
+			 				
+			 				
+			 				
+			 				
 						</tr>
 						<tr height="5"><td></td></tr>
 						
 						<tr >
-							<td class="text14">
+							<td colspan="2" class="text14">
 								<img style="cursor:pointer;" onMouseOver="showPop('ehetypt_info');" onMouseOut="hidePop('ehetypt_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
 				            	<span title="ehetypt">Eksporttype</span>
 		                		<div class="text11" style="position: relative;" align="left">
@@ -692,7 +864,7 @@
 							
 							
 							</td>
-							<td class="text14">
+							<td colspan="2" class="text14">
 								<img style="cursor:pointer;" onMouseOver="showPop('eheid_info');" onMouseOut="hidePop('eheid_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
 				            	<span title="eheid">Eksp.id</span>
 		                		<div class="text11" style="position: relative;" align="left">
@@ -708,7 +880,7 @@
 						</tr>
 						
 						<tr>
-							<td class="text14">
+							<td colspan="2" class="text14">
 								<select class="inputTextMediumBlue" name="ehetypt" id="ehetypt" >
 			 						<option value="">-velg-</option>
 				 				  	<c:forEach var="dto" items="${model.exportTypesDto}" >
@@ -717,7 +889,7 @@
 								</select>
 								 
 				 			</td>
-				 			<td class="text14">
+				 			<td colspan="2" class="text14">
 				 				<input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="eheid" id="eheid" size="22" maxlength="18" value="${model.record.eheid}">
 				 			</td>
 				 			<td class="text14">		

@@ -7,7 +7,7 @@
 
 	<%-- specific jQuery functions for this JSP (must reside under the resource map since this has been
 	specified in servlet.xml as static <mvc:resources mapping="/resources/**" location="WEB-INF/resources/" order="1"/> --%>
-	<SCRIPT type="text/javascript" src="resources/js/tvinnsadncts_childwindow_customer.js?ver=${user.versionEspedsg}"></SCRIPT>
+	<SCRIPT type="text/javascript" src="resources/js/tvinnsaddigitollv2_childwindow_customer.js?ver=${user.versionEspedsg}"></SCRIPT>
 	
 	<table width="90%" height="500px" class="tableBorderWithRoundCorners3D_RoundOnlyOnBottom" cellspacing="0" border="0" cellpadding="0">
 		<tr>
@@ -25,7 +25,7 @@
 					<tr>
 					<td>
 						<table>
-						<form name="tvinnsadCustomerForm" id="tvinnsadCustomerForm" action="tvinnsadncts_childwindow_customer.do?action=doFind" method="post">
+						<form name="tvinnsadCustomerForm" id="tvinnsadCustomerForm" action="tvinnsaddigitollv2_childwindow_customer.do?action=doFind" method="post">
 						<input type="hidden" name="ctype" id="ctype" value="${model.ctype}">
 						<tr>
 							<td class="text14">&nbsp;Kundenr.</td>
@@ -73,7 +73,7 @@
 			                       <tr class="text14">
 			                   </c:otherwise>
 			               </c:choose>
-			               <td style="cursor:pointer;" class="text14MediumBlue" id="knr${record.kundnr}@knavn${record.knavn}@kadr1${record.adr1}@kadr3${record.adr3}@kpostnr${record.postnr}@kland${record.syland}@keori${record.eori}@ctype${model.ctype}@ksyrg${record.syrg}@ktlf${record.tlf}@ksyepos${record.syepos}" >
+			               <td style="cursor:pointer;" class="text14MediumBlue" id="knr${record.kundnr}_knavn${record.knavn}_kadr1${record.adr1}_kadr3${record.adr3}_kpostnr${record.postnr}_kland${record.syland}_keori${record.eori}_ctype${model.ctype}_ksyrg${record.syrg}_ktlf${record.tlf}_ksyepos${record.syepos}" >
 			               		<img title="select" valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;${record.kundnr}
 			               	</td>
 		               	   <td class="text14">&nbsp;${record.knavn}</td>
