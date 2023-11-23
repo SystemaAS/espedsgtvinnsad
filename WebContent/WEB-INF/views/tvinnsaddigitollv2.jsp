@@ -378,12 +378,9 @@
 		               
 		               <td align="center" class="tableCell" >
 		               		<c:choose>
-		               		<c:when test="${record.etst2 == 'S' || record.etst2 == 'R' || record.etst2 == 'D' || record.etst2 == 'M' || record.etst2 == 'C'}">
+		               		<c:when test="${record.etst2 == 'S' || record.etst2 == 'N' || record.etst2 == 'D' || record.etst2 == 'M' || record.etst2 == 'C'}">
 		               			<c:if test="${record.etst2 == 'S'}">
 		               				<img style="cursor:help;" title="Submitted" src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
-		               			</c:if>
-		               			<c:if test="${record.etst2 == 'R'}">
-
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'D'}">
 									
@@ -395,7 +392,7 @@
 		               				<img title="Completed" style="vertical-align:middle;cursor:help;" title="Completed digitoll-pass at toll.no" src="resources/images/complete-icon.png" width="14px" height="12px" border="0" alt="completion">
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'N'}">
-		               				<img title="Denied" style="vertical-align:middle;" title="Denied digitoll-pass at toll.no" src="resources/images/warning.png" width="14px" height="12px" border="0" alt="denied">
+		               				<img title="Denied" style="vertical-align:middle;cursor:help;" title="Denied digitoll-pass at toll.no" src="resources/images/warning.png" width="14px" height="14px" border="0" alt="denied">
 		               			</c:if>
 		               			
 		               		</c:when>
@@ -409,14 +406,11 @@
 		               
 		               <td width="2%" align="center" class="tableCell" >
 		               		<c:choose>
-		               		<c:when test="${record.etst2 == 'S' || record.etst2 == 'R' || record.etst2 == 'D' || 
+		               		<c:when test="${record.etst2 == 'S' ||  record.etst2 == 'D' || 
 		               				record.etst2 == 'M' || record.etst2 == 'C' || record.etst2 == 'N'}">
 		               				
 		               			<c:if test="${record.etst2 == 'S'}">
 		               				<span class="text12" style="cursor:help;" title="S" >SUBMITTED</span>
-		               			</c:if>
-		               			<c:if test="${record.etst2 == 'R'}">
-		               				<span class="text12" style="cursor:help;" title="R" >REOPENED/DRAFT</span>
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'D'}">
 		               				<font class="text12" style="cursor:help;" title="D" color="red">SLETTET</font>
@@ -425,10 +419,10 @@
 		               				<font class="text12" style="cursor:help;" title="M" color="red">ERROR</font>
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'C'}">
-		               				<font class="text12" style="cursor:help;" title="UTC-tid:${record.etenttim} Valid:${record.etentval} Tollst:${record.etentoff}" color="green">COMPLETED</font>
+		               				<font class="text12" style="cursor:help;" title="UTC-tid:${record.etenttim} Valid:${record.etentval} Tollst:${record.etentoff}" >COMPLETED</font>
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'N'}">
-		               				<font class="text12" style="cursor:help;" title="UTC-tid:${record.etenttim} Valid:${record.etentval} Tollst:${record.etentoff}" color="green">DENIED</font>
+		               				<font class="text12" style="cursor:help;" title="UTC-tid:${record.etenttim} Valid:${record.etentval} Tollst:${record.etentoff}" >DENIED</font>
 		               			</c:if>
 		               			
 		               		</c:when>

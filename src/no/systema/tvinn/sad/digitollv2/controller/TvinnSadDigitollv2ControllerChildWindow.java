@@ -405,6 +405,56 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	    	return successView;
 		}
 	}
+	/**
+	 * 
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_transportdocs_rec.do",  method={RequestMethod.GET} )
+	public ModelAndView doTransportDocsReceived(HttpSession session, HttpServletRequest request){
+		
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doTransportDocsReceived");
+		Map model = new HashMap();
+		String id = request.getParameter("id");
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_transportdocrefs_api");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			StringBuilder url = new StringBuilder();
+			url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
+			url.append("getDocsRecTransport.do");
+			
+			String BASE_URL = url.toString();
+    		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&mrn=" + id;
+    		logger.info("URL: " + BASE_URL);
+    		logger.info("PARAMS: " + urlRequestParamsKeys);
+    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+    		//Debug -->
+	    	logger.debug(jsonPayload);
+    		if(StringUtils.isNotEmpty(jsonPayload)) {
+    			try {
+    			ApiMasterRefsContainer container = new ObjectMapper().readValue(jsonPayload, ApiMasterRefsContainer.class);
+    			if(container!=null) {
+    				model.put("mrn", container.getMrn());
+    				model.put("list", container.getList());
+    			}
+    			}catch(Exception e) {
+    				logger.info(e.toString());
+    			}
+    		}
+    		successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+		}
+		
+		return successView;
+	}
 	
 	/**
 	 * Runs the API method
@@ -463,6 +513,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		
 		return successView;
 	}
+	
 	
 	@RequestMapping(value="tvinnsaddigitollv2_childwindow_housedocs_rec.do",  method={RequestMethod.GET} )
 	public ModelAndView doHouseDocsReceived(HttpSession session, HttpServletRequest request){

@@ -16,6 +16,7 @@ public class ApiMasterRefsRecord   {
 	private String documentNumber = "";
 	private String type = "";
 	private String documentStatus = "";
+	private Boolean received = true;
 	
 	
 	

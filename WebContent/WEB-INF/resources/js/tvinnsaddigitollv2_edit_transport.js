@@ -976,7 +976,7 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 		  var controllerUrl = "tvinnsaddigitollv2_childwindow_manifestinfo.do?id=" + id +"&level=t" + "&apiType=" + apiType;
 
 		  if(id.length<35){ //meaning MRN and not LRN (only at Master Consignment level)
-			 controllerUrl = "tvinnsaddigitollv2_childwindow_masterdocs_rec.do?id=" + id; 
+			 controllerUrl = "tvinnsaddigitollv2_childwindow_transportdocs_rec.do?id=" + id; 
 		  }
 		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
 			
