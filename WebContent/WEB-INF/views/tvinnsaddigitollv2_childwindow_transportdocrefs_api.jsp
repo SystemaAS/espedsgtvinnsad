@@ -32,7 +32,7 @@
 						<tr >
 							<td class="text14  ">
 				    			<font class="inputText isa_warning" >
-				    				Master.refs on Transport MRN: ${model.mrn}
+				    				Doc.refs on Transport MRN: ${model.mrn}
 				    			</font>
 				    		</td>
 				   		</tr>
@@ -45,7 +45,7 @@
 							<tr class="tableHeaderField" height="20" >
 								<th width="2%" class="tableHeaderFieldFirst12" >Doc.nr</th>
 		                    	<th width="2%" class="tableHeaderField12" >Type</th>
-		                    	<th width="2%" class="tableHeaderField12" >Received</th>
+		                    	<th width="2%" class="tableHeaderField12" >Received/Status</th>
 		                	</tr>
 		                	</thead>
 		                	<tbody> 
@@ -54,6 +54,13 @@
 				          	   <td width="2%" align="center"class="tableCellFirst12" >${record.documentNumber}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.type}</td>
 			               	   <td width="2%" align="center" class="tableCell12" >${record.received}</td>
+				            </tr> 
+				            </c:forEach>
+				            <c:forEach items="${model.listAux}" var="recordHouses" varStatus="counter">    
+				             <tr class="tableRow" height="20" >
+				          	   <td width="2%" align="center"class="tableCellFirst12" >${recordHouses.documentNumber}</td>
+				          	   <td width="2%" align="center" class="tableCell12" >${recordHouses.type}</td>
+			               	   <td width="2%" align="center" class="tableCell12" >${recordHouses.documentStatus}</td>
 				            </tr> 
 				            </c:forEach>
 				            </tbody>

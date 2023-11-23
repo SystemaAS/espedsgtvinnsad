@@ -445,6 +445,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
     			if(container!=null) {
     				model.put("mrn", container.getMrn());
     				model.put("list", container.getList());
+    				model.put("listAux", container.getListAux());
     			}
     			}catch(Exception e) {
     				logger.info(e.toString());

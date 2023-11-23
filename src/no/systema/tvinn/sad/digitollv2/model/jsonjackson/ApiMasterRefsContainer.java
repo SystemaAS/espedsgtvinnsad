@@ -25,5 +25,9 @@ public class ApiMasterRefsContainer {
 	public void setList(Collection<ApiMasterRefsRecord> value){ this.list = value;}
 	public Collection<ApiMasterRefsRecord> getList(){ return this.list; }
 	
+	private Collection<ApiMasterRefsRecord> listAux = null;
+	public void setListAux(Collection<ApiMasterRefsRecord> value){ this.listAux = value;}
+	public Collection<ApiMasterRefsRecord> getLisAux(){ return this.listAux; }
+	
 	
 }
