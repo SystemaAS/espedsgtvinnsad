@@ -22,12 +22,12 @@
 				</form>									           		
 			    <tr>
 				<td>		
-				<table style="width:90%;" border="0" >
+				<table style="width:100%;" border="0" >
 			    	<%-- separator --%>
 			        <tr height="2"><td></td></tr> 
 					<tr>
 						<td>
-						<table style="width:90%;" id="containerdatatableTable" cellspacing="2" align="left" >
+						<table style="width:100%;" id="containerdatatableTable" cellspacing="2" align="left" >
 						
 						<tr >
 							<td class="text14  ">

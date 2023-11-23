@@ -596,7 +596,7 @@
 						<td style="width:65%" valign="top">
 						<table id="tblDirektfortolling" style="width:100%"  class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="0">
 			 			<tr >
-							<td  colspan="2" class="text16">
+							<td  colspan="5" class="text16">
 								<a title="Aktuelle eksempler..." target="_blank" href="https://toll.github.io/api/mo-eksempler">
 									<font title="Aktuelle eksempler" class="inputFormSubmit text10 isa_info"><b>Eksempler</b></font>
 								</a>
@@ -620,6 +620,7 @@
 							<td>&nbsp;</td>
 							
 						<tr >
+						<tr height="5"><td></td></tr>
 			 			<tr>
 			 				<td class="text14">&nbsp;
 								<img style="cursor:pointer;" onMouseOver="showPop('ehtrty_info');" onMouseOut="hidePop('ehtrty_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
@@ -669,7 +670,7 @@
 				 				<input class="inputFormSubmitStd" type="button" name="manyTransIdButton" id="manyTransIdButton" onClick="showPop('more_transits');" value='Lage flere Transit.'>
 				 				<img style="cursor:pointer;vertical-align: middle;" src="resources/images/add.png" width="12px" height="12px" border="0" alt="create new" >
 				 					<div class="text14" style="position: relative;" align="right" >
-			 						<span style="position:absolute;top:-200px; width:550px;" id="more_transits" class="popupWithInputText"  >
+			 						<span style="position:absolute;top:-200px; width:650px;" id="more_transits" class="popupWithInputText"  >
 							           		<div class="text10" align="left">
 							           			<table border="0" cellspacing="1" cellpadding="0">
 							           			<tr>
@@ -896,7 +897,7 @@
 				 				<input class="inputFormSubmitStd" type="button" name="manyExpIdButton" id="manyExpIdButton" onClick="showPop('more_exports');" value='Lage flere Eksp.id'>
 				 				<img style="cursor:pointer;vertical-align: middle;" src="resources/images/add.png" width="12px" height="12px" border="0" alt="create new" >
 				 					<div class="text14" style="position: relative;" align="right" >
-			 						<span style="position:absolute;top:-200px; width:700px;" id="more_exports" class="popupWithInputText"  >
+			 						<span style="position:absolute;top:-200px; width:750px;" id="more_exports" class="popupWithInputText"  >
 							           		<div class="text10" align="left">
 							           			<table border="0" cellspacing="1" cellpadding="0">
 							           			<tr>

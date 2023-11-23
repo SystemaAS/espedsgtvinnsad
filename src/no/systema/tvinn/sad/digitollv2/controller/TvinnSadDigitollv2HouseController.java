@@ -99,8 +99,26 @@ public class TvinnSadDigitollv2HouseController {
 			 
 		}
 	}
-	
-	
+	/**
+	 * 
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="createHousesFromOppdrag_Digitoll_TEST.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doCreateHousesFromOppdrag_Digitoll(HttpSession session, HttpServletRequest request){
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		String lnrt = request.getParameter("lnrt");
+		String lnrm = request.getParameter("lnrm");
+		
+		ModelAndView successView = new ModelAndView("redirect:tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=" + lnrt + "&emlnrm=" + lnrm);
+		
+		//take the whole string av choices, separated by "#"
+		
+		
+		
+		return successView;
+	}
 	/**
 	 * 
 	 * @param recordToValidate

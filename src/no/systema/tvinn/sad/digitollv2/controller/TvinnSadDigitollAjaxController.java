@@ -1,6 +1,7 @@
 package no.systema.tvinn.sad.digitollv2.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
@@ -252,6 +253,124 @@ public class TvinnSadDigitollAjaxController {
 	 */
 	@RequestMapping(value = "createHousesFromOppdrag_Digitoll.do", method = RequestMethod.GET)
 	public @ResponseBody Set<SadOppdragRecord> createHousesFromOppdrag_Digitoll
+	  						(@RequestParam String applicationUser, @RequestParam String params, @RequestParam String tur, 
+	  						 @RequestParam Integer lnrt, @RequestParam Integer lnrm,  @RequestParam String mode ) {
+		
+		 Set result = new HashSet();
+		 
+		 logger.info("lnrt:" + lnrt);
+		 logger.info("lnrm:" + lnrm);
+		 logger.info("tur:" + tur);
+		 logger.info("mode:" + mode);
+		 logger.info(params);
+		 List<String> mainList = new ArrayList<String>();
+		 if (StringUtils.isNotEmpty(params)) {
+			 String [] recordAvdOpd = params.split("#");
+			 mainList = Arrays.asList(recordAvdOpd);
+		 }
+		 
+		 
+		 if(!mainList.isEmpty()) {
+			 
+			 for (String recordAvdOpd: mainList) {
+				 String[] avdOpd = recordAvdOpd.split("_");
+				 String avd = avdOpd[0].replace("avd", "");
+				 String opd = avdOpd[1].replace("opd", "");
+				 logger.info("avd:" + avd);
+				 logger.info("opd:" + opd);
+				 
+				 //(2) now go on with the real issue (create the house(s)
+				 SadOppdragRecord record = this.getOppdrag(applicationUser, tur, opd);
+				 if(record!=null) {
+					//hand-over 
+					SadmohfRecord sadmohfRecord = new SadmohfRecord();
+					sadmohfRecord.setEhlnrt(lnrt);
+					sadmohfRecord.setEhlnrm(lnrm);
+					sadmohfRecord.setEhavd(Integer.valueOf(avd));
+					sadmohfRecord.setEhpro(Integer.valueOf(tur));
+					sadmohfRecord.setEhtdn(Integer.valueOf(opd));
+					sadmohfRecord.setEhvkb(record.getSivkb()); //bruttovikt
+					sadmohfRecord.setEhdkht("N730");
+					
+					if(StringUtils.isNotEmpty(record.getWeh0068a())) {
+						sadmohfRecord.setEhntk(Integer.valueOf(record.getSintk())); //Kolli
+					}
+					if(StringUtils.isNotEmpty(record.getWeh0068a())) {
+						sadmohfRecord.setEhcnin(Integer.valueOf(record.getSikdc()));//Container
+					}
+					//Previous Docs
+					sadmohfRecord.setEhrg(record.getWehrg());//Dekl.nr
+					if(StringUtils.isNotEmpty(record.getWeh0068a())) {
+						sadmohfRecord.setEh0068a(Integer.valueOf(record.getWeh0068a()));//Dekl.dato
+					}
+					if(StringUtils.isNotEmpty(record.getWeh0068b())) {
+						sadmohfRecord.setEh0068b(Integer.valueOf(record.getWeh0068b()));//Dekl.sekv
+					}
+					//Sender
+					if(StringUtils.isNotEmpty(record.getSikns())) { sadmohfRecord.setEhkns(Integer.valueOf(record.getSikns())); } //Kundnr
+					sadmohfRecord.setEhnas(record.getSinas());//Namn
+					sadmohfRecord.setEhrgs(record.getEhrgs());//Orgnr
+					sadmohfRecord.setEhad1s(record.getSiads1());//Adress
+					String ad2Avs = record.getSiads2() + " " + record.getSiads3(); 
+					sadmohfRecord.setEhpbs(ad2Avs);//
+					if(record.getEhems() != ""){ 
+						sadmohfRecord.setOwn_ehems_email(record.getEhems());//email
+					}
+					//Sender Postnr and City
+					String postnrAvs = ""; String cityAvs = ""; String landAvs = "";
+					if(record.getEhpns() != ""){ postnrAvs = record.getEhpns();}
+					if(record.getEhpss() != ""){ cityAvs = record.getEhpss();}
+					if(record.getEhlks() != ""){ landAvs = record.getEhlks();}
+					sadmohfRecord.setEhpns(postnrAvs);
+					sadmohfRecord.setEhpss(cityAvs);
+					sadmohfRecord.setEhlks(landAvs);
+					
+					//Receiver
+					if(StringUtils.isNotEmpty(record.getSiknk())) { sadmohfRecord.setEhknm(Integer.valueOf(record.getSiknk())); } //Kundnr
+					sadmohfRecord.setEhnam(record.getSinak());//Namn
+					sadmohfRecord.setEhrgm(record.getEhrgm());//Orgnr
+					sadmohfRecord.setEhad1m(record.getSiadk1());//Adress
+					String ad2Mot = record.getSiadk2() + " " + record.getSiadk3(); 
+					sadmohfRecord.setEhpbm(ad2Mot);//
+					if(record.getEhemm() != ""){ 
+						sadmohfRecord.setOwn_ehemm_email(record.getEhemm());//email
+					}
+					//Sender Postnr and City
+					String postnrMot = ""; String cityMot = ""; String landMot = "";
+					if(record.getEhpnm() != ""){ postnrMot = record.getEhpns();}
+					if(record.getEhpsm() != ""){ cityMot = record.getEhpsm();}
+					if(record.getEhlkm() != ""){ landMot = record.getEhlkm();}
+					sadmohfRecord.setEhpnm(postnrMot);
+					sadmohfRecord.setEhpsm(cityMot);
+					sadmohfRecord.setEhlkm(landMot);
+					
+					//adjust other fields
+					this.adjustFieldsForUpdateHouse(applicationUser, sadmohfRecord);
+					
+					
+					//create new
+					StringBuffer errMsg = new StringBuffer();
+					int dmlRetval = 0;
+					dmlRetval = this.houseControllerService.updateRecord(applicationUser, sadmohfRecord, mode, errMsg);
+					
+		   		 }else {
+		   			 logger.warn("no record on <getOppdrag>... ?");
+		   		 }
+			 }
+			 
+		 }
+		 
+		 SadOppdragRecord fejk = new SadOppdragRecord();
+		 fejk.setSiavd("1");
+		 //(1) just to satisfy the ajax-return-requirement of data
+		 result.add(fejk);
+		 
+		 return result;
+	 }
+	
+	
+	@RequestMapping(value = "createHousesFromOppdrag_DigitollOrig.do", method = RequestMethod.GET)
+	public @ResponseBody Set<SadOppdragRecord> createHousesFromOppdrag_DigitollOrig
 	  						(@RequestParam String applicationUser, @RequestParam String avd, @RequestParam String opd,@RequestParam String tur,  
 	  						 @RequestParam Integer lnrt, @RequestParam Integer lnrm,  @RequestParam String mode ) {
 
