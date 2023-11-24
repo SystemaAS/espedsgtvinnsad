@@ -252,7 +252,8 @@
                 		<th width="2%" class="tableHeaderField" >Pass. ETA</th>
                 		<th width="2%" class="tableHeaderField" >Tollst.</th>
                 		<th width="2%" class="tableHeaderField" >Bilnr/Fly</th>
-                		<th width="2%" class="tableHeaderField" >Transp.</th>
+                		<th width="2%" class="tableHeaderField" >Tr.land</th>
+                		<th width="2%" class="tableHeaderField" >Tr.navn</th>
                 		<th width="2%" class="tableHeaderField" >Sjåførs navn</th>
                 		<th width="2%" class="tableHeaderField" >Reg.dato</th>
                 		<th width="2%" class="tableHeaderField" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api"/></th>
@@ -349,6 +350,7 @@
 		               <td class="tableCell" >${record.etetadStr}&nbsp;${record.etetatStr}</td>
 		               <td align="center" class="tableCell" >${record.ettsd}</td>
 		               <td class="tableCell" >${record.etkmrk}</td>
+		               <td align="center" class="tableCell" >${record.etlkt}</td>
 		               <td class="tableCell" >${record.etnat}</td>
 		               <td class="tableCell" >${record.etsjaf}</td>
 		               
