@@ -315,12 +315,16 @@
 	           					</c:otherwise>
 	           					</c:choose>
 	           				</c:if>
+	           				
 				       </td>
 				       <td class="tableCell text12" >
 		               		<c:if test="${not empty record.listMasters}">
 		               			<span class="text12SkyBlue">${ record.listMasters[0].emmid}</span>
+		               			<c:if test="${not empty record.listMasters[0].listHouses && record.listMasters[0].listHouses.size() > 1}">
+		               				<span class="text10">&nbsp;Ant.h.&nbsp;${record.listMasters[0].listHouses.size()}</span>
+		               			</c:if>
 		               		</c:if>
-		               
+		               		
 		               </td>
 		               <td nowrap width="2%" align="center" class="tableCell" >
 		               	  <c:choose>

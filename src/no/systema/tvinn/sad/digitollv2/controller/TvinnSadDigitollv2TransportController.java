@@ -1407,7 +1407,11 @@ public class TvinnSadDigitollv2TransportController {
 			int isoEtshed = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(recordToValidate.getEtshedStr(), DateTimeManager.NO_FORMAT));
 			recordToValidate.setEtshed(isoEtshed);
 		}else {
-			recordToValidate.setEtshed(0);
+			//Original --> recordToValidate.setEtshed(0);
+			
+			//copy from ETA
+			recordToValidate.setEtshed(recordToValidate.getEtetad());
+			
 		}
 		//STA - time to ISO
 		if(recordToValidate.getEtshet() !=null && recordToValidate.getEtshet() > 0) {
@@ -1424,7 +1428,9 @@ public class TvinnSadDigitollv2TransportController {
 			recordToValidate.setEtshet(okTimeDb);
 			
 		}else {
-			recordToValidate.setEtshet(0);
+			//Original --> recordToValidate.setEtshet(0);
+			//copy from ETA
+			recordToValidate.setEtshet(recordToValidate.getEtetat());
 		}
 		
 		//postnr norsk alltid 4-siffror
