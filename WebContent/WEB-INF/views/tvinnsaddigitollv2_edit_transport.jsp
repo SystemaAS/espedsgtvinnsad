@@ -656,21 +656,21 @@
 			 					
 					 			<td class="text14">
 					 				<c:choose>
-					 				<c:when test="${model.record.etshed > 0}">
+					 				<c:when test="${model.record.etshed > 0 && not empty model.record.etmid}">
 					 					<input readonly type="text" class="inputTextReadOnly" name="etshed" id="etshed" size="8" maxlength="6" value="${model.record.etshedStr}">
 					 				</c:when>	
 					 				<c:otherwise>
-					 					<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etshed" id="etshed" size="8" maxlength="6" value="">
+					 					<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etshed" id="etshed" size="8" maxlength="6" value="${model.record.etshedStr}">
 					 				</c:otherwise>
 					 				</c:choose>
 					 			</td>
 								<td>
 									<c:choose>
-					 				<c:when test="${model.record.etshet > 0}">
+					 				<c:when test="${model.record.etshet > 0 && not empty model.record.etmid}">
 					 					<input readonly type="text" class="inputTextReadOnly" name="etshet" id="etshet" size="6" maxlength="4" value="${model.record.etshetStr}">
 					 				</c:when>
 					 				<c:otherwise>
-					 					<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etshet" id="etshet" size="6" maxlength="4" value="">
+					 					<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etshet" id="etshet" size="6" maxlength="4" value="${model.record.etshetStr}">
 					 				</c:otherwise>
 					 				</c:choose>
 									

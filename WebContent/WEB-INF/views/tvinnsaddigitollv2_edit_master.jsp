@@ -1103,7 +1103,12 @@
 		               <td width="2%" align="right" class="tableCell12" >${houseConsignmentRecord.ehntk}</td>
 		               <td width="2%" align="left" class="tableCell12" >${houseConsignmentRecord.ehdkh}</td>
 		               <td width="2%" align="left" class="tableCell12" >${houseConsignmentRecord.ehdkht}</td>
-		               <td width="2%" align="left" class="tableCell12" >${houseConsignmentRecord.ehrg} ${houseConsignmentRecord.eh0068a} ${houseConsignmentRecord.eh0068b} ${houseConsignmentRecord.ehtrnr}</td>
+		               <td width="2%" align="left" class="tableCell12" >
+		               		${houseConsignmentRecord.ehrg}&nbsp;${houseConsignmentRecord.eh0068a}&nbsp;${houseConsignmentRecord.eh0068b}
+		               		<c:if test="${not empty houseConsignmentRecord.ehtrnr}">
+		               			&nbsp;-&nbsp;${houseConsignmentRecord.ehtrnr}
+		               		</c:if>
+		               </td>
 		               <td width="2%" align="left" class="tableCell12" >${houseConsignmentRecord.ehprt}</td>
 		               <td width="2%" align="left" class="tableCell12" >${houseConsignmentRecord.ehuprt}</td>
 		               

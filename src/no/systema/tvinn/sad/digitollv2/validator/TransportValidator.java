@@ -91,27 +91,7 @@ public class TransportValidator implements Validator {
 						errors.rejectValue("etshed", "systema.tvinn.sad.manifest.express.header.error.rule.invalidStaDate");
 					}else{
 						if(!dateValidator.validateDate(strEtshed, DateValidator.DATE_MASK_NO)){
-							
 							errors.rejectValue("etshed", "systema.tvinn.sad.manifest.express.header.error.rule.invalidStaDate"); 	
-						}else{
-							//logical check. ETA must be at least 2 hours ahead from now
-							DateTimeManager dateTimeMgr = new DateTimeManager();
-							boolean isValidDate = dateTimeMgr.isValidCurrentAndForwardDateNO(strEtshed);
-							if(!isValidDate){
-								
-								errors.rejectValue("etshed", "systema.tvinn.sad.manifest.express.header.error.rule.invalidStaDateForward"); 
-							}else{
-								if(dateTimeMgr.isToday(strEtshed, DateTimeManager.NO_FORMAT)){
-									String strEtshet = String.valueOf(record.getEtshet());
-									strEtshet = dateTimeMgr.adjustUserTimeToHHmm(strEtshet);
-									//check the hour. At least 2 hour ahead
-									if(!dateTimeMgr.isValidTime(strEtshet, JsonTvinnSadManifestRecord.MANIFEST_AT_LEAST_HOURS_AHEAD_VALID)){
-										logger.warn("DD");
-										errors.rejectValue("etshed", "systema.tvinn.sad.manifest.express.header.error.rule.invalidStaTimeForward");
-									}
-								}
-							}
-							
 						}
 					}
 				}
