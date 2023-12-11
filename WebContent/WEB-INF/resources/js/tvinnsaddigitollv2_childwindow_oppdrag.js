@@ -3,6 +3,26 @@
 	var BLOCKUI_OVERLAY_MESSAGE_DEFAULT = "Please wait...";
 	
 	jq(function() {
+		jq('#buttonCheckAll').click(function(){
+			jq( ".clazzCreateHouseAware" ).each(function(  ) {
+				var id = this.id;
+				var record = id.split('_');
+				var avd = record[0].replace("avd", "");
+				var opd = record[1].replace("opd", "");
+				var tur = record[2].replace("tur", "");
+				
+				if (jq(this).is(":checked")) {	  
+					jq(this).prop('checked', false);
+				}else{
+					jq(this).prop('checked', true);
+				}
+				
+			});
+		});
+	});
+	
+	
+	jq(function() {
 		jq('#buttonCreateHousesOk').click(function(){
 			var params = "";
 			var turParam = "";	  

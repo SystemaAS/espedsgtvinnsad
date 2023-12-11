@@ -53,6 +53,9 @@
 					               			&nbsp;<input title="automatisk generere house(s)..." class="inputFormSubmit" type="button" name="buttonCreateHousesOk" id="buttonCreateHousesOk" value='Ok Auto'>
 					               		</c:if>
 					               		&nbsp;<input class="inputFormSubmit" type="button" name="buttonCancel" id="buttonCancel" value='Avbryt'>
+					               		<c:if test="${not empty model.list}">
+					               			&nbsp;<input class="inputFormSubmitStd" type="button" name="buttonCheckAll" id="buttonCheckAll" value='Velg alle'>
+					               		</c:if>
 					               	</td>
 					    		</tr>
 				    		</td>
