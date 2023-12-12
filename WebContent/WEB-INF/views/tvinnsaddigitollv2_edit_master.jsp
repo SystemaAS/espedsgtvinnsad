@@ -310,8 +310,8 @@
 		<tr height="2"><td></td></tr>
 		
 		<tr>
-			<td colspan="3" style="width:100%" class="text14" valign="top">
-				<table style="width:90%" align="left" border="0" cellspacing="1" cellpadding="0">					
+			<td colspan="3" class="text14" valign="top">
+				<table align="left" border="0" cellspacing="1" cellpadding="0">					
 					<tr>
 						<td class="text14">&nbsp;<span title="emavd">Avd</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="empro">Tur</span><font class="text16RedBold" >*</font>
@@ -324,7 +324,6 @@
 						<td class="text14">&nbsp;<span title="emcn">Container</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emdkm">Dok.nr</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emdkmt">Dok.type</span><font class="text16RedBold" >*</font></td>
-						
 						<td class="text14">&nbsp;<span title="emst">St.</span></td>
 						<td class="text14">&nbsp;<span title="emst2">
 								St<a tabindex=-1 id="updateInternalStatus2Link" name="updateInternalStatus2Link" runat="server" href="#">.</a>2
@@ -421,33 +420,58 @@
 					</tr>
 					
 					<tr>
-						<td class="text14">&nbsp;<span title="emknt Transportør KundeNr.">Transp.knr.</span></td>
-						<td colspan="2" class="text14">&nbsp;<span title="emrgt - Transportør OrgNr. / EORI">Transp.Orgnr / EORI</span><font class="text16RedBold" >*</font></td>
-					</tr>
-					<tr>
-						<td class="text14">
-							<input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="emknt" id="emknt" size="10" maxlength="8" value="${model.record.emknt}">								
-						</td>
-						<td colspan="2" class="text14">
-							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="emrgt" id="emrgt" size="19" maxlength="17" value="${model.record.emrgt}">												
-						</td>
-						<td colspan="12">
-							<table>
-							<tr>
-								<td class="inputFormSubmit text12 isa_success" style="cursor: not-allowed">Transportør&nbsp;<b>${model.record.transportDto.etnat}</b>
-										&nbsp;&nbsp;Kjøretøy k.merke&nbsp;<b>${model.record.transportDto.etkmrk}</b>
-										&nbsp;&nbsp;ETA&nbsp;<b>${model.record.transportDto.etetadStr}</b>&nbsp;&nbsp;ETA-tid&nbsp;<b>${model.record.transportDto.etetatStr}</b>
+					<td colspan="15" class="text14" valign="top">
+						<table align="left" border="0" cellspacing="2" cellpadding="1">
+						<tr>
+							<td class="text14">&nbsp;<span title="emknt Transportør KundeNr.">Transp.knr.</span></td>
+							<td class="text14">&nbsp;<span title="emrgt - Transportør OrgNr. / EORI">Transp.Orgnr / EORI</span><font class="text16RedBold" >*</font></td>
+							<td></td>
+							<%--
+							<c:if test="${model.record.emlnrm > 0}">
+								<td width="40px"></td>
+								<td class="text14"><span title="Send til orgnr">Send til org.nr</span>
+									<a tabindex="-1" id="sendToPartIdLink">
+										<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
+									</a>
 								</td>
-							</tr>
-							</table>
-						</td>
-					
+							</c:if>
+							 --%>
+						</tr>
+						<tr>
+							<td class="text14">
+								<input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="emknt" id="emknt" size="10" maxlength="8" value="${model.record.emknt}">								
+							</td>
+							<td class="text14">
+								<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="emrgt" id="emrgt" size="19" maxlength="17" value="${model.record.emrgt}">												
+							</td>
+							<td >
+								<table>
+								<tr>
+									<td class="inputFormSubmit text12 isa_success" style="cursor: not-allowed">Transportør&nbsp;<b>${model.record.transportDto.etnat}</b>
+											&nbsp;&nbsp;Kjøretøy k.merke&nbsp;<b>${model.record.transportDto.etkmrk}</b>
+											&nbsp;&nbsp;ETA&nbsp;<b>${model.record.transportDto.etetadStr}</b>&nbsp;&nbsp;ETA-tid&nbsp;<b>${model.record.transportDto.etetatStr}</b>
+									</td>
+								</tr>
+								</table>
+							</td>
+							<%--
+							<c:if test="${model.record.emlnrm > 0}">
+								<td width="40px"></td>
+								<td class="text14">
+									<input  type="text" class="inputTextMediumBlue" name="ownReceiverOrgNr" id="ownReceiverOrgNr" size="17" maxlength="20" value="${Xmodel.record.emvkb}">
+									&nbsp;<input title="Send til part..." class="inputFormSubmitStd" style="cursor:pointer;" type="button" name="sendToPartButton" id="sendToPartButton" value='Send masterId til part'>
+								</td>
+							</c:if>
+							 --%>		
+						</tr>
+						</table>
+					</td>
 					</tr>
 					
 					<tr height="2"><td></td></tr>
 					<tr>
 						<td colspan="15" class="text14" valign="top">
-						<table style="width:90%" align="left" class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="1">
+						<table style="width:100%" align="left" class="tableBorderWithRoundCorners" border="0" cellspacing="2" cellpadding="1">
 						<tr>
 							<td class="text14">&nbsp;<span title="emsdlt">Lastested</span></td>
 							<td class="text14">&nbsp;<span title="emlkl">Land</span></td>
@@ -514,7 +538,7 @@
 					<tr height="2"><td></td></tr>
 					<tr>
 						<td colspan="15" class="text14" valign="top">
-						<table style="width:90%" align="left" class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="1">
+						<table style="width:90%" align="left" class="tableBorderWithRoundCorners" border="0" cellspacing="2" cellpadding="1">
 							<tr>
 								<td colspan="4" class="text14"><b>&nbsp;Container.1</b></td>
 								<td colspan="4" class="text14"><b>&nbsp;Container.2</b></td>

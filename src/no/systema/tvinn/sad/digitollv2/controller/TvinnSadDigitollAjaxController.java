@@ -32,12 +32,15 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.service.SadOppdragService;
 import no.systema.tvinn.sad.digitollv2.service.SadTurService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoafListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
+import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
 import no.systema.tvinn.sad.model.jsonjackson.customer.JsonTvinnSadCustomerContainer;
@@ -596,6 +599,41 @@ public class TvinnSadDigitollAjaxController {
 		  return result;
 		  
 	  }
+	/**
+	 * 
+	 * @param request
+	 * @param applicationUser
+	 * @param emlnrt
+	 * @param emlnrm
+	 * @param orgNr
+	 * @return
+	 */
+	@RequestMapping(value = "tvinnsaddigitollv2_send_masterId_toExternalParty.do", method = RequestMethod.GET)
+	  public @ResponseBody Set<SadmomfRecord> sendMasterIdToPart(HttpServletRequest request, @RequestParam String applicationUser, @RequestParam String emlnrt,
+			  																		   @RequestParam String emlnrm, @RequestParam String orgNr) {
+		  Set result = new HashSet();
+		  logger.info("Inside sendMasterIdToPart");
+		  logger.info("emlnrt:" + emlnrt);
+		  logger.info("emlnrm:" + emlnrm);
+		  logger.info("file-receiver orgNr:" + orgNr);
+		  
+		  //get all records for the construction of the file
+		  SadmomfRecord masterRecord = this.getMasterDto(applicationUser, emlnrt, emlnrm);
+		  this.getTransportDto(applicationUser, masterRecord);
+		  logger.info(masterRecord.toString());
+		  //now make the json-file
+		  //TODO
+		  
+		  if(StringUtils.isNotEmpty(orgNr) && StringUtils.isNotEmpty(orgNr) && StringUtils.isNotEmpty(orgNr)) {
+		  	  SadmomfRecord record = new SadmomfRecord();
+			  record.setEmlnrm(Integer.valueOf(emlnrm) );
+			  result.add(record);
+		  }
+	    	
+		  return result;
+		  
+	  }
+	
 	
 	/**
 	 * 
@@ -742,6 +780,78 @@ public class TvinnSadDigitollAjaxController {
 	/**
 	 * 
 	 * @param user
+	 * @param recordToValidate
+	 */
+	private void getTransportDto(String user, SadmomfRecord masterRecord) {
+		//get BASE URL
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TRANSPORT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + user + "&etlnrt=" + masterRecord.getEmlnrt();
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		SadmotfContainer jsonContainer = this.sadmotfListService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+			List<SadmotfRecord> outputList = (List)jsonContainer.getList();
+			if(outputList!=null && outputList.size() > 0){
+				for (SadmotfRecord record : outputList) {
+					masterRecord.setTransportDto(record);
+				}
+			}
+			
+    	}	
+	}
+	
+	/**
+	 * 
+	 * @param user
+	 * @param emlnrt
+	 * @param emlnrm
+	 * @return
+	 */
+	private SadmomfRecord getMasterDto(String user, String emlnrt, String emlnrm) {
+		SadmomfRecord result = null;
+		//get BASE URL
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_MASTERCONSIGNMENT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + user + "&emlnrt=" + emlnrt + "&emlnrm=" + emlnrm;
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		SadmomfContainer container = this.sadmomfListService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+			List<SadmomfRecord> outputList = (List)container.getList();
+			if(outputList!=null && outputList.size() > 0){
+				for (SadmomfRecord record : outputList) {
+					result = record;
+				}
+			}
+			
+    	}
+    	
+    	return result;
+	}
+	/**
+	 * 
+	 * @param user
 	 * @param sadmohfRecord
 	 */
 	private void adjustFieldsForUpdateHouse(String user, SadmohfRecord sadmohfRecord){
@@ -765,6 +875,8 @@ public class TvinnSadDigitollAjaxController {
 	private SadmoifListService sadmoifListService;
 	@Autowired
 	private SadmotfListService sadmotfListService;
+	@Autowired
+	private SadmomfListService sadmomfListService;
 	@Autowired
 	private SadmoafListService sadmoafListService;
 	@Autowired

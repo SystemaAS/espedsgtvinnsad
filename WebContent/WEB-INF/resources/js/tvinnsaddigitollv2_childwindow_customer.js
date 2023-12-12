@@ -56,7 +56,10 @@
 				  opener.jq('#etnar').focus();
 			  //=========================
 			  //DIGITOLL -- MASTER
-			  //=========================  
+			  //========================= 
+			  }else if(callerType == 'todo'){
+				  opener.jq('#todo').val(syrg);
+	 
 			  }else if(callerType == 'emnas'){
 				  opener.jq('#emkns').val(knr);
 				  opener.jq('#emnas').val(knavn);
