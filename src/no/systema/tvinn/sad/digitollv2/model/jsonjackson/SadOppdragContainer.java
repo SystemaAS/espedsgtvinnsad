@@ -18,6 +18,7 @@ public class SadOppdragContainer {
 	private String tur = null;
 	private String errMsg = null;
 	private Collection<SadOppdragRecord> orderList = null;
+	private Collection<SadOppdragRecord> list = null;
 	
 	
 }

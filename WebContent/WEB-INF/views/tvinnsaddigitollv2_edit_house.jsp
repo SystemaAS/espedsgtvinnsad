@@ -310,10 +310,14 @@
 								<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 							</a>
 						</td>
-						<td class="text14">&nbsp;<span title="ehtdn"><span id="ehtdnIdSpan" style="cursor:pointer;color:brown;">O</span>pd</span><font class="text16RedBold" >*</font>
+						<td nowrap class="text14">&nbsp;<span title="ehtdn"><span id="ehtdnIdSpan" style="cursor:pointer;color:brown;">O</span>pd</span><font class="text16RedBold" >*</font>
 							<a tabindex="-1" id="ehtdnIdLink">
 								<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
 							</a>
+							<span title="Søk i sadi">S</span><a tabindex="-1" id="ehsadiIdLink">
+								<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find2.png" width="16px" height="16px" border="0" alt="search" >
+							</a>
+							
 						</td>
 						<td class="text14">
 							<img style="cursor:pointer;" onMouseOver="showPop('ehvkb_info');" onMouseOut="hidePop('ehvkb_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
@@ -365,7 +369,7 @@
 						
 						
 						</td>
-						<td class="text14">&nbsp;<span title="ehcnin">Container</span><font class="text16RedBold" >*</font></td>
+						<td class="text14">&nbsp;<span title="ehcnin">Cont</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">
 							<%-- Kan inte ändras tyvärr (Api error)
 							<c:if test="${not empty model.record.ehdkh}">
