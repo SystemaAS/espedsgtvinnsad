@@ -2,6 +2,15 @@
   	var jq = jQuery.noConflict();
 	var BLOCKUI_OVERLAY_MESSAGE_DEFAULT = "Please wait...";
 	
+
+	
+	jq(function() {
+	  jq("#dato").datepicker({ 
+		  dateFormat: 'yymmdd' 	
+		  //dateFormat: 'ddmmy' 	  
+	  });	
+	});
+	
 	jq(function() {
 		jq('#buttonCheckAll').click(function(){
 			jq( ".clazzCreateHouseAware" ).each(function(  ) {

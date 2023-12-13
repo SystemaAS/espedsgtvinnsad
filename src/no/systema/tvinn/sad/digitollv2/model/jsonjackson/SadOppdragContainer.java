@@ -15,10 +15,12 @@ import lombok.Data;
 public class SadOppdragContainer {
 	
 	private String user = null;
-	private String tur = null;
+	private String bil = null;
+	private String dato = null;
 	private String errMsg = null;
 	private Collection<SadOppdragRecord> orderList = null;
 	private Collection<SadOppdragRecord> list = null;
+	private Collection<SadOppdragRecord> sadimpList = null;
 	
 	
 }

@@ -778,6 +778,42 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	    	return successView;
 		}
 	}
+	/**
+	 * 
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_sadi.do", method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doShowSadi(HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doShowSadi");
+		Map model = new HashMap();
+		
+		String bilnr = request.getParameter("bil");
+		String dato = request.getParameter("dato");
+		String lnrt = request.getParameter("lnrt");
+		String lnrm = request.getParameter("lnrm");
+		model.put("bil", bilnr);
+		model.put("lnrt", lnrt);
+		model.put("lnrm", lnrm);
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_sadi");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			//get all masters
+			List list = this.getSadi(appUser, bilnr, dato, lnrt, lnrm);  
+			model.put("list", list);
+			
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
 	
 	@RequestMapping(value="tvinnsaddigitollv2_childwindow_tolltariff.do", params="action=doInit",  method={RequestMethod.GET, RequestMethod.POST } )
 	public ModelAndView doInitTolltariff(@ModelAttribute ("record") JsonTvinnSadTolltariffVarukodContainer recordToValidate, HttpSession session, HttpServletRequest request){
@@ -939,7 +975,56 @@ public class TvinnSadDigitollv2ControllerChildWindow {
     	
     	return result;
 	}
+	/**
+	 * 
+	 * @param appUser
+	 * @param bilnr
+	 * @param dato
+	 * @param lnrt
+	 * @param lnrm
+	 * @return
+	 */
+	private List<SadOppdragRecord> getSadi(SystemaWebUser appUser, String bilnr, String dato, String lnrt, String lnrm) {
+		List<SadOppdragRecord> resultList = new ArrayList();
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_SADI_URL; //SADI_URL
+		//add URL-parameters
+		StringBuilder urlRequestParams = new StringBuilder( "user=" + appUser.getUser());
+		if(StringUtils.isNotEmpty(bilnr)) {
+			urlRequestParams.append("&bil=" + bilnr);
+		}
+		if(StringUtils.isNotEmpty(dato)) {
+			urlRequestParams.append("&dato=" + dato);
+		}
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
 
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadOppdragContainer container = this.sadOppdragService.getListContainer(jsonPayload);
+    		if(container!=null && !container.getList().isEmpty()) {
+    			for(SadOppdragRecord record: container.getList()) {
+    				if(StringUtils.isNotEmpty(record.getSidt())) {
+						if (record.getSidt().length()==8) {
+							record.setSidt(this.dateMgr.getDateFormatted_NO(record.getSidt(), DateTimeManager.ISO_FORMAT));
+						}
+					}
+    				//Only those that have not been chosen in this same master
+    				//TODO!!
+    				/*if(!this.houseExists(appUser, record.getSitdn(), lnrt , lnrm )) {
+    					resultList.add(record);
+    				}*/
+    				resultList.add(record);
+    			}
+    		}
+    		
+    	}
+    	
+    	return resultList;
+	}
 	/**
 	 * 
 	 * @param appUser

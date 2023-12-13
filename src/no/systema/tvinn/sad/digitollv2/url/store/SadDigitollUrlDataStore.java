@@ -68,7 +68,7 @@ public final class SadDigitollUrlDataStore {
 		static public String SAD_FETCH_DIGITOLL_OPPDRAG_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TDIG000R2.pgm";
 		//FETCH Sadi
 		//http://10.11.47.61/sycgip/TDIG000.pgm?user=OSCAR&bil=xxx&dato=20231201
-		static public String SAD_FETCH_DIGITOLL_SADI_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TDIG000.pgm";
+		static public String SAD_FETCH_DIGITOLL_SADI_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TDIG000R.pgm";
 		//FETCH Tur
 		//http://10.11.47.61/sycgip/TDIG001R.pgm?user=OSCAR&wsstur=81000009&wtudt=20200101
 		static public String SAD_FETCH_DIGITOLL_TUR_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TDIG001R.pgm";

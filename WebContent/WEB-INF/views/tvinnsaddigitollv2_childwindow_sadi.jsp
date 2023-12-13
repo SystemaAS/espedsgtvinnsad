@@ -36,6 +36,22 @@
 							<td>
 							<table id="old" >
 								<tr>
+								<td colspan="5">
+									<form name="tvinnsadCustomerForm" id="tvinnsadCustomerForm" action="tvinnsaddigitollv2_childwindow_sadi.do?action=doFind" method="post">
+									<table>
+									<tr>
+					            		<td class="text14">&nbsp;Dato</td>
+										<td class="text14">&nbsp;<input onKeyPress="return numberKey(event)" type="text" class="inputText" name="dato" id="dato" size="10" maxlength="8" value="${model.dato}"></td>
+										
+										<td class="text14">&nbsp;</td>
+				           				<td align="right">&nbsp;<input class="inputFormSubmitStd" type="submit" name="submit" value='<spring:message code="search.label"/>'></td>
+					           		</tr>
+					           		</table>
+					           		</form>
+								</td>
+								</tr>
+								<tr height="5"><td></td></tr> 
+								<tr>
 									<td class="text14  ">
 						    			<font class="inputText isa_warning" >
 						    				Import fortollinger
@@ -57,6 +73,7 @@
 					               			&nbsp;<input class="inputFormSubmitStd" type="button" name="buttonCheckAll" id="buttonCheckAll" value='Velg alle'>
 					               		</c:if>
 					               	</td>
+					               	
 					    		</tr>
 				    		</td>
 				    		</table>

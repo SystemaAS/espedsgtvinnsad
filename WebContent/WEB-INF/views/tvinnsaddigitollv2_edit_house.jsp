@@ -156,7 +156,9 @@
 			<input type="hidden" name="emlnrm" id="emlnrm" value="${model.record.masterDto.emlnrm}">
 			
 			<c:if test="${model.record.ehlnrh > 0}">
-				<input type="hidden" name="ehlnrh" id="ehlnrh" value="${model.record.ehlnrh}"> 
+				<input type="hidden" name="ehlnrh" id="ehlnrh" value="${model.record.ehlnrh}">
+				<input type="hidden" name="bilnr" id="bilnr" value="${model.record.transportDto.etkmrk}"> 
+				
 			</c:if>
 			 
 	<table style="width:100%;" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
