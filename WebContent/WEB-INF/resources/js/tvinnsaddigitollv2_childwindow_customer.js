@@ -57,8 +57,9 @@
 			  //=========================
 			  //DIGITOLL -- MASTER
 			  //========================= 
-			  }else if(callerType == 'todo'){
-				  opener.jq('#todo').val(syrg);
+			  }else if(callerType == 'ownReceiverOrgNr'){
+				  opener.jq('#ownReceiverName').val(knavn);
+				  opener.jq('#ownReceiverOrgNr').val(syrg);	
 	 
 			  }else if(callerType == 'emnas'){
 				  opener.jq('#emkns').val(knr);

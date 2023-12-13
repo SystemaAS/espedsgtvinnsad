@@ -198,7 +198,7 @@
 	  
 	  jq('#sendToPartIdLink').click(function() {
 	    	jq('#sendToPartIdLink').attr('target','_blank');
-	    	window.open('tvinnsaddigitollv2_childwindow_customer.do?action=doFind&ctype=todo', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+	    	window.open('tvinnsaddigitollv2_childwindow_customer.do?action=doFind&ctype=ownReceiverOrgNr', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
 	   });	
 
 	  //Avsender
@@ -445,7 +445,8 @@
 	jq(function() {
 		jq('#sendToPartButton').click(function() {
 			
-			if( jq('#ownReceiverOrgNr').val() != "" && jq('#emlnrt').val()!= "" && jq('#emlnrm').val()!= "" ){
+			if( jq('#ownReceiverName').val() != "" && jq('#ownReceiverOrgNr').val() != "" && jq('#emlnrt').val()!= "" && jq('#emlnrm').val()!= "" ){
+				var	name = jq('#ownReceiverName').val();
 				var	orgNr = jq('#ownReceiverOrgNr').val();
 				var emlnrt = jq('#emlnrt').val();
 				var emlnrm = jq('#emlnrm').val();
@@ -455,7 +456,8 @@
 			  	  data: { applicationUser : jq('#applicationUser').val(),
 						  emlnrt : emlnrt,
 						  emlnrm : emlnrm,
-						  orgNr : orgNr}, 
+						  receiverName : name,
+				 		  receiverOrgnr : orgNr},	
 			  	  beforeSend : function() {
 		               jq.blockUI({ message: 'Wait' });
 		          },

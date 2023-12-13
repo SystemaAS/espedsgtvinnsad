@@ -1,5 +1,6 @@
 package no.systema.tvinn.sad.digitollv2.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import javawebparts.core.org.apache.commons.lang.StringUtils;
 import no.systema.main.service.UrlCgiProxyService;
@@ -600,6 +602,10 @@ public class TvinnSadDigitollAjaxController {
 		  
 	  }
 	/**
+	 * This method is just at proxy to the target: .../syjservicestn-expft/digitollv2/send_masterId_toExternalParty.do
+	 * 
+	 * The reason for that is the design issue on whether the external party is going to receive the payload (FTP, web-service, other)
+	 * The communication issue will be the responsibility for the syjservices-expft subsystem.
 	 * 
 	 * @param request
 	 * @param applicationUser
@@ -610,30 +616,44 @@ public class TvinnSadDigitollAjaxController {
 	 */
 	@RequestMapping(value = "tvinnsaddigitollv2_send_masterId_toExternalParty.do", method = RequestMethod.GET)
 	  public @ResponseBody Set<SadmomfRecord> sendMasterIdToPart(HttpServletRequest request, @RequestParam String applicationUser, @RequestParam String emlnrt,
-			  																		   @RequestParam String emlnrm, @RequestParam String orgNr) {
+			  																		   @RequestParam String emlnrm, @RequestParam String receiverName, @RequestParam String receiverOrgnr ) {
 		  Set result = new HashSet();
 		  logger.info("Inside sendMasterIdToPart");
 		  logger.info("emlnrt:" + emlnrt);
 		  logger.info("emlnrm:" + emlnrm);
-		  logger.info("file-receiver orgNr:" + orgNr);
+		  logger.info("file-receiver name:" + receiverName);
+		  logger.info("file-receiver orgNr:" + receiverOrgnr);
 		  
-		  //get all records for the construction of the file
-		  SadmomfRecord masterRecord = this.getMasterDto(applicationUser, emlnrt, emlnrm);
-		  this.getTransportDto(applicationUser, masterRecord);
-		  logger.info(masterRecord.toString());
-		  //now make the json-file
-		  //TODO
-		  
-		  if(StringUtils.isNotEmpty(orgNr) && StringUtils.isNotEmpty(orgNr) && StringUtils.isNotEmpty(orgNr)) {
-		  	  SadmomfRecord record = new SadmomfRecord();
-			  record.setEmlnrm(Integer.valueOf(emlnrm) );
-			  result.add(record);
+		  try {
+			  if(StringUtils.isNotEmpty(receiverName) && StringUtils.isNotEmpty(receiverOrgnr) && StringUtils.isNotEmpty(emlnrt) && StringUtils.isNotEmpty(emlnrm)) {
+				  //get BASE URL
+				  final String BASE_URL = SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL + "send_masterId_toExternalParty.do" ;
+				  //add URL-parameters
+				  StringBuffer urlRequestParams = new StringBuffer();
+				  urlRequestParams.append("user=" + applicationUser + "&emlnrt=" + emlnrt + "&emlnrm=" + emlnrm + "&receiverName=" + receiverName + "&receiverOrgnr=" + receiverOrgnr);
+				  logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+				  logger.warn("URL: " + BASE_URL);
+				  logger.warn("URL PARAMS: " + urlRequestParams);
+			    	
+				  String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+				  //Debug --> 
+				  logger.info(jsonPayload);
+				  //return to jquery
+				  if("OK".equalsIgnoreCase(jsonPayload)) {
+					  SadmomfRecord record = new SadmomfRecord();
+					  record.setEmlnrm(Integer.valueOf(emlnrm) );
+					  result.add(record);
+				  }
+				
+			  	  
+			 }
+		  }catch(Exception e) {
+			  logger.error(e.toString());
 		  }
-	    	
+	      
 		  return result;
 		  
 	  }
-	
 	
 	/**
 	 * 
