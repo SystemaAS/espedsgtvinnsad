@@ -278,7 +278,7 @@
 	  	jq('#ehsadiIdLink').click(function() {
 			if(jq('#ehpro').val()!=''){
 	    		jq('#ehsadiIdLink').attr('target','_blank');
-	    		window.open('tvinnsaddigitollv2_childwindow_sadi.do?action=doFind&bil=' + jq('#bilnr').val() + '&lnrt=' + jq('#emlnrt').val() + '&lnrm=' + jq('#emlnrm').val() + '&ctype=ehsadi', "oppdWin", "top=300px,left=600px,height=600px,width=1100px,scrollbars=yes,location=no");
+	    		window.open('tvinnsaddigitollv2_childwindow_sadi.do?action=doFind&tur=' + jq('#ehpro').val() + '&bil=' + jq('#bilnr').val() + '&lnrt=' + jq('#emlnrt').val() + '&lnrm=' + jq('#emlnrm').val() + '&ctype=ehsadi', "oppdWin", "top=300px,left=600px,height=600px,width=1100px,scrollbars=yes,location=no");
 			}
 	    });
 	  	jq('#ehsadiIdLink').keypress(function(e){ //extra feature for the end user

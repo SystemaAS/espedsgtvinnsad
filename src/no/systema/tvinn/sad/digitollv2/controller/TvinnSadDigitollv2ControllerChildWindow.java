@@ -32,6 +32,7 @@ import javax.servlet.http.HttpSession;
 //application imports
 import no.systema.main.service.UrlCgiProxyService;
 import no.systema.main.service.UrlCgiProxyServiceImpl;
+import no.systema.main.validator.DateValidator;
 import no.systema.main.validator.LoginValidator;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.DateTimeManager;
@@ -97,7 +98,9 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	private LoginValidator loginValidator = new LoginValidator();
 	private CodeDropDownMgr codeDropDownMgr = new CodeDropDownMgr();
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
-	DateTimeManager dateMgr = new DateTimeManager();
+	private DateValidator dateValidator = new DateValidator();
+	private DateTimeManager dateMgr = new DateTimeManager();
+	private Integer sadiSearchNrOfDaysBackwards = -10;
 	
 	@PostConstruct
 	public void initIt() throws Exception {
@@ -789,14 +792,25 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		this.context = TdsAppContext.getApplicationContext();
 		logger.info("Inside: doShowSadi");
 		Map model = new HashMap();
-		
+		String tur = request.getParameter("tur");
 		String bilnr = request.getParameter("bil");
 		String dato = request.getParameter("dato");
 		String lnrt = request.getParameter("lnrt");
 		String lnrm = request.getParameter("lnrm");
+		if(StringUtils.isEmpty(dato)) {
+			dato = dateMgr.getNewDateFromNow(DateTimeManager.NO_FORMAT, this.sadiSearchNrOfDaysBackwards);
+		}else {
+			if(!dateValidator.validateDate(dato, DateValidator.DATE_MASK_NO)) {
+				dato = dateMgr.getNewDateFromNow(DateTimeManager.NO_FORMAT, this.sadiSearchNrOfDaysBackwards);	
+			}
+		}
+		model.put("tur", tur);
 		model.put("bil", bilnr);
+		model.put("dato", dato);
 		model.put("lnrt", lnrt);
 		model.put("lnrm", lnrm);
+		
+		
 		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_sadi");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		//check user (should be in session already)
@@ -804,8 +818,10 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			return this.loginView;
 			
 		}else{
+			//validate and convert to ISO
+			String datoISO = getDatoISOSadi(dato);
 			//get all masters
-			List list = this.getSadi(appUser, bilnr, dato, lnrt, lnrm);  
+			List list = this.getSadi(appUser, bilnr, datoISO, lnrt, lnrm);  
 			model.put("list", list);
 			
 			
@@ -813,6 +829,28 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			
 	    	return successView;
 		}
+	}
+	
+	private String getDatoISOSadi(String dato) {
+		String datoISO = "";
+		//STEP 1
+		if(StringUtils.isEmpty(dato)) {
+			dato = dateMgr.getNewDateFromNow(DateTimeManager.NO_FORMAT, this.sadiSearchNrOfDaysBackwards);
+		}else {
+			if(!dateValidator.validateDate(dato, DateValidator.DATE_MASK_NO)) {
+				dato = dateMgr.getNewDateFromNow(DateTimeManager.NO_FORMAT, this.sadiSearchNrOfDaysBackwards);	
+			}
+		}
+		//now convert to ISO
+		datoISO = dateMgr.getDateFormatted_ISO(String.valueOf(dato), DateTimeManager.NO_FORMAT);
+		
+		//STEP 2
+		//validate ISO otherwise create own
+		if(!dateValidator.validateDateIso203_YYYYMMDD(datoISO)) {
+			datoISO = dateMgr.getNewDateFromNow(this.sadiSearchNrOfDaysBackwards);
+		}
+		
+		return datoISO;
 	}
 	
 	@RequestMapping(value="tvinnsaddigitollv2_childwindow_tolltariff.do", params="action=doInit",  method={RequestMethod.GET, RequestMethod.POST } )
@@ -991,8 +1029,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		StringBuilder urlRequestParams = new StringBuilder( "user=" + appUser.getUser());
 		if(StringUtils.isNotEmpty(bilnr)) {
 			urlRequestParams.append("&bil=" + bilnr);
-		}
-		if(StringUtils.isNotEmpty(dato)) {
+		}else if(StringUtils.isNotEmpty(dato)) {
 			urlRequestParams.append("&dato=" + dato);
 		}
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
@@ -1005,7 +1042,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
     	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
     	if(jsonPayload!=null){
     		SadOppdragContainer container = this.sadOppdragService.getListContainer(jsonPayload);
-    		if(container!=null && !container.getList().isEmpty()) {
+    		if(container!=null && container.getList() !=null) {
     			for(SadOppdragRecord record: container.getList()) {
     				if(StringUtils.isNotEmpty(record.getSidt())) {
 						if (record.getSidt().length()==8) {

@@ -6,8 +6,8 @@
 	
 	jq(function() {
 	  jq("#dato").datepicker({ 
-		  dateFormat: 'yymmdd' 	
-		  //dateFormat: 'ddmmy' 	  
+		  //dateFormat: 'yymmdd' 	
+		  dateFormat: 'ddmmy' 	  
 	  });	
 	});
 	
@@ -18,7 +18,7 @@
 				var record = id.split('_');
 				var avd = record[0].replace("avd", "");
 				var opd = record[1].replace("opd", "");
-				var tur = record[2].replace("tur", "");
+				var dato = record[2].replace("dato", "");
 				
 				if (jq(this).is(":checked")) {	  
 					jq(this).prop('checked', false);
@@ -41,22 +41,29 @@
 				  var record = id.split('_');
 				  var avd = record[0].replace("avd", "");
 				  var opd = record[1].replace("opd", "");
-				  var tur = record[2].replace("tur", "");
+				  var dato = record[2].replace("dato", "");
+				  var tur = jq('#tur').val();
 				  //var counter = i + 1;
-				  //alert(avd + "-" + opd);
+				  //alert(avd + "-" + opd + "-" + dato);
 					  
-				  if(jq('#avd' + avd + '_opd' + opd + '_tur' + tur).prop('checked')){
-					 var tmp = "avd" + avd + "_opd" + opd + "#";
+				  if(jq('#avd' + avd + '_opd' + opd + '_dato' + dato).prop('checked')){
+					 var tmp = "avd" + avd + "_opd" + opd + "_dato" + dato + "#";
 					 params = params + tmp;
 					 turParam = tur; 
+					
 				  }	
 			});
+			/*alert(params);
+			alert("User:" + jq('#applicationUser').val());
+			alert("lnrt:" + jq('#lnrt').val());
+			alert("turParam:" + turParam);
+			*/
 			
 			if(params != ""){
 			  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
 			  jq.ajax({
 		  	  	  type: 'GET',
-		  	  	  url: 'createHousesFromOppdrag_Digitoll.do',
+		  	  	  url: 'createHousesFromSadi_Digitoll.do',
 		  	  	  data: { applicationUser : jq('#applicationUser').val(),
 							params : params,
 							tur: turParam,
@@ -99,71 +106,7 @@
 		
 	});
 	
-  	/*
-	jq(function() {
-		jq('#buttonCreateHousesOk').click(function(){
-				  
-			jq( ".clazzCreateHouseAware" ).each(function(  ) {
-				
-				  var id = this.id;
-				  var record = id.split('_');
-				  var avd = record[0].replace("avd", "");
-				  var opd = record[1].replace("opd", "");
-				  var tur = record[2].replace("tur", "");
-				  //var counter = i + 1;
-				  //alert(avd + "-" + opd);
-				  
-				  if(jq('#avd' + avd + '_opd' + opd + '_tur' + tur).prop('checked')){
-					  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
-					  jq.ajax({
-				  	  	  type: 'GET',
-				  	  	  url: 'createHousesFromOppdrag_Digitoll.do',
-				  	  	  data: { applicationUser : jq('#applicationUser').val(),
-									avd : avd,
-									opd : opd,
-									tur : tur,
-									lnrt : jq('#lnrt').val(),
-									lnrm : jq('#lnrm').val(),
-									mode : 'A'},
-									
-				  	  	  dataType: 'json',
-				  	  	  cache: false,
-				  	  	  //async: false,
-				  	  	  contentType: 'application/json',
-				  	  	  success: function(data) {
-							jq.unblockUI(); //must have async: true (default) to work
-				  	  		var len = data.length;
-				  	  		for ( var i = 0; i < len; i++) {
-				  	  			//Update has been done successfully
-						        
-				  	  		}
-							
-				  	  	  },
-					  	  error: function() {
-							jq.unblockUI();
-				  	  	    //alert('Error loading ...');
-				  	  	  }
-				  	  });
-					  
-				   }
-				  
-			});
-			window.setTimeout(function(){
-                 //we must reload the parent master window since the use case updates the invoice list (if the end-user has selected some invoices to import)
-				  window.opener.setBlockUI();
-				  window.opener.location.href="tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=" + jq('#lnrt').val() + "&emlnrm=" + jq('#lnrm').val();
-				  window.close();     
-             }, 800); //milliseconds: in order to avoid a refresh in master due to the above Ajax create house. It could take more time to be finished on the background...
-			
-		});
-		//abort
-		jq('#buttonCancel').click(function(){
-			window.close();
-		});
-		
-	});
-	*/
-
+  	
 	function getItemData(record) {
 	  	var id = record.id;
 		var opd = id.replace("recordUpdate_", "");
@@ -172,16 +115,17 @@
 	  	var record = ids.split("_");
 		//console.log = record;
 	  	var applicationUser = jq('#applicationUser').val();
-	  	var tur = record[0];
-	  	var avd = record[1];
-	  	//var opd = record[2];
+	  	var avd = record[0];
+	  	var dummyOpd = record[1];
+		var dato = record[2];
+	  	
 	  	//DEBUG alert(applicationUser + " " + tur + " " + avd + " " + opd);
 		
 	  	jq.ajax({
 	  	  type: 'GET',
-	  	  url: 'getSpecificOppdrag_Digitoll.do',
+	  	  url: 'getSpecificSadi_Digitoll.do',
 	  	  data: { applicationUser : applicationUser,
-				  tur : tur,	 
+				  dato : dato,	
 	  		  	  avd : avd, 
 	  		  	  opd : opd},
 	  	  dataType: 'json',

@@ -77,8 +77,8 @@
                 <td class="text14" align="left" title="sign" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.manifest.list.search.label.signatur"/></td>
                 
                 <td class="text14" align="left" ><span title="turnr"><spring:message code="systema.tvinn.sad.manifest.list.search.label.turnr"/></span></td>
-                <td class="text14" align="left" ><span title="etafdatum"><spring:message code="systema.tvinn.sad.manifest.list.search.label.etafdatum"/></span></td>
-                <td class="text14" align="left" ><span title="etatdatum"><spring:message code="systema.tvinn.sad.manifest.list.search.label.etatdatum"/></span></td>
+                <td class="text14" align="left" ><span title="etadatum"><spring:message code="systema.tvinn.sad.manifest.list.search.label.etafdatum"/></span></td>
+                <td class="text14" align="left" ><span title="etadatumt"><spring:message code="systema.tvinn.sad.manifest.list.search.label.etatdatum"/></span></td>
                 <td class="text14" align="left" ><span title="datum"><spring:message code="systema.tvinn.sad.manifest.list.search.label.fdatum"/></span></td>
                 <td class="text14" align="left" ><span title="datumt"><spring:message code="systema.tvinn.sad.manifest.list.search.label.tdatum"/></span></td>
                 <td class="text14" align="left" ><span title="status">Status</span></td>
