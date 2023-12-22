@@ -1029,7 +1029,8 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		StringBuilder urlRequestParams = new StringBuilder( "user=" + appUser.getUser());
 		if(StringUtils.isNotEmpty(bilnr)) {
 			urlRequestParams.append("&bil=" + bilnr);
-		}else if(StringUtils.isNotEmpty(dato)) {
+		}
+		if(StringUtils.isNotEmpty(dato)) {
 			urlRequestParams.append("&dato=" + dato);
 		}
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");

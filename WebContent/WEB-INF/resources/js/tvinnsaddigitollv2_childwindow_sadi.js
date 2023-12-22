@@ -42,12 +42,13 @@
 				  var avd = record[0].replace("avd", "");
 				  var opd = record[1].replace("opd", "");
 				  var dato = record[2].replace("dato", "");
+				  var bilnr = record[3].replace("bil", "");	
 				  var tur = jq('#tur').val();
 				  //var counter = i + 1;
 				  //alert(avd + "-" + opd + "-" + dato);
 					  
-				  if(jq('#avd' + avd + '_opd' + opd + '_dato' + dato).prop('checked')){
-					 var tmp = "avd" + avd + "_opd" + opd + "_dato" + dato + "#";
+				  if(jq('#avd' + avd + '_opd' + opd + '_dato' + dato + '_bil' + bilnr).prop('checked')){
+					 var tmp = "avd" + avd + "_opd" + opd + "_dato" + dato + '_bil' + bilnr + "#";
 					 params = params + tmp;
 					 turParam = tur; 
 					
@@ -118,8 +119,7 @@
 	  	var avd = record[0];
 	  	var dummyOpd = record[1];
 		var dato = record[2];
-	  	
-	  	//DEBUG alert(applicationUser + " " + tur + " " + avd + " " + opd);
+		var bilnr = record[3];
 		
 	  	jq.ajax({
 	  	  type: 'GET',
@@ -127,7 +127,8 @@
 	  	  data: { applicationUser : applicationUser,
 				  dato : dato,	
 	  		  	  avd : avd, 
-	  		  	  opd : opd},
+	  		  	  opd : opd,
+				  bilnr : bilnr},
 	  	  dataType: 'json',
 	  	  cache: false,
 	  	  contentType: 'application/json',

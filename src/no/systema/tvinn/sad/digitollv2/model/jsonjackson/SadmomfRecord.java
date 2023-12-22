@@ -112,7 +112,8 @@ public class SadmomfRecord extends JsonAbstractGrandFatherRecord   {
 	private String own_emdkmUnique = "";  
 	private Boolean own_okToDelete = true;
 	private Boolean own_invalidHousesExist = false;
-	
+	private String own_resultAjaxText = "";
+
 	private Collection<SadmohfRecord> listHouses = null;
 	public void setListHouses(Collection<SadmohfRecord> value){ this.listHouses = value;}
 	public Collection<SadmohfRecord> getListHouses(){ return this.listHouses; }

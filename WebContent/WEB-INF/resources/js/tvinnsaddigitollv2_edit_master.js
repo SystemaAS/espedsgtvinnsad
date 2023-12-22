@@ -468,7 +468,22 @@
 					jq.unblockUI();
 						//alert("Hello");
 						var len = data.length;
-						
+						if(len>0){
+						  	for ( var i = 0; i < len; i++) {
+								//return text (OK or ERROR)
+								var resultText = data[i].own_resultAjaxText;
+								if(resultText.indexOf('ERROR') >=0 ){
+									jq('#sendToPartButton').removeClass("isa_success");
+									jq('#sendToPartButton').addClass("isa_error");
+									jq('#ajaxErrorTextExtParty').css('color', 'red');
+								}else{
+									jq('#sendToPartButton').removeClass("isa_error");
+									jq('#sendToPartButton').addClass("isa_success");
+									jq('#ajaxErrorTextExtParty').css('color', 'green');
+								}
+								jq('#ajaxErrorTextExtParty').text(resultText);
+							}
+						}
 					},
 				  	  error: function() {
 				  	    alert('Error loading ...');

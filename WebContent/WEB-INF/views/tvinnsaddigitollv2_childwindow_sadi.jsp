@@ -35,7 +35,7 @@
 							<td>
 							<table id="old" >
 								<tr>
-								<td colspan="5">
+								<td colspan="10">
 									<form name="tvinnsadCustomerForm" id="tvinnsadCustomerForm" action="tvinnsaddigitollv2_childwindow_sadi.do?action=doFind" method="post">
 										<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
 										<input type="hidden" name="lnrt" id="lnrt" value="${model.lnrt}">
@@ -44,6 +44,9 @@
 									
 									<table>
 									<tr>
+					            		<td class="text14">&nbsp;Kjøretøy kjennemerke</td>
+										<td class="text14">&nbsp;<input readonly type="text" class="inputTextReadOnly" name="bil" id="bil" size="10" maxlength="15" value="${model.bil}"></td>
+										
 					            		<td class="text14">&nbsp;Dato</td>
 										<td class="text14">&nbsp;<input onKeyPress="return numberKey(event)" type="text" class="inputText" name="dato" id="dato" size="8" maxlength="6" value="${model.dato}"></td>
 										
@@ -54,14 +57,13 @@
 					           		</form>
 								</td>
 								</tr>
-								<tr height="5"><td></td></tr> 
+								<tr height="15"><td></td></tr> 
 								<tr>
 									<td class="text14  ">
 						    			<font class="inputText isa_warning" >
 						    				Import fortollinger
 						    			</font>
 						    		</td>
-						    		<td width="20px">&nbsp;</td>
 						    		<%--
 						    		<td nowrap align="right" class="text16" style="color: gray;"  >
 						    			<%--Liste av oppdrag med godkjente deklarasjoner
@@ -72,9 +74,9 @@
 					               		<c:if test="${not empty model.list}">
 					               			&nbsp;<input title="automatisk generere house(s)..." class="inputFormSubmit" type="button" name="buttonCreateHousesOk" id="buttonCreateHousesOk" value='Ok Auto'>
 					               		</c:if>
-					               		&nbsp;<input class="inputFormSubmit" type="button" name="buttonCancel" id="buttonCancel" value='Avbryt'>
+					               		<input class="inputFormSubmit" type="button" name="buttonCancel" id="buttonCancel" value='Avbryt'>
 					               		<c:if test="${not empty model.list}">
-					               			&nbsp;<input class="inputFormSubmitStd" type="button" name="buttonCheckAll" id="buttonCheckAll" value='Velg alle'>
+					               			<input class="inputFormSubmitStd" type="button" name="buttonCheckAll" id="buttonCheckAll" value='Velg alle'>
 					               		</c:if>
 					               	</td>
 					               	
@@ -96,6 +98,7 @@
 								<th width="2%" title="Velg automatisk generere house(s)..." class="tableHeaderField12" >Velg auto.</th>
 		                    	<th width="2%" class="tableHeaderField12" >Avd</th>
 		                    	<th width="2%" class="tableHeaderField12" >Opd</th>
+		                    	<th width="2%" class="tableHeaderField12" >Bilnr</th>
 		                    	<th width="2%" class="tableHeaderField12" >Ekst.ref.</th>
 		                    	<th width="2%" class="tableHeaderField12" >Br.vekt</th>
 		                    	<th width="2%" class="tableHeaderField12" >Kolli</th>
@@ -111,15 +114,16 @@
 		                	<c:forEach items="${model.list}" var="record" varStatus="counter">    
 				             <tr class="tableRow" height="20" >
 				               <td width="2%" align="center" class="tableCellFirst12" >
-				          	   		<a style="display: block;" tabindex=-1 title="${record.siavd}_${record.sitdn}_${model.dato}" id="recordUpdate_${record.sitdn}" href="#" onClick="getItemData(this);">
+				          	   		<a style="display: block;" tabindex=-1 title="${record.siavd}_${record.sitdn}_${record.sidt}_${model.bil}" id="recordUpdate_${record.sitdn}" href="#" onClick="getItemData(this);">
 				          	   			<img title="select manual edit" src="resources/images/update.gif" border="0" alt="edit">
 				          	   		</a>
 				          	   </td>
 				          	   <td width="2%" align="center" class="tableCell12">
-					           		<input class="clazzCreateHouseAware" style="cursor:pointer;" type="checkbox" value="J" id="avd${record.siavd}_opd${record.sitdn}_dato${model.dato}" name="avd${record.siavd}_opd${record.sitdn}_dato${model.dato}" >
+					           		<input class="clazzCreateHouseAware" style="cursor:pointer;" type="checkbox" value="J" id="avd${record.siavd}_opd${record.sitdn}_dato${record.sidt}_bil${model.bil}" name="avd${record.siavd}_opd${record.sitdn}_dato${record.sidt}_bil${model.bil}" >
 					           </td>	
 				          	   <td width="2%" align="center"class="tableCell12" >${record.siavd}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.sitdn}</td>
+				          	   <td width="2%" align="center" class="tableCell12" >${record.sitrid}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.fssok}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.sivkb}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.sintk}</td>

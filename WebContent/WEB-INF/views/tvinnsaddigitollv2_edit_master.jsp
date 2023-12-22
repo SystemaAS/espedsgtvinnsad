@@ -436,9 +436,9 @@
 									</a>
 								</td>
 								<td class="text14"><span title="Send til orgnr">Orgnr</span></td>
-								
+								<td colspan="3" class="text12"><span id="ajaxErrorTextExtParty" name="ajaxErrorTextExtParty"></span></td>
 							</c:if>
-							--%>
+							 --%>
 						</tr>
 						<tr>
 							<td class="text14">
@@ -457,18 +457,20 @@
 								</tr>
 								</table>
 							</td>
-							<%-- 
+							<%--
 							<c:if test="${model.record.emlnrm > 0}">
 								<td width="40px"></td>
 								<td class="text14">
 									<input  type="text" class="inputTextMediumBlue" name="ownReceiverName" id="ownReceiverName" size="31" maxlength="30" value="${Xmodel.record.todo}">
 								</td>
 								<td class="text14">	
-									<input  type="text" class="inputTextMediumBlue" name="ownReceiverOrgNr" id="ownReceiverOrgNr" size="17" maxlength="20" value="${Xmodel.record.todo}">
-									&nbsp;<input title="Send til part..." class="inputFormSubmitStd" style="cursor:pointer;" type="button" name="sendToPartButton" id="sendToPartButton" value='Send masterId til part'>
+									<input  type="text" class="inputTextMediumBlue" name="ownReceiverOrgNr" id="ownReceiverOrgNr" size="17" maxlength="20" value="${Xmodel.record.todo}">									
+								</td>
+								<td class="text14">	
+									<input title="Send til part..." class="inputFormSubmitStd" style="cursor:pointer;" type="button" name="sendToPartButton" id="sendToPartButton" value='Send masterId til part'>
 								</td>
 							</c:if>
-							--%> 		
+							--%>		
 						</tr>
 						</table>
 					</td>

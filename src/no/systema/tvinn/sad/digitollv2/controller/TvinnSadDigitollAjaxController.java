@@ -201,14 +201,14 @@ public class TvinnSadDigitollAjaxController {
 	@RequestMapping(value = "getSpecificSadi_Digitoll.do", method = RequestMethod.GET)
 	public @ResponseBody Set<SadOppdragRecord> getSpecificSadi_Digitoll
 	  						(@RequestParam String applicationUser, @RequestParam String dato, 
-	  						 @RequestParam String avd, @RequestParam String opd) {
+	  						 @RequestParam String avd, @RequestParam String opd, @RequestParam String bilnr) {
 		 
 		final String METHOD = "[DEBUG] getSpecificSadi_Digitoll";
 		logger.info(METHOD + "Inside");
 		Set result = new HashSet();
 		//convert NO-dato to ISO
 		String datoISO = dateMgr.getDateFormatted_ISO(String.valueOf(dato), DateTimeManager.NO_FORMAT);
-		SadOppdragRecord record = this.getSadi(applicationUser, datoISO, avd, opd);
+		SadOppdragRecord record = this.getSadi(applicationUser, datoISO, avd, opd, bilnr); 
 		if(record!=null) {
 			result.add(record);
 		}
@@ -417,26 +417,28 @@ public class TvinnSadDigitollAjaxController {
 		 
 		 List<String> mainList = new ArrayList<String>();
 		 if (StringUtils.isNotEmpty(params)) {
-			 String [] recordAvdOpdDato = params.split("#");
-			 mainList = Arrays.asList(recordAvdOpdDato);
+			 String [] recordAvdOpdDatoBilList = params.split("#");
+			 mainList = Arrays.asList(recordAvdOpdDatoBilList);
 		 }
 		 
 		 
 		 if(!mainList.isEmpty()) {
 			 
-			 for (String recordAvdOpdDato: mainList) {
-				 String[] avdOpd = recordAvdOpdDato.split("_");
+			 for (String recordAvdOpdDatoBil: mainList) {
+				 String[] avdOpd = recordAvdOpdDatoBil.split("_");
 				 String avd = avdOpd[0].replace("avd", "");
 				 String opd = avdOpd[1].replace("opd", "");
 				 String dato = avdOpd[2].replace("dato", "");
+				 String bilnr = avdOpd[3].replace("bil", "");
 				 logger.info("avd:" + avd);
 				 logger.info("opd:" + opd);
 				 logger.info("dato:" + dato);
+				 logger.info("bilnr:" + bilnr);
 				 //convert NO-dato to ISO
 				 String datoISO = dateMgr.getDateFormatted_ISO(String.valueOf(dato), DateTimeManager.NO_FORMAT);
 				 
 				 //(2) now go on with the real issue (create the house(s)
-				 SadOppdragRecord record = this.getSadi(applicationUser, datoISO, avd, opd);
+				 SadOppdragRecord record = this.getSadi(applicationUser, datoISO, avd, opd, bilnr);
 				 if(record!=null) {
 					//hand-over 
 					SadmohfRecord sadmohfRecord = new SadmohfRecord();
@@ -792,7 +794,11 @@ public class TvinnSadDigitollAjaxController {
 				  //return to jquery
 				  if("OK".equalsIgnoreCase(jsonPayload)) {
 					  SadmomfRecord record = new SadmomfRecord();
-					  record.setEmlnrm(Integer.valueOf(emlnrm) );
+					  record.setOwn_resultAjaxText(jsonPayload);
+					  result.add(record);
+				  }else {
+					  SadmomfRecord record = new SadmomfRecord();
+					  record.setOwn_resultAjaxText(jsonPayload);
 					  result.add(record);
 				  }
 				
@@ -857,16 +863,24 @@ public class TvinnSadDigitollAjaxController {
 	 * @param opd
 	 * @return
 	 */
-	private SadOppdragRecord getSadi(String applicationUser, String dato, String avd, String opd) {
+	private SadOppdragRecord getSadi(String applicationUser, String dato, String avd, String opd, String bilnr) {
 		SadOppdragRecord retval = null;
 		
 		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_SADI_URL;
 		//add URL-parameters
-		String urlRequestParams = "user=" + applicationUser + "&dato=" + dato;
+		StringBuilder urlRequestParams =  new StringBuilder();
+		urlRequestParams.append("user=" + applicationUser);
+		if(StringUtils.isNotEmpty(bilnr)){
+			urlRequestParams.append("&bil=" + bilnr);
+		}
+		if(StringUtils.isNotEmpty(dato)){
+			urlRequestParams.append("&dato=" + dato);
+		}
+		
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
     	logger.warn("URL: " + BASE_URL);
     	logger.warn("URL PARAMS: " + urlRequestParams);
-    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
 
     	//Debug --> 
     	logger.info(jsonPayload);
@@ -876,6 +890,7 @@ public class TvinnSadDigitollAjaxController {
     		if(container!=null && !container.getList().isEmpty()) {
     			for(SadOppdragRecord record: container.getList()) {
     				if(record.getSitdn().equals(opd) && record.getSiavd().equals(avd)) {
+    					logger.info(record.getSitdn());
     					//Dekl.dato format to NO
     					if(StringUtils.isNotEmpty(record.getWeh0068a())) {
 							if (record.getWeh0068a().length()==8) {

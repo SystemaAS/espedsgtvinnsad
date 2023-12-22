@@ -320,8 +320,13 @@
 				       <td class="tableCell text12" >
 		               		<c:if test="${not empty record.listMasters}">
 		               			<span class="text12SkyBlue">${ record.listMasters[0].emmid}</span>
-		               			<c:if test="${not empty record.listMasters[0].listHouses && record.listMasters[0].listHouses.size() > 1}">
-		               				<span class="text10">&nbsp;Ant.h.&nbsp;${record.listMasters[0].listHouses.size()}</span>
+		               			<c:if test="${not empty record.listMasters[0].listHouses}">
+		               				<c:if test="${record.listMasters[0].listHouses.size() > 1}">
+		               					<span class="text10">&nbsp;Ant.h.&nbsp;${record.listMasters[0].listHouses.size()}</span>
+		               				</c:if>
+		               				<c:if test="${not empty record.listMasters[0].listHouses[0].ehtrnr}">
+		               					<span class="text10">&nbsp;Transit.h.&nbsp;${record.listMasters[0].listHouses[0].ehtrnr}</span>
+		               				</c:if>
 		               			</c:if>
 		               		</c:if>
 		               		
