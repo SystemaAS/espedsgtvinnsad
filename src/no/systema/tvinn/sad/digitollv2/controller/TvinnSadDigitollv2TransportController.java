@@ -198,8 +198,8 @@ public class TvinnSadDigitollv2TransportController {
 								for(SadmotfRecord record: outputList){
 									this.adjustFieldsForFetch(record);
 									
-									//Special search for red flags
-									//this in order to get a redFlag (defect masters or houses)
+									//Special search for red flags/ yellow flags
+									//this in order to get a redFlag/yellowFlag (defect masters or houses)
 									if(StringUtils.isNotEmpty(request.getParameter("showErrorLayers"))) {
 										if(outputList.size() < SadDigitollConstants.MAX_NUMBER_OF_LINES_FOR_DEEPSEARCH_REDFLAG_ON_TRANSPORT_MAINLIST) { //temporarily to test and avoid hang-ups
 											this.getMasterHouseRedFlagMainList(appUser, record);
@@ -1472,11 +1472,23 @@ public class TvinnSadDigitollv2TransportController {
     		if(listChild!=null && !listChild.isEmpty()) {
     			for(SadmomfRecord child : listChild) {
 	    			if(child.getEmst2().equals(EnumSadmomfStatus2.M.toString())) {
+	    				logger.info("RED!!!");
 	    				record.setOwn_invalidMastersExist(true);
 	    				break;
 	    			}else {
 	    				//this is in order to rise "red flag" on GUI
 	    				this.getHouses(appUser, child, record);
+	    			}
+	    		}
+    			//check for unsent masters ...
+    			for(SadmomfRecord child : listChild) {
+    				logger.info("status2:" + child.getEmst2());
+	    			if(!child.getEmst2().equals(EnumSadmomfStatus2.S.toString())) {
+	    				if(!child.getEmst2().equals(EnumSadmomfStatus2.C.toString())) {
+	    					logger.info("YELLOW flag!!!");
+	    					record.setOwn_unsentMastersExist(true);
+	    					break;
+	    				}
 	    			}
 	    		}
     			
@@ -1591,6 +1603,17 @@ public class TvinnSadDigitollv2TransportController {
     				record.setOwn_invalidHousesExist(true);
     				parent.setOwn_invalidHousesExist(true);
     				break;
+    			}
+    		}
+    		//unsent houses check
+    		for(SadmohfRecord house : tmpList) {
+    			//to heavy?: --> this is for GUI info
+    			if(!house.getEhst2().equals(EnumSadmohfStatus2.S.toString())) {
+    				if(!house.getEhst2().equals(EnumSadmohfStatus2.C.toString())) {
+    					//record.setOwn_invalidHousesExist(true);
+    					parent.setOwn_unsentHousesExist(true);
+    					break;
+    				}
     			}
     		}
     	}

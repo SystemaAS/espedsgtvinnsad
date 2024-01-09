@@ -298,7 +298,7 @@
 		               <td width="2%" align="center" class="tableCell" ><c:if test="${record.etpro > 0}">${record.etpro}</c:if></td>
 		            
 		               <td width="2%" align="center" class="tableCell text12">
-		               		<c:if test="${record.own_invalidMastersExist || record.own_invalidHousesExist || record.etst2 == 'M'}">
+		               		<c:if test="${record.own_invalidMastersExist || record.own_invalidHousesExist || record.own_unsentMastersExist || record.own_unsentHousesExist || record.etst2 == 'M'}">
 		               			<c:choose>
 		               			<c:when test="${record.etst2 == 'M'}">
 		               				<img style="cursor:help;" title="Error on transport..." src="resources/images/redFlag.png" width="18" height="18" border="0"><font class="text10" style="color:red;">T</font>
@@ -308,8 +308,15 @@
 			               				<c:if test="${record.own_invalidMastersExist}">
 		           							<img style="cursor:help;" title="Error on master..." src="resources/images/redFlag.png" width="18" height="18" border="0"><font class="text10" style="color:red;">M</font>
 		           						</c:if>
+		           						<c:if test="${record.own_unsentMastersExist}">
+		           							<img style="cursor:help;" title="Unsent master..." src="resources/images/yellowflag2.png" width="12" height="18" border="0"><font class="text10" style="color:red;">M</font>
+		           						</c:if>
+		           						
 		           						<c:if test="${record.own_invalidHousesExist}">
 		           							<img style="cursor:help;" title="Error on house..." src="resources/images/redFlag.png" width="18" height="18" border="0"><font class="text10" style="color:red;">H</font>
+		           						</c:if>
+		           						<c:if test="${record.own_unsentHousesExist}">
+		           							<img style="cursor:help;" title="Unsent house..." src="resources/images/yellowflag2.png" width="12" height="18" border="0"><font class="text10" style="color:red;">H</font>
 		           						</c:if>
 	           						
 	           					</c:otherwise>
