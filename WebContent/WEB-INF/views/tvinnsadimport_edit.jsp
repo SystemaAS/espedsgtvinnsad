@@ -64,6 +64,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
+						<%--
 						<a id="alinkInvoices" style="display:block;" href="tvinnsadimport_edit_finansopplysninger.do?action=doFetch&avd=${ model.record.siavd}&sign=${ model.record.sisg}
 													&opd=${ model.record.sitdn}
 													&status=${ model.record.sist}&fabl=${ model.record.sibel3}&o2_sist=${ model.record.o2_sist}&o2_sidt=${ model.record.o2_sidt}&o2_simf=${ model.record.o2_simf}">
@@ -71,26 +72,41 @@
 								&nbsp;<spring:message code="systema.tvinn.sad.import.finansopplys.createnew.tab"/>
 							</font>
 						</a>
+						 --%>
+						<font class="tabDisabledLink">
+							&nbsp;<spring:message code="systema.tvinn.sad.import.finansopplys.createnew.tab"/>
+						</font>
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
+						<%--
 						<a id="alinkNotis" style="display:block;" href="editNotisblock.do?action=doFetch&subsys=sadi&orig=topic&avd=${ model.record.siavd}&sign=${ model.record.sisg}
 													&opd=${ model.record.sitdn}&status=${ model.record.sist}&o2_sist=${ model.record.o2_sist}&o2_sidt=${ model.record.o2_sidt}&o2_simf=${ model.record.o2_simf}">
 							<font class="tabDisabledLink">
 								&nbsp;<spring:message code="systema.tvinn.sad.import.notisblock.createnew.tab"/>
 							</font>
 						</a>
+						--%>
+						<font class="tabDisabledLink">
+							&nbsp;<spring:message code="systema.tvinn.sad.import.notisblock.createnew.tab"/>
+						</font>
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<c:choose>
 							<c:when test="${not empty model.record.sibel3}">
+								<%--
 								<a id="alinkItemLines" style="display:block;" href="tvinnsadimport_edit_items.do?action=doFetch&avd=${ model.record.siavd}&sign=${ model.record.sisg}
 									&opd=${ model.record.sitdn}&status=${ model.record.sist}&fabl=${model.record.sibel3}&o2_sist=${ model.record.o2_sist}&o2_sidt=${ model.record.o2_sidt}&o2_simf=${ model.record.o2_simf}">
 									<font class="tabDisabledLink">
 										&nbsp;<spring:message code="systema.tvinn.sad.import.item.createnew.tab"/>
 									</font>
 								</a>
+								--%>
+								<font class="tabDisabledLink">
+									&nbsp;<spring:message code="systema.tvinn.sad.import.item.createnew.tab"/>
+								</font>
+								
 							</c:when>
 							<c:otherwise>
 								<font title="Du må lagre Tolldekl. først! " class="tabDisabledLink" style="color:red;">
@@ -102,6 +118,7 @@
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
+						<%--
 						<a id="alinkLogging" style="display:block;" href="tvinnsadimport_logging.do?avd=${ model.record.siavd}&sign=${ model.record.sisg}
 													&opd=${model.record.sitdn}&status=${model.record.sist}&o2_sist=${ model.record.o2_sist}&o2_sidt=${ model.record.o2_sidt}&o2_simf=${ model.record.o2_simf}">
 							<font class="tabDisabledLink">
@@ -109,9 +126,14 @@
 							</font>
 							<img style="vertical-align: bottom" src="resources/images/log-icon.png" width="16" hight="16" border="0" alt="show log">
 						</a>
+						--%>
+						<font class="tabDisabledLink">
+								&nbsp;<spring:message code="systema.tvinn.sad.import.logging.tab"/>
+							</font>
 					</td>
 					<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
+						<%--
 						<a id="alinkArchive" style="display:block;" href="tvinnsadimport_archive.do?avd=${model.record.siavd}&sign=${model.record.sisg}
 													&opd=${model.record.sitdn}&status=${model.record.sist}&o2_sist=${ model.record.o2_sist}&o2_sidt=${ model.record.o2_sidt}&o2_simf=${ model.record.o2_simf}">
 							<font class="tabDisabledLink">
@@ -119,6 +141,10 @@
 							</font>
 							<img style="vertical-align: bottom" src="resources/images/archive.png" width="16" hight="16" border="0" alt="show archive">
 						</a>
+						--%>
+						<font class="tabDisabledLink">
+								&nbsp;<spring:message code="systema.tvinn.sad.import.archive.tab"/>
+							</font>
 					</td>
 					
 					<%-- We must check if this tolddkl. qualifies for omberegning --%>
@@ -282,6 +308,7 @@
 					</div>						
 					
 				</td>
+				<%--
 				<td align="right" valign="top" >
 					<input tabindex=-1 type="checkbox" name="simi" id="simi" value="I" <c:if test="${model.record.simi == 'I'}"> checked </c:if> ><font class="text14MediumBlue"><b>Foreløpig</b></font>&nbsp;&nbsp;&nbsp;
 					<c:if test="${'2' != isTestAvd}">
@@ -295,16 +322,19 @@
 					&nbsp;&nbsp;<img title="Upload dokument" style="vertical-align: bottom;cursor: pointer;" id="uploadFileImg" width="25px" height="25px" src="resources/images/upload.png" border="0" alt="Upload dokument">
 					&nbsp;&nbsp;&nbsp;
 				</td>
+				 --%>
 			</tr>
 			<tr >
 				<td align="left" class="text14MediumBlue" >
 					&nbsp;&nbsp;&nbsp;&nbsp;<span title="sidst">Tarifferingsted:</span>&nbsp;<b>${model.record.sidst}</b>
 					&nbsp;&nbsp;<span title="sitarf">Tariffør:</span>&nbsp;<b>${model.record.sitarf}</b>
+					<%--
 					<c:forEach items="${user.menuList}" var="record" varStatus="counter"> 
 				 		<c:if test="${ fn:contains(record.prog, 'TOMCAT-TROR') }">
 							&nbsp;&nbsp;<input class="buttonGrayWithGreenFrame" type="button" name="buttonToTror" id="buttonToTror" value='Til Oppdragsreg.'/>
 						</c:if>
 					</c:forEach>
+					 --%>
 				</td>
 			</tr>
 			
@@ -1131,7 +1161,7 @@
 				            <tr >	
 			            		<td class="text9BlueGreen" valign="bottom" align="left" >
 	
-			 				    <%-- only status = M or emtpy status is allowed --%>
+			 				    <%-- only status = M or emtpy status is allowed 
 			 				    <c:choose>
 				 				    <c:when test="${ model.record.sist == 'M' || empty  model.record.sist }">
 					 				    	<input tabindex=-1 class="inputFormSubmit" type="submit" name="submit" id="submit" onclick="javascript: form.action='tvinnsadimport_edit.do';" value='<spring:message code="systema.tvinn.sad.import.createnew.submit"/>'/>
@@ -1144,7 +1174,7 @@
 				 				    		<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
 				 				    </c:otherwise>	
 			 				    </c:choose>
-		 				    
+		 				    	--%>
                 				</td>
 					        </tr>
 				            
@@ -1955,7 +1985,7 @@
 				            <tr >	
 			            		<td class="text9BlueGreen" valign="bottom" align="left" >
 	
-			 				    <%-- only status = M or emtpy status is allowed --%>
+			 				    <%-- only status = M or emtpy status is allowed 
 			 				    <c:choose>
 				 				    <c:when test="${ model.record.sist == 'M' || empty  model.record.sist }">
 					 				    	<input tabindex=-1 class="inputFormSubmit" type="submit" name="submit2" id="submit2" onclick="javascript: form.action='tvinnsadimport_edit.do';" value='<spring:message code="systema.tvinn.sad.import.createnew.submit"/>'/>
@@ -1968,7 +1998,7 @@
 				 				    		<input disabled class="inputFormSubmitGrayDisabled" type="submit" name="submit2" value='<spring:message code="systema.tvinn.sad.submit.not.editable"/>'/>
 				 				    </c:otherwise>	
 			 				    </c:choose>
-		 				    
+		 				    	--%>
                 				</td>
 					        </tr>
 				            

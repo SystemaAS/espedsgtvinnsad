@@ -294,7 +294,7 @@ public class SadImportHeaderController {
 			    		//add gui lists here
 						this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
 						this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
-						this.populateArchiveList(appUser, avd, opd, model);
+						//this.populateArchiveList(appUser, avd, opd, model); removed since DSV does not has this function correct
 						this.setCodeDropDownMgr(appUser, model);	
 			    		this.setDomainObjectsInView(session, model, jsonSadImportSpecificTopicContainer, totalItemLinesObject, omberegningFlag, omberegningDate, omberegningType);	
 				    		

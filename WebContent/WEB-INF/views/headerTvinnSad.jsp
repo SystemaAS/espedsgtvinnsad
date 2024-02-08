@@ -154,8 +154,8 @@
 			    			<%-- --------------------- --%>
 			    			<%-- TVINN-SAD IMPORT MENU --%>
 			    			<%-- --------------------- --%>
-			    			<%-- Requires Norskimport alla AS400-pgm <a id="alinkTopicListMenuImp" tabindex=-1 href="tvinnsadimport.do?action=doFind&sg=${user.tvinnSadSign}"> --%>
-			    			<a id="alinkTopicListMenuExp" tabindex=-1 href="tvinnsadgate.do">
+			    			<a id="alinkTopicListMenuImp" tabindex=-1 href="tvinnsadimport.do?action=doFind&sg=${user.tvinnSadSign}">
+			    			<%-- <a id="alinkTopicListMenuExp" tabindex=-1 href="tvinnsadgate.do"> --%>
 			    				&nbsp;<font 
 			    				<c:choose>           
 	                   			<c:when test="${user.activeMenu=='TVINN_SAD_IMPORT'}">
