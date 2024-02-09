@@ -64,7 +64,7 @@ public class TvinnSadGateController {
 			logger.info("appUser user:" + appUser.getUser());
 			logger.info("appUser lang:" + appUser.getUsrLang());
 			logger.info("appUser userAS400:" + appUser.getUserAS400());
-			
+			logger.info("appUser host:" + appUser.getServletHostWithoutHttpPrefix());
 			String authorizationOn = appUser.getAuthorizedTvinnSadUserAS400();
 			String formSubmit = request.getParameter("formSubmit");
 			

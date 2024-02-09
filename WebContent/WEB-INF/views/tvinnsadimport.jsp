@@ -301,6 +301,7 @@
 						 </a>
 	               	  </td>	
    		               <td align="center" class="tableCell" >&nbsp;
+   		               		<%--
 							<a class="copyLink" id="copyLink${counter.count}" runat="server" href="#">
 								<img src="resources/images/copy.png" border="0" alt="copy">
 							</a>
@@ -341,9 +342,11 @@
 									</table>
 								</form>
 							</div>
+							 --%>
 		               </td>
 		               
 		               <td align="center" class="tableCell" >
+		               <%--	
 		               <c:if test="${ topic.status == 'M' || empty  topic.status }">
 							<a class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
 								<img src="resources/images/delete.gif" border="0" alt="remove">
@@ -359,7 +362,8 @@
 									
 								</form>
 							</div>
-						</c:if>	
+						</c:if>
+						 --%>	
 		               </td>
 		               
 		            </tr>
