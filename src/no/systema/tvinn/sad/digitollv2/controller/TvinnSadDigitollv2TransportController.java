@@ -225,7 +225,8 @@ public class TvinnSadDigitollv2TransportController {
 			this.avdSignControllerService.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
 			this.avdSignControllerService.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
 			this.setCodeDropDownMgr(appUser, model);
-			
+			//set a session variable in order to make the list available to an external view controller (Excel/PDF- Controller)
+			session.setAttribute(session.getId() + TvinnSadConstants.SESSION_LIST, outputList);
 			
 			//domain and search filter
 			successView.addObject(TvinnSadConstants.DOMAIN_LIST,outputList);

@@ -13,5 +13,6 @@ public final class SadDigitollConstants {
 	//
 	public static final String RESOURCE_FILES_PATH = "/WEB-INF/resources/files/";
 	//
-	public static final Integer MAX_NUMBER_OF_LINES_FOR_DEEPSEARCH_REDFLAG_ON_TRANSPORT_MAINLIST = 35;
+	//public static final Integer MAX_NUMBER_OF_LINES_FOR_DEEPSEARCH_REDFLAG_ON_TRANSPORT_MAINLIST = 35;
+	public static final Integer MAX_NUMBER_OF_LINES_FOR_DEEPSEARCH_REDFLAG_ON_TRANSPORT_MAINLIST = 500;
 }

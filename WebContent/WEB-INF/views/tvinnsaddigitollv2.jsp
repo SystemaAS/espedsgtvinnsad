@@ -36,6 +36,10 @@
 			</td>
 			 
 			<td width="80%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
+				<a href="digitollTransportMainListExcelView.do" target="_blank">
+               		<img title="Excel export..." id="itemListExcel" style="vertical-align:top;" width="22px" height="22px"src="resources/images/excel.png" border="0" alt="excel">
+	        	</a>&nbsp;
+	        		
 				<a tabindex=-1 href="renderLocalPdf.do?fn=Digitoll-MOv2.pdf" target="_blank">
  					<img title="Documentation..." style="vertical-align:top;" width="22px" height="22px" src="resources/images/pdf2.png" border="0" alt="pdf">
  				</a>
@@ -81,7 +85,7 @@
                 <td class="text14" align="left" ><span title="etadatumt"><spring:message code="systema.tvinn.sad.manifest.list.search.label.etatdatum"/></span></td>
                 <td class="text14" align="left" ><span title="datum"><spring:message code="systema.tvinn.sad.manifest.list.search.label.fdatum"/></span></td>
                 <td class="text14" align="left" ><span title="datumt"><spring:message code="systema.tvinn.sad.manifest.list.search.label.tdatum"/></span></td>
-                <td class="text14" align="left" ><span title="status">Status</span></td>
+                <td class="text14" align="left" ><span title="status"><spring:message code="systema.tvinn.sad.manifest.list.search.label.status"/></span></td>
                 <td class="text14" align="left" >
                 	<img style="cursor:pointer;" onMouseOver="showPop('extref_info');" onMouseOut="hidePop('extref_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
 	            	<span title="opd - house"><font color="green">Ekst.ref - House</font></span>

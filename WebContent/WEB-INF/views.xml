@@ -15,5 +15,7 @@
 	<!-- TVINN-SAD NCTS Import -->
 	<bean id="tvinnsadNctsImportMainListExcelView" class="no.systema.tvinn.sad.nctsimport.view.MainListExcelBuilder" />
 	
+	<!-- TVINN-SAD Digitoll Transport -->
+	<bean id="tvinnsadDigitollTransportMainListExcelView" class="no.systema.tvinn.sad.digitollv2.view.TransportListExcelBuilder" />
 	
 </beans>
