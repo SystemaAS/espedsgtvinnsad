@@ -45,8 +45,8 @@
 			    	<td width="12%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a id="alinkTopicList" style="display:block;" 
 							<c:choose>
-								<c:when test="${empty model.record.sisg}">href="tvinnsadimport.do?action=doFind&sg=${user.tvinnSadSign}"</c:when>
-								<c:otherwise>href="tvinnsadimport.do?action=doFind&sg=${model.record.sisg}"</c:otherwise>
+								<c:when test="${empty model.record.sisg}">href="tvinnsadimport.do?action=doFindWithDigitoll&sg=${user.tvinnSadSign}"</c:when>
+								<c:otherwise>href="tvinnsadimport.do?action=doFindWithDigitoll&sg=${model.record.sisg}"</c:otherwise>
 							</c:choose> > 
 							<img valign="bottom" src="resources/images/list.gif" border="0" alt="general list">
 							<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.import.list.tab"/></font>
@@ -182,8 +182,8 @@
 					<td width="20%" valign="bottom" class="tabDisabled" align="center" nowrap>
 						<a id="alinkTopicList" style="display:block;" 
 							<c:choose>
-								<c:when test="${empty model.record.sisg}">href="tvinnsadimport.do?action=doFind&sg=${user.tvinnSadSign}"</c:when>
-								<c:otherwise>href="tvinnsadimport.do?action=doFind&sg=${model.record.sisg}"</c:otherwise>
+								<c:when test="${empty model.record.sisg}">href="tvinnsadimport.do?action=doFindWithDigitoll&sg=${user.tvinnSadSign}"</c:when>
+								<c:otherwise>href="tvinnsadimport.do?action=doFindWithDigitoll&sg=${model.record.sisg}"</c:otherwise>
 							</c:choose> > 
 							<img valign="bottom" src="resources/images/list.gif" border="0" alt="general list">
 							<font class="tabDisabledLink">&nbsp;<spring:message code="systema.tvinn.sad.import.list.tab"/></font>

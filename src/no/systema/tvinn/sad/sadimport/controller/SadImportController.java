@@ -263,6 +263,7 @@ public class SadImportController {
 		this.context = TdsAppContext.getApplicationContext();
 		Collection<SadImpDigRecord> outputList = new ArrayList<SadImpDigRecord>();
 		Map model = new HashMap();
+		//TO TEST - change on JSP to thismapping!!
 		
 		ModelAndView successView = new ModelAndView("tvinnsadimport");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
@@ -561,6 +562,9 @@ public class SadImportController {
 		}
 		if(searchFilter.getSitle()!=null && !"".equals(searchFilter.getSitle())){
 			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "sitle=" + searchFilter.getSitle());
+		}
+		if(searchFilter.getSitrid()!=null && !"".equals(searchFilter.getSitrid())){
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "sitrid=" + searchFilter.getSitrid());
 		}
 		if(searchFilter.getDatum()!=null && !"".equals(searchFilter.getDatum())){
 			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "sidt=" + this.dateFormatter.convertToDate_ISO(searchFilter.getDatum()));

@@ -18,6 +18,7 @@ import no.systema.main.model.SystemaWebUser;
 import no.systema.main.util.AppConstants;
 import no.systema.tvinn.sad.sadexport.model.jsonjackson.topic.JsonSadExportTopicListRecord;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportTopicListRecord;
+import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.SadImpDigRecord;
 import no.systema.tvinn.sad.util.TvinnSadConstants;
 
 
@@ -53,8 +54,8 @@ public class SadImportMainListViewController {
 		final String EXCEL_VIEW = "tvinnsadImportMainListExcelView";
 		
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
-		List<JsonSadImportTopicListRecord> mainList = null;
-		
+		//Original for AS400 service: List<JsonSadImportTopicListRecord> mainList = null;
+		List<SadImpDigRecord> mainList = null;
         //--> with browser dialogbox: response.setHeader ("Content-disposition", "attachment; filename=\"edifactPayload.txt\"");
         response.setHeader ("Content-disposition", "filename=\"" + EXCEL_VIEW + ".xls\"");
 

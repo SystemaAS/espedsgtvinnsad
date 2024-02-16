@@ -37,6 +37,10 @@ public class SearchFilterSadImportTopicList {
 	public void setSitle(String value) {  this.sitle = value; }
 	public String getSitle() { return this.sitle;}
 	
+	private String sitrid = null;
+	public void setSitrid(String value) {  this.sitrid = value; }
+	public String getSitrid() { return this.sitrid;}
+	
 	private String sign = null;
 	public void setSign(String value) { this.sign = value;}
 	public String getSign() { return this.sign;}

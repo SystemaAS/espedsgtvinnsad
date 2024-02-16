@@ -154,7 +154,7 @@
 			    			<%-- --------------------- --%>
 			    			<%-- TVINN-SAD IMPORT MENU --%>
 			    			<%-- --------------------- --%>
-			    			<a id="alinkTopicListMenuImp" tabindex=-1 href="tvinnsadimport.do?action=doFind&sg=${user.tvinnSadSign}">
+			    			<a id="alinkTopicListMenuImp" tabindex=-1 href="tvinnsadimport.do?action=doFindWithDigitoll&sg=${user.tvinnSadSign}">
 			    			<%-- <a id="alinkTopicListMenuExp" tabindex=-1 href="tvinnsadgate.do"> --%>
 			    				&nbsp;<font 
 			    				<c:choose>           

@@ -48,17 +48,35 @@
 		
  		<table width="100%" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
  	        <tr height="3"><td></td></tr>
- 	        <form name="tvinnsadImportSearchForm" id="searchForm" action="tvinnsadimport?action=doFindWithDigitoll" method="post" >
+ 	        <form name="tvinnsadImportSearchForm" id="searchForm" action="tvinnsadimport?action=doFind" method="post" >
  	        
  	        <tr>	
                 <td class="text14" align="left" title="avd">&nbsp;&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.avd"/></td>
                 <td class="text14" align="left" title="sg">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.signatur"/></td>
-                <td class="text14" align="left" title="opd">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.arende"/></td>
-                <td class="text14" align="left" title="datum"><spring:message code="systema.tvinn.sad.import.list.search.label.fdatum"/></td>
+                <td class="text14" align="left" title="opd">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.arende"/>
+                <td class="text14" align="left" title="h_xref">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.extrefnr"/></td>
+                		<%--
+                		<a href="tvinnsadimport_edit.do?action=doFetch&avd=${topic.avd}&opd=${topic.opd}&sign=${topic.sg}">
+            				temp
+    					</a>
+    					--%>
+                </td>
+                <td class="text14" align="left" title="datum">
+				<img onMouseOver="showPop('datum_info');" onMouseOut="hidePop('datum_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+                <spring:message code="systema.tvinn.sad.import.list.search.label.fdatum"/>
+                <div class="text11" style="position: relative;" align="left">
+                <span style="position:absolute;top:2px; width:250px;" id="datum_info" class="popupWithInputText text11"  >
+                	Fra Dato
+                	<br/>
+	           		Standardsøk (blank dato) er <b>7 dager på etterskudd</b> på den tiden. 
+	           		<br/>
+					Hvis du ønsker å se lenger tilbake i tid, angi datoen.<br/>
+					For eksempel 010116 på utkikk etter en 1-Jan-2016 til i dag. 
+				</span>	
+				</div>
+                </td>
                 <td class="text14" align="left" title="datumt"><spring:message code="systema.tvinn.sad.import.list.search.label.tdatum"/></td>
-                <td class="text14" align="left" title="sitll">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.lopenr"/></td>
-                <td class="text14" align="left" title="sitle">&nbsp;&nbsp;Ekspnr.</td>
-                <td class="text14" align="left" title="sitll">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.transpId"/></td>
+                <td class="text14" align="left" title="sitle">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.lopenr"/></td>
                 
                 <td class="text14" align="left" title="status">
                 	<img onMouseOver="showPop('status_info');" onMouseOut="hidePop('status_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
@@ -94,6 +112,20 @@
                 <td class="text14" align="left" title="avsNavn">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.avsandare"/></td>
                 <td class="text14" align="left" title="motNavn">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.mottagare"/></td>
                 <td class="text14" align="left" title="sign">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.godsnr"/></td>
+                <td class="text14" align="left" title="simi">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.innstikk"/></td>
+                <td class="text14" align="left" title="inv">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.faknr"/></td>
+                <td class="text14" align="left" title="r31">&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.import.list.search.label.r31"/></td>
+                <td class="text14" align="left" title="eta">&nbsp;&nbsp;
+                <img onMouseOver="showPop('eta_info');" onMouseOut="hidePop('eta_info');"style="vertical-align:top;" width="12px" height="12px" src="resources/images/info3.png" border="0" alt="info">
+	            	<spring:message code="systema.tvinn.sad.import.list.search.label.eta"/>
+                	<div class="text11" style="position: relative;" align="left">
+	                <span style="position:absolute;top:2px; width:250px;" id="eta_info" class="popupWithInputText text11"  >
+			           		<b>ETA: Estimated Time of Arrival</b>
+		           		 	<p>Bare status <b>T</b>(manuell ekspedering hos Tollvesenet) vises.</p> 
+					</span>	
+					</div>
+                
+                </td>
                 
                 <td>&nbsp;</td>
 			</tr>
@@ -117,16 +149,18 @@
 					</select>
 				</td>
 				<td align="left" ><input type="text" class="inputText" name="opd" id="opd" size="8" maxlength="7" value='${searchFilterSadImport.opd}'>&nbsp;</td>
+				<td align="left" ><input type="text" class="inputText" name="xref" id="xref" size="10" maxlength="35" value='${searchFilterSadImport.xref}'>&nbsp;</td>
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="datum" id="datum" size="7" maxlength="6" value='${searchFilterSadImport.datum}'>&nbsp;</td>
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="datumt" id="datumt" size="7" maxlength="6" value='${searchFilterSadImport.datumt}'>&nbsp;</td>
-				<td align="left" ><input type="text" class="inputText" name="sitll" id="sitll" size="12" maxlength="10" value='${searchFilterSadImport.sitll}'>&nbsp;</td>
-				<td align="left" ><input type="text" class="inputText" name="sitle" id="sitle" size="12" maxlength="10" value='${searchFilterSadImport.sitle}'>&nbsp;</td>
-				<td align="left" ><input type="text" class="inputText" name="sitrid" id="sitrid" size="12" maxlength="10" value='${searchFilterSadImport.sitrid}'>&nbsp;</td>
+				<td align="left" ><input type="text" class="inputText" name="sitll" id="sitll" size="10" maxlength="10" value='${searchFilterSadImport.sitll}'>&nbsp;</td>
 				<td align="left" ><input type="text" class="inputText" name="status" id="status" size="1" maxlength="1" value='${searchFilterSadImport.status}'>&nbsp;</td>
 				<td align="left" ><input type="text" class="inputText" name="avsNavn" id="avsNavn" size="9" maxlength="35" value='${searchFilterSadImport.avsNavn}'>&nbsp;</td>
 				<td align="left" ><input type="text" class="inputText" name="motNavn" id="motNavn" size="9" maxlength="35" value='${searchFilterSadImport.motNavn}'>&nbsp;</td>
 				<td align="left" ><input type="text" class="inputText" name="godsnr" id="godsnr" size="10" maxlength="15" value='${searchFilterSadImport.godsnr}'>&nbsp;</td>
-				
+				<td align="left" ><input type="text" class="inputText" name="innstikk" id="innstikk" size="1" maxlength="1" value='${searchFilterSadImport.innstikk}'>&nbsp;</td>
+				<td align="left" ><input type="text" class="inputText" name="inv" id="inv" size="10" maxlength="17" value='${searchFilterSadImport.inv}'>&nbsp;</td>
+				<td align="left" ><input type="text" class="inputText" name="r31" id="r31" size="10" maxlength="30" value='${searchFilterSadImport.r31}'>&nbsp;</td>
+				<td align="left" ><input type="text" class="inputText" name="eta" id="eta" size="10" maxlength="30" value='${searchFilterSadImport.eta}'>&nbsp;</td>
 				<td valign="top" align="left" >
                    &nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='<spring:message code="systema.tvinn.sad.search"/>'>
                 </td>
@@ -194,25 +228,28 @@
 	                    <th class="tableHeaderField" nowrap><spring:message code="systema.tvinn.sad.import.list.search.label.signatur"/></th>
 	                    <th class="tableHeaderField" nowrap><spring:message code="systema.tvinn.sad.import.list.search.label.update"/></th>
 	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.import.list.search.label.arende"/></th>
+	                    <th class="tableHeaderField" nowrap><spring:message code="systema.tvinn.sad.import.list.search.label.extrefnr"/></th>
 	                    <th class="tableHeaderField" nowrap><spring:message code="systema.tvinn.sad.import.list.search.label.datum"/></th>
 	                    <th class="tableHeaderField" nowrap><spring:message code="systema.tvinn.sad.import.list.search.label.lopenr"/></th>
 	                    <th class="tableHeaderField" nowrap><spring:message code="systema.tvinn.sad.import.list.search.label.ekspnr"/></th>
-	                    <th class="tableHeaderField" nowrap><spring:message code="systema.tvinn.sad.import.list.search.label.transpId"/></th>
-	                    
 	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.import.list.search.label.status"/></th>
 	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.import.list.search.label.avsandare"/></th>
 	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.import.list.search.label.mottagare"/></th>
 	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.import.list.search.label.vikt"/></th>
 	                    <th class="tableHeaderField"><spring:message code="systema.tvinn.sad.import.list.search.label.godsnr"/></th>
+	                    <th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.import.list.search.label.innstikk"/></th>
+	                    <th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.import.list.search.label.email"/></th>
+						<th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.import.list.search.label.eta"/></th>
 	                    	                    
-	                    <%-- START Digitoll --%>
-	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.digitoll.lnrt"/></th>
-	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.digitoll.bilnr"/></th>
-	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.digitoll.masterDocNr"/></th>
-	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.digitoll.houseTur"/></th>
-	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.digitoll.houseOpd"/></th>
-	                    <%-- END Digitoll --%>
-	                    
+	                    <%-- START Omberegning --%>
+	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.omber.omber"/></th>
+	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.omber.status"/></th>
+	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.omber.datum"/></th>
+	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.omber.lopenr"/></th>
+	                    <%-- END Omberegning --%>
+	                    <th class="tableHeaderField" ><spring:message code="systema.tvinn.sad.import.list.search.label.notisblock"/></th>	                    
+	                    <th class="tableHeaderField" nowrap><spring:message code="systema.tvinn.sad.import.list.search.label.kopieraArende"/></th>
+	                    <th class="tableHeaderField" nowrap>Slett</th>
 	                    
 	                    
 	                </tr>   
@@ -221,12 +258,12 @@
 		            <c:forEach items="${list}" var="topic" varStatus="counter">
 		            	   <tr class="tableRow" height="20" >
 		               
-		               <td class="tableCellFirst" align="center" width="1%">&nbsp;${topic.siavd}</td>
-		               <td class="tableCell" align="center" >&nbsp;${topic.sisg}</td>
+		               <td class="tableCellFirst" align="center" width="1%">&nbsp;${topic.avd}</td>
+		               <td class="tableCell" align="center" >&nbsp;${topic.sg}</td>
 		               <td width="1%" class="tableCell" align="center">
-	               	   		<a id="alinkCurrentHeaderId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadimport_edit.do?action=doFetch&avd=${topic.siavd}&opd=${topic.sitdn}&sysg=${topic.sisg}&sitll=${topic.sitll}&syst=${topic.sist}&sydt=${topic.sidt}&o2_sist=${Xtopic.o2_sist}&o2_sidt=${Xtopic.o2_sidt}&o2_simf=${Xtopic.o2_simf}">
+	               	   		<a id="alinkCurrentHeaderId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadimport_edit.do?action=doFetch&avd=${topic.avd}&opd=${topic.opd}&sysg=${topic.sg}&sitll=${topic.sitll}&syst=${topic.status}&sydt=${topic.datum}&o2_sist=${topic.o2_sist}&o2_sidt=${topic.o2_sidt}&o2_simf=${topic.o2_simf}">
 	               				<c:choose>
-		               				<c:when test="${ topic.sist == 'M' || empty  topic.sist }">
+		               				<c:when test="${ topic.status == 'M' || empty  topic.status }">
 		               					<img title="Uppdatera ärende" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">
 		               				</c:when>
 		               				<c:otherwise>
@@ -236,43 +273,98 @@
            					</a>
                		   </td>
                		   <td class="tableCell" align="center" >
-               		   		<a id="alinkCurrentHeaderOpdId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadimport_edit.do?action=doFetch&avd=${topic.siavd}&opd=${topic.sitdn}&sysg=${topic.sisg}&sitll=${topic.sitll}&syst=${topic.sist}&sydt=${topic.sidt}&o2_sist=${Xtopic.o2_sist}&o2_sidt=${Xtopic.o2_sidt}&o2_simf=${Xtopic.o2_simf}">
-               		   			${topic.sitdn}
+               		   		<a id="alinkCurrentHeaderOpdId_${counter.count}" onClick="setBlockUI(this);" href="tvinnsadimport_edit.do?action=doFetch&avd=${topic.avd}&opd=${topic.opd}&sysg=${topic.sg}&sitll=${topic.sitll}&syst=${topic.status}&sydt=${topic.datum}&o2_sist=${topic.o2_sist}&o2_sidt=${topic.o2_sidt}&o2_simf=${topic.o2_simf}">
+               		   			${topic.opd}
 		               		</a>
 		               </td>
-		               <td class="tableCell" align="center" >${topic.sidt}</td>
+		               <td class="tableCell" align="left"  >${topic.h_xref}</td>
+		               <td class="tableCell" align="center" >${topic.datum}</td>
 		               <td class="tableCell" align="center" >${topic.sitll}</td>
 		               <td class="tableCell" align="center" >${topic.sitle}</td>
-		               <td class="tableCell" align="center" >${topic.sitrid}</td>
-		               <td width="1%" class="tableCell" align="center" ><b>${topic.sist}</b></td>
-		               <td class="tableCell" align="left" >&nbsp;${topic.sinas}</td>
-		               <td class="tableCell" align="left" >&nbsp;${topic.sinak}</td>
+		               <td width="1%" class="tableCell" align="center" ><b>${topic.status}</b></td>
+		               <td class="tableCell" align="left" >&nbsp;${topic.avsNavn}</td>
+		               <td class="tableCell" align="left" >&nbsp;${topic.motNavn}</td>
 		               <td class="tableCell" align="right" >${topic.sivkb}</td>
 		               <td class="tableCell" align="center" >${topic.sign}</td>
-		               <td class="tableCellOmberegning" align="center" >
-		               		${topic.etlnrt}
-		               		
-		               </td>
-		               <td class="tableCellOmberegning" align="center" >
-		               		<c:if test="${not empty topic.etkmrk && topic.etkmrk != 'null'}">
-		               		${topic.etkmrk}
-		               		</c:if>
-		               </td>
-		               <td class="tableCellOmberegning" align="left" >
-		               		<c:if test="${not empty topic.emdkm && topic.emdkm != 'null'}">
-		               		${topic.emdkm}
-		               		</c:if>
-		               </td>
-		               <td class="tableCellOmberegning" align="left" >
-		               		${topic.ehpro}
-		               		
-		               	</td>
-		               <td class="tableCellOmberegning" align="left" >
-		               		${topic.ehtdn}
-		               		
-		               </td>
+		               <td width="1%" class="tableCell" align="center"><b>${topic.simi}</b></td>
+		               <td width="1%" class="tableCell" align="center" >${topic.epjn}</td>
+		               <td class="tableCell" align="center" >${topic.detaout}</td>
+		               <td class="tableCellOmberegning" align="center" >${topic.o2_simf}</td>
+		               <td width="1%" class="tableCellOmberegning" align="center" >${topic.o2_sist}</td>
+		               <td class="tableCellOmberegning" align="center" >${topic.o2_sidt}</td>
+		               <td class="tableCellOmberegning" align="center" >${topic.o2_sitll}</td>
 
+		               <td class="tableCell" align="left">&nbsp;
+	               		 <a href="editNotisblock.do?action=doFetch&subsys=sadi&avd=${topic.avd}&opd=${topic.opd}&sign=${topic.sg}">
+							<img title="Notisblokk til oppdrag" src="resources/images/largeTextContent.png" width="14px" height="15px" border="0" alt="notisblock">
+							<font class="text14MediumBlue" style="font-style: italic;">${topic.opd}</font>
+						 </a>
+	               	  </td>	
+   		               <td align="center" class="tableCell" >&nbsp;
+   		               		<%--
+							<a class="copyLink" id="copyLink${counter.count}" runat="server" href="#">
+								<img src="resources/images/copy.png" border="0" alt="copy">
+							</a>
+							<div style="display: none;" class="clazz_dialog" id="dialog${counter.count}" title="Dialog">
+								<form  action="tvinnsadimport_copyTopic.do" name="copyForm${counter.count}" id="copyForm${counter.count}" method="post">
+								 	<input type="hidden" name="action${counter.count}" id="action${counter.count}" value='doUpdate'/>
+									<input type="hidden" name="originalAvd${counter.count}" id="originalAvd${counter.count}" value='${topic.avd}'/>
+				 					<input type="hidden" name="originalOpd${counter.count}" id="originalOpd${counter.count}" value='${topic.opd}'/>
+					 					
+									<p class="text14" >Du må velge ny&nbsp;<code><b>Avdeling</b></code>&nbsp;og ny&nbsp;
+										<code><b>Signatur</b></code>&nbsp;for å kunne kopiere en Tolldeklarasjon.
+									</p>
+									<p class="text14" >En ny Tolldekl.nr vil bli opprettet automatisk.
+									</p>
+									<table>
+										<tr>
+											<td class="text14" align="left" >&nbsp;Avdeling</td>
+	                							<td class="text14" align="left" >&nbsp;Signatur</td>
+	                						</tr>
+	 									<tr>
+											<td class="text14MediumBlue">
+												<select class="newAvd" name="newAvd${counter.count}" id="newAvd${counter.count}">
+								            		<option value="">-velg-</option>
+								 				  	<c:forEach var="record" items="${model.avdList}" >
+							                             <option value="${record.avd}">${record.avd}</option>
+													</c:forEach> 
+												</select>
+											</td>
+											<td class="text14MediumBlue">
+												<select class="newSign" name="newSign${counter.count}" id="newSign${counter.count}">
+								            		<option value="">-velg-</option>
+								 				  	<c:forEach var="record" items="${model.signList}" >
+					                             	 	<option value="${record.sign}">${record.sign}</option>
+													</c:forEach> 
+												</select>
+											</td>
+										</tr>
+									</table>
+								</form>
+							</div>
+							 --%>
+		               </td>
 		               
+		               <td align="center" class="tableCell" >
+		               <%--	
+		               <c:if test="${ topic.status == 'M' || empty  topic.status }">
+							<a class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
+								<img src="resources/images/delete.gif" border="0" alt="remove">
+							</a>
+							<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
+								<form action="tvinnsadimport_updateStatus_deleteWithNotis.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
+								 	<input type="hidden" name="currentAvd${counter.count}" id="currentAvd${counter.count}" value="${topic.avd}">
+								 	<input type="hidden" name="currentOpd${counter.count}" id="currentOpd${counter.count}" value="${topic.opd}">
+								 	<input type="hidden" name="selectedStatus${counter.count}" id="selectedStatus${counter.count}" value="S">
+									<p class="text14" >Er du sikker på at du vil slette denne?</p>
+									<p class="text14"> Tekst </p>
+									<input type="text" class="inputText" name="currentText${counter.count}" id="currentText${counter.count}" size="45" maxlength="70" value=''>&nbsp;</td>
+									
+								</form>
+							</div>
+						</c:if>
+						 --%>	
+		               </td>
 		               
 		            </tr>
 		            </c:forEach>
