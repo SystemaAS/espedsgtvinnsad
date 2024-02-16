@@ -33,6 +33,10 @@ public class SearchFilterSadImportTopicList {
 	public void setSitll(String value) {  this.sitll = value; }
 	public String getSitll() { return this.sitll;}
 	
+	private String sitle = null;
+	public void setSitle(String value) {  this.sitle = value; }
+	public String getSitle() { return this.sitle;}
+	
 	private String sign = null;
 	public void setSign(String value) { this.sign = value;}
 	public String getSign() { return this.sign;}

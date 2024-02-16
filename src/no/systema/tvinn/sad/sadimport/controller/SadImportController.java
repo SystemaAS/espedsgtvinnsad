@@ -51,6 +51,9 @@ import no.systema.tvinn.sad.sadimport.validator.SadImportListValidator;
 import no.systema.tvinn.sad.sadimport.filter.SearchFilterSadImportTopicList;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportTopicListContainer;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportTopicListRecord;
+import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.SadImpDigContainer;
+import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.SadImpDigRecord;
+import no.systema.tvinn.sad.sadimport.service.SadImpDigTopicListService;
 import no.systema.tvinn.sad.sadimport.service.SadImportTopicListService;
 
 
@@ -212,6 +215,129 @@ public class SadImportController {
 					//now filter the topic list with the search filter (if applicable)
 					//-----------------------------------------------------------
 					outputList = jsonSadImportTopicListContainer.getOrderList();
+					for(JsonSadImportTopicListRecord record : outputList) {
+						//TODO hämta from digitoll sadmotf och/eller sadmohf joins
+						//använd befintliga digitolls syjservicestn...
+					}
+					//--------------------------------------
+					//Final successView with domain objects
+					//--------------------------------------
+					//drop downs
+					this.setCodeDropDownMgr(appUser, model);
+					this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser);
+					this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
+					
+					//domain and search filter
+					successView.addObject(TvinnSadConstants.DOMAIN_LIST,outputList);
+					successView.addObject(TvinnSadConstants.DOMAIN_LIST_SIZE, outputList.size());	
+					successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+					//set a session variable in order to make the list available to an external view controller (Excel/PDF- Controller)
+					session.setAttribute(session.getId() + TvinnSadConstants.SESSION_LIST, outputList);
+					
+					if (session.getAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADIMPORT) == null || session.getAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADIMPORT).equals("")){
+						successView.addObject(TvinnSadConstants.DOMAIN_SEARCH_FILTER_SADIMPORT, searchFilter);
+					}
+					logger.info(Calendar.getInstance().getTime() + " CONTROLLER end - timestamp");
+			    	
+					return successView;
+					
+		    	}else{
+					logger.error("NO CONTENT on jsonPayload from URL... ??? <Null>");
+					return loginView;
+				}
+		    }
+		}
+		
+	}
+	/**
+	 * This was added to help DSV with STATS in Excel
+	 * STATS must take Digitoll into account. The service is a java service. Omberegning is not included
+	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsadimport", params="action=doFindWithDigitoll",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doFindWithDigitoll(@ModelAttribute ("record") SearchFilterSadImportTopicList recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		Collection<SadImpDigRecord> outputList = new ArrayList<SadImpDigRecord>();
+		Map model = new HashMap();
+		
+		ModelAndView successView = new ModelAndView("tvinnsadimport");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+			
+		}else{
+			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_IMPORT);
+			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE);
+			
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			//-----------
+			//Validation
+			//-----------
+			SadImportListValidator validator = new SadImportListValidator();
+			logger.info("Host via HttpServletRequest.getHeader('Host'): " + request.getHeader("Host"));
+		    validator.validate(recordToValidate, bindingResult);
+		    
+		    //check for ERRORS
+			if(bindingResult.hasErrors()){
+	    		logger.info("[ERROR Validation] search-filter does not validate)");
+	    		//put domain objects and do go back to the successView from here
+	    		//drop downs
+	    		this.setCodeDropDownMgr(appUser, model);
+				this.populateAvdelningHtmlDropDownsFromJsonString(model, appUser);
+				this.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
+				
+				successView.addObject(TvinnSadConstants.DOMAIN_MODEL, model);
+		    	
+				successView.addObject(TvinnSadConstants.DOMAIN_LIST, new ArrayList());
+				successView.addObject(TvinnSadConstants.DOMAIN_SEARCH_FILTER_SADIMPORT, recordToValidate);
+				return successView;
+	    		
+		    }else{
+				//----------------------------------------------
+				//get Search Filter and populate (bind) it here
+				//----------------------------------------------
+	    		SearchFilterSadImportTopicList searchFilter = new SearchFilterSadImportTopicList();
+				ServletRequestDataBinder binder = new ServletRequestDataBinder(searchFilter);
+	            //binder.registerCustomEditor(...); // if needed
+	            binder.bind(request);
+	            //Put in session for further use (within this module) ONLY with: POST method = doFind on search fields
+	            if(request.getMethod().equalsIgnoreCase(RequestMethod.POST.toString())){
+	            		session.setAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADIMPORT, searchFilter);
+	            }else{
+	            	SearchFilterSadImportTopicList sessionFilter = (SearchFilterSadImportTopicList)session.getAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADIMPORT);
+	            	if(sessionFilter!=null){
+	            		//Use the session filter when applicable
+	            		searchFilter = sessionFilter;
+	            	}
+	            }
+	            
+	            //get BASE URL
+	            String BASE_URL = SadImportUrlDataStore.SAD_IMPORT_BASE_TOPICLIST_DIGITOLL_URL;
+	    		
+	    		//add URL-parameters
+	    		String urlRequestParams = this.getRequestUrlKeyParametersDigitoll(searchFilter, appUser);
+	    		session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, BASE_URL + "?" + urlRequestParams.toString()); 
+		    	logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+		    	logger.info("URL: " + BASE_URL);
+		    	logger.info("URL PARAMS: " + urlRequestParams);
+		    	
+		    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+				//Debug --> 
+		    	logger.debug(jsonPayload);
+		    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+		    	if(jsonPayload!=null){
+		    		SadImpDigContainer container = this.sadImpDigTopicListService.getSadImpDigContainer(jsonPayload);
+		    		//-----------------------------------------------------------
+					//now filter the topic list with the search filter (if applicable)
+					//-----------------------------------------------------------
+					outputList = container.getList();
 					
 					//--------------------------------------
 					//Final successView with domain objects
@@ -409,6 +535,57 @@ public class SadImportController {
 	
 	/**
 	 * 
+	 * @param searchFilter
+	 * @param appUser
+	 * @return
+	 */
+	private String getRequestUrlKeyParametersDigitoll(SearchFilterSadImportTopicList searchFilter, SystemaWebUser appUser){
+		StringBuffer urlRequestParamsKeys = new StringBuffer();
+		//String action = request.getParameter("action");
+		
+		urlRequestParamsKeys.append("user=" + appUser.getUser());
+		//urlRequestParamsKeys.append("&usrspcname=" + appUser.getUser());
+		
+		if(searchFilter.getAvd()!=null && !"".equals(searchFilter.getAvd())){
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "siavd=" + searchFilter.getAvd());
+		}
+		if(searchFilter.getOpd()!=null && !"".equals(searchFilter.getOpd())){
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "sitdn=" + searchFilter.getOpd());
+		}
+		
+		if(searchFilter.getSg()!=null && !"".equals(searchFilter.getSg())){
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "sisg=" + searchFilter.getSg());
+		}
+		if(searchFilter.getSitll()!=null && !"".equals(searchFilter.getSitll())){
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "sitll=" + searchFilter.getSitll());
+		}
+		if(searchFilter.getSitle()!=null && !"".equals(searchFilter.getSitle())){
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "sitle=" + searchFilter.getSitle());
+		}
+		if(searchFilter.getDatum()!=null && !"".equals(searchFilter.getDatum())){
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "sidt=" + this.dateFormatter.convertToDate_ISO(searchFilter.getDatum()));
+		}
+		if(searchFilter.getDatum()!=null && !"".equals(searchFilter.getDatumt())){
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "sidt_to=" + this.dateFormatter.convertToDate_ISO(searchFilter.getDatumt()));
+		}
+		if(searchFilter.getStatus()!=null && !"".equals(searchFilter.getStatus())){
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "sist=" + searchFilter.getStatus());
+		}
+		if(searchFilter.getAvsNavn()!=null && !"".equals(searchFilter.getAvsNavn())){
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "sinas=" + searchFilter.getAvsNavn());
+		}
+		if(searchFilter.getMotNavn()!=null && !"".equals(searchFilter.getMotNavn())){
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "sinak=" + searchFilter.getMotNavn());
+		}
+		if(searchFilter.getGodsnr()!=null && !"".equals(searchFilter.getGodsnr())){
+			urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "sign=" + searchFilter.getGodsnr());
+		}
+		
+		return urlRequestParamsKeys.toString();
+	}
+	
+	/**
+	 * 
 	 * @param appUser
 	 * @param model
 	 */
@@ -432,7 +609,6 @@ public class SadImportController {
 	@Qualifier ("sadImportTopicListService")
 	private SadImportTopicListService sadImportTopicListService;
 	@Autowired
-	@Required
 	public void setSadImportTopicListService (SadImportTopicListService value){ this.sadImportTopicListService = value; }
 	public SadImportTopicListService getSadImportTopicListService(){ return this.sadImportTopicListService; }
 	
@@ -443,6 +619,9 @@ public class SadImportController {
 	public void setTvinnSadDropDownListPopulationService (TvinnSadDropDownListPopulationService value){ this.tvinnSadDropDownListPopulationService=value; }
 	public TvinnSadDropDownListPopulationService getTvinnSadDropDownListPopulationService(){return this.tvinnSadDropDownListPopulationService;}
 	
+	
+	@Autowired
+	private SadImpDigTopicListService sadImpDigTopicListService;
 	
 	
 	

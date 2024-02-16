@@ -18,6 +18,12 @@ public final class SadImportUrlDataStore {
 	//----------------------------
 	//http://gw.systema.no/sycgip/TNOI000R.pgm?user=OSCAR&avd=1
 	static public String SAD_IMPORT_BASE_TOPICLIST_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOI000R.pgm";
+	//http://gw.systema.no:8443/syjservicestn/syjsSADIMPDIG.do?user=OSCAR&sisg=OT
+	static public String SAD_IMPORT_BASE_TOPICLIST_DIGITOLL_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADIMPDIG.do";
+		
+	
+	
+	
 	//http://gw.systema.no/sycgip/TNOI000R2.pgm?user=OSCAR&usrspcname=OSCAR&inv=12
 	static public String SAD_IMPORT_BASE_TOPICLIST_INVOICEREF_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TNOI000R2.pgm";
 	//http://gw.systema.no/sycgip/TNOI000R3.pgm?user=OSCAR&usrspcname=OSCAR&r31=12
