@@ -25,17 +25,18 @@ public class SadImpDigRecord extends JsonAbstractGrandFatherRecord {
 	private String sisg = "";
 	private String sist = "";
 	private Integer sitdn = 0;
-	//date fom
+	
+	//date
 	private String sidt = "";
-	public void setDatum(String value) { this.sidt = value; }
-	public String getDatum() {
+	/*public void setSidt(String value) { this.sidt = value; }
+	public String getSidt() {
 		if(this.sidt != null && !"".equals(this.sidt)){
 			return dateFormatter.convertToDate_NO(this.sidt);
 		}else{
 			return this.sidt;
 		}
-	}
-	
+	}*/
+	private String sidtno = "";
 	private String sidt_to = ""; //only for date purposes in the select
 	private String sidtg = "";
 	private String sitrid = ""; //bilregnr

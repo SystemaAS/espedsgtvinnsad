@@ -37,7 +37,8 @@ public class SadImportListValidator implements Validator {
 				if( this.valueExists(record.getOpd()) || this.valueExists(record.getSitll()) || 
 					this.valueExists(record.getDatum()) ||  this.valueExists(record.getAvsNavn()) ||	
 					this.valueExists(record.getMotNavn()) ||  this.valueExists(record.getStatus()) ||
-					this.valueExists(record.getGodsnr())){
+					this.valueExists(record.getGodsnr()) ||  this.valueExists(record.getSitle()) ||
+					this.valueExists(record.getSitrid()) ){
 					//do nothing. Validation test passed!
 				}else{
 					//at least avd or sign must exist IF everything else is empty... 

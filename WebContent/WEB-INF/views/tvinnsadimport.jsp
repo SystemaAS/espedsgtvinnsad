@@ -121,7 +121,7 @@
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="datumt" id="datumt" size="7" maxlength="6" value='${searchFilterSadImport.datumt}'>&nbsp;</td>
 				<td align="left" ><input type="text" class="inputText" name="sitll" id="sitll" size="12" maxlength="10" value='${searchFilterSadImport.sitll}'>&nbsp;</td>
 				<td align="left" ><input type="text" class="inputText" name="sitle" id="sitle" size="12" maxlength="10" value='${searchFilterSadImport.sitle}'>&nbsp;</td>
-				<td align="left" ><input type="text" class="inputText" name="sitrid" id="sitrid" size="12" maxlength="10" value='${searchFilterSadImport.sitrid}'>&nbsp;</td>
+				<td align="left" ><input type="text" class="inputText" name="sitrid" id="sitrid" size="14" maxlength="35" value='${searchFilterSadImport.sitrid}'>&nbsp;</td>
 				<td align="left" ><input type="text" class="inputText" name="status" id="status" size="1" maxlength="1" value='${searchFilterSadImport.status}'>&nbsp;</td>
 				<td align="left" ><input type="text" class="inputText" name="avsNavn" id="avsNavn" size="9" maxlength="35" value='${searchFilterSadImport.avsNavn}'>&nbsp;</td>
 				<td align="left" ><input type="text" class="inputText" name="motNavn" id="motNavn" size="9" maxlength="35" value='${searchFilterSadImport.motNavn}'>&nbsp;</td>
@@ -240,7 +240,7 @@
                		   			${topic.sitdn}
 		               		</a>
 		               </td>
-		               <td class="tableCell" align="center" >${topic.sidt}</td>
+		               <td class="tableCell" align="center" >${topic.sidtno}</td>
 		               <td class="tableCell" align="center" >${topic.sitll}</td>
 		               <td class="tableCell" align="center" >${topic.sitle}</td>
 		               <td class="tableCell" align="center" >${topic.sitrid}</td>

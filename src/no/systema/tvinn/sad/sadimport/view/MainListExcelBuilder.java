@@ -116,8 +116,8 @@ public class MainListExcelBuilder extends AbstractXlsView {
             aRow.createCell(0).setCellValue(record.getSiavd());
             aRow.createCell(1).setCellValue(record.getSisg());
             aRow.createCell(2).setCellValue(record.getSitdn());
-            
-            aRow.createCell(3).setCellValue(record.getSidt());
+            //aRow.createCell(3).setCellValue(record.getSidt()); //ISO-format
+            aRow.createCell(3).setCellValue(record.getSidtno()); //NO-format
             aRow.createCell(4).setCellValue(record.getSitll());
             aRow.createCell(5).setCellValue(record.getSitle());
             aRow.createCell(6).setCellValue(record.getSitrid());
