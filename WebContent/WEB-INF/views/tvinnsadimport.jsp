@@ -207,7 +207,9 @@
 	                    	                    
 	                    <%-- START Digitoll --%>
 	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.digitoll.lnrt"/></th>
+	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.digitoll.eta"/></th>
 	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.digitoll.bilnr"/></th>
+	                    <%-- 
 	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.digitoll.masterDocNr"/></th>
 	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.digitoll.houseTur"/></th>
 	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.digitoll.houseOpd"/></th>
@@ -251,13 +253,19 @@
 		               <td class="tableCell" align="center" >${topic.sign}</td>
 		               <td class="tableCellOmberegning" align="center" >
 		               		${topic.etlnrt}
-		               		
+		               </td>
+		               <td class="tableCellOmberegning" align="center" >
+		               		<c:if test="${not empty topic.etetadno && topic.etetadno != 'null'}">
+		               		${topic.etetadno}
+		               		</c:if>
 		               </td>
 		               <td class="tableCellOmberegning" align="center" >
 		               		<c:if test="${not empty topic.etkmrk && topic.etkmrk != 'null'}">
 		               		${topic.etkmrk}
 		               		</c:if>
 		               </td>
+		               
+		               <%-- 
 		               <td class="tableCellOmberegning" align="left" >
 		               		<c:if test="${not empty topic.emdkm && topic.emdkm != 'null'}">
 		               		${topic.emdkm}
@@ -271,7 +279,7 @@
 		               		${topic.ehtdn}
 		               		
 		               </td>
-
+						--%>
 		               
 		               
 		            </tr>

@@ -19,6 +19,7 @@ public class SearchFilterDigitollTransportList {
 	
 	private String avd = null;
 	private String opd = null;
+	private String lnr = null;
 	private String turnr = null;
 	private String sign = null;
 	private String etaDatum = null;
@@ -27,6 +28,7 @@ public class SearchFilterDigitollTransportList {
 	private String datumt = null;
 	private String status = null;
 	private String extref = null;
+	private String transpId = null;
 	
 	
 	

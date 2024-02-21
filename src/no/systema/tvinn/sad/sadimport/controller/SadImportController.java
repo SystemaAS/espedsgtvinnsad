@@ -338,8 +338,9 @@ public class SadImportController {
 		    		//-----------------------------------------------------------
 					//now filter the topic list with the search filter (if applicable)
 					//-----------------------------------------------------------
-					outputList = container.getList();
-					
+					if(container!=null) {
+						outputList = container.getList();
+					}
 					//--------------------------------------
 					//Final successView with domain objects
 					//--------------------------------------

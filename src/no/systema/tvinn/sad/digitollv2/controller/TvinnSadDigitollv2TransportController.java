@@ -1193,6 +1193,15 @@ public class TvinnSadDigitollv2TransportController {
 				urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "extref=" + searchFilter.getExtref());
 			}
 			
+			//Bilnr
+			if(StringUtils.isNotEmpty(searchFilter.getTranspId())){
+				urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "etkmrk=" + searchFilter.getTranspId());
+			}
+			//Lnr
+			if(StringUtils.isNotEmpty(searchFilter.getLnr())){
+				urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "etlnrt=" + searchFilter.getLnr());
+			}
+			
 		}
 		
 		return urlRequestParamsKeys.toString();
@@ -1205,23 +1214,28 @@ public class TvinnSadDigitollv2TransportController {
 	private boolean allEmpty(SearchFilterDigitollTransportList searchFilter) {
 		boolean retval = false;
 		if(StringUtils.isEmpty(searchFilter.getAvd()) && StringUtils.isEmpty(searchFilter.getOpd()) && StringUtils.isEmpty(searchFilter.getSign()) && StringUtils.isEmpty(searchFilter.getTurnr()) &&
-				StringUtils.isEmpty(searchFilter.getStatus()) && StringUtils.isEmpty(searchFilter.getDatum()) && StringUtils.isEmpty(searchFilter.getDatumt()) && StringUtils.isEmpty(searchFilter.getEtaDatum()) && StringUtils.isEmpty(searchFilter.getEtaDatumt()) ){
-			   retval = true;
+				StringUtils.isEmpty(searchFilter.getStatus()) && StringUtils.isEmpty(searchFilter.getDatum()) && StringUtils.isEmpty(searchFilter.getDatumt()) && StringUtils.isEmpty(searchFilter.getEtaDatum()) 
+				&& StringUtils.isEmpty(searchFilter.getEtaDatumt()) && StringUtils.isEmpty(searchFilter.getTranspId()) && StringUtils.isEmpty(searchFilter.getLnr()) ){
+			   
+			retval = true;
 		
 		} else if(StringUtils.isEmpty(searchFilter.getAvd()) && StringUtils.isEmpty(searchFilter.getOpd()) && StringUtils.isEmpty(searchFilter.getSign()) && StringUtils.isEmpty(searchFilter.getTurnr()) &&
-				StringUtils.isEmpty(searchFilter.getStatus()) && StringUtils.isEmpty(searchFilter.getDatum()) && StringUtils.isNotEmpty(searchFilter.getDatumt()) && StringUtils.isEmpty(searchFilter.getEtaDatum()) && StringUtils.isEmpty(searchFilter.getEtaDatumt())) {
+				StringUtils.isEmpty(searchFilter.getStatus()) && StringUtils.isEmpty(searchFilter.getDatum()) && StringUtils.isNotEmpty(searchFilter.getDatumt()) && StringUtils.isEmpty(searchFilter.getEtaDatum()) 
+				&& StringUtils.isEmpty(searchFilter.getEtaDatumt()) && StringUtils.isEmpty(searchFilter.getTranspId()) && StringUtils.isEmpty(searchFilter.getLnr()) ) {
 		   
 		   searchFilter.setDatumt("");
 		   retval = true;
 		   
 		} else if(StringUtils.isEmpty(searchFilter.getAvd()) && StringUtils.isEmpty(searchFilter.getOpd()) && StringUtils.isEmpty(searchFilter.getSign()) && StringUtils.isEmpty(searchFilter.getTurnr()) &&
-				StringUtils.isEmpty(searchFilter.getStatus()) && StringUtils.isEmpty(searchFilter.getDatum()) && StringUtils.isEmpty(searchFilter.getDatumt()) && StringUtils.isEmpty(searchFilter.getEtaDatum()) && StringUtils.isNotEmpty(searchFilter.getEtaDatumt())) {
+				StringUtils.isEmpty(searchFilter.getStatus()) && StringUtils.isEmpty(searchFilter.getDatum()) && StringUtils.isEmpty(searchFilter.getDatumt()) && StringUtils.isEmpty(searchFilter.getEtaDatum()) 
+				&& StringUtils.isNotEmpty(searchFilter.getEtaDatumt()) && StringUtils.isEmpty(searchFilter.getTranspId()) && StringUtils.isEmpty(searchFilter.getLnr()) ) {
 		   
 		   searchFilter.setEtaDatumt("");
 		   retval = true;
 		   
 		} else if(StringUtils.isEmpty(searchFilter.getAvd()) && StringUtils.isEmpty(searchFilter.getOpd()) && StringUtils.isEmpty(searchFilter.getSign()) && StringUtils.isEmpty(searchFilter.getTurnr()) &&
-				StringUtils.isEmpty(searchFilter.getStatus()) && StringUtils.isEmpty(searchFilter.getDatum()) && StringUtils.isNotEmpty(searchFilter.getDatumt()) && StringUtils.isEmpty(searchFilter.getEtaDatum()) && StringUtils.isNotEmpty(searchFilter.getEtaDatumt())) {
+				StringUtils.isEmpty(searchFilter.getStatus()) && StringUtils.isEmpty(searchFilter.getDatum()) && StringUtils.isNotEmpty(searchFilter.getDatumt()) && StringUtils.isEmpty(searchFilter.getEtaDatum()) 
+				&& StringUtils.isNotEmpty(searchFilter.getEtaDatumt()) && StringUtils.isEmpty(searchFilter.getTranspId()) && StringUtils.isEmpty(searchFilter.getLnr()) ) {
 		   
 		   searchFilter.setDatumt("");
 		   searchFilter.setEtaDatumt("");

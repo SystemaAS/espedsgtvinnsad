@@ -73,18 +73,19 @@
  		<table style="width:100%;" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
  		<tr>
  		<td>
- 		<table style="width:95%;">
+ 		<table style="width:99%;">
  	        <form name="searchForm" id="searchForm" action="tvinnsaddigitollv2.do?action=doFind" method="post" >
  	        <tr height="3"><td></td></tr>
  	        <tr>	
                 <td class="text14" align="left" title="avd" >&nbsp;&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.manifest.list.search.label.avd"/></td>
                 <td class="text14" align="left" title="sign" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.manifest.list.search.label.signatur"/></td>
-                
+                <td class="text14" align="left" title="sign" >&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.manifest.list.search.label.lnr"/></td>
                 <td class="text14" align="left" ><span title="turnr"><spring:message code="systema.tvinn.sad.manifest.list.search.label.turnr"/></span></td>
                 <td class="text14" align="left" ><span title="etadatum"><spring:message code="systema.tvinn.sad.manifest.list.search.label.etafdatum"/></span></td>
                 <td class="text14" align="left" ><span title="etadatumt"><spring:message code="systema.tvinn.sad.manifest.list.search.label.etatdatum"/></span></td>
                 <td class="text14" align="left" ><span title="datum"><spring:message code="systema.tvinn.sad.manifest.list.search.label.fdatum"/></span></td>
                 <td class="text14" align="left" ><span title="datumt"><spring:message code="systema.tvinn.sad.manifest.list.search.label.tdatum"/></span></td>
+                <td class="text14" align="left" ><span title="transpId"><spring:message code="systema.tvinn.sad.manifest.list.search.label.transpid"/></span></td>
                 <td class="text14" align="left" ><span title="status"><spring:message code="systema.tvinn.sad.manifest.list.search.label.status"/></span></td>
                 <td class="text14" align="left" >
                 	<img style="cursor:pointer;" onMouseOver="showPop('extref_info');" onMouseOut="hidePop('extref_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
@@ -151,12 +152,14 @@
 						</c:forEach>  
 					</select>
 				</td>
+				<td align="left" ><input type="text" class="inputText" name="lnr" id="lnr" size="8" maxlength="7" value="${searchFilterSadDigitollTransportList.lnr}">&nbsp;</td>
 				<td align="left" ><input type="text" class="inputText" name="turnr" id="turnr" size="10" maxlength="8" value="${searchFilterSadDigitollTransportList.turnr}">&nbsp;</td>
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="etaDatum" id="etaDatum" size="6" maxlength="6" value="${searchFilterSadDigitollTransportList.etaDatum}">&nbsp;</td> 
 				<%-- TEST <td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="etaDatum" id="etaDatum" size="6" maxlength="6" value="010823">&nbsp;</td> --%>
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="etaDatumt" id="etaDatumt" size="6" maxlength="6" value="${searchFilterSadDigitollTransportList.etaDatumt}">&nbsp;</td>
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="datum" id="datum" size="6" maxlength="6" value="${searchFilterSadDigitollTransportList.datum}">&nbsp;</td>
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="datumt" id="datumt" size="6" maxlength="6" value="${searchFilterSadDigitollTransportList.datumt}">&nbsp;</td>
+				<td align="left" ><input type="text" class="inputText" name="transpId" id="transpId" size="10" maxlength="35" value="${searchFilterSadDigitollTransportList.transpId}">&nbsp;</td>
 				<td align="left" >
 					<select class="selectMediumBlueE2" name="status" id="status">
 					  <option value="">-velg-</option>

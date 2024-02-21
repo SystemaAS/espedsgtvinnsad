@@ -470,7 +470,7 @@
 									<input title="Send til part..." class="inputFormSubmitStd" style="cursor:pointer;" type="button" name="sendToPartButton" id="sendToPartButton" value='Send masterId til part'>
 								</td>
 							</c:if>
-							--%>		
+							 --%>		
 						</tr>
 						</table>
 					</td>

@@ -466,7 +466,14 @@
 							</c:choose>						
 						</td>
 						<td class="text14">
-							<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ehvt" id="ehvt" size="35" maxlength="50" value="${model.record.ehvt}">									
+							<c:choose>
+								<c:when test="${model.record.ehlnrh > 0}">
+									<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ehvt" id="ehvt" size="35" maxlength="50" value="${model.record.ehvt}">
+								</c:when>
+								<c:otherwise> 
+									<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ehvt" id="ehvt" size="35" maxlength="50" value="se SAD">
+								</c:otherwise>
+							</c:choose>									
 						</td>
 						<td class="text14">
 							<select class="inputTextMediumBlueMandatoryField" id="ehcnin" name="ehcnin">
