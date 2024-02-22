@@ -127,6 +127,7 @@ public class TvinnSadDigitollv2TransportController {
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		
 		String gate = request.getParameter("gate");
+		String sadi = request.getParameter("sadi");
 		
 		
 		//check user (should be in session already)
@@ -149,14 +150,23 @@ public class TvinnSadDigitollv2TransportController {
             if(request.getMethod().equalsIgnoreCase(RequestMethod.POST.toString())){
             	session.setAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADDIGITOLL_TRANSPORT_LIST, searchFilter);
             }else{
+            	
             	SearchFilterDigitollTransportList sessionFilter = (SearchFilterDigitollTransportList)session.getAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADDIGITOLL_TRANSPORT_LIST);
             	if(sessionFilter!=null){
-            		//Use the session filter when applicable
-            		searchFilter = sessionFilter;
-            		
+            		if(StringUtils.isNotEmpty(sadi)) {
+            			sessionFilter = null;
+            			session.removeAttribute(TvinnSadConstants.SESSION_SEARCH_FILTER_SADDIGITOLL_TRANSPORT_LIST);
+            		}else {
+            			//Use the session filter when applicable
+            			searchFilter = sessionFilter;
+            		}
             	}else{
-            		//first time propose today
-            		searchFilter.setEtaDatum(dateMgr.getNewDateFromNow(DateTimeManager.NO_FORMAT, -1));
+            		if(StringUtils.isNotEmpty(searchFilter.getLnr()) && StringUtils.isNotEmpty(sadi) ) {
+            			//no date since it is comming from outside the Digitoll-Tab (redirecting from SAD-Import to Digitoll via lnr)
+            		}else {
+            			//first time propose today
+            			searchFilter.setEtaDatum(dateMgr.getNewDateFromNow(DateTimeManager.NO_FORMAT, -1));
+            		}
             	}
             }
             

@@ -103,6 +103,10 @@ public class MainListExcelBuilder extends AbstractXlsView {
         header.getCell(13).setCellStyle(styleDigitoll);
         header.createCell(14).setCellValue(this.context.getMessage("systema.tvinn.sad.import.list.search.label.digitoll.bilnr", new Object[0], request.getLocale()));
         header.getCell(14).setCellStyle(styleDigitoll);
+        header.createCell(15).setCellValue(this.context.getMessage("systema.tvinn.sad.import.list.search.label.digitoll.vikt", new Object[0], request.getLocale()));
+        header.getCell(15).setCellStyle(styleDigitoll);
+        header.createCell(16).setCellValue(this.context.getMessage("systema.tvinn.sad.import.list.search.label.digitoll.vikthouse", new Object[0], request.getLocale()));
+        header.getCell(16).setCellStyle(styleDigitoll);
         
         /* ONLY with SQL SELECT_CLAUSE_DEEP 
         header.createCell(14).setCellValue(this.context.getMessage("systema.tvinn.sad.import.list.search.label.digitoll.masterDocNr", new Object[0], request.getLocale()));
@@ -152,6 +156,17 @@ public class MainListExcelBuilder extends AbstractXlsView {
             	aRow.createCell(14).setCellValue(record.getEtkmrk());
             }else {
             	aRow.createCell(14).setCellValue("");
+            }
+            
+            if(record.getEmvkb()!=null && !record.getEmvkb().equals("null")) { 
+            	aRow.createCell(15).setCellValue(record.getEmvkb());
+            }else {
+            	aRow.createCell(15).setCellValue("");
+            }
+            if(record.getEhvkb()!=null && !record.getEhvkb().equals("null")) { 
+            	aRow.createCell(15).setCellValue(record.getEhvkb());
+            }else {
+            	aRow.createCell(15).setCellValue("");
             }
             /* ONLY with SQL SELECT_CLAUSE_DEEP 
             if(record.getEmdkm()!=null && !record.getEmdkm().equals("null")) { 

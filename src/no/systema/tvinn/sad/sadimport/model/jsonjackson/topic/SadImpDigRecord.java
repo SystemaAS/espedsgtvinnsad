@@ -55,6 +55,7 @@ public class SadImpDigRecord extends JsonAbstractGrandFatherRecord {
 	private String etetad = "";
 	private String etetadno = "";
 	private String emdkm = ""; 
+	private String emvkb = "";
 	private String ehrgm = "";
 	private Integer ehpro = 0;
 	private Integer ehtdn = 0;

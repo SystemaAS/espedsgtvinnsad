@@ -209,6 +209,8 @@
 	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.digitoll.lnrt"/></th>
 	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.digitoll.eta"/></th>
 	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.digitoll.bilnr"/></th>
+	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.digitoll.vikt"/></th>
+	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.digitoll.vikthouse"/></th>
 	                    <%-- 
 	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.digitoll.masterDocNr"/></th>
 	                    <th class="tableHeaderFieldOmberegning" ><spring:message code="systema.tvinn.sad.import.list.search.label.digitoll.houseTur"/></th>
@@ -251,8 +253,10 @@
 		               <td class="tableCell" align="left" >&nbsp;${topic.sinak}</td>
 		               <td class="tableCell" align="right" >${topic.sivkb}</td>
 		               <td class="tableCell" align="center" >${topic.sign}</td>
-		               <td class="tableCellOmberegning" align="center" >
-		               		${topic.etlnrt}
+		               <td class="tableCellOmberegning" align="center" >	               		
+		               		<a id="alinkCurrentLnr_${counter.count}" onClick="setBlockUI(this);" href="tvinnsaddigitollv2.do?action=doFind&lnr=${topic.etlnrt}&sadi=1">
+		               			${topic.etlnrt}
+		               		</a>		               		
 		               </td>
 		               <td class="tableCellOmberegning" align="center" >
 		               		<c:if test="${not empty topic.etetadno && topic.etetadno != 'null'}">
@@ -264,7 +268,16 @@
 		               		${topic.etkmrk}
 		               		</c:if>
 		               </td>
-		               
+		               <td class="tableCellOmberegning" align="center" >
+		               		<c:if test="${not empty topic.emvkb && topic.emvkb != 'null'}">
+		               		${topic.emvkb}
+		               		</c:if>
+		               </td>
+		               <td class="tableCellOmberegning" align="center" >
+		               		<c:if test="${not empty topic.ehvkb && topic.ehvkb != 'null'}">
+		               		${topic.ehvkb}
+		               		</c:if>
+		               </td>
 		               <%-- 
 		               <td class="tableCellOmberegning" align="left" >
 		               		<c:if test="${not empty topic.emdkm && topic.emdkm != 'null'}">
