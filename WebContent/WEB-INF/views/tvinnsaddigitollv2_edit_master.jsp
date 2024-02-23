@@ -427,10 +427,10 @@
 							<td class="text14">&nbsp;<span title="emknt Transportør KundeNr.">Transp.knr.</span></td>
 							<td class="text14">&nbsp;<span title="emrgt - Transportør OrgNr. / EORI">Transp.Orgnr / EORI</span><font class="text16RedBold" >*</font></td>
 							<td></td>
-							<%-- 
+							 
 							<c:if test="${model.record.emlnrm > 0}">
 								<td width="40px"></td>
-								<td class="text14"><span title="Send til orgnr">Send masterId til - Navn</span>
+								<td class="text14"><span title="Send til orgnr">Send Dok.nr til - Navn</span>
 									<a tabindex="-1" id="sendToPartIdLink">
 										<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
 									</a>
@@ -438,7 +438,7 @@
 								<td class="text14"><span title="Send til orgnr">Orgnr</span></td>
 								<td colspan="3" class="text12"><span id="ajaxErrorTextExtParty" name="ajaxErrorTextExtParty"></span></td>
 							</c:if>
-							 --%>
+							
 						</tr>
 						<tr>
 							<td class="text14">
@@ -457,20 +457,20 @@
 								</tr>
 								</table>
 							</td>
-							<%--
+							
 							<c:if test="${model.record.emlnrm > 0}">
 								<td width="40px"></td>
 								<td class="text14">
-									<input  type="text" class="inputTextMediumBlue" name="ownReceiverName" id="ownReceiverName" size="31" maxlength="30" value="${Xmodel.record.todo}">
+									<input  type="text" readonly class="inputText12LightYellow" name="ownReceiverName" id="ownReceiverName" size="31" maxlength="30" value="">
 								</td>
 								<td class="text14">	
-									<input  type="text" class="inputTextMediumBlue" name="ownReceiverOrgNr" id="ownReceiverOrgNr" size="17" maxlength="20" value="${Xmodel.record.todo}">									
+									<input  type="text" readonly class="inputText12LightYellow" name="ownReceiverOrgNr" id="ownReceiverOrgNr" size="17" maxlength="20" value="">									
 								</td>
 								<td class="text14">	
-									<input title="Send til part..." class="inputFormSubmitStd" style="cursor:pointer;" type="button" name="sendToPartButton" id="sendToPartButton" value='Send masterId til part'>
+									<input title="Send til part..." class="buttonGrayWithGreenFrame" style="cursor:pointer;" type="button" name="sendToPartButton" id="sendToPartButton" value='Send Dok.nr til part'>
 								</td>
 							</c:if>
-							 --%>		
+									
 						</tr>
 						</table>
 					</td>

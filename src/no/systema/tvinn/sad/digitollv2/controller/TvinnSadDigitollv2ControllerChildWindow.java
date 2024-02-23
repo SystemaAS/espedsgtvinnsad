@@ -62,6 +62,8 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmocfContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmocfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifContainer;
@@ -71,6 +73,7 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.service.SadOppdragService;
 import no.systema.tvinn.sad.digitollv2.service.SadTurService;
+import no.systema.tvinn.sad.digitollv2.service.SadmocfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmohfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
@@ -884,6 +887,38 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	    	return successView;
 		}
 	}
+	/**
+	 * setup file for external houses (främmande houser) sadmocf
+	 * 
+	 * @param recordToValidate
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_external_houses.do", params="action=doFind",  method={RequestMethod.GET, RequestMethod.POST } )
+	public ModelAndView doInitExternalHouses(@ModelAttribute ("record") SadmocfRecord recordToValidate, HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doInitExternalHouses");
+		Map model = new HashMap();
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_external_houses");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			  
+			List list = this.getSadmocfList(appUser, recordToValidate.getOrgnr());
+			
+			model.put("sadmocfList", list);
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	
+	
 	
 	
 	/**
@@ -923,6 +958,42 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		}
 		return list;
 	}
+	/**
+	 * 
+	 * @param appUser
+	 * @param orgnr
+	 * @return
+	 */
+	private List<SadmocfRecord> getSadmocfList(SystemaWebUser appUser, String orgnr){
+		List<SadmocfRecord> list = new ArrayList<SadmocfRecord>();
+		
+		logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+		String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_EXTERNAL_HOUSES_URL;
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + appUser.getUser() + "&orgnr=" + orgnr);
+		
+		logger.info(BASE_URL);
+		logger.info(urlRequestParams.toString());
+		
+		UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
+		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+		logger.info(jsonPayload);
+		SadmocfContainer container = null;
+		try{
+			if(jsonPayload!=null){
+				container = this.sadmocfListService.getListContainer(jsonPayload);
+				if(container!=null){
+					for(SadmocfRecord  record : container.getList()){
+						list.add(record);
+					}
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	private List<JsonTvinnSadTolltariffVarukodRecord> getTolltariffList(SystemaWebUser appUser, String tolltariffVarekod, String ieMode){
 		List<JsonTvinnSadTolltariffVarukodRecord> list = new ArrayList<JsonTvinnSadTolltariffVarukodRecord>();
 		
@@ -1346,6 +1417,10 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	private SadmohfListService sadmohfListService;
 	@Autowired
 	private SadmoifListService sadmoifListService;
+	
+	@Autowired
+	private SadmocfListService sadmocfListService;
+	
 	@Autowired
 	private SadOppdragService sadOppdragService;
 	@Autowired

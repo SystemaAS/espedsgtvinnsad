@@ -275,10 +275,17 @@
       //init table (no ajax, no columns since the payload is already there by means of HTML produced on the back-end)
       jq('#mainList').dataTable( {
     	  "dom": '<"top">t<"bottom"flip><"clear">',
-          "paging":   false,
-          "ordering": false,
-          "info":     false,
-          "searching":     false
+          "searchHighlight": true,
+		  "tabIndex": -1,
+	  	  "order": [[ 1, "asc" ]], //avd
+		  "lengthMenu": [ 30, 50, 100, 100],
+		  //"paging":   false,
+          //"ordering": false,
+          //"info":     false,
+          //"searching":     false
+          "fnDrawCallback": function( oSettings ) {
+    		jq('.dataTables_filter input').addClass("inputText12LightYellow");
+    	}
   	  });
       
       //event on input field for search

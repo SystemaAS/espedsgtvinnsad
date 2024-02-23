@@ -12,7 +12,7 @@ import lombok.Data;
  * @date Dec, 2023
  */
 @Data
-public class SadmocfContainer <T> {
+public class SadmocfContainer {
 	
 	private String user = null;
 	private String errMsg = null;

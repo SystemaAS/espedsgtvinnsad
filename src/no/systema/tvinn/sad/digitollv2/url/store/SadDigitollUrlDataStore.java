@@ -81,5 +81,10 @@ public final class SadDigitollUrlDataStore {
 		//http://10.11.47.61/sycgip/TDIG003R.pgm?user=OSCAR
 		static public String SAD_FETCH_DIGITOLL_SIGN_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TDIG003R.pgm";
 		
+		//Främmande houses 
+		//http://10.11.47.61/syjservicestn/syjsSADMOCF.do?user=OSCAR&orgnr
+		static public String SAD_FETCH_DIGITOLL_EXTERNAL_HOUSES_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOCF.do";
+				
+		
 		
 }
