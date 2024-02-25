@@ -403,7 +403,7 @@
 						</td>
 						<td class="text14">&nbsp;<span title="ehst3"><a tabindex=-1 id="updateInternalStatus3Link" name="updateInternalStatus3Link" runat="server" href="#"><span class="text14">St.3</span></a></span></td>
 						<td class="text14">&nbsp;<span title="ehdts">Send.dato</span></td>
-						<td class="text14">&nbsp;<span title="ehdts">Master Doknr</span></td>
+						<td class="text14">&nbsp;<span title="masterDto.emdkm">Master Doknr</span></td>
 						
 					</tr>
 					<tr>	

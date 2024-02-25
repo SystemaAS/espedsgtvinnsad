@@ -26,7 +26,16 @@ public final class SadDigitollUrlDataStore {
 		//UPDATE/INSERT/DELETE House
 		//http://localhost:8080/syjservicestn/syjsSADMOMF_U.do?user=OSCAR and/or user=OSCAR...
 		static public String SAD_UPDATE_DIGITOLL_HOUSECONSIGNMENT_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOHF_U.do";
-				
+		
+		//FETCH External - Främmande House Consignment list
+		//http://localhost:8080/syjservicestn/syjsSADMOHF.do?user=OSCAR and/or user=OSCAR...
+		static public String SAD_FETCH_DIGITOLL_EXTERNAL_HOUSECONSIGNMENT_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsZADMOHF.do";
+		//UPDATE/INSERT/DELETE House
+		//http://localhost:8080/syjservicestn/syjsSADMOMF_U.do?user=OSCAR and/or user=OSCAR...
+		static public String SAD_UPDATE_DIGITOLL_EXTERNAL_HOUSECONSIGNMENT_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsZADMOHF_U.do";
+		
+		
+		
 		//FETCH Item line list
 		//http://localhost:8080/syjservicestn/syjsSADMOIFR.do?user=OSCAR and/or user=OSCAR...
 		static public String SAD_FETCH_DIGITOLL_ITEMLINES_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOIF.do";

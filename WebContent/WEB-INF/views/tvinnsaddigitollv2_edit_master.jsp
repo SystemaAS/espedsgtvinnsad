@@ -428,7 +428,7 @@
 							<td class="text14">&nbsp;<span title="emrgt - Transportør OrgNr. / EORI">Transp.Orgnr / EORI</span><font class="text16RedBold" >*</font></td>
 							<td></td>
 							 
-							<c:if test="${model.record.emlnrm > 0}">
+							<c:if test="${model.record.emlnrm > 0 && not empty model.record.emmid}">
 								<td width="40px"></td>
 								<td class="text14"><span title="Send til orgnr">Send Dok.nr til - Navn</span>
 									<a tabindex="-1" id="sendToPartIdLink">
@@ -458,7 +458,7 @@
 								</table>
 							</td>
 							
-							<c:if test="${model.record.emlnrm > 0}">
+							<c:if test="${model.record.emlnrm > 0 && not empty model.record.emmid}">
 								<td width="40px"></td>
 								<td class="text14">
 									<input  type="text" readonly class="inputText12LightYellow" name="ownReceiverName" id="ownReceiverName" size="31" maxlength="30" value="">
