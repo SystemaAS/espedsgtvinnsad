@@ -127,7 +127,10 @@
 				          	   <td width="2%" align="center" class="tableCell12" >${record.fssok}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.sivkb}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.sintk}</td>
-				          	   <td width="2%" align="center" class="tableCell12" >${record.wehrg}&nbsp;${record.weh0068a}&nbsp;${record.weh0068b}</td>
+				          	   <td width="2%" align="center" class="tableCell12" >${record.wehrg}&nbsp;${record.weh0068a}&nbsp;${record.weh0068b}
+				          	   		<c:if test="${not empty record.wfssokmrn}">&nbsp;Mrn:${record.wfssokmrn}</c:if>
+				          	   		<c:if test="${not empty record.wfssokexp}">&nbsp;Eksp.id:${record.wfssokexp}</c:if>
+				          	   </td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.sinas}</td> 
 				          	   <td width="2%" align="center" class="tableCell12" ><span style="font-size: 10px;">${record.siads1}&nbsp;${record.siads2}&nbsp;${record.siads3}</span></td>
 			               	   <td width="2%" align="center" class="tableCell12" >${record.sinak}</td>

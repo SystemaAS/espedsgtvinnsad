@@ -194,6 +194,9 @@
 				opener.jq('#ehrg').val("");opener.jq('#ehrg').val(data[i].wehrg); //Dekl.nr
 				opener.jq('#eh0068a').val("");opener.jq('#eh0068a').val(data[i].weh0068a); //Dekl.dato
 				opener.jq('#eh0068b').val("");opener.jq('#eh0068b').val(data[i].weh0068b); //Dekl.sekv
+				opener.jq('#ehtrnr').val("");opener.jq('#ehtrnr').val(data[i].wfssokmrn); //Mrn.nr transit
+				opener.jq('#eheid').val("");opener.jq('#eheid').val(data[i].wfssokexp); //Eksp.id
+				
 				//Sender
 				opener.jq('#ehkns').val("");opener.jq('#ehkns').val(data[i].sikns); //Kundnr
 				opener.jq('#ehnas').val("");opener.jq('#ehnas').val(data[i].sinas); //Namn

@@ -64,7 +64,11 @@ public class SadOppdragRecord extends JsonAbstractGrandFatherRecord  {
     private String stiarf;
     private String fssok;
     private String sitrid;
-	
+    
+    private String wfssok_cr; 
+    private String wfssokmrn; //Mrn nummer
+    private String wfssokexp; //Ekspid
+    
 	/**
 	 * 
 	 * @return
