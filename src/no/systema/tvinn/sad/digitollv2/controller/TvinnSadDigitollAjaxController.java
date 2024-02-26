@@ -330,6 +330,12 @@ public class TvinnSadDigitollAjaxController {
 					if(StringUtils.isNotEmpty(record.getWeh0068b())) {
 						sadmohfRecord.setEh0068b(Integer.valueOf(record.getWeh0068b()));//Dekl.sekv
 					}
+					if(StringUtils.isNotEmpty(record.getWfssokmrn())) {
+						sadmohfRecord.setEhtrnr(record.getWfssokmrn());//Mrn.Transit
+					}
+					if(StringUtils.isNotEmpty(record.getWfssokexp())) {
+						sadmohfRecord.setEheid(record.getWfssokexp());//Eksp.id
+					}
 					//Sender
 					if(StringUtils.isNotEmpty(record.getSikns())) { sadmohfRecord.setEhkns(Integer.valueOf(record.getSikns())); } //Kundnr
 					sadmohfRecord.setEhnas(record.getSinas());//Namn
@@ -464,6 +470,12 @@ public class TvinnSadDigitollAjaxController {
 					if(StringUtils.isNotEmpty(record.getWeh0068b())) {
 						sadmohfRecord.setEh0068b(Integer.valueOf(record.getWeh0068b()));//Dekl.sekv
 					}
+					if(StringUtils.isNotEmpty(record.getWfssokmrn())) {
+						sadmohfRecord.setEhtrnr(record.getWfssokmrn());//Mrn.Transit
+					}
+					if(StringUtils.isNotEmpty(record.getWfssokexp())) {
+						sadmohfRecord.setEheid(record.getWfssokexp());//Eksp.id
+					}
 					//Sender
 					if(StringUtils.isNotEmpty(record.getSikns())) { sadmohfRecord.setEhkns(Integer.valueOf(record.getSikns())); } //Kundnr
 					sadmohfRecord.setEhnas(record.getSinas());//Namn
@@ -572,6 +584,13 @@ public class TvinnSadDigitollAjaxController {
 			if(StringUtils.isNotEmpty(record.getWeh0068b())) {
 				sadmohfRecord.setEh0068b(Integer.valueOf(record.getWeh0068b()));//Dekl.sekv
 			}
+			if(StringUtils.isNotEmpty(record.getWfssokmrn())) {
+				sadmohfRecord.setEhtrnr(record.getWfssokmrn());//Mrn.Transit
+			}
+			if(StringUtils.isNotEmpty(record.getWfssokexp())) {
+				sadmohfRecord.setEheid(record.getWfssokexp());//Eksp.id
+			}
+			
 			//Sender
 			if(StringUtils.isNotEmpty(record.getSikns())) { sadmohfRecord.setEhkns(Integer.valueOf(record.getSikns())); } //Kundnr
 			sadmohfRecord.setEhnas(record.getSinas());//Namn
@@ -844,6 +863,7 @@ public class TvinnSadDigitollAjaxController {
 							}
 						}
     					logger.info(record.getWeh0068a());
+    					logger.info("Mrn:" + record.getWfssokmrn());
     					retval = record;
     					break;
     				}
