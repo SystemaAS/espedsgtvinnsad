@@ -427,7 +427,7 @@
 							<td class="text14">&nbsp;<span title="emknt Transportør KundeNr.">Transp.knr.</span></td>
 							<td class="text14">&nbsp;<span title="emrgt - Transportør OrgNr. / EORI">Transp.Orgnr / EORI</span><font class="text16RedBold" >*</font></td>
 							<td></td>
-							<%-- 
+							 
 							<c:if test="${model.record.emlnrm > 0 && not empty model.record.emmid}">
 								<td width="40px"></td>
 								<td class="text14"><span title="Send til orgnr">Send Dok.nr til - Navn</span>
@@ -438,7 +438,7 @@
 								<td class="text14"><span title="Send til orgnr">Orgnr</span></td>
 								<td colspan="3" class="text12"><span id="ajaxErrorTextExtParty" name="ajaxErrorTextExtParty"></span></td>
 							</c:if>
-							 --%>
+							 
 						</tr>
 						<tr>
 							<td class="text14">
@@ -458,7 +458,6 @@
 								</table>
 							</td>
 							
-							<%--
 							<c:if test="${model.record.emlnrm > 0 && not empty model.record.emmid}">
 								<td width="40px"></td>
 								<td class="text14">
@@ -471,7 +470,7 @@
 									<input title="Send til part..." class="buttonGrayWithGreenFrame" style="cursor:pointer;" type="button" name="sendToPartButton" id="sendToPartButton" value='Send Dok.nr til part'>
 								</td>
 							</c:if>
-							 --%>		
+							 		
 						</tr>
 						</table>
 					</td>
