@@ -90,12 +90,16 @@
 				           				1. Road
 				           		</a>
 				           		<br/>
+				           		<a class="text11" target="_blank" href="https://api-test.toll.no/api/movement/rail/v1/swagger-ui/index.html">
+				           				2. Rail
+				           		</a>
+				           		<br/>
 			           			<a class="text11" target="_blank" href="https://api-test.toll.no/api/movement/air/v1/swagger-ui/index.html">
-			           					2. Air
+			           					3. Air
 			           			</a>
 			           			<br/>
 			           			<a class="text11" target="_blank" href="https://toll.github.io/">
-			           					3. Digitoll - Teknisk informasjon
+			           					4. Digitoll - Teknisk informasjon
 			           			</a>
 			           			<br/>
 			           			<br/>
@@ -110,7 +114,7 @@
 			           		<div class="text11" align="left">
 			           			<a id="alinkLogsgLoggerApi" ><span class="text12" style="cursor:pointer;color:green;">1. Api-log</span></a><br/><br/>
 			           			<a id="alinkLogsgLoggerSadService" ><span class="text12" style="cursor:pointer;color:green;">2. Sad-service-log</span></a><br/>
-			           			<a id="alinkLogsgLoggerRoadEntry" ><span class="text12" style="cursor:pointer;color:green;">3. Road-Enry-log</span></a><br/>
+			           			<a id="alinkLogsgLoggerRoadEntry" ><span class="text12" style="cursor:pointer;color:green;">3. Road-Entry-log</span></a><br/>
 			           			<a id="alinkLogsgLoggerCatalina" ><span class="text12" style="cursor:pointer;color:green;">4. Catalina-log</span></a><br/>
 			           			
 			           			<br/>
@@ -223,8 +227,13 @@
 			<tr >
 				<td class="text14" align="left" >
 					<c:choose>
-               		<c:when test="${ not empty model.record.etktyp && fn:startsWith(model.record.etktyp,'4') }">
-						<img title="api:air" style="vertical-align:middle;cursor:pointer;" id="airplaneImg" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >
+               		<c:when test="${ not empty model.record.etktyp && (fn:startsWith(model.record.etktyp,'4') ||  fn:startsWith(model.record.etktyp,'2'))   }">
+						<c:if test="${fn:startsWith(model.record.etktyp,'4')}">
+							<img title="api:air" style="cursor:help;vertical-align:middle;cursor:pointer;" id="airplaneImg" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
+						</c:if>
+						<c:if test="${fn:startsWith(model.record.etktyp,'2')}">
+							<img title="api:rail" style="cursor:help;vertical-align:middle;cursor:pointer;" id="railImg" src="resources/images/rail.png" width="25" height="25"border="0" >&nbsp;
+						</c:if>
 					</c:when>
 					<c:otherwise>
 						<img title="api:road" style="vertical-align:middle;cursor:pointer;" id="lorryImg" src="resources/images/lorry_green.png" width="20" height="20"border="0" >
@@ -1187,8 +1196,14 @@
 		               <td width="2%" class="tableCell" ><c:if test="${masterConsignmentRecord.emdtin > 0}">${masterConsignmentRecord.emdtin}</c:if></td>
 		               <td width="2%" class="tableCell" >
 		               		<c:choose>
-		               		<c:when test="${ not empty model.record.etktyp && fn:startsWith(model.record.etktyp,'4') }">
-								<img title="api:air" style="vertical-align:middle;" id="airplaneImg${masterConsignmentRecord.emuuid}" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
+		               		<c:when test="${ not empty model.record.etktyp && (fn:startsWith(model.record.etktyp,'4') || fn:startsWith(model.record.etktyp,'2') )  }">
+								<c:if test="${fn:startsWith(model.record.etktyp,'4')}">
+									<img title="api:air" style="cursor:help;vertical-align:middle;cursor:pointer;" id="airplaneImg${masterConsignmentRecord.emuuid}" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
+								</c:if>
+								<c:if test="${fn:startsWith(model.record.etktyp,'2')}">
+									<img title="api:rail" style="cursor:help;vertical-align:middle;cursor:pointer;" id="railImg${masterConsignmentRecord.emuuid}" src="resources/images/rail.png" width="25" height="25"border="0" >&nbsp;
+								</c:if>
+								
 							</c:when>
 							<c:otherwise>
 								<img title="api:road" style="vertical-align:middle;" id="lorryImg${masterConsignmentRecord.emuuid}" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;

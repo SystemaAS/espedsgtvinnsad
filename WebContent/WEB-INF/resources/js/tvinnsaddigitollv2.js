@@ -194,6 +194,8 @@
 		  //check if this is an AIR api record
 		  if(jq("#airplaneImg" + id).length > 0) { 
 			apiType = "air";	
+		  }	else if(jq("#railImg" + id).length > 0) { 
+			apiType = "rail";	
 		  }		
 		  window.open('tvinnsaddigitollv2_childwindow_manifestinfo.do?id=' + id +'&level=t' + '&apiType=' + apiType, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");
 	  });

@@ -349,6 +349,56 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	    	return successView;
 		}
 	}
+	
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_movrail_entryinfo.do",  method={RequestMethod.GET} )
+	public ModelAndView doEntryRailInfo(HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doEntryRailInfo");
+		Map model = new HashMap();
+		String mrn = request.getParameter("mrn");
+		
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_manifestinfo");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			StringBuilder url = new StringBuilder();
+			url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
+			
+			if(StringUtils.isNotEmpty(mrn)) {
+				url.append("getMovementRailEntry.do");
+				
+				String BASE_URL = url.toString();
+	    		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&mrn=" + mrn;
+	    		logger.info("URL: " + BASE_URL);
+	    		logger.info("PARAMS: " + urlRequestParamsKeys);
+	    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+	    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+	    		//Debug -->
+		    	logger.debug(jsonPayload);
+	    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    		
+	    		model.put("content", jsonPayload);
+	    		
+	    		try {
+	    			ApiGenericDtoResponse obj = new ObjectMapper().readValue(jsonPayload, ApiGenericDtoResponse.class);
+	    			if(obj!=null) {
+	    				EntryMovRoadDto dto = obj.getEntryMovementRoad();
+						logger.debug(dto.toString());
+						
+	    			}
+	    		}catch(Exception e) {
+	    			e.toString();
+	    		}
+			}
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
 	/**
 	 * 
 	 * @param session
@@ -463,6 +513,52 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		return successView;
 	}
 	
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_transportdocs_rec_rail.do",  method={RequestMethod.GET} )
+	public ModelAndView doTransportDocsReceivedRail(HttpSession session, HttpServletRequest request){
+		
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doTransportDocsReceivedRail");
+		Map model = new HashMap();
+		String id = request.getParameter("id");
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_transportdocrefs_api");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			StringBuilder url = new StringBuilder();
+			url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
+			url.append("getDocsRecTransportRail.do");
+			
+			String BASE_URL = url.toString();
+    		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&mrn=" + id;
+    		logger.info("URL: " + BASE_URL);
+    		logger.info("PARAMS: " + urlRequestParamsKeys);
+    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+    		//Debug -->
+	    	logger.debug(jsonPayload);
+    		if(StringUtils.isNotEmpty(jsonPayload)) {
+    			try {
+    			ApiMasterRefsContainer container = new ObjectMapper().readValue(jsonPayload, ApiMasterRefsContainer.class);
+    			if(container!=null) {
+    				model.put("mrn", container.getMrn());
+    				model.put("list", container.getList());
+    				model.put("listAux", container.getListAux());
+    			}
+    			}catch(Exception e) {
+    				logger.info(e.toString());
+    			}
+    		}
+    		successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+		}
+		
+		return successView;
+	}
+	
 	/**
 	 * Runs the API method
 	 * http://localhost:8080/syjservicestn-expft/digitollv2/getDocsRecMasterConsignment.do?user=OSCAR&mrn=23NONJB08UP98SOBT7
@@ -521,6 +617,51 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		return successView;
 	}
 	
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_masterdocs_rec_rail.do",  method={RequestMethod.GET} )
+	public ModelAndView doMasterDocsReceivedRail(HttpSession session, HttpServletRequest request){
+		
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doMasterDocsReceivedRail");
+		Map model = new HashMap();
+		String id = request.getParameter("id");
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_masterdocrefs_api");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			StringBuilder url = new StringBuilder();
+			url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
+			url.append("getDocsRecMasterConsignmentRail.do");
+			
+			String BASE_URL = url.toString();
+    		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&mrn=" + id;
+    		logger.info("URL: " + BASE_URL);
+    		logger.info("PARAMS: " + urlRequestParamsKeys);
+    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+    		//Debug -->
+	    	logger.debug(jsonPayload);
+    		if(StringUtils.isNotEmpty(jsonPayload)) {
+    			try {
+    			ApiMasterRefsContainer container = new ObjectMapper().readValue(jsonPayload, ApiMasterRefsContainer.class);
+    			if(container!=null) {
+    				model.put("mrn", container.getMrn());
+    				model.put("list", container.getList());
+    			}
+    			}catch(Exception e) {
+    				logger.info(e.toString());
+    			}
+    		}
+    		successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+		}
+		
+		return successView;
+	}
+	
 	
 	@RequestMapping(value="tvinnsaddigitollv2_childwindow_housedocs_rec.do",  method={RequestMethod.GET} )
 	public ModelAndView doHouseDocsReceived(HttpSession session, HttpServletRequest request){
@@ -541,6 +682,44 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			StringBuilder url = new StringBuilder();
 			url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
 			url.append("getDocsRecHouseConsignment.do");
+			
+			String BASE_URL = url.toString();
+    		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&mrn=" + id;
+    		logger.info("URL: " + BASE_URL);
+    		logger.info("PARAMS: " + urlRequestParamsKeys);
+    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+    		//Debug -->
+	    	logger.debug(jsonPayload);
+    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    		
+    		model.put("content", jsonPayload);
+
+    		successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_housedocs_rec_rail.do",  method={RequestMethod.GET} )
+	public ModelAndView doHouseDocsReceivedRail(HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doHouseDocsReceivedRail");
+		Map model = new HashMap();
+		String id = request.getParameter("id");
+		
+		
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_manifestinfo");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			StringBuilder url = new StringBuilder();
+			url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
+			url.append("getDocsRecHouseConsignmentRail.do");
 			
 			String BASE_URL = url.toString();
     		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&mrn=" + id;

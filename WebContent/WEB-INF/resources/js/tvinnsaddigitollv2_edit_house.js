@@ -725,13 +725,32 @@
 	  jq(".uuidLinkParent").click(function() {
 		  var id = this.id;
 		  jq("#"+id).attr(('target','_blank'));
+		  var apiType = "";
+		  //check if this is an AIR api record
+		  if(jq("#airplaneImg").length > 0) { 
+			apiType = "air";	
+		  }else if(jq("#railImg").length > 0) { 
+			apiType = "rail";	
+		  }		
 		  //default url
 		  var controllerUrl = "tvinnsaddigitollv2_childwindow_housedocs_rec.do?id=" + id;
+		  if(apiType == "rail"){
+			 controllerUrl = "tvinnsaddigitollv2_childwindow_housedocs_rec_rail.do?id=" + id;
+		  }
+
 		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
 			
 	  });
 		
 	  jq("#airplaneImg").click(function() {
+		  var id = this.id;
+		  jq("#"+id).attr(('target','_blank'));
+		  //default url
+		  var controllerUrl = "tvinnsaddigitollv2_childwindow_routinginfo.do?level=h";
+		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
+			
+	  });
+	 jq("#railImg").click(function() {
 		  var id = this.id;
 		  jq("#"+id).attr(('target','_blank'));
 		  //default url

@@ -420,6 +420,61 @@ public class TvinnSadDigitollv2MasterController {
 		}	
 		return successView;
 	}
+	
+	@RequestMapping(value="tvinnsaddigitollv2_updateInternalStatus1_master.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doUpdateStatus1(@ModelAttribute ("record") SadmomfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		Map model = new HashMap();
+		
+		String id1 = "";
+		String id2 = "";
+		String status = "";
+		
+		//from form
+		id1= String.valueOf(recordToValidate.getEmlnrt());
+		id2= String.valueOf(recordToValidate.getEmlnrm());
+    	status = recordToValidate.getEmst();
+	    logger.info("Id1:" + id1); logger.info("Id2:" + id2); logger.info("status:" + status);
+	    
+		ModelAndView successView = new ModelAndView("redirect:tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=" + Integer.parseInt(id1) + "&emlnrm=" + Integer.parseInt(id2) );
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		
+		//START
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			//==========
+			//Upd status
+			//==========
+		
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_DIGITOLLV2);
+			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE); 
+			
+			//Update/Insert
+			if(StringUtils.isNotEmpty(id1) && StringUtils.isNotEmpty(id2) ) {
+				
+				recordToValidate.setEmlnrt(Integer.valueOf(id1));
+				recordToValidate.setEmlnrm(Integer.valueOf(id2));
+				recordToValidate.setEmst(status);
+				String mode = "US";
+				logger.info("MODE:" + mode + " before update in Controller ...");
+				
+				StringBuffer errMsg = new StringBuffer();
+				int dmlRetval = 0;
+				dmlRetval = this.updateStatusOnMaster(appUser.getUser(), recordToValidate, mode, errMsg);
+				if(dmlRetval < 0) {
+					//error on update
+					model.put("errorMessage", errMsg.toString());
+				}
+			}
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+	    
+		}	
+		return successView;
+	}	
 	/**
 	 * 
 	 * @param recordToValidate

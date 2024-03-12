@@ -380,8 +380,13 @@
 		               <td class="tableCell" ><c:if test="${record.etdtr > 0}">${record.etdtrStr}</c:if></td>
 		               <td width="2%" class="tableCell" >
 		               		<c:choose>
-		               		<c:when test="${ not empty record.etktyp && fn:startsWith(record.etktyp,'4') }">
-								<img style="cursor:help;vertical-align:middle;" title="api:air" id="airplaneImg${record.etuuid}" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
+		               		<c:when test="${ not empty record.etktyp && (fn:startsWith(record.etktyp,'4') || fn:startsWith(record.etktyp,'2') ) }">
+		               			<c:if test="${fn:startsWith(record.etktyp,'4')}">
+									<img style="cursor:help;vertical-align:middle;" title="api:air" id="airplaneImg${record.etuuid}" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
+								</c:if>
+								<c:if test="${fn:startsWith(record.etktyp,'2')}">
+									<img style="cursor:help;vertical-align:middle;" title="api:rail" id="railImg${record.etuuid}" src="resources/images/rail.png" width="25" height="25"border="0" >&nbsp;
+								</c:if>
 							</c:when>
 							<c:otherwise>
 								<c:if test="${record.etst2 == 'C'}">							

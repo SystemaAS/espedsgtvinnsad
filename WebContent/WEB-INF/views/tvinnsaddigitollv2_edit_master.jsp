@@ -102,12 +102,16 @@
 				           				1. Road
 				           		</a>
 				           		<br/>
+				           		<a class="text11" target="_blank" href="https://api-test.toll.no/api/movement/rail/v1/swagger-ui/index.html">
+				           				2. Rail
+				           		</a>
+				           		<br/>
 			           			<a class="text11" target="_blank" href="https://api-test.toll.no/api/movement/air/v1/swagger-ui/index.html">
-			           					2. Air
+			           					3. Air
 			           			</a>
 			           			<br/>
 			           			<a class="text11" target="_blank" href="https://toll.github.io/">
-			           					3. Digitoll - Teknisk informasjon
+			           					4. Digitoll - Teknisk informasjon
 			           			</a>
 			           			<br/>
 			           			<br/>
@@ -228,8 +232,13 @@
 			<tr >
 				<td class="text14" align="left" >
 					<c:choose>
-               		<c:when test="${ not empty model.record.transportDto.etktyp && fn:startsWith(model.record.transportDto.etktyp,'4') }">
-						<img title="api:air" style="vertical-align:middle;" id="airplaneImg" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >
+               		<c:when test="${ not empty model.record.transportDto.etktyp && (fn:startsWith(model.record.transportDto.etktyp,'4') ||  fn:startsWith(model.record.transportDto.etktyp,'2'))  }">
+               			<c:if test="${fn:startsWith(model.record.transportDto.etktyp,'4')}">
+							<img title="api:air" style="cursor:help;vertical-align:middle;cursor:pointer;" id="airplaneImg" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
+						</c:if>
+						<c:if test="${fn:startsWith(model.record.transportDto.etktyp,'2')}">
+							<img title="api:rail" style="cursor:help;vertical-align:middle;cursor:pointer;" id="railImg" src="resources/images/rail.png" width="25" height="25"border="0" >&nbsp;
+						</c:if>
 					</c:when>
 					<c:otherwise>
 						<img title="api:road" style="vertical-align:middle;" id="lorryImg" src="resources/images/lorry_green.png" width="20" height="20"border="0" >
@@ -324,12 +333,15 @@
 						<td class="text14">&nbsp;<span title="emcn">Container</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emdkm">Dok.nr</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emdkmt">Dok.type</span><font class="text16RedBold" >*</font></td>
-						<td class="text14">&nbsp;<span title="emst">St.</span></td>
-						<td class="text14">&nbsp;<span title="emst2">
+						<td class="text14">&nbsp;
+							<span class="text14" title="emst">
+								St<a tabindex=-1 id="updateInternalStatusLink" name="updateInternalStatusLink" runat="server" href="#">.</a>
+							</span>
+						</td>
+						<td class="text14" class="text14">&nbsp;
+							<span class="text14" title="emst2">
 								St<a tabindex=-1 id="updateInternalStatus2Link" name="updateInternalStatus2Link" runat="server" href="#">.</a>2
-						 </span>						
-						
-						
+						 	</span>						
 						</td>
 						<td class="text14">&nbsp;<span title="emst3"><a tabindex=-1 id="updateInternalStatus3Link" name="updateInternalStatus3Link" runat="server" href="#"><span class="text14">St.3</span></a></span></td>
 						<td class="text14">&nbsp;<span title="emdtr">Reg.dato</span></td>
@@ -1153,8 +1165,14 @@
 		               
 		               <td width="2%" class="tableCell12" >
 		               		<c:choose>
-		               		<c:when test="${ not empty model.record.transportDto.etktyp && fn:startsWith(model.record.transportDto.etktyp,'4') }">
-								<img title="api:air" style="vertical-align:middle;" id="airplaneImg${houseConsignmentRecord.ehuuid}" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
+		               		<c:when test="${ not empty model.record.transportDto.etktyp && (fn:startsWith(model.record.transportDto.etktyp,'4') || fn:startsWith(model.record.transportDto.etktyp,'2') )  }">
+								<c:if test="${fn:startsWith(model.record.transportDto.etktyp,'4')}">
+									<img title="api:air" style="vertical-align:middle;" id="airplaneImg${houseConsignmentRecord.ehuuid}" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
+								</c:if>
+								<c:if test="${fn:startsWith(model.record.transportDto.etktyp,'2')}">
+									<img title="api:rail" style="cursor:help;vertical-align:middle;cursor:pointer;" id="railImg${houseConsignmentRecord.ehuuid}" src="resources/images/rail.png" width="25" height="25"border="0" >&nbsp;
+								</c:if>
+								
 							</c:when>
 							<c:otherwise>
 								<img title="api:road" style="vertical-align:middle;" id="lorryImg${houseConsignmentRecord.ehuuid}" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;
@@ -1305,6 +1323,32 @@
 
 
 
+<%-- Dialog update status  --%>		
+<tr>
+	<td>
+		<div id="dialogStatus" title="Dialog">
+			
+			<form action="tvinnsaddigitollv2_updateInternalStatus1_master.do" name="updateInternalStatusForm" id="updateInternalStatusForm" method="post">
+			 	<input type="hidden" name="emlnrt" id="emlnrt" value="${model.record.emlnrt}">
+			 	<input type="hidden" name="emlnrm" id="emlnrm" value="${model.record.emlnrm}">
+			 	<p class="text14" >Change Internal status as needed.</p>
+				<table>
+					<tr>
+						<td class="text14" align="left" >&nbsp;Status</td>
+						<td class="text14MediumBlue">
+							<select class="selectMediumBlueE2" name="emst" id="emst">
+		            		  	<option title="EMPTY" value=" ">BLANK</option>
+			            		<option title="X-TEST" value="X">X</option>
+							</select>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</td>
+</tr> 
+
+
 <%-- Dialog update status 2 --%>		
 <tr>
 	<td>
@@ -1335,7 +1379,7 @@
 	</td>
 </tr> 
 
-<%-- Dialog update status 2 --%>		
+<%-- Dialog update status 3 --%>		
 <tr>
 	<td>
 		<div id="dialogStatus3" title="Dialog">

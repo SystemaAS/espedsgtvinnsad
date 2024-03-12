@@ -500,6 +500,16 @@
 //-------------------------------------------
   //START Model dialog ADMIN: "Update status"
   //-------------------------------------------
+   jq(function() { 
+	  jq("#dialogStatus").dialog({
+		  autoOpen: false,
+		  maxWidth:500,
+          maxHeight: 400,
+          width: 280,
+          height: 220,
+		  modal: true
+	  });
+  });
    //Initialize <div> here
   jq(function() { 
 	  jq("#dialogStatus2").dialog({
@@ -532,18 +542,17 @@
 	  jq("#updateInternalStatus3Link").click(function() {
 		 presentChangeInternalStatus3Dialog();
 	  });
-		/* NOT implemented on Controller
 	  jq("#updateInternalStatusLink").click(function() {
 		  presentChangeInternalStatusDialog();
-	  });*/
+	  });
 	  
   });
   
   function presentChangeInternalStatusDialog(){
 		//setters (add more if needed)
-		  jq('#dialogUpdateInternalStatus').dialog( "option", "title", "Update Internal Status" );
+		  jq('#dialogStatus').dialog( "option", "title", "Update Internal Status" );
 		  //deal with buttons for this modal window
-		  jq('#dialogUpdateInternalStatus').dialog({
+		  jq('#dialogStatus').dialog({
 			 buttons: [ 
 	            {
 				 id: "dialogSaveTU",	
@@ -567,7 +576,7 @@
 		  //init values
 		  jq("#dialogSaveSU").button("option", "disabled", true);
 		  //open now
-		  jq('#dialogUpdateInternalStatus').dialog('open');
+		  jq('#dialogStatus').dialog('open');
 	  }
   
 	function presentChangeInternalStatus2Dialog(){
@@ -859,13 +868,18 @@
 		  //check if this is an AIR api record
 		  if(jq("#airplaneImg").length > 0) { 
 			apiType = "air";	
-		  }	
+		  }else if(jq("#railImg").length > 0) { 
+			apiType = "rail";	
+		  }		
 		  //default url
 		  var controllerUrl = "tvinnsaddigitollv2_childwindow_manifestinfo.do?id=" + id +"&level=m" + "&apiType=" + apiType;
 
 		 // Has been removed at toll.no in V2 ...	
 		  if(id.length<35){ //meaning MRN and not LRN (only at Master Consignment level)
-			 controllerUrl = "tvinnsaddigitollv2_childwindow_masterdocs_rec.do?id=" + id; 
+			 controllerUrl = "tvinnsaddigitollv2_childwindow_masterdocs_rec.do?id=" + id;
+			if(apiType == "rail"){
+				controllerUrl = "tvinnsaddigitollv2_childwindow_masterdocs_rec_rail.do?id=" + id;
+			}
 		  }
 		 
 		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
