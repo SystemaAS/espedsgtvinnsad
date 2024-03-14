@@ -1,0 +1,98 @@
+1;Lastesykkel m/tre hjul
+31;Lastebil
+32;Tankbil
+33;Trekkvogn
+34;Varebil
+35;Tankbil m/tankl�ft
+36;Lastebil, t�rrbulk - Lastebil utformet for � frakte t�rrbulk gods
+37;Lastebil, container - Lastebil utformet for � frakte containere
+38;Bilfrakter - Lastebil utformet for � frakte kj�ret�y
+39;Lastebil m/kj�l - Lastebil utformet for � frakte frosne varer
+310;Lastebil, post Kj�ret�y designet for transport av post
+311;Lastebil dump Kj�ret�y designet med en laste dumper kapasitet
+312;Lastebil, gaffeltruck Kj�ret�y designet for � l�fte last og tunge ting
+313;Laster m/skuff Kj�ret�y designet for skuffing av sand og annet bulk-materiell
+314;Lastebil, platform, fast Kj�ret�y designet med en fast plattform
+315;Containertransport�r Kj�ret�y designet for � l�fte og transportere containere.
+320;Kran, mobil Kj�ret�y mad lastekran
+330;Buss Kj�ret�y designet for transport av mer enn 8 passasjerer inkludert sj�f�r
+341;Varebil Kj�ret�y designet for raske leveringer
+342;Varebil, lett Kj�ret�y designet for lettvogn
+343;Varebil, m�bler Kj�ret�y designet for transport av m�bler
+360;Traktor, industriell Kj�ret�y designet for � slepe en eller flere tilhengere
+362;Lastebil, fryser med isotermisk tilhenger Kj�ret�y designet for transport av frosne varer med en tilhenger designet for transport av temperaturkontrollerte varer
+363;Lastebil, isotermisk med isotermisk tilhenger Kj�ret�y med tilhenger designet for � transportere temperaturkontrollerte varer
+364;Lastebil, kj�ler med isotermisk tilhenger Kj�ret�y designet for transport av kj�levarer med en tilhenger designet for transport av temperaturkontrollerte varer
+365;Lastebil, fryser med kj�letilhenger Kj�ret�y designet for transport av frosne varer med tilhenger designet for transport av kj�levarer
+366;Lastebil, isotermisk med kj�letilhenger Kj�ret�y designet for transport av temperaturkontrollerte varer med en tilhenger designet for transport av kj�levarer
+367;Lastebil, �pent gulv, med utvidbar tilhenger Kj�ret�y med �pent gulv med en utvidbar tilhenger
+368;Lastebil, rigid, med tank og tanktilhenger Ub�yelig kj�ret�y designet med en tank med en tanktilhenger
+369;Lastebil, bulk med tanktilhenger Kj�ret�y designet for bulktransport med en tanktilhenger
+370;Lastebil, rigid, med tank og bulktilhenger Rigid kj�ret�y designet med en tank med en tilhenger som kan transportere last og v�ske i bulk 
+371;Lastebil, bulk med bulktilhenger Kj�ret�y og trailer begge designet for transport av bulklast
+372;Lastebil, tautliner med utvidbar tilhenger Kj�ret�y tautliner med utvidbar tilhenger
+373;Lastebil, tautliner med avtakbar tak og utvidbar tilhenger Kj�ret�y tautliner med avtakbar tak og utvidbar tilhenger
+374;Lastebil, bulk med utvidbar tilhenger Kj�ret�y designet for transport av bulklast med en utvidbar tilhenger
+375;Lastebil, Kj�ler med frysetilhenger Kj�ret�y designet for transport av kj�levarer med tilhenger designet for � transportere frosne varer
+376;Lastebil, isotermisk med frysetilhenger Kj�ret�y designet for transport av temperaturkontrollerte varer med en tilhenger designet for transport av frosne varer
+377;Lastebil, m�bler med tilhenger Kj�ret�y designet for transport av m�bler med en tilhenger
+378;Lastebil, tautliner med m�bel trailer Kj�ret�y tautliner med trailer designet for transport av m�bler
+379;Lastebil, tautliner, avtakbart tak med m�beltilhenger Kj�ret�y tautliner designet med avtakbart tak med trailer designet for transport av m�bler
+380;Lastebil, tip-up med gondola tilhenger Kj�ret�y designet for tip-up kapasitet med en gondola tilhenger
+381;Lastebil, tautliner med gondola tilhenger Tautliner kj�ret�y med en gondola tilhenger
+382;Lastebil, tautliner, med avtakbart tak og gondola tilhenger Tautliner kj�ret�y avtakbart tak og gondola tilhenger
+383;Lastebil, �pent gulv med gondola tilhenger Kj�ret�y med �pent gulv og gondola tilhenger
+384;Lastebil, bulk med gondol tilhenger Kj�ret�y designet for � laste last med gondol tilhenger.
+385;Lastebil, bulk med utvidbar gondola tilhenger Kj�ret�y designet for tip-up kapasitet med utvidbar gondol tilhenger.
+386;Lastebil, tautliner med utvidbar gondola tilhenger Taultliner kj�ret�y med en utvidbar gondol tilhenger.
+387;Lastebil, tautliner med avtagbart tak p� utvidbar gondol tilhenger Tautliner kj�ret�y designet med avtagbart tak og med en utvidbar gondol tilhenger.
+388;Lastebil, �pent gulv med utvidbar gondola tilhenger Tautliner kj�ret�y med �pent gulv og en utvidbar gondola tilhenger.
+389;Lastebil, bulk med utvidbar gondol tilhenger Kj�ret�y designet for transport av bulk last med en utvidbar gondol tilhenger.
+390;Lastebil, tip-up med �pent gulv tilhenger Kj�ret�y designet med tip-up kapasitet med en �pen gulv henger.
+391;Lastebil, tauliner med �pent gulv tilhenger Tautliner kj�ret�y med �pent gulv tilhenger.
+392;Lastebil, tauliner med avtagbart tak og �pent gulv tilhenger Tautliner kj�ret�y designet med avtagbart tak og �pent gulv tilhenger.
+393;Lastebil, tauliner med gulv som kan �pnes og tilhenger med gulv som kan �pnes Kj�ret�y og henger, begge med �pent gulv.
+394;Lastebil, bulk med �pent gulv henger Kj�ret�y designet for transport av bulk med en �pent gulv henger.
+395;Lastebil, med henger Kj�ret�y designet for � trekke en henger, med en henger festet til.
+396;Lastebil, tipp, med tipp-henger Kj�ret�y med tipp og med en henger med tipp mulighet.
+397;Lastebil, kj�ler med kj�ler henger Kj�ret�y designet for transport av kj�levarer med en tilhenger designet for transport av kj�le varer.
+398;Lastebil, fryse med fryse henger Kj�ret�y som kan frakte frysevarer med henger som ogs� kan frakte frysevarer.
+399;Lastebil, flyttelass med tilhenger Kj�ret�y designet for � frakte husholdningsvarer med henger som ogs� kan frakte husholdningsvarer.
+3101;Lastebil, tautliner med avtagbart tak og avtagbar tilhenger Motorisert tautliner kj�ret�y med avtagbart tak og tilhenger for � frakte husholdningsutstyr.
+3102;Bil, med campingvogn Bil som trekker en campingvogn.
+3103;Lastebil, tautliner, 25 tonn Motorisert tatuliner kj�ret�y med 25 tonns kapasitet.
+3104;Lastebil, tautliner, 25 tonn med avtagbart tak Motorisert tatuliner kj�ret�y med 25 tonns kapasitet og avtagbart tak.
+3105;Lastebil, leddkj�ret�y, flat seng, 25 tonn Motorisert leddkj�ret�y med en flat seng og 25 tonns kapasitet.
+3106;Lastebil, leddkj�ret�y, flat seng, 24 tonn, med 10 meter kran Motorisert leddkj�ret�y med en flat seng og 25 tonns kapasitet med en 10 meter kran p�.
+3107;Lastebil, leddkj�ret�y, flat seng, 24 tonn, med 15 meter kran Motorisert leddkj�ret�y med en flat seng og 25 tonns kapasitet med en 15 meter kran p�.
+3108;Lastebil, leddkj�ret�y, flat seng, 24 tonn, med 19 meter kran Motorisert leddkj�ret�y med en flat seng og 25 tonns kapasitet med en 18 meter kran p�.
+3109;Lastebil, leddkj�ret�y, flat seng, 10 tonn Motorisert leddkj�ret�y med en flat seng og 10 tonn kapasitet.
+3110;Lastebil, tautliner, 25 tonn, med 90 kubikkmeter tilhenger Motorisert tautliner kj�ret�y med 25 tonn kapasitet og en 90 kubikkmeter tilhenger.
+3111;Lastebil, tautliner, 25 tonn, med 120 kubikkmeter tilhenger Motorisert tautliner kj�ret�y med 25 tonn kapasitet og en 120 kubikkmeter tilhenger.
+3112;Lastebil, flat med tilhenger og 10 meter kran Motorisert kj�ret�y med flat seng og tilhenger med 10 meter kran.
+3113;Lastebil, leddet med tank Motorisert leddkj�ret�y med tank designet for � frakte flytende eller bulk last.
+3114;Lastebil, flat, 15 tonner Motorisert kj�ret�y med flat seng og 15 tonn kapasitet.
+3115;Lastebil, flat, 15 tonner med kran Motorisert kj�ret�y med flat seng, 15 tonn kapasitet og kran.
+3116;Lastebil, isotermisk (konstant temperatur) Motorisert kj�ret�y designet for � frakte temperaturkontrollert last.
+3117;Lastebil, kj�l Motorisert kj�ret�y designet for � frakte kj�lt last.
+3118;Varebil, frys Motorisert kj�ret�y designet for � frakte fryst last.
+3119;Varebil, isotermisk (konstant temperatur) Motorisert kj�ret�y designet for � frakte isotermisk last.
+3120;Varebil, kj�l Motorisert kj�ret�y designet for � frakte kj�lt last.
+3121;Lastebil, bulk Motorisert kj�ret�y designet for � frakte bulk last.
+3122;Lastebil, tip-up Motorisert kj�ret�y designet med tip-up funksjon.
+3123;Lastebil, ledd tip-up Ledd motorisert kj�ret�y designet med tip-up funksjon.
+3124;Lastebil, med tank Motorisert kj�ret�y designet med with-tank.
+3125;Lastebil, tautliner Motorisert kj�ret�y med ikke-ledd sider.
+3126;Lastebil, tautliner, med avtagbart tak Motorisert tautliner kj�ret�y med et avtagbart tak.
+3127;Lastebil, med mulighet for �pne gulv Motorisert kj�ret�y med et gulv som kan �pnes.
+3128;Lastebil, frys Motorisert kj�ret�y designet for � frakte fryste varer.
+3129;Lastebil, med kran for � flytte last, uten tilhenger Lastebil med kran for � flytte last, uten tilhenger.
+3130;Lastebil, med kran for � flytte last, med tilhenger Lastebil med kran for � flytte last, med tilhenger.
+3131;Lastebil, med kran til � l�fte varer, uten tilhenger Lastebil med kran for � l�fte varer, uten tilhenger.
+3132;Lastebil, med kran til � l�fte varer, med tilhenger Lastebil med kran for � l�fte varer, med tilhenger.
+3133;Drosje Motorisert kj�ret�y med tillatelse for � frakte mot betaling.
+3134;Lastebil, m�bler Motorisert kj�ret�y designet for transport av m�bler.
+3135;Lastebil, hydrant Motorisert kj�ret�y designet for levering av drivstoff fra en installasjon til transportmiddel. 
+3136;Personbil Motorisert kj�ret�y designet for � frakte et lite antall passasjerer.
+3137;Lastebil, med lastelem bak Motorisert kj�ret�y med hydraulisk l�fte utstyr p� baksiden av kj�ret�yet for lasting og lossing av varer.
+4000;Aircraft, type unknown - Aircraft of unknown type.

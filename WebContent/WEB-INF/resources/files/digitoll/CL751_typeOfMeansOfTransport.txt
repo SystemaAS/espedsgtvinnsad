@@ -3,96 +3,275 @@
 32;Tankbil
 33;Trekkvogn
 34;Varebil
-35;Tankbil m/tanklï¿½ft
-36;Lastebil, tï¿½rrbulk - Lastebil utformet for ï¿½ frakte tï¿½rrbulk gods
-37;Lastebil, container - Lastebil utformet for ï¿½ frakte containere
-38;Bilfrakter - Lastebil utformet for ï¿½ frakte kjï¿½retï¿½y
-39;Lastebil m/kjï¿½l - Lastebil utformet for ï¿½ frakte frosne varer
-310;Lastebil, post Kjï¿½retï¿½y designet for transport av post
-311;Lastebil dump Kjï¿½retï¿½y designet med en laste dumper kapasitet
-312;Lastebil, gaffeltruck Kjï¿½retï¿½y designet for ï¿½ lï¿½fte last og tunge ting
-313;Laster m/skuff Kjï¿½retï¿½y designet for skuffing av sand og annet bulk-materiell
-314;Lastebil, platform, fast Kjï¿½retï¿½y designet med en fast plattform
-315;Containertransportï¿½r Kjï¿½retï¿½y designet for ï¿½ lï¿½fte og transportere containere.
-320;Kran, mobil Kjï¿½retï¿½y mad lastekran
-330;Buss Kjï¿½retï¿½y designet for transport av mer enn 8 passasjerer inkludert sjï¿½fï¿½r
-341;Varebil Kjï¿½retï¿½y designet for raske leveringer
-342;Varebil, lett Kjï¿½retï¿½y designet for lettvogn
-343;Varebil, mï¿½bler Kjï¿½retï¿½y designet for transport av mï¿½bler
-360;Traktor, industriell Kjï¿½retï¿½y designet for ï¿½ slepe en eller flere tilhengere
-362;Lastebil, fryser med isotermisk tilhenger Kjï¿½retï¿½y designet for transport av frosne varer med en tilhenger designet for transport av temperaturkontrollerte varer
-363;Lastebil, isotermisk med isotermisk tilhenger Kjï¿½retï¿½y med tilhenger designet for ï¿½ transportere temperaturkontrollerte varer
-364;Lastebil, kjï¿½ler med isotermisk tilhenger Kjï¿½retï¿½y designet for transport av kjï¿½levarer med en tilhenger designet for transport av temperaturkontrollerte varer
-365;Lastebil, fryser med kjï¿½letilhenger Kjï¿½retï¿½y designet for transport av frosne varer med tilhenger designet for transport av kjï¿½levarer
-366;Lastebil, isotermisk med kjï¿½letilhenger Kjï¿½retï¿½y designet for transport av temperaturkontrollerte varer med en tilhenger designet for transport av kjï¿½levarer
-367;Lastebil, ï¿½pent gulv, med utvidbar tilhenger Kjï¿½retï¿½y med ï¿½pent gulv med en utvidbar tilhenger
-368;Lastebil, rigid, med tank og tanktilhenger Ubï¿½yelig kjï¿½retï¿½y designet med en tank med en tanktilhenger
-369;Lastebil, bulk med tanktilhenger Kjï¿½retï¿½y designet for bulktransport med en tanktilhenger
-370;Lastebil, rigid, med tank og bulktilhenger Rigid kjï¿½retï¿½y designet med en tank med en tilhenger som kan transportere last og vï¿½ske i bulk 
-371;Lastebil, bulk med bulktilhenger Kjï¿½retï¿½y og trailer begge designet for transport av bulklast
-372;Lastebil, tautliner med utvidbar tilhenger Kjï¿½retï¿½y tautliner med utvidbar tilhenger
-373;Lastebil, tautliner med avtakbar tak og utvidbar tilhenger Kjï¿½retï¿½y tautliner med avtakbar tak og utvidbar tilhenger
-374;Lastebil, bulk med utvidbar tilhenger Kjï¿½retï¿½y designet for transport av bulklast med en utvidbar tilhenger
-375;Lastebil, Kjï¿½ler med frysetilhenger Kjï¿½retï¿½y designet for transport av kjï¿½levarer med tilhenger designet for ï¿½ transportere frosne varer
-376;Lastebil, isotermisk med frysetilhenger Kjï¿½retï¿½y designet for transport av temperaturkontrollerte varer med en tilhenger designet for transport av frosne varer
-377;Lastebil, mï¿½bler med tilhenger Kjï¿½retï¿½y designet for transport av mï¿½bler med en tilhenger
-378;Lastebil, tautliner med mï¿½bel trailer Kjï¿½retï¿½y tautliner med trailer designet for transport av mï¿½bler
-379;Lastebil, tautliner, avtakbart tak med mï¿½beltilhenger Kjï¿½retï¿½y tautliner designet med avtakbart tak med trailer designet for transport av mï¿½bler
-380;Lastebil, tip-up med gondola tilhenger Kjï¿½retï¿½y designet for tip-up kapasitet med en gondola tilhenger
-381;Lastebil, tautliner med gondola tilhenger Tautliner kjï¿½retï¿½y med en gondola tilhenger
-382;Lastebil, tautliner, med avtakbart tak og gondola tilhenger Tautliner kjï¿½retï¿½y avtakbart tak og gondola tilhenger
-383;Lastebil, ï¿½pent gulv med gondola tilhenger Kjï¿½retï¿½y med ï¿½pent gulv og gondola tilhenger
-384;Lastebil, bulk med gondol tilhenger Kjï¿½retï¿½y designet for ï¿½ laste last med gondol tilhenger.
-385;Lastebil, bulk med utvidbar gondola tilhenger Kjï¿½retï¿½y designet for tip-up kapasitet med utvidbar gondol tilhenger.
-386;Lastebil, tautliner med utvidbar gondola tilhenger Taultliner kjï¿½retï¿½y med en utvidbar gondol tilhenger.
-387;Lastebil, tautliner med avtagbart tak pï¿½ utvidbar gondol tilhenger Tautliner kjï¿½retï¿½y designet med avtagbart tak og med en utvidbar gondol tilhenger.
-388;Lastebil, ï¿½pent gulv med utvidbar gondola tilhenger Tautliner kjï¿½retï¿½y med ï¿½pent gulv og en utvidbar gondola tilhenger.
-389;Lastebil, bulk med utvidbar gondol tilhenger Kjï¿½retï¿½y designet for transport av bulk last med en utvidbar gondol tilhenger.
-390;Lastebil, tip-up med ï¿½pent gulv tilhenger Kjï¿½retï¿½y designet med tip-up kapasitet med en ï¿½pen gulv henger.
-391;Lastebil, tauliner med ï¿½pent gulv tilhenger Tautliner kjï¿½retï¿½y med ï¿½pent gulv tilhenger.
-392;Lastebil, tauliner med avtagbart tak og ï¿½pent gulv tilhenger Tautliner kjï¿½retï¿½y designet med avtagbart tak og ï¿½pent gulv tilhenger.
-393;Lastebil, tauliner med gulv som kan ï¿½pnes og tilhenger med gulv som kan ï¿½pnes Kjï¿½retï¿½y og henger, begge med ï¿½pent gulv.
-394;Lastebil, bulk med ï¿½pent gulv henger Kjï¿½retï¿½y designet for transport av bulk med en ï¿½pent gulv henger.
-395;Lastebil, med henger Kjï¿½retï¿½y designet for ï¿½ trekke en henger, med en henger festet til.
-396;Lastebil, tipp, med tipp-henger Kjï¿½retï¿½y med tipp og med en henger med tipp mulighet.
-397;Lastebil, kjï¿½ler med kjï¿½ler henger Kjï¿½retï¿½y designet for transport av kjï¿½levarer med en tilhenger designet for transport av kjï¿½le varer.
-398;Lastebil, fryse med fryse henger Kjï¿½retï¿½y som kan frakte frysevarer med henger som ogsï¿½ kan frakte frysevarer.
-399;Lastebil, flyttelass med tilhenger Kjï¿½retï¿½y designet for ï¿½ frakte husholdningsvarer med henger som ogsï¿½ kan frakte husholdningsvarer.
-3101;Lastebil, tautliner med avtagbart tak og avtagbar tilhenger Motorisert tautliner kjï¿½retï¿½y med avtagbart tak og tilhenger for ï¿½ frakte husholdningsutstyr.
-3102;Bil, med campingvogn Bil som trekker en campingvogn.
-3103;Lastebil, tautliner, 25 tonn Motorisert tatuliner kjï¿½retï¿½y med 25 tonns kapasitet.
-3104;Lastebil, tautliner, 25 tonn med avtagbart tak Motorisert tatuliner kjï¿½retï¿½y med 25 tonns kapasitet og avtagbart tak.
-3105;Lastebil, leddkjï¿½retï¿½y, flat seng, 25 tonn Motorisert leddkjï¿½retï¿½y med en flat seng og 25 tonns kapasitet.
-3106;Lastebil, leddkjï¿½retï¿½y, flat seng, 24 tonn, med 10 meter kran Motorisert leddkjï¿½retï¿½y med en flat seng og 25 tonns kapasitet med en 10 meter kran pï¿½.
-3107;Lastebil, leddkjï¿½retï¿½y, flat seng, 24 tonn, med 15 meter kran Motorisert leddkjï¿½retï¿½y med en flat seng og 25 tonns kapasitet med en 15 meter kran pï¿½.
-3108;Lastebil, leddkjï¿½retï¿½y, flat seng, 24 tonn, med 19 meter kran Motorisert leddkjï¿½retï¿½y med en flat seng og 25 tonns kapasitet med en 18 meter kran pï¿½.
-3109;Lastebil, leddkjï¿½retï¿½y, flat seng, 10 tonn Motorisert leddkjï¿½retï¿½y med en flat seng og 10 tonn kapasitet.
-3110;Lastebil, tautliner, 25 tonn, med 90 kubikkmeter tilhenger Motorisert tautliner kjï¿½retï¿½y med 25 tonn kapasitet og en 90 kubikkmeter tilhenger.
-3111;Lastebil, tautliner, 25 tonn, med 120 kubikkmeter tilhenger Motorisert tautliner kjï¿½retï¿½y med 25 tonn kapasitet og en 120 kubikkmeter tilhenger.
-3112;Lastebil, flat med tilhenger og 10 meter kran Motorisert kjï¿½retï¿½y med flat seng og tilhenger med 10 meter kran.
-3113;Lastebil, leddet med tank Motorisert leddkjï¿½retï¿½y med tank designet for ï¿½ frakte flytende eller bulk last.
-3114;Lastebil, flat, 15 tonner Motorisert kjï¿½retï¿½y med flat seng og 15 tonn kapasitet.
-3115;Lastebil, flat, 15 tonner med kran Motorisert kjï¿½retï¿½y med flat seng, 15 tonn kapasitet og kran.
-3116;Lastebil, isotermisk (konstant temperatur) Motorisert kjï¿½retï¿½y designet for ï¿½ frakte temperaturkontrollert last.
-3117;Lastebil, kjï¿½l Motorisert kjï¿½retï¿½y designet for ï¿½ frakte kjï¿½lt last.
-3118;Varebil, frys Motorisert kjï¿½retï¿½y designet for ï¿½ frakte fryst last.
-3119;Varebil, isotermisk (konstant temperatur) Motorisert kjï¿½retï¿½y designet for ï¿½ frakte isotermisk last.
-3120;Varebil, kjï¿½l Motorisert kjï¿½retï¿½y designet for ï¿½ frakte kjï¿½lt last.
-3121;Lastebil, bulk Motorisert kjï¿½retï¿½y designet for ï¿½ frakte bulk last.
-3122;Lastebil, tip-up Motorisert kjï¿½retï¿½y designet med tip-up funksjon.
-3123;Lastebil, ledd tip-up Ledd motorisert kjï¿½retï¿½y designet med tip-up funksjon.
-3124;Lastebil, med tank Motorisert kjï¿½retï¿½y designet med with-tank.
-3125;Lastebil, tautliner Motorisert kjï¿½retï¿½y med ikke-ledd sider.
-3126;Lastebil, tautliner, med avtagbart tak Motorisert tautliner kjï¿½retï¿½y med et avtagbart tak.
-3127;Lastebil, med mulighet for ï¿½pne gulv Motorisert kjï¿½retï¿½y med et gulv som kan ï¿½pnes.
-3128;Lastebil, frys Motorisert kjï¿½retï¿½y designet for ï¿½ frakte fryste varer.
-3129;Lastebil, med kran for ï¿½ flytte last, uten tilhenger Lastebil med kran for ï¿½ flytte last, uten tilhenger.
-3130;Lastebil, med kran for ï¿½ flytte last, med tilhenger Lastebil med kran for ï¿½ flytte last, med tilhenger.
-3131;Lastebil, med kran til ï¿½ lï¿½fte varer, uten tilhenger Lastebil med kran for ï¿½ lï¿½fte varer, uten tilhenger.
-3132;Lastebil, med kran til ï¿½ lï¿½fte varer, med tilhenger Lastebil med kran for ï¿½ lï¿½fte varer, med tilhenger.
-3133;Drosje Motorisert kjï¿½retï¿½y med tillatelse for ï¿½ frakte mot betaling.
-3134;Lastebil, mï¿½bler Motorisert kjï¿½retï¿½y designet for transport av mï¿½bler.
-3135;Lastebil, hydrant Motorisert kjï¿½retï¿½y designet for levering av drivstoff fra en installasjon til transportmiddel. 
-3136;Personbil Motorisert kjï¿½retï¿½y designet for ï¿½ frakte et lite antall passasjerer.
-3137;Lastebil, med lastelem bak Motorisert kjï¿½retï¿½y med hydraulisk lï¿½fte utstyr pï¿½ baksiden av kjï¿½retï¿½yet for lasting og lossing av varer.
-4000;Aircraft, type unknown - Aircraft of unknown type.
+35;Tankbil m/tankløft
+36;Lastebil, tørrbulk - Lastebil utformet for å frakte tørrbulk gods
+37;Lastebil, container - Lastebil utformet for å frakte containere
+38;Bilfrakter - Lastebil utformet for å frakte kjøretøy
+39;Lastebil m/kjøl - Lastebil utformet for å frakte frosne varer
+60;Multimodal, ukjent type - Multimodal transport av ukjent type
+70;Fast transportinstallasjon, ukjent type - Fast transportinstallasjon av ukjent type
+71;Rørledning - Ledning bestående av et eller flere rør for kontinuerlig transport av væske eller gass
+72;Strømkabel - Ledning bestående av en eller flere kabler for kontinuerlig transport av elektrisitet
+80;Skip av ukjent type
+81;Frakteskip - motorisert skip utformet for å frakte generelt gods
+85;Frakteskip m/slep - motorisert skip med slep utformet for å frakte generelt gods
+86;Tankskip m/slep - motorisert skip med slep utformet for å frakte flytende last
+87;Frakteskip m/flere skip ved siden - Motorisert skip utformet for å frakte generelt gods i følge med et eller flere skip
+88;Frakteskip m/tankskip ved siden - Motorisert skip utformet for å frakte generelt gods i følge med et tankskip utformet for å bære flytende væske
+89;Frakteskip m/flere skip foran - Motorisert skip utformet for å frakte generelt gods, som dytter et eller flere skip også utformet for å bære generelt gods
+150;Lasteskip
+151;Stykkgods transport
+152;Bulk transport
+153;Tanker
+154;Flytende gasstanker
+155;Annen spesialtanker
+157;Last og passasjerfartøy
+159;Passasjerskip
+160;Hjelpefartøy
+170;Annet sjøgående fartøy
+172;Arbeidsskip
+173;Skyvebåt
+174;Mudrer
+175;Fiskebåt
+176; Forsknings- og utdanningsskipSkip designet for forskning og studier
+177;MarinefartøySkip drevet av Marinen
+178;Struktur, flytendeAll flytende struktur
+180;LystbåtBåt designet for rekreasjon
+181;SpeedbåtBåt designet for fart, ofte benyttet til rekreasjon
+182;Seilbåt med hjelpemotorBåt designet hovedsakelig for seiling utstyrt med hjelpemotor
+183;Seiler yachtEn spesiell type fartøy for det meste brukt til fornøyelse og designet for seiling
+184;Båt til sportsfiskeFartøy designet for sportsfiske
+185;Fartøy, fornøyelse, lengre enn 20 meterFartøy lengre enn 20 meter, designet for rekreasjon
+189;Fartøy, annet, rekreasjonFartøy designet for rekreasjon, ingen annen spesifikasjon
+190;Rask båtRaskt fartøy for alle typer formål
+191;HydrofoilFartøy med vingelignende struktur for skimming i høy fart
+192;Katamaran, raskRaskt fartøy designet med to parallelle skrog
+210;Tog, jernbaneEn eller flere jernbanevogner trukket eller dyttet av et eller flere lokomotivenheter, eller selvgående, som transporteres på jernbanespor
+220;Tog, passasjerTog, designet for å transportere passasjerer
+230;Tog, fraktTog for transport av frakt
+310;Lastebil, postKjøretøy designet for transport av post
+311;Lastebil dumpKjøretøy designet med en laste dumper kapasitet
+312;Lastebil, gaffeltruckKjøretøy designet for å løfte last og tunge ting
+313;Laster m/skuffKjøretøy designet for skuffing av sand og annet bulk materiell
+314;Lastebil, platform, fastKjøretøy designet med en fast plattform
+315;ContainertransportørKjøretøy designet for å løfte og transportere containere.
+320;Kran, mobilKjøretøy mad lastekran
+330;BussKjøretøy designet for transport av mer enn 8 passasjerer inkludert sjåfør
+341;VarebilKjøretøy designet for raske leveringer
+342;Varebil, lettKjøretøy designet for lettvogn
+343;Varebil, møblerKjøretøy designet for transport av møbler
+360;Traktor, industriellKjøretøy designet for å slepe en eller flere tilhengere
+362;Lastebil, fryser med isotermisk tilhengerKjøretøy designet for transport av frosne varer med en tilhenger designet for transport av temperaturkontrollerte varer
+363;Lastebil, isotermisk med isotermisk tilhengerKjøretøy med tilhenger designet for å transportere temperaturkontrollerte varer
+364;Lastebil, kjøler med isotermisk tilhengerKjøretøy designet for transport av kjølevarer med en tilhenger designet for transport av temperaturkontrollerte varer
+365;Lastebil, fryser med kjøletilhengerKjøretøy designet for transport av frosne varer med tilhenger designet for transport av kjølevarer
+366;Lastebil, isotermisk med kjøletilhengerKjøretøy designet for transport av temperaturkontrollerte varer med en tilhenger designet for transport av kjølevarer
+367;Lastebil, åpent gulv, med utvidbar tilhengerKjøretøy med åpent gulv med en utvidbar tilhenger
+368;Lastebil, rigid, med tank og tanktilhengerUbøyelig kjøretøy designet med en tank med en tanktilhenger
+369;Lastebil, bulk med tanktilhengerKjøretøy designet for bulktransport med en tanktilhenger
+370;Lastebil, rigid, med tank og bulktilhengerRigid kjøretøy designet med en tank med en tilhenger som kan transportere last og væske i bulk
+371;Lastebil, bulk med bulktilhengerKjøretøy og trailer begge designet for transport av bulklast
+372;Lastebil, tautliner med utvidbar tilhengerKjøretøy tautliner med utvidbar tilhenger
+373;Lastebil, tautliner med avtakbart tak og utvidbar tilhengerKjøretøy tautliner med avtakbart tak og utvidbar tilhenger
+374;Lastebil, bulk med utvidbar tilhengerKjøretøy designet for transport av bulklast med en utvidbar tilhenger
+375;Lastebil, Kjøler med frysetilhengerKjøretøy designet for transport av kjølevarer med tilhenger designet for å transportere frosne varer
+376;Lastebil, isotermisk med frysetilhengerKjøretøy designet for transport av temperaturkontrollerte varer med en tilhenger designet for transport av frosne varer
+377;Lastebil, møbler med tilhengerKjøretøy designet for transport av møbler med en tilhenger
+378;Lastebil, tautliner med møbel trailerKjøretøy tautliner med trailer designet for transport av møbler
+379;Lastebil, tautliner, avtakbart tak med møbeltilhengerKjøretøy tautliner designet med avtakbart tak med trailer designet for transport av møbler
+380;Lastebil, tip-up med gondola tilhengerKjøretøy designet for tip-up kapasitet med en gondola tilhenger
+381;Lastebil, tautliner med gondola tilhengerTautliner kjøretøy med en gondola tilhenger
+382;Lastebil, tautliner, med avtakbart tak og gondola tilhengerTaultliner kjøretøy avtakbart tak og gondola tilhenger
+383;Lastebil, åpent gulv med gondola tilhengerKjøretøy med åpent gulv og gondola tilhenger
+384;Lastebil, bulk med gondol tilhengerKjøretøy designet for å laste last med gondol tilhenger.
+385;Lastebil, bulk med utvidbar gondola tilhengerKjøretøy designet for tip-up kapasitet med utvidbar gondol tilhenger.
+386;Lastebil, tautliner med utvidbar gondola tilhengerTaultliner kjøretøy med en utvidbar gondol tilhenger.
+387;Lastebil, tautliner med avtagbart tak på utvidbar gondol tilhengerTautliner kjøretøy designet med avtagbart tak og med en utvidbar gondol tilhenger.
+388;Lastebil, åpent gulv med utvidbar gondola tilhengerTautliner kjøretøy med åpent gulv og en utvidbar gondola tilhenger.
+389;Lastebil, bulk med utvidbar gondol tilhengerKjøretøy designet for transport av bulk last med en utvidbar gondol tilhenger.
+390;Lastebil, tip-up med åpent gulv tilhengerKjøretøy designet med tip-up kapasitet med en åpen gulvhenger.
+391;Lastebil, tauliner med åpent gulv tilhengerTautliner kjøretøy med åpent gulv tilhenger.
+392;Lastebil, tauliner med avtagbart tak og åpent gulv tilhengerTautliner kjøretøy designet med avtagbart tak og åpent gulv tilhenger.
+393;Lastebil, tauliner med gulv som kan åpnes og tilhenger med gulv som kan åpnesKjøretøy og henger, begge med åpent gulv.
+394;Lastebil, bulk med åpen gulvhengerKjøretøy designet for transport av bulk med en åpen gulvhenger.
+395;Lastebil, med hengerKjøretøy designet for å trekke en henger, med en henger festet til.
+396;Lastebil, tipp, med tipp-hengerKjøretøy med tipp og med en henger med tippmulighet.
+397;Lastebil, kjøler med kjølehengerKjøretøy designet for transport av kjølevarer med en tilhenger designet for transport av kjølevarer.
+398;Lastebil, fryse med frysehengerKjøretøy som kan frakte frysevarer med henger som også kan frakte frysevarer.
+399;Lastebil, flyttelass med tilhengerKjøretøy designet for å frakte husholdningsvarer med henger som også kan frakte husholdningsvarer.
+802;MotortankskipFartøy designet for å frakte flytende last i fast lastetank.
+803;ContainerfartøyFartøy spesielt designet og utstyrt for å frakte containere.
+804;GassfartøyFartøy designet for å frakte gass i fast lastetank, type G i henhold til ADN.
+810;Motorlastefartøy som drar minst et tankskipMotorisert fartøy designet for å frakte generell last, som drar minst et fartøy som er designet for å frakte flytende last.
+811;SlepebåtFartøy designet for å dra eller dytte andre fartøy som også er i stand til å laste generell last.
+812;Slepe båt, tankerFartøy designet for å dra eller dytte andre fartøy som også er i stand til å laste flytende last.
+813;Slepebåt, flereFartøy designet for å dra eller dytte andre fartøy som også er i stand til å laste generell last, tilknyttet et eller flere fartøy.
+814;Slepebåt, tanker, flereFartøy designet for å dra eller dytte andre fartøy som også er i stand til å laste enten generell last eller flytende last, tilknyttet et eller flere fartøy.
+815;GodslekterLekter designet for last av generell last, enten uten egen fremdriftskraft eller kun tilstrekkelig fremdriftskraft til å utføre begrensede manøvre.
+816;TanklekterLekter designet for last av flytende last i fast tank, enten uten egen fremdriftskraft eller kun tilstrekkelig fremdriftskraft til å utføre begrensede manøvre.
+817;GodslekterLekter spesielt designet og utstyrt til å laste containere, enten uten egen fremdriftskraft eller kun tilstrekkelig fremdriftskraft til å utføre begrensede manøvre.
+818;Tanklekter, gassLekter designet for last av gass i tank, type G i henhold til ADN, enten uten egen fremdriftskraft eller kun tilstrekkelig fremdriftskraft til å utføre begrensede manøvre.
+821;Bukserbåt, en lastelekterFartøy designet for å dytte eller taue, bidra til bevegelse av en lastelekter.
+822;Bukserbåt, to lastelektereKombinasjon designet for å dytte eller taue, bidra til bevegelse av to lastelektere.
+823;Bukserbåt, tre lastelektereKombinasjon designet for å dytte eller taue, bidra til bevegelse av tre lastelektere.
+824;Bukserbåt, fire lastelektereKombinasjon designet for å dytte eller taue, bidra til bevegelse av fire lastelektere.
+825;Bukserbåt, fem lastelektereKombinasjon designet for å dytte eller taue, bidra til bevegelse av fem lastelektere.
+826;Bukserbåt, seks lastelektereKombinasjon designet for å dytte eller taue, bidra til bevegelse av seks lastelektere.
+827;Bukserbåt, syv lastelektereKombinasjon designet for å dytte eller taue, bidra til bevegelse av syv lastelektere.
+828;Bukserbåt, åtte lastelektereKombinasjon designet for å dytte eller taue, bidra til bevegelse av åtte lastelektere.
+829;Bukserbåt, ni lastelektereKombinasjon designet for å dytte eller taue, bidra til bevegelse av ni lastelektere.
+831;Bukserbåt, en gass/tanklekterKombinasjon designet for å dytte eller taue, en tank- eller gasslekter.
+832;Bukserbåt, to lektere med minst en tank eller gasslekterKombinasjon designet for å dytte eller taue, flytte to lektere med minst en tank- eller gasslekter.
+833;Bukserbåt, tre lektere med minst en tank eller gasslekterKombinasjon designet for å dytte eller taue, flytte tre lektere med minst en tank- eller gasslekter.
+834;Bukserbåt, fire lektere med minst en tank eller gasslekterKombinasjon designet for å dytte eller taue, flytte fire lektere med minst en tank- eller gasslekter.
+835;Bukserbåt, fem lektere med minst en tank eller gasslekterKombinasjon designet for å dytte eller taue, flytte fem lektere med minst en tank- eller gasslekter.
+836;Bukserbåt, seks lektere med minst en tank eller gasslekterKombinasjon designet for å dytte eller taue, flytte seks lektere med minst en tank- eller gasslekter.
+837;Bukserbåt, syv lektere med minst en tank eller gasslekterKombinasjon designet for å dytte eller taue, flytte syv lektere med minst en tank- eller gasslekter.
+838;Bukserbåt, åtte lektere med minst en tank eller gasslekterKombinasjon designet for å dytte eller taue, flytte åtte lektere med minst en tank- eller gasslekter.
+839;Bukserbåt, ni lektere med minst en tank eller gasslekterKombinasjon designet for å dytte eller taue, flytte ni lektere med minst en tank- eller gasslekter.
+840;Slepebåt, singelFartøy spesielt designet for å utføre sleping.
+841;Slepebåt, ett eller flere slepFartøy spesielt designet for å dytte et annet fartøy som er festet med en eller flere slep samtidig.
+842;Slepebåt, assistere et fartøy eller koblede kombinasjonerFartøy designet for å dytte et annet fartøy som assisterer et fartøy eller en kombinasjon av fartøy eller slepebåt og fartøy.
+843;Skyvebåt, singelFartøy designet  for å skyve.Fartøy spesielt designet for å skyve en skyvekonvoi.
+844;Passasjerskip, ferge, redningsskøyte, cruiseskipFartøy designet for å frakte passasjerer.
+845;ServicefartøyEt følsomt (fartøy for logistisk støtte), håndterer transport av små materialer og vedlikeholdsutstyr utenfor havneområde på elver og andre innenlands vannveier.
+846;Fartøy, vedlikeholdsarbeid, flytende tårn, kabelskip, bøyeskip, mudringFartøy designet for å utføre et spesielt arbeid.
+847;Objekt, slept, ikke spesifisert annet stedEt objekt som slepes og som ikke er spesifisert annet sted.
+848;FiskebåtFartøy designet for å fiske.
+849;BunkerskipMotorisert fartøy designet for å frakte og levere bunkere (produkter ment for fremdrift og drift av fartøy) til andre fartøy, type N i henhold til ADN.
+850;Lekter, tanker, kjemikalierFartøy designet for å frakte flytende eller bulk kjemikalier.
+851;Objekt, ikke spesifisert annet stedEt flytende objekt som ikke er spesifisert annet sted.
+1501;KornfartøyFartøy designet for å frakte korn.
+1502;Tømmer/tømmerbærerFartøy designet for å frakte tømmer.
+1503;FlisfartøyFartøy designet for å frakte flis.
+1504;StålvarefartøyFartøy designet for å frakte stålvarer.
+1505;Transportør, generell last/containerFartøy designet for å frakte generell last og containere.
+1506;Temperaturkontrollert lastefartøyFartøy designet for å frakte temperaturkontrollert last.
+1511;ContainerfartøyFartøy designet for kun å frakte containere.
+1512;Ro-ro fartøyFartøy med rampe designet for å frakte rull på/rull av last.
+1513;BilfartøyFartøy designet for å frakte motorkjøretøy eller tilhørende deler.
+1514;HusdyrfartøyFartøy designet for å frakte husdyr.
+1515;Lekterfartøy - lekterskipFartøy designet for å frakte lektere. Med Lash menes lektere om bord i skip.
+1516;KjemikaliefartøyFartøy designet for å frakte kjemikalier i bulk eller tønner. Ikke i tank.
+1517;Bestrålt drivstoffartøyFartøy designet for å frakte bestrålt brensel.
+1518;Tungt lastefartøySkip designet for å frakte tung last.
+1519;Ro-ro/containerfartøyFartøy designet for å frakte både containere og rull på/rull av last.
+1521;TørrbulkfartøyFartøy designet for å frakte tørr bulk (pulver).
+1522;MalmfartøyFartøy designet for å frakte malm.
+1523;SementfartøyFartøy designet for å frakte sement.
+1524;GrusfartøyFartøy designet for å frakte grus.
+1525;KullfartøyFartøy designet fro å frakte kull.
+1531;RåoljetankerTanker designet for å frakte råolje.
+1532;Kjemikalietanker, kysttrafikkTanker designet for å frakte kjemikalier kyststrafikk.
+1533;Kjemikalietanker, dypt havTanker designet for å frakte kjemikalier på dypt hav.
+1534;Olje og andre derivater tankerTanker designet for å frakte olje og and derivater.
+1541;LPG-tankerFartøy designet for å frakte flytende petroluemsgass.
+1542;LNG-tankerTanker designet for å frakte flytende naturgass.
+1543;LNG/LPG-tankerTanker designet  for å frakte flytende naturgass (LNG) og flytende petroleumsgass (LPG).
+1551;Asfalt/bitumentankerTanker designet for å frakte asfalt/bitumen.
+1552;Svart sirup-tankerTanker designet for å frakte svart sirup.
+1553;Vegetabilsk olje-tankerTanker designet for å frakte vegetabilsk olje.
+1591;CruiseskipPassasjerskip designet for å frakte turister på spesifiserte ruter.
+1592;FergeFartøy designet for å seile regelmessig mellom to eller flere havner.
+1593;Andre passasjerskipFartøy designet for å frakte passasjerer, ikke spesifisert annet sted.
+1594;Passasjer skip, seilingFartøy designet for å frakte passasjerer og hovedsaklig drevet med seil.
+1601;Slepebåt, uten slepFartøy designet for ikke å slepe objekter, men seile alene.
+1602;Slepebåt, med slepFartøy designet for å slepe, og slepe et objekt.
+1603;BergingsfartøyFartøy designet for å berge.
+1604;RedningsfartøyFartøy designet for å effektivisere redningsoperasjoner.
+1605;OljekampfartøyFartøy designet for å bekjempe oljesøl.
+1606;OljeriggObjekt designet for å bore olje opp av sjøen.
+1607;SykehusfartøyFartøy designet for å tjene som sykehus på sjøen.
+1711;MannskapsbåtFartøy designet for å frakte mannskap til/fra skip.
+1712;Patruljere/tiltak-skipFartøy designet for å vokte, patruljere og iverksette tiltak.
+1721;ForsyningsfartøyFartøy designet for å gi forsyninger.
+1723;Offshore forsyningsskipFartøy designet for å gi offshore støtte.
+1724;PontoonFlat-bunnet fartøy med et flatt dekk.
+1725;Steindumping-fartøyFartøy designet for å dumpe stein.
+1726;KabelleggereFartøy designet for å legge kabel.
+1727;BøyefartøyFartøy designet for å håndtere bøyer.
+1728;IsbryterFartøy designet for å bryte is.
+1729;RørleggingsfartøyFartøy designet for å legge rør.
+1751;TrålerFartøy designet for å dra et poselignende nett.
+1752;KutterLite fartøy som noen ganger kan fraktes på et større skip.
+1753;FabrikkskipFartøy designet som en fiskefabrikk.
+1761;FiskeundersøkelsesfartøyFartøy designet for å drive fiskeundersøkelser.
+1762;KlimaregistreringsfartøyFartøy designet for å registrere klimaet.
+1763;Skip for miljømålingFartøy designet for miljø overvåking og måling.
+1764;ForskningsfartøyFartøy designet til forskingsformål.
+1765;SkoleskipFartøy designet for øvelse, seil som drivkraft
+1766;ØvelsesfartøyFartøy designet for øvelse.
+1781;Kran, flytendeEn kran montert på en lekter eller pontoon.
+1782;FlytedokkEn nedsenkbar flytende plattform brukt som en dokk.
+2201;Tog, super-ekspressTog designet for høy fart.
+2202;Tog, sovevognPassasjertog som innehar sovekupé
+2203;Tog, passasjer, til leie for grupperEt leid tog.
+2301;Énvogns-togTog til å frakte last til den samme bestemmelsessted.
+2302;Tog, containerTog for å frakte containere.
+2303;Tog, med en vognTog med en enkel vogn for å frakte last.
+2304;Tog, med mer enn en vogn og færre enn 20 vognerTog med mer enn en vogn og færre enn 20 vogner for å frakte last.
+2305;Tog, med mer enn 20 vognerTog med mer enn 20 vogner for å frakte last.
+3100;Lastebil, tautliner med avtagbar tilhengerMotorisert tautliner lastebil med tilhenger for å frakte husholdningsutstyr.
+3101;Lastebil, tautliner med avtagbart tak og avtagbar tilhengerMotorisert tautliner kjøretøy med avtagbart tak og tilhenger for å frakte husholdningsutstyr.
+3102;Bil, med campingvognBil som trekker en campingvogn.
+3103;Lastebil, tautliner, 25 tonnMotorisert tatuliner kjøretøy med 25 tonns kapasitet.
+3104;Lastebil, tautliner, 25 tonn med avtagbart takMotorisert tautliner kjøretøy med 25 tonns kapasitet og avtagbart tak.
+3105;Lastebil, leddkjøretøy, flat seng, 25 tonnMotorisert leddkjøretøy med en flat seng og 25 tonns kapasitet.
+3106;Lastebil, leddkjøretøy, flat seng, 24 tonn, med 10 meter kranMotorisert leddkjøretøy med en flat seng og 25 tonns kapasitet med en 10 meter kran på.
+3107;Lastebil, leddkjøretøy, flat seng, 24 tonn, med 15 meter kranMotorisert leddkjøretøy med en flat seng og 25 tonns kapasitet med en 15 meter kran på.
+3108;Lastebil, leddkjøretøy, flat seng, 24 tonn, med 19 meter kranMotorisert leddkjøretøy med en flat seng og 25 tonns kapasitet med en 18 meter kran på.
+3109;Lastebil, leddkjøretøy, flat seng, 10 tonnMotorisert leddkjøretøy med en flat seng og 10 tonn kapasitet.
+3110;Lastebil, tautliner, 25 tonn, med 90 kubikkmeter tilhengerMotorisert tautliner kjøretøy med 25 tonn kapasitet og en 90 kubikkmeter tilhenger.
+3111;Lastebil, tautliner, 25 tonn, med 120 kubikkmeter tilhengerMotorisert tautliner kjøretøy med 25 tonn kapasitet og en 120 kubikkmeter tilhenger.
+3112;Lastebil, flat med tilhenger og 10 meter kranMotorisert kjøretøy med flat seng og tilhenger med 10 meter kran.
+3113;Lastebil, leddet med tankMotorisert leddkjøretøy med tank designet for å frakte flytende eller bulk last.
+3114;Lastebil, flat, 15 tonnerMotorisert kjøretøy med flat seng og 15 tonn kapasitet.
+3115;Lastebil, flat, 15 tonner med kranMotorisert kjøretøy med flat seng, 15 tonn kapasitet og kran.
+3116;Lastebil, isotermisk (konstant temperatur)Motorisert kjøretøy designet for å frakte temperaturkontrollert last.
+3117;Lastebil, kjølMotorisert kjøretøy designet for å frakte kjølt last.
+3118;Varebil, frysMotorisert kjøretøy designet for å frakte fryst last.
+3119;Varebil, isotermisk (konstant termperatur)Motorisert kjøretøy designet for å frakte isotermisk last.
+3120;Varebil, kjølMotorisert kjøretøy designet for å frakte kjølt last.
+3121;Lastebil, bulkMotorisert kjøretøy designet for å frakte bulk last.
+3122;Lastebil, tip-upMotorisert kjøretøy designet med tip-up funksjon.
+3123;Lastebil, ledd tip-upLedd motorisert kjøretøy designet med tip-up funksjon.
+3124;Lastebil, med tankMotorisert kjøretøy designet med tank.
+3125;Lastebil, tautlinerMotorisert kjøretøy med ikke-ledd sider.
+3126;Lastebil, tautliner, med avtagbart takMotorisert tautliner kjøretøy med et avtagbart tak.
+3127;Lastebil, med mulighet for åpne gulvMotorisert kjøretøy med et gulv som kan åpnes.
+3128;Lastebil, frysMotorisert kjøretøy designet for å frakte fryste varer.
+3129;Lastebil, med kran for å flytte last, uten tilhengerLastebil med kran for å flytte last, uten tilhenger.
+3130;Lastebil, med kran for å flytte last, med tilhengerLastebil med kran for å flytte last, med tilhenger.
+3131;Lastebil, med kran til å løfte varer, uten tilhengerLastebil med kran for å løfte varer, uten tilhenger.
+3132;Lastebil, med kran til å løfte varer, med tilhengerLastebil med kran for å løfte varer, med tilhenger.
+3133;DrosjeMotorisert kjøretøy med tillatelse for å frakte mot betaling.
+3134;Lastebil, møblerMotorisert kjøretøy designet for transport av møbler.
+3135;Lastebil, hydrantMotorisert kjøretøy designet for levering av drivstoff fra en installasjon til transportmiddel.
+3136;PersonbilMotorisert kjøretøy designet for å frakte et lite antall passasjerer.
+3137;Lastebil, med lastelem bakMotorisert kjøretøy med hydralisk løfte utstyr på baksiden av kjøretøyet for lasting og lossing av varer.
+3138;Pansret kjøretøyMotorisert kjøretøy designet med forsterket karosseri for forbedret beskyttelse.
+3201;Bil, heisMotorisert kjøretøy med løftbar arbeidsplattform.
+3301;Buss, med tilhengerMotorisert kjøretøy med tilhenger for å frakte passasjerer og/eller bagasje.
+3302;Buss, hovedveiMotorisert kjøretøy designet for kjøring på hovedvei.
+3303;Buss, sightseeingMotorisert kjøretøy designet for sightseeing.
+3304;Buss, flyplass/byMotorisert kjøretøy designet for å frakte passasjerer og deres bagasje mellom en flyplass og en by og retur.
+4000;Fly, ukjent typeFly av ukjent type.
+5000;Post, ukjent typePost av ukjent type.
+8021;Motortankskip, flytende last, type NMotorisert fartøy designet for å frakte flytende last i lastetank, type N i henhold til ADN.
+8022;Motortankskip, flytende last, type CMotorisert fartøy designet for å frakte flytende kjemikalie last i lastetank, type C i henhold til ADN.
+8023;Motortankskip, tørr lastMotorisert fartøy designet for å frakte tørr last eller flytende i fast lastetank (f.eks. sement).
+8161;Tanklekter, flytende last, type NLekter designet for å frakte flytende last i lastetank, type N i henhold til ADN, enten uten egen motorkraft eller bare med tilstrekkelig kraft til å utføre begrensede manøvre.
+8162;Lekter designet for å frakte spesiell flytende last i lastetank, type C i henhold til ADN, enten uten egen motorkraft eller bare med tilstrekkelig kraft til å utføre begrensede manøvre.
+8163;Tanklekter, tørr lastLekter designet for å frakte tørr last i fast lastetank, lik flytende( f.eks. sement), enten uten egen motorkraft eller bare med tilstrekkelig kraft til å utføre begrensede manøvre.
+8441;FergeFartøy designet for å frakte passasjerer og/eller kjøretøy på faste korte seilaser.
+8442;Røde kors-skipPassasjerfartøy med sovelugarer designet for å frakte syke og eller funksjonshemmete personer.
+8443;CruiseskipPassasjerfartøy designet for å frakte mer enn 12 passasjerer innkvartert ombord.
+8444;Passasjerskip uten innkvarteringPassasjerfartøy designet for å frakte mer enn 12 passasjerer, men uten passasjer innkvartering, slik som lugarer o.l.
+8445;Dagstur høyhastighetsbåtPassasjer fartøy designet for å frakte mer enn 12 passasjerer, men uten passasjer innkvartering, slik som lugarer o.l. Kapasitet til å nå en hastighet på over 40 km/t i forbindelse med vann.
+8446;Dagstur hydrofoil-fartøyPassasjerfartøy designet for å frakte mer enn 12 passasjerer, men uten passasjerinnkvartering, slik som lugarer o.l., hydrofoil.
+8447;SeilcruiseskipPassasjerfartøy bygget og utstyrt også med henblikk på til fremdrift med seil og designet for å frakte mer enn 12 passasjerer innkvartert om bord.
+8448;Seilpassasjerskip uten innkvarteringPassasjerfartøy bygget og utstyrt også med henblikk på til fremdrift med seil og designet for å frakte mer enn 12 passasjerer, men uten passasjer innkvartert, slik som lugarer o.l.
+8451;ServicefartøyEt fartøy for logistisk støtte, som håndterer transport av små materialer og vedlikeholdsutstyr utenfor havneområde, på elver og andre innenlands vannveier.
+8452;PolitibåtEt fartøy til bruk av politiet ved tilsyn for å håndheve gjeldende regler og forskrifter.
+8453;HavneservicefartøyEt havnefartøy (fartøy til logistisk hjelp) for håndtering av transport av materialer og personer innenfor havneområdet.
+8454;NavigasjonsovervåkningsfartøyEt fartøy for kompetent myndighet som fører tilsyn med trafikk på vannet og navigasjon for å sørge for sikkerhet og opprettholdelse av regler og reguleringer.
