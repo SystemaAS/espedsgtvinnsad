@@ -957,6 +957,31 @@ public class TvinnSadDigitollv2MasterController {
 				recordToValidate.setEmavd(originalAvd);
 				recordToValidate.setEmpro(originalPro);
 				recordToValidate.setEmsg(originalSign);
+				//---------------------------------------------------------------------
+				//copy from Ombud (Avsender and Mott samma som Ombud according to DSV)
+				//---------------------------------------------------------------------
+				recordToValidate.setEmkns(recordToValidate.getTransportDto().getEtknr());
+				recordToValidate.setEmknm(recordToValidate.getTransportDto().getEtknr());
+				recordToValidate.setEmnas(recordToValidate.getTransportDto().getEtnar());
+				recordToValidate.setEmnam(recordToValidate.getTransportDto().getEtnar());
+				recordToValidate.setEmrgs(recordToValidate.getTransportDto().getEtrgr());
+				recordToValidate.setEmrgm(recordToValidate.getTransportDto().getEtrgr());
+				recordToValidate.setEmtpps(2);//bedrift = 2
+				recordToValidate.setEmtppm(2);//bedrift = 2
+				recordToValidate.setEmpss(recordToValidate.getTransportDto().getEtpsr());
+				recordToValidate.setEmpsm(recordToValidate.getTransportDto().getEtpsr());
+				recordToValidate.setEmlks(recordToValidate.getTransportDto().getEtlkr());
+				recordToValidate.setEmlkm(recordToValidate.getTransportDto().getEtlkr());
+				recordToValidate.setEmad1s(recordToValidate.getTransportDto().getEtad1r());
+				recordToValidate.setEmad1m(recordToValidate.getTransportDto().getEtad1r());
+				recordToValidate.setEmpns(recordToValidate.getTransportDto().getEtpnr());
+				recordToValidate.setEmpnm(recordToValidate.getTransportDto().getEtpnr());
+				//epost eller telefon
+				recordToValidate.setEmemst(recordToValidate.getTransportDto().getEtemtt());
+				recordToValidate.setEmemmt(recordToValidate.getTransportDto().getEtemtt());
+				recordToValidate.setEmems(recordToValidate.getTransportDto().getEtemt());
+				recordToValidate.setEmemm(recordToValidate.getTransportDto().getEtemt());
+				
 				
 		 }catch(Exception e) {
 			 logger.error(e.toString());

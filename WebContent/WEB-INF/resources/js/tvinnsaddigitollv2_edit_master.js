@@ -181,6 +181,82 @@
 	    		refreshCustomValidity(jq('#emrgt')[0]);
 	  		}
 	  	});
+
+		//Parties
+		jq('#emnas').focus(function() {
+	    	if(jq('#emnas').val()!=''){
+	    		refreshCustomValidity(jq('#emnas')[0]);
+	  		}
+	  	});
+		jq('#emrgs').focus(function() {
+	    	if(jq('#emrgs').val()!=''){
+	    		refreshCustomValidity(jq('#emrgs')[0]);
+	  		}
+	  	});
+		jq('#emtpps').focus(function() {
+	    	if(jq('#emtpps').val()!=''){
+	    		refreshCustomValidity(jq('#emtpps')[0]);
+	  		}
+	  	});
+		jq('#empss').focus(function() {
+	    	if(jq('#empss').val()!=''){
+	    		refreshCustomValidity(jq('#empss')[0]);
+	  		}
+	  	});
+		jq('#emlks').focus(function() {
+	    	if(jq('#emlks').val()!=''){
+	    		refreshCustomValidity(jq('#emlks')[0]);
+	  		}
+	  	});
+		jq('#emad1s').focus(function() {
+	    	if(jq('#emad1s').val()!=''){
+	    		refreshCustomValidity(jq('#emad1s')[0]);
+	  		}
+	  	});
+		jq('#empns').focus(function() {
+	    	if(jq('#empns').val()!=''){
+	    		refreshCustomValidity(jq('#empns')[0]);
+	  		}
+	  	});
+		//Mottaker
+		jq('#emnam').focus(function() {
+	    	if(jq('#emnam').val()!=''){
+	    		refreshCustomValidity(jq('#emnam')[0]);
+	  		}
+	  	});
+		jq('#emrgm').focus(function() {
+	    	if(jq('#emrgm').val()!=''){
+	    		refreshCustomValidity(jq('#emrgm')[0]);
+	  		}
+	  	});
+		jq('#emtppm').focus(function() {
+	    	if(jq('#emtppm').val()!=''){
+	    		refreshCustomValidity(jq('#emtppm')[0]);
+	  		}
+	  	});
+		jq('#empsm').focus(function() {
+	    	if(jq('#empsm').val()!=''){
+	    		refreshCustomValidity(jq('#empsm')[0]);
+	  		}
+	  	});
+		jq('#emlkm').focus(function() {
+	    	if(jq('#emlkm').val()!=''){
+	    		refreshCustomValidity(jq('#emlkm')[0]);
+	  		}
+	  	});
+		jq('#emad1m').focus(function() {
+	    	if(jq('#emad1m').val()!=''){
+	    		refreshCustomValidity(jq('#emad1m')[0]);
+	  		}
+	  	});
+		jq('#empnm').focus(function() {
+	    	if(jq('#empnm').val()!=''){
+	    		refreshCustomValidity(jq('#empnm')[0]);
+	  		}
+	  	});	
+	
+
+
 	  
 	  	//CHILD-WINDOWS
 	 	//--------------------

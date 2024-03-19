@@ -195,6 +195,16 @@
 	    		refreshCustomValidity(jq('#ehlks')[0]);
 	  		}
 	  	});
+		jq('#ehpss').focus(function() {
+	    	if(jq('#ehpss').val()!=''){
+	    		refreshCustomValidity(jq('#ehpss')[0]);
+	  		}
+	  	});
+		jq('#ehpns').focus(function() {
+	    	if(jq('#ehpns').val()!=''){
+	    		refreshCustomValidity(jq('#ehpns')[0]);
+	  		}
+	  	});
 
 		jq('#ehnam').focus(function() {
 	    	if(jq('#ehnam').val()!=''){
@@ -204,6 +214,16 @@
 		jq('#ehlkm').focus(function() {
 	    	if(jq('#ehlkm').val()!=''){
 	    		refreshCustomValidity(jq('#ehlkm')[0]);
+	  		}
+	  	});
+		jq('#ehpsm').focus(function() {
+	    	if(jq('#ehpsm').val()!=''){
+	    		refreshCustomValidity(jq('#ehpsm')[0]);
+	  		}
+	  	});
+		jq('#ehpnm').focus(function() {
+	    	if(jq('#ehpnm').val()!=''){
+	    		refreshCustomValidity(jq('#ehpnm')[0]);
 	  		}
 	  	});
 		jq('#ehdkht').focus(function() {

@@ -1209,7 +1209,7 @@
 			 				<tr >
 			 					
 			 					<td class="text14">&nbsp;<span title="ehtpps">Typ.person</span><font class="text16RedBold" >*</font></td>
-								<td class="text14">&nbsp;<span title="ehpss">Sted</span></td>
+								<td class="text14">&nbsp;<span title="ehpss">Sted</span><font class="text16RedBold" >*</font></td>
 								<td class="text14">&nbsp;<span title="ehlks">Landkode</span><font class="text16RedBold" >*</font></td>
 								
 			 				</tr>
@@ -1221,7 +1221,7 @@
 								  		<option title="En samling personer" value="3" <c:if test="${model.record.ehtpps == 3}"> selected </c:if> >Sam.pers.</option> 	
 									</select>
 			 					</td>
-								<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehpss" id="ehpss" size="25" maxlength="24" value="${model.record.ehpss}"></td>
+								<td class="text14"><input type="text" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="ehpss" id="ehpss" size="25" maxlength="24" value="${model.record.ehpss}"></td>
 								<td class="text14">
 									<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="ehlks" id="ehlks" >
 				 						<option value="">-velg-</option>
@@ -1236,13 +1236,13 @@
 			 				<tr >
 			 					<td class="text14">&nbsp;</td>
 								<td class="text14">&nbsp;<span title="ehad1s">Adress</span></td>
-								<td class="text14">&nbsp;<span title="ehpns">Postnr</span></td>
+								<td class="text14">&nbsp;<span title="ehpns">Postnr</span><font class="text16RedBold" >*</font></td>
 								
 			 				</tr>
 			 				<tr >
 			 					<td class="text14">&nbsp;</td>
 								<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehad1s" id="ehad1s" size="25" maxlength="30" value="${model.record.ehad1s}"></td>
-								<td class="text14"><input  type="text" class="inputTextMediumBlue" name="ehpns" id="ehpns" size="12" maxlength="9" value="${model.record.ehpns}"></td>
+								<td class="text14"><input  type="text" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField"  name="ehpns" id="ehpns" size="12" maxlength="9" value="${model.record.ehpns}"></td>
 			 				</tr>
 			 				
 			 				<tr >
@@ -1330,7 +1330,7 @@
 				 				
 				 				<tr >
 				 					<td class="text14">&nbsp;<span title="ehtppm">Typ.person</span><font class="text16RedBold" >*</font></td>
-									<td class="text14">&nbsp;<span title="ehpsm">Sted</span></td>
+									<td class="text14">&nbsp;<span title="ehpsm">Sted</span><font class="text16RedBold" >*</font></td>
 									<td class="text14">&nbsp;<span title="ehlkm">Landkode</span><font class="text16RedBold" >*</font></td>
 									
 				 				</tr>
@@ -1342,7 +1342,7 @@
 								  			<option title="En samling personer" value="3" <c:if test="${model.record.ehtppm == 3}"> selected </c:if> >Sam.pers.</option> 	
 										</select>
 				 					</td>
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehpsm" id="ehpsm" size="25" maxlength="24" value="${model.record.ehpsm}"></td>
+									<td class="text14"><input type="text" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField"  name="ehpsm" id="ehpsm" size="25" maxlength="24" value="${model.record.ehpsm}"></td>
 									<td class="text14">
 										<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="ehlkm" id="ehlkm" >
 					 						<option value="">-velg-</option>
@@ -1358,13 +1358,13 @@
 				 				<tr >
 				 					<td class="text14">&nbsp;</td>
 				 					<td class="text14">&nbsp;<span title="ehad1m">Adress</span></td>
-									<td class="text14">&nbsp;<span title="ehpnm">Postnr</span></td>
+									<td class="text14">&nbsp;<span title="ehpnm">Postnr</span><font class="text16RedBold" >*</font></td>
 									
 				 				</tr>
 				 				<tr >
 				 					<td class="text14">&nbsp;</td>
 				 					<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehad1m" id="ehad1m" size="25" maxlength="30" value="${model.record.ehad1m}"></td>
-									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="ehpnm" id="ehpnm" size="12" maxlength="9" value="${model.record.ehpnm}"></td>
+									<td class="text14"><input  type="text" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField"  name="ehpnm" id="ehpnm" size="12" maxlength="9" value="${model.record.ehpnm}"></td>
 				 				</tr>
 				 				
 				 				<tr >

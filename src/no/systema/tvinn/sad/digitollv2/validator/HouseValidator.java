@@ -88,6 +88,14 @@ public class HouseValidator implements Validator {
 						errors.rejectValue("own_ehemm_email", "systema.tvinn.sad.digitoll.house.error.rule.invalid.email.receiver");
 					}
 				}
+				//Sender address (one of these MUST be present)
+				if(StringUtils.isEmpty(record.getEhad1s()) && StringUtils.isEmpty(record.getEhpbs()) ) {
+					errors.rejectValue("ehad1s", "systema.tvinn.sad.digitoll.house.error.rule.required.sender.adressOrAdress2");
+				}
+				//Receiver address (one of these MUST be present)
+				if(StringUtils.isEmpty(record.getEhad1m()) && StringUtils.isEmpty(record.getEhpbm()) ) {
+					errors.rejectValue("ehad1m", "systema.tvinn.sad.digitoll.house.error.rule.required.receiver.adressOrAdress2");
+				}
 
 				//------
 				//dates 

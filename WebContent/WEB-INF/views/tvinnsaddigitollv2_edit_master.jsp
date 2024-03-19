@@ -697,29 +697,29 @@
 				 				<table>
 				 				<tr >
 									<td class="text14">&nbsp;<span title="emkns">Knr</span></td>
-									<td class="text14">&nbsp;<span title="emnas">Navn</span><font class="text16NavyBlueBold" >*</font>
+									<td class="text14">&nbsp;<span title="emnas">Navn</span><font class="text16RedBold" >*</font>
 										<a tabindex="-1" id="emnasIdLink">
 											<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
 										</a>
 									</td>
-									<td class="text14">&nbsp;<span title="emrgs">Org.nr /EORI</span><font class="text16NavyBlueBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="emrgs">Org.nr /EORI</span><font class="text16RedBold" >*</font></td>
 									
 				 				</tr>
 				 				<tr >
 									
 									<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="emkns" id="emkns" size="10" maxlength="8" value="${model.record.emkns}"></td>
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emnas" id="emnas" size="25" maxlength="30" value="${model.record.emnas}"></td>
-									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="emrgs" id="emrgs" size="20" maxlength="17" value="${model.record.emrgs}"></td>
+									<td class="text14"><input type="text" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="emnas" id="emnas" size="25" maxlength="30" value="${model.record.emnas}"></td>
+									<td class="text14"><input  type="text" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField"  name="emrgs" id="emrgs" size="20" maxlength="17" value="${model.record.emrgs}"></td>
 				 				</tr>
 				 				<tr >
-				 					<td class="text14">&nbsp;<span title="emtpps">Typ.person</span><font class="text16NavyBlueBold" >*</font></td>
-									<td class="text14">&nbsp;<span title="empss">Sted</span></td>
-									<td class="text14">&nbsp;<span title="emlks">Landkode</span></td>
+				 					<td class="text14">&nbsp;<span title="emtpps">Typ.person</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="empss">Sted</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="emlks">Landkode</span><font class="text16RedBold" >*</font></td>
 									
 				 				</tr>
 				 				<tr >
 									<td class="text14">
-										<select class="inputTextMediumBlue" id="emtpps" name="emtpps">
+										<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField"  id="emtpps" name="emtpps">
 											<option value="">-velg-</option>
 											<option title="En fysisk person" value="1" <c:if test="${model.record.emtpps == 1}"> selected </c:if> >Fys.person</option>
 								  			<option title="En juridisk person, det vil si en bedrift" value="2" <c:if test="${model.record.emtpps == 2}"> selected </c:if> >Bedrift</option>
@@ -727,9 +727,9 @@
 										</select>
 									</td>
 									
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="empss" id="empss" size="25" maxlength="24" value="${model.record.empss}"></td>
+									<td class="text14"><input type="text" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="empss" id="empss" size="25" maxlength="24" value="${model.record.empss}"></td>
 									<td class="text14">
-										<select class="inputTextMediumBlue" name="emlks" id="emlks" >
+										<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField"  name="emlks" id="emlks" >
 					 						<option value="">-velg-</option>
 						 				  	<c:forEach var="dto" items="${model.countryDto}" >
 					                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.emlks == dto.code}"> selected </c:if> >${dto.code}</option>
@@ -739,14 +739,14 @@
 				 				</tr>
 				 				<tr >
 				 					<td class="text14">&nbsp;</td>
-									<td class="text14">&nbsp;<span title="emad1s">Adress</span></td>
-									<td class="text14">&nbsp;<span title="empns">Postnr</span></td>
+									<td class="text14">&nbsp;<span title="emad1s">Adress</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="empns">Postnr</span><font class="text16RedBold" >*</font></td>
 									
 				 				</tr>
 				 				<tr >
 									<td class="text14">&nbsp;</td>
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emad1s" id="emad1s" size="25" maxlength="30" value="${model.record.emad1s}"></td>
-									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="empns" id="empns" size="12" maxlength="9" value="${model.record.empns}"></td>
+									<td class="text14"><input type="text" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField"  name="emad1s" id="emad1s" size="25" maxlength="30" value="${model.record.emad1s}"></td>
+									<td class="text14"><input  type="text" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField"  name="empns" id="empns" size="12" maxlength="9" value="${model.record.empns}"></td>
 				 				</tr>
 				 				
 				 				<tr >
@@ -806,40 +806,40 @@
 				 				<table>
 				 				<tr >
 									<td class="text14">&nbsp;<span title="emknm">Knr</span></td>
-									<td class="text14">&nbsp;<span title="emnam">Navn</span><font class="text16NavyBlueBold" >*</font>
+									<td class="text14">&nbsp;<span title="emnam">Navn</span><font class="text16RedBold" >*</font>
 										<a tabindex="-1" id="emnamIdLink">
 											<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
 										</a>
 									</td>
-									<td class="text14">&nbsp;<span title="emrgm">Org.nr /EORI</span><font class="text16NavyBlueBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="emrgm">Org.nr /EORI</span><font class="text16RedBold" >*</font></td>
 				 				</tr>
 				 				<tr >
 									
 									<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="emknm" id="emknm" size="10" maxlength="8" value="${model.record.emknm}"></td>
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="emnam" id="emnam" size="25" maxlength="30" value="${model.record.emnam}"></td>
-									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="emrgm" id="emrgm" size="20" maxlength="17" value="${model.record.emrgm}"></td>
+									<td class="text14"><input type="text" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="emnam" id="emnam" size="25" maxlength="30" value="${model.record.emnam}"></td>
+									<td class="text14"><input  type="text" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="emrgm" id="emrgm" size="20" maxlength="17" value="${model.record.emrgm}"></td>
 				 				
 				 				</tr>
 				 				
 				 				<tr >
 									
-				 					<td class="text14">&nbsp;<span title="emtppm">Typ.person</span><font class="text16NavyBlueBold" >*</font></td>
-									<td class="text14">&nbsp;<span title="empsm">Sted</span></td>
-									<td class="text14">&nbsp;<span title="emlkm">Landkode</span></td>
+				 					<td class="text14">&nbsp;<span title="emtppm">Typ.person</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="empsm">Sted</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="emlkm">Landkode</span><font class="text16RedBold" >*</font></td>
 									
 				 				</tr>
 				 				<tr>
 									<td class="text14">
-										<select class="inputTextMediumBlue" id="emtppm" name="emtppm">
+										<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" id="emtppm" name="emtppm">
 											<option value="">-velg-</option>
 											<option title="En fysisk person" value="1" <c:if test="${model.record.emtppm == 1}"> selected </c:if> >Fys.person</option>
 								  			<option title="En juridisk person, det vil si en bedrift" value="2" <c:if test="${model.record.emtppm == 2}"> selected </c:if> >Bedrift</option>
 								  			<option title="En samling personer" value="3" <c:if test="${model.record.emtppm == 3}"> selected </c:if> >Sam.pers.</option> 	
 										</select>
 									</td>
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="empsm" id="empsm" size="25" maxlength="24" value="${model.record.empsm}"></td>
+									<td class="text14"><input type="text" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="empsm" id="empsm" size="25" maxlength="24" value="${model.record.empsm}"></td>
 									<td class="text14">
-										<select class="inputTextMediumBlue" name="emlkm" id="emlkm" >
+										<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="emlkm" id="emlkm" >
 					 						<option value="">-velg-</option>
 						 				  	<c:forEach var="dto" items="${model.countryDto}" >
 					                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${model.record.emlkm == dto.code}"> selected </c:if> >${dto.code}</option>
@@ -850,14 +850,14 @@
 				 				<tr >
 									
 				 					<td class="text14">&nbsp;</td>
-									<td class="text14">&nbsp;<span title="emad1m">Adress</span></td>
-									<td class="text14">&nbsp;<span title="empnm">Postnr</span></td>
+									<td class="text14">&nbsp;<span title="emad1m">Adress</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="empnm">Postnr</span><font class="text16RedBold" >*</font></td>
 				 				</tr>
 				 				<tr >
 									
 				 					<td class="text14">&nbsp;</td>
-				 					<td class="text14"><input type="text" class="inputTextMediumBlue" name="emad1m" id="emad1m" size="25" maxlength="30" value="${model.record.emad1m}"></td>
-									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="empnm" id="empnm" size="12" maxlength="9" value="${model.record.empnm}"></td>
+				 					<td class="text14"><input type="text" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="emad1m" id="emad1m" size="25" maxlength="30" value="${model.record.emad1m}"></td>
+									<td class="text14"><input  type="text" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="empnm" id="empnm" size="12" maxlength="9" value="${model.record.empnm}"></td>
 				 				</tr>
 				 				<tr >
 				 					
