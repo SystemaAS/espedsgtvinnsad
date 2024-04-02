@@ -575,6 +575,7 @@
 									<option title="VOEC-sendinger" value="IMMEDIATE_RELEASE_VOEC" <c:if test="${model.record.ehprt == 'IMMEDIATE_RELEASE_VOEC'}"> selected </c:if> >IMMEDIATE_RELEASE_VOEC</option>
 									<option title="Samlefortolling" value="COLLECTIVE_RELEASE" <c:if test="${model.record.ehprt == 'COLLECTIVE_RELEASE'}"> selected </c:if> >COLLECTIVE_RELEASE</option>
 									<option title="Innlegg på tollager" value="WAREHOUSE_RELEASE" <c:if test="${model.record.ehprt == 'WAREHOUSE_RELEASE'}"> selected </c:if> >WAREHOUSE_RELEASE</option> 
+									<option title="Forsendelse som ikke har deklarasjonsplikt etter § 4-1-29 i vareførselsforskriften" value="DOCUMENTS_NOT_OBLIGED_RELEASE" <c:if test="${model.record.ehprt == 'DOCUMENTS_NOT_OBLIGED_RELEASE'}"> selected </c:if> >DOCUMENTS_NOT_OBLIGED_RELEASE</option> 
 									 
 								</select>
 				

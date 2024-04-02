@@ -347,6 +347,9 @@ public class TvinnSadDigitollAjaxController {
 						sadmohfRecord.setOwn_ehems_email(record.getEhems());//email
 					}
 					//Sender Postnr and City
+					logger.info("Send-pnr:" + record.getEhpns());
+					logger.info("Send-sted:" + record.getEhpss());
+					logger.info("Send-land:" + record.getEhlks());
 					String postnrAvs = ""; String cityAvs = ""; String landAvs = "";
 					if(record.getEhpns() != ""){ postnrAvs = record.getEhpns();}
 					if(record.getEhpss() != ""){ cityAvs = record.getEhpss();}
@@ -365,9 +368,12 @@ public class TvinnSadDigitollAjaxController {
 					if(record.getEhemm() != ""){ 
 						sadmohfRecord.setOwn_ehemm_email(record.getEhemm());//email
 					}
-					//Sender Postnr and City
+					//Receiver Postnr and City
+					logger.info("Mott-pnr:" + record.getEhpnm());
+					logger.info("Mott-sted:" + record.getEhpsm());
+					logger.info("Mott-land:" + record.getEhlkm());
 					String postnrMot = ""; String cityMot = ""; String landMot = "";
-					if(record.getEhpnm() != ""){ postnrMot = record.getEhpns();}
+					if(record.getEhpnm() != ""){ postnrMot = record.getEhpnm();}
 					if(record.getEhpsm() != ""){ cityMot = record.getEhpsm();}
 					if(record.getEhlkm() != ""){ landMot = record.getEhlkm();}
 					sadmohfRecord.setEhpnm(postnrMot);
@@ -487,6 +493,9 @@ public class TvinnSadDigitollAjaxController {
 						sadmohfRecord.setOwn_ehems_email(record.getEhems());//email
 					}
 					//Sender Postnr and City
+					logger.info("Send-pnr:" + record.getEhpns());
+					logger.info("Send-sted:" + record.getEhpss());
+					logger.info("Send-land:" + record.getEhlks());
 					String postnrAvs = ""; String cityAvs = ""; String landAvs = "";
 					if(record.getEhpns() != ""){ postnrAvs = record.getEhpns();}
 					if(record.getEhpss() != ""){ cityAvs = record.getEhpss();}
@@ -505,9 +514,12 @@ public class TvinnSadDigitollAjaxController {
 					if(record.getEhemm() != ""){ 
 						sadmohfRecord.setOwn_ehemm_email(record.getEhemm());//email
 					}
-					//Sender Postnr and City
+					//Receiver Postnr and City
+					logger.info("Mott-pnr:" + record.getEhpnm());
+					logger.info("Mott-sted:" + record.getEhpsm());
+					logger.info("Mott-land:" + record.getEhlkm());
 					String postnrMot = ""; String cityMot = ""; String landMot = "";
-					if(record.getEhpnm() != ""){ postnrMot = record.getEhpns();}
+					if(record.getEhpnm() != ""){ postnrMot = record.getEhpnm();}
 					if(record.getEhpsm() != ""){ cityMot = record.getEhpsm();}
 					if(record.getEhlkm() != ""){ landMot = record.getEhlkm();}
 					sadmohfRecord.setEhpnm(postnrMot);
@@ -602,6 +614,9 @@ public class TvinnSadDigitollAjaxController {
 				sadmohfRecord.setOwn_ehems_email(record.getEhems());//email
 			}
 			//Sender Postnr and City
+			logger.info("Send-pnr:" + record.getEhpns());
+			logger.info("Send-sted:" + record.getEhpss());
+			logger.info("Send-land:" + record.getEhlks());
 			String postnrAvs = ""; String cityAvs = ""; String landAvs = "";
 			if(record.getEhpns() != ""){ postnrAvs = record.getEhpns();}
 			if(record.getEhpss() != ""){ cityAvs = record.getEhpss();}
@@ -620,9 +635,12 @@ public class TvinnSadDigitollAjaxController {
 			if(record.getEhemm() != ""){ 
 				sadmohfRecord.setOwn_ehemm_email(record.getEhemm());//email
 			}
-			//Sender Postnr and City
+			//Receiver Postnr and City
+			logger.info("Mott-pnr:" + record.getEhpnm());
+			logger.info("Mott-sted:" + record.getEhpsm());
+			logger.info("Mott-land:" + record.getEhlkm());
 			String postnrMot = ""; String cityMot = ""; String landMot = "";
-			if(record.getEhpnm() != ""){ postnrMot = record.getEhpns();}
+			if(record.getEhpnm() != ""){ postnrMot = record.getEhpnm();}
 			if(record.getEhpsm() != ""){ cityMot = record.getEhpsm();}
 			if(record.getEhlkm() != ""){ landMot = record.getEhlkm();}
 			sadmohfRecord.setEhpnm(postnrMot);
