@@ -481,6 +481,11 @@
 								<td class="text14">	
 									<input title="Send til part..." class="buttonGrayWithGreenFrame" style="cursor:pointer;" type="button" name="sendToPartButton" id="sendToPartButton" value='Send Dok.nr til part'>
 								</td>
+								<td class="text14">	
+									<a tabindex="-1" id="ftplogIdLink">
+										<img title="ftp-log" style="cursor:pointer;vertical-align: middle;" src="resources/images/log-icon2.png" width="22px" height="22px" border="0" alt="ftp-log" >
+									</a>
+								</td>	
 							</c:if>
 							 		
 						</tr>

@@ -67,6 +67,8 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmocfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmolffContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmolffRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
@@ -76,6 +78,7 @@ import no.systema.tvinn.sad.digitollv2.service.SadTurService;
 import no.systema.tvinn.sad.digitollv2.service.SadmocfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmohfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
+import no.systema.tvinn.sad.digitollv2.service.SadmolffListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
@@ -1097,6 +1100,29 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		}
 	}
 	
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_external_houses_log.do", params="action=doFind",  method={RequestMethod.GET, RequestMethod.POST } )
+	public ModelAndView doInitExternalHousesLog(@ModelAttribute ("record") SadmolffRecord recordToValidate, HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doInitExternalHousesLog");
+		Map model = new HashMap();
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_external_houses_log");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			  
+			List list = this.getSadmolffList(appUser, recordToValidate.getEmdkm());
+			
+			model.put("sadmolffList", list);
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	
 	
 	
 	
@@ -1163,6 +1189,36 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 				container = this.sadmocfListService.getListContainer(jsonPayload);
 				if(container!=null){
 					for(SadmocfRecord  record : container.getList()){
+						list.add(record);
+					}
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	private List<SadmolffRecord> getSadmolffList(SystemaWebUser appUser, String emdkm){
+		List<SadmolffRecord> list = new ArrayList<SadmolffRecord>();
+		
+		logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+		String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_EXTERNAL_HOUSES_FTP_LOG_URL;
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + appUser.getUser() + "&emdkm=" + emdkm);
+		
+		logger.info(BASE_URL);
+		logger.info(urlRequestParams.toString());
+		
+		UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
+		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+		logger.info(jsonPayload);
+		SadmolffContainer container = null;
+		try{
+			if(jsonPayload!=null){
+				container = this.sadmolffListService.getListContainer(jsonPayload);
+				if(container!=null){
+					for(SadmolffRecord  record : container.getList()){
 						list.add(record);
 					}
 				}
@@ -1599,6 +1655,8 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	
 	@Autowired
 	private SadmocfListService sadmocfListService;
+	@Autowired
+	private SadmolffListService sadmolffListService;
 	
 	@Autowired
 	private SadOppdragService sadOppdragService;

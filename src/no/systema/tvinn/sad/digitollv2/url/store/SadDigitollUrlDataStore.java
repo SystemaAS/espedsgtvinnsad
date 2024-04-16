@@ -93,7 +93,9 @@ public final class SadDigitollUrlDataStore {
 		//Främmande houses 
 		//http://10.11.47.61/syjservicestn/syjsSADMOCF.do?user=OSCAR&orgnr
 		static public String SAD_FETCH_DIGITOLL_EXTERNAL_HOUSES_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOCF.do";
-				
+		//http://10.11.47.61/syjservicestn/syjsSADMOLFF.do?user=OSCAR&orgnr
+		static public String SAD_FETCH_DIGITOLL_EXTERNAL_HOUSES_FTP_LOG_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOLFF.do";
+						
 		
 		
 }

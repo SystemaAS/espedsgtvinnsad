@@ -275,6 +275,10 @@
 	  jq('#sendToPartIdLink').click(function() {
 	    	jq('#sendToPartIdLink').attr('target','_blank');
 	    	window.open('tvinnsaddigitollv2_childwindow_external_houses.do?action=doFind&ctype=ownReceiverOrgNr', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+	   });
+	   jq('#ftplogIdLink').click(function() {
+	    	jq('#ftplogIdLink').attr('target','_blank');
+	    	window.open('tvinnsaddigitollv2_childwindow_external_houses_log.do?action=doFind&emdkm=' + jq('#emdkm').val() + jq('#own_emdkmUnique').val(), "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
 	   });	
 
 	  //Avsender
