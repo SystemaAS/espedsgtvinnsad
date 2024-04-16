@@ -17,7 +17,8 @@ import no.systema.main.model.jsonjackson.general.JsonAbstractGrandFatherRecord;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SadmolffRecord extends JsonAbstractGrandFatherRecord {
 
-	private String status = ""; //TEGN 20 status (send, confirmed, dialog, receipt, ok) 
+	private String status = ""; //TEGN 20 status (send, confirmed, dialog, receipt, ok)
+	private String statustxt = ""; //TEGN 70 status (note)
 	private String uuid = ""; //TEGN 36 messageId
 	private String emdkm = ""; //TEGN 50 master doc id
 	private String emlnrt  = "" ;  //TEGN   7 

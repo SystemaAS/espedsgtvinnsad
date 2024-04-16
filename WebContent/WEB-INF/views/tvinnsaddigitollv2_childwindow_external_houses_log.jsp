@@ -55,13 +55,13 @@
 							<th class="text14" >&nbsp;&nbsp;</th>
 							 --%>
 							<th class="text14" >&nbsp;Master-docId&nbsp;</th>
-							<th class="text14" >&nbsp;Avs&nbsp;</th>
-		                    <th class="text14" >&nbsp;Mot&nbsp;</th>
-		                    <th class="text14" >&nbsp;Tr.id&nbsp;</th>
-		                    <th class="text14" >&nbsp;Status&nbsp;</th>
+							<th class="text14" >&nbsp;Tr.id&nbsp;</th>
+		                    <th class="text14" >&nbsp;St.&nbsp;</th>
 		                    <th class="text14" >&nbsp;TimeStamp&nbsp;</th>
+		                    <th class="text14" >&nbsp;Avs&nbsp;</th>
+		                    <th class="text14" >&nbsp;Mot&nbsp;</th>
 		                    <th class="text14" >&nbsp;uuid&nbsp;</th>
-		                    
+		                    <th class="text14" >&nbsp;St.text&nbsp;</th>
 		                </tr> 
 		                </thead>
 		                
@@ -74,13 +74,13 @@
 				               	</td>
 				                --%>	
 			               	   <td class="text14">&nbsp;${record.emdkm}</td>
-			               	   <td class="text14">&nbsp;${record.avsid}</td>
-			               	   <td class="text14">&nbsp;${record.motid}</td>
 			               	   <td class="text14">&nbsp;${record.emlnrt}</td>
 			               	   <td class="text14">&nbsp;${record.status}</td>
 			               	   <td class="text14">&nbsp;${record.date}-${record.time}</td>
+			               	   <td class="text14">&nbsp;${record.avsid}</td>
+			               	   <td class="text14">&nbsp;${record.motid}</td>
 			               	   <td class="text14">&nbsp;${record.uuid}</td>
-			               	   
+			               	   <td class="text14">&nbsp;${record.statustxt}</td>
 			            	</tr> 
 			            	
 			            </c:forEach>
