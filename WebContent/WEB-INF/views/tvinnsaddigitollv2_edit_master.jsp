@@ -673,6 +673,34 @@
 						</td>
 					</tr>
 					
+					<tr height="4"><td></td></tr>
+					<tr>
+						<td colspan="15" class="text14" valign="top">
+						<table align="left" border="0" cellspacing="0" cellpadding="1">
+							<tr>
+								<td class="text14"><b>&nbsp;Ekstern Dok.nr</b>
+									<a tabindex="-1" id="emdkm_ffIdLink">
+										<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
+									</a>
+								</td>
+								<td class="text14">
+									<input readonly type="text" class="inputTextReadOnly" name="emdkm_ff" id="emdkm_ff" size="35" maxlength="50" value="${Xmodel.record.emdkm_ff}">		
+								</td>
+								<td class="text14">&nbsp;<span title="emdkmt_ff">Dok.type</span></td>
+								<td class="text14">
+									<input readonly type="text" class="inputTextReadOnly" name="emdkmt_ff" id="emdkmt_ff" size="6" maxlength="4" value="${Xmodel.record.emdkmt_ff}">		
+								</td>
+								<td class="text14">&nbsp;<span title="emrgt">Transp.Orgnr / EORI</span></td>
+								<td class="text14">
+									<input readonly type="text" class="inputTextReadOnly" name="emrgt_ff" id="emrgt_ff" size="20" maxlength="17" value="${Xmodel.record.emrgt_ff}">		
+								</td>
+							</tr>
+							
+						</table>
+						</td>
+					</tr>
+					
+					
 				</table>
 			</td>
 		</tr>

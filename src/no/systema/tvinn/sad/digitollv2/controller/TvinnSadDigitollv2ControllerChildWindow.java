@@ -73,6 +73,8 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ZadmomlfContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ZadmomlfRecord;
 import no.systema.tvinn.sad.digitollv2.service.SadOppdragService;
 import no.systema.tvinn.sad.digitollv2.service.SadTurService;
 import no.systema.tvinn.sad.digitollv2.service.SadmocfListService;
@@ -81,6 +83,7 @@ import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmolffListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
+import no.systema.tvinn.sad.digitollv2.service.ZadmomlfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
 import no.systema.tvinn.sad.digitollv2.util.SadDigitollConstants;
 import no.systema.tvinn.sad.manifest.express.util.manager.CodeDropDownMgr;
@@ -823,6 +826,48 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			List list = this.getTurList(appUser, recordToValidate);
 			model.put("turList", list);
 			model.put("callerType", callerType);
+			//model.put("tkkode", tullkontorCode);
+			//model.put("tktxtn", tullkontorName);
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_external_master.do", params="action=doInit",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doInitExternalMaster(@ModelAttribute ("record") ZadmomlfRecord recordToValidate, HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doInitExternalMaster");
+		Map model = new HashMap();
+		String callerType = request.getParameter("ctype");
+		String date = request.getParameter("date");
+
+		logger.info("caller:" + callerType);
+		//logger.info("tuavd:" + tuavd);
+		//logger.info("tupro:" + tupro);
+		//
+		
+		//antingen eller och inte båda 2...Turen overrides avd if it exists
+		/*if(StringUtils.isNotEmpty(tupro)) {
+			model.put("tupro", tupro);
+		}else {
+			model.put("tuavd", tuavd);
+		}*/
+		
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_external_master");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			  
+			List list = this.getExternalMasterList(appUser, recordToValidate);
+			model.put("mainList", list);
+			model.put("callerType", callerType);
+			model.put("date", date);
 			//model.put("tkkode", tullkontorCode);
 			//model.put("tktxtn", tullkontorName);
 			
@@ -1593,6 +1638,46 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	}
 	/**
 	 * 
+	 * @param appUser
+	 * @param recordToValidate
+	 * @return
+	 */
+	private List<ZadmomlfRecord> getExternalMasterList(SystemaWebUser appUser, ZadmomlfRecord recordToValidate){
+		  List<ZadmomlfRecord> result = new ArrayList<ZadmomlfRecord>();
+		
+		  logger.info("Inside getExternalMasterList");
+		  //prepare the access CGI with RPG back-end
+		  String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_EXTERNAL_MASTER_URL;
+		  StringBuffer urlRequestParamsKeys = new StringBuffer();
+		  urlRequestParamsKeys.append("user=" + appUser.getUser());
+		  urlRequestParamsKeys.append("&date=" + recordToValidate.getDate()); ;
+		  /*if(StringUtils.isNotEmpty(recordToValidate.getTupro())) {
+			  urlRequestParamsKeys.append("&wsstur=" + recordToValidate.getTupro());
+		  }
+		  if(StringUtils.isNotEmpty(recordToValidate.getTuavd())) {
+			  urlRequestParamsKeys.append("&wssavd=" + recordToValidate.getTuavd());
+		  }*/
+		  		  
+		  logger.info("URL: " + BASE_URL);
+		  logger.info("PARAMS: " + urlRequestParamsKeys);
+		  logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		  String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
+
+		  logger.info(jsonPayload);
+		  logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    	if(jsonPayload!=null){
+	    		ZadmomlfContainer container = this.zadmomlfListService.getListContainer(jsonPayload);
+	    		if(container!=null){
+	    			if(StringUtils.isEmpty(container.getErrMsg())){
+	    				result = (List)container.getList();
+	    				
+	    			}
+	    		}
+	    	}
+		  return result;
+	}
+	/**
+	 * 
 	 * @param applicationUser
 	 * @param soName
 	 * @param code
@@ -1657,6 +1742,8 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	private SadmocfListService sadmocfListService;
 	@Autowired
 	private SadmolffListService sadmolffListService;
+	@Autowired
+	private ZadmomlfListService zadmomlfListService;
 	
 	@Autowired
 	private SadOppdragService sadOppdragService;

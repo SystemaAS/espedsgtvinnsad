@@ -271,6 +271,19 @@
 				jq('#emproIdLink').click();
 			}
 	    });
+
+		//External Doc.nr (MasterId)
+		jq('#emdkm_ffIdLink').click(function() {
+	    	jq('#emdkm_ffIdLink').attr('target','_blank');
+	    	window.open('tvinnsaddigitollv2_childwindow_external_master.do?action=doInit&date=20200101' + '&tupro=' + jq('#empro').val() + '&tuavd=' + jq('#emavd').val()  + '&ctype=emdkm', "masterffWin", "top=300px,left=500px,height=600px,width=1050px,scrollbars=no,status=no,location=no");
+	    });
+	    jq('#emdkm_ffIdLink').keypress(function(e){ //extra feature for the end user
+			if(e.which == 13) {
+				jq('#emdkm_ffIdLink').click();
+			}
+	    });
+
+
 	  
 	  jq('#sendToPartIdLink').click(function() {
 	    	jq('#sendToPartIdLink').attr('target','_blank');
