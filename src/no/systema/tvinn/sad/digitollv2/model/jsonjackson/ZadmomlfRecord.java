@@ -16,6 +16,7 @@ import no.systema.main.model.jsonjackson.general.JsonAbstractGrandFatherRecord;
 public class ZadmomlfRecord extends JsonAbstractGrandFatherRecord {
 
 	private String emdkm = ""; //TEGN 50 master doc id
+	private String emdkmt = ""; //TEGN 4 master doc type
 	private String empro  = "" ;  //TEGN 20 (including AVD-TUR)
 	
 	private String avsna = ""; //TEGN 50 sender name

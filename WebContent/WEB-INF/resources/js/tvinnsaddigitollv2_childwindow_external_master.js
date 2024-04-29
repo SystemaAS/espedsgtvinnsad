@@ -8,30 +8,26 @@
 			  var id = this.id;
 			  //id="tupro${record.tupro}@tuavd${record.tuavd}@ctype${model.callerType}
 			  var record = id.split('@');
-			  var tupro = record[0].replace("tupro", "");
-			  var tuavd = record[1].replace("tuavd", "");
-		  	  var tutvkt = record[2].replace("tutvkt", "");	
-			  var callerType = record[3].replace("ctype", "");
-			  
-			  	//tur - etpro (transport)
-			  	if(callerType == 'etpro'){ 
-				 //console.log("Bingo!!") 
-				  opener.jq('#etpro').val(tupro);
-				  opener.jq('#etpro').focus();
-				
-			  	//tur - empro (master)	  
-			  	}else if (callerType == 'empro'){  
-				  opener.jq('#empro').val(tupro);
-				  if(tutvkt != ''){
-				  	opener.jq('#emvkb').val(tutvkt);
-				  }	
-				  opener.jq('#emvkb').focus();
-				  
-			  	//tur - ehpro (house)	
-			  	}else if (callerType == 'ehpro'){
-		  		  opener.jq('#ehpro').val(tupro);
-				  opener.jq('#ehpro').focus();
-				  
+			  var emdkm_ff = record[0].replace("emdkm", "");
+			  var emrgt_ff = record[1].replace("trreforg", "");
+		  	  var callerType = record[2].replace("ctype", "");
+			  var emdkmt_ff = record[3].replace("emdkmt", "");	
+			  	//console.log(emdkm_ff + " " + emrgt_ff + " caller:" + callerType);
+
+			  	if(callerType == 'emdkm'){ 
+				  opener.jq('#emdkm_ff').prop('readonly',false);					
+				  opener.jq('#emdkm_ff').val(emdkm_ff);
+				  opener.jq('#emdkm_ff').prop('readonly',true);
+				  //
+				  opener.jq('#emdkmt_ff').prop('readonly',false);					
+				  opener.jq('#emdkmt_ff').val(emdkmt_ff);
+				  opener.jq('#emdkmt_ff').prop('readonly',true);
+				  //	
+				  opener.jq('#emrgt_ff').prop('readonly',false);
+				  opener.jq('#emrgt_ff').val(emrgt_ff);	
+				  opener.jq('#emrgt_ff').prop('readonly',true);
+				  //focus
+				  opener.jq('#emdkm_ff').focus();
 			  	}
 			  //close child window
 			  window.close();

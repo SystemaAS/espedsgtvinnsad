@@ -1450,7 +1450,24 @@ public class TvinnSadDigitollv2MasterController {
 			}
 		}
 		
-		
+		//=========================================
+		//some columns returning null in text ???
+		//=========================================
+		if(StringUtils.isNotEmpty(recordToValidate.getEmdkm_ff())) {
+			if(recordToValidate.getEmdkm_ff().equals("null")) {
+				recordToValidate.setEmdkm_ff("");
+			}
+		}
+		if(StringUtils.isNotEmpty(recordToValidate.getEmdkmt_ff())) {
+			if(recordToValidate.getEmdkmt_ff().equals("null")) {
+				recordToValidate.setEmdkmt_ff("");
+			}
+		}
+		if(StringUtils.isNotEmpty(recordToValidate.getEmrgt_ff())) {
+			if(recordToValidate.getEmrgt_ff().equals("null")) {
+				recordToValidate.setEmrgt_ff("");
+			}
+		}
 	}
 	/**
 	 * 

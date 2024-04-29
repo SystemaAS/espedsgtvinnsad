@@ -53,7 +53,8 @@
 						<tr class="tableHeaderField" height="20" >
 							<th class="text14" >&nbsp;Kundenr.&nbsp;</th>
 		                    <th class="text14" >&nbsp;Navn&nbsp;</th>
-		                    <th class="text14" >&nbsp;TIN&nbsp;</th>
+		                    <th class="text14" >&nbsp;OrgNr&nbsp;</th>
+		                    <th class="text14" >&nbsp;EORI&nbsp;</th>
 		                    <th class="text14" >&nbsp;Adresse&nbsp;</th>
 		                    <th class="text14" >&nbsp;Postadresse&nbsp;</th>
 		                    <th class="text14" >&nbsp;Postnr&nbsp;</th>
@@ -78,6 +79,7 @@
 			               	</td>
 		               	   <td class="text14">&nbsp;${record.knavn}</td>
 		               	   <td class="text14">&nbsp;${record.syrg}</td>
+		               	   <td class="text14">&nbsp;${record.eori}</td>
 		               	   <td class="text14">&nbsp;${record.adr1}</td>
 		               	   <td class="text14">&nbsp;${record.adr3}</td>
 		               	   <td class="text14">&nbsp;${record.postnr}</td>

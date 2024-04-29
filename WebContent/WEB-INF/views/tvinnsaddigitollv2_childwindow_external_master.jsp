@@ -75,10 +75,10 @@
 		                <c:forEach var="record" items="${model.mainList}" varStatus="counter">    
 			               
 			               <tr class="text14">
-				               <td nowrap style="cursor:pointer;" class="text14MediumBlue" id="emdkm${record.emdkm}@tuavd${Xrecord.tuavd}@tutvkt${Xrecord.tutvkt}@ctype${Xmodel.callerType}" >
+				               <td nowrap style="cursor:pointer;" class="text14MediumBlue" id="emdkm${record.emdkm}@trreforg${record.trreforg}@ctype${model.callerType}@emdkmt${record.emdkmt}" >
 			               			${record.emdkm}
 				               </td>
-				               <td class="text14">&nbsp;TODO</td>
+				               <td class="text14">&nbsp;${record.emdkmt}</td>
 			               	   <td class="text14">&nbsp;${record.empro}</td>
 			               	   <td class="text14">&nbsp;${record.date}</td>
 			               	   <td class="text14">&nbsp;${record.time}</td>

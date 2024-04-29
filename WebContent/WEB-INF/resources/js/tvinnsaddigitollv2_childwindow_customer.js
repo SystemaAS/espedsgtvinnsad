@@ -20,7 +20,7 @@
 			  var tlf = record[9].replace("ktlf", ""); 
 			  var syepos = record[10].replace("ksyepos", ""); 	
 			  //DEBUG -> alert(knr + " " + knavn + " " + callerType)
-			  			  
+			  var orgNrPlaceholder = "";			  
 			  
 			  //=========================
 			  //DIGITOLL -- TRANSPORT
@@ -28,7 +28,16 @@
 			  if(callerType == 'etnat'){
 				  opener.jq('#etknt').val(knr);
 				  opener.jq('#etnat').val(knavn);refreshCustomValidity(opener.jq('#etnat')[0]);
-				  opener.jq('#etrgt').val(syrg);refreshCustomValidity(opener.jq('#etrgt')[0]);
+				  //Orgnr/EORI
+				  if(eori != ''){
+					orgNrPlaceholder = eori;
+				  }else{
+					orgNrPlaceholder = syrg;
+					
+				  }
+				  opener.jq('#etrgt').val(orgNrPlaceholder);refreshCustomValidity(opener.jq('#etrgt')[0]);
+				  // END Orgnr/EORI
+		
 				  opener.jq('#etad1t').val(adr1);
 				  opener.jq('#etpst').val(adr3);refreshCustomValidity(opener.jq('#etpst')[0]);
 				  opener.jq('#etpnt').val(postnr);
@@ -42,7 +51,17 @@
 			  }else if(callerType == 'etnar'){
 				  opener.jq('#etknr').val(knr);
 				  opener.jq('#etnar').val(knavn);refreshCustomValidity(opener.jq('#etnar')[0]);
-				  opener.jq('#etrgr').val(syrg);refreshCustomValidity(opener.jq('#etrgr')[0]);
+				  
+				  //Orgnr/EORI
+				  if(eori != ''){
+					orgNrPlaceholder = eori;
+				  }else{
+					orgNrPlaceholder = syrg;
+					
+				  }
+				  opener.jq('#etrgr').val(orgNrPlaceholder);refreshCustomValidity(opener.jq('#etrgr')[0]);
+				  // END Orgnr/EORI
+		
 				  opener.jq('#etad1r').val(adr1);
 				  opener.jq('#etpsr').val(adr3);refreshCustomValidity(opener.jq('#etpsr')[0]);
 				  opener.jq('#etpnr').val(postnr);
@@ -54,6 +73,7 @@
 				  }	
 		
 				  opener.jq('#etnar').focus();
+		
 			  //=========================
 			  //DIGITOLL -- MASTER
 			  //========================= 
@@ -64,7 +84,17 @@
 			  }else if(callerType == 'emnas'){
 				  opener.jq('#emkns').val(knr);
 				  opener.jq('#emnas').val(knavn);
-				  opener.jq('#emrgs').val(syrg);
+				  
+				  //Orgnr/EORI
+				  if(eori != ''){
+					orgNrPlaceholder = eori;
+				  }else{
+					orgNrPlaceholder = syrg;
+					
+				  }
+				  opener.jq('#emrgs').val(orgNrPlaceholder);
+				  // END Orgnr/EORI
+		
 				  opener.jq('#emad1s').val(adr1);
 				  opener.jq('#empss').val(adr3);
 				  opener.jq('#empns').val(postnr);
@@ -73,7 +103,16 @@
 			  }else if(callerType == 'emnam'){
 				  opener.jq('#emknm').val(knr);
 				  opener.jq('#emnam').val(knavn);
-				  opener.jq('#emrgm').val(syrg);
+				  //Orgnr/EORI
+				  if(eori != ''){
+					orgNrPlaceholder = eori;
+				  }else{
+					orgNrPlaceholder = syrg;
+					
+				  }
+				  opener.jq('#emrgm').val(orgNrPlaceholder);
+				  // END Orgnr/EORI
+		
 				  opener.jq('#emad1m').val(adr1);
 				  opener.jq('#empsm').val(adr3);
 				  opener.jq('#empnm').val(postnr);
@@ -85,7 +124,16 @@
 			  }else if(callerType == 'ehnas'){
 				  opener.jq('#ehkns').val(knr);
 				  opener.jq('#ehnas').val(knavn);refreshCustomValidity(opener.jq('#ehnas')[0]);
-				  opener.jq('#ehrgs').val(syrg);refreshCustomValidity(opener.jq('#ehrgs')[0]);
+				  //Orgnr/EORI
+				  if(eori != ''){
+					orgNrPlaceholder = eori;
+				  }else{
+					orgNrPlaceholder = syrg;
+					
+				  }
+				  opener.jq('#ehrgs').val(orgNrPlaceholder);refreshCustomValidity(opener.jq('#ehrgs')[0]);
+				  // END Orgnr/EORI	
+				  
 				  opener.jq('#ehad1s').val(adr1);
 				  opener.jq('#ehpss').val(adr3);
 				  opener.jq('#ehpns').val(postnr);
@@ -94,7 +142,16 @@
 			  }else if(callerType == 'ehnam'){
 				  opener.jq('#ehknm').val(knr);
 				  opener.jq('#ehnam').val(knavn);refreshCustomValidity(opener.jq('#ehnam')[0]);
-				  opener.jq('#ehrgm').val(syrg);refreshCustomValidity(opener.jq('#ehrgm')[0]);
+				  
+				  //Orgnr/EORI
+				  if(eori != ''){
+					orgNrPlaceholder = eori;
+				  }else{
+					orgNrPlaceholder = syrg;
+					
+				  }
+				  opener.jq('#ehrgm').val(orgNrPlaceholder);refreshCustomValidity(opener.jq('#ehrgm')[0]);
+				  // END Orgnr/EORI
 				  opener.jq('#ehad1m').val(adr1);
 				  opener.jq('#ehpsm').val(adr3);
 				  opener.jq('#ehpnm').val(postnr);

@@ -146,6 +146,13 @@
 	  	window.open('tvinnsadmanifest_childwindow_manifestinfo.do?id=' + jq('#efuuid').val() + "&raw=1", "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");
 
     });
+
+	jq('#imgRemoveExternalIdsLink').click(function() { 
+    	jq('#emdkm_ff').val("");
+		jq('#emdkmt_ff').val("");
+		jq('#emrgt_ff').val("");
+	});
+
   });
   
 
@@ -275,7 +282,7 @@
 		//External Doc.nr (MasterId)
 		jq('#emdkm_ffIdLink').click(function() {
 	    	jq('#emdkm_ffIdLink').attr('target','_blank');
-	    	window.open('tvinnsaddigitollv2_childwindow_external_master.do?action=doInit&date=20200101' + '&tupro=' + jq('#empro').val() + '&tuavd=' + jq('#emavd').val()  + '&ctype=emdkm', "masterffWin", "top=300px,left=500px,height=600px,width=1050px,scrollbars=no,status=no,location=no");
+	    	window.open('tvinnsaddigitollv2_childwindow_external_master.do?action=doInit&date=20200101' + '&ctype=emdkm', "masterffWin", "top=300px,left=500px,height=600px,width=1050px,scrollbars=no,status=no,location=no");
 	    });
 	    jq('#emdkm_ffIdLink').keypress(function(e){ //extra feature for the end user
 			if(e.which == 13) {
@@ -369,10 +376,10 @@
 			}
 			if(len > 0){
 				jq('#emknt').val(customer.kundnr);
-				if('' != customer.orgnr){
-					jq('#emrgt').val(customer.orgnr);
-				}else{
+				if('' != customer.eori){
 					jq('#emrgt').val(customer.eori);
+				}else{
+					jq('#emrgt').val(customer.orgnr);
 				}
 			}else{
 				//init fields
@@ -420,10 +427,10 @@
 			if(len > 0){
 				jq('#emknm').val(customer.kundnr);
 				jq('#emnam').val(customer.knavn);
-				if('' != customer.orgnr){
-					jq('#emrgm').val(customer.orgnr);
-				}else{
+				if('' != customer.eori){
 					jq('#emrgm').val(customer.eori);
+				}else{
+					jq('#emrgm').val(customer.orgnr);
 				}
 				jq('#empsm').val(customer.adr3);
 				jq('#emlkm').val(customer.syland);
@@ -491,10 +498,10 @@
 			if(len > 0){
 				jq('#emkns').val(customer.kundnr);
 				jq('#emnas').val(customer.knavn);
-				if('' != customer.orgnr){
-					jq('#emrgs').val(customer.orgnr);
-				}else{
+				if('' != customer.eori){
 					jq('#emrgs').val(customer.eori);
+				}else{
+					jq('#emrgs').val(customer.orgnr);
 				}
 				jq('#empss').val(customer.adr3);
 				jq('#emlks').val(customer.syland);

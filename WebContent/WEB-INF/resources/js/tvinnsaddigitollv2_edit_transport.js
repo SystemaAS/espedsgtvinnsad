@@ -519,10 +519,10 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 			if(len > 0){
 				jq('#etknt').val(customer.kundnr);
 				jq('#etnat').val(customer.knavn); refreshCustomValidity(jq('#etnat')[0]);
-				if('' != customer.orgnr){
-					jq('#etrgt').val(customer.orgnr);refreshCustomValidity(jq('#etrgt')[0]);
-				}else{
+				if('' != customer.eori){
 					jq('#etrgt').val(customer.eori);refreshCustomValidity(jq('#etrgt')[0]);
+				}else{
+					jq('#etrgt').val(customer.orgnr);refreshCustomValidity(jq('#etrgt')[0]);
 				}
 				jq('#etpst').val(customer.adr3);refreshCustomValidity(jq('#etpst')[0]);
 				jq('#etlkt').val(customer.syland);refreshCustomValidity(jq('#etlkt')[0]);
@@ -593,10 +593,10 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 			if(len > 0){
 				jq('#etknr').val(customer.kundnr);
 				jq('#etnar').val(customer.knavn); refreshCustomValidity(jq('#etnar')[0]);
-				if('' != customer.orgnr){
-					jq('#etrgr').val(customer.orgnr);refreshCustomValidity(jq('#etrgr')[0]);
-				}else{
+				if('' != customer.eori){
 					jq('#etrgr').val(customer.eori);refreshCustomValidity(jq('#etrgr')[0]);
+				}else{
+					jq('#etrgr').val(customer.orgnr);refreshCustomValidity(jq('#etrgr')[0]);
 				}
 				
 				jq('#etpsr').val(customer.adr3);refreshCustomValidity(jq('#etpsr')[0]);
