@@ -1468,6 +1468,11 @@ public class TvinnSadDigitollv2MasterController {
 				recordToValidate.setEmrgt_ff("");
 			}
 		}
+		if(StringUtils.isNotEmpty(recordToValidate.getEmrgr_ff())) {
+			if(recordToValidate.getEmrgr_ff().equals("null")) {
+				recordToValidate.setEmrgr_ff("");
+			}
+		}
 	}
 	/**
 	 * 
