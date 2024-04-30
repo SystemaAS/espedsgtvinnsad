@@ -34,7 +34,17 @@
     jq('#manifestForm').submit(function() { 
     	setBlockUI();
     });
-    
+	
+	jq('#sendToPartIdLink').click(function() {
+    	jq('#sendToPartIdLink').attr('target','_blank');
+    	window.open('tvinnsaddigitollv2_childwindow_external_houses.do?action=doFind&orgnr=' + jq('#ownReceiverOrgNr').val() + '&ctype=ownReceiverOrgNr', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+	});
+	jq('#ftplogIdLink').click(function() {
+    	jq('#ftplogIdLink').attr('target','_blank');
+    	window.open('tvinnsaddigitollv2_childwindow_external_houses_logTODO.do?action=doFind&todo=' + jq('#TODOemdkm').val() + jq('#TODOown_emdkmUnique').val(), "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+	});	    
+
+
     jq('#sendButton').click(function() { 
     	var async_own = "";
 		if (jq("#async").length){ //check if it exists 

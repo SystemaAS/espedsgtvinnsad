@@ -75,7 +75,7 @@
 		                <c:forEach var="record" items="${model.mainList}" varStatus="counter">    
 			               
 			               <tr class="text14">
-				               <td nowrap style="cursor:pointer;" class="text14MediumBlue" id="emdkm${record.emdkm}@trreforg${record.trreforg}@ctype${model.callerType}@emdkmt${record.emdkmt}" >
+				               <td nowrap style="cursor:pointer;" class="text14MediumBlue" id="emdkm${record.emdkm}@trreforg${record.trreforg}@ctype${model.callerType}@emdkmt${record.emdkmt}@avsid${record.avsid}" >
 			               			${record.emdkm}
 				               </td>
 				               <td class="text14">&nbsp;${record.emdkmt}</td>

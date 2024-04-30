@@ -11,7 +11,8 @@
 			  var emdkm_ff = record[0].replace("emdkm", "");
 			  var emrgt_ff = record[1].replace("trreforg", "");
 		  	  var callerType = record[2].replace("ctype", "");
-			  var emdkmt_ff = record[3].replace("emdkmt", "");	
+			  var emdkmt_ff = record[3].replace("emdkmt", "");
+			  var emrgr_ff = record[4].replace("avsid", "");	
 			  	//console.log(emdkm_ff + " " + emrgt_ff + " caller:" + callerType);
 
 			  	if(callerType == 'emdkm'){ 
@@ -26,6 +27,10 @@
 				  opener.jq('#emrgt_ff').prop('readonly',false);
 				  opener.jq('#emrgt_ff').val(emrgt_ff);	
 				  opener.jq('#emrgt_ff').prop('readonly',true);
+				  //
+				  opener.jq('#emrgr_ff').prop('readonly',false);
+				  opener.jq('#emrgr_ff').val(emrgr_ff);	
+				  opener.jq('#emrgr_ff').prop('readonly',true);
 				  //focus
 				  opener.jq('#emdkm_ff').focus();
 			  	}

@@ -217,7 +217,7 @@
 			</c:if>
 
 			<tr height="5">	
-  			<td  colspan="10" class="text14 formFrame" <c:if test="${not empty model.record.masterDto.emdkm_ff}">style="background-color:#5499C7;"</c:if> >
+  			<td  colspan="10" class="text14 formFrame" <c:if test="${not empty model.record.masterDto.emdkm_ff && model.record.masterDto.emdkm_ff != 'null'}">style="background-color:#5499C7;"</c:if> >
 			<table style="width:100%">
 			<tr >
 				<td class="text14" align="left" >
@@ -515,7 +515,7 @@
 						</td>
 						<td class="text14">
 							<c:choose>
-								<c:when test="${not empty model.record.masterDto.emdkm_ff}">
+								<c:when test="${not empty model.record.masterDto.emdkm_ff && model.record.masterDto.emdkm_ff != 'null'}" >
 									<input title="Dok.type:${model.record.masterDto.emdkmt_ff}&nbsp;Transp.Orgnr:${model.record.masterDto.emrgt_ff}" readonly type="text" class="inputTextReadOnly" style="background-color:#5499C7;cursor:pointer;" name="master_emdkm_ff" id="master_emdkm_ff" size="25" maxlength="50" value="${model.record.masterDto.emdkm_ff}">
 								</c:when>
 								<c:otherwise>
@@ -533,6 +533,19 @@
 					<tr>
 					<td>
 					<table>
+						<tr>
+							<td colspan="12">
+								<table>
+								<tr>
+									<td class="inputFormSubmit text12 isa_success" style="cursor: not-allowed">Transportør&nbsp;<b>${model.record.transportDto.etnat}</b>
+											&nbsp;&nbsp;Kjøretøy k.merke&nbsp;<b>${model.record.transportDto.etkmrk}</b>
+											&nbsp;&nbsp;ETA&nbsp;<b>${model.record.transportDto.etetadStr}</b>&nbsp;&nbsp;ETA-tid&nbsp;<b>${model.record.transportDto.etetatStr}</b>
+																	
+									</td>
+								</tr>
+								</table>
+							</td>	
+						</tr>
 						<tr>
 							<td colspan="3" class="text14">&nbsp;<span title="ehprt">Prosedyr</span><font class="text16RedBold" >*</font></td>
 							<td class="text14">
@@ -572,6 +585,21 @@
 								</div>
 							</td>
 							
+							
+							<c:if test="${model.record.ehlnrm > 0 && not empty model.record.ehmid}">
+								<c:if test="${not empty model.record.masterDto.emdkm_ff && model.record.masterDto.emdkm_ff != 'null'}">
+									<td width="30px" ></td>
+									<td class="text14"><span title="Send til orgnr">Send House til - Navn</span>
+										<a tabindex="-1" id="sendToPartIdLink">
+											<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
+										</a>
+									</td>
+									<td class="text14"><span title="Send til orgnr">Orgnr</span></td>
+									<td colspan="3" class="text12"><span id="ajaxErrorTextExtParty" name="ajaxErrorTextExtParty"></span></td>
+								</c:if>
+							</c:if>
+
+							
 						</tr>
 						<tr>
 							<td colspan="3" class="text14">
@@ -600,19 +628,30 @@
 							<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehextref" id="ehextref" size="20" maxlength="35" value="${model.record.ehextref}"></td>
 							<td class="text14" width="20px"></td>
 							<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehrecid" id="ehrecid" size="20" maxlength="35" value="${model.record.ehrecid}"></td>
-							<td colspan="12">
-								<table>
-								<tr>
-									<td class="inputFormSubmit text12 isa_success" style="cursor: not-allowed">Transportør&nbsp;<b>${model.record.transportDto.etnat}</b>
-											&nbsp;&nbsp;Kjøretøy k.merke&nbsp;<b>${model.record.transportDto.etkmrk}</b>
-											&nbsp;&nbsp;ETA&nbsp;<b>${model.record.transportDto.etetadStr}</b>&nbsp;&nbsp;ETA-tid&nbsp;<b>${model.record.transportDto.etetatStr}</b>
-																	
+							
+							<c:if test="${model.record.ehlnrm > 0 && not empty model.record.ehmid}">
+								<c:if test="${not empty model.record.masterDto.emdkm_ff && model.record.masterDto.emdkm_ff != 'null'}">
+									<td width="30px" ></td>
+									<td class="text14">
+										<input  type="text" readonly class="inputText12LightYellow" style="background-color:#5499C7;" name="ownReceiverName" id="ownReceiverName" size="31" maxlength="30" value="">
 									</td>
-								</tr>
-								</table>
-							</td>
+									<td class="text14">	
+										<input  type="text" readonly class="inputText12LightYellow" style="background-color:#5499C7;" name="ownReceiverOrgNr" id="ownReceiverOrgNr" size="17" maxlength="20" value="${model.record.masterDto.emrgr_ff}">									
+									</td>
+									<td class="text14">	
+										<input title="Send til ombud..." class="buttonGrayWithGreenFrame" style="cursor:pointer;" type="button" name="sendToPartButton" id="sendToPartButton" value='Send House til ombud'>
+									</td>
+									<td class="text14">	
+										<a tabindex="-1" id="ftplogIdLink">
+											<img title="ftp-log" style="cursor:pointer;vertical-align: middle;" src="resources/images/log-icon2.png" width="22px" height="22px" border="0" alt="ftp-log" >
+										</a>
+									</td>
+								</c:if>	
+							</c:if>		
+										 		
 							
 							
+	
 						</tr>
 						
 					</table>

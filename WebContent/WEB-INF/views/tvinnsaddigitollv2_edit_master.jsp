@@ -694,6 +694,10 @@
 								<td class="text14">
 									<input readonly type="text" class="inputTextReadOnly" name="emrgt_ff" id="emrgt_ff" size="20" maxlength="17" value="${model.record.emrgt_ff}">		
 								</td>
+								<td class="text14">&nbsp;<span title="emrgr_ff">Ombud-Avs.Orgnr / EORI</span></td>
+								<td class="text14">
+									<input readonly type="text" class="inputTextReadOnly" name="emrgr_ff" id="emrgr_ff" size="20" maxlength="17" value="${model.record.emrgr_ff}">		
+								</td>
 								<td class="text14"></span>
 									<img title="Fjerne Ekstern Doc.nr/type/Orgnr" id="imgRemoveExternalIdsLink" style="cursor:pointer;vertical-align: middle;" src="resources/images/delete.gif" width="14px" height="14px" border="0" alt="delete" >
 								</td>
