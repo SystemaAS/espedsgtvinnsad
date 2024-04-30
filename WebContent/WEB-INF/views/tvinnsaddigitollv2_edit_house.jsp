@@ -217,7 +217,7 @@
 			</c:if>
 
 			<tr height="5">	
-  			<td  colspan="10" class="text14 formFrame" >
+  			<td  colspan="10" class="text14 formFrame" <c:if test="${not empty model.record.masterDto.emdkm_ff}">style="background-color:#5499C7;"</c:if> >
 			<table style="width:100%">
 			<tr >
 				<td class="text14" align="left" >
@@ -514,7 +514,14 @@
 							<input readonly type="text" class="inputTextReadOnly" name="ehdts" id="ehdts" size="12" maxlength="8" value="${model.record.ehdtsStr}">		
 						</td>
 						<td class="text14">
-							<input readonly type="text" class="inputTextReadOnly" name="master_emdkm" id="master_emdkm" size="25" maxlength="50" value="${model.record.masterDto.emdkm}">		
+							<c:choose>
+								<c:when test="${not empty model.record.masterDto.emdkm_ff}">
+									<input title="Dok.type:${model.record.masterDto.emdkmt_ff}&nbsp;Transp.Orgnr:${model.record.masterDto.emrgt_ff}" readonly type="text" class="inputTextReadOnly" style="background-color:#5499C7;cursor:pointer;" name="master_emdkm_ff" id="master_emdkm_ff" size="25" maxlength="50" value="${model.record.masterDto.emdkm_ff}">
+								</c:when>
+								<c:otherwise>
+									<input readonly type="text" class="inputTextReadOnly" name="master_emdkm" id="master_emdkm" size="25" maxlength="50" value="${model.record.masterDto.emdkm}">
+								</c:otherwise>
+							</c:choose>		
 						</td>
 					</tr>
 					</table>
