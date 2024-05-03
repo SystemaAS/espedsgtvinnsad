@@ -805,10 +805,10 @@ public class TvinnSadDigitollAjaxController {
 	 * @return
 	 */
 	@RequestMapping(value = "tvinnsaddigitollv2_send_masterId_toExternalParty.do", method = RequestMethod.GET)
-	  public @ResponseBody Set<SadmomfRecord> sendMasterIdToPart(HttpServletRequest request, @RequestParam String applicationUser, @RequestParam String emlnrt,
+	  public @ResponseBody Set<SadmomfRecord> sendMasterIdToExternalParty(HttpServletRequest request, @RequestParam String applicationUser, @RequestParam String emlnrt,
 			  																		   @RequestParam String emlnrm, @RequestParam String receiverName, @RequestParam String receiverOrgnr ) {
 		  Set result = new HashSet();
-		  logger.info("Inside sendMasterIdToPart");
+		  logger.info("Inside sendMasterIdToExternalParty");
 		  logger.info("emlnrt:" + emlnrt);
 		  logger.info("emlnrm:" + emlnrm);
 		  logger.info("file-receiver name:" + receiverName);
@@ -835,6 +835,63 @@ public class TvinnSadDigitollAjaxController {
 					  result.add(record);
 				  }else {
 					  SadmomfRecord record = new SadmomfRecord();
+					  record.setOwn_resultAjaxText(jsonPayload);
+					  result.add(record);
+				  }
+				
+			  	  
+			 }
+		  }catch(Exception e) {
+			  logger.error(e.toString());
+		  }
+	      
+		  return result;
+		  
+	  }
+	/**
+	 * Send the local house back to the MasterId sender Party
+	 * @param request
+	 * @param applicationUser
+	 * @param emlnrt
+	 * @param emlnrm
+	 * @param receiverName
+	 * @param receiverOrgnr
+	 * @return
+	 */
+	@RequestMapping(value = "tvinnsaddigitollv2_send_externalHouse_toExternalParty.do", method = RequestMethod.GET)
+	  public @ResponseBody Set<SadmomfRecord> sendExternalHouseBackToExternalParty(HttpServletRequest request, @RequestParam String applicationUser, @RequestParam String ehlnrt,
+			  																		   @RequestParam String ehlnrm, @RequestParam String ehlnrh, 
+			  																		   @RequestParam String receiverName, @RequestParam String receiverOrgnr ) {
+		  Set result = new HashSet();
+		  logger.info("Inside sendExternalHouseToExternalParty");
+		  logger.info("ehlnrt:" + ehlnrt);
+		  logger.info("ehlnrm:" + ehlnrm);
+		  logger.info("ehlnrh:" + ehlnrh);
+		  logger.info("file-receiver name:" + receiverName);
+		  logger.info("file-receiver orgNr:" + receiverOrgnr);
+		  
+		  try {
+			  if(StringUtils.isNotEmpty(receiverName) && StringUtils.isNotEmpty(receiverOrgnr) && StringUtils.isNotEmpty(ehlnrt) 
+				  && StringUtils.isNotEmpty(ehlnrm) && StringUtils.isNotEmpty(ehlnrh)) {
+				  //get BASE URL
+				  final String BASE_URL = SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL + "send_externalHouse_toExternalParty.do" ;
+				  //add URL-parameters
+				  StringBuffer urlRequestParams = new StringBuffer();
+				  urlRequestParams.append("user=" + applicationUser + "&ehlnrt=" + ehlnrt + "&ehlnrm=" + ehlnrm +  "&ehlnrh=" + ehlnrh + "&receiverName=" + receiverName + "&receiverOrgnr=" + receiverOrgnr);
+				  logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+				  logger.warn("URL: " + BASE_URL);
+				  logger.warn("URL PARAMS: " + urlRequestParams);
+			    	
+				  String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+				  //Debug --> 
+				  logger.info(jsonPayload);
+				  //return to jquery
+				  if("OK".equalsIgnoreCase(jsonPayload)) {
+					  SadmohfRecord record = new SadmohfRecord();
+					  record.setOwn_resultAjaxText(jsonPayload);
+					  result.add(record);
+				  }else {
+					  SadmohfRecord record = new SadmohfRecord();
 					  record.setOwn_resultAjaxText(jsonPayload);
 					  result.add(record);
 				  }

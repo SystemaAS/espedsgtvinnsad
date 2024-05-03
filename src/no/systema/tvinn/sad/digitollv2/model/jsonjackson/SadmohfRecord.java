@@ -165,11 +165,16 @@ public class SadmohfRecord extends JsonAbstractGrandFatherRecord   {
 	private SadmotfRecord transportDto; //Dto for transport to get som fields
 	private SadmomfRecord masterDto; //Dto for master to get som fields
 	
-	
-	
+
 	private Collection<SadmoifRecord> listItemLines = null;
 	public void setListItemLines (Collection<SadmoifRecord> value){ this.listItemLines = value;}
 	public Collection<SadmoifRecord> getListItemLines(){ return this.listItemLines; }
+	
+	
+	//private String own_emdkmUnique = "";  
+	//private Boolean own_okToDelete = true;
+	//private Boolean own_invalidHousesExist = false;
+	private String own_resultAjaxText = "";
 	
 	/**
 	 * 

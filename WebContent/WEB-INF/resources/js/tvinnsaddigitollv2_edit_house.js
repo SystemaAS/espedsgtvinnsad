@@ -916,6 +916,63 @@
   		  jq('#dialogLoggerLocal').dialog('open');
   	  }
 
+	//====================================================== 
+	//Send external house to party (owner of the transport)
+	//====================================================== 
+	jq(function() {
+		jq('#sendToPartButton').click(function() {
+			
+			if( jq('#ownReceiverName').val() != "" && jq('#ownReceiverOrgNr').val() != "" && jq('#ehlnrt').val()!= "" && jq('#ehlnrm').val()!= "" && jq('#ehlnrh').val()!= ""){
+				var	name = jq('#ownReceiverName').val();
+				var	orgNr = jq('#ownReceiverOrgNr').val();
+				var ehlnrt = jq('#ehlnrt').val();
+				var ehlnrm = jq('#ehlnrm').val();
+				var ehlnrh = jq('#ehlnrh').val();
+				jq.ajax({
+			  	  type: 'GET',
+			  	  url: 'tvinnsaddigitollv2_send_externalHouse_toExternalParty.do',
+			  	  data: { applicationUser : jq('#applicationUser').val(),
+						  ehlnrt : ehlnrt,
+						  ehlnrm : ehlnrm,
+						  ehlnrh : ehlnrh,
+						  receiverName : name,
+				 		  receiverOrgnr : orgNr},	
+			  	  beforeSend : function() {
+		               jq.blockUI({ message: 'Wait' });
+		          },
+				  dataType: 'json',
+			  	  cache: false,
+			  	  contentType: 'application/json',
+			  	  success: function(data) {
+					jq.unblockUI();
+						//alert("Hello");
+						var len = data.length;
+						if(len>0){
+						  	for ( var i = 0; i < len; i++) {
+								//return text (OK or ERROR)
+								var resultText = data[i].own_resultAjaxText;
+								if(resultText.indexOf('ERROR') >=0 ){
+									jq('#sendToPartButton').removeClass("isa_success");
+									jq('#sendToPartButton').addClass("isa_error");
+									jq('#ajaxErrorTextExtParty').css('color', 'red');
+								}else{
+									jq('#sendToPartButton').removeClass("isa_error");
+									jq('#sendToPartButton').addClass("isa_success");
+									jq('#ajaxErrorTextExtParty').css('color', 'green');
+								}
+								jq('#ajaxErrorTextExtParty').text(resultText);
+							}
+						}
+					},
+				  	  error: function() {
+				  	    alert('Error loading ...');
+						jq.unblockUI();
+				  	}			
+				});	
+			}
+			
+		});
+	});
 
 
 //-------------------
