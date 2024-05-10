@@ -1086,6 +1086,7 @@ public class TvinnSadDigitollv2MasterController {
 		//get all external houses (främmande houses ) if applicable ...
 		if(StringUtils.isNotEmpty(record.getEmdkm_ff()) ){
 			this.getExternalHouses(appUser, record);
+		
 		}
 				
 	}
