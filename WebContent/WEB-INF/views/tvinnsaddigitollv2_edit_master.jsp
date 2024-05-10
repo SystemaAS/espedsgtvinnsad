@@ -1347,7 +1347,231 @@
 						</td>	
 		            </tr> 
 		            </c:forEach>
+		            
+		            
+		            <%-- =============== --%>
+		            <%-- External houses --%>
+		            <%-- =============== --%>
+		            <c:forEach items="${model.record.listExternalHouses}" var="externalHouseRecord" varStatus="counterExt">
+		            		              	  
+		            <tr class="tableRow" style="background-color:#5499C7;" height="20" >
+		          
+		          	   <td width="2%" class="tableCellFirst12" <c:if test="${externalHouseRecord.ehst2 == 'D'}">style="background-color: #FEEFB3;color: #9F6000;" </c:if> align="center">
+		          	   		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_house.do?action=doFind&ehlnrt=${externalHouseRecord.ehlnrt}&ehlnrm=${externalHouseRecord.ehlnrm}&ehlnrh=${externalHouseRecord.ehlnrh}" onClick="setBlockUI();">
+               					<c:choose>
+		               				<c:when test="${externalHouseRecord.ehst2 == 'C' || externalHouseRecord.ehst2 == 'N' || externalHouseRecord.ehst == 'S'}">
+		               					<img title="Read" style="vertical-align:bottom;" src="resources/images/eye.png" height="18px" width="18px" border="0" alt="read">
+		               				</c:when>
+		               				<c:otherwise>
+		               					<img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">
+		               				</c:otherwise>
+	               				</c:choose>
+               				</a>
+               				
+	               	   </td>
+	               	   <td width="2%" align="center" class="tableCell12" >${externalHouseRecord.ehlnrh}</td>
+	               	   <td width="2%" align="center" class="tableCell12" >${externalHouseRecord.ehavd}</td>
+	               	   <td width="2%" align="center" class="tableCell12" >${externalHouseRecord.ehpro}</td>
+	               	   <td width="2%" align="center" class="tableCell12" >${externalHouseRecord.ehtdn}</td>
+	               	   <td width="2%" align="center" class="tableCell12" >${externalHouseRecord.ehextref}</td>
+		               <td nowrap width="2%" align="center" class="tableCell12 text12">
+		               	  <c:choose>
+		               		<c:when test="${externalHouseRecord.ehst == 'S'}">
+		               			<font class="inputFormSubmit text12 isa_error">KANSELLERT</font>
+		               			
+	               	   			<%-- We can only CANCEL (S) internally if the emmid and emuuid are gone since we DELETED first from Tollv.(if we even got that far at some point...) --%>
+	               	   			<c:if test="${empty externalHouseRecord.ehmid && empty externalHouseRecord.ehuuid}">
+					   				<a tabindex=-1 class="grantLink" id="grantLink${counterExt.count}" runat="server" href="#">
+										<font title="Gjøre tilgjengelig igjen ved å klikke" class="inputFormSubmit text12 isa_success"><b>e</b></font>
+									</a> 
+									<div id="dialogUpdateInternalStatusGrant${counterExt.count}" class="clazz_dialog" title="Dialog">
+										<form action="tvinnsaddigitollv2_updateInternalStatus_house.do" name="updateInternalStatusGrantForm${counterExt.count}" id="updateInternalStatusGrantForm${counterExt.count}" method="post">
+										 	<input type="hidden" name="current_id1${counterExt.count}" id="current_id1${counterExt.count}" value="${externalHouseRecord.ehlnrt}">
+											<input type="hidden" name="current_id2${counterExt.count}" id="current_id2${counterExt.count}" value="${externalHouseRecord.ehlnrm}">
+											<input type="hidden" name="current_id3${counterExt.count}" id="current_id3${counterExt.count}" value="${externalHouseRecord.ehlnrh}">
+										 	<input type="hidden" name="current_status${counterExt.count}" id="current_status${counterExt.count}" value="">
+										 	<p class="text14" >Er du sikker på at du vil gjøre tilgjengelig igjen Lnr <b>${externalHouseRecord.ehlnrh}</b> i <b>SYSPED</b> ?</p>
+												
+										</form>
+									</div>
+								</c:if>
+		               		</c:when>
+		               		<c:otherwise>
+		               			${externalHouseRecord.ehst}
+		               		</c:otherwise>
+		               	   </c:choose>
+		               </td>
+		               <td width="2%" align="right" class="tableCell12" >${externalHouseRecord.ehvkb}</td>
+		               <td width="2%" align="right" class="tableCell12" >${externalHouseRecord.ehntk}</td>
+		               <td width="2%" align="left" class="tableCell12" >${externalHouseRecord.ehdkh}</td>
+		               <td width="2%" align="left" class="tableCell12" >${externalHouseRecord.ehdkht}</td>
+		               <td width="2%" align="left" class="tableCell12" >
+		               		${externalHouseRecord.ehrg}&nbsp;${externalHouseRecord.eh0068a}&nbsp;${externalHouseRecord.eh0068b}
+		               		<c:if test="${not empty externalHouseRecord.ehtrnr}">&nbsp;Mrn:${externalHouseRecord.ehtrnr}</c:if>
+		               		<c:if test="${not empty externalHouseRecord.eheid}">&nbsp;Ekspid:${externalHouseRecord.eheid}</c:if>
+		               </td>
+		               <td width="2%" align="left" class="tableCell12" >${externalHouseRecord.ehprt}</td>
+		               <td width="2%" align="left" class="tableCell12" >${externalHouseRecord.ehuprt}</td>
+		               
+		               <td width="2%" align="left" class="tableCell12" >${externalHouseRecord.ehetypt}</td>
+		               <td width="2%" align="left" class="tableCell12" >${externalHouseRecord.eheid}</td>
+		               
+		               
+		               <td width="2%" align="center" class="tableCell12" >${externalHouseRecord.ehnam}&nbsp;-&nbsp;${externalHouseRecord.ehpsm}&nbsp;${externalHouseRecord.ehlkm}</td>
+		               <td width="2%" align="center" class="tableCell12" >${externalHouseRecord.ehnas}&nbsp;-&nbsp;${externalHouseRecord.ehpss}&nbsp;${externalHouseRecord.ehlks}</td>
+		               <td width="2%" class="tableCell12" ><c:if test="${externalHouseRecord.ehdts > 0}">${externalHouseRecord.ehdts}-${externalHouseRecord.ehtms}</c:if></td>
+		               
+		               <td width="2%" class="tableCell12" >
+		               		<c:choose>
+		               		<c:when test="${ not empty model.record.transportDto.etktyp && (fn:startsWith(model.record.transportDto.etktyp,'4') || fn:startsWith(model.record.transportDto.etktyp,'2') )  }">
+								<c:if test="${fn:startsWith(model.record.transportDto.etktyp,'4')}">
+									<img title="api:air" style="vertical-align:middle;" id="airplaneImg${externalHouseRecord.ehuuid}" src="resources/images/airplaneBlue.png" width="25" height="25"border="0" >&nbsp;
+								</c:if>
+								<c:if test="${fn:startsWith(model.record.transportDto.etktyp,'2')}">
+									<img title="api:rail" style="cursor:help;vertical-align:middle;cursor:pointer;" id="railImg${externalHouseRecord.ehuuid}" src="resources/images/rail.png" width="25" height="25"border="0" >&nbsp;
+								</c:if>
+								
+							</c:when>
+							<c:otherwise>
+								<img title="api:road" style="vertical-align:middle;" id="lorryImg${externalHouseRecord.ehuuid}" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;
+							</c:otherwise>
+							</c:choose>
+		               </td>
+		               
+		               <td width="2%" class="tableCell12" ><font class="text12SkyBlue">${externalHouseRecord.ehmid}</font></td>
+		               		
+		               <td width="2%" class="tableCell12" title="les status på toll.no">
+		               		<a style="display: block; width: 100%; height: 100%; cursor:pointer" class="uuidLink text12SkyBlue" id="${externalHouseRecord.ehuuid}">
+								${externalHouseRecord.ehuuid}
+							</a>  
+		               </td>
+		               <td width="2%" align="center" class="tableCell12" >
+		               		<c:choose>
+		               		<c:when test="${externalHouseRecord.ehst2 == 'S' || externalHouseRecord.ehst2 == 'R' || externalHouseRecord.ehst2 == 'D' || 
+		               				externalHouseRecord.ehst2 == 'M' || externalHouseRecord.ehst2 == 'C'}">
+		               				
+		               			<c:if test="${externalHouseRecord.ehst2 == 'S'}">
+		               				<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
+		               			</c:if>
+		               			<c:if test="${externalHouseRecord.ehst2 == 'R'}">
+
+		               			</c:if>
+		               			<c:if test="${externalHouseRecord.ehst2 == 'D'}">
+									
+		               			</c:if>
+		               			<c:if test="${externalHouseRecord.ehst2 == 'M'}">
+									<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
+		               			</c:if>
+		               			<c:if test="${externalHouseRecord.ehst2 == 'C'}">
+		               				<img style="vertical-align:middle;" title="Completed tolldekl at toll.no" src="resources/images/complete-icon.png" width="14px" height="12px" border="0" alt="completion">
+		               			</c:if>
+		               			<c:if test="${externalHouseRecord.ehst2 == 'N'}">
+		               				<img title="Denied" style="vertical-align:middle;" title="Denied digitoll-pass at toll.no" src="resources/images/warning.png" width="14px" height="12px" border="0" alt="denied">
+		               			</c:if>
+		               		</c:when>
+		               		<c:otherwise>
+		               			<c:if test="${externalHouseRecord.ehst2 != 'S'}">
+		               				<img src="resources/images/bulletYellow.png" width="10" height="10" border="0" >
+		               			</c:if>
+		               		</c:otherwise>
+		               		</c:choose>
+		               </td>
+		               <td width="2%" align="center" class="tableCell12" >
+		               		<c:choose>
+		               		<c:when test="${externalHouseRecord.ehst2 == 'S' || externalHouseRecord.ehst2 == 'R' || externalHouseRecord.ehst2 == 'D' || 
+		               				externalHouseRecord.ehst2 == 'M' || externalHouseRecord.ehst2 == 'C' || externalHouseRecord.ehst2 == 'N'}">
+		               				
+		               			<c:if test="${externalHouseRecord.ehst2 == 'S'}">
+		               				<span class="text12" title="S" >SUBMITTED</span>
+		               			</c:if>
+		               			<c:if test="${externalHouseRecord.ehst2 == 'R'}">
+		               				<span class="text12" title="R" >REOPENED/DRAFT</span>
+		               			</c:if>
+		               			<c:if test="${externalHouseRecord.ehst2 == 'D'}">
+		               				<font class="text12" title="D" color="red">SLETTET</font>
+		               			</c:if>
+		               			<c:if test="${externalHouseRecord.ehst2 == 'M'}">
+		               				<font class="text12" title="M" color="red">ERROR</font>
+		               			</c:if>
+		               			<c:if test="${externalHouseRecord.ehst2 == 'C'}">
+		               				<font class="text12" title="C" color="green">COMPLETED</font>
+		               			</c:if>
+		               			<c:if test="${externalHouseRecord.ehst2 == 'N'}">
+		               				<font class="text12" title="C" color="green">DENIED</font>
+		               			</c:if>
+		               			
+		               		</c:when>
+		               		<c:otherwise>
+		               			${externalHouseRecord.ehst2}
+		               		</c:otherwise>
+		               		</c:choose>
+		               </td>
+
+		               <td width="2%" class="tableCell12" align="center"> 
+		               		  	
+					   				<c:if test="${not empty externalHouseRecord.ehuuid  && not empty externalHouseRecord.ehmid}">
+					   					<c:if test="${not empty externalHouseRecord.ehst2 && (externalHouseRecord.ehst2 == 'S' || externalHouseRecord.ehst2 == 'M') }">
+				              				<a tabindex=-1 class="removeLink" id="removeLink${counterExt.count}" runat="server" href="#">
+												<img src="resources/images/delete.gif" border="0" alt="remove">
+											</a>
+											<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counterExt.count}" title="Dialog">
+												<form action="tvinnsaddigitollv2_api_delete_house.do" name="updateStatusForm${counterExt.count}" id="updateStatusForm${counterExt.count}" method="post">
+													<input type="hidden" name="current_id1${counterExt.count}" id="current_id1${counterExt.count}" value="${externalHouseRecord.ehlnrt}">
+													<input type="hidden" name="current_id2${counterExt.count}" id="current_id2${counterExt.count}" value="${externalHouseRecord.ehlnrm}">
+													<input type="hidden" name="current_id3${counterExt.count}" id="current_id3${counterExt.count}" value="${externalHouseRecord.ehlnrh}">
+													<input type="hidden" name="current_mrn${counterExt.count}" id="current_mrn${counterExt.count}" value="${externalHouseRecord.ehmid}">
+													<input type="hidden" name="action${counterExt.count}" id="action${counterExt.count}" value="doDelete">
+												 	<p class="text14" >Er du sikker på at du vil slette denne&nbsp;MRN&nbsp;<b>${externalHouseRecord.ehmid}</b> fra <b>Tollvesenet</b> ?</p>
+													
+												</form>
+											</div>
+										</c:if>
+		              				</c:if>
+		              				
+              				
+	               	   </td>
+	               	   <td width="2%" class="tableCell12" align="center">
+	               	   		<c:if test="${externalHouseRecord.ehst == 'M' || empty externalHouseRecord.ehst}">
+	               	   			<%-- We can only CANCEL (S) internally if the emmid and emuuid are gone since we DELETED first from Tollv.(if we even got that far at some point...) --%>
+	               	   			<c:if test="${empty externalHouseRecord.ehmid && empty externalHouseRecord.ehuuid}">
+					   				<%-- REPLACED with DELETE but we can get back to this. Let it stay until we are certain 
+					   				<a tabindex=-1 style="display: block; width: 100%; height: 100%;" class="cancelLink" id="cancelLink${counterExt.count}" runat="server" href="#">
+										<img src="resources/images/remove.png" width="16" height="16" border="0" alt="remove">
+									</a> 
+									<div id="dialogUpdateInternalStatus${counterExt.count}" class="clazz_dialog" title="Dialog">
+										<form action="tvinnsaddigitollv2_updateInternalStatus_house.do" name="updateInternalStatusForm${counterExt.count}" id="updateInternalStatusForm${counterExt.count}" method="post">
+										 	<input type="hidden" name="current_id1${counterExt.count}" id="current_id1${counterExt.count}" value="${externalHouseRecord.ehlnrt}">
+											<input type="hidden" name="current_id2${counterExt.count}" id="current_id2${counterExt.count}" value="${externalHouseRecord.ehlnrm}">
+											<input type="hidden" name="current_id3${counterExt.count}" id="current_id3${counterExt.count}" value="${externalHouseRecord.ehlnrh}">
+										 	<input type="hidden" name="current_status${counterExt.count}" id="current_status${counterExt.count}" value="S">
+										 	<p class="text14" >Er du sikker på at du vil kansellere Lnr <b>${externalHouseRecord.ehlnrh}</b> i <b>SYSPED</b> ?</p>
+												
+										</form>
+									</div>
+									--%>
+									<a tabindex=-1 style="display: block; width: 100%; height: 100%;" class="deleteHouseLink" id="deleteLink${counterExt.count}" runat="server" href="#">
+										<img src="resources/images/remove.png" width="16" height="16" border="0" alt="remove">
+									</a> 
+									<div id="dialogDeleteHouse${counterExt.count}" class="clazz_dialog" title="Dialog">
+										<form action="tvinnsaddigitollv2_delete_house.do" name="deleteHouseForm${counterExt.count}" id="deleteHouseForm${counterExt.count}" method="post">
+										 	<input type="hidden" name="current_id1${counterExt.count}" id="current_id1${counterExt.count}" value="${externalHouseRecord.ehlnrt}">
+											<input type="hidden" name="current_id2${counterExt.count}" id="current_id2${counterExt.count}" value="${externalHouseRecord.ehlnrm}">
+											<input type="hidden" name="current_id3${counterExt.count}" id="current_id3${counterExt.count}" value="${externalHouseRecord.ehlnrh}">
+										 	<p class="text14" >Er du sikker på at du vil fjerne House-Lnr <b>${externalHouseRecord.ehlnrh}</b> i <b>SYSPED</b> ?</p>
+										</form>
+									</div>
+								</c:if>
+							</c:if>
+						</td>
+					  </tr>		
+		            	
+		            </c:forEach>
+		            <%-- =============== --%>
+		            <%-- END External houses --%>
+		            <%-- =============== --%>
 		            </tbody>
+		            
+		            
 	            </table>
 	            </td>
 	            </tr>

@@ -1079,8 +1079,15 @@ public class TvinnSadDigitollv2MasterController {
 	 */
 	private void setRecordAspects(SystemaWebUser appUser, SadmomfRecord record) {
 		this.adjustFieldsForFetch(record);
+		
 		//get all houses
 		this.getHouses(appUser, record);
+		
+		//get all external houses (främmande houses ) if applicable ...
+		if(StringUtils.isNotEmpty(record.getEmdkm_ff()) ){
+			this.getExternalHouses(appUser, record);
+		}
+				
 	}
 	
 	/**
@@ -1591,6 +1598,45 @@ public class TvinnSadDigitollv2MasterController {
     	if(jsonPayload!=null){
     		SadmohfContainer jsonContainer = this.sadmohfListService.getListContainer(jsonPayload);
     		record.setListHouses(jsonContainer.getList());
+    		//now check if the master is valid to be deleted or not.
+    		//To be valid for deletion it is required to have all houses deleted as well = without MRN att toll.no
+    		//You are allow to delete a master if and only if all children have been deleted from toll.no previously ... It has to do with the API since we must know which api (air or road)
+    		//we are using...
+    		/*List<SadmohfRecord> listChild = (List)jsonContainer.getList();
+    		if(listChild!=null && !listChild.isEmpty()) {
+    			for(SadmohfRecord child : listChild) {
+	    			if(StringUtils.isNotEmpty(child.getEhmid())) {
+	    				record.setOwn_okToDelete(false);
+	    				break;
+	    			}
+	    		}
+    		}else {
+    			//OK
+    		}*/
+    	}
+    	
+	}
+	/**
+	 * in order to present the external houses, if any ...
+	 * @param appUser
+	 * @param record
+	 */
+	private void getExternalHouses(SystemaWebUser appUser, SadmomfRecord record) {
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_EXTERNAL_HOUSECONSIGNMENT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser() + "&ehdkm_fh=" + record.getEmdkm_ff();
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadmohfContainer jsonContainer = this.sadmohfListService.getListContainer(jsonPayload);
+    		logger.info("ZADMOHF-list:" + jsonContainer.getList().toString());
+    		record.setListExternalHouses(jsonContainer.getList());
     		//now check if the master is valid to be deleted or not.
     		//To be valid for deletion it is required to have all houses deleted as well = without MRN att toll.no
     		//You are allow to delete a master if and only if all children have been deleted from toll.no previously ... It has to do with the API since we must know which api (air or road)

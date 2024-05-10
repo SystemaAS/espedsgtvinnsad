@@ -122,6 +122,10 @@ public class SadmomfRecord extends JsonAbstractGrandFatherRecord   {
 	private Collection<SadmohfRecord> listHouses = null;
 	public void setListHouses(Collection<SadmohfRecord> value){ this.listHouses = value;}
 	public Collection<SadmohfRecord> getListHouses(){ return this.listHouses; }
+	//
+	private Collection<SadmohfRecord> listExternalHouses = null;
+	public void setListExternalHouses(Collection<SadmohfRecord> value){ this.listExternalHouses = value;}
+	public Collection<SadmohfRecord> getListExternalHouses(){ return this.listExternalHouses; }
 	
 	private SadmotfRecord transportDto = null;
 	
