@@ -59,6 +59,7 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
+
 import no.systema.tvinn.sad.digitollv2.service.ApiGenericDtoResponseService;
 import no.systema.tvinn.sad.digitollv2.service.GeneralUpdateService;
 import no.systema.tvinn.sad.digitollv2.service.SadDigitollDropDownListPopulationService;
@@ -784,6 +785,8 @@ public class TvinnSadDigitollv2HouseController {
 		
 	}
 	
+	
+	
 	/**
 	 * Special only for invalidation errors
 	 * @param recordToValidate
@@ -923,6 +926,7 @@ public class TvinnSadDigitollv2HouseController {
 		//get all items
 		this.getItemLines(appUser, record);
 	}
+	
 	/**
 	 * 
 	 * @param applicationUser
@@ -1191,6 +1195,9 @@ public class TvinnSadDigitollv2HouseController {
 			}
 		}
 	}
+	
+	
+	
 	
 	/**
 	 * 

@@ -38,40 +38,97 @@
 				   		</tr>
 						<tr height="5"><td></td></tr> 
 						<tr>
-						<td class="text11">
-									
-						<table id="mainList" class="compact" >
-							<thead>
-							<tr class="tableHeaderField" height="20" >
-								<th width="2%" class="tableHeaderFieldFirst12" >Doc.nr</th>
-		                    	<th width="2%" class="tableHeaderField12" >Type</th>
-		                    	<th width="2%" class="tableHeaderField12" >Received/Status</th>
-		                	</tr>
-		                	</thead>
-		                	<tbody> 
-		                	<c:forEach items="${model.list}" var="record" varStatus="counter">    
-				             <tr class="tableRow" height="20" >
-				          	   <td width="2%" align="center"class="tableCellFirst12" >${record.documentNumber}</td>
-				          	   <td width="2%" align="center" class="tableCell12" >${record.type}</td>
-			               	   <td width="2%" align="center" class="tableCell12" >${record.received}</td>
-				            </tr> 
-				            </c:forEach>
-				            <c:forEach items="${model.listAux}" var="recordHouses" varStatus="counter">    
-				             <tr class="tableRow" height="20" >
-				          	   <td width="2%" align="center"class="tableCellFirst12" >${recordHouses.documentNumber}</td>
-				          	   <td width="2%" align="center" class="tableCell12" >${recordHouses.type}</td>
-			               	   <td width="2%" align="center" class="tableCell12" >${recordHouses.documentStatus}</td>
-				            </tr> 
-				            </c:forEach>
-				            </tbody>
-			            </table>
-			            </td>
+							<td class="text11">	
+							<table id="mainList" class="compact" >
+								<thead>
+								<tr class="tableHeaderField" height="20" >
+									<th width="2%" class="tableHeaderFieldFirst12" >Doc.nr</th>
+			                    	<th width="2%" class="tableHeaderField12" >Type</th>
+			                    	<th width="2%" class="tableHeaderField12" >Received/Status</th>
+			                	</tr>
+			                	</thead>
+			                	<tbody> 
+			                	<c:forEach items="${model.list}" var="record" varStatus="counter">    
+					             <tr class="tableRow" height="20" >
+					          	   <td width="2%" align="center"class="tableCellFirst12" >${record.documentNumber}</td>
+					          	   <td width="2%" align="center" class="tableCell12" >${record.type}</td>
+				               	   <td width="2%" align="center" class="tableCell12" >${record.received}</td>
+					            </tr> 
+					            </c:forEach>
+					            <c:forEach items="${model.listAux}" var="recordHouses" varStatus="counter">    
+					             <tr class="tableRow" height="20" >
+					          	   <td width="2%" align="center"class="tableCellFirst12" >${recordHouses.documentNumber}</td>
+					          	   <td width="2%" align="center" class="tableCell12" >${recordHouses.type}</td>
+				               	   <td width="2%" align="center" class="tableCell12" >${recordHouses.documentStatus}</td>
+					            </tr> 
+					            </c:forEach>
+					            </tbody>
+				            </table>
+				            </td>
+			            </tr>
+			            
+			            <tr height="40"><td>&nbsp;</td></tr>
+			            <tr >
+							<td class="text14  ">
+				    			<font class="inputText isa_success" >
+				    				Doc.refs on Transport MRN: ${model.mrnWithDescendants}&nbsp;<b>with descendants</b>
+				    			</font>
+				    		</td>
+				   		</tr>
+				   		<tr >
+							<td class="text14">
+				    			&nbsp;Masters - Sum vekt:&nbsp;<b>${model.dto.sumOfWeightForMasterConsignments}</b>&nbsp;&nbsp;&nbsp;&nbsp;Houses -  Sum vekt:&nbsp;<b>${model.dto.sumOfWeightForHouseConsignments}</b>	
+				    		</td>
+				   		</tr>
+				   		
+				   		
+						<tr height="5"><td></td></tr> 
+			            <tr>
+				            <td class="text11">
+							<table id="mainListWithDescendants" class="compact" >
+								<thead>
+								<tr class="tableHeaderField" height="20" >
+									<th width="2%" class="tableHeaderFieldFirst12" >Doc.nr</th>
+			                    	<th width="2%" class="tableHeaderField12" >Type</th>
+			                    	<th width="2%" class="tableHeaderField12" >Weight</th>
+			                    	<th width="2%" class="tableHeaderField12" >Received/Status</th>
+			                    	<th width="2%" class="tableHeaderField12" >Sum vekt-houses</th>
+			                	</tr>
+			                	</thead>
+			                	<tbody>
+			                	<c:if test="${not empty model.dto.masterConsignments}">
+				                	<c:forEach items="${model.dto.masterConsignments}" var="record" varStatus="counter">    
+						             <tr class="tableRow" height="20" >
+						          	   <td width="2%" align="center"class="tableCellFirst12" >${record.documentNumber}</td>
+						          	   <td width="2%" align="center" class="tableCell12" >${record.type}</td>
+						          	   <td width="2%" align="center" class="tableCell12" >${record.weight}</td>
+					               	   <td width="2%" align="center" class="tableCell12" >${record.received}</td>
+					               	   <td width="2%" align="center" class="tableCell12" >${record.sumOfWeightForHouseConsignments}</td>
+						            </tr> 
+						            </c:forEach>
+					            </c:if>
+					            
+					            <c:if test="${not empty model.dtoHouseList}">
+						            <c:forEach items="${model.dtoHouseList}" var="record" varStatus="counter">    
+						             <tr class="tableRow" height="20" >
+						          	   <td width="2%" align="center"class="tableCellFirst12" >house-${counter.count}</td>
+						          	   <td width="2%" align="center" class="tableCell12" ></td>
+						          	   <td width="2%" align="center" class="tableCell12" >${record.weight}</td>
+					               	   <td width="2%" align="center" class="tableCell12" >${record.status}</td>
+					               	   <td width="2%" align="center" class="tableCell12" ></td>
+						            </tr> 
+						            </c:forEach>
+					      		</c:if>
+					      		
+					            </tbody>
+				            </table>
+				            </td>
 			            </tr>
 			            </table>
-			            
 					</td>	
 					</tr>
 					<tr height="2"><td></td></tr> 
+	
 	
 				</table>
 				</td>

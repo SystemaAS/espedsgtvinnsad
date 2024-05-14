@@ -68,6 +68,7 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ZadmohfContainer;
 import no.systema.tvinn.sad.digitollv2.service.ApiGenericDtoResponseService;
 import no.systema.tvinn.sad.digitollv2.service.GeneralUpdateService;
 import no.systema.tvinn.sad.digitollv2.service.SadDigitollDropDownListPopulationService;
@@ -76,6 +77,7 @@ import no.systema.tvinn.sad.digitollv2.service.SadmoafListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmohfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
+import no.systema.tvinn.sad.digitollv2.service.ZadmohfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
 import no.systema.tvinn.sad.digitollv2.util.SadDigitollConstants;
 import no.systema.tvinn.sad.digitollv2.validator.MasterValidator;
@@ -1635,7 +1637,7 @@ public class TvinnSadDigitollv2MasterController {
     	logger.debug(jsonPayload);
     	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
     	if(jsonPayload!=null){
-    		SadmohfContainer jsonContainer = this.sadmohfListService.getListContainer(jsonPayload);
+    		ZadmohfContainer jsonContainer = this.zadmohfListService.getListContainer(jsonPayload);
     		logger.info("ZADMOHF-list:" + jsonContainer.getList().toString());
     		record.setListExternalHouses(jsonContainer.getList());
     		//now check if the master is valid to be deleted or not.
@@ -1691,6 +1693,8 @@ public class TvinnSadDigitollv2MasterController {
 	private SadmomfListService sadmomfListService;
 	@Autowired
 	private SadmohfListService sadmohfListService;
+	@Autowired
+	private ZadmohfListService zadmohfListService;
 	@Autowired
 	private SadmoafListService sadmoafListService;
 	

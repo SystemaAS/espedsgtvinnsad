@@ -1354,18 +1354,11 @@
 		            <%-- =============== --%>
 		            <c:forEach items="${model.record.listExternalHouses}" var="externalHouseRecord" varStatus="counterExt">
 		            		              	  
-		            <tr class="tableRow" style="background-color:#5499C7;" height="20" >
+		            <tr class="tableRow" style="background-color:#7ab0d4;" height="20" >
 		          
 		          	   <td width="2%" class="tableCellFirst12" <c:if test="${externalHouseRecord.ehst2 == 'D'}">style="background-color: #FEEFB3;color: #9F6000;" </c:if> align="center">
-		          	   		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_house.do?action=doFind&ehlnrt=${externalHouseRecord.ehlnrt}&ehlnrm=${externalHouseRecord.ehlnrm}&ehlnrh=${externalHouseRecord.ehlnrh}" onClick="setBlockUI();">
-               					<c:choose>
-		               				<c:when test="${externalHouseRecord.ehst2 == 'C' || externalHouseRecord.ehst2 == 'N' || externalHouseRecord.ehst == 'S'}">
-		               					<img title="Read" style="vertical-align:bottom;" src="resources/images/eye.png" height="18px" width="18px" border="0" alt="read">
-		               				</c:when>
-		               				<c:otherwise>
-		               					<img title="Update" style="vertical-align:bottom;" src="resources/images/update.gif" border="0" alt="edit">
-		               				</c:otherwise>
-	               				</c:choose>
+		          	   		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_externalhouse.do?action=doFind&ehdkh=${externalHouseRecord.ehdkh}&ehlnrt=${model.record.emlnrt}&ehlnrm=${model.record.emlnrm}" onClick="setBlockUI();">
+               					<img title="Read" style="vertical-align:bottom;" src="resources/images/eye.png" height="18px" width="18px" border="0" alt="read">		 
                				</a>
                				
 	               	   </td>
