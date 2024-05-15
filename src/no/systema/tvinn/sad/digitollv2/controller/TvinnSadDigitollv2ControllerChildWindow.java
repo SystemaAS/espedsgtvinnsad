@@ -582,7 +582,10 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		
 		
 	}
-	
+	/*=====================
+	 * RAIL
+	 * ====================
+	*/
 	@RequestMapping(value="tvinnsaddigitollv2_childwindow_transportdocs_rec_rail.do",  method={RequestMethod.GET} )
 	public ModelAndView doTransportDocsReceivedRail(HttpSession session, HttpServletRequest request){
 		
@@ -623,12 +626,157 @@ public class TvinnSadDigitollv2ControllerChildWindow {
     				logger.info(e.toString());
     			}
     		}
+    		//============================
+    		//extra list with descendants
+    		//============================
+    		String jsonPayloadDescendants = this.getTransportDescendantsRail(appUser.getUser(), id);
+    		if(StringUtils.isNotEmpty(jsonPayloadDescendants)) {
+    			try {
+    				ApiRefsWithDescendantsContainer dto = new ObjectMapper().readValue(jsonPayloadDescendants, ApiRefsWithDescendantsContainer.class);
+	    			if(dto!=null) {
+	    				logger.info(dto.getObject().getSumOfWeightForMasterConsignments());
+	    				logger.info(dto.getObject().getMasterConsignments().toString());
+	    				for(MasterConsignments rec : dto.getObject().getMasterConsignments()) {
+	    					for(HouseConsignments houses : rec.getHouseConsignments()) {
+	    						logger.info(houses.getStatus());
+	    						model.put("dtoHouseList", rec.getHouseConsignments());
+	    					}
+	    				}
+	    				model.put("mrnWithDescendants", id);
+	    				model.put("dto", dto.getObject());
+	    				
+	    				//model.put("listAuxWithDescendants", container.getListAux());
+	    			}
+    			}catch(Exception e) {
+    				logger.error(e.toString());
+    			}
+    		}
     		successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 		}
 		
 		return successView;
 	}
 	
+	private String getTransportDescendantsRail(String user, String mrn) {
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: getTransportDescendantsRail");
+		
+		
+		StringBuilder url = new StringBuilder();
+		url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
+		url.append("getDocsRecTransportRail_withDescendants.do");
+		
+		String BASE_URL = url.toString();
+		String urlRequestParamsKeys = "user=" + user + "&mrn=" + mrn;
+		logger.info("URL: " + BASE_URL);
+		logger.info("PARAMS: " + urlRequestParamsKeys);
+		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+		//Debug -->
+    	logger.info(jsonPayload);
+    
+		
+		return jsonPayload;
+
+	}
+	/*=====================
+	 * AIR
+	 * ====================
+	*/
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_transportdocs_rec_air.do",  method={RequestMethod.GET} )
+	public ModelAndView doTransportDocsReceivedAir(HttpSession session, HttpServletRequest request){
+		
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doTransportDocsReceivedRail");
+		Map model = new HashMap();
+		String id = request.getParameter("id");
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_transportdocrefs_api");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			StringBuilder url = new StringBuilder();
+			url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
+			url.append("getDocsRecTransportAir.do");
+			
+			String BASE_URL = url.toString();
+    		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&mrn=" + id;
+    		logger.info("URL: " + BASE_URL);
+    		logger.info("PARAMS: " + urlRequestParamsKeys);
+    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+    		//Debug -->
+	    	logger.debug(jsonPayload);
+    		if(StringUtils.isNotEmpty(jsonPayload)) {
+    			try {
+    			ApiMasterRefsContainer container = new ObjectMapper().readValue(jsonPayload, ApiMasterRefsContainer.class);
+    			if(container!=null) {
+    				model.put("mrn", container.getMrn());
+    				model.put("list", container.getList());
+    				model.put("listAux", container.getListAux());
+    			}
+    			}catch(Exception e) {
+    				logger.info(e.toString());
+    			}
+    		}
+    		//============================
+    		//extra list with descendants
+    		//============================
+    		String jsonPayloadDescendants = this.getTransportDescendantsAir(appUser.getUser(), id);
+    		if(StringUtils.isNotEmpty(jsonPayloadDescendants)) {
+    			try {
+    				ApiRefsWithDescendantsContainer dto = new ObjectMapper().readValue(jsonPayloadDescendants, ApiRefsWithDescendantsContainer.class);
+	    			if(dto!=null) {
+	    				logger.info(dto.getObject().getSumOfWeightForMasterConsignments());
+	    				logger.info(dto.getObject().getMasterConsignments().toString());
+	    				for(MasterConsignments rec : dto.getObject().getMasterConsignments()) {
+	    					for(HouseConsignments houses : rec.getHouseConsignments()) {
+	    						logger.info(houses.getStatus());
+	    						model.put("dtoHouseList", rec.getHouseConsignments());
+	    					}
+	    				}
+	    				model.put("mrnWithDescendants", id);
+	    				model.put("dto", dto.getObject());
+	    				
+	    				//model.put("listAuxWithDescendants", container.getListAux());
+	    			}
+    			}catch(Exception e) {
+    				logger.error(e.toString());
+    			}
+    		}
+    		successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+		}
+		
+		return successView;
+	}
+	
+	private String getTransportDescendantsAir(String user, String mrn) {
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: getTransportDescendantsAir");
+		
+		
+		StringBuilder url = new StringBuilder();
+		url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
+		url.append("getDocsRecTransportAir_withDescendants.do");
+		
+		String BASE_URL = url.toString();
+		String urlRequestParamsKeys = "user=" + user + "&mrn=" + mrn;
+		logger.info("URL: " + BASE_URL);
+		logger.info("PARAMS: " + urlRequestParamsKeys);
+		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+		//Debug -->
+    	logger.info(jsonPayload);
+    
+		
+		return jsonPayload;
+
+	}
+
 	/**
 	 * Runs the API method
 	 * http://localhost:8080/syjservicestn-expft/digitollv2/getDocsRecMasterConsignment.do?user=OSCAR&mrn=23NONJB08UP98SOBT7
@@ -772,12 +920,148 @@ public class TvinnSadDigitollv2ControllerChildWindow {
     				logger.info(e.toString());
     			}
     		}
+    		//============================
+    		//extra list with descendants
+    		//============================
+    		String jsonPayloadDescendants = this.getMasterDescendantsRail(appUser.getUser(), id);
+    		if(StringUtils.isNotEmpty(jsonPayloadDescendants)) {
+    			
+    			try {
+    				ApiRefsWithDescendantsLightContainer dto = new ObjectMapper().readValue(jsonPayloadDescendants, ApiRefsWithDescendantsLightContainer.class);
+	    			if(dto!=null) {
+	    				logger.info(dto.getObject().getDocumentNumber());
+	    				
+	    				model.put("mrnWithDescendants", id);
+	    				model.put("dto", dto.getObject());
+	    				
+	    				//model.put("listAuxWithDescendants", container.getListAux());
+	    			}
+    			}catch(Exception e) {
+    				logger.error(e.toString());
+    			}
+    			
+    		}
+    		
     		successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 		}
 		
 		return successView;
 	}
+	private String getMasterDescendantsRail(String user, String mrn) {
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: getMasterDescendants");
+		
+		
+		StringBuilder url = new StringBuilder();
+		url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
+		url.append("getDocsRecMasterConsignmentRail_withDescendants.do");
+		
+		String BASE_URL = url.toString();
+		String urlRequestParamsKeys = "user=" + user + "&mrn=" + mrn;
+		logger.info("URL: " + BASE_URL);
+		logger.info("PARAMS: " + urlRequestParamsKeys);
+		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+		//Debug -->
+    	logger.info(jsonPayload);
+    
+		
+		return jsonPayload;
+		
+		
+		
+	}
 	
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_masterdocs_rec_air.do",  method={RequestMethod.GET} )
+	public ModelAndView doMasterDocsReceivedAir(HttpSession session, HttpServletRequest request){
+		
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doMasterDocsReceivedAir");
+		Map model = new HashMap();
+		String id = request.getParameter("id");
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_masterdocrefs_api");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			StringBuilder url = new StringBuilder();
+			url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
+			url.append("getDocsRecMasterConsignmentAir.do");
+			
+			String BASE_URL = url.toString();
+    		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&mrn=" + id;
+    		logger.info("URL: " + BASE_URL);
+    		logger.info("PARAMS: " + urlRequestParamsKeys);
+    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+    		//Debug -->
+	    	logger.debug(jsonPayload);
+    		if(StringUtils.isNotEmpty(jsonPayload)) {
+    			try {
+    			ApiMasterRefsContainer container = new ObjectMapper().readValue(jsonPayload, ApiMasterRefsContainer.class);
+    			if(container!=null) {
+    				model.put("mrn", container.getMrn());
+    				model.put("list", container.getList());
+    			}
+    			}catch(Exception e) {
+    				logger.info(e.toString());
+    			}
+    		}
+    		//============================
+    		//extra list with descendants
+    		//============================
+    		String jsonPayloadDescendants = this.getMasterDescendantsAir(appUser.getUser(), id);
+    		if(StringUtils.isNotEmpty(jsonPayloadDescendants)) {
+    			
+    			try {
+    				ApiRefsWithDescendantsLightContainer dto = new ObjectMapper().readValue(jsonPayloadDescendants, ApiRefsWithDescendantsLightContainer.class);
+	    			if(dto!=null) {
+	    				logger.info(dto.getObject().getDocumentNumber());
+	    				
+	    				model.put("mrnWithDescendants", id);
+	    				model.put("dto", dto.getObject());
+	    				
+	    				//model.put("listAuxWithDescendants", container.getListAux());
+	    			}
+    			}catch(Exception e) {
+    				logger.error(e.toString());
+    			}
+    			
+    		}
+    		
+    		successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+		}
+		
+		return successView;
+	}
+	private String getMasterDescendantsAir(String user, String mrn) {
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: getMasterDescendants");
+		
+		
+		StringBuilder url = new StringBuilder();
+		url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
+		url.append("getDocsRecMasterConsignmentAir_withDescendants.do");
+		
+		String BASE_URL = url.toString();
+		String urlRequestParamsKeys = "user=" + user + "&mrn=" + mrn;
+		logger.info("URL: " + BASE_URL);
+		logger.info("PARAMS: " + urlRequestParamsKeys);
+		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+		//Debug -->
+    	logger.info(jsonPayload);
+    
+		
+		return jsonPayload;
+		
+		
+		
+	}
 	
 	@RequestMapping(value="tvinnsaddigitollv2_childwindow_housedocs_rec.do",  method={RequestMethod.GET} )
 	public ModelAndView doHouseDocsReceived(HttpSession session, HttpServletRequest request){

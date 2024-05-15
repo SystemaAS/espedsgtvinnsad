@@ -979,6 +979,8 @@
 			 controllerUrl = "tvinnsaddigitollv2_childwindow_masterdocs_rec.do?id=" + id;
 			if(apiType == "rail"){
 				controllerUrl = "tvinnsaddigitollv2_childwindow_masterdocs_rec_rail.do?id=" + id;
+			}else if(apiType == "air"){
+				controllerUrl = "tvinnsaddigitollv2_childwindow_masterdocs_rec_air.do?id=" + id;
 			}
 		  }
 		 

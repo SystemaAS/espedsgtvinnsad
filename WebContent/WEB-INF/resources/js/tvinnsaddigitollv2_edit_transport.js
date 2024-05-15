@@ -986,7 +986,9 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 			 controllerUrl = "tvinnsaddigitollv2_childwindow_transportdocs_rec.do?id=" + id; 
 			 if(apiType == "rail"){
 			 	controllerUrl = "tvinnsaddigitollv2_childwindow_transportdocs_rec_rail.do?id=" + id;
-			 }
+			 }else if(apiType == "air"){
+			 	controllerUrl = "tvinnsaddigitollv2_childwindow_transportdocs_rec_air.do?id=" + id;
+			 } 
 		
 		
 		  }
