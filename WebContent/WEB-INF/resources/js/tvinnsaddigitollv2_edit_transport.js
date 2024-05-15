@@ -1034,7 +1034,9 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 		  var controllerUrl = "tvinnsaddigitollv2_childwindow_movroad_entryinfo.do?mrn=" + id;
 		  if(apiType == "rail"){
 			 controllerUrl = "tvinnsaddigitollv2_childwindow_movrail_entryinfo.do?mrn=" + id;
-		  }
+		  }else if(apiType == "air"){
+			 controllerUrl = "tvinnsaddigitollv2_childwindow_movair_entryinfo.do?mrn=" + id;
+		  } 
 
 		  window.open(controllerUrl, "codeWin", "top=300px,left=700px,height=150px,width=800px,scrollbars=yes,status=no,location=no");	
 			
