@@ -92,11 +92,15 @@ public class TransportListExcelBuilder extends AbstractXlsView {
         header.createCell(11).setCellValue(this.context.getMessage("systema.tvinn.sad.manifest.list.search.label.regDato", new Object[0], request.getLocale()));
         header.getCell(11).setCellStyle(style);
         
-        header.createCell(12).setCellValue(this.context.getMessage("systema.tvinn.sad.manifest.list.search.label.mrn", new Object[0], request.getLocale()));
+        header.createCell(12).setCellValue(this.context.getMessage("systema.tvinn.sad.manifest.list.search.label.typeApi", new Object[0], request.getLocale()));
         header.getCell(12).setCellStyle(style);
         
-        header.createCell(13).setCellValue(this.context.getMessage("systema.tvinn.sad.manifest.list.search.label.statusApi", new Object[0], request.getLocale()));
+        
+        header.createCell(13).setCellValue(this.context.getMessage("systema.tvinn.sad.manifest.list.search.label.mrn", new Object[0], request.getLocale()));
         header.getCell(13).setCellStyle(style);
+        
+        header.createCell(14).setCellValue(this.context.getMessage("systema.tvinn.sad.manifest.list.search.label.statusApi", new Object[0], request.getLocale()));
+        header.getCell(14).setCellStyle(style);
         
         // create data rows
         int rowCount = 1;
@@ -120,7 +124,19 @@ public class TransportListExcelBuilder extends AbstractXlsView {
             aRow.createCell(9).setCellValue(record.getEtnat());
             aRow.createCell(10).setCellValue(record.getEtsjaf());
             aRow.createCell(11).setCellValue(record.getEtdtrStr());
-            aRow.createCell(12).setCellValue(record.getEtmid());
+            //
+            String api = new String("");
+            if(record.getEtktyp()!=null) {
+            	if(record.getEtktyp().startsWith("2")) {
+            		api = "RAIL";
+            	}else if(record.getEtktyp().startsWith("4")) {
+            		api = "AIR";
+            	}else {
+            		api = "ROAD";
+            	}
+            }
+            aRow.createCell(12).setCellValue(api);
+            aRow.createCell(13).setCellValue(record.getEtmid());
             //
             String st2 = new String ();
             if("S".equals(record.getEtst2()) || "N".equals(record.getEtst2()) || "D".equals(record.getEtst2()) || "M".equals(record.getEtst2()) || "C".equals(record.getEtst2()) ) {
@@ -139,7 +155,7 @@ public class TransportListExcelBuilder extends AbstractXlsView {
             }else {
             	st2 = record.getEtst2();
             }
-            aRow.createCell(13).setCellValue(st2);
+            aRow.createCell(14).setCellValue(st2);
             
            
         }
