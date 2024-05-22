@@ -442,10 +442,22 @@
 							 
 							<c:if test="${model.record.emlnrm > 0 && not empty model.record.emmid}">
 								<td width="40px"></td>
-								<td class="text14"><span title="Send til orgnr">Send Dok.nr til - Navn</span>
+								<td class="text14">
+									<img style="cursor:pointer;" onMouseOver="showPop('sendMaster_info');" onMouseOut="hidePop('sendMaster_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+									<span title="Send til orgnr">Send Dok.nr til - Navn</span>
 									<a tabindex="-1" id="sendToPartIdLink">
 										<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
 									</a>
+									<div class="text11" style="position: relative;" align="left">
+				                	<span style="position:absolute;top:2px; width:250px;" id="sendMaster_info" class="popupWithInputText text11"  >
+					           		<b>Send Dok.nr</b>
+					           		<p>Master Dok.nr som du må sende til aktøren som leier "posisjon" i transporten din slik at han kan sende sitt eget "house"</p>
+									</span>	
+									</div>
+									
+									
+									
+									
 								</td>
 								<td class="text14"><span title="Send til orgnr">Orgnr</span></td>
 								<td colspan="3" class="text12"><span id="ajaxErrorTextExtParty" name="ajaxErrorTextExtParty"></span></td>
@@ -678,10 +690,22 @@
 						<td colspan="15" class="text14" valign="top">
 						<table align="left" border="0" cellspacing="0" cellpadding="1">
 							<tr>
-								<td class="text14"><span title="emdkm_ff"><b>&nbsp;Ekstern Dok.nr</b></span>
-									<a tabindex="-1" id="emdkm_ffIdLink">
+								<td class="text14">
+									<img style="cursor:pointer;" onMouseOver="showPop('extMaster_info');" onMouseOut="hidePop('extMaster_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+					            	<span title="emdkm_ff"><b>&nbsp;Ekstern Master Dok.nr</b></span>
+					            	<a tabindex="-1" id="emdkm_ffIdLink">
 										<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 									</a>
+			                		<div class="text11" style="position: relative;" align="left">
+				                	<span style="position:absolute;top:2px; width:250px;" id="extMaster_info" class="popupWithInputText text11"  >
+					           		<b>Ekstern Master Dok.nr</b>
+					           		<p>Eksternt Master Dok.nr som du har mottatt fra transporteier (Ombud/Representant)<br/>
+					           			Disse feltene brukes kun for deg som skal sende ditt eget "house" til toll.no samtidig som du har leid "posisjon" hos transporteier
+					           		</p>
+									</span>	
+									</div>
+									
+									
 								</td>
 								<td class="text14">
 									<input readonly type="text" class="inputTextReadOnly" name="emdkm_ff" id="emdkm_ff" size="35" maxlength="50" value="${model.record.emdkm_ff}">		

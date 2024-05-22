@@ -151,6 +151,7 @@
     	jq('#emdkm_ff').val("");
 		jq('#emdkmt_ff').val("");
 		jq('#emrgt_ff').val("");
+		jq('#emrgr_ff').val("");
 	});
 
   });
@@ -282,7 +283,7 @@
 		//External Doc.nr (MasterId)
 		jq('#emdkm_ffIdLink').click(function() {
 	    	jq('#emdkm_ffIdLink').attr('target','_blank');
-	    	window.open('tvinnsaddigitollv2_childwindow_external_master.do?action=doInit&date=20200101' + '&ctype=emdkm', "masterffWin", "top=300px,left=500px,height=600px,width=1050px,scrollbars=no,status=no,location=no");
+	    	window.open('tvinnsaddigitollv2_childwindow_external_master.do?action=doInit&date=20240101' + '&ctype=emdkm', "masterffWin", "top=300px,left=500px,height=600px,width=1100px,scrollbars=no,status=no,location=no");
 	    });
 	    jq('#emdkm_ffIdLink').keypress(function(e){ //extra feature for the end user
 			if(e.which == 13) {
@@ -294,11 +295,11 @@
 	  
 	  jq('#sendToPartIdLink').click(function() {
 	    	jq('#sendToPartIdLink').attr('target','_blank');
-	    	window.open('tvinnsaddigitollv2_childwindow_external_houses.do?action=doFind&ctype=ownReceiverOrgNr', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+	    	window.open('tvinnsaddigitollv2_childwindow_external_houses.do?action=doFind&ctype=ownReceiverOrgNr', "codeWin", "top=300px,left=500px,height=600px,width=1200px,scrollbars=no,status=no,location=no");
 	   });
 	   jq('#ftplogIdLink').click(function() {
 	    	jq('#ftplogIdLink').attr('target','_blank');
-	    	window.open('tvinnsaddigitollv2_childwindow_external_houses_log.do?action=doFind&emdkm=' + jq('#emdkm').val() + jq('#own_emdkmUnique').val(), "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+	    	window.open('tvinnsaddigitollv2_childwindow_external_houses_log.do?action=doFind&emdkm=' + jq('#emdkm').val() + jq('#own_emdkmUnique').val(), "codeWin", "top=300px,left=500px,height=600px,width=1070px,scrollbars=no,status=no,location=no");
 	   });	
 
 	  //Avsender

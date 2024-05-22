@@ -1364,6 +1364,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		Map model = new HashMap();
 		String callerType = request.getParameter("ctype");
 		String date = request.getParameter("date");
+		String emdkm = request.getParameter("emdkm");
 
 		logger.info("caller:" + callerType);
 		//logger.info("tuavd:" + tuavd);
@@ -1390,6 +1391,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			model.put("mainList", list);
 			model.put("callerType", callerType);
 			model.put("date", date);
+			model.put("emdkm", emdkm);
 			//model.put("tkkode", tullkontorCode);
 			//model.put("tktxtn", tullkontorName);
 			
@@ -2172,7 +2174,10 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		  String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_EXTERNAL_MASTER_URL;
 		  StringBuffer urlRequestParamsKeys = new StringBuffer();
 		  urlRequestParamsKeys.append("user=" + appUser.getUser());
-		  urlRequestParamsKeys.append("&date=" + recordToValidate.getDate()); ;
+		  urlRequestParamsKeys.append("&date=" + recordToValidate.getDate());
+		  if(StringUtils.isNotEmpty(recordToValidate.getEmdkm())) {
+			  urlRequestParamsKeys.append("&emdkm=" + recordToValidate.getEmdkm());
+		  }
 		  /*if(StringUtils.isNotEmpty(recordToValidate.getTupro())) {
 			  urlRequestParamsKeys.append("&wsstur=" + recordToValidate.getTupro());
 		  }

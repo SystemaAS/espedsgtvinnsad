@@ -56,6 +56,8 @@
 		                    <th class="text14" >&nbsp;Orgnr.&nbsp;</th>
 		                    <th class="text14" >&nbsp;Comm&nbsp;</th>
 		                    <th class="text14" >&nbsp;Format&nbsp;</th>
+		                    <th class="text14" >&nbsp;Channel&nbsp;</th>
+		                    <th class="text14" >&nbsp;Info&nbsp;</th>
 		                </tr> 
 		                </thead>
 		                
@@ -69,6 +71,22 @@
 			               	   <td class="text14">&nbsp;${record.orgnr}</td>
 			               	   <td class="text14">&nbsp;${record.commtype}</td>
 			               	   <td class="text14">&nbsp;${record.format}</td>
+			               	   <td class="text14">&nbsp;<c:if test="${not empty record.xmlxsd && record.xmlxsd!='null'}">${record.xmlxsd}</c:if></td>
+			               	   <td class="text14">
+			               	   		<c:if test="${not empty record.ftpserver && record.ftpserver!='null'}">&nbsp;<b>FTP-server&nbsp;</b>${record.ftpserver}</c:if>
+			               	   		<c:if test="${not empty record.ftpdir && record.ftpdir!='null'}">&nbsp;<b>Dir&nbsp;</b>${record.ftpdir}</c:if>
+			               	   		<c:if test="${not empty record.avsorgnr && record.avsorgnr!='null'}">
+				               	   		<img style="cursor:pointer;" onMouseOver="showPop('extra_info${counter.count}');" onMouseOut="hidePop('extra_info${counter.count}');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+						            	<div class="text11" style="position: relative;" align="left">
+					                	<span style="position:absolute;top:2px; width:250px;" id="extra_info${counter.count}" class="popupWithInputText text11"  >
+						           		<b>Avs.Navn og Orgnr</b> - når man sender "house" tilbake til Ombud/Representanten.<br/>
+						           		<p><c:if test="${not empty record.avsname && record.avsname!='null'}">${record.avsname}-</c:if>
+						           			<c:if test="${not empty record.avsorgnr && record.avsorgnr!='null'}">${record.avsorgnr}</c:if>
+						           		</p>
+										</span>	
+										</div>
+									</c:if>
+			               	   </td>
 			               	   
 			            	</tr> 
 			            	

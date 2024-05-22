@@ -18,7 +18,7 @@
 		<tr>
 			<td colspan="3" class="text14Bold">&nbsp;&nbsp;&nbsp;
 			<img title="search" valign="bottom" src="resources/images/search.gif" width="24px" height="24px" border="0" alt="search">
-			Søk kode</td>
+			Søk - Ekstern Dok.nr </td>
 		</tr>
 		<tr>
 		<td valign="top">
@@ -35,9 +35,9 @@
 						<tr>
 							<td class="text14">&nbsp;Date</td>
 							<td class="text14">&nbsp;<input type="text" class="inputText" onKeyPress="return numberKey(event)" name="date" id="date" size="10" maxlength="8" value="${model.date}"></td>
-						
+							
 							<td class="text14">&nbsp;Dok.nr</td>
-							<td class="text14">&nbsp;<input type="text" class="inputText" onKeyPress="return numberKey(event)" name="emdkm" id="emdkm" size="35" maxlength="50" value="${model.emdkm}"></td>
+							<td class="text14">&nbsp;<input type="text" class="inputText" name="emdkm" id="emdkm" size="35" maxlength="50" value="${model.emdkm}"></td>
 						
 	           				<td align="right">&nbsp;<input class="inputFormSubmit" onClick="setBlockUI(this)" type="submit" name="submit" value='<spring:message code="search.label"/>'>
 		           		</tr>
