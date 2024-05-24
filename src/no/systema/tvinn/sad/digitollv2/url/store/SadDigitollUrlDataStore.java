@@ -95,6 +95,8 @@ public final class SadDigitollUrlDataStore {
 		static public String SAD_FETCH_DIGITOLL_EXTERNAL_HOUSES_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOCF.do";
 		//http://10.11.47.61/syjservicestn/syjsSADMOLFF.do?user=OSCAR&orgnr
 		static public String SAD_FETCH_DIGITOLL_EXTERNAL_HOUSES_FTP_LOG_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOLFF.do";
+		//http://10.11.47.61/syjservicestn/syjsSADMOLHFF.do?user=OSCAR&orgnr
+		static public String SAD_FETCH_DIGITOLL_EXTERNAL_HOUSES_BACKTO_OMBUD_FTP_LOG_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOLHFF.do";
 		//Främmande master
 		//http://10.11.47.61/syjservicestn/syjsZADMOMLF.do?user=OSCAR...
 		static public String SAD_FETCH_DIGITOLL_EXTERNAL_MASTER_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsZADMOMLF.do";

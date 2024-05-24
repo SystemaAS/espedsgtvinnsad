@@ -215,7 +215,7 @@
 			</c:if>
 
 			<tr height="5">	
-  			<td  colspan="10" class="text14 formFrame" style="background-color:#7ab0d4;" >
+  			<td  colspan="10" class="text14 formFrame" style="background-color:#B2BEB5;" >
 			<table style="width:100%">
 			<tr >
 				<td class="text14" align="left" >
@@ -296,7 +296,14 @@
 						</span>
 					
 					</c:if>
-					
+					<td class="text14" align="right">
+				   		<table>
+				   			<tr>
+				   				<td class="text14" style="color:yellow;" >EKSTERN HOUSE</td>
+				   			</tr>
+				   		</table>
+			   		</td>
+		   		
 					
 		   		</td>
 	   		</tr>

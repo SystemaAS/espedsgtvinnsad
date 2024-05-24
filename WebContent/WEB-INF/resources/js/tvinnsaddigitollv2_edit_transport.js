@@ -997,28 +997,31 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 	  });
 
 	 jq("#airplaneImg").click(function() {
+		if(jq("#etmid").val()!='') { 
 		  var id = this.id;
 		  jq("#"+id).attr(('target','_blank'));
 		  //default url
 		  var controllerUrl = "tvinnsaddigitollv2_childwindow_routinginfo.do?level=t";
 		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
-			
+		 }	
 	  });	
 	 jq("#railImg").click(function() {
+		if(jq("#etmid").val()!='') { 
 		  var id = this.id;
 		  jq("#"+id).attr(('target','_blank'));
 		  //default url
 		  var controllerUrl = "tvinnsaddigitollv2_childwindow_routinginfo.do?level=t";
 		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
-			
+		}	
 	  });	
 	 jq("#lorryImg").click(function() {
+		if(jq("#etmid").val()!='') { 
 		  var id = this.id;
 		  jq("#"+id).attr(('target','_blank'));
 		  //default url
 		  var controllerUrl = "tvinnsaddigitollv2_childwindow_routinginfo.do?level=t";
 		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
-			
+		}	
 	  });	
 	  jq(".entryLink").click(function() {
 		  var id = this.id;
