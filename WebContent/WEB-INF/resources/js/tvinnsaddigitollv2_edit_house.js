@@ -780,7 +780,7 @@
 		  jq("#"+id).attr(('target','_blank'));
 		  //default url
 		  var controllerUrl = "tvinnsaddigitollv2_childwindow_routinginfo.do?level=h";
-		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
+		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=1200px,scrollbars=yes,status=no,location=no");	
 			
 	  });
 	 jq("#railImg").click(function() {
@@ -788,7 +788,7 @@
 		  jq("#"+id).attr(('target','_blank'));
 		  //default url
 		  var controllerUrl = "tvinnsaddigitollv2_childwindow_routinginfo.do?level=h";
-		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
+		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=1200px,scrollbars=yes,status=no,location=no");	
 			
 	  });	
 	 jq("#lorryImg").click(function() {
@@ -796,7 +796,7 @@
 		  jq("#"+id).attr(('target','_blank'));
 		  //default url
 		  var controllerUrl = "tvinnsaddigitollv2_childwindow_routinginfo.do?level=h";
-		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
+		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=1200px,scrollbars=yes,status=no,location=no");	
 			
 	  });	
 

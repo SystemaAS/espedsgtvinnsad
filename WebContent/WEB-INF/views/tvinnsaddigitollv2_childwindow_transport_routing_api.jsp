@@ -16,9 +16,10 @@
 		  		<%-- this container table is necessary in order to separate the datatables element and the frame above, otherwise
 			 	the cosmetic frame will not follow the whole datatable grid including the search field... --%>
 				<table id="containerdatatableTable" cellspacing="2" align="left" width="100%" >
-				<form name="transportForm" id="transportForm" action="tvinnsaddigitollv2_childwindow_routinginfo.do?level=t" method="post">
+				<form name="transportForm" id="transportForm" action="tvinnsaddigitollv2_childwindow_routinginfo.do" method="post">
 					<tr>
 					<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
+					<input type="hidden" name="level" id="level" value="${model.level}">
 					
 					<td class="text14  ">
 					<font class="inputText isa_warning" >

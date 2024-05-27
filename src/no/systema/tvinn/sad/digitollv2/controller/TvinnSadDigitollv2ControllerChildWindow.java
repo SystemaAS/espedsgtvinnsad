@@ -293,7 +293,21 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	    			ApiGenericDtoResponse obj = new ObjectMapper().readValue(jsonPayload, ApiGenericDtoResponse.class);
 	    			
 	    			if(obj!=null && obj.getErrMsg().isEmpty()) {
+	    				
+	    				model.put("list", obj.getEntryList());
+						for (EntryRoutingDto dto: obj.getEntryList()) {
+							//DEBUG
+							logger.debug("#entrySummaryDeclarationMRN#:" + dto.getEntrySummaryDeclarationMRN());
+							logger.debug("#transportDocumentHouseLevel#");
+							logger.debug("referenceNumber:" + dto.getTransportDocumentHouseLevel().getReferenceNumber());
+							logger.debug("type:" + dto.getTransportDocumentHouseLevel().getType());
+							logger.debug("#routingResult#");
+							logger.debug("id:" + dto.getRoutingResult().getId());
+							logger.debug("routing:" + dto.getRoutingResult().getRouting());
+						}
+						
 	    				//to allow local tests where the payload does not exist
+	    				/*
 						if(obj.getEntryList().isEmpty() && appUser.getUser().equals("OSCAR")) {
 							String FAKE_LIST = "testFakeRouting.json";
 							String jsonTest = textFileReaderService.getFileLinesStringPayload(TdsServletContext.getTdsServletContext().getResourceAsStream(AppConstants.RESOURCE_FILES_PATH + "digitoll/" + FAKE_LIST));
@@ -325,7 +339,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 								logger.debug("id:" + dto.getRoutingResult().getId());
 								logger.debug("routing:" + dto.getRoutingResult().getRouting());
 							}
-						}
+						}*/
 						
 	    			}else {
 	    				logger.info("ErrorMsg:" + obj.getErrMsg());
@@ -335,6 +349,8 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	    			e.toString();
 	    		}
 			}
+			model.put("uuid", uuid);
+			model.put("level", level);
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 			
 	    	return successView;
