@@ -252,12 +252,13 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="tvinnsaddigitollv2_childwindow_routinginfo.do",  method={RequestMethod.GET} )
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_routinginfo.do",  method={RequestMethod.GET, RequestMethod.POST } )
 	public ModelAndView doRoutingInfo(HttpSession session, HttpServletRequest request){
 		this.context = TdsAppContext.getApplicationContext();
 		logger.info("Inside: doRoutingInfo");
 		Map model = new HashMap();
 		String level = request.getParameter("level");
+		String uuid = request.getParameter("uuid");
 		
 		
 		//OLD ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_manifestinfo");
@@ -278,21 +279,20 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 					url.append("getRoutingHouseConsignment.do");
 				}
 				String BASE_URL = url.toString();
-	    		String urlRequestParamsKeys = "user=" + appUser.getUser();
+	    		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&uuid=" + uuid;
 	    		logger.info("URL: " + BASE_URL);
 	    		logger.info("PARAMS: " + urlRequestParamsKeys);
-	    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
 	    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
 	    		
 	    		//Debug -->
 		    	logger.debug(jsonPayload);
-	    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 	    		
 	    		//Old case ... model.put("content", jsonPayload);
 	    		
 	    		try {
 	    			ApiGenericDtoResponse obj = new ObjectMapper().readValue(jsonPayload, ApiGenericDtoResponse.class);
-	    			if(obj!=null) {
+	    			
+	    			if(obj!=null && obj.getErrMsg().isEmpty()) {
 	    				//to allow local tests where the payload does not exist
 						if(obj.getEntryList().isEmpty() && appUser.getUser().equals("OSCAR")) {
 							String FAKE_LIST = "testFakeRouting.json";
@@ -327,6 +327,9 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 							}
 						}
 						
+	    			}else {
+	    				logger.info("ErrorMsg:" + obj.getErrMsg());
+	    				model.put("list", null);
 	    			}
 	    		}catch(Exception e) {
 	    			e.toString();

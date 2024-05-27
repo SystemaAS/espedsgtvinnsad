@@ -16,9 +16,18 @@
 		  		<%-- this container table is necessary in order to separate the datatables element and the frame above, otherwise
 			 	the cosmetic frame will not follow the whole datatable grid including the search field... --%>
 				<table id="containerdatatableTable" cellspacing="2" align="left" width="100%" >
-				<form>
+				<form name="transportForm" id="transportForm" action="tvinnsaddigitollv2_childwindow_routinginfo.do?level=t" method="post">
+					<tr>
 					<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
-					<input type="hidden" name="mrn" id="mrn" value="${TODOmodel.mrn}">
+					
+					<td class="text14  ">
+					<font class="inputText isa_warning" >
+				    	Routing info
+				    </font>	
+				    &nbsp;&nbsp;RoutingId&nbsp;
+					<input type="text" class="inputText" name="uuid" id="uuid" size="39" maxlength="36" value="${model.uuid}">
+					<input class="inputFormSubmit" onClick="setBlockUI(this)" type="submit" name="submit" value='<spring:message code="search.label"/>'>
+					</tr>
 				</form>									           		
 			    <tr>
 				<td>		
@@ -29,13 +38,6 @@
 						<td>
 						<table style="width:100%;" id="containerdatatableTable" cellspacing="2" align="left" >
 						
-						<tr >
-							<td class="text14  ">
-				    			<font class="inputText isa_warning" >
-				    				Routing info
-				    			</font>
-				    		</td>
-				   		</tr>
 						<tr height="5"><td></td></tr> 
 						<tr>
 							<td class="text11">	
