@@ -37,7 +37,9 @@ import no.systema.main.validator.LoginValidator;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.DateTimeManager;
 import no.systema.main.util.JsonDebugger;
+import no.systema.main.util.io.TextFileReaderService;
 import no.systema.main.context.TdsAppContext;
+import no.systema.main.context.TdsServletContext;
 import no.systema.main.model.SystemaWebUser;
 
 //tvinn
@@ -53,6 +55,7 @@ import no.systema.tvinn.sad.model.jsonjackson.customer.JsonTvinnSadCustomerConta
 import no.systema.tvinn.sad.model.jsonjackson.customer.JsonTvinnSadCustomerRecord;
 import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorContainer;
 import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorRecord;
+import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
 import no.systema.tvinn.sad.digitollv2.model.api.entrymovementroad.EntryMovRoadDto;
 import no.systema.tvinn.sad.digitollv2.model.api.routing.EntryRoutingDto;
@@ -119,6 +122,8 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	private DateValidator dateValidator = new DateValidator();
 	private DateTimeManager dateMgr = new DateTimeManager();
 	private Integer sadiSearchNrOfDaysBackwards = -10;
+	//
+	private TextFileReaderService textFileReaderService = new TextFileReaderService();
 	
 	@PostConstruct
 	public void initIt() throws Exception {
@@ -255,7 +260,8 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		String level = request.getParameter("level");
 		
 		
-		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_manifestinfo");
+		//OLD ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_manifestinfo");
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_transport_routing_api");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		//check user (should be in session already)
 		if(appUser==null){
@@ -277,25 +283,48 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	    		logger.info("PARAMS: " + urlRequestParamsKeys);
 	    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
 	    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+	    		
 	    		//Debug -->
 		    	logger.debug(jsonPayload);
 	    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 	    		
-	    		model.put("content", jsonPayload);
+	    		//Old case ... model.put("content", jsonPayload);
 	    		
 	    		try {
 	    			ApiGenericDtoResponse obj = new ObjectMapper().readValue(jsonPayload, ApiGenericDtoResponse.class);
 	    			if(obj!=null) {
-						
-						for (EntryRoutingDto dto: obj.getEntryList()) {
-							//DEBUG
-							logger.debug("#entrySummaryDeclarationMRN#:" + dto.getEntrySummaryDeclarationMRN());
-							logger.debug("#transportDocumentHouseLevel#");
-							logger.debug("referenceNumber:" + dto.getTransportDocumentHouseLevel().getReferenceNumber());
-							logger.debug("type:" + dto.getTransportDocumentHouseLevel().getType());
-							logger.debug("#routingResult#");
-							logger.debug("id:" + dto.getRoutingResult().getId());
-							logger.debug("routing:" + dto.getRoutingResult().getRouting());
+	    				//to allow local tests where the payload does not exist
+						if(obj.getEntryList().isEmpty() && appUser.getUser().equals("OSCAR")) {
+							String FAKE_LIST = "testFakeRouting.json";
+							String jsonTest = textFileReaderService.getFileLinesStringPayload(TdsServletContext.getTdsServletContext().getResourceAsStream(AppConstants.RESOURCE_FILES_PATH + "digitoll/" + FAKE_LIST));
+							obj = new ObjectMapper().readValue(jsonTest, ApiGenericDtoResponse.class); 
+							logger.debug(obj.getEntryList().toString());
+							
+							model.put("list", obj.getEntryList());
+							for (EntryRoutingDto dto: obj.getEntryList()) {
+								//DEBUG
+								logger.debug("#entrySummaryDeclarationMRN#:" + dto.getEntrySummaryDeclarationMRN());
+								logger.debug("#transportDocumentHouseLevel#");
+								logger.debug("referenceNumber:" + dto.getTransportDocumentHouseLevel().getReferenceNumber());
+								logger.debug("type:" + dto.getTransportDocumentHouseLevel().getType());
+								logger.debug("#routingResult#");
+								logger.debug("id:" + dto.getRoutingResult().getId());
+								logger.debug("routing:" + dto.getRoutingResult().getRouting());
+							}
+							
+						}else {
+							
+							model.put("list", obj.getEntryList());
+							for (EntryRoutingDto dto: obj.getEntryList()) {
+								//DEBUG
+								logger.debug("#entrySummaryDeclarationMRN#:" + dto.getEntrySummaryDeclarationMRN());
+								logger.debug("#transportDocumentHouseLevel#");
+								logger.debug("referenceNumber:" + dto.getTransportDocumentHouseLevel().getReferenceNumber());
+								logger.debug("type:" + dto.getTransportDocumentHouseLevel().getType());
+								logger.debug("#routingResult#");
+								logger.debug("id:" + dto.getRoutingResult().getId());
+								logger.debug("routing:" + dto.getRoutingResult().getRouting());
+							}
 						}
 						
 	    			}

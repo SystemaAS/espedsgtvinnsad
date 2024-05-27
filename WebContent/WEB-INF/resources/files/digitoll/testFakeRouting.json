@@ -1,0 +1,3168 @@
+{
+    "user": "HEIANN",
+    "avd": null,
+    "pro": null,
+    "tdn": "",
+    "lrn": "",
+    "mrn": "",
+    "statusApi": "",
+    "requestMethodApi": "GET",
+    "requestId": "",
+    "db_st": "",
+    "db_st2": "",
+    "db_st3": "",
+    "timestamp": "",
+    "errMsg": "",
+    "etlnrt": "",
+    "emlnrt": "",
+    "emlnrm": "",
+    "ehlnrt": "",
+    "ehlnrm": "",
+    "ehlnrh": "",
+    "ellnrt": 0,
+    "ellnrm": 0,
+    "ellnrh": 0,
+    "documentIssueDate": "0",
+    "list": [],
+    "entryMovementRoad": {
+        "validEntry": null,
+        "customsOfficeOfEntry": null,
+        "timeOfEntry": null,
+        "mrn": null
+    },
+    "entryList": [
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-11-17T13:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "YF19385",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "6d35b663-8a8a-4b81-8f3b-de87c5a4e46c",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-11-20T12:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD81475",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "41d0dc96-3c52-4903-8f0d-f24344e3d810",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-11-20T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90514",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "7250e46f-2aac-4457-8c1c-f306b2c10216",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-11-22T16:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92182",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "8a11b429-0a67-478e-979a-9895ed6a59a7",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-11-24T14:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90486",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "39ba77cd-669a-415e-9c13-5ee8b928ab50",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-11-24T14:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD81475",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "d9438574-7afc-437d-a9e9-7d4e41a6c9ad",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-11-27T12:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD84241",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "69ebffe1-57a0-47af-9e8d-c5a9a04b4726",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-11-27T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "42BLX6",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "9dbc392b-d211-4fe4-8de1-cfe347e0a73f",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-11-29T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90591",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "19f76336-267f-4a21-90d3-1d5de70fe4b8",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-11-29T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90591",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "1c7124a3-41c8-40fe-8371-9399d73980cf",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-11-30T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD61687",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "8d28f43a-5afd-4b54-b25e-04b824f2cf0f",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-11-30T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD61687",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "67a9649e-b9a8-4b59-9d59-796837d26d9d",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-11-30T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD91005",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "ca88a9a4-7bab-447e-bf9a-d7dc4cd47c2d",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-11-30T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD91005",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "85628ae9-4077-4b49-9801-8d7c730fae52",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-11-30T10:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD85521",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "05079599-1768-4c17-bd46-21ff3886b1e3",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-01T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92182",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "2a7de51f-a038-418b-955f-6618fd134f37",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-04T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90593",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "66fac2e7-a004-492a-a59e-c77736940fbc",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-04T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90593",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "b04990a9-ca6e-41a3-a96b-e6516a2674dd",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-04T14:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "AE76976",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "d2bf60f9-bdfc-4e47-a0f0-d0730b1a13b5",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-04T14:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92243",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "6695a45c-29ed-4887-92e9-132ecc3868a7",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-04T14:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "AE76976",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "5a9df336-41ed-4d71-a726-11de494031da",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-04T14:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92243",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "0ed732a6-5586-441a-a3fd-38bf0d824188",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-04T14:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92243",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "c46f73e4-9f72-4e83-8e33-c76b91e0e36e",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-04T14:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92243",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "adaf1c37-a7dc-4d83-b47d-cddfc470a373",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-04T16:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "CE25RFS",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "39e9d65d-926c-4643-9fbd-e0a898676ae7",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-07T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90739",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "bcb8ccfa-05f8-4b4b-8ac5-aad27d24c5fe",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-07T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90739",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "ff0c59b0-2112-47c0-922e-627bccefa3e9",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-08T13:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "ZD26239",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "345f63b7-551b-4031-9731-2bdfe6b13d33",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-08T13:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "ZD26239",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "3ac29942-05c8-463c-a79a-582f8d40cad1",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-10T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD88409",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "2230e4a8-77c7-4cb9-8d11-d9fcbeef5a8e",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-11T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90593",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "5b878ea5-5c0a-44d4-bb5a-9ba19756a652",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-11T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90593",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "8e578518-70e0-4d15-a540-f6048720842c",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-11T18:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92181",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "f37d495f-9e56-48eb-9dc6-b9cc7278edf9",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-12T15:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "CE25RFS",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "b3948bd0-9422-489f-a825-f9df19275ede",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-13T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90514",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "218e374b-548e-45f0-8477-b6b634205f92",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-15T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "CESV892",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "55f99d3e-de9c-4abe-b4b9-e848933e94a6",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-15T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "CE79LUG",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "3bf02ea5-621d-4ba6-af54-3eea69907a67",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-18T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90417",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "a36faa1c-c1c0-479f-a261-ff116873c964",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-18T13:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD84237",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "3a313796-9a3c-4ff7-a5bc-3949f0d335f2",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-18T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "YF19385",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "ed3cf451-9b1e-4890-932f-bf4cd556e4e1",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-18T16:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "CE25RFS",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "f77b64ac-f045-4520-983a-6756e2fe1901",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-20T12:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "CE25RFS",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "9ea66b05-1d18-4970-98cb-dde24c5ee013",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-21T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD88409",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "338e6b5c-69fb-43d1-b3a0-a8beeb6bf9a0",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-21T11:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90739",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "54f9db9d-9067-499d-84a8-3527a1b8a66c",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-21T11:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90739",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "0421ac93-bf71-4f6c-98dd-470627c68971",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-22T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD84864",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "753b144a-afca-473e-92f5-5a97105f33ca",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-22T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92094",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "c6016d76-0b61-45ea-b124-764f226667dd",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-22T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "CE79LUG",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "d67179ac-deae-4e93-8e54-4e73ea751c02",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-23T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD71725",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "e0b4687e-5f17-4655-9ef3-a3a305dc1297",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2023-12-27T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92697",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "553b792c-8293-4aaf-b90d-f47533be3f10",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-02T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92093",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "51fc0ef2-3aac-4b0a-af70-5175623bed48",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-03T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90593",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "95805f56-82aa-47c7-be3e-31d7ffe15b4f",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-03T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90592",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "fbcf156b-4559-436f-a9d2-6b6ca1fa7bc0",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-04T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "GCL209",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "4ade840c-7a0e-4cd3-a452-d92c1021f40b",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-07T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD88409",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "f14eadb3-2357-4cc6-9173-b9dc5075a307",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-08T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92365",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "46606613-421b-41fb-b1c9-12709f1b3000",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-11T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90592",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "b6cc0c73-486b-4056-b696-fb4a17fb0cb0",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-11T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD91005",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "d164c6a8-2c31-41ad-b222-86bda0172e97",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-13T20:15:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD88409",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "1dd99a80-cefd-475c-8908-c9164fb77204",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-13T20:15:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD88409",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "8d7819fc-e19f-4f4d-9abf-01701bc56146",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-15T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "GCL201",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "8fca1603-8825-4778-9ab1-c8c090cf50b1",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-13T20:15:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD88409",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "d9e0657c-4efd-489a-830f-89fac0740239",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-13T20:15:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD88409",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "6a66425a-7016-48e0-9e8b-bd2ba8ef12e3",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-15T13:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92242",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "e904427b-b887-463b-8aee-acd7937348fe",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-16T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "AA76967",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "092f96a0-c5a1-4db8-8285-51b09fd3459e",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-16T17:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "HZ34222",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "e8f7f49f-2c96-4a17-be40-98ebb54eaf4a",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-16T17:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "HZ34222",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "3fb43d62-6b80-4a81-827e-3d89dd632504",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-16T17:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "HZ34222",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "3710e4b8-08ae-44d4-8aa8-e7a3f483bb21",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-16T17:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "ZZ29981",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "8044c751-5bfd-4d34-b615-456798f2105f",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-17T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD76354",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "4164b587-7182-4f81-af70-8777cb7ce5f5",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-22T17:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "CE25RFS",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "7edf0144-0bb4-48f9-8b67-b27947a733a3",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-23T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92530",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "ac5d5e27-9afb-4bda-9192-34ccc838b054",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-23T17:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD81475",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "a10c5f73-8f8b-40c8-8933-a8aeb1f90054",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-24T13:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92293",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "40daa5aa-512d-4b3a-80c2-26cd4c6d652d",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-25T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD91005",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "d800476e-4861-4b83-a9e1-fcba0105f36e",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-26T09:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD86662",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "abdd721e-f71c-4ddc-8684-b40a69c1edb5",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-26T09:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD86662",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "9571a843-9082-40ca-b9cc-dd8daebf89b8",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-29T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD88409",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "29d268fc-097d-4b66-a3ae-6dff139e1580",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-29T12:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92293",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "1d927e12-c125-4f9e-bde2-ba2304273e22",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-29T13:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92182",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "32a1a535-2e40-40e5-a22e-0722c312bb25",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-29T17:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92244",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "287eb842-761a-40b9-894f-f5ca9ce2c042",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-30T14:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "LRN",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "6166c84d-5c19-417a-bb36-575f88e7d40c",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-30T18:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD84237",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "67cdd297-0ade-4e14-b438-7a5014e99b55",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-31T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD76354",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "2641dd5a-f5a6-4c52-9381-14bc3c89c2b9",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-31T14:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD86662",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "03edd7c7-04b2-4630-87ae-50a9c7a534c9",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-31T16:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92244",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "679957ed-1d63-4517-b844-0b1f2e675e37",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-31T16:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92182",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "8b66d764-f10f-41d5-a15a-0a9b898f51f5",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-01-31T17:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "ZZ29981",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "2ff5e254-bcbc-45ad-99c6-f2d2adb698d4",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-01T20:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD74585",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "266dd00d-3780-4834-8140-552b5489ad93",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-02T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "US16983",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "988107a2-5407-4af0-9330-4282d4020a37",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-02T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "US16983",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "e279d8fd-b9a6-40eb-b284-61501a976982",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-02T17:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92182",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "7547f7de-577a-46e2-a481-750b2e2fd2cc",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-06T12:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92182",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "7e11b661-751f-4ddf-aebf-ef360ea08c01",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-06T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90514",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "7f323291-a870-4f6c-8e14-e2ec848b0cbb",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-07T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90591",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "8742cea0-068f-40f8-a231-4e7eb3efbfb9",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-07T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "CESV892",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "5cf85b8c-6c0e-415c-b22d-6fb2fd9b34d9",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-07T17:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92240",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "d439af56-5d6e-4b2e-8765-ef22850a77e8",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-08T11:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD91005",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "75ddcbc0-b705-4f2b-8f69-2c088881d482",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-08T11:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD76354",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "27ee8322-abe4-403a-bf50-56b6fe556815",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-09T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "GCL209",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "df387ed1-5b62-4b9d-b32b-f1d4c9504528",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-12T13:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD93038",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "d01bcc0e-f516-4f99-8c62-3b9d899c2de5",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-12T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90514",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "e20510b7-3df4-4726-a82e-575f7324f8ee",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-13T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92365",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "e4f1aadc-6f89-4101-9a42-b0990b684db1",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-14T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD86662",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "9c4caf98-4bd9-4cb4-af1e-b3d0579bcf7b",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-15T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD91005",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "8cf4d012-d69a-4887-ac95-d9f772fb69db",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-15T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "GCL209",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "8bbe1422-7152-4c50-a859-d5254af6bd66",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-15T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD76354",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "65a5454a-80b2-4381-8808-2b759e5e4c02",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-15T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92093",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "2758b092-c7fe-4666-b1ee-966c980a9976",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-16T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD88977",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "356de48f-e8f6-4ae0-aed8-5f48d4863313",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-16T10:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92293",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "3aabd360-cc95-4cf5-829e-c3a8939ccbac",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-16T14:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD84237",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "ad37bcc1-9ff9-4c79-a80a-22413646ade9",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-16T14:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD84237",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "d2c534fd-a053-4357-af7f-a6f08f3e97da",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-19T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90593",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "46151031-7b52-4ef2-a286-0e5839b72dd8",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-19T16:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92242",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "7eecfc66-02ad-4cac-b0fc-39179c44cc2e",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-20T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD86662",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "aa7e47f2-0f2b-48f6-b18b-e8dd5dd9ff8b",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-22T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "AN-SP351",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "475eedc3-1a50-44d6-830a-13da01479884",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-22T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD91005",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "415087d7-fbec-40c9-b0fb-5482e7bf06ec",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-25T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD88409",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "d8ca00d9-f733-4991-bc70-a0fdb106ba6f",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-26T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90416",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "0a5b6cf0-138c-4279-acbf-b68749a19e06",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-26T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "GCL201",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "4f74ecda-a369-4d23-a689-7fd55a53a9ec",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-26T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92093",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "b98ac6bf-6aa8-4ca3-a4e3-cb3c118ead19",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-28T13:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92244",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "5ed6adc5-4ea6-415c-ab2e-2086f88fe98b",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-28T13:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92180",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "a26a12e0-1bf3-45f2-82ea-478ac5a10f8c",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-28T13:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92180",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "7aa72636-fc63-475a-b1c0-acab4d33dc29",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-28T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD81475",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "05f27a24-39c4-4e37-9515-2428f8968db2",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-29T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD76354",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "8551be3b-8777-4d75-a3e9-f4589cee677f",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-02-29T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "ANSP351",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "d96a0f11-763e-4838-a4f3-0f6d4bb32883",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-04T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90593",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "dadd9193-d20a-4b57-87b6-88e6a7904e65",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-04T13:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "CE25RFS",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "7c877510-bad9-4cd6-b754-8b2506699882",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-05T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92530",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "a535d1dc-94bb-4813-a174-2fda8ee7f7e3",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-06T16:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD86662",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "c32ca103-5cea-4c6d-8021-0e88cd098e73",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-08T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD91005",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "8d6ae942-76fc-44a2-87ed-1a2d310c3393",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-08T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90514",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "64f68cc0-e668-4074-978f-da5de000bd73",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-10T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD76354",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "a71f82bd-d08d-4247-ae48-fc5d2c87890e",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-10T19:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92180",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "dd832590-53fe-484e-ae7a-5dd9ad14d23a",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-11T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90593",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "e8ea7fb1-4a40-4e07-bfe0-c0a01dc83034",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-11T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90591",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "933c0545-00ec-4737-a16b-b5c3c4fc9e58",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-11T11:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD85520",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "90ec688f-66a6-4ca0-9b78-6f4bd21a7164",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-11T14:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD84237",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "2a47af08-c264-4ad3-a59d-4c0478dface6",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-11T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90514",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "c831094b-05b6-4d3d-9a52-837114bb35f6",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-12T09:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "CE25RFS",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "bf63518b-3d95-413f-97b3-09437c3b3710",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-12T18:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD84237",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "de497f5c-7e2e-42b0-97dc-b7f141481e3f",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-13T13:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD85520",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "5459cde1-a540-4289-a00c-604f39a37a4e",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-13T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90514",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "c537ab34-5ecb-4a68-8348-fccd03765adf",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-14T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92365",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "0929057c-c38c-44db-9bce-05a0c09ccc45",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-14T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90416",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "35eaec5d-9b35-4432-bb16-520fbe6dd1db",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-14T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD91005",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "a8af4f51-cf0b-4013-9f01-53da27d9d7a4",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-16T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "CE95DUG",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "20794e18-acdd-4fa0-972a-1e9a14f06739",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-18T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD76354",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "d221ec79-be44-4fd1-9253-812379bb5f31",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-18T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90593",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "dd258a4a-b2d5-404a-ae3a-94f5e547cc4d",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-18T12:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD84889",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "987f239f-8abd-4ea6-b9ab-82f2eb80294e",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-18T13:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD85520",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "3a9fcdd5-18dd-439a-a34f-559be474f5ef",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-19T14:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "TF33117",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "04e238f3-d6e7-49c3-948f-37c1fe651328",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-21T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "GCL209",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "46ebe790-5072-4883-848c-118eef48ea03",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-22T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "42BLX6",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "2fb39100-8b0c-4ac7-b2a4-e281edbf2d82",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-22T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "CE79LUG",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "3a2e0a4f-b08c-4287-bbad-8edac2eec2a6",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-22T14:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "HK11244",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "e34fc118-9e97-4d59-b81f-74ffe6b8ce75",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-24T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD76354",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "1ca84969-e1ea-457b-9996-ab0d37287061",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-24T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD88409",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "36a86c02-9e28-41f0-800f-9b53c4700ba5",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-25T09:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92093",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "53c6805d-171e-45ab-94a1-d7ef30f81e94",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-26T16:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90514",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "8afbfbda-5c66-47ea-9bcb-74570eaee749",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-27T12:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD81475",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "86eb2f32-4d45-45bc-8ac9-461df83b1e70",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-03-28T13:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "CV70830",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "ab994c58-e3fa-4d22-8a51-6ca3b54527e2",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-01T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "GCL201",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "b4a76507-661d-410a-ba6f-74e3bdf75772",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-02T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90593",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "e8d09a7d-3c9b-42fe-959f-dab226787e99",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-03T14:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD93038",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "ea43c7a3-31cb-4c7c-b70d-f0c17abf7069",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-03T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92244",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "95c260fb-1753-4e73-850d-ae77dc3ba4f6",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-04T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD76354",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "6af8c76c-c1b3-452b-9594-5eef81fe0109",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-04T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90592",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "077e300c-e440-4732-81f2-60b9e855f5eb",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-04T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD91005",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "e5bae93a-fd8f-4691-b14a-74137db47b98",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-08T15:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92186",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "c19bb3d2-21de-455e-9229-85a3e0a7f517",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-09T14:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92530",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "5a4236a2-7e2a-41ac-9b41-b01fdb2f30eb",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-10T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90417",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "78139c35-10ff-40e1-ab47-8b97ecd2e4fa",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-10T17:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92244",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "28157e27-797a-4c70-8b45-a2e4ed539043",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-10T17:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92244",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "28157e27-797a-4c70-8b45-a2e4ed539043",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-10T17:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92244",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "6cc7b73f-a80f-4182-b4e1-f3f9898c2c62",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-10T17:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92244",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "6cc7b73f-a80f-4182-b4e1-f3f9898c2c62",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-10T17:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92244",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "a8fb1bf3-050c-4949-9681-cfd99a1c3d32",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-10T17:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92244",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "a8fb1bf3-050c-4949-9681-cfd99a1c3d32",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-11T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90739",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "a249e7fa-8cca-471c-b02a-0100908700b0",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-11T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD91005",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "bdb95791-b505-40e9-91ab-43e9e2d8f152",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-11T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90592",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "4e1bb922-2fea-461f-954d-70befcd7cf4c",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-11T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD76354",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "2b9ec267-6988-4b24-9ac3-f91178b41ce0",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-11T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92093",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "984ce517-8eba-4206-86d1-40c9f91d0729",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-11T14:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92530",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "d1accf31-a5d7-406c-b090-797d459b3084",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-12T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92240",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "a0d77a29-99b3-4765-bf38-5065b843f7ce",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-15T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "CE79LUG",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "c6104489-1747-4895-b27f-d67031048970",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-15T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "ANSP351",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "7bb53177-c129-4de3-9254-4a584eaf4532",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-15T14:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90514",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "a3a81f02-75ab-402c-b816-e930a35b88f7",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-15T16:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92181",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "81093bf3-1cce-4936-b566-36f3157272b6",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-15T16:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92181",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "a793ab8f-c53e-46a1-8faf-67c80df43753",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-16T16:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "HZ34222",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "b0715c79-5ed5-462d-b9a7-e495ae7871ff",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-17T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD76354",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "2caaed9e-408d-4a82-af3a-cd03534747bb",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-17T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90514",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "0e1790f2-f6c2-4af3-94fa-895463e615a4",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-17T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90514",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "fa17b254-80b8-4d7a-9692-e2b30dbca4d6",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-21T15:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92243",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "62cffe39-0853-4740-85c8-2c2d5d1332d6",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-22T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92697",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "04dd5bd6-c281-49d4-986c-f9c0873a1bce",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-22T14:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90514",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "1709b9b9-aa80-46ad-9af5-fa3d4bc9c6a5",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-23T14:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD84237",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "feadde7e-f0f6-4f8c-8239-287e0cdbc425",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-24T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD86463",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "e3ab3702-b06c-4ff3-bca2-d1baf2967d8d",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-24T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "GCL201",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "7b40776b-94bf-4d5e-8b84-8ffd0c4fc6f2",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-24T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD91005",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "ed5b868b-31e2-4ae9-9aae-49ce2d1d3a19",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-24T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "GCL209",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "ca9067d9-bba7-431c-b1a6-bebbe54b96f7",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-24T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "GCL209",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "ca9067d9-bba7-431c-b1a6-bebbe54b96f7",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-24T14:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "HK11244",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "7ef7ee03-d9a1-493f-9abb-bde829d06943",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-24T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92180",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "94e1c5c6-af7a-445e-ae94-2c30c7957277",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-24T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92180",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "66a54a22-75cd-46bb-9776-9d8838368450",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-25T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90593",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "42bece0d-5497-40ef-a469-16b2dea98eda",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-25T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD76354",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "84751d23-288e-4987-9066-b078189bc2fb",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-26T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "42BLX6",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "6adda4e0-d33e-474b-96f1-4b91d24b27d5",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-26T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90739",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "4cfe405e-3a4d-443b-a25e-4be991c5c550",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-26T14:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "HK11244",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "c40dea6b-2e53-4e3a-91ae-e10b059cd6cd",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-28T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "ZZ29981",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "19e8a207-b282-4514-b9ad-d8db2d8a7cc5",
+                "routing": "TO_CONTROL"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-28T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "ZZ29981",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "22e985fa-b5cf-416e-8a41-b1aaa505c451",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-28T18:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92242",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "5a709e76-af82-426a-ac86-aa44a4a8c875",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-29T14:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92243",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "2c459fe8-7176-46d5-ac54-e195517b6746",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-29T14:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "CE25RFS",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "64f68d76-0fcd-4fb6-bb75-52a6ba05833b",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-29T14:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90514",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "8509c5d7-2843-4951-b966-6a239beb15ad",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-04-30T06:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "ZD26239",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "069570c0-d837-4890-a6a6-c1feda99c987",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-05-06T13:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92186",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "7ea454d9-021b-4c29-a408-87090ad6ce17",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-05-06T13:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "CE25RFS",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "1005ea82-5412-49db-adad-b0daffaaa369",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-05-06T12:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "UA40112",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "d1a4570e-8f0c-4b11-97ad-a19ebd8e7919",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-05-06T16:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD93020",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "7710ecb8-2440-44b7-9428-782c533582ab",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-05-06T16:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "LJ76641",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "8348203f-3b8f-4007-aba5-f8ee84918584",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-05-08T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92365",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "9b1b8c33-d5ae-4ed0-bb04-5581c00dc470",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-05-09T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "GCL201",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "7ab658fd-8ded-4e4d-8446-6af36e06f5c4",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-05-10T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "42BLX6",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "06fad598-0a9c-4ab2-b331-2ec774f0bbc7",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-05-12T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "CESV892",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "f52c0755-afc4-40a2-a36a-1d351156a6bf",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-05-14T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "GCL209",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "66ce1ece-92c5-4bc1-a9ed-1c3a04e2a5d1",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-05-14T13:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD81475",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "ea3e3623-af42-4956-9dc4-a9efcbc1a185",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-05-15T13:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92243",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "811a0fc3-26a8-4af2-ab45-9cc801c9fb99",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-05-15T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92530",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "1d07e723-5a90-4816-aff5-fed294b0c522",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-05-15T16:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90514",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "e0d7a294-f5f3-4aa0-8465-5699de08a140",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-05-16T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90486",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "2d31d026-1000-48ea-ac98-3260aff9c50a",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-05-16T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "GCL201",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "03bea04a-6d9e-4392-a44f-58afea210510",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-05-22T14:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD90514",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "4487d77a-a033-4278-a46f-a3d15c31b375",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-05-22T15:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD92186",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "576176c3-6368-4d57-b15f-37a1efb29327",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-05-23T11:30:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "HK11244",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "c9142af2-1bee-4ae9-b9d2-babae419d60e",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-05-23T14:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "VJ24007",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "30459689-f830-4c43-b4a5-95f71e1c5062",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-05-24T08:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD91005",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "b26181df-6b4a-4773-905a-1454a5b29dea",
+                "routing": "TO_ENTRY"
+            }
+        },
+        {
+            "entrySummaryDeclarationMRN": null,
+            "estimatedTimeOfArrival": "2024-05-24T13:00:00Z",
+            "transportDocumentHouseLevel": null,
+            "activeBorderTransportMeans": {
+                "identificationNumber": "JD93020",
+                "typeOfIdentification": "30"
+            },
+            "routingResult": {
+                "id": "9eb1b22f-6c87-4e73-8844-ffe497daa747",
+                "routing": "TO_ENTRY"
+            }
+        }
+    ]
+}
