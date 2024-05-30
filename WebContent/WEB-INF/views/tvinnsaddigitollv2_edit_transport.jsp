@@ -309,7 +309,7 @@
 				   		<table>
 				   			<tr>
 				   				<td class="text14" ><a title="lese entry" tabindex=-1 id="${model.record.etmid}" class="entryLink" style="color:gray;" href="#">ENTRY</a></td>
-				   				<td class="text12" ><a title="post ENS" tabindex=-1 id="${model.record.etmid}" class="ics2Link" style="color:gray;" href="#">ICS2-ENS</a></td>
+				   				<td class="text10" ><a title="ICS2 - presentation ENS - EntrySummaryDeclaration" tabindex=-1 id="${model.record.etmid}" class="ics2Link" style="color:orange;" href="#">ICS2</a></td>
 				   			</tr>
 				   		</table>
 			   		</td>

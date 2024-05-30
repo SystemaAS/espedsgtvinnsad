@@ -362,50 +362,57 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="tvinnsaddigitollv2_childwindow_ics2_presentation_ensinfo.do",  method={RequestMethod.GET} )
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_ics2_presentation_ensinfo.do",  method={RequestMethod.GET, RequestMethod.POST} )
 	public ModelAndView doPresentationIcs2EnsInfo(HttpSession session, HttpServletRequest request){
 		this.context = TdsAppContext.getApplicationContext();
 		logger.info("Inside: doPresentationIcs2EnsInfo");
 		Map model = new HashMap();
 		String mrn = request.getParameter("mrn");
+		String lrn = request.getParameter("lrn");
 		//for TEST
-		mrn = "23NO00000000000004"; //from toll.no predefined test-value
+		//mrn = "23NO00000000000004"; //from toll.no predefined test-value
 		
-		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_manifestinfo");
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_ics2_ensinfo");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		//check user (should be in session already)
 		if(appUser==null){
 			return this.loginView;
 			
 		}else{
-			StringBuilder url = new StringBuilder();
-			url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
-			
+			//end-user enters ENS-MRN
 			if(StringUtils.isNotEmpty(mrn)) {
-				url.append("postEntrySummaryDeclaration.do");
+			
+				StringBuilder url = new StringBuilder();
+				url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
 				
-				String BASE_URL = url.toString();
-	    		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&ensMrn=" + mrn;
-	    		logger.info("URL: " + BASE_URL);
-	    		logger.info("PARAMS: " + urlRequestParamsKeys);
-	    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
-	    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
-	    		//Debug -->
-		    	logger.debug(jsonPayload);
-	    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-	    		
-	    		model.put("content", jsonPayload);
-	    		
-	    		try {
-	    			ApiGenericDtoResponse obj = new ObjectMapper().readValue(jsonPayload, ApiGenericDtoResponse.class);
-	    			if(obj!=null) {
-	    				EntryMovRoadDto dto = obj.getEntryMovementRoad();
-						logger.debug(dto.toString());
-						
-	    			}
-	    		}catch(Exception e) {
-	    			e.toString();
-	    		}
+				if(StringUtils.isNotEmpty(mrn)) {
+					url.append("postEntrySummaryDeclaration.do");
+					
+					String BASE_URL = url.toString();
+		    		String urlRequestParamsKeys = "user=" + appUser.getUser() + "&ensMrn=" + mrn + "&ensRequestId=" + lrn;
+		    		logger.info("URL: " + BASE_URL);
+		    		logger.info("PARAMS: " + urlRequestParamsKeys);
+		    		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys);
+		    		//Debug -->
+			    	logger.debug(jsonPayload);
+		    		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+		    		
+		    		model.put("lrn", lrn);
+		    		model.put("mrn", mrn);
+		    		model.put("content", jsonPayload);
+		    		
+		    		try {
+		    			ApiGenericDtoResponse obj = new ObjectMapper().readValue(jsonPayload, ApiGenericDtoResponse.class);
+		    			if(obj!=null) {
+		    				EntryMovRoadDto dto = obj.getEntryMovementRoad();
+							logger.debug(dto.toString());
+							
+		    			}
+		    		}catch(Exception e) {
+		    			e.toString();
+		    		}
+				}
 			}
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 			

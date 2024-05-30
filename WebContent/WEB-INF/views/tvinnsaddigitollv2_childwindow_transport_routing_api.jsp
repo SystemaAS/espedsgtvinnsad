@@ -27,7 +27,7 @@
 				    </font>	
 				    &nbsp;&nbsp;RoutingId&nbsp;
 					<input type="text" class="inputText" name="uuid" id="uuid" size="39" maxlength="36" value="${model.uuid}">
-					<input class="inputFormSubmit" onClick="setBlockUI(this)" type="submit" name="submit" value='<spring:message code="search.label"/>'>
+					<input class="inputFormSubmit" onClick="setBlockUI(this)" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.search"/>'>
 					</tr>
 				</form>									           		
 			    <tr>
