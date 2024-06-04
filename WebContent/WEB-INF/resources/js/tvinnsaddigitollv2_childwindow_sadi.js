@@ -149,7 +149,16 @@
 				opener.jq('#eh0068a').val("");opener.jq('#eh0068a').val(data[i].weh0068a); //Dekl.dato
 				opener.jq('#eh0068b').val("");opener.jq('#eh0068b').val(data[i].weh0068b); //Dekl.sekv
 				opener.jq('#ehtrnr').val("");opener.jq('#ehtrnr').val(data[i].wfssokmrn); //Mrn.nr transit
+				//Eksp.id
 				opener.jq('#eheid').val("");opener.jq('#eheid').val(data[i].wfssokexp); //Eksp.id
+				opener.jq('#eheid2').val("");opener.jq('#eheid2').val(data[i].wfssokexp2); //Eksp.id
+				opener.jq('#eheid3').val("");opener.jq('#eheid3').val(data[i].wfssokexp3); //Eksp.id
+				opener.jq('#eheid4').val("");opener.jq('#eheid4').val(data[i].wfssokexp4); //Eksp.id
+				opener.jq('#eheid5').val("");opener.jq('#eheid5').val(data[i].wfssokexp5); //Eksp.id
+				opener.jq('#eheid6').val("");opener.jq('#eheid6').val(data[i].wfssokexp6); //Eksp.id
+				opener.jq('#eheid7').val("");opener.jq('#eheid7').val(data[i].wfssokexp7); //Eksp.id
+				opener.jq('#eheid8').val("");opener.jq('#eheid8').val(data[i].wfssokexp8); //Eksp.id
+				opener.jq('#eheid9').val("");opener.jq('#eheid9').val(data[i].wfssokexp9); //Eksp.id
 				
 				//Sender
 				opener.jq('#ehkns').val("");opener.jq('#ehkns').val(data[i].sikns); //Kundnr
