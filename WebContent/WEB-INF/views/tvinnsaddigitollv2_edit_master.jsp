@@ -451,7 +451,7 @@
 									<div class="text11" style="position: relative;" align="left">
 				                	<span style="position:absolute;top:2px; width:250px;" id="sendMaster_info" class="popupWithInputText text11"  >
 					           		<b>Send Dok.nr</b>
-					           		<p>Master Dok.nr som du må sende til aktøren som leier "posisjon" i transporten din slik at han kan sende sitt eget "house"</p>
+					           		<p>Master Dok.nr som du må sende til aktøren som leier "posisjon" i transporten din slik at aktøren kan sende sitt eget "house"</p>
 									</span>	
 									</div>
 									
