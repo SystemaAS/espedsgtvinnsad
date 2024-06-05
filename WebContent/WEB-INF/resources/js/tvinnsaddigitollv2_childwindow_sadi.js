@@ -148,7 +148,17 @@
 				opener.jq('#ehrg').val("");opener.jq('#ehrg').val(data[i].wehrg); //Dekl.nr
 				opener.jq('#eh0068a').val("");opener.jq('#eh0068a').val(data[i].weh0068a); //Dekl.dato
 				opener.jq('#eh0068b').val("");opener.jq('#eh0068b').val(data[i].weh0068b); //Dekl.sekv
+				//Mrn.nr transit
 				opener.jq('#ehtrnr').val("");opener.jq('#ehtrnr').val(data[i].wfssokmrn); //Mrn.nr transit
+				opener.jq('#ehtrnr2').val("");opener.jq('#ehtrnr2').val(data[i].wfssokmrn2); //Mrn.nr transit
+				opener.jq('#ehtrnr3').val("");opener.jq('#ehtrnr3').val(data[i].wfssokmrn3); //Mrn.nr transit
+				opener.jq('#ehtrnr4').val("");opener.jq('#ehtrnr4').val(data[i].wfssokmrn4); //Mrn.nr transit
+				opener.jq('#ehtrnr5').val("");opener.jq('#ehtrnr5').val(data[i].wfssokmrn5); //Mrn.nr transit
+				opener.jq('#ehtrnr6').val("");opener.jq('#ehtrnr6').val(data[i].wfssokmrn6); //Mrn.nr transit
+				opener.jq('#ehtrnr7').val("");opener.jq('#ehtrnr7').val(data[i].wfssokmrn7); //Mrn.nr transit
+				opener.jq('#ehtrnr8').val("");opener.jq('#ehtrnr8').val(data[i].wfssokmrn8); //Mrn.nr transit
+				opener.jq('#ehtrnr9').val("");opener.jq('#ehtrnr9').val(data[i].wfssokmrn9); //Mrn.nr transit
+				
 				//Eksp.id
 				opener.jq('#eheid').val("");opener.jq('#eheid').val(data[i].wfssokexp); //Eksp.id
 				opener.jq('#eheid2').val("");opener.jq('#eheid2').val(data[i].wfssokexp2); //Eksp.id
