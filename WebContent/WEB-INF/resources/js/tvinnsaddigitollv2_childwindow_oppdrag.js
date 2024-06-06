@@ -186,6 +186,35 @@
 				console.log(data[i].sitlf)
 				opener.jq('#ehavd').val("");opener.jq('#ehavd').val(data[i].siavd); //Avd
 				opener.jq('#ehtdn').val("");opener.jq('#ehtdn').val(data[i].sitdn); //Opp
+				
+				//---------------------------------------------------------------------------------------------------
+				//EXP eller TRA beroende av några villkor (se på exempel on: https://toll.github.io/api/mo-eksempler)
+				//---------------------------------------------------------------------------------------------------
+				if(data[i].wfssokmrn == ""){
+					//console.log("A")
+					//No transit-MRN means: Eksempel 1 – Tolldeklarasjon for overgang til fri disponering og svensk/EU eksport (kun relevant på vei)
+					opener.jq('#ehprt').val("");opener.jq('#ehprt').val("IMMEDIATE_RELEASE_IMPORT");
+					opener.jq('#ehupr').val("");opener.jq('#ehupr').val("EXP"); 		
+				}else{
+					//transit-MRN exists only as clean transit: Eksempel 3 – Transittering som er startet opp utenfor Norge og som bare skal grensepasseres ved ankomst til grensen
+					if(data[i].wehrg == "" && data[i].weh0068a == "" && data[i].weh0068b == ""){
+						//console.log("B")
+						opener.jq('#ehprt').val("");opener.jq('#ehprt').val("TRANSIT_IMPORT");
+						opener.jq('#ehupr').val("");opener.jq('#ehupr').val("TRA");
+						
+					}else{
+						//console.log("C")
+						//MRN exists and CUDE also: Eksempel 2 – Tolldeklarasjon for overgang til fri disponering og transittering som skal fullføres ved grensepassering
+						opener.jq('#ehprt').val("");opener.jq('#ehprt').val("IMMEDIATE_RELEASE_IMPORT");
+						opener.jq('#ehupr').val("");opener.jq('#ehupr').val("TRA"); //eller "TRE" ???
+						if(data[i].wfssokexp != ""){
+							//if this Ekp.id exists then we might use "TRE"
+							opener.jq('#ehupr').val("");opener.jq('#ehupr').val("TRE");
+						}
+					}
+				}
+				
+				
 				opener.jq('#ehextref').val("");opener.jq('#ehextref').val(data[i].fssok); //ExtRef
 				opener.jq('#ehvkb').val("");opener.jq('#ehvkb').val(data[i].sivkb); //bruttovikt
 				opener.jq('#ehntk').val("");opener.jq('#ehntk').val(data[i].sintk); //Kolli

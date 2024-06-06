@@ -549,10 +549,10 @@
 						<tr>
 							<td colspan="3" class="text14">&nbsp;<span title="ehprt">Prosedyr</span><font class="text16RedBold" >*</font></td>
 							<td class="text14">
-								<img style="cursor:pointer;" onMouseOver="showPop('ehuprt_info');" onMouseOut="hidePop('ehuprt_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
-				            	<span title="ehuprt">Eksp.pros.</span>
+								<img style="cursor:pointer;" onMouseOver="showPop('ehupr_info');" onMouseOut="hidePop('ehupr_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+				            	<span title="ehupr">Eksp.pros.</span>
 		                		<div class="text11" style="position: relative;" align="left">
-			                	<span style="position:absolute;top:2px; width:250px;" id="ehuprt_info" class="popupWithInputText text11"  >
+			                	<span style="position:absolute;top:2px; width:250px;" id="ehupr_info" class="popupWithInputText text11"  >
 				           		<b>Eksp.prosedyr - Outgoing Procedure</b>
 				           		<ul>
 				           			<li><b>TRA</b> Transittering. Kode som brukes når valgt Tollprosedyre er Direktefortolling for å angi om prosedyren fram til grensen er transittering</li>
