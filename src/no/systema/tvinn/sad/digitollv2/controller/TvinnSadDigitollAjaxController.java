@@ -336,6 +336,10 @@ public class TvinnSadDigitollAjaxController {
 					if(StringUtils.isNotEmpty(record.getWfssokexp())) {
 						sadmohfRecord.setEheid(record.getWfssokexp());//Eksp.id
 					}
+					
+					//set ehprt and ehupr depending on combinations (this is also made on JSP/JS when the user does not use the Auto(checkbox)
+					this.setProcedures(sadmohfRecord);
+					
 					//Sender
 					if(StringUtils.isNotEmpty(record.getSikns())) { sadmohfRecord.setEhkns(Integer.valueOf(record.getSikns())); } //Kundnr
 					sadmohfRecord.setEhnas(record.getSinas());//Namn
@@ -442,6 +446,8 @@ public class TvinnSadDigitollAjaxController {
 				 String opd = avdOpd[1].replace("opd", "");
 				 String dato = avdOpd[2].replace("dato", "");
 				 String bilnr = avdOpd[3].replace("bil", "");
+				 //new fields
+				 
 				 logger.info("avd:" + avd);
 				 logger.info("opd:" + opd);
 				 logger.info("dato:" + dato);
@@ -482,6 +488,10 @@ public class TvinnSadDigitollAjaxController {
 					if(StringUtils.isNotEmpty(record.getWfssokexp())) {
 						sadmohfRecord.setEheid(record.getWfssokexp());//Eksp.id
 					}
+					
+					//set ehprt and ehupr depending on combinations (this is also made on JSP/JS when the user does not use the Auto(checkbox)
+					this.setProcedures(sadmohfRecord);
+					
 					//Sender
 					if(StringUtils.isNotEmpty(record.getSikns())) { sadmohfRecord.setEhkns(Integer.valueOf(record.getSikns())); } //Kundnr
 					sadmohfRecord.setEhnas(record.getSinas());//Namn
@@ -602,6 +612,10 @@ public class TvinnSadDigitollAjaxController {
 			if(StringUtils.isNotEmpty(record.getWfssokexp())) {
 				sadmohfRecord.setEheid(record.getWfssokexp());//Eksp.id
 			}
+			
+			//set ehprt and ehupr depending on combinations (this is also made on JSP/JS when the user does not use the Auto(checkbox)
+			this.setProcedures(sadmohfRecord);
+			
 			
 			//Sender
 			if(StringUtils.isNotEmpty(record.getSikns())) { sadmohfRecord.setEhkns(Integer.valueOf(record.getSikns())); } //Kundnr
@@ -905,6 +919,38 @@ public class TvinnSadDigitollAjaxController {
 		  return result;
 		  
 	  }
+	
+	
+	/**
+	 * 
+	 * @param sadmohfRecord
+	 */
+	private void setProcedures(SadmohfRecord sadmohfRecord) {
+		//set ehprt and ehupr depending on combinations (this is also made on JSP/JS when the user does not use the Auto(checkbox)
+		if(StringUtils.isEmpty(sadmohfRecord.getEhtrnr())){
+			//No transit-MRN means: Eksempel 1 – Tolldeklarasjon for overgang til fri disponering og svensk/EU eksport (kun relevant på vei)
+			sadmohfRecord.setEhprt("IMMEDIATE_RELEASE_IMPORT");
+			sadmohfRecord.setEhupr("EXP");
+			logger.info("A");
+		}else {
+			//transit-MRN exists only as clean transit: Eksempel 3 – Transittering som er startet opp utenfor Norge og som bare skal grensepasseres ved ankomst til grensen
+			if(sadmohfRecord.getEh0068a()==0 && sadmohfRecord.getEh0068b()==0) {
+				sadmohfRecord.setEhprt("TRANSIT_IMPORT");
+				sadmohfRecord.setEhupr("TRA");
+				logger.info("B");
+			}else {
+				//MRN exists and CUDE also: Eksempel 2 – Tolldeklarasjon for overgang til fri disponering og transittering som skal fullføres ved grensepassering
+				sadmohfRecord.setEhprt("IMMEDIATE_RELEASE_IMPORT");
+				sadmohfRecord.setEhupr("TRA");
+				logger.info("C");
+				if(StringUtils.isNotEmpty(sadmohfRecord.getEheid())){
+					sadmohfRecord.setEhupr("TRE");
+					logger.info("D");
+				}
+			}
+		}
+		
+	}
 	
 	/**
 	 * 
