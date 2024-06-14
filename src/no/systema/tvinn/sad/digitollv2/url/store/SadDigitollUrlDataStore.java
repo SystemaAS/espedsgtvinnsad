@@ -38,6 +38,10 @@ public final class SadDigitollUrlDataStore {
 		//UPDATE/INSERT/DELETE House
 		//http://localhost:8080/syjservicestn/syjsSADMOMF_U.do?user=OSCAR and/or user=OSCAR...
 		static public String SAD_UPDATE_DIGITOLL_EXTERNAL_HOUSECONSIGNMENT_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsZADMOHF_U.do";
+		//http://localhost:8080/syjservicestn/syjsZADMOMLF_U.do?user=OSCAR and/or user=OSCAR...
+		static public String SAD_UPDATE_DIGITOLL_EXTERNAL_MASTERCONSIGNMENT_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsZADMOMLF_U.do";
+		
+		
 		
 		
 		

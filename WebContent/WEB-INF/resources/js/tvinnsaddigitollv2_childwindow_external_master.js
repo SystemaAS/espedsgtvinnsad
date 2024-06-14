@@ -89,6 +89,19 @@
 	  });
 	});
 	
+	
+	jq(function() {
+		jq('#insertButton').click(function() { 
+			//DEBUG -->alert(jq('#etlnrt').val() + " " + jq('#emdkm_insert').val() + jq('#emdkmt_insert').val());
+			if(jq('#emdkm_insert').val() != '' && jq('#emdkmt_insert').val() != ''){
+				setBlockUI();
+				window.location = 'tvinnsaddigitollv2_edit_master_zadmomlf.do?etlnrt=' + jq('#etlnrt').val() + '&emdkm=' + jq('#emdkm_insert').val()+ '&emdkmt=' + jq('#emdkmt_insert').val();
+				//jq.unblockUI();		 		
+			}
+	    });
+	});
+	
+	
 	//======================
     //Datatables jquery 
     //======================

@@ -270,6 +270,61 @@ public class TvinnSadDigitollv2MasterController {
 		return successView;
 	}
 	
+	
+	@RequestMapping(value="tvinnsaddigitollv2_edit_master_zadmomlf.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doUpdateZadmomlf(HttpSession session, HttpServletRequest request){
+		logger.info("Inside doUpdateZadmomlf");
+		Map model = new HashMap();
+		String etlnrt = request.getParameter("etlnrt");
+		String emdkm = request.getParameter("emdkm");
+		String emdkmt = request.getParameter("emdkmt");
+		String mode = "AL"; //ADD LIGHT
+	    logger.info("emdkm:" +  emdkm + " emdkmt:" +  emdkmt + " etlnrt:" +  etlnrt);
+	    
+	    ModelAndView successView = new ModelAndView("redirect:tvinnsaddigitollv2_childwindow_external_master.do?action=doInit&date=20240101&ctype=etlnrt&etlnrt=" + etlnrt);
+
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//START
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			//==========
+			//Upd status
+			//==========
+			/*
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_DIGITOLLV2);
+			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE); 
+			
+			//Update/Insert
+			if(StringUtils.isNotEmpty(id1) && StringUtils.isNotEmpty(id2) ) {
+				
+				recordToValidate.setEmlnrt(Integer.valueOf(id1));
+				recordToValidate.setEmlnrm(Integer.valueOf(id2));
+				
+				String mode = "D";
+				logger.info("MODE:" + mode + " before update in Controller ...");
+				
+				StringBuffer errMsg = new StringBuffer();
+				int dmlRetval = 0;
+				dmlRetval = this.deleteMaster(appUser.getUser(), recordToValidate, mode, errMsg);
+				
+				if(dmlRetval < 0) {
+					//error on update
+					model.put("errorMessage", errMsg.toString());
+				}
+			}
+			*/
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+	    
+		}
+		
+		return successView;
+		
+	}
+	
 	/**
 	 * 
 	 * @param recordToValidate
@@ -1452,7 +1507,7 @@ public class TvinnSadDigitollv2MasterController {
 		}
 		//doknr
 		if(StringUtils.isNotEmpty(recordToValidate.getEmdkm())) {
-			int index = recordToValidate.getEmdkm().lastIndexOf("-");
+			int index = recordToValidate.getEmdkm().lastIndexOf("-SYS");
 			if (index > -1) {
 				String uniqueKey = recordToValidate.getEmdkm().substring(index);
 				recordToValidate.setEmdkm(recordToValidate.getEmdkm().substring(0, index));

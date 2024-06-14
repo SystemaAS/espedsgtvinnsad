@@ -15,10 +15,36 @@
 	
 	
 	<table width="90%" height="500px" class="tableBorderWithRoundCorners3D_RoundOnlyOnBottom" cellspacing="0" border="0" cellpadding="0">
+		
 		<tr>
 			<td colspan="3" class="text14Bold">&nbsp;&nbsp;&nbsp;
+			Registrer - Ekstern Dok.nr </td>
+		</tr>
+		<tr height="10"><td></td></tr>
+		<tr>
+		<td colspan="3" valign="top">
+		  		
+				<table cellspacing="2" align="left" >
+				<form name="insertForm" id="insertForm" >
+					<tr>
+						<td class="text14">&nbsp;Dok.nr</td>
+						<td class="text14">&nbsp;<input type="text" class="inputText" name="emdkm_insert" id="emdkm_insert" size="25" maxlength="70" value="${model.emdkm_insert}"></td>
+						<td class="text14">&nbsp;Dok.type</td>
+						<td class="text14">&nbsp;<input type="text" class="inputText" name="emdkmt_insert" id="emdkmt_insert" size="6" maxlength="4" value="${model.emdkmt_insert}"></td>
+						<td align="right">&nbsp;<input class="inputFormSubmit" type="button" name="insertButton" id="insertButton" value='Lage ny'></td>		
+					</tr>
+				</form>	
+				</table>
+				
+		</td>
+		</tr>
+		
+		<tr height="10"><td><hr></td></tr>
+		<tr>
+			<td colspan="3" class="text14Bold">&nbsp;&nbsp;&nbsp;
+			Søk - Ekstern Dok.nr 
 			<img title="search" valign="bottom" src="resources/images/search.gif" width="24px" height="24px" border="0" alt="search">
-			Søk - Ekstern Dok.nr </td>
+			</td>
 		</tr>
 		<tr>
 		<td valign="top">
@@ -35,16 +61,16 @@
 							<input type="hidden" name="etlnrt" id="etlnrt" value="${model.etlnrt}">
 							<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
 							
-						<tr>
-							<td class="text14">&nbsp;Date</td>
-							<td class="text14">&nbsp;<input type="text" class="inputText" onKeyPress="return numberKey(event)" name="date" id="date" size="10" maxlength="8" value="${model.date}"></td>
+							<tr>
+								<td class="text14">&nbsp;Date</td>
+								<td class="text14">&nbsp;<input type="text" class="inputText" onKeyPress="return numberKey(event)" name="date" id="date" size="10" maxlength="8" value="${model.date}"></td>
+								
+								<td class="text14">&nbsp;Dok.nr</td>
+								<td class="text14">&nbsp;<input type="text" class="inputText" name="emdkm" id="emdkm" size="35" maxlength="50" value="${model.emdkm}"></td>
 							
-							<td class="text14">&nbsp;Dok.nr</td>
-							<td class="text14">&nbsp;<input type="text" class="inputText" name="emdkm" id="emdkm" size="35" maxlength="50" value="${model.emdkm}"></td>
-						
-	           				<td align="right">&nbsp;<input class="inputFormSubmit" onClick="setBlockUI(this)" type="submit" name="submit" value='<spring:message code="search.label"/>'>
-		           		</tr>
-		           		
+		           				<td align="right">&nbsp;<input class="inputFormSubmit" onClick="setBlockUI(this)" type="submit" name="submit" value='<spring:message code="search.label"/>'></td>
+		           			</tr>
+		           		</form>
 		           		</table>
 					</td>
 					</tr>
@@ -58,6 +84,9 @@
 					<table id="mainList" class="display compact cell-border" width="100%" >
 						<thead>
 						<tr class="tableHeaderField" >
+							<th title="Velg manuelt ..." width="2%" class="tableHeaderFieldFirst12" >
+								<img title="select manual" src="resources/images/update.gif" border="0" alt="edit">
+							</th>
 							<th class="text14" title="emdkm">&nbsp;Dok.nr&nbsp;</th>
 							<th class="text14" title="emdkmt">&nbsp;Dok.type&nbsp;</th>
 							<th class="text14" title="empro">&nbsp;Ref.Id/Tur&nbsp;</th>
@@ -78,9 +107,15 @@
 		                <c:forEach var="record" items="${model.mainList}" varStatus="counter">    
 			               
 			               <tr class="text14">
+			               	   <td width="2%" align="center" style="cursor:pointer;" class="text14MediumBlue" id="emdkm${record.emdkm}@trreforg${record.trreforg}@ctype${model.callerType}@emdkmt${record.emdkmt}@avsid${record.avsid}" >
+				          	   		<img title="select manual edit" src="resources/images/update.gif" border="0" alt="edit">
+				          	   </td>
+				          	   <%--
 				               <td nowrap style="cursor:pointer;" class="text14MediumBlue" id="emdkm${record.emdkm}@trreforg${record.trreforg}@ctype${model.callerType}@emdkmt${record.emdkmt}@avsid${record.avsid}" >
 			               			${record.emdkm}
 				               </td>
+				                --%>
+				               <td nowrap class="text14MediumBlue">&nbsp;${record.emdkm}</td>
 				               <td class="text14">&nbsp;${record.emdkmt}</td>
 			               	   <td class="text14">&nbsp;${record.empro}</td>
 			               	   <td class="text14">&nbsp;${record.date}</td>

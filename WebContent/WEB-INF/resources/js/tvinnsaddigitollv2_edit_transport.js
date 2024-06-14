@@ -111,7 +111,7 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 	//External Doc.nr import (MasterId import). When an external party owns its master id and must be imported by the tranport owner (special UC)
 	jq('#importMasterLink').click(function() {
     	jq('#importMasterLink').attr('target','_blank');
-    	window.open('tvinnsaddigitollv2_childwindow_external_master.do?action=doInit&date=20240101' + '&ctype=etlnrt' + '&etlnrt=' + jq('#etlnrt').val(), "masterffWin", "top=300px,left=500px,height=600px,width=1100px,scrollbars=no,status=no,location=no");
+    	window.open('tvinnsaddigitollv2_childwindow_external_master.do?action=doInit&date=20240101' + '&ctype=etlnrt' + '&etlnrt=' + jq('#etlnrt').val(), "masterffWin", "top=300px,left=500px,height=600px,width=1200px,scrollbars=no,status=no,location=no");
     });
     jq('#importMasterLink').keypress(function(e){ //extra feature for the end user
 		if(e.which == 13) {
