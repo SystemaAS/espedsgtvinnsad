@@ -1481,6 +1481,8 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		String callerType = request.getParameter("ctype");
 		String date = request.getParameter("date");
 		String emdkm = request.getParameter("emdkm");
+		//this is one is optional and exists only when the child window is opened from the transport-parent-window
+		String etlnrt = request.getParameter("etlnrt");
 
 		logger.info("caller:" + callerType);
 		//logger.info("tuavd:" + tuavd);
@@ -1508,8 +1510,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			model.put("callerType", callerType);
 			model.put("date", date);
 			model.put("emdkm", emdkm);
-			//model.put("tkkode", tullkontorCode);
-			//model.put("tktxtn", tullkontorName);
+			model.put("etlnrt", etlnrt);
 			
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 			

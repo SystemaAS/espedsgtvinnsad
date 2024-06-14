@@ -244,7 +244,7 @@
 						<img title="api:road" style="vertical-align:middle;" id="lorryImg" src="resources/images/lorry_green.png" width="20" height="20"border="0" >
 					</c:otherwise>
 					</c:choose>
-					<c:if test="${not empty model.record.emmid}">
+					<c:if test="${not empty model.record.emmid && model.record.emmid != 'EXTERNAL'}">
 						<c:if test="${model.record.emst2 != 'C' && model.record.emst2 != 'N' }">
 							&nbsp;
 							<input title="Slett fra toll.no" class="inputFormSubmitStd" type="button" name="deleteButton" id="deleteButton" value='Slett'>
@@ -253,14 +253,24 @@
 							</div>
 						</c:if>
 					</c:if>		
-		    		<c:if test="${model.record.emlnrm > 0}">
+		    		<c:if test="${model.record.emlnrm > 0 && model.record.emmid != 'EXTERNAL'}}">
 			    		<a id="alinkRefreshButton" href="tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=${model.record.emlnrt}&emlnrm=${model.record.emlnrm}">
 			    			&nbsp;<input title="Refresh all status..." class="inputFormSubmitStd" type="button" name="refreshButton" id="refreshButton" value='Refresh'>
 			    		</a>
 		    		</c:if>
 		    		
 					<%-- <span title="MRN nr. hos toll.no - per Master" >MRN-Api&nbsp;</span><font class="text14SkyBlue">${model.record.emmid}</font> --%>
-		    		<span title="MRN nr. hos toll.no - per Master" >MRN-Api&nbsp;</span><a title="Dok.refs. på toll.no" class="uuidLinkParent text14SkyBlue" id="${model.record.emmid}">${model.record.emmid}</a>
+		    		<c:choose>
+		    			<%-- in case this is a fremmed Master --%>
+			    		<c:when test="${model.record.emmid == 'EXTERNAL'}">
+			    			<span title="MRN nr. hos toll.no - per Master" >MRN-Api&nbsp;</span><label title="Dok.refs. på toll.no" class=" text14SkyBlue">${model.record.emmid}</label>
+			    		</c:when>
+			    		<c:otherwise >
+			    			<%-- Own master (tranport owner's master) --%>
+			    			<span title="MRN nr. hos toll.no - per Master" >MRN-Api&nbsp;</span><a title="Dok.refs. på toll.no" class="uuidLinkParent text14SkyBlue" id="${model.record.emmid}">${model.record.emmid}</a>
+			    		</c:otherwise>
+		    		</c:choose>
+		    		
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
 		    		<span title="Transaktionsid hos toll.no - per request" >Trans.id&nbsp;</span><a title="les status på toll.no" class="uuidLinkParent text14SkyBlue" id="${model.record.emuuid}">${model.record.emuuid}</a>
 		    		&nbsp;&nbsp;<font style="font-weight: bold;color: lightgray;">|</font>&nbsp;&nbsp;
@@ -440,7 +450,7 @@
 							<td class="text14">&nbsp;<span title="emrgt - Transportør OrgNr. / EORI">Transp.Orgnr / EORI</span><font class="text16RedBold" >*</font></td>
 							<td></td>
 							 
-							<c:if test="${model.record.emlnrm > 0 && not empty model.record.emmid}">
+							<c:if test="${model.record.emlnrm > 0 && (not empty model.record.emmid && model.record.emmid != 'EXTERNAL')}">
 								<td width="40px"></td>
 								<td class="text14">
 									<img style="cursor:pointer;" onMouseOver="showPop('sendMaster_info');" onMouseOut="hidePop('sendMaster_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
@@ -482,7 +492,7 @@
 								</table>
 							</td>
 							
-							<c:if test="${model.record.emlnrm > 0 && not empty model.record.emmid}">
+							<c:if test="${model.record.emlnrm > 0 && (not empty model.record.emmid && model.record.emmid != 'EXTERNAL')}">
 								<td width="40px"></td>
 								<td class="text14">
 									<input  type="text" readonly class="inputText12LightYellow" name="ownReceiverName" id="ownReceiverName" size="31" maxlength="30" value="">
@@ -686,51 +696,51 @@
 					</tr>
 					
 					<tr height="4"><td></td></tr>
-					
-					<tr>
-						<td colspan="15" class="text14" valign="top">
-						<table align="left" border="0" cellspacing="0" cellpadding="1">
-							<tr>
-								<td class="text14">
-									<img style="cursor:pointer;" onMouseOver="showPop('extMaster_info');" onMouseOut="hidePop('extMaster_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
-					            	<span title="emdkm_ff"><b>&nbsp;Ekstern Master Dok.nr</b></span>
-					            	<a tabindex="-1" id="emdkm_ffIdLink">
-										<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
-									</a>
-			                		<div class="text11" style="position: relative;" align="left">
-				                	<span style="position:absolute;top:2px; width:250px;" id="extMaster_info" class="popupWithInputText text11"  >
-					           		<b>Ekstern Master Dok.nr</b>
-					           		<p>Eksternt Master Dok.nr som du har mottatt fra transporteier (Ombud/Representant)<br/>
-					           			Disse feltene brukes kun for deg som skal sende ditt eget "house" til toll.no samtidig som du har leid "posisjon" hos transporteier
-					           		</p>
-									</span>	
-									</div>
-									
-								</td>
-								<td class="text14">
-									<input readonly type="text" class="inputTextReadOnly" name="emdkm_ff" id="emdkm_ff" size="35" maxlength="50" value="${model.record.emdkm_ff}">		
-								</td>
-								<td class="text14">&nbsp;<span title="emdkmt_ff">Dok.type</span></td>
-								<td class="text14">
-									<input readonly type="text" class="inputTextReadOnly" name="emdkmt_ff" id="emdkmt_ff" size="6" maxlength="4" value="${model.record.emdkmt_ff}">		
-								</td>
-								<td class="text14">&nbsp;<span title="emrgt_ff">Transp.Orgnr / EORI</span></td>
-								<td class="text14">
-									<input readonly type="text" class="inputTextReadOnly" name="emrgt_ff" id="emrgt_ff" size="20" maxlength="17" value="${model.record.emrgt_ff}">		
-								</td>
-								<td class="text14">&nbsp;<span title="emrgr_ff">Ombud-Avs.Orgnr / EORI</span></td>
-								<td class="text14">
-									<input readonly type="text" class="inputTextReadOnly" name="emrgr_ff" id="emrgr_ff" size="20" maxlength="17" value="${model.record.emrgr_ff}">		
-								</td>
-								<td class="text14"></span>
-									<img title="Fjerne Ekstern Doc.nr/type/Orgnr" id="imgRemoveExternalIdsLink" style="cursor:pointer;vertical-align: middle;" src="resources/images/delete.gif" width="14px" height="14px" border="0" alt="delete" >
-								</td>
-							</tr>
-							
-						</table>
-						</td>
-					</tr>
-					
+					<c:if test="${model.record.emmid != 'EXTERNAL'}">
+						<tr>
+							<td colspan="15" class="text14" valign="top">
+							<table align="left" border="0" cellspacing="0" cellpadding="1">
+								<tr>
+									<td class="text14">
+										<img style="cursor:pointer;" onMouseOver="showPop('extMaster_info');" onMouseOut="hidePop('extMaster_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+						            	<span title="emdkm_ff"><b>&nbsp;Ekstern Master Dok.nr</b></span>
+						            	<a tabindex="-1" id="emdkm_ffIdLink">
+											<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
+										</a>
+				                		<div class="text11" style="position: relative;" align="left">
+					                	<span style="position:absolute;top:2px; width:250px;" id="extMaster_info" class="popupWithInputText text11"  >
+						           		<b>Ekstern Master Dok.nr</b>
+						           		<p>Eksternt Master Dok.nr som du har mottatt fra transporteier (Ombud/Representant)<br/>
+						           			Disse feltene brukes kun for deg som skal sende ditt eget "house" til toll.no samtidig som du har leid "posisjon" hos transporteier
+						           		</p>
+										</span>	
+										</div>
+										
+									</td>
+									<td class="text14">
+										<input readonly type="text" class="inputTextReadOnly" name="emdkm_ff" id="emdkm_ff" size="35" maxlength="50" value="${model.record.emdkm_ff}">		
+									</td>
+									<td class="text14">&nbsp;<span title="emdkmt_ff">Dok.type</span></td>
+									<td class="text14">
+										<input readonly type="text" class="inputTextReadOnly" name="emdkmt_ff" id="emdkmt_ff" size="6" maxlength="4" value="${model.record.emdkmt_ff}">		
+									</td>
+									<td class="text14">&nbsp;<span title="emrgt_ff">Transp.Orgnr / EORI</span></td>
+									<td class="text14">
+										<input readonly type="text" class="inputTextReadOnly" name="emrgt_ff" id="emrgt_ff" size="20" maxlength="17" value="${model.record.emrgt_ff}">		
+									</td>
+									<td class="text14">&nbsp;<span title="emrgr_ff">Ombud-Avs.Orgnr / EORI</span></td>
+									<td class="text14">
+										<input readonly type="text" class="inputTextReadOnly" name="emrgr_ff" id="emrgr_ff" size="20" maxlength="17" value="${model.record.emrgr_ff}">		
+									</td>
+									<td class="text14"></span>
+										<img title="Fjerne Ekstern Doc.nr/type/Orgnr" id="imgRemoveExternalIdsLink" style="cursor:pointer;vertical-align: middle;" src="resources/images/delete.gif" width="14px" height="14px" border="0" alt="delete" >
+									</td>
+								</tr>
+								
+							</table>
+							</td>
+						</tr>
+					</c:if>
 					
 				</table>
 			</td>
@@ -1050,32 +1060,35 @@
 								<input title="Executing status ..." class="buttonGrayInsideDivPopup" style="cursor:not-allowed;color:brown;" type="button" name="sendButton" id="sendButton" value='Send'>
 							</c:when>
 							<c:otherwise>
-								<input title="Send" class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
-								<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
-									 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
-								</div>
+								<c:if test="${model.record.emmid != 'EXTERNAL'}">
+									<input title="Send" class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
+									<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
+										 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
+									</div>
+								</c:if>
 							</c:otherwise>
 							</c:choose>
 							
-							
-							<c:choose>
-							<%-- st3 on the level that trigger the async-Send until the async-process is finnished --%>
-							<c:when test="${model.record.emst3 == 'P' }"> <%--PENDING(P) on async triggered --%>
-								<input title="Pending status ..." class="buttonGrayInsideDivPopup" style="cursor:not-allowed;" type="button" name="sendButtonAllHousesBlocked" id="sendButtonAllHousesBlocked" value='Send alle houses'>
-							</c:when>
-							<c:otherwise>
-								<input title="Send alle underliggende houses..." class="buttonGrayWithGreenFrame" type="button" name="sendButtonAllHouses" id="sendButtonAllHouses" value='Send alle houses'>
-								<div style="display: none;" class="clazz_dialog" id="dialogSendAllHouses" title="Dialog">
-									 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
-								</div>
-							</c:otherwise>
-							</c:choose>
+							<c:if test="${model.record.emmid != 'EXTERNAL'}">
+								<c:choose>
+								<%-- st3 on the level that trigger the async-Send until the async-process is finnished --%>
+								<c:when test="${model.record.emst3 == 'P' }"> <%--PENDING(P) on async triggered --%>
+									<input title="Pending status ..." class="buttonGrayInsideDivPopup" style="cursor:not-allowed;" type="button" name="sendButtonAllHousesBlocked" id="sendButtonAllHousesBlocked" value='Send alle houses'>
+								</c:when>
+								<c:otherwise>
+									<input title="Send alle underliggende houses..." class="buttonGrayWithGreenFrame" type="button" name="sendButtonAllHouses" id="sendButtonAllHouses" value='Send alle houses'>
+									<div style="display: none;" class="clazz_dialog" id="dialogSendAllHouses" title="Dialog">
+										 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
+									</div>
+								</c:otherwise>
+								</c:choose>
+							</c:if>
 							
 							<a id="alinkCreateNewButton" href="tvinnsaddigitollv2_edit_master.do?action=doCreate&emlnrt=${model.record.emlnrt}&emavd=${model.record.transportDto.etavd}&emsg=${model.record.transportDto.etsg}&empro=${model.record.transportDto.etpro}">
 								<input class="inputFormSubmitStd" type="button" name="createNewButton" id="createNewButton" value='Lage ny'>
 							</a>
 							<%-- For the moment the user should be responsible for deleting all houses prior to deleting the Master. All houses must have been DELETED from the API (no MRN) --%>
-							<c:if test="${empty model.record.emmid && empty model.record.listHouses}">
+							<c:if test="${(empty model.record.emmid || model.record.emmid == 'EXTERNAL') && empty model.record.listHouses}">
 								<input title="Fjerne fra SYSPED" class="inputFormSubmitStd" type="button" name="deleteMasterButton" id="deleteMasterButton" value='Fjerne'>
 								<div id="dialogDeleteMaster" class="clazz_dialog" title="Dialog">
 									 <p class="text14" >Er du sikker på at du vil fjerne Master - Lnr <b>${model.record.emlnrm}</b> i <b>SYSPED</b> ?</p>

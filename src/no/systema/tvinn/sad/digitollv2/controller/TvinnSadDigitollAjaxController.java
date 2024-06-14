@@ -25,6 +25,7 @@ import javawebparts.core.org.apache.commons.lang.StringUtils;
 import no.systema.main.service.UrlCgiProxyService;
 import no.systema.main.util.DateTimeManager;
 import no.systema.tvinn.sad.digitollv2.controller.service.HouseControllerService;
+import no.systema.tvinn.sad.digitollv2.controller.service.MasterControllerService;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurContainer;
@@ -678,6 +679,118 @@ public class TvinnSadDigitollAjaxController {
 		 return result;
 	 }
 	
+	@RequestMapping(value = "createMasterFromZadmomlf_Digitoll.do", method = RequestMethod.GET)
+	public @ResponseBody Set<SadmomfRecord> createMasterFromZadmomlf_Digitoll
+	  						(@RequestParam String applicationUser, @RequestParam String params, 
+	  						 @RequestParam Integer lnrt, @RequestParam String mode ) {
+		
+		 Set result = new HashSet();
+		 logger.info("Inside createMasterFromZadmomlf_Digitoll.do:" + lnrt);
+		 logger.info("lnrt:" + lnrt);
+		 logger.info("mode:" + mode);
+		 logger.info("params:" + params);
+		 
+		 List<String> mainList = new ArrayList<String>();
+		 if (StringUtils.isNotEmpty(params)) {
+			 String [] recordList = params.split("#");
+			 mainList = Arrays.asList(recordList);
+		 }
+		 
+		 
+		 if(!mainList.isEmpty()) {
+			 
+			 for (String recordParent: mainList) {
+				 	String[] items = recordParent.split("_");
+				 	String emdkm = items[0].replace("emdkm", "");
+				 	String emdkmt = items[1].replace("emdkmt", "");
+				 	//new fields
+					 
+				 	logger.info("emdkm:" + emdkm);
+				 	logger.info("emdmt:" + emdkmt);
+					 
+				 	//convert NO-dato to ISO
+					//String datoISO = dateMgr.getDateFormatted_ISO(String.valueOf(dato), DateTimeManager.NO_FORMAT);
+					 
+				 	//(2) now go on with the real issue (create the master)
+				 	SadmomfRecord sadmomfRecord = new SadmomfRecord();
+				
+				 	sadmomfRecord.setEmlnrt(lnrt);
+				 	sadmomfRecord.setEmdkm(emdkm);
+				 	sadmomfRecord.setEmdkmt(emdkmt);
+				 	
+					/*sadmohfRecord.setEhlnrm(lnrm);
+					sadmohfRecord.setEhavd(Integer.valueOf(avd));
+					sadmohfRecord.setEhpro(Integer.valueOf(tur));
+					sadmohfRecord.setEhtdn(Integer.valueOf(opd));
+					sadmohfRecord.setEhvkb(record.getSivkb()); //bruttovikt
+					sadmohfRecord.setEhdkht("N730");
+					//Sender
+					
+					if(StringUtils.isNotEmpty(record.getSikns())) { sadmohfRecord.setEhkns(Integer.valueOf(record.getSikns())); } //Kundnr
+					sadmohfRecord.setEhnas(record.getSinas());//Namn
+					sadmohfRecord.setEhrgs(record.getEhrgs());//Orgnr
+					sadmohfRecord.setEhad1s(record.getSiads1());//Adress
+					String ad2Avs = record.getSiads2() + " " + record.getSiads3(); 
+					sadmohfRecord.setEhpbs(ad2Avs);//
+					if(record.getEhems() != ""){ 
+						sadmohfRecord.setOwn_ehems_email(record.getEhems());//email
+					}
+					//Sender Postnr and City
+					logger.info("Send-pnr:" + record.getEhpns());
+					logger.info("Send-sted:" + record.getEhpss());
+					logger.info("Send-land:" + record.getEhlks());
+					String postnrAvs = ""; String cityAvs = ""; String landAvs = "";
+					if(record.getEhpns() != ""){ postnrAvs = record.getEhpns();}
+					if(record.getEhpss() != ""){ cityAvs = record.getEhpss();}
+					if(record.getEhlks() != ""){ landAvs = record.getEhlks();}
+					sadmohfRecord.setEhpns(postnrAvs);
+					sadmohfRecord.setEhpss(cityAvs);
+					sadmohfRecord.setEhlks(landAvs);
+					
+					//Receiver
+					if(StringUtils.isNotEmpty(record.getSiknk())) { sadmohfRecord.setEhknm(Integer.valueOf(record.getSiknk())); } //Kundnr
+					sadmohfRecord.setEhnam(record.getSinak());//Namn
+					sadmohfRecord.setEhrgm(record.getEhrgm());//Orgnr
+					sadmohfRecord.setEhad1m(record.getSiadk1());//Adress
+					String ad2Mot = record.getSiadk2() + " " + record.getSiadk3(); 
+					sadmohfRecord.setEhpbm(ad2Mot);//
+					if(record.getEhemm() != ""){ 
+						sadmohfRecord.setOwn_ehemm_email(record.getEhemm());//email
+					}
+					//Receiver Postnr and City
+					logger.info("Mott-pnr:" + record.getEhpnm());
+					logger.info("Mott-sted:" + record.getEhpsm());
+					logger.info("Mott-land:" + record.getEhlkm());
+					String postnrMot = ""; String cityMot = ""; String landMot = "";
+					if(record.getEhpnm() != ""){ postnrMot = record.getEhpnm();}
+					if(record.getEhpsm() != ""){ cityMot = record.getEhpsm();}
+					if(record.getEhlkm() != ""){ landMot = record.getEhlkm();}
+					sadmohfRecord.setEhpnm(postnrMot);
+					sadmohfRecord.setEhpsm(cityMot);
+					sadmohfRecord.setEhlkm(landMot);
+					
+					//adjust other fields
+					this.adjustFieldsForUpdateHouse(applicationUser, sadmohfRecord);
+					*/
+					
+					//create new
+					StringBuffer errMsg = new StringBuffer();
+					int dmlRetval = 0;
+					dmlRetval = this.masterControllerService.updateRecord(applicationUser, sadmomfRecord, mode, errMsg);
+					logger.info("dmlRetval:" + dmlRetval);
+			 }
+			 
+		 }
+		 
+		 SadmomfRecord fejk = new SadmomfRecord();
+		 fejk.setEmlnrt(lnrt);
+		 //(1) just to satisfy the ajax-return-requirement of data
+		 result.add(fejk);
+		 logger.info(result.toString());
+		 return result;
+	 }
+	
+	
 	/**
 	 * 
 	 * @param applicationUser
@@ -1258,6 +1371,9 @@ public class TvinnSadDigitollAjaxController {
 	
 	@Autowired
 	private HouseControllerService houseControllerService;
+	@Autowired
+	private MasterControllerService masterControllerService;
+	
 	@Autowired
 	private TvinnSadCustomerService tvinnSadCustomerService;
 }

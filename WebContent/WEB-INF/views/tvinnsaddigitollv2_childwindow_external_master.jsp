@@ -32,6 +32,9 @@
 						<table>
 						<form name="mainForm" id="mainForm" action="tvinnsaddigitollv2_childwindow_external_master.do?action=doInit" method="post">
 							<input type="hidden" name="ctype" id="ctype" value="${model.callerType}">
+							<input type="hidden" name="etlnrt" id="etlnrt" value="${model.etlnrt}">
+							<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
+							
 						<tr>
 							<td class="text14">&nbsp;Date</td>
 							<td class="text14">&nbsp;<input type="text" class="inputText" onKeyPress="return numberKey(event)" name="date" id="date" size="10" maxlength="8" value="${model.date}"></td>
