@@ -99,7 +99,7 @@
 		                    
 		                    <th class="text14" title="motna">&nbsp;Mot&nbsp;</th>
 		                    <th class="text14" title="motid">&nbsp;Mot.Orgnr&nbsp;</th>
-
+							<th width="2%" class="text14" title="Fjern record" >Slett</th>
 		                </tr> 
 		                </thead>
 		                
@@ -117,15 +117,39 @@
 				                --%>
 				               <td nowrap class="text14MediumBlue">&nbsp;${record.emdkm}</td>
 				               <td class="text14">&nbsp;${record.emdkmt}</td>
-			               	   <td class="text14">&nbsp;${record.empro}</td>
-			               	   <td class="text14">&nbsp;${record.date}</td>
-			               	   <td class="text14">&nbsp;${record.time}</td>
-			               	   <td class="text14">&nbsp;${record.trreforg}</td>
-			               	   <td class="text14">&nbsp;${record.trrefreg}</td>
-			               	   <td class="text14">&nbsp;${record.avsna}</td>
-			               	   <td class="text14">&nbsp;${record.avsid}</td>
-			               	   <td class="text14">&nbsp;${record.motna}</td>
-			               	   <td class="text14">&nbsp;${record.motid}</td>
+			               	   <td class="text14">&nbsp;<c:if test="${'null'!= record.empro}">${record.empro}</c:if></td>
+			               	   <td class="text14">&nbsp;<c:if test="${'null'!= record.date}">${record.date}</c:if></td>
+			               	   <td class="text14">&nbsp;<c:if test="${'null'!= record.time}">${record.time}</c:if></td>
+			               	   <td class="text14">&nbsp;<c:if test="${'null'!= record.trreforg}">${record.trreforg}</c:if></td>
+			               	   <td class="text14">&nbsp;<c:if test="${'null'!= record.trrefreg}">${record.trrefreg}</c:if></td>
+			               	   <td class="text14">&nbsp;<c:if test="${'null'!= record.avsna}">${record.avsna}</c:if></td>
+			               	   <td class="text14">&nbsp;<c:if test="${'null'!= record.avsid}">${record.avsid}</c:if></td>
+			               	   <td class="text14">&nbsp;<c:if test="${'null'!= record.motna}">${record.motna}</c:if></td>
+			               	   <td class="text14">&nbsp;<c:if test="${'null'!= record.motid}">${record.motid}</c:if></td>
+			               	   <td class="text14" align="center">
+			               	   		<%--
+			               	   		<a tabindex=-1 style="display:block;" onClick="setBlockUI(this);"
+			               	   				href="tvinnsaddigitollv2_delete_light_master_zadmomlf.do?etlnrt=${model.etlnrt}&emdkm=${record.emdkm}&emdkmt=${record.emdkmt}">
+										<img src="resources/images/delete.gif" border="0" alt="remove">
+									</a>
+									--%>
+									<a tabindex=-1 class="removeLink" id="removeLink${counter.count}" runat="server" href="#">
+												<img src="resources/images/delete.gif" border="0" alt="remove">
+									</a>
+									<div style="display: none;" class="clazz_dialog" id="dialogDeleteRecord${counter.count}" title="Dialog">
+										<form action="tvinnsaddigitollv2_delete_light_master_zadmomlf.do" name="deleteRecordForm${counter.count}" id="deleteRecordForm${counter.count}" method="post">
+											<input type="hidden" name="current_id1${counter.count}" id="current_id1${counter.count}" value="${model.etlnrt}">
+											<input type="hidden" name="current_id2${counter.count}" id="current_id2${counter.count}" value="${record.emdkm}">
+											<input type="hidden" name="current_id3${counter.count}" id="current_id3${counter.count}" value="${record.emdkmt}">
+											<input type="hidden" name="action${counter.count}" id="action${counter.count}" value="doDelete">
+										 	<p class="text14" >Er du sikker på at du vil slette denne?</p>
+										</form>
+									</div> 
+									 
+									
+					
+									
+							   </td>
 			            	</tr> 
 			            	
 			            </c:forEach>

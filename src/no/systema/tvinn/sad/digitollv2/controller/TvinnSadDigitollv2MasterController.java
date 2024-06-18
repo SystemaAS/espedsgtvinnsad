@@ -69,6 +69,7 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ZadmohfContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ZadmomlfRecord;
 import no.systema.tvinn.sad.digitollv2.service.ApiGenericDtoResponseService;
 import no.systema.tvinn.sad.digitollv2.service.GeneralUpdateService;
 import no.systema.tvinn.sad.digitollv2.service.SadDigitollDropDownListPopulationService;
@@ -270,16 +271,21 @@ public class TvinnSadDigitollv2MasterController {
 		return successView;
 	}
 	
-	
-	@RequestMapping(value="tvinnsaddigitollv2_edit_master_zadmomlf.do",  method={RequestMethod.GET, RequestMethod.POST} )
-	public ModelAndView doUpdateZadmomlf(HttpSession session, HttpServletRequest request){
-		logger.info("Inside doUpdateZadmomlf");
+	/**
+	 * Creates a record in ZADMOMLF manually (without a file import through the spring-boot-application: digitoll-eh-pr
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_edit_light_master_zadmomlf.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doUpdateLightZadmomlf(HttpSession session, HttpServletRequest request){
+		logger.info("Inside doUpdateLightZadmomlf");
 		Map model = new HashMap();
 		String etlnrt = request.getParameter("etlnrt");
 		String emdkm = request.getParameter("emdkm");
 		String emdkmt = request.getParameter("emdkmt");
-		String mode = "AL"; //ADD LIGHT
-	    logger.info("emdkm:" +  emdkm + " emdkmt:" +  emdkmt + " etlnrt:" +  etlnrt);
+		
+		logger.info("emdkm:" +  emdkm + " emdkmt:" +  emdkmt + " etlnrt:" +  etlnrt);
 	    
 	    ModelAndView successView = new ModelAndView("redirect:tvinnsaddigitollv2_childwindow_external_master.do?action=doInit&date=20240101&ctype=etlnrt&etlnrt=" + etlnrt);
 
@@ -290,33 +296,100 @@ public class TvinnSadDigitollv2MasterController {
 			return loginView;
 		
 		}else{
-			//==========
-			//Upd status
-			//==========
-			/*
-			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
-			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_DIGITOLLV2);
-			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE); 
-			
 			//Update/Insert
-			if(StringUtils.isNotEmpty(id1) && StringUtils.isNotEmpty(id2) ) {
-				
-				recordToValidate.setEmlnrt(Integer.valueOf(id1));
-				recordToValidate.setEmlnrm(Integer.valueOf(id2));
-				
-				String mode = "D";
+			if(StringUtils.isNotEmpty(emdkm) && StringUtils.isNotEmpty(emdkmt) && StringUtils.isNotEmpty(etlnrt) ) {
+				ZadmomlfRecord recordToValidate = new ZadmomlfRecord();
+				recordToValidate.setEmdkm(emdkm);
+				recordToValidate.setEmdkmt(emdkmt);
+				String mode = "AL"; //ADD LIGHT
+			    
 				logger.info("MODE:" + mode + " before update in Controller ...");
 				
 				StringBuffer errMsg = new StringBuffer();
 				int dmlRetval = 0;
-				dmlRetval = this.deleteMaster(appUser.getUser(), recordToValidate, mode, errMsg);
+				dmlRetval = this.createMasterZadmomlf(appUser.getUser(), recordToValidate, mode, errMsg);
 				
 				if(dmlRetval < 0) {
 					//error on update
 					model.put("errorMessage", errMsg.toString());
+					logger.error(errMsg.toString());
 				}
 			}
-			*/
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+	    
+		}
+		
+		return successView;
+		
+	}
+	/**
+	 * 
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_delete_light_master_zadmomlf.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doDeleteLightZadmomlf(HttpSession session, HttpServletRequest request){
+		logger.info("Inside doDeleteLightZadmomlf");
+		Map model = new HashMap();
+		String id1 = "";
+		String id2 = "";
+		String id3 = "";
+		
+		Enumeration requestParameters = request.getParameterNames();
+	    while (requestParameters.hasMoreElements()) {
+	        String element = (String) requestParameters.nextElement();
+	        String value = request.getParameter(element);
+	        if (element != null && value != null) {
+        		//logger.warn("####################################################");
+    			//logger.warn("param Name : " + element + " value: " + value);
+    			if(element.startsWith("current_id1")){
+    				id1 = value;
+    			}else if(element.startsWith("current_id2")){
+    				id2 = value;
+    			}else if(element.startsWith("current_id3")){
+    				id3 = value;
+    			}
+    		}
+    	}
+	    String etlnrt = id1;
+		String emdkm = id2;
+		String emdkmt = id3;
+		logger.info("emdkm:" +  emdkm + " emdkmt:" +  emdkmt + " etlnrt:" +  etlnrt);
+	    
+	    ModelAndView successView = new ModelAndView("redirect:tvinnsaddigitollv2_childwindow_external_master.do?action=doInit&date=20240101&ctype=etlnrt&etlnrt=" + etlnrt);
+
+		
+	    
+	    
+	    SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//START
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			//Update/Insert
+			if(StringUtils.isNotEmpty(emdkm) && StringUtils.isNotEmpty(emdkmt) && StringUtils.isNotEmpty(etlnrt) ) {
+				ZadmomlfRecord recordToValidate = new ZadmomlfRecord();
+				recordToValidate.setEmdkm(emdkm);
+				recordToValidate.setEmdkmt(emdkmt);
+				String mode = "D"; //ADD LIGHT
+			    
+				logger.info("MODE:" + mode + " before update in Controller ...");
+				
+				StringBuffer errMsg = new StringBuffer();
+				int dmlRetval = 0;
+				dmlRetval = this.deleteMasterZadmomlf(appUser.getUser(), recordToValidate, mode, errMsg);
+				
+				if(dmlRetval < 0) {
+					//error on update
+					model.put("errorMessage", errMsg.toString());
+					logger.error(errMsg.toString());
+				}
+			}
+			
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 	    
 		}
@@ -828,6 +901,98 @@ public class TvinnSadDigitollv2MasterController {
 		
 		//get BASE URL
 		final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_MASTERCONSIGNMENT_URL;
+		//add URL-parameters
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + applicationUser + "&mode=" + mode);
+		urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate)));
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		GeneralUpdateContainer container = this.generalUpdateService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<GeneralUpdateRecord> outputList = container.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(GeneralUpdateRecord record : outputList ){
+					logger.info(record.toString());
+					if(StringUtils.isNotEmpty(container.getErrMsg())){
+						errMsg.append(record.getStatus());
+						errMsg.append(" -->detail:" + container.getErrMsg());
+						retval = -1;
+						break;
+					}
+				}
+			}
+    	}
+    	
+    	return retval;
+	}
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param recordToValidate
+	 * @param mode
+	 * @param etlnrt
+	 * @param errMsg
+	 * @return
+	 */
+	private int createMasterZadmomlf(String applicationUser, ZadmomlfRecord recordToValidate, String mode, StringBuffer errMsg) {
+		int retval = 0;
+		
+		
+		//get BASE URL
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_EXTERNAL_MASTERCONSIGNMENT_URL;
+		//add URL-parameters
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + applicationUser + "&mode=" + mode);
+		urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate)));
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		GeneralUpdateContainer container = this.generalUpdateService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<GeneralUpdateRecord> outputList = container.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(GeneralUpdateRecord record : outputList ){
+					logger.info(record.toString());
+					if(StringUtils.isNotEmpty(container.getErrMsg())){
+						errMsg.append(record.getStatus());
+						errMsg.append(" -->detail:" + container.getErrMsg());
+						retval = -1;
+						break;
+					}
+				}
+			}
+    	}
+    	
+    	return retval;
+	}
+	
+	private int deleteMasterZadmomlf(String applicationUser, ZadmomlfRecord recordToValidate, String mode, StringBuffer errMsg) {
+		int retval = 0;
+		
+		
+		//get BASE URL
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_EXTERNAL_MASTERCONSIGNMENT_URL;
 		//add URL-parameters
 		StringBuffer urlRequestParams = new StringBuffer();
 		urlRequestParams.append("user=" + applicationUser + "&mode=" + mode);
