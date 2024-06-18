@@ -18,7 +18,7 @@
 		
 		<tr>
 			<td colspan="3" class="text14Bold">&nbsp;&nbsp;&nbsp;
-			Registrer - Ekstern Dok.nr </td>
+			Registrer - Ekstern Dok.nr manuelt </td>
 		</tr>
 		<tr height="10"><td></td></tr>
 		<tr>

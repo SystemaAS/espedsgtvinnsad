@@ -1020,8 +1020,18 @@
 			                &nbsp;
 			                <a tabindex="-1" id="importMasterLink">
 								<span align="left" class="inputText">
+									<img style="cursor:pointer;" onMouseOver="showPop('fremMaster_info');" onMouseOut="hidePop('fremMaster_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
 				                	<span style="cursor:pointer;vertical-align:middle;font-size: 12px;" title="Vis du ønsker importere fremmed master..." >Importer fremmed master</span>
 				                </span>
+				                <div class="text11" style="position: relative;" align="left">
+			                	<span style="position:absolute;top:2px; left:300px; width:250px;" id="fremMaster_info" class="popupWithInputText text11"  >
+			                	<p><b>Importer fremmed master</b>&nbsp;
+			                		Funksjonen brukes når transporteier IKKE eier Master-ID som er grunnlaget for fremmede houser.<br/>
+									Dette betyr at den som sendte sine egne houser IKKE baserte sendingen på transporteiers Master-ID
+			                		
+			                	</p>
+				           		</span>	
+								</div>
 			              	</a>
 						</c:otherwise>
 						</c:choose>
