@@ -253,7 +253,7 @@
 							</div>
 						</c:if>
 					</c:if>		
-		    		<c:if test="${model.record.emlnrm > 0 && model.record.emmid != 'EXTERNAL'}}">
+		    		<c:if test="${model.record.emlnrm > 0 && model.record.emmid != 'EXTERNAL'}">
 			    		<a id="alinkRefreshButton" href="tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=${model.record.emlnrt}&emlnrm=${model.record.emlnrm}">
 			    			&nbsp;<input title="Refresh all status..." class="inputFormSubmitStd" type="button" name="refreshButton" id="refreshButton" value='Refresh'>
 			    		</a>
