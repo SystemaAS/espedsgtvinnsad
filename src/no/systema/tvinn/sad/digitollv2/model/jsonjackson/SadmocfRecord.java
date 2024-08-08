@@ -22,8 +22,9 @@ public class SadmocfRecord extends JsonAbstractGrandFatherRecord  {
 	
 	private String ftpdir  = ""; //ftpdir char(70)
 	private String ftpbupdir  = ""; //ftpbupdir char(70)
+	private String sftpdir_ps  = ""; //ftpdir char(70)
 	private String wsendpoint  = ""; //wsendpoint char(200) 
-	
+
 	//
 	private String avsorgnr  = "";//      tegn      30     
 	private String avsname  = "";//      tegn      30  

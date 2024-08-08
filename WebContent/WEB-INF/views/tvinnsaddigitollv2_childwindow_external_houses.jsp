@@ -58,6 +58,7 @@
 		                    <th class="text14" >&nbsp;Format&nbsp;</th>
 		                    <th class="text14" >&nbsp;Channel&nbsp;</th>
 		                    <th class="text14" >&nbsp;Info&nbsp;</th>
+		                    <th class="text14" >&nbsp;sFtp target dir&nbsp;</th>
 		                </tr> 
 		                </thead>
 		                
@@ -86,8 +87,11 @@
 										</span>	
 										</div>
 									</c:if>
+									
 			               	   </td>
-			               	   
+			               	   <td class="text14">
+			               	   	<c:if test="${not empty record.sftpdir_ps && record.sftpdir_ps!='null'}">${record.sftpdir_ps}</c:if>
+			               	   </td>
 			            	</tr> 
 			            	
 			            </c:forEach>
