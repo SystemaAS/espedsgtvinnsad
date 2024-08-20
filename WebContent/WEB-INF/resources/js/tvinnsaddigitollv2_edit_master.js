@@ -198,7 +198,7 @@
 	  	});
 		jq('#emrgs').focus(function() {
 	    	if(jq('#emrgs').val()!=''){
-	    		refreshCustomValidity(jq('#emrgs')[0]);
+	    		//refreshCustomValidity(jq('#emrgs')[0]);
 	  		}
 	  	});
 		jq('#emtpps').focus(function() {
@@ -234,7 +234,7 @@
 	  	});
 		jq('#emrgm').focus(function() {
 	    	if(jq('#emrgm').val()!=''){
-	    		refreshCustomValidity(jq('#emrgm')[0]);
+	    		//refreshCustomValidity(jq('#emrgm')[0]);
 	  		}
 	  	});
 		jq('#emtppm').focus(function() {

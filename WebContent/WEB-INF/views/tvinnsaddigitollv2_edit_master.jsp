@@ -776,14 +776,14 @@
 											<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
 										</a>
 									</td>
-									<td class="text14">&nbsp;<span title="emrgs">Org.nr /EORI</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="emrgs">Org.nr /EORI</span></td>
 									
 				 				</tr>
 				 				<tr >
 									
 									<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="emkns" id="emkns" size="10" maxlength="8" value="${model.record.emkns}"></td>
 									<td class="text14"><input type="text" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="emnas" id="emnas" size="25" maxlength="30" value="${model.record.emnas}"></td>
-									<td class="text14"><input  type="text" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField"  name="emrgs" id="emrgs" size="20" maxlength="17" value="${model.record.emrgs}"></td>
+									<td class="text14"><input  type="text" class="inputTextMediumBlue"  name="emrgs" id="emrgs" size="20" maxlength="17" value="${model.record.emrgs}"></td>
 				 				</tr>
 				 				<tr >
 				 					<td class="text14">&nbsp;<span title="emtpps">Typ.person</span><font class="text16RedBold" >*</font></td>
@@ -885,13 +885,13 @@
 											<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
 										</a>
 									</td>
-									<td class="text14">&nbsp;<span title="emrgm">Org.nr /EORI</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="emrgm">Org.nr /EORI</span></td>
 				 				</tr>
 				 				<tr >
 									
 									<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="emknm" id="emknm" size="10" maxlength="8" value="${model.record.emknm}"></td>
 									<td class="text14"><input type="text" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="emnam" id="emnam" size="25" maxlength="30" value="${model.record.emnam}"></td>
-									<td class="text14"><input  type="text" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" name="emrgm" id="emrgm" size="20" maxlength="17" value="${model.record.emrgm}"></td>
+									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="emrgm" id="emrgm" size="20" maxlength="17" value="${model.record.emrgm}"></td>
 				 				
 				 				</tr>
 				 				

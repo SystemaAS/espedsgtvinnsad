@@ -1253,7 +1253,7 @@
 										<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
 									</a>
 								</td>
-								<td class="text14">&nbsp;<span title="ehrgs">Org.nr /EORI</span><font class="text16RedBold" >*</font></td>
+								<td class="text14">&nbsp;<span title="ehrgs">Org.nr /EORI</span></td>
 								
 			 				</tr>
 			 				<tr >
@@ -1261,7 +1261,7 @@
 								<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="ehkns" id="ehkns" size="10" maxlength="8" value="${model.record.ehkns}"></td>
 								
 								<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ehnas" id="ehnas" size="25" maxlength="30" value="${model.record.ehnas}"></td>
-								<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ehrgs" id="ehrgs" size="20" maxlength="17" value="${model.record.ehrgs}"></td>
+								<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehrgs" id="ehrgs" size="20" maxlength="17" value="${model.record.ehrgs}"></td>
 			 				</tr>
 			 				
 			 				
@@ -1377,14 +1377,14 @@
 											<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
 										</a>
 									</td>
-									<td class="text14">&nbsp;<span title="ehrgm">Org.nr /EORI</span><font class="text16RedBold" >*</font></td>
+									<td class="text14">&nbsp;<span title="ehrgm">Org.nr /EORI</span></td>
 									
 				 				</tr>
 				 				<tr >
 				 					
 									<td class="text14"><input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="ehknm" id="ehknm" size="10" maxlength="8" value="${model.record.ehknm}"></td>
 									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ehnam" id="ehnam" size="25" maxlength="30" value="${model.record.ehnam}"></td>
-									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="ehrgm" id="ehrgm" size="20" maxlength="17" value="${model.record.ehrgm}"></td>
+									<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehrgm" id="ehrgm" size="20" maxlength="17" value="${model.record.ehrgm}"></td>
 				 				</tr>
 				 				
 				 				<tr >
