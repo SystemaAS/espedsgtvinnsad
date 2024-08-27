@@ -62,6 +62,7 @@
 		                    <th class="text14" >&nbsp;Mot&nbsp;</th>
 		                    <th class="text14" >&nbsp;uuid&nbsp;</th>
 		                    <th class="text14" >&nbsp;St.text&nbsp;</th>
+		                    <th class="text14" >&nbsp;Msg.type&nbsp;</th>
 		                </tr> 
 		                </thead>
 		                
@@ -81,6 +82,17 @@
 			               	   <td class="text14">&nbsp;${record.motid}</td>
 			               	   <td class="text14">&nbsp;${record.uuid}</td>
 			               	   <td class="text14">&nbsp;${record.statustxt}</td>
+			               	   <td class="text14">
+			               	   <c:choose>
+				               	   <c:when test="${record.msgtype == 'null'}">
+				               	   		&nbsp;
+				               	   </c:when>
+				               	   <c:otherwise>
+				               	   		&nbsp;${record.msgtype}
+				               	   </c:otherwise>
+			               	   </c:choose>
+			               	   </td>
+			               	   
 			            	</tr> 
 			            	
 			            </c:forEach>
