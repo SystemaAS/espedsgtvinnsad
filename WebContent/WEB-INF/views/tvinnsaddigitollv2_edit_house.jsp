@@ -606,7 +606,7 @@
 										</span>	
 										</div>
 									</td>
-									<td class="text14"><span title="Send til orgnr">Orgnr</span></td>
+									<td class="text14"><span title="Send til orgnr (masterDto.emrgr_ff)">Orgnr</span></td>
 									<td colspan="3" class="text12"><span id="ajaxErrorTextExtParty" name="ajaxErrorTextExtParty"></span></td>
 								</c:if>
 							</c:if>
@@ -660,10 +660,6 @@
 									</td>
 								</c:if>	
 							</c:if>		
-										 		
-							
-							
-	
 						</tr>
 						
 					</table>

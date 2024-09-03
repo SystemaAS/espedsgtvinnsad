@@ -1304,12 +1304,8 @@ public class TvinnSadDigitollv2MasterController {
 		
 		//get all houses
 		this.getHouses(appUser, record);
-		
 		//get all external houses (främmande houses ) if applicable ...
-		if(StringUtils.isNotEmpty(record.getEmdkm_ff()) ){
-			this.getExternalHouses(appUser, record);
-		
-		}
+		this.getExternalHouses(appUser, record);
 				
 	}
 	
@@ -1847,7 +1843,12 @@ public class TvinnSadDigitollv2MasterController {
 	private void getExternalHouses(SystemaWebUser appUser, SadmomfRecord record) {
 		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_EXTERNAL_HOUSECONSIGNMENT_URL;
 		//add URL-parameters
-		String urlRequestParams = "user=" + appUser.getUser() + "&ehdkm_fh=" + record.getEmdkm_ff();
+		String completeEmdkm = record.getEmdkm();
+		//It could be that we have masked the emdkm for presentation purposes
+		if(StringUtils.isNotEmpty(record.getEmdkm()) && record.getEmdkm().indexOf("-SYS")<0) {
+			completeEmdkm = record.getEmdkm() + record.getOwn_emdkmUnique();
+		}
+		String urlRequestParams = "user=" + appUser.getUser() + "&ehdkm_fh=" + completeEmdkm;
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
     	logger.warn("URL: " + BASE_URL);
     	logger.warn("URL PARAMS: " + urlRequestParams);

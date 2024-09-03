@@ -333,7 +333,8 @@
 				       </td>
 				       <td class="tableCell text12" >
 		               		<c:if test="${not empty record.listMasters}">
-		               			<span class="text12SkyBlue">${ record.listMasters[0].emmid}</span>
+		               			<span class="text10">Mrn.&nbsp;<span class="text12SkyBlue">${ record.listMasters[0].emmid}</span></span>
+		               			<span class="text10">DocId.&nbsp;<span class="text12SkyBlue">${ record.listMasters[0].emdkm}</span></span>
 		               			<c:if test="${not empty record.listMasters[0].listHouses}">
 		               				<c:if test="${record.listMasters[0].listHouses.size() > 1}">
 		               					<span class="text10">&nbsp;Ant.h.&nbsp;${record.listMasters[0].listHouses.size()}</span>
