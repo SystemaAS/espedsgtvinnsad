@@ -1468,7 +1468,7 @@
 							</c:choose>
 		               </td>
 		               
-		               <td width="2%" class="tableCell12" ><font class="text12SkyBlue">${externalHouseRecord.ehmid}</font></td>
+		               <td width="2%" class="tableCell12" ><font class="text12SkyBlue">${externalHouseRecord.ehmid}</font><font class="text12" style="color:yellow;" >EKSTERN HOUSE</font></td>
 		               		
 		               <td width="2%" class="tableCell12" title="les status på toll.no">
 		               		<a style="display: block; width: 100%; height: 100%; cursor:pointer" class="uuidLink text12SkyBlue" id="${externalHouseRecord.ehuuid}">
