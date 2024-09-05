@@ -115,7 +115,8 @@
 			           			<a id="alinkLogsgLoggerApi" ><span class="text12" style="cursor:pointer;color:green;">1. Api-log</span></a><br/><br/>
 			           			<a id="alinkLogsgLoggerSadService" ><span class="text12" style="cursor:pointer;color:green;">2. Sad-service-log</span></a><br/>
 			           			<a id="alinkLogsgLoggerRoadEntry" ><span class="text12" style="cursor:pointer;color:green;">3. Road-Entry-log</span></a><br/>
-			           			<a id="alinkLogsgLoggerCatalina" ><span class="text12" style="cursor:pointer;color:green;">4. Catalina-log</span></a><br/>
+			           			<a id="alinkLogsgLoggerCatalina" ><span class="text12" style="cursor:pointer;color:green;">4. Catalina-log</span></a><br/><br/>
+			           			<a id="alinkLogsgLoggerFremHouseFtplog" ><span class="text12" style="cursor:pointer;color:green;">5. Frem.house Ftp-log</span></a><br/>
 			           			
 			           			<br/>
 			           			<button name="_ButtonClose" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('jarStartCmd');">Close</button> 

@@ -40,6 +40,12 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 			  var url = "renderLocalCatalina.do?user=" + jq('#applicationUser').val();
   			  presentPwdDialogLocal(url);
   		  });
+		  jq("#alinkLogsgLoggerFremHouseFtplog").click(function() {
+			  jq('#alinkLogsgLoggerFremHouseFtplog').attr('target','_blank');
+	    	  window.open('tvinnsaddigitollv2_childwindow_external_houses_log.do?action=doFind&date=20240901', "codeWin", "top=300px,left=500px,height=600px,width=1070px,scrollbars=no,status=no,location=no");
+  		  });	
+
+
   	  });
   	  
   	  

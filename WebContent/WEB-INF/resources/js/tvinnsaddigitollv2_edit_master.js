@@ -299,7 +299,11 @@
 	   });
 	   jq('#ftplogIdLink').click(function() {
 	    	jq('#ftplogIdLink').attr('target','_blank');
-	    	window.open('tvinnsaddigitollv2_childwindow_external_houses_log.do?action=doFind&emdkm=' + jq('#emdkm').val() + jq('#own_emdkmUnique').val(), "codeWin", "top=300px,left=500px,height=600px,width=1070px,scrollbars=no,status=no,location=no");
+			var id = jq('#emdkm').val() + jq('#own_emdkmUnique').val();
+			if(jq('#emdkm_ff').val()!=''){
+				id = jq('#emdkm_ff').val();	
+			}
+	    	window.open('tvinnsaddigitollv2_childwindow_external_houses_log.do?action=doFind&emdkm=' + id, "codeWin", "top=300px,left=500px,height=600px,width=1070px,scrollbars=no,status=no,location=no");
 	   });	
 
 	  //Avsender

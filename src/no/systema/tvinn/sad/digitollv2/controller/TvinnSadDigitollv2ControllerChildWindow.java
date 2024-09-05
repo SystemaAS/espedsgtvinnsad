@@ -1800,8 +1800,9 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			
 		}else{
 			  
-			List list = this.getSadmolffList(appUser, recordToValidate.getEmdkm());
-			
+			List list = this.getSadmolffList(appUser, recordToValidate);
+			model.put("id", recordToValidate.getEmdkm());
+			model.put("date", recordToValidate.getDate());
 			model.put("sadmolffList", list);
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 			
@@ -1907,13 +1908,19 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		return list;
 	}
 	
-	private List<SadmolffRecord> getSadmolffList(SystemaWebUser appUser, String emdkm){
+	private List<SadmolffRecord> getSadmolffList(SystemaWebUser appUser, SadmolffRecord recordToValidate){
 		List<SadmolffRecord> list = new ArrayList<SadmolffRecord>();
 		
 		logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
 		String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_EXTERNAL_HOUSES_FTP_LOG_URL;
 		StringBuffer urlRequestParams = new StringBuffer();
-		urlRequestParams.append("user=" + appUser.getUser() + "&emdkm=" + emdkm);
+		urlRequestParams.append("user=" + appUser.getUser());
+		if(StringUtils.isNotEmpty(recordToValidate.getEmdkm())) {
+			urlRequestParams.append("&emdkm=" + recordToValidate.getEmdkm());
+		}
+		if(StringUtils.isNotEmpty(recordToValidate.getDate())) {
+			urlRequestParams.append("&date=" + recordToValidate.getDate());
+		}
 		
 		logger.info(BASE_URL);
 		logger.info(urlRequestParams.toString());

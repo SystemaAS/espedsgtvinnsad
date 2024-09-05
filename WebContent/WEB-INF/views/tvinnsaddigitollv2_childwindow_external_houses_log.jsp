@@ -22,17 +22,18 @@
 		  		<%-- this container table is necessary in order to separate the datatables element and the frame above, otherwise
 			 	the cosmetic frame will not follow the whole datatable grid including the search field... --%>
 				<table id="containerdatatableTable" cellspacing="2" align="left" width="100%" >
-					<%--
+					
 					<tr>
 					<td>
 						<table>
-						<form name="tvinnsadCustomerForm" id="tvinnsadCustomerForm" action="tvinnsaddigitollv2_childwindow_external_houses.do?action=doFind" method="post">
+						<form name="digitollExtHousesFtpLogForm" id="digitollExtHousesFtpLogForm" action="tvinnsaddigitollv2_childwindow_external_houses_log.do" method="post">
+							<input type="hidden" name="action" id="action" value="doFind">
 						<tr>
-							<td class="text14">&nbsp;Navn</td>
-							<td class="text14">&nbsp;<input type="text" class="inputText" name="name" id="name" size="30" maxlength="70" value="${model.name}"></td>
+							<td class="text14">&nbsp;DocId</td>
+							<td class="text14">&nbsp;<input type="text" class="inputText" name="emdkm" id="emdkm" size="40" maxlength="50" value="${model.id}"></td>
 							<td class="text14">&nbsp;</td>
-							<td class="text14">&nbsp;OrgNr.</td>
-							<td class="text14">&nbsp;<input type="text" class="inputText" name="orgnr" id="orgnr" size="15" maxlength="35" value="${model.orgnr}"></td>
+							<td class="text14">&nbsp;Dato</td>
+							<td class="text14">&nbsp;<input type="text" class="inputText" name="date" id="date" size="12" maxlength="10" value="${model.date}"></td>
 							
 							<td class="text14">&nbsp;</td>
 	           				<td align="right">&nbsp;<input class="inputFormSubmit" type="submit" name="submit" value='<spring:message code="search.label"/>'></td>
@@ -41,7 +42,7 @@
 		           		</table>
 					</td>
 					</tr>
-					--%> 
+					
 													           		
 	           		<tr height="10"><td></td></tr>
 					
@@ -54,7 +55,7 @@
 							<%--
 							<th class="text14" >&nbsp;&nbsp;</th>
 							 --%>
-							<th class="text14" >&nbsp;Master-docId&nbsp;</th>
+							<th class="text14" >&nbsp;DocId&nbsp;</th>
 							<th class="text14" >&nbsp;Tr.id&nbsp;</th>
 		                    <th class="text14" >&nbsp;St.&nbsp;</th>
 		                    <th class="text14" >&nbsp;TimeStamp&nbsp;</th>
