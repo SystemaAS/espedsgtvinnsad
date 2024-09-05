@@ -1,27 +1,12 @@
 	//this variable is a global jQuery var instead of using "$" all the time. Very handy
   	var jq = jQuery.noConflict();
 
-	/*
-	jq(function() {
-		jq('#mainList').on('click', 'td', function(){
-			  var id = this.id;
-			  var record = id.split('_');
-			 
-			  var orgnr = record[0].replace("orgnr", "");
-			  var name = record[1].replace("name", "");
-			  //var commtype = record[2].replace("commtype", "");
-			  //var format = record[3].replace("format", "");
-			   			  
-		  	  opener.jq('#ownReceiverOrgNr').val(orgnr);
-			  opener.jq('#ownReceiverName').val(name);
-			  
- 	
 	
-			  //close child window
-			  window.close();
-		  });
-		});
-	*/
+	jq(function() {
+		jq("#date").datepicker({ 
+		  dateFormat: 'yymmdd' 	  
+	  });
+	});
 	
 	//======================
     //Datatables jquery 

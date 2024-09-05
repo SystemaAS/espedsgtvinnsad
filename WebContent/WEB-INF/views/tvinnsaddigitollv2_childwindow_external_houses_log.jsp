@@ -9,6 +9,10 @@
 	specified in servlet.xml as static <mvc:resources mapping="/resources/**" location="WEB-INF/resources/" order="1"/> --%>
 	<SCRIPT type="text/javascript" src="resources/js/tvinnsaddigitollv2_childwindow_external_houses_log.js?ver=${user.versionEspedsg}"></SCRIPT>
 	
+	<style type = "text/css">
+	.ui-datepicker { font-size:9pt;}
+	</style>
+	
 	<table width="90%" height="500px" class="tableBorderWithRoundCorners3D_RoundOnlyOnBottom" cellspacing="0" border="0" cellpadding="0">
 		<tr>
 			<td colspan="3" class="text14Bold">&nbsp;&nbsp;&nbsp;
