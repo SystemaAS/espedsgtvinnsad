@@ -1117,9 +1117,9 @@
 
 
 
-
+<%--
 <c:if test="${not empty model.record.listHouses}">
-
+ --%>
 	<%-- list component --%>
 	<tr>
 		<td >		
@@ -1385,18 +1385,20 @@
 		            </tr> 
 		            </c:forEach>
 		            
-		            
+        
 		            <%-- =============== --%>
 		            <%-- External houses --%>
 		            <%-- =============== --%>
 		            <c:forEach items="${model.record.listExternalHouses}" var="externalHouseRecord" varStatus="counterExt">
 		            		              	  
 		            <tr class="tableRow" style="background-color:#B2BEB5;" height="20" >
-		          
+		          	
 		          	   <td width="2%" class="tableCellFirst12" <c:if test="${externalHouseRecord.ehst2 == 'D'}">style="background-color: #FEEFB3;color: #9F6000;" </c:if> align="center">
+		          	   		
 		          	   		<a style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_edit_externalhouse.do?action=doFind&ehdkh=${externalHouseRecord.ehdkh}&ehlnrt=${model.record.emlnrt}&ehlnrm=${model.record.emlnrm}" onClick="setBlockUI();">
                					<img title="Read the external-house that was received inbound..." style="vertical-align:bottom;" src="resources/images/eye.png" height="18px" width="18px" border="0" alt="read">		 
                				</a>
+               			
                				
 	               	   </td>
 	               	   <td width="2%" align="center" class="tableCell12" >${externalHouseRecord.ehlnrh}</td>
@@ -1612,8 +1614,9 @@
 		</table>
 		</td>
 	</tr>
-
+ <%--
 </c:if>
+  --%>
 
 
 
