@@ -45,7 +45,7 @@
 									<table>
 									<tr>
 					            		<td class="text14">&nbsp;Kjøretøy kjennemerke</td>
-										<td class="text14">&nbsp;<input readonly type="text" class="inputTextReadOnly" name="bil" id="bil" size="10" maxlength="15" value="${model.bil}"></td>
+										<td class="text14">&nbsp;<input type="text" class="inputText" name="bil" id="bil" size="10" maxlength="15" value="${model.bil}"></td>
 										
 					            		<td class="text14">&nbsp;Dato</td>
 										<td class="text14">&nbsp;<input onKeyPress="return numberKey(event)" type="text" class="inputText" name="dato" id="dato" size="8" maxlength="6" value="${model.dato}"></td>
