@@ -71,6 +71,13 @@
 		  jq('#dialogSend').dialog('open');
     });
 
+  	jq("#alinkFremHouseFilelog").click(function() {
+		jq('#alinkFremHouseFilelog').attr('target','_blank');
+	    //window.open('tvinnsaddigitollv2_childwindow_external_houses_log.do?action=doFind&date=20240901', "codeWin", "top=300px,left=500px,height=600px,width=1070px,scrollbars=no,status=no,location=no");
+		//window.open('renderExternalHouseFiles.do?', "codeWin", "top=300px,left=500px,height=600px,width=1070px,scrollbars=no,status=no,location=no");
+		window.open('tvinnsaddigitollv2_childwindow_external_houses_bupfiles_log.do?action=doFind', "bupfilesWin", "top=300px,left=500px,height=600px,width=1070px,scrollbars=no,status=no,location=no");
+  	});	
+
 	//Real delete to Api (DELETE)
  	jq('#deleteButton').click(function() { 
     	  jq('#dialogDelete').dialog( "option", "title", "Slett fra toll.no" );

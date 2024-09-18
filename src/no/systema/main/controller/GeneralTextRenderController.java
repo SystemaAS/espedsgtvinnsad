@@ -348,8 +348,72 @@ public class GeneralTextRenderController {
 			
 		}
 			
-	}	
+	}
 	
+	/**
+	 * 
+	 * @param session
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="renderExternalHouseBupFiles.do", method={ RequestMethod.GET })
+	public ModelAndView doRenderExternalHouseFiles(HttpSession session, HttpServletRequest request, HttpServletResponse response){
+		logger.info("Inside doRenderExternalHouseBupFiles...");
+		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
+		String fp = request.getParameter("fp");
+		
+		Log4jMgr log4jMgr = new Log4jMgr();
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			
+			try{
+				log4jMgr.doLevelUpdate(request, response);
+			}catch(Exception e){
+				e.toString();
+			}
+			
+			//String path = TdsServletContext.getTdsServletContext().getRealPath("/");
+			//logger.info("ServletContext:" + path);
+			//int pathRootIndex = path.indexOf(SERVLET_CONTEXT_WEBAPPS_ROOT);
+			String logFile = fp;
+			
+			//String logFile = null;
+			/*if(pathRootIndex!=-1){
+				logFile = path.substring(0,pathRootIndex) + RELATIVE_LOGFILE_PATH;
+				logger.info("logFile:" + logFile);
+			}*/
+			
+			if(logFile!=null ){
+				//must know the file type in order to put the correct content type on the Servlet response.
+                String fileType = this.payloadContentFlusher.getFileType(logFile);
+                if(AppConstants.DOCUMENTTYPE_LOG.equals(fileType)){
+                		response.setContentType(AppConstants.HTML_CONTENTTYPE_TEXTHTML);
+                }else if(AppConstants.DOCUMENTTYPE_TXT.equals(fileType)){
+            			response.setContentType(AppConstants.HTML_CONTENTTYPE_TEXTHTML);
+                }else if(AppConstants.DOCUMENTTYPE_XML.equals(fileType)){
+            			response.setContentType(AppConstants.HTML_CONTENTTYPE_TEXTXML);
+                }//--> with browser dialogbox: response.setHeader ("Content-disposition", "attachment; filename=\"edifactPayload.txt\"");
+                response.setHeader ("Content-disposition", "filename=\"digitollFile" + fileType + "\"");
+                
+                logger.info("Start flushing file payload...");
+                //send the file output to the ServletOutputStream
+                try{
+                		//InputStream inputStream = session.getServletContext().getResourceAsStream(logFile);
+                		this.payloadContentFlusher.flushServletOutputDigitollBupFiles(response, logFile);
+                	
+                }catch (Exception e){
+                		e.printStackTrace();
+                }
+            }
+			//this to present the output in an independent window
+            return(null);
+			
+		}
+			
+	}
 	
 }
 

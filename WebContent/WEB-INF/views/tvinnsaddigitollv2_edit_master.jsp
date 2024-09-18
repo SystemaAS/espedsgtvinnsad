@@ -732,9 +732,14 @@
 									<td class="text14">
 										<input readonly type="text" class="inputTextReadOnly" name="emrgr_ff" id="emrgr_ff" size="20" maxlength="17" value="${model.record.emrgr_ff}">		
 									</td>
-									<td class="text14"></span>
+									<td class="text14">
 										<img title="Fjerne Ekstern Doc.nr/type/Orgnr" id="imgRemoveExternalIdsLink" style="cursor:pointer;vertical-align: middle;" src="resources/images/delete.gif" width="14px" height="14px" border="0" alt="delete" >
 									</td>
+									<td class="text14">
+										<a id="alinkFremHouseFilelog" ><span class="text12" style="cursor:pointer;color:green;">
+											&nbsp;&nbsp;&nbsp;<img title="Bup-file-log for digitoll-eh-pr" style="vertical-align:middle;" width="20px" height="20px"  src="resources/images/log-iconLOG-orig.png" ></span>
+										</a>
+									<td class="text14">
 								</tr>
 								
 							</table>
