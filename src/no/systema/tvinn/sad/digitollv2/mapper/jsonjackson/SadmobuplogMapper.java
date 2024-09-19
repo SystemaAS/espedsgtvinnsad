@@ -10,7 +10,7 @@ import com.fasterxml.jackson.core.json.JsonReadFeature;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmobuplogContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmobuplgContainer;
 
 
 import java.util.*;
@@ -30,14 +30,14 @@ public class SadmobuplogMapper {
 	 * @return
 	 * @throws Exception
 	 */
-	public SadmobuplogContainer getContainer(String utfPayload) throws Exception{
+	public SadmobuplgContainer getContainer(String utfPayload) throws Exception{
 		ObjectMapper mapper = new ObjectMapper();  
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
 		mapper.configure(JsonReadFeature.ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature(), true);
-		SadmobuplogContainer container = null;
+		SadmobuplgContainer container = null;
 		if(utfPayload!=null){
 			//At this point we now have an UTF-8 payload
-			container = mapper.readValue(utfPayload.getBytes(), SadmobuplogContainer.class); 
+			container = mapper.readValue(utfPayload.getBytes(), SadmobuplgContainer.class); 
 			
 		}
 			

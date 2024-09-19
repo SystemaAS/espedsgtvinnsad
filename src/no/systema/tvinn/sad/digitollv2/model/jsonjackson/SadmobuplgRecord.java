@@ -11,12 +11,13 @@ import no.systema.main.model.jsonjackson.general.JsonAbstractGrandFatherRecord;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SadmobuplogRecord extends JsonAbstractGrandFatherRecord   {
+public class SadmobuplgRecord extends JsonAbstractGrandFatherRecord   {
 
 	private String file  = "";
 	private String date  = "";
 	private String time = "";
-	
+	private String msgid = "";
+	private String peppolid = "";
 	
 	/**
 	 * 

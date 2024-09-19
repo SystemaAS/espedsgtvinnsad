@@ -64,6 +64,8 @@
 							<th class="text14" >&nbsp;File&nbsp;</th>
 							<th class="text14" >&nbsp;Date&nbsp;</th>
 		                    <th class="text14" >&nbsp;Time&nbsp;</th>
+		                    <th class="text14" >&nbsp;Msgid&nbsp;</th>
+		                    <th class="text14" >&nbsp;Msgid-Peppol&nbsp;</th>
 		                    
 		                </tr> 
 		                </thead>
@@ -83,6 +85,9 @@
 				               </td> 	
 			               	   <td class="text14">&nbsp;${record.date}</td>
 			               	   <td class="text14">&nbsp;${record.time}</td>
+			               	   <td class="text12SkyBlue">&nbsp;${record.msgid}</td>
+			               	   <td class="text12SkyBlue">&nbsp;${record.peppolid}</td>
+			               	   
 			            	</tr> 
 			            	
 			            </c:forEach>

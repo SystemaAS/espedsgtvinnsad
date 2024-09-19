@@ -42,7 +42,11 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
   		  });
 		  jq("#alinkLogsgLoggerFremHouseFtplog").click(function() {
 			  jq('#alinkLogsgLoggerFremHouseFtplog').attr('target','_blank');
-	    	  window.open('tvinnsaddigitollv2_childwindow_external_houses_log.do?action=doFind&date=20240901', "codeWin", "top=300px,left=500px,height=600px,width=1070px,scrollbars=no,status=no,location=no");
+	    	  window.open('tvinnsaddigitollv2_childwindow_external_houses_log.do?action=doFind&date=20240901', "fremHouseFtpWin", "top=300px,left=500px,height=600px,width=1070px,scrollbars=yes,status=no,location=no");
+  		  });
+		  jq("#alinkLogsgLoggerFremHouseBuplog").click(function() {
+			  jq('#alinkLogsgLoggerFremHouseBuplog').attr('target','_blank');
+	    	  window.open('tvinnsaddigitollv2_childwindow_external_houses_bupfiles_log.do?action=doFind', "bupfilesWin", "top=300px,left=500px,height=600px,width=1070px,scrollbars=yes,status=no,location=no");
   		  });	
 
 

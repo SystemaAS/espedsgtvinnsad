@@ -71,8 +71,8 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurRecord;
-import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmobuplogContainer;
-import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmobuplogRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmobuplgContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmobuplgRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmocfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmocfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfContainer;
@@ -90,7 +90,7 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ZadmomlfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ZadmomlfRecord;
 import no.systema.tvinn.sad.digitollv2.service.SadOppdragService;
 import no.systema.tvinn.sad.digitollv2.service.SadTurService;
-import no.systema.tvinn.sad.digitollv2.service.SadmobuplogListService;
+import no.systema.tvinn.sad.digitollv2.service.SadmobuplgListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmocfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmohfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
@@ -1814,7 +1814,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	}
 	
 	@RequestMapping(value="tvinnsaddigitollv2_childwindow_external_houses_bupfiles_log.do", params="action=doFind",  method={RequestMethod.GET, RequestMethod.POST } )
-	public ModelAndView doInitExternalHousesBupfilesLog(@ModelAttribute ("record") SadmobuplogRecord recordToValidate, HttpSession session, HttpServletRequest request){
+	public ModelAndView doInitExternalHousesBupfilesLog(@ModelAttribute ("record") SadmobuplgRecord recordToValidate, HttpSession session, HttpServletRequest request){
 		this.context = TdsAppContext.getApplicationContext();
 		logger.info("Inside: doInitExternalHousesBupfilesLog");
 		Map model = new HashMap();
@@ -1827,7 +1827,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			
 		}else{
 			  
-			List list = this.getSadmobuplogList(appUser, recordToValidate);
+			List list = this.getSadmobuplgList(appUser, recordToValidate);
 			model.put("date", recordToValidate.getDate());
 			model.put("list", list);
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
@@ -1978,8 +1978,8 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	 * @param recordToValidate
 	 * @return
 	 */
-	private List<SadmobuplogRecord> getSadmobuplogList(SystemaWebUser appUser, SadmobuplogRecord recordToValidate){
-		List<SadmobuplogRecord> list = new ArrayList<SadmobuplogRecord>();
+	private List<SadmobuplgRecord> getSadmobuplgList(SystemaWebUser appUser, SadmobuplgRecord recordToValidate){
+		List<SadmobuplgRecord> list = new ArrayList<SadmobuplgRecord>();
 		
 		logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
 		String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_EXTERNAL_HOUSES_BUPFILES_LOG_URL;
@@ -1994,6 +1994,12 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		if(StringUtils.isNotEmpty(recordToValidate.getDate())) {
 			urlRequestParams.append("&time=" + recordToValidate.getTime());
 		}
+		if(StringUtils.isNotEmpty(recordToValidate.getMsgid())) {
+			urlRequestParams.append("&msgid=" + recordToValidate.getMsgid());
+		}
+		if(StringUtils.isNotEmpty(recordToValidate.getPeppolid())) {
+			urlRequestParams.append("&peppolid=" + recordToValidate.getPeppolid());
+		}
 		
 		logger.info(BASE_URL);
 		logger.info(urlRequestParams.toString());
@@ -2001,12 +2007,12 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		UrlCgiProxyService urlCgiProxyService = new UrlCgiProxyServiceImpl();
 		String jsonPayload = urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
 		logger.info(jsonPayload);
-		SadmobuplogContainer container = null;
+		SadmobuplgContainer container = null;
 		try{
 			if(jsonPayload!=null){
-				container = this.sadmobuplogListService.getListContainer(jsonPayload);
+				container = this.sadmobuplgListService.getListContainer(jsonPayload);
 				if(container!=null){
-					for(SadmobuplogRecord  record : container.getList()){
+					for(SadmobuplgRecord  record : container.getList()){
 						list.add(record);
 					}
 				}
@@ -2520,7 +2526,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	@Autowired
 	private SadmoifListService sadmoifListService;
 	@Autowired
-	private SadmobuplogListService sadmobuplogListService;
+	private SadmobuplgListService sadmobuplgListService;
 	
 	@Autowired
 	private SadmocfListService sadmocfListService;

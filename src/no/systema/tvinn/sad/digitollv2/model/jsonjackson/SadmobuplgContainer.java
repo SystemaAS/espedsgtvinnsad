@@ -15,14 +15,14 @@ import lombok.Data;
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SadmobuplogContainer {
+public class SadmobuplgContainer {
 	
 	private String user = null;
 	private String avd = null;
 	private String errMsg = null;
-	private Collection<SadmobuplogRecord> list = null;
-	public void setList(Collection<SadmobuplogRecord> value){ this.list = value;}
-	public Collection<SadmobuplogRecord> getList(){ return this.list; }
+	private Collection<SadmobuplgRecord> list = null;
+	public void setList(Collection<SadmobuplgRecord> value){ this.list = value;}
+	public Collection<SadmobuplgRecord> getList(){ return this.list; }
 	
 	
 }
