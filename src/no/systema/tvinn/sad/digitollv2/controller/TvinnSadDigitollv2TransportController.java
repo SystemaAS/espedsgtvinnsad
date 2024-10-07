@@ -1203,6 +1203,11 @@ public class TvinnSadDigitollv2TransportController {
 				urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "extref=" + searchFilter.getExtref());
 			}
 			
+			//Special (masterid from master) special search
+			if(StringUtils.isNotEmpty(searchFilter.getMasterId())){
+				urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "masterid=" + searchFilter.getMasterId());
+			}
+			
 			//Bilnr
 			if(StringUtils.isNotEmpty(searchFilter.getTranspId())){
 				urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "etkmrk=" + searchFilter.getTranspId());
@@ -1213,7 +1218,7 @@ public class TvinnSadDigitollv2TransportController {
 			}
 			
 		}
-		
+
 		return urlRequestParamsKeys.toString();
 	}
 	/**

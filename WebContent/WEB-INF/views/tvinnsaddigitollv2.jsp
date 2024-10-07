@@ -88,8 +88,24 @@
                 <td class="text14" align="left" ><span title="transpId"><spring:message code="systema.tvinn.sad.manifest.list.search.label.transpid"/></span></td>
                 <td class="text14" align="left" ><span title="status"><spring:message code="systema.tvinn.sad.manifest.list.search.label.status"/></span></td>
                 <td class="text14" align="left" >
+                	<img style="cursor:pointer;" onMouseOver="showPop('masterid_info');" onMouseOut="hidePop('masterid_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+	            	<span title="MasterId"><font color="green">Dok.id - Master</font></span>
+               		<div class="text11" style="position: relative;" align="left">
+                	<span style="position:absolute;top:2px; width:250px;" id="masterid_info" class="popupWithInputText text11"  >
+                	<p><b>Dok.id - Master</b><br/>
+                	Søker alle Master-id som finnes per transport.
+                	</p>
+                	<p>
+                 	Parameteren søker ikke i kombinasjon med andre søkeparameter. Den <b>søker</b> ubetinget i <b>hele databasen!</b>
+                	</p>
+					</span>	
+					</div>
+                
+                </td>
+                <%-- 
+                <td class="text14" align="left" >
                 	<img style="cursor:pointer;" onMouseOver="showPop('extref_info');" onMouseOut="hidePop('extref_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
-	            	<span title="opd - house"><font color="green">Ekst.ref - House</font></span>
+	            	<span title="Ekst.ref - house"><font color="green">Ekst.ref - House</font></span>
                		<div class="text11" style="position: relative;" align="left">
                 	<span style="position:absolute;top:2px; width:250px;" id="extref_info" class="popupWithInputText text11"  >
                 	<p><b>Ekstern ref. - House</b><br/>
@@ -120,7 +136,7 @@
 					</div>
                 
                 </td>
-                
+                --%>
                 
                 
 			</tr>
@@ -171,8 +187,14 @@
 						<option title="S" value="S"<c:if test="${searchFilterSadDigitollTransportList.status == 'S'}"> selected </c:if> >SUBMITTED</option> 
 					</select>
 				</td>
+				
+				<td align="left" ><input type="text" class="inputText" name="masterId" id="masterId" size="25" maxlength="50" value="${searchFilterSadDigitollTransportList.masterId}">&nbsp;</td>
+				
+				<%-- 
 				<td align="left" ><input type="text" class="inputText" name="extref" id="extref" size="15" maxlength="35" value="${searchFilterSadDigitollTransportList.extref}">&nbsp;</td>
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="opd" id="opd" size="8" maxlength="7" value="${searchFilterSadDigitollTransportList.opd}">&nbsp;</td>
+				--%>
+				
 				
 				<td valign="top" align="left" >
                    <input class="inputFormSubmit" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.search"/>'>
