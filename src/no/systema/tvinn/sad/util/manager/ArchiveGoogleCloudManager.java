@@ -288,7 +288,7 @@ public class ArchiveGoogleCloudManager {
 	/**
 	 * Call to the Node API at Systema is:
 	 * Example
-	 * POST https://gw.systema.no:9886/api/getfiles
+	 * POST https://gw.systema.no:9887/api/getfiles
 	 *	Content-Type: application/json	
 	 *	{ "localwritepath": "/temp/", "Files": [ { "companyid": "a12", "filename": "si201300170000658WtGAj87xw0.pdf" } ] }
 	 * 

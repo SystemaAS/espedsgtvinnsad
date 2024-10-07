@@ -10,7 +10,7 @@ public class Test {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String tmp = "http://gw.systema.no:9886/api/files?companyid=a24&filename=4CR_4bb36639.pdf";
+		String tmp = "https://gw.systema.no:9887/api/files?companyid=a24&filename=4CR_4bb36639.pdf";
 		int i = tmp.indexOf("companyid=");
 		int j = tmp.indexOf("&filename=");
 		int x = tmp.indexOf("/files?");
