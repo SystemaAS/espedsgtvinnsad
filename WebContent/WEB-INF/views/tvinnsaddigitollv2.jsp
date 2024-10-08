@@ -100,46 +100,9 @@
                 	</p>
 					</span>	
 					</div>
-                
-                </td>
-                <%-- 
-                <td class="text14" align="left" >
-                	<img style="cursor:pointer;" onMouseOver="showPop('extref_info');" onMouseOut="hidePop('extref_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
-	            	<span title="Ekst.ref - house"><font color="green">Ekst.ref - House</font></span>
-               		<div class="text11" style="position: relative;" align="left">
-                	<span style="position:absolute;top:2px; width:250px;" id="extref_info" class="popupWithInputText text11"  >
-                	<p><b>Ekstern ref. - House</b><br/>
-                	Søker alle houses (med ekst.ref som id) som finnes per transport uavhengig av hvilke Master de tilhører.
-                	</p>
-                	<p>
-                 	Parameteren søker ikke i kombinasjon med andre søkeparameter. Den <b>søker</b> ubetinget i <b>hele databasen!</b>
-                	</p>
-					</span>	
-					</div>
-                
-                </td>
-                <td class="text14" align="left" >
-                	<img style="cursor:pointer;" onMouseOver="showPop('opd_info');" onMouseOut="hidePop('opd_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
-	            	<span title="opd - house"><font color="green">Opd - House</font></span>
-               		<div class="text11" style="position: relative;" align="left">
-                	<span style="position:absolute;top:2px; width:250px;" id="opd_info" class="popupWithInputText text11"  >
-                	<p><b>Opd - House</b><br/>
-                	Søker alle houses (med opd.nr som id) som finnes per transport uavhengig av hvilke Master de tilhører.
-                	</p>
-                	<p>
-                 	Søket kan gjøres med en <b>del av strengen: minst 4 sifre</b> eller hele strengen
-                	</p>
-	           		<p>
-                 	Parameteren søker ikke i kombinasjon med andre søkeparameter. Den <b>søker</b> ubetinget i <b>hele databasen!</b>
-                	</p>
-					</span>	
-					</div>
-                
-                </td>
-                --%>
-                
-                
+                </td>    
 			</tr>
+			
  	        <tr>
 				<td align="left" >&nbsp;
            			<select class="selectMediumBlueE2" name="avd" id="avd">
@@ -188,14 +151,94 @@
 					</select>
 				</td>
 				
-				<td align="left" ><input type="text" class="inputText" name="masterId" id="masterId" size="25" maxlength="50" value="${searchFilterSadDigitollTransportList.masterId}">&nbsp;</td>
-				
-				<%-- 
-				<td align="left" ><input type="text" class="inputText" name="extref" id="extref" size="15" maxlength="35" value="${searchFilterSadDigitollTransportList.extref}">&nbsp;</td>
-				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="opd" id="opd" size="8" maxlength="7" value="${searchFilterSadDigitollTransportList.opd}">&nbsp;</td>
-				--%>
-				
-				
+				<td align="left" ><input type="text" class="inputText" name="masterId" id="masterId" size="25" maxlength="50" value="${searchFilterSadDigitollTransportList.masterId}">&nbsp;&nbsp;
+						<img title="Flere søkeparemetere..." onClick="showPop('search_more');" style="cursor:pointer;vertical-align: middle;" src="resources/images/add.png" width="12px" height="12px" border="0" alt="search more ..." >
+		 					<div class="text14" style="position: relative;" align="left" >
+	 						<span style="position:absolute;top:0px" id="search_more" class="popupWithInputText"  >
+					           		<div class="text10" align="left">
+					           			<table border="0" cellspacing="1" cellpadding="0">
+					           			<tr>
+					           			<td>
+					           				<table class="lightGrayBg" >
+					           				<tr>
+							           			<td class="text14" colspan="2">
+							           				<b>Flere søkeparemetere</b>
+							           			</td>
+						        			</tr>
+											<tr>
+												<td class="text14" align="left" >
+								                	<img style="cursor:pointer;" onMouseOver="showPop('extref_info');" onMouseOut="hidePop('extref_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+									            	<span title="Ekst.ref - house"><font color="green">Ekst.ref - House</font></span>
+								               		<div class="text11" style="position: relative;" align="left">
+								                	<span style="position:absolute;top:2px; width:250px;" id="extref_info" class="popupWithInputText text11"  >
+								                	<p><b>Ekstern ref. - House</b><br/>
+								                	Søker alle houses (med ekst.ref som id) som finnes per transport uavhengig av hvilke Master de tilhører.
+								                	</p>
+								                	<p>
+								                 	Parameteren søker ikke i kombinasjon med andre søkeparameter. Den <b>søker</b> ubetinget i <b>hele databasen!</b>
+								                	</p>
+													</span>	
+													</div>
+								                </td>
+							           			<td class="text14" align="left" >
+								                	<img style="cursor:pointer;" onMouseOver="showPop('opd_info');" onMouseOut="hidePop('opd_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+									            	<span title="opd - house"><font color="green">Opd - House</font></span>
+								               		<div class="text11" style="position: relative;" align="left">
+								                	<span style="position:absolute;top:2px; width:250px;" id="opd_info" class="popupWithInputText text11"  >
+								                	<p><b>Opd - House</b><br/>
+								                	Søker alle houses (med opd.nr som id) som finnes per transport uavhengig av hvilke Master de tilhører.
+								                	</p>
+								                	<p>
+								                 	Søket kan gjøres med en <b>del av strengen: minst 4 sifre</b> eller hele strengen
+								                	</p>
+									           		<p>
+								                 	Parameteren søker ikke i kombinasjon med andre søkeparameter. Den <b>søker</b> ubetinget i <b>hele databasen!</b>
+								                	</p>
+													</span>	
+													</div>
+								                </td>	
+								                <%-- TODO more here ...
+								                <td class="text14" align="left" >
+								                	<img style="cursor:pointer;" onMouseOver="showPop('todo_info');" onMouseOut="hidePop('todo_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+									            	<span title="todo"><font color="green">Todo</font></span>
+								               		<div class="text11" style="position: relative;" align="left">
+								                	<span style="position:absolute;top:2px; width:250px;" id="todo_info" class="popupWithInputText text11"  >
+								                	<p><b>Todo</b><br/>
+								                	Future legend.
+								                	</p>
+									           		<p>
+								                 	Parameteren søker ikke i kombinasjon med andre søkeparameter. Den <b>søker</b> ubetinget i <b>hele databasen!</b>
+								                	</p>
+													</span>	
+													</div>
+								                </td>
+								                 --%>										           			
+											</tr>
+											<tr>
+												<td align="left" ><input type="text" class="inputText" name="extref" id="extref" size="15" maxlength="35" value="${searchFilterSadDigitollTransportList.extref}">&nbsp;</td>
+												<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="opd" id="opd" size="8" maxlength="7" value="${searchFilterSadDigitollTransportList.opd}">&nbsp;</td>
+												
+												<%-- TODO more here ...
+												<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="todo" id="todo" size="8" maxlength="7" value="${TODOsearchFilterSadDigitollTransportList.opd}">&nbsp;</td>
+												 --%>
+											</tr>
+											</table>
+										</td>
+										</tr>
+										<tr height="4"><td class="text" align="left"></td></tr>
+										</table>
+										<table align="left" border="0">
+											<tr align="left" >
+												<td class="text14"><button name="search_more" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('search_more');">&nbsp;Ok</button> 
+												</td>
+											</tr>
+										</table>
+									</div>
+						</span>
+						</div>
+
+				</td>			
+												
 				<td valign="top" align="left" >
                    <input class="inputFormSubmit" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.search"/>'>
                 </td>
