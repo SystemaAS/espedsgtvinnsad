@@ -925,6 +925,8 @@
 			                	<span style="position:absolute;top:2px; width:500px;" id="ehetypt_info" class="popupWithInputText text11"  >
 				           		<b>Eksporttype</b>
 				           		<ul>
+				           			<li><b>AES_EXPORT</b> Eksport fra EU. Automatisk utførselsbekreftelse og bare unntaksvis behov for manuell behandling.	
+										18 tegn.<br/>Eksempel: 24SE0123456789ABCD</li>
 				           			<li><b>UGE_EXPORT</b> UGE Eksport fra Sverige som på forhånd er klarert for utførsel av det svenske Tullverket. Ifm med ankomst til grensen sendes det automatisk en ankomst- og utførselsbekreftelse til Tullverket. Medfører ikke behov for manuell ekspedisjon på grensen.	
 										18 tegn. de to første tegnene skal være siffer.de tre neste skal være bokstavene SEE. <br/>Eksempel: 23SEE0123456789QWE</li>
 									<li><b>EUEIR_EXPORT</b>	EUEIR Eksport fra Sverige. Ingen videre oppfølging for Tolletaten ifm ankomst og innpassering. Medfører ikke behov for manuell ekspedisjon på grensen.	
