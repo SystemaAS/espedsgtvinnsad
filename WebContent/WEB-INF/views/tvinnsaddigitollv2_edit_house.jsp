@@ -937,6 +937,8 @@
 										10 tegn. <br/>Eksempel:FKR0116862</li>
 									<li><b>ECS_EXPORT</b> ECS Eksport fra EU. Ekspedisjonsprosessen innebærer at toller utførselsbekrefter eksporten i eksportkontrollsystemet (ECS). Medfører behov for manuell ekspedisjon på grensen.	
 										18 tegn <br/>Eksempel:23FIMHFG8987345TY7</li>
+									<li><b>EMCS_EXPORT</b> Eksport av punktskatt-pliktige varer. Varene er frigjort for eksport, men må alltid utførselsbekreftes av toller ettersom det skal gå en melding til det svenske skatteverket. Medfører behov for manuell ekspedisjon på grensen.	
+										18 tegn <br/>Eksempel:23SEKKFG8987345TY7</li>	
 								</ul>		
 				           		</span>	
 								</div>
