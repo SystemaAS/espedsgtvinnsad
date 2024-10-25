@@ -1485,12 +1485,15 @@
 		<tr height="3"><td></td></tr>
 		<tr>
 			<td align="left" >
-			<c:if test="${model.record.ehst != 'S' && model.record.ehst2 != 'C' && model.record.ehst2 != 'N' }"> <%-- CANCELED(S) && COMPLETED && DENIED --%>
-				&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
+			<%-- <c:if test="${model.record.ehst != 'S' && model.record.ehst2 != 'C' && model.record.ehst2 != 'N' }"> <%-- CANCELED(S) && COMPLETED && DENIED --%>
+			<c:if test="${model.record.ehst != 'S'}"> 
+				<c:if test="${model.record.ehst2 != 'C' && model.record.ehst2 != 'N'}"> 
+					&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
+				</c:if>
 				<c:if test="${model.record.ehlnrh > 0}">
 					<c:choose>
 						<c:when test="${(model.record.ehst2 == 'C' || model.record.ehst2 == 'N') || model.record.ehst3 == 'P' }"> <%--COMPLETED(C) PENDING(P)--%>
-							<%-- C == not possible --%>
+
 							<c:if test="${model.record.ehst3 == 'P' }"> <%-- PENDING(P) --%>
 								<input title="Pending status ..." class="buttonGrayInsideDivPopup" style="cursor:not-allowed;color:brown;" type="button" name="sendButton" id="sendButton" value='Send'>
 							</c:if>
@@ -1514,14 +1517,17 @@
 			                	<input style="cursor:pointer;vertical-align:middle;" type="checkbox" id="async" name="async" value="1" checked>
 			                	<span style="cursor:help;vertical-align:middle;font-size: 12px;" title="Vis du ønsker sende til en kø..." >Send til kø</span>
 			                </span>
-		                
+		                	
 						</c:otherwise>
-					</c:choose>
+					</c:choose>					
+				</c:if>
+				<c:if test="${model.record.ehst2 != 'C' && model.record.ehst2 != 'N'}"> 
 					&nbsp;&nbsp;&nbsp;&nbsp;<input class="inputFormSubmitBlue" type="button" name="buttonInitVoec" id="buttonInitVoec" value='Varelinjer - VOEC'>
-					<input class="inputFormSubmitStd" type="button" value="Laste opp til arkivet" name="uplButton" onClick="window.open('tvinnsadmanifest_childwindow_uploadFile.do?action=doInit&wsavd=${model.record.ehavd}&wsopd=${model.record.ehtdn}','archiveFromHouseFileUpload','top=300px,left=800px,height=250px,width=330px,scrollbars=no,status=no,location=no')">
-					<c:if test="${not empty model.record.ehrg && not empty model.record.eh0068a && not empty model.record.eh0068b }">
-						<input title="" class="inputFormSubmitStd" type="button" name="sttButton" id="sttButton" value='Send doks. til toll.no'>
-					</c:if>
+				</c:if>
+				<%-- ALWAYS PRESENT if CUDE since this are the id's for sending the document to toll.no --%>
+               	<c:if test="${not empty model.record.ehrg && not empty model.record.eh0068a && not empty model.record.eh0068b }">
+               		<input class="inputFormSubmitStd" type="button" value="Laste opp til arkivet" name="uplButton" onClick="window.open('tvinnsadmanifest_childwindow_uploadFile.do?action=doInit&wsavd=${model.record.ehavd}&wsopd=${model.record.ehtdn}','archiveFromHouseFileUpload','top=300px,left=800px,height=250px,width=330px,scrollbars=no,status=no,location=no')">
+					<input title="" class="inputFormSubmitStd" type="button" name="sttButton" id="sttButton" value='Send doks. til toll.no'>
 				</c:if>
 			</c:if>
 		</tr> 
