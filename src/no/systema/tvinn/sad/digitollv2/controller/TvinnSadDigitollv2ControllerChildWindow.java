@@ -2395,7 +2395,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		  logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
 		  String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
 
-		  //logger.debug(jsonPayload);
+		  logger.info(jsonPayload);
 		  logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 	    	if(jsonPayload!=null){
 	    		SadTurContainer container = this.sadTurService.getListContainer(jsonPayload);
