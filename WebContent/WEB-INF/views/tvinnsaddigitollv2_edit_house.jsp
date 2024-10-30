@@ -69,12 +69,23 @@
 						</c:otherwise>
 						</c:choose>
 						
+						<c:if test="${model.record.ehlnrh > 1 }">
+								<a title="previous house ..." id="alinkPreviousHouse" href="tvinnsaddigitollv2_edit_house.do?action=doFind&ehlnrt=${model.record.ehlnrt}&ehlnrm=${model.record.ehlnrm}&ehlnrh=${model.record.ehlnrh - 1}">
+									<font class="text14" style="color:orange;"><b> << </b></font>
+								</a>&nbsp;
+						</c:if>
 						<font class="tabLink">
 							&nbsp;<spring:message code="systema.tvinn.sad.digitoll.list.tab.house"/>
 						</font>
 						<img src="resources/images/update.gif" border="0" alt="edit">
 						<c:if test="${model.record.ehlnrh > 0}">
 							<font class="text14MediumBlue">&nbsp;${model.record.ehlnrh}</font>
+							&nbsp;
+							<c:if test="${model.ceilHouse > model.record.ehlnrh}">
+								<a title="next house ..." id="alinkNextHouse" href="tvinnsaddigitollv2_edit_house.do?action=doFind&ehlnrt=${model.record.ehlnrt}&ehlnrm=${model.record.ehlnrm}&ehlnrh=${model.record.ehlnrh + 1}">
+									<font class="text14" style="color:orange;"><b> >> </b></font>
+								</a>
+							</c:if>
 						</c:if>
 					</td>
 					

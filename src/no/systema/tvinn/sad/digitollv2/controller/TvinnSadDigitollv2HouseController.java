@@ -238,6 +238,8 @@ public class TvinnSadDigitollv2HouseController {
 							this.setMasterDto(appUser.getUser(), record);
 							//now we have all item lines in this house
 							model.put("record", record);
+							//put some other aspects
+							model.put("ceilHouse", this.getHousesListSize(appUser, record.getMasterDto()));
 							//logger.debug(record.toString());
 							//Only if ERROR
 							if("M".equals(record.getEhst2())) {
@@ -1345,6 +1347,45 @@ public class TvinnSadDigitollv2HouseController {
     	
 	}
 	
+	
+	private int getHousesListSize(SystemaWebUser appUser, SadmomfRecord record) {
+		int retval = 0;
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_HOUSECONSIGNMENT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser() + "&ehlnrt=" + record.getEmlnrt() + "&ehlnrm=" + record.getEmlnrm();
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadmohfContainer jsonContainer = this.sadmohfListService.getListContainer(jsonPayload);
+    		record.setListHouses(jsonContainer.getList());
+    		
+    		if(!record.getListHouses().isEmpty()) {
+    			retval = record.getListHouses().size();
+    		}
+    		//now check if the master is valid to be deleted or not.
+    		//To be valid for deletion it is required to have all houses deleted as well = without MRN att toll.no
+    		//You are allow to delete a master if and only if all children have been deleted from toll.no previously ... It has to do with the API since we must know which api (air or road)
+    		//we are using...
+    		/*List<SadmohfRecord> listChild = (List)jsonContainer.getList();
+    		if(listChild!=null && !listChild.isEmpty()) {
+    			for(SadmohfRecord child : listChild) {
+	    			if(StringUtils.isNotEmpty(child.getEhmid())) {
+	    				record.setOwn_okToDelete(false);
+	    				break;
+	    			}
+	    		}
+    		}else {
+    			//OK
+    		}*/
+    	}
+    	return retval;
+	}
 	
 	//SERVICES
 	@Autowired
