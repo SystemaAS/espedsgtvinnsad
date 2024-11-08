@@ -30,6 +30,15 @@ public class SearchFilterDigitollTransportList {
 	private String extref = null;
 	private String transpId = null;
 	private String masterId = null;
+	//extra filter
+	private String cb_C = null;
+	private String cb_N = null;
+	private String cb_M = null;
+	private String cb_K = null;
+	private String cb_D = null;
+	private String cb_S = null;
+	private String cb_EMPTY = null;
+	
 	
 	
 	

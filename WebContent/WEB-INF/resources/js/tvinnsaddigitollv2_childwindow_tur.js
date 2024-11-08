@@ -17,6 +17,9 @@
 			  	if(callerType == 'etpro'){ 
 				 //console.log("Bingo!!") 
 				  opener.jq('#etpro').val(tupro);
+				  if(opener.jq('#etavd').val()=='' && tuavd!=''){
+					opener.jq('#etavd').val(tuavd);	
+				  }
 				  opener.jq('#etpro').focus();
 				
 			  	//tur - empro (master)	  

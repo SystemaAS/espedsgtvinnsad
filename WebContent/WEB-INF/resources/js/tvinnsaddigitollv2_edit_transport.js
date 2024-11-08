@@ -407,6 +407,9 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 									jq('#etsg').val(jq('#applicationUserSign').val());//signatur from login
 								}
 								//From Tur
+								if(data[i].tuavd != '' && jq('#etavd').val()==''){
+									jq('#etavd').val(data[i].tuavd);//avd
+								}
 								jq('#etkmrk').val(data[i].tubiln);//Bilnr.
 								if(data[i].tusjn1 != ''){
 									jq('#etsjaf').val(data[i].tusjn1);//Fører-navn

@@ -140,6 +140,7 @@
 				<td align="left" ><input onKeyPress="return numberKey(event)" type="text" class="inputText" name="datumt" id="datumt" size="6" maxlength="6" value="${searchFilterSadDigitollTransportList.datumt}">&nbsp;</td>
 				<td align="left" ><input type="text" class="inputText" name="transpId" id="transpId" size="10" maxlength="35" value="${searchFilterSadDigitollTransportList.transpId}">&nbsp;</td>
 				<td align="left" >
+					<%-- 
 					<select class="selectMediumBlueE2" name="status" id="status">
 					  <option value="">-velg-</option>
 	 				  	<option title="C" value="C"<c:if test="${searchFilterSadDigitollTransportList.status == 'C'}"> selected </c:if> >COMPLETED</option>
@@ -148,10 +149,79 @@
 						<option title="K" value="K"<c:if test="${searchFilterSadDigitollTransportList.status == 'K'}"> selected </c:if> >KANSELLERT</option> 
 						<option title="D" value="D"<c:if test="${searchFilterSadDigitollTransportList.status == 'D'}"> selected </c:if> >SLETTET</option> 
 						<option title="S" value="S"<c:if test="${searchFilterSadDigitollTransportList.status == 'S'}"> selected </c:if> >SUBMITTED</option> 
-					</select>
+					</select>&nbsp;
+					--%>
+					<c:choose>
+						<c:when test="${searchFilterSadDigitollTransportList.cb_EMPTY == '1' || searchFilterSadDigitollTransportList.cb_C == 'C' || searchFilterSadDigitollTransportList.cb_N == 'N' 
+										|| searchFilterSadDigitollTransportList.cb_M == 'M' || searchFilterSadDigitollTransportList.cb_D == 'D' || searchFilterSadDigitollTransportList.cb_S == 'S'}">
+							<span title="Flere-søkeparemetere..." class="selectMediumBlueE2" onClick="showPop('search_more_status');" style="cursor:pointer;vertical-align: middle;width:50px;background-color:#0096FF;color:white;" >...</span>
+						</c:when>
+						<c:otherwise>
+							<span title="Flere-søkeparemetere..." class="selectMediumBlueE2" onClick="showPop('search_more_status');" style="cursor:pointer;vertical-align: middle;width:50px;">...</span>
+						</c:otherwise>
+					</c:choose>
+						<%--<img title="Multi-søkeparemetere..." onClick="showPop('search_more_status');" style="cursor:pointer;vertical-align: middle;" src="resources/images/add.png" width="12px" height="12px" border="0" alt="search more ..." > --%>
+		 					<div class="text14" style="position: relative;" align="left" >
+	 						<span style="position:absolute;top:0px;width:150px;" id="search_more_status" class="popupWithInputText"  >
+					           		<div class="text10" align="left" >
+					           			<table border="0" cellspacing="1" cellpadding="0" width="100%">
+					           			<tr>
+					           			<td>
+					           				<table border="0" class="lightGrayBg" width="100%">
+					           				<tr>
+							           			<td class="text14" colspan="2">
+							           				<b>Flere ...</b>
+							           			</td>
+						        			</tr>
+											<tr>	
+												<td class="text12" align="left" ><input type="checkbox" id="cb_EMPTY" name="cb_EMPTY" value="1" <c:if test="${searchFilterSadDigitollTransportList.cb_EMPTY == '1'}"> checked </c:if> >blank</td>
+											</tr>
+											<tr>
+												<td class="text12" align="left" ><input type="checkbox" id="cb_C" name="cb_C" value="C" <c:if test="${searchFilterSadDigitollTransportList.cb_C == 'C'}"> checked </c:if> >COMPLETED</td>
+											</tr>
+											<tr>	
+												<td class="text12" align="left" ><input type="checkbox" id="cb_N" name="cb_N" value="N" <c:if test="${searchFilterSadDigitollTransportList.cb_N == 'N'}"> checked </c:if> >DENIED</td>
+											</tr>
+											<tr>	
+												<td class="text12" align="left" ><input type="checkbox" id="cb_M" name="cb_M" value="M" <c:if test="${searchFilterSadDigitollTransportList.cb_M == 'M'}"> checked </c:if> >ERROR</td>
+											</tr>
+											
+											
+											 
+											<tr>
+												<td class="text12" align="left" ><input type="checkbox" id="cb_D" name="cb_D" value="D" <c:if test="${searchFilterSadDigitollTransportList.cb_D == 'D'}"> checked </c:if> >SLETTET</td>
+											</tr>
+											<tr>
+												<td class="text12" align="left" ><input type="checkbox" id="cb_S" name="cb_S" value="S" <c:if test="${searchFilterSadDigitollTransportList.cb_S == 'S'}"> checked </c:if> >SUBMITTED</td>
+											</tr>
+											</table>
+										</td>
+										</tr>
+										<tr height="4"><td class="text" align="left"></td></tr>
+										</table>
+										<table align="left" border="0">
+											<tr align="left" >
+												<td class="text14"><button name="search_more_status" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('search_more_status');">&nbsp;Ok</button> 
+												</td>
+											</tr>
+										</table>
+									</div>
+						</span>
+						</div>
+					 <%--
+					 <select class="js-example-basic-single" name="status" >
+						<option value="">-velg-</option>
+	 				  	<option title="C" value="C"<c:if test="${searchFilterSadDigitollTransportList.status == 'C'}"> selected </c:if> >COMPLETED</option>
+	 				  	<option title="N" value="N"<c:if test="${searchFilterSadDigitollTransportList.status == 'N'}"> selected </c:if> >DENIED</option> 
+						<option title="M" value="M"<c:if test="${searchFilterSadDigitollTransportList.status == 'M'}"> selected </c:if> >ERROR</option> 
+						<option title="K" value="K"<c:if test="${searchFilterSadDigitollTransportList.status == 'K'}"> selected </c:if> >KANSELLERT</option> 
+						<option title="D" value="D"<c:if test="${searchFilterSadDigitollTransportList.status == 'D'}"> selected </c:if> >SLETTET</option> 
+						<option title="S" value="S"<c:if test="${searchFilterSadDigitollTransportList.status == 'S'}"> selected </c:if> >SUBMITTED</option>
+					 </select>
+					  --%>
 				</td>
 				
-				<td align="left" ><input type="text" class="inputText" name="masterId" id="masterId" size="25" maxlength="50" value="${searchFilterSadDigitollTransportList.masterId}">&nbsp;&nbsp;
+				<td align="left" ><input type="text" class="inputText" name="masterId" id="masterId" size="25" maxlength="50" value="${searchFilterSadDigitollTransportList.masterId}">&nbsp;
 						<img title="Flere søkeparemetere..." onClick="showPop('search_more');" style="cursor:pointer;vertical-align: middle;" src="resources/images/add.png" width="12px" height="12px" border="0" alt="search more ..." >
 		 					<div class="text14" style="position: relative;" align="left" >
 	 						<span style="position:absolute;top:0px" id="search_more" class="popupWithInputText"  >

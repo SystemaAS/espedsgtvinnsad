@@ -308,11 +308,11 @@
     });
 	jq("div.toolbar").html('<span class="text16">Transportliste</span>');
     
-//event on input field for search
+	//event on input field for search
     jq('input.mainList_filter').on( 'keyup click', function () {
     		filterGlobal();
     });
-   
+   	
 	
   });
   

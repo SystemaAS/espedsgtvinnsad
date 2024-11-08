@@ -1192,6 +1192,27 @@ public class TvinnSadDigitollv2TransportController {
 				}
 				
 			}
+			//FILTER multiple (DSV req. BENTEs mail 7.Nov.2024...must exclude some status or include variations
+			if(StringUtils.isNotEmpty(searchFilter.getCb_C())){
+				urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "cb_C=" + searchFilter.getCb_C());	
+			}
+			if(StringUtils.isNotEmpty(searchFilter.getCb_N())){
+				urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "cb_N=" + searchFilter.getCb_N());
+			}
+			if(StringUtils.isNotEmpty(searchFilter.getCb_M())){
+				urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "cb_M=" + searchFilter.getCb_M());
+			}
+			
+			if(StringUtils.isNotEmpty(searchFilter.getCb_EMPTY())){
+				urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "cb_EMPTY=" + searchFilter.getCb_EMPTY());
+			}
+			if(StringUtils.isNotEmpty(searchFilter.getCb_D())){
+				urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "cb_D=" + searchFilter.getCb_D());
+			}
+			if(StringUtils.isNotEmpty(searchFilter.getCb_S())){
+				urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "cb_S=" + searchFilter.getCb_S());
+			}
+			
 			
 			//Special (Opd from house) Deep search
 			if(StringUtils.isNotEmpty(searchFilter.getOpd())){
