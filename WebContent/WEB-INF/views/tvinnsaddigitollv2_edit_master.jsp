@@ -1065,7 +1065,7 @@
 								<input title="Executing status ..." class="buttonGrayInsideDivPopup" style="cursor:not-allowed;color:brown;" type="button" name="sendButton" id="sendButton" value='Send'>
 							</c:when>
 							<c:otherwise>
-								<c:if test="${model.record.emmid != 'EXTERNAL'}">
+								<c:if test="${empty model.record.emdkm_ff && empty model.record.emrgt_ff && empty model.record.emrgr_ff}">
 									<input title="Send" class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
 									<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
 										 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
