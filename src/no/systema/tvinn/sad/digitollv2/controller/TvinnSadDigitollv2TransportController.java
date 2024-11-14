@@ -190,7 +190,7 @@ public class TvinnSadDigitollv2TransportController {
 			    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
 		
 			    	//Debug --> 
-			    	//logger.debug(jsonPayload);
+			    	logger.info(jsonPayload);
 			    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 			    	if(jsonPayload!=null){
 			    		
@@ -293,6 +293,13 @@ public class TvinnSadDigitollv2TransportController {
 			
 			//Submit button (Update/Insert)
 			if(StringUtils.isNotEmpty(action) && action.equals("doUpdate")) {
+				//Check for duplicate only with CREATE NEW and if turnr >0 (some customers may have to send a turnr=0 dummyplace-holder
+				if(recordToValidate.getEtpro()>0 && StringUtils.isEmpty(etlnrt)) {
+					Boolean isDuplicateTurnr = this.isDuplicateTurnumber(appUser, recordToValidate);
+					logger.info(isDuplicateTurnr.toString());
+					recordToValidate.setIsDuplicateTurnr(isDuplicateTurnr);
+				}
+				
 				//Validate
 				TransportValidator validator = new TransportValidator();
 				validator.validate(recordToValidate, bindingResult);
@@ -337,6 +344,7 @@ public class TvinnSadDigitollv2TransportController {
 						}
 					}
 			    }
+			    
 			}
 			
 			//FETCH when applicable
@@ -1690,6 +1698,32 @@ public class TvinnSadDigitollv2TransportController {
 			}
 		}
 		return retval;
+	}
+	
+	//check for duplicates (not allowed)
+	private boolean isDuplicateTurnumber(SystemaWebUser appUser, SadmotfRecord record) {
+		boolean retval = false;
+		
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TRANSPORT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser() + "&etpro=" + record.getEtpro();
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadmotfContainer jsonContainer = this.sadmotfListService.getListContainer(jsonPayload);
+    		if(jsonContainer!=null && !jsonContainer.getList().isEmpty()) {
+    			retval = true;
+    		}
+ 
+    	}
+    	
+    	return retval;
 	}
 	
 	//SERVICES

@@ -437,7 +437,8 @@
 	               	   <td width="2%" align="center" class="tableCell" >${record.etlnrt}</td>
 		               <td width="2%" align="center" class="tableCell" >${record.etavd}</td>
 		               <td width="2%" align="center" class="tableCell" >${record.etsg}</td>
-		               <td width="2%" align="center" class="tableCell" ><c:if test="${record.etpro > 0}">${record.etpro}</c:if></td>
+		               <%-- <td width="2%" align="center" class="tableCell" ><c:if test="${record.etpro > 0}">${record.etpro}</c:if></td>  --%>
+		               <td width="2%" align="center" class="tableCell" >${record.etpro}</td>
 		            
 		               <td width="2%" align="center" class="tableCell text12">
 		               		<c:if test="${record.own_invalidMastersExist || record.own_invalidHousesExist || record.own_unsentMastersExist || record.own_unsentHousesExist || record.etst2 == 'M'}">

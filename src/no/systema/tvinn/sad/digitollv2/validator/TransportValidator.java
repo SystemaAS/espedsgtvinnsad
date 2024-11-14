@@ -169,6 +169,22 @@ public class TransportValidator implements Validator {
 					}
 				}
 				
+				//duplicate turnr controll (Only in CREATE NEW = etlnrt = 0)...
+				if(record.getEtlnrt()>0){
+					//nothing
+				}else {
+					if(record.getIsDuplicateTurnr()) {
+						if(record.getEtpro()>0) {
+							errors.rejectValue("isDuplicateTurnr", "systema.tvinn.sad.digitoll.transport.error.rule.duplicate.turnr");
+						}
+					}
+				}
+				
+				//turnr can not be = 0. It can be <0 incase we are product owner with external houses
+				if(record.getEtpro()==0){
+					
+					errors.rejectValue("isDuplicateTurnr", "systema.tvinn.sad.digitoll.transport.error.rule.invalid.zero.turnr");
+				}
 				
 			}
 		}
