@@ -38,6 +38,7 @@ public class SearchFilterDigitollTransportList {
 	private String cb_D = null;
 	private String cb_S = null;
 	private String cb_EMPTY = null;
+	private String cb_Z = null;
 	
 	
 	

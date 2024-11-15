@@ -293,7 +293,10 @@ public class TvinnSadDigitollv2TransportController {
 			
 			//Submit button (Update/Insert)
 			if(StringUtils.isNotEmpty(action) && action.equals("doUpdate")) {
-				//Check for duplicate only with CREATE NEW and if turnr >0 (some customers may have to send a turnr=0 dummyplace-holder
+				//=====================================================================================================================
+				//Check for duplicate only with CREATE NEW and if turnr >0 (some customers may have to send a turnr=-1 dummyplace-holder
+				// turnr = -1 should be allowed to be duplicated!
+				//=====================================================================================================================
 				if(recordToValidate.getEtpro()>0 && StringUtils.isEmpty(etlnrt)) {
 					Boolean isDuplicateTurnr = this.isDuplicateTurnumber(appUser, recordToValidate);
 					logger.info(isDuplicateTurnr.toString());
@@ -1219,6 +1222,9 @@ public class TvinnSadDigitollv2TransportController {
 			}
 			if(StringUtils.isNotEmpty(searchFilter.getCb_S())){
 				urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "cb_S=" + searchFilter.getCb_S());
+			}
+			if(StringUtils.isNotEmpty(searchFilter.getCb_Z())){
+				urlRequestParamsKeys.append(TvinnSadConstants.URL_CHAR_DELIMETER_FOR_PARAMS_WITH_HTML_REQUEST + "cb_Z=" + searchFilter.getCb_Z());
 			}
 			
 			
