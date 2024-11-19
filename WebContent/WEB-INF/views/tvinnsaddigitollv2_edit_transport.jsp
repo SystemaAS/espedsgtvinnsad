@@ -148,7 +148,10 @@
 				<input type="hidden" name="etlnrt" id="etlnrt" value="${model.record.etlnrt}"> 
 				<input type="hidden" name="etst" id="etst" value="${model.record.etst}">
 				<input type="hidden" name="etst2" id="etst2" value="${model.record.etst2}">
-				<input type="hidden" name="etsg" id="etsg" value="${model.record.etsg}">
+				<%--this is because of the editable nature of the SYS when update ... look more below (etsg = SYS) --%>
+				<c:if test ="${model.record.etsg != 'SYS'}">
+					<input type="hidden" name="etsg" id="etsg" value="${model.record.etsg}">
+				</c:if>
 				<input type="hidden" name="etavd" id="etavd" value="${model.record.etavd}">
 				<input type="hidden" name="etpro" id="etpro" value="${model.record.etpro}">
 			</c:if>
@@ -344,8 +347,7 @@
 						 						<a tabindex="-1" id="etproIdLinkFejk">
 													<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 												</a>
-												
-						 						&nbsp;&nbsp;Sign&nbsp;${model.record.etsg}
+												&nbsp;&nbsp;Sign&nbsp;${model.record.etsg}
 						 						
 						 				</td>
 						 				<td class="text12White" align="right">
@@ -379,7 +381,16 @@
 										<td colspan="2" class="text12" title="etdtr">&nbsp;Reg.dato&nbsp;
 											<input readonly type="text"  class="inputTextReadOnly" name="etdtr" id="etdtr" size="8" maxlength="6" value="${model.record.etdtrStr}">
 										</td>
-										
+										<c:if test ="${model.record.etsg == 'SYS'}">
+											<td colspan="2" class="text12" title="etsg">&nbsp;Sign<font class="text16RedBold" >*</font>
+												<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" id="etsg" name="etsg">
+												<option value="">-velg-</option>
+							 				  	<c:forEach var="record" items="${model.signList}" >
+							 				  		<option title="${record.namn}" value="${record.sign}"<c:if test="${model.record.etsg == record.sign}"> selected </c:if> >${record.sign}</option> 
+												</c:forEach> 
+												</select> 	
+											</td>
+										</c:if>
 					 				</tr>
 					 				<tr height="2"><td>&nbsp;</td></tr>
 			 					</c:when>
