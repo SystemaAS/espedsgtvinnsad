@@ -697,6 +697,7 @@
 				           		<ul>
 				           			<li><b>CUDE</b> Tolldeklarasjon. Kode som skal brukes dersom det er deklarasjonsID og ikke typeOfReference som skal fylles ut på previousDocuments-objektet</li>
 									<li><b>RETR</b> Oppstart transittering. Kode som skal brukes dersom det er en LRN til transitteringsdeklarasjonen som fylles ut i referenceNumber på previousDocuments-objektet</li>
+									<li><b>GONU</b> Godsnummer. Kode for å angi godsnummer for varer som skal godsregistreres
 									<li><b>N820</b> Transittering. Transittering som er startet opp utenfor Norge og som bare skal grensepasseres ved ankomst til grensen eller Transittering som skal fullføres mot tolldeklarasjon ved grensepassering
 				           		</ul>
 								</span>	
@@ -706,7 +707,7 @@
 			 				<td class="text14">&nbsp;<span title="ehrg">Deklarantnr.</span></td>
 							<td class="text14">&nbsp;<span title="eh0068a">Dato</span></td>
 							<td class="text14">&nbsp;<span title="eh0068b">Sekvensnr.</span></td>
-							<td class="text14">&nbsp;<span title="ehtrnr">MRN/LRN - Transitering</span></td>
+							<td class="text14">&nbsp;<span title="ehtrnr">MRN/LRN-Trans/Godsnr</span></td>
 							
 						</tr>
 						<tr>
@@ -714,7 +715,8 @@
 			 					<select class="inputTextMediumBlue" id="ehtrty" name="ehtrty">
 									<option title="Tolldeklarasjon" value="CUDE" <c:if test="${model.record.ehtrty == 'CUDE'}"> selected </c:if> >CUDE</option>
 							  		<option title="Transitteringsdeklarasjon" value="N820" <c:if test="${model.record.ehtrty == 'N820'}"> selected </c:if> >N820</option>
-							  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty == 'RETR'}"> selected </c:if> >RETR</option> 	
+							  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty == 'RETR'}"> selected </c:if> >RETR</option>
+							  		<option title="Godsnummer. Brukes for varer som skal godsregistreres" value="GONU" <c:if test="${model.record.ehtrty == 'GONU'}"> selected </c:if> >GONU</option> 	
 								</select>
 		 					</td>
 							<td class="text14"><input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="ehrg" id="ehrg" size="12" maxlength="11" value="${model.record.ehrg}"></td>
@@ -733,7 +735,7 @@
 			 				<td class="text14"><input type="text" class="inputTextMediumBlue toggleTransit" name="ehtrnr" id="ehtrnr" size="20" maxlength="18" value="${model.record.ehtrnr}"></td>
 			 				
 			 				<td class="text14">		
-				 				<input class="inputFormSubmitStd" type="button" name="manyTransIdButton" id="manyTransIdButton" onClick="showPop('more_transits');" value='Lage flere Transit.'>
+				 				<input class="inputFormSubmitStd" type="button" name="manyTransIdButton" id="manyTransIdButton" onClick="showPop('more_transits');" value='Lage flere Trans./Godsnr'>
 				 				<img style="cursor:pointer;vertical-align: middle;" src="resources/images/add.png" width="12px" height="12px" border="0" alt="create new" >
 				 					<div class="text14" style="position: relative;" align="right" >
 			 						<span style="position:absolute;top:-200px; width:650px;" id="more_transits" class="popupWithInputText"  >
@@ -744,21 +746,22 @@
 							           				<table class="lightGrayBg" >
 							           				<tr>
 									           			<td class="text14" colspan="2">
-									           				<b>Flere Transiteringer</b>
+									           				<b>Flere Trans./Godsnr</b>
 									           			</td>
 								        			</tr>
 													<tr>
 														<td class="text14">&nbsp;<span title="ehtrty2" >2.Ref.type</span></td>
-									           			<td class="text14">&nbsp;<span title="ehtrnr2" >2.MRN/LRN - Transitering</span></td>
-									           			<td class="text14">&nbsp;<span title="ehtrty3" >3.Eksporttype</span></td>
-									           			<td class="text14">&nbsp;<span title="ehtrnr3" >3.MRN/LRN - Transitering</span></td>
+									           			<td class="text14">&nbsp;<span title="ehtrnr2" >2.MRN/LRN-Trans/Godsnr</span></td>
+									           			<td class="text14">&nbsp;<span title="ehtrty3" >3.Ref.type</span></td>
+									           			<td class="text14">&nbsp;<span title="ehtrnr3" >3.MRN/LRN-Trans/Godsnr</span></td>
 									           			
 													</tr>
 								           			<tr>
 									           			<td class="text14" nowrap >&nbsp;
 									            			<select class="inputTextMediumBlue" id="ehtrty2" name="ehtrty2">
 																<option title="Transitteringsdeklarasjon" value="N820" <c:if test="${model.record.ehtrty2 == 'N820'}"> selected </c:if> >N820</option>
-														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty2 == 'RETR'}"> selected </c:if> >RETR</option> 	
+														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty2 == 'RETR'}"> selected </c:if> >RETR</option>
+														  		<option title="Godsnummer. Brukes for varer som skal godsregistreres" value="GONU" <c:if test="${model.record.ehtrty2 == 'GONU'}"> selected </c:if> >GONU</option>
 															</select>
 										            		
 									           			</td>
@@ -768,7 +771,8 @@
 									           			<td class="text14" nowrap >&nbsp;
 									            			<select class="inputTextMediumBlue" id="ehtrty3" name="ehtrty3">
 																<option title="Transitteringsdeklarasjon" value="N820" <c:if test="${model.record.ehtrty3 == 'N820'}"> selected </c:if> >N820</option>
-														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty3 == 'RETR'}"> selected </c:if> >RETR</option> 	
+														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty3 == 'RETR'}"> selected </c:if> >RETR</option>
+														  		<option title="Godsnummer. Brukes for varer som skal godsregistreres" value="GONU" <c:if test="${model.record.ehtrty3 == 'GONU'}"> selected </c:if> >GONU</option> 	
 															</select>
 										            		
 									           			</td>
@@ -779,16 +783,17 @@
 				           							</tr>
 				           							<tr>
 														<td class="text14">&nbsp;<span title="ehtrty4" >4.Ref.type</span></td>
-									           			<td class="text14">&nbsp;<span title="ehtrnr4" >4.MRN/LRN - Transitering</span></td>
+									           			<td class="text14">&nbsp;<span title="ehtrnr4" >4.MRN/LRN-Trans/Godsnr</span></td>
 									           			<td class="text14">&nbsp;<span title="ehtrty5" >5.Ref.type</span></td>
-									           			<td class="text14">&nbsp;<span title="ehtrnr5" >5.MRN/LRN - Transitering</span></td>
+									           			<td class="text14">&nbsp;<span title="ehtrnr5" >5.MRN/LRN-Trans/Godsnr</span></td>
 									           			
 													</tr>
 								           			<tr>
 									           			<td class="text14" nowrap >&nbsp;
 									            			<select class="inputTextMediumBlue" id="ehtrty4" name="ehtrty4">
 																<option title="Transitteringsdeklarasjon" value="N820" <c:if test="${model.record.ehtrty4 == 'N820'}"> selected </c:if> >N820</option>
-														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty4 == 'RETR'}"> selected </c:if> >RETR</option> 	
+														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty4 == 'RETR'}"> selected </c:if> >RETR</option>
+														  		<option title="Godsnummer. Brukes for varer som skal godsregistreres" value="GONU" <c:if test="${model.record.ehtrty4 == 'GONU'}"> selected </c:if> >GONU</option> 	
 															</select>
 										            		
 									           			</td>
@@ -798,7 +803,8 @@
 									           			<td class="text14" nowrap >&nbsp;
 									            			<select class="inputTextMediumBlue" id="ehtrty5" name="ehtrty5">
 																<option title="Transitteringsdeklarasjon" value="N820" <c:if test="${model.record.ehtrty5 == 'N820'}"> selected </c:if> >N820</option>
-														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty5 == 'RETR'}"> selected </c:if> >RETR</option> 	
+														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty5 == 'RETR'}"> selected </c:if> >RETR</option> 
+														  		<option title="Godsnummer. Brukes for varer som skal godsregistreres" value="GONU" <c:if test="${model.record.ehtrty5 == 'GONU'}"> selected </c:if> >GONU</option>	
 															</select>
 										            		
 									           			</td>
@@ -808,16 +814,17 @@
 				           							</tr>
 				           							<tr>
 														<td class="text14">&nbsp;<span title="ehtrty6" >6.Ref.type</span></td>
-									           			<td class="text14">&nbsp;<span title="ehtrnr6" >6.MRN/LRN - Transitering</span></td>
+									           			<td class="text14">&nbsp;<span title="ehtrnr6" >6.MRN/LRN-Trans/Godsnr</span></td>
 									           			<td class="text14">&nbsp;<span title="ehtrty7" >7.Ref.type</span></td>
-									           			<td class="text14">&nbsp;<span title="ehtrnr7" >7.MRN/LRN - Transitering</span></td>
+									           			<td class="text14">&nbsp;<span title="ehtrnr7" >7.MRN/LRN-Trans/Godsnr</span></td>
 									           			
 													</tr>
 								           			<tr>
 									           			<td class="text14" nowrap >&nbsp;
 									            			<select class="inputTextMediumBlue" id="ehtrty6" name="ehtrty6">
 																<option title="Transitteringsdeklarasjon" value="N820" <c:if test="${model.record.ehtrty6 == 'N820'}"> selected </c:if> >N820</option>
-														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty6 == 'RETR'}"> selected </c:if> >RETR</option> 	
+														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty6 == 'RETR'}"> selected </c:if> >RETR</option> 
+														  		<option title="Godsnummer. Brukes for varer som skal godsregistreres" value="GONU" <c:if test="${model.record.ehtrty6 == 'GONU'}"> selected </c:if> >GONU</option>	
 															</select>
 										            		
 									           			</td>
@@ -827,7 +834,8 @@
 									           			<td class="text14" nowrap >&nbsp;
 									            			<select class="inputTextMediumBlue" id="ehtrty7" name="ehtrty7">
 																<option title="Transitteringsdeklarasjon" value="N820" <c:if test="${model.record.ehtrty7 == 'N820'}"> selected </c:if> >N820</option>
-														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty7 == 'RETR'}"> selected </c:if> >RETR</option> 	
+														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty7 == 'RETR'}"> selected </c:if> >RETR</option> 
+														  		<option title="Godsnummer. Brukes for varer som skal godsregistreres" value="GONU" <c:if test="${model.record.ehtrty7 == 'GONU'}"> selected </c:if> >GONU</option>	
 															</select>
 										            		
 									           			</td>
@@ -837,16 +845,17 @@
 				           							</tr>
 				           							<tr>
 														<td class="text14">&nbsp;<span title="ehtrty8" >8.Ref.type</span></td>
-									           			<td class="text14">&nbsp;<span title="ehtrnr8" >8.MRN/LRN - Transitering</span></td>
+									           			<td class="text14">&nbsp;<span title="ehtrnr8" >8.MRN/LRN-Trans/Godsnr</span></td>
 									           			<td class="text14">&nbsp;<span title="ehtrty9" >9.Ref.type</span></td>
-									           			<td class="text14">&nbsp;<span title="ehtrnr9" >9.MRN/LRN - Transitering</span></td>
+									           			<td class="text14">&nbsp;<span title="ehtrnr9" >9.MRN/LRN-Trans/Godsnr</span></td>
 									           			
 													</tr>
 								           			<tr>
 									           			<td class="text14" nowrap >&nbsp;
 									            			<select class="inputTextMediumBlue" id="ehtrty8" name="ehtrty8">
 																<option title="Transitteringsdeklarasjon" value="N820" <c:if test="${model.record.ehtrty8 == 'N820'}"> selected </c:if> >N820</option>
-														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty8 == 'RETR'}"> selected </c:if> >RETR</option> 	
+														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty8 == 'RETR'}"> selected </c:if> >RETR</option>
+														  		<option title="Godsnummer. Brukes for varer som skal godsregistreres" value="GONU" <c:if test="${model.record.ehtrty8 == 'GONU'}"> selected </c:if> >GONU</option> 	
 															</select>
 										            		
 									           			</td>
@@ -856,7 +865,8 @@
 									           			<td class="text14" nowrap >&nbsp;
 									            			<select class="inputTextMediumBlue" id="ehtrty9" name="ehtrty9">
 																<option title="Transitteringsdeklarasjon" value="N820" <c:if test="${model.record.ehtrty9 == 'N820'}"> selected </c:if> >N820</option>
-														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty9 == 'RETR'}"> selected </c:if> >RETR</option> 	
+														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty9 == 'RETR'}"> selected </c:if> >RETR</option>
+														  		<option title="Godsnummer. Brukes for varer som skal godsregistreres" value="GONU" <c:if test="${model.record.ehtrty9 == 'GONU'}"> selected </c:if> >GONU</option> 	
 															</select>
 										            		
 									           			</td>
@@ -867,14 +877,15 @@
 				           							
 				           							<tr>
 														<td class="text14">&nbsp;<span title="ehtrty10" >10.Ref.type</span></td>
-									           			<td class="text14">&nbsp;<span title="ehtrnr10" >10.MRN/LRN - Transitering</span></td>
+									           			<td class="text14">&nbsp;<span title="ehtrnr10" >10.MRN/LRN-Trans/Godsnr</span></td>
 									           			
 													</tr>
 								           			<tr>
 									           			<td class="text14" nowrap >&nbsp;
 									            			<select class="inputTextMediumBlue" id="ehtrty10" name="ehtrty10">
 																<option title="Transitteringsdeklarasjon" value="N820" <c:if test="${model.record.ehtrty10 == 'N820'}"> selected </c:if> >N820</option>
-														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty10 == 'RETR'}"> selected </c:if> >RETR</option> 	
+														  		<option title="Oppstart transittering (på grensen). Brukes dersom det er en LRN" value="RETR" <c:if test="${model.record.ehtrty10 == 'RETR'}"> selected </c:if> >RETR</option> 
+														  		<option title="Godsnummer. Brukes for varer som skal godsregistreres" value="GONU" <c:if test="${model.record.ehtrty10 == 'GONU'}"> selected </c:if> >GONU</option>	
 															</select>
 										            		
 									           			</td>
