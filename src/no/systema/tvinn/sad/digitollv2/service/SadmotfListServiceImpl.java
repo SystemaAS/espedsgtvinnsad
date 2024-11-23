@@ -3,7 +3,9 @@
  */
 package no.systema.tvinn.sad.digitollv2.service;
 
+import no.systema.tvinn.sad.digitollv2.mapper.jsonjackson.EoriValidationMapper;
 import no.systema.tvinn.sad.digitollv2.mapper.jsonjackson.SadmotfMapper;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.EoriValidationContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 
 /**
@@ -24,6 +26,20 @@ public class SadmotfListServiceImpl implements SadmotfListService {
 		return container;
 		
 	}
+	
+	public EoriValidationContainer getListContainerEORIValidation(String utfPayload) {
+		EoriValidationContainer container = null;
+		try{
+			EoriValidationMapper mapper = new EoriValidationMapper();
+			container = mapper.getContainer(utfPayload);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return container;
+		
+	}
+	
 	
 	
 	

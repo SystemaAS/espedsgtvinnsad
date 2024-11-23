@@ -26,6 +26,8 @@ import no.systema.main.service.UrlCgiProxyService;
 import no.systema.main.util.DateTimeManager;
 import no.systema.tvinn.sad.digitollv2.controller.service.HouseControllerService;
 import no.systema.tvinn.sad.digitollv2.controller.service.MasterControllerService;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.EoriValidationContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.EoriValidationDto;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurContainer;
@@ -126,6 +128,41 @@ public class TvinnSadDigitollAjaxController {
 	    		SadmoifContainer jsonContainer = this.sadmoifListService.getListContainer(jsonPayload);
 	    		List<SadmoifRecord> list = (List)jsonContainer.getList();
 	    		for(SadmoifRecord record : list) {
+	    			result.add(record);
+	    		}
+	    		
+	    	}
+		 
+		 return result;
+	 }
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param eori
+	 * @return
+	 */
+	@RequestMapping(value = "getEORIValidation_Digitoll.do", method = RequestMethod.GET)
+	public @ResponseBody Set<EoriValidationDto> getEORIValidation_Digitoll
+	  						(@RequestParam String applicationUser, @RequestParam String eori) {
+		 
+		 final String METHOD = "[DEBUG] getEORIValidation_Digitoll ";
+		 logger.info(METHOD + "Inside");
+		 Set result = new HashSet();
+		 //prepare the access CGI with RPG back-end
+		 final String BASE_URL = SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL + "getEORIValidation.do";
+		 String urlRequestParams = "user=" + applicationUser + "&eori=" + eori;
+			logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+	    	logger.warn("URL: " + BASE_URL);
+	    	logger.warn("URL PARAMS: " + urlRequestParams);
+	    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+	
+	    	//Debug --> 
+	    	logger.debug(jsonPayload);
+	    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    	if(jsonPayload!=null){
+	    		EoriValidationContainer jsonContainer = this.sadmotfListService.getListContainerEORIValidation(jsonPayload);
+	    		List<EoriValidationDto> list = (List)jsonContainer.getList();
+	    		for(EoriValidationDto record : list) {
 	    			result.add(record);
 	    		}
 	    		

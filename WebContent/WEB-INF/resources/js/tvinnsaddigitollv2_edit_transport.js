@@ -652,6 +652,120 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 		}
   }
   
+/*
+  jq(function() { 
+	    jq('#etrgt').blur(function() {
+			if(jq('#etrgt').val() != ""){
+				//only with EORI and not with OrgNr
+				var eoriStart = new RegExp('[A-Z]{2}');
+				if(eoriStart.test(jq('#etrgt').val())){
+					//var field = jq('#etrgt');
+						validateEORI(jq('#etrgt'))
+						
+						jq.ajax({
+					  	  type: 'GET',
+					  	  url: 'getEORIValidation_Digitoll.do',
+					  	  data: { applicationUser : jq('#applicationUser').val(),
+		 						  eori : jq('#etrgt').val()}, 
+					  	  dataType: 'json',
+					  	  cache: false,
+					  	  contentType: 'application/json',
+					  	  
+						  success: function(data) {
+							console.log("Hello eori validation...");
+							var len = data.length;
+							if(len>0){
+								  for ( var i = 0; i < len; i++) {
+									if(data[i].status == 0){ //Valid
+										jq('#etrgt').removeClass("isa_error");
+										//jq('#etrgt').addClass("isa_success");
+											
+									}else{
+										jq('#etrgt').addClass("isa_error");
+									}
+								  }
+							 }else{
+								jq('#etrgt').addClass("isa_error");
+							 }	
+							 
+							},
+						  	  error: function() {
+						  	    alert('Error loading ...');
+						  	 }	
+						});
+						
+				}else{
+					jq('#etrgt').removeClass("isa_error");
+				}	
+			}else{
+				jq('#etrgt').removeClass("isa_error");
+				//jq('#etrgt').removeClass("isa_success");
+			}
+
+		});
+  });
+*/
+jq(function() { 
+	jq('#etrgt').blur(function() {
+		validateEORI(jq('#etrgt'))
+				
+ 	});
+
+	jq('#etrgr').blur(function() {
+		validateEORI(jq('#etrgr'))
+				
+ 	});
+
+ });	
+function validateEORI(field){
+	if(field.val() != ""){
+	  	//only with EORI and not with OrgNr
+	  	var eoriStart = new RegExp('[A-Z]{2}');
+	  	if(eoriStart.test(field.val())){
+	  
+				jq.ajax({
+			  	  type: 'GET',
+			  	  url: 'getEORIValidation_Digitoll.do',
+			  	  data: { applicationUser : jq('#applicationUser').val(),
+						  eori : field.val()}, 
+			  	  dataType: 'json',
+			  	  cache: false,
+			  	  contentType: 'application/json',
+			  	  
+				  success: function(data) {
+					console.log("Hello eori validation...");
+					var len = data.length;
+					if(len>0){
+						  for ( var i = 0; i < len; i++) {
+							if(data[i].status == 0){ //Valid
+								field.removeClass("isa_error");
+								//jq('#etrgt').addClass("isa_success");
+									
+							}else{
+								field.addClass("isa_error");
+							}
+						  }
+					 }else{
+						field.addClass("isa_error");
+					 }	
+					 
+					},
+				  	  error: function() {
+				  	    console.log("ERROR on service... check logs ...");
+				  	 }	
+				});
+		}else{
+			field.removeClass("isa_error");
+		}	
+	}else{
+		field.removeClass("isa_error");
+		//field.removeClass("isa_success");
+	}
+}
+
+
+  
+
   //-------------------------------------------
   //START Model dialog ADMIN: "Update status"
   //-------------------------------------------
