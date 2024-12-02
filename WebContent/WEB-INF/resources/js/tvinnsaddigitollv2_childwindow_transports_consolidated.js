@@ -95,6 +95,86 @@
 	  	});
 		
   	}
+	//=======================================================================
+	//Consolidated Transport: change all houses into one-on tranport-master
+	//=======================================================================
+	jq(function() {
+		jq('#buttonCheckAll').click(function(){
+			jq( ".clazzCreateHouseAware" ).each(function(  ) {
+				var id = this.id;
+				
+				if (jq(this).is(":checked")) {	  
+					jq(this).prop('checked', false);
+				}else{
+					jq(this).prop('checked', true);
+				}
+				
+			});
+		});
+		//abort
+		jq('#buttonCancel').click(function(){
+			window.close();
+		});
+		
+		//consolidate controller call
+		jq('#buttonCreateHousesOk').click(function(){
+			var params = "";
+			jq( ".clazzCreateHouseAware" ).each(function(  ) {
+			   var id = this.id;
+			   if(jq('#' + id).prop('checked')){
+				  var tmp = id + "#";
+				  params = params + tmp; 
+			   }	
+			});
+			
+			/* DEBUG
+			alert(params);
+			alert("User:" + jq('#applicationUser').val());
+			alert("lnrt:" + jq('#lnrt').val());
+			*/
+			if(params != ""){
+			  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+			  jq.ajax({
+		  	  	  type: 'GET',
+		  	  	  url: 'createHousesFromTransportConsolidation_Digitoll.do',
+		  	  	  data: { applicationUser : jq('#applicationUser').val(),
+							params : params,
+							lnrt : jq('#lnrt').val()
+						},
+				  dataType: 'json',
+		  	  	  cache: false,
+		  	  	  //async: false,
+		  	  	  contentType: 'application/json',
+		  	  	  success: function(data) {
+					jq.unblockUI(); //must have async: true (default) to work
+		  	  		var len = data.length;
+		  	  		for ( var i = 0; i < len; i++) {
+		  	  			//Update has been done successfully
+				        
+		  	  		}
+					
+		  	  	  },
+			  	  error: function() {
+					jq.unblockUI();
+		  	  	    //alert('Error loading ...');
+		  	  	  }
+		  	  });
+			
+			}
+				
+			window.setTimeout(function(){
+                 //we must reload the parent master window since the use case updates the invoice list (if the end-user has selected some invoices to import)
+				  window.opener.setBlockUI();
+				  window.opener.location.href="tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=" + jq('#lnrt').val();
+				  window.close();     
+             }, 800); //milliseconds: in order to avoid a refresh in transport due to the above Ajax. It could take more time to be finished on the background...
+			
+		});
+		
+		
+	});
+	
+	
 
 
 //Initialize <div> here for all clazz_dialog

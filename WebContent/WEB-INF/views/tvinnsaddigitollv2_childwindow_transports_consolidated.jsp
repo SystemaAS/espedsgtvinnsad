@@ -18,9 +18,7 @@
 				<table id="containerdatatableTable" cellspacing="2" align="left" width="100%" >
 				<form>
 					<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
-					<input type="hidden" name="fromEmlnrt" id="fromEmlnrt" value="${model.fromEmlnrt}">
-					<input type="hidden" name="fromEmlnrm" id="fromEmlnrm" value="${model.fromEmlnrm}">
-					<input type="hidden" name="fromEtktyp" id="fromEtktyp" value="${model.fromEtktyp}">
+					<input type="hidden" name="lnrt" id="lnrt" value="${model.lnrt}">
 				</form>									           		
 			    <tr>
 				<td>		
@@ -34,10 +32,21 @@
 						<tr >
 							<td class="text14  ">
 				    			<font class="inputText isa_warning" >
-				    				Gyldige transporter er kun innenfor samme API og uten tidligere registrerte Masters
+				    				Gyldige transporter med Status = AUTO-GEN.
 				    			</font>
 				    		</td>
 				   		</tr>
+				   		<tr >
+					   		<td align="left">
+			               		<c:if test="${not empty model.list}">
+			               			&nbsp;<input title="auto-consolidate house(s)..." class="inputFormSubmit" type="button" name="buttonCreateHousesOk" id="buttonCreateHousesOk" value='Ok Auto'>
+			               		</c:if>
+			               		<input class="inputFormSubmit" type="button" name="buttonCancel" id="buttonCancel" value='Avbryt'>
+			               		<c:if test="${not empty model.list}">
+			               			<input class="inputFormSubmitStd" type="button" name="buttonCheckAll" id="buttonCheckAll" value='Velg alle'>
+			               		</c:if>
+			               	</td>
+		               	</tr>
 						<tr height="5"><td></td></tr> 
 						<tr>
 						<td class="text11">
@@ -56,16 +65,8 @@
 		                	<c:forEach items="${model.list}" var="itemLinesRecord" varStatus="counter">    
 				             <tr class="tableRow" height="20" >
 					           <td width="2%" align="center" class="tableCellFirst12">
-					           		<c:choose>
-					           		<c:when test="${empty itemLinesRecord.listMasters}">
-						           		<a tabindex=-1 title="${itemLinesRecord.etlnrt}" id="recordUpdate_${itemLinesRecord.etlnrt}" href="#" onClick="changeTransport(this);">
-					               			<img valign="bottom" src="resources/images/transform.png" width="15" height="15" border="0" alt="edit">&nbsp;
-					               		</a>
-				               		</c:when>
-				               		<c:otherwise>
-				               			<img style="cursor: not-allowed" title="Ugyldig transport. Ingen tidigare reg. Master(s) skal eksistere i transporten du skal bytte til" valign="bottom" src="resources/images/lock.gif" border="0" alt="not-allowed">&nbsp;
-				               		</c:otherwise>
-									</c:choose>
+					           		<input class="clazzCreateHouseAware" style="cursor:pointer;" type="checkbox" value="J" id="${itemLinesRecord.etlnrt}" >
+					           </td>
 					           	</td>	
 				          	   <td width="2%" align="center"class="tableCell12" >${itemLinesRecord.etlnrt}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${itemLinesRecord.etkmrk}</td>

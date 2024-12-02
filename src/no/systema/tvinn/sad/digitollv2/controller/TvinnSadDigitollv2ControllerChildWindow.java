@@ -1619,7 +1619,8 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			//get all masters
 			List list = this.getTransportsConsolidated(appUser, etlnrt);  
 			model.put("list", list);
-			model.put("etlnrtParent", etlnrt);
+			model.put("lnrt", etlnrt.toString());
+			logger.info(etlnrt.toString());
 			//model.put("fromEmlnrt", emlnrt);
 			//model.put("fromEmlnrm", emlnrm);
 			//model.put("fromEtktyp", etktyp);
