@@ -235,6 +235,9 @@ public class TvinnSadDigitollv2TransportController {
 			this.avdSignControllerService.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
 			this.avdSignControllerService.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
 			this.setCodeDropDownMgr(appUser, model);
+			//this is necessary since not all customers have access to webservices without making firewall changes (take time...)
+			model.put("eoriValidationActive",AppConstants.EORI_VALIDATION_ACTIVE);
+			
 			//set a session variable in order to make the list available to an external view controller (Excel/PDF- Controller)
 			session.setAttribute(session.getId() + TvinnSadConstants.SESSION_LIST, outputList);
 			
@@ -399,7 +402,8 @@ public class TvinnSadDigitollv2TransportController {
 			this.avdSignControllerService.populateSignatureHtmlDropDownsFromJsonString(model, appUser);
 			//this.setCodeDropDownMgr(appUser, model);
 			this.setDropDownService(model);
-			
+			//this is necessary since not all customers have access to webservices without making firewall changes (take time...)
+			model.put("eoriValidationActive",AppConstants.EORI_VALIDATION_ACTIVE);
 			
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 	    

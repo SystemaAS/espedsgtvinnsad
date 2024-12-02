@@ -718,7 +718,8 @@ jq(function() {
 
  });	
 function validateEORI(field){
-	if(field.val() != ""){
+	console.log("eoriValidation:" + jq('#eoriValidationActive').val());
+	if(field.val() != "" && jq('#eoriValidationActive').val() >0){
 	  	//only with EORI and not with OrgNr
 	  	var eoriStart = new RegExp('[A-Z]{2}');
 	  	if(eoriStart.test(field.val())){
@@ -733,20 +734,27 @@ function validateEORI(field){
 			  	  contentType: 'application/json',
 			  	  
 				  success: function(data) {
-					console.log("Hello eori validation...");
+					console.log("success(1) eori validation...");
+					
 					var len = data.length;
 					if(len>0){
+						  console.log("level-2 eori validation..." + len);
+					
 						  for ( var i = 0; i < len; i++) {
+							console.log("level-2.1 eori validation...");
 							if(data[i].status == 0){ //Valid
+								console.log("level-3 eori validation...");
 								field.removeClass("isa_error");
 								//jq('#etrgt').addClass("isa_success");
 									
 							}else{
 								field.addClass("isa_error");
+								console.log("addClass-isa_error_ok");
 							}
 						  }
 					 }else{
 						field.addClass("isa_error");
+						console.log("addClass-isa_error_ok on len<0");
 					 }	
 					 
 					},

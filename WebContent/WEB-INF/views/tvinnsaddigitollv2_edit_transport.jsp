@@ -143,6 +143,7 @@
 			<input type="hidden" name="etuuid" id="etuuid" value="${model.record.etuuid}"> 
 			<input type="hidden" name="etmid" id="etmid" value="${model.record.etmid}">
 			<input type="hidden" name="action" id="action" value="doUpdate">
+			<input type="hidden" name="eoriValidationActive" id="eoriValidationActive" value="${model.eoriValidationActive}">
 			
 			<c:if test="${model.record.etlnrt > 0}">
 				<input type="hidden" name="etlnrt" id="etlnrt" value="${model.record.etlnrt}"> 
