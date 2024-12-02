@@ -586,7 +586,7 @@
 		               <td width="2%" align="center" class="tableCell" >
 		               		<c:choose>
 		               		<c:when test="${record.etst2 == 'S' ||  record.etst2 == 'D' || 
-		               				record.etst2 == 'M' || record.etst2 == 'C' || record.etst2 == 'N'}">
+		               				record.etst2 == 'M' || record.etst2 == 'C' || record.etst2 == 'N' || record.etst2 == 'Z'}">
 		               				
 		               			<c:if test="${record.etst2 == 'S'}">
 		               				<span class="text12" style="cursor:help;" title="S" >SUBMITTED</span>
@@ -602,6 +602,13 @@
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'N'}">
 		               				<font class="text12" style="cursor:help;" title="UTC-tid:${record.etenttim} Valid:${record.etentval} Tollst:${record.etentoff}" >DENIED</font>
+		               			</c:if>
+		               			<c:if test="${record.etst2 == 'Z'}">
+		               				<span class="text12" style="cursor:help;" title="Z" >
+		               					<a tabindex=-1 style="display: block; width: 100%; height: 100%;" class="consolidateLink" id="etlnrt${record.etlnrt}" runat="server" href="#">
+		               						AUTO-GEN
+		               					</a>
+		               				</span>
 		               			</c:if>
 		               			
 		               		</c:when>

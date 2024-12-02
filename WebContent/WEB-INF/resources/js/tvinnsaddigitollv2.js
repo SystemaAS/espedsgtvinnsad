@@ -55,7 +55,17 @@
 	  
 	  
   });
-  
+ 
+jq(function() {
+	  jq(".consolidateLink").click(function() {
+		  var id = this.id;
+		  //jq("#"+id).attr(('target','_blank'));
+		  
+		  var controllerUrl = "tvinnsaddigitollv2_childwindow_transports_consolidated.do?id=" + id;
+		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
+			
+	  });
+  }); 
   
 //Initialize <div> here for all clazz_dialog
   jq(function() { 

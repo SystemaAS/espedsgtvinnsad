@@ -1594,6 +1594,47 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	 * @param request
 	 * @return
 	 */
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_transports_consolidated.do", method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doShowTransportsConsolidated(HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doShowTransportsConsolidated");
+		Map model = new HashMap();
+		
+		String id = request.getParameter("id");
+		Integer etlnrt = Integer.valueOf(id.replace("etlnrt", ""));
+		//String[] idRec = id.split("_"); 
+		//Integer emlnrt = Integer.valueOf(idRec[0].replace("emlnrt", ""));
+		//Integer emlnrm = Integer.valueOf(idRec[1].replace("emlnrm", ""));
+		//String etktyp = idRec[2].replace("etktyp", "");
+		//logger.info("emlnrt:" + emlnrt + " emlnrm:" + emlnrm + " etktyp:" + etktyp);
+		
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_transports_consolidated");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			//get all masters
+			List list = this.getTransportsConsolidated(appUser, etlnrt);  
+			model.put("list", list);
+			model.put("etlnrtParent", etlnrt);
+			//model.put("fromEmlnrt", emlnrt);
+			//model.put("fromEmlnrm", emlnrm);
+			//model.put("fromEtktyp", etktyp);
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	
+	/**
+	 * 
+	 * @param session
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="tvinnsaddigitollv2_childwindow_oppdrag.do", method={RequestMethod.GET, RequestMethod.POST} )
 	public ModelAndView doShowOppdrag(HttpSession session, HttpServletRequest request){
 		this.context = TdsAppContext.getApplicationContext();
@@ -2256,6 +2297,64 @@ public class TvinnSadDigitollv2ControllerChildWindow {
     	
     	return result;
 	}
+	
+	private List<SadmotfRecord> getTransportsConsolidated(SystemaWebUser appUser, Integer etlnrt) {
+		
+		List<SadmotfRecord> result = new ArrayList<SadmotfRecord>();
+		int DAYS_BACK_FROM_NOW = -10;
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_TRANSPORT_URL;
+		//add from date in order to limit the list
+		//String fromRegDate = this.dateMgr.getSpecificDayFrom_CurrentDate_ISO(DAYS_BACK_FROM_NOW);
+		String urlRequestParams = "user=" + appUser.getUser() + "&cb_C=Z";
+		
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	//logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		SadmotfContainer jsonContainer = this.sadmotfListService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		List<SadmotfRecord> outputList = (List)jsonContainer.getList();
+			for(SadmotfRecord record : outputList) {
+				//get masters to know in the GUI ... (only transports without masters are allow to change to)
+				/*this.getMasters(appUser, record);
+				
+				//check if it is a transport with the same api (road or air)
+				if(etktyp.startsWith(SadDigitollConstants.API_AIR_INDICATOR)) {
+					if(record.getEtktyp().startsWith(SadDigitollConstants.API_AIR_INDICATOR)) {
+						//Eliminate one-self
+						if( record.getEtlnrt() != emlnrt) {
+							result.add(record);
+						}
+					}
+				}else {
+					if(!record.getEtktyp().startsWith(SadDigitollConstants.API_AIR_INDICATOR)) {
+						//Eliminate one-self
+						if(record.getEtlnrt() != emlnrt) {
+							result.add(record);
+						}
+					}
+				}*/
+				
+				if(record.getEtlnrt() != etlnrt) {
+					result.add(record);
+				}
+				
+				
+			}
+			
+    	}
+    	
+    	return result;
+	}
+
 	/**
 	 * 
 	 * @param appUser
