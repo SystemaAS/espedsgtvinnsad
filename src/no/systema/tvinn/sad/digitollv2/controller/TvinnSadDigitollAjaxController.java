@@ -22,10 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import javawebparts.core.org.apache.commons.lang.StringUtils;
+import no.systema.main.model.SystemaWebUser;
 import no.systema.main.service.UrlCgiProxyService;
 import no.systema.main.util.DateTimeManager;
 import no.systema.tvinn.sad.digitollv2.controller.service.HouseControllerService;
 import no.systema.tvinn.sad.digitollv2.controller.service.MasterControllerService;
+import no.systema.tvinn.sad.digitollv2.enums.EnumSadmohfStatus2;
+import no.systema.tvinn.sad.digitollv2.enums.EnumSadmomfStatus2;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.EoriValidationContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.EoriValidationDto;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragContainer;
@@ -34,6 +37,7 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifRecord;
@@ -44,6 +48,7 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
 import no.systema.tvinn.sad.digitollv2.service.SadOppdragService;
 import no.systema.tvinn.sad.digitollv2.service.SadTurService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoafListService;
+import no.systema.tvinn.sad.digitollv2.service.SadmohfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
@@ -928,15 +933,23 @@ public class TvinnSadDigitollAjaxController {
 		  
 	  }
 	
-	
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param params
+	 * @param lnrt
+	 * @param tur
+	 * @return
+	 */
 	@RequestMapping(value = "createHousesFromTransportConsolidation_Digitoll.do", method = RequestMethod.GET)
 	public @ResponseBody Set<SadOppdragRecord> createHousesFromTransportConsolidation_Digitoll
 	  						(@RequestParam String applicationUser, @RequestParam String params, 
-	  						 @RequestParam Integer lnrt) {
+	  						 @RequestParam Integer lnrt, @RequestParam Integer tur ) {
 		
 		 Set result = new HashSet();
 		 
 		 logger.info("lnrt:" + lnrt);
+		 logger.info("tur:" + tur);
 		 logger.info(params);
 		 
 		 List<String> mainList = new ArrayList<String>();
@@ -944,24 +957,22 @@ public class TvinnSadDigitollAjaxController {
 			 String [] recordsEtlnrt = params.split("#");
 			 mainList = Arrays.asList(recordsEtlnrt);
 		 }
+		 int maxHouseTargetCounter = this.getMaxHouseCounter(applicationUser, lnrt);
+		 logger.info("maxHouseTargetCounter:" + maxHouseTargetCounter);
 		 
-		 
+		 //
 		 if(!mainList.isEmpty()) {
-			 
-			 for (String record: mainList) {
-				 
-				 //new fields
-				 logger.info("etlnrt to update:" + record);
-				 if(record!=null) {
-					//hand-over
-					//TODO
-					 
-					
-					
-					//create new
-					//StringBuffer errMsg = new StringBuffer();
-					//int dmlRetval = 0;
-					//dmlRetval = this.houseControllerService.updateRecord(applicationUser, sadmohfRecord, mode, errMsg);
+			 //(1) iterate through the list of GUI-chosen params-transports to consolidate into the parent transport (lnrt)
+			 for (String param: mainList) {
+				 logger.info("etlnrt to move:" + param);
+				 if(param!=null) {
+					 SadmotfRecord sourceTransport = this.consolidateHouses(applicationUser, param);
+					 for(SadmomfRecord master : sourceTransport.getListMasters()) {
+						 for(SadmohfRecord house : master.getListHouses()) {
+							 //private void consolidate(String applicationUser, Integer lnrt, Integer ehlnrh, Integer ehpro, SadmohfRecord record) {
+							 this.consolidateUpdate(applicationUser, lnrt, ++maxHouseTargetCounter, tur, house);
+						 }
+					 }
 					
 		   		 }else {
 		   			 logger.warn("no record to update... ?");
@@ -978,6 +989,156 @@ public class TvinnSadDigitollAjaxController {
 		 return result;
 	 }
 	
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param param
+	 * @return
+	 */
+	private SadmotfRecord consolidateHouses(String applicationUser, String param) {
+		//get masters and houses of the transport in turn
+		SadmotfRecord recordTmp = new SadmotfRecord();
+		recordTmp.setEtlnrt(Integer.valueOf(param));
+		SadmotfRecord record = this.getMasters(applicationUser, recordTmp);
+		
+		for (SadmomfRecord master : record.getListMasters()) {
+			this.getHouses(applicationUser, master);
+		}
+		
+		//at this point we must get the highest ehlnrh-nr of the target transport in order to put the new ones whith this new counter (ehlnrh)
+		logger.info("consolidate houses OK");
+		//logger.info(record.toString());
+		return record;
+		
+	}
+	
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param lnrt
+	 * @param ehlnrh
+	 * @param ehpro
+	 * @param record
+	 */
+	private void consolidateUpdate(String applicationUser, Integer lnrt, Integer ehlnrh, Integer ehpro, SadmohfRecord record) {
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_HOUSECONSIGNMENT_CONSOLIDATE_URL;
+		//add URL-parameters
+		//http://localhost:8080/syjservicestn/syjsSADMOHF_U_CONS.do?user=OSCAR&ehlnrt=35&ehlnrm=1&ehlnrh=1&ehpro=4444&ehlnrt_w=31&ehlnrm_w=1&ehlnrh_w=1
+		StringBuilder urlRequestParams = new StringBuilder();
+		urlRequestParams.append("user=" + applicationUser + "&ehlnrt=" + lnrt + "&ehlnrm=1" + "&ehlnrh=" + ehlnrh + "&ehpro=" + ehpro);
+		urlRequestParams.append("&ehlnrt_w=" + record.getEhlnrt() + "&ehlnrm_w=1" + "&ehlnrh_w=" + record.getEhlnrh());
+		
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	/*
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadmohfContainer jsonContainer = this.sadmohfListService.getListContainer(jsonPayload);
+    		//
+    		if(StringUtils.isNotEmpty(jsonContainer.getErrMsg())){
+    			logger.error("##################" + jsonContainer.getErrMsg() + "#######################");
+    		}else {
+    			//OK with the UPDATE
+    		}
+    		
+    	}
+    	*/
+	}
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param lnrt
+	 * @return
+	 */
+	private int getMaxHouseCounter(String applicationUser, Integer lnrt) {
+		int retval = -1;
+		int counter = -1;
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_HOUSECONSIGNMENT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + applicationUser + "&ehlnrt=" + lnrt + "&ehlnrm=1"; //always first Master
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadmohfContainer jsonContainer = this.sadmohfListService.getListContainer(jsonPayload);
+    		List<SadmohfRecord> list = (List)jsonContainer.getList();
+    		for(SadmohfRecord house : list) {
+    			if(house.getEhlnrh()> counter) {
+    				counter = house.getEhlnrh();
+    			}
+    		}
+    		retval = counter;
+    	}
+    	
+    	return retval;
+	}
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param record
+	 * @return
+	 */
+	private SadmotfRecord getMasters(String applicationUser, SadmotfRecord record) {
+		
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_MASTERCONSIGNMENT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + applicationUser + "&emlnrt=" + record.getEtlnrt();
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadmomfContainer jsonContainer = this.sadmomfListService.getListContainer(jsonPayload);
+    		//get houses also
+    		List<SadmomfRecord> tmpMasterList = (List)jsonContainer.getList();
+    		record.setListMasters(tmpMasterList);
+    		
+    	}
+    	SadmotfRecord retval = record;
+    	
+    	return retval;
+    	
+	}
+	
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param record
+	 */
+	private void getHouses(String applicationUser, SadmomfRecord record) {
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_HOUSECONSIGNMENT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + applicationUser + "&ehlnrt=" + record.getEmlnrt() + "&ehlnrm=" + record.getEmlnrm();
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadmohfContainer jsonContainer = this.sadmohfListService.getListContainer(jsonPayload);
+    		record.setListHouses(jsonContainer.getList());
+    	}
+	}
+	
+
 	
 	/**
 	 * fetch default values from SADMOAF
@@ -1121,9 +1282,7 @@ public class TvinnSadDigitollAjaxController {
 		  return result;
 		  
 	  }
-	
-	
-	/**
+		/**
 	 * 
 	 * @param sadmohfRecord
 	 */
@@ -1452,11 +1611,14 @@ public class TvinnSadDigitollAjaxController {
 	@Autowired
 	private SadmomfListService sadmomfListService;
 	@Autowired
+	private SadmohfListService sadmohfListService;
+	@Autowired
 	private SadmoafListService sadmoafListService;
 	@Autowired
 	private SadOppdragService sadOppdragService;
 	@Autowired
 	private SadTurService sadTurService;
+	
 	
 	@Autowired
 	private HouseControllerService houseControllerService;

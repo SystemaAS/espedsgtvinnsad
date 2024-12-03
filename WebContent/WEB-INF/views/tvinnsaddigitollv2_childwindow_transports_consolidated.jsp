@@ -19,6 +19,7 @@
 				<form>
 					<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
 					<input type="hidden" name="lnrt" id="lnrt" value="${model.lnrt}">
+					<input type="hidden" name="tur" id="tur" value="${model.tur}">
 				</form>									           		
 			    <tr>
 				<td>		
