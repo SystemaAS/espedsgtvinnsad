@@ -927,6 +927,58 @@ public class TvinnSadDigitollAjaxController {
 		  return result;
 		  
 	  }
+	
+	
+	@RequestMapping(value = "createHousesFromTransportConsolidation_Digitoll.do", method = RequestMethod.GET)
+	public @ResponseBody Set<SadOppdragRecord> createHousesFromTransportConsolidation_Digitoll
+	  						(@RequestParam String applicationUser, @RequestParam String params, 
+	  						 @RequestParam Integer lnrt) {
+		
+		 Set result = new HashSet();
+		 
+		 logger.info("lnrt:" + lnrt);
+		 logger.info(params);
+		 
+		 List<String> mainList = new ArrayList<String>();
+		 if (StringUtils.isNotEmpty(params)) {
+			 String [] recordsEtlnrt = params.split("#");
+			 mainList = Arrays.asList(recordsEtlnrt);
+		 }
+		 
+		 
+		 if(!mainList.isEmpty()) {
+			 
+			 for (String record: mainList) {
+				 
+				 //new fields
+				 logger.info("etlnrt to update:" + record);
+				 if(record!=null) {
+					//hand-over
+					//TODO
+					 
+					
+					
+					//create new
+					//StringBuffer errMsg = new StringBuffer();
+					//int dmlRetval = 0;
+					//dmlRetval = this.houseControllerService.updateRecord(applicationUser, sadmohfRecord, mode, errMsg);
+					
+		   		 }else {
+		   			 logger.warn("no record to update... ?");
+		   		 }
+			 }
+			 
+		 }
+		 
+		 SadOppdragRecord fejk = new SadOppdragRecord();
+		 fejk.setSiavd("1");
+		 //(1) just to satisfy the ajax-return-requirement of data
+		 result.add(fejk);
+		 
+		 return result;
+	 }
+	
+	
 	/**
 	 * fetch default values from SADMOAF
 	 * @param request

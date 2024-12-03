@@ -254,7 +254,7 @@
     	}
     });
 
-	jq("div.toolbar").html('<span class="text16">Endre Transport</span>');
+	jq("div.toolbar").html('<span class="text12">Konsolidere Transport</span>');
     
 //event on input field for search
     jq('input.mainList_filter').on( 'keyup click', function () {

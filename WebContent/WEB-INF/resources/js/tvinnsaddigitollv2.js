@@ -59,9 +59,11 @@
 jq(function() {
 	  jq(".consolidateLink").click(function() {
 		  var id = this.id;
-		  //jq("#"+id).attr(('target','_blank'));
+		  var record = id.split('_');
+		  var etlnrt = record[0];
+		  var etpro = record[1];
 		  
-		  var controllerUrl = "tvinnsaddigitollv2_childwindow_transports_consolidated.do?id=" + id;
+		  var controllerUrl = "tvinnsaddigitollv2_childwindow_transports_consolidated.do?etlnrt=" + etlnrt+ "&etpro=" + etpro;
 		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
 			
 	  });

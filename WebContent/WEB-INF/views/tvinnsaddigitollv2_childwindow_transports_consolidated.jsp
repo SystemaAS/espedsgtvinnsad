@@ -31,11 +31,20 @@
 						
 						<tr >
 							<td class="text14  ">
-				    			<font class="inputText isa_warning" >
-				    				Gyldige transporter med Status = AUTO-GEN.
+				    			<font class="inputText">
+				    				Lnr&nbsp;<b>${model.lnrt}</b> - Turnr&nbsp;<b>${model.tur}</b>
 				    			</font>
 				    		</td>
 				   		</tr>
+				   		<tr height="5"><td></td></tr>
+						<tr >
+							<td class="text14  ">
+				    			<font class="inputText isa_warning" >
+				    				Gyldige transporter med status = AUTO-GEN. som kan konsolideres
+				    			</font>
+				    		</td>
+				   		</tr>
+				   		<tr height="2"><td></td></tr>
 				   		<tr >
 					   		<td align="left">
 			               		<c:if test="${not empty model.list}">
@@ -56,8 +65,9 @@
 							<tr class="tableHeaderField" height="20" >
 								<th width="2%" class="tableHeaderFieldFirst12"  >Velg</th>
 		                    	<th width="2%" class="tableHeaderField12" >Transport Lnr</th>
+		                    	<th width="2%" class="tableHeaderField12" >Turnr</th>
 		                    	<th width="2%" class="tableHeaderField12" >Bilnr/Fly</th>
-		                    	<th width="2%" class="tableHeaderField12" >Sjåførs navn</th>
+		                    	<th width="2%" class="tableHeaderField12" >Transp.</th>
 		                    	<th width="2%" class="tableHeaderField12" >Api</th>
 		                	</tr>
 		                	</thead>
@@ -69,8 +79,9 @@
 					           </td>
 					           	</td>	
 				          	   <td width="2%" align="center"class="tableCell12" >${itemLinesRecord.etlnrt}</td>
+				          	   <td width="2%" align="center"class="tableCell12" >${itemLinesRecord.etpro}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${itemLinesRecord.etkmrk}</td>
-			               	   <td width="2%" align="right" class="tableCell12" >${itemLinesRecord.etsjaf}</td>
+				          	   <td width="2%" align="center" class="tableCell12" >${itemLinesRecord.etnat}</td>
 			               	   <td width="2%" align="center" class="tableCell" >
 				               		<c:choose>
 				               		<c:when test="${ not empty itemLinesRecord.etktyp && fn:startsWith(itemLinesRecord.etktyp,'4') }">

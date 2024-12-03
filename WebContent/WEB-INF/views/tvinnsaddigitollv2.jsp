@@ -605,7 +605,7 @@
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'Z'}">
 		               				<span class="text12" style="cursor:help;" title="Z" >
-		               					<a tabindex=-1 style="display: block; width: 100%; height: 100%;" class="consolidateLink" id="etlnrt${record.etlnrt}" runat="server" href="#">
+		               					<a tabindex=-1 style="display: block; width: 100%; height: 100%;" class="consolidateLink" id="etlnrt${record.etlnrt}_etpro${record.etpro}" runat="server" href="#">
 		               						AUTO-GEN
 		               					</a>
 		               				</span>

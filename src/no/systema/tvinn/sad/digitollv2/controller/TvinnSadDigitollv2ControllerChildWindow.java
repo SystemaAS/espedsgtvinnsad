@@ -1600,13 +1600,10 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		logger.info("Inside: doShowTransportsConsolidated");
 		Map model = new HashMap();
 		
-		String id = request.getParameter("id");
+		String id = request.getParameter("etlnrt");
+		String idpro = request.getParameter("etpro");
 		Integer etlnrt = Integer.valueOf(id.replace("etlnrt", ""));
-		//String[] idRec = id.split("_"); 
-		//Integer emlnrt = Integer.valueOf(idRec[0].replace("emlnrt", ""));
-		//Integer emlnrm = Integer.valueOf(idRec[1].replace("emlnrm", ""));
-		//String etktyp = idRec[2].replace("etktyp", "");
-		//logger.info("emlnrt:" + emlnrt + " emlnrm:" + emlnrm + " etktyp:" + etktyp);
+		Integer etpro = Integer.valueOf(idpro.replace("etpro", ""));
 		
 		
 		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_transports_consolidated");
@@ -1620,6 +1617,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			List list = this.getTransportsConsolidated(appUser, etlnrt);  
 			model.put("list", list);
 			model.put("lnrt", etlnrt.toString());
+			model.put("tur", etpro.toString());
 			logger.info(etlnrt.toString());
 			//model.put("fromEmlnrt", emlnrt);
 			//model.put("fromEmlnrm", emlnrm);
