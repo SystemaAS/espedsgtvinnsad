@@ -1,7 +1,2 @@
 AES_EXPORT;Eksport fra EU. Automatisk utførselsbekreftelse og bare unntaksvis behov for manuell behandling
-UGE_EXPORT;Eksport fra Sverige som på forhånd er klarert
 EUEIR_EXPORT;Eksport fra Sverige. Ingen videre oppfølging for Tolletaten ifm ankomst og innpassering
-ALE_EXPORT;Eksport fra Sverige. Ingen videre oppfølging for Tolletaten ifm ankomst og innpassering
-UNU_EXPORT;Eksport fra Sverige. Medfører behov for manuell ekspedisjon på grensen
-ECS_EXPORT;Eksport fra EU. Medfører behov for manuell ekspedisjon på grensen
-EMCS_EXPORT;Eksport av punktskatt-pliktige varer. Varene er frigjort for eksport, men må alltid utførselsbekreftes av toller ettersom det skal gå en melding til det svenske skatteverket. Medfører behov for manuell ekspedisjon på grensen.

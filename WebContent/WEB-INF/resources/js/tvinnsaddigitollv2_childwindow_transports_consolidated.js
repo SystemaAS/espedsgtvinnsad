@@ -162,15 +162,13 @@
 		  	  });
 			
 			}
-			/* real
 			window.setTimeout(function(){
                  //we must reload the parent master window since the use case updates the invoice list (if the end-user has selected some invoices to import)
 				  window.opener.setBlockUI();
 				  window.opener.location.href="tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=" + jq('#lnrt').val();
 				  window.close();     
-             }, 800); //milliseconds: in order to avoid a refresh in transport due to the above Ajax. It could take more time to be finished on the background...
-			*/
-			window.close();
+             }, 1000); //milliseconds: in order to avoid a refresh in transport due to the above Ajax. It could take more time to be finished on the background...
+			
 		});
 		
 		

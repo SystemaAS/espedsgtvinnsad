@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -31,6 +32,8 @@ import no.systema.tvinn.sad.digitollv2.enums.EnumSadmohfStatus2;
 import no.systema.tvinn.sad.digitollv2.enums.EnumSadmomfStatus2;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.EoriValidationContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.EoriValidationDto;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurContainer;
@@ -45,6 +48,7 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
+import no.systema.tvinn.sad.digitollv2.service.GeneralUpdateService;
 import no.systema.tvinn.sad.digitollv2.service.SadOppdragService;
 import no.systema.tvinn.sad.digitollv2.service.SadTurService;
 import no.systema.tvinn.sad.digitollv2.service.SadmoafListService;
@@ -53,6 +57,7 @@ import no.systema.tvinn.sad.digitollv2.service.SadmoifListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
+import no.systema.tvinn.sad.mapper.url.request.UrlRequestParameterMapper;
 import no.systema.tvinn.sad.model.jsonjackson.customer.JsonTvinnSadCustomerContainer;
 import no.systema.tvinn.sad.model.jsonjackson.customer.JsonTvinnSadCustomerRecord;
 import no.systema.tvinn.sad.sadimport.model.jsonjackson.topic.JsonSadImportTopicFinansOpplysningerRecord;
@@ -65,6 +70,8 @@ public class TvinnSadDigitollAjaxController {
 	private static final Logger logger = LoggerFactory.getLogger(TvinnSadDigitollAjaxController.class.getName());
 	private DateTimeManager dateMgr = new DateTimeManager();
 	private String HYPHEN = "-";
+	private UrlRequestParameterMapper urlRequestParameterMapper = new UrlRequestParameterMapper();
+	
 	/**
 	 * 
 	 * @param applicationUser
@@ -966,13 +973,27 @@ public class TvinnSadDigitollAjaxController {
 			 for (String param: mainList) {
 				 logger.info("etlnrt to move:" + param);
 				 if(param!=null) {
-					 SadmotfRecord sourceTransport = this.consolidateHouses(applicationUser, param);
-					 for(SadmomfRecord master : sourceTransport.getListMasters()) {
-						 for(SadmohfRecord house : master.getListHouses()) {
-							 //private void consolidate(String applicationUser, Integer lnrt, Integer ehlnrh, Integer ehpro, SadmohfRecord record) {
-							 this.consolidateUpdate(applicationUser, lnrt, ++maxHouseTargetCounter, tur, house);
+					 SadmotfRecord sourceTransport = this.getSourceTransportToHandoverHouses(applicationUser, param);
+					 if(sourceTransport!=null && sourceTransport.getListMasters()!=null) {
+						 for(SadmomfRecord master : sourceTransport.getListMasters()) {
+							 if(master!=null && master.getListHouses()!=null) {
+								 for(SadmohfRecord house : master.getListHouses()) {
+									 //consolidate
+									 //this.consolidateUpdate(applicationUser, lnrt, ++maxHouseTargetCounter, tur, house);//in case the TUR must be set as the parent transport
+									 this.consolidateUpdate(applicationUser, lnrt, ++maxHouseTargetCounter, tur, house);//in case the TUR must be set as the parent transport
+								 }
+							 }
 						 }
-					 }
+						 //delete source transport
+						 int dmlRetval = 0;
+						 StringBuffer errMsg = new StringBuffer();
+						 dmlRetval = this.deleteTransport(applicationUser, sourceTransport, "D", errMsg);
+						 if(dmlRetval >= 0) {
+							 logger.debug("Transport lnrt:" + sourceTransport.getEtlnrt() + " has been DELETED");
+						 }else {
+							 logger.error("ERROR on deleteTranport:" + errMsg.toString());
+						 }
+				 	 }
 					
 		   		 }else {
 		   			 logger.warn("no record to update... ?");
@@ -988,6 +1009,55 @@ public class TvinnSadDigitollAjaxController {
 		 
 		 return result;
 	 }
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param sourceTransport
+	 * @param mode
+	 * @param errMsg
+	 * @return
+	 */
+	private int deleteTransport(String applicationUser, SadmotfRecord sourceTransport, String mode, StringBuffer errMsg) {
+		int retval = 0;
+		
+		
+		//get BASE URL
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_TRANSPORT_URL;
+		//add URL-parameters
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + applicationUser + "&mode=" + mode);
+		urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((sourceTransport)));
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		GeneralUpdateContainer container = this.generalUpdateService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<GeneralUpdateRecord> outputList = container.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(GeneralUpdateRecord record : outputList ){
+					logger.info(record.toString());
+					if(StringUtils.isNotEmpty(container.getErrMsg())){
+						errMsg.append(record.getStatus());
+						errMsg.append(" -->detail:" + container.getErrMsg());
+						retval = -1;
+						break;
+					}
+				}
+			}
+    	}
+    	
+    	return retval;
+	}
 	
 	/**
 	 * 
@@ -995,7 +1065,7 @@ public class TvinnSadDigitollAjaxController {
 	 * @param param
 	 * @return
 	 */
-	private SadmotfRecord consolidateHouses(String applicationUser, String param) {
+	private SadmotfRecord getSourceTransportToHandoverHouses(String applicationUser, String param) {
 		//get masters and houses of the transport in turn
 		SadmotfRecord recordTmp = new SadmotfRecord();
 		recordTmp.setEtlnrt(Integer.valueOf(param));
@@ -1025,14 +1095,15 @@ public class TvinnSadDigitollAjaxController {
 		//add URL-parameters
 		//http://localhost:8080/syjservicestn/syjsSADMOHF_U_CONS.do?user=OSCAR&ehlnrt=35&ehlnrm=1&ehlnrh=1&ehpro=4444&ehlnrt_w=31&ehlnrm_w=1&ehlnrh_w=1
 		StringBuilder urlRequestParams = new StringBuilder();
-		urlRequestParams.append("user=" + applicationUser + "&ehlnrt=" + lnrt + "&ehlnrm=1" + "&ehlnrh=" + ehlnrh + "&ehpro=" + ehpro);
+		//urlRequestParams.append("user=" + applicationUser + "&ehlnrt=" + lnrt + "&ehlnrm=1" + "&ehlnrh=" + ehlnrh + "&ehpro=" + ehpro); ??? ehpro (not likely???)
+		urlRequestParams.append("user=" + applicationUser + "&ehlnrt=" + lnrt + "&ehlnrm=1" + "&ehlnrh=" + ehlnrh + "&ehpro=" + record.getEhpro());
 		urlRequestParams.append("&ehlnrt_w=" + record.getEhlnrt() + "&ehlnrm_w=1" + "&ehlnrh_w=" + record.getEhlnrh());
 		
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
     	logger.warn("URL: " + BASE_URL);
     	logger.warn("URL PARAMS: " + urlRequestParams);
     	
-    	/*
+    	
     	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
 
     	//Debug --> 
@@ -1045,10 +1116,12 @@ public class TvinnSadDigitollAjaxController {
     			logger.error("##################" + jsonContainer.getErrMsg() + "#######################");
     		}else {
     			//OK with the UPDATE
+    			logger.info("SUCCESS on update...");
     		}
     		
     	}
-    	*/
+    	
+    	
 	}
 	/**
 	 * 
@@ -1619,6 +1692,8 @@ public class TvinnSadDigitollAjaxController {
 	@Autowired
 	private SadTurService sadTurService;
 	
+	@Autowired
+	private GeneralUpdateService generalUpdateService;
 	
 	@Autowired
 	private HouseControllerService houseControllerService;

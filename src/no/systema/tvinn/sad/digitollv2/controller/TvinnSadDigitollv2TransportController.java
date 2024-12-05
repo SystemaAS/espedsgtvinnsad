@@ -1514,6 +1514,10 @@ public class TvinnSadDigitollv2TransportController {
 				recordToValidate.setEtpnr(StringUtils.leftPad(String.valueOf(recordToValidate.getEtpnr()),4,"0"));
 			}
 		}
+		//AUTO-GENERATED transports (status = Z) must removed that state as soon as someone saves the transport manually
+		if("Z".equals(recordToValidate.getEtst2())){
+			recordToValidate.setEtst2("");
+		}
 		
 	}
 	/**

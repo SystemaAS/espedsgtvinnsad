@@ -927,18 +927,9 @@
 				           		<ul>
 				           			<li><b>AES_EXPORT</b> Eksport fra EU. Automatisk utførselsbekreftelse og bare unntaksvis behov for manuell behandling.	
 										18 tegn.<br/>Eksempel: 24SE0123456789ABCD</li>
-				           			<li><b>UGE_EXPORT</b> UGE Eksport fra Sverige som på forhånd er klarert for utførsel av det svenske Tullverket. Ifm med ankomst til grensen sendes det automatisk en ankomst- og utførselsbekreftelse til Tullverket. Medfører ikke behov for manuell ekspedisjon på grensen.	
-										18 tegn. de to første tegnene skal være siffer.de tre neste skal være bokstavene SEE. <br/>Eksempel: 23SEE0123456789QWE</li>
-									<li><b>EUEIR_EXPORT</b>	EUEIR Eksport fra Sverige. Ingen videre oppfølging for Tolletaten ifm ankomst og innpassering. Medfører ikke behov for manuell ekspedisjon på grensen.	
+				           			<li><b>EUEIR_EXPORT</b>	EUEIR Eksport fra Sverige. Ingen videre oppfølging for Tolletaten ifm ankomst og innpassering. Medfører ikke behov for manuell ekspedisjon på grensen.	
 										inntil 35 tegn. <br/>Eksempel: SE009251-20230602-24</li>
-									<li><b>ALE_EXPORT</b> ALE Eksport fra Sverige. Ingen videre oppfølging for Tolletaten ifm ankomst og innpassering. Medfører ikke behov for manuell ekspedisjon på grensen.	
-										18 tegn. <br/>Eksempel:23SEALEATD3OAW6MG1</li>
-									<li><b>UNU_EXPORT</b> UNU Eksport fra Sverige. Dette er det Tullverket kaller en "Standardtulldeklaration" og den må alltid ekspederes av et "Exporttullkontor" før varen kan føres ut av Sverige. Pga grensetollsamarbeidet er det f.eks No SVD/No Ørje som fungerer som nettopp dette Exporttullkontoret når eksporten skal til Norge. Dette innebærer at den norske tolleren må ekspedere eksportdeklarasjonen i det svenske systemet. Ekspedisjon kan også innebære manuell behandling tilsvarende maskebehandling i Tvinn. Etter av deklarasjonen er ekspedert, må den utførselsbekreftes på samme måte som en UGE. Medfører behov for manuell ekspedisjon på grensen.	
-										10 tegn. <br/>Eksempel:FKR0116862</li>
-									<li><b>ECS_EXPORT</b> ECS Eksport fra EU. Ekspedisjonsprosessen innebærer at toller utførselsbekrefter eksporten i eksportkontrollsystemet (ECS). Medfører behov for manuell ekspedisjon på grensen.	
-										18 tegn <br/>Eksempel:23FIMHFG8987345TY7</li>
-									<li><b>EMCS_EXPORT</b> Eksport av punktskatt-pliktige varer. Varene er frigjort for eksport, men må alltid utførselsbekreftes av toller ettersom det skal gå en melding til det svenske skatteverket. Medfører behov for manuell ekspedisjon på grensen.	
-										18 tegn <br/>Eksempel:23SEKKFG8987345TY7</li>	
+										
 								</ul>		
 				           		</span>	
 								</div>
