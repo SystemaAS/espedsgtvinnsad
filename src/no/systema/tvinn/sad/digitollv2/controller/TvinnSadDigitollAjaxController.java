@@ -987,7 +987,7 @@ public class TvinnSadDigitollAjaxController {
 						 //delete source transport
 						 int dmlRetval = 0;
 						 StringBuffer errMsg = new StringBuffer();
-						 dmlRetval = this.deleteTransport(applicationUser, sourceTransport, "D", errMsg);
+						 dmlRetval = this.deleteTransportConsolidated(applicationUser, sourceTransport, "DC", errMsg);
 						 if(dmlRetval >= 0) {
 							 logger.debug("Transport lnrt:" + sourceTransport.getEtlnrt() + " has been DELETED");
 						 }else {
@@ -1017,7 +1017,7 @@ public class TvinnSadDigitollAjaxController {
 	 * @param errMsg
 	 * @return
 	 */
-	private int deleteTransport(String applicationUser, SadmotfRecord sourceTransport, String mode, StringBuffer errMsg) {
+	private int deleteTransportConsolidated(String applicationUser, SadmotfRecord sourceTransport, String mode, StringBuffer errMsg) {
 		int retval = 0;
 		
 		
