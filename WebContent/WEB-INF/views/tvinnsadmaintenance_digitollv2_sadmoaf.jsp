@@ -232,11 +232,11 @@
 			 					</td>
 			 					<td>
 			 						<c:choose>
-					 				<c:when test="${model.record.etpro > 0}">
-					 					<input type="text12"  class="inputTextMediumBlue" onKeyPress="return numberKey(event)" name="etpro" id="etpro" size="9" maxlength="8" value="${model.record.etpro}">
+					 				<c:when test="${model.record.etpro > 0 || model.record.etpro < 0}">
+					 					<input type="text12"  class="inputTextMediumBlue" onKeyPress="return amountKey(event)" name="etpro" id="etpro" size="9" maxlength="8" value="${model.record.etpro}">
 					 				</c:when>	
 					 				<c:otherwise>
-					 					<input type="text12"  class="inputTextMediumBlue" onKeyPress="return numberKey(event)" name="etpro" id="etpro" size="9" maxlength="8" value="">
+					 					<input type="text12"  class="inputTextMediumBlue" onKeyPress="return amountKey(event)" name="etpro" id="etpro" size="9" maxlength="8" value="">
 					 				</c:otherwise>
 					 				</c:choose>
 			 					</td>

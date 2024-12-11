@@ -321,6 +321,10 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 					var len = data.length;
 					if(len>0){
 						for ( var i = 0; i < len; i++) {
+							if(data[i].etpro < 0){
+								jq('#etpro').val(data[i].etpro);//Turnr
+								jq('#etsg').val(data[i].etsg);//sign
+							}
 							//From default values: etktkd etktyp etktm etklk
 							if(data[i].etktkd != ''){
 								jq('#etktkd').val(data[i].etktkd);//Mode.Tr
@@ -397,7 +401,7 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 						  for ( var i = 0; i < len; i++) {
 							if(data[i].own_ErrMsg != ''){
 								jq('#etpro').addClass("isa_error");
-								initTurFields();	
+								//initTurFields(); har removats pga av Schenker som inte har turer... den är på prov eftersom de klagade som fan	
 							}else{
 								jq('#etpro').removeClass("isa_error");
 								
@@ -470,7 +474,7 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 		jq('#etkmrk').val("");//Bilnr.
 		jq('#etsjaf').val("");//Fører-navn
 		jq('#etetad').val(""); //eta
-		jq('#ettsd').val(""); //pass.tollsted
+		//jq('#ettsd').val(""); //pass.tollsted
 		
 		//CARRIER (either from HEADf (customer) or from tur-pgm)
 		jq('#etknt').val("");//cust.nr.
