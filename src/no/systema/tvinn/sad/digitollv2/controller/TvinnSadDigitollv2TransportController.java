@@ -321,7 +321,17 @@ public class TvinnSadDigitollv2TransportController {
 					isValidForFetch = false;
 		    		
 			    }else{
-			    	//adjust fields
+			    	StringBuffer errMsg = new StringBuffer();
+			    	int dmlRetval = 0;
+					
+			    	// this is a little deviation only for the auto-generated records...
+			    	if("Z".equals( recordToValidate.getEtst2())){
+						//adjust fields in Master & house (cascade) before we eliminate Z-status in the parent transport (ETST2 = Z) AUTO-GEN
+						this.updateAutoGenChildren(appUser.getUser(), recordToValidate, errMsg);
+					}
+					
+					
+			    	//adjust fields for transport
 					this.adjustFieldsForUpdate(recordToValidate);
 					
 			    	String mode = "NA";
@@ -331,8 +341,7 @@ public class TvinnSadDigitollv2TransportController {
 					}else {
 						mode = SadDigitollConstants.DB_MODE_INSERT;
 					}
-					StringBuffer errMsg = new StringBuffer();
-					int dmlRetval = 0;
+					
 					dmlRetval = this.updateRecord(appUser.getUser(), recordToValidate, mode, errMsg);
 					if(dmlRetval < 0) {
 						//error on update
@@ -1099,7 +1108,58 @@ public class TvinnSadDigitollv2TransportController {
     	
     	return retval;
 	}
-	
+	/**
+	 * update some fields in the children tables (1) master: SADMOMF and (2) house: SADMOHF only with status Z
+	 * 
+	 * @param applicationUser
+	 * @param recordToValidate
+	 * @param errMsg
+	 * @return
+	 */
+	private int updateAutoGenChildren(String applicationUser, SadmotfRecord recordToValidate, StringBuffer errMsg) {
+		int retval = 0;
+		logger.info("Inside updateAutoGenChildren ...");
+		
+		//get BASE URL
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_AUTOGEN_CHILDREN_DIGITOLL_TRANSPORT_URL;
+		//add URL-parameters
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + applicationUser);
+		urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate)));
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		GeneralUpdateContainer container = this.generalUpdateService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<GeneralUpdateRecord> outputList = container.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(GeneralUpdateRecord record : outputList ){
+					logger.warn(record.toString());
+					if(StringUtils.isNotEmpty(container.getErrMsg())){
+						errMsg.append(record.getStatus());
+						errMsg.append(" -->detail:" + container.getErrMsg());
+						retval = -1;
+						break;
+					}else {
+						//OK
+					}
+				}
+			}
+    	}
+    	
+    	return retval;
+	}
+
 	
 	/**
 	 * log Errors in Aspects and Domain objects in order to render on GUI

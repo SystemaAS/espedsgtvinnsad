@@ -1604,7 +1604,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		String idpro = request.getParameter("etpro");
 		Integer etlnrt = Integer.valueOf(id.replace("etlnrt", ""));
 		Integer etpro = Integer.valueOf(idpro.replace("etpro", ""));
-		
+		logger.info("etlnrt:" + etlnrt);
 		
 		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_transports_consolidated");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
@@ -1614,14 +1614,15 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			
 		}else{
 			//get all masters
-			List list = this.getTransportsConsolidated(appUser, etlnrt);  
+			List list = this.getTransportsConsolidated(appUser, etlnrt); 
+			if(list!=null) {
+				logger.info("list size to show:" + list.size());
+			}
 			model.put("list", list);
 			model.put("lnrt", etlnrt.toString());
 			model.put("tur", etpro.toString());
 			logger.info(etlnrt.toString());
-			//model.put("fromEmlnrt", emlnrt);
-			//model.put("fromEmlnrm", emlnrm);
-			//model.put("fromEtktyp", etktyp);
+			
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 			
 	    	return successView;
@@ -2321,27 +2322,11 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			//now filter the topic list with the search filter (if applicable)
 			//----------------------------------------------------------------
     		List<SadmotfRecord> outputList = (List)jsonContainer.getList();
+    		if(outputList!=null) {
+    			logger.debug("list size - RAW:" + outputList.size());
+    		}
 			for(SadmotfRecord record : outputList) {
-				//get masters to know in the GUI ... (only transports without masters are allow to change to)
-				/*this.getMasters(appUser, record);
-				
-				//check if it is a transport with the same api (road or air)
-				if(etktyp.startsWith(SadDigitollConstants.API_AIR_INDICATOR)) {
-					if(record.getEtktyp().startsWith(SadDigitollConstants.API_AIR_INDICATOR)) {
-						//Eliminate one-self
-						if( record.getEtlnrt() != emlnrt) {
-							result.add(record);
-						}
-					}
-				}else {
-					if(!record.getEtktyp().startsWith(SadDigitollConstants.API_AIR_INDICATOR)) {
-						//Eliminate one-self
-						if(record.getEtlnrt() != emlnrt) {
-							result.add(record);
-						}
-					}
-				}*/
-				
+				//remove the parent transport being used to consolidate houses
 				if(record.getEtlnrt() != etlnrt) {
 					result.add(record);
 				}

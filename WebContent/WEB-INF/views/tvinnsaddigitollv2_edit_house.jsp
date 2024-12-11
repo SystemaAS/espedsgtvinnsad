@@ -985,7 +985,7 @@
 								 
 				 			</td>
 				 			<td colspan="2" class="text14">
-				 				<input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="eheid" id="eheid" size="22" maxlength="18" value="${model.record.eheid}">
+				 				<input type="text" class="inputTextMediumBlue toggleDirektfortolling" name="eheid" id="eheid" size="21" maxlength="18" value="${model.record.eheid}">
 				 			</td>
 				 			<td class="text14">		
 				 				<input class="inputFormSubmitStd" type="button" name="manyExpIdButton" id="manyExpIdButton" onClick="showPop('more_exports');" value='Lage flere Eksp.id'>
