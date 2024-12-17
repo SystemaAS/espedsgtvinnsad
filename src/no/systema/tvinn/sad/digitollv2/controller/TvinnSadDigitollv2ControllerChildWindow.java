@@ -2326,12 +2326,12 @@ public class TvinnSadDigitollv2ControllerChildWindow {
     			logger.debug("list size - RAW:" + outputList.size());
     		}
 			for(SadmotfRecord record : outputList) {
-				//remove the parent transport being used to consolidate houses
-				if(record.getEtlnrt() != etlnrt) {
+				//remove the parent transport himself, being used to consolidate houses
+				if(!record.getEtlnrt().equals(etlnrt)) {
+					logger.debug("AFTER-->record.getEtlnrt():" + record.getEtlnrt());
+					logger.debug("AFTER-->etlnrt:" + etlnrt);
 					result.add(record);
 				}
-				
-				
 			}
 			
     	}
