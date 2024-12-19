@@ -356,6 +356,13 @@ public class TvinnSadDigitollv2TransportController {
 						//this step is required for the FETCH-step since we want to get the newly created record for upcoming updates...
 						if(mode.equals(SadDigitollConstants.DB_MODE_INSERT)) {
 							etlnrt = String.valueOf(recordToValidate.getEtlnrt());
+						}else {
+							this.setRecordAspects(appUser, recordToValidate);
+							//only UPDATE --> when having already masters in order to update the emrgt (transp.orgNr on sadmomf...)
+							//this case is usually present when the AUTO-GEN option has been carried out (integration with CB's TMS-systems and Digitoll)
+							if(recordToValidate.getListMasters()!=null && !recordToValidate.getListMasters().isEmpty()) {
+								this.updateTranspOrgNrOnMaster(appUser.getUser(), recordToValidate, errMsg);
+							}
 						}
 					}
 			    }
@@ -1101,6 +1108,48 @@ public class TvinnSadDigitollv2TransportController {
 						if(mode.equals(SadDigitollConstants.DB_MODE_INSERT)) {
 							recordToValidate.setEtlnrt(record.getId());
 						}
+					}
+				}
+			}
+    	}
+    	
+    	return retval;
+	}
+	
+	private int updateTranspOrgNrOnMaster(String applicationUser, SadmotfRecord recordToValidate, StringBuffer errMsg) {
+		int retval = 0;
+		
+		
+		//get BASE URL
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_TRANSP_ORGNR_ON_MASTER_URL;
+		//add URL-parameters
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + applicationUser + "&emlnrt=" + recordToValidate.getEtlnrt() + "&emrgt=" + recordToValidate.getEtrgt());
+		urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate)));
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		GeneralUpdateContainer container = this.generalUpdateService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<GeneralUpdateRecord> outputList = container.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(GeneralUpdateRecord record : outputList ){
+					logger.warn(record.toString());
+					if(StringUtils.isNotEmpty(container.getErrMsg())){
+						errMsg.append(record.getStatus());
+						errMsg.append(" -->detail:" + container.getErrMsg());
+						retval = -1;
+						break;
 					}
 				}
 			}

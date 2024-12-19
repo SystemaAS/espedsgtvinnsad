@@ -14,7 +14,11 @@ public final class SadDigitollUrlDataStore {
 		//UPDATE AUTO-GEN Children
 		//http://localhost:8080/syjservicestn/syjsSADMOTF_U.do?user=OSCAR and/or user=OSCAR...
 		static public String SAD_UPDATE_AUTOGEN_CHILDREN_DIGITOLL_TRANSPORT_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOTF_U_AUTOGEN_CHIL.do";
-				
+		
+		//UPDATE Transp.on master
+		//http://localhost:8080/syjservicestn/syjsSADMOTF_U.do?user=OSCAR and/or user=OSCAR...
+		static public String SAD_UPDATE_TRANSP_ORGNR_ON_MASTER_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOMF_U_ADJ_MASTER.do";
+		
 		
 		
 		

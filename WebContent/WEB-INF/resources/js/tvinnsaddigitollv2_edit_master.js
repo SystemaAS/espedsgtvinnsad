@@ -191,12 +191,13 @@
 	    		refreshCustomValidity(jq('#emdkmt')[0]);
 	  		}
 	  	});
+		/*
 		jq('#emrgt').focus(function() {
 	    	if(jq('#emrgt').val()!=''){
 	    		refreshCustomValidity(jq('#emrgt')[0]);
 	  		}
 	  	});
-
+		*/
 		//Parties
 		jq('#emnas').focus(function() {
 	    	if(jq('#emnas').val()!=''){
@@ -350,9 +351,10 @@
 			}
 	    		
 		});
+		
 		jq('#emknt').blur(function() {
 			if(jq('#emrgt').val()==''){
-				fetchCarrier();	
+				//fetchCarrier();	
 			}
 	    		
 		});

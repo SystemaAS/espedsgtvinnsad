@@ -168,7 +168,7 @@ public class TvinnSadDigitollv2MasterController {
 				
 				}else{
 			    	//adjust fields
-					this.adjustFieldsForUpdate(recordToValidate);
+					this.adjustFieldsForUpdate(appUser.getUser(), recordToValidate);
 					
 			    	String mode = "NA";
 					//Update
@@ -1704,7 +1704,7 @@ public class TvinnSadDigitollv2MasterController {
 	 * 
 	 * @param recordToValidate
 	 */
-	private void adjustFieldsForUpdate(SadmomfRecord recordToValidate){
+	private void adjustFieldsForUpdate(String applicationUser, SadmomfRecord recordToValidate){
 		
 		//Sender - communication
 		if(StringUtils.isNotEmpty(recordToValidate.getOwn_emems_email())){
@@ -1772,6 +1772,14 @@ public class TvinnSadDigitollv2MasterController {
 			}
 			
 		}
+		//emrgt must have the etrgt of the transport IF the emrgt is empty (usually when the master has been auto-generated
+		this.setTransportDto(applicationUser, recordToValidate);
+		String etrgt = recordToValidate.getTransportDto().getEtrgt();
+		if(StringUtils.isEmpty(etrgt)) {
+			etrgt = "etrgt-EMPTY?";
+		}
+		recordToValidate.setEmrgt(etrgt);
+		
 	}
 	
 	/**

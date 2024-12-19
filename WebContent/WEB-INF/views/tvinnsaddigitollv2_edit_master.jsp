@@ -447,7 +447,7 @@
 						<table align="left" border="0" cellspacing="2" cellpadding="0">
 						<tr>
 							<td class="text14">&nbsp;<span title="emknt Transportør KundeNr.">Transp.knr.</span></td>
-							<td class="text14">&nbsp;<span title="emrgt - Transportør OrgNr. / EORI">Transp.Orgnr / EORI</span><font class="text16RedBold" >*</font></td>
+							<td class="text14">&nbsp;<span title="emrgt - Transportør OrgNr. / EORI">Transp.Orgnr / EORI</span></td>
 							<td></td>
 							 
 							<c:if test="${model.record.emlnrm > 0 && (not empty model.record.emmid && model.record.emmid != 'EXTERNAL')}">
@@ -476,10 +476,17 @@
 						</tr>
 						<tr>
 							<td class="text14">
-								<input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="emknt" id="emknt" size="10" maxlength="8" value="${model.record.emknt}">								
+								<input  readonly type="text" class="inputTextReadOnly" name="emknt" id="emknt" size="10" maxlength="8" value="${model.record.emknt}">								
 							</td>
 							<td class="text14">
-								<input  required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="emrgt" id="emrgt" size="19" maxlength="17" value="${model.record.emrgt}">												
+								<c:choose>
+									<c:when test="${not empty model.record.emrgt && fn:contains(model.record.emrgt, 'EMPTY')}">
+										<input  readonly type="text" class="inputTextReadOnly isa_error"  name="emrgt" id="emrgt" size="19" maxlength="17" value="${model.record.emrgt}">
+									</c:when>
+									<c:otherwise>
+										<input  readonly type="text" class="inputTextReadOnly" name="emrgt" id="emrgt" size="19" maxlength="17" value="${model.record.emrgt}">
+									</c:otherwise>
+								</c:choose>												
 							</td>
 							<td >
 								<table>
