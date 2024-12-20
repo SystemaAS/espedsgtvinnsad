@@ -45,8 +45,11 @@
 							<table id="mainList" class="compact" >
 								<thead>
 								<tr class="tableHeaderField" height="20" >
-									<th width="2%" class="tableHeaderFieldFirst12" >ETA</th>
-			                    	<th width="2%" class="tableHeaderField12" >RoutingId</th>
+									<th class="tableHeaderFieldFirst12" >ETA</th>
+									<th class="tableHeaderFieldFirst12" >STA</th>
+									<th width="2%" class="tableHeaderField12" >Kjøretøy kj.merke</th>
+									<th width="2%" class="tableHeaderField12" >Kjør.Typ.</th>
+									<th class="tableHeaderField12" >RoutingId</th>
 			                    	<th width="2%" class="tableHeaderField12" >RoutingTxt</th>
 			                    	<th width="2%" class="tableHeaderField12" >ENS-MRN</th>
 			                	</tr>
@@ -54,10 +57,13 @@
 			                	<tbody> 
 			                	<c:forEach items="${model.list}" var="record" varStatus="counter">    
 					             <tr class="tableRow" height="20" >
-					          	   <td width="2%" align="center" class="tableCellFirst12" >${record.estimatedTimeOfArrival}</td>
-					          	   <td width="2%" align="center" class="tableCell12" >${record.routingResult.id}</td>
-				               	   <td width="2%" align="center" class="tableCell12" >${record.routingResult.routing}</td>
-				               	   <td width="2%" align="center" class="tableCell12" >${record.entrySummaryDeclarationMRN}</td>
+					          	   <td align="left" class="tableCellFirst12" >${record.estimatedTimeOfArrival}</td>
+					          	   <td align="left" class="tableCellFirst12" >${record.scheduledTimeOfArrival}</td>
+					          	   <td width="2%" align="left" class="tableCellFirst12" >${record.activeBorderTransportMeans.identificationNumber}</td>
+					          	   <td width="2%" align="center" class="tableCellFirst12" >${record.activeBorderTransportMeans.typeOfIdentification}</td>
+					          	   <td align="left" class="tableCell12" >${record.routingResult.id}</td>
+				               	   <td width="2%" align="left" class="tableCell12" >${record.routingResult.routing}</td>
+				               	   <td width="2%" align="left" class="tableCell12" >${record.entrySummaryDeclarationMRN}</td>
 					            </tr> 
 					            </c:forEach>
 					            

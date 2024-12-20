@@ -11,6 +11,7 @@ import lombok.Data;
 public class EntryRoutingDto {
 	private String entrySummaryDeclarationMRN;
 	private String estimatedTimeOfArrival;
+	private String scheduledTimeOfArrival;
 	private EntryTranspDocDto transportDocumentHouseLevel;
 	private EntryActiveTransportMeansDto activeBorderTransportMeans;
 	private EntryRoutingResultDto routingResult;
