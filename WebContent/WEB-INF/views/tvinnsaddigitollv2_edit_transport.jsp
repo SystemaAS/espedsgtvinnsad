@@ -1007,10 +1007,12 @@
 									
 								</c:when>
 								<c:otherwise>
-									<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
-									<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
-										 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
-									</div>
+									<c:if test="${model.record.etsg != 'SYS'}">
+										<input class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
+										<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
+											 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
+										</div>
+									</c:if>
 								</c:otherwise>
 								</c:choose>
 							</c:if>

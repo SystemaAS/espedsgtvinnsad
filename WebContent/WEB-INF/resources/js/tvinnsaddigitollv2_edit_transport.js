@@ -719,6 +719,16 @@ jq(function() {
 		validateEORI(jq('#etrgr'))
 				
  	});
+	//SYS should be seen!
+	jq('#etsg').change(function() {
+		if(jq('#etsg').val()=='SYS'){
+			jq('#etsg').addClass("isa_error");
+		}else{
+			jq('#etsg').removeClass("isa_error");
+		}
+				
+ 	});
+	
 
  });	
 function validateEORI(field){
@@ -1261,11 +1271,15 @@ function validateEORI(field){
     });
 	jq("div.toolbar").html('<span class="text16">Hovedforsendelser - Master Consignments</span>');
     
-//event on input field for search
+	//event on input field for search
     jq('input.mainList_filter').on( 'keyup click', function () {
     		filterGlobal();
     });
    
+	//SYS-signature warning
+	if (jq("#etsg").val()=='SYS') { 
+		jq('#etsg').addClass("isa_error");
+	}
 	
   });
 

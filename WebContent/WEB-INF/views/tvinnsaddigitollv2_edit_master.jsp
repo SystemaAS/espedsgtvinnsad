@@ -1072,11 +1072,13 @@
 								<input title="Executing status ..." class="buttonGrayInsideDivPopup" style="cursor:not-allowed;color:brown;" type="button" name="sendButton" id="sendButton" value='Send'>
 							</c:when>
 							<c:otherwise>
-								<c:if test="${empty model.record.emdkm_ff && empty model.record.emrgt_ff && empty model.record.emrgr_ff}">
-									<input title="Send" class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
-									<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
-										 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
-									</div>
+								<c:if test="${model.record.emsg != 'SYS'}">
+									<c:if test="${empty model.record.emdkm_ff && empty model.record.emrgt_ff && empty model.record.emrgr_ff}">
+										<input title="Send" class="inputFormSubmit" type="button" name="sendButton" id="sendButton" value='Send'>
+										<div style="display: none;" class="clazz_dialog" id="dialogSend" title="Dialog">
+											 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
+										</div>
+									</c:if>
 								</c:if>
 							</c:otherwise>
 							</c:choose>
@@ -1088,10 +1090,12 @@
 									<input title="Pending status ..." class="buttonGrayInsideDivPopup" style="cursor:not-allowed;" type="button" name="sendButtonAllHousesBlocked" id="sendButtonAllHousesBlocked" value='Send alle houses'>
 								</c:when>
 								<c:otherwise>
-									<input title="Send alle underliggende houses..." class="buttonGrayWithGreenFrame" type="button" name="sendButtonAllHouses" id="sendButtonAllHouses" value='Send alle houses'>
-									<div style="display: none;" class="clazz_dialog" id="dialogSendAllHouses" title="Dialog">
-										 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
-									</div>
+									<c:if test="${model.record.emsg != 'SYS'}">
+										<input title="Send alle underliggende houses..." class="buttonGrayWithGreenFrame" type="button" name="sendButtonAllHouses" id="sendButtonAllHouses" value='Send alle houses'>
+										<div style="display: none;" class="clazz_dialog" id="dialogSendAllHouses" title="Dialog">
+											 <p class="text14" >Er du sikker på at du vil sende till toll.no ?</p>
+										</div>
+									</c:if>
 								</c:otherwise>
 								</c:choose>
 							</c:if>

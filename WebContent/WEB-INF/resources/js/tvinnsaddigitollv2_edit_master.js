@@ -271,7 +271,14 @@
 	  		}
 	  	});	
 	
-
+		//SYS should be seen!
+		jq('#emsg').change(function() {
+			if(jq('#emsg').val()=='SYS'){
+				jq('#emsg').addClass("isa_error");
+			}else{
+				jq('#emsg').removeClass("isa_error");
+			}
+		});
 
 	  
 	  	//CHILD-WINDOWS
@@ -1285,9 +1292,13 @@
     jq('input.mainList_filter').on( 'keyup click', function () {
     		filterGlobal();
     });
-
+	//
 	jq('#emsg').focus();
-   
+	
+   	//SYS-signature warning
+	if (jq("#emsg").val()=='SYS') { 
+		jq('#emsg').addClass("isa_error");
+	}
 	
   });
   
