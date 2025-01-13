@@ -247,7 +247,7 @@
 					</c:choose>
 					
 					<c:if test="${not empty model.record.etmid}">
-						<c:if test="${model.record.etst2 != 'C' && model.record.etst2 != 'N' }">
+						<c:if test="${model.record.etst2 != 'C' && model.record.etst2 != 'N'}">
 							<input title="Slett fra toll.no" class="inputFormSubmitStd" type="button" name="deleteButton" id="deleteButton" value='Slett'>
 							<div style="display: none;" class="clazz_dialog" id="dialogDelete" title="Dialog">
 								 <p class="text14" >Er du sikker på at du ønsker å slette fra toll.no?</p>
@@ -985,14 +985,10 @@
  		</tr>
  		
  		
- 		
- 		
- 		
- 		
 		<tr height="10"><td></td></tr>
 		<tr>
 			<td align="left" >
-				<c:if test="${model.record.etst != 'S' && model.record.etst2 != 'C' && model.record.etst2 != 'N' }"> <%-- CANCELED(S) AND COMPLETED(C) --%>
+				<c:if test="${model.record.etst != 'S' && model.record.etst2 != 'C' && model.record.etst2 != 'N' }"> <%-- CANCELED(S) AND COMPLETED(C) AND DENIED (N) --%>
 					&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
 					<c:if test="${model.record.etlnrt > 0}">
 						<c:choose>

@@ -58,20 +58,44 @@ public class HouseValidator implements Validator {
 					}else if (record.getEhprt().startsWith("IMMEDIATE")){
 						if(!"CUDE".equals(record.getEhtrty())) {
 							errors.rejectValue("ehtrty", "systema.tvinn.sad.digitoll.house.error.rule.invalidReferenceType");
+						}else {
+							//CUDE
+							/*
+							if( StringUtils.isNotEmpty(record.getEhrg())){
+								if(record.getEh0068a()!=null && record.getEh0068b() !=null) {
+									if(record.getEh0068a()>0 && record.getEh0068b() > 0) {
+									 //OK
+									}else {
+										errors.rejectValue("ehrg", "systema.tvinn.sad.digitoll.house.error.rule.required.deklDateSekv");	
+									}
+								}else {
+									errors.rejectValue("ehrg", "systema.tvinn.sad.digitoll.house.error.rule.required.deklDateSekv");
+								}
+							}else {
+								//all 3 or none
+								if(record.getEh0068a()!=null && record.getEh0068b()!=null && StringUtils.isNotEmpty(record.getEhrg())){
+									//OK
+								}else {
+									errors.rejectValue("ehrg", "systema.tvinn.sad.digitoll.house.error.rule.required.deklDateSekv");
+								}
+							}*/
+							//CUDE
+							if(record.getEh0068a()!=null && record.getEh0068b()!=null && StringUtils.isNotEmpty(record.getEhrg())){
+								//OK - All three not empty
+							}else if(record.getEh0068a()==null && record.getEh0068b()==null && StringUtils.isEmpty(record.getEhrg())){
+								//OK - all three empty
+							}else {
+								errors.rejectValue("ehrg", "systema.tvinn.sad.digitoll.house.error.rule.required.deklDateSekv");
+							}
+							
 						}
-						/* removed for TEST CASE 2 (toll.no)
-						if(StringUtils.isNotEmpty(record.getEhtrnr()) ) {
-							errors.rejectValue("ehtrty", "systema.tvinn.sad.digitoll.house.error.rule.notrequired.mrn");
-						}*/
-						//Mandatory Dekl.Date.Sekv.
-						if( StringUtils.isNotEmpty(record.getEhrg()) && record.getEh0068a()!=null && record.getEh0068b()!=null ){
-							if(record.getEh0068a()>0 && record.getEh0068b()>0) {
+					}else if (record.getEhprt().startsWith("WAREHOUSE")){
+						if("GONU".equals(record.getEhtrty())) {
+							if(StringUtils.isNotEmpty(record.getEhtrnr())) {
 								//OK
 							}else {
-								errors.rejectValue("ehtrty", "systema.tvinn.sad.digitoll.house.error.rule.required.deklDateSekv");
+								errors.rejectValue("ehtrnr", "systema.tvinn.sad.digitoll.house.error.rule.invalidGonuRef");
 							}
-						}else {
-							errors.rejectValue("ehtrty", "systema.tvinn.sad.digitoll.house.error.rule.required.deklDateSekv");
 						}
 					}
 				}
