@@ -19,7 +19,9 @@ public final class SadDigitollUrlDataStore {
 		//http://localhost:8080/syjservicestn/syjsSADMOTF_U.do?user=OSCAR and/or user=OSCAR...
 		static public String SAD_UPDATE_TRANSP_ORGNR_ON_MASTER_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOMF_U_ADJ_MASTER.do";
 		
-		
+		//Gets the routingId needed for each 1000-record on the Movement-Routing API (complement to the ENTRY (completed/denied) API
+		//http://localhost:8080/syjservicestn/syjsSADMOROID.do?user=OSCAR
+		static public String SAD_FETCH_ROUTINGID_MOVEMENT_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOROID.do";
 		
 		
 		//FETCH Master Consignment list

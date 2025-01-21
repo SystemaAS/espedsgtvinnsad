@@ -1307,7 +1307,7 @@
 			 				</tr>
 			 				<tr >
 			 					<td class="text14">&nbsp;</td>
-								<td class="text14">&nbsp;<span title="ehad1s">Adress</span></td>
+								<td class="text14">&nbsp;<span title="ehad1s">Adress</span><font class="text16RedBold" >*</font></td>
 								<td class="text14">&nbsp;<span title="ehpns">Postnr</span><font class="text16RedBold" >*</font></td>
 								
 			 				</tr>
@@ -1429,7 +1429,7 @@
 				 				
 				 				<tr >
 				 					<td class="text14">&nbsp;</td>
-				 					<td class="text14">&nbsp;<span title="ehad1m">Adress</span></td>
+				 					<td class="text14">&nbsp;<span title="ehad1m">Adress</span><font class="text16RedBold" >*</font></td>
 									<td class="text14">&nbsp;<span title="ehpnm">Postnr</span><font class="text16RedBold" >*</font></td>
 									
 				 				</tr>

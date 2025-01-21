@@ -144,6 +144,8 @@
 			<input type="hidden" name="etmid" id="etmid" value="${model.record.etmid}">
 			<input type="hidden" name="action" id="action" value="doUpdate">
 			<input type="hidden" name="eoriValidationActive" id="eoriValidationActive" value="${model.eoriValidationActive}">
+			<input type="hidden" name="movementRoutingId" id="movementRoutingId" value="${model.routingId}">
+			
 			
 			<c:if test="${model.record.etlnrt > 0}">
 				<input type="hidden" name="etlnrt" id="etlnrt" value="${model.record.etlnrt}"> 
@@ -247,7 +249,8 @@
 					</c:choose>
 					
 					<c:if test="${not empty model.record.etmid}">
-						<c:if test="${model.record.etst2 != 'C' && model.record.etst2 != 'N'}">
+						<%-- <c:if test="${model.record.etst2 != 'C' && model.record.etst2 != 'N'}"> --%>
+						<c:if test="${model.record.etst2 != 'C'}">
 							<input title="Slett fra toll.no" class="inputFormSubmitStd" type="button" name="deleteButton" id="deleteButton" value='Slett'>
 							<div style="display: none;" class="clazz_dialog" id="dialogDelete" title="Dialog">
 								 <p class="text14" >Er du sikker på at du ønsker å slette fra toll.no?</p>
@@ -560,6 +563,15 @@
 								<td colspan="2" class="text14">
 									<img style="cursor:pointer;" onMouseOver="showPop('etkmrk_info');" onMouseOut="hidePop('etkmrk_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
 					            	<span title="etkmrk">Kjøretøy kjennemerke</span><font class="text16RedBold" >*</font>
+					            	<font class="text11" style="cursor:pointer;color:orange;" onMouseOver="showPop('etkmrkROnly_info');" onMouseOut="hidePop('etkmrkROnly_info');">&nbsp;info</font>
+							            	<div class="text11" style="position: relative;" align="left">
+						                	<span style="position:absolute;top:2px; width:250px;" id="etkmrkROnly_info" class="popupWithInputText text11"  >
+						                	<p><b>Reg.nr</b>&nbsp;
+							           			Kan ikke endres hvis MRN finnes. Bruk SLETT-knappen for å fjerne Transporten fra toll.no, endre och lagre den nye verdien och SEND på nytt till toll.no
+							           		</p>
+											</span>	
+											</div>
+					            	
 			                		<div class="text11" style="position: relative;" align="left">
 				                	<span style="position:absolute;top:2px; width:250px;" id="etkmrk_info" class="popupWithInputText text11"  >
 				                	<p><b>Kjøretøy kjennemerke</b>&nbsp;
@@ -592,7 +604,16 @@
 								</td>
 				 			</tr>
 				 			<tr>
-			 					<td colspan="2" class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="etkmrk" id="etkmrk" size="25" maxlength="35" value="${model.record.etkmrk}"></td>
+			 					<td colspan="2" class="text14">
+			 						<c:choose>
+				 						<c:when test="${empty model.record.etmid}">
+				 							<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  type="text" class="inputTextMediumBlueMandatoryField" name="etkmrk" id="etkmrk" size="25" maxlength="35" value="${model.record.etkmrk}">
+				 						</c:when>
+				 						<c:otherwise>
+				 							<input readonly type="text" class="inputTextReadOnly" style="color:#9F6000;" name="etkmrk" id="etkmrk" size="25" maxlength="35" value="${model.record.etkmrk}">
+				 						</c:otherwise>
+			 						</c:choose>
+			 					</td>
 			 					<td colspan="2" class="text14"><input type="text" class="inputTextMediumBlue" name="etcref" id="etcref" size="19" maxlength="17" value="${model.record.etcref}"></td>
 								
 			 				</tr>
@@ -988,11 +1009,13 @@
 		<tr height="10"><td></td></tr>
 		<tr>
 			<td align="left" >
-				<c:if test="${model.record.etst != 'S' && model.record.etst2 != 'C' && model.record.etst2 != 'N' }"> <%-- CANCELED(S) AND COMPLETED(C) AND DENIED (N) --%>
+				<%-- <c:if test="${model.record.etst != 'S' && model.record.etst2 != 'C' && model.record.etst2 != 'N' }">  CANCELED(S) AND COMPLETED(C) AND DENIED (N) --%>
+				<c:if test="${model.record.etst != 'S' && model.record.etst2 != 'C' }"> <%-- CANCELED(S) AND COMPLETED(C)--%>
 					&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
 					<c:if test="${model.record.etlnrt > 0}">
 						<c:choose>
-						<c:when test="${model.record.etst2 == 'C' ||model.record.etst2 == 'N' }"> <%--COMPLETED(C) --%>
+						 <%-- <c:when test="${model.record.etst2 == 'C' ||model.record.etst2 == 'N' }">COMPLETED(C) AND DENIED (N) --%>
+						<c:when test="${model.record.etst2 == 'C' }"> <%--COMPLETED(C) --%>
 							<%-- not possible --%>
 						</c:when>
 						<c:otherwise>

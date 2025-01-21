@@ -22,6 +22,9 @@ public class GeneralUpdateRecord <T> {
 	private Integer id2 = null;
 	private Integer id3 = null;
 	private Integer id4 = null;
+	//Routing Movement fields
+	private String rid = "";
+	private String fdate = "";
 	
 	
 	

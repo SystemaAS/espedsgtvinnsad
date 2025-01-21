@@ -1169,7 +1169,7 @@ function validateEORI(field){
 		  var id = this.id;
 		  jq("#"+id).attr(('target','_blank'));
 		  //default url
-		  var controllerUrl = "tvinnsaddigitollv2_childwindow_routinginfo.do?level=t";
+		  var controllerUrl = "tvinnsaddigitollv2_childwindow_routinginfo.do?level=t&uuid=" + jq("#movementRoutingId").val();
 		  window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=1200px,scrollbars=yes,status=no,location=no");	
 		}	
 	  });	

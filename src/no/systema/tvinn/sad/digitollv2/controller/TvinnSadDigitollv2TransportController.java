@@ -395,6 +395,7 @@ public class TvinnSadDigitollv2TransportController {
 					if(outputList!=null){
 						for(SadmotfRecord record: outputList){
 							this.setRecordAspects(appUser, record);
+							model.put("routingId",this.getRoutingIdForChildWindow(appUser));
 							//now we have all aspects in this record
 							model.put("record", record);
 							//logger.debug(record.toString());
@@ -1801,7 +1802,44 @@ public class TvinnSadDigitollv2TransportController {
     	}
     	
 	}
-	
+	/**
+	 * 
+	 * @param appUser
+	 * @return
+	 */
+	private String getRoutingIdForChildWindow(SystemaWebUser appUser) {
+		String retval = "";
+		
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_ROUTINGID_MOVEMENT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser();
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		GeneralUpdateContainer container = this.generalUpdateService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<GeneralUpdateRecord> outputList = container.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(GeneralUpdateRecord record : outputList ){
+					logger.info(record.toString());
+					if(StringUtils.isNotEmpty(container.getErrMsg())){
+						break;
+					}else {
+						retval = record.getRid();
+					}
+				}
+			}
+    	}
+    	return retval;
+	}
 	/**
 	 * 
 	 * @param record
