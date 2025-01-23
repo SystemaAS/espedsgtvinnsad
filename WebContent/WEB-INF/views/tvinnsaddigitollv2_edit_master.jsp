@@ -1286,7 +1286,18 @@
 		               				houseConsignmentRecord.ehst2 == 'M' || houseConsignmentRecord.ehst2 == 'C'}">
 		               				
 		               			<c:if test="${houseConsignmentRecord.ehst2 == 'S'}">
-		               				<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
+		               				<c:choose>
+										<%-- check if there was a SUCCESS from the API but with a incomplete-documentation-reason-list (usually when the seq.nr of a declaration is not valid) --%>
+										<c:when test="${not empty houseConsignmentRecord.incltdoc && 'null' != houseConsignmentRecord.incltdoc }">
+											<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
+											<font class="text11" style="color:brown;">${houseConsignmentRecord.incltdoc}</font>
+										</c:when>
+										<c:otherwise>
+											<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
+											
+										</c:otherwise>
+									</c:choose>
+
 		               			</c:if>
 		               			<c:if test="${houseConsignmentRecord.ehst2 == 'R'}">
 

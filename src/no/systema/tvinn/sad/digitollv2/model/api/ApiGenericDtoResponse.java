@@ -50,7 +50,9 @@ public class ApiGenericDtoResponse {
 	private Integer ellnrt = 0;
 	private Integer ellnrm = 0;
 	private Integer ellnrh = 0;
-	
+	//
+	//incomplete documentation
+	private String incompleteDocumentationString = "";
 	
 	
 	private List<Object> list = new ArrayList<Object>();

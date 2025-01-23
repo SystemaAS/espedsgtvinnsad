@@ -269,8 +269,17 @@
 						<c:choose>
 						<c:when test="${model.record.ehst2 == 'S' || model.record.ehst2 == 'D' || model.record.ehst2 == 'C' || model.record.ehst2 == 'N'}">
 							<c:if test="${model.record.ehst2 == 'S'}">
-								<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
-								<font style="color:gray;">SUBMITTED</font>
+								<c:choose>
+									<%-- check if there was a SUCCESS from the API but with a incomplete-documentation-reason-list (usually when the seq.nr of a declaration is not valid) --%>
+									<c:when test="${not empty model.record.incltdoc && 'null' != model.record.incltdoc }">
+										<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
+										<font style="color:gray;">SUBMITTED</font>&nbsp;<font class="text12" style="color:brown;">${model.record.incltdoc}</font>
+									</c:when>
+									<c:otherwise>
+										<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
+										<font style="color:gray;">SUBMITTED</font>
+									</c:otherwise>
+								</c:choose>
 							</c:if>
 							<c:if test="${model.record.ehst2 == 'C'}">
 								<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
