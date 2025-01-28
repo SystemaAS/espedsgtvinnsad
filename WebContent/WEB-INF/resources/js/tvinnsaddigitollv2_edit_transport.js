@@ -400,10 +400,10 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 					if(len>0){
 						  for ( var i = 0; i < len; i++) {
 							if(data[i].own_ErrMsg != ''){
-								jq('#etpro').addClass("isa_error");
+								jq('#etpro').addClass("isa_warning");
 								//initTurFields(); har removats pga av Schenker som inte har turer... den är på prov eftersom de klagade som fan	
 							}else{
-								jq('#etpro').removeClass("isa_error");
+								jq('#etpro').removeClass("isa_warning");
 								
 								if(data[i].tusg != ''){
 									jq('#etsg').val(data[i].tusg);//signatur
@@ -452,6 +452,7 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 						  }
 					 }else{
 						jq('#etpro').removeClass("isa_error");
+						jq('#etpro').removeClass("isa_warning");
 						initTurFields();	
 					 }	
 					 
