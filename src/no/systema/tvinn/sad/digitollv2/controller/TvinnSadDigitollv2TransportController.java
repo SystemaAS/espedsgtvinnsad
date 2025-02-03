@@ -1778,6 +1778,7 @@ public class TvinnSadDigitollv2TransportController {
     	if(jsonPayload!=null){
     		SadmohfContainer jsonContainer = this.sadmohfListService.getListContainer(jsonPayload);
     		record.setListHouses(jsonContainer.getList());
+    		
     		//this is in order to rise "red flag" on GUI 
     		List<SadmohfRecord>tmpList = (List)jsonContainer.getList();
     		for(SadmohfRecord house : tmpList) {
@@ -1799,6 +1800,17 @@ public class TvinnSadDigitollv2TransportController {
     				}
     			}
     		}
+    		//check for invalid Sekv.nr on houses
+    		for(SadmohfRecord house : tmpList) {
+    			//only if the Mrn exists and if the status = SUBMITTED
+    			if(house.getEhst2().equals(EnumSadmohfStatus2.S.toString()) && StringUtils.isNotEmpty(house.getEhmid())) {
+	    			if(house.getIncltdoc()!=null && StringUtils.isNotEmpty(house.getIncltdoc())) {
+	    				parent.setOwn_invalidSekvnrOnHouse(true);
+	    				break;
+	    			}
+    			}
+    		}
+    		
     	}
     	
 	}

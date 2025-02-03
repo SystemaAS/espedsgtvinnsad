@@ -450,7 +450,43 @@
 		               <td width="2%" align="center" class="tableCell" >${record.etavd}</td>
 		               <td width="2%" align="center" class="tableCell" >${record.etsg}</td>
 		               <%-- <td width="2%" align="center" class="tableCell" ><c:if test="${record.etpro > 0}">${record.etpro}</c:if></td>  --%>
-		               <td width="2%" align="center" class="tableCell" >${record.etpro}</td>
+		               <td width="3%" align="left" class="tableCell" >${record.etpro}
+		               		
+		               		<c:if test="${not empty record.listMasters[0].listHouses}">
+		               			
+		               			<font class="text10">&nbsp;Ant.h.&nbsp;</font><font onClick="showPop('h_info_sekv_error${counter.count}');" title="Houses..." class="inputFormSubmit11 text10 isa_warning"><b>${record.listMasters[0].listHouses.size()}</b></font>
+		               			<c:if test="${record.own_invalidSekvnrOnHouse}">
+		               				<img style="cursor:help;" title="Error on house...CUDE_DOCUMENTATION" src="resources/images/redFlag.png" width="18" height="18" border="0">
+		               			</c:if>
+		               			
+		               			<span class="text11" style="position: relative;" align="left">
+			                	<span style="position:absolute;top:2px; width:280px;" id="h_info_sekv_error${counter.count}" class="popupWithInputText text11"  >
+			                	<button name="_ButtonCloseEtktm" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('h_info_sekv_error${counter.count}');">Close</button><br/>
+				           			<font style="color:royalblue">Ant.h.&nbsp;<b>${record.listMasters[0].listHouses.size()}</b></font>
+			           				<ul>
+			           				<c:forEach items="${record.listMasters[0].listHouses}" var="houseRecord" varStatus="h_counter">  
+			           					<li>
+			           						<a class="clazz_gotoHouse" title="goto house..." href="tvinnsaddigitollv2_edit_house.do?action=doFind&ehlnrt=${houseRecord.ehlnrt}&ehlnrm=${houseRecord.ehlnrm}&ehlnrh=${houseRecord.ehlnrh}">
+			           						<c:choose>
+			           							<c:when test="${not empty houseRecord.incltdoc && not empty houseRecord.ehmid}">
+			           								<font class="text10" style="color:red">House nr.&nbsp;<b>${houseRecord.ehlnrh}&nbsp;</b></font>
+			           								<font class="text10" style="color:red">ERROR on: CUDE_DOCUMENTATION</font>
+			           							</c:when>
+			           							<c:otherwise>
+			           								<font class="text10" style="color:royalblue">House nr.&nbsp;<b>${houseRecord.ehlnrh}</b></font>
+			           								
+			           							</c:otherwise>
+			           						</c:choose>
+			           						</a>
+			           					</li>
+			           				</c:forEach>
+			           				</ul>
+								</span>	
+								</span>
+	               			</c:if>
+		              		
+		               
+		               </td>
 		            
 		               <td width="2%" align="center" class="tableCell text12">
 		               		<c:if test="${record.own_invalidMastersExist || record.own_invalidHousesExist || record.own_unsentMastersExist || record.own_unsentHousesExist || record.etst2 == 'M'}">
