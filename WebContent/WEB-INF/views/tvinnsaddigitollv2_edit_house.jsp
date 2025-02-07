@@ -1550,6 +1550,10 @@
                	<c:if test="${not empty model.record.ehrg && not empty model.record.eh0068a && not empty model.record.eh0068b }">
                		<input class="inputFormSubmitStd" type="button" value="Laste opp til arkivet" name="uplButton" onClick="window.open('tvinnsadmanifest_childwindow_uploadFile.do?action=doInit&wsavd=${model.record.ehavd}&wsopd=${model.record.ehtdn}','archiveFromHouseFileUpload','top=300px,left=800px,height=250px,width=330px,scrollbars=no,status=no,location=no')">
 					<input title="" class="inputFormSubmitStd" type="button" name="sttButton" id="sttButton" value='Send doks. til toll.no'>
+					<span align="left" class="inputText">
+	                	<input style="cursor:pointer;vertical-align:middle;" type="checkbox" disabled="disabled" id="zhdoc" name="zhdoc" value="1"  <c:if test="${model.zhdoc_automatic_send > 0}"> checked </c:if> >
+	                	<span style="cursor:help;vertical-align:middle;font-size: 12px;color:grey;" title="ZH-doc auto.send til toll (doc-api)" >ZH-Doc auto.send via API</span>
+	                </span>
 				</c:if>
 			</c:if>
 		</tr> 

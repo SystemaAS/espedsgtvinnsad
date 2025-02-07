@@ -172,6 +172,7 @@ public class TvinnSadManifestAjaxHandlerController {
 	 * @param declSekvens
 	 * @return
 	 */
+	//TODO
 	@RequestMapping(value = "sendFileToToll_TvinnSadManifest.do", method = RequestMethod.GET)
 	public @ResponseBody Set<String> sendFileToToll
 	  						(@RequestParam String applicationUser, @RequestParam String docType, @RequestParam String docPath,

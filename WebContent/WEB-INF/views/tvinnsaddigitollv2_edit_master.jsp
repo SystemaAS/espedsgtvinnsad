@@ -1174,6 +1174,7 @@
                 		<th width="2%" class="tableHeaderField12" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.mrn"/></th>
                 		<th width="2%" class="tableHeaderField12" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.request"/></th>
                 		<th title="Api-status" width="2%" class="tableHeaderField12" ></th>
+                		<th title="CUDE_ERROR" width="2%" class="tableHeaderField12" ></th>
                 		<th title="S=SUBMITTED,R=REOPENED/DRAFT,D=SLETTET,C=COMPLETED,N=DENIED,M=ERROR" width="2%" class="tableHeaderField12" ><spring:message code="systema.tvinn.sad.digitoll.list.column.api.status"/></th>
                 		<th width="2%" class="tableHeaderField12" title="Fjerner manifest fra Tollvesenet" >Slett</th>
                 		<th width="2%" class="tableHeaderField12" title="Fjerner manifest lokalt (SYSPED)">Fjerne-sysped</th>
@@ -1289,8 +1290,7 @@
 		               				<c:choose>
 										<%-- check if there was a SUCCESS from the API but with a incomplete-documentation-reason-list (usually when the seq.nr of a declaration is not valid) --%>
 										<c:when test="${not empty houseConsignmentRecord.incltdoc && 'null' != houseConsignmentRecord.incltdoc }">
-											<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >
-											<font class="text11" style="color:brown;">${houseConsignmentRecord.incltdoc}</font>
+											<img src="resources/images/bulletRed.png" width="10" height="10" border="0" >&nbsp;
 										</c:when>
 										<c:otherwise>
 											<img src="resources/images/bulletGreen.png" width="10" height="10" border="0" >
@@ -1321,6 +1321,14 @@
 		               			</c:if>
 		               		</c:otherwise>
 		               		</c:choose>
+		               </td>
+		               <td width="2%" align="left" class="tableCell12" >
+	               			<c:if test="${houseConsignmentRecord.ehst2 == 'S'}">
+               					<%-- check if there was a SUCCESS from the API but with a incomplete-documentation-reason-list (usually when the seq.nr of a declaration is not valid) --%>
+								<c:if test="${not empty houseConsignmentRecord.incltdoc && 'null' != houseConsignmentRecord.incltdoc }">
+									<font class="text10" style="color:brown;">${houseConsignmentRecord.incltdoc}</font>
+								</c:if>
+							</c:if>		           
 		               </td>
 		               <td width="2%" align="center" class="tableCell12" >
 		               		<c:choose>
@@ -1535,6 +1543,9 @@
 		               		</c:otherwise>
 		               		</c:choose>
 		               </td>
+		               <td width="2%" align="left" class="tableCell12" ></td>
+		               
+		               
 		               <td width="2%" align="center" class="tableCell12" >
 		               		<c:choose>
 		               		<c:when test="${externalHouseRecord.ehst2 == 'S' || externalHouseRecord.ehst2 == 'R' || externalHouseRecord.ehst2 == 'D' || 

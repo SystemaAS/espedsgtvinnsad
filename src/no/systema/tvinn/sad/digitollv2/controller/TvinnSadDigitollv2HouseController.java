@@ -35,6 +35,7 @@ import no.systema.main.model.SystemaWebUser;
 //tvinn
 import no.systema.tvinn.sad.util.TvinnSadConstants;
 import no.systema.tvinn.sad.util.TvinnSadDateFormatter;
+import no.systema.tvinn.sad.util.manager.ArchiveGoogleCloudManager;
 import no.systema.z.main.maintenance.service.MaintMainKofastService;
 import no.systema.tvinn.sad.service.html.dropdown.TvinnSadDropDownListPopulationService;
 import no.systema.tvinn.sad.nctsimport.util.RpgReturnResponseHandler;
@@ -71,7 +72,10 @@ import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
 import no.systema.tvinn.sad.digitollv2.util.SadDigitollConstants;
 import no.systema.tvinn.sad.digitollv2.validator.HouseValidator;
 import no.systema.tvinn.sad.mapper.url.request.UrlRequestParameterMapper;
+import no.systema.tvinn.sad.manifest.express.model.jsonjackson.JsonTvinnSadManifestArchivedDocsRecord;
 import no.systema.tvinn.sad.manifest.express.util.manager.CodeDropDownMgr;
+import no.systema.tvinn.sad.manifest.express.util.manager.ManifestExpressMgr;
+import no.systema.tvinn.sad.manifest.url.store.TvinnSadManifestUrlDataStore;
 
 
 /**
@@ -240,6 +244,7 @@ public class TvinnSadDigitollv2HouseController {
 							model.put("record", record);
 							//put some other aspects
 							model.put("ceilHouse", this.getHousesListSize(appUser, record.getMasterDto()));
+							model.put("zhdoc_automatic_send", Integer.valueOf(AppConstants.ZHDOC_API_AUTOMATIC_SEND_ACTIVE));
 							//logger.debug(record.toString());
 							//Only if ERROR
 							if("M".equals(record.getEhst2())) {
@@ -267,6 +272,8 @@ public class TvinnSadDigitollv2HouseController {
 			this.avdSignControllerService.populateAvdelningHtmlDropDownsFromJsonString(model, appUser, session);
 			
 			this.setDropDownService(model);
+			
+			
 	    	
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 	    
@@ -601,9 +608,43 @@ public class TvinnSadDigitollv2HouseController {
 						redirect.append(redirectSuffix);
 					}
 				}
+				//----------------------------------------------------------
+				//Send ZH-doc-Handlesfaktura automatically. When applicable...
+				//----------------------------------------------------------
+				if(this.isValidZH_tosend(recordToValidate)) {
+					logger.info("#######################################");
+					logger.info("START API ZH-DOC send ... house [ehlnrh]:" + recordToValidate.getEhlnrh());
+					logger.info("#######################################");
+					//(1) send doc (ZH = Handelsfaktura) unconditionally. This has been done manually in the GUI but now we will reinforce that behavior with this automation...
+					//UC driven by DSV in order to always send the doc (if applicable)
+					//(1.1) get the document link and type (ZH)
+					JsonTvinnSadManifestArchivedDocsRecord zhRecord = this.getZHdoc(appUser, recordToValidate);
+					if(zhRecord!=null) {
+						logger.info("Doctyp:" + zhRecord.getDoctyp());
+						logger.info("Doclnk:" + zhRecord.getDoclnk());
+						logger.info("ehrg:" + recordToValidate.getEhrg());
+						//String eh0068a_ISO = dateFormatter.convertToDate_ISO(recordToValidate.getEh0068a().toString());
+						//logger.info("eh0068a_ISO:" + eh0068a_ISO);
+						logger.info("eh0068a:" + recordToValidate.getEh0068a().toString());
+						logger.info("eh0068b:" + recordToValidate.getEh0068b().toString());
+					
+						//(2) send it to the service as in the child-window, namely: 
+						//example (manually): no.systema.tvinn.sad.manifest.express.controller.ajax.TvinnSadManifestAjaxHandlerController.sendFileToToll_TvinnSadManifest.do
+						Set result = this.sendZHDocViaAPi(appUser, zhRecord, recordToValidate);
+						logger.info("result-Set ZHDoc-Api:" + result.toString());
+						//do handle this result-set somewhere ... maybe log in new db-table
+				 		//TODO...
+				 	 	//result.add(jsonPayload);
+				 		
+					}
+					logger.info("####################################################");
+					logger.info("END API ZH-DOC send ...house [ehlnrh]:" + recordToValidate.getEhlnrh());
+					logger.info("####################################################");
+				}
+				
 				
 			}else {
-				//this will never populate a redirect but sheet the same ...:-(
+				//this will never populate a redirect but anyways ... :-(
 				StringBuffer errMsg = new StringBuffer();
 				errMsg.append("ERROR on doSendHouse -->detail: null ids? ...");
 				model.put("errorMessage", errMsg.toString());
@@ -614,6 +655,124 @@ public class TvinnSadDigitollv2HouseController {
 		
 		return successView;
 		
+	}
+	
+	/**
+	 * 
+	 * @param appUser
+	 * @param zhRecord
+	 * @param recordToValidate
+	 * @return
+	 */
+	private Set sendZHDocViaAPi(SystemaWebUser appUser, JsonTvinnSadManifestArchivedDocsRecord zhRecord, SadmohfRecord sadmohfRecord ) {
+		Set result = new HashSet();
+		
+		try {
+			String declDateFormatted = dateMgr.getDateFormatted_ISO(sadmohfRecord.getEh0068a().toString(), DateTimeManager.NO_FORMAT, DateTimeManager.ISO_FORMAT_REVERSED);
+			String declId = sadmohfRecord.getEhrg() + "-" + declDateFormatted + "-" + sadmohfRecord.getEh0068b().toString();
+			String docPath = zhRecord.getDoclnk();
+			String docType = zhRecord.getDoctyp();
+			String docTypeFormatted = this.getDocumentType(docType, docPath);
+			
+			if(docPath.startsWith("http")) {
+				//Download to local directory from Google Cloud
+				if(appUser.getUser() .equalsIgnoreCase("OSCAR")) {
+					logger.warn("####### -->Using downloadPdfFromGoogleCloudTest (hardcoded A12 + .pdf just for testing ...");
+					docPath = new ArchiveGoogleCloudManager().downloadPdfFromGoogleCloudTestSimple(docPath);
+				}else {
+					docPath = new ArchiveGoogleCloudManager().downloadPdfFromGoogleCloudSimple(docPath);
+				}
+			}
+			//
+			String url = TvinnSadManifestUrlDataStore.TVINN_SAD_SEND_DOCUMENT_TO_TOLL_URL_V2;
+			String BASE_URL = url;
+	 		StringBuffer urlRequestParamsKeys = new StringBuffer();
+	 		urlRequestParamsKeys.append("user=" + appUser.getUser() + "&declId=" + declId + "&docType=" + docTypeFormatted );
+	 		urlRequestParamsKeys.append("&docPath=" + docPath );
+	 		logger.warn("URL: " + BASE_URL);
+	 		logger.warn("PARAMS: " + urlRequestParamsKeys.toString());
+	 		
+	 		logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+	 		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
+	 		//Debug -->
+		    logger.warn("Return code docAPI:" + jsonPayload);
+	 		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	 		
+	 		result.add(jsonPayload);
+	 		
+		}catch(Exception e) {
+			logger.error(e.toString());
+			e.toString();
+		}
+		
+		return result;
+	}
+	
+	private String getDocumentType(String docType, String docPath){
+		//docType is too bad to elucidate something. We use the docPath since this carries information about type
+		String retval = "faktura";
+		if(docPath!=null){
+			if(docPath.contains("/ZH") || docPath.contains("/ZO")){
+				retval = "faktura";
+			}else{
+				//other types here (tillatelser, fraktregning, opprinnelsesdokumentasjon, fraktbrev)
+			}
+		}
+		
+		return retval;
+	}
+	/**
+	 * Check for validity for automatic sending ZH-doc
+	 * @param recordToValidate
+	 * @return
+	 */
+	private boolean isValidZH_tosend(SadmohfRecord sadmohfRecord ) {
+		boolean retval = false;
+		try {
+			if(AppConstants.ZHDOC_API_AUTOMATIC_SEND_ACTIVE!=null && Integer.valueOf(AppConstants.ZHDOC_API_AUTOMATIC_SEND_ACTIVE) >0) {
+				if(StringUtils.isNotEmpty(sadmohfRecord.getEhrg()) && 
+					StringUtils.isNotEmpty(String.valueOf(sadmohfRecord.getEh0068a())) && StringUtils.isNotEmpty(String.valueOf(sadmohfRecord.getEh0068b())) ){
+					retval = true;
+				}
+			}
+		}catch(Exception e) {
+			e.toString();
+			logger.error(e.toString());
+		}
+		
+		return retval;
+	}
+	/**
+	 * filters the list to get the ZH-docs (Handelsfaktura SAD)
+	 * @param appUser
+	 * @param recordToValidate
+	 * @return
+	 */
+	private JsonTvinnSadManifestArchivedDocsRecord getZHdoc(SystemaWebUser appUser, SadmohfRecord sadmohfRecord ) {
+		JsonTvinnSadManifestArchivedDocsRecord result = null;
+		try {
+			String wsavd = String.valueOf(sadmohfRecord.getEhavd()); 
+			String wsopd = String.valueOf(sadmohfRecord.getEhtdn());
+			if(StringUtils.isNotEmpty(wsavd) && StringUtils.isNotEmpty(wsopd)) {
+				Collection<JsonTvinnSadManifestArchivedDocsRecord> list = manifestExpressMgr.fetchArchiveDocs(appUser, wsavd, wsopd);
+				logger.info(list.toString());
+				for(JsonTvinnSadManifestArchivedDocsRecord record: list) {
+					logger.trace("Doctyp:" + record.getDoctyp());
+					logger.trace("Doclnk:" + record.getDoclnk());
+					if(record.getDoclnk()!=null && record.getDoclnk().contains("ZH20")) {
+						result = new JsonTvinnSadManifestArchivedDocsRecord();
+						result.setDoctyp(record.getDoctyp());
+						result.setDoclnk(record.getDoclnk());
+						break;
+					}
+				}
+			}
+		}catch(Exception e) {
+			e.toString();
+			logger.error(e.toString());
+			
+		}
+		return result;
 	}
 	/**
 	 * Always async
@@ -656,7 +815,6 @@ public class TvinnSadDigitollv2HouseController {
 		}else{
 			
 			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
-			
 			//=================
 			//SEND POST or PUT
 			//=================
@@ -670,12 +828,54 @@ public class TvinnSadDigitollv2HouseController {
 				//remove the (P)ENDING status that was set by the caller before the async call
 				//this.apiHouseSendService.setSt3_Master(appUser.getUser(), lnrt, lnrm, EnumSadmomfStatus3.EMPTY.toString());
 			}else {
-				//this will never populate a redirect but sheet the same ...:-(
+				//this will never populate a redirect but shit the same ...:-(
 				StringBuffer errMsg = new StringBuffer();
 				errMsg.append("ERROR on doSendHouse -->detail: null ids? ...");
 				model.put("errorMessage", errMsg.toString());
-
 			}
+			
+			//----------------------------------------------------------
+			//Send ZH-doc-Handlesfaktura automatically. When applicable...
+			//----------------------------------------------------------
+			List<SadmohfRecord> listSadmohRecord = this.getHouses(appUser.getUser(), lnrtStr, lnrmStr);
+			if(listSadmohRecord!=null && listSadmohRecord.size()>0) {
+				for (SadmohfRecord sadmohfRecord : listSadmohRecord) {
+					if(this.isValidZH_tosend(sadmohfRecord)) {
+						logger.info("##############################################################");
+						logger.info("START API ZH-DOC send ... house [ehdkh]:" + sadmohfRecord.getEhdkh());
+						logger.info("##############################################################");
+						//(1) send doc (ZH = Handelsfaktura) unconditionally. This has been done manually in the GUI but now we will reinforce that behavior with this automation...
+						//UC driven by DSV in order to always send the doc (if applicable)
+						//(1.1) get the document link and type (ZH)
+						JsonTvinnSadManifestArchivedDocsRecord zhRecord = this.getZHdoc(appUser, sadmohfRecord);
+						if(zhRecord!=null) {
+							logger.info("Doctyp:" + zhRecord.getDoctyp());
+							logger.info("Doclnk:" + zhRecord.getDoclnk());
+							logger.info("ehrg:" + sadmohfRecord.getEhrg());
+							//String eh0068a_ISO = dateFormatter.convertToDate_ISO(recordToValidate.getEh0068a().toString());
+							//logger.info("eh0068a_ISO:" + eh0068a_ISO);
+							logger.info("eh0068a:" + sadmohfRecord.getEh0068a().toString());
+							logger.info("eh0068b:" + sadmohfRecord.getEh0068b().toString());
+						
+							//(2) send it to the service as in the child-window, namely: 
+							//example (manually): no.systema.tvinn.sad.manifest.express.controller.ajax.TvinnSadManifestAjaxHandlerController.sendFileToToll_TvinnSadManifest.do
+							Set result = this.sendZHDocViaAPi(appUser, zhRecord, sadmohfRecord);
+							logger.info("result-Set ZHDoc-Api:" + result.toString());
+							//do handle this result-set somewhere ... maybe log in new db-table
+					 		//TODO...
+					 	 	//result.add(jsonPayload);
+					 		
+						}
+						logger.info("##########################################################");
+						logger.info("END API ZH-DOC send ... house [ehdkh]:" + sadmohfRecord.getEhdkh());
+						logger.info("##########################################################");
+					}
+				
+				}
+			}
+			
+			
+			
 			successView = new ModelAndView(redirect.toString());
 			
 		}
@@ -684,6 +884,34 @@ public class TvinnSadDigitollv2HouseController {
 		
 	}
 	
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param emlnrt
+	 * @param emlnrm
+	 * @return
+	 */
+	private List<SadmohfRecord> getHouses(String applicationUser, String lnrt, String lnrm) {
+		List <SadmohfRecord> resultList = new ArrayList<SadmohfRecord>();
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_HOUSECONSIGNMENT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + applicationUser + "&ehlnrt=" + lnrt + "&ehlnrm=" + lnrm;
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadmohfContainer jsonContainer = this.sadmohfListService.getListContainer(jsonPayload);
+    		if(jsonContainer!=null && !jsonContainer.getList().isEmpty()) {
+    			resultList = (List)jsonContainer.getList();
+    		}
+    	}
+    	return resultList;
+	}
 	
 	/**
 	 * 
@@ -1421,5 +1649,8 @@ public class TvinnSadDigitollv2HouseController {
 	
 	@Autowired
 	private HouseControllerService houseControllerService;
+	
+	@Autowired
+	private ManifestExpressMgr manifestExpressMgr;
 }
 
