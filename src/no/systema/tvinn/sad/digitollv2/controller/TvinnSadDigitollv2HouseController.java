@@ -701,6 +701,9 @@ public class TvinnSadDigitollv2HouseController {
 	 		
 	 		//log in new db-table SADMODOCLG
 			SadmodoclgRecord sadmodoclgRecord = new SadmodoclgRecord();
+			if(StringUtils.isNotEmpty(jsonPayload) && jsonPayload.length()>200) {
+				jsonPayload = jsonPayload.substring(0,199);
+			}
 			sadmodoclgRecord.setResultapi(jsonPayload);
 			sadmodoclgRecord.setDocId(sadmohfRecord.getEhdkh());
 			sadmodoclgRecord.setDeklid(declId);
@@ -875,10 +878,7 @@ public class TvinnSadDigitollv2HouseController {
 							//example (manually): no.systema.tvinn.sad.manifest.express.controller.ajax.TvinnSadManifestAjaxHandlerController.sendFileToToll_TvinnSadManifest.do
 							Set result = this.sendZHDocViaAPi(appUser, zhRecord, sadmohfRecord);
 							logger.info("result-Set ZHDoc-Api:" + result.toString());
-							//do handle this result-set somewhere ... maybe log in new db-table
-					 		//TODO...
-					 	 	//result.add(jsonPayload);
-					 		
+							
 						}
 						logger.info("##########################################################");
 						logger.info("END API ZH-DOC send ... house [ehdkh]:" + sadmohfRecord.getEhdkh());
