@@ -63,7 +63,7 @@
 					 		setBlockUI();
 							window.location = 'tvinnsaddigitollv2_api_send_house.do?ehlnrt=' + jq('#ehlnrt').val() + '&ehlnrm=' + jq('#ehlnrm').val() + '&ehlnrh=' + jq('#ehlnrh').val()
 													+ '&ehmid=' + jq('#ehmid').val()  + '&async=' + async_own + '&ehavd=' + jq('#ehavd').val() + '&ehtdn=' + jq('#ehtdn').val()
-													+ '&ehrg=' + jq('#ehrg').val() + '&eh0068a=' + jq('#eh0068a').val() + '&eh0068b=' + jq('#eh0068b').val();
+													+ '&ehrg=' + jq('#ehrg').val() + '&eh0068a=' + jq('#eh0068a').val() + '&eh0068b=' + jq('#eh0068b').val() + '&ehdkh=' + jq('#ehdkh').val();
 				 		}
 			 	 },
 	 	 		{

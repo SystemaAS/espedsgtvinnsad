@@ -45,12 +45,14 @@ import no.systema.tvinn.sad.digitollv2.controller.service.ApiAsyncFacadeSendServ
 import no.systema.tvinn.sad.digitollv2.controller.service.ApiHouseSendService;
 import no.systema.tvinn.sad.digitollv2.controller.service.AvdSignControllerService;
 import no.systema.tvinn.sad.digitollv2.controller.service.HouseControllerService;
+import no.systema.tvinn.sad.digitollv2.controller.service.HouseDocLogControllerService;
 import no.systema.tvinn.sad.digitollv2.enums.EnumSadmohfStatus3;
 import no.systema.tvinn.sad.digitollv2.enums.EnumSadmomfStatus3;
 import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmodoclgRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoifContainer;
@@ -632,10 +634,7 @@ public class TvinnSadDigitollv2HouseController {
 						//example (manually): no.systema.tvinn.sad.manifest.express.controller.ajax.TvinnSadManifestAjaxHandlerController.sendFileToToll_TvinnSadManifest.do
 						Set result = this.sendZHDocViaAPi(appUser, zhRecord, recordToValidate);
 						logger.info("result-Set ZHDoc-Api:" + result.toString());
-						//do handle this result-set somewhere ... maybe log in new db-table
-				 		//TODO...
-				 	 	//result.add(jsonPayload);
-				 		
+						
 					}
 					logger.info("####################################################");
 					logger.info("END API ZH-DOC send ...house [ehlnrh]:" + recordToValidate.getEhlnrh());
@@ -664,7 +663,7 @@ public class TvinnSadDigitollv2HouseController {
 	 * @param recordToValidate
 	 * @return
 	 */
-	private Set sendZHDocViaAPi(SystemaWebUser appUser, JsonTvinnSadManifestArchivedDocsRecord zhRecord, SadmohfRecord sadmohfRecord ) {
+	private Set sendZHDocViaAPi(SystemaWebUser appUser, JsonTvinnSadManifestArchivedDocsRecord zhRecord, SadmohfRecord sadmohfRecord) {
 		Set result = new HashSet();
 		
 		try {
@@ -699,6 +698,21 @@ public class TvinnSadDigitollv2HouseController {
 	 		logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
 	 		
 	 		result.add(jsonPayload);
+	 		
+	 		//log in new db-table SADMODOCLG
+			SadmodoclgRecord sadmodoclgRecord = new SadmodoclgRecord();
+			sadmodoclgRecord.setResultapi(jsonPayload);
+			sadmodoclgRecord.setDocId(sadmohfRecord.getEhdkh());
+			sadmodoclgRecord.setDeklid(declId);
+			sadmodoclgRecord.setDoctyp(docTypeFormatted);
+			sadmodoclgRecord.setDoclnk(zhRecord.getDoclnk());
+			sadmodoclgRecord.setDeklnr(sadmohfRecord.getEhrg());
+			sadmodoclgRecord.setDekldate(dateMgr.getDateFormatted_ISO(sadmohfRecord.getEh0068a().toString(), DateTimeManager.NO_FORMAT));
+			sadmodoclgRecord.setDeklsekv(sadmohfRecord.getEh0068b().toString());
+			StringBuffer errMsg = new StringBuffer();
+	 		this.houseDocLogControllerServiceLogger.insertRecord(appUser.getUser(), sadmodoclgRecord, "A", errMsg);
+	 	 	
+	 		
 	 		
 		}catch(Exception e) {
 			logger.error(e.toString());
@@ -1649,6 +1663,9 @@ public class TvinnSadDigitollv2HouseController {
 	
 	@Autowired
 	private HouseControllerService houseControllerService;
+	
+	@Autowired
+	private HouseDocLogControllerService houseDocLogControllerServiceLogger;
 	
 	@Autowired
 	private ManifestExpressMgr manifestExpressMgr;
