@@ -622,6 +622,7 @@ public class TvinnSadDigitollv2HouseController {
 					//(1.1) get the document link and type (ZH)
 					JsonTvinnSadManifestArchivedDocsRecord zhRecord = this.getZHdoc(appUser, recordToValidate);
 					if(zhRecord!=null) {
+						//at this point we are sure that there are Handelsfakturor-ZH-PDFs (otherwise just do not send anything)
 						logger.info("Doctyp:" + zhRecord.getDoctyp());
 						logger.info("Doclnk:" + zhRecord.getDoclnk());
 						logger.info("ehrg:" + recordToValidate.getEhrg());
@@ -866,6 +867,7 @@ public class TvinnSadDigitollv2HouseController {
 						//(1.1) get the document link and type (ZH)
 						JsonTvinnSadManifestArchivedDocsRecord zhRecord = this.getZHdoc(appUser, sadmohfRecord);
 						if(zhRecord!=null) {
+							//at this point we are sure that there are Handelsfakturor-ZH-PDFs (otherwise just do not send anything)
 							logger.info("Doctyp:" + zhRecord.getDoctyp());
 							logger.info("Doclnk:" + zhRecord.getDoclnk());
 							logger.info("ehrg:" + sadmohfRecord.getEhrg());

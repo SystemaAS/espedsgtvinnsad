@@ -29,4 +29,5 @@ public class GeneralUpdateContainer {
 	public Collection<GeneralUpdateRecord> getList(){ return this.list; }
 	
 	
+	
 }

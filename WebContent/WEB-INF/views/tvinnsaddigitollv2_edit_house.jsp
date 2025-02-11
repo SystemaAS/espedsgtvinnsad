@@ -1553,6 +1553,9 @@
 					<span align="left" class="inputText">
 	                	<input style="cursor:pointer;vertical-align:middle;" type="checkbox" disabled="disabled" id="zhdoc" name="zhdoc" value="1"  <c:if test="${model.zhdoc_automatic_send > 0}"> checked </c:if> >
 	                	<span style="cursor:help;vertical-align:middle;font-size: 12px;color:grey;" title="ZH-doc auto.send til toll (doc-api)" >ZH-Doc auto.send via API</span>
+	                	<a tabindex="-1" id="docApilogIdLink">
+						  <img title="doc-api log" style="cursor:pointer;vertical-align: middle;" src="resources/images/log-icon2.png" width="16px" height="16px" border="0" alt="doc-api log" >
+						</a>
 	                </span>
 				</c:if>
 			</c:if>

@@ -42,7 +42,13 @@
 	jq('#ftplogIdLink').click(function() {
     	jq('#ftplogIdLink').attr('target','_blank');
     	window.open('tvinnsaddigitollv2_childwindow_external_houses_backto_ombud_log.do?action=doFind&ehdkh=' + jq('#ehdkh').val(), "codeWin", "top=300px,left=500px,height=600px,width=1200px,scrollbars=no,status=no,location=no");
-	});	    
+	});
+	jq('#docApilogIdLink').click(function() {
+    	jq('#docApilogIdLink').attr('target','_blank');
+    	window.open('tvinnsaddigitollv2_childwindow_docapi_log.do?action=doFind&ehdkh=' + jq('#ehdkh').val(), "codeWinDocApi", "top=380px,left=500px,height=400px,width=1200px,scrollbars=no,status=no,location=no");
+	});
+	
+		    
 
 
     jq('#sendButton').click(function() { 

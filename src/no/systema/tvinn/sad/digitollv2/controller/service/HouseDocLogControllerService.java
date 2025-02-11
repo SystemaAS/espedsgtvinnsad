@@ -9,9 +9,11 @@ import no.systema.main.service.UrlCgiProxyService;
 import no.systema.main.util.DateTimeManager;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmodoclgContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmodoclgRecord;
 import no.systema.tvinn.sad.digitollv2.service.ApiGenericDtoResponseService;
 import no.systema.tvinn.sad.digitollv2.service.GeneralUpdateService;
+import no.systema.tvinn.sad.digitollv2.service.SadmodoclgListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmohfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
@@ -49,7 +51,7 @@ public class HouseDocLogControllerService {
 		
 		
 		//get BASE URL
-		final String BASE_URL = SadDigitollUrlDataStore.SAD_DOC_API_LOG_DIGITOLL_HOUSECONSIGNMENT_URL;
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_DOC_API_LOG_HOUSECONSIGNMENT_URL;
 		//add URL-parameters
 		StringBuffer urlRequestParams = new StringBuffer();
 		urlRequestParams.append("user=" + applicationUser + "&mode=" + mode);
@@ -88,6 +90,44 @@ public class HouseDocLogControllerService {
     	return retval;
 	}
 	
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param docId
+	 * @return
+	 */
+	public Collection<SadmodoclgRecord> getList(String applicationUser, String docId) {
+		Collection<SadmodoclgRecord> retval = new ArrayList<SadmodoclgRecord>();
+
+		//get BASE URL
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_DIGITOLL_DOC_API_LOG_HOUSECONSIGNMENT_URL;
+		//add URL-parameters
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + applicationUser + "&docId=" + docId);
+		//urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((logRecord)));
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		SadmodoclgContainer container = this.sadmodoclgListService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<SadmodoclgRecord> outputList = container.getList();	
+			retval = outputList;
+    	}
+    	
+    	return retval;
+	}
+	
+	
 	
 	
 	@Autowired
@@ -103,5 +143,8 @@ public class HouseDocLogControllerService {
 	
 	@Autowired
 	private GeneralUpdateService generalUpdateService;
+	
+	@Autowired
+	private SadmodoclgListService sadmodoclgListService;
 	
 }

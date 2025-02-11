@@ -55,6 +55,7 @@ import no.systema.tvinn.sad.model.jsonjackson.customer.JsonTvinnSadCustomerConta
 import no.systema.tvinn.sad.model.jsonjackson.customer.JsonTvinnSadCustomerRecord;
 import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorContainer;
 import no.systema.tvinn.sad.model.jsonjackson.tullkontor.JsonTvinnSadTullkontorRecord;
+import no.systema.tvinn.sad.digitollv2.controller.service.HouseDocLogControllerService;
 import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
 import no.systema.tvinn.sad.digitollv2.model.api.entrymovementroad.EntryMovRoadDto;
@@ -1386,6 +1387,33 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		}
 	}
 	
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_docapi_log.do",  method={RequestMethod.GET} )
+	public ModelAndView doHouseDocApiLog(HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doHouseDocApiLog");
+		Map model = new HashMap();
+		String ehdkh = request.getParameter("ehdkh");
+		
+		
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_docapi_log");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			StringBuilder url = new StringBuilder();
+			
+			List list = (List)this.houseDocLogControllerService.getList(appUser.getUser(), ehdkh );
+			model.put("list", list);
+			model.put("ehdkh", ehdkh);
+    		successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	
 	/**
 	 * 
 	 * @param recordToValidate
@@ -2630,6 +2658,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	private TvinnSadCustomerService tvinnSadCustomerService;
 	@Autowired
 	private TvinnSadTolltariffVarukodService tvinnSadTolltariffVarukodService;
-	
+	@Autowired
+	private HouseDocLogControllerService houseDocLogControllerService;
 }
 
