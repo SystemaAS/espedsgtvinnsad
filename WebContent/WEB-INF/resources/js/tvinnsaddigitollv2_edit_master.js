@@ -310,7 +310,7 @@
 	  
 	  jq('#sendToPartIdLink').click(function() {
 	    	jq('#sendToPartIdLink').attr('target','_blank');
-	    	window.open('tvinnsaddigitollv2_childwindow_external_houses.do?action=doFind&ctype=ownReceiverOrgNr', "codeWin", "top=300px,left=500px,height=600px,width=1200px,scrollbars=no,status=no,location=no");
+	    	window.open('tvinnsaddigitollv2_childwindow_external_houses.do?action=doFind&ctype=ownReceiverOrgNr&emlnrt='+ jq('#emlnrt').val() + '&emlnrm='+ jq('#emlnrm').val() , "codeWin", "top=300px,left=500px,height=600px,width=1200px,scrollbars=no,status=no,location=no");
 	   });
 	   jq('#ftplogIdLink').click(function() {
 	    	jq('#ftplogIdLink').attr('target','_blank');

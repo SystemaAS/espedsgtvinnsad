@@ -748,9 +748,10 @@ public class TvinnSadDigitollv2HouseController {
 		boolean retval = false;
 		try {
 			if(AppConstants.ZHDOC_API_AUTOMATIC_SEND_ACTIVE!=null && Integer.valueOf(AppConstants.ZHDOC_API_AUTOMATIC_SEND_ACTIVE) >0) {
-				if(StringUtils.isNotEmpty(sadmohfRecord.getEhrg()) && 
-					StringUtils.isNotEmpty(String.valueOf(sadmohfRecord.getEh0068a())) && StringUtils.isNotEmpty(String.valueOf(sadmohfRecord.getEh0068b())) ){
-					retval = true;
+				if(StringUtils.isNotEmpty(sadmohfRecord.getEhrg()) && StringUtils.isNotEmpty(String.valueOf(sadmohfRecord.getEh0068a())) && StringUtils.isNotEmpty(String.valueOf(sadmohfRecord.getEh0068b())) ){
+					if( (sadmohfRecord.getEh0068a()!=null && sadmohfRecord.getEh0068a()>0) && (sadmohfRecord.getEh0068a()!=null && sadmohfRecord.getEh0068b()>0)  ) {
+						retval = true;
+					}
 				}
 			}
 		}catch(Exception e) {

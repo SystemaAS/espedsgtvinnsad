@@ -55,7 +55,7 @@ public class SadmohfRecord extends JsonAbstractGrandFatherRecord   {
 	private Integer eh0068a = 0; //    sonet        8  0       8       309        begge    sendingsdato
 	private String eh0068aStr = "";
 	public String getEh0068aStr() {
-		if(this.eh0068a > 0 ){
+		if(this.eh0068a!= null && this.eh0068a > 0 ){
 			String tmp = String.valueOf(this.eh0068a);
 			if (tmp.length()< 6) {
 				this.eh0068aStr = "0" + tmp;

@@ -22,36 +22,44 @@
 		  		<%-- this container table is necessary in order to separate the datatables element and the frame above, otherwise
 			 	the cosmetic frame will not follow the whole datatable grid including the search field... --%>
 				<table id="containerdatatableTable" cellspacing="2" align="left" width="100%" >
-					<%--
+					
 					<tr>
 					<td>
 						<table>
-						<form name="tvinnsadCustomerForm" id="tvinnsadCustomerForm" action="tvinnsaddigitollv2_childwindow_external_houses.do?action=doFind" method="post">
+						<form name="juxForm" id="juxForm">
+								<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
+								<input type="hidden" name="emlnrt" id="emlnrt" value="${model.emlnrt}">
+								<input type="hidden" name="emlnrm" id="emlnrm" value="${model.emlnrm}">
+								
+							</form>	
 						<tr>
-							<td class="text14">&nbsp;Navn</td>
-							<td class="text14">&nbsp;<input type="text" class="inputText" name="name" id="name" size="30" maxlength="70" value="${model.name}"></td>
-							<td class="text14">&nbsp;</td>
-							<td class="text14">&nbsp;OrgNr.</td>
-							<td class="text14">&nbsp;<input type="text" class="inputText" name="orgnr" id="orgnr" size="15" maxlength="35" value="${model.orgnr}"></td>
-							
-							<td class="text14">&nbsp;</td>
-	           				<td align="right">&nbsp;<input class="inputFormSubmit" type="submit" name="submit" value='<spring:message code="search.label"/>'></td>
+									
+							<td align="left">
+	           				<c:if test="${not empty model.sadmocfList}">
+					               &nbsp;<input title="automatisk generere send-filer..." class="inputFormSubmit" type="button" name="buttonCreateFilesOK" id="buttonCreateFilesOK" value='Ok'>
+					         </c:if>
+					         <input class="inputFormSubmit" type="button" name="buttonCancel" id="buttonCancel" value='Avbryt'>
+					         <c:if test="${not empty model.sadmocfList}">
+					              <input class="inputFormSubmitStd" type="button" name="buttonCheckAll" id="buttonCheckAll" value='Velg alle'>
+					         </c:if>
+	           				</td>
 		           		</tr>
-		           		</form>
 		           		</table>
 					</td>
 					</tr>
-					--%> 
+					
+					
 													           		
 	           		<tr height="10"><td></td></tr>
 					
 					<tr class="text14" >
 					<td class="ownScrollableSubWindowDynamicWidthHeight" width="100%" style="height:30em;">
 					<%-- this is the datatables grid (content)--%>
-					<table id="customerList" class="display compact cell-border" width="100%" >
+					<table id="partyList" class="display compact cell-border" width="100%" >
 						<thead>
 						<tr class="tableHeaderField" height="20" >
 							<th class="text14" >&nbsp;&nbsp;</th>
+							<th class="text14" >&nbsp;Velg</th>
 							<th class="text14" >&nbsp;Navn&nbsp;</th>
 		                    <th class="text14" >&nbsp;Orgnr.&nbsp;</th>
 		                    <th class="text14" >&nbsp;Comm&nbsp;</th>
@@ -65,15 +73,18 @@
 		                <tbody>
 		                <c:forEach var="record" items="${model.sadmocfList}" varStatus="counter">    
 			               <tr class="text14">
-			                   <td style="cursor:pointer;" class="text14MediumBlue" id="orgnr${record.orgnr}_name${record.name}_commtype${record.commtype}_format${record.format}" >
+			                   <td style="cursor:pointer;" class="text14MediumBlue" id="orgnr${record.orgnr}_name${record.name}_commtype${record.commtype}_format${record.format}_singlePick" >
 				               		<img title="select" valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;
 				               	</td>
-			               	   <td class="text14">&nbsp;${record.name}</td>
-			               	   <td class="text14">&nbsp;${record.orgnr}</td>
-			               	   <td class="text14">&nbsp;${record.commtype}</td>
-			               	   <td class="text14">&nbsp;${record.format}</td>
-			               	   <td class="text14">&nbsp;<c:if test="${not empty record.xmlxsd && record.xmlxsd!='null'}">${record.xmlxsd}</c:if></td>
-			               	   <td class="text14">
+				               	<td width="2%" align="center" class="text12">
+					           		<input title="${record.name}" class="clazzSendDocIdToExternalPartyAware" style="cursor:pointer;" type="checkbox" value="J" id="orgnr${record.orgnr}" name="orgnr${record.orgnr}" >
+					           </td>
+			               	   <td width="15%" class="text12">&nbsp;${record.name}</td>
+			               	   <td class="text12">&nbsp;${record.orgnr}</td>
+			               	   <td class="text12">&nbsp;${record.commtype}</td>
+			               	   <td class="text12">&nbsp;${record.format}</td>
+			               	   <td class="text12">&nbsp;<c:if test="${not empty record.xmlxsd && record.xmlxsd!='null'}">${record.xmlxsd}</c:if></td>
+			               	   <td class="text12">
 			               	   		<c:if test="${not empty record.ftpserver && record.ftpserver!='null'}">&nbsp;<b>FTP-server&nbsp;</b>${record.ftpserver}</c:if>
 			               	   		<c:if test="${not empty record.ftpdir && record.ftpdir!='null'}">&nbsp;<b>Dir&nbsp;</b>${record.ftpdir}</c:if>
 			               	   		<c:if test="${not empty record.avsorgnr && record.avsorgnr!='null'}">
@@ -89,7 +100,7 @@
 									</c:if>
 									
 			               	   </td>
-			               	   <td class="text14">
+			               	   <td class="text12">
 			               	   	<c:if test="${not empty record.sftpdir_ps && record.sftpdir_ps!='null'}">${record.sftpdir_ps}</c:if>
 			               	   </td>
 			            	</tr> 

@@ -1256,7 +1256,7 @@ public class TvinnSadDigitollAjaxController {
 	 */
 	@RequestMapping(value = "tvinnsaddigitollv2_send_masterId_toExternalParty.do", method = RequestMethod.GET)
 	  public @ResponseBody Set<SadmomfRecord> sendMasterIdToExternalParty(HttpServletRequest request, @RequestParam String applicationUser, @RequestParam String emlnrt,
-			  																		   @RequestParam String emlnrm, @RequestParam String receiverName, @RequestParam String receiverOrgnr ) {
+			  												@RequestParam String emlnrm, @RequestParam String receiverName, @RequestParam String receiverOrgnr ) {
 		  Set result = new HashSet();
 		  logger.info("Inside sendMasterIdToExternalParty");
 		  logger.info("emlnrt:" + emlnrt);
@@ -1298,6 +1298,93 @@ public class TvinnSadDigitollAjaxController {
 		  return result;
 		  
 	  }
+	
+	/**
+	 * This method is just at proxy to the target: .../syjservicestn-expft/digitollv2/send_masterId_toExternalParty.do
+	 * This method will act in a multi-party fashion. As the single method but within a list
+	 * 
+	 * The reason for that is the design issue on whether the external party is going to receive the payload (FTP, web-service, other)
+	 * The communication issue will be the responsibility for the syjservices-expft subsystem.
+	 * 
+	 * @param request
+	 * @param applicationUser
+	 * @param emlnrt
+	 * @param emlnrm
+	 * @param orgNr
+	 * @return
+	 */
+	@RequestMapping(value = "tvinnsaddigitollv2_send_masterId_toExternalParties.do", method = RequestMethod.GET)
+	  public @ResponseBody Set<SadmomfRecord> sendMasterIdToExternalParties(HttpServletRequest request, @RequestParam String applicationUser, @RequestParam String params,  
+			  																							@RequestParam String emlnrt,@RequestParam String emlnrm ) {
+		
+		 //TODO
+		 List<String> partyList = new ArrayList<String>();
+		 if (StringUtils.isNotEmpty(params)) {
+			 String [] recordsParties = params.split("#");
+			 partyList = Arrays.asList(recordsParties);
+		 }	
+		 logger.info("paramsRaw:" + params);
+		 
+		
+		
+		  Set result = new HashSet();
+		  logger.info("Inside sendMasterIdToExternalParties");
+		  logger.info("emlnrt:" + emlnrt);
+		  logger.info("emlnrm:" + emlnrm);
+		  
+		  
+		  try {
+			  if(partyList != null && !partyList.isEmpty()) {
+				//(1) iterate through the list of GUI-chosen checkboxes 
+				for (String party: partyList) {
+					  logger.info("partyRaw:" + party);	
+					  String [] record = party.split("_");
+					  if(record.length>=2) {
+						  String receiverOrgnr = record[0].replace("orgnr", ""); //from the tvinnsaddigitollv2_childwindow_external_houses.js file
+						  String receiverName = record[1].replace("name", "");  //from the tvinnsaddigitollv2_childwindow_external_houses.js file
+						  logger.info("file-receiver name:" + receiverName);
+						  logger.info("file-receiver orgNr:" + receiverOrgnr);
+						  
+						  
+						  /*TO TEST
+						  if(StringUtils.isNotEmpty(receiverName) && StringUtils.isNotEmpty(receiverOrgnr) && StringUtils.isNotEmpty(emlnrt) && StringUtils.isNotEmpty(emlnrm)) {
+							  //get BASE URL
+							  final String BASE_URL = SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL + "send_masterId_toExternalParty.do" ;
+							  //add URL-parameters
+							  StringBuffer urlRequestParams = new StringBuffer();
+							  urlRequestParams.append("user=" + applicationUser + "&emlnrt=" + emlnrt + "&emlnrm=" + emlnrm + "&receiverName=" + receiverName + "&receiverOrgnr=" + receiverOrgnr);
+							  logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+							  logger.warn("URL: " + BASE_URL);
+							  logger.warn("URL PARAMS: " + urlRequestParams);
+						    	
+							  String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+							  //Debug --> 
+							  logger.info(jsonPayload);
+							  //return to jquery
+							  if("OK".equalsIgnoreCase(jsonPayload)) {
+								  SadmomfRecord record = new SadmomfRecord();
+								  record.setOwn_resultAjaxText(jsonPayload);
+								  result.add(record);
+							  }else {
+								  SadmomfRecord record = new SadmomfRecord();
+								  record.setOwn_resultAjaxText(jsonPayload);
+								  result.add(record);
+							  }
+							
+						  	  
+						 }*/
+					  }
+				}
+			  }
+		  }catch(Exception e) {
+			  logger.error(e.toString());
+		  }
+	      
+		  return result;
+		  
+	  }
+	
+	
 	/**
 	 * Send the local house back to the MasterId sender Party
 	 * @param request

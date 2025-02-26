@@ -1840,6 +1840,8 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		this.context = TdsAppContext.getApplicationContext();
 		logger.info("Inside: doInitExternalHouses");
 		Map model = new HashMap();
+		String emlnrt = request.getParameter("emlnrt");
+		String emlnrm = request.getParameter("emlnrm");
 		
 		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_external_houses");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
@@ -1852,6 +1854,9 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			List list = this.getSadmocfList(appUser, recordToValidate.getOrgnr());
 			
 			model.put("sadmocfList", list);
+			model.put("emlnrt", emlnrt);
+			model.put("emlnrm", emlnrm);
+			
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 			
 	    	return successView;
