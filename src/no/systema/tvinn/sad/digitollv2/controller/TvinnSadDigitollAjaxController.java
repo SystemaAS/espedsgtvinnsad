@@ -1337,16 +1337,14 @@ public class TvinnSadDigitollAjaxController {
 			  if(partyList != null && !partyList.isEmpty()) {
 				//(1) iterate through the list of GUI-chosen checkboxes 
 				for (String party: partyList) {
-					  logger.info("partyRaw:" + party);	
-					  String [] record = party.split("_");
-					  if(record.length>=2) {
-						  String receiverOrgnr = record[0].replace("orgnr", ""); //from the tvinnsaddigitollv2_childwindow_external_houses.js file
-						  String receiverName = record[1].replace("name", "");  //from the tvinnsaddigitollv2_childwindow_external_houses.js file
+					  logger.trace("partyRaw:" + party);	
+					  String [] partyRecord = party.split("_");
+					  if(partyRecord.length>=2) {
+						  String receiverOrgnr = partyRecord[0].replace("orgnr", ""); //from the tvinnsaddigitollv2_childwindow_external_houses.js file
+						  String receiverName = partyRecord[1].replace("name", "");  //from the tvinnsaddigitollv2_childwindow_external_houses.js file
 						  logger.info("file-receiver name:" + receiverName);
 						  logger.info("file-receiver orgNr:" + receiverOrgnr);
 						  
-						  
-						  /*TO TEST
 						  if(StringUtils.isNotEmpty(receiverName) && StringUtils.isNotEmpty(receiverOrgnr) && StringUtils.isNotEmpty(emlnrt) && StringUtils.isNotEmpty(emlnrm)) {
 							  //get BASE URL
 							  final String BASE_URL = SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL + "send_masterId_toExternalParty.do" ;
@@ -1372,7 +1370,7 @@ public class TvinnSadDigitollAjaxController {
 							  }
 							
 						  	  
-						 }*/
+						 }
 					  }
 				}
 			  }
