@@ -668,7 +668,14 @@ public class TvinnSadDigitollv2HouseController {
 		Set result = new HashSet();
 		
 		try {
-			String declDateFormatted = dateMgr.getDateFormatted_ISO(sadmohfRecord.getEh0068a().toString(), DateTimeManager.NO_FORMAT, DateTimeManager.ISO_FORMAT_REVERSED);
+			String declDateFormatted = "";
+			if(sadmohfRecord.getEh0068a()!=null  && sadmohfRecord.getEh0068a().toString().length()==6){
+				//NO-mask
+				declDateFormatted = dateMgr.getDateFormatted_ISO(sadmohfRecord.getEh0068a().toString(), DateTimeManager.NO_FORMAT, DateTimeManager.ISO_FORMAT_REVERSED);
+			}else {
+				//ISO-mask already. We'll just have to reverse it. This UC happens when you are sending ALL-Houses (from the Master) since this record is coming from the db-table (already in ISO)
+				declDateFormatted = dateMgr.getDateFormatted_ISO(sadmohfRecord.getEh0068a().toString(), DateTimeManager.ISO_FORMAT, DateTimeManager.ISO_FORMAT_REVERSED);
+			}
 			String declId = sadmohfRecord.getEhrg() + "-" + declDateFormatted + "-" + sadmohfRecord.getEh0068b().toString();
 			String docPath = zhRecord.getDoclnk();
 			String docType = zhRecord.getDoctyp();
