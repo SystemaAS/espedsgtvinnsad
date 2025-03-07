@@ -6,10 +6,13 @@
 	jq(function() {
 		jq('#partyList').on('click', 'td', function(){
 			  var id = this.id;
+			  // file via ajax
+			  console.log("click on td... id:" + id);
+			  
 			  //only these td's are of interest!!
 			  if(id.indexOf("singlePick") != -1){
 				  var record = id.split('_');
-				 
+				  /* OLD 
 				  if(record.length >= 2){
 					  var orgnr = record[0].replace("orgnr", "");
 					  var name = record[1].replace("name", "");
@@ -19,19 +22,63 @@
 				  	  opener.jq('#ownReceiverOrgNr').val(orgnr);
 					  opener.jq('#ownReceiverName').val(name);
 				  }
-	 			  /*
+	 			  
 				  opener.jq('#ehrgs').val(syrg);refreshCustomValidity(opener.jq('#ehrgs')[0]);
 				  opener.jq('#ehad1s').val(adr1);
 				  opener.jq('#ehpss').val(adr3);
 				  opener.jq('#ehpns').val(postnr);
 				  opener.jq('#ehlks').val(land);
 				  opener.jq('#ehnas').focus();	
-			  	  */
-		
-		
+			  	  
 				  //close child window
 				  window.close();
-			  }
+			      */
+			   }
+
+			   //upload file	
+			   if(id.indexOf("file") != -1){
+				  
+				  console.log("click on td:" + id);
+				  var fileId = id.replace("TD", "");
+				  console.log("click on id for file-field:" + fileId);
+				 	
+				  
+				  jq('#' + fileId).change(function(){
+				  	var file = jq('#' + fileId)[0].files;
+					console.log("file:" + file);
+					console.log("file-size:" + file.length);
+					console.log("file-name:" + file[0].name);
+					console.log("file-size:" + file[0].size);
+					console.log("file-type:" + file[0].type);
+					
+					if(file!=null && file.length > 0){
+						//DEBUG
+						console.log("applicationUser:" + jq('#applicationUser').val());
+						console.log("file:" + file[0]);
+						
+						var formData = new FormData();
+						formData.append('applicationUser', jq('#applicationUser').val());
+						formData.append('file', file[0]);
+						
+						jq.ajax({
+					        type: "POST",
+					        url: "tvinnsaddigitollv2_saveAttachmentTempOnMaster.do",
+					        //async: true,
+							data: formData,
+							dataType: 'json',
+							enctype: 'multipart/form-data',
+					        contentType: false,
+					        processData: false,
+					        success: function (data) {
+					            //console.log(data);
+								console.log("SUCCESS");
+					        }
+	    				});
+						
+					}
+				  });
+				  	
+			   }
 	
 		  });
 	});

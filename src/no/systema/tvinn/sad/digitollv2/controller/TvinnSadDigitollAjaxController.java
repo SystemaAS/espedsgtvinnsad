@@ -1,6 +1,8 @@
 package no.systema.tvinn.sad.digitollv2.controller;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -20,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.multipart.MultipartFile;
 
 import javawebparts.core.org.apache.commons.lang.StringUtils;
 import no.systema.main.model.SystemaWebUser;
@@ -1440,7 +1442,55 @@ public class TvinnSadDigitollAjaxController {
 		  return result;
 		  
 	  }
-		/**
+	
+	/**
+	 * This saves a file payload temporarily before we do something with it ...
+	 * @param applicationUser
+	 * @param file
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_saveAttachmentTempOnMaster.do", method = { RequestMethod.GET, RequestMethod.POST })
+    public @ResponseBody Set<String> saveAttachmentTempOnMaster (@RequestParam ("applicationUser") String applicationUser, @RequestParam ("file") MultipartFile file) {
+		    logger.info("Inside:  saveAttachmentTempOnMaster");
+		    Set result = new HashSet();
+		    
+	        if (!file.isEmpty()) {
+        		String fileName = file.getOriginalFilename();
+        		logger.info("FILE NAME:" + fileName);
+                
+        		String rootPath	= "/Users/oscardelatorre/";
+        	    File dir = new File(rootPath);
+        	    
+        	    try {
+	                byte[] bytes = file.getBytes();
+	                // Create the file on server
+	                File serverFile = new File(dir.getAbsolutePath() + File.separator +  fileName);
+	                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+	                stream.write(bytes);
+	                stream.close();
+	                logger.info("Server File Location=" + serverFile.getAbsolutePath());
+	                
+        	    } catch (Exception e) {
+            		//run time upload error
+            		String absoluteFileName = rootPath + File.separator + fileName;
+            		//return "You failed to upload to:" + fileName + " runtime error:" + e.getMessage();
+        	    }
+
+                
+	        } else {
+	            //return "You failed to upload an empty file.";
+	        	
+	        }
+		    result.add("OK");
+			
+    	return result;
+    }
+
+	
+	
+	/**
 	 * 
 	 * @param sadmohfRecord
 	 */

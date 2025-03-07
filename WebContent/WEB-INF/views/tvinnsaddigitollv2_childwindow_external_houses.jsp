@@ -73,9 +73,14 @@
 		                <tbody>
 		                <c:forEach var="record" items="${model.sadmocfList}" varStatus="counter">    
 			               <tr class="text14">
+			                   <%-- 
 			                   <td style="cursor:pointer;" class="text14MediumBlue" id="orgnr${record.orgnr}_name${record.name}_commtype${record.commtype}_format${record.format}_singlePick" >
 				               		<img title="select" valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;
 				               	</td>
+				               --%>
+				               <td class="text14" id="TDfile_${counter.count}_${record.orgnr}">
+           						&nbsp;<input ondragenter="myFileUploadDragEnter${counter.count}(event,this)" ondragleave="myFileUploadDragLeave${counter.count}(event,this)" class="tableBorderWithRoundCornersLightYellow3D" style="width:150px;height:55px;display:block;" type="file" name="file_${counter.count}_${record.orgnr}" id="file_${counter.count}_${record.orgnr}" />
+       							</td>	
 				               	<td width="2%" align="center" class="text12">
 					           		<input title="${record.name}" class="clazzSendDocIdToExternalPartyAware" style="cursor:pointer;" type="checkbox" value="J" id="orgnr${record.orgnr}" name="orgnr${record.orgnr}" >
 					           </td>
