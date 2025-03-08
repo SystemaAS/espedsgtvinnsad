@@ -79,7 +79,7 @@
 				               	</td>
 				               --%>
 				               <td class="text14" id="TDfile_${counter.count}_${record.orgnr}">
-           						&nbsp;<input ondragenter="myFileUploadDragEnter${counter.count}(event,this)" ondragleave="myFileUploadDragLeave${counter.count}(event,this)" class="tableBorderWithRoundCornersLightYellow3D" style="width:150px;height:55px;display:block;" type="file" name="file_${counter.count}_${record.orgnr}" id="file_${counter.count}_${record.orgnr}" />
+           						&nbsp;<input ondragenter="myFileUploadDragEnter${counter.count}(event,this)" ondragleave="myFileUploadDragLeave${counter.count}(event,this)" class="tableBorderWithRoundCornersLightYellow3D" style="width:150px;height:55px;display:block;"  multiple type="file" name="file_${counter.count}_${record.orgnr}" id="file_${counter.count}_${record.orgnr}" />
        							</td>	
 				               	<td width="2%" align="center" class="text12">
 					           		<input title="${record.name}" class="clazzSendDocIdToExternalPartyAware" style="cursor:pointer;" type="checkbox" value="J" id="orgnr${record.orgnr}" name="orgnr${record.orgnr}" >

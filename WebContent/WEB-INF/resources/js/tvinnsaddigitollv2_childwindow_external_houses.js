@@ -35,6 +35,7 @@
 			      */
 			   }
 
+			/*	
 			   //upload file	
 			   if(id.indexOf("file") != -1){
 				  
@@ -87,8 +88,63 @@
 				  });
 				  	
 			   }
-	
+			*/
+			
+			   //upload file	
+			   if(id.indexOf("file") != -1){
+				  
+				  console.log("click on td:" + id);
+				  var fileId = id.replace("TD", "");
+				  console.log("click on id for file-field:" + fileId);
+				 	
+				  
+				  jq('#' + fileId).change(function(){
+					var formData = new FormData();
+					var files = jq('#' + fileId)[0].files;
+					
+					if(files!=null && files.length > 0){
+						var formData = new FormData();
+						formData.append('applicationUser', jq('#applicationUser').val());
+						//DEBUG
+						console.log("applicationUser:" + jq('#applicationUser').val());
+						console.log("Nr. of files:" + files.length);
+						
+						for ( var i = 0, l = files.length; i < l; i++ ) {
+							formData.append('files', files[i]);
+							console.log("file-name:" + files[i].name);
+							console.log("file-size:" + files[i].size);
+							console.log("file-type:" + files[i].type);
+						}
+						
+						
+					}else{
+						console.log("NO FILES");
+						formData.append('applicationUser', jq('#applicationUser').val());
+						formData.append('files[]', null);	
+						
+					}
+					
+					jq.ajax({
+				        type: "POST",
+				        url: "tvinnsaddigitollv2_saveAttachmentTempOnMaster.do",
+				        //async: true,
+						data: formData,
+						dataType: 'json',
+						enctype: 'multipart/form-data',
+				        contentType: false,
+				        processData: false,
+				        success: function (data) {
+				            //console.log(data);
+							console.log("SUCCESS");
+				        }
+    				});	
+					
+				  });
+				  	
+			   }
+			
 		  });
+
 	});
 	
 	
