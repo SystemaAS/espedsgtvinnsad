@@ -3,6 +3,10 @@ package no.systema.tvinn.sad.digitollv2.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -14,9 +18,12 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -1316,8 +1323,9 @@ public class TvinnSadDigitollAjaxController {
 	 * @return
 	 */
 	@RequestMapping(value = "tvinnsaddigitollv2_send_masterId_toExternalParties.do", method = RequestMethod.GET)
-	  public @ResponseBody Set<SadmomfRecord> sendMasterIdToExternalParties(HttpServletRequest request, @RequestParam String applicationUser, @RequestParam String params,  
-			  																							@RequestParam String emlnrt,@RequestParam String emlnrm ) {
+	  public @ResponseBody Set<SadmomfRecord> sendMasterIdToExternalParties(HttpServletRequest request, 
+			  								@RequestParam String applicationUser, @RequestParam String params,  
+			  								@RequestParam String emlnrt,@RequestParam String emlnrm ) {
 		
 		 //TODO
 		 List<String> partyList = new ArrayList<String>();
@@ -1452,36 +1460,88 @@ public class TvinnSadDigitollAjaxController {
 	 * @return
 	 */
 	@RequestMapping(value="tvinnsaddigitollv2_saveAttachmentTempOnMaster.do", method = { RequestMethod.GET, RequestMethod.POST })
-    public @ResponseBody Set<String> saveAttachmentTempOnMaster (@RequestParam ("applicationUser") String applicationUser, @RequestParam ("file") MultipartFile file) {
-		    logger.info("Inside:  saveAttachmentTempOnMaster");
+    public @ResponseBody Set<String> saveAttachmentTempOnMaster (HttpServletRequest request, 
+    								@RequestParam String applicationUser, @Nullable @RequestParam MultipartFile file) { 
+		    logger.info("Inside: saveAttachmentTempOnMaster");
 		    Set result = new HashSet();
-		    
-	        if (!file.isEmpty()) {
+		    String rootPath	= "/Users/oscardelatorre/tmp/";
+    	    File dir = new File(rootPath);
+    	    
+	        if (file!=null && !file.isEmpty()) {
         		String fileName = file.getOriginalFilename();
         		logger.info("FILE NAME:" + fileName);
+        		
                 
-        		String rootPath	= "/Users/oscardelatorre/";
-        	    File dir = new File(rootPath);
-        	    
         	    try {
 	                byte[] bytes = file.getBytes();
+	    
+	                /*
 	                // Create the file on server
 	                File serverFile = new File(dir.getAbsolutePath() + File.separator +  fileName);
+	                //File serverFile = new File(fileName);
 	                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
 	                stream.write(bytes);
 	                stream.close();
 	                logger.info("Server File Location=" + serverFile.getAbsolutePath());
+	                */
+	                Path filePath = Paths.get(dir.getAbsolutePath() + File.separator +  fileName);
+	                Files.write(filePath, bytes);
+	                
+	                
+	                final String BASE_URL = SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL + "send_masterId_toExternalPartyXXX.do" ;
+		             try {
+			              StringBuffer urlRequestParams = new StringBuffer();
+			              //byte[] bytesEncoded = Base64.encodeBase64(bytes);
+			    		  //String payload =  new String(bytesEncoded);
+			    		  
+			    		  //byte[] bytesEncoded = java.util.Base64.getEncoder().encode(bytes);
+			    		  //String payload =  new String(bytesEncoded);
+			    		  
+						  urlRequestParams.append("user=" + applicationUser + "&filePath=" + filePath.toString());
+						  logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+						  logger.warn("URL: " + BASE_URL);
+						  logger.warn("URL PARAMS: " + urlRequestParams);
+					    	
+						  String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+						  //Debug --> 
+						  logger.info(jsonPayload);
+		             }catch(Exception e) {
+		            	 logger.error(e.toString());
+		             }
 	                
         	    } catch (Exception e) {
             		//run time upload error
-            		String absoluteFileName = rootPath + File.separator + fileName;
-            		//return "You failed to upload to:" + fileName + " runtime error:" + e.getMessage();
+            		//String absoluteFileName = rootPath + File.separator + fileName;
+            		e.printStackTrace();
         	    }
 
                 
 	        } else {
-	            //return "You failed to upload an empty file.";
-	        	
+	            result.add("EMTPY");
+	            logger.info("NO FILE ...");
+	            MultipartFile fileDummy = new MockMultipartFile("dummyfileThatDoesNotExists.txt", "dummyfileThatDoesNotExists.txt", 
+	            		"text/plain", "This is a dummy file content".getBytes(StandardCharsets.UTF_8));
+	            
+	            final String BASE_URL = SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL + "send_masterId_toExternalPartyXXX.do" ;
+	             try {
+		              StringBuffer urlRequestParams = new StringBuffer();
+		              ////byte[] bytesEncoded = Base64.encodeBase64(fileDummy.getBytes());
+		              //byte[] bytesEncoded = java.util.Base64.getEncoder().encode(fileDummy.getBytes());
+		    		  //String payload =  new String(bytesEncoded);
+		              Path filePath = Paths.get(dir.getAbsolutePath() + File.separator +  fileDummy.getName());
+		              Files.write(filePath, fileDummy.getBytes());
+		                
+		              urlRequestParams.append("user=" + applicationUser + "&filePath=" + filePath.toString());
+					  logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+					  logger.warn("URL: " + BASE_URL);
+					  logger.warn("URL PARAMS: " + urlRequestParams);
+				    	
+					  String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+					  //Debug --> 
+					  logger.info(jsonPayload);
+	             }catch(Exception e) {
+	            	 logger.error(e.toString());
+	             }
 	        }
 		    result.add("OK");
 			

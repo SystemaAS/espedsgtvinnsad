@@ -46,19 +46,26 @@
 				  jq('#' + fileId).change(function(){
 				  	var file = jq('#' + fileId)[0].files;
 					console.log("file:" + file);
-					console.log("file-size:" + file.length);
-					console.log("file-name:" + file[0].name);
-					console.log("file-size:" + file[0].size);
-					console.log("file-type:" + file[0].type);
 					
-					if(file!=null && file.length > 0){
+					//if(file!=null && file.length > 0){
 						//DEBUG
 						console.log("applicationUser:" + jq('#applicationUser').val());
-						console.log("file:" + file[0]);
 						
 						var formData = new FormData();
 						formData.append('applicationUser', jq('#applicationUser').val());
-						formData.append('file', file[0]);
+						
+						if(file!=null && file.length > 0){
+							formData.append('file', file[0]);
+							//DEBUG
+							console.log("file:" + file[0]);
+							console.log("file-size:" + file.length);
+							console.log("file-name:" + file[0].name);
+							console.log("file-size:" + file[0].size);
+							console.log("file-type:" + file[0].type);
+
+						}else{
+							formData.append('file', null);
+						}
 						
 						jq.ajax({
 					        type: "POST",
@@ -75,7 +82,8 @@
 					        }
 	    				});
 						
-					}
+					//}
+					
 				  });
 				  	
 			   }
