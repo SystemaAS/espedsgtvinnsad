@@ -35,66 +35,15 @@
 			      */
 			   }
 
-			/*	
+			   //=================
+			   // TESTAT och KLART
+			   //=================
 			   //upload file	
 			   if(id.indexOf("file") != -1){
 				  
 				  console.log("click on td:" + id);
 				  var fileId = id.replace("TD", "");
-				  console.log("click on id for file-field:" + fileId);
-				 	
-				  
-				  jq('#' + fileId).change(function(){
-				  	var file = jq('#' + fileId)[0].files;
-					console.log("file:" + file);
-					
-					//if(file!=null && file.length > 0){
-						//DEBUG
-						console.log("applicationUser:" + jq('#applicationUser').val());
-						
-						var formData = new FormData();
-						formData.append('applicationUser', jq('#applicationUser').val());
-						
-						if(file!=null && file.length > 0){
-							formData.append('file', file[0]);
-							//DEBUG
-							console.log("file:" + file[0]);
-							console.log("file-size:" + file.length);
-							console.log("file-name:" + file[0].name);
-							console.log("file-size:" + file[0].size);
-							console.log("file-type:" + file[0].type);
-
-						}else{
-							formData.append('file', null);
-						}
-						
-						jq.ajax({
-					        type: "POST",
-					        url: "tvinnsaddigitollv2_saveAttachmentTempOnMaster.do",
-					        //async: true,
-							data: formData,
-							dataType: 'json',
-							enctype: 'multipart/form-data',
-					        contentType: false,
-					        processData: false,
-					        success: function (data) {
-					            //console.log(data);
-								console.log("SUCCESS");
-					        }
-	    				});
-						
-					//}
-					
-				  });
-				  	
-			   }
-			*/
-			
-			   //upload file	
-			   if(id.indexOf("file") != -1){
-				  
-				  console.log("click on td:" + id);
-				  var fileId = id.replace("TD", "");
+				  var orgnr = fileId.replace("file","");
 				  console.log("click on id for file-field:" + fileId);
 				 	
 				  
@@ -103,14 +52,26 @@
 					var files = jq('#' + fileId)[0].files;
 					
 					if(files!=null && files.length > 0){
-						var formData = new FormData();
+						
 						formData.append('applicationUser', jq('#applicationUser').val());
+						formData.append('emdkm', jq('#emdkm').val());
+						formData.append('orgnr', orgnr);
 						//DEBUG
 						console.log("applicationUser:" + jq('#applicationUser').val());
+						console.log("emdkm:" + jq('#emdkm').val());
+						console.log("orgnr:" + orgnr);
 						console.log("Nr. of files:" + files.length);
 						
+						var obj = []; 
+ 						//const obj = new Obj(1 + "_" + jq('#emdkm').val() + "_" + orgnr);
 						for ( var i = 0, l = files.length; i < l; i++ ) {
+							obj.push(jq('#emdkm').val() + "_" + orgnr + "_" + files[i].name);
+							//var mapKey = i + "_" + jq('#emdkm').val() + "_" + orgnr;
+							//map[mapKey] = files[i];
+							
 							formData.append('files', files[i]);
+							formData.append('obj', obj[i]);
+							//DEBUG
 							console.log("file-name:" + files[i].name);
 							console.log("file-size:" + files[i].size);
 							console.log("file-type:" + files[i].type);
@@ -119,15 +80,19 @@
 						
 					}else{
 						console.log("NO FILES");
+						//
 						formData.append('applicationUser', jq('#applicationUser').val());
-						formData.append('files[]', null);	
+						formData.append('emdkm', jq('#emdkm').val());
+						formData.append('orgnr', orgnr);
+						formData.append('files', null);
+						formData.append('obj', null);	
 						
 					}
 					
 					jq.ajax({
 				        type: "POST",
 				        url: "tvinnsaddigitollv2_saveAttachmentTempOnMaster.do",
-				        //async: true,
+				        async: true,
 						data: formData,
 						dataType: 'json',
 						enctype: 'multipart/form-data',
@@ -142,17 +107,21 @@
 				  });
 				  	
 			   }
-			
 		  });
 
 	});
 	
 	
+	function Obj(fname) {
+  		this.fileName = fname;
+	}
+
+	
 	jq(function() {
 		jq('#buttonCheckAll').click(function(){
 			jq( ".clazzSendDocIdToExternalPartyAware" ).each(function(  ) {
-				var id = this.id;
-				var record = id.split('_');
+				//var id = this.id;
+				//var record = id.split('_');
 				//orgnr${record.orgnr}_name${record.name}_commtype${record.commtype}_format${record.format}
 				//var orgnr = record[0].replace("orgnr", "");
 				//var name = record[1].replace("name", "");
@@ -169,39 +138,67 @@
 			});
 		});
 		
-		//abort
+		//Cancel Button
 		jq('#buttonCancel').click(function(){
 			window.close();
 		});
 		
-		
+		//OK Button
 		jq('#buttonCreateFilesOK').click(function(){
-			var params = "";  
+			var params = '';  
 			jq( ".clazzSendDocIdToExternalPartyAware" ).each(function(  ) {
 				
 				var id = this.id;
-				console.log("orgnr:" + id);
+				//console.log("orgnr:" + id);
 				var record = id.split('_');
 				var orgnr = record[0].replace("orgnr", "");
 				//var name = record[1].replace("name", "");
 				//var commtype = record[2].replace("commtype", "");
 				//var format = record[3].replace("format", "");
-				  //var counter = i + 1;
-				  //alert(orgnr + "-" + name + "-" + commtype + "-" + format);
-				  console.log("orgnr:" + orgnr);
-		  		  
-				  if(jq('#orgnr' + orgnr).prop('checked')){
-					 console.log("checked!!");
-					 //there is a problem with spaces in a field id (std rule: do not use spaces in an id)
-					 var name = jq('#orgnr' + orgnr).attr('title');	
-					 var tmp = "orgnr" + orgnr + "_name" + name + "#";
-					 params = params + tmp; 
-				  }	
-				  console.log("params:" + params);
+				//var counter = i + 1;
+			  	//alert(orgnr + "-" + name + "-" + commtype + "-" + format);
+			  	console.log("orgnr:" + orgnr);
+	  		  
+			  	if(jq('#orgnr' + orgnr).prop('checked')){
+					console.log("checked!!");
+				 	//there is a problem with spaces in a field id (std rule: do not use spaces in an id)
+				 	var name = jq('#orgnr' + orgnr).attr('title');	
+				 	var tmp = "orgnr" + orgnr + "_name" + name + "#";
+				 	params = params + tmp; 
+			  	}
+			  	/*
+				//----------------------
+				//multipart attachments
+				//----------------------
+				//var formData = new FormData();
+				var files = jq('#file' + orgnr)[0].files;
+				if(files!=null && files.length > 0){
+					//var formData = new FormData();
+					//formData.append('applicationUser', jq('#applicationUser').val());
+					//DEBUG
+					console.log("Nr. of files:" + files.length);
+					
+					for ( var i = 0, l = files.length; i < l; i++ ) {
+						//formData.append('files', files[i]);
+						console.log("file-name:" + files[i].name);
+						console.log("file-size:" + files[i].size);
+						console.log("file-type:" + files[i].type);
+					}
+											
+				}else{
+					console.log("NO FILES");
+					//formData.append('applicationUser', jq('#applicationUser').val());
+					//formData.append('files[]', null);	
+					
+				}
+				//--------------------------
+				//END multipart attachments
+				//--------------------------
+				*/
 			});
+			console.log("params:" + params);
 			
-			
-			
+			/*TO UNCOMMENT
 			if(params != ""){
 			  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
 			  jq.ajax({
@@ -238,7 +235,7 @@
 				  window.opener.location.href="tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=" + jq('#emlnrt').val() + "&emlnrm=" + jq('#emlnrm').val();
 				  window.close();     
              }, 800); //milliseconds: in order to avoid a refresh in master due to the above Ajax create house. It could take more time to be finished on the background...
-			
+			*/
 		});
 		
 		

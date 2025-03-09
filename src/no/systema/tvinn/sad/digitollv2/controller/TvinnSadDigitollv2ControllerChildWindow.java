@@ -1842,7 +1842,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		Map model = new HashMap();
 		String emlnrt = request.getParameter("emlnrt");
 		String emlnrm = request.getParameter("emlnrm");
-		
+		String emdkm = request.getParameter("emdkm");
 		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_external_houses");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		//check user (should be in session already)
@@ -1856,6 +1856,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			model.put("sadmocfList", list);
 			model.put("emlnrt", emlnrt);
 			model.put("emlnrm", emlnrm);
+			model.put("emdkm", emdkm);
 			
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 			

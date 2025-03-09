@@ -28,8 +28,10 @@
 						<table>
 						<form name="juxForm" id="juxForm">
 								<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
+								<input type="hidden" name="emdkm" id="emdkm" value="${model.emdkm}">
 								<input type="hidden" name="emlnrt" id="emlnrt" value="${model.emlnrt}">
 								<input type="hidden" name="emlnrm" id="emlnrm" value="${model.emlnrm}">
+								
 								
 							</form>	
 						<tr>
@@ -78,8 +80,8 @@
 				               		<img title="select" valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;
 				               	</td>
 				               --%>
-				               <td class="text14" id="TDfile_${counter.count}_${record.orgnr}">
-           						&nbsp;<input ondragenter="myFileUploadDragEnter${counter.count}(event,this)" ondragleave="myFileUploadDragLeave${counter.count}(event,this)" class="tableBorderWithRoundCornersLightYellow3D" style="width:150px;height:55px;display:block;"  multiple type="file" name="file_${counter.count}_${record.orgnr}" id="file_${counter.count}_${record.orgnr}" />
+				               <td class="text14" id="TDfile${record.orgnr}">
+           						&nbsp;<input ondragenter="myFileUploadDragEnter${counter.count}(event,this)" ondragleave="myFileUploadDragLeave${counter.count}(event,this)" class="tableBorderWithRoundCornersLightYellow3D" style="width:150px;height:55px;display:block;"  multiple type="file" name="file${record.orgnr}" id="file${record.orgnr}" />
        							</td>	
 				               	<td width="2%" align="center" class="text12">
 					           		<input title="${record.name}" class="clazzSendDocIdToExternalPartyAware" style="cursor:pointer;" type="checkbox" value="J" id="orgnr${record.orgnr}" name="orgnr${record.orgnr}" >

@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -25,12 +26,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.JsonObject;
 
 import javawebparts.core.org.apache.commons.lang.StringUtils;
 import no.systema.main.model.SystemaWebUser;
@@ -1460,104 +1464,76 @@ public class TvinnSadDigitollAjaxController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="tvinnsaddigitollv2_saveAttachmentTempOnMaster.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value="tvinnsaddigitollv2_saveAttachmentTempOnMaster.do", consumes = {"*/*"}, method = { RequestMethod.GET, RequestMethod.POST  } )
     public @ResponseBody Set<String> saveAttachmentTempOnMaster (HttpServletRequest request, 
-    								@RequestParam String applicationUser, @Nullable @RequestParam MultipartFile[] files) { 
+    								@RequestParam String applicationUser, @RequestParam String emdkm, @RequestParam String orgnr, 
+    								@Nullable @RequestParam MultipartFile[] files, @Nullable @RequestParam String[] obj) { 
 		    logger.info("Inside: saveAttachmentTempOnMaster");
 		    Set result = new HashSet();
-		    String FILE_SEPARATOR = "#";
+		    //String FILE_SEPARATOR = "#";
+		    String FILENAME_SEPARATOR = "_xx";
 		    String rootPath	= "/Users/oscardelatorre/tmp/";
     	    File dir = new File(rootPath);
     	    
-	        if (files!=null) {
+	        if ( (files!=null && files.length>0) && (obj!=null && obj.length>0) ) {
 	        	logger.info("Number of files:" + files.length);
-	        	List<String> arrayFiles = Arrays
-	                    .stream(files)
-	                    .map(MultipartFile::getOriginalFilename)
+	        	//logger.info("Number of objects:" + obj);
+	        	logger.info("obj:" + obj.length);
+	        	List<String> arrayObj = Arrays
+	                    .stream(obj)
+	                    //.map(MultipartFile::getOriginalFilename)
 	                    .collect(Collectors.toList());
-	        	logger.info(arrayFiles.toString());
-	        	for(String myFile : arrayFiles) {
-	        		logger.info(myFile);
+	        	for (String item : arrayObj) {
+	        		logger.info("obj-content:" + item);
 	        	}
-	        	/*
-	        	StringBuilder sbFilesPaths = new StringBuilder();
-	        	for (int i = 0; i < files.length; i++) {
-	        		MultipartFile file = files[i];
-	        		logger.info(file.getOriginalFilename());
-	        		String fileName = file.getOriginalFilename();
-	        		logger.info("FILE NAME:" + fileName);
-
+	        	
+	        	List<MultipartFile> arrayFiles = Arrays
+	                    .stream(files)
+	                    //.map(MultipartFile::getOriginalFilename)
+	                    .collect(Collectors.toList());
+	        	
+	        	for(MultipartFile file : arrayFiles) {
+	        		logger.info("FILE NAME Original:" + file.getOriginalFilename());
 	        		try {
 		                byte[] bytes = file.getBytes();
-		                /*
-		                // Create the file on server
-		                File serverFile = new File(dir.getAbsolutePath() + File.separator +  fileName);
-		                //File serverFile = new File(fileName);
-		                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-		                stream.write(bytes);
-		                stream.close();
-		                logger.info("Server File Location=" + serverFile.getAbsolutePath());
+		                StringBuilder fileName = new StringBuilder();
+		                fileName.append(emdkm + FILENAME_SEPARATOR + orgnr + FILENAME_SEPARATOR);
+		                fileName.append(file.getOriginalFilename());
 		                
-		                Path filePath = Paths.get(dir.getAbsolutePath() + File.separator +  fileName);
+		                String finalFilePath = dir.getAbsolutePath() + File.separator + fileName.toString();
+		                logger.info("finalFilePath:" + finalFilePath);
+		                Path filePath = Paths.get(finalFilePath);
 		                Files.write(filePath, bytes);
-		                //collection of file paths to send further
-		                sbFilesPaths.append(FILE_SEPARATOR + filePath.toString());
 		                
 	        		} catch (Exception e) {
-	            		//run time upload error
-	            		//String absoluteFileName = rootPath + File.separator + fileName;
+	        			logger.error(e.toString());
 	            		e.printStackTrace();
 	        	    }  
-	        	}   */  
-		          /*      
-                final String BASE_URL = SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL + "send_masterId_toExternalPartyXXX.do" ;
-	             try {
-		              StringBuffer urlRequestParams = new StringBuffer();
-		              //byte[] bytesEncoded = Base64.encodeBase64(bytes);
-		    		  //String payload =  new String(bytesEncoded);
-		    		  
-		    		  //byte[] bytesEncoded = java.util.Base64.getEncoder().encode(bytes);
-		    		  //String payload =  new String(bytesEncoded);
-		    		  
-					  urlRequestParams.append("user=" + applicationUser + "&files=" + sbFilesPaths.toString());
-					  logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-					  logger.warn("URL: " + BASE_URL);
-					  logger.warn("URL PARAMS: " + urlRequestParams);
-				    	
-					  String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
-					  //Debug --> 
-					  logger.info(jsonPayload);
-	             }catch(Exception e) {
-	            	 logger.error(e.toString());
-	             }
-		           */     
+	        	}
                 
 	        } else {
 	            result.add("EMTPY");
-	            logger.info("NO FILE ...");
+	            logger.info("NO FILE ... deleting previous ... if any");
+	            /*
 	            MultipartFile fileDummy = new MockMultipartFile("dummyfileThatDoesNotExists.txt", "dummyfileThatDoesNotExists.txt", 
 	            		"text/plain", "This is a dummy file content".getBytes(StandardCharsets.UTF_8));
-	            
-	            final String BASE_URL = SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL + "send_masterId_toExternalPartyXXX.do" ;
-	             try {
-		              StringBuffer urlRequestParams = new StringBuffer();
-		              ////byte[] bytesEncoded = Base64.encodeBase64(fileDummy.getBytes());
-		              //byte[] bytesEncoded = java.util.Base64.getEncoder().encode(fileDummy.getBytes());
-		    		  //String payload =  new String(bytesEncoded);
-		              Path filePath = Paths.get(dir.getAbsolutePath() + File.separator +  fileDummy.getName());
-		              Files.write(filePath, fileDummy.getBytes());
-		                
-		              urlRequestParams.append("user=" + applicationUser + "&filePath=" + filePath.toString());
-					  logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
-					  logger.warn("URL: " + BASE_URL);
-					  logger.warn("URL PARAMS: " + urlRequestParams);
-				    	
-					  String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
-					  //Debug --> 
-					  logger.info(jsonPayload);
-	             }catch(Exception e) {
-	            	 logger.error(e.toString());
-	             }
+	            */	
+	            try {
+	            	String searchString = emdkm + FILENAME_SEPARATOR + orgnr + FILENAME_SEPARATOR;
+	            	logger.info("Search string:" + searchString);
+		            Files.list((dir.toPath())).filter(p -> p.toString().contains(searchString)).forEach((p) -> {
+		                try {
+		                	logger.debug("Deleting..." + p.getFileName().toString());
+		                    Files.deleteIfExists(p);
+		                } catch (Exception e) {
+		                	logger.error(e.toString());
+		                    e.printStackTrace();
+		                }
+		            });
+	            }catch(Exception e){
+	            	logger.error(e.toString());
+            		e.printStackTrace();
+	            }
 	        }
 		    result.add("OK");
 			
