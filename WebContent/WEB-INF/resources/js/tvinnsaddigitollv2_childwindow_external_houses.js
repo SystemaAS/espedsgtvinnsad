@@ -38,7 +38,7 @@
 			   //=================
 			   // TESTAT och KLART
 			   //=================
-			   //upload file	
+			   //upload file temporarly
 			   if(id.indexOf("file") != -1){
 				  
 				  console.log("click on td:" + id);
@@ -63,7 +63,7 @@
 						console.log("Nr. of files:" + files.length);
 						
 						var obj = []; 
- 						//const obj = new Obj(1 + "_" + jq('#emdkm').val() + "_" + orgnr);
+ 						
 						for ( var i = 0, l = files.length; i < l; i++ ) {
 							obj.push(jq('#emdkm').val() + "_" + orgnr + "_" + files[i].name);
 							//var mapKey = i + "_" + jq('#emdkm').val() + "_" + orgnr;
@@ -71,6 +71,7 @@
 							
 							formData.append('files', files[i]);
 							formData.append('obj', obj[i]);
+							
 							//DEBUG
 							console.log("file-name:" + files[i].name);
 							console.log("file-size:" + files[i].size);
@@ -111,10 +112,6 @@
 
 	});
 	
-	
-	function Obj(fname) {
-  		this.fileName = fname;
-	}
 
 	
 	jq(function() {
@@ -163,7 +160,15 @@
 					console.log("checked!!");
 				 	//there is a problem with spaces in a field id (std rule: do not use spaces in an id)
 				 	var name = jq('#orgnr' + orgnr).attr('title');	
-				 	var tmp = "orgnr" + orgnr + "_name" + name + "#";
+				 	var tmp = "orgnr" + orgnr + "_name" + name;
+					//elucidate if there are attachments
+					var fileId = id.replace("TD", "");
+					var files = jq('#file' + orgnr)[0].files;
+					if(files!=null && files.length > 0){
+						tmp = tmp + "_attachments" + true + "#";	
+					}else{
+						tmp = tmp + "_attachments" + false + "#";
+					}
 				 	params = params + tmp; 
 			  	}
 			  	/*
@@ -198,7 +203,7 @@
 			});
 			console.log("params:" + params);
 			
-			/*TO UNCOMMENT
+			
 			if(params != ""){
 			  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
 			  jq.ajax({
@@ -207,7 +212,8 @@
 		  	  	  data: { applicationUser : jq('#applicationUser').val(),
 							params : params,
 							emlnrt : jq('#emlnrt').val(),
-							emlnrm : jq('#emlnrm').val()},
+							emlnrm : jq('#emlnrm').val(),
+							emdkm : jq('#emdkm').val()},
 
 		  	  	  dataType: 'json',
 		  	  	  cache: false,
@@ -235,7 +241,7 @@
 				  window.opener.location.href="tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=" + jq('#emlnrt').val() + "&emlnrm=" + jq('#emlnrm').val();
 				  window.close();     
              }, 800); //milliseconds: in order to avoid a refresh in master due to the above Ajax create house. It could take more time to be finished on the background...
-			*/
+			
 		});
 		
 		

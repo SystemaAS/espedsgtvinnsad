@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -24,26 +25,31 @@ import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.JsonObject;
 
 import javawebparts.core.org.apache.commons.lang.StringUtils;
 import no.systema.main.model.SystemaWebUser;
 import no.systema.main.service.UrlCgiProxyService;
+import no.systema.main.util.AppConstants;
 import no.systema.main.util.DateTimeManager;
 import no.systema.tvinn.sad.digitollv2.controller.service.HouseControllerService;
 import no.systema.tvinn.sad.digitollv2.controller.service.MasterControllerService;
 import no.systema.tvinn.sad.digitollv2.enums.EnumSadmohfStatus2;
 import no.systema.tvinn.sad.digitollv2.enums.EnumSadmomfStatus2;
+import no.systema.tvinn.sad.digitollv2.model.ObjDto;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.EoriValidationContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.EoriValidationDto;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateContainer;
@@ -1330,7 +1336,7 @@ public class TvinnSadDigitollAjaxController {
 	@RequestMapping(value = "tvinnsaddigitollv2_send_masterId_toExternalParties.do", method = RequestMethod.GET)
 	  public @ResponseBody Set<SadmomfRecord> sendMasterIdToExternalParties(HttpServletRequest request, 
 			  								@RequestParam String applicationUser, @RequestParam String params,  
-			  								@RequestParam String emlnrt,@RequestParam String emlnrm ) {
+			  								@RequestParam String emlnrt,@RequestParam String emlnrm, @RequestParam String emdkm ) {
 		
 		 //TODO
 		 List<String> partyList = new ArrayList<String>();
@@ -1341,11 +1347,11 @@ public class TvinnSadDigitollAjaxController {
 		 logger.info("paramsRaw:" + params);
 		 
 		
-		
 		  Set result = new HashSet();
 		  logger.info("Inside sendMasterIdToExternalParties");
 		  logger.info("emlnrt:" + emlnrt);
 		  logger.info("emlnrm:" + emlnrm);
+		  logger.info("emdkm:" + emdkm);
 		  
 		  
 		  try {
@@ -1354,18 +1360,26 @@ public class TvinnSadDigitollAjaxController {
 				for (String party: partyList) {
 					  logger.trace("partyRaw:" + party);	
 					  String [] partyRecord = party.split("_");
-					  if(partyRecord.length>=2) {
+					  if(partyRecord.length>=3) {
 						  String receiverOrgnr = partyRecord[0].replace("orgnr", ""); //from the tvinnsaddigitollv2_childwindow_external_houses.js file
 						  String receiverName = partyRecord[1].replace("name", "");  //from the tvinnsaddigitollv2_childwindow_external_houses.js file
+						  Boolean attachmentsExist = Boolean.parseBoolean(partyRecord[2].replace("attachments", "")); 
 						  logger.info("file-receiver name:" + receiverName);
 						  logger.info("file-receiver orgNr:" + receiverOrgnr);
-						  
+						  logger.info("file-attachments:" + attachmentsExist);
+						  //clean up the files saved in the file system if uploaded previously
+						  if(!attachmentsExist) {
+							  this.deleteObsoleteAttachments(emdkm, receiverOrgnr);
+						  }
+							  
 						  if(StringUtils.isNotEmpty(receiverName) && StringUtils.isNotEmpty(receiverOrgnr) && StringUtils.isNotEmpty(emlnrt) && StringUtils.isNotEmpty(emlnrm)) {
 							  //get BASE URL
 							  final String BASE_URL = SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL + "send_masterId_toExternalParty.do" ;
 							  //add URL-parameters
 							  StringBuffer urlRequestParams = new StringBuffer();
-							  urlRequestParams.append("user=" + applicationUser + "&emlnrt=" + emlnrt + "&emlnrm=" + emlnrm + "&receiverName=" + receiverName + "&receiverOrgnr=" + receiverOrgnr);
+							  urlRequestParams.append("user=" + applicationUser + "&emlnrt=" + emlnrt + "&emlnrm=" + emlnrm);
+							  urlRequestParams.append("&receiverName=" + receiverName + "&receiverOrgnr=" + receiverOrgnr);
+							  urlRequestParams.append("&attachmentsExist=" + Boolean.valueOf(attachmentsExist));
 							  logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
 							  logger.warn("URL: " + BASE_URL);
 							  logger.warn("URL PARAMS: " + urlRequestParams);
@@ -1383,9 +1397,9 @@ public class TvinnSadDigitollAjaxController {
 								  record.setOwn_resultAjaxText(jsonPayload);
 								  result.add(record);
 							  }
-							
-						  	  
-						 }
+					  
+						  }
+						  
 					  }
 				}
 			  }
@@ -1457,28 +1471,32 @@ public class TvinnSadDigitollAjaxController {
 	  }
 	
 	/**
-	 * This saves a file payload temporarily before we do something with it ...
-	 * @param applicationUser
-	 * @param file
-	 * @param session
+	 * Saves payload temporarly
 	 * @param request
+	 * @param applicationUser
+	 * @param emdkm
+	 * @param orgnr
+	 * @param files
+	 * @param obj
 	 * @return
 	 */
-	@RequestMapping(value="tvinnsaddigitollv2_saveAttachmentTempOnMaster.do", consumes = {"*/*"}, method = { RequestMethod.GET, RequestMethod.POST  } )
+	@RequestMapping(value="tvinnsaddigitollv2_saveAttachmentTempOnMaster.do", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE} , method = { RequestMethod.GET, RequestMethod.POST  } )
     public @ResponseBody Set<String> saveAttachmentTempOnMaster (HttpServletRequest request, 
-    								@RequestParam String applicationUser, @RequestParam String emdkm, @RequestParam String orgnr, 
-    								@Nullable @RequestParam MultipartFile[] files, @Nullable @RequestParam String[] obj) { 
-		    logger.info("Inside: saveAttachmentTempOnMaster");
+    							    String applicationUser, String emdkm, String orgnr, 
+     								@Nullable MultipartFile[] files, @Nullable String[] obj) {
+    	
+			logger.info("Inside: saveAttachmentTempOnMaster");
 		    Set result = new HashSet();
 		    //String FILE_SEPARATOR = "#";
 		    String FILENAME_SEPARATOR = "_xx";
-		    String rootPath	= "/Users/oscardelatorre/tmp/";
+		    
+		    String rootPath	= AppConstants.EXTHOUSE_ATTACHMENTS_UPLOAD_DIR;
     	    File dir = new File(rootPath);
     	    
-	        if ( (files!=null && files.length>0) && (obj!=null && obj.length>0) ) {
+    	    if ( (files!=null && files.length>0) && (obj!=null && obj.length>0) ) {
 	        	logger.info("Number of files:" + files.length);
-	        	//logger.info("Number of objects:" + obj);
 	        	logger.info("obj:" + obj.length);
+	 
 	        	List<String> arrayObj = Arrays
 	                    .stream(obj)
 	                    //.map(MultipartFile::getOriginalFilename)
@@ -1539,7 +1557,35 @@ public class TvinnSadDigitollAjaxController {
 			
     	return result;
     }
-
+	/**
+	 * 
+	 * @param emdkm
+	 * @param orgnr
+	 */
+	private void deleteObsoleteAttachments(String emdkm, String orgnr) {
+		logger.info("Inside deleteObsoleteAttachments");
+		
+		String rootPath	= AppConstants.EXTHOUSE_ATTACHMENTS_UPLOAD_DIR;
+	    File dir = new File(rootPath);
+	    String FILENAME_SEPARATOR = "_xx";
+        
+        try {
+        	String searchString = emdkm + FILENAME_SEPARATOR + orgnr + FILENAME_SEPARATOR;
+        	logger.info("Search string:" + searchString);
+            Files.list((dir.toPath())).filter(p -> p.toString().contains(searchString)).forEach((p) -> {
+                try {
+                	logger.debug("Deleting..." + p.getFileName().toString());
+                    Files.deleteIfExists(p);
+                } catch (Exception e) {
+                	logger.error(e.toString());
+                    e.printStackTrace();
+                }
+            });
+        }catch(Exception e){
+        	logger.error(e.toString());
+    		e.printStackTrace();
+        }
+	}
 	
 	
 	/**
