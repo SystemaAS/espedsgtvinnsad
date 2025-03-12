@@ -108,11 +108,20 @@
 		                    	<th width="2%" class="tableHeaderField12" >Mott</th>
 		                    	<th width="2%" class="tableHeaderField12" ></th>
 		                    	<th width="2%" class="tableHeaderField12" >Reg.dato</th>
+		                    	<th width="2%" class="tableHeaderField12" >Eksp.enh.</th>
 		                	</tr>
 		                	</thead>
 		                	<tbody> 
-		                	<c:forEach items="${model.list}" var="record" varStatus="counter">    
-				             <tr class="tableRow" height="20" >
+		                	<c:forEach items="${model.list}" var="record" varStatus="counter">
+		                	 <%-- Digitoll exp.enh = 441002 --%>
+		                	 <c:choose>
+		                	 	<c:when test="${record.sitle == '441002' }">
+			              			<tr class="tableRow" style="background-color: #ECFFDC;color:#9F6000;" height="20" >
+			              	 	</c:when>
+			              	 	<c:otherwise>
+			              	 		<tr class="tableRow" height="20" >
+			              	 	</c:otherwise>  
+			              	 </c:choose>
 				               <td width="2%" align="center" class="tableCellFirst12" >
 				          	   		<a style="display: block;" tabindex=-1 title="${record.siavd}_${record.sitdn}_${record.sidt}_${model.bil}" id="recordUpdate_${record.sitdn}" href="#" onClick="getItemData(this);">
 				          	   			<img title="select manual edit" src="resources/images/update.gif" border="0" alt="edit">
@@ -135,7 +144,8 @@
 				          	   <td width="2%" align="center" class="tableCell12" ><span style="font-size: 10px;">${record.siads1}&nbsp;${record.siads2}&nbsp;${record.siads3}</span></td>
 			               	   <td width="2%" align="center" class="tableCell12" >${record.sinak}</td>
 			               	   <td width="2%" align="center" class="tableCell12" ><span style="font-size: 10px;">${record.siadk1}&nbsp;${record.siadk2}&nbsp;${record.siadk3}</span></td>
-			               	   <td width="2%" align="center" class="tableCell12" >${record.sidt}</td>		               	
+			               	   <td width="2%" align="center" class="tableCell12" >${record.sidt}</td>
+			               	   <td width="2%" align="center" class="tableCell12" >${record.sitle}</td>
 				            </tr> 
 				            </c:forEach>
 				            </tbody>

@@ -1371,7 +1371,7 @@ public class TvinnSadDigitollAjaxController {
 						  if(!attachmentsExist) {
 							  this.deleteObsoleteAttachments(emdkm, receiverOrgnr);
 						  }
-							  
+						  
 						  if(StringUtils.isNotEmpty(receiverName) && StringUtils.isNotEmpty(receiverOrgnr) && StringUtils.isNotEmpty(emlnrt) && StringUtils.isNotEmpty(emlnrm)) {
 							  //get BASE URL
 							  final String BASE_URL = SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL + "send_masterId_toExternalParty.do" ;

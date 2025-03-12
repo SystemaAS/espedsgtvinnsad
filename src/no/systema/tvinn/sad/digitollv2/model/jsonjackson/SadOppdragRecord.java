@@ -40,6 +40,7 @@ public class SadOppdragRecord extends JsonAbstractGrandFatherRecord  {
     private String silv;
     private String silvt;
     private String sign;
+    private String sitle;
     private String wehrg;
     private String weh0068a;
     private String weh0068b;
