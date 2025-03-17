@@ -281,7 +281,7 @@
 	  	jq('#ehtdnIdLink').click(function() {
 			if(jq('#ehpro').val()!=''){
 	    		jq('#ehtdnIdLink').attr('target','_blank');
-	    		window.open('tvinnsaddigitollv2_childwindow_oppdrag.do?action=doFind&tur=' + jq('#ehpro').val() + '&lnrt=' + jq('#emlnrt').val() + '&lnrm=' + jq('#emlnrm').val() + '&ctype=ehtdn', "oppdWin", "top=300px,left=600px,height=600px,width=1000px,scrollbars=yes,location=no");
+	    		window.open('tvinnsaddigitollv2_childwindow_oppdrag.do?action=doFind&tur=' + jq('#ehpro').val() + '&lnrt=' + jq('#emlnrt').val() + '&lnrm=' + jq('#emlnrm').val() + '&ctype=ehtdn', "oppdWin", "top=300px,left=600px,height=600px,width=1100px,scrollbars=yes,location=no");
 			}
 	    });
 	  	jq('#ehtdnIdLink').keypress(function(e){ //extra feature for the end user
@@ -293,7 +293,7 @@
 	  	jq('#ehtdnIdSpan').click(function() {
 			if(jq('#ehpro').val()!=''){									
 	    		jq('#ehtdnIdSpan').attr('target','_blank');
-	    		window.open('tvinnsaddigitollv2_childwindow_oppdragJson.do?action=doFind&tur=' + jq('#ehpro').val() + '&lnrt=' + jq('#emlnrt').val() + '&lnrm=' + jq('#emlnrm').val() + '&ctype=ehtdnJson' + '&opd=' + jq('#ehtdn').val(), "oppdWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");
+	    		window.open('tvinnsaddigitollv2_childwindow_oppdragJson.do?action=doFind&tur=' + jq('#ehpro').val() + '&lnrt=' + jq('#emlnrt').val() + '&lnrm=' + jq('#emlnrm').val() + '&ctype=ehtdnJson' + '&opd=' + jq('#ehtdn').val(), "oppdWin", "top=300px,left=500px,height=600px,width=900px,scrollbars=yes,status=no,location=no");
 			}
 	    });
 
@@ -315,7 +315,7 @@
 	  	jq('#ehsadiIdLink').click(function() {
 			if(jq('#ehpro').val()!=''){
 	    		jq('#ehsadiIdLink').attr('target','_blank');
-	    		window.open('tvinnsaddigitollv2_childwindow_sadi.do?action=doFind&tur=' + jq('#ehpro').val() + '&bil=' + jq('#bilnr').val() + '&lnrt=' + jq('#emlnrt').val() + '&lnrm=' + jq('#emlnrm').val() + '&ctype=ehsadi', "oppdWin", "top=300px,left=600px,height=600px,width=1100px,scrollbars=yes,location=no");
+	    		window.open('tvinnsaddigitollv2_childwindow_sadi.do?action=doFind&tur=' + jq('#ehpro').val() + '&bil=' + jq('#bilnr').val() + '&lnrt=' + jq('#emlnrt').val() + '&lnrm=' + jq('#emlnrm').val() + '&ctype=ehsadi', "oppdWin", "top=300px,left=600px,height=600px,width=1200px,scrollbars=yes,location=no");
 			}
 	    });
 	  	jq('#ehsadiIdLink').keypress(function(e){ //extra feature for the end user

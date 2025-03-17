@@ -1672,9 +1672,13 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		String tur = request.getParameter("tur");
 		String lnrt = request.getParameter("lnrt");
 		String lnrm = request.getParameter("lnrm");
+		String sitle = request.getParameter("sitle");
+		
 		model.put("tur", tur);
 		model.put("lnrt", lnrt);
 		model.put("lnrm", lnrm);
+		model.put("sitle", sitle);
+		
 		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_oppdrag");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		//check user (should be in session already)
@@ -1683,7 +1687,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			
 		}else{
 			//get all masters
-			List list = this.getOppdrag(appUser, tur, lnrt, lnrm);  
+			List list = this.getOppdrag(appUser, tur, lnrt, lnrm, sitle);  
 			model.put("list", list);
 			
 			
@@ -1738,6 +1742,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		String tur = request.getParameter("tur");
 		String bilnr = request.getParameter("bil");
 		String dato = request.getParameter("dato");
+		String sitle = request.getParameter("sitle");
 		String lnrt = request.getParameter("lnrt");
 		String lnrm = request.getParameter("lnrm");
 		if(StringUtils.isEmpty(dato)) {
@@ -1750,6 +1755,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		model.put("tur", tur);
 		model.put("bil", bilnr);
 		model.put("dato", dato);
+		model.put("sitle", sitle);
 		model.put("lnrt", lnrt);
 		model.put("lnrm", lnrm);
 		
@@ -1764,7 +1770,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			//validate and convert to ISO
 			String datoISO = getDatoISOSadi(dato);
 			//get all masters
-			List list = this.getSadi(appUser, bilnr, datoISO, lnrt, lnrm);  
+			List list = this.getSadi(appUser, bilnr, datoISO, lnrt, lnrm, sitle);  
 			model.put("list", list);
 			
 			
@@ -2170,17 +2176,21 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	 * @param tur
 	 * @param lnrt
 	 * @param lnrm
+	 * @param sitle
 	 * @return
 	 */
-	private List<SadOppdragRecord> getOppdrag(SystemaWebUser appUser, String tur, String lnrt, String lnrm) {
+	private List<SadOppdragRecord> getOppdrag(SystemaWebUser appUser, String tur, String lnrt, String lnrm, String sitle) {
 		List<SadOppdragRecord> resultList = new ArrayList();
 		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_OPPDRAG_URL;
 		//add URL-parameters
-		String urlRequestParams = "user=" + appUser.getUser() + "&tur=" + tur;
+		StringBuffer urlRequestParams = new StringBuffer("user=" + appUser.getUser() + "&tur=" + tur);
+		if(StringUtils.isNotEmpty(sitle)) {
+			urlRequestParams.append("&sitle=" + sitle);
+		}
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
     	logger.warn("URL: " + BASE_URL);
     	logger.warn("URL PARAMS: " + urlRequestParams);
-    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
 
     	//Debug --> 
     	logger.info(jsonPayload);
@@ -2233,7 +2243,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	 * @param lnrm
 	 * @return
 	 */
-	private List<SadOppdragRecord> getSadi(SystemaWebUser appUser, String bilnr, String dato, String lnrt, String lnrm) {
+	private List<SadOppdragRecord> getSadi(SystemaWebUser appUser, String bilnr, String dato, String lnrt, String lnrm, String sitle) {
 		List<SadOppdragRecord> resultList = new ArrayList();
 		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_SADI_URL; //SADI_URL
 		//add URL-parameters
@@ -2243,6 +2253,9 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		}
 		if(StringUtils.isNotEmpty(dato)) {
 			urlRequestParams.append("&dato=" + dato);
+		}
+		if(StringUtils.isNotEmpty(sitle)) {
+			urlRequestParams.append("&sitle=" + sitle);
 		}
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
     	logger.warn("URL: " + BASE_URL);

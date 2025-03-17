@@ -1519,6 +1519,14 @@ public class TvinnSadDigitollv2TransportController {
 	 */
 	private void adjustFieldsForUpdate(SadmotfRecord recordToValidate){
 		
+		//Bil regnr ( no spaces )
+		if(recordToValidate.getEtkmrk()!=null) {
+			String str = recordToValidate.getEtkmrk();
+			str = str.trim();
+			str = str.replaceAll(" ", "");
+			recordToValidate.setEtkmrk(str);
+		}
+		
 		//Driver - communication
 		if(StringUtils.isNotEmpty(recordToValidate.getEtems())){
 			if(recordToValidate.getEtems().contains("@")) {

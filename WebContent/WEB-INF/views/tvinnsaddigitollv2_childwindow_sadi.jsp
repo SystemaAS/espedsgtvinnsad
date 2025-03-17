@@ -50,6 +50,9 @@
 					            		<td class="text14">&nbsp;Dato</td>
 										<td class="text14">&nbsp;<input onKeyPress="return numberKey(event)" type="text" class="inputText" name="dato" id="dato" size="8" maxlength="6" value="${model.dato}"></td>
 										
+										<td class="text14">&nbsp;Eksp.enhet</td>
+										<td class="text14">&nbsp;<input onKeyPress="return numberKey(event)" type="text" class="inputText" name="sitle" id="sitle" size="8" maxlength="6" value="${model.sitle}"></td>
+										
 										<td class="text14">&nbsp;</td>
 				           				<td align="right">&nbsp;<input class="inputFormSubmitStd" type="submit" name="submit" value='Søk'></td>
 					           		</tr>

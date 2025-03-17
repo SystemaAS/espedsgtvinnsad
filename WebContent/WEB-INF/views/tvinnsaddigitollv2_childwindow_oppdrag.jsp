@@ -16,10 +16,21 @@
 		  		<%-- this container table is necessary in order to separate the datatables element and the frame above, otherwise
 			 	the cosmetic frame will not follow the whole datatable grid including the search field... --%>
 				<table id="containerdatatableTable" cellspacing="2" align="left" width="100%" >
-				<form>
+				<form name="tvinnsadCustomerForm" id="tvinnsadCustomerForm" action="tvinnsaddigitollv2_childwindow_oppdrag.do?action=doFind" method="post">
 					<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
 					<input type="hidden" name="lnrt" id="lnrt" value="${model.lnrt}">
 					<input type="hidden" name="lnrm" id="lnrm" value="${model.lnrm}">
+					<input type="hidden" name="tur" id="tur" value="${model.tur}">
+					<table>
+					<tr>
+	            		
+						<td class="text14">&nbsp;Eksp.enhet</td>
+						<td class="text14">&nbsp;<input onKeyPress="return numberKey(event)" type="text" class="inputText" name="sitle" id="sitle" size="8" maxlength="6" value="${model.sitle}"></td>
+						
+						<td class="text14">&nbsp;</td>
+           				<td align="right">&nbsp;<input class="inputFormSubmitStd" type="submit" name="submit" value='Søk'></td>
+	           		</tr>
+	           		</table>
 				</form>	
 													           		
 			    <tr>
@@ -84,11 +95,20 @@
 		                    	<th width="2%" class="tableHeaderField12" >Mott</th>
 		                    	<th width="2%" class="tableHeaderField12" ></th>
 		                    	<th width="2%" class="tableHeaderField12" >Reg.dato</th>
+		                    	<th width="2%" class="tableHeaderField12" >Eksp.enh.</th>
 		                	</tr>
 		                	</thead>
 		                	<tbody> 
 		                	<c:forEach items="${model.list}" var="record" varStatus="counter">    
-				             <tr class="tableRow" height="20" >
+				             <%-- Digitoll exp.enh = 441002 --%>
+		                	 <c:choose>
+		                	 	<c:when test="${record.sitle == '441002' }">
+			              			<tr class="tableRow" style="background-color: #ECFFDC;color:#9F6000;" height="20" >
+			              	 	</c:when>
+			              	 	<c:otherwise>
+			              	 		<tr class="tableRow" height="20" >
+			              	 	</c:otherwise>  
+			              	 </c:choose>
 				               <td width="2%" align="center" class="tableCellFirst12" >
 				          	   		<a style="display: block;" tabindex=-1 title="${model.tur}_${record.siavd}_${record.sitdn}" id="recordUpdate_${record.sitdn}" href="#" onClick="getItemData(this);">
 				          	   			<img title="select manual edit" src="resources/images/update.gif" border="0" alt="edit">
@@ -110,7 +130,8 @@
 				          	   <td width="2%" align="center" class="tableCell12" ><span style="font-size: 10px;">${record.siads1}&nbsp;${record.siads2}&nbsp;${record.siads3}</span></td>
 			               	   <td width="2%" align="center" class="tableCell12" >${record.sinak}</td>
 			               	   <td width="2%" align="center" class="tableCell12" ><span style="font-size: 10px;">${record.siadk1}&nbsp;${record.siadk2}&nbsp;${record.siadk3}</span></td>
-			               	   <td width="2%" align="center" class="tableCell12" >${record.sidt}</td>		               	
+			               	   <td width="2%" align="center" class="tableCell12" >${record.sidt}</td>
+			               	   <td width="2%" align="center" class="tableCell12" >${record.sitle}</td>		               	
 				            </tr> 
 				            </c:forEach>
 				            </tbody>
