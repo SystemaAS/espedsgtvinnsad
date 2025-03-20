@@ -725,9 +725,15 @@
 										
 									</td>
 									<td class="text14">
-										<input readonly type="text" class="inputTextReadOnly" name="emdkm_ff" id="emdkm_ff" size="35" maxlength="50" value="${model.record.emdkm_ff}">		
+										<input readonly type="text" class="inputTextReadOnly" name="emdkm_ff" id="emdkm_ff" size="35" maxlength="50" value="${model.record.emdkm_ff}">
+										<c:if test="${not empty model.record.emdkm_ff}">
+											<a tabindex="-1" id="emdkm_ffAttachmentsIdLink">
+												<img title="vedlegg fra transportør" style="cursor:pointer;vertical-align: middle;" src="resources/images/attachmentIcon.png" width="14px" height="14px" border="0" alt="fakt.vedlegg" >
+											</a>
+										</c:if>
+												
 									</td>
-									<td class="text14">&nbsp;<span title="emdkmt_ff">Dok.type</span></td>
+									<td class="text14">&nbsp;&nbsp;&nbsp;<span title="emdkmt_ff">Dok.type</span></td>
 									<td class="text14">
 										<input readonly type="text" class="inputTextReadOnly" name="emdkmt_ff" id="emdkmt_ff" size="6" maxlength="4" value="${model.record.emdkmt_ff}">		
 									</td>

@@ -305,6 +305,17 @@
 				jq('#emdkm_ffIdLink').click();
 			}
 	    });
+		
+		//External Attachments Doc.nr (MasterId)
+		jq('#emdkm_ffAttachmentsIdLink').click(function() {
+	    	jq('#emdkm_ffAttachmentsIdLink').attr('target','_blank');
+	    	window.open('tvinnsaddigitollv2_childwindow_external_master_attachments.do?action=doInit&date=20250101&docref='+ jq('#emdkm_ff').val() + '&ctype=emdkm', "masterffWin", "top=300px,left=500px,height=600px,width=1400px,scrollbars=no,status=no,location=no");
+	    });
+	    jq('#emdkm_ffAttachmentsIdLink').keypress(function(e){ //extra feature for the end user
+			if(e.which == 13) {
+				jq('#emdkm_ffAttachmentsIdLink').click();
+			}
+	    });
 
 
 	  

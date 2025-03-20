@@ -87,6 +87,8 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmomfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmotfRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ZadmoattfContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ZadmoattfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ZadmomlfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ZadmomlfRecord;
 import no.systema.tvinn.sad.digitollv2.service.SadOppdragService;
@@ -99,6 +101,7 @@ import no.systema.tvinn.sad.digitollv2.service.SadmolffListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmolhffListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmomfListService;
 import no.systema.tvinn.sad.digitollv2.service.SadmotfListService;
+import no.systema.tvinn.sad.digitollv2.service.ZadmoattfListService;
 import no.systema.tvinn.sad.digitollv2.service.ZadmomlfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
 import no.systema.tvinn.sad.digitollv2.util.SadDigitollConstants;
@@ -1548,6 +1551,58 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	    	return successView;
 		}
 	}
+	
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_external_master_attachments.do", params="action=doInit",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doInitExternalMasterAttachments(@ModelAttribute ("record") ZadmoattfRecord recordToValidate, HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doInitExternalMasterAttachments");
+		Map model = new HashMap();
+		String callerType = request.getParameter("ctype");
+		String date = request.getParameter("date");
+		String docref = request.getParameter("docref");
+		//this is one is optional and exists only when the child window is opened from the transport-parent-window
+		String etlnrt = request.getParameter("etlnrt");
+
+		logger.info("caller:" + callerType);
+		//logger.info("tuavd:" + tuavd);
+		//logger.info("tupro:" + tupro);
+		//
+		
+		//antingen eller och inte båda 2...Turen overrides avd if it exists
+		/*if(StringUtils.isNotEmpty(tupro)) {
+			model.put("tupro", tupro);
+		}else {
+			model.put("tuavd", tuavd);
+		}*/
+		
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_external_master_attachments");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			  
+			List list = this.getExternalMasterAttachmentsList(appUser, recordToValidate);
+			model.put("mainList", list);
+			model.put("callerType", callerType);
+			model.put("date", date);
+			model.put("docref", docref);
+			model.put("etlnrt", etlnrt);
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
 	/**
 	 * 
 	 * @param houseRecord
@@ -2569,12 +2624,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		  if(StringUtils.isNotEmpty(recordToValidate.getEmdkm())) {
 			  urlRequestParamsKeys.append("&emdkm=" + recordToValidate.getEmdkm());
 		  }
-		  /*if(StringUtils.isNotEmpty(recordToValidate.getTupro())) {
-			  urlRequestParamsKeys.append("&wsstur=" + recordToValidate.getTupro());
-		  }
-		  if(StringUtils.isNotEmpty(recordToValidate.getTuavd())) {
-			  urlRequestParamsKeys.append("&wssavd=" + recordToValidate.getTuavd());
-		  }*/
+		  
 		  		  
 		  logger.info("URL: " + BASE_URL);
 		  logger.info("PARAMS: " + urlRequestParamsKeys);
@@ -2583,8 +2633,41 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 
 		  logger.info(jsonPayload);
 		  logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
-	    	if(jsonPayload!=null){
+	    	if(jsonPayload!=null){ 
 	    		ZadmomlfContainer container = this.zadmomlfListService.getListContainer(jsonPayload);
+	    		if(container!=null){
+	    			if(StringUtils.isEmpty(container.getErrMsg())){
+	    				result = (List)container.getList();
+	    				
+	    			}
+	    		}
+	    	}
+		  return result;
+	}
+	
+	private List<ZadmoattfRecord> getExternalMasterAttachmentsList(SystemaWebUser appUser, ZadmoattfRecord recordToValidate){
+		  List<ZadmoattfRecord> result = new ArrayList<ZadmoattfRecord>();
+		
+		  logger.info("Inside getExternalMasterList");
+		  //prepare the access CGI with RPG back-end
+		  String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_EXTERNAL_MASTER_ATTACHMENTS_URL;
+		  StringBuffer urlRequestParamsKeys = new StringBuffer();
+		  urlRequestParamsKeys.append("user=" + appUser.getUser());
+		  urlRequestParamsKeys.append("&date=" + recordToValidate.getDate());
+		  if(StringUtils.isNotEmpty(recordToValidate.getDocref())) {
+			  urlRequestParamsKeys.append("&docref=" + recordToValidate.getDocref());
+		  }
+		  
+		  		  
+		  logger.info("URL: " + BASE_URL);
+		  logger.info("PARAMS: " + urlRequestParamsKeys);
+		  logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		  String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
+
+		  logger.info(jsonPayload);
+		  logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    	if(jsonPayload!=null){ 
+	    		ZadmoattfContainer container = this.zadmoattfListService.getListContainer(jsonPayload);
 	    		if(container!=null){
 	    			if(StringUtils.isEmpty(container.getErrMsg())){
 	    				result = (List)container.getList();
@@ -2666,6 +2749,8 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	private SadmolhffListService sadmolhffListService;
 	@Autowired
 	private ZadmomlfListService zadmomlfListService;
+	@Autowired
+	private ZadmoattfListService zadmoattfListService;
 	
 	@Autowired
 	private SadOppdragService sadOppdragService;
