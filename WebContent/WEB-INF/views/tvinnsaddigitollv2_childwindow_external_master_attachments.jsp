@@ -18,31 +18,7 @@
 		
 		<tr>
 			<td colspan="3" class="text14Bold">&nbsp;&nbsp;&nbsp;
-			Registrer - Ekstern Dok.nr manuelt </td>
-		</tr>
-		<tr height="10"><td></td></tr>
-		<tr>
-		<td colspan="3" valign="top">
-		  		
-				<table cellspacing="2" align="left" >
-				<form name="insertForm" id="insertForm" >
-					<tr>
-						<td class="text14">&nbsp;Dok.nr</td>
-						<td class="text14">&nbsp;<input type="text" class="inputText" name="emdkm_insert" id="emdkm_insert" size="25" maxlength="70" value="${Xmodel.emdkm_insert}"></td>
-						<td class="text14">&nbsp;Dok.type</td>
-						<td class="text14">&nbsp;<input type="text" class="inputText" name="emdkmt_insert" id="emdkmt_insert" size="6" maxlength="4" value="${Xmodel.emdkmt_insert}"></td>
-						<td align="right">&nbsp;<input class="inputFormSubmit" type="button" name="insertButton" id="insertButton" value='Lage ny'></td>		
-					</tr>
-				</form>	
-				</table>
-				
-		</td>
-		</tr>
-		
-		<tr height="10"><td><hr></td></tr>
-		<tr>
-			<td colspan="3" class="text14Bold">&nbsp;&nbsp;&nbsp;
-			Søk - Ekstern Dok.nr 
+			Søk - Ekstern Dokument 
 			<img title="search" valign="bottom" src="resources/images/search.gif" width="24px" height="24px" border="0" alt="search">
 			</td>
 		</tr>
@@ -56,18 +32,18 @@
 					<tr>
 					<td>
 						<table>
-						<form name="mainForm" id="mainForm" action="tvinnsaddigitollv2_childwindow_external_master.do?action=doInit" method="post">
+						<form name="mainForm" id="mainForm" action="tvinnsaddigitollv2_childwindow_external_master_attachments.do?action=doInit" method="post">
 							<input type="hidden" name="ctype" id="ctype" value="${model.callerType}">
-							<input type="hidden" name="etlnrt" id="etlnrt" value="${model.etlnrt}">
+							<input type="hidden" name="docref" id="docref" value="${model.docref}">
 							<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
 							
 							<tr>
 								<td class="text14">&nbsp;Date</td>
 								<td class="text14">&nbsp;<input type="text" class="inputText" onKeyPress="return numberKey(event)" name="date" id="date" size="10" maxlength="8" value="${model.date}"></td>
-								
+								<%--
 								<td class="text14">&nbsp;Dok.nr</td>
 								<td class="text14">&nbsp;<input type="text" class="inputText" name="emdkm" id="emdkm" size="35" maxlength="50" value="${model.emdkm}"></td>
-							
+								 --%>
 		           				<td align="right">&nbsp;<input class="inputFormSubmit" onClick="setBlockUI(this)" type="submit" name="submit" value='<spring:message code="search.label"/>'></td>
 		           			</tr>
 		           		</form>
@@ -104,7 +80,8 @@
 			               
 			               <tr class="text14">
 			               	   <td style="cursor:pointer;" class="text14MediumBlue">
-				               		<a tabindex=-1 target="_blank" href="tvinnsaddigitollv2_renderAttachment.do?doclnk=${record.docname}">
+			               	   		<a title="${record.docname}" target="_blank" tabindex=-1 class="renderAttachmentLink" id="renderAttachmentLink${counter.count}">
+				               		<%-- <a tabindex=-1 target="_blank" href="tvinnsaddigitollv2_renderAttachment.do?doclnk=${record.docname}"> --%>
 	    							<c:choose>
 		    							<c:when test="${fn:contains(record.id, '.pdf')}">
 		    								<img title="file on server" style="vertical-align:middle;" src="resources/images/pdf.png" width="14" height="14" border="0" alt="PDF arch.">
@@ -115,6 +92,9 @@
 	    							</c:choose>
 	    							${record.id}
 	    							</a>
+	    							<form target="_blank" action="tvinnsaddigitollv2_renderAttachment.do" name="renderAttachmentForm${counter.count}" id="renderAttachmentForm${counter.count}" method="post">
+										<input type="hidden" name="doclnk${counter.count}" id="doclnk${counter.count}" value="${record.docname}">
+									</form>
 	    							
 				               </td>
 				               <td class="text14">&nbsp;${record.date}</td>
@@ -134,7 +114,9 @@
 										<form action="tvinnsaddigitollv2_delete_master_zadmoattf.do" name="deleteRecordForm${counter.count}" id="deleteRecordForm${counter.count}" method="post">
 											<input type="hidden" name="current_id1${counter.count}" id="current_id1${counter.count}" value="${record.id}">
 											<input type="hidden" name="current_id2${counter.count}" id="current_id2${counter.count}" value="${record.avsid}">
-											<input type="hidden" name="current_id3${counter.count}" id="current_id3${counter.count}" value="${record.docname}">
+											<input type="hidden" name="current_id3${counter.count}" id="current_id3${counter.count}" value="${record.docref}">
+											<input type="hidden" name="current_id4${counter.count}" id="current_id4${counter.count}" value="${model.date}">
+											<input type="hidden" name="current_id5${counter.count}" id="current_id5${counter.count}" value="${record.docname}">
 											<input type="hidden" name="action${counter.count}" id="action${counter.count}" value="doDelete">
 										 	<p class="text14" >Er du sikker på at du vil slette denne?</p>
 										</form>

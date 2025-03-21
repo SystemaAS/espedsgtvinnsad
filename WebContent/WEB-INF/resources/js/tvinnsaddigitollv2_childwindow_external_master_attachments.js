@@ -1,107 +1,6 @@
 	//this variable is a global jQuery var instead of using "$" all the time. Very handy
   	var jq = jQuery.noConflict();
 
-  	//-----------
-  	// Tullkontor
-  	//-----------
-	jq(function() {
-		jq('#mainList').on('click', 'td', function(){
-			  var id = this.id;
-			
-			  //id="tupro${record.tupro}@tuavd${record.tuavd}@ctype${model.callerType}
-			  if(id.indexOf("docnameAttachment") >= 0){
-				console.log("yes");
-				var path = id.replace("docnameAttachment", "");
-				console.log(path);
-				//jq.post("tvinnsadmanifest_renderAttachment.do", { doclnk: path } );
-				/*
-				jq.ajax({
-				  type: "POST",
-				  url: "tvinnsadmanifest_renderAttachment.do",
-				  data: { doclnk: path},
-				  async: false,
-				  //success: success,
-				  dataType: 'json'
-				});*/
-				
-				
-				  //var emrgt_ff = record[1].replace("trreforg", "");
-			  	  //var callerType = record[2].replace("ctype", "");
-				  //var emdkmt_ff = record[3].replace("emdkmt", "");
-				  //var emrgr_ff = record[4].replace("avsid", "");	
-				  //console.log(emdkm_ff + " " + emrgt_ff + " caller:" + callerType);
-			  }
-				/*
-			  	if(callerType == 'emdkm_ff'){ 
-				 
-				  opener.jq('#emdkm_ff').prop('readonly',false);					
-				  opener.jq('#emdkm_ff').val(emdkm_ff);
-				  opener.jq('#emdkm_ff').prop('readonly',true);
-				  //
-				  opener.jq('#emdkmt_ff').prop('readonly',false);					
-				  opener.jq('#emdkmt_ff').val(emdkmt_ff);
-				  opener.jq('#emdkmt_ff').prop('readonly',true);
-				  //	
-				  opener.jq('#emrgt_ff').prop('readonly',false);
-				  opener.jq('#emrgt_ff').val(emrgt_ff);	
-				  opener.jq('#emrgt_ff').prop('readonly',true);
-				  //
-				  opener.jq('#emrgr_ff').prop('readonly',false);
-				  opener.jq('#emrgr_ff').val(emrgr_ff);	
-				  opener.jq('#emrgr_ff').prop('readonly',true);
-				  //focus
-				  opener.jq('#emdkm_ff').focus();
-				  //close child window
-			  	  window.close();
-				  
-			  	}*/
-				/*
-				else if(callerType == 'etlnrt'){
-					var params = "emdkm" + emdkm_ff + "_emdkmt" + emdkmt_ff;
-					//DEBUG --> alert(params + "applicationUser:" + jq('#applicationUser').val() + " etlnrt:" + jq('#etlnrt').val());
-					if(params != ""){
-						
-						jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
-						  jq.ajax({
-					  	  	  type: 'GET',
-					  	  	  url: 'createMasterFromZadmomlf_Digitoll.do',
-					  	  	  data: { applicationUser : jq('#applicationUser').val(),
-										params : params,
-										lnrt : jq('#etlnrt').val(),
-										mode : 'A'},
-										
-					  	  	  dataType: 'json',
-					  	  	  cache: false,
-					  	  	  //async: false,
-					  	  	  contentType: 'application/json',
-					  	  	  success: function(data) {
-								jq.unblockUI(); //must have async: true (default) to work
-					  	  		var len = data.length;
-					  	  		for ( var i = 0; i < len; i++) {
-					  	  			//Update has been done successfully
-							        
-					  	  		}
-								
-					  	  	  },
-						  	  error: function() {
-								jq.unblockUI();
-					  	  	    //alert('Error loading ...');
-					  	  	  }
-					  	  });
-								
-					  }
-					window.setTimeout(function(){
-		                 //we must reload the parent master window since the use case updates the invoice list (if the end-user has selected some invoices to import)
-						  window.opener.setBlockUI();
-						  window.opener.location.href="tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=" + jq('#etlnrt').val();
-						  window.close();     
-		             }, 800); //milliseconds: in order to avoid a refresh in transport due to the above Ajax create master. It could take more time to be finished on the background...
-					
-				}*/
-
-	    });
-	});
-	
 	
 	jq(function() {
 	  jq("#date").datepicker({ 
@@ -128,7 +27,7 @@
 		  var id = this.id;
 		  counterIndex = id.replace("removeLink","");
 		  
-		  jq('#dialogDeleteRecord'+counterIndex).dialog( "option", "title", "Slett record " + jq('#current_id2'+counterIndex).val());
+		  jq('#dialogDeleteRecord'+counterIndex).dialog( "option", "title", "Slett record " + jq('#current_id1'+counterIndex).val());
 		  //deal with buttons for this modal window
 		  jq('#dialogDeleteRecord'+counterIndex).dialog({
 			 buttons: [ 
@@ -155,6 +54,15 @@
 		  //open now
 		  jq('#dialogDeleteRecord'+counterIndex).dialog('open');
 		 
+	  });
+  });
+
+  jq(function() {
+	  //because we don't want to send a path in href-GET. Must be POST and this is the only way...'
+	  jq(".renderAttachmentLink").click(function() {
+		  var id = this.id;
+		  counterIndex = id.replace("renderAttachmentLink","");
+		  jq('#renderAttachmentForm'+counterIndex).submit();
 	  });
   });
 

@@ -3,6 +3,7 @@ package no.systema.tvinn.sad.digitollv2.controller;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -238,8 +239,23 @@ public class TvinnSadDigitollv2ExternalHouseController {
 			return this.loginView;
 			
 		}else{
+			//String filePath = request.getParameter("doclnk");
+			String filePath = "";
 			
-			String filePath = request.getParameter("doclnk");
+			Enumeration requestParameters = request.getParameterNames();
+		    while (requestParameters.hasMoreElements()) {
+		        String element = (String) requestParameters.nextElement();
+		        String value = request.getParameter(element);
+		        if (element != null && value != null) {
+	        		//logger.warn("####################################################");
+	    			//logger.warn("param Name : " + element + " value: " + value);
+	    			if(element.startsWith("doclnk")){
+	    				filePath = value;
+	    			}//else if ... more here
+	    		}
+	    	}
+			
+			
 			
 			if(filePath!=null && !"".equals(filePath)){
 				logger.info("STEP 1");

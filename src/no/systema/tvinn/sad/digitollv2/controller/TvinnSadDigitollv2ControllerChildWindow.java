@@ -1568,7 +1568,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		String date = request.getParameter("date");
 		String docref = request.getParameter("docref");
 		//this is one is optional and exists only when the child window is opened from the transport-parent-window
-		String etlnrt = request.getParameter("etlnrt");
+		//String etlnrt = request.getParameter("etlnrt");
 
 		logger.info("caller:" + callerType);
 		//logger.info("tuavd:" + tuavd);
@@ -1596,13 +1596,15 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			model.put("callerType", callerType);
 			model.put("date", date);
 			model.put("docref", docref);
-			model.put("etlnrt", etlnrt);
+			//model.put("etlnrt", etlnrt);
 			
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 			
 	    	return successView;
 		}
 	}
+	
+	
 	/**
 	 * 
 	 * @param houseRecord
