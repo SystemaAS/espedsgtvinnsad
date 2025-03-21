@@ -337,7 +337,7 @@ public class TvinnSadManifestHeaderCargoLinesController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value="tvinnsadmanifest_renderArchive.do", method={ RequestMethod.GET })
+	@RequestMapping(value="tvinnsadmanifest_renderArchive.do", method={ RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView doManifestRenderArchive(HttpSession session, HttpServletRequest request, HttpServletResponse response){
 		logger.info("Inside doManifestRenderArchive...");
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
@@ -347,13 +347,13 @@ public class TvinnSadManifestHeaderCargoLinesController {
 			
 		}else{
 			
-			//session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE); 
 			String filePath = request.getParameter("doclnk");
 			
 			if(filePath!=null && !"".equals(filePath)){
-				
+				logger.info("A");
                 String absoluteFilePath = filePath;
                 if(!new IPAddressValidator().isValidAbsoluteFilePathFor_RenderFile(absoluteFilePath)){
+                	logger.info("B");
                 	return (null);
                 }else{	
 	                //must know the file type in order to put the correct content type on the Servlet response.
