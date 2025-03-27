@@ -450,7 +450,7 @@
 							<td class="text14">&nbsp;<span title="emrgt - Transportør OrgNr. / EORI">Transp.Orgnr / EORI</span></td>
 							<td></td>
 							 
-							<%--  
+							<%--  OBSOLETE ...
 							<c:if test="${model.record.emlnrm > 0 && (not empty model.record.emmid && model.record.emmid != 'EXTERNAL')}">
 								<td width="40px"></td>
 								<td class="text14">
@@ -520,7 +520,7 @@
 									</div>
 
 								</td>
-								<%--
+								<%-- OBSOLETE
 								<td class="text14">
 									<input  type="text" readonly class="inputText12LightYellow" name="ownReceiverName" id="ownReceiverName" size="31" maxlength="30" value="">
 								</td>
