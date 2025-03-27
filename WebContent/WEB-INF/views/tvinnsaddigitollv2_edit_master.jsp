@@ -450,6 +450,7 @@
 							<td class="text14">&nbsp;<span title="emrgt - Transportør OrgNr. / EORI">Transp.Orgnr / EORI</span></td>
 							<td></td>
 							 
+							<%--  
 							<c:if test="${model.record.emlnrm > 0 && (not empty model.record.emmid && model.record.emmid != 'EXTERNAL')}">
 								<td width="40px"></td>
 								<td class="text14">
@@ -469,9 +470,11 @@
 									
 									
 								</td>
+								
 								<td class="text14"><span title="Send til orgnr">Orgnr</span></td>
 								<td colspan="3" class="text12"><span id="ajaxErrorTextExtParty" name="ajaxErrorTextExtParty"></span></td>
 							</c:if>
+							--%>
 							 
 						</tr>
 						<tr>
@@ -502,6 +505,23 @@
 							<c:if test="${model.record.emlnrm > 0 && (not empty model.record.emmid && model.record.emmid != 'EXTERNAL')}">
 								<td width="40px"></td>
 								<td class="text14">
+									<img style="cursor:pointer;" onMouseOver="showPop('sendMaster_info');" onMouseOut="hidePop('sendMaster_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+									<span id="sendToPartIdLink" class="buttonGrayWithGreenFrame" style="cursor:pointer; title="Send til orgnr">Send Dok.nr til part</span>
+									<%--
+									<a tabindex="-1" id="sendToPartIdLink">
+										<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
+									</a>
+									--%>
+									<div class="text11" style="position: relative;" align="left">
+				                	<span style="position:absolute;top:2px; width:250px;" id="sendMaster_info" class="popupWithInputText text11"  >
+					           		<b>Send Dok.nr</b>
+					           		<p>Master Dok.nr som du må sende til aktøren som leier "posisjon" i transporten din slik at aktøren kan sende sitt eget "house"</p>
+									</span>	
+									</div>
+
+								</td>
+								<%--
+								<td class="text14">
 									<input  type="text" readonly class="inputText12LightYellow" name="ownReceiverName" id="ownReceiverName" size="31" maxlength="30" value="">
 								</td>
 								<td class="text14">	
@@ -510,11 +530,13 @@
 								<td class="text14">	
 									<input title="Send til part..." class="buttonGrayWithGreenFrame" style="cursor:pointer;" type="button" name="sendToPartButton" id="sendToPartButton" value='Send Dok.nr til part'>
 								</td>
+								 --%>
 								<td class="text14">	
 									<a tabindex="-1" id="ftplogIdLink">
 										<img title="ftp-log" style="cursor:pointer;vertical-align: middle;" src="resources/images/log-icon2.png" width="22px" height="22px" border="0" alt="ftp-log" >
 									</a>
-								</td>	
+								</td>
+									
 							</c:if>
 							 		
 						</tr>
