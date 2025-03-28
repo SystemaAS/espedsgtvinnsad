@@ -44,6 +44,11 @@
 				  console.log("click on td:" + id);
 				  var fileId = id.replace("TD", "");
 				  var orgnr = fileId.replace("file","");
+				  var docId = jq('#emdkm').val();
+			      //if the house is the parent-window
+				  if(jq('#ctype').val() == 'ownOmbudOrgNr'){
+					docId = jq('#ehdkh').val();
+				  }
 				  console.log("click on id for file-field:" + fileId);
 				 	
 				  
@@ -54,18 +59,18 @@
 					if(files!=null && files.length > 0){
 						
 						formData.append('applicationUser', jq('#applicationUser').val());
-						formData.append('emdkm', jq('#emdkm').val());
+						formData.append('docid', docId);
 						formData.append('orgnr', orgnr);
 						//DEBUG
 						console.log("applicationUser:" + jq('#applicationUser').val());
-						console.log("emdkm:" + jq('#emdkm').val());
+						console.log("docid:" + docId);
 						console.log("orgnr:" + orgnr);
 						console.log("Nr. of files:" + files.length);
 						
 						var obj = []; 
  						
 						for ( var i = 0, l = files.length; i < l; i++ ) {
-							obj.push(jq('#emdkm').val() + "_" + orgnr + "_" + files[i].name);
+							obj.push(docId + "_" + orgnr + "_" + files[i].name);
 							//var mapKey = i + "_" + jq('#emdkm').val() + "_" + orgnr;
 							//map[mapKey] = files[i];
 							
@@ -83,7 +88,7 @@
 						console.log("NO FILES");
 						//
 						formData.append('applicationUser', jq('#applicationUser').val());
-						formData.append('emdkm', jq('#emdkm').val());
+						formData.append('docid', docId);
 						formData.append('orgnr', orgnr);
 						formData.append('files', null);
 						formData.append('obj', null);	
@@ -92,7 +97,7 @@
 					
 					jq.ajax({
 				        type: "POST",
-				        url: "tvinnsaddigitollv2_saveAttachmentTempOnMaster.do",
+				        url: "tvinnsaddigitollv2_saveAttachmentTemp.do",
 				        async: true,
 						data: formData,
 						dataType: 'json',
@@ -140,9 +145,12 @@
 			window.close();
 		});
 		
-		//OK Button
+		
+		//----------------------------------------------
+		//OK Button when Master is the parent-window
+		//----------------------------------------------
 		jq('#buttonCreateFilesOK').click(function(){
-			var params = '';  
+			var params = ''; 
 			jq( ".clazzSendDocIdToExternalPartyAware" ).each(function(  ) {
 				
 				var id = this.id;
@@ -171,35 +179,6 @@
 					}
 				 	params = params + tmp; 
 			  	}
-			  	/*
-				//----------------------
-				//multipart attachments
-				//----------------------
-				//var formData = new FormData();
-				var files = jq('#file' + orgnr)[0].files;
-				if(files!=null && files.length > 0){
-					//var formData = new FormData();
-					//formData.append('applicationUser', jq('#applicationUser').val());
-					//DEBUG
-					console.log("Nr. of files:" + files.length);
-					
-					for ( var i = 0, l = files.length; i < l; i++ ) {
-						//formData.append('files', files[i]);
-						console.log("file-name:" + files[i].name);
-						console.log("file-size:" + files[i].size);
-						console.log("file-type:" + files[i].type);
-					}
-											
-				}else{
-					console.log("NO FILES");
-					//formData.append('applicationUser', jq('#applicationUser').val());
-					//formData.append('files[]', null);	
-					
-				}
-				//--------------------------
-				//END multipart attachments
-				//--------------------------
-				*/
 			});
 			console.log("params:" + params);
 			
@@ -243,6 +222,90 @@
              }, 800); //milliseconds: in order to avoid a refresh in master due to the above Ajax create house. It could take more time to be finished on the background...
 			
 		});
+		
+		//-------------------------------------------------------------------------------
+		//OK Button when House is the parent-window (when constructing the MOHouse-file)
+		//-------------------------------------------------------------------------------
+		jq('#buttonCreateFilesToOmbudOK').click(function(){
+			var params = ''; 
+			var orgnr;
+			var name;
+			jq( ".clazzSendDocIdToExternalPartyAware" ).each(function(  ) {
+				
+				var id = this.id;
+				//console.log("orgnr:" + id);
+				var record = id.split('_');
+				orgnr = record[0].replace("orgnr", "");
+				//var name = record[1].replace("name", "");
+				//var commtype = record[2].replace("commtype", "");
+				//var format = record[3].replace("format", "");
+				//var counter = i + 1;
+			  	//alert(orgnr + "-" + name + "-" + commtype + "-" + format);
+			  	console.log("orgnr:" + orgnr);
+	  		  
+			  	if(jq('#orgnr' + orgnr).prop('checked')){
+					console.log("checked!!");
+				 	//there is a problem with spaces in a field id (std rule: do not use spaces in an id)
+				 	name = jq('#orgnr' + orgnr).attr('title');	
+				 	var tmp = "orgnr" + orgnr + "_name" + name;
+					//elucidate if there are attachments
+					var fileId = id.replace("TD", "");
+					var files = jq('#file' + orgnr)[0].files;
+					if(files!=null && files.length > 0){
+						tmp = tmp + "_attachments" + true + "#";	
+					}else{
+						tmp = tmp + "_attachments" + false + "#";
+					}
+				 	params = params + tmp; 
+			  	}
+			});
+			console.log("params:" + params);
+			
+			
+			if(params != ""){
+			  jq.blockUI({ message: BLOCKUI_OVERLAY_MESSAGE_DEFAULT});
+			  jq.ajax({
+		  	  	  type: 'GET',
+		  	  	  url: 'tvinnsaddigitollv2_send_externalHouse_toExternalParty.do',
+		  	  	  data: { applicationUser : jq('#applicationUser').val(),
+						  params : params,
+						  ehlnrt : jq('#ehlnrt').val(),
+						  ehlnrm : jq('#ehlnrm').val(),
+						  ehlnrh : jq('#ehlnrh').val(),
+						  ehdkh : jq('#ehdkh').val()},
+						  //receiverName : name,
+				 		  //receiverOrgnr : orgnr},
+
+		  	  	  dataType: 'json',
+		  	  	  cache: false,
+		  	  	  //async: false,
+		  	  	  contentType: 'application/json',
+		  	  	  success: function(data) {
+					jq.unblockUI(); //must have async: true (default) to work
+		  	  		var len = data.length;
+		  	  		for ( var i = 0; i < len; i++) {
+		  	  			//Update has been done successfully
+				        
+		  	  		}
+					
+		  	  	  },
+			  	  error: function() {
+					jq.unblockUI();
+		  	  	    //alert('Error loading ...');
+		  	  	  }
+		  	  });
+
+			}	  
+			
+			window.setTimeout(function(){
+                 //we must reload the parent master window since the use case updates the invoice list (if the end-user has selected some invoices to import)
+				  window.opener.setBlockUI();
+				  window.opener.location.href="tvinnsaddigitollv2_edit_house.do?action=doFind&ehlnrt=" + jq('#ehlnrt').val() + "&ehlnrm=" + jq('#ehlnrm').val() + "&ehlnrh=" + jq('#ehlnrh').val();
+				  window.close();     
+             }, 800); //milliseconds: in order to avoid a refresh in master due to the above Ajax create house. It could take more time to be finished on the background...
+			
+		});
+		
 		
 		
 	});

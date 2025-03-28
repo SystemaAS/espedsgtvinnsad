@@ -1906,6 +1906,18 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		String emlnrt = request.getParameter("emlnrt");
 		String emlnrm = request.getParameter("emlnrm");
 		String emdkm = request.getParameter("emdkm");
+		String ctype = request.getParameter("ctype");
+		//checks if this UCase = UseCase - Send House back to the carrier (ombud/representative)
+		if(StringUtils.isNotEmpty(ctype) && ctype.contains("Ombud")) {
+			String ehlnrt = request.getParameter("ehlnrt");
+			String ehlnrm = request.getParameter("ehlnrm");
+			String ehlnrh = request.getParameter("ehlnrh");
+			String ehdkh = request.getParameter("ehdkh");
+			model.put("ehlnrt", ehlnrt);
+			model.put("ehlnrm", ehlnrm);
+			model.put("ehlnrh", ehlnrh);
+			model.put("ehdkh", ehdkh);
+		}
 		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_external_houses");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		//check user (should be in session already)
@@ -1920,6 +1932,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			model.put("emlnrt", emlnrt);
 			model.put("emlnrm", emlnrm);
 			model.put("emdkm", emdkm);
+			model.put("ctype", ctype);
 			
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 			

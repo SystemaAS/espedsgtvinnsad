@@ -31,14 +31,25 @@
 								<input type="hidden" name="emdkm" id="emdkm" value="${model.emdkm}">
 								<input type="hidden" name="emlnrt" id="emlnrt" value="${model.emlnrt}">
 								<input type="hidden" name="emlnrm" id="emlnrm" value="${model.emlnrm}">
-								
-								
+								<input type="hidden" name="ctype" id="ctype" value="${model.ctype}">
+								<%-- this is when the parent window is the house.jsp and not the master.jsp --%>
+								<input type="hidden" name="ehdkh" id="ehdkh" value="${model.ehdkh}">
+								<input type="hidden" name="ehlnrt" id="ehlnrt" value="${model.ehlnrt}">
+								<input type="hidden" name="ehlnrm" id="ehlnrm" value="${model.ehlnrm}">
+								<input type="hidden" name="ehlnrh" id="ehlnrh" value="${model.ehlnrh}">
 							</form>	
 						<tr>
 									
 							<td align="left">
 	           				<c:if test="${not empty model.sadmocfList}">
-					               &nbsp;<input title="automatisk generere send-filer..." class="inputFormSubmit" type="button" name="buttonCreateFilesOK" id="buttonCreateFilesOK" value='Ok'>
+	           					   <c:choose>
+	           					   <c:when test="${not empty model.ctype &&  model.ctype == 'ownOmbudOrgNr'}">
+	           					   		&nbsp;<input title="automatisk generere send-filer..." class="inputFormSubmit" type="button" name="buttonCreateFilesToOmbudOK" id="buttonCreateFilesToOmbudOK" value='Ok'>
+	           					   </c:when>
+	           					   <c:otherwise>
+					               		&nbsp;<input title="automatisk generere send-filer..." class="inputFormSubmit" type="button" name="buttonCreateFilesOK" id="buttonCreateFilesOK" value='Ok'>
+					               </c:otherwise>
+					               </c:choose>
 					         </c:if>
 					         <input class="inputFormSubmit" type="button" name="buttonCancel" id="buttonCancel" value='Avbryt'>
 					         <c:if test="${not empty model.sadmocfList}">

@@ -609,8 +609,9 @@
 							<c:if test="${model.record.ehlnrm > 0 && not empty model.record.ehmid}">
 								<c:if test="${not empty model.record.masterDto.emdkm_ff && model.record.masterDto.emdkm_ff != 'null'}">
 									<td width="30px" ></td>
-									
+									<%--
 									<td class="text14">
+										 
 										<img style="cursor:pointer;" onMouseOver="showPop('extHouse_info');" onMouseOut="hidePop('extHouse_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
 					            		<span title="Send til orgnr">Send House til - Navn</span>
 										<a tabindex="-1" id="sendToPartIdLink">
@@ -625,9 +626,11 @@
 						           		</p>
 										</span>	
 										</div>
+										
 									</td>
 									<td class="text14"><span title="Send til orgnr (masterDto.emrgr_ff)">Orgnr</span></td>
 									<td colspan="3" class="text12"><span id="ajaxErrorTextExtParty" name="ajaxErrorTextExtParty"></span></td>
+									--%>
 								</c:if>
 							</c:if>
 
@@ -665,14 +668,31 @@
 								<c:if test="${not empty model.record.masterDto.emdkm_ff && model.record.masterDto.emdkm_ff != 'null'}">
 									<td width="30px" ></td>
 									<td class="text14">
-										<input  type="text" readonly class="inputText12LightYellow" style="background-color:#5499C7;" name="ownReceiverName" id="ownReceiverName" size="31" maxlength="30" value="">
+										<img style="cursor:pointer;" onMouseOver="showPop('extHouse_info');" onMouseOut="hidePop('extHouse_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
+					            		<span id="sendToPartIdLink" class="buttonGrayWithGreenFrame" title="Send til Transport eier...orgnr">Send House til Tr.eier</span>
+										<%--
+										<a tabindex="-1" id="sendToPartIdLink">
+											<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
+										</a>
+										--%>
+										<div class="text11" style="position: relative;" align="left">
+					                	<span style="position:absolute;top:2px; width:250px;" id="extHouse_info" class="popupWithInputText text11"  >
+						           		<b>Send House til</b>
+						           		<p>
+						           			Feltene vises kun hvis det er en ekstern Master Dok.nr sendt hit fra en transporteier.<br/> 
+						           			Du må velge et navn ved å søke ved hjelp av den synlige OrgNr.
+						           		</p>
+										</span>	
+										</div>
 									</td>
+									<td class="text10">	
+										<input  type="text" readonly class="inputText12LightYellow" name="ownReceiverOrgNr" id="ownReceiverOrgNr" size="17" maxlength="20" value="${model.record.masterDto.emrgr_ff}">									
+									</td>
+									<%--
 									<td class="text14">	
-										<input  type="text" readonly class="inputText12LightYellow" style="background-color:#5499C7;" name="ownReceiverOrgNr" id="ownReceiverOrgNr" size="17" maxlength="20" value="${model.record.masterDto.emrgr_ff}">									
+										<input title="Send til Transport eier..." class="buttonGrayWithGreenFrame" style="cursor:pointer;" type="button" name="sendToPartButton" id="sendToPartButton" value='Send House til Transp.eier'>
 									</td>
-									<td class="text14">	
-										<input title="Send til ombud..." class="buttonGrayWithGreenFrame" style="cursor:pointer;" type="button" name="sendToPartButton" id="sendToPartButton" value='Send House til ombud'>
-									</td>
+									 --%>
 									<td class="text14">	
 										<a tabindex="-1" id="ftplogIdLink">
 											<img title="ftp-log" style="cursor:pointer;vertical-align: middle;" src="resources/images/log-icon2.png" width="22px" height="22px" border="0" alt="ftp-log" >

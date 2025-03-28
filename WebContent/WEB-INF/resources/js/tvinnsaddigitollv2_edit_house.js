@@ -37,7 +37,10 @@
 	
 	jq('#sendToPartIdLink').click(function() {
     	jq('#sendToPartIdLink').attr('target','_blank');
-    	window.open('tvinnsaddigitollv2_childwindow_external_houses.do?action=doFind&orgnr=' + jq('#ownReceiverOrgNr').val() + '&ctype=ownReceiverOrgNr', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+    	window.open('tvinnsaddigitollv2_childwindow_external_houses.do?action=doFind&ctype=ownOmbudOrgNr' + 
+					'&orgnr=' + jq('#ownReceiverOrgNr').val() + '&ehlnrt=' + jq('#ehlnrt').val() + '&ehlnrm=' + jq('#ehlnrm').val() + 
+					'&ehlnrh=' + jq('#ehlnrh').val() + '&ehdkh='+ jq('#ehdkh').val() , 
+					"codeWin", "top=300px,left=500px,height=650px,width=1000px,scrollbars=no,status=no,location=no");
 	});
 	jq('#ftplogIdLink').click(function() {
     	jq('#ftplogIdLink').attr('target','_blank');
@@ -932,7 +935,7 @@
 	//====================================================== 
 	jq(function() {
 		jq('#sendToPartButton').click(function() {
-			
+			/* OBSOLETE
 			if( jq('#ownReceiverName').val() != "" && jq('#ownReceiverOrgNr').val() != "" && jq('#ehlnrt').val()!= "" && jq('#ehlnrm').val()!= "" && jq('#ehlnrh').val()!= ""){
 				var	name = jq('#ownReceiverName').val();
 				var	orgNr = jq('#ownReceiverOrgNr').val();
@@ -941,7 +944,7 @@
 				var ehlnrh = jq('#ehlnrh').val();
 				jq.ajax({
 			  	  type: 'GET',
-			  	  url: 'tvinnsaddigitollv2_send_externalHouse_toExternalParty.do',
+			  	  url: 'TODELETE_tvinnsaddigitollv2_send_externalHouse_toExternalParty.do',
 			  	  data: { applicationUser : jq('#applicationUser').val(),
 						  ehlnrt : ehlnrt,
 						  ehlnrm : ehlnrm,
@@ -981,7 +984,7 @@
 				  	}			
 				});	
 			}
-			
+			*/
 		});
 	});
 
