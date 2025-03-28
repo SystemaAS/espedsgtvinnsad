@@ -636,7 +636,7 @@
 										<input  type="text" readonly class="inputText12LightYellow" style="background-color:#5499C7;" name="ownReceiverOrgNr" id="ownReceiverOrgNr" size="17" maxlength="20" value="${model.record.masterDto.emrgr_ff}">									
 									</td>
 									<td class="text14">	
-										<input title="Send til ombud..." class="buttonGrayWithGreenFrame" style="cursor:pointer;" type="button" name="sendToPartButton" id="sendToPartButton" value='Send House til ombud'>
+										<input title="Send til ombud..." class="buttonGrayWithGreenFrame" style="cursor:pointer;" type="button" name="sendToPartButton" id="sendToPartButton" value='Send House til Ombud/Representant'>
 									</td>
 									<td class="text14">	
 										<a tabindex="-1" id="ftplogIdLink">

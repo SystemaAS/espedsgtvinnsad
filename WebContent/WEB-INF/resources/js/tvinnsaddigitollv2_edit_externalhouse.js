@@ -922,7 +922,7 @@
 	//====================================================== 
 	jq(function() {
 		jq('#sendToPartButton').click(function() {
-			
+			/* OBSOLETE
 			if( jq('#ownReceiverName').val() != "" && jq('#ownReceiverOrgNr').val() != "" && jq('#ehlnrt').val()!= "" && jq('#ehlnrm').val()!= "" && jq('#ehlnrh').val()!= ""){
 				var	name = jq('#ownReceiverName').val();
 				var	orgNr = jq('#ownReceiverOrgNr').val();
@@ -931,7 +931,7 @@
 				var ehlnrh = jq('#ehlnrh').val();
 				jq.ajax({
 			  	  type: 'GET',
-			  	  url: 'tvinnsaddigitollv2_send_externalHouse_toExternalParty.do',
+			  	  url: 'TODELETE_tvinnsaddigitollv2_send_externalHouse_toExternalParty.do',
 			  	  data: { applicationUser : jq('#applicationUser').val(),
 						  ehlnrt : ehlnrt,
 						  ehlnrm : ehlnrm,
@@ -971,7 +971,7 @@
 				  	}			
 				});	
 			}
-			
+			*/
 		});
 	});
 
