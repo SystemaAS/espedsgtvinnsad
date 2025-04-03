@@ -44,6 +44,11 @@
     	window.open('tvinnsaddigitollv2_childwindow_external_houses_logTODO.do?action=doFind&todo=' + jq('#TODOemdkm').val() + jq('#TODOown_emdkmUnique').val(), "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
 	});	    
 
+	jq('#vedleggButton').click(function() {
+    	jq('#vedleggButton').attr('target','_blank');
+    	window.open('tvinnsaddigitollv2_childwindow_externalhouse_advmelding_attachm_log.do?action=doFind&docref=' + jq('#ehdkh').val(), "codeWin", "top=300px,left=500px,height=600px,width=1200px,scrollbars=no,status=no,location=no");
+	});	    
+
 
     jq('#sendButton').click(function() { 
     	var async_own = "";

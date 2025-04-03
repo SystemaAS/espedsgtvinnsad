@@ -2010,6 +2010,34 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	    	return successView;
 		}
 	}
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_externalhouse_advmelding_attachm_log.do", params="action=doFind",  method={RequestMethod.GET, RequestMethod.POST } )
+	public ModelAndView doInitExternalHouseAdvmeldingAttachments(@ModelAttribute ("record") ZadmoattfRecord recordToValidate, HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doInitExternalHouseAdvmeldingAttachments");
+		Map model = new HashMap();
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_externalhouse_advmelding_attachm_log");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			
+			List list = this.getExternalHouseAttachmentsList(appUser, recordToValidate);
+			model.put("zadmoattfList", list);
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
 
 	
 	
@@ -2209,6 +2237,41 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		}
 		return list;
 	}
+	
+	
+	private List<ZadmoattfRecord> getExternalHouseAttachmentsList(SystemaWebUser appUser, ZadmoattfRecord recordToValidate){
+		  List<ZadmoattfRecord> result = new ArrayList<ZadmoattfRecord>();
+		
+		  logger.info("Inside getExternalMasterList");
+		  //prepare the access CGI with RPG back-end
+		  String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_EXTERNAL_HOUSE_ATTACHMENTS_URL;
+		  StringBuffer urlRequestParamsKeys = new StringBuffer();
+		  urlRequestParamsKeys.append("user=" + appUser.getUser());
+		  urlRequestParamsKeys.append("&date=" + recordToValidate.getDate());
+		  if(StringUtils.isNotEmpty(recordToValidate.getDocref())) {
+			  urlRequestParamsKeys.append("&docref=" + recordToValidate.getDocref());
+		  }
+		  
+		  		  
+		  logger.info("URL: " + BASE_URL);
+		  logger.info("PARAMS: " + urlRequestParamsKeys);
+		  logger.info(Calendar.getInstance().getTime() +  " CGI-start timestamp");
+		  String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
+
+		  logger.info(jsonPayload);
+		  logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+	    	if(jsonPayload!=null){ 
+	    		ZadmoattfContainer container = this.zadmoattfListService.getListContainer(jsonPayload);
+	    		if(container!=null){
+	    			if(StringUtils.isEmpty(container.getErrMsg())){
+	    				result = (List)container.getList();
+	    				
+	    			}
+	    		}
+	    	}
+		  return result;
+	}
+	
 	
 	private List<JsonTvinnSadTolltariffVarukodRecord> getTolltariffList(SystemaWebUser appUser, String tolltariffVarekod, String ieMode){
 		List<JsonTvinnSadTolltariffVarukodRecord> list = new ArrayList<JsonTvinnSadTolltariffVarukodRecord>();

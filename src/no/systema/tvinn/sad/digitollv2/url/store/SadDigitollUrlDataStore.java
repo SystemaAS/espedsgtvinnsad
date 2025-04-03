@@ -135,7 +135,10 @@ public final class SadDigitollUrlDataStore {
 		//http://10.11.47.61/syjservicestn/syjsZADMOMLF.do?user=OSCAR...
 		static public String SAD_FETCH_DIGITOLL_EXTERNAL_MASTER_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsZADMOMLF.do";
 		static public String SAD_FETCH_DIGITOLL_EXTERNAL_MASTER_ATTACHMENTS_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsZADMOATTF.do";
-				
+		//External Houses
+		static public String SAD_FETCH_DIGITOLL_EXTERNAL_HOUSE_ATTACHMENTS_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsZADMOATTF.do";
+		
+		
 		
 		
 }

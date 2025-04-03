@@ -625,6 +625,9 @@
 							<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehextref" id="ehextref" size="20" maxlength="35" value="${model.record.ehextref}"></td>
 							<td class="text14" width="20px"></td>
 							<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehrecid" id="ehrecid" size="20" maxlength="35" value="${model.record.ehrecid}"></td>
+							<td class="text14">
+								<input title="" class="inputFormSubmitStd" type="button" name="vedleggButton" id="vedleggButton" value='Vedlegg - Adv.melding'>
+							</td>
 							
 							<c:if test="${model.record.ehlnrm > 0 && not empty model.record.ehmid}">
 								<c:if test="${not empty model.record.masterDto.emdkm_ff && model.record.masterDto.emdkm_ff != 'null'}">
@@ -645,10 +648,7 @@
 									</td>
 								</c:if>	
 							</c:if>		
-										 		
-							
-							
-	
+
 						</tr>
 						
 					</table>
@@ -1476,7 +1476,7 @@
 		<tr height="3"><td></td></tr>
 		<tr>
 			<td align="left" >
-			
+				
 			<%--
 			<c:if test="${model.record.ehst != 'S' && model.record.ehst2 != 'C' && model.record.ehst2 != 'N' }"> <%-- CANCELED(S) && COMPLETED && DENIED 
 				&nbsp;&nbsp;<input class="inputFormSubmit" type="submit" name="submit" id="submit" value='Lagre'>
