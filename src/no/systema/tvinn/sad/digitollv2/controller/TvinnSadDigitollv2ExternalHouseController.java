@@ -1,5 +1,8 @@
 package no.systema.tvinn.sad.digitollv2.controller;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -34,8 +37,12 @@ import no.systema.main.validator.IPAddressValidator;
 import no.systema.main.validator.LoginValidator;
 import no.systema.tvinn.sad.digitollv2.controller.service.AvdSignControllerService;
 import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ZadmoattfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ZadmohfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ZadmohfRecord;
+import no.systema.tvinn.sad.digitollv2.service.GeneralUpdateService;
 import no.systema.tvinn.sad.digitollv2.service.SadDigitollDropDownListPopulationService;
 import no.systema.tvinn.sad.digitollv2.service.ZadmohfListService;
 import no.systema.tvinn.sad.digitollv2.url.store.SadDigitollUrlDataStore;
@@ -227,6 +234,97 @@ public class TvinnSadDigitollv2ExternalHouseController {
 	 * 
 	 * @param session
 	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_delete_externalhouse_zadmoattf.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doDeleteZadmoattfExternalHouse(HttpSession session, HttpServletRequest request){
+		logger.info("Inside doDeleteZadmoattfExternalHouse");
+		Map model = new HashMap();
+		String id1 = "";
+		String id2 = "";
+		String id3 = "";
+		String id4 = "";
+		String id5 = "";
+		
+		Enumeration requestParameters = request.getParameterNames();
+	    while (requestParameters.hasMoreElements()) {
+	        String element = (String) requestParameters.nextElement();
+	        String value = request.getParameter(element);
+	        if (element != null && value != null) {
+        		//logger.warn("####################################################");
+    			//logger.warn("param Name : " + element + " value: " + value);
+    			if(element.startsWith("current_id1")){
+    				id1 = value;
+    			}else if(element.startsWith("current_id2")){
+    				id2 = value;
+    			}else if(element.startsWith("current_id3")){
+    				id3 = value;
+    			}else if(element.startsWith("current_id4")){
+    				id4 = value;
+    			}else if(element.startsWith("current_id5")){
+    				id5 = value;
+    			}
+    		}
+    	}
+	    String id = id1;
+		String avsid = id2;
+		String docref = id3;
+		String dateSok = id4;
+		String docname = id5;
+		
+		logger.info("id:" +  id + " avsid:" +  avsid + " docname:" +  docref);
+		logger.debug("docname:" + docname);
+	    ModelAndView successView = new ModelAndView("redirect:tvinnsaddigitollv2_childwindow_externalhouse_attachments.do?action=doInit&date=" + dateSok + "&ctype=ehdkh&docref=" + docref);
+
+		
+	    SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//START
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			//delete
+			if(StringUtils.isNotEmpty(id) && StringUtils.isNotEmpty(docref) ) {
+				ZadmoattfRecord recordToValidate = new ZadmoattfRecord();
+				recordToValidate.setId(id);
+				recordToValidate.setDocref(docref);
+				String mode = "D";
+			    
+				logger.info("MODE:" + mode + " before update in Controller ...");
+				StringBuffer errMsg = new StringBuffer();
+				int dmlRetval = 0;
+				dmlRetval = this.deleteHouseZadmoattf(appUser.getUser(), recordToValidate, mode, errMsg);
+				
+				if(dmlRetval < 0) {
+					//error on update
+					model.put("errorMessage", errMsg.toString());
+					logger.error(errMsg.toString());
+				}else {
+					//DELETE file from file system !!!!!!!!!!!!!!!!!!!!!
+					try {
+						Path p = Paths.get(docname);
+                		logger.debug("Deleting..." + p.toString());
+                    	Files.deleteIfExists(p);
+	                } catch (Exception e) {
+	                	logger.error(e.toString());
+	                    e.printStackTrace();
+	                }
+				}
+				
+			}
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+	    
+		}
+		
+		return successView;
+		
+	}
+	/**
+	 * 
+	 * @param session
+	 * @param request
 	 * @param response
 	 * @return
 	 */
@@ -300,6 +398,57 @@ public class TvinnSadDigitollv2ExternalHouseController {
 			
 	}	
 	
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param recordToValidate
+	 * @param mode
+	 * @param errMsg
+	 * @return
+	 */
+	private int deleteHouseZadmoattf(String applicationUser, ZadmoattfRecord recordToValidate, String mode, StringBuffer errMsg) {
+		int retval = 0;
+		
+		
+		//get BASE URL
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_EXTERNAL_ATTACHMENTS_URL;
+		//add URL-parameters
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + applicationUser + "&mode=" + mode);
+		urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate)));
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		GeneralUpdateContainer container = this.generalUpdateService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<GeneralUpdateRecord> outputList = container.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(GeneralUpdateRecord record : outputList ){
+					logger.info(record.toString());
+					if(StringUtils.isNotEmpty(container.getErrMsg())){
+						errMsg.append(record.getStatus());
+						errMsg.append(" -->detail:" + container.getErrMsg());
+						retval = -1;
+						break;
+					}
+				}
+			}
+    	}
+    	
+    	return retval;
+	}
+
+	
 	private void setRecordAspects(SystemaWebUser appUser, ZadmohfRecord record) {
 		this.adjustFieldsForFetch(record);
 		//get all items
@@ -365,4 +514,6 @@ public class TvinnSadDigitollv2ExternalHouseController {
 	
 	@Autowired
 	private ZadmohfListService zadmohfListService;
+	@Autowired
+	private GeneralUpdateService generalUpdateService;
 }

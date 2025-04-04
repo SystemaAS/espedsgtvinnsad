@@ -626,7 +626,8 @@
 							<td class="text14" width="20px"></td>
 							<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehrecid" id="ehrecid" size="20" maxlength="35" value="${model.record.ehrecid}"></td>
 							<td class="text14">
-								<input title="" class="inputFormSubmitStd" type="button" name="vedleggButton" id="vedleggButton" value='Vedlegg - Adv.melding'>
+								<input title="" class="inputFormSubmitStd" style="color:blue;" type="button" name="vedleggButton" id="vedleggButton" value='Vedlegg fra vareeier'>
+								<img title="vedlegg fra vareeier" style="cursor:not-allowed ;vertical-align: middle;" src="resources/images/attachmentIcon.png" width="14px" height="14px" border="0" alt="fakt.vedlegg" >
 							</td>
 							
 							<c:if test="${model.record.ehlnrm > 0 && not empty model.record.ehmid}">

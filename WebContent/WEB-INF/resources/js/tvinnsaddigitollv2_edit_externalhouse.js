@@ -45,8 +45,8 @@
 	});	    
 
 	jq('#vedleggButton').click(function() {
-    	jq('#vedleggButton').attr('target','_blank');
-    	window.open('tvinnsaddigitollv2_childwindow_externalhouse_advmelding_attachm_log.do?action=doFind&docref=' + jq('#ehdkh').val(), "codeWin", "top=300px,left=500px,height=600px,width=1200px,scrollbars=no,status=no,location=no");
+    	jq('#vedleggButton').attr('target','_blank'); 
+    	window.open('tvinnsaddigitollv2_childwindow_externalhouse_attachments.do?action=doInit&date=20250101&docref=' + jq('#ehdkh').val() + '&ctype=ehdkh', "codeWin", "top=300px,left=500px,height=600px,width=1300px,scrollbars=no,status=no,location=no");
 	});	    
 
 

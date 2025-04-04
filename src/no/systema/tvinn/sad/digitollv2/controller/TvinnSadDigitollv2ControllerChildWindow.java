@@ -2017,22 +2017,45 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="tvinnsaddigitollv2_childwindow_externalhouse_advmelding_attachm_log.do", params="action=doFind",  method={RequestMethod.GET, RequestMethod.POST } )
-	public ModelAndView doInitExternalHouseAdvmeldingAttachments(@ModelAttribute ("record") ZadmoattfRecord recordToValidate, HttpSession session, HttpServletRequest request){
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_externalhouse_attachments.do", params="action=doInit",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doInitExternalHouseAttachments(@ModelAttribute ("record") ZadmoattfRecord recordToValidate, HttpSession session, HttpServletRequest request){
 		this.context = TdsAppContext.getApplicationContext();
-		logger.info("Inside: doInitExternalHouseAdvmeldingAttachments");
+		logger.info("Inside: doInitExternalHouseAttachments");
 		Map model = new HashMap();
+		String callerType = request.getParameter("ctype");
+		String date = request.getParameter("date");
+		String docref = request.getParameter("docref");
+		//this is one is optional and exists only when the child window is opened from the transport-parent-window
+		//String etlnrt = request.getParameter("etlnrt");
+
+		logger.info("caller:" + callerType);
+		//logger.info("tuavd:" + tuavd);
+		//logger.info("tupro:" + tupro);
+		//
 		
-		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_externalhouse_advmelding_attachm_log");
+		//antingen eller och inte båda 2...Turen overrides avd if it exists
+		/*if(StringUtils.isNotEmpty(tupro)) {
+			model.put("tupro", tupro);
+		}else {
+			model.put("tuavd", tuavd);
+		}*/
+		
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_externalhouse_attachments");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
 		//check user (should be in session already)
 		if(appUser==null){
 			return this.loginView;
 			
 		}else{
-			
+			  
 			List list = this.getExternalHouseAttachmentsList(appUser, recordToValidate);
-			model.put("zadmoattfList", list);
+			model.put("mainList", list);
+			model.put("callerType", callerType);
+			model.put("date", date);
+			model.put("docref", docref);
+			//model.put("etlnrt", etlnrt);
+			
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 			
 	    	return successView;
