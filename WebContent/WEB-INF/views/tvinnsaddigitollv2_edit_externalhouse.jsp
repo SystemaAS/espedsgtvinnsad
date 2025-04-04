@@ -626,7 +626,7 @@
 							<td class="text14" width="20px"></td>
 							<td class="text14"><input type="text" class="inputTextMediumBlue" name="ehrecid" id="ehrecid" size="20" maxlength="35" value="${model.record.ehrecid}"></td>
 							<td class="text14">
-								<input title="" class="inputFormSubmitStd" style="color:blue;" type="button" name="vedleggButton" id="vedleggButton" value='Vedlegg fra vareeier'>
+								<input title="" class="inputFormSubmitStd" style="color:yellow;background-color:#B2BEB5" type="button" name="vedleggButton" id="vedleggButton" value='Vedlegg fra vareeier'>
 								<img title="vedlegg fra vareeier" style="cursor:not-allowed ;vertical-align: middle;" src="resources/images/attachmentIcon.png" width="14px" height="14px" border="0" alt="fakt.vedlegg" >
 							</td>
 							
