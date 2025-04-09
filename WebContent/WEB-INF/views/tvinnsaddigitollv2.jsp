@@ -448,10 +448,10 @@
 	               	   </td>
 	               	   <td width="2%" align="center" class="tableCell" >${record.etlnrt}</td>
 		               <td width="2%" align="center" class="tableCell" >${record.etavd}</td>
-		               <td width="2%" align="left" class="tableCell" >${record.etsg}
+		               <td width="4%" align="left" class="tableCell" >${record.etsg}
 		               
 		               		<a title="Endre signatur..." tabindex=-1 class="reassignLink" id="reassignLink${counter.count}" runat="server" href="#">
-								<font class="text10" style="color:green">TS</font>
+								<font class="text10" style="color:green; font-weight: bold;">e</font>
 							</a>
 							<div style="display: none;" class="clazz_dialog_mini" id="dialogReassignSign${counter.count}" title="Dialog">
 								<form action="tvinnsaddigitollv2_reassignSignatur_transport.do" name="reassignSignForm${counter.count}" id="reassignSignForm${counter.count}" method="post">
