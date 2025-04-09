@@ -448,7 +448,27 @@
 	               	   </td>
 	               	   <td width="2%" align="center" class="tableCell" >${record.etlnrt}</td>
 		               <td width="2%" align="center" class="tableCell" >${record.etavd}</td>
-		               <td width="2%" align="center" class="tableCell" >${record.etsg}</td>
+		               <td width="2%" align="left" class="tableCell" >${record.etsg}
+		               
+		               		<a title="Endre signatur..." tabindex=-1 class="reassignLink" id="reassignLink${counter.count}" runat="server" href="#">
+								<font class="text10" style="color:green">TS</font>
+							</a>
+							<div style="display: none;" class="clazz_dialog_mini" id="dialogReassignSign${counter.count}" title="Dialog">
+								<form action="tvinnsaddigitollv2_reassignSignatur_transport.do" name="reassignSignForm${counter.count}" id="reassignSignForm${counter.count}" method="post">
+									<input type="hidden" name="current_id1${counter.count}" id="current_id1${counter.count}" value="${record.etlnrt}">
+									<input type="hidden" name="action${counter.count}" id="action${counter.count}" value="doUpdate">
+									<p class="text14" >Er du sikker på at du vil tildele ny signatur?</p>
+									<select class="selectMediumBlueE2" style="background-color:lightyellow;" name="current_sg${counter.count}" id="current_sg${counter.count}">
+									  <option value="">-velg-</option>
+					 				  	<c:forEach var="recordWithin" items="${model.signList}" >
+					 				  		<option title="${recordWithin.namn}" value="${recordWithin.sign}">${recordWithin.sign}</option> 
+										</c:forEach>  
+									</select>		
+								</form>
+							</div>
+		               </td>
+		               
+		               
 		               <%-- <td width="2%" align="center" class="tableCell" ><c:if test="${record.etpro > 0}">${record.etpro}</c:if></td>  --%>
 		               <td width="3%" align="left" class="tableCell" >${record.etpro}
 		               		
