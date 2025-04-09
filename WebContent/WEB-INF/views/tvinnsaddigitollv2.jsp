@@ -451,7 +451,7 @@
 		               <td width="4%" align="left" class="tableCell" >${record.etsg}
 		               
 		               		<a title="Endre signatur..." tabindex=-1 class="reassignLink" id="reassignLink${counter.count}" runat="server" href="#">
-								<font class="text10" style="color:green; font-weight: bold;">e</font>
+								<font class="text12" style="color:green; font-weight: bold;">e</font>
 							</a>
 							<div style="display: none;" class="clazz_dialog_mini" id="dialogReassignSign${counter.count}" title="Dialog">
 								<form action="tvinnsaddigitollv2_reassignSignatur_transport.do" name="reassignSignForm${counter.count}" id="reassignSignForm${counter.count}" method="post">
