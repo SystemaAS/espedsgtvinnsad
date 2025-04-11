@@ -16,6 +16,8 @@ public class SadmocfRecord extends JsonAbstractGrandFatherRecord  {
 	private String commtype  = ""; //  tegn      10 (ftp, email, webserv) 
 	private String format  = ""; //format char(10) NOT NULL,  
 	private String ftpserver  = ""; //ftpserver char(70)  
+	private String ftpport  = ""; //ftpport char(10)  
+	private String ftptmp  = ""; //ftptmp char(70)
 	private String xmlxsd  = ""; //xmlxsd char(25),  
 	private String ftpuser  = ""; //ftpuser char(35)  
 	private String ftppwd  = ""; //ftppwd char(70)

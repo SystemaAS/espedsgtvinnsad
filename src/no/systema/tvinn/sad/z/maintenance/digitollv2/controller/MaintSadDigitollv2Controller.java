@@ -73,14 +73,24 @@ public class MaintSadDigitollv2Controller {
 	 */
 	private List<MaintenanceMainListObject> populateMaintenanceMainList(){
 		List<MaintenanceMainListObject> listObject = new ArrayList<MaintenanceMainListObject>();
-		MaintenanceMainListObject object = new  MaintenanceMainListObject();    
 		
+		//SADMOAF
+		MaintenanceMainListObject object = new  MaintenanceMainListObject();    
 		object.setId("1");
 		object.setSubject("Avd - Vedl. avdeling for Digitoll V2");
 		object.setCode("SADMOAF");
 		object.setDbTable("SADMOAF");
 		object.setStatus("G");
 		object.setPgm("sadmoaf");
+		listObject.add(object);
+		//SADMOCF
+		object = new  MaintenanceMainListObject();
+		object.setId("2");
+		object.setSubject("Adv.melding - Parter - MasterId Outbound");
+		object.setCode("SADMOCF");
+		object.setDbTable("SADMOCF");
+		object.setStatus("G");
+		object.setPgm("sadmocf");
 		listObject.add(object);
 		
 		return listObject;
