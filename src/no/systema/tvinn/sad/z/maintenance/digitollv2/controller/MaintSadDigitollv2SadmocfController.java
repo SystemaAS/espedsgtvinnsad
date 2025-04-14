@@ -80,7 +80,7 @@ public class MaintSadDigitollv2SadmocfController {
 		logger.info("Inside doSadmoaf...");
 		Map model = new HashMap();
 		String action = request.getParameter("action");
-		String etavd = request.getParameter("etavd");
+		String orgnr = request.getParameter("orgnr");
 		if(appUser==null){
 			return this.loginView;
 		}else{
@@ -91,7 +91,7 @@ public class MaintSadDigitollv2SadmocfController {
 			
 			if(StringUtils.isNotEmpty(action)) {
 				if(action.equals("doFind")) {
-					model.put("record", this.getRecord(appUser, etavd, true));
+					model.put("record", this.getRecord(appUser, orgnr, true));
 				}
 			}
 			//drop downs
@@ -280,13 +280,13 @@ public class MaintSadDigitollv2SadmocfController {
 	 * @param etavd
 	 * @return
 	 */
-	private SadmoafRecord getRecord(SystemaWebUser appUser, String etavd, boolean adjust){
-		SadmoafRecord retval = null;
+	private SadmocfRecord getRecord(SystemaWebUser appUser, String orgnr, boolean adjust){
+		SadmocfRecord retval = null;
 		
 		//get BASE URL
-		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_DEFAULT_VALUES_URL;
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_EXTERNAL_HOUSES_URL;
 		//add URL-parameters
-		String urlRequestParams = "user=" + appUser.getUser() + "&etavd=" + etavd;
+		String urlRequestParams = "user=" + appUser.getUser() + "&orgnr=" + orgnr;
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
     	logger.warn("URL: " + BASE_URL);
     	logger.warn("URL PARAMS: " + urlRequestParams);
@@ -298,13 +298,13 @@ public class MaintSadDigitollv2SadmocfController {
     	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
     	if(jsonPayload!=null){
     		
-    		SadmoafContainer container = this.sadmoafListService.getListContainer(jsonPayload);
+    		SadmocfContainer container = this.sadmocfListService.getListContainer(jsonPayload);
     		//----------------------------------------------------------------
 			//now filter the topic list with the search filter (if applicable)
 			//----------------------------------------------------------------
-    		Collection<SadmoafRecord> outputList = container.getList();	
+    		Collection<SadmocfRecord> outputList = container.getList();	
 			if(outputList!=null && outputList.size()>0){
-				for(SadmoafRecord record: outputList) {
+				for(SadmocfRecord record: outputList) {
 					if(adjust) {
 						this.adjustFieldsForFetch(record);
 					}
@@ -378,23 +378,23 @@ public class MaintSadDigitollv2SadmocfController {
 	 * 
 	 * @param recordToValidate
 	 */
-	private void adjustFieldsForFetch(SadmoafRecord recordToValidate){
-		//Register date
-		if(recordToValidate.getEtdtr()!=null && recordToValidate.getEtdtr() > 0) {
-			String tmpEtdtr = String.valueOf(recordToValidate.getEtdtr());
-			if (org.apache.commons.lang3.StringUtils.isNotEmpty(tmpEtdtr) && tmpEtdtr.length()==8) {
-				int isoEtdtr = Integer.parseInt(this.dateMgr.getDateFormatted_NO(tmpEtdtr, DateTimeManager.ISO_FORMAT));
-				recordToValidate.setEtdtr(isoEtdtr);
-			}
+	private void adjustFieldsForFetch(SadmocfRecord recordToValidate){
+		String NULL_STR = "null";
+		//Ftp records
+		if(recordToValidate.getFtpserver()!=null && recordToValidate.getFtpserver().equals(NULL_STR)) {
+			recordToValidate.setFtpserver("");
 		}
-		//ETA date
-		if(recordToValidate.getEtetad()!=null && recordToValidate.getEtetad() > 0) {
-			String tmpEtetatd = String.valueOf(recordToValidate.getEtetad());
-			if (org.apache.commons.lang3.StringUtils.isNotEmpty(tmpEtetatd) && tmpEtetatd.length()==8) {
-				int isoEtetad = Integer.parseInt(this.dateMgr.getDateFormatted_NO(tmpEtetatd, DateTimeManager.ISO_FORMAT));
-				recordToValidate.setEtetad(isoEtetad);
-			}
+		if(recordToValidate.getFtpport()!=null && recordToValidate.getFtpport().equals(NULL_STR)) {
+			recordToValidate.setFtpport("");
 		}
+		if(recordToValidate.getFtpuser()!=null && recordToValidate.getFtpuser().equals(NULL_STR)) {
+			recordToValidate.setFtpuser("");
+		}
+		if(recordToValidate.getFtppwd()!=null && recordToValidate.getFtppwd().equals(NULL_STR)) {
+			recordToValidate.setFtppwd("");
+		}
+		//Ftpdir and tmp on GUI 
+		/*
 		//ETA time
 		if(recordToValidate.getEtetat()!=null && recordToValidate.getEtetat() > 0) {
 			String tmpEtetat = String.valueOf(recordToValidate.getEtetat());
@@ -434,7 +434,7 @@ public class MaintSadDigitollv2SadmocfController {
 				recordToValidate.setEtpnr(StringUtils.leftPad(String.valueOf(recordToValidate.getEtpnr()),4,"0"));
 			}
 		}
-		
+		*/
 		
 	}
 	/**
