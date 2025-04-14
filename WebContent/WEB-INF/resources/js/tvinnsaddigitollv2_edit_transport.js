@@ -89,7 +89,38 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 		  //open now
 		  jq('#dialogDelete').dialog('open');
     });
-    
+	
+	//Real delete to Api (DELETE)
+ 	jq('#updateMrnWithOriginalMrnButton').click(function() { 
+    	  jq('#dialogReset').dialog( "option", "title", "Oppdater MRN i databasen" );
+		  //deal with buttons for this modal window
+		  jq('#dialogReset').dialog({
+			 buttons: [ 
+	            {
+				 id: "dialogSaveTU",	
+				 text: "Ok",
+				 click: function(){
+					 		setBlockUI();
+							window.location = 'tvinnsaddigitollv2_resetMrn_transport.do?layer=1&etlnrt=' + jq('#etlnrt').val() + '&etmid_own=' + jq('#etmid_own').val() + '&action=doReset' ;
+				 		}
+			 	 },
+	 	 		{
+			 	 id: "dialogCancelTU",
+			 	 text: "Cancel", 
+				 click: function(){
+					 		//back to initial state of form elements on modal dialog
+					 		jq("#dialogSaveSU").button("option", "disabled", true);
+					 		jq( this ).dialog( "close" ); 
+				 		} 
+	 	 		 } ] 
+		  });
+		  //init values
+		  jq("#dialogSaveSU").button("option", "disabled", true);
+		  //open now
+		  jq('#dialogReset').dialog('open');
+    });    
+
+
 	//Refresh
     jq('#alinkRefreshButton').click(function() { 
     	setBlockUI();

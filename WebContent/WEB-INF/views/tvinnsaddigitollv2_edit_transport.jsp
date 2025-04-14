@@ -72,7 +72,13 @@
 								<div class="text12" align="left">
 				           			<span class="uuidLinkParent" style="color:green;cursor:pointer;" id="${model.record.etuuid_own}">${model.record.etuuid_own}</span>
 					           		<br/>
-				           			<button name="_ButtonCloseApi" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('requestIdBup');">Close</button> 
+				           			<button name="_ButtonCloseApi" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('requestIdBup');">Close</button>
+				           			<c:if test="${empty model.record.etmid && not empty model.record.etmid_own}">
+				           			 	&nbsp;&nbsp;<input title="Update MRN ..." class="buttonInsideDivPopup" style="font-size:12px;" type="button" name="updateMrnWithOriginalMrnButton" id="updateMrnWithOriginalMrnButton" value='Oppdater MRN i db'>
+				           			 	<div style="display: none;" class="clazz_dialog" id="dialogReset" title="Dialog">
+											 <p class="text14" >Er du sikker på at du ønsker oppdater MRN-nr i databasen?</p>
+										</div>
+				           			</c:if>
 				           		</div>
 				           	</span>
 				           	</div>	
@@ -142,6 +148,7 @@
 			<input type="hidden" name="applicationUserSign" id="applicationUserSign" value="${user.tvinnSadSign}">
 			<input type="hidden" name="etuuid" id="etuuid" value="${model.record.etuuid}"> 
 			<input type="hidden" name="etmid" id="etmid" value="${model.record.etmid}">
+			<input type="hidden" name="etmid_own" id="etmid_own" value="${model.record.etmid_own}">
 			<input type="hidden" name="action" id="action" value="doUpdate">
 			<input type="hidden" name="eoriValidationActive" id="eoriValidationActive" value="${model.eoriValidationActive}">
 			<input type="hidden" name="movementRoutingId" id="movementRoutingId" value="${model.routingId}">

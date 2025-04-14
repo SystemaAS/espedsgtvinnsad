@@ -763,7 +763,58 @@ public class TvinnSadDigitollv2TransportController {
 		}	
 		return successView;
 	}	
-	
+	/**
+	 * 
+	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_resetMrn_transport.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doResetMrn(@ModelAttribute ("record") SadmotfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		Map model = new HashMap();
+		
+	    logger.info("etlnrt:" + recordToValidate.getEtlnrt()); logger.info("etmid_own:" + recordToValidate.getEtmid_own());
+	    String url = "redirect:tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=" + recordToValidate.getEtlnrt();
+	    
+	   
+		ModelAndView successView = new ModelAndView(url);
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		
+		//START
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			//==========
+			//Upd Mrn
+			//==========
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_DIGITOLLV2);
+			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE); 
+			
+			//Update/Insert
+			if(recordToValidate.getEtlnrt() >0 ) {
+				
+				String mode = "RESET_MRN";
+				logger.info("MODE:" + mode + " before update in Controller ...");
+				
+				StringBuffer errMsg = new StringBuffer();
+				int dmlRetval = 0; 
+				dmlRetval = this.resetMrn(appUser.getUser(), recordToValidate, mode, errMsg);
+				if(dmlRetval < 0) {
+					//error on update
+					model.put("errorMessage", errMsg.toString());
+				}
+			}
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+	    
+		}	
+		return successView;
+	}	
 	/**
 	 * 
 	 * @param recordToValidate
@@ -1189,6 +1240,46 @@ public class TvinnSadDigitollv2TransportController {
 					logger.info(record.toString());
 					if(StringUtils.isNotEmpty(container.getErrMsg())){
 						errMsg.append(record.getStatus3());
+						errMsg.append(" -->detail:" + container.getErrMsg());
+						retval = -1;
+						break;
+					}
+				}
+			}
+    	}
+    	
+    	return retval;
+	}
+	private int resetMrn(String applicationUser, SadmotfRecord recordToValidate, String mode, StringBuffer errMsg) {
+		int retval = 0;
+		
+		
+		//get BASE URL
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_TRANSPORT_URL;
+		//add URL-parameters
+		StringBuffer urlRequestParams = new StringBuffer();
+		urlRequestParams.append("user=" + applicationUser + "&mode=" + mode);
+		urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate)));
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+
+    	//Debug --> 
+    	logger.info(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		GeneralUpdateContainer container = this.generalUpdateService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<GeneralUpdateRecord> outputList = container.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(GeneralUpdateRecord record : outputList ){
+					logger.info(record.toString());
+					if(StringUtils.isNotEmpty(container.getErrMsg())){
 						errMsg.append(" -->detail:" + container.getErrMsg());
 						retval = -1;
 						break;
