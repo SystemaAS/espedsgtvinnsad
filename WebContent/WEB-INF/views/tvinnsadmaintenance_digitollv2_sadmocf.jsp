@@ -28,15 +28,7 @@
 				<img src="resources/images/update.gif" border="0" alt="edit">
 						
 			</td>
-			<c:if test="${Xmodel.record.etavd > -1}">
-				<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
-				<td width="15%" valign="bottom" class="tabDisabled" align="center" nowrap>
-					<a tabindex=-1 id="alinkMaster" style="display:block;" href="tvinnsadmaintenance_digitollv2_sadmoaf_master.do?etavd=${Xmodel.record.etavd}">
-						<font class="tabDisabledLink">&nbsp;Master</font>
-					</a>
-				</td>
-			</c:if>
-	 		<td width="80%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
+			<td width="80%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
 					
 		</tr>
 	</table>
@@ -111,259 +103,7 @@
 	           		 
  		<tr>
 			<td class="text14" valign="top">
-				<table style="width:85%" align="left" border="0" cellspacing="1" cellpadding="0">
-					
-				 	<tr >
-					 	<td >
-						<table class="formFrameHeader" style="width:100%;"  border="0" cellspacing="1" cellpadding="0">
-					 		<tr height="15">
-					 			<td class="text14White">&nbsp;&nbsp;Transportinfo.</td>
-						 	</tr>
-			            </table>
-			            </td>
-		            </tr>
-		            <tr >
-					 	<td>
-						<table class="formFrame" style="width:100%;" border="0" cellspacing="1" cellpadding="0">
-			 				
-							<tr>
-			 					<td class="text12" title="etavd">&nbsp;Avd</td>
-			 					<td class="text12" title="etsg">&nbsp;Sign</td>
-			 					<td class="text12" title="etpro">&nbsp;Tur</td>
-		 					</tr>				 				
-		 					<tr>
-			 					<td>
-			 						<c:choose>
-			 						<c:when test="${Xmodel.record.etavd > 0}">
-				 						<input readonly size="7" maxlength="4" class="inputTextReadOnly" id="etavd" name="etavd" value="${Xmodel.record.etavd}">
-									</c:when>
-									<c:otherwise>
-										<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" id="etavd" name="etavd" >
-										  <option value="">-Välj-</option>
-										  	<option title="0=default" value="0"<c:if test="${Xmodel.record.etavd == 0}"> selected </c:if> >0</option>
-						 				  	<c:forEach var="record" items="${Xmodel.avdList}" >
-						 				  		<option title="${record.namn}" value="${record.avd}"<c:if test="${Xmodel.record.etavd == record.avd}"> selected </c:if> >${record.avd}</option> 
-											</c:forEach>  
-										</select>
-									</c:otherwise>
-									</c:choose>
-			 					</td>
-			 					<td>
-			 						<select select class="inputTextMediumBlue" id="etsg" name="etsg" >
-									  <option value="">-Välj-</option>
-					 				  	<c:forEach var="record" items="${Xmodel.signList}" >
-					 				  		<option title="${record.namn}" value="${record.sign}"<c:if test="${Xmodel.record.etsg == record.sign}"> selected </c:if> >${record.sign}</option> 
-										</c:forEach>  
-									</select>	
-			 					</td>
-			 					<td>
-			 						<c:choose>
-					 				<c:when test="${Xmodel.record.etpro > 0 || Xmodel.record.etpro < 0}">
-					 					<input type="text12"  class="inputTextMediumBlue" onKeyPress="return amountKey(event)" name="etpro" id="etpro" size="9" maxlength="8" value="${Xmodel.record.etpro}">
-					 				</c:when>	
-					 				<c:otherwise>
-					 					<input type="text12"  class="inputTextMediumBlue" onKeyPress="return amountKey(event)" name="etpro" id="etpro" size="9" maxlength="8" value="">
-					 				</c:otherwise>
-					 				</c:choose>
-			 					</td>
-		 					</tr>
-		 					<tr height="10"></tr>
-				 				
-			 				<tr >
-			 					<td class="text14">
-			 						<img style="cursor:pointer;" onMouseOver="showPop('etktkd_info');" onMouseOut="hidePop('etktkd_info');" style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
-				            		<span title="etktkd Mode of Transport">ModeTr.</span>
-			                		<div class="text11" style="position: relative;" align="left">
-				                	<span style="position:absolute;top:2px; width:250px;" id="etktkd_info" class="popupWithInputText text11"  >
-					           		<ul>
-					           			<c:forEach var="dto" items="${Xmodel.modeOfTransportDto}" >
-				           				<li><b>${dto.code}</b>&nbsp;${dto.txt1}</li>
-				           				</c:forEach>
-				           			</ul>
-									</span>	
-									</div>
-
-			 					</td>
-			 					
-			 					<td class="text14">
-				 					<img style="cursor:pointer;" onMouseOver="showPop('etktd_info');" onMouseOut="hidePop('etktd_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
-					            	<span title="etktyp Type of Identification"><font color="green">Kjør.Typ.</font></span>
-			                		<div class="text11" style="position: relative;" align="left">
-				                	<span style="position:absolute;top:2px; width:250px;" id="etktd_info" class="popupWithInputText text11"  >
-				                	<p><b>Kjør.Typ.</b>&nbsp;Bestemmer hvilket API som brukes...(f.eks: 41 = luftfartøy = api-air)</p>
-					           		<ul>
-					           			<c:forEach var="dto" items="${Xmodel.typeOfIdentificationMeansTransportDto}" >
-				           				<li><b>${dto.code}</b>&nbsp;${dto.txt1}</li>
-				           				</c:forEach>
-				           			</ul>
-									</span>	
-									</div>
-		 						</td>
-								<td class="text14">
-									<img title="Click!" style="cursor:pointer;" onClick="showPop('etktm_info');" style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
-					            	<span title="etktm Type of Means of Transport">Tr.midd.typ.</span>
-			                		<div class="text11" style="position: relative;" align="left">
-				                	<span style="position:absolute;top:2px; width:250px;" id="etktm_info" class="popupWithInputText text11"  >
-				                	<button name="_ButtonCloseEtktm" class="buttonGrayInsideDivPopup" type="button" onClick="hidePop('etktm_info');">Close</button> 
-					           		<p>Ref.kodeverk or MouseOver(value) in this same list...</p><br/>
-					           		<%-- this causes the Y-scroll go all the way down as the list content (when the list is not visible...) to be substituted
-					           		<ul>
-					           			<c:forEach var="dto" items="${Xmodel.meansOfTransportDto}" >
-				           				<li><b>${dto.code}</b>&nbsp;${dto.txt1}</li>
-				           				</c:forEach>
-				           			</ul>
-				           			 --%>
-									</span>	
-									</div>
-								</td>
-								<td class="text14">&nbsp;<span title="etklk Land code">Landkode</span></td>
-				 			</tr>
-				 				
-				 			<tr >
-			 					<td class="text14">
-			 						
-			 						<select class="inputTextMediumBlue" name="etktkd" id="etktkd" >
-				 						<option value="">-velg-</option>
-					 				  	<c:forEach var="dto" items="${Xmodel.modeOfTransportDto}" >
-				                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${Xmodel.record.etktkd == dto.code}"> selected </c:if> >${dto.code}</option>
-										</c:forEach>
-									</select>	
-								</td>
-								<td>
-									<select class="inputTextMediumBlue" name="etktyp" id="etktyp" >
-				 						<option value="">-velg-</option>
-					 				  	<c:forEach var="dto" items="${Xmodel.typeOfIdentificationMeansTransportDto}" >
-				                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${Xmodel.record.etktyp == dto.code}"> selected </c:if> >${dto.code}</option>
-										</c:forEach>
-									</select>	
-										
-								</td>
-					 			<td class="text14">
-					 				<select class="inputTextMediumBlue" name="etktm" id="etktm" >
-				 						<option value="">-velg-</option>
-					 				  	<c:forEach var="dto" items="${Xmodel.meansOfTransportDto}" >
-				                       	 	<option title="${dto.txt1}" value="${dto.code}" <c:if test="${Xmodel.record.etktm == dto.code}"> selected </c:if> >${dto.code}</option>
-										</c:forEach>
-									</select>
-					 			</td>
-					 			<td class="text14">
-					 				<select class="inputTextMediumBlue" name="etklk" id="etklk" >
-				 						<option value="">-velg-</option>
-					 				  	<c:forEach var="dto" items="${Xmodel.countryDto}" >
-				                       	 	<option title="${dto.code}" value="${dto.code}" <c:if test="${Xmodel.record.etklk == dto.code}"> selected </c:if> >${dto.code}</option>
-										</c:forEach>
-									</select>		
-					 				
-					 			</td>
-						 			
-				 			</tr>
-				 				
-			 				<tr >
-								<td colspan="2" class="text14">
-									<img style="cursor:pointer;" onMouseOver="showPop('etkmrk_info');" onMouseOut="hidePop('etkmrk_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
-					            	<span title="etkmrk">Kjøretøy kjennemerke</span>
-			                		<div class="text11" style="position: relative;" align="left">
-				                	<span style="position:absolute;top:2px; width:250px;" id="etkmrk_info" class="popupWithInputText text11"  >
-				                	<p><b>Kjøretøy kjennemerke</b>&nbsp;
-					           			Identifikasjonummer brukt for å unikt identifiserer transporten. (maxLength: 35-chars)
-					           		</p>
-					           		
-					           		<p>
-					           			For en bil på landevei er dette registreringsnummert for bilen. I typeOfIdentification angis kode 30 → Registration Number of the Road Vehicle
-					           		</p>
-					           		<p>
-					           			For fly er dette halenummeret. I typeOfIdentification angis kode 41 → Registration Number of the Aircraft
-					           		</p>
-					           		<p>
-					           			For tog angis toget nummer. I typeOfIdentification angis kode 21 → Train number For sjø angis IMO skipsregistreringsnummer. I typeOfIdentification angis kode 10 → IMO Ship Identification Number
-					           		</p>
-					           		
-									</span>	
-									</div>
-								</td>
-								<td colspan="2" class="text14">
-									<img style="cursor:pointer;" onMouseOver="showPop('etcref_info');" onMouseOut="hidePop('etcref_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
-					            	<span title="etcref">Turref.nr (IATA flight, other)</span>
-			                		<div class="text11" style="position: relative;" align="left">
-				                	<span style="position:absolute;top:2px; width:250px;" id="etcref_info" class="popupWithInputText text11"  >
-				                	<p><b>Turref.nr - IATA flight</b>&nbsp;
-					           			Identifikasjon av reisen for transportmiddelet. For flytransport er dette IATA flight number. (maxLength: 17-chars)
-					           		</p>
-									</span>	
-									</div>
-								</td>
-				 			</tr>
-				 			<tr>
-			 					<td colspan="2" class="text14"><input type="text" class="inputTextMediumBlue" name="etkmrk" id="etkmrk" size="25" maxlength="35" value="${Xmodel.record.etkmrk}"></td>
-			 					<td colspan="2" class="text14"><input type="text" class="inputTextMediumBlue" name="etcref" id="etcref" size="19" maxlength="17" value="${Xmodel.record.etcref}"></td>
-								
-			 				</tr>
-			 				<tr>
-			 					<td colspan="2" class="text14">&nbsp;<span title="etsjaf">Fører-navn</span></td>
-								<td colspan="2" class="text14">&nbsp;<span title="etems">Fører-epost / Telefon</span></td>
-								
-			 				</tr>
-			 				<tr >
-					 			<td colspan="2" class="text14">
-					 				<input type="text" class="inputTextMediumBlue" name="etsjaf" id="etsjaf" size="30" maxlength="50" value="${Xmodel.record.etsjaf}">
-					 			</td>
-								<td colspan="2" class="text14">
-									<input type="text" class="inputTextMediumBlue" name="etems" id="etems" size="30" maxlength="50" value="${Xmodel.record.etems}">
-									
-								</td>
-			 				</tr>
-			 				
-				 				
-			 				<tr height="2"><td>&nbsp;</td></tr>
-			 				<tr>
-			 					<td class="text14">&nbsp;<span title="etetad - Estimated date of arrival">ETA</span></td>
-								<td class="text14">&nbsp;<span title="etetat-HHmm Estimated time of arrival">ETA-Tid&nbsp;<font class="text10">(HHmm)</font></span></td>
-								<td class="text14">&nbsp;<span title="ettsd">Pass.tollsted</span></td>
-			 				</tr>
-			 				<tr >
-			 					
-					 			<td class="text14">
-					 				<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etetad" id="etetad" size="8" maxlength="6" value="${Xmodel.record.etetadStr}">
-					 			</td>
-								<td>
-									<input  onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etetat" id="etetat" size="6" maxlength="4" value="${Xmodel.record.etetatStr}">
-					 				
-								</td>
-			 					
-								<td>
-									<input type="text" class="inputTextMediumBlue" name="ettsd" id="ettsd" size="9" maxlength="8" value="${Xmodel.record.ettsd}">
-									<a tabindex="-1" id="ettsdIdLink">
-										<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
-									</a>
-								</td>
-			 				</tr>
-			 				
-			 				<tr>
-			 					<td class="text14">&nbsp;<span title="etshed - Scheduled date of arrival - Flight ">STA</span></td>
-								<td class="text14">&nbsp;<span title="etshet-HHmm Scheduled time of arrival - Flight">STA-Tid&nbsp;<font class="text10">(HHmm)</font></span></td>
-			 				</tr>
-			 				<tr >
-			 					
-					 			<td class="text14">
-					 				<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etshed" id="etshed" size="8" maxlength="6" value="${Xmodel.record.etshedStr}">
-					 				
-					 			</td>
-								<td>
-									<input onKeyPress="return numberKey(event)" type="text" class="inputTextMediumBlue" name="etshet" id="etshet" size="6" maxlength="4" value="${Xmodel.record.etshetStr}">
-									
-								</td>
-			 				</tr>
-			 				<tr height="2"><td>&nbsp;</td></tr>
-			 				
-			            </table>
-			            </td>
-		            </tr>
-	            
-	            </table>
-            </td>
-            
-           	<td class="text14" valign="top">
-				<table style="width:85%;" align="left" border="0" cellspacing="1" cellpadding="0">
+				<table style="width:65%;" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
 						<table class="formFrameHeader" style="width:100%; border="0" cellspacing="1" cellpadding="0">
@@ -371,11 +111,11 @@
 					 			<td class="text14White">
 					 			
 					 			<img style="cursor:pointer;" onMouseOver="showPop('transp_info');" onMouseOut="hidePop('transp_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
-				            	<span title="Transportør">Transportør&nbsp;</span>
+				            	<span title="Part">Part&nbsp;</span>
 		                		<div class="text11" style="position: relative;" align="left">
 			                	<span style="position:absolute;top:2px; width:250px;" id="transp_info" class="popupWithInputText text11"  >
-			                	<p><b>Transportør</b>&nbsp;
-			                			Transportør for transport. Organisasjonen/bedriften som opererer transporten
+			                	<p><b>Part</b>&nbsp;
+			                			Part. Organisasjonen som fortoller selv.
 			                	</p>
 				           		</span>	
 								</div>
@@ -420,8 +160,8 @@
 									
 				 				</tr>
 				 				<tr >
-		 							<td class="text14"><input type="text" class="inputTextMediumBlue" name="name" id="name" size="35" maxlength="50" value="${model.record.name}"></td>
-									<td class="text14"><input type="text" class="inputTextMediumBlue" name="orgnr" id="orgnr" size="30" maxlength="30" value="${model.record.orgnr}"></td>
+		 							<td class="text14"><input type="text" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="name" id="name" size="35" maxlength="50" value="${model.record.name}"></td>
+									<td class="text14"><input type="text" required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="orgnr" id="orgnr" size="30" maxlength="30" value="${model.record.orgnr}"></td>
 				 				</tr>
 				 				<tr >
 				 					<td>
@@ -432,14 +172,14 @@
 										</tr>
 						 				<tr>
 											<td class="text14">
-												<select class="inputTextMediumBlue" name="commtype" id="commtype" >
+												<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="commtype" id="commtype" >
 							 						<option value="">-velg-</option>
 								 				  	<option title="ftp" value="ftp" <c:if test="${model.record.commtype == 'ftp'}"> selected </c:if> >ftp</option>
 								 				  	<option title="sftp" value="sftp" <c:if test="${model.record.commtype == 'sftp'}"> selected </c:if>>sftp</option>
 												</select>
 											</td>
 											<td class="text14">
-												<select class="inputTextMediumBlue" name="format" id="format" >
+												<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')" class="inputTextMediumBlueMandatoryField" name="format" id="format" >
 							 						<option value="">-velg-</option>
 								 				  	<option title="xml" value="xml" <c:if test="${model.record.format == 'xml'}"> selected </c:if>>xml</option>
 								 				  	<option title="json" value="json" <c:if test="${model.record.format == 'json'}"> selected </c:if>>json</option>
@@ -451,7 +191,7 @@
 									<td>
 					 					<table>
 					 					<tr>
-											<td class="text14">&nbsp;<span title="etad1t">Channel</span></td>
+											<td class="text14">&nbsp;<span title="xmlxsd">Channel</span></td>
 										</tr>
 										<tr>
 											<td class="text14">
@@ -465,26 +205,108 @@
 										</table>
 									</td>
 				 				</tr>
-				 				
+				 				<tr height="2"><td>&nbsp;</td></tr>
 				 				<tr >
-				 					<td colspan="2">
+				 					<td>
 					 					<table>
 					 					<tr>
 											<td class="text14">&nbsp;<span title="ftpserver">Ftp server</span></td>
 											<td class="text14">&nbsp;<span title="ftpport">Ftp port</span></td>
-											<td class="text14">&nbsp;<span title="ftpuser">Ftp user</span></td>
-											<td class="text14">&nbsp;<span title="ftppwd">Ftp pwd</span></td>
 											
 										</tr>
 						 				<tr>
 											<td class="text14"><input type="text" class="inputTextMediumBlue" name="ftpserver" id="ftpserver" size="35" maxlength="70" value="${model.record.ftpserver}"></td>
 											<td class="text14"><input type="text" class="inputTextMediumBlue" name="ftpport" id="ftpport" size="10" maxlength="10" value="${model.record.ftpport}"></td>
-											<td class="text14"><input type="text" class="inputTextMediumBlue" name="ftpuser" id="ftpuser" size="35" maxlength="35" value="${model.record.ftpuser}"></td>
-											<td class="text14"><input type="text" class="inputTextMediumBlue" name="ftppwd" id="ftppwd" size="35" maxlength="70" value="${model.record.ftppwd}"></td>
+											
+										</tr>
+										</table>
+									</td>
+									<td>
+					 					<table>
+					 					<tr>
+											<td class="text14">&nbsp;<span title="ftpuser">Ftp user</span></td>
+											<td class="text14">&nbsp;<span title="ftppwd">Ftp pwd</span></td>
+										</tr>
+						 				<tr>
+											<td class="text14"><input type="text" class="inputTextMediumBlue" name="ftpuser" id="ftpuser" size="20" maxlength="35" value="${model.record.ftpuser}"></td>
+											<td class="text14"><input type="text" class="inputTextMediumBlue" name="ftppwd" id="ftppwd" size="20" maxlength="70" value="${model.record.ftppwd}"></td>
 										</tr>
 										</table>
 									</td>
 								</tr>
+								
+								<tr >
+				 					<td>
+					 					<table>
+					 					<tr>
+											<td class="text14">&nbsp;<span title="ftpdir">Ftp dir.</span></td>
+											
+										</tr>
+						 				<tr>
+											<td class="text14"><input type="text" class="inputTextMediumBlue" name="ftpdir" id="ftpdir" size="45" maxlength="70" value="${model.record.ftpdir}"></td>
+											
+										</tr>
+										</table>
+									</td>
+									<td>
+					 					<table>
+					 					<tr>
+											<td class="text14">&nbsp;<span title="ftptmp">Ftp tmp</span></td>
+											
+										</tr>
+						 				<tr>
+											<td class="text14"><input type="text" class="inputTextMediumBlue" name="ftptmp" id="ftptmp" size="35" maxlength="70" value="${model.record.ftptmp}"></td>
+										</tr>
+										</table>
+									</td>
+								</tr>
+								<tr >
+				 					<td>
+					 					<table>
+					 					<tr>
+											<td class="text14">&nbsp;<span title="ftpbupdir">Ftp backup dir.</span></td>
+											
+										</tr>
+						 				<tr>
+											<td class="text14"><input type="text" class="inputTextMediumBlue" name="ftpbupdir" id="ftpbupdir" size="45" maxlength="70" value="${model.record.ftpbupdir}"></td>
+											
+										</tr>
+										</table>
+									</td>
+									
+								</tr>
+								
+								<tr height="2"><td>&nbsp;</td></tr>
+								<tr >
+				 					<td>
+					 					<table>
+					 					<tr>
+											<td class="text14">&nbsp;<span title="sftpdir_ps">sFtp dir.</span></td>
+											
+										</tr>
+						 				<tr>
+											<td class="text14"><input type="text" class="inputTextMediumBlue" name="sftpdir_ps" id="sftpdir_ps" size="45" maxlength="70" value="${model.record.sftpdir_ps}"></td>
+											
+										</tr>
+										</table>
+									</td>
+									<td>
+					 					<table>
+					 					<tr>
+											<td class="text14">&nbsp;<span title="avsorgnr">Avs.orgnr</span></td>
+											<td class="text14">&nbsp;<span title="avsname">Avs.name</span></td>
+										</tr>
+						 				<tr>
+											<td class="text14"><input type="text" class="inputTextMediumBlue" name="avsorgnr" id="avsorgnr" size="20" maxlength="30" value="${model.record.avsorgnr}"></td>
+											<td class="text14"><input type="text" class="inputTextMediumBlue" name="avsname" id="avsname" size="30" maxlength="30" value="${model.record.avsname}"></td>
+											
+										</tr>
+										</table>
+									</td>
+									
+								</tr>
+								
+								
 				 				<tr height="2"><td>&nbsp;</td></tr>
 				 				
 				 				</table>

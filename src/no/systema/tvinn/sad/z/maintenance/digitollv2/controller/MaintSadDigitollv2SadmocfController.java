@@ -118,10 +118,10 @@ public class MaintSadDigitollv2SadmocfController {
 	 * @return
 	 */
 	@RequestMapping(value="tvinnsadmaintenance_digitollv2_sadmocf_edit.do", method=RequestMethod.POST)
-	public ModelAndView doEditSadmocff(@ModelAttribute ("record") SadmoafRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
-		logger.info(String.valueOf(recordToValidate.getEtavd()));
+	public ModelAndView doEditSadmocff(@ModelAttribute ("record") SadmocfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		logger.info(recordToValidate.getOrgnr());
 		StringBuilder redirect =  new StringBuilder();
-		redirect.append("redirect:tvinnsadmaintenance_digitollv2_sadmocf.do?action=doFind&etavd=" + recordToValidate.getEtavd());
+		redirect.append("redirect:tvinnsadmaintenance_digitollv2_sadmocf.do?action=doFind&orgnr=" + recordToValidate.getOrgnr());
 		
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
 		String mode = "U";
@@ -133,13 +133,14 @@ public class MaintSadDigitollv2SadmocfController {
 			return this.loginView;
 		}else{
 			
-			if(!this.avdExists(appUser, String.valueOf(recordToValidate.getEtavd())) ){
+			if(!this.orgnrExists(appUser, recordToValidate.getOrgnr()) ){
 				mode = "A";	
 			}
 			
 			 this.adjustFieldsForUpdate(recordToValidate);
 			 //prepare the access CGI with RPG back-end
-			 String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_DEFAULT_VALUES_URL;
+			 
+			 String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_EXTERNAL_HOUSES_URL;
 			 StringBuffer urlRequestParams = new StringBuffer();
 			 urlRequestParams.append("user=" + appUser.getUser() + "&mode=" + mode );
 			 urlRequestParams.append(this.urlRequestParameterMapper.getUrlParameterValidString((recordToValidate)));
@@ -321,13 +322,13 @@ public class MaintSadDigitollv2SadmocfController {
 	 * @param efavd
 	 * @return
 	 */
-	private boolean avdExists(SystemaWebUser appUser, String etavd){
+	private boolean orgnrExists(SystemaWebUser appUser, String orgnr){
 		boolean retval = false;
 		
 		//get BASE URL
-		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_DEFAULT_VALUES_URL;
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_EXTERNAL_HOUSES_URL;
 		//add URL-parameters
-		String urlRequestParams = "user=" + appUser.getUser() + "&etavd=" + etavd;
+		String urlRequestParams = "user=" + appUser.getUser() + "&orgnr=" + orgnr;
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
     	logger.warn("URL: " + BASE_URL);
     	logger.warn("URL PARAMS: " + urlRequestParams);
@@ -339,10 +340,10 @@ public class MaintSadDigitollv2SadmocfController {
     	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
     	if(jsonPayload!=null){
     		
-    		SadmoafContainer container = this.sadmoafListService.getListContainer(jsonPayload);
+    		SadmocfContainer container = this.sadmocfListService.getListContainer(jsonPayload);
     		//the list will exists with match
     		if(container.getList()!=null && container.getList().size()>0){
-    			logger.warn("Avd exists");
+    			logger.warn("Orgnr exists");
     			retval = true;
     		}
 			
@@ -393,7 +394,27 @@ public class MaintSadDigitollv2SadmocfController {
 		if(recordToValidate.getFtppwd()!=null && recordToValidate.getFtppwd().equals(NULL_STR)) {
 			recordToValidate.setFtppwd("");
 		}
-		//Ftpdir and tmp on GUI 
+		if(recordToValidate.getFtpdir()!=null && recordToValidate.getFtpdir().equals(NULL_STR)) {
+			recordToValidate.setFtpdir("");
+		}
+		if(recordToValidate.getFtptmp()!=null && recordToValidate.getFtptmp().equals(NULL_STR)) {
+			recordToValidate.setFtptmp("");
+		}
+		
+		if(recordToValidate.getFtpbupdir()!=null && recordToValidate.getFtpbupdir().equals(NULL_STR)) {
+			recordToValidate.setFtpbupdir("");
+		}
+		if(recordToValidate.getSftpdir_ps()!=null && recordToValidate.getSftpdir_ps().equals(NULL_STR)) {
+			recordToValidate.setSftpdir_ps("");
+		}
+		//
+		if(recordToValidate.getAvsorgnr()!=null && recordToValidate.getAvsorgnr().equals(NULL_STR)) {
+			recordToValidate.setAvsorgnr("");
+		}
+		if(recordToValidate.getAvsname()!=null && recordToValidate.getAvsname().equals(NULL_STR)) {
+			recordToValidate.setAvsname("");
+		}
+		
 		/*
 		//ETA time
 		if(recordToValidate.getEtetat()!=null && recordToValidate.getEtetat() > 0) {
@@ -413,27 +434,6 @@ public class MaintSadDigitollv2SadmocfController {
 				recordToValidate.setEtshed(isoEtshed);
 			}
 		}
-		//STA time
-		if(recordToValidate.getEtshet()!=null && recordToValidate.getEtshet() > 0) {
-			String tmpEtshet = String.valueOf(recordToValidate.getEtshet());
-			if(tmpEtshet.length()>4) {
-				tmpEtshet = tmpEtshet.substring(0,4);
-				recordToValidate.setEtetat(Integer.valueOf(tmpEtshet));
-			}
-			
-		}
-		//postnr norsk alltid 4-siffror
-		if(StringUtils.isNotEmpty(recordToValidate.getEtpnt())) {
-			if("NO".equals(recordToValidate.getEtlkt())) {
-				recordToValidate.setEtpnt(StringUtils.leftPad(String.valueOf(recordToValidate.getEtpnt()),4,"0"));
-			}
-		}
-		//postnr norsk alltid 4-siffror
-		if(StringUtils.isNotEmpty(recordToValidate.getEtpnr())) {
-			if("NO".equals(recordToValidate.getEtlkr())) {
-				recordToValidate.setEtpnr(StringUtils.leftPad(String.valueOf(recordToValidate.getEtpnr()),4,"0"));
-			}
-		}
 		*/
 		
 	}
@@ -441,8 +441,9 @@ public class MaintSadDigitollv2SadmocfController {
 	 * 
 	 * @param recordToValidate
 	 */
-	private void adjustFieldsForUpdate(SadmoafRecord recordToValidate){
+	private void adjustFieldsForUpdate(SadmocfRecord recordToValidate){
 		
+		/*
 		//Driver - communication
 		if(StringUtils.isNotEmpty(recordToValidate.getEtems())){
 			if(recordToValidate.getEtems().contains("@")) {
@@ -477,7 +478,7 @@ public class MaintSadDigitollv2SadmocfController {
 		}else {
 			int regDate = Integer.valueOf(this.dateMgr.getCurrentDate_ISO());
 			recordToValidate.setEtdtr(regDate);
-		}*/
+		}
 		
 		//ETA - date to ISO
 		if(recordToValidate.getEtetad()!=null && recordToValidate.getEtetad() > 0) {
@@ -542,79 +543,11 @@ public class MaintSadDigitollv2SadmocfController {
 				recordToValidate.setEtpnr(StringUtils.leftPad(String.valueOf(recordToValidate.getEtpnr()),4,"0"));
 			}
 		}
+		*/
 		
 	}
 	
-	/**
-	 * Adjust for master fields
-	 * @param recordToValidate
-	 */
-	private void adjustFieldsForUpdateMaster(SadmoafRecord recordToValidate){
-		
-		//Sender - communication
-		if(StringUtils.isNotEmpty(recordToValidate.getOwn_emems_email())){
-			recordToValidate.setEmems(recordToValidate.getOwn_emems_email());
-			recordToValidate.setEmemst(SadDigitollConstants.API_TYPE_EMAIL);	
-		}else {
-			recordToValidate.setEmems(recordToValidate.getOwn_emems_telephone());
-			recordToValidate.setEmemst(SadDigitollConstants.API_TYPE_TELEPHONE);
-		}
-		//Receiver - communication
-		if(StringUtils.isNotEmpty(recordToValidate.getOwn_ememm_email())){
-			recordToValidate.setEmemm(recordToValidate.getOwn_ememm_email());
-			recordToValidate.setEmemmt(SadDigitollConstants.API_TYPE_EMAIL);	
-		}else {
-			recordToValidate.setEmemm(recordToValidate.getOwn_ememm_telephone());
-			recordToValidate.setEmemmt(SadDigitollConstants.API_TYPE_TELEPHONE);
-		}
-		
-		//Register date
-		if(recordToValidate.getEmdtr()!=null && recordToValidate.getEmdtr() > 0) {
-			int regDate = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(recordToValidate.getEmdtrStr(), DateTimeManager.NO_FORMAT));
-			recordToValidate.setEmdtr(regDate);
-		}else {
-			int regDate = Integer.valueOf(this.dateMgr.getCurrentDate_ISO());
-			recordToValidate.setEmdtr(regDate);
-		}
-		
-		//Sent date
-		if(recordToValidate.getEmdtin()!=null && recordToValidate.getEmdtin() > 0) {
-			int sentDate = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(String.valueOf(recordToValidate.getEmdtin()), DateTimeManager.NO_FORMAT));
-			recordToValidate.setEmdtin(sentDate);
-		}
-		//Date
-		if(recordToValidate.getEmatdd()!=null && recordToValidate.getEmatdd() > 0) {
-			int date = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(String.valueOf(recordToValidate.getEmatdd()), DateTimeManager.NO_FORMAT));
-			recordToValidate.setEmdtin(date);
-		}
-		
-		//postnr norsk alltid 4-siffror
-		if(StringUtils.isNotEmpty(recordToValidate.getEmpns())) {
-			if("NO".equals(recordToValidate.getEmlks())) {
-				recordToValidate.setEmpns(StringUtils.leftPad(String.valueOf(recordToValidate.getEmpns()),4,"0"));
-			}
-		}
-		//postnr norsk alltid 4-siffror
-		if(StringUtils.isNotEmpty(recordToValidate.getEmpnm())) {
-			if("NO".equals(recordToValidate.getEmlkm())) {
-				recordToValidate.setEmpnm(StringUtils.leftPad(String.valueOf(recordToValidate.getEmpnm()),4,"0"));
-			}
-		}
-	}
-	
-	/**
-	 * 
-	 * @param model
-	 */
-	private void setDropDownServiceMaster(Map model) {
-		//previous docs
-		List<GenericDropDownDto> dto = this.digitollDropDownListPopulationService.getPreviousDocumentsList(); model.put("previousDocumentsDto", dto);
-		//container sizeAnd type
-		dto = this.digitollDropDownListPopulationService.getContainerSizeAndType(); model.put("containerSizeAndTypeDto", dto);
-		//country
-		dto = this.digitollDropDownListPopulationService.getCountryList(); model.put("countryDto", dto);
-		
-	}
+
 	
 	//SERVICES
 	@Autowired

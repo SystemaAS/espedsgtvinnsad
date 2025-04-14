@@ -43,9 +43,24 @@
 	 	jq("#etshed").datepicker({ 
 		  dateFormat: 'ddmmy' 	  
 	  	});
-    	jq('#etavd').focus(function() {
-			if(jq('#etavd').val()!=''){
-	    		refreshCustomValidity(jq('#etavd')[0]);
+    	jq('#orgnr').focus(function() {
+			if(jq('#orgnr').val()!=''){
+	    		refreshCustomValidity(jq('#orgnr')[0]);
+	  		}
+	  	});
+		jq('#name').focus(function() {
+			if(jq('#name').val()!=''){
+	    		refreshCustomValidity(jq('#name')[0]);
+	  		}
+	  	});
+		jq('#commtype').focus(function() {
+			if(jq('#nacommtypeme').val()!=''){
+	    		refreshCustomValidity(jq('#commtype')[0]);
+	  		}
+	  	});
+		jq('#format').focus(function() {
+			if(jq('#format').val()!=''){
+	    		refreshCustomValidity(jq('#format')[0]);
 	  		}
 	  	});
 
