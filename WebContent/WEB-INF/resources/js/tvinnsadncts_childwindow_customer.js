@@ -215,6 +215,15 @@
 				  opener.jq('#ehpnm').val(postnr);
 				  opener.jq('#ehlkm').val(land);
 				  opener.jq('#ehnar').focus();	
+			  
+			  //========================================
+			  //Digitoll MasterId external houses header
+			  //========================================
+			  }else if(callerType == 'name'){
+				  opener.jq('#etknt').val(knr);
+				  opener.jq('#name').val(knavn);
+				  opener.jq('#orgnr').val(syrg);
+				  opener.jq('#orgnr').focus();
 			  }
 	
 	

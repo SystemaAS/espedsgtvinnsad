@@ -8,7 +8,6 @@
 	<%-- specific jQuery functions for this JSP (must reside under the resource map since this has been
 		specified in servlet.xml as static <mvc:resources mapping="/resources/**" location="WEB-INF/resources/" order="1"/> --%>
 	<SCRIPT type="text/javascript" src="resources/js/tvinnsadglobal_edit.js?ver=${user.versionEspedsg}"></SCRIPT>	
-	<SCRIPT type="text/javascript" src="resources/js/tvinnsadmaintenance_digitollv2_sadmoaf.js?ver=${user.versionEspedsg}"></SCRIPT>
 	
 	<style type = "text/css">
 	.ui-datepicker { font-size:9pt;}

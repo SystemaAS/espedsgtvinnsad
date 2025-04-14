@@ -10,7 +10,9 @@ import no.systema.main.model.jsonjackson.general.JsonAbstractGrandFatherRecord;
 
 @Data
 public class SadmocfRecord extends JsonAbstractGrandFatherRecord  {
-
+	//for finding a customer in maintenance mode ...
+	private String etknt = "";
+	
 	private String orgnr  = "";//      tegn      30     
 	private String name  = "";//      tegn      30  
 	private String commtype  = ""; //  tegn      10 (ftp, email, webserv) 

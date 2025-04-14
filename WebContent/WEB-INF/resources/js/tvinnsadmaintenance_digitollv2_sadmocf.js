@@ -62,26 +62,17 @@
 			}
 	    });
 		
-		//Carrier
-      jq('#etnatIdLink').click(function() {
-	    	jq('#etnatIdLink').attr('target','_blank');
-	    	window.open('tvinnsadncts_childwindow_customer.do?action=doFind&sonavn=' + jq('#etnat').val() + '&ctype=etnat', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
+	  //Party
+      jq('#nameIdLink').click(function() {
+	    	jq('#nameIdLink').attr('target','_blank');
+	    	window.open('tvinnsadncts_childwindow_customer.do?action=doFind&sonavn=' + jq('#name').val() + '&ctype=name', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
 	    });
-	  jq('#etnatIdLink').keypress(function(e){ //extra feature for the end user
+	  jq('#nameIdLink').keypress(function(e){ //extra feature for the end user
 		if(e.which == 13) {
-			jq('#etnatIdLink').click();
+			jq('#nameIdLink').click();
 		}
 	  });
-	  //Representative
-      jq('#etnarIdLink').click(function() {
-	    	jq('#etnarIdLink').attr('target','_blank');
-	    	window.open('tvinnsadncts_childwindow_customer.do?action=doFind&sonavn=' + jq('#etnar').val() + '&ctype=etnar', "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=no,status=no,location=no");
-	    });
-	  jq('#etnarIdLink').keypress(function(e){ //extra feature for the end user
-		if(e.which == 13) {
-			jq('#etnarIdLink').click();
-		}
-	  });	
+	  	
 
   });
 
@@ -91,18 +82,14 @@
 	//--------------------------------------------------------------------------------------
 	jq(function() { 
 	    jq('#etknt').blur(function() {
-			if(jq('#etnat').val()==''){
-	    		fetchCarrier();	
+			if(jq('#name').val()==''){
+	    		fetchParty();	
 			}
 		});
-		jq('#etknr').blur(function() {
-			if(jq('#etnar').val()==''){
-	    		fetchRepresentative();	
-			}
-		});
+		
 	});
 	  
-  	function fetchCarrier(){
+  	function fetchParty(){
 	  var customerNr = jq.trim(jq('#etknt').val());
 		
 		if(customerNr!=""){
@@ -133,12 +120,9 @@
 			}
 			if(len > 0){
 				jq('#etknt').val(customer.kundnr);
-				jq('#etnat').val(customer.knavn); refreshCustomValidity(jq('#etnat')[0]);
-				if('' != customer.orgnr){
-					jq('#etrgt').val(customer.orgnr);refreshCustomValidity(jq('#etrgt')[0]);
-				}else{
-					jq('#etrgt').val(customer.eori);refreshCustomValidity(jq('#etrgt')[0]);
-				}
+				jq('#name').val(customer.knavn); refreshCustomValidity(jq('#name')[0]);
+				jq('#orgnr').val(customer.orgnr);refreshCustomValidity(jq('#orgnr')[0]);
+				/*
 				jq('#etpst').val(customer.adr3);refreshCustomValidity(jq('#etpst')[0]);
 				jq('#etlkt').val(customer.syland);refreshCustomValidity(jq('#etlkt')[0]);
 				jq('#etpnt').val(customer.postnr);
@@ -146,105 +130,39 @@
 				jq('#ettppt').val("2"); //bedrift
 				jq('#own_etemt_telephone').val(customer.tlf);
 				jq('#own_etemt_email').val("");
+				*/
 			}else{
 				//init fields
 				jq('#etknt').val("");
-				jq('#etnat').val("");
-				jq('#etrgt').val("");
+				jq('#name').val("");
+				jq('#orgnr').val("");
+				/*
 				jq('#etpst').val("");
 				jq('#etlkt').val("");
 				jq('#etpnt').val("");
 				jq('#etad1t').val("");
 				jq('#own_etemt_telephone').val("");
 				jq('#own_etemt_email').val("");
+				*/
 			}
 		});
   		
 		}else{
 			jq('#etknt').val("");
-				jq('#etnat').val("");
-				jq('#etrgt').val("");
+				jq('#name').val("");
+				jq('#orgnr').val("");
+				/*
 				jq('#etpst').val("");
 				jq('#etlkt').val("");
 				jq('#etpnt').val("");
 				jq('#etad1t').val("");
 				jq('#own_etemt_telephone').val("");
 				jq('#own_etemt_email').val("");
+				*/
 		}
   	}
-	function fetchRepresentative(){
-	  var customerNr = jq.trim(jq('#etknr').val());
-		
-		if(customerNr!=""){
-  		jq.getJSON('searchCustomer_TvinnSad.do', {
-			applicationUser : jq('#applicationUser').val(),
-			customerName : "",
-			customerNumber : jq('#etknr').val(),
-			ajax : 'true'
-		}, function(data) {
-			//alert("Hello");
-			var len = data.length;
-			for ( var i = 0; i < len; i++) {
-				//html += '<option value="' + data[i].kundnr + '">' + data[i].knavn + '</option>';
-				customer = new Object();
-				customer.kundnr = data[i].kundnr;
-				customer.knavn = data[i].knavn;
-				customer.eori = data[i].eori;
-				customer.orgnr = data[i].syrg;
-				customer.adr1 = data[i].adr1;
-				customer.adr2 = data[i].adr2;
-				customer.adr3 = data[i].adr3;
-				customer.postnr = data[i].postnr;//data[i].postnr; DK=sypoge
-				customer.kpers = data[i].kpers;
-				customer.tlf = data[i].tlf;
-				customer.syland = data[i].syland;
-			  	//put the object in map now with customerNumber as key
-				map[customer.kundnr] = customer;
-			}
-			if(len > 0){
-				jq('#etknr').val(customer.kundnr);
-				jq('#etnar').val(customer.knavn); refreshCustomValidity(jq('#etnar')[0]);
-				if('' != customer.orgnr){
-					jq('#etrgr').val(customer.orgnr);refreshCustomValidity(jq('#etrgr')[0]);
-				}else{
-					jq('#etrgr').val(customer.eori);refreshCustomValidity(jq('#etrgr')[0]);
-				}
-				
-				jq('#etpsr').val(customer.adr3);refreshCustomValidity(jq('#etpsr')[0]);
-				jq('#etlkr').val(customer.syland);refreshCustomValidity(jq('#etlkr')[0]);
-				jq('#etpnr').val(customer.postnr);
-				jq('#etad1r').val(customer.adr1);
-				jq('#ettppr').val("2"); //bedrift
-				jq('#own_etemr_telephone').val(customer.tlf);
-				jq('#own_etemr_email').val("");
-			}else{
-				//init fields
-				jq('#etknr').val("");
-				jq('#etnar').val("");
-				jq('#etrgr').val("");
-				jq('#etpsr').val("");
-				jq('#etlkr').val("");
-				jq('#etpnr').val("");
-				jq('#etad1r').val("");
-				jq('#own_etemr_telephone').val("");
-				jq('#own_etemr_email').val("");
-			}
-		});
-  		
-		}else{
-			jq('#etknr').val("");
-			jq('#etnar').val("");
-			jq('#etrgr').val("");
-			jq('#etpsr').val("");
-			jq('#etlkr').val("");
-			jq('#etpnr').val("");
-			jq('#etad1r').val("");
-			jq('#own_etemr_telephone').val("");
-			jq('#own_etemr_email').val("");
-		}
-  }
-  
-
+	
+ 
 
 //Initialize <div> here for all clazz_dialog
   jq(function() { 
