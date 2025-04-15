@@ -138,7 +138,6 @@ public class MaintSadDigitollv2SadmocfController {
 			}
 			
 			 this.adjustFieldsForUpdate(recordToValidate);
-			 //prepare the access CGI with RPG back-end
 			 
 			 String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_EXTERNAL_HOUSES_URL;
 			 StringBuffer urlRequestParams = new StringBuffer();
@@ -150,7 +149,7 @@ public class MaintSadDigitollv2SadmocfController {
 			 String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
 			 if(jsonPayload!=null){
 				
-				 SadmoafContainer container = this.sadmoafListService.getListContainer(jsonPayload);
+				 SadmocfContainer container = this.sadmocfListService.getListContainer(jsonPayload);
 				//----------------------------------------------------------------
 				//now filter the topic list with the search filter (if applicable)
 				//----------------------------------------------------------------
@@ -177,13 +176,13 @@ public class MaintSadDigitollv2SadmocfController {
 	 * @return
 	 */
 	@RequestMapping(value="tvinnsadmaintenance_digitollv2_sadmocf_delete.do", method={ RequestMethod.POST, RequestMethod.GET })
-	public ModelAndView doDeleteSadmocf(@ModelAttribute ("record") SadmoafRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+	public ModelAndView doDeleteSadmocf(@ModelAttribute ("record") SadmocfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
 		
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
 		StringBuilder redirect =  new StringBuilder();
 		redirect.append("redirect:tvinnsadmaintenance_digitollv2_sadmocf.do");
 		
-		String etavd = request.getParameter("etavd");
+		//String etavd = request.getParameter("etavd");
 		String mode = "D";
 		
 		Map model = new HashMap();
@@ -192,9 +191,9 @@ public class MaintSadDigitollv2SadmocfController {
 		}else{
 			
 			//prepare the access CGI with RPG back-end
-			 String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_DEFAULT_VALUES_URL;
+			 String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_EXTERNAL_HOUSES_URL;
 			 StringBuffer urlRequestParams = new StringBuffer();
-			 urlRequestParams.append("user=" + appUser.getUser() + "&mode=" + mode + "&etavd=" + etavd );
+			 urlRequestParams.append("user=" + appUser.getUser() + "&mode=" + mode + "&orgnr=" + recordToValidate.getOrgnr() );
 			 
 			 logger.warn("URL: " + BASE_URL);
 			 logger.warn("URL PARAMS: " + urlRequestParams);
@@ -202,7 +201,7 @@ public class MaintSadDigitollv2SadmocfController {
 			 String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
 			 if(jsonPayload!=null){
 				
-				SadmoafContainer container = this.sadmoafListService.getListContainer(jsonPayload);
+				SadmocfContainer container = this.sadmocfListService.getListContainer(jsonPayload);
 				//----------------------------------------------------------------
 				//now filter the topic list with the search filter (if applicable)
 				//----------------------------------------------------------------
@@ -223,24 +222,6 @@ public class MaintSadDigitollv2SadmocfController {
 	}
 	
 	
-	/**
-	 * 
-	 * @param source
-	 * @param recordToValidate
-	 */
-	private void adjustRecordToValidateWithTranportAttributes(SadmoafRecord source, SadmoafRecord recordToValidate) {
-		SadmoafOnlyTransportRecord tmpBeanTransport = new SadmoafOnlyTransportRecord();
-		try {
-			//Now lend only those transport attributes to the recordToValidate GUI (only master attributes) to make the com
-			BeanUtils.copyProperties(tmpBeanTransport, source);
-			//This will only add the transport props and leave the master properties untouched
-			BeanUtils.copyProperties(recordToValidate, tmpBeanTransport);
-			 
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
 	/**
 	 * 
 	 * @param appUser
@@ -414,27 +395,7 @@ public class MaintSadDigitollv2SadmocfController {
 		if(recordToValidate.getAvsname()!=null && recordToValidate.getAvsname().equals(NULL_STR)) {
 			recordToValidate.setAvsname("");
 		}
-		
-		/*
-		//ETA time
-		if(recordToValidate.getEtetat()!=null && recordToValidate.getEtetat() > 0) {
-			String tmpEtetat = String.valueOf(recordToValidate.getEtetat());
-			if(tmpEtetat.length()>4) {
-				tmpEtetat = tmpEtetat.substring(0,4);
-				recordToValidate.setEtetat(Integer.valueOf(tmpEtetat));
-			}
-			
-		}
-		
-		//STA date
-		if(recordToValidate.getEtshed()!=null && recordToValidate.getEtshed() > 0) {
-			String tmpEtshed = String.valueOf(recordToValidate.getEtshed());
-			if (org.apache.commons.lang3.StringUtils.isNotEmpty(tmpEtshed) && tmpEtshed.length()==8) {
-				int isoEtshed = Integer.parseInt(this.dateMgr.getDateFormatted_NO(tmpEtshed, DateTimeManager.ISO_FORMAT));
-				recordToValidate.setEtshed(isoEtshed);
-			}
-		}
-		*/
+	
 		
 	}
 	/**
@@ -459,25 +420,6 @@ public class MaintSadDigitollv2SadmocfController {
 		}else {
 			recordToValidate.setEtemr(recordToValidate.getOwn_etemr_telephone());
 			recordToValidate.setEtemrt(SadDigitollConstants.API_TYPE_TELEPHONE);
-		}
-		//Carrier - communication
-		if(StringUtils.isNotEmpty(recordToValidate.getOwn_etemt_email())){
-			recordToValidate.setEtemt(recordToValidate.getOwn_etemt_email());
-			recordToValidate.setEtemtt(SadDigitollConstants.API_TYPE_EMAIL);	
-		}else {
-			recordToValidate.setEtemt(recordToValidate.getOwn_etemt_telephone());
-			recordToValidate.setEtemtt(SadDigitollConstants.API_TYPE_TELEPHONE);
-		}
-		
-		//Register date
-		/*if(recordToValidate.getEtdtr()!=null && recordToValidate.getEtdtr() > 0) {
-			int regDate = Integer.valueOf(this.dateMgr.getDateFormatted_ISO(recordToValidate.getEtdtrStr(), DateTimeManager.NO_FORMAT));
-			//logger.info("BBBB:" + regDate);
-			recordToValidate.setEtdtr(regDate);
-			
-		}else {
-			int regDate = Integer.valueOf(this.dateMgr.getCurrentDate_ISO());
-			recordToValidate.setEtdtr(regDate);
 		}
 		
 		//ETA - date to ISO
@@ -553,8 +495,7 @@ public class MaintSadDigitollv2SadmocfController {
 	@Autowired
 	private UrlCgiProxyService urlCgiProxyService;
 
-	@Autowired
-	private SadmoafListService sadmoafListService;
+	
 	@Autowired
 	private AvdSignControllerService avdSignControllerService;
 	
