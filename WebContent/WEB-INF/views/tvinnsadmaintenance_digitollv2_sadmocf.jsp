@@ -24,7 +24,7 @@
 		<tr height="25">
 			 
 	 		<td width="15%" valign="bottom" class="tab" align="center" nowrap>
-				<font class="tabLink">&nbsp;Transport</font>
+				<font class="tabLink">&nbsp;Adv.melding - Parter som fortoller selv</font>
 				<img src="resources/images/update.gif" border="0" alt="edit">
 						
 			</td>
@@ -34,24 +34,18 @@
 	</table>
 	</td>
  </tr>
- 
- 
- 
-<tr height="5"><td colspan="10">&nbsp;</td></tr>
- 
+  
  <tr>
  	<td>
-	<%-- --------------------------- --%>	
- 	<%-- tab area container PRIMARY  --%>
-	<%-- --------------------------- --%>
-	<form name="manifestForm" id="manifestForm" action="tvinnsadmaintenance_digitollv2_sadmocf_edit.do" method="post">
-			<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
-			<input type="hidden" name="applicationUserSign" id="applicationUserSign" value="${user.tvinnSadSign}">
-			<input type="hidden" name="action" id="action" value="doUpdate">
 			
 			 
 	<table style="width:100%;" class="tabThinBorderWhite" border="0" cellspacing="0" cellpadding="0">
- 		<tr height="10"><td colspan="10">&nbsp;</td></tr>
+		<form name="manifestForm" id="manifestForm" action="tvinnsadmaintenance_digitollv2_sadmocf_edit.do" method="post">
+			<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
+			<input type="hidden" name="applicationUserSign" id="applicationUserSign" value="${user.tvinnSadSign}">
+			<input type="hidden" name="action" id="action" value="doUpdate">
+	
+		<tr height="10"><td colspan="10">&nbsp;</td></tr>
  		
 		<%-- --------------- --%>
 		<%-- CONTENT --%>
@@ -102,8 +96,8 @@
 			</c:if>
 	           		 
  		<tr>
-			<td class="text14" valign="top">
-				<table style="width:65%;" align="left" border="0" cellspacing="1" cellpadding="0">
+			<td class="text14" valign="top">&nbsp;&nbsp;
+				<table style="width:55%;" align="left" border="0" cellspacing="1" cellpadding="0">
 				 	<tr >
 					 	<td >
 						<table class="formFrameHeader" style="width:100%; border="0" cellspacing="1" cellpadding="0">
@@ -167,7 +161,7 @@
 				 					<td>
 					 					<table>
 					 					<tr>
-											<td class="text14">&nbsp;<span title="commtype">Comm.</span></td>
+											<td class="text14">&nbsp;<span title="commtype">Komm.type</span></td>
 											<td class="text14">&nbsp;<span title="format">Format</span></td>
 										</tr>
 						 				<tr>
@@ -191,13 +185,12 @@
 									<td>
 					 					<table>
 					 					<tr>
-											<td class="text14">&nbsp;<span title="xmlxsd">Channel</span></td>
+											<td class="text14">&nbsp;<span title="xmlxsd">Nettverk</span></td>
 										</tr>
 										<tr>
 											<td class="text14">
 												<select class="inputTextMediumBlue" name="xmlxsd" id="xmlxsd" >
-							 						<option value="">-velg-</option>
-								 				  	<option title="xmlxsd" value="peppol-sbdh" <c:if test="${model.record.xmlxsd == 'peppol-sbdh'}"> selected </c:if>>peppol-sbdh</option>
+							 						<option title="xmlxsd" value="peppol-sbdh" <c:if test="${model.record.xmlxsd == 'peppol-sbdh'}"> selected </c:if>>peppol-sbdh</option>
 													<option title="xmlxsd" value="evry" <c:if test="${model.record.xmlxsd == 'evry'}"> selected </c:if>>evry</option>
 												</select>
 											</td>
@@ -205,109 +198,7 @@
 										</table>
 									</td>
 				 				</tr>
-				 				<tr height="2"><td>&nbsp;</td></tr>
-				 				<tr >
-				 					<td>
-					 					<table>
-					 					<tr>
-											<td class="text14">&nbsp;<span title="ftpserver">Ftp server</span></td>
-											<td class="text14">&nbsp;<span title="ftpport">Ftp port</span></td>
-											
-										</tr>
-						 				<tr>
-											<td class="text14"><input type="text" class="inputTextMediumBlue" name="ftpserver" id="ftpserver" size="35" maxlength="70" value="${model.record.ftpserver}"></td>
-											<td class="text14"><input type="text" class="inputTextMediumBlue" name="ftpport" id="ftpport" size="10" maxlength="10" value="${model.record.ftpport}"></td>
-											
-										</tr>
-										</table>
-									</td>
-									<td>
-					 					<table>
-					 					<tr>
-											<td class="text14">&nbsp;<span title="ftpuser">Ftp user</span></td>
-											<td class="text14">&nbsp;<span title="ftppwd">Ftp pwd</span></td>
-										</tr>
-						 				<tr>
-											<td class="text14"><input type="text" class="inputTextMediumBlue" name="ftpuser" id="ftpuser" size="20" maxlength="35" value="${model.record.ftpuser}"></td>
-											<td class="text14"><input type="text" class="inputTextMediumBlue" name="ftppwd" id="ftppwd" size="20" maxlength="70" value="${model.record.ftppwd}"></td>
-										</tr>
-										</table>
-									</td>
-								</tr>
-								
-								<tr >
-				 					<td>
-					 					<table>
-					 					<tr>
-											<td class="text14">&nbsp;<span title="ftpdir">Ftp dir.</span></td>
-											
-										</tr>
-						 				<tr>
-											<td class="text14"><input type="text" class="inputTextMediumBlue" name="ftpdir" id="ftpdir" size="45" maxlength="70" value="${model.record.ftpdir}"></td>
-											
-										</tr>
-										</table>
-									</td>
-									<td>
-					 					<table>
-					 					<tr>
-											<td class="text14">&nbsp;<span title="ftptmp">Ftp tmp</span></td>
-											
-										</tr>
-						 				<tr>
-											<td class="text14"><input type="text" class="inputTextMediumBlue" name="ftptmp" id="ftptmp" size="35" maxlength="70" value="${model.record.ftptmp}"></td>
-										</tr>
-										</table>
-									</td>
-								</tr>
-								<tr >
-				 					<td>
-					 					<table>
-					 					<tr>
-											<td class="text14">&nbsp;<span title="ftpbupdir">Ftp backup dir.</span></td>
-											
-										</tr>
-						 				<tr>
-											<td class="text14"><input type="text" class="inputTextMediumBlue" name="ftpbupdir" id="ftpbupdir" size="45" maxlength="70" value="${model.record.ftpbupdir}"></td>
-											
-										</tr>
-										</table>
-									</td>
-									
-								</tr>
-								
-								<tr height="2"><td>&nbsp;</td></tr>
-								<tr >
-				 					<td>
-					 					<table>
-					 					<tr>
-											<td class="text14">&nbsp;<span title="sftpdir_ps">sFtp dir.</span></td>
-											
-										</tr>
-						 				<tr>
-											<td class="text14"><input type="text" class="inputTextMediumBlue" name="sftpdir_ps" id="sftpdir_ps" size="45" maxlength="70" value="${model.record.sftpdir_ps}"></td>
-											
-										</tr>
-										</table>
-									</td>
-									<td>
-					 					<table>
-					 					<tr>
-											<td class="text14">&nbsp;<span title="avsorgnr">Avs.orgnr</span></td>
-											<td class="text14">&nbsp;<span title="avsname">Avs.name</span></td>
-										</tr>
-						 				<tr>
-											<td class="text14"><input type="text" class="inputTextMediumBlue" name="avsorgnr" id="avsorgnr" size="20" maxlength="30" value="${model.record.avsorgnr}"></td>
-											<td class="text14"><input type="text" class="inputTextMediumBlue" name="avsname" id="avsname" size="30" maxlength="30" value="${model.record.avsname}"></td>
-											
-										</tr>
-										</table>
-									</td>
-									
-								</tr>
-								
-								
-				 				<tr height="2"><td>&nbsp;</td></tr>
+				 				<tr height="1"><td>&nbsp;</td></tr>
 				 				
 				 				</table>
 				 				</td>
@@ -318,6 +209,134 @@
 	            </table>
             </td>
             
+            <td class="text14" valign="top">
+				<table style="width:60%;" align="left" border="0" cellspacing="1" cellpadding="0">
+				 	<tr >
+					 	<td >
+						<table class="formFrameHeader" style="width:100%; border="0" cellspacing="1" cellpadding="0">
+					 		<tr height="15">
+					 			<td class="text14White">
+					 			<span title="Part">...&nbsp;</span>
+		                		</td>
+			 				</tr>
+			            </table>
+			            </td>
+		            </tr>
+		            <tr >
+					 	<td>
+						<table style="width:100%;" class="formFrame" border="0" cellspacing="1" cellpadding="0">
+					 		<tr>
+				 				<td>
+				 				<table>
+				 				<tr>
+				 					<td>
+					 					<table>
+					 					<tr>
+											<td class="text12">&nbsp;<span title="ftpserver">Ftp server</span></td>
+											<td class="text12">&nbsp;<span title="ftpport">Ftp port</span></td>
+											
+										</tr>
+						 				<tr>
+											<td class="text12"><input type="text" class="inputTextMediumBlue11" name="ftpserver" id="ftpserver" size="35" maxlength="70" value="${model.record.ftpserver}"></td>
+											<td class="text12"><input type="text" class="inputTextMediumBlue11" name="ftpport" id="ftpport" size="10" maxlength="10" value="${model.record.ftpport}"></td>
+											
+										</tr>
+										</table>
+									</td>
+									<td>
+					 					<table>
+					 					<tr>
+											<td class="text12">&nbsp;<span title="ftpuser">Ftp user</span></td>
+											<td class="text12">&nbsp;<span title="ftppwd">Ftp pwd</span></td>
+										</tr>
+						 				<tr>
+											<td class="text12"><input type="text" class="inputTextMediumBlue11" name="ftpuser" id="ftpuser" size="20" maxlength="35" value="${model.record.ftpuser}"></td>
+											<td class="text12"><input type="text" class="inputTextMediumBlue11" name="ftppwd" id="ftppwd" size="20" maxlength="70" value="${model.record.ftppwd}"></td>
+										</tr>
+										</table>
+									</td>
+								</tr>
+								
+								<tr >
+				 					<td>
+					 					<table>
+					 					<tr>
+											<td class="text12">&nbsp;<span title="ftpdir">Ftp dir.</span></td>
+											
+										</tr>
+						 				<tr>
+											<td class="text12"><input type="text" class="inputTextMediumBlue11" name="ftpdir" id="ftpdir" size="45" maxlength="70" value="${model.record.ftpdir}"></td>
+											
+										</tr>
+										</table>
+									</td>
+									<td>
+					 					<table>
+					 					<tr>
+											<td class="text12">&nbsp;<span title="ftptmp">Ftp tmp</span></td>
+											
+										</tr>
+						 				<tr>
+											<td class="text12"><input type="text" class="inputTextMediumBlue11" name="ftptmp" id="ftptmp" size="35" maxlength="70" value="${model.record.ftptmp}"></td>
+										</tr>
+										</table>
+									</td>
+								</tr>
+								<tr >
+				 					<td>
+					 					<table>
+					 					<tr>
+											<td class="text12">&nbsp;<span title="ftpbupdir">Ftp backup dir.</span></td>
+											
+										</tr>
+						 				<tr>
+											<td class="text12"><input type="text" class="inputTextMediumBlue11" name="ftpbupdir" id="ftpbupdir" size="45" maxlength="70" value="${model.record.ftpbupdir}"></td>
+											
+										</tr>
+										</table>
+									</td>
+									
+								</tr>
+								
+								<tr >
+				 					<td>
+					 					<table>
+					 					<tr>
+											<td class="text12">&nbsp;<span title="sftpdir_ps">sFtp dir.</span></td>
+											
+										</tr>
+						 				<tr>
+											<td class="text12"><input type="text" class="inputTextMediumBlue11" name="sftpdir_ps" id="sftpdir_ps" size="45" maxlength="70" value="${model.record.sftpdir_ps}"></td>
+											
+										</tr>
+										</table>
+									</td>
+									<td>
+					 					<table>
+					 					<tr>
+											<td class="text12">&nbsp;<span title="avsorgnr">Avs.orgnr</span></td>
+											<td class="text12">&nbsp;<span title="avsname">Avs.navn</span></td>
+										</tr>
+						 				<tr>
+											<td class="text12"><input type="text" class="inputTextMediumBlue11" name="avsorgnr" id="avsorgnr" size="20" maxlength="30" value="${model.record.avsorgnr}"></td>
+											<td class="text12"><input type="text" class="inputTextMediumBlue11" name="avsname" id="avsname" size="30" maxlength="30" value="${model.record.avsname}"></td>
+											
+										</tr>
+										</table>
+									</td>
+									
+								</tr>
+								
+				 				<tr height="1"><td>&nbsp;</td></tr>
+				 				
+				 				</table>
+				 				</td>
+			 				</tr>
+			            </table>
+			            </td>
+		            </tr>
+	            </table>
+            </td>
              
 		</tr>
 		<tr height="10"><td></td></tr>
@@ -420,16 +439,16 @@
 </tr>
 	
 	
-	
-	</table> 
+	</table>
+	</td>
+	</tr>
 	</form>
+	</table> 
+	
 </td>
 </tr>
 
  
-
-
-
 </table>
  
  	

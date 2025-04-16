@@ -86,7 +86,7 @@ public class MaintSadDigitollv2Controller {
 		//SADMOCF
 		object = new  MaintenanceMainListObject();
 		object.setId("2");
-		object.setSubject("Adv.melding - Parter - MasterId Outbound");
+		object.setSubject("Adv.melding - Parter som fortoller selv");
 		object.setCode("SADMOCF");
 		object.setDbTable("SADMOCF");
 		object.setStatus("G");
