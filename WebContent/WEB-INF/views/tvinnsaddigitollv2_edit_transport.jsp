@@ -84,7 +84,7 @@
 				           	</div>	
 			 			</c:if>
 			 			
-						<a style="vertical-align:super;" title="Kodeverk toll.no" target="_blank" href="https://toll.github.io/api/mo-kodeverk.html">
+						<a style="vertical-align:super;" title="Kodeverk toll.no" target="_blank" href="https://toll.github.io/api/mo/mo-kodeverk.html">
 							<font title="Kodeverk toll.no" class="inputFormSubmit text10 isa_warning"><b>Kodeverk</b></font>
 						</a>
 					

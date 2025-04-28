@@ -188,7 +188,7 @@
 				opener.jq('#ehtdn').val("");opener.jq('#ehtdn').val(data[i].sitdn); //Opp
 				
 				//---------------------------------------------------------------------------------------------------
-				//EXP eller TRA beroende av några villkor (se på exempel on: https://toll.github.io/api/mo-eksempler)
+				//EXP eller TRA beroende av några villkor (se på exempel on: https://toll.github.io/api/mo/mo-eksempler)
 				//---------------------------------------------------------------------------------------------------
 				if(data[i].wfssokmrn == ""){
 					//console.log("A")

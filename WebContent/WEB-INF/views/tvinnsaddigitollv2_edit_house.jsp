@@ -103,7 +103,7 @@
 				           	</span>
 				           	</div>	
 			 			</c:if>
-			 			<a style="vertical-align:super;" title="Kodeverk toll.no" target="_blank" href="https://toll.github.io/api/mo-kodeverk.html">
+			 			<a style="vertical-align:super;" title="Kodeverk toll.no" target="_blank" href="https://toll.github.io/api/mo/mo-kodeverk.html">
 							<font title="Kodeverk toll.no" class="inputFormSubmit text10 isa_warning"><b>Kodeverk</b></font>
 						</a>
 					
@@ -714,7 +714,7 @@
 						<table id="tblDirektfortolling" style="width:100%"  class="tableBorderWithRoundCorners" border="0" cellspacing="1" cellpadding="0">
 			 			<tr >
 							<td  colspan="5" class="text16">
-								<a title="Aktuelle eksempler..." target="_blank" href="https://toll.github.io/api/mo-eksempler">
+								<a title="Aktuelle eksempler..." target="_blank" href="https://toll.github.io/api/mo/mo-eksempler">
 									<font title="Aktuelle eksempler" class="inputFormSubmit text10 isa_info"><b>Eksempler</b></font>
 								</a>
 								<img style="cursor:pointer;" onMouseOver="showPop('prevDocs_info');" onMouseOut="hidePop('prevDocs_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
