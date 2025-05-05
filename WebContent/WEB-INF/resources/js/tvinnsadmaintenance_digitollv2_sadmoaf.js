@@ -174,7 +174,7 @@
   	}
 	function fetchRepresentative(){
 	  var customerNr = jq.trim(jq('#etknr').val());
-		
+		console.log("A");
 		if(customerNr!=""){
   		jq.getJSON('searchCustomer_TvinnSad.do', {
 			applicationUser : jq('#applicationUser').val(),
