@@ -27,6 +27,7 @@ import no.systema.main.model.SystemaWebUser;
 import no.systema.tvinn.sad.digitollv2.controller.service.AvdSignControllerService;
 import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafOnlyMasterRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafOnlyTransportRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmoafRecord;
 import no.systema.tvinn.sad.digitollv2.service.SadDigitollDropDownListPopulationService;
@@ -130,9 +131,16 @@ public class MaintSadDigitollv2SadmoafController {
 		}else{
 			
 			if(!this.avdExists(appUser, String.valueOf(recordToValidate.getEtavd())) ){
-				mode = "A";	
+				mode = "A";
+			}else {
+				//get master data to fill up recordToValidate with master records if already exists
+				SadmoafRecord source = this.getRecord(appUser, recordToValidate.getEtavd().toString(), false);
+				if(source.getEmavd()>0 || StringUtils.isNotEmpty(source.getEmsg()) || StringUtils.isNotEmpty(source.getEmdkmt()) ||
+				   StringUtils.isNotEmpty(source.getEmnas()) || StringUtils.isNotEmpty(source.getEmnam()) || StringUtils.isNotEmpty(source.getEmrcem1())) {
+					//if master records exist then fill recordToValidate with master-fields
+					this.adjustRecordToValidateWithMasterAttributes(source, recordToValidate);
+				}
 			}
-			
 			 this.adjustFieldsForUpdate(recordToValidate);
 			 //prepare the access CGI with RPG back-end
 			 String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_DIGITOLL_DEFAULT_VALUES_URL;
@@ -324,6 +332,20 @@ public class MaintSadDigitollv2SadmoafController {
 			BeanUtils.copyProperties(tmpBeanTransport, source);
 			//This will only add the transport props and leave the master properties untouched
 			BeanUtils.copyProperties(recordToValidate, tmpBeanTransport);
+			 
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private void adjustRecordToValidateWithMasterAttributes(SadmoafRecord source, SadmoafRecord recordToValidate) {
+		SadmoafOnlyMasterRecord tmpBeanMaster = new SadmoafOnlyMasterRecord();
+		try {
+			//Now lend only those transport attributes to the recordToValidate GUI (only master attributes) to make the com
+			BeanUtils.copyProperties(tmpBeanMaster, source);
+			//This will only add the master props and leave the transport properties untouched
+			BeanUtils.copyProperties(recordToValidate, tmpBeanMaster);
 			 
 		}catch(Exception e) {
 			e.printStackTrace();
