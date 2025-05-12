@@ -615,31 +615,35 @@ public class TvinnSadDigitollv2HouseController {
 				//----------------------------------------------------------
 				if(this.isValidZH_tosend(recordToValidate)) {
 					logger.info("#######################################");
-					logger.info("START API ZH-DOC send ... house [ehlnrh]:" + recordToValidate.getEhlnrh());
+					logger.info("START API ZH-DOC send ... house [ehdkh]:" + recordToValidate.getEhdkh());
 					logger.info("#######################################");
 					//(1) send doc (ZH = Handelsfaktura) unconditionally. This has been done manually in the GUI but now we will reinforce that behavior with this automation...
 					//UC driven by DSV in order to always send the doc (if applicable)
-					//(1.1) get the document link and type (ZH)
-					JsonTvinnSadManifestArchivedDocsRecord zhRecord = this.getZHdoc(appUser, recordToValidate);
-					if(zhRecord!=null) {
-						//at this point we are sure that there are Handelsfakturor-ZH-PDFs (otherwise just do not send anything)
-						logger.info("Doctyp:" + zhRecord.getDoctyp());
-						logger.info("Doclnk:" + zhRecord.getDoclnk());
-						logger.info("ehrg:" + recordToValidate.getEhrg());
-						//String eh0068a_ISO = dateFormatter.convertToDate_ISO(recordToValidate.getEh0068a().toString());
-						//logger.info("eh0068a_ISO:" + eh0068a_ISO);
-						logger.info("eh0068a:" + recordToValidate.getEh0068a().toString());
-						logger.info("eh0068b:" + recordToValidate.getEh0068b().toString());
-					
-						//(2) send it to the service as in the child-window, namely: 
-						//example (manually): no.systema.tvinn.sad.manifest.express.controller.ajax.TvinnSadManifestAjaxHandlerController.sendFileToToll_TvinnSadManifest.do
-						Set result = this.sendZHDocViaAPi(appUser, zhRecord, recordToValidate);
-						logger.info("result-Set ZHDoc-Api:" + result.toString());
-						
+					//(1.1) get the documents (document link and type (ZH))
+					Collection<JsonTvinnSadManifestArchivedDocsRecord> list = this.getZHdocs(appUser, recordToValidate);
+					if(list!=null && !list.isEmpty()) {
+						for (JsonTvinnSadManifestArchivedDocsRecord zhRecord : list) {
+							if(zhRecord!=null) {
+								//at this point we are sure that there are Handelsfakturor-ZH-PDFs (otherwise just do not send anything)
+								logger.info("Doctyp:" + zhRecord.getDoctyp());
+								logger.info("Doclnk:" + zhRecord.getDoclnk());
+								logger.info("ehrg:" + recordToValidate.getEhrg());
+								//String eh0068a_ISO = dateFormatter.convertToDate_ISO(recordToValidate.getEh0068a().toString());
+								//logger.info("eh0068a_ISO:" + eh0068a_ISO);
+								logger.info("eh0068a:" + recordToValidate.getEh0068a().toString());
+								logger.info("eh0068b:" + recordToValidate.getEh0068b().toString());
+							
+								//(2) send it to the service as in the child-window, namely: 
+								//example (manually): no.systema.tvinn.sad.manifest.express.controller.ajax.TvinnSadManifestAjaxHandlerController.sendFileToToll_TvinnSadManifest.do
+								Set result = this.sendZHDocViaAPi(appUser, zhRecord, recordToValidate);
+								logger.info("result-Set ZHDoc-Api:" + result.toString());
+								
+							}
+							logger.info("####################################################");
+							logger.info("END API ZH-DOC send ...house [ehdkh]:" + recordToValidate.getEhdkh());
+							logger.info("####################################################");
+						}
 					}
-					logger.info("####################################################");
-					logger.info("END API ZH-DOC send ...house [ehlnrh]:" + recordToValidate.getEhlnrh());
-					logger.info("####################################################");
 				}
 				
 				
@@ -800,6 +804,24 @@ public class TvinnSadDigitollv2HouseController {
 		}
 		return result;
 	}
+	private Collection<JsonTvinnSadManifestArchivedDocsRecord> getZHdocs(SystemaWebUser appUser, SadmohfRecord sadmohfRecord ) {
+		Collection<JsonTvinnSadManifestArchivedDocsRecord> list = new ArrayList<JsonTvinnSadManifestArchivedDocsRecord>();
+		try {
+			String wsavd = String.valueOf(sadmohfRecord.getEhavd()); 
+			String wsopd = String.valueOf(sadmohfRecord.getEhtdn());
+			if(StringUtils.isNotEmpty(wsavd) && StringUtils.isNotEmpty(wsopd)) {
+				list = manifestExpressMgr.fetchArchiveDocs(appUser, wsavd, wsopd);
+				logger.info(list.toString());
+				
+			}
+		
+		}catch(Exception e) {
+			e.toString();
+			logger.error(e.toString());
+			
+		}
+		return list;
+	}
 	/**
 	 * Always async
 	 * 
@@ -873,26 +895,31 @@ public class TvinnSadDigitollv2HouseController {
 						//(1) send doc (ZH = Handelsfaktura) unconditionally. This has been done manually in the GUI but now we will reinforce that behavior with this automation...
 						//UC driven by DSV in order to always send the doc (if applicable)
 						//(1.1) get the document link and type (ZH)
-						JsonTvinnSadManifestArchivedDocsRecord zhRecord = this.getZHdoc(appUser, sadmohfRecord);
-						if(zhRecord!=null) {
-							//at this point we are sure that there are Handelsfakturor-ZH-PDFs (otherwise just do not send anything)
-							logger.info("Doctyp:" + zhRecord.getDoctyp());
-							logger.info("Doclnk:" + zhRecord.getDoclnk());
-							logger.info("ehrg:" + sadmohfRecord.getEhrg());
-							//String eh0068a_ISO = dateFormatter.convertToDate_ISO(recordToValidate.getEh0068a().toString());
-							//logger.info("eh0068a_ISO:" + eh0068a_ISO);
-							logger.info("eh0068a:" + sadmohfRecord.getEh0068a().toString());
-							logger.info("eh0068b:" + sadmohfRecord.getEh0068b().toString());
+						Collection<JsonTvinnSadManifestArchivedDocsRecord> list = this.getZHdocs(appUser, sadmohfRecord);
+						if(list!=null && !list.isEmpty()) {
+							for (JsonTvinnSadManifestArchivedDocsRecord zhRecord : list) {
 						
-							//(2) send it to the service as in the child-window, namely: 
-							//example (manually): no.systema.tvinn.sad.manifest.express.controller.ajax.TvinnSadManifestAjaxHandlerController.sendFileToToll_TvinnSadManifest.do
-							Set result = this.sendZHDocViaAPi(appUser, zhRecord, sadmohfRecord);
-							logger.info("result-Set ZHDoc-Api:" + result.toString());
-							
+								if(zhRecord!=null) {
+									//at this point we are sure that there are Handelsfakturor-ZH-PDFs (otherwise just do not send anything)
+									logger.info("Doctyp:" + zhRecord.getDoctyp());
+									logger.info("Doclnk:" + zhRecord.getDoclnk());
+									logger.info("ehrg:" + sadmohfRecord.getEhrg());
+									//String eh0068a_ISO = dateFormatter.convertToDate_ISO(recordToValidate.getEh0068a().toString());
+									//logger.info("eh0068a_ISO:" + eh0068a_ISO);
+									logger.info("eh0068a:" + sadmohfRecord.getEh0068a().toString());
+									logger.info("eh0068b:" + sadmohfRecord.getEh0068b().toString());
+								
+									//(2) send it to the service as in the child-window, namely: 
+									//example (manually): no.systema.tvinn.sad.manifest.express.controller.ajax.TvinnSadManifestAjaxHandlerController.sendFileToToll_TvinnSadManifest.do
+									Set result = this.sendZHDocViaAPi(appUser, zhRecord, sadmohfRecord);
+									logger.info("result-Set ZHDoc-Api:" + result.toString());
+									
+								}
+								logger.info("##########################################################");
+								logger.info("END API ZH-DOC send ... house [ehdkh]:" + sadmohfRecord.getEhdkh());
+								logger.info("##########################################################");
+							}
 						}
-						logger.info("##########################################################");
-						logger.info("END API ZH-DOC send ... house [ehdkh]:" + sadmohfRecord.getEhdkh());
-						logger.info("##########################################################");
 					}
 				
 				}
