@@ -26,6 +26,7 @@
 		  		
 				<table cellspacing="2" align="left" >
 				<form name="insertForm" id="insertForm" >
+						<input type="hidden" name="etlnrt_insert" id="etlnrt_insert" value="${model.etlnrt}">
 					<tr>
 						<td class="text14">&nbsp;Dok.nr</td>
 						<td class="text14">&nbsp;<input type="text" class="inputText" name="emdkm_insert" id="emdkm_insert" size="25" maxlength="70" value="${model.emdkm_insert}"></td>

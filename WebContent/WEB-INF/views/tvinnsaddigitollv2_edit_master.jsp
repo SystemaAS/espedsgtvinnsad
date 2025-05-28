@@ -151,6 +151,9 @@
 			<input type="hidden" name="emuuid" id="emuuid" value="${model.record.emuuid}"> 
 			<input type="hidden" name="emmid" id="emmid" value="${model.record.emmid}">
 			<input type="hidden" name="emlnrt" id="emlnrt" value="${model.record.emlnrt}">
+			<%-- this ref is needed for the external_master child window--%>
+			<input type="hidden" name="etlnrt" id="etlnrt" value="${model.record.emlnrt}">
+			
 			<input type="hidden" name="action" id="action" value="doUpdate">
 			
 			<c:if test="${model.record.emlnrm > 0}">

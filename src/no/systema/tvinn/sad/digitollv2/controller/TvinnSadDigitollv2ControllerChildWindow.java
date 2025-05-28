@@ -1520,15 +1520,6 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 
 		logger.info("caller:" + callerType);
 		//logger.info("tuavd:" + tuavd);
-		//logger.info("tupro:" + tupro);
-		//
-		
-		//antingen eller och inte båda 2...Turen overrides avd if it exists
-		/*if(StringUtils.isNotEmpty(tupro)) {
-			model.put("tupro", tupro);
-		}else {
-			model.put("tuavd", tuavd);
-		}*/
 		
 		
 		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_external_master");
@@ -1571,16 +1562,6 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		//String etlnrt = request.getParameter("etlnrt");
 
 		logger.info("caller:" + callerType);
-		//logger.info("tuavd:" + tuavd);
-		//logger.info("tupro:" + tupro);
-		//
-		
-		//antingen eller och inte båda 2...Turen overrides avd if it exists
-		/*if(StringUtils.isNotEmpty(tupro)) {
-			model.put("tupro", tupro);
-		}else {
-			model.put("tuavd", tuavd);
-		}*/
 		
 		
 		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_external_master_attachments");
