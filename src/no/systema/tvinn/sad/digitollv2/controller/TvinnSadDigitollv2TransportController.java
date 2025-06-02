@@ -400,6 +400,12 @@ public class TvinnSadDigitollv2TransportController {
 							model.put("record", record);
 							//logger.debug(record.toString());
 							
+							//This is done to block the Orgnr/EORI from carrier to be updated since master/houses depend on it
+							//Only under certain circumstances ...
+							if(this.masterMrnExist(appUser, record)) {
+								model.put("masterMrnExists", "1");
+							}
+							
 							//Only if ERROR
 							if("M".equals(record.getEtst2())) {
 								this.setLastErrorText(appUser, etlnrt, model);
@@ -421,6 +427,7 @@ public class TvinnSadDigitollv2TransportController {
 			this.setDropDownService(model);
 			//this is necessary since not all customers have access to webservices without making firewall changes (take time...)
 			model.put("eoriValidationActive",AppConstants.EORI_VALIDATION_ACTIVE);
+			
 			
 			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
 	    
@@ -1913,6 +1920,41 @@ public class TvinnSadDigitollv2TransportController {
     		}
     	}
     	
+	}
+	
+	private boolean masterMrnExist(SystemaWebUser appUser, SadmotfRecord record) {
+		boolean retval = false;
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_MASTERCONSIGNMENT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser() + "&emlnrt=" + record.getEtlnrt();
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadmomfContainer jsonContainer = this.sadmomfListService.getListContainer(jsonPayload);
+    		record.setListMasters(jsonContainer.getList());
+    		//now check if the transport has errors on all layers below (master-layer and house-layer)
+    		List<SadmomfRecord> listChild = (List)jsonContainer.getList();
+    		if(listChild!=null && !listChild.isEmpty()) {
+    			for(SadmomfRecord child : listChild) {
+	    			if(child.getEmmid() != null && StringUtils.isNotEmpty(child.getEmmid())) {
+	    				logger.info("MrnMasterExists!!!");
+	    				retval = true;
+	    				break;
+	    			}
+	    		}
+    			
+    		}else {
+    			//OK
+    		}
+    	}
+    	
+    	return retval;
 	}
 	
 	/**

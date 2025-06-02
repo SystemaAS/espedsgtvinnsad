@@ -787,6 +787,20 @@
 									
 									<img style="cursor:pointer;" onMouseOver="showPop('etrgt_info');" onMouseOut="hidePop('etrgt_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
 					            	<span title="etrgt">Orgnr / EORI&nbsp;</span><font class="text16RedBold" >*</font>
+			                		<font class="text11" style="cursor:pointer;color:orange;" onMouseOver="showPop('etrgtROnly_info');" onMouseOut="hidePop('etrgtROnly_info');">&nbsp;info</font>
+							            	<div class="text11" style="position: relative;" align="left">
+						                	<span style="position:absolute;top:2px; width:250px;" id="etrgtROnly_info" class="popupWithInputText text11"  >
+						                	<p><b>Orgnr/EORI - Transportør</b>&nbsp;
+							           		Kan ikke endres hvis MRN finnes på både Transport och en-eller-flere Master.</p> 
+							           		<p>Bruk SLETT-knappen for å fjerne Transporten og alle Master fra toll.no, endre och lagre den nye verdien och SEND på nytt till toll.no
+							           		</p>
+							           		<p>Alle House må SEND:es også på nytt till toll.no. Alle House trenger ikke å bli SLETTET, bare SEND på nytt.
+							           		</p>
+							           		
+											</span>	
+											</div>
+					            	
+			                		
 			                		<div class="text11" style="position: relative;" align="left">
 				                	<span style="position:absolute;top:2px; width:250px;" id="etrgt_info" class="popupWithInputText text11"  >
 				                	<p><b>Orgnr / EORI</b>&nbsp;
@@ -803,7 +817,17 @@
 				 				</tr>
 				 				<tr >
 									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"   type="text" class="inputTextMediumBlueMandatoryField" name="etnat" id="etnat" size="35" maxlength="30" value="${model.record.etnat}"></td>
-									<td class="text14"><input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"   type="text" class="inputTextMediumBlueMandatoryField" name="etrgt" id="etrgt" size="18" maxlength="17" value="${model.record.etrgt}"></td>
+									
+									<td class="text14">
+										<c:choose>
+					 						<c:when test="${empty model.record.etmid && empty model.masterMrnExists}">
+					 							<input required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"   type="text" class="inputTextMediumBlueMandatoryField" name="etrgt" id="etrgt" size="18" maxlength="17" value="${model.record.etrgt}">
+					 						</c:when>
+					 						<c:otherwise>
+					 							<input readonly type="text" class="inputTextReadOnly" style="color:#9F6000;" name="etrgt" id="etrgt" size="18" maxlength="17" value="${model.record.etrgt}">
+					 						</c:otherwise>
+			 							</c:choose>	
+									</td>
 									
 				 				</tr>
 				 				
