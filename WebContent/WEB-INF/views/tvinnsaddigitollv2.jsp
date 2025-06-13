@@ -624,12 +624,15 @@
 									<img style="cursor:help;" title="Error" src="resources/images/bulletRed.png" width="10" height="10" border="0" >
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'C'}">
-		               				<img title="Completed" style="vertical-align:middle;cursor:help;" title="Completed digitoll-pass at toll.no" src="resources/images/complete-icon.png" width="14px" height="12px" border="0" alt="completion">
+		               				<a tabindex=-1 class="entryLink" id="${record.etmid}_${record.etktyp}">
+										<img style="vertical-align:middle;cursor:help;" title="Completed digitoll-pass at toll.no" src="resources/images/complete-icon.png" width="14px" height="12px" border="0" alt="completion">
+									</a>
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'N'}">
-		               				<img title="Denied" style="vertical-align:middle;cursor:help;" title="Denied digitoll-pass at toll.no" src="resources/images/warning.png" width="14px" height="14px" border="0" alt="denied">
+		               				<a tabindex=-1 class="entryLink" id="${record.etmid}_${record.etktyp}">
+										<img style="vertical-align:middle;cursor:help;" title="Denied digitoll-pass at toll.no" src="resources/images/warning.png" width="14px" height="14px" border="0" alt="denied">
+									</a>
 		               			</c:if>
-		               			
 		               		</c:when>
 		               		<c:otherwise>
 		               			<c:if test="${record.etst2 != 'S'}">
@@ -654,10 +657,25 @@
 		               				<font class="text12" style="cursor:help;" title="M" color="red">ERROR</font>
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'C'}">
-		               				<font class="text12" style="cursor:help;" title="UTC-tid:${record.etenttim} Valid:${record.etentval} Tollst:${record.etentoff}" >COMPLETED</font>
+		               				<c:choose>
+		               					<c:when test="${record.etentval == '0'}">
+		               						<font class="text12" style="cursor:help;" title="UTC-tid:${record.etenttim} Valid:false Tollst:${record.etentoff}" >COMPLETED</font>
+		               					</c:when>
+		               					<c:otherwise>
+		               						<font class="text12" style="cursor:help;" title="UTC-tid:${record.etenttim} Valid:true Tollst:${record.etentoff}" >COMPLETED</font>
+		               					</c:otherwise>
+		               				</c:choose>
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'N'}">
-		               				<font class="text12" style="cursor:help;" title="UTC-tid:${record.etenttim} Valid:${record.etentval} Tollst:${record.etentoff}" >DENIED</font>
+		               				<c:choose>
+		               					<c:when test="${record.etentval == '0'}">
+		               						<font class="text12" style="cursor:help;" title="UTC-tid:${record.etenttim} Valid:false Tollst:${record.etentoff}" >DENIED</font>
+		               					</c:when>
+		               					<c:otherwise>
+		               						<font class="text12" style="cursor:help;" title="UTC-tid:${record.etenttim} Valid:true Tollst:${record.etentoff}" >DENIED</font>
+		               					</c:otherwise>
+		               				</c:choose>
+		               				
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'Z'}">
 		               				<span class="text12" style="cursor:help;" title="Z" >

@@ -122,8 +122,40 @@ jq(function() {
 		  jq('#dialogUpdateStatus'+counterIndex).dialog('open');
 		 
 	  });
+
+
+	  jq(".entryLink").click(function() {
+		  var tmp = this.id;
+		  var idRecord = tmp.split('_');		
+		  var id = idRecord[0]; //MRN
+		  var apiType = idRecord[1]; //Type of mode 4= air, 2=rail, etc
+
+		  jq("#"+id).attr(('target','_blank'));
+		  var apiType = "";
+		  //check if this is an AIR api record
+		  if(apiType == 4) { 
+			apiType = "air";	
+		  }else if(apiType == 2) { 
+			apiType = "rail";	
+		  }	
+		  //default url
+		  var controllerUrl = "tvinnsaddigitollv2_childwindow_movroad_entryinfo.do?mrn=" + id;
+		  if(apiType == "rail"){
+			 controllerUrl = "tvinnsaddigitollv2_childwindow_movrail_entryinfo.do?mrn=" + id;
+		  }else if(apiType == "air"){
+			 controllerUrl = "tvinnsaddigitollv2_childwindow_movair_entryinfo.do?mrn=" + id;
+		  } 
+
+		  window.open(controllerUrl, "codeWin", "top=300px,left=700px,height=150px,width=800px,scrollbars=yes,status=no,location=no");	
+			
+	  });		
+
+
+
   });
   
+  
+
 
   //Initialize <div> here for all clazz_dialog
   jq(function() { 
