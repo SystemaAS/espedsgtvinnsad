@@ -821,7 +821,62 @@ public class TvinnSadDigitollv2TransportController {
 	    
 		}	
 		return successView;
-	}	
+	}
+	/**
+	 * This is a very special case. When the etmid and the etmid_own where not created in the db despite the fact that the etmid was created at toll.no
+	 * The user then will proceed to input the known-MRN value and save it (by updating the sadmotf-db-table)
+	 * 
+	 * @param recordToValidate
+	 * @param bindingResult
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="tvinnsaddigitollv2_resetMrnManually_transport.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doResetMrnManually(@ModelAttribute ("record") SadmotfRecord recordToValidate, BindingResult bindingResult, HttpSession session, HttpServletRequest request){
+		Map model = new HashMap();
+		
+	    logger.info("etlnrt:" + recordToValidate.getEtlnrt()); 
+	    logger.info("etmid_own:" + recordToValidate.getEtmid_own());
+	    String url = "redirect:tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=" + recordToValidate.getEtlnrt();
+	    
+	   
+		ModelAndView successView = new ModelAndView(url);
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		
+		//START
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			//==========
+			//Upd Mrn
+			//==========
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_DIGITOLLV2);
+			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE); 
+			
+			//Update/Insert
+			if(recordToValidate.getEtlnrt() >0 ) {
+				
+				String mode = "RESET_MRN_MANUALLY";
+				logger.info("MODE:" + mode + " before update in Controller ...");
+				
+				StringBuffer errMsg = new StringBuffer();
+				int dmlRetval = 0; 
+				dmlRetval = this.resetMrn(appUser.getUser(), recordToValidate, mode, errMsg);
+				if(dmlRetval < 0) {
+					//error on update
+					model.put("errorMessage", errMsg.toString());
+				}
+			}
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+	    
+		}	
+		return successView;
+	}
 	/**
 	 * 
 	 * @param recordToValidate
@@ -1257,6 +1312,14 @@ public class TvinnSadDigitollv2TransportController {
     	
     	return retval;
 	}
+	/**
+	 * 
+	 * @param applicationUser
+	 * @param recordToValidate
+	 * @param mode
+	 * @param errMsg
+	 * @return
+	 */
 	private int resetMrn(String applicationUser, SadmotfRecord recordToValidate, String mode, StringBuffer errMsg) {
 		int retval = 0;
 		
@@ -1297,6 +1360,7 @@ public class TvinnSadDigitollv2TransportController {
     	
     	return retval;
 	}
+	
 	/**
 	 * 
 	 * @param applicationUser

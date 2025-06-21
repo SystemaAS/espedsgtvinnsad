@@ -90,7 +90,7 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 		  jq('#dialogDelete').dialog('open');
     });
 	
-	//Real delete to Api (DELETE)
+	//Update Mrn with orignal Mrn ... this is used when toll.no had some problem with the MRN) 
  	jq('#updateMrnWithOriginalMrnButton').click(function() { 
     	  jq('#dialogReset').dialog( "option", "title", "Oppdater MRN i databasen" );
 		  //deal with buttons for this modal window
@@ -120,6 +120,40 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 		  jq('#dialogReset').dialog('open');
     });    
 
+	//Reset Mrn manually (when toll.no never delivered the MRN despite having created it)
+ 	jq('#updateMrnManuallyWithOriginalMrnButton').click(function() { 
+		//bara vid input value
+		if(jq('#etmid_manual').val()){
+    	  jq('#dialogResetManually').dialog( "option", "title", "Oppdater MRN i databasen med egen verdi" );
+		  //deal with buttons for this modal window
+		  jq('#dialogResetManually').dialog({
+			 buttons: [ 
+	            {
+				 id: "dialogSaveTU",	
+				 text: "Ok",
+				 click: function(){
+					 		setBlockUI();
+							window.location = 'tvinnsaddigitollv2_resetMrnManually_transport.do?layer=1&etlnrt=' + jq('#etlnrt').val() + '&etmid_own=' + jq('#etmid_manual').val() + '&action=doResetManually' ;
+				 		}
+			 	 },
+	 	 		{
+			 	 id: "dialogCancelTU",
+			 	 text: "Cancel", 
+				 click: function(){
+					 		//back to initial state of form elements on modal dialog
+					 		jq("#dialogSaveSU").button("option", "disabled", true);
+					 		jq( this ).dialog( "close" ); 
+				 		} 
+	 	 		 } ] 
+		  });
+		  //init values
+		  jq("#dialogSaveSU").button("option", "disabled", true);
+		  //open now
+		  jq('#dialogResetManually').dialog('open');
+		};
+    });    
+
+	
 
 	//Refresh
     jq('#alinkRefreshButton').click(function() { 

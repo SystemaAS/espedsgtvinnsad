@@ -68,7 +68,7 @@
 				 			<span cursor:pointer;" onClick="showPop('requestIdBup');" title="Sist godkjente MRN" class="inputTextReadOnly text11" style="vertical-align:super;">MRN:&nbsp;${model.record.etmid_own}</span>
 				 			&nbsp;&nbsp;
 				 			<div class="text12" style="position: relative;display: inline;" align="left">
-							<span style="position:absolute; left:-200px; top:15px; width:280px;" id="requestIdBup" class="popupWithInputText"  >
+							<span style="position:absolute; left:-200px; top:15px; width:330px;" id="requestIdBup" class="popupWithInputText"  >
 								<div class="text12" align="left">
 				           			<span class="uuidLinkParent" style="color:green;cursor:pointer;" id="${model.record.etuuid_own}">${model.record.etuuid_own}</span>
 					           		<br/>
@@ -77,6 +77,15 @@
 				           			 	&nbsp;&nbsp;<input title="Update MRN ..." class="buttonInsideDivPopup" style="font-size:12px;" type="button" name="updateMrnWithOriginalMrnButton" id="updateMrnWithOriginalMrnButton" value='Oppdater MRN i db'>
 				           			 	<div style="display: none;" class="clazz_dialog" id="dialogReset" title="Dialog">
 											 <p class="text14" >Er du sikker på at du ønsker oppdater MRN-nr i databasen?</p>
+										</div>
+				           			</c:if>
+				           			<c:if test="${empty model.record.etmid && empty model.record.etmid_own}">
+				           			 	&nbsp;&nbsp;<input title="Update MRN ..." class="buttonInsideDivPopup" style="font-size:12px;" 
+				           			 				type="button" name="updateMrnManuallyWithOriginalMrnButton" id="updateMrnManuallyWithOriginalMrnButton" 
+				           			 				value='Oppdater MRN i db med egen verdi'>
+				           			 	<p>Egen verdi MRN:<input type="text" class="inputTextMediumBlue" name="etmid_manual" id="etmid_manual" size="25" maxlength="18" value=""></p>
+				           			 	<div style="display: none;" class="clazz_dialog" id="dialogResetManually" title="Dialog">
+											 <p class="text14" >Er du sikker på at du ønsker oppdater MRN-nr i databasen med egen verdi?</p>
 										</div>
 				           			</c:if>
 				           		</div>
