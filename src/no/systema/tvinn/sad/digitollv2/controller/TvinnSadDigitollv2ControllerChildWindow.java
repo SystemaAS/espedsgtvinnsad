@@ -1958,7 +1958,10 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			return this.loginView;
 			
 		}else{
-			  
+			//security measure
+			if(StringUtils.isEmpty(recordToValidate.getDate())){
+				recordToValidate.setDate(dateMgr.getCurrentDate_ISO());
+			}
 			List list = this.getSadmobuplgList(appUser, recordToValidate);
 			model.put("date", recordToValidate.getDate());
 			model.put("list", list);
