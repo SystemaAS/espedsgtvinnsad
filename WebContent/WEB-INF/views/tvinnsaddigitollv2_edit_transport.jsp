@@ -440,7 +440,7 @@
 											<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" id="etavd" name="etavd">
 											  <option value="">-velg-</option>
 							 				  	<c:forEach var="record" items="${model.avdList}" >
-							 				  		<option title="${record.namn}" value="${record.avd}"<c:if test="${model.record.etavd == record.avd}"> selected </c:if> >${record.avd}</option> 
+							 				  		<option title="${record.namn}" value="${record.avd}"<c:if test="${user.asavd == record.avd}"> selected </c:if> >${record.avd}</option> 
 												</c:forEach>  
 											</select> 
 					 					</td>
