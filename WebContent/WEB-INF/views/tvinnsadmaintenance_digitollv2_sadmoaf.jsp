@@ -535,6 +535,7 @@
 									
 				 				</tr>
 				 				<tr >
+				 					<%--ORIGINAL
 				 					<c:choose>
 				 					<c:when test="${model.record.etemtt == 'EM'}">
 				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemt_email" id="own_etemt_email" size="35" maxlength="50" value="${model.record.etemt}"></td>
@@ -553,6 +554,9 @@
 										</c:choose>
 									</c:otherwise>
 									</c:choose>
+									 --%>
+									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemt_email" id="own_etemt_email" size="35" maxlength="50" value="${model.record.etemt}"></td>
+						 			<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemt_telephone" id="own_etemt_telephone" size="15" maxlength="50" value="${model.record.etemtx}"></td>
 									
 				 				</tr>
 				 				<tr height="2"><td>&nbsp;</td></tr>
@@ -670,6 +674,7 @@
 									
 				 				</tr>
 				 				<tr >
+				 					<%-- ORIGINAL
 									<c:choose>
 				 					<c:when test="${empty model.record.etemrt}">
 				 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_email" id="own_etemr_email" size="35" maxlength="50" value=""></td>
@@ -688,6 +693,9 @@
 										</c:choose>
 									</c:otherwise>
 									</c:choose>
+									 --%>
+									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_email" id="own_etemr_email" size="35" maxlength="50" value="${model.record.etemr}"></td>
+									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_telephone" id="own_etemr_telephone" size="15" maxlength="50" value="${model.record.etemrx}"></td> 
 				 				</tr>
 				 				<tr height="2"><td>&nbsp;</td></tr>
 				 				

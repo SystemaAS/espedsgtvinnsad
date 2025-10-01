@@ -75,6 +75,8 @@
  		<td>
  		<table style="width:99%;">
  	        <form name="searchForm" id="searchForm" action="tvinnsaddigitollv2.do?action=doFind" method="post" >
+			<input type="hidden" name="movementRoutingId" id="movementRoutingId" value="${model.routingId}">
+			 	       
  	        <tr height="3"><td></td></tr>
  	        <tr>	
                 <td class="text14" align="left" title="avd" >&nbsp;&nbsp;&nbsp;<spring:message code="systema.tvinn.sad.manifest.list.search.label.avd"/></td>
@@ -89,11 +91,11 @@
                 <td class="text14" align="left" ><span title="status"><spring:message code="systema.tvinn.sad.manifest.list.search.label.status"/></span></td>
                 <td class="text14" align="left" >
                 	<img style="cursor:pointer;" onMouseOver="showPop('masterid_info');" onMouseOut="hidePop('masterid_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
-	            	<span title="MasterId"><font color="green">Dok.id - Master</font></span>
+	            	<span title="MasterId"><font color="green">Dok.nr - Master</font></span>
                		<div class="text11" style="position: relative;" align="left">
                 	<span style="position:absolute;top:2px; width:250px;" id="masterid_info" class="popupWithInputText text11"  >
-                	<p><b>Dok.id - Master</b><br/>
-                	Søker alle Master-id som finnes per transport.
+                	<p><b>Dok.nr - Master</b><br/>
+                	Søker alle Master-Doc.nr som finnes per transport.
                 	</p>
                 	<p>
                  	Parameteren søker ikke i kombinasjon med andre søkeparameter. Den <b>søker</b> ubetinget i <b>hele databasen!</b>
@@ -594,11 +596,22 @@
 								</c:if>
 							</c:when>
 							<c:otherwise>
-								<c:if test="${record.etst2 == 'C'}">							
-									<img style="cursor:help;vertical-align:middle;" title="api:road" id="lorryImg${record.etuuid}" src="resources/images/delivery-truck.png" width="25" height="25"border="0" >&nbsp;
+								<c:if test="${record.etst2 == 'C'}">
+									<a tabindex=-1 class="routingLink" id="${record.etmid}_${record.etktyp}">						
+										<img style="cursor:pointer;vertical-align:middle;" title="api:road" id="lorryImg${record.etuuid}" src="resources/images/delivery-truck.png" width="25" height="25"border="0" >&nbsp;
+									</a>
 								</c:if>
-								<c:if test="${record.etst2 != 'C'}">							
-									<img style="cursor:help;vertical-align:middle;" title="api:road" id="lorryImg${record.etuuid}" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;
+								<c:if test="${record.etst2 != 'C'}">
+									<c:choose>
+			               				<c:when test="${record.etst2 == 'N'}">
+											<a tabindex=-1 class="routingLink" id="${record.etmid}_${record.etktyp}">
+												<img style="cursor:pointer;vertical-align:middle;" title="api:road" id="lorryImg${record.etuuid}" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;
+											</a>
+										</c:when>
+									<c:otherwise>							
+										<img style="cursor:help;vertical-align:middle;" title="api:road" id="lorryImg${record.etuuid}" src="resources/images/lorry_green.png" width="20" height="20"border="0" >&nbsp;
+									</c:otherwise>
+									</c:choose>
 								</c:if>
 								
 							</c:otherwise>
@@ -703,7 +716,7 @@
 											</a>
 											<div style="display: none;" class="clazz_dialog" id="dialogUpdateStatus${counter.count}" title="Dialog">
 												<form action="tvinnsaddigitollv2_api_delete_transport.do" name="updateStatusForm${counter.count}" id="updateStatusForm${counter.count}" method="post">
-													<input type="hidden" name="current_id1${counter.count}" id="current_id1${counter.count}" value="${record.etlnrt}">
+													<input type="" name="current_id1${counter.count}" id="current_id1${counter.count}" value="${record.etlnrt}">
 													<input type="hidden" name="current_mrn${counter.count}" id="current_mrn${counter.count}" value="${record.etmid}">
 													<input type="hidden" name="action${counter.count}" id="action${counter.count}" value="doDelete">
 												 	<p class="text14" >Er du sikker på at du vil slette denne&nbsp;MRN&nbsp;<b>${record.etmid}</b> fra <b>Tollvesenet</b> ?</p>

@@ -739,6 +739,7 @@
 						            	<a tabindex="-1" id="emdkm_ffIdLink">
 											<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="14px" height="14px" border="0" alt="search" >
 										</a>
+										<font id="manualUpdateFFGroup" title="Manuell oppdatering" class="inputFormSubmit text10 isa_warning"><b>Manuell oppd.</b></font>
 				                		<div class="text11" style="position: relative;" align="left">
 					                	<span style="position:absolute;top:2px; width:250px;" id="extMaster_info" class="popupWithInputText text11"  >
 						           		<b>Ekstern Master Dok.nr</b>
@@ -1114,7 +1115,7 @@
 							</c:otherwise>
 							</c:choose>
 							
-							<c:if test="${model.record.emmid != 'EXTERNAL'}">
+							<c:if test="${model.record.emmid != 'EXTERNAL' && not empty model.record.listHouses}">
 								<c:choose>
 								<%-- st3 on the level that trigger the async-Send until the async-process is finnished --%>
 								<c:when test="${model.record.emst3 == 'P' }"> <%--PENDING(P) on async triggered --%>
@@ -1146,7 +1147,25 @@
 			                	<input style="cursor:pointer;vertical-align:middle;" type="checkbox" id="async" name="async" value="1" checked>
 			                	<span style="cursor:help;vertical-align:middle;font-size: 12px;" title="Vis du ønsker sende til en kø..." >Send til kø</span>
 			                </span>
-							
+			                
+			                <c:if test="${model.record.emmid != 'EXTERNAL' && not empty model.record.listHouses}">
+			                	<c:choose>
+								<%-- st3 on the level that trigger the async-Send until the async-process is finnished --%>
+								<c:when test="${model.record.emst3 == 'P' }"> <%--PENDING(P) on async triggered --%>
+									<input title="Pending status ..." class="buttonGrayInsideDivPopup" style="cursor:not-allowed;" type="button" name="slettButtonAllHousesBlocked" id="slettButtonAllHousesBlocked" value='Slett alle houses'>
+								</c:when>
+								<c:otherwise>
+									<c:if test="${model.record.emsg != 'SYS'}">
+										&nbsp;
+										<input title="Slett alle underliggende houses fra toll.no..." class="inputFormSubmitStd" type="button" name="slettButtonAllHouses" id="slettButtonAllHouses" value='Slett alle houses'>
+										<div style="display: none;" class="clazz_dialog" id="dialogSlettAllHouses" title="Dialog">
+											 <p class="text14" >Er du sikker på at du vil slette alle houses fra toll.no ?</p>
+										</div>
+									</c:if>
+								</c:otherwise>
+								</c:choose>
+								
+							</c:if>
 						</c:otherwise>
 					</c:choose>
 				</c:if>

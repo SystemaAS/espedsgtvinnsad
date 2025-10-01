@@ -91,6 +91,8 @@ public class SadmoafRecord extends JsonAbstractGrandFatherRecord  {
 	private String etpbr =""; //       postbox repre.                         307  321    15         a
 	private String etemr =""; //       epostadr/tlf repre.                    322  371    50         a
 	private String etemrt =""; //      kodetype repre.                        372  373     2         a
+	private String etemrx =""; //       epostadr/tlf repre.                    322  371    50         a
+	private String etemrtx =""; //      kodetype repre.                        372  373     2         a
 	private String own_etemr_telephone = ""; // 
 	private String own_etemr_email = ""; // 
 	private String etkmrk =""; //      kjennemerke                            374  403    30         a
@@ -114,6 +116,8 @@ public class SadmoafRecord extends JsonAbstractGrandFatherRecord  {
 	private String etpbt =""; //       postbox trans.                         697  711    15         a
 	private String etemt =""; //       epostadr/tlf trans.                    712  761    50         a
 	private String etemtt =""; //      kodetype trans.                        762  763     2         a
+	private String etemtx =""; //       epostadr/tlf trans.                    712  761    50         a
+	private String etemttx =""; //      kodetype trans.                        762  763     2         a
 	private String own_etemt_telephone = ""; // 
 	private String own_etemt_email = ""; // 
 	private String etdkm =""; //       master dokumentnr                      764  813    50         a

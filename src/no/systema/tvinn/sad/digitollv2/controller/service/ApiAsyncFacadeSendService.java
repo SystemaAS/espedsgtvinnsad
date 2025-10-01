@@ -58,6 +58,12 @@ public class ApiAsyncFacadeSendService {
 		this.apiHouseSendService.sendAll(applicationUser, lnrt, lnrm );
 	}
 	
+	@Async
+	public void deleteAllHouses (String applicationUser, Integer lnrt, Integer lnrm) {	
+		this.apiHouseSendService.deleteAll(applicationUser, lnrt, lnrm );
+	}
+	
+	
 	
 	
 	@Autowired

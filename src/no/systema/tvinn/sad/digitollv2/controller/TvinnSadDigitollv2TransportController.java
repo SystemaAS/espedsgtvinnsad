@@ -237,6 +237,8 @@ public class TvinnSadDigitollv2TransportController {
 			this.setCodeDropDownMgr(appUser, model);
 			//this is necessary since not all customers have access to webservices without making firewall changes (take time...)
 			model.put("eoriValidationActive",AppConstants.EORI_VALIDATION_ACTIVE);
+			//
+			model.put("routingId",this.getRoutingIdForChildWindow(appUser));
 			
 			//set a session variable in order to make the list available to an external view controller (Excel/PDF- Controller)
 			session.setAttribute(session.getId() + TvinnSadConstants.SESSION_LIST, outputList);
@@ -1741,9 +1743,10 @@ public class TvinnSadDigitollv2TransportController {
 		if(StringUtils.isNotEmpty(recordToValidate.getOwn_etemr_email())){
 			recordToValidate.setEtemr(recordToValidate.getOwn_etemr_email());
 			recordToValidate.setEtemrt(SadDigitollConstants.API_TYPE_EMAIL);	
-		}else {
-			recordToValidate.setEtemr(recordToValidate.getOwn_etemr_telephone());
-			recordToValidate.setEtemrt(SadDigitollConstants.API_TYPE_TELEPHONE);
+		}
+		if(StringUtils.isNotEmpty(recordToValidate.getOwn_etemr_telephone())){
+			recordToValidate.setEtemrx(recordToValidate.getOwn_etemr_telephone());
+			recordToValidate.setEtemrtx(SadDigitollConstants.API_TYPE_TELEPHONE);
 		}
 	}
 	/**
@@ -1835,18 +1838,23 @@ public class TvinnSadDigitollv2TransportController {
 		if(StringUtils.isNotEmpty(recordToValidate.getOwn_etemr_email())){
 			recordToValidate.setEtemr(recordToValidate.getOwn_etemr_email());
 			recordToValidate.setEtemrt(SadDigitollConstants.API_TYPE_EMAIL);	
-		}else {
-			recordToValidate.setEtemr(recordToValidate.getOwn_etemr_telephone());
-			recordToValidate.setEtemrt(SadDigitollConstants.API_TYPE_TELEPHONE);
 		}
+		if(StringUtils.isNotEmpty(recordToValidate.getOwn_etemr_telephone())){
+			recordToValidate.setEtemrx(recordToValidate.getOwn_etemr_telephone());
+			recordToValidate.setEtemrtx(SadDigitollConstants.API_TYPE_TELEPHONE);
+		}
+		
 		//Carrier - communication
 		if(StringUtils.isNotEmpty(recordToValidate.getOwn_etemt_email())){
 			recordToValidate.setEtemt(recordToValidate.getOwn_etemt_email());
 			recordToValidate.setEtemtt(SadDigitollConstants.API_TYPE_EMAIL);	
-		}else {
-			recordToValidate.setEtemt(recordToValidate.getOwn_etemt_telephone());
-			recordToValidate.setEtemtt(SadDigitollConstants.API_TYPE_TELEPHONE);
 		}
+		if(StringUtils.isNotEmpty(recordToValidate.getOwn_etemt_telephone())){
+			recordToValidate.setEtemtx(recordToValidate.getOwn_etemt_telephone());
+			recordToValidate.setEtemttx(SadDigitollConstants.API_TYPE_TELEPHONE);
+		}
+		
+		
 		
 		//Register date
 		if(recordToValidate.getEtdtr()!=null && recordToValidate.getEtdtr() > 0) {

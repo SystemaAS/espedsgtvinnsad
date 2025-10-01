@@ -9,6 +9,8 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class HouseConsignments {
+	private String documentNumber;
+	private String type;
 	private String weight;
 	private String status;
 	

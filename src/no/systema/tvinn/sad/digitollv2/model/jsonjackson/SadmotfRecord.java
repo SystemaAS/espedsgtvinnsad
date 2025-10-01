@@ -120,6 +120,8 @@ public class SadmotfRecord extends JsonAbstractGrandFatherRecord  {
 	
 	private String etemr = ""; // varchar(50), Epostadr/tlf  
 	private String etemrt = ""; // varchar(2),   Epostadr/tlf typ (TE-EM)
+	private String etemrx = ""; // varchar(50), Epostadr/tlf  
+	private String etemrtx = ""; // varchar(2),   Epostadr/tlf typ (TE-EM)
 	private String own_etemr_telephone = ""; // 
 	private String own_etemr_email = ""; // 
 	private String etkmrk = ""; // varchar(30), Kjennemerke (reg.nr)
@@ -145,6 +147,8 @@ public class SadmotfRecord extends JsonAbstractGrandFatherRecord  {
 	private String etpbt = ""; // varchar(15) , Postbox
 	private String etemt = ""; // varchar(50), Epostadr/tlf 
 	private String etemtt = ""; // varchar(2), Epostadr/tlf typ (TE-EM)
+	private String etemtx = ""; // varchar(50), Epostadr/tlf 
+	private String etemttx = ""; // varchar(2), Epostadr/tlf typ (TE-EM)
 	private String own_etemt_telephone = ""; // 
 	private String own_etemt_email = ""; // 
 	

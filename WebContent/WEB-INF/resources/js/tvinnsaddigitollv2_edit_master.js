@@ -138,6 +138,36 @@
 		  jq('#dialogSendAllHouses').dialog('open');
     });
 
+	//Real Send to Api (POST or PUT)
+    jq('#slettButtonAllHouses').click(function() { 
+    	  jq('#dialogSlettAllHouses').dialog( "option", "title", "Slett alle underliggende houses fra toll.no" );
+		  //deal with buttons for this modal window
+		  jq('#dialogSlettAllHouses').dialog({
+			 buttons: [ 
+	            {
+				 id: "dialogSaveTU",	
+				 text: "Ok",
+				 click: function(){
+					 		setBlockUI();
+							window.location = 'tvinnsaddigitollv2_api_delete_allHouses.do?&level=m&lnrt=' + jq('#emlnrt').val() + '&lnrm=' + jq('#emlnrm').val();
+				 		}
+			 	 },
+	 	 		{
+			 	 id: "dialogCancelTU",
+			 	 text: "Cancel", 
+				 click: function(){
+					 		//back to initial state of form elements on modal dialog
+					 		jq("#dialogSaveSU").button("option", "disabled", true);
+					 		jq( this ).dialog( "close" ); 
+				 		} 
+	 	 		 } ] 
+		  });
+		  //init values
+		  jq("#dialogSaveSU").button("option", "disabled", true);
+		  //open now
+		  jq('#dialogSlettAllHouses').dialog('open');
+    });
+
 	//Refresh
     jq('#alinkRefreshButton').click(function() { 
     	setBlockUI();
@@ -279,6 +309,54 @@
 				jq('#emsg').removeClass("isa_error");
 			}
 		});
+		
+		//allow manually update of external ids in the _främmande houser group (_ff)
+		jq('#manualUpdateFFGroup').click(function() {
+			var emdkm_ff_group = document.querySelector('#emdkm_ff');
+			
+			if(emdkm_ff_group.matches('.inputTextReadOnly')){
+				jq('#emdkm_ff').addClass("inputTextMediumBlue");
+				jq('#emdkm_ff').removeClass("inputTextReadOnly");
+				jq('#emdkm_ff').removeAttr('readonly');
+				//
+				jq('#emdkmt_ff').addClass("inputTextMediumBlue");
+				jq('#emdkmt_ff').removeClass("inputTextReadOnly");
+				jq('#emdkmt_ff').removeAttr('readonly');
+				//
+				jq('#emrgt_ff').addClass("inputTextMediumBlue");
+				jq('#emrgt_ff').removeClass("inputTextReadOnly");
+				jq('#emrgt_ff').removeAttr('readonly');
+				//
+				jq('#emrgr_ff').addClass("inputTextMediumBlue");
+				jq('#emrgr_ff').removeClass("inputTextReadOnly");
+				jq('#emrgr_ff').removeAttr('readonly');
+				//
+				jq('#manualUpdateFFGroup').addClass("isa_success");
+				jq('#manualUpdateFFGroup').removeClass("isa_warning");
+
+				
+			}else{
+				jq('#emdkm_ff').addClass("inputTextReadOnly");
+				jq('#emdkm_ff').removeClass("inputTextMediumBlue");
+				jq('#emdkm_ff').prop('readonly', true);
+				//
+				jq('#emdkmt_ff').addClass("inputTextReadOnly");
+				jq('#emdkmt_ff').removeClass("inputTextMediumBlue");
+				jq('#emdkmt_ff').prop('readonly', true);
+				//
+				jq('#emrgt_ff').addClass("inputTextReadOnly");
+				jq('#emrgt_ff').removeClass("inputTextMediumBlue");
+				jq('#emrgt_ff').prop('readonly', true);
+				//
+				jq('#emrgr_ff').addClass("inputTextReadOnly");
+				jq('#emrgr_ff').removeClass("inputTextMediumBlue");
+				jq('#emrgr_ff').prop('readonly', true);
+				//
+				jq('#manualUpdateFFGroup').addClass("isa_warning");
+				jq('#manualUpdateFFGroup').removeClass("isa_success");
+			}
+		});
+		
 
 	  
 	  	//CHILD-WINDOWS

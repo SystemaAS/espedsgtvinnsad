@@ -935,6 +935,68 @@ public class TvinnSadDigitollv2HouseController {
 		
 	}
 	
+	@RequestMapping(value="tvinnsaddigitollv2_api_delete_allHouses.do",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doApiDeleteAllHouses(HttpSession session, HttpServletRequest request){
+		logger.info("inside doApiDeleteAllHouses");
+		
+		String lnrtStr = request.getParameter("lnrt");
+		String lnrmStr = request.getParameter("lnrm");
+		String level = request.getParameter("level");
+		
+		Integer lnrt = 0;
+		Integer lnrm = 0;
+		if(StringUtils.isNotEmpty(lnrtStr)) { lnrt = Integer.valueOf(lnrtStr); }
+		if(StringUtils.isNotEmpty(lnrtStr)) { lnrm = Integer.valueOf(lnrmStr); }
+		
+		Map model = new HashMap();
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		ModelAndView successView = null;
+		StringBuilder redirect = new StringBuilder();
+		
+		//if it triggered from master level
+		if(StringUtils.isNotEmpty(level) && level.equals("m")) {
+			redirect.append("redirect:tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=" + lnrtStr + "&emlnrm=" + lnrmStr);
+		}else {
+			redirect.append("redirect:tvinnsaddigitollv2_edit_transport.do?action=doFind&etlnrt=" + lnrtStr );
+		}
+		logger.info(redirect.toString());
+		
+		if(appUser==null){
+			return loginView;
+		
+		}else{
+			
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			//=================
+			//SEND DELETE
+			//=================
+			//send from master GUI implementation
+			if(lnrt > 0 && lnrm > 0 ) {
+				//set st3 as pending in master to block the Send all houses- button until finished
+				this.apiHouseSendService.setSt3_Master(appUser.getUser(), lnrt, lnrm, EnumSadmomfStatus3.PENDING.toString());
+				//always async
+				this.apiAsynchFacadeSendService.deleteAllHouses(appUser.getUser(), lnrt, lnrm );
+				
+				//remove the (P)ENDING status that was set by the caller before the async call
+				//this.apiHouseSendService.setSt3_Master(appUser.getUser(), lnrt, lnrm, EnumSadmomfStatus3.EMPTY.toString());
+			}else {
+				//this will never populate a redirect but shit the same ...:-(
+				StringBuffer errMsg = new StringBuffer();
+				errMsg.append("ERROR on doSendHouse -->detail: null ids? ...");
+				model.put("errorMessage", errMsg.toString());
+			}
+			
+			
+			
+			
+			successView = new ModelAndView(redirect.toString());
+			
+		}
+		
+		return successView;
+		
+	}
+	
 	/**
 	 * 
 	 * @param applicationUser

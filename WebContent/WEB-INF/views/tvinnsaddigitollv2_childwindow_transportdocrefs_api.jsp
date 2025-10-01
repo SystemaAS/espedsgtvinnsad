@@ -111,8 +111,8 @@
 					            <c:if test="${not empty model.dtoHouseList}">
 						            <c:forEach items="${model.dtoHouseList}" var="record" varStatus="counter">    
 						             <tr class="tableRow" height="20" >
-						          	   <td width="2%" align="center"class="tableCellFirst12" >house-${counter.count}</td>
-						          	   <td width="2%" align="center" class="tableCell12" ></td>
+						          	   <td width="2%" align="left"class="tableCellFirst12" >house:${record.documentNumber}</td>
+						          	   <td width="2%" align="center" class="tableCell12" >${record.type}</td>
 						          	   <td width="2%" align="center" class="tableCell12" >${record.weight}</td>
 					               	   <td width="2%" align="center" class="tableCell12" >${record.status}</td>
 					               	   <td width="2%" align="center" class="tableCell12" ></td>

@@ -440,7 +440,10 @@
 											<select required oninvalid="this.setCustomValidity('Obligatorisk')" oninput="setCustomValidity('')"  class="inputTextMediumBlueMandatoryField" id="etavd" name="etavd">
 											  <option value="">-velg-</option>
 							 				  	<c:forEach var="record" items="${model.avdList}" >
-							 				  		<option title="${record.namn}" value="${record.avd}"<c:if test="${user.asavd == record.avd}"> selected </c:if> >${record.avd}</option> 
+							 				  		<%-- if you put this....then you must move the event onBlur for avd to onChange for Tur!!!!!
+							 				  		 <option title="${record.namn}" value="${record.avd}"<c:if test="${user.asavd == record.avd}"> selected </c:if> >${record.avd}</option> 
+							 				  		--%>
+							 				  		<option title="${record.namn}" value="${record.avd}"<c:if test="${model.record.etavd == record.avd}"> selected </c:if> >${record.avd}</option>
 												</c:forEach>  
 											</select> 
 					 					</td>
@@ -872,6 +875,8 @@
 									<td class="text14">&nbsp;<span title="own_etemt_telephone">Telefon</span></td>
 									
 				 				</tr>
+				 				
+				 				<%-- ORIGINAL
 				 				<tr >
 				 					<c:choose>
 				 					<c:when test="${model.record.etemtt == 'EM'}">
@@ -893,6 +898,12 @@
 									</c:choose>
 									
 				 				</tr>
+				 				 --%>
+				 				 
+				 				 <tr >
+			 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemt_email" id="own_etemt_email" size="35" maxlength="50" value="${model.record.etemt}"></td>
+									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemt_telephone" id="own_etemt_telephone" size="15" maxlength="50" value="${model.record.etemtx}"></td>
+								</tr>
 				 				<tr height="2"><td>&nbsp;</td></tr>
 				 				
 				 				</table>
@@ -1007,6 +1018,8 @@
 									<td class="text14">&nbsp;<span title="own_etemr_telephone">Telefon</span></td>
 									
 				 				</tr>
+				 				
+				 				<%-- ORIGINAL 
 				 				<tr >
 									<c:choose>
 				 					<c:when test="${empty model.record.etemrt}">
@@ -1017,7 +1030,7 @@
 				 						<c:choose>
 				 							<c:when test="${model.record.etemrt == 'EM'}">
 						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_email" id="own_etemr_email" size="35" maxlength="50" value="${model.record.etemr}"></td>
-						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_telephone" id="own_etemr_telephone" size="15" maxlength="50" value=""></td>
+						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_telephone" id="own_etemr_telephone" size="15" maxlength="50" value="${model.record.etemrx}"></td>
 						 					</c:when>
 						 					<c:otherwise>
 						 						<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_email" id="own_etemr_email" size="35" maxlength="50" value=""></td>
@@ -1027,6 +1040,13 @@
 									</c:otherwise>
 									</c:choose>
 				 				</tr>
+				 				--%>
+				 				
+				 				<tr >
+									<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_email" id="own_etemr_email" size="35" maxlength="50" value="${model.record.etemr}"></td>
+						 			<td class="text14"><input  type="text" class="inputTextMediumBlue" name="own_etemr_telephone" id="own_etemr_telephone" size="15" maxlength="50" value="${model.record.etemrx}"></td>		
+				 				</tr>
+				 				
 				 				<tr height="2"><td>&nbsp;</td></tr>
 				 				
 				 				</table>

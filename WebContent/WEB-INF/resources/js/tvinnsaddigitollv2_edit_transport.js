@@ -368,7 +368,7 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 	//Default-values from SADMOAF
 	//================================= 
 	jq(function() {
-		jq('#etavd').blur(function() {
+		jq('#etavd').change(function() {
 			
 			if(jq('#etavd').val() != ""){
 				var	_avd = jq('#etavd').val();
@@ -416,21 +416,40 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 							jq('#etad1r').val(data[i].etad1r);//Ombud adress
 							jq('#etpnr').val(data[i].etpnr);//Ombud Postnr
 							//alert(data[i].etemrt + data[i].etemr);
-							if(data[i].etemrt == 'TE'){
-								jq('#own_etemr_telephone').val(data[i].etemr);//Ombud telephone
-							}else if(data[i].etemrt == 'EM'){
-								jq('#own_etemr_email').val(data[i].etemr);//Ombud epost
-							}
+							jq('#own_etemr_email').val(data[i].etemr);//Ombud epost
+							jq('#own_etemr_telephone').val(data[i].etemrx);//Ombud telephone
+							
+							jq('#etnat').val(data[i].etnat);//Carrier navn
+							jq('#etrgt').val(data[i].etrgt);//Carrier Orgnr
+							jq('#etpst').val(data[i].etpst);//Carrier Sted
+							jq('#etlkt').val(data[i].etlkt);//Carrier landkod
+							jq('#etad1t').val(data[i].etad1t);//Carrier adress
+							jq('#etpnt').val(data[i].etpnt);//Carrier Postnr
+							//alert(data[i].etemrt + data[i].etemr);
+							jq('#own_etemt_email').val(data[i].etemt);//Ombud epost
+							jq('#own_etemt_telephone').val(data[i].etemtx);//Ombud telephone
+							
+							
 					 	}
 					}else{
-						jq('#etnar').val("");//Ombud navn
-						jq('#etrgr').val("");//Ombud Orgnr
-						jq('#etpsr').val("");//Ombud Sted
-						jq('#etlkr').val("");//Ombud landkod
-						jq('#etad1r').val("");//Ombud adress
-						jq('#etpnr').val("");//Ombud Postnr
-						jq('#own_etemr_email').val("");//Ombud epost
-						jq('#own_etemr_telephone').val("");//Ombud telephone
+						//Ombud
+						jq('#etnar').val("");// navn
+						jq('#etrgr').val("");// Orgnr
+						jq('#etpsr').val("");// Sted
+						jq('#etlkr').val("");// landkod
+						jq('#etad1r').val("");// adress
+						jq('#etpnr').val("");// Postnr
+						jq('#own_etemr_email').val("");// epost
+						jq('#own_etemr_telephone').val("");// telephone
+						//Carrier
+						jq('#etnat').val("");// navn
+						jq('#etrgt').val("");// Orgnr
+						jq('#etpst').val("");// Sted
+						jq('#etlkt').val("");// landkod
+						jq('#etad1t').val("");// adress
+						jq('#etpnt').val("");// Postnr
+						jq('#own_etemt_email').val("");// epost
+						jq('#own_etemt_telephone').val("");// telephone
 					}
 					},
 				  	  error: function() {
@@ -511,7 +530,10 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 									jq('#etpst').val(data[i].tuad3t);//varies depending on customer. We just print out what comes inside tuad3t...
 									//Landkode transp.
 									jq('#etlkt').val(data[i].tulk);
-									
+									jq('#etpnt').val(""); //to erase what came on etavd-onChange
+									//emails&phones (carrier)
+									jq('#own_etemt_telephone').val("");//to erase what came on etavd-onChange
+									jq('#own_etemt_email').val("");	
 								}
 							}
 						  }

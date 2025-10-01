@@ -107,6 +107,57 @@ public class ApiHouseSendService {
 		return retval;
 		
 	}
+	
+	public String delete (String applicationUser, Integer ehlnrt, Integer ehlnrm, Integer ehlnrh, String ehmid) {
+		String retval = "";
+		logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+		
+		//=================
+		//SEND DELETE
+		//=================
+		if(ehlnrt > 0 && ehlnrm > 0 && ehlnrh > 0) {
+	    	
+			StringBuilder url = new StringBuilder();
+			StringBuilder urlRequestParamsKeys = new StringBuilder();
+			urlRequestParamsKeys.append("user=" + applicationUser);
+			
+			url.append(SadDigitollUrlDataStore.SAD_DIGITOLL_MANIFEST_ROOT_API_URL);
+			//check if POST-CREATE or PUT-UPDATE
+			if( StringUtils.isNotEmpty(ehmid) ) {
+				url.append("deleteHouseConsignment.do");
+				urlRequestParamsKeys.append("&ehlnrt=" + ehlnrt);
+				urlRequestParamsKeys.append("&ehlnrm=" + ehlnrm);
+				urlRequestParamsKeys.append("&ehlnrh=" + ehlnrh);
+				urlRequestParamsKeys.append("&mrn=" + ehmid);
+			}
+			
+			String BASE_URL = url.toString();
+    		logger.info("URL: " + BASE_URL);
+    		logger.info("PARAMS: " + urlRequestParamsKeys.toString());
+    		String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParamsKeys.toString());
+    		//Debug -->
+	    	logger.info(jsonPayload);
+	    	
+    		try {
+	    		ApiGenericDtoResponse apiDtoResponse = this.apiGenericDtoResponseService.getReponse(jsonPayload);
+	    		if(StringUtils.isNotEmpty(apiDtoResponse.getErrMsg())){
+	    			new RedirectCleaner().doIt(apiDtoResponse);
+	    			//in order to catch it after the redirect as a parameter...if applicable
+	    			if(StringUtils.isNotEmpty(apiDtoResponse.getErrMsgClean())) {
+	    				retval = "&" + SadDigitollConstants.REDIRECT_ERRMSG + "=" + apiDtoResponse.getErrMsgClean();
+	    			}
+				}
+    		}catch(Exception e) {
+    			e.printStackTrace();
+    			
+    		}finally {
+    			this.setSt3_House(applicationUser, ehlnrt, ehlnrm, ehlnrh, EnumSadmohfStatus3.EMPTY.toString());
+    		}
+		}
+		
+		return retval;
+		
+	}
 	/**
 	 * Send all houses as a batch (call by either master or transport)
 	 * 
@@ -127,6 +178,41 @@ public class ApiHouseSendService {
 			List<SadmohfRecord> listOfHouses = this.getHouses(applicationUser, String.valueOf(lnrt), String.valueOf(lnrm));
 			for(SadmohfRecord record: listOfHouses) {
 				this.send(applicationUser, record.getEhlnrt(), record.getEhlnrm(), record.getEhlnrh(), record.getEhmid());
+			}
+			//remove the (P)ENDING status that was set by the caller before the async call
+			this.setSt3_Master(applicationUser, lnrt, lnrm, EnumSadmomfStatus3.EMPTY.toString());
+			
+		}else if(lnrt > 0 ) {
+			/* not implemented in the caller...
+			List<SadmomfRecord> listOfMasters = this.getMasters(applicationUser, String.valueOf(lnrt));
+			for(SadmomfRecord masterRecord: listOfMasters) {
+				List<SadmohfRecord> listOfHouses = this.getHouses(applicationUser, String.valueOf(masterRecord.getEmlnrt()), String.valueOf(masterRecord.getEmlnrm()));
+				for(SadmohfRecord houseRecord: listOfHouses) {
+					this.send(applicationUser, houseRecord.getEhlnrt(), houseRecord.getEhlnrm(), houseRecord.getEhlnrh(), houseRecord.getEhmid());
+				}
+			}
+			//remove the (P)ENDING status that was set by the caller before the async call
+			this.setSt3_TransportToPending(applicationUser, lnrt, lnrm, EnumSadmomfStatus3.EMPTY.toString());
+			*/
+		}
+		
+		return retval;
+		
+	}
+	
+	public String deleteAll(String applicationUser, Integer lnrt, Integer lnrm) {
+		String retval = "";
+		logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+		
+		//=================
+		//SEND DELETE
+		//=================
+		if(lnrt > 0 && lnrm > 0) {
+			List<SadmohfRecord> listOfHouses = this.getHouses(applicationUser, String.valueOf(lnrt), String.valueOf(lnrm));
+			for(SadmohfRecord record: listOfHouses) {
+				if(StringUtils.isNotEmpty(record.getEhmid())) {
+					this.delete(applicationUser, record.getEhlnrt(), record.getEhlnrm(), record.getEhlnrh(), record.getEhmid());
+				}
 			}
 			//remove the (P)ENDING status that was set by the caller before the async call
 			this.setSt3_Master(applicationUser, lnrt, lnrm, EnumSadmomfStatus3.EMPTY.toString());
