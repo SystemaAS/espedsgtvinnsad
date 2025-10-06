@@ -67,6 +67,7 @@ public class GeneralTextRenderController {
 	public ModelAndView doRenderLocalLogsg(HttpSession session, HttpServletRequest request, HttpServletResponse response){
 		logger.info("Inside doRenderLocalLogsg...");
 		SystemaWebUser appUser = (SystemaWebUser)session.getAttribute(AppConstants.SYSTEMA_WEB_USER_KEY);
+		String date = request.getParameter("date");
 		Log4jMgr log4jMgr = new Log4jMgr();
 		if(appUser==null){
 			return this.loginView;
@@ -82,27 +83,32 @@ public class GeneralTextRenderController {
 			String path = TdsServletContext.getTdsServletContext().getRealPath("/");
 			//logger.info("ServletContext:" + path);
 			int pathRootIndex = path.indexOf(SERVLET_CONTEXT_WEBAPPS_ROOT);
-			String logFile = null;
+			StringBuilder logFile = new StringBuilder();
 			if(pathRootIndex!=-1){
-				logFile = path.substring(0,pathRootIndex) + RELATIVE_LOGFILE_PATH;
+				logFile.append(path.substring(0,pathRootIndex) + RELATIVE_LOGFILE_PATH);
+				if(StringUtils.isNotEmpty(date)) {
+					if(new DateValidator().validateDateIso203_YYYY_MM_DD(date)) {
+						logFile.append("." + date);
+					}
+				}
 				logger.info("logFile:" + logFile);
 			}
 			
 			if(logFile!=null ){
 				//must know the file type in order to put the correct content type on the Servlet response.
-                String fileType = this.payloadContentFlusher.getFileType(logFile);
+                String fileType = this.payloadContentFlusher.getFileType(logFile.toString());
                 if(AppConstants.DOCUMENTTYPE_LOG.equals(fileType)){
                 		response.setContentType(AppConstants.HTML_CONTENTTYPE_TEXTHTML);
                 }else if(AppConstants.DOCUMENTTYPE_TXT.equals(fileType)){
             			response.setContentType(AppConstants.HTML_CONTENTTYPE_TEXTHTML);
                 }//--> with browser dialogbox: response.setHeader ("Content-disposition", "attachment; filename=\"edifactPayload.txt\"");
-                response.setHeader ("Content-disposition", "filename=\"log4jCustomer.txt" + fileType + "\"");
+                response.setHeader ("Content-disposition", "filename=\"logsgLogger.txt" + fileType + "\"");
                 
                 logger.info("Start flushing file payload...");
                 //send the file output to the ServletOutputStream
                 try{
                 		//InputStream inputStream = session.getServletContext().getResourceAsStream(logFile);
-                		this.payloadContentFlusher.flushServletOutput(response, logFile);
+                		this.payloadContentFlusher.flushServletOutput(response, logFile.toString());
                 	
                 }catch (Exception e){
                 		e.printStackTrace();
