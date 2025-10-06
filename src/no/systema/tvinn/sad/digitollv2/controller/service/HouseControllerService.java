@@ -201,7 +201,7 @@ public class HouseControllerService {
 		if(sadmohfRecord!=null) {
 			//an extra random number som extra unique flag
 			Random rand = new Random(); 
-			int randomValue = rand.nextInt(100); 
+			int randomValue = rand.nextInt(1000); 
 			
 			dokumentId = orgNr + HYPHEN + StringUtils.leftPad(String.valueOf(sadmohfRecord.getEhavd()),4,"0") + 
 						 		 HYPHEN + StringUtils.leftPad(String.valueOf(sadmohfRecord.getEhtdn()),7,"0") + 

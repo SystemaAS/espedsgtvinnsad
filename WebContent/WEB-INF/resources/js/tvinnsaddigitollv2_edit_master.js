@@ -365,7 +365,7 @@
   		//--------------------
 	    jq('#emproIdLink').click(function() {
 	    	jq('#emproIdLink').attr('target','_blank');
-	    	window.open('tvinnsaddigitollv2_childwindow_tur.do?action=doInit&tudt=20240801' + '&tupro=' + jq('#empro').val() + '&tuavd=' + jq('#emavd').val()  + '&ctype=empro', "turWin", "top=300px,left=500px,height=600px,width=1000px,scrollbars=no,status=no,location=no");
+	    	window.open('tvinnsaddigitollv2_childwindow_tur.do?action=doInit&tudt=' + '&tupro=' + jq('#empro').val() + '&tuavd=' + jq('#emavd').val()  + '&ctype=empro', "turWin", "top=300px,left=500px,height=600px,width=1000px,scrollbars=no,status=no,location=no");
 	    });
 	    jq('#emproIdLink').keypress(function(e){ //extra feature for the end user
 			if(e.which == 13) {
@@ -376,7 +376,7 @@
 		//External Doc.nr (MasterId)
 		jq('#emdkm_ffIdLink').click(function() {
 	    	jq('#emdkm_ffIdLink').attr('target','_blank');
-	    	window.open('tvinnsaddigitollv2_childwindow_external_master.do?action=doInit&date=20240101' + '&ctype=emdkm' + '&etlnrt=' + jq('#emlnrt').val(), "masterffWin", "top=300px,left=500px,height=600px,width=1400px,scrollbars=no,status=no,location=no");
+	    	window.open('tvinnsaddigitollv2_childwindow_external_master.do?action=doInit&date=' + '&ctype=emdkm' + '&etlnrt=' + jq('#emlnrt').val(), "masterffWin", "top=300px,left=500px,height=600px,width=1400px,scrollbars=no,status=no,location=no");
 	    });
 	    jq('#emdkm_ffIdLink').keypress(function(e){ //extra feature for the end user
 			if(e.which == 13) {

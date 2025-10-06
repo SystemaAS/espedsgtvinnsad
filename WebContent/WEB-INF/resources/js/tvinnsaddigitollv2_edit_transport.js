@@ -202,7 +202,7 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
   	//--------------------
     jq('#etproIdLink').click(function() {
     	jq('#etproIdLink').attr('target','_blank');
-    	window.open('tvinnsaddigitollv2_childwindow_tur.do?action=doInit&tudt=20240801' + '&tupro=' + jq('#etpro').val() + '&tuavd=' + jq('#etavd').val()  + '&ctype=etpro', "turWin", "top=300px,left=500px,height=600px,width=1000px,scrollbars=no,status=no,location=no");
+    	window.open('tvinnsaddigitollv2_childwindow_tur.do?action=doInit&tudt=' + '&tupro=' + jq('#etpro').val() + '&tuavd=' + jq('#etavd').val()  + '&ctype=etpro', "turWin", "top=300px,left=500px,height=600px,width=1000px,scrollbars=no,status=no,location=no");
     });
     jq('#etproIdLink').keypress(function(e){ //extra feature for the end user
 		if(e.which == 13) {
@@ -212,7 +212,7 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
     //Fejk for looking
 	jq('#etproIdLinkFejk').click(function() {
     	jq('#etproIdLinkFejk').attr('target','_blank');
-    	window.open('tvinnsaddigitollv2_childwindow_tur.do?action=doInit&tudt=20240801' + '&tupro=' + jq('#etpro').val() + '&tuavd=' + jq('#etavd').val()  + '&ctype=etproFEJK', "turWin", "top=300px,left=500px,height=600px,width=1000px,scrollbars=no,status=no,location=no");
+    	window.open('tvinnsaddigitollv2_childwindow_tur.do?action=doInit&tudt=' + '&tupro=' + jq('#etpro').val() + '&tuavd=' + jq('#etavd').val()  + '&ctype=etproFEJK', "turWin", "top=300px,left=500px,height=600px,width=1000px,scrollbars=no,status=no,location=no");
     });
     
     
@@ -474,7 +474,7 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 			  	  data: { applicationUser : jq('#applicationUser').val(),
  						  avd : jq('#etavd').val(),
 			  		  	  turNr : jq('#etpro').val(), 
-			  		  	  fromDate : "20240801"}, 
+			  		  	  fromDate : "20250301"}, 
 			  	  dataType: 'json',
 			  	  cache: false,
 			  	  contentType: 'application/json',
@@ -485,7 +485,9 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 						  for ( var i = 0; i < len; i++) {
 							if(data[i].own_ErrMsg != ''){
 								jq('#etpro').addClass("isa_warning");
-								//initTurFields(); har removats pga av Schenker som inte har turer... den är på prov eftersom de klagade som fan	
+								//initTurFields(); har removats pga av Schenker som inte har turer... den är på prov eftersom de klagade som fan
+								jq('#etsg').val(jq('#applicationUserSign').val()) //detta här är pga DHL
+			
 							}else{
 								jq('#etpro').removeClass("isa_warning");
 								
@@ -557,7 +559,7 @@ id="alinkTransport"  //this variable is a global jQuery var instead of using "$"
 	
  function initTurFields(){
 	jq(function() { 
-		//jq('#etavd').val("");//avd.
+		jq('#etavd').val("");//avd.
 		jq('#etsg').val("");//signatur
 		jq('#etkmrk').val("");//Bilnr.
 		jq('#etsjaf').val("");//Fører-navn
