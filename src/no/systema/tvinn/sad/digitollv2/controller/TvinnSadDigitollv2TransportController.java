@@ -298,14 +298,16 @@ public class TvinnSadDigitollv2TransportController {
 			
 			//Submit button (Update/Insert)
 			if(StringUtils.isNotEmpty(action) && action.equals("doUpdate")) {
-				//=====================================================================================================================
+				//======================================================================================================================================
 				//Check for duplicate only with CREATE NEW and if turnr >0 (some customers may have to send a turnr=-1 dummyplace-holder
-				// turnr = -1 should be allowed to be duplicated!
-				//=====================================================================================================================
+				// turnr = -1 should be allowed to be duplicated! (111 as an extra number since some customers have problems with -1 in their keeboards
+				//======================================================================================================================================
 				if(recordToValidate.getEtpro()>0 && StringUtils.isEmpty(etlnrt)) {
-					Boolean isDuplicateTurnr = this.isDuplicateTurnumber(appUser, recordToValidate);
-					logger.info(isDuplicateTurnr.toString());
-					recordToValidate.setIsDuplicateTurnr(isDuplicateTurnr);
+					if(recordToValidate.getEtpro()!=111) {
+						Boolean isDuplicateTurnr = this.isDuplicateTurnumber(appUser, recordToValidate);
+						logger.info(isDuplicateTurnr.toString());
+						recordToValidate.setIsDuplicateTurnr(isDuplicateTurnr);
+					}
 				}
 				
 				//Validate

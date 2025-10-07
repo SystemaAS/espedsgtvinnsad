@@ -52,16 +52,16 @@
     //numeric values
     function numberKey(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
-        if (charCode > 31 && (charCode < 48 || charCode > 57)){
+        if (charCode > 31 && (charCode < 48 || charCode > 57) && (charCode < 96 || charCode > 105)){
             return false;
         }else{
             return true;
         }
     }
-    //amounts with decimal comma(44), period(46), minus(45)
+    //amounts with decimal comma(44), period(46), minus(45), minus(189) (96 to 105 = numbers in the numeric keypad, minus(109) in the numeric path) 
     function amountKey(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
-        if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode!=44 && charCode!=45){
+        if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode!=44 && charCode!=45 && charCode!=189 && charCode!=109){
             return false;
         }else{
             return true;

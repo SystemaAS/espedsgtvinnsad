@@ -1370,6 +1370,10 @@ function validateEORI(field){
 	if (jq("#etsg").val()=='SYS') { 
 		jq('#etsg').addClass("isa_error");
 	}
+	//start when doCreate
+	if( jq('#etavd').length ) {
+		jq('#etavd').focus();
+	}
 	
   });
 
