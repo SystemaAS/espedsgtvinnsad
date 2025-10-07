@@ -52,7 +52,7 @@
     //numeric values
     function numberKey(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
-        if (charCode > 31 && (charCode < 48 || charCode > 57) && (charCode < 96 || charCode > 105)){
+        if (charCode > 31 && (charCode < 48 || charCode > 57)){
             return false;
         }else{
             return true;
