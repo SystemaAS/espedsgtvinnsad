@@ -245,17 +245,27 @@ public class TvinnSadDigitollv2MasterController {
 		    	}
 			}
 			if("doCreate".equals(action)) {
+				logger.warn("inside doCreate Master...");
 				this.setTransportDto(appUser.getUser(), recordToValidate);
 				//(1)get default values from sadmoaf
 				this.setDefaultValues(appUser, recordToValidate);
+				logger.warn("doCreateA-emlkd:" + recordToValidate.getEmlkd());
 				//(2)get default values from tur to complete
 				this.setDefaultValuesTur(appUser, recordToValidate);
+				logger.warn("doCreateA2-emlkd:" + recordToValidate.getEmlkd());
 				//(3)extra
 				if(StringUtils.isEmpty(recordToValidate.getEmrgt())){
 					if(recordToValidate.getTransportDto()!=null) {
 						//logger.debug("setting carrier orgnr from TransportDto:" + recordToValidate.getTransportDto().getEtrgt());
 						recordToValidate.setEmrgt(recordToValidate.getTransportDto().getEtrgt());
 					}
+				}
+				logger.warn("doCreateA3-emlkd:" + recordToValidate.getEmlkd());
+				if(StringUtils.isNotEmpty(recordToValidate.getEmlkd())) {
+					logger.warn("doCreateA3-emlkd-bingo:" + recordToValidate.getEmlkd());
+					logger.warn("emlkd-bingo-emsg:" + recordToValidate.getEmsg());
+					logger.warn("emlkd-bingo-empro:" + recordToValidate.getEmpro());
+					
 				}
 				//
 				model.put("record", recordToValidate);
