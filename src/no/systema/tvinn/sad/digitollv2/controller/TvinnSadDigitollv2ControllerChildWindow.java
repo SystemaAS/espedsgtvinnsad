@@ -128,7 +128,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
 	private DateValidator dateValidator = new DateValidator();
 	private DateTimeManager dateMgr = new DateTimeManager();
-	private Integer sadiSearchNrOfDaysBackwards = -10;
+	private Integer sadiSearchNrOfDaysBackwards = -7;
 	//
 	private TextFileReaderService textFileReaderService = new TextFileReaderService();
 	
@@ -1477,7 +1477,19 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		logger.info("tudt (fromDate):" + tudt);
 		logger.info("tuavd:" + tuavd);
 		logger.info("tupro:" + tupro);
-		//
+		
+		if(StringUtils.isEmpty(tudt)) {
+			if(StringUtils.isEmpty(tuavd) && StringUtils.isEmpty(tupro)) {
+				tudt = dateMgr.getNewDateFromNow(DateTimeManager.ISO_FORMAT, this.sadiSearchNrOfDaysBackwards);
+				recordToValidate.setTudt(tudt);
+			}
+		}else {
+			if(!dateValidator.validateDate(tudt, DateValidator.DATE_MASK_ISO)) {
+				tudt = dateMgr.getNewDateFromNow(DateTimeManager.ISO_FORMAT, this.sadiSearchNrOfDaysBackwards);	
+				recordToValidate.setTudt(tudt);
+			}
+		}
+		
 		model.put("tudt", tudt);
 		//antingen eller och inte båda 2...Turen overrides avd if it exists
 		if(StringUtils.isNotEmpty(tupro)) {
@@ -1711,6 +1723,8 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		String lnrt = request.getParameter("lnrt");
 		String lnrm = request.getParameter("lnrm");
 		String sitle = request.getParameter("sitle");
+		
+		
 		
 		model.put("tur", tur);
 		model.put("lnrt", lnrt);
