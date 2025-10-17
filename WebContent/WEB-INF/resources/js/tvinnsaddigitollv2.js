@@ -160,6 +160,14 @@ jq(function() {
 			
 	  });	
 
+	  jq(".descendantsLink").click(function() {
+		var id = this.id;
+		jq("#"+id).attr(('target','_blank'));
+		//default url
+		var controllerUrl = "tvinnsaddigitollv2_childwindow_transportdocs_rec.do?id=" + id;
+		window.open(controllerUrl, "codeWin", "top=300px,left=500px,height=600px,width=800px,scrollbars=yes,status=no,location=no");	
+			
+	  });	
 
   });
   

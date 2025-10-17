@@ -617,7 +617,19 @@
 							</c:otherwise>
 							</c:choose>
 		               </td>
-		               <td class="tableCell" ><span class="text12SkyBlue">${record.etmid}</span></td>
+		               <td class="tableCell" title="Doc.refs på toll.no (road) ...">
+		               		<c:choose>
+		               		<%-- implemented only on road ... todo air and rail --%>
+		               		<c:when test="${ not empty record.etmid && fn:startsWith(record.etktyp,'3') }">
+			               		<a style="display: block; width: 100%; height: 100%;" class="descendantsLink" id="${record.etmid}">
+		               				${record.etmid}
+		               			</a>	
+		               		</c:when>
+		               		<c:otherwise>
+		               			<span class="text12SkyBlue">${record.etmid}</span>
+		               		</c:otherwise>
+		               		</c:choose>
+		               </td>
 		               <td class="tableCell" title="les status på toll.no">
 		               		<a style="display: block; width: 100%; height: 100%; cursor:pointer" class="uuidLink text12SkyBlue" id="${record.etuuid}">
 								${record.etuuid}
@@ -638,12 +650,12 @@
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'C'}">
 		               				<a tabindex=-1 class="entryLink" id="${record.etmid}_${record.etktyp}">
-										<img style="vertical-align:middle;cursor:help;" title="Completed digitoll-pass at toll.no" src="resources/images/complete-icon.png" width="14px" height="12px" border="0" alt="completion">
+										<img style="vertical-align:middle;" title="Completed digitoll-pass at toll.no" src="resources/images/complete-icon.png" width="14px" height="12px" border="0" alt="completion">
 									</a>
 		               			</c:if>
 		               			<c:if test="${record.etst2 == 'N'}">
 		               				<a tabindex=-1 class="entryLink" id="${record.etmid}_${record.etktyp}">
-										<img style="vertical-align:middle;cursor:help;" title="Denied digitoll-pass at toll.no" src="resources/images/warning.png" width="14px" height="14px" border="0" alt="denied">
+										<img style="vertical-align:middle;" title="Denied digitoll-pass at toll.no" src="resources/images/warning.png" width="14px" height="14px" border="0" alt="denied">
 									</a>
 		               			</c:if>
 		               		</c:when>
