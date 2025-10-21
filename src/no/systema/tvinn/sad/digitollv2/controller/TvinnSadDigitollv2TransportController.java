@@ -320,6 +320,7 @@ public class TvinnSadDigitollv2TransportController {
 		    			this.setRecordAspects(appUser, recordToValidate);
 		    		}
 		    		this.adjustOmbudCommunication(recordToValidate);
+		    		this.adjustCarrierCommunication(recordToValidate);
 					//now we have all aspects in this transport
 					model.put("record", recordToValidate);
 					isValidForFetch = false;
@@ -1749,6 +1750,16 @@ public class TvinnSadDigitollv2TransportController {
 		if(StringUtils.isNotEmpty(recordToValidate.getOwn_etemr_telephone())){
 			recordToValidate.setEtemrx(recordToValidate.getOwn_etemr_telephone());
 			recordToValidate.setEtemrtx(SadDigitollConstants.API_TYPE_TELEPHONE);
+		}
+	}
+	private void adjustCarrierCommunication(SadmotfRecord recordToValidate) {
+		if(StringUtils.isNotEmpty(recordToValidate.getOwn_etemt_email())){
+			recordToValidate.setEtemt(recordToValidate.getOwn_etemt_email());
+			recordToValidate.setEtemtt(SadDigitollConstants.API_TYPE_EMAIL);	
+		}
+		if(StringUtils.isNotEmpty(recordToValidate.getOwn_etemt_telephone())){
+			recordToValidate.setEtemtx(recordToValidate.getOwn_etemt_telephone());
+			recordToValidate.setEtemttx(SadDigitollConstants.API_TYPE_TELEPHONE);
 		}
 	}
 	/**
