@@ -621,12 +621,12 @@
 		               		<c:choose>
 		               		<%-- implemented only on road ... todo air and rail --%>
 		               		<c:when test="${ not empty record.etmid && fn:startsWith(record.etktyp,'3') }">
-			               		<a style="display: block; width: 100%; height: 100%;" class="descendantsLink" id="${record.etmid}">
+			               		<a style="display: block; width: 100%; height: 100%;" class="descendantsLink text12SkyBlue" id="${record.etmid}">
 		               				${record.etmid}
 		               			</a>	
 		               		</c:when>
 		               		<c:otherwise>
-		               			<span class="text12SkyBlue">${record.etmid}</span>
+		               			<span class="text12">${record.etmid}</span>
 		               		</c:otherwise>
 		               		</c:choose>
 		               </td>
