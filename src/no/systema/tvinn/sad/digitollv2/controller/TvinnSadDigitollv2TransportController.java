@@ -206,8 +206,10 @@ public class TvinnSadDigitollv2TransportController {
 								model.put(TvinnSadConstants.ASPECT_ERROR_MESSAGE, "Too many lines. Narrow your search please ...");
 							}else{
 								for(SadmotfRecord record: outputList){
+									//to catch master id's on gui
+									this.getMasterInfo(appUser, record);
+									//
 									this.adjustFieldsForFetch(record);
-									
 									//Special search for red flags/ yellow flags
 									//this in order to get a redFlag/yellowFlag (defect masters or houses)
 									if(StringUtils.isNotEmpty(request.getParameter("showErrorLayers"))) {
@@ -2007,6 +2009,25 @@ public class TvinnSadDigitollv2TransportController {
     	
 	}
 	
+	private void getMasterInfo(SystemaWebUser appUser, SadmotfRecord record) {
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_MASTERCONSIGNMENT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser() + "&emlnrt=" + record.getEtlnrt();
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		SadmomfContainer jsonContainer = this.sadmomfListService.getListContainer(jsonPayload);
+    		record.setListMasters(jsonContainer.getList());
+    		
+    	}
+    	
+	}
 	private boolean masterMrnExist(SystemaWebUser appUser, SadmotfRecord record) {
 		boolean retval = false;
 		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_MASTERCONSIGNMENT_URL;

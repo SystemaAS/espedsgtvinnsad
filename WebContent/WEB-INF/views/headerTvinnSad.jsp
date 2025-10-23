@@ -61,6 +61,8 @@
 		<script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.10.19/features/searchHighlight/dataTables.searchHighlight.min.js"></script>
 		
 		
+	<input type="hidden" name="language" id=language value="${user.usrLang}">	
+
 
     <table class="noBg" style="width:100%;" border="0" cellspacing="0" cellpadding="0">
 		<%--Banner --%>
