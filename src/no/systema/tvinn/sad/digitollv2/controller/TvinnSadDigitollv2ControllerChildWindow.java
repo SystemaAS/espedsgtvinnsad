@@ -128,7 +128,7 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	private TvinnSadDateFormatter dateFormatter = new TvinnSadDateFormatter();
 	private DateValidator dateValidator = new DateValidator();
 	private DateTimeManager dateMgr = new DateTimeManager();
-	private Integer sadiSearchNrOfDaysBackwards = -7;
+	private Integer sadiSearchNrOfDaysBackwards = -0;
 	//
 	private TextFileReaderService textFileReaderService = new TextFileReaderService();
 	
