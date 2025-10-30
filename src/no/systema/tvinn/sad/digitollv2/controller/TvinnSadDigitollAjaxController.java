@@ -259,7 +259,7 @@ public class TvinnSadDigitollAjaxController {
 		final String METHOD = "[DEBUG] getSpecificOppdrag_Digitoll ";
 		logger.info(METHOD + " ...inside");
 		Set result = new HashSet();
-		SadOppdragRecord record = this.getOppdrag(applicationUser, tur, opd);
+		SadOppdragRecord record = this.getOppdrag(applicationUser, tur, opd, avd);
 		if(record!=null) {
 			result.add(record);
 		}
@@ -374,7 +374,7 @@ public class TvinnSadDigitollAjaxController {
 				 logger.info("opd:" + opd);
 				 
 				 //(2) now go on with the real issue (create the house(s)
-				 SadOppdragRecord record = this.getOppdrag(applicationUser, tur, opd);
+				 SadOppdragRecord record = this.getOppdrag(applicationUser, tur, opd, avd);
 				 if(record!=null) {
 					//hand-over 
 					SadmohfRecord sadmohfRecord = new SadmohfRecord();
@@ -650,7 +650,7 @@ public class TvinnSadDigitollAjaxController {
 		 result.add(fejk);
 		 
 		 //(2) now go on with the real issue (create the house(s)
-		 SadOppdragRecord record = this.getOppdrag(applicationUser, tur, opd);
+		 SadOppdragRecord record = this.getOppdrag(applicationUser, tur, opd, avd);
 		 if(record!=null) {
 			//hand-over 
 			SadmohfRecord sadmohfRecord = new SadmohfRecord();
@@ -1656,17 +1656,26 @@ public class TvinnSadDigitollAjaxController {
 	 * @param tur
 	 * @param opd
 	 */
-	private SadOppdragRecord getOppdrag(String applicationUser, String tur, String opd) {
+	private SadOppdragRecord getOppdrag(String applicationUser, String tur, String opd, String avd) {
 		SadOppdragRecord retval = null;
 		
 		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_OPPDRAG_URL;
 		//add URL-parameters
-		String urlRequestParams = "user=" + applicationUser + "&tur=" + tur;
+		StringBuilder urlRequestParams = new StringBuilder();
+		urlRequestParams.append("user=" + applicationUser + "&tur=" + tur);
+		
+		if(StringUtils.isNotEmpty(avd)){
+			urlRequestParams.append("&avd=" + avd);
+		}
+		if(StringUtils.isNotEmpty(opd)){
+			urlRequestParams.append("&opd=" + opd);
+		}
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
     	logger.warn("URL: " + BASE_URL);
     	logger.warn("URL PARAMS: " + urlRequestParams);
-    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
 
+    	
     	//Debug --> 
     	logger.info(jsonPayload);
     	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
@@ -1674,7 +1683,7 @@ public class TvinnSadDigitollAjaxController {
     		SadOppdragContainer container = this.sadOppdragService.getListContainer(jsonPayload);
     		if(container!=null && !container.getOrderList().isEmpty()) {
     			for(SadOppdragRecord record: container.getOrderList()) {
-    				if(record.getSitdn().equals(opd)) {
+    				if(record.getSitdn().equals(opd) && record.getSiavd().equals(avd)) {
     					//Dekl.dato format to NO
     					if(StringUtils.isNotEmpty(record.getWeh0068a())) {
 							if (record.getWeh0068a().length()==8) {

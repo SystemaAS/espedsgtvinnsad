@@ -16,7 +16,7 @@
         <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}</fileNamePattern>
         <!-- keep 30 days' worth of history capped at 3GB total size -->
         <maxHistory>30</maxHistory>
-        <totalSizeCap>50MB</totalSizeCap>
+        <totalSizeCap>250MB</totalSizeCap>
     </rollingPolicy>
     <encoder>
         <pattern>${OWN_PATTERN}</pattern>
