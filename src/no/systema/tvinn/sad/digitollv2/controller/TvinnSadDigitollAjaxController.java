@@ -1719,7 +1719,7 @@ public class TvinnSadDigitollAjaxController {
 			urlRequestParams.append("&avd=" + avd);
 		}
 		if(StringUtils.isNotEmpty(opd)){
-			urlRequestParams.append("&tdeknr=" + opd);
+			urlRequestParams.append("&tdn=" + opd);
 		}
 		
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
