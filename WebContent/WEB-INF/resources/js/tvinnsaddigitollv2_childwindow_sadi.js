@@ -97,8 +97,8 @@
 				  window.opener.setBlockUI();
 				  window.opener.location.href="tvinnsaddigitollv2_edit_master.do?action=doFind&emlnrt=" + jq('#lnrt').val() + "&emlnrm=" + jq('#lnrm').val();
 				  window.close();     
-             }, 800); //milliseconds: in order to avoid a refresh in master due to the above Ajax create house. It could take more time to be finished on the background...
-			
+             //}, 800); //milliseconds: in order to avoid a refresh in master due to the above Ajax create house. It could take more time to be finished on the background...
+			 }, 1500); //milliseconds: in order to avoid a refresh in master due to the above Ajax create house. It could take more time to be finished on the background...
 		});
 		//abort
 		jq('#buttonCancel').click(function(){
