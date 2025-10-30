@@ -257,7 +257,7 @@ public class TvinnSadDigitollAjaxController {
 	  						 @RequestParam String avd, @RequestParam String opd) {
 		 
 		final String METHOD = "[DEBUG] getSpecificOppdrag_Digitoll ";
-		logger.info(METHOD + "Inside");
+		logger.info(METHOD + " ...inside");
 		Set result = new HashSet();
 		SadOppdragRecord record = this.getOppdrag(applicationUser, tur, opd);
 		if(record!=null) {
@@ -274,7 +274,7 @@ public class TvinnSadDigitollAjaxController {
 	  						 @RequestParam String avd, @RequestParam String opd, @RequestParam String bilnr) {
 		 
 		final String METHOD = "[DEBUG] getSpecificSadi_Digitoll";
-		logger.info(METHOD + "Inside");
+		logger.info(METHOD + "...inside");
 		Set result = new HashSet();
 		//convert NO-dato to ISO
 		String datoISO = dateMgr.getDateFormatted_ISO(String.valueOf(dato), DateTimeManager.NO_FORMAT);
@@ -1714,6 +1714,12 @@ public class TvinnSadDigitollAjaxController {
 		}
 		if(StringUtils.isNotEmpty(dato)){
 			urlRequestParams.append("&dato=" + dato);
+		}
+		if(StringUtils.isNotEmpty(avd)){
+			urlRequestParams.append("&avd=" + avd);
+		}
+		if(StringUtils.isNotEmpty(opd)){
+			urlRequestParams.append("&tdeknr=" + opd);
 		}
 		
 		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
