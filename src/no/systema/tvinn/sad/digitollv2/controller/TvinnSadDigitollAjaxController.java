@@ -54,6 +54,7 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.EoriValidationContainer
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.EoriValidationDto;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GrossWeightDto;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurContainer;
@@ -200,6 +201,28 @@ public class TvinnSadDigitollAjaxController {
 	    		
 	    	}
 		 
+		 return result;
+	 }
+	
+	/**
+	 * 
+	 * @param applicationUser
+	 * @return
+	 */
+	@RequestMapping(value = "getGrossWeightSum_Digitoll.do", method = RequestMethod.GET)
+	public @ResponseBody Set<EoriValidationDto> getGrossWeightSum_Digitoll
+	  						(@RequestParam String applicationUser, @RequestParam String lnrt, @RequestParam String lnrm) {
+		 
+		 final String METHOD = "[DEBUG] getGrossWeightSum_Digitoll ";
+		 logger.info(METHOD + "Inside");
+		 Set result = new HashSet();
+		 GrossWeightDto dto = new GrossWeightDto();
+		 //dto.setGrossWeight(99);
+		 //result.add(dto);
+		 
+		 int grossWeightSum = this.getHousesSumGrossWeight(applicationUser, lnrt, lnrm);
+		 dto.setGrossWeight(grossWeightSum);
+		 result.add(dto);
 		 return result;
 	 }
 	/**
@@ -1953,6 +1976,46 @@ public class TvinnSadDigitollAjaxController {
 		
 		
 	}
+	/**
+	 * 
+	 * @param appUser
+	 * @param lnrt
+	 * @param lnrm
+	 * @return
+	 */
+	private int getHousesSumGrossWeight(String applicationUser, String lnrt, String lnrm) {
+		double sumGrossWeight = 0D;
+		
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_DIGITOLL_HOUSECONSIGNMENT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + applicationUser + "&ehlnrt=" + lnrt + "&ehlnrm=" + lnrm;
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		
+    		SadmohfContainer jsonContainer = this.sadmohfListService.getListContainer(jsonPayload);
+    		List<SadmohfRecord> listChild = (List)jsonContainer.getList();
+    		if(listChild!=null && !listChild.isEmpty()) {
+    			for(SadmohfRecord child : listChild) {
+	    			if(StringUtils.isNotEmpty(child.getEhvkb())) {
+	    				sumGrossWeight = sumGrossWeight + Double.valueOf(child.getEhvkb());
+	    				logger.info(String.valueOf(sumGrossWeight));
+	    			}
+	    		}
+    		}
+    	}
+    	//convert to integer since the master gross weight must be in Kilo (without decimals)
+    	int sumGrossWeightInt = (int)sumGrossWeight;
+    	
+    	return sumGrossWeightInt;
+	}
+	
 	
 	@Autowired
 	private UrlCgiProxyService urlCgiProxyService;

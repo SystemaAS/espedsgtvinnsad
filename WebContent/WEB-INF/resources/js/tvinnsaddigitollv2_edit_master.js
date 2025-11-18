@@ -355,7 +355,39 @@
 				jq('#manualUpdateFFGroup').addClass("isa_warning");
 				jq('#manualUpdateFFGroup').removeClass("isa_success");
 			}
+			
 		});
+		
+		
+		jq('#fetchGrossWeight').click(function() {
+			jq.getJSON('getGrossWeightSum_Digitoll.do', {
+				applicationUser : jq('#applicationUser').val(),
+				lnrt : jq('#emlnrt').val(),
+				lnrm : jq('#emlnrm').val(),
+				ajax : 'true'
+			}, function(data) {
+				//alert("Hello");
+				var len = data.length;
+				for ( var i = 0; i < len; i++) {
+					//html += '<option value="' + data[i].kundnr + '">' + data[i].knavn + '</option>';
+					dto = new Object();
+					dto.grossWeight = data[i].grossWeight;
+					
+				}
+				if(len > 0){
+					jq('#emvkb').val(dto.grossWeight);
+					
+				}else{
+					//init fields
+					jq('#emvkb').val("0");
+					
+					
+				}
+			});
+		
+			
+		});	
+		
 		
 
 	  
