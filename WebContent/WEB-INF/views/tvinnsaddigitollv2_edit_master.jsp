@@ -343,7 +343,11 @@
 						</td>
 						<td class="text14">&nbsp;<span title="emsg">Sign</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emvkb">Bruttovekt</span><font class="text16RedBold" >*</font>
-							<font id="fetchGrossWeight" title="Hent bruttovekt (summen av alle houser)" class="inputFormSubmit text8 isa_warning">Hent</font>
+							<%-- <font id="fetchGrossWeight" title="Hent bruttovekt (summen av alle houser)" class="inputFormSubmit text8">Hent</font>  --%>
+							<a tabindex="-1" id=fetchGrossWeight>
+								<img title="Hent bruttovekt (summen av alle houser)" style="cursor:pointer;vertical-align: middle;" src="resources/images/sumatoria.png" width="14px" height="14px" border="0" alt="Summen bruttovekt" >
+							</a>
+							
 						</td>
 						<td class="text14">&nbsp;<span title="emcn">Container</span><font class="text16RedBold" >*</font></td>
 						<td class="text14">&nbsp;<span title="emdkm">Dok.nr</span><font class="text16RedBold" >*</font></td>
