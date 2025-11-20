@@ -22,6 +22,7 @@ public final class SadDigitollUrlDataStore {
 		//Gets the routingId needed for each 1000-record on the Movement-Routing API (complement to the ENTRY (completed/denied) API
 		//http://localhost:8080/syjservicestn/syjsSADMOROID.do?user=OSCAR
 		static public String SAD_FETCH_ROUTINGID_MOVEMENT_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOROID.do";
+		static public String SAD_UPDATE_ROUTINGID_MOVEMENT_URL = AppConstants.HTTP_ROOT_SERVLET_JSERVICES + "/syjservicestn/syjsSADMOROID_U.do";
 		
 		
 		//FETCH Master Consignment list

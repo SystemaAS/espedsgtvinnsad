@@ -28,6 +28,11 @@
 				    &nbsp;&nbsp;RoutingId&nbsp;
 					<input type="text" class="inputText" name="uuid" id="uuid" size="39" maxlength="36" value="${model.uuid}">
 					<input class="inputFormSubmit" onClick="setBlockUI(this)" type="submit" name="submit" value='<spring:message code="systema.tvinn.sad.search"/>'>
+					&nbsp;&nbsp;&nbsp;
+					<span align="left" class="inputText">
+	                	<input style="cursor:pointer;vertical-align:middle;" type="checkbox" id="updFlag" name="updFlag" value="1">
+	                	<span style="cursor:help;vertical-align:middle;font-size: 12px;" title="Vis du ønsker lagre denne routingId (update ...)" >Oppdater RoutingId</span>
+	                </span>
 					</tr>
 				</form>									           		
 			    <tr>

@@ -66,6 +66,8 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ApiMasterRefsRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ApiMrnStatusWithDescendantsRecordDto;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ApiRefsWithDescendantsContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ApiRefsWithDescendantsLightContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateContainer;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.HouseConsignments;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.MasterConsignments;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadOppdragContainer;
@@ -91,6 +93,7 @@ import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ZadmoattfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ZadmoattfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ZadmomlfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.ZadmomlfRecord;
+import no.systema.tvinn.sad.digitollv2.service.GeneralUpdateService;
 import no.systema.tvinn.sad.digitollv2.service.SadOppdragService;
 import no.systema.tvinn.sad.digitollv2.service.SadTurService;
 import no.systema.tvinn.sad.digitollv2.service.SadmobuplgListService;
@@ -266,11 +269,22 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		Map model = new HashMap();
 		String level = request.getParameter("level");
 		String uuid = request.getParameter("uuid");
+		String updateUuidFlag = request.getParameter("updFlag");
+		if(StringUtils.isNotEmpty(updateUuidFlag)) {
+			logger.info("uuid:" + uuid);
+			logger.info("updFlag:" + updateUuidFlag);
+		}
 		
-		
-		//OLD ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_manifestinfo");
 		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_transport_routing_api");
 		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		
+		//in the tranport layer we want to fetch the latest updated uuid (since we might update it (check-box) as we search...)
+		if(StringUtils.isEmpty(uuid)) {
+			uuid = this.getRoutingIdForChildWindow(appUser);
+		}
+		
+		
+		
 		//check user (should be in session already)
 		if(appUser==null){
 			return this.loginView;
@@ -303,14 +317,17 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	    				
 	    				model.put("list", obj.getEntryList());
 						for (EntryRoutingDto dto: obj.getEntryList()) {
+							logger.debug(dto.toString());
 							//DEBUG
-							logger.debug("#entrySummaryDeclarationMRN#:" + dto.getEntrySummaryDeclarationMRN());
-							logger.debug("#transportDocumentHouseLevel#");
-							logger.debug("referenceNumber:" + dto.getTransportDocumentHouseLevel().getReferenceNumber());
-							logger.debug("type:" + dto.getTransportDocumentHouseLevel().getType());
-							logger.debug("#routingResult#");
-							logger.debug("id:" + dto.getRoutingResult().getId());
-							logger.debug("routing:" + dto.getRoutingResult().getRouting());
+							logger.trace("#entrySummaryDeclarationMRN#:" + dto.getEntrySummaryDeclarationMRN());
+							logger.trace("#transportDocumentHouseLevel#");
+							if(dto.getTransportDocumentHouseLevel()!=null) {
+								logger.trace("referenceNumber:" + dto.getTransportDocumentHouseLevel().getReferenceNumber());
+								logger.trace("type:" + dto.getTransportDocumentHouseLevel().getType());
+							}
+							logger.trace("#routingResult#");
+							logger.trace("id:" + dto.getRoutingResult().getId());
+							logger.trace("routing:" + dto.getRoutingResult().getRouting());
 						}
 						
 	    				//to allow local tests where the payload does not exist
@@ -348,8 +365,14 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 							}
 						}*/
 						
+						//Now check if we must update the RoutingId from the end-user check-box. This might happen when the end-user copies the latest (of 1000) in order to get the next 1000:s
+						if(StringUtils.isNotEmpty(updateUuidFlag) && StringUtils.isNotEmpty(uuid)) {
+							logger.info("to update the uuid ...");
+							this.updateRoutingIdWithLatest(appUser.getUser(), uuid);
+						}
+						
 	    			}else {
-	    				logger.info("ErrorMsg:" + obj.getErrMsg());
+	    				logger.error("ErrorMsg:" + obj.getErrMsg());
 	    				model.put("list", null);
 	    			}
 	    		}catch(Exception e) {
@@ -362,6 +385,73 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 			
 	    	return successView;
 		}
+	}
+	private String getRoutingIdForChildWindow(SystemaWebUser appUser) {
+		String retval = "";
+		
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_FETCH_ROUTINGID_MOVEMENT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + appUser.getUser();
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		GeneralUpdateContainer container = this.generalUpdateService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<GeneralUpdateRecord> outputList = container.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(GeneralUpdateRecord record : outputList ){
+					logger.info(record.toString());
+					if(StringUtils.isNotEmpty(container.getErrMsg())){
+						break;
+					}else {
+						retval = record.getRid();
+					}
+				}
+			}
+    	}
+    	return retval;
+	}
+	
+	private String updateRoutingIdWithLatest(String applicationUser, String uuid) {
+		String retval = "";
+		
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_UPDATE_ROUTINGID_MOVEMENT_URL;
+		//add URL-parameters
+		String urlRequestParams = "user=" + applicationUser + "&mode=U" + "&rid=" + uuid;
+		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.warn("URL: " + BASE_URL);
+    	logger.warn("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams);
+
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+    		GeneralUpdateContainer container = this.generalUpdateService.getListContainer(jsonPayload);
+    		//----------------------------------------------------------------
+			//now filter the topic list with the search filter (if applicable)
+			//----------------------------------------------------------------
+    		Collection<GeneralUpdateRecord> outputList = container.getList();	
+			if(outputList!=null && outputList.size()>0){
+				for(GeneralUpdateRecord record : outputList ){
+					logger.info(record.toString());
+					if(StringUtils.isNotEmpty(container.getErrMsg())){
+						break;
+					}else {
+						retval = record.getRid();
+					}
+				}
+			}
+    	}
+    	return retval;
 	}
 	/**
 	 * ICS2 - Presentation Entry-Summary-Declaration
@@ -2863,5 +2953,9 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 	private TvinnSadTolltariffVarukodService tvinnSadTolltariffVarukodService;
 	@Autowired
 	private HouseDocLogControllerService houseDocLogControllerService;
+	
+	@Autowired
+	private GeneralUpdateService generalUpdateService;
+	
 }
 
