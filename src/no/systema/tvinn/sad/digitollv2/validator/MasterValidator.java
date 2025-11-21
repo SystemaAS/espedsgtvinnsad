@@ -73,12 +73,14 @@ public class MasterValidator implements Validator {
 				//email sender 
 				if(StringUtils.isNotEmpty(record.getOwn_emems_email()) ) {
 					if(!emailValidator.validateEmail(record.getOwn_emems_email())){
+						logger.info("FEL! sender email " + record.getOwn_emems_email());
 						errors.rejectValue("own_emems_email", "systema.tvinn.sad.digitoll.master.error.rule.invalid.email.sender");
 					}
 				}
 				//email receiver 
 				if(StringUtils.isNotEmpty(record.getOwn_ememm_email()) ) {
 					if(!emailValidator.validateEmail(record.getOwn_ememm_email())){
+						logger.info("FEL! receiver email " + record.getOwn_ememm_email());
 						errors.rejectValue("own_ememm_email", "systema.tvinn.sad.digitoll.master.error.rule.invalid.email.receiver");
 					}
 				}
