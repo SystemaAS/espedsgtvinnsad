@@ -749,7 +749,7 @@
 				                		<div class="text11" style="position: relative;" align="left">
 					                	<span style="position:absolute;top:2px; width:250px;" id="extMaster_info" class="popupWithInputText text11"  >
 						           		<b>Ekstern Master Dok.nr</b>
-						           		<p>Eksternt Master Dok.nr som du har mottatt fra transporteier (Ombud/Representant)<br/>
+						           		<p>Eksternt Master Dok.nr som du har mottatt fra transporteier (Representant/Ombud)<br/>
 						           			Disse feltene brukes kun for deg som skal sende ditt eget "house" til toll.no samtidig som du har leid "posisjon" hos transporteier
 						           		</p>
 										</span>	
@@ -773,7 +773,7 @@
 									<td class="text14">
 										<input readonly type="text" class="inputTextReadOnly" name="emrgt_ff" id="emrgt_ff" size="20" maxlength="17" value="${model.record.emrgt_ff}">		
 									</td>
-									<td class="text14">&nbsp;<span title="emrgr_ff">Ombud-Avs.Orgnr / EORI</span></td>
+									<td class="text14">&nbsp;<span title="emrgr_ff">Representant/Ombud-Avs.Orgnr / EORI</span></td>
 									<td class="text14">
 										<input readonly type="text" class="inputTextReadOnly" name="emrgr_ff" id="emrgr_ff" size="20" maxlength="17" value="${model.record.emrgr_ff}">		
 									</td>

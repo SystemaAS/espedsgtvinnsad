@@ -669,7 +669,7 @@
 									<td width="30px" ></td>
 									<td class="text14">
 										<img style="cursor:pointer;" onMouseOver="showPop('extHouse_info');" onMouseOut="hidePop('extHouse_info');"style="vertical-align:middle;" width="11px" height="11px" src="resources/images/info3.png" border="0" alt="info">
-					            		<span id="sendToPartIdLink" class="buttonGrayWithGreenFrame" title="Send til Transport eier...orgnr">Send House til Tr.eier</span>
+					            		<span id="sendToPartIdLink" class="buttonGrayWithGreenFrame" title="Send til Transport eier (Ombud/Representant)...orgnr">Send House til Representant/Ombud</span>
 										<%--
 										<a tabindex="-1" id="sendToPartIdLink">
 											<img style="cursor:pointer;vertical-align: middle;" src="resources/images/find.png" width="16px" height="16px" border="0" alt="search" >
