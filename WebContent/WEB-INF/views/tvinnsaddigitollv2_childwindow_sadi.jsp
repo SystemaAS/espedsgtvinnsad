@@ -136,7 +136,7 @@
 				          	   <td width="2%" align="center"class="tableCell12" >${record.siavd}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.sitdn}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.sitrid}</td>
-				          	   <td width="2%" align="center" class="tableCell12" >${record.fssok}</td>
+				          	   <td width="2%" align="center" class="tableCell12" >${record.wfssok_cr}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.sivkb}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.sintk}</td>
 				          	   <td width="2%" align="center" class="tableCell12" >${record.wehrg}&nbsp;${record.weh0068a}&nbsp;${record.weh0068b}

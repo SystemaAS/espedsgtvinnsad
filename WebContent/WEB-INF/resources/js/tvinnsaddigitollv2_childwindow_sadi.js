@@ -170,7 +170,7 @@
 				//---------------
 				//END EXP vs TRA
 				//---------------
-				opener.jq('#ehextref').val("");opener.jq('#ehextref').val(data[i].fssok); //ExtRef
+				opener.jq('#ehextref').val("");opener.jq('#ehextref').val(data[i].wfssok_cr); //ExtRef
 				opener.jq('#ehvkb').val("");opener.jq('#ehvkb').val(data[i].sivkb); //bruttovikt
 				opener.jq('#ehntk').val("");opener.jq('#ehntk').val(data[i].sintk); //Kolli
 				opener.jq('#ehcnin').val("");opener.jq('#ehcnin').val(data[i].sikdc); //Container

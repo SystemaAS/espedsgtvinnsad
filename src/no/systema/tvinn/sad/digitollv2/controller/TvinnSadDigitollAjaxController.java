@@ -558,6 +558,7 @@ public class TvinnSadDigitollAjaxController {
 					sadmohfRecord.setEhavd(Integer.valueOf(avd));
 					sadmohfRecord.setEhpro(Integer.valueOf(tur));
 					sadmohfRecord.setEhtdn(Integer.valueOf(opd));
+					sadmohfRecord.setEhextref(record.getWfssok_cr()); //ext.ref ... införlivat 24.nov.2025 efter CB/OT tester targeted mot DHL
 					sadmohfRecord.setEhvkb(record.getSivkb()); //bruttovikt
 					sadmohfRecord.setEhdkht("N730");
 					
