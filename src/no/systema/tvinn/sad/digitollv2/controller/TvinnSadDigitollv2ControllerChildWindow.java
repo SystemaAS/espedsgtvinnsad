@@ -1609,6 +1609,61 @@ public class TvinnSadDigitollv2ControllerChildWindow {
 		}
 	}
 	
+	@RequestMapping(value="tvinnsaddigitollv2_childwindow_tur_automationSysped.do", params="action=doInit",  method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doInitTurAutomationSysped(@ModelAttribute ("record") SadTurRecord recordToValidate, HttpSession session, HttpServletRequest request){
+		this.context = TdsAppContext.getApplicationContext();
+		logger.info("Inside: doInitTur");
+		Map model = new HashMap();
+		String callerType = request.getParameter("ctype");
+		String tudt = recordToValidate.getTudt();
+		String tuavd = recordToValidate.getTuavd();
+		String tupro = recordToValidate.getTupro();
+		logger.info("caller:" + callerType);
+		logger.info("tudt (fromDate):" + tudt);
+		logger.info("tuavd:" + tuavd);
+		logger.info("tupro:" + tupro);
+		
+		if(StringUtils.isEmpty(tudt)) {
+			if(StringUtils.isEmpty(tuavd) && StringUtils.isEmpty(tupro)) {
+				tudt = dateMgr.getNewDateFromNow(DateTimeManager.ISO_FORMAT, this.sadiSearchNrOfDaysBackwards);
+				recordToValidate.setTudt(tudt);
+			}
+		}else {
+			if(!dateValidator.validateDate(tudt, DateValidator.DATE_MASK_ISO)) {
+				tudt = dateMgr.getNewDateFromNow(DateTimeManager.ISO_FORMAT, this.sadiSearchNrOfDaysBackwards);	
+				recordToValidate.setTudt(tudt);
+			}
+		}
+		
+		model.put("tudt", tudt);
+		//antingen eller och inte båda 2...Turen overrides avd if it exists
+		if(StringUtils.isNotEmpty(tupro)) {
+			model.put("tupro", tupro);
+		}else {
+			model.put("tuavd", tuavd);
+		}
+		
+		
+		ModelAndView successView = new ModelAndView("tvinnsaddigitollv2_childwindow_tur_automationSysped");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		//check user (should be in session already)
+		if(appUser==null){
+			return this.loginView;
+			
+		}else{
+			  
+			List list = this.getTurList(appUser, recordToValidate);
+			model.put("turList", list);
+			model.put("callerType", callerType);
+			//model.put("tkkode", tullkontorCode);
+			//model.put("tktxtn", tullkontorName);
+			
+			successView.addObject(TvinnSadConstants.DOMAIN_MODEL , model);
+			
+	    	return successView;
+		}
+	}
+	
 	@RequestMapping(value="tvinnsaddigitollv2_childwindow_external_master.do", params="action=doInit",  method={RequestMethod.GET, RequestMethod.POST} )
 	public ModelAndView doInitExternalMaster(@ModelAttribute ("record") ZadmomlfRecord recordToValidate, HttpSession session, HttpServletRequest request){
 		this.context = TdsAppContext.getApplicationContext();

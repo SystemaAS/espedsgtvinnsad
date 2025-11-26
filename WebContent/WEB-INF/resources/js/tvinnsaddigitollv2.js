@@ -169,6 +169,12 @@ jq(function() {
 			
 	  });	
 
+	  jq("#alinkHeaderCreateFromSysped").click(function() {
+		jq('#alinkHeaderCreateFromSysped').attr('target','_blank');
+		//default url
+		window.open('tvinnsaddigitollv2_childwindow_tur_automationSysped.do?action=doInit&tudt=' + '&tupro=' +  '&tuavd='  + '&ctype=mainlist', "turWin", "top=300px,left=500px,height=600px,width=1100px,scrollbars=no,status=no,location=no");
+			
+	  });	
   });
   
   

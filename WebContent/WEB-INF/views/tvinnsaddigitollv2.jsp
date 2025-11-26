@@ -34,7 +34,17 @@
 					<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new">
 				</a>
 			</td>
-			 
+			<%-- only those customers that have SYSPED as TMS --%>
+			<c:if test="${ fn:contains(user.servletHostWithoutHttpPrefix, 'localhost') || fn:contains(user.servletHostWithoutHttpPrefix, 'gw.systema') || 
+						   fn:contains(user.servletHostWithoutHttpPrefix, 'kingsrod') || fn:contains(user.servletHostWithoutHttpPrefix, 'nortrail')}">
+			<td width="1px" class="tabFantomSpace" align="center" nowrap><font class="tabDisabledLink">&nbsp;</font></td>
+			<td width="15%" valign="bottom" class="tabDisabled" style="background-color:lightgoldenrodyellow;" align="center" nowrap>
+				<a id="alinkHeaderCreateFromSysped" style="display:block;">
+					<font class="tabDisabledLink" style="color:taupe;font-style:italic;">&nbsp;<spring:message code="systema.tvinn.sad.createnew"/> fra Sysped </font>
+					<img src="resources/images/add.png" width="12" hight="12" border="0" alt="create new from Sysped">
+				</a>
+			</td>
+			 </c:if>
 			<td width="80%" class="tabFantomSpace" align="right" nowrap><font class="tabDisabledLink">&nbsp;</font>
 				<a href="digitollTransportMainListExcelView.do" target="_blank">
                		<img title="Excel export..." id="itemListExcel" style="vertical-align:top;" width="22px" height="22px"src="resources/images/excel.png" border="0" alt="excel">
