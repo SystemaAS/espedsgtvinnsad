@@ -33,11 +33,13 @@ import org.springframework.web.bind.ServletRequestDataBinder;
 
 //application imports
 import no.systema.main.service.UrlCgiProxyService;
+import no.systema.main.validator.DateValidator;
 import no.systema.main.validator.LoginValidator;
 import no.systema.main.util.AppConstants;
 import no.systema.main.util.DateTimeManager;
 import no.systema.main.util.JsonDebugger;
 import no.systema.jservices.common.values.FasteKoder;
+import no.systema.main.context.TdsAppContext;
 import no.systema.main.model.SystemaWebUser;
 
 //tvinn
@@ -60,6 +62,7 @@ import no.systema.tvinn.sad.digitollv2.model.GenericDropDownDto;
 import no.systema.tvinn.sad.digitollv2.model.api.ApiGenericDtoResponse;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.GeneralUpdateRecord;
+import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadTurRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfContainer;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmohfRecord;
 import no.systema.tvinn.sad.digitollv2.model.jsonjackson.SadmologContainer;
@@ -262,6 +265,9 @@ public class TvinnSadDigitollv2TransportController {
 		}	
 		return successView;
 	}
+	
+	
+	
 	
 	/**
 	 * 

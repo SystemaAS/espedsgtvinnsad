@@ -121,6 +121,8 @@ public final class SadDigitollUrlDataStore {
 		//..."signaturer": { "sign":"A01", "namn":"A2001" 
 		//http://10.11.47.61/sycgip/TDIG003R.pgm?user=OSCAR
 		static public String SAD_FETCH_DIGITOLL_SIGN_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TDIG003R.pgm";
+		//Automation from SYSPED (nortrail and kingsrød)
+		static public String SAD_AUTOMATION_SYSPED_DIGITOLL_URL = AppConstants.HTTP_ROOT_CGI + "/sycgip/TDIG004R.pgm";
 		
 		//Främmande houses 
 		//http://10.11.47.61/syjservicestn/syjsSADMOCF.do?user=OSCAR&orgnr

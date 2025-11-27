@@ -177,8 +177,6 @@ jq(function() {
 	  });	
   });
   
-  
-
 
   //Initialize <div> here for all clazz_dialog
   jq(function() { 

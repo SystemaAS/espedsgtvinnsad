@@ -32,6 +32,7 @@
 						<table>
 						<form name="tvinnsadImportTullkontorForm" id="tvinnsadImportTullkontorForm" action="tvinnsaddigitollv2_childwindow_tur_automationSysped.do?action=doInit" method="post">
 							<input type="hidden" name="ctype" id="ctype" value="${model.callerType}">
+							<input type="hidden" name="applicationUser" id="applicationUser" value="${user.user}">
 						<tr>
 							
 							<td class="text14">&nbsp;Sign</td>
@@ -91,8 +92,13 @@
 			                       <tr class="text14">
 			                   </c:otherwise>
 			               </c:choose>
-			               <td nowrap style="cursor:pointer;" class="text14MediumBlue" id="tupro${record.tupro}@tuavd${record.tuavd}@tutvkt${record.tutvkt}@ctype${model.callerType}" >
-		               			<img title="select" valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;${record.tupro}
+			               <td nowrap style="cursor:pointer;" class="text14MediumBlue" id="tupro${record.tupro}@tuavd${record.tuavd}" >
+		               			<%-- do it in ajax
+		               			<a style="display: block; width: 100%; height: 100%;"  href="tvinnsaddigitollv2_automationFromSysped.do?action=doCreate&sign=${user.tvinnSadSign}&tur=${record.tupro}&avd=${record.tuavd}" onClick="setBlockUI();">
+		               				<img title="select" valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;${record.tupro}
+		               			</a>
+		               			 --%>
+		               			 <img title="select" valign="bottom" src="resources/images/update.gif" border="0" alt="edit">&nbsp;${record.tupro}
 			                </td>
 		               	   <td class="text14">&nbsp;${record.tuavd}</td>
 		               	   <td class="text14">&nbsp;${record.tutarf}</td>

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
@@ -37,6 +39,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.JsonObject;
 
@@ -500,6 +503,141 @@ public class TvinnSadDigitollAjaxController {
 		 
 		 return result;
 	 }
+	
+	@RequestMapping(value = "createAutomationFromSysped_Digitoll.do", method = RequestMethod.GET)
+	public @ResponseBody Set<SadOppdragRecord> createAutomationFromSysped_Digitoll
+	  						(@RequestParam String applicationUser, @RequestParam String tur, 
+	  						 @RequestParam String avd, @RequestParam String sign ) {
+		
+		logger.info("Inside: createAutomationFromSysped_Digitoll...");
+		Set result = new HashSet();
+		 
+		logger.info("tur:" + tur);
+		logger.info("avd:" + avd);
+		logger.info("sign:" + sign);
+		
+		
+		//get BASE URL
+		final String BASE_URL = SadDigitollUrlDataStore.SAD_AUTOMATION_SYSPED_DIGITOLL_URL;
+		//add URL-parameters
+		StringBuilder urlRequestParams = new StringBuilder();
+		urlRequestParams.append ("user=" + applicationUser);
+		
+		if(StringUtils.isNotEmpty(avd)) {
+			urlRequestParams.append ("&avd=" + avd);
+		}
+		if(StringUtils.isNotEmpty(tur)) {
+			urlRequestParams.append ("&tur=" + tur);
+		}
+		if(StringUtils.isNotEmpty(sign)) {
+			urlRequestParams.append ("&sign=" + sign);
+		}
+		
+		logger.debug(Calendar.getInstance().getTime() + " CGI-start timestamp");
+    	logger.debug("URL: " + BASE_URL);
+    	logger.debug("URL PARAMS: " + urlRequestParams);
+    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+    	//Debug --> 
+    	logger.debug(jsonPayload);
+    	logger.debug(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+    	if(jsonPayload!=null){
+			SadmotfContainer jsonContainer = this.sadmotfListService.getListContainer(jsonPayload);
+			//----------------------------------------------------------------
+			//look for errMsg on Container
+			//----------------------------------------------------------------
+			if(jsonContainer!=null) {
+	    		if(StringUtils.isNotEmpty(jsonContainer.getErrMsg())){
+	    			logger.error("ERROR:" + jsonContainer.toString());
+	    			//do something in the GUI. Right now it will be just a message in the log ...
+	    		}else {
+	    			logger.info("OK:" + jsonContainer.toString());
+	    		}
+			}
+    	}
+		//return to ajax call
+		SadOppdragRecord fejk = new SadOppdragRecord();
+		fejk.setSiavd("1");
+		//(1) just to satisfy the ajax-return-requirement of data
+		result.add(fejk);
+		 
+		return result;
+	 }
+	
+	
+	
+	
+	
+	/*
+	@RequestMapping(value="tvinnsaddigitollv2_automationFromSysped.do", params="action=doCreate", method={RequestMethod.GET, RequestMethod.POST} )
+	public ModelAndView doAutomationFromSysped(HttpSession session, HttpServletRequest request){
+		//this.context = TdsAppContext.getApplicationContext();
+		Collection<SadmotfRecord> outputList = new ArrayList<SadmotfRecord>();
+		Map model = new HashMap();
+		
+		ModelAndView successView = new ModelAndView("redirect:tvinnsaddigitollv2.do?action=doFind");
+		SystemaWebUser appUser = this.loginValidator.getValidUser(session);
+		
+		String sign = request.getParameter("sign");
+		String tur = request.getParameter("tur");
+		String avd = request.getParameter("avd");
+		logger.info("Inside: doAutomationFromSysped(BindingResult ...");
+		
+		logger.info(avd);
+		logger.info(sign);
+		logger.info(tur);
+		
+		//check user (should be in session already)
+		if(appUser==null){
+			return loginView;
+		}else{
+			logger.info(Calendar.getInstance().getTime() + " CONTROLLER start - timestamp");
+			appUser.setActiveMenu(SystemaWebUser.ACTIVE_MENU_TVINN_SAD_DIGITOLLV2);
+			session.setAttribute(TvinnSadConstants.ACTIVE_URL_RPG_TVINN_SAD, TvinnSadConstants.ACTIVE_URL_RPG_INITVALUE); 
+			
+	            //get BASE URL
+	    		final String BASE_URL = SadDigitollUrlDataStore.SAD_AUTOMATION_SYSPED_DIGITOLL_URL;
+	    		//add URL-parameters
+	    		StringBuilder urlRequestParams = new StringBuilder();
+	    		urlRequestParams.append ("user=" + appUser.getUser());
+	    		
+	    		if(StringUtils.isNotEmpty(avd)) {
+	    			urlRequestParams.append ("&avd=" + avd);
+	    		}
+	    		if(StringUtils.isNotEmpty(tur)) {
+	    			urlRequestParams.append ("&tur=" + tur);
+	    		}
+	    		if(StringUtils.isNotEmpty(sign)) {
+	    			urlRequestParams.append ("&sign=" + sign);
+	    		}
+	    		
+	    		logger.info(Calendar.getInstance().getTime() + " CGI-start timestamp");
+		    	logger.warn("URL: " + BASE_URL);
+		    	logger.warn("URL PARAMS: " + urlRequestParams);
+		    	String jsonPayload = this.urlCgiProxyService.getJsonContent(BASE_URL, urlRequestParams.toString());
+	
+		    	//Debug --> 
+		    	logger.info(jsonPayload);
+		    	logger.info(Calendar.getInstance().getTime() +  " CGI-end timestamp");
+		    	if(jsonPayload!=null){
+		    		
+	    		SadmotfContainer jsonContainer = this.sadmotfListService.getListContainer(jsonPayload);
+	    		//----------------------------------------------------------------
+				//look for errMsg on Container
+				//----------------------------------------------------------------
+				if(jsonContainer!=null) {
+		    		if(StringUtils.isNotEmpty(jsonContainer.getErrMsg())){
+		    			logger.error("ERROR:" + jsonContainer.toString());
+		    		}else {
+		    			logger.info("OK:" + jsonContainer.toString());
+		    		}
+				}
+					
+            }
+	    
+		}	
+		return successView;
+	}
+	*/
 	
 	/**
 	 * 
